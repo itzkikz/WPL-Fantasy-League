@@ -48,7 +48,7 @@ app.get("/api/getData", async (req, res) => {
 });
 
 // READ: Get all data from a sheet
-app.get("/api/getLineup/:teamName", async (req, res) => {
+app.get("/api/getLineup/:teamName/:gameweek", async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
@@ -59,42 +59,51 @@ app.get("/api/getLineup/:teamName", async (req, res) => {
 
     const jsonData = convertToJSON(rows);
 
-    const { teamName } = req.params;
-
+    const { teamName, gameweek } = req.params;
 
     const propertyName = "team_name";
     const searchValue = decodeURI(teamName);
-    const gw = jsonData[jsonData.length - 1].gw
+    let gw = gameweek;
+    const currentGw = jsonData[jsonData.length - 1].gw;
+    if (gw === "0") {
+      gw = currentGw;
+    }
 
-    console.log(req.params)
+    console.log(req.params);
 
     const filteredGWData = jsonData.filter((item) => {
       return item[propertyName] === searchValue && item.gw === gw;
     });
 
     const filteredData = jsonData.filter((item) => {
-      return item[propertyName] === searchValue
+      return item[propertyName] === searchValue;
     });
 
-    const totalGWScore = filteredGWData.reduce((acc, item) => acc + parseInt(item.point), 0);
-    const avg = filteredData.reduce((acc, item) => acc + parseInt(item.point), 0) / gw;
+    const totalGWScore = filteredGWData.reduce(
+      (acc, item) => acc + parseInt(item.point),
+      0
+    );
+    const avg =
+      (filteredData.reduce((acc, item) => acc + parseInt(item.point), 0) / gw).toFixed(2);
 
-const highest = Math.max(
-  ...Object.values(
-    filteredData.reduce((a, p) => {
-      const point = parseInt(p.point, 10) || 0;
-      a[p.gw] = (a[p.gw] || 0) + point;
-      return a;
-    }, {})
-  )
-);
+    const highest = Math.max(
+      ...Object.values(
+        filteredData.reduce((a, p) => {
+          const point = parseInt(p.point, 10) || 0;
+          a[p.gw] = (a[p.gw] || 0) + point;
+          return a;
+        }, {})
+      )
+    );
 
     res.json({
       success: true,
       data: filteredGWData,
       totalGWScore,
       avg,
-      highest
+      highest,
+      gw,
+      currentGw
     });
   } catch (error) {
     console.error("Error reading data:", error);
