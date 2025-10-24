@@ -84,7 +84,7 @@ app.get("/api/getLineup/:teamName/:gameweek", async (req, res) => {
       0
     );
     const avg =
-      (filteredData.reduce((acc, item) => acc + parseInt(item.point), 0) / gw).toFixed(2);
+      (filteredData.reduce((acc, item) => acc + parseInt(item.point), 0) / currentGw).toFixed(2);
 
     const highest = Math.max(
       ...Object.values(
