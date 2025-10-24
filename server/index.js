@@ -13,7 +13,7 @@ const corsOptions = {
     'http://localhost:3001', // Next.js dev server
     'http://localhost:3000', // Alternative port
     // 'https://your-frontend-domain.vercel.app', // Production frontend
-    // 'https://your-frontend-domain.com'
+    'https://wpl-fantasy-league.vercel.app/'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
