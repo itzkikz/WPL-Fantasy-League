@@ -8,20 +8,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 
-const corsOptions = {
-  origin: [
-    'http://localhost:3001', // Next.js dev server
-    'http://localhost:3000', // Alternative port
-    // 'https://your-frontend-domain.vercel.app', // Production frontend
-    'https://wpl-fantasy-league.vercel.app/'
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true, // Allow cookies if needed
-  optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
+app.use(cors())
 
 // Load service account credentials
 const credentials = JSON.parse(
