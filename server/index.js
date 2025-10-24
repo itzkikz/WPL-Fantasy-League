@@ -39,11 +39,35 @@ const sheets = google.sheets({ version: 'v4', auth });
 const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID;
 
 // READ: Get all data from a sheet
-app.get('/api/data', async (req, res) => {
+app.get('/api/getData', async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
       range: 'Sheet1!A:Z', // Adjust range as needed
+    });
+
+    const rows = response.data.values;
+    const jsonData = convertToJSON(rows);
+
+    res.json({
+      success: true,
+      data: jsonData,
+    });
+  } catch (error) {
+    console.error('Error reading data:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
+// READ: Get all data from a sheet
+app.get('/api/getLineup', async (req, res) => {
+  try {
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: SPREADSHEET_ID,
+      range: 'Team1!A:K', // Adjust range as needed
     });
 
     const rows = response.data.values;
