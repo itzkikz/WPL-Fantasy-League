@@ -28,7 +28,7 @@ app.get("/api/getData", async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: "Master Data!A:E", // Adjust range as needed
+      range: "Master Data!B:G", // Adjust range as needed
     });
 
     const rows = response.data.values;
@@ -52,7 +52,7 @@ app.get("/api/getLineup/:teamName/:gameweek", async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: "Master Data!G:N", // Adjust range as needed
+      range: "Master Data!H:X", // Adjust range as needed
     });
 
     const rows = response.data.values;
@@ -135,7 +135,7 @@ app.get("/api/getPlayer/:playerName", async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: "Master Data!Y:AK", // Adjust range as needed
+      range: "Master Data!Z:AL", // Adjust range as needed
     });
 
     const rows = response.data.values;
