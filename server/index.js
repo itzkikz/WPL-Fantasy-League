@@ -28,7 +28,7 @@ app.get("/api/getData", async (req, res) => {
   try {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: "Master Data!B:G", // Adjust range as needed
+      range: "Master Data!A:G", // Adjust range as needed
     });
 
     const rows = response.data.values;
