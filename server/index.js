@@ -79,22 +79,38 @@ app.get("/api/getLineup/:teamName/:gameweek", async (req, res) => {
       return item[propertyName] === searchValue;
     });
 
-    const totalGWScore = filteredGWData.reduce(
-      (acc, item) => acc + parseInt(item.point),
-      0
-    );
-    const avg =
-      (filteredData.reduce((acc, item) => acc + parseInt(item.point), 0) / currentGw).toFixed(2);
+    const totalGWScore = filteredGWData.reduce((acc, item) => {
+      if (item.lineup !== "Sub") {
+        return acc + parseInt(item.point);
+      }
+      return acc;
+    }, 0);
 
-    const highest = Math.max(
-      ...Object.values(
-        filteredData.reduce((a, p) => {
-          const point = parseInt(p.point, 10) || 0;
-          a[p.gw] = (a[p.gw] || 0) + point;
-          return a;
-        }, {})
-      )
-    );
+    const avg = (
+      filteredData.reduce(
+        (acc, item) => {
+          if (item.lineup !== "Sub") {
+            return acc + parseInt(item.point);
+          }
+          return acc;
+        },
+
+        0
+      ) / currentGw
+    ).toFixed(2);
+
+   const highest = Math.max(
+  ...Object.values(
+    filteredData.reduce((a, p) => {
+      if (p.lineup !== 'Sub') {
+        const point = parseInt(p.point, 10) || 0;
+        a[p.gw] = (a[p.gw] || 0) + point;
+      }
+      return a;
+    }, {})
+  )
+);
+
 
     res.json({
       success: true,
@@ -103,7 +119,87 @@ app.get("/api/getLineup/:teamName/:gameweek", async (req, res) => {
       avg,
       highest,
       gw,
-      currentGw
+      currentGw,
+    });
+  } catch (error) {
+    console.error("Error reading data:", error);
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
+// READ: Get all data from a sheet
+app.get("/api/getPlayer/:playerName", async (req, res) => {
+  try {
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: SPREADSHEET_ID,
+      range: "Master Data!Y:AK", // Adjust range as needed
+    });
+
+    const rows = response.data.values;
+
+    const jsonData = convertToJSON(rows);
+
+    const { playerName } = req.params;
+
+    const propertyName = "player_name";
+    const searchValue = decodeURI(playerName);
+    // let gw = gameweek;
+    // const currentGw = jsonData[jsonData.length - 1].gw;
+    // if (gw === "0") {
+    //   gw = currentGw;
+    // }
+
+    // console.log(req.params);
+
+    // const filteredGWData = jsonData.filter((item) => {
+    //   return item[propertyName] === searchValue && item.gw === gw;
+    // });
+
+    const filteredData = jsonData.filter((item) => {
+      return item[propertyName] === searchValue;
+    });
+
+    console.log("Filtered Data:", filteredData);
+
+    // const totalGWScore = filteredGWData.reduce((acc, item) => {
+    //   if (item.lineup !== "Sub") {
+    //     return acc + parseInt(item.point);
+    //   }
+    //   return acc;
+    // }, 0);
+
+    // const avg = (
+    //   filteredData.reduce(
+    //     (acc, item) => {
+    //       if (item.lineup !== "Sub") {
+    //         return acc + parseInt(item.point);
+    //       }
+    //       return acc;
+    //     },
+
+    //     0
+    //   ) / currentGw
+    // ).toFixed(2);
+
+//    const highest = Math.max(
+//   ...Object.values(
+//     filteredData.reduce((a, p) => {
+//       if (p.lineup !== 'Sub') {
+//         const point = parseInt(p.point, 10) || 0;
+//         a[p.gw] = (a[p.gw] || 0) + point;
+//       }
+//       return a;
+//     }, {})
+//   )
+// );
+
+
+    res.json({
+      success: true,
+      data: filteredData[0],
     });
   } catch (error) {
     console.error("Error reading data:", error);
