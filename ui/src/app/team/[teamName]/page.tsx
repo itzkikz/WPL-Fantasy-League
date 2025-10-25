@@ -1,7 +1,14 @@
 import GameweekTeamView from "@/components/GameweekTeamView";
 
-export default function TeamPage({ params }: { params: { teamName: string } }) {
-  const { teamName } = params;
+interface TeamPageProps {
+  params: {
+    teamName: string;
+  };
+  searchParams?: Record<string, string | string[]>;
+}
+
+export default async function TeamPage({ params }: TeamPageProps) {
+  const { teamName } = await params;
 
   return (
     <main className="min-h-screen bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">

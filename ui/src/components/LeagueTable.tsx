@@ -5,130 +5,17 @@ import { useRouter } from "next/navigation";
 
 type Team = {
   pos: number;
-  delta: "up" | "down" | "same";
+  pos_change: number;
   team: string;
   manager: string;
-  gw: number;
+  current_gw: number;
   total: number;
+  gw: number;
+  last_update_date: string;
 };
 
-const data: Team[] = [
-  {
-    pos: 1,
-    delta: "same",
-    team: "Havertz Word Ref",
-    manager: "Dan Day",
-    gw: 72,
-    total: 631,
-  },
-  {
-    pos: 2,
-    delta: "up",
-    team: "saka nuts",
-    manager: "lucas clarke",
-    gw: 98,
-    total: 621,
-  },
-  {
-    pos: 3,
-    delta: "down",
-    team: "Arsenal",
-    manager: "Nick Roth",
-    gw: 70,
-    total: 620,
-  },
-  {
-    pos: 4,
-    delta: "up",
-    team: "Real Badmen Fc",
-    manager: "Travis Murira",
-    gw: 73,
-    total: 617,
-  },
-  {
-    pos: 5,
-    delta: "up",
-    team: "فريق الاحلام",
-    manager: "اللأيسنو هدية",
-    gw: 104,
-    total: 616,
-  },
-  {
-    pos: 6,
-    delta: "up",
-    team: "Saliba the solution",
-    manager: "Jacob Davis",
-    gw: 86,
-    total: 615,
-  },
-  {
-    pos: 7,
-    delta: "same",
-    team: "BomboStars",
-    manager: "Johan Larpes",
-    gw: 71,
-    total: 614,
-  },
-  {
-    pos: 8,
-    delta: "up",
-    team: "HavertzYourWay",
-    manager: "Joel Rogers",
-    gw: 94,
-    total: 613,
-  },
-  {
-    pos: 8,
-    delta: "up",
-    team: "simpletons",
-    manager: "Riley Althaus",
-    gw: 84,
-    total: 613,
-  },
-  {
-    pos: 5,
-    delta: "up",
-    team: "فريق الاحلام",
-    manager: "اللأيسنو هدية",
-    gw: 104,
-    total: 616,
-  },
-  {
-    pos: 6,
-    delta: "up",
-    team: "Saliba the solution",
-    manager: "Jacob Davis",
-    gw: 86,
-    total: 615,
-  },
-  {
-    pos: 7,
-    delta: "same",
-    team: "BomboStars",
-    manager: "Johan Larpes",
-    gw: 71,
-    total: 614,
-  },
-  {
-    pos: 8,
-    delta: "up",
-    team: "HavertzYourWay",
-    manager: "Joel Rogers",
-    gw: 94,
-    total: 613,
-  },
-  {
-    pos: 8,
-    delta: "up",
-    team: "simpletons",
-    manager: "Riley Althaus",
-    gw: 84,
-    total: 613,
-  },
-];
-
-function Delta({ d }: { d: Team["delta"] }) {
-  if (d === "up")
+function Delta({ d }: { d: Team["pos_change"] }) {
+  if (d > 0)
     return (
       <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#2fa550] text-white">
         <svg
@@ -148,7 +35,7 @@ function Delta({ d }: { d: Team["delta"] }) {
         </svg>
       </span>
     );
-  if (d === "down")
+  if (d < 0)
     return (
       <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#ed0628] text-white">
         <svg
@@ -169,13 +56,30 @@ function Delta({ d }: { d: Team["delta"] }) {
       </span>
     );
   return (
-    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-200 text-gray-600"></span>
+    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#541e5d] text-gray-600">
+      <svg
+        className="w-6 h-6 text-gray-800 dark:text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M7.757 12h8.486M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+        />
+      </svg>
+    </span>
   );
 }
 
 export default function LeagueTable({ data }: { data: Team[] }) {
   const router = useRouter();
-
 
   const handleRowClick = (team: string) => {
     router.push(`/team/${encodeURIComponent(team)}`);
@@ -232,7 +136,7 @@ export default function LeagueTable({ data }: { data: Team[] }) {
           Arsenal
         </h2> */}
         <p className="mt-2 text-xs text-gray-600 text-center">
-          Last updated: <b>Monday 20 Oct at 00:42</b>(Local Time)
+          Last updated: <b>{data[0]?.last_update_date}</b>(Local Time)
         </p>
       </div>
 
@@ -269,9 +173,9 @@ export default function LeagueTable({ data }: { data: Team[] }) {
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <span className="inline-flex h-6 w-6 items-center justify-center text-xs text-black font-semibold">
-                        {i+1}
+                        {i + 1}
                       </span>
-                      <Delta d={r.delta} />
+                      <Delta d={r.pos_change} />
                     </div>
                   </td>
                   <td className="px-2 py-3">
@@ -281,7 +185,7 @@ export default function LeagueTable({ data }: { data: Team[] }) {
                     <p className="text-xs text-gray-500">{"Manager"}</p>
                   </td>
                   <td className="px-2 py-3 text-center font-semibold text-[#2a1134]">
-                    {r.gw}
+                    {r.current_gw}
                   </td>
                   <td className="px-4 py-3 text-right text-base font-semibold text-[#4a2b59]">
                     {r.total}
@@ -292,6 +196,6 @@ export default function LeagueTable({ data }: { data: Team[] }) {
           </table>
         </div>
       </div>
-      </>
+    </>
   );
 }

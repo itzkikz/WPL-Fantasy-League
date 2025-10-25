@@ -6,8 +6,14 @@ export const fetchRecords = async () => {
   return response.json();
 };
 
-export const fetchLineup = async () => {
-  const response = await fetch(`${API_URL}/api/getLineup`);
+export const fetchLineup = async (teamName, gameweek) => {
+  const response = await fetch(`${API_URL}/api/getLineup/${encodeURIComponent(teamName)}/${gameweek}`);
+  if (!response.ok) throw new Error('Failed to fetch data');
+  return response.json();
+};
+
+export const fetchPlayer = async (playerName) => {
+  const response = await fetch(`${API_URL}/api/getPlayer/${encodeURIComponent(playerName)}`);
   if (!response.ok) throw new Error('Failed to fetch data');
   return response.json();
 };

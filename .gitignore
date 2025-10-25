@@ -138,3 +138,11 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# PWA files
+ui/public/sw.js
+ui/public/workbox-*.js
+ui/public/worker-*.js
+ui/public/sw.js.map
+ui/public/workbox-*.js.map
+ui/public/worker-*.js.map
