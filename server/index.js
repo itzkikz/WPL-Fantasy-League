@@ -80,7 +80,7 @@ app.get("/api/getLineup/:teamName/:gameweek", async (req, res) => {
     });
 
     const totalGWScore = filteredGWData.reduce((acc, item) => {
-      if (item.lineup !== "Sub") {
+      if (!item.lineup.toLowerCase().startsWith("sub ")) {
         return acc + parseInt(item.point);
       }
       return acc;
@@ -89,7 +89,7 @@ app.get("/api/getLineup/:teamName/:gameweek", async (req, res) => {
     const avg = (
       filteredData.reduce(
         (acc, item) => {
-          if (item.lineup !== "Sub") {
+          if (!item.lineup.toLowerCase().startsWith("sub ")) {
             return acc + parseInt(item.point);
           }
           return acc;
@@ -102,7 +102,7 @@ app.get("/api/getLineup/:teamName/:gameweek", async (req, res) => {
    const highest = Math.max(
   ...Object.values(
     filteredData.reduce((a, p) => {
-      if (p.lineup !== 'Sub') {
+      if (!p.lineup.toLowerCase().startsWith("sub ")) {
         const point = parseInt(p.point, 10) || 0;
         a[p.gw] = (a[p.gw] || 0) + point;
       }
