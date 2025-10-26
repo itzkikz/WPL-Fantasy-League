@@ -1,0 +1,11 @@
+// src/routes/books/$id.tsx
+import { createFileRoute } from '@tanstack/react-router'
+
+export const Route = createFileRoute('/lineups/$id')({
+  component: BookDetail,
+})
+
+function BookDetail() {
+  const { id } = Route.useParams()
+  return <h1>Book ID: {id}</h1>
+}
