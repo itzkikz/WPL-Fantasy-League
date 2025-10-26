@@ -11,6 +11,15 @@ export interface Player {
   isPowerPlayer?: boolean;
   fullTeamName: string;
   subNumber?: number;
+  clean_sheet: string;
+  goal: string;
+  assist: string;
+  yellow_card: string;
+  red_card: string;
+  minutes_played: string;
+  save: string;
+  penalty_save: string;
+  penalty_miss: string;
 }
 
 export interface Formation {
@@ -29,6 +38,15 @@ export interface PlayerData {
   role: string | null;
   club: string;
   point: number;
+  clean_sheet: string;
+  goal: string;
+  assist: string;
+  yellow_card: string;
+  red_card: string;
+  minutes_played: string;
+  save: string;
+  penalty_save: string;
+  penalty_miss: string;
 }
 
 export interface FormationResult {

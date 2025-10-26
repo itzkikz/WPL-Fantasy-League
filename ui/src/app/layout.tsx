@@ -32,7 +32,9 @@ export default function RootLayout({
   return (
    <html lang="en" className={outfit.variable}>
     <meta name="apple-mobile-web-app-title" content="WPLFF" />
-      <body className={outfit.className}>{children}</body>
+      <body className={outfit.className}>
+        {children}
+      </body>
     </html>
   );
 }

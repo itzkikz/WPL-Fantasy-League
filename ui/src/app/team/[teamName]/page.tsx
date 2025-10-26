@@ -1,10 +1,7 @@
 import GameweekTeamView from "@/components/GameweekTeamView";
 
 interface TeamPageProps {
-  params: {
-    teamName: string;
-  };
-  searchParams?: Record<string, string | string[]>;
+  params: Promise<{ teamName: string }>;
 }
 
 export default async function TeamPage({ params }: TeamPageProps) {

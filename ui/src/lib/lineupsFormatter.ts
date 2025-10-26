@@ -48,7 +48,16 @@ playersData.forEach((playerData, index) => {
       teamColor: teamData.color,
       point: playerData.point || 0,
       position: mapPosition(playerData.position),
-      fullTeamName: playerData.club
+      fullTeamName: playerData.club,
+      clean_sheet: playerData.clean_sheet,
+      goal: playerData.goal,
+      assist: playerData.assist,
+      yellow_card: playerData.yellow_card,
+      red_card: playerData.red_card,
+      minutes_played: playerData.minutes_played,
+      save: playerData.save,
+      penalty_save: playerData.penalty_save,
+       penalty_miss: playerData.penalty_miss,
     };
 
     // Add captain/vice captain flags
@@ -59,9 +68,9 @@ playersData.forEach((playerData, index) => {
     }
 
     // Separate lineup vs bench
-    if ((playerData.lineup).toLowerCase() === "starting xi") {
+    if ((playerData?.lineup)?.toLowerCase() === "starting xi") {
       lineupPlayers.push(player);
-    } else if (playerData.lineup.toLowerCase().startsWith("sub ")) {
+    } else if (playerData?.lineup?.toLowerCase().startsWith("sub ")) {
       // Extract sub number (with space: "sub 1", "sub 2", etc.)
       const subMatch = playerData.lineup.match(/sub\s+(\d+)/i);
       const subNumber = subMatch ? parseInt(subMatch[1]) : 999;

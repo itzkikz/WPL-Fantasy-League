@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // next.config.ts
-import withPWA from "next-pwa";
+import withPWA from "@ducanh2912/next-pwa";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 };
 
-const pwaConfig = withPWA({
+export default withPWA({
   dest: "public",
-  register: true,
-  skipWaiting: true,
   disable: process.env.NODE_ENV === "development",
-});
-
-export default pwaConfig(nextConfig as any);
+  register: true,
+  workboxOptions: {
+    disableDevLogs: true,
+  },
+})(nextConfig);

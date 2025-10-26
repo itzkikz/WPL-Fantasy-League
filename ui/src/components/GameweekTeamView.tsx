@@ -8,23 +8,10 @@ import { convertToFormation } from "../lib/lineupsFormatter";
 import { useRouter } from "next/navigation";
 import Loader from "./Loader";
 import type {
-  Player as ApiPlayer,
+  Player,
   Formation as ApiFormation,
 } from "../lib/types";
 import { PlayerCard } from "./PlayerCard";
-
-type Player = {
-  id: number;
-  name: string;
-  team: string;
-  teamColor: string;
-  point: number;
-  isCaptain?: boolean;
-  isViceCaptain?: boolean;
-  position: string;
-  isPowerPlayer?: boolean;
-  fullTeamName: string;
-};
 
 type Fixture = {
   gameweek: string;
@@ -59,7 +46,7 @@ function PlayerDetailOverlay({
   player: Player;
   onClose: () => void;
 }) {
-  const [activeTab, setActiveTab] = useState<"stats" | "matches" | "history">(
+  const [activeTab, setActiveTab] = useState<"stats" | "ostats" | "matches" | "history">(
     "stats"
   );
   const [playerStats, setPlayerStats] = useState<any>(null);
@@ -202,8 +189,19 @@ function PlayerDetailOverlay({
                 activeTab === "stats" ? "text-gray-900" : "text-gray-400"
               }`}
             >
-              Stats
+              GW Stats
               {activeTab === "stats" && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600" />
+              )}
+            </button>
+            <button
+              onClick={() => setActiveTab("ostats")}
+              className={`py-3 text-sm font-semibold relative ${
+                activeTab === "ostats" ? "text-gray-900" : "text-gray-400"
+              }`}
+            >
+              Overall Stats
+              {activeTab === "ostats" && (
                 <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600" />
               )}
             </button>
@@ -224,6 +222,93 @@ function PlayerDetailOverlay({
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto">
           {activeTab === "stats" && (
+            <div className="px-6 py-4">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">
+                Game Week Stats
+              </h3>
+
+              <div className="space-y-3">
+                {/* <StatRow label="Starts" value={playerStats?.app} /> */}
+                {/* <StatRow label="Minutes Played" value="720" /> */}
+                <StatRow
+                  label="Clean Sheets"
+                  value={player.clean_sheet}
+                />
+                {/* <StatRow label="Goals Conceded" value="8" per90="1.0" /> */}
+                {/* <StatRow
+                  label="Expected Goals Against"
+                  value="10.88"
+                  per90="1.0"
+                /> */}
+                <StatRow label="Goals" value={player?.goal} />
+                <StatRow label="Assists" value={player?.assist} />
+                {/* <StatRow label="Expected Goals" value="0.80" per90="0.1" />
+                <StatRow label="Expected Assists" value="0.97" per90="0.12" />
+                <StatRow
+                  label="Expected Goals Involvements"
+                  value="1.77"
+                  per90="0.22"
+                /> */}
+                <StatRow
+                  label="Yellow Cards"
+                  value={player?.yellow_card}
+                />
+                <StatRow label="Red Cards" value={player?.red_card} />
+                {/* <StatRow label="Own Goals" value={playerStats?.yellow_card} /> */}
+                {/* <StatRow
+                  label="Defensive Contributions"
+                  value="63"
+                  per90="7.88"
+                /> */}
+              </div>
+
+              <h3 className="text-lg font-bold text-gray-900 mb-4 mt-6">
+                FPL Stats
+              </h3>
+
+              <div className="space-y-3">
+                <StatRow
+                  label="Total Points"
+                  value={player?.point}
+                />
+                {/* <StatRow label="Form" value="3.5" /> */}
+                {/* <StatRow
+                  label="Pts / Match"
+                  value={(playerStats?.total_point / playerStats?.app).toFixed(
+                    2
+                  )}
+                /> */}
+                {/* <StatRow label="Total Bonus Points" value="3" />
+                <StatRow
+                  label="ICT Influence (Defender)"
+                  value="13"
+                  suffix="of 246"
+                />
+                <StatRow
+                  label="ICT Creativity (Defender)"
+                  value="23"
+                  suffix="of 246"
+                />
+                <StatRow
+                  label="ICT Threat (Defender)"
+                  value="8"
+                  suffix="of 246"
+                />
+                <StatRow
+                  label="ICT Index (Defender)"
+                  value="9"
+                  suffix="of 246"
+                />
+                <StatRow
+                  label="ICT Index (Overall)"
+                  value="48"
+                  suffix="of 745"
+                />
+                <StatRow label="Teams Selected by" value="32.0%" /> */}
+              </div>
+            </div>
+          )}
+          {activeTab === "ostats" && (
             <div className="px-6 py-4">
               <h3 className="text-lg font-bold text-gray-900 mb-4">
                 Season Stats
@@ -335,7 +420,7 @@ function StatRow({
   suffix,
 }: {
   label: string;
-  value: string;
+  value: string | number;
   per90?: string;
   suffix?: string;
 }) {
@@ -448,7 +533,7 @@ export default function GameweekTeamView({ teamName }: { teamName: string }) {
     undefined
   );
 
-  const [bench, setBench] = useState<ApiPlayer[]>([]);
+  const [bench, setBench] = useState<Player[]>([]);
 
   useEffect(() => {
     async function fetchData() {
