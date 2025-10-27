@@ -10,7 +10,7 @@ const Header = ({ teamName }: HeaderProps) => {
     <div className="flex-none bg-white">
       <div className="flex items-center justify-between max-w-md mx-auto">
         <button
-          className="w-10 h-10 rounded-full flex items-center justify-center"
+          className="cursor-pointer w-10 h-10 rounded-full flex items-center justify-center"
           onClick={() => router.history.back()}
         >
           <svg

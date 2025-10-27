@@ -13,12 +13,13 @@ const GWNavigation = ({
     <div className="flex-none bg-white py-1">
       <div className="flex items-center justify-center gap-6 max-w-md mx-auto">
         <button
+          className="cursor-pointer"
           disabled={gameWeek === 1}
           onClick={() => setGameweek(gameWeek - 1)}
         >
           <svg
             className={`w-5 h-5 ${
-              gameWeek === 1 ? `dark:text-grey` : `dark:text-black`
+              gameWeek === 1 ? 'text-gray-400' : 'text-[#2a1134]'
             }`}
             fill="none"
             stroke="currentColor"
@@ -32,18 +33,17 @@ const GWNavigation = ({
             />
           </svg>
         </button>
-        <h2 className="text-base font-bold text-gray-900">
+        <h2 className="text-base font-bold text-[#2a1134]">
           Gameweek {gameWeek === 0 ? "" : gameWeek}
         </h2>
 
         <button
+          className="cursor-pointer"
           disabled={gameWeek - currentGW === 0}
           onClick={() => setGameweek(gameWeek + 1)}
         >
           <svg
-            className={`w-5 h-5 ${
-              gameWeek - currentGW === 0 ? `text-grey` : `text-black`
-            }`}
+            className={`w-5 h-5 ${gameWeek - currentGW === 0 ? 'text-gray-400' : 'text-[#2a1134]'}`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

@@ -12,6 +12,7 @@ import GWPlayerList from "../components/GWPlayerList";
 import GWPitchSkeleton from "../components/skeletons/GWPitchSkeleton";
 import GWStatsCardsSkeleton from "../components/skeletons/GWStatsCardsSkeleton";
 import PlayerStatsOverlay from "../components/PlayerStatsOverlay";
+import GWNavigationSkeleton from "../components/skeletons/GWNavigationSkeleton";
 
 const TeamDetailsPage = () => {
   const route = getRouteApi("/standings/$teamName");
@@ -29,11 +30,15 @@ const TeamDetailsPage = () => {
   return (
     <>
       <Header teamName={teamName} />
-      <GWNavigation
-        gameWeek={gw}
-        currentGW={currentGw}
-        setGameweek={setGameWeek}
-      />
+      {isLoading ? (
+        <GWNavigationSkeleton />
+      ) : (
+        <GWNavigation
+          gameWeek={gw}
+          currentGW={currentGw}
+          setGameweek={setGameWeek}
+        />
+      )}
 
       {isLoading ? (
         <GWStatsCardsSkeleton />
