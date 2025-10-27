@@ -1,4 +1,4 @@
-import { PlayerLineup } from "../players/types"
+import { Player } from "../players/types"
 
 // Standings related types
 export interface Standings {
@@ -11,8 +11,16 @@ export interface Standings {
     total_point_before_this_gw: string
 }
 
+export interface Formation {
+    goalkeeper: Player[];
+    defenders: Player[];
+    midfielders: Player[];
+    forwards: Player[];
+}
+
 export interface TeamDetails {
-    playerData: PlayerLineup[],
+    starting: Formation;
+    bench: Player[];
     totalGWScore: number,
     avg: number,
     highest: number,

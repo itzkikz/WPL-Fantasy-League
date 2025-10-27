@@ -24,8 +24,7 @@ const TeamDetailsPage = () => {
 
   const { data: teamDetails, isLoading } = useTeamDetails(teamName, gameWeek);
 
-  const { gw, currentGw, avg, highest, totalGWScore } = teamDetails || {};
-  const { starting, bench } = convertToFormation(teamDetails?.playerData || []);
+  const { gw, currentGw, avg, highest, totalGWScore, starting, bench } = teamDetails || {};
 
   return (
     <>

@@ -9,7 +9,7 @@ export const playersApi = {
   },
 
   getByPlayerName: async (playerName: string): Promise<PlayerStats> => {
-    const response = await apiClient.get(`getPlayer/${playerName}`)
+    const response = await apiClient.get(`players/${playerName}`)
     return response.data.data
   },
 

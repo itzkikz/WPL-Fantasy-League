@@ -1,4 +1,5 @@
-import { Formation, Player } from "../libs/formatter/types";
+import { Player } from "../features/players/types";
+import { Formation } from "../features/standings/types";
 import PitchPlayerCard from "./PitchPlayerCard";
 
 interface GWPitchProps {

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Player } from "../libs/formatter/types";
 import { usePlayerDetails } from "../features/players/hooks";
 import StatRow from "./StatRow";
 import PlayerStatsOverlaySkeleton from "./skeletons/PlayerStatsOverlaySkeleton";
+import { Player } from "../features/players/types";
 
 const PlayerStatsOverlay = ({
   player,
