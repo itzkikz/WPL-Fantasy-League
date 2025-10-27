@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StandingsIndexRouteImport } from './routes/standings/index'
 import { Route as StandingsTeamNameRouteImport } from './routes/standings/$teamName'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +37,47 @@ const StandingsTeamNameRoute = StandingsTeamNameRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/standings/$teamName': typeof StandingsTeamNameRoute
   '/standings': typeof StandingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/standings/$teamName': typeof StandingsTeamNameRoute
   '/standings': typeof StandingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/standings/$teamName': typeof StandingsTeamNameRoute
   '/standings/': typeof StandingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/standings/$teamName' | '/standings'
+  fullPaths: '/' | '/login' | '/standings/$teamName' | '/standings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/standings/$teamName' | '/standings'
-  id: '__root__' | '/' | '/standings/$teamName' | '/standings/'
+  to: '/' | '/login' | '/standings/$teamName' | '/standings'
+  id: '__root__' | '/' | '/login' | '/standings/$teamName' | '/standings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LoginRoute: typeof LoginRoute
   StandingsTeamNameRoute: typeof StandingsTeamNameRoute
   StandingsIndexRoute: typeof StandingsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LoginRoute: LoginRoute,
   StandingsTeamNameRoute: StandingsTeamNameRoute,
   StandingsIndexRoute: StandingsIndexRoute,
 }
