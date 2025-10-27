@@ -40,7 +40,7 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
 
         res.json({
             success: true,
-            data: filteredData,
+            data: filteredData[0],
         });
     } catch (error: unknown) {
         console.error("Error reading data:", error);
