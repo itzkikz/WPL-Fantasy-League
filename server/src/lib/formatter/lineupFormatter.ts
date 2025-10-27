@@ -1,9 +1,9 @@
 // formationConverter.ts
 import * as fs from 'fs';
 import * as path from 'path';
-const teamsData = JSON.parse(fs.readFileSync(path.join(__dirname, 'teamsData.json'), 'utf8'));
 import { Player, FormationResult } from './types';
 import { TeamDetails } from '../../types/standings';
+import { teamsData } from './teamsData';
 
 /**
  * Converts fantasy team API response to Formation format

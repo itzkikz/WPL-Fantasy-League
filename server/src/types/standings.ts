@@ -1,4 +1,3 @@
-import { PlayerLineup } from ./ players
 
 export interface StandingsResponse {
     current_gw: number,
