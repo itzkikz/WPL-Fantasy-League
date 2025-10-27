@@ -20,6 +20,7 @@ export interface Player {
     penalty_save: number;
     penalty_miss: number;
     app: number;
+    gw: number;
 }
 
 export interface Formation {

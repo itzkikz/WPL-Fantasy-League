@@ -58,6 +58,7 @@ export function convertToFormation(playersData: PlayerData[]): FormationResult {
       save: playerData.save,
       penalty_save: playerData.penalty_save,
       penalty_miss: playerData.penalty_miss,
+      gw: playerData.gw
     };
 
     // Add captain/vice captain flags

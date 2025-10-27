@@ -69,13 +69,16 @@ const PlayerStatsOverlay = ({
                   </div>
                   <div className="flex-1 pt-4">
                     <h2 className="text-right text-white text-5xl font-bold mb-1">
-                      {playerStats?.total_point}<span className="text-sm text-right text-white">
+                      {playerStats?.total_point}
+                      <span className="text-sm text-right text-white">
                         {"  "}
                         Pts
                       </span>
                     </h2>
                     <h2 className="text-right text-white text-3xl font-bold mb-2">
-                      {(playerStats?.total_point / playerStats?.app || 0).toFixed(2)}
+                      {(
+                        playerStats?.total_point / playerStats?.app || 0
+                      ).toFixed(2)}
                       <span className="text-sm text-right text-white">
                         {"  "}
                         Pts/Match
@@ -134,7 +137,7 @@ const PlayerStatsOverlay = ({
                       activeTab === "stats" ? "text-gray-900" : "text-gray-400"
                     }`}
                   >
-                    GW Stats
+                    GW {player?.gw} Stats
                     {activeTab === "stats" && (
                       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600" />
                     )}
@@ -176,10 +179,7 @@ const PlayerStatsOverlay = ({
                     <div className="space-y-3">
                       {/* <StatRow label="Starts" value={playerStats?.app} /> */}
                       {/* <StatRow label="Minutes Played" value="720" /> */}
-                      <StatRow
-                        label="Played"
-                        value={player?.app === 1 ? "Yes" : "No"}
-                      />
+                      <StatRow label="Appearance" value={player?.app} />
                       <StatRow
                         label="Clean Sheets"
                         value={player.clean_sheet}
@@ -204,6 +204,15 @@ const PlayerStatsOverlay = ({
                         value={player?.yellow_card}
                       />
                       <StatRow label="Red Cards" value={player?.red_card} />
+                      <StatRow
+                        label="Penalty Miss"
+                        value={player?.penalty_miss}
+                      />
+                      <StatRow
+                        label="Penalty Save"
+                        value={player?.penalty_save}
+                      />
+                      <StatRow label="Saves" value={player?.save} />
                       {/* <StatRow label="Own Goals" value={playerStats?.yellow_card} /> */}
                       {/* <StatRow
                   label="Defensive Contributions"
@@ -249,6 +258,15 @@ const PlayerStatsOverlay = ({
                         label="Red Cards"
                         value={playerStats?.red_card}
                       />
+                      <StatRow
+                        label="Penalty Miss"
+                        value={playerStats?.penalty_miss}
+                      />
+                      <StatRow
+                        label="Penalty Save"
+                        value={playerStats?.penalty_save}
+                      />
+                      <StatRow label="Saves" value={playerStats?.save} />
                       {/* <StatRow label="Own Goals" value={playerStats?.yellow_card} /> */}
                       {/* <StatRow
                   label="Defensive Contributions"
