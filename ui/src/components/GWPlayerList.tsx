@@ -22,14 +22,14 @@ const GWPlayerList = ({ starting, bench, onClick }: GWPlayerListProps) => {
         <div className="flex items-center gap-6 ml-4">
           <div className="text-center min-w-[40px]">
             <p className="text-xs font-semibold text-gray-600 uppercase">
-              Form
+              Points
             </p>
           </div>
-          <div className="text-center min-w-[50px]">
+          {/* <div className="text-center min-w-[50px]">
             <p className="text-xs font-semibold text-gray-600 uppercase">
               Price
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
 

@@ -84,6 +84,7 @@ const PlayerStatsOverlay = ({
                         Pts/Match
                       </span>
                     </h2>
+                    <h1 className="text-right text-white text-xl">£{playerStats?.price}m</h1>
                   </div>
                 </div>
               </div>

@@ -60,9 +60,9 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
             {player.point || "3.5"}
           </p>
         </div>
-        <div className="text-center min-w-[50px]">
+        {/* <div className="text-center min-w-[50px]">
           <p className="text-sm font-semibold text-gray-900">{"£0m"}</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
