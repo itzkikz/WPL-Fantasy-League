@@ -1,7 +1,7 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useStandings } from "../features/standings/hooks";
-import ScrollableTable from "../components/ScrollableTable";
-import ScrollableTableSkeleton from "../components/skeletons/ScrollableTableSkeleton";
+import { useStandings } from "../../features/standings/hooks";
+import ScrollableTable from "../../components/ScrollableTable";
+import ScrollableTableSkeleton from "../../components/skeletons/ScrollableTableSkeleton";
 
 const StandingsPage = () => {
   const navigate = useNavigate();

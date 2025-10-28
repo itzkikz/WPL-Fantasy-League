@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StandingsIndexRouteImport } from './routes/standings/index'
+import { Route as ManagerIndexRouteImport } from './routes/manager/index'
 import { Route as StandingsTeamNameRouteImport } from './routes/standings/$teamName'
+import { Route as ManagerPickTeamIndexRouteImport } from './routes/manager/pick-team/index'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -29,9 +31,19 @@ const StandingsIndexRoute = StandingsIndexRouteImport.update({
   path: '/standings/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ManagerIndexRoute = ManagerIndexRouteImport.update({
+  id: '/manager/',
+  path: '/manager/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StandingsTeamNameRoute = StandingsTeamNameRouteImport.update({
   id: '/standings/$teamName',
   path: '/standings/$teamName',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManagerPickTeamIndexRoute = ManagerPickTeamIndexRouteImport.update({
+  id: '/manager/pick-team/',
+  path: '/manager/pick-team/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -39,34 +51,61 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/standings/$teamName': typeof StandingsTeamNameRoute
+  '/manager': typeof ManagerIndexRoute
   '/standings': typeof StandingsIndexRoute
+  '/manager/pick-team': typeof ManagerPickTeamIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/standings/$teamName': typeof StandingsTeamNameRoute
+  '/manager': typeof ManagerIndexRoute
   '/standings': typeof StandingsIndexRoute
+  '/manager/pick-team': typeof ManagerPickTeamIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/standings/$teamName': typeof StandingsTeamNameRoute
+  '/manager/': typeof ManagerIndexRoute
   '/standings/': typeof StandingsIndexRoute
+  '/manager/pick-team/': typeof ManagerPickTeamIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/standings/$teamName' | '/standings'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/standings/$teamName'
+    | '/manager'
+    | '/standings'
+    | '/manager/pick-team'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/standings/$teamName' | '/standings'
-  id: '__root__' | '/' | '/login' | '/standings/$teamName' | '/standings/'
+  to:
+    | '/'
+    | '/login'
+    | '/standings/$teamName'
+    | '/manager'
+    | '/standings'
+    | '/manager/pick-team'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/standings/$teamName'
+    | '/manager/'
+    | '/standings/'
+    | '/manager/pick-team/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
   StandingsTeamNameRoute: typeof StandingsTeamNameRoute
+  ManagerIndexRoute: typeof ManagerIndexRoute
   StandingsIndexRoute: typeof StandingsIndexRoute
+  ManagerPickTeamIndexRoute: typeof ManagerPickTeamIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,11 +131,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StandingsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/manager/': {
+      id: '/manager/'
+      path: '/manager'
+      fullPath: '/manager'
+      preLoaderRoute: typeof ManagerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/standings/$teamName': {
       id: '/standings/$teamName'
       path: '/standings/$teamName'
       fullPath: '/standings/$teamName'
       preLoaderRoute: typeof StandingsTeamNameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manager/pick-team/': {
+      id: '/manager/pick-team/'
+      path: '/manager/pick-team'
+      fullPath: '/manager/pick-team'
+      preLoaderRoute: typeof ManagerPickTeamIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -106,7 +159,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
   StandingsTeamNameRoute: StandingsTeamNameRoute,
+  ManagerIndexRoute: ManagerIndexRoute,
   StandingsIndexRoute: StandingsIndexRoute,
+  ManagerPickTeamIndexRoute: ManagerPickTeamIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

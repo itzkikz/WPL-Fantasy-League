@@ -1,4 +1,4 @@
-import { Player } from "../libs/formatter/types";
+import { Player } from "../features/players/types";
 
 interface PitchPlayerCardProps {
   isSmall?: boolean;

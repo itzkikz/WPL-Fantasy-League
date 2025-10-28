@@ -1,18 +1,18 @@
 import { getRouteApi } from "@tanstack/react-router";
-import { useTeamDetails } from "../features/standings/hooks";
+import { useTeamDetails } from "../../features/standings/hooks";
 import { useState } from "react";
-import Header from "../components/Header";
-import GWNavigation from "../components/GWNavigation";
-import GWStatsCards from "../components/GWStatsCards";
-import GWTabSwitcher from "../components/GWTabSwitcher";
+import Header from "../../components/Header";
+import GWNavigation from "../../components/GWNavigation";
+import GWStatsCards from "../../components/GWStatsCards";
+import GWTabSwitcher from "../../components/GWTabSwitcher";
 import { convertToFormation } from "../libs/formatter/lineupFormatter";
-import GWPitch from "../components/GWPitch";
+import GWPitch from "../../components/GWPitch";
 import { Player } from "../libs/formatter/types";
-import GWPlayerList from "../components/GWPlayerList";
-import GWPitchSkeleton from "../components/skeletons/GWPitchSkeleton";
-import GWStatsCardsSkeleton from "../components/skeletons/GWStatsCardsSkeleton";
-import PlayerStatsOverlay from "../components/PlayerStatsOverlay";
-import GWNavigationSkeleton from "../components/skeletons/GWNavigationSkeleton";
+import GWPlayerList from "../../components/GWPlayerList";
+import GWPitchSkeleton from "../../components/skeletons/GWPitchSkeleton";
+import GWStatsCardsSkeleton from "../../components/skeletons/GWStatsCardsSkeleton";
+import PlayerStatsOverlay from "../../components/PlayerStatsOverlay";
+import GWNavigationSkeleton from "../../components/skeletons/GWNavigationSkeleton";
 
 const TeamDetailsPage = () => {
   const route = getRouteApi("/standings/$teamName");
@@ -24,7 +24,8 @@ const TeamDetailsPage = () => {
 
   const { data: teamDetails, isLoading } = useTeamDetails(teamName, gameWeek);
 
-  const { gw, currentGw, avg, highest, totalGWScore, starting, bench } = teamDetails || {};
+  const { gw, currentGw, avg, highest, totalGWScore, starting, bench } =
+    teamDetails || {};
 
   return (
     <>
@@ -65,6 +66,8 @@ const TeamDetailsPage = () => {
 
       {selectedPlayer && (
         <PlayerStatsOverlay
+          showDetails={false}
+          showStats={true}
           player={selectedPlayer}
           onClose={() => setSelectedPlayer(null)}
         />
