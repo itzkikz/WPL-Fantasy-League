@@ -4,11 +4,13 @@ dotenv.config();
 import express from 'express';
 import standingsRouter from './routes/standings';
 import playersRouter from './routes/players';
+import authRouter from './routes/auth'
+import { setSheets } from './lib/store/globals';
+import { authenticateToken } from './middlewares/authMiddleware';
 
 const cors = require("cors");
 const { google } = require("googleapis");
 const fs = require("fs");
-const { convertToJSON } = require("./utils");
 
 const app = express();
 app.use(express.json());
@@ -24,11 +26,21 @@ const auth = new google.auth.GoogleAuth({
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
+const sheets = google.sheets({ version: "v4", auth });
+
+setSheets(sheets)
+
 
 
 
 app.use("/api", standingsRouter);
 app.use("/api", playersRouter);
+app.use("/api", authRouter);
+
+app.get('/api/validate-token', authenticateToken, (req: any, res) => {
+  res.json({ valid: true, user: req.user });
+});
+
 
 
 // READ: Get all data from a sheet

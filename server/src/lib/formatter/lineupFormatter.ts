@@ -1,6 +1,4 @@
 // formationConverter.ts
-import * as fs from 'fs';
-import * as path from 'path';
 import { Player, FormationResult } from './types';
 import { TeamDetails } from '../../types/standings';
 import { teamsData } from './teamsData';

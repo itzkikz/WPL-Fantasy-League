@@ -22,14 +22,12 @@ export interface Player {
     app: number;
     gw: number;
 }
-
 export interface Formation {
     goalkeeper: Player[];
     defenders: Player[];
     midfielders: Player[];
     forwards: Player[];
 }
-
 export interface FormationResult {
     starting: Formation;
     bench: Player[];
