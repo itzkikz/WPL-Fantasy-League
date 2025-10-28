@@ -7,7 +7,7 @@ export const Route = createRootRoute({
     <>
       <main className="font-outfit min-h-screen bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
         <div className="max-w-7xl mx-auto">
-          <div className="flex h-screen flex-col mx-auto max-w-md bg-white shadow-sm">
+          <div className="flex h-screen flex-col mx-auto max-w-md bg-white dark:bg-[#1e0021] shadow-sm text-[#37003c] dark:text-white">
             <header className="hidden relative w-full h-10 overflow-hidden">
               {/* Animated gradient overlay */}
               {/* Content container */}
@@ -59,7 +59,7 @@ export const Route = createRootRoute({
                 {["Home", "Stats", "..", "...", "Settings"].map((label) => (
                   <button
                     key={label}
-                    className="inline-flex flex-col items-center justify-center text-[11px] text-gray-500 hover:text-purple-600 transition-colors"
+                    className="inline-flex flex-col items-center justify-center text-[11px] text-gray-500 dark:hover:text-[#541e5d] transition-colors"
                   >
                     {label === "Home" && (
                       <svg

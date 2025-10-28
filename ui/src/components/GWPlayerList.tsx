@@ -11,17 +11,17 @@ interface GWPlayerListProps {
 const GWPlayerList = ({ starting, bench, onClick }: GWPlayerListProps) => {
   return (
     <div className="flex-1 overflow-y-auto">
-    <div className="bg-white">
+    <div>
       {/* Column Headers */}
-      <div className="sticky top-0 bg-gray-50 border-b border-gray-200 px-4 py-3 flex items-center">
+      <div className="sticky top-0 bg-white dark:bg-[#1e0021] border-b border-[#ebe5eb] dark:border-[#541e5d] px-4 py-3 flex items-center">
         <div className="flex-1">
-          <p className="text-xs font-semibold text-gray-600 uppercase">
+          <p className="text-xs font-semibold uppercase">
             Player
           </p>
         </div>
         <div className="flex items-center gap-6 ml-4">
           <div className="text-center min-w-[40px]">
-            <p className="text-xs font-semibold text-gray-600 uppercase">
+            <p className="text-xs font-semibold uppercase">
               Points
             </p>
           </div>
@@ -35,7 +35,7 @@ const GWPlayerList = ({ starting, bench, onClick }: GWPlayerListProps) => {
 
       {/* Goalkeepers */}
       <div>
-        <h3 className="text-lg font-bold text-gray-900 px-4 py-3 bg-gray-50">
+        <h3 className="text-lg font-bold px-4 py-3">
           Goalkeepers
         </h3>
         {starting?.goalkeeper.map((player) => (
@@ -49,7 +49,7 @@ const GWPlayerList = ({ starting, bench, onClick }: GWPlayerListProps) => {
 
       {/* Defenders */}
       <div>
-        <h3 className="text-lg font-bold text-gray-900 px-4 py-3 bg-gray-50">
+        <h3 className="text-lg font-bold px-4 py-3 ">
           Defenders
         </h3>
         {starting?.defenders.map((player) => (
@@ -63,7 +63,7 @@ const GWPlayerList = ({ starting, bench, onClick }: GWPlayerListProps) => {
 
       {/* Midfielders */}
       <div>
-        <h3 className="text-lg font-bold text-gray-900 px-4 py-3 bg-gray-50">
+        <h3 className="text-lg font-bold px-4 py-3 ">
           Midfielders
         </h3>
         {starting?.midfielders.map((player) => (
@@ -78,7 +78,7 @@ const GWPlayerList = ({ starting, bench, onClick }: GWPlayerListProps) => {
       {/* Forwards */}
       {starting?.forwards && starting.forwards.length > 0 && (
         <div>
-          <h3 className="text-lg font-bold text-gray-900 px-4 py-3 bg-gray-50">
+          <h3 className="text-lg font-bold px-4 py-3">
             Forwards
           </h3>
           {starting.forwards.map((player) => (
@@ -92,7 +92,7 @@ const GWPlayerList = ({ starting, bench, onClick }: GWPlayerListProps) => {
       )}
       {bench && bench.length > 0 && (
         <div>
-          <h3 className="text-lg font-bold text-gray-900 px-4 py-3 bg-gray-50">
+          <h3 className="text-lg font-bold px-4 py-3">
             Substitutes
           </h3>
           {bench.map((player) => (

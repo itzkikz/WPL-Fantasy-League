@@ -5,7 +5,7 @@ const Delta = ({ d }: { d: Standings["pos_change"] }) => {
     return (
       <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#2fa550] text-white">
         <svg
-          className="w-3 h-3 text-gray-800 dark:text-white"
+          className="w-3 h-3 text-white dark:text-white"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -25,7 +25,7 @@ const Delta = ({ d }: { d: Standings["pos_change"] }) => {
     return (
       <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#ed0628] text-white">
         <svg
-          className="w-3 h-3 text-gray-800 dark:text-white"
+          className="w-3 h-3 text-white dark:text-white"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -44,7 +44,7 @@ const Delta = ({ d }: { d: Standings["pos_change"] }) => {
   return (
     <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#541e5d] text-gray-600">
       <svg
-        className="w-6 h-6 text-gray-800 dark:text-white"
+        className="w-6 h-6 text-white dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"

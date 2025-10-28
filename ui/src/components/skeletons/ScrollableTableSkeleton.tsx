@@ -22,13 +22,13 @@ const ScrollableTableSkeleton = ({
       <div className="h-full overflow-y-auto">
         <table className="w-full">
           {/* Sticky table header */}
-          <thead className="sticky top-0 z-10 bg-white">
+          <thead className="sticky top-0 z-10">
             <tr>
               {headings.map((heading, index) => (
                 <th
                   key={index + heading?.label}
                   className={
-                    heading?.class + ` text-xs font-semibold text-gray-600`
+                    heading?.class + ` text-xs font-semibold`
                   }
                 >
                   {heading?.label}
@@ -40,7 +40,7 @@ const ScrollableTableSkeleton = ({
           {/* Skeleton tbody */}
           <tbody>
             {[...Array(10)].map((_, i) => (
-              <tr key={i} className="even:bg-gray-50">
+              <tr key={i}>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
                     <div className="h-6 w-6 bg-gray-200 rounded animate-pulse"></div>

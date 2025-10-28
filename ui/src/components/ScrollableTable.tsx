@@ -29,13 +29,13 @@ const ScrollableTable = ({
       <div className="h-full overflow-y-auto">
         <table className="w-full">
           {/* Sticky table header */}
-          <thead className="sticky top-0 z-10 bg-white">
+          <thead className="sticky top-0 z-10 bg-white dark:bg-[#1e0021]">
             <tr>
               {headings.map((heading, index) => (
                 <th
                   key={index + heading?.label}
                   className={
-                    heading?.class + ` text-xs font-semibold text-gray-600`
+                    heading?.class + ` text-xs font-semibold`
                   }
                 >
                   {heading?.label}
@@ -49,27 +49,27 @@ const ScrollableTable = ({
             {content?.map((r, i) => (
               <tr
                 key={i}
-                className="even:bg-gray-50 hover:bg-purple-50 transition-colors cursor-pointer"
+                className="dark:hover:bg-[#541e5d] transition-colors cursor-pointer border-b border-[#ebe5eb] dark:border-[#541e5d]"
                 onClick={() => onClick(r.team)}
               >
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
-                    <span className="inline-flex h-6 w-6 items-center justify-center text-xs text-black font-semibold">
+                    <span className="inline-flex h-6 w-6 items-center justify-center text-xs font-semibold">
                       {i + 1}
                     </span>
                     <Delta d={r.pos_change} />
                   </div>
                 </td>
                 <td className="px-2 py-3">
-                  <p className="text-[15px] font-semibold text-[#2a1134] leading-tight">
+                  <p className="text-[15px] font-semibold leading-tight">
                     {r.team}
                   </p>
                   <p className="text-xs text-gray-500">{"Manager"}</p>
                 </td>
-                <td className="px-2 py-3 text-center font-semibold text-[#2a1134]">
+                <td className="px-2 py-3 text-center font-semibold">
                   {r.current_gw}
                 </td>
-                <td className="px-4 py-3 text-right text-base font-semibold text-[#4a2b59]">
+                <td className="px-4 py-3 text-right text-base font-semibold">
                   {r.total}
                 </td>
               </tr>

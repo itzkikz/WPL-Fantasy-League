@@ -16,11 +16,11 @@ const StandingsPage = () => {
 
   return (
     <>
-      <div className="flex-none bg-white px-4 pt-4 pb-3 border-b border-gray-100">
+      <div className="flex-none px-4 pt-4 pb-3 border-b border-[#ebe5eb] dark:border-[#541e5d]">
         {/* <h2 className="text-center text-2xl font-semibold text-[#33003b]">
           Arsenal
         </h2> */}
-        <p className="mt-2 text-xs text-gray-600 text-center">
+        <p className="mt-2 text-xs text-center">
           Last updated: <b>{standings && standings[0]?.last_update_date}</b>
           (Local Time)
         </p>

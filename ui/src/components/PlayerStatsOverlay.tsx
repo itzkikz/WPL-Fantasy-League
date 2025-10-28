@@ -23,7 +23,7 @@ const PlayerStatsOverlay = ({
         className={`fixed inset-0 z-50 bg-black/50 flex items-end animate-fade-in`}
       >
         <div
-          className={`w-full max-w-md mx-auto bg-white rounded-t-3xl max-h-[90vh] overflow-hidden flex flex-col animate-slide-up`}
+          className={`w-full max-w-md mx-auto bg-white dark:bg-[#1e0021] rounded-t-3xl max-h-[90vh] overflow-hidden flex flex-col animate-slide-up`}
         >
           {/* Header with Player Info */}
           {isLoading ? (
@@ -31,13 +31,13 @@ const PlayerStatsOverlay = ({
           ) : (
             <>
               {" "}
-              <div className="relative bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 px-6 pt-6 pb-4">
+              <div className="relative dark:text-[#1e0021] bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 px-6 pt-6 pb-4">
                 <button
                   onClick={onClose}
                   className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
                 >
                   <svg
-                    className="w-6 h-6 text-white"
+                    className="w-6 h-6"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -54,37 +54,37 @@ const PlayerStatsOverlay = ({
                 <div className="flex items-start gap-4 mt-8">
                   {/* Player Details */}
                   <div className="flex-1 pt-4">
-                    <p className="text-white/80 text-sm font-medium mb-1">
+                    <p className="text-sm font-medium mb-1">
                       {player.position}
                     </p>
-                    <h2 className="text-white text-2xl font-bold mb-1">
+                    <h2 className="text-2xl font-bold mb-1">
                       {player.name.split(" ")[0]}
                     </h2>
-                    <h2 className="text-white text-3xl font-bold mb-2">
+                    <h2 className="text-3xl font-bold mb-2">
                       {player.name.split(" ").slice(1).join(" ")}
                     </h2>
-                    <p className="text-white/90 text-sm">
+                    <p className="text-sm">
                       {player.fullTeamName || player.team}
                     </p>
                   </div>
                   <div className="flex-1 pt-4">
-                    <h2 className="text-right text-white text-5xl font-bold mb-1">
+                    <h2 className="text-right text-5xl font-bold mb-1">
                       {playerStats?.total_point}
-                      <span className="text-sm text-right text-white">
+                      <span className="text-sm text-right">
                         {"  "}
                         Pts
                       </span>
                     </h2>
-                    <h2 className="text-right text-white text-3xl font-bold mb-2">
+                    <h2 className="text-right text-3xl font-bold mb-2">
                       {(
                         playerStats?.total_point / playerStats?.app || 0
                       ).toFixed(2)}
-                      <span className="text-sm text-right text-white">
+                      <span className="text-sm text-right">
                         {"  "}
                         Pts/Match
                       </span>
                     </h2>
-                    <h1 className="text-right text-white text-xl">£{playerStats?.price}m</h1>
+                    <h1 className="text-right text-xl">£{playerStats?.price}m</h1>
                   </div>
                 </div>
               </div>
@@ -92,22 +92,22 @@ const PlayerStatsOverlay = ({
               <div className="hidden px-6 mb-6">
                 <div className="bg-gray-50 rounded-xl p-4 grid grid-cols-4 gap-4">
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-gray-900">£4.9m</p>
+                    <p className="text-2xl font-bold ">£4.9m</p>
                     <p className="text-xs text-gray-600 mt-1">Price</p>
                     <p className="text-xs text-gray-500">49 of 246</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-gray-900">6.2</p>
+                    <p className="text-2xl font-bold ">6.2</p>
                     <p className="text-xs text-gray-600 mt-1">Pts / Match</p>
                     <p className="text-xs text-gray-500">5 of 246</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-gray-900">3.5</p>
+                    <p className="text-2xl font-bold ">3.5</p>
                     <p className="text-xs text-gray-600 mt-1">Form</p>
                     <p className="text-xs text-gray-500">20 of 246</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-gray-900">32.0%</p>
+                    <p className="text-2xl font-bold ">32.0%</p>
                     <p className="text-xs text-gray-600 mt-1">Selected</p>
                     <p className="text-xs text-gray-500">2 of 246</p>
                   </div>
@@ -117,14 +117,14 @@ const PlayerStatsOverlay = ({
                 </p>
               </div>
               {/* Tabs */}
-              <div className="flex-none border-b border-gray-200 px-6">
+              <div className="flex-none border-b border-[#ebe5eb] dark:border-[#541e5d] px-6">
                 <div className="flex gap-8">
                   <button
                     onClick={() => setActiveTab("matches")}
                     className={`hidden py-3 text-sm font-semibold relative ${
                       activeTab === "matches"
-                        ? "text-gray-900"
-                        : "text-gray-400"
+                        ? ""
+                        : "text-[#ebe5eb] dark:text-[#541e5d]"
                     }`}
                   >
                     Matches
@@ -135,7 +135,7 @@ const PlayerStatsOverlay = ({
                   <button
                     onClick={() => setActiveTab("stats")}
                     className={`py-3 text-sm font-semibold relative ${
-                      activeTab === "stats" ? "text-gray-900" : "text-gray-400"
+                      activeTab === "stats" ? "" : "text-[#ebe5eb] dark:text-[#541e5d]"
                     }`}
                   >
                     GW {player?.gw} Stats
@@ -146,7 +146,7 @@ const PlayerStatsOverlay = ({
                   <button
                     onClick={() => setActiveTab("ostats")}
                     className={`py-3 text-sm font-semibold relative ${
-                      activeTab === "ostats" ? "text-gray-900" : "text-gray-400"
+                      activeTab === "ostats" ? "" : "text-[#ebe5eb] dark:text-[#541e5d]"
                     }`}
                   >
                     Overall Stats
@@ -158,8 +158,8 @@ const PlayerStatsOverlay = ({
                     onClick={() => setActiveTab("history")}
                     className={`hidden py-3 text-sm font-semibold relative ${
                       activeTab === "history"
-                        ? "text-gray-900"
-                        : "text-gray-400"
+                        ? ""
+                        : "text-[#ebe5eb] dark:text-[#541e5d]"
                     }`}
                   >
                     History
@@ -173,7 +173,7 @@ const PlayerStatsOverlay = ({
               <div className="flex-1 overflow-y-auto">
                 {activeTab === "stats" && (
                   <div className="px-6 py-4">
-                    <h3 className="text-lg font-bold text-gray-900 mb-4">
+                    <h3 className="text-lg font-bold mb-4">
                       Game Week Stats
                     </h3>
 
@@ -225,7 +225,7 @@ const PlayerStatsOverlay = ({
                 )}
                 {activeTab === "ostats" && (
                   <div className="px-6 py-4">
-                    <h3 className="text-lg font-bold text-gray-900 mb-4">
+                    <h3 className="text-lg font-bold mb-4">
                       Season Stats
                     </h3>
 
