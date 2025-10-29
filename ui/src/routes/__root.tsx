@@ -1,6 +1,7 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import Logo from "./../assets/wplff.svg";
+import BottomNavbar from "../components/BottomNavbar";
 
 export const Route = createRootRoute({
   component: () => (
@@ -54,70 +55,7 @@ export const Route = createRootRoute({
             </header>
             <Outlet />
             <TanStackRouterDevtools />
-            <nav className="hidden flex-none border-t border-gray-200 bg-white">
-              <div className="grid h-16 grid-cols-5">
-                {["Home", "Stats", "..", "...", "Settings"].map((label) => (
-                  <button
-                    key={label}
-                    className="inline-flex flex-col items-center justify-center text-[11px] text-gray-500 dark:hover:text-[#541e5d] transition-colors"
-                  >
-                    {label === "Home" && (
-                      <svg
-                        className="w-6 h-6 text-gray-800 dark:text-[#33003b]"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"
-                        />
-                      </svg>
-                    )}
-                    {label === "Stats" && (
-                      <svg
-                        className="w-6 h-6 text-gray-800 dark:text-[#33003b]"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667"
-                        />
-                      </svg>
-                    )}
-                    {label !== "Home" && label !== "Stats" && (
-                      <svg
-                        className="w-6 h-6 text-gray-800 dark:text-[#33003b]"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M7 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H7Z" />
-                      </svg>
-                    )}
-
-                    <span className="mt-1">{label}</span>
-                  </button>
-                ))}
-              </div>
-            </nav>
+           <BottomNavbar />
           </div>
         </div>
       </main>

@@ -1,15 +1,16 @@
 // src/features/standings/api.ts
 import apiClient from '../../api/client'
+import { API_ENDPOINTS } from '../../api/endpoints'
 import { Standings, TeamDetails } from './types'
 
 export const standingsApi = {
   getAll: async (): Promise<Standings[]> => {
-    const response = await apiClient.get('/standings')
+    const response = await apiClient.get(API_ENDPOINTS.STANDINGS.BASE)
     return response.data.data
   },
 
   getByTeamName: async (teamName: string, gameWeek: number): Promise<TeamDetails> => {
-    const response = await apiClient.get(`/standings/${teamName}/${gameWeek}`)
+    const response = await apiClient.get(API_ENDPOINTS.STANDINGS.BY_TEAMNAME(teamName, gameWeek))
     return response.data.data
   },
 

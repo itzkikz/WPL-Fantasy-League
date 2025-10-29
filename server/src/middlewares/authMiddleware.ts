@@ -19,10 +19,10 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
-    if (!token) return res.status(401).json({ valid: false });
+    if (!token) return res.status(401).json({data: { valid: false }});
 
     jwt.verify(token, publicKey, { algorithms: ["RS256"] }, (err, user) => {
-        if (err) return res.status(403).json({ valid: false });
+        if (err) return res.status(403).json({data : { valid: false }});
         req.user = user;
         next();
     });

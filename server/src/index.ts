@@ -38,7 +38,7 @@ app.use("/api", playersRouter);
 app.use("/api", authRouter);
 
 app.get('/api/validate-token', authenticateToken, (req: any, res) => {
-  res.json({ valid: true, user: req.user });
+  res.json({data:{ valid: true, user: req.user }});
 });
 
 

@@ -32,7 +32,9 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     algorithm: "RS256",
   });
   res.json({
-    token,
-    user: { username: user.username }
+    data: {
+      token,
+      user: { username: user.username }
+    }
   });
 }

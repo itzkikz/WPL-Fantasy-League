@@ -5,7 +5,7 @@ const ManagerPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full max-w-md bg-white rounded-3xl p-3 shadow-xl overflow-hidden">
+    <div className="w-full max-w-md rounded-3xl p-3 shadow-xl overflow-hidden">
       {/* Header Card with Gradient */}
       <div className="bg-gradient-to-br from-cyan-400 rounded-3xl via-blue-500 to-purple-600 p-6 text-white relative">
         {/* User Info */}
@@ -134,7 +134,7 @@ const ManagerPage = () => {
       {/* Points & Rankings Section */}
       <div className="p-6 border-b border-gray-200">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900">Points & Rankings</h2>
+          <h2 className="text-xl font-bold">Points & Rankings</h2>
           <button className="text-sm text-purple-600 hover:text-purple-700 flex items-center gap-1">
             Gameweek History
             <svg
@@ -155,20 +155,20 @@ const ManagerPage = () => {
 
         <div className="space-y-3">
           <div className="flex justify-between items-center">
-            <span className="text-gray-700">Overall points</span>
-            <span className="font-semibold text-gray-900">35</span>
+            <span className="">Overall points</span>
+            <span className="font-semibold">35</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-gray-700">Overall rank</span>
-            <span className="font-semibold text-gray-900">12,195,771</span>
+            <span className="">Overall rank</span>
+            <span className="font-semibold">12,195,771</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-gray-700">Total players</span>
-            <span className="font-semibold text-gray-900">12,322,756</span>
+            <span className="">Total players</span>
+            <span className="font-semibold">12,322,756</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-gray-700">Gameweek points</span>
-            <span className="font-semibold text-gray-900">35</span>
+            <span className="">Gameweek points</span>
+            <span className="font-semibold">35</span>
           </div>
         </div>
       </div>
@@ -176,7 +176,7 @@ const ManagerPage = () => {
       {/* My Team Badge Section */}
       <div className="p-6 border-b border-gray-200">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900">My Team Badge</h2>
+          <h2 className="text-xl font-bold">My Team Badge</h2>
           <button className="text-sm text-purple-600 hover:text-purple-700 flex items-center gap-1">
             Generate Team Badge
             <svg
@@ -228,10 +228,10 @@ const ManagerPage = () => {
               />
             </svg>
           </div>
-          <p className="text-center font-semibold text-gray-900 mb-1">
+          <p className="text-center font-semibold mb-1">
             Generate
           </p>
-          <p className="text-center text-gray-700">team badge</p>
+          <p className="text-center ">team badge</p>
           <div className="mt-4 flex items-center gap-2">
             <img
               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF0000'%3E%3Cpath d='M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z'/%3E%3C/svg%3E"
@@ -239,7 +239,7 @@ const ManagerPage = () => {
               className="w-5 h-5"
             />
             <span className="text-xs text-gray-600">Powered by</span>
-            <span className="text-xs font-semibold text-gray-900">
+            <span className="text-xs font-semibold">
               Adobe Express
             </span>
           </div>
@@ -249,7 +249,7 @@ const ManagerPage = () => {
       {/* Transfers Section */}
       <div className="p-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold text-gray-900">Transfers</h2>
+          <h2 className="text-xl font-bold">Transfers</h2>
           <button className="text-sm text-purple-600 hover:text-purple-700 flex items-center gap-1">
             Transfer History
             <svg

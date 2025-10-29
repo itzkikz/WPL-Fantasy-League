@@ -2,16 +2,23 @@
 export const API_ENDPOINTS = {
   // Auth endpoints
   AUTH: {
-    LOGIN: '/auth/login',
+    LOGIN: 'login/',
     LOGOUT: '/auth/logout',
     REGISTER: '/auth/register',
     REFRESH: '/auth/refresh',
+    VALIDATE:'validate-token/'
   },
 
   // Books endpoints
   STANDINGS: {
     BASE: '/standings',
-    BY_TEAMNAME: (teamName: string) => `/standings/${teamName}`,
+    BY_TEAMNAME: (teamName: string, gameWeek: number) => `/standings/${teamName}/${gameWeek}`,
+  },
+
+  // Books endpoints
+  PLAYERS: {
+    BASE: '/players',
+    BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
   },
 
   // Users endpoints

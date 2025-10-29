@@ -1,26 +1,62 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import Logo from "../assets/wplff.svg";
-
+import { useLogin } from "../features/auth/hooks";
 
 const LoginPage = () => {
-  const [selectedUser, setSelectedUser] = useState('');
+  const [selectedUser, setSelectedUser] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
+  const navigate = useNavigate();
+
+  const mutation = useLogin((data) => {
+    if (data?.token) {
+      localStorage.setItem("token", data.token);
+    }
+    navigate({ to: "/manager" });
+  });
+
   // Preselected user options
   const userOptions = [
-    'john.doe@example.com',
-    'jane.smith@example.com',
-    'admin@company.com',
-    'user123',
-    'developer@tech.com'
+    "InConsistent",
+    "Air10 Srikers",
+    "Magical Magyars",
+    "Gunda Koyi",
+    "Seal Breakers",
+    "Relegated FC",
+    "COF 26",
+    "Airjith Strikers",
+    "Peeranki FC",
+    "Vava FC",
+    "Athiradi FC",
+    "4 Guys 1 Cup",
+    "Blaublancos",
+    "Mamangam DC",
+    "Kona Kona FC",
   ];
 
-  // Close dropdown when clicking outside
+  const filteredUsers = useMemo(() => {
+    if (!searchTerm) return userOptions;
+    return userOptions.filter((user) =>
+      user.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm, userOptions]);
+
+  // Check if form is complete
+  const isFormComplete = selectedUser && password.trim();
+
+  const handleSelectUser = (user) => {
+    setSelectedUser(user);
+    setIsDropdownOpen(false);
+    setSearchTerm("");
+  };
+
+  // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -28,19 +64,19 @@ const LoginPage = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log({ email, password, rememberMe });
-  };
-
-   const handleSelectUser = (user) => {
-    setSelectedUser(user);
-    setIsDropdownOpen(false);
+    const form = e.target;
+    mutation.mutate({
+      teamName: form.teamName.value,
+      password: form.password.value,
+    });
   };
 
   return (
@@ -48,23 +84,26 @@ const LoginPage = () => {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="flex justify-center">
-           <div className="w-20 h-20 rounded-sm flex items-center justify-center">
-                      <img
-                        src={Logo}
-                        alt="PLogo"
-                        className="w-20 h-20 animate-bounce opacity-90"
-                      />
-                    </div>
+          <div className="w-20 h-20 rounded-sm flex items-center justify-center">
+            <img
+              src={Logo}
+              alt="PLogo"
+              className="w-20 h-20 animate-bounce opacity-90"
+            />
+          </div>
         </div>
 
         {/* Title */}
-        <h1 className="text-[#2a1134] text-4xl font-bold text-center mb-8">
-          Log In
-        </h1>
+        <h1 className="text-4xl font-bold text-center mb-8">Log In</h1>
+        {mutation.isError && (
+          <h1 className="text-base font-semibold text-center text-red-700 mb-8">
+            {mutation?.error?.data?.error}
+          </h1>
+        )}
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Email/Username Input */}
+          {/* Email/teamName Input */}
           <div className="relative" ref={dropdownRef}>
             <button
               type="button"
@@ -73,35 +112,75 @@ const LoginPage = () => {
               aria-expanded={isDropdownOpen}
               aria-haspopup="listbox"
             >
-              <span className={selectedUser ? 'text-[#2a1134]' : 'text-gray-400'}>
-                {selectedUser || 'Select Team'}
+              <span
+                className={selectedUser ? "text-[#2a1134]" : "text-gray-400"}
+              >
+                {selectedUser || "Select Team"}
               </span>
-              <svg 
-                className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
+                  isDropdownOpen ? "rotate-180" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
 
-            {/* Dropdown Menu */}
+            {/* Hidden input keeping track of final selected value */}
+            <input
+              type="text"
+              name="teamName"
+              value={selectedUser || ""}
+              readOnly
+              className="hidden"
+            />
+
+            {/* Dropdown Menu with Search */}
             {isDropdownOpen && (
-              <div className="absolute z-10 w-full mt-2 bg-white border-2 border-slate-400 rounded-2xl shadow-lg max-h-60 overflow-y-auto">
-                <ul className="py-2" role="listbox">
-                  {userOptions.map((user, index) => (
-                    <li
-                      key={index}
-                      onClick={() => handleSelectUser(user)}
-                      className="px-6 py-3 text-[#2a1134] hover:bg-slate-600 cursor-pointer transition-colors"
-                      role="option"
-                      aria-selected={selectedUser === user}
-                    >
-                      {user}
-                    </li>
-                  ))}
-                </ul>
+              <div className="absolute z-10 w-full mt-2 bg-white border-2 border-slate-400 rounded-2xl shadow-lg max-h-60 overflow-hidden">
+                {/* Search Input */}
+                <div className="p-2 border-b border-slate-300">
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search teams..."
+                    className="w-full px-4 py-2 text-[#2a1134] placeholder-gray-400 border border-slate-300 rounded-lg focus:outline-none focus:border-[#2a1134] transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                    autoFocus
+                  />
+                </div>
+
+                {/* Filtered Results */}
+                <div className="overflow-y-auto max-h-48">
+                  <ul className="py-2" role="listbox">
+                    {filteredUsers.length > 0 ? (
+                      filteredUsers.map((user, index) => (
+                        <li
+                          key={index}
+                          onClick={() => handleSelectUser(user)}
+                          className="px-6 py-3 text-[#2a1134] hover:bg-slate-600 cursor-pointer transition-colors"
+                          role="option"
+                          aria-selected={selectedUser === user}
+                        >
+                          {user}
+                        </li>
+                      ))
+                    ) : (
+                      <li className="px-6 py-3 text-gray-400 text-center">
+                        No teams found
+                      </li>
+                    )}
+                  </ul>
+                </div>
               </div>
             )}
           </div>
@@ -112,8 +191,9 @@ const LoginPage = () => {
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-6 py-4 bg-white-900 border-2 border-slate-600 rounded-2xl text-[#2a1134] placeholder-gray-400 focus:outline-none focus:border-[#2a1134] transition-colors"
+              className="w-full px-6 py-4 bg-white border-2 border-slate-600 rounded-2xl text-[#2a1134] placeholder-gray-400 focus:outline-none focus:border-[#2a1134] transition-colors"
               placeholder="Password"
+              name="password"
             />
             <button
               type="button"
@@ -160,54 +240,15 @@ const LoginPage = () => {
             </button>
           </div>
 
-          {/* Remember Me and Forgot Password */}
-          <div className="flex items-center justify-between py-2">
-            <label className="flex items-center cursor-pointer">
-              <div className="relative hidden">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="sr-only hidden"
-                />
-                <div
-                  className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${
-                    rememberMe
-                      ? "bg-purple-600 border-purple-600"
-                      : "bg-transparent border-gray-400"
-                  }`}
-                >
-                  {rememberMe && (
-                    <svg
-                      className="w-4 h-4 text-white hidden"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={3}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  )}
-                </div>
-              </div>
-              <span className="ml-3 text-white text-base"></span>
-            </label>
-            <a
-              href="#"
-              className="text-[#2a1134] hover:text-[#2a1134]-300 text-base transition-colors"
-            >
-              Forgot Password ?
-            </a>
-          </div>
-
           {/* Login Button */}
           <button
             type="submit"
-            className="w-full py-4 bg-[#2a1134] hover:from-purple-500 hover:to-purple-600 text-white text-xl font-semibold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-purple-500/50 mt-6"
+            disabled={!isFormComplete}
+            className={`w-full py-4 text-xl font-semibold rounded-2xl transition-all duration-300 transform focus:outline-none focus:ring-4 focus:ring-purple-500/50 mt-6 ${
+              isFormComplete
+                ? "bg-[#1e0021] dark:bg-white text-white dark:text-[#1e0021] hover:scale-[1.02] cursor-pointer"
+                : "bg-[#ebe5eb] dark:bg-[#541e5d] cursor-not-allowed opacity-60"
+            }`}
           >
             Log In
           </button>
@@ -219,7 +260,8 @@ const LoginPage = () => {
             <div className="flex-1 border-t border-gray-600"></div>
           </div>
           <button
-            type="submit"
+            type="button"
+            onClick={() => navigate({to: '/standings'})}
             className="w-full py-4 bg-red-700 hover:from-purple-500 hover:to-purple-600 text-white text-xl font-semibold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-purple-500/50 mt-6"
           >
             Skip
