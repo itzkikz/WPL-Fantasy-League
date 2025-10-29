@@ -10,7 +10,7 @@ const GWNavigation = ({
   currentGW = 0,
 }: GWNavigationProps) => {
   return (
-    <div className="flex-none bg-white py-1">
+    <div className="flex-none py-1">
       <div className="flex items-center justify-center gap-6 max-w-md mx-auto">
         <button
           className="cursor-pointer"
@@ -18,9 +18,7 @@ const GWNavigation = ({
           onClick={() => setGameweek(gameWeek - 1)}
         >
           <svg
-            className={`w-5 h-5 ${
-              gameWeek === 1 ? 'text-gray-400' : 'text-[#2a1134]'
-            }`}
+            className={`w-5 h-5 ${gameWeek === 1 ? 'text-gray-400' : ''}`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -33,7 +31,7 @@ const GWNavigation = ({
             />
           </svg>
         </button>
-        <h2 className="text-base font-bold text-[#2a1134]">
+        <h2 className="text-base font-bold">
           Gameweek {gameWeek === 0 ? "" : gameWeek}
         </h2>
 
@@ -43,7 +41,7 @@ const GWNavigation = ({
           onClick={() => setGameweek(gameWeek + 1)}
         >
           <svg
-            className={`w-5 h-5 ${gameWeek - currentGW === 0 ? 'text-gray-400' : 'text-[#2a1134]'}`}
+            className={`w-5 h-5 ${gameWeek - currentGW === 0 ? 'text-gray-400' : ''}`}
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

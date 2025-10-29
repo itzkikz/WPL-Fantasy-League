@@ -10,10 +10,10 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
   return (
     <div
       onClick={onClick}
-      className="flex items-center py-3 px-4 border-b border-gray-100 hover:bg-gray-50"
+      className="flex items-center py-3 px-4 border-b border-[#ebe5eb] dark:border-[#541e5d] dark:hover:bg-[#541e5d]"
     >
       {/* Info Icon */}
-      <button className="mr-3 text-gray-400">
+      <button className="mr-3">
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
           <path
             fillRule="evenodd"
@@ -28,27 +28,27 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
         className="w-10 h-10 rounded flex items-center justify-center mr-3"
         style={{ backgroundColor: player.teamColor }}
       >
-        <span className="text-white text-xs font-bold">{player.team}</span>
+        <span className="text-xs text-white font-bold">{player.team}</span>
       </div>
 
       {/* Player Info */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <h3 className="font-semibold text-gray-900 text-sm truncate">
+          <h3 className="font-semibold text-sm truncate">
             {player?.name ? player.name.trim().split(/\s+/).slice(-1)[0] : ""}
           </h3>
           {player.isCaptain && (
-            <span className="px-1.5 py-0.5 bg-gray-900 text-white text-xs font-bold rounded">
+            <span className="px-1.5 py-0.5 bg-gray-900 text-xs font-bold rounded">
               C
             </span>
           )}
           {player.isViceCaptain && (
-            <span className="px-1.5 py-0.5 bg-gray-700 text-white text-xs font-bold rounded">
+            <span className="px-1.5 py-0.5 bg-gray-700 text-xs font-bold rounded">
               V
             </span>
           )}
         </div>
-        <p className="text-gray-500 text-xs">
+        <p className="text-xs">
           {player.team} {player.position}
         </p>
       </div>
@@ -56,13 +56,13 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
       {/* Stats */}
       <div className="flex items-center gap-6 ml-4">
         <div className="text-center min-w-[40px]">
-          <p className="text-sm font-semibold text-gray-900">
+          <p className="text-sm font-semibold">
             {player.point || "3.5"}
           </p>
         </div>
-        <div className="text-center min-w-[50px]">
+        {/* <div className="text-center min-w-[50px]">
           <p className="text-sm font-semibold text-gray-900">{"£0m"}</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

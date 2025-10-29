@@ -1,6 +1,6 @@
 const GWNavigationSkeleton = () => {
   return (
-    <div className="flex-none bg-white py-1">
+    <div className="flex-none py-1">
       <div className="flex items-center justify-center gap-6 max-w-md mx-auto">
         {/* Left arrow skeleton */}
         <div className="w-5 h-5 bg-gray-200 rounded animate-pulse"></div>

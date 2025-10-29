@@ -5,14 +5,14 @@ interface GWTabSwitcherProps {
 
 const GWTabSwitcher = ({ activeTab, setActiveTab }: GWTabSwitcherProps) => {
   return (
-    <div className="flex-none px-4 py-4 bg-white">
-      <div className="max-w-md mx-auto bg-gray-100 rounded-sm p-1 flex">
+    <div className="flex-none px-4 py-4">
+      <div className="max-w-md mx-auto rounded-sm p-1 flex bg-[#ebe5eb] dark:bg-[#41054b]">
         <button
           onClick={() => setActiveTab("pitch")}
           className={`flex-1 py-2 px-4 rounded-sm text-sm font-semibold transition-colors ${
             activeTab === "pitch"
-              ? "bg-white text-gray-900 shadow-sm"
-              : "text-gray-600"
+              ? "bg-white dark:bg-[#28002b] shadow-sm"
+              : ""
           }`}
         >
           Pitch
@@ -21,8 +21,8 @@ const GWTabSwitcher = ({ activeTab, setActiveTab }: GWTabSwitcherProps) => {
           onClick={() => setActiveTab("list")}
           className={`flex-1 py-2 px-4 rounded-sm text-sm font-semibold transition-colors ${
             activeTab === "list"
-              ? "bg-white text-gray-900 shadow-sm"
-              : "text-gray-600"
+              ? "bg-white dark:bg-[#28002b] shadow-sm"
+              : ""
           }`}
         >
           List

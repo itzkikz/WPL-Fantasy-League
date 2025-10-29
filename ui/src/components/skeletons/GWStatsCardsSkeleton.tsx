@@ -1,6 +1,6 @@
 const GWStatsCardsSkeleton = () => {
   return (
-    <div className="flex-none bg-white px-16">
+    <div className="flex-none px-16">
       <div className="flex items-center justify-between max-w-md mx-auto gap-1">
         {/* Average skeleton */}
         <div className="text-center">
