@@ -3,6 +3,8 @@ import { usePlayerDetails } from "../features/players/hooks";
 import StatRow from "./StatRow";
 import PlayerStatsOverlaySkeleton from "./skeletons/PlayerStatsOverlaySkeleton";
 import { Player } from "../features/players/types";
+import Button from "./common/Button";
+import Checkbox from "./common/Checkbox";
 
 const PlayerStatsOverlay = ({
   player,
@@ -33,11 +35,10 @@ const PlayerStatsOverlay = ({
         >
           {/* Header with Player Info */}
           {isLoading ? (
-            <PlayerStatsOverlaySkeleton onClose={onClose} />
+            <PlayerStatsOverlaySkeleton player={player} showStats={showStats} showDetails={showDetails} pickMyTeam={pickMyTeam} onClose={onClose} />
           ) : (
             <>
-              {" "}
-              <div className="relative dark:text-[#1e0021] bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 px-6 pt-6 pb-4">
+              <div className={`relative px-6 pt-6 pb-4`} style={{ backgroundColor: player?.teamColor }}>
                 <button
                   onClick={onClose}
                   className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
@@ -98,29 +99,29 @@ const PlayerStatsOverlay = ({
               </div>
               {/* Stats Grid */}
               {showDetails && (
-                <div className="hidden px-6 mb-6">
-                  <div className="bg-gray-50 rounded-xl p-4 grid grid-cols-4 gap-4">
+                <div className="flex px-6 mb-6 border-b border-[#ebe5eb] dark:border-[#541e5d]">
+                  <div className="rounded-xl p-4 grid grid-cols-4 gap-4">
                     <div className="text-center">
                       <p className="text-2xl font-bold ">£4.9m</p>
-                      <p className="text-xs text-gray-600 mt-1">Price</p>
-                      <p className="text-xs text-gray-500">49 of 246</p>
+                      <p className="text-xs  mt-1">Price</p>
+                      <p className="text-xs ">49 of 246</p>
                     </div>
                     <div className="text-center">
                       <p className="text-2xl font-bold ">6.2</p>
-                      <p className="text-xs text-gray-600 mt-1">Pts / Match</p>
-                      <p className="text-xs text-gray-500">5 of 246</p>
+                      <p className="text-xs  mt-1">Pts / Match</p>
+                      <p className="text-xs ">5 of 246</p>
                     </div>
                     <div className="text-center">
                       <p className="text-2xl font-bold ">3.5</p>
-                      <p className="text-xs text-gray-600 mt-1">Form</p>
-                      <p className="text-xs text-gray-500">20 of 246</p>
+                      <p className="text-xs  mt-1">Form</p>
+                      <p className="text-xs ">20 of 246</p>
                     </div>
                     <div className="text-center">
                       <p className="text-2xl font-bold ">32.0%</p>
-                      <p className="text-xs text-gray-600 mt-1">Selected</p>
-                      <p className="text-xs text-gray-500">2 of 246</p>
+                      <p className="text-xs  mt-1">Selected</p>
+                      <p className="text-xs ">2 of 246</p>
                     </div>
-                    <p className="text-center text-xs text-gray-600 mt-2">
+                    <p className="text-center text-xs  mt-2 hidden">
                       Ranking for Defenders
                     </p>
                   </div>
@@ -128,84 +129,13 @@ const PlayerStatsOverlay = ({
               )}
               {pickMyTeam && (
                 <div>
-                  <div className="flex items-center justify-between py-2 px-12 mb-5">
-                    <label className="flex items-center cursor-pointer">
-                      <div className="relative">
-                        <input
-                          type="checkbox"
-                          checked={true}
-                          className="sr-only hidden"
-                        />
-                        <div
-                          className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${"bg-transparent border-gray-400"}`}
-                        >
-                          {
-                            <svg
-                              className="w-4 h-4 text-white hidden"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={3}
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                          }
-                        </div>
-                      </div>
-                      <span className="ml-3 text-[#2a1134] text-base">
-                        Captian
-                      </span>
-                    </label>
-                    <label className="flex items-center cursor-pointer">
-                      <div className="relative">
-                        <input
-                          type="checkbox"
-                          checked={true}
-                          className="sr-only hidden"
-                        />
-                        <div
-                          className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${"bg-transparent border-gray-400"}`}
-                        >
-                          {
-                            <svg
-                              className="w-4 h-4 text-white hidden"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={3}
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                          }
-                        </div>
-                      </div>
-                      <span className="ml-3 text-[#2a1134] text-base">
-                        Vice Captian
-                      </span>
-                    </label>
+                  <div className="flex items-center justify-between py-5 px-12 mb-2 border-b border-[#ebe5eb] dark:border-[#541e5d]">
+                    <Checkbox label="Captian" />
+                    <Checkbox label="Vice Captian" />
                   </div>
-                  <div className="flex items-center justify-center py-2 px-8 mb-5">
-                    <button
-                      disabled={true}
-                      type="submit"
-                      className="w-1/3 py-2 px-2 mr-2 bg-white border border-[#2a1134] hover:from-purple-500 hover:to-purple-600 text-[#2a1134] text-base rounded-4xl transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-purple-500/50 mt-6"
-                    >
-                      Full Profile
-                    </button>
-                    <button
-                      type="submit"
-                      className="w-1/3 py-2 px-2 ml-2 bg-[#2a1134] hover:from-purple-500 hover:to-purple-600 text-white text-base rounded-4xl transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-purple-500/50 mt-6"
-                    >
-                      Substitute
-                    </button>
+                  <div className="flex items-center justify-between py-2 px-12 mb-2">
+                    <Button label="Full Profile" type="Primary" />
+                    <Button label="Substitute" type="Primary" />
                   </div>
                 </div>
               )}
@@ -379,17 +309,13 @@ const PlayerStatsOverlay = ({
 
                   {activeTab === "matches" && (
                     <div className="px-6 py-4">
-                      <p className="text-gray-500 text-center py-8">
-                        Matches content
-                      </p>
+                      <p className=" text-center py-8">Matches content</p>
                     </div>
                   )}
 
                   {activeTab === "history" && (
                     <div className="px-6 py-4">
-                      <p className="text-gray-500 text-center py-8">
-                        History content
-                      </p>
+                      <p className=" text-center py-8">History content</p>
                     </div>
                   )}
                 </div>

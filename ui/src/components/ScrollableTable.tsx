@@ -53,7 +53,7 @@ const ScrollableTable = ({
                 onClick={() => onClick(r.team)}
               >
                 <td className="px-4 py-3">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1">
                     <span className="inline-flex h-6 w-6 items-center justify-center text-xs font-semibold">
                       {i + 1}
                     </span>

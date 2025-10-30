@@ -3,6 +3,10 @@ import GWPitch from "../../components/GWPitch";
 import Header from "../../components/Header";
 import PlayerStatsOverlay from "../../components/PlayerStatsOverlay";
 import { Player } from "../../features/players/types";
+import { handlePlayerSwap } from "../../libs/helpers/pickMyTeam";
+import { TeamDetails } from "../../features/standings/types";
+import { useUserStore } from "../../store/useUserStore";
+import Button from "../../components/common/Button";
 
 const MOCK_DATA = {
   avg: "51.78",
@@ -331,14 +335,21 @@ const MOCK_DATA = {
 };
 
 const PickTeamPage = () => {
-  const { gw, currentGw, avg, highest, totalGWScore, starting, bench } =
-    MOCK_DATA || {};
+  const { gw, currentGw, avg, highest, totalGWScore, starting, bench } = MOCK_DATA || {};
 
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
 
+  const {user} = useUserStore();
+
+  const result = handlePlayerSwap({starting, bench}, 'Jurriën Timber', 'starting'); // Mika Biereth
+console.log('Available players to swap with:', result.availablePlayers);
+
+// Execute the swap
+//const updatedTeam = executeSwap(teamData, 10, 11); // Swap Biereth with Nico Williams
+
   return (
     <>
-      <Header />
+      <Header teamName={user?.teamName} />
       <div className="flex items-center justify-center bg-white px-4 pt-4 pb-3 border-b border-gray-100 text-[#33003b]">
         <h6 className="text-center text-base text-[#33003b]">Gameweek 10</h6>
         <span aria-hidden="true">&nbsp;•&nbsp;</span>
@@ -353,13 +364,8 @@ const PickTeamPage = () => {
         </span>
       </div>
       <GWPitch starting={starting} bench={bench} onClick={setSelectedPlayer} />
-      <div className="flex justify-center items-center">
-        <button
-          type="submit"
-          className="w-1/2 py-4 px-4 bg-[#2a1134] hover:from-purple-500 hover:to-purple-600 text-white text-base rounded-4xl transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-purple-500/50 mt-6"
-        >
-          Save Your Team
-        </button>
+      <div className="flex justify-center items-center px-4 py-4">
+        <Button disabled={true} width="w-1/2" label="Save Your Team" />
       </div>
       {selectedPlayer && (
         <PlayerStatsOverlay
@@ -367,6 +373,7 @@ const PickTeamPage = () => {
           onClose={() => setSelectedPlayer(null)}
           showDetails={true}
           showStats={false}
+          pickMyTeam={true}
         />
       )}
     </>

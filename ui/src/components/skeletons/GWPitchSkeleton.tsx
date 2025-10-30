@@ -1,3 +1,4 @@
+import PitchBanner from "../PitchBanner";
 import PitchPlayerCardSkeleton from "./PitchPlayerCardSkeleton";
 
 const GWPitchSkeleton = () => {
@@ -10,30 +11,7 @@ const GWPitchSkeleton = () => {
         }}
       >
         {/* Fantasy Header Bars */}
-        <div className="absolute top-0 left-0 right-0 h-8 flex items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-white rounded-sm flex items-center justify-center shadow-md">
-                <svg className="w-8 h-8" viewBox="0 0 40 40" fill="none">
-                  <path d="M20 5L25 15H15L20 5Z" fill="#3D195B" />
-                  <circle cx="20" cy="25" r="8" fill="#00FF87" />
-                </svg>
-              </div>
-              <span className="text-white text-xs font-bold">WPL Fantasy</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-3">
-              <div className="w-5 h-5 bg-white rounded-sm flex items-center justify-center shadow-md">
-                <svg className="w-8 h-8" viewBox="0 0 40 40" fill="none">
-                  <path d="M20 5L25 15H15L20 5Z" fill="#3D195B" />
-                  <circle cx="20" cy="25" r="8" fill="#00FF87" />
-                </svg>
-              </div>
-              <span className="text-white text-xs font-bold">WPL Fantasy</span>
-            </div>
-          </div>
-        </div>
+        <PitchBanner />
 
         {/* Players Formation Skeleton */}
         <div className="relative pt-10 pb-16 px-2">

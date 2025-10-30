@@ -12,6 +12,7 @@ export interface Standings {
 }
 
 export interface Formation {
+    [key: string ]: any;
     goalkeeper: Player[];
     defenders: Player[];
     midfielders: Player[];

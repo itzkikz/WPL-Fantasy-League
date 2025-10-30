@@ -1,11 +1,7 @@
-/**
- * Swaps a player between starting lineup and bench while maintaining FPL formation rules
- * @param {Object} teamData - The team data object containing starting and bench players
- * @param {number} playerId - ID of the player to swap
- * @param {string} location - Current location: 'starting' or 'bench'
- * @returns {Object} - Updated team data and available swap options
- */
-function handlePlayerSwap(teamData, playerId, location) {
+import { Player } from "../../features/players/types";
+import { Formation, TeamDetails } from "../../features/standings/types";
+
+export const handlePlayerSwap = (teamData : Pick<TeamDetails, "starting" | "bench">, playerName: string, location: string) => {
     const FORMATION_RULES = {
         goalkeeper: { min: 1, max: 1 },
         defenders: { min: 3, max: 5 },
@@ -24,8 +20,8 @@ function handlePlayerSwap(teamData, playerId, location) {
     }
 
     // Helper function to get position category from position code
-    function getPositionCategory(position) {
-        const positionMap = {
+    function getPositionCategory(position: string): 'goalkeeper' | 'defenders' | 'midfielders' | 'forwards' {
+        const positionMap: { [key: string]: 'goalkeeper' | 'defenders' | 'midfielders' | 'forwards' } = {
             'GK': 'goalkeeper',
             'DEF': 'defenders',
             'MID': 'midfielders',
@@ -41,7 +37,8 @@ function handlePlayerSwap(teamData, playerId, location) {
     if (location === 'starting') {
         // Search in starting lineup
         for (let category in teamData.starting) {
-            const player = teamData.starting[category].find(p => p.id === playerId);
+            const typedCategory = category as keyof Formation;
+            const player = teamData.starting[typedCategory].find((p) => p.name === playerName);
             if (player) {
                 selectedPlayer = player;
                 selectedPlayerCategory = category;
@@ -50,7 +47,7 @@ function handlePlayerSwap(teamData, playerId, location) {
         }
     } else {
         // Search in bench
-        selectedPlayer = teamData.bench.find(p => p.id === playerId);
+        selectedPlayer = teamData.bench.find(p => p.name === playerName);
         if (selectedPlayer) {
             selectedPlayerCategory = getPositionCategory(selectedPlayer.position);
         }
@@ -73,7 +70,7 @@ function handlePlayerSwap(teamData, playerId, location) {
             
             // Create hypothetical counts after swap
             const hypotheticalCounts = { ...currentCounts };
-            hypotheticalCounts[selectedPlayerCategory]--;
+            hypotheticalCounts[selectedPlayerCategory as keyof Formation]--;
             hypotheticalCounts[benchCategory]++;
 
             // Check if swap maintains valid formation
@@ -91,13 +88,14 @@ function handlePlayerSwap(teamData, playerId, location) {
     } else {
         // Moving from bench to starting - find starting players that can be benched
         for (let category in teamData.starting) {
-            const categoryPlayers = teamData.starting[category].filter(startingPlayer => {
+            const typedCategory = category as keyof Formation;
+            const categoryPlayers = teamData.starting[typedCategory].filter(startingPlayer => {
                 const startingCategory = category;
                 
                 // Create hypothetical counts after swap
                 const hypotheticalCounts = { ...currentCounts };
-                hypotheticalCounts[startingCategory]--;
-                hypotheticalCounts[selectedPlayerCategory]++;
+                hypotheticalCounts[startingCategory as keyof Formation]--;
+                hypotheticalCounts[selectedPlayerCategory as keyof Formation]++;
 
                 // Check if swap maintains valid formation
                 return (
@@ -123,14 +121,7 @@ function handlePlayerSwap(teamData, playerId, location) {
     };
 }
 
-/**
- * Executes the swap between two players
- * @param {Object} teamData - The team data object
- * @param {number} player1Id - First player ID
- * @param {number} player2Id - Second player ID
- * @returns {Object} - Updated team data
- */
-function executeSwap(teamData, player1Id, player2Id) {
+export const executeSwap = (teamData : TeamDetails, player1Name : string, player2Name : string) => {
     const newTeamData = JSON.parse(JSON.stringify(teamData)); // Deep clone
     
     let player1 = null, player1Location = null, player1Category = null;
@@ -138,7 +129,7 @@ function executeSwap(teamData, player1Id, player2Id) {
 
     // Find player 1
     for (let category in newTeamData.starting) {
-        const idx = newTeamData.starting[category].findIndex(p => p.id === player1Id);
+        const idx = newTeamData.starting[category].findIndex(p => p.id === player1Name);
         if (idx !== -1) {
             player1 = newTeamData.starting[category][idx];
             player1Location = 'starting';
@@ -148,7 +139,7 @@ function executeSwap(teamData, player1Id, player2Id) {
         }
     }
     if (!player1) {
-        const idx = newTeamData.bench.findIndex(p => p.id === player1Id);
+        const idx = newTeamData.bench.findIndex((p: Player) => p.name === player1Name);
         if (idx !== -1) {
             player1 = newTeamData.bench[idx];
             player1Location = 'bench';
@@ -158,7 +149,7 @@ function executeSwap(teamData, player1Id, player2Id) {
 
     // Find player 2
     for (let category in newTeamData.starting) {
-        const idx = newTeamData.starting[category].findIndex(p => p.id === player2Id);
+        const idx = newTeamData.starting[category].findIndex((p: Player) => p.name === player2Name);
         if (idx !== -1) {
             player2 = newTeamData.starting[category][idx];
             player2Location = 'starting';
@@ -168,7 +159,7 @@ function executeSwap(teamData, player1Id, player2Id) {
         }
     }
     if (!player2) {
-        const idx = newTeamData.bench.findIndex(p => p.id === player2Id);
+        const idx = newTeamData.bench.findIndex((p: Player) => p.name === player2Name);
         if (idx !== -1) {
             player2 = newTeamData.bench[idx];
             player2Location = 'bench';
@@ -204,7 +195,7 @@ function executeSwap(teamData, player1Id, player2Id) {
     }
 
     // Reassign bench sub numbers
-    newTeamData.bench.forEach((player, index) => {
+    newTeamData.bench.forEach((player : Player, index : number) => {
         player.subNumber = index + 1;
     });
 
@@ -213,8 +204,8 @@ function executeSwap(teamData, player1Id, player2Id) {
 
 // Example usage:
 // Get available swap options when clicking a starting player
-const result = handlePlayerSwap(teamData, 10, 'starting'); // Mika Biereth
-console.log('Available players to swap with:', result.availablePlayers);
+// const result = handlePlayerSwap(teamData, 10, 'starting'); // Mika Biereth
+// console.log('Available players to swap with:', result.availablePlayers);
 
-// Execute the swap
-const updatedTeam = executeSwap(teamData, 10, 11); // Swap Biereth with Nico Williams
+// // Execute the swap
+// const updatedTeam = executeSwap(teamData, 10, 11); // Swap Biereth with Nico Williams

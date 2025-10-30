@@ -108,7 +108,7 @@ const LoginPage = () => {
             <button
               type="button"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="w-full px-6 py-4 bg-white border-2 border-slate-600 rounded-2xl text-left text-[#2a1134] placeholder-gray-400 focus:outline-none focus:border-[#2a1134] transition-colors flex items-center justify-between"
+              className="w-full px-6 py-4 bg-white border-2 border-slate-600 rounded-full text-left text-[#2a1134] placeholder-gray-400 focus:outline-none focus:border-[#2a1134] transition-colors flex items-center justify-between"
               aria-expanded={isDropdownOpen}
               aria-haspopup="listbox"
             >
@@ -153,7 +153,7 @@ const LoginPage = () => {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search teams..."
-                    className="w-full px-4 py-2 text-[#2a1134] placeholder-gray-400 border border-slate-300 rounded-lg focus:outline-none focus:border-[#2a1134] transition-colors"
+                    className="w-full px-4 py-2 text-[#2a1134] placeholder-gray-400 border border-slate-300 rounded-lg focus:outline-none  transition-colors"
                     onClick={(e) => e.stopPropagation()}
                     autoFocus
                   />
@@ -191,7 +191,7 @@ const LoginPage = () => {
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-6 py-4 bg-white border-2 border-slate-600 rounded-2xl text-[#2a1134] placeholder-gray-400 focus:outline-none focus:border-[#2a1134] transition-colors"
+              className="w-full px-6 py-4 bg-white border-2 border-slate-600 rounded-full text-[#2a1134] placeholder-gray-400 focus:outline-none focus:border-[#2a1134] transition-colors"
               placeholder="Password"
               name="password"
             />

@@ -6,9 +6,9 @@ import BottomNavbar from "../components/BottomNavbar";
 export const Route = createRootRoute({
   component: () => (
     <>
-      <main className="font-outfit min-h-screen bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
+      <main className="font-outfit min-h-screen bg-white dark:bg-[#1e0021] shadow-sm text-[#37003c] dark:text-white">
         <div className="max-w-7xl mx-auto">
-          <div className="flex h-screen flex-col mx-auto max-w-md bg-white dark:bg-[#1e0021] shadow-sm text-[#37003c] dark:text-white">
+          <div className="flex h-screen flex-col mx-auto max-w-md">
             <header className="hidden relative w-full h-10 overflow-hidden">
               {/* Animated gradient overlay */}
               {/* Content container */}

@@ -5,7 +5,7 @@ export interface Player {
     team: string;
     teamColor: string;
     point: number;
-    position: "GK" | "DEF" | "MID" | "FWD";
+    position: string;
     isCaptain?: boolean;
     isViceCaptain?: boolean;
     isPowerPlayer?: boolean;

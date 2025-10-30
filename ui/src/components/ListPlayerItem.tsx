@@ -1,4 +1,5 @@
-import { Player } from "../libs/formatter/types";
+import Info from "./icons/info";
+import { Player } from "../features/players/types";
 
 interface ListPlayerItemProps {
   isSmall?: boolean;
@@ -13,15 +14,9 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
       className="flex items-center py-3 px-4 border-b border-[#ebe5eb] dark:border-[#541e5d] dark:hover:bg-[#541e5d]"
     >
       {/* Info Icon */}
-      <button className="mr-3">
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-          <path
-            fillRule="evenodd"
-            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </button>
+      <div className="mr-3">
+        <Info width="5" height="5" />
+      </div>
 
       {/* Jersey Icon */}
       <div
@@ -49,16 +44,14 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
           )}
         </div>
         <p className="text-xs">
-          {player.team} {player.position}
+          {player.fullTeamName} | {player.position}
         </p>
       </div>
 
       {/* Stats */}
       <div className="flex items-center gap-6 ml-4">
-        <div className="text-center min-w-[40px]">
-          <p className="text-sm font-semibold">
-            {player.point || "3.5"}
-          </p>
+        <div className="text-center min-w-10">
+          <p className="text-sm font-semibold">{player.point || "3.5"}</p>
         </div>
         {/* <div className="text-center min-w-[50px]">
           <p className="text-sm font-semibold text-gray-900">{"£0m"}</p>
