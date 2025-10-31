@@ -14,7 +14,7 @@ const GWNavigation = ({
 }: GWNavigationProps) => {
   return (
     <div className="flex-none py-1">
-      <div className="flex items-center justify-center gap-6 max-w-md mx-auto">
+      <div className="flex items-center justify-center gap-6 px-4">
         <button
           className={`cursor-pointer${gameWeek === 1 ? "text-gray-200" : ""}`}
           disabled={gameWeek === 1}

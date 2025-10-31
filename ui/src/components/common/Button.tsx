@@ -26,7 +26,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   return (
     <button
       disabled={disabled}
-      className={`${width ? width : ""} flex items-center justify-center gap-2 py-2 px-2 mr-2 text-base rounded-full ${type !== "NoBackground" ? addClassName : ""}`}
+      className={`${width ? width : ""} cursor-pointer flex items-center justify-center gap-2 py-2 px-2 mr-2 text-base rounded-full ${type !== "NoBackground" ? addClassName : ""}`}
       onClick={() => onClick()}
     >
       {icon && icon}

@@ -7,14 +7,14 @@ interface PitchPlayerCardProps {
 }
 
 const PitchPlayerCard = ({
-  isSmall = false,
+  isSmall = true,
   player,
   onClick,
 }: PitchPlayerCardProps) => {
   return (
     <button
       onClick={onClick}
-      className={`relative ${isSmall ? "w-15" : "w-15"} cursor-pointer`}
+      className={`relative ${isSmall ? "w-15" : "w-15 md:w-20 lg:w-24"} cursor-pointer transition-transform hover:scale-105`}
     >
       {/* Captain/Vice Captain Badge */}
       {(player?.isCaptain || player?.isViceCaptain) && (
@@ -62,7 +62,7 @@ const PitchPlayerCard = ({
       {/* Points */}
       <div className="bg-[#2a1134] rounded-b px-1 py-1 text-center">
         <p
-          className={`${isSmall ? "text-xs" : "text-xs"} font-bold text-white`}
+          className={`${isSmall ? "text-[10px]" : "text-xs"} font-bold text-white`}
         >
           {player?.point}
         </p>

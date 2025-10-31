@@ -6,7 +6,7 @@ interface GWStatsCardsProps {
 
 const GWStatsCards = ({ avg, totalGWScore, highest }: GWStatsCardsProps) => {
   return (
-    <div className="flex-none px-16">
+    <div className="flex-none px-12 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between max-w-md mx-auto gap-1">
         <div className="text-center">
           <p className="text-lg font-bold">{avg}</p>

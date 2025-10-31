@@ -8,7 +8,7 @@ export const Route = createRootRoute({
     <>
       <main className="font-outfit min-h-screen bg-white dark:bg-[#1e0021] shadow-sm text-[#37003c] dark:text-white">
         <div className="max-w-7xl mx-auto">
-          <div className="flex h-screen flex-col mx-auto max-w-md">
+          <div className="flex h-screen flex-col mx-auto w-full">
             <header className="hidden relative w-full h-10 overflow-hidden">
               {/* Animated gradient overlay */}
               {/* Content container */}

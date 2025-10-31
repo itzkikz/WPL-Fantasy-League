@@ -5,16 +5,17 @@ import PlayerStatsOverlaySkeleton from "./skeletons/PlayerStatsOverlaySkeleton";
 import { Player } from "../features/players/types";
 import Button from "./common/Button";
 import Checkbox from "./common/Checkbox";
+import DisableBodyScroll from "./DisableBodyScroll";
 
 const PlayerStatsOverlay = ({
   player,
-  onClose,
+  onBack,
   showStats = false,
   showDetails = false,
   pickMyTeam = false,
 }: {
   player: Player;
-  onClose: () => void;
+  onBack: () => void;
   showStats: boolean;
   showDetails: boolean;
   pickMyTeam: boolean;
@@ -27,36 +28,12 @@ const PlayerStatsOverlay = ({
 
   return (
     <>
-      <div
-        className={`fixed inset-0 z-50 bg-black/50 flex items-end animate-fade-in`}
-      >
-        <div
-          className={`w-full max-w-md mx-auto bg-white dark:bg-[#1e0021] rounded-t-3xl max-h-[90vh] overflow-hidden flex flex-col animate-slide-up`}
-        >
           {/* Header with Player Info */}
           {isLoading ? (
-            <PlayerStatsOverlaySkeleton player={player} showStats={showStats} showDetails={showDetails} pickMyTeam={pickMyTeam} onClose={onClose} />
+            <PlayerStatsOverlaySkeleton player={player} showStats={showStats} showDetails={showDetails} pickMyTeam={pickMyTeam} onClose={onBack} />
           ) : (
             <>
               <div className={`relative px-6 pt-6 pb-4`} style={{ backgroundColor: player?.teamColor }}>
-                <button
-                  onClick={onClose}
-                  className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
 
                 <div className="flex items-start gap-4 mt-8">
                   {/* Player Details */}
@@ -322,8 +299,6 @@ const PlayerStatsOverlay = ({
               )}
             </>
           )}
-        </div>
-      </div>
     </>
   );
 };

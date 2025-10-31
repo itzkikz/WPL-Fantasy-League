@@ -13,7 +13,7 @@ const Header = ({ teamName }: HeaderProps) => {
   };
   return (
     <div className="flex-none">
-      <div className="flex items-center justify-between max-w-md mx-auto">
+      <div className="flex items-center justify-between px-4">
         <Button onClick={handleGoBack} type="NoBackground">
           <AngleLeft height="10" width="10" />
         </Button>

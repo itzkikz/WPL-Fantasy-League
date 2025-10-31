@@ -7,6 +7,8 @@ import { handlePlayerSwap } from "../../libs/helpers/pickMyTeam";
 import { TeamDetails } from "../../features/standings/types";
 import { useUserStore } from "../../store/useUserStore";
 import Button from "../../components/common/Button";
+import GWPitchCopy from "../../components/GWPitchCopy";
+import Overlay from "../../components/common/Overlay";
 
 const MOCK_DATA = {
   avg: "51.78",
@@ -335,17 +337,28 @@ const MOCK_DATA = {
 };
 
 const PickTeamPage = () => {
-  const { gw, currentGw, avg, highest, totalGWScore, starting, bench } = MOCK_DATA || {};
+  const { gw, currentGw, avg, highest, totalGWScore, starting, bench } =
+    MOCK_DATA || {};
 
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
+  const [showOverlay, setShowOverlay] = useState(false);
 
-  const {user} = useUserStore();
+  const { user } = useUserStore();
 
-  const result = handlePlayerSwap({starting, bench}, 'Jurriën Timber', 'starting'); // Mika Biereth
-console.log('Available players to swap with:', result.availablePlayers);
+  const result = handlePlayerSwap(
+    { starting, bench },
+    "Jurriën Timber",
+    "starting"
+  ); // Mika Biereth
+  console.log("Available players to swap with:", result.availablePlayers);
 
-// Execute the swap
-//const updatedTeam = executeSwap(teamData, 10, 11); // Swap Biereth with Nico Williams
+  const handlePlayerOverlay = (player: Player | null) => {
+    setSelectedPlayer(player);
+    setShowOverlay(!showOverlay);
+  };
+
+  // Execute the swap
+  //const updatedTeam = executeSwap(teamData, 10, 11); // Swap Biereth with Nico Williams
 
   return (
     <>
@@ -357,17 +370,25 @@ console.log('Available players to swap with:', result.availablePlayers);
           Deadline: Sat 1 Nov, 19:00
         </h6>
       </div>
-      <div className="flex bg-[#2a1134] rounded-lg p-2 text-white justify-center items-center text-center m-2">
-        <span className="text-xs">
-          To change your captain use the menu which appears when clicking on a
-          player
-        </span>
+      <div className="flex text-white justify-center items-center">
+        <div className="flex bg-[#2a1134] rounded-lg p-2 text-white justify-center items-center text-center m-2">
+          <span className="text-xs">
+            To change your captain use the menu which appears when clicking on a
+            player
+          </span>
+        </div>
+        <Button disabled={true} width="w-1/2" label="Save" />
       </div>
-      <GWPitch starting={starting} bench={bench} onClick={setSelectedPlayer} />
-      <div className="flex justify-center items-center px-4 py-4">
-        <Button disabled={true} width="w-1/2" label="Save Your Team" />
-      </div>
-      {selectedPlayer && (
+
+      <GWPitch starting={starting} bench={bench} onClick={handlePlayerOverlay} />
+      {/* <div className="flex-1 overflow-y-auto"> */}
+      {/* <GWPitchCopy
+        starting={starting}
+        bench={bench}
+        onClick={handlePlayerOverlay}
+      /> */}
+      {/* </div> */}
+      {/* {selectedPlayer && (
         <PlayerStatsOverlay
           player={selectedPlayer}
           onClose={() => setSelectedPlayer(null)}
@@ -375,7 +396,22 @@ console.log('Available players to swap with:', result.availablePlayers);
           showStats={false}
           pickMyTeam={true}
         />
-      )}
+      )} */}
+      <Overlay
+        isOpen={showOverlay}
+        onClose={() => handlePlayerOverlay(null)}
+        children={
+          selectedPlayer && (
+            <PlayerStatsOverlay
+              player={selectedPlayer}
+              onBack={() => handlePlayerOverlay}
+              showDetails={true}
+              showStats={false}
+              pickMyTeam={true}
+            />
+          )
+        }
+      />
     </>
   );
 };
