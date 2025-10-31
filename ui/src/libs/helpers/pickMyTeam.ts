@@ -1,211 +1,141 @@
 import { Player } from "../../features/players/types";
 import { Formation, TeamDetails } from "../../features/standings/types";
 
-export const handlePlayerSwap = (teamData : Pick<TeamDetails, "starting" | "bench">, playerName: string, location: string) => {
-    const FORMATION_RULES = {
-        goalkeeper: { min: 1, max: 1 },
-        defenders: { min: 3, max: 5 },
-        midfielders: { min: 2, max: 5 },
-        forwards: { min: 1, max: 3 }
-    };
+type Category = "goalkeeper" | "defenders" | "midfielders" | "forwards";
+type EnrichedPlayer = Player & { isAvlSub: boolean };
 
-    // Helper function to count players by position in starting lineup
-    function countStartingPlayers() {
-        return {
-            goalkeeper: teamData.starting.goalkeeper.length,
-            defenders: teamData.starting.defenders.length,
-            midfielders: teamData.starting.midfielders.length,
-            forwards: teamData.starting.forwards.length
-        };
-    }
+const FORMATION_RULES: Record<Category, { min: number; max: number }> = {
+  goalkeeper: { min: 1, max: 1 },
+  defenders: { min: 3, max: 5 },
+  midfielders: { min: 2, max: 5 },
+  forwards: { min: 1, max: 3 },
+};
 
-    // Helper function to get position category from position code
-    function getPositionCategory(position: string): 'goalkeeper' | 'defenders' | 'midfielders' | 'forwards' {
-        const positionMap: { [key: string]: 'goalkeeper' | 'defenders' | 'midfielders' | 'forwards' } = {
-            'GK': 'goalkeeper',
-            'DEF': 'defenders',
-            'MID': 'midfielders',
-            'FWD': 'forwards'
-        };
-        return positionMap[position];
-    }
-
-    // Find the selected player
-    let selectedPlayer = null;
-    let selectedPlayerCategory = null;
-
-    if (location === 'starting') {
-        // Search in starting lineup
-        for (let category in teamData.starting) {
-            const typedCategory = category as keyof Formation;
-            const player = teamData.starting[typedCategory].find((p) => p.name === playerName);
-            if (player) {
-                selectedPlayer = player;
-                selectedPlayerCategory = category;
-                break;
-            }
-        }
-    } else {
-        // Search in bench
-        selectedPlayer = teamData.bench.find(p => p.name === playerName);
-        if (selectedPlayer) {
-            selectedPlayerCategory = getPositionCategory(selectedPlayer.position);
-        }
-    }
-
-    if (!selectedPlayer) {
-        return { error: 'Player not found' };
-    }
-
-    // Get current formation counts
-    const currentCounts = countStartingPlayers();
-
-    // Determine available players for swap
-    let availablePlayers = [];
-
-    if (location === 'starting') {
-        // Moving from starting to bench - find bench players that can replace
-        availablePlayers = teamData.bench.filter(benchPlayer => {
-            const benchCategory = getPositionCategory(benchPlayer.position);
-            
-            // Create hypothetical counts after swap
-            const hypotheticalCounts = { ...currentCounts };
-            hypotheticalCounts[selectedPlayerCategory as keyof Formation]--;
-            hypotheticalCounts[benchCategory]++;
-
-            // Check if swap maintains valid formation
-            return (
-                hypotheticalCounts.goalkeeper >= FORMATION_RULES.goalkeeper.min &&
-                hypotheticalCounts.goalkeeper <= FORMATION_RULES.goalkeeper.max &&
-                hypotheticalCounts.defenders >= FORMATION_RULES.defenders.min &&
-                hypotheticalCounts.defenders <= FORMATION_RULES.defenders.max &&
-                hypotheticalCounts.midfielders >= FORMATION_RULES.midfielders.min &&
-                hypotheticalCounts.midfielders <= FORMATION_RULES.midfielders.max &&
-                hypotheticalCounts.forwards >= FORMATION_RULES.forwards.min &&
-                hypotheticalCounts.forwards <= FORMATION_RULES.forwards.max
-            );
-        });
-    } else {
-        // Moving from bench to starting - find starting players that can be benched
-        for (let category in teamData.starting) {
-            const typedCategory = category as keyof Formation;
-            const categoryPlayers = teamData.starting[typedCategory].filter(startingPlayer => {
-                const startingCategory = category;
-                
-                // Create hypothetical counts after swap
-                const hypotheticalCounts = { ...currentCounts };
-                hypotheticalCounts[startingCategory as keyof Formation]--;
-                hypotheticalCounts[selectedPlayerCategory as keyof Formation]++;
-
-                // Check if swap maintains valid formation
-                return (
-                    hypotheticalCounts.goalkeeper >= FORMATION_RULES.goalkeeper.min &&
-                    hypotheticalCounts.goalkeeper <= FORMATION_RULES.goalkeeper.max &&
-                    hypotheticalCounts.defenders >= FORMATION_RULES.defenders.min &&
-                    hypotheticalCounts.defenders <= FORMATION_RULES.defenders.max &&
-                    hypotheticalCounts.midfielders >= FORMATION_RULES.midfielders.min &&
-                    hypotheticalCounts.midfielders <= FORMATION_RULES.midfielders.max &&
-                    hypotheticalCounts.forwards >= FORMATION_RULES.forwards.min &&
-                    hypotheticalCounts.forwards <= FORMATION_RULES.forwards.max
-                );
-            });
-            availablePlayers.push(...categoryPlayers);
-        }
-    }
-
-    return {
-        selectedPlayer,
-        location,
-        availablePlayers,
-        currentFormation: `${currentCounts.defenders}-${currentCounts.midfielders}-${currentCounts.forwards}`
-    };
+function getPositionCategory(
+  position: string
+): Category {
+  const positionMap: Record<string, Category> = {
+    GK: "goalkeeper",
+    DEF: "defenders",
+    MID: "midfielders",
+    FWD: "forwards",
+  };
+  return positionMap[position];
 }
 
-export const executeSwap = (teamData : TeamDetails, player1Name : string, player2Name : string) => {
-    const newTeamData = JSON.parse(JSON.stringify(teamData)); // Deep clone
-    
-    let player1 = null, player1Location = null, player1Category = null;
-    let player2 = null, player2Location = null, player2Category = null;
+function countStartingPlayers(starting: Formation) {
+  return {
+    goalkeeper: starting.goalkeeper.length,
+    defenders: starting.defenders.length,
+    midfielders: starting.midfielders.length,
+    forwards: starting.forwards.length,
+  };
+}
 
-    // Find player 1
-    for (let category in newTeamData.starting) {
-        const idx = newTeamData.starting[category].findIndex(p => p.id === player1Name);
-        if (idx !== -1) {
-            player1 = newTeamData.starting[category][idx];
-            player1Location = 'starting';
-            player1Category = category;
-            newTeamData.starting[category].splice(idx, 1);
-            break;
-        }
-    }
-    if (!player1) {
-        const idx = newTeamData.bench.findIndex((p: Player) => p.name === player1Name);
-        if (idx !== -1) {
-            player1 = newTeamData.bench[idx];
-            player1Location = 'bench';
-            newTeamData.bench.splice(idx, 1);
-        }
-    }
+function canSwap(
+  counts: Record<Category, number>,
+  outCat: Category,
+  inCat: Category
+) {
+  const next = { ...counts };
+  next[outCat]--;
+  next[inCat]++;
+  return (
+    next.goalkeeper >= FORMATION_RULES.goalkeeper.min &&
+    next.goalkeeper <= FORMATION_RULES.goalkeeper.max &&
+    next.defenders >= FORMATION_RULES.defenders.min &&
+    next.defenders <= FORMATION_RULES.defenders.max &&
+    next.midfielders >= FORMATION_RULES.midfielders.min &&
+    next.midfielders <= FORMATION_RULES.midfielders.max &&
+    next.forwards >= FORMATION_RULES.forwards.min &&
+    next.forwards <= FORMATION_RULES.forwards.max
+  );
+}
 
-    // Find player 2
-    for (let category in newTeamData.starting) {
-        const idx = newTeamData.starting[category].findIndex((p: Player) => p.name === player2Name);
-        if (idx !== -1) {
-            player2 = newTeamData.starting[category][idx];
-            player2Location = 'starting';
-            player2Category = category;
-            newTeamData.starting[category].splice(idx, 1);
-            break;
-        }
-    }
-    if (!player2) {
-        const idx = newTeamData.bench.findIndex((p: Player) => p.name === player2Name);
-        if (idx !== -1) {
-            player2 = newTeamData.bench[idx];
-            player2Location = 'bench';
-            newTeamData.bench.splice(idx, 1);
-        }
-    }
+export const handlePlayerSwap = (
+  teamData: Pick<TeamDetails, "starting" | "bench">,
+  playerName: string,
+  location: "starting" | "bench"
+) => {
+  // Find selected player and its category
+  let selectedPlayer: Player | null = null;
+  let selectedCategory: Category | null = null;
 
-    // Swap positions
-    if (player1Location === 'starting') {
-        newTeamData.bench.push(player1);
-        delete player1.isCaptain;
-        delete player1.isViceCaptain;
-        delete player1.isPowerPlayer;
-    } else {
-        const category = player1.position === 'GK' ? 'goalkeeper' : 
-                        player1.position === 'DEF' ? 'defenders' :
-                        player1.position === 'MID' ? 'midfielders' : 'forwards';
-        newTeamData.starting[category].push(player1);
-        delete player1.subNumber;
+  if (location === "starting") {
+    for (const k in teamData.starting) {
+      const category = k as Category;
+      const found = teamData.starting[category].find((p) => p.name === playerName);
+      if (found) {
+        selectedPlayer = found;
+        selectedCategory = category;
+        break;
+      }
     }
+  } else {
+    selectedPlayer = teamData.bench.find((p) => p.name === playerName) ?? null;
+    if (selectedPlayer) selectedCategory = getPositionCategory(selectedPlayer.position);
+  }
 
-    if (player2Location === 'starting') {
-        newTeamData.bench.push(player2);
-        delete player2.isCaptain;
-        delete player2.isViceCaptain;
-        delete player2.isPowerPlayer;
-    } else {
-        const category = player2.position === 'GK' ? 'goalkeeper' : 
-                        player2.position === 'DEF' ? 'defenders' :
-                        player2.position === 'MID' ? 'midfielders' : 'forwards';
-        newTeamData.starting[category].push(player2);
-        delete player2.subNumber;
-    }
+  if (!selectedPlayer || !selectedCategory) {
+    return { error: "Player not found" as const };
+  }
 
-    // Reassign bench sub numbers
-    newTeamData.bench.forEach((player : Player, index : number) => {
-        player.subNumber = index + 1;
+  // Current formation counts
+  const currentCounts = countStartingPlayers(teamData.starting);
+
+  // Enrich starting with isAvlSub
+  const enrichedStarting: {
+    goalkeeper: EnrichedPlayer[];
+    defenders: EnrichedPlayer[];
+    midfielders: EnrichedPlayer[];
+    forwards: EnrichedPlayer[];
+  } = {
+    goalkeeper: [],
+    defenders: [],
+    midfielders: [],
+    forwards: [],
+  };
+
+  // Enrich bench with isAvlSub
+  let enrichedBench: EnrichedPlayer[] = [];
+
+  if (location === "starting") {
+    // Selected is in starting: bench players may replace selected
+    enrichedBench = teamData.bench.map((benchP) => {
+      const benchCat = getPositionCategory(benchP.position);
+      const ok = canSwap(currentCounts, selectedCategory!, benchCat);
+      return { ...benchP, isAvlSub: ok };
     });
 
-    return newTeamData;
-}
+    // Starting players are not the counterpart set in this direction; mark all as false
+    for (const k in teamData.starting) {
+      const category = k as Category;
+      enrichedStarting[category] = teamData.starting[category].map((p) => ({
+        ...p,
+        isAvlSub: false,
+      }));
+    }
+  } else {
+    // Selected is on bench: starting players may be benched for selected
+    enrichedBench = teamData.bench.map((p) => ({
+      ...p,
+      isAvlSub: false, // counterparts are in starting for this direction
+    }));
 
-// Example usage:
-// Get available swap options when clicking a starting player
-// const result = handlePlayerSwap(teamData, 10, 'starting'); // Mika Biereth
-// console.log('Available players to swap with:', result.availablePlayers);
+    for (const k in teamData.starting) {
+      const category = k as Category;
+      enrichedStarting[category] = teamData.starting[category].map((startP) => {
+        const ok = canSwap(currentCounts, category, selectedCategory!);
+        return { ...startP, isAvlSub: ok };
+      });
+    }
+  }
 
-// // Execute the swap
-// const updatedTeam = executeSwap(teamData, 10, 11); // Swap Biereth with Nico Williams
+  return {
+    selectedPlayer,
+    location,
+    starting: enrichedStarting,
+    bench: enrichedBench,
+    currentFormation: `${currentCounts.defenders}-${currentCounts.midfielders}-${currentCounts.forwards}`,
+  };
+};

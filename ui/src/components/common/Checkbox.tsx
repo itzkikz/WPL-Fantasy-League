@@ -1,18 +1,30 @@
 import { FunctionComponent } from "react";
 
 interface CheckboxProps {
-    label: string;
+  label: string;
+  checked: boolean;
+  onChange: () => void;
 }
 
-const Checkbox: FunctionComponent<CheckboxProps> = ({label}) => {
+const Checkbox: FunctionComponent<CheckboxProps> = ({
+  label,
+  checked,
+  onChange,
+}) => {
+  console.log(checked);
   return (
     <label className="flex items-center cursor-pointer">
       <div className="relative">
-        <input type="checkbox" checked={true} className="sr-only hidden" />
+        <input
+          type="checkbox"
+          onChange={onChange}
+          checked={checked}
+          className="sr-only hidden"
+        />
         <div
           className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors`}
         >
-          {
+          {checked && (
             <svg
               className="w-4 h-4"
               fill="none"
@@ -26,7 +38,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({label}) => {
                 d="M5 13l4 4L19 7"
               />
             </svg>
-          }
+          )}
         </div>
       </div>
       <span className="ml-3 text-base">{label}</span>

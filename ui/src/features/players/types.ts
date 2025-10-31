@@ -21,6 +21,7 @@ export interface Player {
     penalty_miss: number;
     app: number;
     gw: number;
+    isAvlSub?: boolean;
 }
 
 export interface PlayerStats {

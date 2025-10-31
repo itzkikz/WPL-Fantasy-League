@@ -1,9 +1,9 @@
 import { Link, useMatchRoute } from "@tanstack/react-router";
-import Home from "./icons/Home";
-import User from "./icons/User";
-import UserSettings from "./icons/UserSettings";
-import Graph from "./icons/Graph";
-import Notification from "./icons/Notification";
+import Home from "../icons/Home";
+import User from "../icons/User";
+import UserSettings from "../icons/UserSettings";
+import Graph from "../icons/Graph";
+import Notification from "../icons/Notification";
 
 const BottomNavbar = () => {
   const matchRoute = useMatchRoute();

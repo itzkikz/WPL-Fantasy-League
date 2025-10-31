@@ -9,7 +9,7 @@ import GWPitch from "../../components/GWPitch";
 import GWPlayerList from "../../components/GWPlayerList";
 import GWPitchSkeleton from "../../components/skeletons/GWPitchSkeleton";
 import GWStatsCardsSkeleton from "../../components/skeletons/GWStatsCardsSkeleton";
-import PlayerStatsOverlay from "../../components/PlayerStatsOverlay";
+import PlayerStatsCard from "../../components/player/PlayerStatsCard";
 import GWNavigationSkeleton from "../../components/skeletons/GWNavigationSkeleton";
 import Overlay from "../../components/common/Overlay";
 import { Player } from "../../features/players/types";
@@ -59,14 +59,14 @@ const TeamDetailsPage = () => {
           <GWPitch
             starting={starting}
             bench={bench}
-            onClick={setSelectedPlayer}
+            onClick={handlePlayerOverlay}
           />
         ))}
       {activeTab === "list" && (
         <GWPlayerList
           starting={starting}
           bench={bench}
-          onClick={setSelectedPlayer}
+          onClick={handlePlayerOverlay}
         />
       )}
 
@@ -75,12 +75,12 @@ const TeamDetailsPage = () => {
         onClose={() => handlePlayerOverlay(null)}
         children={
           selectedPlayer && (
-            <PlayerStatsOverlay
+            <PlayerStatsCard
               player={selectedPlayer}
               onBack={() => handlePlayerOverlay}
-              showDetails={true}
-              showStats={false}
-              pickMyTeam={true}
+              showDetails={false}
+              showStats={true}
+              pickMyTeam={false}
             />
           )
         }
