@@ -21,7 +21,24 @@ export default defineConfig({
       strategies: 'injectManifest',                 // enable custom SW for push [docs]
       srcDir: 'src',                                // where the SW file lives
       filename: 'sw.ts',                            // custom SW entry
-      registerType: 'autoUpdate',                   // background updates
+      registerType: 'autoUpdate',
+      workbox: {
+        runtimeCaching: [
+          {
+            // Same-origin API example (adjust to your routes)
+            urlPattern: /^https:\/\/wpl-fantasy-league\.onrender\.com\/api\/.*$/i, // e.g. /api/todos
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'api-cache-v1',
+              cacheableResponse: { statuses: [0, 200] },
+              expiration: {
+                maxAgeSeconds: 60 * 60 * 24, // 1 day TTL
+                maxEntries: 50
+              }
+            }
+          }
+        ]
+      },                                             // background updates
       devOptions: { enabled: true },                // SW+manifest in dev (localhost is secure)
       includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
