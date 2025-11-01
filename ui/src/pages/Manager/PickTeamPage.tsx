@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GWPitch from "../../components/GWPitch";
 import Header from "../../components/Header";
 import PlayerStatsCard from "../../components/player/PlayerStatsCard";
@@ -14,345 +14,47 @@ import Overlay from "../../components/common/Overlay";
 import { Formation, TeamDetails } from "../../features/standings/types";
 import { useManageTeamStore } from "../../store/useManageTeamStore";
 import { usePlayerStore } from "../../store/usePlayerStore";
-
-const MOCK_DATA = {
-  avg: "51.78",
-  highest: 73,
-  starting: {
-    goalkeeper: [
-      {
-        id: 7,
-        name: "Lucas Chevalier",
-        team: "PSG",
-        teamColor: "#004170",
-        point: 6,
-        position: "GK",
-        fullTeamName: "Paris Saint-Germain",
-        app: 1,
-        clean_sheet: 1,
-        goal: 0,
-        assist: 0,
-        yellow_card: 0,
-        red_card: 0,
-        save: 2,
-        penalty_save: 0,
-        penalty_miss: 0,
-        gw: 9,
-        isPowerPlayer: false,
-      },
-    ],
-    defenders: [
-      {
-        id: 5,
-        name: "Jurriën Timber",
-        team: "ARS",
-        teamColor: "#EF0107",
-        point: 6,
-        position: "DEF",
-        fullTeamName: "Arsenal",
-        app: 1,
-        clean_sheet: 1,
-        goal: 0,
-        assist: 0,
-        yellow_card: 0,
-        red_card: 0,
-        save: 0,
-        penalty_save: 0,
-        penalty_miss: 0,
-        gw: 9,
-        isPowerPlayer: false,
-      },
-      {
-        id: 9,
-        name: "Marquinhos",
-        team: "PSG",
-        teamColor: "#004170",
-        point: 2,
-        position: "DEF",
-        fullTeamName: "Paris Saint-Germain",
-        app: 1,
-        clean_sheet: 0,
-        goal: 0,
-        assist: 0,
-        yellow_card: 0,
-        red_card: 0,
-        save: 0,
-        penalty_save: 0,
-        penalty_miss: 0,
-        gw: 9,
-        isPowerPlayer: false,
-      },
-      {
-        id: 15,
-        name: "Trevoh Chalobah",
-        team: "CHE",
-        teamColor: "#034694",
-        point: 2,
-        position: "DEF",
-        fullTeamName: "Chelsea",
-        app: 1,
-        clean_sheet: 0,
-        goal: 0,
-        assist: 0,
-        yellow_card: 0,
-        red_card: 0,
-        save: 0,
-        penalty_save: 0,
-        penalty_miss: 0,
-        gw: 9,
-        isPowerPlayer: false,
-      },
-    ],
-    midfielders: [
-      {
-        id: 6,
-        name: "Karim Adeyemi",
-        team: "BVB",
-        teamColor: "#FDE100",
-        point: 2,
-        position: "MID",
-        fullTeamName: "Borussia Dortmund",
-        app: 1,
-        clean_sheet: 1,
-        goal: 0,
-        assist: 0,
-        yellow_card: 0,
-        red_card: 0,
-        save: 0,
-        penalty_save: 0,
-        penalty_miss: 0,
-        gw: 9,
-        isPowerPlayer: false,
-      },
-      {
-        id: 8,
-        name: "Ludovic Blas",
-        team: "REN",
-        teamColor: "#E20E17",
-        point: 2,
-        position: "MID",
-        fullTeamName: "Stade Rennais",
-        app: 1,
-        clean_sheet: 0,
-        goal: 0,
-        assist: 0,
-        yellow_card: 0,
-        red_card: 0,
-        save: 0,
-        penalty_save: 0,
-        penalty_miss: 0,
-        gw: 9,
-        isPowerPlayer: false,
-      },
-      {
-        id: 12,
-        name: "Rafael Leão",
-        team: "MIL",
-        teamColor: "#FB090B",
-        point: 14,
-        position: "MID",
-        fullTeamName: "Milan",
-        app: 1,
-        clean_sheet: 0,
-        goal: 1,
-        assist: 0,
-        yellow_card: 0,
-        red_card: 0,
-        save: 0,
-        penalty_save: 0,
-        penalty_miss: 0,
-        gw: 9,
-        isCaptain: true,
-        isPowerPlayer: true,
-      },
-      {
-        id: 14,
-        name: "Hakon Arnar Haraldsson",
-        team: "LIL",
-        teamColor: "#CC0000",
-        point: 9,
-        position: "MID",
-        fullTeamName: "Lille",
-        app: 1,
-        clean_sheet: 0,
-        goal: 1,
-        assist: 1,
-        yellow_card: 1,
-        red_card: 0,
-        save: 0,
-        penalty_save: 0,
-        penalty_miss: 0,
-        gw: 9,
-        isPowerPlayer: false,
-      },
-    ],
-    forwards: [
-      {
-        id: 3,
-        name: "Erling Haaland",
-        team: "MCI",
-        teamColor: "#6CABDD",
-        point: 2,
-        position: "FWD",
-        fullTeamName: "Manchester City",
-        app: 1,
-        clean_sheet: 0,
-        goal: 0,
-        assist: 0,
-        yellow_card: 0,
-        red_card: 0,
-        save: 0,
-        penalty_save: 0,
-        penalty_miss: 0,
-        gw: 9,
-        isViceCaptain: true,
-        isPowerPlayer: false,
-      },
-      {
-        id: 4,
-        name: "Jonathan Burkardt",
-        team: "SGE",
-        teamColor: "#E1000F",
-        point: 10,
-        position: "FWD",
-        fullTeamName: "Eintracht Frankfurt",
-        app: 1,
-        clean_sheet: 1,
-        goal: 2,
-        assist: 0,
-        yellow_card: 0,
-        red_card: 0,
-        save: 0,
-        penalty_save: 0,
-        penalty_miss: 0,
-        gw: 9,
-        isPowerPlayer: false,
-      },
-      {
-        id: 10,
-        name: "Mika Biereth",
-        team: "MON",
-        teamColor: "#E2001A",
-        point: 0,
-        position: "FWD",
-        fullTeamName: "AS Monaco",
-        app: 0,
-        clean_sheet: 0,
-        goal: 0,
-        assist: 0,
-        yellow_card: 0,
-        red_card: 0,
-        save: 0,
-        penalty_save: 0,
-        penalty_miss: 0,
-        gw: 9,
-        isPowerPlayer: false,
-      },
-    ],
-  },
-  bench: [
-    {
-      id: 2,
-      name: "Dean Henderson",
-      team: "CRY",
-      teamColor: "#1B458F",
-      point: 2,
-      position: "GK",
-      fullTeamName: "Crystal Palace",
-      app: 1,
-      clean_sheet: 0,
-      goal: 0,
-      assist: 0,
-      yellow_card: 0,
-      red_card: 0,
-      save: 2,
-      penalty_save: 0,
-      penalty_miss: 0,
-      gw: 9,
-      subNumber: 1,
-      isPowerPlayer: false,
-    },
-    {
-      id: 1,
-      name: "Amir Rrahmani",
-      team: "NAP",
-      teamColor: "#0066CC",
-      point: 0,
-      position: "DEF",
-      fullTeamName: "Napoli",
-      app: 0,
-      clean_sheet: 0,
-      goal: 0,
-      assist: 0,
-      yellow_card: 0,
-      red_card: 0,
-      save: 0,
-      penalty_save: 0,
-      penalty_miss: 0,
-      gw: 9,
-      subNumber: 2,
-      isPowerPlayer: false,
-    },
-    {
-      id: 11,
-      name: "Nico Williams",
-      team: "ATH",
-      teamColor: "#EE2523",
-      point: 2,
-      position: "MID",
-      fullTeamName: "Athletic Club",
-      app: 1,
-      clean_sheet: 0,
-      goal: 0,
-      assist: 0,
-      yellow_card: 0,
-      red_card: 0,
-      save: 0,
-      penalty_save: 0,
-      penalty_miss: 0,
-      gw: 9,
-      subNumber: 3,
-      isPowerPlayer: false,
-    },
-    {
-      id: 13,
-      name: "Bremer",
-      team: "JUV",
-      teamColor: "#000000",
-      point: 0,
-      position: "DEF",
-      fullTeamName: "Juventus",
-      app: 0,
-      clean_sheet: 0,
-      goal: 0,
-      assist: 0,
-      yellow_card: 0,
-      red_card: 0,
-      save: 0,
-      penalty_save: 0,
-      penalty_miss: 0,
-      gw: 9,
-      subNumber: 4,
-      isPowerPlayer: false,
-    },
-  ],
-  gw: 9,
-  currentGw: 9,
-  totalGWScore: 55,
-};
+import {
+  useManagerDetails,
+  useSubstitution,
+} from "../../features/manager/hooks";
+import { useTeamDetails } from "../../features/standings/hooks";
 
 const PickTeamPage = () => {
-  const { gw, currentGw, avg, highest, totalGWScore, starting, bench } =
-    MOCK_DATA || {};
+  const { player, setPlayer } = usePlayerStore();
+  const { user } = useUserStore();
+
+  const { data: teamDetails, isLoading, isSuccess } = useManagerDetails();
+  const { starting, bench } = teamDetails || {
+    starting: { goalkeeper: [], forwards: [], midfielders: [], defenders: [] },
+    bench: [],
+  };
+
+  console.log(starting);
 
   const [showOverlay, setShowOverlay] = useState(false);
   const [editedStarting, setEditedStarting] =
     useState<TeamDetails["starting"]>(starting);
   const [editedBench, setEditedBench] = useState<TeamDetails["bench"]>(bench);
-  const { setIsSubstitution, isSubstitution, substitutions, setSubstitutions } =
-    useManageTeamStore();
-  const { player, setPlayer } = usePlayerStore();
-  const { user } = useUserStore();
+  const {
+    setIsSubstitution,
+    isSubstitution,
+    substitutions,
+    setSubstitutions,
+    resetSubstitutions,
+  } = useManageTeamStore();
+
+  const mutation = useSubstitution((data) => {
+    console.log(data);
+  });
+
+  useEffect(() => {
+    console.log(isSuccess);
+    if (isSuccess) {
+      setEditedBench(bench);
+      setEditedStarting(starting);
+    }
+  }, [isSuccess]);
 
   const handlePlayerOverlay = (eachPlayer: Player | null) => {
     eachPlayer && setPlayer(eachPlayer);
@@ -407,6 +109,13 @@ const PickTeamPage = () => {
     setPlayer(null);
   };
 
+  const handleSave = () => {
+    setPlayer(null);
+    resetSubstitutions();
+    setIsSubstitution(false);
+    mutation.mutate(substitutions);
+  };
+
   // Execute the swap
   //const updatedTeam = executeSwap(teamData, 10, 11); // Swap Biereth with Nico Williams
 
@@ -429,6 +138,7 @@ const PickTeamPage = () => {
         </div>
         <Button
           disabled={substitutions?.length === 0}
+          onClick={handleSave}
           width="w-1/2"
           label="Save"
         />
@@ -437,7 +147,13 @@ const PickTeamPage = () => {
       <GWPitch
         starting={editedStarting}
         bench={editedBench}
-        onClick={!isSubstitution ? handlePlayerOverlay : handleExecuteSwap}
+        onClick={
+          !isSubstitution
+            ? handlePlayerOverlay
+            : substitutions?.length > 0
+              ? handleExecuteSwap
+              : () => {}
+        }
         pickMyTeam={true}
         reset={handleSubReset}
       />

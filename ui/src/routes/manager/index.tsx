@@ -10,5 +10,3 @@ export const Route = createFileRoute("/manager/")({
     </ProtectedRoute>
   ),
 });
-
-

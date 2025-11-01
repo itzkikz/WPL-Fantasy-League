@@ -51,7 +51,7 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
       {/* Stats */}
       <div className="flex items-center gap-6 ml-4">
         <div className="text-center min-w-10">
-          <p className="text-sm font-semibold">{player.point || "3.5"}</p>
+          <p className="text-sm font-semibold">{player.point || 0}</p>
         </div>
         {/* <div className="text-center min-w-[50px]">
           <p className="text-sm font-semibold text-gray-900">{"£0m"}</p>

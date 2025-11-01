@@ -18,7 +18,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
   const response = await getSheets()?.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: "Users!A:D", // Adjust range as needed
+    range: "Users!A:E", // Adjust range as needed
   });
 
   const rows = response?.data?.values || [];
@@ -28,7 +28,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
   if (!user || !(await bcrypt.compare(password, user.password))) {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
-  const token = jwt.sign({ userId: user.username, info: user.info, isTempPassword: user.isTempPassword }, privateKey, {
+  const token = jwt.sign({ userId: user.username, info: user.info, isTempPassword: user.isTempPassword, gw: user.gw }, privateKey, {
     algorithm: "RS256",
   });
   res.json({

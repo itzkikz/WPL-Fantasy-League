@@ -6,7 +6,7 @@ interface DataTypeMapping {
   teamDetails: TeamDetails[];
   standings: StandingsResponse[];
   playerStats: PlayerStats[];
-  users: Users[]
+  users: Users[];
 }
 
 const isNumeric = (value: any): boolean => {
@@ -19,7 +19,6 @@ const isNumeric = (value: any): boolean => {
 // Type mapping
 type DataType = 'teamDetails' | 'standings' | 'playerStats' | 'users';
 type ReturnTypeMap<T extends DataType> = DataTypeMapping[T];
-
 
 export function convertToJSON<T extends DataType>(
   rows: any[][],
@@ -35,13 +34,19 @@ export function convertToJSON<T extends DataType>(
       .toLowerCase()
   );
 
-  const data = rows.slice(1);
+  const data = rows
+    .slice(1)
+    .filter(row => {
+      const second = row?.[1];
+      if (second === null || second === undefined) return false;
+      const str = String(second).trim();
+      return str !== '';
+    });
 
   return data.map(row => {
     const obj: any = {};
     headers.forEach((header, index) => {
       const value = row[index];
-
       if (isNumeric(value)) {
         obj[header] = Number(value);
       } else {
@@ -55,7 +60,7 @@ export function convertToJSON<T extends DataType>(
     if (type === 'playerStats') {
       return obj as PlayerStats;
     }
-    if(type === 'users'){
+    if (type === 'users') {
       return obj as Users;
     }
     return obj as StandingsResponse;

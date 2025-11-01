@@ -13,6 +13,7 @@ import PlayerStatsCard from "../../components/player/PlayerStatsCard";
 import GWNavigationSkeleton from "../../components/skeletons/GWNavigationSkeleton";
 import Overlay from "../../components/common/Overlay";
 import { Player } from "../../features/players/types";
+import { usePlayerStore } from "../../store/usePlayerStore";
 
 const TeamDetailsPage = () => {
   const route = getRouteApi("/standings/$teamName");
@@ -20,7 +21,7 @@ const TeamDetailsPage = () => {
   const { teamName } = route.useParams();
   const [gameWeek, setGameWeek] = useState(0);
   const [activeTab, setActiveTab] = useState("pitch");
-  const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
+  const { player, setPlayer } = usePlayerStore();
   const [showOverlay, setShowOverlay] = useState(false);
 
   const { data: teamDetails, isLoading } = useTeamDetails(teamName, gameWeek);
@@ -28,8 +29,8 @@ const TeamDetailsPage = () => {
   const { gw, currentGw, avg, highest, totalGWScore, starting, bench } =
     teamDetails || {};
 
-  const handlePlayerOverlay = (player: Player | null) => {
-    setSelectedPlayer(player);
+  const handlePlayerOverlay = (eachPlayer: Player | null) => {
+    eachPlayer && setPlayer(eachPlayer);
     setShowOverlay(!showOverlay);
   };
 
@@ -74,9 +75,8 @@ const TeamDetailsPage = () => {
         isOpen={showOverlay}
         onClose={() => handlePlayerOverlay(null)}
         children={
-          selectedPlayer && (
+          player && (
             <PlayerStatsCard
-              player={selectedPlayer}
               onBack={() => handlePlayerOverlay}
               showDetails={false}
               showStats={true}

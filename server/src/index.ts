@@ -5,6 +5,7 @@ import express from 'express';
 import standingsRouter from './routes/standings';
 import playersRouter from './routes/players';
 import authRouter from './routes/auth'
+import managerRouter from './routes/manager'
 import { setSheets } from './lib/store/globals';
 import { authenticateToken } from './middlewares/authMiddleware';
 
@@ -38,8 +39,10 @@ app.use("/api", playersRouter);
 app.use("/api", authRouter);
 
 app.get('/api/validate-token', authenticateToken, (req: any, res) => {
-  res.json({data:{ valid: true, user: req.user }});
+  res.json({ data: { valid: true, user: req.user } });
 });
+
+app.use('/api', authenticateToken, managerRouter);
 
 
 

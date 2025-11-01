@@ -16,6 +16,11 @@ export const API_ENDPOINTS = {
     BASE: '/players',
     BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
   },
+  MANAGER: {
+    BASE: '/manager',
+    SUBSTITUTION: '/manager/sub'
+    // BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
+  },
 } as const
 
 // API Query Keys for TanStack Query
@@ -24,4 +29,5 @@ export const QUERY_KEYS = {
   PLAYERS: 'players',
   AUTH: 'auth',
   USERS: 'users',
+  MANAGER: 'manager'
 } as const
