@@ -8,22 +8,25 @@ import Checkbox from "../common/Checkbox";
 import PlayerDetails from "./PlayerDetails";
 import PlayerInfo from "./PlayerInfo";
 import PlayerOverall from "./PlayerOverall";
+import { usePlayerStore } from "../../store/usePlayerStore";
 
 const PlayerStatsCard = ({
-  player,
   onBack,
   showStats = false,
   showDetails = false,
   pickMyTeam = false,
   handleSub,
 }: {
-  player: Player;
   onBack: () => void;
   showStats: boolean;
   showDetails: boolean;
   pickMyTeam: boolean;
-  handleSub?: (playerName: Player["name"], location: "starting" | "bench") => void;
+  handleSub?: (
+    playerName: Player["name"],
+    location: "starting" | "bench"
+  ) => void;
 }) => {
+  const { player } = usePlayerStore();
   const { data: playerStats, isLoading } = usePlayerDetails(player.name);
   const [isCaptain, setIsCaptian] = useState(player?.isCaptain ? true : false);
   const [isViceCaptain, setIsViceCaptian] = useState(
@@ -83,7 +86,7 @@ const PlayerStatsCard = ({
           {/* Captian & Vice Captian Selection */}
           {/* Tabs */}
           {showStats && playerStats && (
-            <PlayerOverall player={player} playerStats={playerStats} />
+            <PlayerOverall playerStats={playerStats} />
           )}
         </>
       )}

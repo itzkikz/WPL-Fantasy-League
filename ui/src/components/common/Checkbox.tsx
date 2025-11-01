@@ -11,7 +11,6 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
   checked,
   onChange,
 }) => {
-  console.log(checked);
   return (
     <label className="flex items-center cursor-pointer">
       <div className="relative">

@@ -8,7 +8,6 @@ export const Route = createFileRoute('/login')({
     // Check auth synchronously
   const {user} = useUserStore.getState()
 
-  console.log(user)
     
     if (user?.teamName) {
       throw redirect({ to: "/manager" });

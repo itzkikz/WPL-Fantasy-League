@@ -3,11 +3,17 @@ import GWPitch from "../../components/GWPitch";
 import Header from "../../components/Header";
 import PlayerStatsCard from "../../components/player/PlayerStatsCard";
 import { Player } from "../../features/players/types";
-import { handlePlayerSwap } from "../../libs/helpers/pickMyTeam";
+import {
+  clearSwapHighlights,
+  executeSwap,
+  playerSwap,
+} from "../../libs/helpers/pickMyTeam";
 import { useUserStore } from "../../store/useUserStore";
 import Button from "../../components/common/Button";
 import Overlay from "../../components/common/Overlay";
 import { Formation, TeamDetails } from "../../features/standings/types";
+import { useManageTeamStore } from "../../store/useManageTeamStore";
+import { usePlayerStore } from "../../store/usePlayerStore";
 
 const MOCK_DATA = {
   avg: "51.78",
@@ -339,34 +345,66 @@ const PickTeamPage = () => {
   const { gw, currentGw, avg, highest, totalGWScore, starting, bench } =
     MOCK_DATA || {};
 
-  const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
   const [showOverlay, setShowOverlay] = useState(false);
   const [editedStarting, setEditedStarting] =
     useState<TeamDetails["starting"]>(starting);
   const [editedBench, setEditedBench] = useState<TeamDetails["bench"]>(bench);
-  const [isSubstitution, setIsSubstitution] = useState(false);
-
+  const { setIsSubstitution, isSubstitution, substitutions, setSubstitutions } =
+    useManageTeamStore();
+  const { player, setPlayer } = usePlayerStore();
   const { user } = useUserStore();
 
-  const handlePlayerOverlay = (player: Player | null) => {
-    setSelectedPlayer(player);
+  const handlePlayerOverlay = (eachPlayer: Player | null) => {
+    eachPlayer && setPlayer(eachPlayer);
     setShowOverlay(!showOverlay);
   };
 
-  const handleSubsList = (
+  const handleExecuteSwap = (eachPlayer: Player) => {
+    const updatedTeam =
+      player &&
+      executeSwap(
+        { starting: editedStarting, bench: editedBench },
+        eachPlayer?.name,
+        player?.name
+      ); // Swap Biereth with Nico Williams
+    console.log(updatedTeam);
+    updatedTeam?.bench && setEditedBench(updatedTeam.bench);
+    updatedTeam?.starting && setEditedStarting(updatedTeam.starting);
+    updatedTeam?.swappedIn &&
+      updatedTeam?.swappedOut &&
+      setSubstitutions({
+        swapIn: updatedTeam?.swappedIn,
+        swapOut: updatedTeam?.swappedOut,
+      });
+    setIsSubstitution(false);
+    setPlayer(null);
+  };
+
+  const handlePlayerSwap = (
     playerName: Player["name"],
     location: "starting" | "bench"
   ) => {
     if (playerName) {
       setIsSubstitution(true);
-      const result = handlePlayerSwap(
-        { starting, bench },
+      const result = playerSwap(
+        { bench: editedBench, starting: editedStarting },
         playerName,
         location
       ); // Mika Biereth
       result?.bench && setEditedBench(result.bench);
       result?.starting && setEditedStarting(result.starting);
     }
+  };
+
+  const handleSubReset = () => {
+    setIsSubstitution(false);
+    const result = clearSwapHighlights({
+      bench: editedBench,
+      starting: editedStarting,
+    }); // Mika Biereth
+    result?.bench && setEditedBench(result.bench);
+    result?.starting && setEditedStarting(result.starting);
+    setPlayer(null);
   };
 
   // Execute the swap
@@ -389,29 +427,33 @@ const PickTeamPage = () => {
             player
           </span>
         </div>
-        <Button disabled={true} width="w-1/2" label="Save" />
+        <Button
+          disabled={substitutions?.length === 0}
+          width="w-1/2"
+          label="Save"
+        />
       </div>
 
       <GWPitch
         starting={editedStarting}
         bench={editedBench}
-        onClick={handlePlayerOverlay}
-        isSubstitution={isSubstitution}
+        onClick={!isSubstitution ? handlePlayerOverlay : handleExecuteSwap}
+        pickMyTeam={true}
+        reset={handleSubReset}
       />
 
       <Overlay
         isOpen={showOverlay}
         onClose={() => handlePlayerOverlay(null)}
         children={
-          selectedPlayer && (
+          player && (
             <PlayerStatsCard
-              player={selectedPlayer}
               onBack={() => handlePlayerOverlay(null)}
               showDetails={true}
               showStats={false}
               pickMyTeam={true}
               handleSub={(playerName: string, location: "starting" | "bench") =>
-                handleSubsList(playerName, location)
+                handlePlayerSwap(playerName, location)
               }
             />
           )

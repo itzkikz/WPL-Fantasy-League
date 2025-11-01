@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import StatRow from "../StatRow";
 import { Player, PlayerStats } from "../../features/players/types";
+import { usePlayerStore } from "../../store/usePlayerStore";
 
 export default function PlayerOverall({
-  player,
   playerStats,
 }: {
-  player: Player;
   playerStats: PlayerStats;
 }) {
   const [activeTab, setActiveTab] = useState<"stats" | "ostats">("stats");
+
+  const { player } = usePlayerStore();
 
   return (
     <>
