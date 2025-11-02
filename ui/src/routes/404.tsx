@@ -5,5 +5,5 @@ export const Route = createFileRoute('/404')({
 })
 
 function RouteComponent() {
-  return <div className='h-screen'>Not Found!</div>
+  return <div className='flex h-full w-full text-center justify-center items-center'>Updating</div>
 }

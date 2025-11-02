@@ -35,7 +35,7 @@ const PitchBanner: FunctionComponent<PitchBannerProps> = () => {
                 </div>
 
                 {/* Fantasy Text */}
-                <span className="text-white text-xs font-bold">
+                <span className="text-xs font-bold">
                   WPL Fantasy
                 </span>
               </div>

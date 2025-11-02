@@ -1,11 +1,17 @@
-import { TeamDetails } from "../../types/standings";
-import { Formation, FormationResult, Player } from "../formatter/types";
+import { Formation, FormationResult } from "../formatter/types";
 
 type Category = "goalkeeper" | "defenders" | "midfielders" | "forwards";
 
-function getPositionCategory(position: string): Category {
+const FORMATION_RULES: Record<Category, { min: number; max: number }> = {
+  goalkeeper: { min: 1, max: 1 },
+  defenders: { min: 3, max: 5 },
+  midfielders: { min: 2, max: 5 },
+  forwards: { min: 1, max: 3 },
+};
+
+function getPositionCategory(pos: string): Category {
   const map: Record<string, Category> = { GK: "goalkeeper", DEF: "defenders", MID: "midfielders", FWD: "forwards" };
-  return map[position];
+  return map[pos];
 }
 
 function countStartingPlayers(starting: Formation) {
@@ -17,116 +23,89 @@ function countStartingPlayers(starting: Formation) {
   };
 }
 
-const FORMATION_RULES: Record<Category, { min: number; max: number }> = {
-  goalkeeper: { min: 1, max: 1 },
-  defenders: { min: 3, max: 5 },
-  midfielders: { min: 2, max: 5 },
-  forwards: { min: 1, max: 3 },
-};
-
-function canSwap(
-  counts: Record<Category, number>,
-  outCat: Category,
-  inCat: Category
-) {
+function canSwap(counts: Record<Category, number>, outCat: Category, inCat: Category) {
   const next = { ...counts };
   next[outCat]--;
   next[inCat]++;
-  return (
-    next.goalkeeper >= FORMATION_RULES.goalkeeper.min &&
-    next.goalkeeper <= FORMATION_RULES.goalkeeper.max &&
-    next.defenders >= FORMATION_RULES.defenders.min &&
-    next.defenders <= FORMATION_RULES.defenders.max &&
-    next.midfielders >= FORMATION_RULES.midfielders.min &&
-    next.midfielders <= FORMATION_RULES.midfielders.max &&
-    next.forwards >= FORMATION_RULES.forwards.min &&
-    next.forwards <= FORMATION_RULES.forwards.max
-  );
+  return Object.entries(FORMATION_RULES).every(([cat, { min, max }]) => {
+    const c = next[cat as Category];
+    return c >= min && c <= max;
+  });
 }
 
-function findInStarting(
-  starting: Formation,
-  predicate: (p: Player) => boolean
-): { category: Category; index: number; player: Player } | null {
-  for (const k in starting) {
-    const category = k as Category;
-    const idx = starting[category].findIndex(predicate);
-    if (idx !== -1) return { category, index: idx, player: starting[category][idx] };
+export function validateAndApplySwap(
+  oldTeam: Pick<FormationResult, "starting" | "bench">,
+  swapInName: string,   // must be on bench in oldTeam
+  swapOutName: string,  // must be in starting in oldTeam
+) {
+  if (swapInName === swapOutName) {
+    return { ok: false as const, error: "Cannot swap the same player" };
   }
-  return null;
+
+  // Find players and locations in the authoritative snapshot
+  const findStarting = (name: string) => {
+    for (const k of ["goalkeeper", "defenders", "midfielders", "forwards"] as Category[]) {
+      const idx = oldTeam.starting[k].findIndex(p => p.name === name);
+      if (idx !== -1) return { category: k, index: idx, player: oldTeam.starting[k][idx] };
+    }
+    return null;
+  };
+
+  const startOut = findStarting(swapOutName);
+  const startIn  = findStarting(swapInName);
+  const benchInIdx = oldTeam.bench.findIndex(p => p.name === swapInName);
+  const benchOutIdx = oldTeam.bench.findIndex(p => p.name === swapOutName);
+
+  // Exactly one starting and one bench
+  if (!startOut || benchInIdx === -1 || startIn || benchOutIdx !== -1) {
+    return { ok: false as const, error: "Swap requires one starting and one bench player" };
+  }
+
+  // Derive categories from stored positions
+  const outCat = startOut.category;
+  const inCat = getPositionCategory(oldTeam.bench[benchInIdx].position);
+
+  // Formation feasibility
+  const counts = countStartingPlayers(oldTeam.starting);
+  if (!canSwap(counts, outCat, inCat)) {
+    return { ok: false as const, error: "Swap violates formation rules" };
+  }
+
+  // Compute canonical post-swap team
+  const newStarting: Formation = {
+    goalkeeper: [...oldTeam.starting.goalkeeper],
+    defenders:  [...oldTeam.starting.defenders],
+    midfielders:[...oldTeam.starting.midfielders],
+    forwards:   [...oldTeam.starting.forwards],
+  };
+  const newBench = [...oldTeam.bench];
+
+  // Bench order handling
+  const benchPlayer = newBench[benchInIdx];
+  const benchSubNo = (benchPlayer as any).subNumber ?? (benchInIdx + 1);
+
+  const promoted = { ...(benchPlayer as any) };
+  if (benchSubNo !== undefined) delete (promoted as any).subNumber;
+
+  const demoted = { ...(startOut.player as any) };
+  if (benchSubNo !== undefined) (demoted as any).subNumber = benchSubNo;
+
+  // Apply swap
+  if (inCat === outCat) {
+    newStarting[outCat][startOut.index] = promoted;
+  } else {
+    newStarting[outCat] = newStarting[outCat].filter((_, i) => i !== startOut.index);
+    newStarting[inCat] = [...newStarting[inCat], promoted];
+  }
+  newBench[benchInIdx] = demoted;
+
+  const next = countStartingPlayers(newStarting);
+  return {
+    ok: true as const,
+    starting: newStarting,
+    bench: newBench,
+    swappedIn: promoted,
+    swappedOut: demoted,
+    currentFormation: `${next.defenders}-${next.midfielders}-${next.forwards}`,
+  };
 }
-
-export const validateSwapAuto = (
-  teamData: Pick<FormationResult, "starting" | "bench">,
-  a: Player,
-  b: Player
-): { ok: boolean; reason?: string; outCat?: Category; inCat?: Category } => {
-  // Define your membership rule based on subNumber:
-  // - Starters: subNumber === 0 or undefined
-  // - Bench: subNumber > 0 (bench order)
-  const isStarterBySubNumber = (p: Player) =>
-    p.subNumber === 0 || p.subNumber == null;
-
-  const aIsStarter = isStarterBySubNumber(a);
-  const bIsStarter = isStarterBySubNumber(b);
-  const aIsBench = !aIsStarter;
-  const bIsBench = !bIsStarter;
-
-  // Must be one starter and one bench
-  if (!(aIsStarter || bIsStarter) || !(aIsBench || bIsBench)) {
-    return {
-      ok: false,
-      reason: "One player must be in starting XI and the other on the bench",
-    };
-  }
-  if ((aIsStarter && bIsStarter) || (aIsBench && bIsBench)) {
-    return {
-      ok: false,
-      reason: "Swap must be between one starter and one bench player",
-    };
-  }
-
-  // Normalize roles based purely on subNumber
-  const outCat = getPositionCategory((aIsStarter ? a : b).position);
-  const inCat = getPositionCategory((aIsBench ? a : b).position);
-
-  // Validate formation after hypothetical swap
-  const counts = countStartingPlayers(teamData.starting);
-  const ok = canSwap(counts, outCat, inCat);
-
-  return ok
-    ? { ok: true, outCat, inCat }
-    : { ok: false, reason: "Swap violates formation rules", outCat, inCat };
-};
-
-
-// Validate that a swap has ALREADY been applied: swapIn is now in starting,
-// swapOut is now on the bench (optionally with a subNumber), and formation is valid.
-export const validateExecutedSwapAuto = (
-  teamData: Pick<FormationResult, 'starting' | 'bench'>,
-  swapIn: Player,
-  swapOut: Player
-): { ok: boolean; reason?: string } => {
-  const inNow = findInStarting(teamData.starting, (p) => p.id === swapIn.id || p.name === swapIn.name);
-  const outNowBenchIdx = teamData.bench.findIndex((p) => p.id === swapOut.id || p.name === swapOut.name);
-
-  if (!inNow) return { ok: false, reason: "swapIn is not in starting XI" };
-  if (outNowBenchIdx === -1) return { ok: false, reason: "swapOut is not on the bench" };
-
-  // Optional: subNumber presence check (if your model uses it)
-  // const hasBenchOrder = (teamData.bench[outNowBenchIdx] as any)?.subNumber != null;
-
-  // Verify formation still valid
-  const counts = countStartingPlayers(teamData.starting);
-  const valid =
-    counts.goalkeeper >= FORMATION_RULES.goalkeeper.min &&
-    counts.goalkeeper <= FORMATION_RULES.goalkeeper.max &&
-    counts.defenders >= FORMATION_RULES.defenders.min &&
-    counts.defenders <= FORMATION_RULES.defenders.max &&
-    counts.midfielders >= FORMATION_RULES.midfielders.min &&
-    counts.midfielders <= FORMATION_RULES.midfielders.max &&
-    counts.forwards >= FORMATION_RULES.forwards.min &&
-    counts.forwards <= FORMATION_RULES.forwards.max;
-
-  return valid ? { ok: true } : { ok: false, reason: "Formation invalid after swap" };
-};

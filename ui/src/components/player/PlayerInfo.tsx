@@ -10,7 +10,7 @@ export default function PlayerInfo({
 }) {
   return (
     <div
-      className={`relative px-6 pt-6 pb-4`}
+      className={`relative px-6 pt-6 pb-4 rounded-t-3xl text-white`}
       style={{ backgroundColor: player?.teamColor }}
     >
       <div className="flex items-start gap-4 mt-8">

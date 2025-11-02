@@ -21,7 +21,7 @@ const BottomNavbar = () => {
   }
 
   return (
-    <nav className="flex-none border-t dark:border-[#541e5d]">
+    <nav className="flex-none border-t border-[#ebe5eb] dark:border-[#541e5d]">
       <div className="grid h-16 grid-cols-5">
         {navItems.map(({ label, path }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });

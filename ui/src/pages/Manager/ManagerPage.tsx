@@ -23,7 +23,7 @@ const ManagerPage = () => {
   };
 
   return (
-    <div className="w-full h-full rounded-3xl p-3 shadow-xl overflow-hidden">
+    <div className="w-full h-full p-3 overflow-hidden">
       {managerDetails && (<><ManagerStatsCard
         navigateToPickTeam={handlePickTeamNavigation}
         navigateToTeamPoints={handleTeamPointsNavigation}

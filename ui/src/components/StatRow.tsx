@@ -12,8 +12,8 @@ const StatRow = ({
   border?: boolean;
 }) => {
   return (
-    <div className={`flex items-center justify-between ${border ? "py-2 border-b border-[#ebe5eb] dark:border-[#541e5d]" : ""}`}>
-      <p className="text-base">{label}</p>
+    <div className={`flex items-center justify-between ${border ? " border-b border-[#ebe5eb] dark:border-[#541e5d]" : ""}`}>
+      <p className="text-sm">{label}</p>
       <div className="flex items-center gap-3">
         {per90 && (
           <>

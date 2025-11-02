@@ -9,34 +9,40 @@ const Overlay = ({
   onClose: () => void;
   children: React.ReactNode;
 }) => {
+  // Keep this in sync with the Tailwind duration classes below (700ms)
+  const ANIM_MS = 700;
+
   const [mounted, setMounted] = useState(isOpen);
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
-      requestAnimationFrame(() => setIsAnimating(true)); // enter
+      // Trigger enter transition on the next frame to ensure the initial styles apply before animating
+      requestAnimationFrame(() => setIsAnimating(true));
     } else {
-      setIsAnimating(false); // start exit
-      const t = setTimeout(() => setMounted(false), 300); // unmount after animation
+      // Start exit transition
+      setIsAnimating(false);
+      // Unmount after the transition finishes
+      const t = setTimeout(() => setMounted(false), ANIM_MS);
       return () => clearTimeout(t);
     }
   }, [isOpen]);
 
   if (!mounted) return null;
 
-  const requestClose = () => onClose(); // parent flips isOpen=false
+  const requestClose = () => onClose();
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-end justify-center transition-opacity duration-300 ${
+      className={`fixed inset-0 z-50 flex items-end justify-center transition-opacity duration-700 ease-in-out ${
         isAnimating ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
       onClick={requestClose}
     >
       <div className="absolute inset-0 bg-black/80" />
       <div
-        className={`relative w-full max-w-lg bg-white dark:bg-[#1e0021] rounded-t-2xl shadow-xl transform transition-transform duration-300 ease-out ${
+        className={`relative w-full max-w-lg bg-white dark:bg-[#1e0021] rounded-t-3xl shadow-xl transform transition-transform duration-700 ease-in-out ${
           isAnimating ? "translate-y-0" : "translate-y-full"
         }`}
         onClick={(e) => e.stopPropagation()}

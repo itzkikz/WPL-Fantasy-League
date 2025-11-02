@@ -13,11 +13,11 @@ const Header = ({ teamName }: HeaderProps) => {
   };
   return (
     <div className="flex-none">
-      <div className="flex items-center justify-between px-4">
+      <div className="flex items-center justify-between px-2">
         <Button onClick={handleGoBack} type="NoBackground">
-          <AngleLeft height="10" width="10" />
+          <AngleLeft height="8" width="8" />
         </Button>
-        <h1 className="text-lg font-bold">{teamName}</h1>
+        <h1 className="text-base font-bold">{teamName}</h1>
         <div className="w-10" /> {/* Spacer */}
       </div>
     </div>

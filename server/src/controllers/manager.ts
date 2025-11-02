@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { StandingsResponse, TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
-import { validateExecutedSwapAuto, validateSwapAuto } from "../lib/validators/substitution";
+import { validateAndApplySwap } from "../lib/validators/substitution";
 import { Substitution } from "../types/manager";
 import { executeSwap } from "../lib/helpers/substitution";
 import { buildSquadRows } from "../lib/helpers/subUpdate";
@@ -104,13 +104,6 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
 
   const highest = Math.max(...Object.values(gwScores));
 
-
-
-
-
-
-
-
   return res.json({
     data: {
       deadline,
@@ -190,13 +183,11 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
 
     let swappedData: any = {};
     const invalid = substitution.map((val: Substitution) => {
-      const res = validateSwapAuto({ starting, bench }, val.swapIn, val.swapOut);
-      if (!res.ok) {
-        return !res.ok;
-      } else {
-        swappedData = executeSwap({ starting: swappedData?.starting || starting, bench: swappedData?.bench || bench }, val?.swapIn?.name, val?.swapOut?.name);
-        return false;
+      swappedData = validateAndApplySwap({ starting: swappedData?.starting || starting, bench: swappedData?.bench || bench }, val.swapIn.name, val.swapOut.name);
+      if (!swappedData.ok) {
+        return !swappedData.ok;
       }
+      return false
     });
 
 
@@ -230,8 +221,7 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
       });
       res.json({
         data: {
-          message: updateRows,
-          updated: write?.data
+          message: "Team Updated !"
         }
       });
       // return { updated: updates.length, appended: 0 };
@@ -249,7 +239,7 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
 
       res.json({
         data: {
-          message: appendRes?.data
+          message: "Team Updated !"
         }
       });
     }

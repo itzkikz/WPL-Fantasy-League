@@ -9,14 +9,27 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StatsIndexRouteImport } from './routes/stats/index'
 import { Route as StandingsIndexRouteImport } from './routes/standings/index'
 import { Route as ManagerIndexRouteImport } from './routes/manager/index'
 import { Route as StandingsTeamNameRouteImport } from './routes/standings/$teamName'
 import { Route as ManagerPickTeamIndexRouteImport } from './routes/manager/pick-team/index'
 
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -30,6 +43,11 @@ const R404Route = R404RouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatsIndexRoute = StatsIndexRouteImport.update({
+  id: '/stats/',
+  path: '/stats/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StandingsIndexRoute = StandingsIndexRouteImport.update({
@@ -57,18 +75,24 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/login': typeof LoginRoute
+  '/notifications': typeof NotificationsRoute
+  '/settings': typeof SettingsRoute
   '/standings/$teamName': typeof StandingsTeamNameRoute
   '/manager': typeof ManagerIndexRoute
   '/standings': typeof StandingsIndexRoute
+  '/stats': typeof StatsIndexRoute
   '/manager/pick-team': typeof ManagerPickTeamIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/login': typeof LoginRoute
+  '/notifications': typeof NotificationsRoute
+  '/settings': typeof SettingsRoute
   '/standings/$teamName': typeof StandingsTeamNameRoute
   '/manager': typeof ManagerIndexRoute
   '/standings': typeof StandingsIndexRoute
+  '/stats': typeof StatsIndexRoute
   '/manager/pick-team': typeof ManagerPickTeamIndexRoute
 }
 export interface FileRoutesById {
@@ -76,9 +100,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/login': typeof LoginRoute
+  '/notifications': typeof NotificationsRoute
+  '/settings': typeof SettingsRoute
   '/standings/$teamName': typeof StandingsTeamNameRoute
   '/manager/': typeof ManagerIndexRoute
   '/standings/': typeof StandingsIndexRoute
+  '/stats/': typeof StatsIndexRoute
   '/manager/pick-team/': typeof ManagerPickTeamIndexRoute
 }
 export interface FileRouteTypes {
@@ -87,27 +114,36 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/login'
+    | '/notifications'
+    | '/settings'
     | '/standings/$teamName'
     | '/manager'
     | '/standings'
+    | '/stats'
     | '/manager/pick-team'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/404'
     | '/login'
+    | '/notifications'
+    | '/settings'
     | '/standings/$teamName'
     | '/manager'
     | '/standings'
+    | '/stats'
     | '/manager/pick-team'
   id:
     | '__root__'
     | '/'
     | '/404'
     | '/login'
+    | '/notifications'
+    | '/settings'
     | '/standings/$teamName'
     | '/manager/'
     | '/standings/'
+    | '/stats/'
     | '/manager/pick-team/'
   fileRoutesById: FileRoutesById
 }
@@ -115,14 +151,31 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
   LoginRoute: typeof LoginRoute
+  NotificationsRoute: typeof NotificationsRoute
+  SettingsRoute: typeof SettingsRoute
   StandingsTeamNameRoute: typeof StandingsTeamNameRoute
   ManagerIndexRoute: typeof ManagerIndexRoute
   StandingsIndexRoute: typeof StandingsIndexRoute
+  StatsIndexRoute: typeof StatsIndexRoute
   ManagerPickTeamIndexRoute: typeof ManagerPickTeamIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -142,6 +195,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stats/': {
+      id: '/stats/'
+      path: '/stats'
+      fullPath: '/stats'
+      preLoaderRoute: typeof StatsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/standings/': {
@@ -179,9 +239,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
   LoginRoute: LoginRoute,
+  NotificationsRoute: NotificationsRoute,
+  SettingsRoute: SettingsRoute,
   StandingsTeamNameRoute: StandingsTeamNameRoute,
   ManagerIndexRoute: ManagerIndexRoute,
   StandingsIndexRoute: StandingsIndexRoute,
+  StatsIndexRoute: StatsIndexRoute,
   ManagerPickTeamIndexRoute: ManagerPickTeamIndexRoute,
 }
 export const routeTree = rootRouteImport

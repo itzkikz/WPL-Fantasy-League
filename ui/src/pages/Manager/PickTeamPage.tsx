@@ -40,7 +40,7 @@ const PickTeamPage = () => {
     isSuccess,
     dataUpdatedAt,
   } = useManagerDetails();
-  const { managerTeam } = managerDetails || {};
+  const { managerTeam, pickMyTeam } = managerDetails || {};
   const { starting, bench } = managerTeam || {
     starting: { goalkeeper: [], forwards: [], midfielders: [], defenders: [] },
     bench: [],
@@ -209,17 +209,26 @@ const PickTeamPage = () => {
   return (
     <>
       {user?.teamName && <Header teamName={user?.teamName} />}
-      <div className="flex items-center justify-center bg-white px-4 pt-4 pb-3 border-b border-gray-100 text-[#33003b]">
-        <h6 className="text-center text-base text-[#33003b]">
-          Gameweek {managerDetails?.gw + 1}
-        </h6>
-        <span aria-hidden="true">&nbsp;•&nbsp;</span>
-        <h6 className="text-center text-base font-semibold text-[#33003b]">
-          Deadline: {formatted}
-        </h6>
-      </div>
-      <div className="flex text-white justify-center items-center">
-        <div className="flex bg-[#2a1134] rounded-lg p-2 text-white justify-center items-center text-center m-2">
+      {pickMyTeam ? (
+        <div className="flex items-center justify-center bg-[#1e0021] dark:bg-white px-4 pt-4 pb-3 border-b border-gray-100 text-white dark:text-[#33003b]">
+          <h6 className="text-center text-base">
+            Gameweek {managerDetails?.gw + 1}
+          </h6>
+          <span aria-hidden="true">&nbsp;•&nbsp;</span>
+          <h6 className="text-center text-base font-semibold">
+            Deadline: {formatted}
+          </h6>
+        </div>
+      ) : (
+        <div className="flex items-center justify-center bg-[#1e0021] dark:bg-white px-4 pt-4 pb-3 border-b border-gray-100 text-white dark:text-[#33003b]">
+          <h6 className="text-center text-base font-semibold">
+            Not Enabled
+          </h6>
+        </div>
+      )}
+
+      <div className="flex justify-center items-center">
+        <div className="flex bg-[#ebe5eb] dark:bg-[#2a1134] rounded-lg p-2 justify-center items-center text-center m-2">
           <span className="text-xs">
             To change your captain use the menu which appears when clicking on a
             player
@@ -251,7 +260,7 @@ const PickTeamPage = () => {
             <PlayerStatsCard
               showDetails={true}
               showStats={false}
-              pickMyTeam={true}
+              pickMyTeam={pickMyTeam}
               handleSub={(
                 playerName: string,
                 location: "starting" | "bench",

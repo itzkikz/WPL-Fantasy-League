@@ -18,7 +18,7 @@ const PlayerStatsOverlaySkeleton = ({
   return (
     <>
       {/* Header with Player Info Skeleton */}
-      <div className="relative px-6 pt-6 pb-4" style={{ backgroundColor: player?.teamColor }}>
+      <div className="relative px-6 pt-6 pb-4 rounded-3xl" style={{ backgroundColor: player?.teamColor }}>
         <button
           onClick={onClose}
           className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
@@ -116,7 +116,7 @@ const PlayerStatsOverlaySkeleton = ({
               {[...Array(9)].map((_, i) => (
                 <div
                   key={i}
-                  className="flex items-center justify-between py-3 border-b border-gray-100 dark:border-gray-800"
+                  className="flex items-center justify-between border-b border-gray-100 dark:border-gray-800"
                 >
                   <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-32 animate-pulse"></div>
                   <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-12 animate-pulse"></div>
