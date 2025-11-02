@@ -2,7 +2,7 @@
 import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.API_BASE_URL || 'http://localhost:8080/api',
+  baseURL: import.meta.env.API_BASE_URL || 'https://wpl-fantasy-league.onrender.com/api',
   timeout: 100000,
   headers: { 'Content-Type': 'application/json' },
 })
@@ -45,7 +45,6 @@ apiClient.interceptors.response.use(
 
     // OR: rethrow with the server payload to simplify callers
     const payload = getErrorPayload(error)
-    console.log({ ...error, data: payload, response: error.response })
     return Promise.reject({ ...error, data: payload, response: error.response })
   }
 )

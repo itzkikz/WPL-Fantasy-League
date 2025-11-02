@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as MaintenanceRouteImport } from './routes/maintenance'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
@@ -28,6 +29,11 @@ const SettingsRoute = SettingsRouteImport.update({
 const NotificationsRoute = NotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MaintenanceRoute = MaintenanceRouteImport.update({
+  id: '/maintenance',
+  path: '/maintenance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/login': typeof LoginRoute
+  '/maintenance': typeof MaintenanceRoute
   '/notifications': typeof NotificationsRoute
   '/settings': typeof SettingsRoute
   '/standings/$teamName': typeof StandingsTeamNameRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/login': typeof LoginRoute
+  '/maintenance': typeof MaintenanceRoute
   '/notifications': typeof NotificationsRoute
   '/settings': typeof SettingsRoute
   '/standings/$teamName': typeof StandingsTeamNameRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/login': typeof LoginRoute
+  '/maintenance': typeof MaintenanceRoute
   '/notifications': typeof NotificationsRoute
   '/settings': typeof SettingsRoute
   '/standings/$teamName': typeof StandingsTeamNameRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/login'
+    | '/maintenance'
     | '/notifications'
     | '/settings'
     | '/standings/$teamName'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/login'
+    | '/maintenance'
     | '/notifications'
     | '/settings'
     | '/standings/$teamName'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/login'
+    | '/maintenance'
     | '/notifications'
     | '/settings'
     | '/standings/$teamName'
@@ -151,6 +163,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
   LoginRoute: typeof LoginRoute
+  MaintenanceRoute: typeof MaintenanceRoute
   NotificationsRoute: typeof NotificationsRoute
   SettingsRoute: typeof SettingsRoute
   StandingsTeamNameRoute: typeof StandingsTeamNameRoute
@@ -174,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/notifications'
       preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/maintenance': {
+      id: '/maintenance'
+      path: '/maintenance'
+      fullPath: '/maintenance'
+      preLoaderRoute: typeof MaintenanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -239,6 +259,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
   LoginRoute: LoginRoute,
+  MaintenanceRoute: MaintenanceRoute,
   NotificationsRoute: NotificationsRoute,
   SettingsRoute: SettingsRoute,
   StandingsTeamNameRoute: StandingsTeamNameRoute,

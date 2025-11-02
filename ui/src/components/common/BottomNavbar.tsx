@@ -16,7 +16,7 @@ const BottomNavbar = () => {
     { label: "Settings", path: "/settings" },
   ];
 
-  if (matchRoute({ to: "/login" }) || matchRoute({ to: "/" })) {
+  if (matchRoute({ to: "/login" }) || matchRoute({to: "/maintenance"}) || matchRoute({ to: "/" })) {
     return null; // Truthy check works for both {} and { params }
   }
 
