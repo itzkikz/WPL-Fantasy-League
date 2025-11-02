@@ -2,30 +2,32 @@
 export const API_ENDPOINTS = {
   // Auth endpoints
   AUTH: {
-    LOGIN: '/auth/login',
-    LOGOUT: '/auth/logout',
-    REGISTER: '/auth/register',
-    REFRESH: '/auth/refresh',
+    LOGIN: 'login/',
+    VALIDATE: 'validate-token/'
   },
 
   // Books endpoints
   STANDINGS: {
     BASE: '/standings',
-    BY_TEAMNAME: (teamName: string) => `/standings/${teamName}`,
+    BY_TEAMNAME: (teamName: string, gameWeek: number) => `/standings/${teamName}/${gameWeek}`,
   },
 
-  // Users endpoints
-  USERS: {
-    BASE: '/users',
-    BY_ID: (id: string) => `/users/${id}`,
-    PROFILE: '/users/profile',
-    UPDATE_PROFILE: '/users/profile/update',
+  PLAYERS: {
+    BASE: '/players',
+    BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
+  },
+  MANAGER: {
+    BASE: '/manager',
+    SUBSTITUTION: '/manager/sub'
+    // BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
   },
 } as const
 
 // API Query Keys for TanStack Query
 export const QUERY_KEYS = {
   STANDINGS: 'standings',
+  PLAYERS: 'players',
+  AUTH: 'auth',
   USERS: 'users',
-  USER_PROFILE: 'user-profile',
+  MANAGER: 'manager'
 } as const

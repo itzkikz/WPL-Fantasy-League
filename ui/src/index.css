@@ -64,3 +64,36 @@ body {
 .animate-slide-up {
   animation: slide-up 0.3s ease-out;
 }
+
+/* Global Scrollbar Styles (Light Theme) */
+::-webkit-scrollbar {
+  width: 0.5px; /* Adjust width as needed */
+  height: 5px; /* Adjust height for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ffffff; /* Light theme track color */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ffffff; /* Light theme thumb color */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ffffff; /* Light theme thumb hover color */
+}
+
+/* Dark Theme Scrollbar Styles */
+.dark ::-webkit-scrollbar-track {
+  background-color: #1e0021; /* Dark theme track color */
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: #1e0021; /* Dark theme thumb color */
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: #1e0021; /* Dark theme thumb hover color */
+}

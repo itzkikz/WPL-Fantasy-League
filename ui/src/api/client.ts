@@ -1,45 +1,52 @@
 // src/api/client.ts
 import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
 
-
 const apiClient = axios.create({
   baseURL: import.meta.env.API_BASE_URL || 'https://wpl-fantasy-league.onrender.com/api',
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  timeout: 100000,
+  headers: { 'Content-Type': 'application/json' },
 })
 
-// Request interceptor - add auth token
+// Request: attach token
 apiClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem('authToken')
+    const token = localStorage.getItem('token')
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`
     }
     return config
   },
-  (error: AxiosError) => {
-    return Promise.reject(error)
-  }
+  (error: AxiosError) => Promise.reject(error)
 )
 
-// Response interceptor - handle errors globally
+// Helpers to extract server response safely
+function getErrorPayload(err: AxiosError) {
+  // Prefer server-provided payload if present
+  return err.response?.data ?? { message: err.message }
+}
+
+// Response: propagate server response on errors
 apiClient.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
+    // 401: clear token, optionally redirect
     if (error.response?.status === 401) {
-      // Handle unauthorized - redirect to login
-      localStorage.removeItem('authToken')
-      window.location.href = '/login'
+      localStorage.removeItem('token')
+      // window.location.href = '/login'
     }
-    
+
+    // 500: log, but still propagate server response
     if (error.response?.status === 500) {
       console.error('Server error:', error.message)
     }
-    
-    return Promise.reject(error)
+
+    // EITHER: rethrow the original AxiosError (callers can read error.response/data)
+    // return Promise.reject(error)
+
+    // OR: rethrow with the server payload to simplify callers
+    const payload = getErrorPayload(error)
+    return Promise.reject({ ...error, data: payload, response: error.response })
   }
 )
 
-export default apiClient;
+export default apiClient

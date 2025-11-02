@@ -5,7 +5,7 @@ interface GWTabSwitcherProps {
 
 const GWTabSwitcher = ({ activeTab, setActiveTab }: GWTabSwitcherProps) => {
   return (
-    <div className="flex-none px-4 py-4">
+    <div className="flex-none px-4 py-2">
       <div className="max-w-md mx-auto rounded-sm p-1 flex bg-[#ebe5eb] dark:bg-[#41054b]">
         <button
           onClick={() => setActiveTab("pitch")}
