@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import Logo from "../assets/wplff.svg";
 import { useLogin } from "../features/auth/hooks";
+import Button from "../components/common/Button";
 
 const LoginPage = () => {
   const [selectedUser, setSelectedUser] = useState("");
@@ -244,7 +245,7 @@ const LoginPage = () => {
           <button
             type="submit"
             disabled={!isFormComplete}
-            className={`w-full py-4 text-xl font-semibold rounded-2xl transition-all duration-300 transform focus:outline-none focus:ring-4 focus:ring-purple-500/50 mt-6 ${
+            className={`w-full py-4 text-xl font-semibold rounded-full transition-all duration-300 transform focus:outline-none focus:ring-4 focus:ring-purple-500/50 mt-6 ${
               isFormComplete
                 ? "bg-[#1e0021] dark:bg-white text-white dark:text-[#1e0021] hover:scale-[1.02] cursor-pointer"
                 : "bg-[#ebe5eb] dark:bg-[#541e5d] cursor-not-allowed opacity-60"
@@ -252,20 +253,18 @@ const LoginPage = () => {
           >
             Log In
           </button>
-
           {/* Divider */}
           <div className="flex items-center justify-center py-6">
             <div className="flex-1 border-t border-gray-600"></div>
             <span className="px-4 text-gray-400 text-sm">or</span>
             <div className="flex-1 border-t border-gray-600"></div>
           </div>
-          <button
-            type="button"
-            onClick={() => navigate({to: '/standings'})}
-            className="w-full py-4 bg-red-700 hover:from-purple-500 hover:to-purple-600 text-white text-xl font-semibold rounded-2xl transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-purple-500/50 mt-6"
-          >
-            Skip
-          </button>
+          <Button
+            width="w-full"
+            type="Secondary"
+            children={<div className="text-lg font-semibold">Skip</div>}
+            onClick={() => navigate({ to: "/standings" })}
+          />
         </form>
       </div>
     </div>

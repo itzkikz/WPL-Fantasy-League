@@ -1,6 +1,10 @@
+import { ManagerDetailsResponse } from "../features/manager/types";
 import StatRow from "./StatRow";
+interface ManagerPointsCardsProps {
+  managerDetails: ManagerDetailsResponse
+}
 
-const ManagerPointsCards = () => {
+const ManagerPointsCards = ({managerDetails} : ManagerPointsCardsProps) => {
   return (
     <>
       {/* Points & Rankings Section */}
@@ -10,11 +14,11 @@ const ManagerPointsCards = () => {
         </div>
 
         <div className="space-y-3">
-          <StatRow label="Overall points" value={35} border={false} />
-          <StatRow label="Overall points" value={35} border={false} />
-          <StatRow label="Overall rank" value={35} border={false} />
-          <StatRow label="Total players" value={"12,322,756"} border={false} />
-          <StatRow label="Gameweek points" value={35} border={false} />
+          <StatRow label="Overall points" value={managerDetails?.total} border={false} />
+          <StatRow label="Overall points before this GW" value={managerDetails?.total_point_before_this_gw} border={false} />
+          <StatRow label="Overall rank" value={managerDetails?.rank} border={false} />
+          <StatRow label="Total players" value={managerDetails?.teamsCount} border={false} />
+          <StatRow label="Gameweek points" value={managerDetails?.totalGWScore} border={false} />
         </div>
       </div>
     </>

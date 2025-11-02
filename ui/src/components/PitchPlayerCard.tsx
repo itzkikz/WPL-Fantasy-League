@@ -13,6 +13,7 @@ const PitchPlayerCard = ({
   onClick,
   pickMyteam = false,
 }: PitchPlayerCardProps) => {
+  
   const playerFirstName = player?.name
     ? player.name.trim().split(/\s+/).slice(0)[0]
     : "";

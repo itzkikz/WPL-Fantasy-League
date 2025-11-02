@@ -4,170 +4,263 @@ import { convertToJSON } from "../utils";
 import { Users } from "../types/users";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { TeamDetails } from "../types/standings";
+import { StandingsResponse, TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
 import { validateExecutedSwapAuto, validateSwapAuto } from "../lib/validators/substitution";
 import { Substitution } from "../types/manager";
 import { executeSwap } from "../lib/helpers/substitution";
 import { buildSquadRows } from "../lib/helpers/subUpdate";
 import { FormationResult } from "../lib/formatter/types";
+import { sheets_v4 } from "googleapis";
 
 const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID;
-
+type Cell = string | number | boolean | null;
+type Row = Cell[];
 
 export const details = async (req: Request, res: Response, next: NextFunction) => {
-  const response = await getSheets()?.spreadsheets.values.get({
+  const teamName = req.user.userId;
+  const propertyName = "team_name";
+  const batchDetails = await getSheets()?.spreadsheets.values.batchGet({
     spreadsheetId: SPREADSHEET_ID,
-    range: "Pick Team!A:G", // Adjust range as needed
+    ranges: [
+      'Users!A:G',
+      'Pick Team!A:G',
+      'Master Data!H:O',
+      'Master Data!B:G'
+    ],
+    majorDimension: 'ROWS',
+    valueRenderOption: 'UNFORMATTED_VALUE',
+    dateTimeRenderOption: 'FORMATTED_STRING'
   });
 
-  const currentGW = req.user.gw;
-  const nextGW = currentGW + 1;
+  const valueRanges: sheets_v4.Schema$ValueRange[] = batchDetails?.data.valueRanges ?? [];
 
-  const rowsPickTeam = response?.data?.values || [];
-  const teamDetails: TeamDetails[] = convertToJSON(rowsPickTeam, 'teamDetails');
-  const propertyName = "team_name";
-  const searchValue = decodeURI(req.user.userId);
+  const usersRows: Row[] = (valueRanges[0].values as Row[]) ?? []; // 2D array
+  const pickteamRows: Row[] = (valueRanges[1].values as Row[]) ?? []; // 2D array
+  const detailsRows: Row[] = (valueRanges[2].values as Row[]) ?? []; // 2D array
+  const standingsRows: Row[] = (valueRanges[3].values as Row[]) ?? []; // 2D array
 
-  let filteredGWData = teamDetails.filter(
-    (item: TeamDetails) => item[propertyName] === searchValue && item.gw === nextGW
+  const users: Users[] = convertToJSON(usersRows, 'users');
+  const teamDetails: TeamDetails[] = convertToJSON(detailsRows, 'teamDetails');
+  const standings: StandingsResponse[] = convertToJSON(standingsRows, 'standings');
+  const pickTeamDetails: TeamDetails[] = convertToJSON(pickteamRows, 'teamDetails');
+
+  const manager = users.find((val) => val?.username === teamName)
+  const { deadline, gw, pickmyteam } = manager || { gw: 0 };
+  const nextGw = gw + 1;
+
+  const rank = standings.findIndex(item => item.team === teamName) + 1;
+  const teamStanding = standings.find(item => item.team === teamName);
+  const { total, total_point_before_this_gw } = teamStanding || {};
+
+
+  const pickTeamDetailsNextGW = pickTeamDetails.filter(
+    (item: TeamDetails) => item[propertyName] === teamName && item.gw === nextGw
   );
-  if (filteredGWData?.length === 0) {
-    const response = await getSheets()?.spreadsheets.values.get({
-      spreadsheetId: SPREADSHEET_ID,
-      range: "Master Data!H:X", // Adjust range as needed
-    });
 
-    const rows = response?.data?.values || [];
-    const teamDetails: TeamDetails[] = convertToJSON(rows, 'teamDetails');
-    const propertyName = "team_name";
-    const searchValue = decodeURI(req.user.userId);
+  let managerTeam: FormationResult;
 
-    filteredGWData = teamDetails.filter(
-      (item: TeamDetails) => item[propertyName] === searchValue && item.gw === currentGW
+
+  if (pickTeamDetailsNextGW?.length > 0) {
+    managerTeam = convertToFormation(pickTeamDetails);
+  } else {
+    const teamDetailsGW = teamDetails.filter(
+      (item: TeamDetails) => item[propertyName] === teamName && item.gw === gw
     );
+    managerTeam = convertToFormation(teamDetailsGW);
   }
-  const { starting, bench } = convertToFormation(filteredGWData);
+
+
+
+
+  // Helper function to check if item is not a substitute
+  const isNotSubstitute = (item: TeamDetails) => !item?.lineup?.toLowerCase().startsWith("sub ");
+  // Helper function to get valid points
+  const getValidPoints = (item: TeamDetails) => isNotSubstitute(item) ? item.point : 0;
+  // Filter data once and reuse
+  const filteredGWData = teamDetails.filter(
+    (item: TeamDetails) => item[propertyName] === teamName && item.gw === gw
+  );
+  const filteredData = teamDetails.filter(
+    (item: TeamDetails) => item[propertyName] === teamName
+  );
+  // Calculate total GW score
+  const totalGWScore = filteredGWData.reduce(
+    (acc, item: TeamDetails) => acc + getValidPoints(item),
+    0
+  );
+  // Calculate average
+  const avg = (
+    filteredData.reduce((acc, item: TeamDetails) => acc + getValidPoints(item), 0) / (gw || 1)
+  ).toFixed(2);
+  // Calculate highest score by gameweek
+  const gwScores = filteredData.reduce((acc: Record<number, number>, item: TeamDetails) => {
+    if (isNotSubstitute(item)) {
+      const gameweek = item.gw;
+      acc[gameweek] = (acc[gameweek] || 0) + item.point;
+    }
+    return acc;
+  }, {} as Record<number, number>);
+
+  const highest = Math.max(...Object.values(gwScores));
 
 
 
 
 
-  res.json({
-    success: true,
+
+
+
+  return res.json({
     data: {
-      starting,
-      bench,
+      deadline,
+      gw,
+      pickMyTeam: pickmyteam,
+      avg,
+      highest,
+      total,
+      total_point_before_this_gw,
+      totalGWScore,
+      teamsCount: standings?.length,
+      rank,
+      managerTeam,
+      team: teamName
     }
   });
 }
 
 export const substitution = async (req: Request, res: Response, next: NextFunction) => {
   const { substitution } = req.body;
-  const response = await getSheets()?.spreadsheets.values.get({
-    spreadsheetId: SPREADSHEET_ID,
-    range: "Pick Team!A:G", // Adjust range as needed
-  });
-  const currentGW = req.user.gw;
-  const nextGW = req.user.gw + 1;
 
-  const rowsPickTeam = response?.data?.values || [];
-  const teamDetails: TeamDetails[] = convertToJSON(rowsPickTeam, 'teamDetails');
+  const teamName = req.user.userId;
   const propertyName = "team_name";
-  const teamName = decodeURI(req.user.userId);
+  const batchDetails = await getSheets()?.spreadsheets.values.batchGet({
+    spreadsheetId: SPREADSHEET_ID,
+    ranges: [
+      'Users!A:G',
+      'Pick Team!A:G',
+      'Master Data!H:O',
+    ],
+    majorDimension: 'ROWS',
+    valueRenderOption: 'UNFORMATTED_VALUE',
+    dateTimeRenderOption: 'FORMATTED_STRING'
+  });
 
-  let filteredGWData = teamDetails.filter(
-    (item: TeamDetails) => item[propertyName] === teamName && item.gw === nextGW
-  );
-  if (filteredGWData?.length === 0) {
-    const response = await getSheets()?.spreadsheets.values.get({
-      spreadsheetId: SPREADSHEET_ID,
-      range: "Master Data!H:X", // Adjust range as needed
+  const valueRanges: sheets_v4.Schema$ValueRange[] = batchDetails?.data.valueRanges ?? [];
+
+  const usersRows: Row[] = (valueRanges[0].values as Row[]) ?? []; // 2D array
+
+
+
+  const pickteamRows: Row[] = (valueRanges[1].values as Row[]) ?? []; // 2D array
+  const detailsRows: Row[] = (valueRanges[2].values as Row[]) ?? []; // 2D array
+
+  const users: Users[] = convertToJSON(usersRows, 'users');
+  const manager = users.find((val) => val?.username === teamName)
+
+  const { deadline, gw, pickmyteam } = manager || { gw: 0 };
+
+
+  if (pickmyteam) {
+
+    const teamDetails: TeamDetails[] = convertToJSON(detailsRows, 'teamDetails');
+    const pickTeamDetails: TeamDetails[] = convertToJSON(pickteamRows, 'teamDetails');
+
+    const nextGw = gw + 1;
+
+
+    const pickTeamDetailsNextGW = pickTeamDetails.filter(
+      (item: TeamDetails) => item[propertyName] === teamName && item.gw === nextGw
+    );
+
+    let managerTeam: FormationResult;
+
+
+    if (pickTeamDetailsNextGW?.length > 0) {
+      managerTeam = convertToFormation(pickTeamDetails);
+    } else {
+      const teamDetailsGW = teamDetails.filter(
+        (item: TeamDetails) => item[propertyName] === teamName && item.gw === gw
+      );
+      managerTeam = convertToFormation(teamDetailsGW);
+    }
+
+    const { starting, bench } = managerTeam;
+
+
+    let swappedData: any = {};
+    const invalid = substitution.map((val: Substitution) => {
+      const res = validateSwapAuto({ starting, bench }, val.swapIn, val.swapOut);
+      if (!res.ok) {
+        return !res.ok;
+      } else {
+        swappedData = executeSwap({ starting: swappedData?.starting || starting, bench: swappedData?.bench || bench }, val?.swapIn?.name, val?.swapOut?.name);
+        return false;
+      }
     });
 
-    const rows = response?.data?.values || [];
-    const teamDetails: TeamDetails[] = convertToJSON(rows, 'teamDetails');
-    const propertyName = "team_name";
 
-    filteredGWData = teamDetails.filter(
-      (item: TeamDetails) => item[propertyName] === teamName && item.gw === currentGW
-    );
-  }
-  const { starting, bench } = convertToFormation(filteredGWData)
-
-
-  let swappedData: any = {};
-  console.log(starting, bench, swappedData, swappedData)
-  const invalid = substitution.map((val: Substitution) => {
-    const res = validateSwapAuto({ starting, bench }, val.swapIn, val.swapOut);
-    console.log(res);
-    if (!res.ok) {
-      return !res.ok;
-    } else {
-      swappedData = executeSwap({ starting: swappedData?.starting || starting, bench: swappedData?.bench || bench }, val?.swapIn?.name, val?.swapOut?.name);
-      return false;
-      // console.log(executeSwap({ starting, bench }, val?.swapIn?.name, val?.swapOut?.name))
+    if (invalid.includes(true)) {
+      return res.status(403).json({ data: { message: 'One or more substitutions are not allowed' } });
     }
-  });
 
 
-  if (invalid.includes(true)) {
-    return res.status(403).json({ data: { message: 'One or more substitutions are not allowed' } });
-  }
+    const updateRows = swappedData.starting && buildSquadRows(swappedData, teamName, nextGw);
 
+    const updates: any = [];
 
-  const updateRows = swappedData.starting && buildSquadRows(swappedData, teamName, nextGW);
+    pickteamRows.forEach((r, i) => {
+      if (r[1] === teamName && r[0] === nextGw) {
+        const rowIndex = i + 1; // account for header row A1
+        updates.push({
+          range: `${'Pick Team'}!A${rowIndex}`,
+          values: [updateRows[rowIndex - 2]]
+        });
+      }
+    });
 
-  const updates: any = [];
+    // 2a) If matches, batch update those cells
+    if (updates.length) {
+      const write = await getSheets()?.spreadsheets.values.batchUpdate({
+        spreadsheetId: SPREADSHEET_ID,
+        requestBody: {
+          valueInputOption: 'USER_ENTERED',
+          data: updates
+        }
+      });
+      res.json({
+        data: {
+          message: updateRows,
+          updated: write?.data
+        }
+      });
+      // return { updated: updates.length, appended: 0 };
+    } else {
+      // 2b) If no matches, append a new row at the bottom
+      const appendRes = await getSheets()?.spreadsheets.values.append({
+        spreadsheetId: SPREADSHEET_ID,
+        range: `${'Pick Team'}!A:D`,               // anchor the table; appends after last row
+        valueInputOption: 'USER_ENTERED',
+        insertDataOption: 'INSERT_ROWS',
+        requestBody: {
+          values: updateRows
+        }
+      });
 
-  rowsPickTeam.forEach((r, i) => {
-    console.log(r[1], teamName, r[0], nextGW)
-    if (r[1] === teamName && parseInt(r[0]) === nextGW) {
-      const rowIndex = i + 1; // account for header row A1
-      updates.push({
-        range: `${'Pick Team'}!A${rowIndex}`,
-        values: [updateRows[rowIndex - 2]]
+      res.json({
+        data: {
+          message: appendRes?.data
+        }
       });
     }
-  });
-
-  // 2a) If matches, batch update those cells
-  if (updates.length) {
-    const write = await getSheets()?.spreadsheets.values.batchUpdate({
-      spreadsheetId: SPREADSHEET_ID,
-      requestBody: {
-        valueInputOption: 'USER_ENTERED',
-        data: updates
-      }
-    });
-    // console.log('Updated cells:', write?.data);
-    res.json({
-      data: {
-        message: updateRows,
-        updated: write?.data
-      }
-    });
-    // return { updated: updates.length, appended: 0 };
   } else {
-    // 2b) If no matches, append a new row at the bottom
-    const appendRes = await getSheets()?.spreadsheets.values.append({
-      spreadsheetId: SPREADSHEET_ID,
-      range: `${'Pick Team'}!A:D`,               // anchor the table; appends after last row
-      valueInputOption: 'USER_ENTERED',
-      insertDataOption: 'INSERT_ROWS',
-      requestBody: {
-        values: updateRows
-      }
-    });
-    // console.log('Appended range:', appendRes?.data);
-    // return { updated: 0, appended: 1 };
-
-    res.json({
+    res.status(403).json({
       data: {
-        message: appendRes?.data
+        message: "Pick My Team is not open"
       }
     });
   }
+
 
 
 }

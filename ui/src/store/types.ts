@@ -8,3 +8,8 @@ export interface Substitutions {
   swapIn: Player,
   swapOut: Player
 }
+
+export interface Roles {
+  captain?: Player['name'],
+  vice?: Player['name']
+}

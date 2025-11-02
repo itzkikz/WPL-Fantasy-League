@@ -3,13 +3,15 @@ import Dollar from "./icons/Dollar";
 import { Group } from "./icons/Group";
 import AngleRight from "./icons/AngleRight";
 import { ArrowRight } from "./icons/ArrowRight";
+import { ManagerDetailsResponse } from "../features/manager/types";
 
 interface ManagerStatsCardProps {
   navigateToPickTeam: () => void;
   navigateToTeamPoints: () => void;
+  managerDetails: ManagerDetailsResponse
 }
 
-const ManagerStatsCard = ({ navigateToPickTeam, navigateToTeamPoints }: ManagerStatsCardProps) => {
+const ManagerStatsCard = ({ navigateToPickTeam, navigateToTeamPoints, managerDetails }: ManagerStatsCardProps) => {
   return (
     <>
       {/* Header Card with Gradient */}
@@ -17,7 +19,7 @@ const ManagerStatsCard = ({ navigateToPickTeam, navigateToTeamPoints }: ManagerS
         {/* User Info */}
         <div className="flex items-start justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold">vadakens</h1>
+            <h1 className="text-2xl font-bold">{managerDetails?.team}</h1>
             <div className="flex items-center gap-2 mt-1">
               <span className="text-sm">Manager</span>
               <img
@@ -35,21 +37,21 @@ const ManagerStatsCard = ({ navigateToPickTeam, navigateToTeamPoints }: ManagerS
 
         {/* Stats Section */}
         <div className="mb-6">
-          <p className="text-sm text-center mb-3 opacity-90">Gameweek 9</p>
+          <p className="text-sm text-center mb-3 opacity-90">Gameweek {managerDetails?.gw}</p>
           <div className="flex items-end justify-center gap-8">
             <div className="text-center">
-              <p className="text-4xl font-bold">46</p>
+              <p className="text-4xl font-bold">{managerDetails?.avg}</p>
               <p className="text-xs mt-1 opacity-80">Average</p>
             </div>
             <div className="text-center">
-              <p className="text-6xl font-bold">35</p>
+              <p className="text-6xl font-bold">{managerDetails?.totalGWScore}</p>
               <p className="text-sm mt-1 flex items-center justify-center gap-1">
                 Points
                 <AngleRight height="4" width="4" />
               </p>
             </div>
             <div className="text-center">
-              <p className="text-4xl font-bold">124</p>
+              <p className="text-4xl font-bold">{managerDetails?.highest}</p>
               <p className="text-xs mt-1 flex items-center justify-center gap-1 opacity-80">
                 Highest
                 <AngleRight height="3" width="3" />
@@ -70,6 +72,7 @@ const ManagerStatsCard = ({ navigateToPickTeam, navigateToTeamPoints }: ManagerS
 
           <Button
             width="w-1/2"
+            disabled={true}
             type="Primary"
             icon={<Dollar height={5} width={5} />}
             children={<span className="font-semibold">Transfers</span>}

@@ -7,6 +7,8 @@ import {
   clearSwapHighlights,
   executeSwap,
   playerSwap,
+  setCaptain,
+  setViceCaptain,
 } from "../../libs/helpers/pickMyTeam";
 import { useUserStore } from "../../store/useUserStore";
 import Button from "../../components/common/Button";
@@ -18,47 +20,68 @@ import {
   useManagerDetails,
   useSubstitution,
 } from "../../features/manager/hooks";
-import { useTeamDetails } from "../../features/standings/hooks";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import { Roles } from "../../store/types";
+import StatRow from "../../components/StatRow";
+import Toast from "../../components/common/Toast";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const PickTeamPage = () => {
   const { player, setPlayer } = usePlayerStore();
   const { user } = useUserStore();
 
-  const { data: teamDetails, isLoading, isSuccess } = useManagerDetails();
-  const { starting, bench } = teamDetails || {
+  const {
+    data: managerDetails,
+    isLoading,
+    isSuccess,
+    dataUpdatedAt,
+  } = useManagerDetails();
+  const { managerTeam } = managerDetails || {};
+  const { starting, bench } = managerTeam || {
     starting: { goalkeeper: [], forwards: [], midfielders: [], defenders: [] },
     bench: [],
   };
 
-  console.log(starting);
+  const d = dayjs.utc(managerDetails?.deadline).tz("Asia/Kolkata");
+  const formatted = d.format("ddd D MMM, HH:mm"); // e.g., "Sat 1 Nov, 19:00"
 
   const [showOverlay, setShowOverlay] = useState(false);
+  const [showSaveOverlay, setShowSaveOverlay] = useState(false);
+  const [openToast, setOpenToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState({});
+
   const [editedStarting, setEditedStarting] =
     useState<TeamDetails["starting"]>(starting);
   const [editedBench, setEditedBench] = useState<TeamDetails["bench"]>(bench);
+  const [roleError, setRoleError] = useState("");
+  const [teamError, setTeamError] = useState("");
   const {
     setIsSubstitution,
     isSubstitution,
     substitutions,
     setSubstitutions,
     resetSubstitutions,
+    roles,
+    setRoles,
   } = useManageTeamStore();
 
-  const mutation = useSubstitution((data) => {
-    console.log(data);
-  });
+  const mutation = useSubstitution();
 
   useEffect(() => {
-    console.log(isSuccess);
     if (isSuccess) {
       setEditedBench(bench);
       setEditedStarting(starting);
     }
-  }, [isSuccess]);
+  }, [dataUpdatedAt]);
 
   const handlePlayerOverlay = (eachPlayer: Player | null) => {
     eachPlayer && setPlayer(eachPlayer);
     setShowOverlay(!showOverlay);
+    !showOverlay && setRoleError("");
   };
 
   const handleExecuteSwap = (eachPlayer: Player) => {
@@ -69,7 +92,6 @@ const PickTeamPage = () => {
         eachPlayer?.name,
         player?.name
       ); // Swap Biereth with Nico Williams
-    console.log(updatedTeam);
     updatedTeam?.bench && setEditedBench(updatedTeam.bench);
     updatedTeam?.starting && setEditedStarting(updatedTeam.starting);
     updatedTeam?.swappedIn &&
@@ -79,22 +101,29 @@ const PickTeamPage = () => {
         swapOut: updatedTeam?.swappedOut,
       });
     setIsSubstitution(false);
-    setPlayer(null);
+    setPlayer({});
   };
 
   const handlePlayerSwap = (
     playerName: Player["name"],
-    location: "starting" | "bench"
+    location: "starting" | "bench",
+    isCaptain: Player["isCaptain"],
+    isViceCaptain: Player["isViceCaptain"]
   ) => {
-    if (playerName) {
-      setIsSubstitution(true);
-      const result = playerSwap(
-        { bench: editedBench, starting: editedStarting },
-        playerName,
-        location
-      ); // Mika Biereth
-      result?.bench && setEditedBench(result.bench);
-      result?.starting && setEditedStarting(result.starting);
+    if (isCaptain || isViceCaptain) {
+      setRoleError("Change Captain/Vice before subsitution");
+    } else {
+      if (playerName) {
+        handlePlayerOverlay(null);
+        setIsSubstitution(true);
+        const result = playerSwap(
+          { bench: editedBench, starting: editedStarting },
+          playerName,
+          location
+        ); // Mika Biereth
+        result?.bench && setEditedBench(result.bench);
+        result?.starting && setEditedStarting(result.starting);
+      }
     }
   };
 
@@ -106,14 +135,72 @@ const PickTeamPage = () => {
     }); // Mika Biereth
     result?.bench && setEditedBench(result.bench);
     result?.starting && setEditedStarting(result.starting);
-    setPlayer(null);
+    setPlayer({});
+  };
+
+  const handleSaveOverlay = () => {
+    const forwards = editedStarting.forwards.filter(
+      (val) => val?.isCaptain || val?.isViceCaptain
+    );
+    const midfielders = editedStarting.midfielders.filter(
+      (val) => val?.isCaptain || val?.isViceCaptain
+    );
+    const defenders = editedStarting.defenders.filter(
+      (val) => val?.isCaptain || val?.isViceCaptain
+    );
+    const goalkeeper = editedStarting.goalkeeper.filter(
+      (val) => val?.isCaptain || val?.isViceCaptain
+    );
+
+    const role = [...forwards, ...midfielders, ...defenders, ...goalkeeper];
+    if (role?.length !== 2) {
+      const missingRole = role[0]?.isCaptain ? "Vice Captain" : "Captain";
+      setTeamError(
+        `You need to select a ${missingRole} from Starting XI to submit your team`
+      );
+    } else {
+      setTeamError("");
+    }
+    setShowSaveOverlay(true);
   };
 
   const handleSave = () => {
-    setPlayer(null);
+    mutation.mutate(substitutions, {
+      onSuccess: (data) => {
+        setOpenToast(true);
+        setToastMessage({ message: data?.message, type: "SUCCESS" });
+      },
+      onError: (data) => {
+        setOpenToast(true);
+        setToastMessage({ message: data?.data?.data?.message, type: "ERROR" });
+      },
+    });
+    setPlayer({});
     resetSubstitutions();
     setIsSubstitution(false);
-    mutation.mutate(substitutions);
+    setTeamError("");
+    setRoles({});
+    setShowSaveOverlay(false);
+  };
+
+  const handleRoles = (updatedRole: Roles) => {
+    let roleUpdate;
+    if (updatedRole && updatedRole?.captain) {
+      roleUpdate = setCaptain(
+        { starting: editedStarting, bench: editedBench },
+        updatedRole?.captain
+      );
+    }
+    if (updatedRole && updatedRole?.vice) {
+      roleUpdate = setViceCaptain(
+        { starting: editedStarting, bench: editedBench },
+        updatedRole?.vice
+      );
+    }
+    const { starting, bench } = roleUpdate;
+    setEditedStarting(starting);
+    setEditedBench(bench);
+    setRoles({ ...roles, ...updatedRole });
   };
 
   // Execute the swap
@@ -123,10 +210,12 @@ const PickTeamPage = () => {
     <>
       {user?.teamName && <Header teamName={user?.teamName} />}
       <div className="flex items-center justify-center bg-white px-4 pt-4 pb-3 border-b border-gray-100 text-[#33003b]">
-        <h6 className="text-center text-base text-[#33003b]">Gameweek 10</h6>
+        <h6 className="text-center text-base text-[#33003b]">
+          Gameweek {managerDetails?.gw + 1}
+        </h6>
         <span aria-hidden="true">&nbsp;•&nbsp;</span>
         <h6 className="text-center text-base font-semibold text-[#33003b]">
-          Deadline: Sat 1 Nov, 19:00
+          Deadline: {formatted}
         </h6>
       </div>
       <div className="flex text-white justify-center items-center">
@@ -137,8 +226,10 @@ const PickTeamPage = () => {
           </span>
         </div>
         <Button
-          disabled={substitutions?.length === 0}
-          onClick={handleSave}
+          disabled={
+            substitutions?.length === 0 && Object.keys(roles)?.length === 0
+          }
+          onClick={handleSaveOverlay}
           width="w-1/2"
           label="Save"
         />
@@ -147,13 +238,7 @@ const PickTeamPage = () => {
       <GWPitch
         starting={editedStarting}
         bench={editedBench}
-        onClick={
-          !isSubstitution
-            ? handlePlayerOverlay
-            : substitutions?.length > 0
-              ? handleExecuteSwap
-              : () => {}
-        }
+        onClick={!isSubstitution ? handlePlayerOverlay : handleExecuteSwap}
         pickMyTeam={true}
         reset={handleSubReset}
       />
@@ -164,17 +249,116 @@ const PickTeamPage = () => {
         children={
           player && (
             <PlayerStatsCard
-              onBack={() => handlePlayerOverlay(null)}
               showDetails={true}
               showStats={false}
               pickMyTeam={true}
-              handleSub={(playerName: string, location: "starting" | "bench") =>
-                handlePlayerSwap(playerName, location)
+              handleSub={(
+                playerName: string,
+                location: "starting" | "bench",
+                isCaptain: boolean,
+                isViceCaptain: boolean
+              ) =>
+                handlePlayerSwap(playerName, location, isCaptain, isViceCaptain)
               }
+              changeRole={handleRoles}
+              error={roleError}
             />
           )
         }
       />
+      <Overlay
+        isOpen={showSaveOverlay}
+        onClose={() => setShowSaveOverlay(false)}
+        children={
+          <>
+            <div className={`relative px-6 pt-6 pb-4`}>
+              <div className="flex items-start gap-4 mt-8">
+                {/* Player Details */}
+                <div className="flex-1 pt-4">
+                  <h2 className="text-2xl text-center font-bold mb-1">
+                    Changes
+                  </h2>
+                </div>
+                {/* <div className="flex-1 pt-4">
+                <h2 className="text-right text-5xl font-bold mb-1">
+                  hii
+                  <span className="text-sm text-right">Pts</span>
+                </h2>
+                <h2 className="text-right text-3xl font-bold mb-2">
+                 hii
+                  <span className="text-sm text-right">
+                    Pts/Match
+                  </span>
+                </h2>
+                <h1 className="text-right text-xl">hii</h1>
+              </div> */}
+              </div>
+            </div>
+            <div className="flex-1 overflow-y-auto items-center justify-center min-h-[200px]">
+              {teamError && (
+                <h1 className="text-red-500 text-center text-lg animate-pulse">
+                  {teamError}
+                </h1>
+              )}
+              {!teamError && (
+                <>
+                  <div className="px-6 py-4">
+                    <h3 className="text-lg font-bold mb-4">Roles</h3>
+                    <div className="space-y-3">
+                      {roles?.captain && (
+                        <StatRow label="Captain" value={roles?.captain} />
+                      )}
+                      {roles?.vice && (
+                        <StatRow label="Vice Captain" value={roles?.vice} />
+                      )}
+                    </div>
+                  </div>
+                  {substitutions && substitutions?.length > 0 && (
+                    <div className="px-6 py-4">
+                      <h3 className="text-lg font-bold mb-4">Subs</h3>
+                      <div className="space-y-3">
+                        {substitutions?.map((sub) => (
+                          <>
+                            <StatRow
+                              label="Subbed In"
+                              value={sub?.swapIn?.name}
+                            />
+                            <StatRow
+                              label="Subbed Out"
+                              value={sub?.swapOut?.name}
+                            />
+                          </>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+            {!teamError && (
+              <div className="flex items-center justify-center py-4">
+                <Button
+                  type="Primary"
+                  width="w-1/2"
+                  label="Confirm"
+                  onClick={handleSave}
+                />
+              </div>
+            )}
+          </>
+        }
+      />
+
+      {openToast && toastMessage && toastMessage && (
+        <Toast
+          open={openToast}
+          message={toastMessage}
+          onClose={() => {
+            setOpenToast(false);
+            setToastMessage("");
+          }}
+        />
+      )}
     </>
   );
 };

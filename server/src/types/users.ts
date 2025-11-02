@@ -3,5 +3,7 @@ export interface Users {
     password: string,
     isTempPassword: string,
     info: string,
-    gw: number
+    gw: number,
+    pickmyteam: boolean;
+    deadline: string;
 }

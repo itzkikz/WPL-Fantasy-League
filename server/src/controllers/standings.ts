@@ -58,7 +58,6 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
         if (gw === 0) {
             gw = currentGw;
         }
-        console.log(req.params);
         // Helper function to check if item is not a substitute
         const isNotSubstitute = (item: TeamDetails) => !item?.lineup?.toLowerCase().startsWith("sub ");
         // Helper function to get valid points

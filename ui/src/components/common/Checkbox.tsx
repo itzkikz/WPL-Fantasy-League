@@ -15,7 +15,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
     <label className="flex items-center cursor-pointer">
       <div className="relative">
         <input
-          type="checkbox"
+          type="radio"
           onChange={onChange}
           checked={checked}
           className="sr-only hidden"

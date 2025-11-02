@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { Substitutions } from "./types";
+import { Roles, Substitutions } from "./types";
 import { TeamDetails } from "../features/standings/types";
 
 interface useManageTeamStoreState {
@@ -11,6 +11,8 @@ interface useManageTeamStoreState {
   resetSubstitutions: () => void;
   teamDetails: TeamDetails;
   setTeamDetails: (value: TeamDetails) => void;
+  roles: Roles;
+  setRoles: (value: Roles) => void;
 }
 
 export const useManageTeamStore = create<useManageTeamStoreState>()(
@@ -24,6 +26,8 @@ export const useManageTeamStore = create<useManageTeamStoreState>()(
       resetSubstitutions: () => set({ substitutions: [] }),
       teamDetails: {},
       setTeamDetails: (value: TeamDetails) => set({ teamDetails: value }),
+      roles: {},
+      setRoles: (value: Roles) => set({ roles: value }),
     }),
     { name: "useManageTeamStore" } // Optional: give your store a custom name
   )
