@@ -171,7 +171,7 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
 
 
     if (pickTeamDetailsNextGW?.length > 0) {
-      managerTeam = convertToFormation(pickTeamDetails);
+      managerTeam = convertToFormation(pickTeamDetailsNextGW);
     } else {
       const teamDetailsGW = teamDetails.filter(
         (item: TeamDetails) => item[propertyName] === teamName && item.gw === gw
