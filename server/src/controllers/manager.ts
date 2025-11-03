@@ -54,16 +54,16 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
   const teamStanding = standings.find(item => item.team === teamName);
   const { total, total_point_before_this_gw } = teamStanding || {};
 
-
   const pickTeamDetailsNextGW = pickTeamDetails.filter(
     (item: TeamDetails) => item[propertyName] === teamName && item.gw === nextGw
   );
 
   let managerTeam: FormationResult;
+   console.log(pickTeamDetailsNextGW)
 
 
   if (pickTeamDetailsNextGW?.length > 0) {
-    managerTeam = convertToFormation(pickTeamDetails);
+    managerTeam = convertToFormation(pickTeamDetailsNextGW);
   } else {
     const teamDetailsGW = teamDetails.filter(
       (item: TeamDetails) => item[propertyName] === teamName && item.gw === gw
