@@ -165,16 +165,22 @@ const PickTeamPage = () => {
   };
 
   const handleSave = () => {
-    mutation.mutate(substitutions, {
-      onSuccess: (data) => {
-        setOpenToast(true);
-        setToastMessage({ message: data?.message, type: "SUCCESS" });
-      },
-      onError: (data) => {
-        setOpenToast(true);
-        setToastMessage({ message: data?.data?.data?.message, type: "ERROR" });
-      },
-    });
+    mutation.mutate(
+      { substitution: substitutions, roles },
+      {
+        onSuccess: (data) => {
+          setOpenToast(true);
+          setToastMessage({ message: data?.message, type: "SUCCESS" });
+        },
+        onError: (data) => {
+          setOpenToast(true);
+          setToastMessage({
+            message: data?.data?.data?.message,
+            type: "ERROR",
+          });
+        },
+      }
+    );
     setPlayer({});
     resetSubstitutions();
     setIsSubstitution(false);
@@ -221,9 +227,7 @@ const PickTeamPage = () => {
         </div>
       ) : (
         <div className="flex items-center justify-center bg-[#1e0021] dark:bg-white px-4 pt-4 pb-3 border-b border-gray-100 text-white dark:text-[#33003b]">
-          <h6 className="text-center text-base font-semibold">
-            Not Enabled
-          </h6>
+          <h6 className="text-center text-base font-semibold">Not Enabled</h6>
         </div>
       )}
 

@@ -74,7 +74,7 @@ const GWPitch = ({
         )}
 
         {Object.keys(starting).map((key: string) => (
-          <div key={key} className="flex justify-evenly gap-3">
+          <div key={key} className="flex justify-evenly gap-3 select-none">
             {starting[key].map((eachPlayer: Player) => (
               <div key={eachPlayer.id} className={`flex flex-col`}>
                 <div
@@ -93,7 +93,7 @@ const GWPitch = ({
             ))}
           </div>
         ))}
-        <div className="relative w-auto rounded-2xl bottom-0 left-0 right-0 bg-gradient-to-b from-green-800/80 to-green-900/90 backdrop-blur-sm py-4 px-4 mt-auto">
+        <div className="select-none relative w-auto rounded-2xl bottom-0 left-0 right-0 bg-gradient-to-b from-green-800/80 to-green-900/90 backdrop-blur-sm py-4 px-4 mt-auto">
           <div className="flex justify-center gap-6 md:gap-8 mb-2">
             {bench?.map((eachPlayer) => (
               <div

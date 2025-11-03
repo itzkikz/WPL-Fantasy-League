@@ -4,12 +4,13 @@ import { SubstitutionRequest, SubstitutionResponse } from './types'
 import { managerApi } from './api'
 import { managerQueries } from './queries'
 import { QUERY_KEYS } from '../../api/endpoints'
+import { Roles } from '../../store/types'
 
 export const useSubstitution = (onSuccess?: (data: SubstitutionResponse) => void) => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (substitution: SubstitutionRequest[]) => managerApi.substitution(substitution),
+    mutationFn: ({ substitution, roles }: { substitution: SubstitutionRequest[], roles: Roles }) => managerApi.substitution(substitution, roles),
     onSuccess: () => {
       // Invalidate and refetch books list
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.MANAGER] })

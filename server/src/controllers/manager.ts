@@ -12,6 +12,7 @@ import { executeSwap } from "../lib/helpers/substitution";
 import { buildSquadRows } from "../lib/helpers/subUpdate";
 import { FormationResult } from "../lib/formatter/types";
 import { sheets_v4 } from "googleapis";
+import { setCaptain, setViceCaptain } from "../lib/helpers/roleUpdate";
 
 const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID;
 type Cell = string | number | boolean | null;
@@ -123,7 +124,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
 }
 
 export const substitution = async (req: Request, res: Response, next: NextFunction) => {
-  const { substitution } = req.body;
+  const { substitution, roles } = req.body;
 
   const teamName = req.user.userId;
   const propertyName = "team_name";
@@ -182,17 +183,36 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
 
 
     let swappedData: any = {};
-    const invalid = substitution.map((val: Substitution) => {
-      swappedData = validateAndApplySwap({ starting: swappedData?.starting || starting, bench: swappedData?.bench || bench }, val.swapIn.name, val.swapOut.name);
-      if (!swappedData.ok) {
-        return !swappedData.ok;
+    if (substitution?.length > 0) {
+      const invalid = substitution.map((val: Substitution) => {
+        swappedData = validateAndApplySwap({ starting: swappedData?.starting || starting, bench: swappedData?.bench || bench }, val.swapIn.name, val.swapOut.name);
+        if (!swappedData.ok) {
+          return !swappedData.ok;
+        }
+        return false
+      });
+
+
+      if (invalid.includes(true)) {
+        return res.status(403).json({ data: { message: 'One or more substitutions are not allowed' } });
       }
-      return false
-    });
+    }
+    let roleUpdate: any = {};
+    if (roles && roles?.captain) {
+      roleUpdate = setCaptain(
+        { starting: roleUpdate?.starting || swappedData.starting || starting, bench: roleUpdate?.bench || swappedData.bench || bench },
+        roles?.captain
+      );
+    }
+    if (roles && roles?.vice) {
+      roleUpdate = setViceCaptain(
+        { starting: roleUpdate?.starting || swappedData.starting || starting, bench: roleUpdate?.bench || swappedData.bench || bench },
+        roles?.vice
+      );
+    }
 
-
-    if (invalid.includes(true)) {
-      return res.status(403).json({ data: { message: 'One or more substitutions are not allowed' } });
+    if (roleUpdate) {
+      swappedData = roleUpdate;
     }
 
 

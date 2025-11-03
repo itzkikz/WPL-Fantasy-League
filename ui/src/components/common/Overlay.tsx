@@ -4,10 +4,12 @@ const Overlay = ({
   isOpen,
   onClose,
   children,
+  showBackButton = true
 }: {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  showBackButton: boolean;
 }) => {
   // Keep this in sync with the Tailwind duration classes below (700ms)
   const ANIM_MS = 700;
@@ -47,7 +49,7 @@ const Overlay = ({
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
+        {showBackButton && (<button
           onClick={requestClose}
           className="absolute z-10 top-4 left-4 w-10 h-10 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center"
         >
@@ -64,7 +66,8 @@ const Overlay = ({
               d="M15 19l-7-7 7-7"
             />
           </svg>
-        </button>
+        </button>)}
+        
         {children}
       </div>
     </div>
