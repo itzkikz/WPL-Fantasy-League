@@ -10,7 +10,7 @@ const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID;
 const KEY = process.env.SECRET_KEY;
 
 // Read keys
-const privateKey = fs.readFileSync("./keys/private.key", "utf8");
+const privateKey = fs.readFileSync("./private.key", "utf8");
 
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {

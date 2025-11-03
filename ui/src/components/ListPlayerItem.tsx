@@ -1,4 +1,4 @@
-import Info from "./icons/info";
+import Info from "./icons/Info";
 import { Player } from "../features/players/types";
 
 interface ListPlayerItemProps {

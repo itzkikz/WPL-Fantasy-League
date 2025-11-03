@@ -11,7 +11,7 @@ declare global {
 }
 import jwt from 'jsonwebtoken'
 const KEY = process.env.SECRET_KEY;
-const publicKey = fs.readFileSync("./keys/public.key", "utf8");
+const publicKey = fs.readFileSync("./public.key", "utf8");
 
 
 // Middleware to verify JWT
