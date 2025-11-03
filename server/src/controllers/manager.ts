@@ -59,7 +59,6 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
   );
 
   let managerTeam: FormationResult;
-   console.log(pickTeamDetailsNextGW)
 
 
   if (pickTeamDetailsNextGW?.length > 0) {
@@ -197,6 +196,7 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
         return res.status(403).json({ data: { message: 'One or more substitutions are not allowed' } });
       }
     }
+
     let roleUpdate: any = {};
     if (roles && roles?.captain) {
       roleUpdate = setCaptain(
@@ -211,10 +211,9 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
       );
     }
 
-    if (roleUpdate) {
+    if (Object.keys(roleUpdate)?.length > 0) {
       swappedData = roleUpdate;
     }
-
 
     const updateRows = swappedData.starting && buildSquadRows(swappedData, teamName, nextGw);
 
