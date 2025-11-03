@@ -219,13 +219,15 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
 
     const updates: any = [];
 
+    let dataIndex = 0;
     pickteamRows.forEach((r, i) => {
       if (r[1] === teamName && r[0] === nextGw) {
         const rowIndex = i + 1; // account for header row A1
         updates.push({
           range: `${'Pick Team'}!A${rowIndex}`,
-          values: [updateRows[rowIndex - 2]]
+          values: [updateRows[dataIndex]]
         });
+        dataIndex++
       }
     });
 
