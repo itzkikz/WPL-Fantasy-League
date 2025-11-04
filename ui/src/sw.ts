@@ -58,17 +58,17 @@ registerRoute(
 // ---------------------------
 // API runtime caching
 // ---------------------------
-// Adjust strategy per data freshness needs; CacheFirst mirrors your config
 registerRoute(
-  ({ url }) => /^https:\/\/wpl-fantasy-league\.onrender\.com\/api\/.*$/i.test(url.href),
-  new CacheFirst({
-    cacheName: 'api-cache-v1',
-    plugins: [
-      new CacheableResponsePlugin({ statuses: [0, 200] }),
-      new ExpirationPlugin({ maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 }),
-    ],
-  })
+  ({ url }) => /^https:\/\/wpl-fantasy-league\.onrender\.com\/api\/.*$/i.test(url.href),
+  new StaleWhileRevalidate({
+    cacheName: 'api-cache-v1',
+    plugins: [
+      new CacheableResponsePlugin({ statuses: [0, 200] }),
+      new ExpirationPlugin({ maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 }),
+    ],
+  })
 )
+
 
 // Conservative default for unmatched requests; combine with offline fallback below
 setDefaultHandler(new NetworkOnly()) // fall through to catch handler on failure [web:21]
