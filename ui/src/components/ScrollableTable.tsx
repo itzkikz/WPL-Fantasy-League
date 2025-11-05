@@ -25,7 +25,7 @@ const ScrollableTable = ({
   onClick
 }: ScrollableTableProps) => {
   return (
-    <div className="flex-1 overflow-hidden">
+    <div className="flex-1 overflow-hidden select-none">
       <div className="h-full overflow-y-auto">
         <table className="w-full">
           {/* Sticky table header */}

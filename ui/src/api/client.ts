@@ -2,7 +2,7 @@
 import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.API_BASE_URL || 'https://wpl-fantasy-league.onrender.com/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://wpl-fantasy-league.onrender.com/api',
   timeout: 100000,
   headers: { 'Content-Type': 'application/json' },
 })

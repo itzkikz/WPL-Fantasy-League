@@ -52,6 +52,72 @@ function canSwap(
   );
 }
 
+// Updated benchSwap to prevent GK swaps with outfield players
+// Updated benchSwap with consistent return structure
+export const benchSwap = (
+  teamData: Pick<TeamDetails, "starting" | "bench">,
+  playerNameA: string,
+  playerNameB: string
+) => {
+  if (playerNameA === playerNameB) {
+    return { error: "Cannot swap the same player" as const };
+  }
+
+  const benchIndexA = teamData.bench.findIndex((p) => p.name === playerNameA);
+  const benchIndexB = teamData.bench.findIndex((p) => p.name === playerNameB);
+
+  if (benchIndexA === -1 || benchIndexB === -1) {
+    return { error: "One or both players not found on bench" as const };
+  }
+
+  const playerA = teamData.bench[benchIndexA];
+  const playerB = teamData.bench[benchIndexB];
+
+  // Prevent GK from swapping with outfield players on bench
+  const isAGoalkeeper = playerA.position === "GK";
+  const isBGoalkeeper = playerB.position === "GK";
+
+  if (isAGoalkeeper !== isBGoalkeeper) {
+    return { error: "Bench goalkeeper cannot swap with outfield players" as const };
+  }
+
+  // Clone bench array
+  const newBench: Player[] = [...teamData.bench];
+  
+  // Swap their subNumber values if they exist
+  const subNoA = (playerA as any).subNumber;
+  const subNoB = (playerB as any).subNumber;
+  
+  // Create swapped players with exchanged subNumbers
+  const playerASwapped: Player = {
+    ...playerB,
+    ...(subNoA !== undefined ? { subNumber: subNoA } : 
+        subNoB !== undefined ? { subNumber: undefined } : {})
+  };
+  
+  const playerBSwapped: Player = {
+    ...playerA,
+    ...(subNoB !== undefined ? { subNumber: subNoB } : 
+        subNoA !== undefined ? { subNumber: undefined } : {})
+  };
+  
+  // Swap positions in array
+  newBench[benchIndexA] = playerASwapped;
+  newBench[benchIndexB] = playerBSwapped;
+
+  const counts = countStartingPlayers(teamData.starting);
+
+  return {
+    starting: teamData.starting,
+    bench: newBench,
+    swappedIn: playerASwapped,  // Added for consistency
+    swappedOut: playerBSwapped, // Added for consistency
+    currentFormation: `${counts.defenders}-${counts.midfielders}-${counts.forwards}`,
+  };
+};
+
+
+// Enhanced playerSwap with GK bench restrictions
 export const playerSwap = (
   teamData: Pick<TeamDetails, "starting" | "bench">,
   playerName: string,
@@ -117,10 +183,18 @@ export const playerSwap = (
     }
   } else {
     // Selected is on bench: starting players may be benched for selected
-    enrichedBench = teamData.bench.map((p) => ({
-      ...p,
-      isAvlSub: false, // counterparts are in starting for this direction
-    }));
+    // ALSO: other bench players can swap positions with selected (except GK)
+    const selectedIsGK = selectedPlayer.position === "GK";
+
+    enrichedBench = teamData.bench.map((p) => {
+      if (p.name === playerName) {
+        return { ...p, isAvlSub: false };
+      }
+      // GK can only swap with GK (none on bench), outfield can swap with outfield
+      const pIsGK = p.position === "GK";
+      const canSwapOnBench = selectedIsGK === pIsGK;
+      return { ...p, isAvlSub: canSwapOnBench };
+    });
 
     for (const k in teamData.starting) {
       const category = k as Category;
@@ -140,9 +214,8 @@ export const playerSwap = (
   };
 };
 
-// Assumes Player may have an optional numeric `subNumber` (bench order 1–3).
-// If your model uses a different key (e.g., benchOrder), rename `subNumber` accordingly.
 
+// Enhanced executeSwap to handle both starting-bench and bench-bench swaps
 export const executeSwap = (
   teamData: Pick<TeamDetails, "starting" | "bench">,
   playerNameA: string,
@@ -170,6 +243,11 @@ export const executeSwap = (
 
   const benchIndexA = teamData.bench.findIndex((p) => p.name === playerNameA);
   const benchIndexB = teamData.bench.findIndex((p) => p.name === playerNameB);
+
+  // Check if both players are on the bench - delegate to benchSwap
+  if (benchIndexA !== -1 && benchIndexB !== -1) {
+    return benchSwap(teamData, playerNameA, playerNameB);
+  }
 
   let startingInfo:
     | { category: Category; index: number; player: Player }
@@ -247,6 +325,7 @@ export const executeSwap = (
     currentFormation: `${nextCounts.defenders}-${nextCounts.midfielders}-${nextCounts.forwards}`,
   };
 };
+
 
 export const clearSwapHighlights = (
   teamData: Pick<TeamDetails, "starting" | "bench">

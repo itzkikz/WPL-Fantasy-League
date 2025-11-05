@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import Logo from "../assets/wplff.svg";
+import DarkLogo from "../assets/wplf1-dark.png";
+import LightLogo from "../assets/wplf1-light.png";
+
 
 const SplashScreen = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -20,11 +22,16 @@ const SplashScreen = () => {
       {showSplash && (
         <div className="flex items-center justify-center h-screen">
           <div className="flex items-center justify-center">
-            <div className="w-24 h-24 rounded-sm flex items-center justify-center mr-2">
+            <div className="w-24 h-24 rounded-sm flex items-center  justify-center mr-2">
               <img
-                src={Logo}
+                src={DarkLogo}
                 alt="PLogo"
-                className="w-24 h-24 animate-bounce opacity-90"
+                className="hidden dark:block w-24 h-24 animate-bounce opacity-90"
+              />
+              <img
+                src={LightLogo}
+                alt="PLogo"
+                className="block dark:hidden w-24 h-24 animate-bounce opacity-90"
               />
             </div>
             <div className="flex-row h-24">

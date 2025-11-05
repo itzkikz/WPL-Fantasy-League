@@ -315,7 +315,8 @@ const PickTeamPage = () => {
               )}
               {!teamError && (
                 <>
-                  <div className="px-6 py-4">
+                 {Object.keys(roles).length > 0 &&
+                  (<div className="px-6 py-4">
                     <h3 className="text-lg font-bold mb-4">Roles</h3>
                     <div className="space-y-3">
                       {roles?.captain && (
@@ -325,7 +326,7 @@ const PickTeamPage = () => {
                         <StatRow label="Vice Captain" value={roles?.vice} />
                       )}
                     </div>
-                  </div>
+                  </div>)}
                   {substitutions && substitutions?.length > 0 && (
                     <div className="px-6 py-4">
                       <h3 className="text-lg font-bold mb-4">Subs</h3>

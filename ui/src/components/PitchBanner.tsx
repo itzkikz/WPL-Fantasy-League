@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import Logo from "../assets/wplff.svg";
+import Logo from "../assets/wplf1-dark.png";
 
 
 interface PitchBannerProps {
@@ -7,7 +7,7 @@ interface PitchBannerProps {
 }
  
 const PitchBanner: FunctionComponent<PitchBannerProps> = () => {
-    return ( <div className="absolute top-2 left-0 right-0 h-8 flex items-center justify-between px-4">
+    return ( <div className="absolute top-4 left-0 right-0 h-8 flex items-center justify-between px-4">
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1">
               <div className="w-8 h-8 flex items-center justify-center">
