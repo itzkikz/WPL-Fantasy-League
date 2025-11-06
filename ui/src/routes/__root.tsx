@@ -1,6 +1,6 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import Logo from "./../assets/wplff.svg";
+import Logo from "./../assets/wplf1-dark.png";
 import BottomNavbar from "../components/common/BottomNavbar";
 
 export const Route = createRootRoute({

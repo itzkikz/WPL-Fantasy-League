@@ -38,6 +38,7 @@ export default function PlayerInfo({
             </span>
           </h2>
           <h1 className="text-right text-xl">£{playerStats?.price}m</h1>
+          <h1 className="text-right text-base">£{playerStats?.release_value}m(Selling Price)</h1>
         </div>
       </div>
     </div>

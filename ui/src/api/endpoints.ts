@@ -21,6 +21,11 @@ export const API_ENDPOINTS = {
     SUBSTITUTION: '/manager/sub'
     // BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
   },
+  NOTIFICATION: {
+    BASE: '/notify/subscribe',
+    // SUBSTITUTION: '/manager/sub'
+    // BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
+  },
 } as const
 
 // API Query Keys for TanStack Query

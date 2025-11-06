@@ -136,8 +136,8 @@ self.addEventListener('push', (event: PushEvent) => {
     tag: payload.tag ?? 'live-activity',
     renotify: payload.renotify ?? true,
     // Use paths that exist in your deployed public path; adjust if app is served under a subpath.
-    badge: payload.badge ?? '/icons/pwa-192x192.png',
-    icon: payload.icon ?? '/icons/pwa-192x192.png',
+    badge: payload.badge ?? '/pwa-192x192.png',
+    icon: payload.icon ?? '/pwa-192x192.png',
     data: payload.data ?? { url: payload.url ?? '/' },
     actions: payload.actions ?? [],
   }

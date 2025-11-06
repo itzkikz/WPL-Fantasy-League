@@ -12,5 +12,6 @@ export interface PlayerStats {
     penalty_miss: number,
     penalty_save: number,
     total_point: number,
-    price: number
+    price: number,
+    release_value: number,
 }

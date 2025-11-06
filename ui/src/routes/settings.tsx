@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import Settings from '../pages/Settings/Settings';
 
 export const Route = createFileRoute('/settings')({
   component: RouteComponent,
@@ -6,11 +7,8 @@ export const Route = createFileRoute('/settings')({
 
 function RouteComponent() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen text-center">
-      <h1 className="text-2xl font-semibold mb-2 animate-pulse">
-        Customizations coming soon —
-      </h1>
-      <p className="animate-bounce">Make it truly yours!</p>
+    <div className="flex flex-col h-screen text-center">
+      <Settings />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import Logo from "../assets/wplff.svg";
+import DarkLogo from "../assets/wplf1-dark.png";
+import LightLogo from "../assets/wplf1-light.png";
 import { useLogin } from "../features/auth/hooks";
 import Button from "../components/common/Button";
 
@@ -87,9 +88,14 @@ const LoginPage = () => {
         <div className="flex justify-center">
           <div className="w-20 h-20 rounded-sm flex items-center justify-center">
             <img
-              src={Logo}
+              src={DarkLogo}
               alt="PLogo"
-              className="w-20 h-20 animate-bounce opacity-90"
+              className="hidden dark:block w-20 h-20 animate-bounce"
+            />
+            <img
+              src={LightLogo}
+              alt="PLogo"
+              className="block dark:hidden w-20 h-20 animate-bounce"
             />
           </div>
         </div>

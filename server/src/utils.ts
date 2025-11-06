@@ -1,12 +1,13 @@
 import { PlayerStats } from "./types/players";
 import { StandingsResponse, TeamDetails } from "./types/standings";
-import { Users } from "./types/users";
+import { Subscribers, Users } from "./types/users";
 
 interface DataTypeMapping {
   teamDetails: TeamDetails[];
   standings: StandingsResponse[];
   playerStats: PlayerStats[];
   users: Users[];
+  subscribers: Subscribers[];
 }
 
 const isNumeric = (value: any): boolean => {
@@ -17,7 +18,7 @@ const isNumeric = (value: any): boolean => {
 };
 
 // Type mapping
-type DataType = 'teamDetails' | 'standings' | 'playerStats' | 'users';
+type DataType = 'teamDetails' | 'standings' | 'playerStats' | 'users' | 'subscribers';
 type ReturnTypeMap<T extends DataType> = DataTypeMapping[T];
 
 export function convertToJSON<T extends DataType>(
@@ -62,6 +63,9 @@ export function convertToJSON<T extends DataType>(
     }
     if (type === 'users') {
       return obj as Users;
+    }
+    if (type === 'subscribers') {
+      return obj as Subscribers;
     }
     return obj as StandingsResponse;
   }) as ReturnTypeMap<T>;

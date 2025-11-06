@@ -33,12 +33,12 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
             {player?.name ? player.name.trim().split(/\s+/).slice(-1)[0] : ""}
           </h3>
           {player.isCaptain && (
-            <span className="px-1.5 py-0.5 bg-gray-900 text-xs font-bold rounded">
+            <span className="px-1.5 py-0.5 text-xs font-bold rounded text-white dark:text-[#1e0021] bg-[#1e0021] dark:bg-white">
               C
             </span>
           )}
           {player.isViceCaptain && (
-            <span className="px-1.5 py-0.5 bg-gray-700 text-xs font-bold rounded">
+            <span className="px-1.5 py-0.5 text-xs font-bold rounded text-white dark:text-[#1e0021] bg-[#1e0021] dark:bg-white">
               V
             </span>
           )}

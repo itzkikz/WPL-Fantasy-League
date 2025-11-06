@@ -15,7 +15,6 @@ const privateKey = fs.readFileSync("./private.key", "utf8");
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
   const { teamName, password } = req.body;
-
   const response = await getSheets()?.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
     range: "Users!A:E", // Adjust range as needed

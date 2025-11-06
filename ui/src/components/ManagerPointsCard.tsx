@@ -13,12 +13,21 @@ const ManagerPointsCards = ({managerDetails} : ManagerPointsCardsProps) => {
           <h2 className="text-xl font-bold">Points & Rankings</h2>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-3 mb-4">
           <StatRow label="Overall points" value={managerDetails?.total} border={false} />
           <StatRow label="Overall points before this GW" value={managerDetails?.total_point_before_this_gw} border={false} />
           <StatRow label="Overall rank" value={managerDetails?.rank} border={false} />
           <StatRow label="Total players" value={managerDetails?.teamsCount} border={false} />
           <StatRow label="Gameweek points" value={managerDetails?.totalGWScore} border={false} />
+        </div>
+         <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold">Finance</h2>
+        </div>
+
+        <div className="space-y-3">
+          <StatRow label="Total Budget (Bonus and Fine included)" value={managerDetails?.total_budget} border={false} />
+          <StatRow label="Utlisation" value={managerDetails?.utlisation} border={false} />
+          <StatRow label="Balance" value={(managerDetails?.balance).toFixed(2)} border={false} />
         </div>
       </div>
     </>

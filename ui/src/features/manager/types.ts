@@ -23,5 +23,8 @@ export interface ManagerDetailsResponse {
   rank: number,
   managerTeam: TeamDetails,
   team: string
-  pickMyTeam: boolean
+  pickMyTeam: boolean,
+  total_budget: number,
+  balance: number,
+  utlisation: number
 }

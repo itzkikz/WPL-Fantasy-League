@@ -4,7 +4,8 @@ dotenv.config();
 import express from 'express';
 import standingsRouter from './routes/standings';
 import playersRouter from './routes/players';
-import authRouter from './routes/auth'
+import authRouter from './routes/auth';
+import notificationRouter from './routes/notification';
 import managerRouter from './routes/manager'
 import { setSheets } from './lib/store/globals';
 import { authenticateToken } from './middlewares/authMiddleware';
@@ -43,6 +44,9 @@ app.get('/api/validate-token', authenticateToken, (req: any, res) => {
 });
 
 app.use('/api', authenticateToken, managerRouter);
+
+app.use("/api", authenticateToken, notificationRouter);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

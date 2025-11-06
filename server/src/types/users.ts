@@ -6,4 +6,14 @@ export interface Users {
     gw: number,
     pickmyteam: boolean;
     deadline: string;
+    total_budget: number;
+    utlisation: number;
+    balance: number;
+}
+
+export interface Subscribers {
+    username: string,
+    endpoint: string
+    expirationTime: number
+    keys: string
 }
