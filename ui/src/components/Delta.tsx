@@ -6,18 +6,18 @@ import Neutral from "./icons/Neutral";
 const Delta = ({ d }: { d: Standings["pos_change"] }) => {
   if (d > 0)
     return (
-      <div className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#2fa550] text-white">
+      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-light-secondary dark:bg-dark-secondary">
         <AngleUp height="3" width="3" />
       </div>
     );
   if (d < 0)
     return (
-      <div className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#ed0628] text-white">
+      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-light-accent dark:bg-dark-accent">
         <AngleDown height="3" width="3" />
       </div>
     );
   return (
-    <div className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#541e5d] text-gray-600">
+    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-light-primary dark:bg-dark-primary">
       <Neutral />
     </div>
   );

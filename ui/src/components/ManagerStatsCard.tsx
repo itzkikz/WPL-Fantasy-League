@@ -15,13 +15,14 @@ const ManagerStatsCard = ({ navigateToPickTeam, navigateToTeamPoints, managerDet
   return (
     <>
       {/* Header Card with Gradient */}
-      <div className="bg-gradient-to-br from-cyan-400 rounded-3xl via-blue-500 to-purple-600 p-6 text-white relative">
+      <div className="bg-gradient-to-br  from-dark-primary rounded-3xl via-dark-primary to-dark-primary p-6 relative text-dark-bg">
         {/* User Info */}
         <div className="flex items-start justify-between mb-6">
           <div>
             <h1 className="text-2xl font-bold">{managerDetails?.team}</h1>
+            <h1 className="text-sm">Managed By </h1>
             <div className="flex items-center gap-2 mt-1">
-              <span className="text-sm">Manager</span>
+              <span className="text-sm">{managerDetails?.managers}</span>
               <img
                 src="https://flagcdn.com/w20/in.png"
                 alt="India flag"

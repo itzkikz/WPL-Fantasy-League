@@ -1,66 +1,71 @@
-import PitchBanner from "../PitchBanner";
 import PitchPlayerCardSkeleton from "./PitchPlayerCardSkeleton";
 
-const GWPitchSkeleton = () => {
+interface GWPitchSkeletonProps {
+  pickMyTeam?: boolean;
+}
+
+const GWPitchSkeleton = ({ pickMyTeam = false }: GWPitchSkeletonProps) => {
+  // Default formation: 4-3-3 (can be adjusted based on your needs)
+  const formationLayout = [
+    { key: "goalkeeper", count: 1 },
+    { key: "forwards", count: 3 },
+    { key: "midfielders", count: 3 },
+    { key: "defenders", count: 4 },
+  ];
+
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div
-        className="min-h-full relative bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/pitch.svg')",
-        }}
-      >
-        {/* Fantasy Header Bars */}
-        <PitchBanner />
-
-        {/* Players Formation Skeleton */}
-        <div className="relative pt-10 pb-16 px-2">
-          {/* Goalkeeper - 1 player */}
-          <div className="flex justify-center mb-3">
-            <PitchPlayerCardSkeleton />
-          </div>
-
-          {/* Defenders - 4 players */}
-          <div className="flex justify-center gap-3 mb-3">
-            {[...Array(4)].map((_, i) => (
-              <PitchPlayerCardSkeleton key={`def-${i}`} />
-            ))}
-          </div>
-
-          {/* Midfielders - 3 players */}
-          <div className="flex justify-center gap-3 mb-3">
-            {[...Array(3)].map((_, i) => (
-              <PitchPlayerCardSkeleton key={`mid-${i}`} />
-            ))}
-          </div>
-
-          {/* Forwards - 3 players */}
-          <div className="flex justify-center gap-8">
-            {[...Array(3)].map((_, i) => (
-              <PitchPlayerCardSkeleton key={`fwd-${i}`} />
-            ))}
-          </div>
+    <div
+      className="relative flex flex-col gap-5 bg-top bg-no-repeat box-border py-6 max-w-[1400px] overflow-auto h-screen items-center justify-center"
+      style={{
+        backgroundImage: "url('/pitch.svg')",
+      }}
+    >
+      {/* Banner Skeleton */}
+      <div className="absolute top-0 left-0 right-0 h-8 flex items-center justify-between px-4">
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 bg-white/30 rounded-sm animate-pulse"></div>
+          <div className="h-3 bg-white/40 rounded w-24 animate-pulse"></div>
         </div>
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 bg-white/30 rounded-sm animate-pulse"></div>
+          <div className="h-3 bg-white/40 rounded w-24 animate-pulse"></div>
+        </div>
+      </div>
 
-        {/* Bench Section Skeleton */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-b from-green-800/80 to-green-900/90 backdrop-blur-sm py-2 px-2">
-          <div className="max-w-md mx-auto">
-            <div className="flex justify-center gap-8 mb-2">
-              {[...Array(4)].map((_, i) => (
-                <div
-                  key={`label-${i}`}
-                  className="w-15 text-center"
-                >
-                  <div className="h-3 bg-green-700/50 rounded w-8 mx-auto animate-pulse"></div>
-                </div>
-              ))}
+      {/* Formation Skeleton */}
+      {formationLayout.map((line) => (
+        <div key={line.key} className="flex justify-evenly gap-3 select-none">
+          {[...Array(line.count)].map((_, i) => (
+            <div key={`${line.key}-${i}`} className="flex flex-col">
+              <div className="rounded-md relative m-auto overflow-hidden">
+                <PitchPlayerCardSkeleton />
+              </div>
             </div>
-            <div className="flex justify-center gap-8">
-              {[...Array(4)].map((_, i) => (
-                <PitchPlayerCardSkeleton key={`bench-${i}`} isSmall={true} />
-              ))}
+          ))}
+        </div>
+      ))}
+
+      {/* Bench Section Skeleton */}
+      <div className="select-none relative w-auto rounded-2xl bottom-0 left-0 right-0 bg-gradient-to-b from-light-secondary to-light-secondary backdrop-blur-sm py-4 px-4 mt-auto">
+        <div className="flex justify-center gap-6 md:gap-8 mb-2">
+          {[...Array(4)].map((_, i) => (
+            <div
+              key={`label-${i}`}
+              className="w-15 text-center"
+            >
+              <div className="h-3 bg-white/30 rounded w-8 mx-auto animate-pulse"></div>
             </div>
-          </div>
+          ))}
+        </div>
+        <div className="flex justify-center gap-6 md:gap-8">
+          {[...Array(4)].map((_, i) => (
+            <div
+              key={`bench-${i}`}
+              className="rounded-md relative m-auto overflow-hidden"
+            >
+              <PitchPlayerCardSkeleton isSmall={true} />
+            </div>
+          ))}
         </div>
       </div>
     </div>

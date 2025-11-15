@@ -16,12 +16,16 @@ const BottomNavbar = () => {
     { label: "Settings", path: "/settings" },
   ];
 
-  if (matchRoute({ to: "/login" }) || matchRoute({to: "/maintenance"}) || matchRoute({ to: "/" })) {
+  if (
+    matchRoute({ to: "/login" }) ||
+    matchRoute({ to: "/maintenance" }) ||
+    matchRoute({ to: "/" })
+  ) {
     return null; // Truthy check works for both {} and { params }
   }
 
   return (
-    <nav className="flex-none border-t border-[#ebe5eb] dark:border-[#541e5d]">
+    <nav className="flex-none border-t border-light-border dark:border-dark-border">
       <div className="grid h-16 grid-cols-5">
         {navItems.map(({ label, path }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });
@@ -30,19 +34,23 @@ const BottomNavbar = () => {
             <Link
               key={label}
               to={path}
-              className={`inline-flex flex-col items-center justify-center text-[11px] transition-colors ${
-                isActive
-                  ? "dark:text-[#541e5d] font-semibold"
-                  : "dark:hover:text-[#541e5d]"
-              }`}
+              className={`inline-flex flex-col items-center justify-center text-[11px] transition-colors`}
             >
               {label === "Home" && <Home isActive={isActive} />}
               {label === "Manage" && <User isActive={isActive} />}
-              {label === "Settings" && <UserSettings />}
-              {label === "Stats" && <Graph />}
-              {label === "Notifications" && <Notification />}
+              {label === "Settings" && <UserSettings isActive={isActive} />}
+              {label === "Stats" && <Graph isActive={isActive} />}
+              {label === "Notifications" && <Notification isActive={isActive} />}
 
-              <span className="mt-1">{label}</span>
+              <span
+                className={`mt-1 ${
+                  isActive
+                    ? "text-gray-400 dark:text-light-text-secondary font-semibold"
+                    : ""
+                }`}
+              >
+                {label}
+              </span>
             </Link>
           );
         })}

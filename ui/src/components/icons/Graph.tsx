@@ -1,11 +1,17 @@
 import { FunctionComponent } from "react";
 
-interface Props {}
+interface Props {
+    isActive: boolean;
+}
 
-const Graph: FunctionComponent<Props> = () => {
+const Graph: FunctionComponent<Props> = ({isActive}) => {
   return (
     <svg
-      className="w-6 h-6 text-gray-800 dark:text-white"
+      className={`w-6 h-6 ${
+        isActive
+          ? "text-gray-400 dark:text-light-text-secondary font-semibold"
+          : ""
+      }`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"

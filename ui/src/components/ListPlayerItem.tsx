@@ -11,7 +11,7 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
   return (
     <div
       onClick={onClick}
-      className="flex items-center py-3 px-4 border-b border-[#ebe5eb] dark:border-[#541e5d] dark:hover:bg-[#541e5d]"
+      className="flex items-center py-3 px-4 border-b border-light-border dark:border-dark-border"
     >
       {/* Info Icon */}
       <div className="mr-3">
@@ -23,7 +23,7 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
         className="w-10 h-10 rounded flex items-center justify-center mr-3"
         style={{ backgroundColor: player.teamColor }}
       >
-        <span className="text-xs text-white font-bold">{player.team}</span>
+        <span className="text-xs font-bold">{player.team}</span>
       </div>
 
       {/* Player Info */}
@@ -33,12 +33,12 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
             {player?.name ? player.name.trim().split(/\s+/).slice(-1)[0] : ""}
           </h3>
           {player.isCaptain && (
-            <span className="px-1.5 py-0.5 text-xs font-bold rounded text-white dark:text-[#1e0021] bg-[#1e0021] dark:bg-white">
+            <span className="px-1.5 py-0.5 text-xs font-bold rounded bg-light-primary">
               C
             </span>
           )}
           {player.isViceCaptain && (
-            <span className="px-1.5 py-0.5 text-xs font-bold rounded text-white dark:text-[#1e0021] bg-[#1e0021] dark:bg-white">
+            <span className="px-1.5 py-0.5 text-xs font-bold rounded bg-light-primary">
               V
             </span>
           )}

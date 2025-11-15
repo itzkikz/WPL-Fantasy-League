@@ -10,7 +10,7 @@ const GWStatsCardsSkeleton = () => {
 
         {/* Total Points skeleton - highlighted card */}
         <div className="relative">
-          <div className="text-center bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl px-4 py-4 shadow-lg">
+          <div className="text-center bg-linear-to-br from-light-primary to-light-primary rounded-2xl px-4 py-4 shadow-lg">
             <div className="h-8 w-16 bg-white/30 rounded mx-auto mb-1 animate-pulse"></div>
             <p className="text-sm text-white mt-1">Total Pts</p>
           </div>

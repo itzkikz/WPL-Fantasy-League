@@ -14,9 +14,9 @@ const GWStatsCards = ({ avg, totalGWScore, highest }: GWStatsCardsProps) => {
         </div>
 
         <div className="relative">
-          <div className="text-center bg-linear-to-br from-cyan-400 to-blue-600 rounded-2xl px-4 py-4 shadow-lg">
-            <p className="text-2xl font-bold text-white dark:text-[#1e0021]">{totalGWScore}</p>
-            <p className="text-sm text-white dark:text-[#1e0021] mt-1">Total Pts</p>
+          <div className="text-center bg-linear-to-br from-light-primary to-light-primary rounded-2xl px-4 py-4 shadow-lg">
+            <p className="text-2xl font-bold">{totalGWScore}</p>
+            <p className="text-sm mt-1">Total Pts</p>
           </div>
         </div>
 

@@ -29,6 +29,6 @@ export const useManageTeamStore = create<useManageTeamStoreState>()(
       roles: {},
       setRoles: (value: Roles) => set({ roles: value }),
     }),
-    { name: "useManageTeamStore" } // Optional: give your store a custom name
+    { name: "ManageTeamStore" } // Optional: give your store a custom name
   )
 );

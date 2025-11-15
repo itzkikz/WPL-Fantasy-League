@@ -13,6 +13,6 @@ export const usePlayerStore = create<usePlayerStoreState>()(
       player: {},
       setPlayer: (value: Player | {}) => set({ player: value }),
     }),
-    { name: "usePlayerStore" } // Optional: give your store a custom name
+    { name: "PlayerStore" } // Optional: give your store a custom name
   )
 );

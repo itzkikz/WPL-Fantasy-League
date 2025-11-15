@@ -6,7 +6,7 @@ interface NeutralProps {
  
 const Neutral: FunctionComponent<NeutralProps> = () => {
     return (<svg
-        className="w-6 h-6 text-white dark:text-white"
+        className="w-5 h-5"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"

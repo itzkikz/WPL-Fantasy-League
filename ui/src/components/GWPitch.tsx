@@ -4,6 +4,7 @@ import { useManageTeamStore } from "../store/useManageTeamStore";
 import { usePlayerStore } from "../store/usePlayerStore";
 import PitchBanner from "./PitchBanner";
 import PitchPlayerCard from "./PitchPlayerCard";
+import Logo from "../assets/wplf1-dark.png";
 
 interface GWPitchProps {
   starting: Formation;
@@ -18,16 +19,16 @@ const GWPitch = ({
   bench,
   onClick,
   pickMyTeam = false,
-  reset
+  reset,
 }: GWPitchProps) => {
   const { isSubstitution } = useManageTeamStore();
   const { player } = usePlayerStore();
   const glowBorderClass =
-    "ring-2 ring-white shadow-[0_0_8px_3px_rgba(255,255,255,0.45)] hover:shadow-[0_0_12px_5px_rgba(30,0,33,0.60)] transition-shadow";
+    "ring-2 ring-light-bg shadow-[0_0_8px_3px_rgba(255,255,255,0.45)] hover:shadow-[0_0_12px_5px_rgba(30,0,33,0.60)] transition-shadow";
   const glowBorderGreenClass =
-    "ring-2 ring-[#00ff4e] shadow-[0_0_8px_3px_rgba(255,255,255,0.45)] hover:shadow-[0_0_12px_5px_rgba(30,0,33,0.60)] transition-shadow";
+    "ring-2 ring-dark-secondary shadow-[0_0_8px_3px_rgba(255,255,255,0.45)] hover:shadow-[0_0_12px_5px_rgba(30,0,33,0.60)] transition-shadow";
   const glowBorderRedClass =
-    "ring-2 ring-[#e2001a] shadow-[0_0_8px_3px_rgba(255,255,255,0.45)] hover:shadow-[0_0_12px_5px_rgba(30,0,33,0.60)] transition-shadow";
+    "ring-2 ring-dark-accent shadow-[0_0_8px_3px_rgba(255,255,255,0.45)] hover:shadow-[0_0_12px_5px_rgba(30,0,33,0.60)] transition-shadow";
 
   const getCardClass = (subAvl: boolean, playerName: Player["name"]) => {
     if (!subAvl && isSubstitution && playerName !== player?.name) {
@@ -51,10 +52,20 @@ const GWPitch = ({
         }}
       >
         <PitchBanner />
+        <div className="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-sm items-center  justify-center mr-2">
+          <img
+            src={Logo}
+            alt="PLogo"
+            className="w-80 h-80 opacity-20"
+          />
+        </div>
         {isSubstitution && (
-          <div onClick={reset} className="absolute top-1/6 left-1/16 right-0 w-8 h-8 bg-white rounded-full flex items-center justify-center">
+          <div
+            onClick={reset}
+            className="absolute top-1/6 left-1/16 right-0 w-8 h-8 bg-light-bg rounded-full flex items-center justify-center"
+          >
             <svg
-              className="w-6 h-6 text-red-500"
+              className="w-6 h-6 text-dark-accent"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -93,12 +104,12 @@ const GWPitch = ({
             ))}
           </div>
         ))}
-        <div className="select-none relative w-auto rounded-2xl bottom-0 left-0 right-0 bg-gradient-to-b from-green-800/80 to-green-900/90 backdrop-blur-sm py-4 px-4 mt-auto">
+        <div className="select-none relative w-auto rounded-2xl bottom-0 left-0 right-0 bg-gradient-to-b from-light-secondary to-light-secondary backdrop-blur-sm py-4 px-4 mt-auto">
           <div className="flex justify-center gap-6 md:gap-8 mb-2">
             {bench?.map((eachPlayer) => (
               <div
                 key={`label-${eachPlayer.id}`}
-                className="w-15 text-center text-xs font-bold text-white"
+                className="w-15 text-center text-xs font-bold"
               >
                 {eachPlayer.position}
               </div>

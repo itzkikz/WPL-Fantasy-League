@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import Notifications from "../pages/Notifications";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const Route = createFileRoute("/notifications")({
   component: RouteComponent,
@@ -7,8 +8,10 @@ export const Route = createFileRoute("/notifications")({
 
 function RouteComponent() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen text-center">
-      <Notifications />
-    </div>
+    <ProtectedRoute>
+      <div className="flex flex-col items-center justify-center h-screen text-center">
+        <Notifications />
+      </div>
+    </ProtectedRoute>
   );
 }

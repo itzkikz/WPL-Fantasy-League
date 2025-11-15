@@ -1,42 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 
 @theme {
-  --font-outfit: "Outfit", sans-serif;
+  --font-sans: 'Outfit', sans-serif;
+  
+  /* Light theme colors */
+  --color-light-bg: #FAFAFA;
+  --color-light-surface: #fffee1;
+  --color-light-primary: #04CDE0;
+  --color-light-secondary: #00CC6B;
+  --color-light-accent: #D0004A;
+  --color-light-text-primary: #38003C;
+  --color-light-text-secondary: #5E005F;
+  --color-light-border: #E0E0E0;
+  --color-light-skeleton: #EBEBEB;
+  
+  /* Dark theme colors */
+  --color-dark-bg: #1A001B;
+  --color-dark-surface: #2C0030;
+  --color-dark-primary: #04F5FF;
+  --color-dark-secondary: #00FF85;
+  --color-dark-accent: #E90052;
+  --color-dark-text-primary: #FFFFFF;
+  --color-dark-text-secondary: #C8C8C8;
+  --color-dark-border: #5C1A60;
+  --color-dark-skeleton: #EBEBEB;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #2a1134;
+/* Default to light theme */
+:root,
+[data-theme="light"] {
+  --color-bg: var(--color-light-bg);
+  --color-surface: var(--color-light-surface);
+  --color-primary: var(--color-light-primary);
+  --color-secondary: var(--color-light-secondary);
+  --color-accent: var(--color-light-accent);
+  --color-text-primary: var(--color-light-text-primary);
+  --color-text-secondary: var(--color-light-text-secondary);
+  --color-border: var(--color-light-border);
+  --color-skeleton: var(--color-light-skeleton);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #2a1134;
-  }
+/* Only apply dark colors when data-theme="dark" */
+[data-theme="dark"] {
+  --color-bg: var(--color-dark-bg);
+  --color-surface: var(--color-dark-surface);
+  --color-primary: var(--color-dark-primary);
+  --color-secondary: var(--color-dark-secondary);
+  --color-accent: var(--color-dark-accent);
+  --color-text-primary: var(--color-dark-text-primary);
+  --color-text-secondary: var(--color-dark-text-secondary);
+  --color-border: var(--color-dark-border);
+  --color-skeleton: var(--color-dark-skeleton);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-  overscroll-behavior-y: contain;
-  /* Style the entire scrollbar */
-
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  transition: background-color 200ms, color 200ms;
 }
+
+
 /* app/globals.css */
 @keyframes fade-in {
   from {
@@ -68,33 +95,41 @@ body {
 
 /* Global Scrollbar Styles (Light Theme) */
 ::-webkit-scrollbar {
-  width: 0.5px; /* Adjust width as needed */
-  height: 5px; /* Adjust height for horizontal scrollbars */
+  width: 0.5px;
+  /* Adjust width as needed */
+  height: 5px;
+  /* Adjust height for horizontal scrollbars */
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #ffffff; /* Light theme track color */
+  background-color: #ffffff;
+  /* Light theme track color */
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #ffffff; /* Light theme thumb color */
+  background-color: #ffffff;
+  /* Light theme thumb color */
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #ffffff; /* Light theme thumb hover color */
+  background-color: #ffffff;
+  /* Light theme thumb hover color */
 }
 
 /* Dark Theme Scrollbar Styles */
 .dark ::-webkit-scrollbar-track {
-  background-color: #1e0021; /* Dark theme track color */
+  background-color: #1e0021;
+  /* Dark theme track color */
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background-color: #1e0021; /* Dark theme thumb color */
+  background-color: #1e0021;
+  /* Dark theme thumb color */
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background-color: #1e0021; /* Dark theme thumb hover color */
+  background-color: #1e0021;
+  /* Dark theme thumb hover color */
 }

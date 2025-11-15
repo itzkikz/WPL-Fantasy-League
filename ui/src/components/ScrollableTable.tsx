@@ -29,7 +29,7 @@ const ScrollableTable = ({
       <div className="h-full overflow-y-auto">
         <table className="w-full">
           {/* Sticky table header */}
-          <thead className="sticky top-0 z-10 bg-white dark:bg-[#1e0021]">
+          <thead className="sticky top-0 z-10 shadow-sm bg-light-surface dark:bg-dark-surface border-b border-light-border dark:border-dark-border">
             <tr>
               {headings.map((heading, index) => (
                 <th
@@ -49,7 +49,7 @@ const ScrollableTable = ({
             {content?.map((r, i) => (
               <tr
                 key={i}
-                className="dark:hover:bg-[#541e5d] transition-colors cursor-pointer border-b border-[#ebe5eb] dark:border-[#541e5d]"
+                className="transition-colors cursor-pointer border-b border-light-border dark:border-dark-border"
                 onClick={() => onClick(r.team)}
               >
                 <td className="px-4 py-3">
@@ -57,14 +57,15 @@ const ScrollableTable = ({
                     <span className="inline-flex h-6 w-6 items-center justify-center text-xs font-semibold">
                       {i + 1}
                     </span>
-                    <Delta d={r.pos_change} />
+                    <div className="text-light-bg"><Delta d={r.pos_change} /></div>
+                    
                   </div>
                 </td>
                 <td className="px-2 py-3">
                   <p className="text-[15px] font-semibold leading-tight">
                     {r.team}
                   </p>
-                  <p className="text-xs text-gray-500">{"Manager"}</p>
+                  {/* <p className="text-xs text-gray-500">{"Manager"}</p> */}
                 </td>
                 <td className="px-2 py-3 text-center font-semibold">
                   {r.current_gw}

@@ -42,16 +42,16 @@ const Overlay = ({
       }`}
       onClick={requestClose}
     >
-      <div className="absolute inset-0 bg-black/80" />
+      <div className="absolute inset-0 bg-dark-bg/80" />
       <div
-        className={`relative w-full max-w-lg bg-white dark:bg-[#1e0021] rounded-t-3xl shadow-xl transform transition-transform duration-700 ease-in-out ${
+        className={`relative w-full max-w-lg bg-light-bg dark:bg-dark-bg rounded-t-3xl shadow-xl transform transition-transform duration-700 ease-in-out ${
           isAnimating ? "translate-y-0" : "translate-y-full"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
         {showBackButton && (<button
           onClick={requestClose}
-          className="absolute z-10 top-4 left-4 w-10 h-10 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center"
+          className="absolute z-10 top-4 left-4 w-10 h-10 rounded-full bg-light-text-secondary backdrop-blur-sm flex items-center justify-center"
         >
           <svg
             className="w-6 h-6"

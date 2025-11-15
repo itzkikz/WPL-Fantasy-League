@@ -3,8 +3,8 @@ const User = ({ isActive }: { isActive: boolean }) => {
     <svg
       className={`w-6 h-6 ${
         isActive
-          ? "dark:text-[#541e5d] font-semibold"
-          : "dark:hover:text-[#541e5d]"
+          ? "text-gray-400 dark:text-light-text-secondary font-semibold"
+          : ""
       }`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"

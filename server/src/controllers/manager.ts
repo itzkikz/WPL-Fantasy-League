@@ -24,7 +24,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
   const batchDetails = await getSheets()?.spreadsheets.values.batchGet({
     spreadsheetId: SPREADSHEET_ID,
     ranges: [
-      'Users!A:J',
+      'Users!A:K',
       'Pick Team!A:G',
       'Master Data!H:O',
       'Master Data!B:G'
@@ -47,7 +47,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
   const pickTeamDetails: TeamDetails[] = convertToJSON(pickteamRows, 'teamDetails');
 
   const manager = users.find((val) => val?.username === teamName)
-  const { deadline, gw, pickmyteam, utlisation, total_budget, balance } = manager || { gw: 0 };
+  const { deadline, gw, pickmyteam, utlisation, total_budget, balance, managers } = manager || { gw: 0 };
   const nextGw = gw + 1;
 
   const rank = standings.findIndex(item => item.team === teamName) + 1;
@@ -120,7 +120,8 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
       team: teamName,
       utlisation,
       total_budget,
-      balance
+      balance,
+      managers
     }
   });
 }

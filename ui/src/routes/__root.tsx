@@ -6,7 +6,7 @@ import BottomNavbar from "../components/common/BottomNavbar";
 export const Route = createRootRoute({
   component: () => (
     <>
-      <main className="font-outfit min-h-screen bg-white dark:bg-[#1e0021] shadow-sm text-[#37003c] dark:text-white">
+      <main className="font-outfit min-h-screen shadow-sm text-primary">
         <div className="max-w-7xl mx-auto">
           <div className="flex h-screen flex-col mx-auto w-full">
             <header className="hidden relative w-full h-10 overflow-hidden">

@@ -14,7 +14,7 @@ const StatRow = ({
   textSize?: string;
 }) => {
   return (
-    <div className={`flex items-center justify-between ${border ? " border-b border-[#ebe5eb] dark:border-[#541e5d]" : ""}`}>
+    <div className={`flex items-center justify-between ${border ? " border-b border-light-border dark:border-dark-border" : ""}`}>
       <p className={textSize}>{label}</p>
       <div className="flex items-center gap-3">
         {per90 && (

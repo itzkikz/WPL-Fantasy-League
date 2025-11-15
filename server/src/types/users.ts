@@ -9,6 +9,7 @@ export interface Users {
     total_budget: number;
     utlisation: number;
     balance: number;
+    managers: string;
 }
 
 export interface Subscribers {

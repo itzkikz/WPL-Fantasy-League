@@ -216,7 +216,7 @@ const PickTeamPage = () => {
     <>
       {user?.teamName && <Header teamName={user?.teamName} />}
       {pickMyTeam ? (
-        <div className="flex items-center justify-center bg-[#1e0021] dark:bg-white px-4 pt-4 pb-3 border-b border-gray-100 text-white dark:text-[#33003b]">
+        <div className="flex items-center justify-center px-4 pt-4 pb-3 bg-dark-bg dark:bg-light-bg text-dark-text-primary dark:text-light-text-primary">
           <h6 className="text-center text-base">
             Gameweek {managerDetails?.gw + 1}
           </h6>
@@ -226,13 +226,13 @@ const PickTeamPage = () => {
           </h6>
         </div>
       ) : (
-        <div className="flex items-center justify-center bg-[#1e0021] dark:bg-white px-4 pt-4 pb-3 border-b border-gray-100 text-white dark:text-[#33003b]">
+        <div className="flex items-center justify-center px-4 pt-4 pb-3 bg-dark-bg dark:bg-light-bg text-dark-text-primary dark:text-light-text-primary">
           <h6 className="text-center text-base font-semibold">Not Enabled</h6>
         </div>
       )}
 
       <div className="flex justify-center items-center">
-        <div className="flex bg-[#ebe5eb] dark:bg-[#2a1134] rounded-lg p-2 justify-center items-center text-center m-2">
+        <div className="flex bg-light-surface dark:bg-dark-surface rounded-lg p-2 justify-center items-center text-center m-2">
           <span className="text-xs">
             To change your captain use the menu which appears when clicking on a
             player
@@ -309,7 +309,7 @@ const PickTeamPage = () => {
             </div>
             <div className="flex-1 overflow-y-auto items-center justify-center min-h-[200px]">
               {teamError && (
-                <h1 className="text-red-500 text-center text-lg animate-pulse">
+                <h1 className="text-light-accent text-center text-lg animate-pulse">
                   {teamError}
                 </h1>
               )}
