@@ -23,15 +23,19 @@ const ManagerPage = () => {
   };
 
   return (
-    <div className="w-full h-full p-3 overflow-hidden">
-      {managerDetails && (<><ManagerStatsCard
+   <div className="w-full h-full p-3 overflow-y-auto">
+  {managerDetails && (
+    <>
+      <ManagerStatsCard
         navigateToPickTeam={handlePickTeamNavigation}
         navigateToTeamPoints={handleTeamPointsNavigation}
         managerDetails={managerDetails}
       />
-      <ManagerPointsCards managerDetails={managerDetails} /></>)}
-      
-    </div>
+      <ManagerPointsCards managerDetails={managerDetails} />
+    </>
+  )}
+</div>
+
   );
 };
 

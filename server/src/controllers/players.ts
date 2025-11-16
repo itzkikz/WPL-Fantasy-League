@@ -40,3 +40,33 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
 
     }
 }
+
+export const getFullPlayerStats = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const response = await getSheets()?.spreadsheets.values.get({
+            spreadsheetId: SPREADSHEET_ID,
+            range: "Players!A:Q", // Adjust range as needed
+        });
+        const rows = response?.data?.values || [];
+        const playerStats: PlayerStats[] = convertToJSON(rows, 'playerStats').sort((a, b) => b?.total_point - a?.total_point);
+
+        res.json({
+            success: true,
+            data: playerStats,
+        });
+    } catch (error: unknown) {
+        console.error("Error reading data:", error);
+        if (error instanceof Error) {
+            res.status(500).json({
+                success: false,
+                error: error.message,
+            });
+        } else {
+            res.status(500).json({
+                success: false,
+                error: error,
+            });
+        }
+
+    }
+}

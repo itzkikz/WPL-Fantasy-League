@@ -44,30 +44,32 @@ const Overlay = ({
     >
       <div className="absolute inset-0 bg-dark-bg/80" />
       <div
-        className={`relative w-full max-w-lg bg-light-bg dark:bg-dark-bg rounded-t-3xl shadow-xl transform transition-transform duration-700 ease-in-out ${
+        className={`relative w-full h-[90vh] bg-light-bg dark:bg-dark-bg rounded-t-3xl shadow-xl transform transition-transform duration-700 ease-in-out overflow-y-auto ${
           isAnimating ? "translate-y-0" : "translate-y-full"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        {showBackButton && (<button
-          onClick={requestClose}
-          className="absolute z-10 top-4 left-4 w-10 h-10 rounded-full bg-light-text-secondary backdrop-blur-sm flex items-center justify-center"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {showBackButton && (
+          <button
+            onClick={requestClose}
+            className="absolute z-10 top-4 left-4 w-10 h-10 rounded-full bg-light-text-secondary backdrop-blur-sm flex items-center justify-center"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>)}
-        
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+        )}
+
         {children}
       </div>
     </div>

@@ -4,18 +4,20 @@ interface CheckboxProps {
   label: string;
   checked: boolean;
   onChange: () => void;
+  type: string
 }
 
 const Checkbox: FunctionComponent<CheckboxProps> = ({
   label,
   checked,
   onChange,
+  type = "radio"
 }) => {
   return (
     <label className="flex items-center cursor-pointer">
       <div className="relative">
         <input
-          type="radio"
+          type={type}
           onChange={onChange}
           checked={checked}
           className="sr-only hidden"

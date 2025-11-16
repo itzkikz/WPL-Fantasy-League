@@ -14,4 +14,6 @@ export interface PlayerStats {
     total_point: number,
     price: number,
     release_value: number,
+    club: string,
+    league: string
 }

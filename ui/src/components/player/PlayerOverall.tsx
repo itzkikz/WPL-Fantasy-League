@@ -5,17 +5,19 @@ import { usePlayerStore } from "../../store/usePlayerStore";
 
 export default function PlayerOverall({
   playerStats,
+  noGW = false
 }: {
   playerStats: PlayerStats;
+  noGW: boolean;
 }) {
-  const [activeTab, setActiveTab] = useState<"stats" | "ostats">("stats");
+  const [activeTab, setActiveTab] = useState<"stats" | "ostats">(noGW ? "ostats" : "stats");
 
   const { player } = usePlayerStore();
 
   return (
     <>
       <div className="flex-none border-b border-[#ebe5eb] dark:border-[#541e5d] px-6">
-        <div className="flex gap-8">
+        {noGW ? (<></>) : (<div className="flex gap-8">
           <button
             onClick={() => setActiveTab("stats")}
             className={`py-3 text-sm font-semibold relative ${
@@ -38,7 +40,8 @@ export default function PlayerOverall({
               <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600" />
             )}
           </button>
-        </div>
+        </div>)}
+        
       </div>
 
       <div className="flex-1 overflow-y-auto">

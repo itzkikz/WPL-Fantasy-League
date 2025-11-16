@@ -39,5 +39,7 @@ export interface PlayerStats {
     penalty_save: number,
     total_point: number,
     price: number,
-    release_value: number
+    release_value: number,
+    club: string,
+    league: string
 }

@@ -1,6 +1,9 @@
 import express from 'express';
-import { getPlayerStats } from '../controllers/players';
+import { getFullPlayerStats, getPlayerStats } from '../controllers/players';
 const router = express.Router();
+
+
+router.get("/players", getFullPlayerStats);
 
 router.get("/players/:playerName", getPlayerStats);
 
