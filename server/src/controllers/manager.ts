@@ -104,6 +104,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
 
   const highest = Math.max(...Object.values(gwScores));
 
+  res.set('Cache-Control', 'public, max-age=3600, s-maxage=3600');
   return res.json({
     data: {
       deadline,

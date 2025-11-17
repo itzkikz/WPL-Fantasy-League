@@ -19,7 +19,8 @@ export const getStandings = async (req: Request, res: Response, next: NextFuncti
 
         const rows = response?.data?.values || [];
         const standings: StandingsResponse[] = convertToJSON(rows, 'standings');
-
+        
+        res.set('Cache-Control', 'public, max-age=3600, s-maxage=3600');
         res.json({
             success: true,
             data: standings,
@@ -89,7 +90,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
 
         const highest = Math.max(...Object.values(gwScores));
         const { starting, bench } = convertToFormation(filteredGWData)
-
+        res.set('Cache-Control', 'public, max-age=3600, s-maxage=3600');
         res.json({
             success: true,
             data: {

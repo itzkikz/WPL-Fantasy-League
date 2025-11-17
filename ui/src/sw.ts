@@ -59,7 +59,7 @@ registerRoute(
 // API runtime caching
 // ---------------------------
 registerRoute(
-  ({ url }) => /^https:\/\/wpl-fantasy-league\.onrender\.com\/api\/.*$/i.test(url.href),
+  ({ url }) => /^https:\/\/api-proxy\.wplfantasy\.workers\.dev\/api\/.*$/i.test(url.href),
   new StaleWhileRevalidate({
     cacheName: 'api-cache-v1',
     plugins: [

@@ -20,6 +20,8 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
         const filteredData = playerStats.find((item: PlayerStats) => {
             return item[propertyName] === searchValue;
         });
+
+        res.set('Cache-Control', 'public, max-age=3600, s-maxage=3600');
         res.json({
             success: true,
             data: filteredData,
@@ -50,6 +52,7 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
         const rows = response?.data?.values || [];
         const playerStats: PlayerStats[] = convertToJSON(rows, 'playerStats').sort((a, b) => b?.total_point - a?.total_point);
 
+        res.set('Cache-Control', 'public, max-age=3600, s-maxage=3600');
         res.json({
             success: true,
             data: playerStats,
