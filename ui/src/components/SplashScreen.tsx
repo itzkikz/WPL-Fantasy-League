@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import DarkLogo from "../assets/wplf1-dark.png";
 import LightLogo from "../assets/wplf1-light.png";
-
+import "./styles/splash.css";
 
 const SplashScreen = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -20,29 +20,43 @@ const SplashScreen = () => {
   return (
     <>
       {showSplash && (
-        <div className="flex items-center justify-center h-screen">
-          <div className="flex items-center justify-center">
-            <div className="w-24 h-24 rounded-sm flex items-center  justify-center mr-2">
-              <img
-                src={DarkLogo}
-                alt="PLogo"
-                className="hidden dark:block w-24 h-24 animate-bounce opacity-90"
-              />
-              <img
-                src={LightLogo}
-                alt="PLogo"
-                className="block dark:hidden w-24 h-24 animate-bounce opacity-90"
-              />
+        <div className="splash-screen-container">
+          {/* Main splash content */}
+          <div className="splash-content">
+            {/* Logo Container with glow effect */}
+            <div className="logo-container">
+              <div className="logo-wrapper">
+                <img
+                  src={DarkLogo}
+                  alt="WPL Logo"
+                  className="hidden dark:block logo-image"
+                />
+                <img
+                  src={LightLogo}
+                  alt="WPL Logo"
+                  className="block dark:hidden logo-image"
+                />
+              </div>
             </div>
-            <div className="flex-row h-24">
-              <h1 className="text-4xl font-bold tracking-tight animate-pulse">
+
+            {/* Title Section */}
+            <div className="title-section">
+              <h1 className="text-2xl font-bold tracking-tight animate-pulse">
                 WPL
               </h1>
-              <h2 className="text-2xl font-bold tracking-tight animate-pulse">
+              <h2 className="text-xl font-bold tracking-tight animate-pulse">
                 Fantasy Football
               </h2>
             </div>
           </div>
+
+          {/* Footer Attribution Text */}
+          <div className="splash-footer">
+            <p className="splash-attribution">Ramshad & Team</p>
+          </div>
+
+          {/* Fade out overlay */}
+          <div className="splash-overlay"></div>
         </div>
       )}
     </>
