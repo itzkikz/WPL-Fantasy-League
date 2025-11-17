@@ -9,7 +9,7 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
     try {
         const response = await getSheets()?.spreadsheets.values.get({
             spreadsheetId: SPREADSHEET_ID,
-            range: "Master Data!Z:AN", // Adjust range as needed
+            range: "Players!A:Q", // Adjust range as needed
         });
         const rows = response?.data?.values || [];
         const playerStats: PlayerStats[] = convertToJSON(rows, 'playerStats');

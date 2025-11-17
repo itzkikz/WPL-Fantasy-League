@@ -42,11 +42,10 @@ const PlayersScrollableTable = ({
   const totalSize = rowVirtualizer.getTotalSize();
 
   return (
-    <div className="flex-1 overflow-hidden select-none flex flex-col">
-      {/* Virtualized Scrollable Body */}
       <div
         ref={tableContainerRef}
-        className="overflow-y-auto h-[calc(100vh-8rem)]"
+        className="overflow-y-auto"
+        style={{ height: `calc(100vh - 8rem)` }}
         // style={{ height: containerHeight }}
       >
         <table className="w-full border-collapse">
@@ -126,7 +125,6 @@ const PlayersScrollableTable = ({
           </tbody>
         </table>
       </div>
-    </div>
   );
 };
 
