@@ -14,7 +14,6 @@ const PitchPlayerCard = ({
   pickMyteam = false,
 }: PitchPlayerCardProps) => {
 
-  console.log(player)
   
   const playerFirstName = player?.name
     ? player.name.trim().split(/\s+/).slice(0)[0]

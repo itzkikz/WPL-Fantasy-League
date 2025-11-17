@@ -20,7 +20,6 @@ const StandingsPage = () => {
 
   useEffect(() => {
     const seen = localStorage.getItem("update_1.1.0_seen"); // change version key per update
-    console.log(seen);
     if (seen === "false" || seen === undefined || seen === null)
       setShowUpdateOverlay(true);
   }, []);

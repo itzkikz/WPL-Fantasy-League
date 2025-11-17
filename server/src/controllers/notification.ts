@@ -24,7 +24,6 @@ type Row = Cell[];
 
 export const subscribe = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        console.log(req.body.subscription)
         const subscription: Subscribers = req.body.subscription;
         const teamName = req.user.userId;
         const response = await getSheets()?.spreadsheets.values.get({
@@ -89,7 +88,6 @@ export const send = async (req: Request, res: Response, next: NextFunction) => {
 
     const subscribers: Subscribers[] = convertToJSON(subscriberRows, 'subscribers');
 
-    console.log(subscribers)
     const subWithoutUserName = subscribers.map(({ username, ...rest }) => rest);
 
     subWithoutUserName.forEach((sub) => {

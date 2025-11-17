@@ -8,7 +8,7 @@ export default function Notifications() {
   const mutation = useSubscribe();
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const publicKey =
     "BMIl52TuxsGMqPfiY0vKqyW_sXETc34YrkSTrEqrQEUQsLhMtIwBR1h_Hlmks5EFtY3u7Rz8M17Qy4Dwmv9v-A0";
 
@@ -22,6 +22,7 @@ export default function Notifications() {
       try {
         const registration = await navigator.serviceWorker.ready;
         const subscribed = await registration.pushManager.getSubscription();
+        mutation.mutate({ subscription: subscribed });
         setIsSubscribed(!!subscribed);
       } catch (error) {
         console.error("Failed to check subscription status:", error);
@@ -38,13 +39,13 @@ export default function Notifications() {
       try {
         const registration = await navigator.serviceWorker.ready;
         const subscribed = await registration.pushManager.getSubscription();
-        
+
         if (subscribed) {
           console.info("User is already subscribed.");
           setIsSubscribed(true);
           return;
         }
-        
+
         const subscription = await registration.pushManager.subscribe({
           userVisibleOnly: true,
           applicationServerKey: urlB64ToUint8Array(publicKey),
@@ -80,14 +81,12 @@ export default function Notifications() {
       {user && user?.teamName ? (
         <>
           {!isSubscribed && (
-            <Button 
-              label="Allow Notifications" 
-              onClick={() => subscribeUser()} 
+            <Button
+              label="Allow Notifications"
+              onClick={() => subscribeUser()}
             />
           )}
-          {isSubscribed && (
-            <div>✓ Notifications enabled</div>
-          )}
+          {isSubscribed && <div>✓ Notifications enabled</div>}
         </>
       ) : (
         <>Login to get notifications</>
