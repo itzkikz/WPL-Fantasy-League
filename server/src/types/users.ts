@@ -18,3 +18,9 @@ export interface Subscribers {
     expirationTime: number
     keys: string
 }
+
+export interface Notifications {
+    title: string,
+    message: string,
+    time:number
+}

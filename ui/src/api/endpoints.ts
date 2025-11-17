@@ -22,7 +22,8 @@ export const API_ENDPOINTS = {
     // BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
   },
   NOTIFICATION: {
-    BASE: '/notify/subscribe',
+    BASE: '/notify/notifications',
+    SUBSCRIBE:'/notify/subscribe',
     // SUBSTITUTION: '/manager/sub'
     // BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
   },
@@ -34,5 +35,6 @@ export const QUERY_KEYS = {
   PLAYERS: 'players',
   AUTH: 'auth',
   USERS: 'users',
-  MANAGER: 'manager'
+  MANAGER: 'manager',
+  NOTIFICATIONS: 'notifications',
 } as const

@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useUserStore } from "../store/useUserStore";
-import { useSubscribe } from "../features/notifications/hooks";
-import { SubscribeRequest } from "../features/notifications/types";
+import {
+  useNotifications,
+  useSubscribe,
+} from "../features/notifications/hooks";
+import { Notifications, SubscribeRequest } from "../features/notifications/types";
 import Button from "../components/common/Button";
+import NotificationItem from "../components/NotificationItem";
 
 export default function Notifications() {
   const mutation = useSubscribe();
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isSubLoading, setIsSubLoading] = useState(true);
+  const [notificationsList, setNotificationsList] = useState<Notifications>()
 
   const publicKey =
     "BMIl52TuxsGMqPfiY0vKqyW_sXETc34YrkSTrEqrQEUQsLhMtIwBR1h_Hlmks5EFtY3u7Rz8M17Qy4Dwmv9v-A0";
@@ -27,10 +32,10 @@ export default function Notifications() {
       } catch (error) {
         console.error("Failed to check subscription status:", error);
       } finally {
-        setIsLoading(false);
+        setIsSubLoading(false);
       }
     } else {
-      setIsLoading(false);
+      setIsSubLoading(false);
     }
   };
 
@@ -72,21 +77,52 @@ export default function Notifications() {
 
   const { user } = useUserStore();
 
-  if (isLoading) {
+  const { data: notifications, isLoading, error } = useNotifications();
+
+  useEffect(() => {
+    console.log("Notifications:", notifications);
+  }, [notifications]);
+
+  if (isSubLoading) {
     return <div>Loading...</div>;
   }
+
+const handleDismiss = (id) => {
+    setNotificationsList(notificationsList.filter(notif => notif.id !== id));
+  };
 
   return (
     <>
       {user && user?.teamName ? (
         <>
-          {!isSubscribed && (
-            <Button
-              label="Allow Notifications"
-              onClick={() => subscribeUser()}
-            />
-          )}
-          {isSubscribed && <div>✓ Notifications enabled</div>}
+          <div className="p-6 w-full">
+            <div className="max-w-2xl mx-auto">
+              <h1 className="text-2xl font-bold mb-6">
+                Notifications
+              </h1>
+              {!isSubscribed && (
+                <Button
+                  label="Allow Notifications"
+                  onClick={() => subscribeUser()}
+                />
+              )}
+              {isSubscribed && notifications && notifications.length > 0 ? (
+                notifications.map((notif) => (
+                  <NotificationItem
+                    key={notif.time}
+                    title={notif.title}
+                    message={notif.message}
+                    time={notif.time}
+                    onDismiss={() => handleDismiss(notif.id)}
+                  />
+                ))
+              ) : (
+                <div className="text-center py-12 rounded-lg">
+                  <p className="text-gray-500">No notifications</p>
+                </div>
+              )}</div>              </div>
+
+             
         </>
       ) : (
         <>Login to get notifications</>

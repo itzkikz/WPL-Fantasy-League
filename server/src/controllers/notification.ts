@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { getSheets } from "../lib/store/globals";
 import { convertToJSON } from "../utils";
-import { Subscribers, Users } from "../types/users";
+import { Notifications, Subscribers, Users } from "../types/users";
 import jwt from 'jsonwebtoken'
 import { sheets_v4 } from "googleapis";
 const webpush = require("web-push");
@@ -102,4 +102,22 @@ export const send = async (req: Request, res: Response, next: NextFunction) => {
         });
     });
     res.status(200).json({ message: "Notifications sent.." });
+}
+
+export const notifications = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const response = await getSheets()?.spreadsheets.values.get({
+            spreadsheetId: SPREADSHEET_ID,
+            range: "Notifications!A:C", // Adjust range as needed
+        });
+        const notificationRows: Row[] = (response?.data?.values as Row[]) ?? []; // 2D array
+
+        const notifications: Notifications[] = convertToJSON(notificationRows, 'notifications');
+
+        res.json({ data: notifications })
+
+    } catch (e) {
+        console.log(e)
+        res.status(403).json({ data: { message: e } })
+    }
 }
