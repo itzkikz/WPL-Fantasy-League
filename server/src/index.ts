@@ -9,6 +9,7 @@ import notificationRouter from './routes/notification';
 import managerRouter from './routes/manager'
 import { setSheets } from './lib/store/globals';
 import { authenticateToken } from './middlewares/authMiddleware';
+import { logMiddleware } from './middlewares/logMiddleware';
 
 const cors = require("cors");
 const { google } = require("googleapis");
@@ -33,6 +34,9 @@ const sheets = google.sheets({ version: "v4", auth });
 setSheets(sheets)
 
 
+
+// Log all incoming requests
+app.use(logMiddleware);
 
 
 app.use("/api", standingsRouter);
