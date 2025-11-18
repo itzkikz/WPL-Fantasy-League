@@ -44,7 +44,7 @@ const Overlay = ({
     >
       <div className="absolute inset-0 bg-dark-bg/80" />
       <div
-        className={`relative w-full h-[90vh] bg-light-bg dark:bg-dark-bg rounded-t-3xl shadow-xl transform transition-transform duration-700 ease-in-out overflow-y-auto ${
+        className={`relative w-full h-[90vh] bg-light-bg dark:bg-dark-bg rounded-t-3xl shadow-xl transform transition-transform duration-700 ease-in-out ${
           isAnimating ? "translate-y-0" : "translate-y-full"
         }`}
         onClick={(e) => e.stopPropagation()}

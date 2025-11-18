@@ -36,6 +36,8 @@ const TeamDetailsPage = () => {
 
   return (
     <>
+        <div className="flex flex-col h-screen overflow-auto-y">
+
       <Header teamName={teamName} />
       {isLoading ? (
         <GWNavigationSkeleton />
@@ -85,6 +87,7 @@ const TeamDetailsPage = () => {
           )
         }
       />
+      </div>
     </>
   );
 };

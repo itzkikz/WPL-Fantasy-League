@@ -5,7 +5,7 @@ import UserSettings from "../icons/UserSettings";
 import Graph from "../icons/Graph";
 import Notification from "../icons/Notification";
 
-const BottomNavbar = () => {
+const SideNavbar = () => {
   const matchRoute = useMatchRoute();
 
   const navItems = [
@@ -21,12 +21,12 @@ const BottomNavbar = () => {
     matchRoute({ to: "/maintenance" }) ||
     matchRoute({ to: "/" })
   ) {
-    return null; // Truthy check works for both {} and { params }
+    return null;
   }
 
   return (
-    <nav className="absolute bottom-0 bg-light-bg dark:bg-dark-bg w-full block lg:hidden flex-none border-t border-light-border dark:border-dark-border">
-      <div className="grid h-16 grid-cols-5">
+    <nav className="hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-light-border dark:border-dark-border lg:h-screen lg:py-4 lg:px-2">
+      <div className="flex flex-col gap-2">
         {navItems.map(({ label, path }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });
 
@@ -34,7 +34,7 @@ const BottomNavbar = () => {
             <Link
               key={label}
               to={path}
-              className={`inline-flex flex-col items-center justify-center text-[11px] transition-colors`}
+              className={`flex items-center gap-3 px-3 py-2 text-sm transition-colors`}
             >
               {label === "Home" && <Home isActive={isActive} />}
               {label === "Manage" && <User isActive={isActive} />}
@@ -43,7 +43,7 @@ const BottomNavbar = () => {
               {label === "Notifications" && <Notification isActive={isActive} />}
 
               <span
-                className={`mt-1 ${
+                className={`${
                   isActive
                     ? "text-gray-400 dark:text-light-text-secondary font-semibold"
                     : ""
@@ -59,4 +59,4 @@ const BottomNavbar = () => {
   );
 };
 
-export default BottomNavbar;
+export default SideNavbar;

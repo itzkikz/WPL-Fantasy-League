@@ -23,7 +23,7 @@ const ManagerPage = () => {
   };
 
   return (
-   <div className="w-full h-full p-3 overflow-y-auto">
+   <div className="w-full p-3 flex flex-col h-full overflow-y-auto">
   {managerDetails && (
     <>
       <ManagerStatsCard

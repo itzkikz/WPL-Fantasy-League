@@ -22,63 +22,62 @@ const DEFAULT_HEADINGS: Heading[] = [
 const ScrollableTable = ({
   headings = DEFAULT_HEADINGS,
   content,
-  onClick
+  onClick,
 }: ScrollableTableProps) => {
   return (
-    <div className="flex-1 overflow-hidden select-none">
-      <div className="h-full overflow-y-auto">
-        <table className="w-full">
-          {/* Sticky table header */}
-          <thead className="sticky top-0 z-10 shadow-sm bg-light-surface dark:bg-dark-surface border-b border-light-border dark:border-dark-border">
-            <tr>
-              {headings.map((heading, index) => (
-                <th
-                  key={index + heading?.label}
-                  className={
-                    heading?.class + ` text-xs font-semibold`
-                  }
-                >
-                  {heading?.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-
-          {/* Scrollable tbody */}
-          <tbody>
-            {content?.map((r, i) => (
-              <tr
-                key={i}
-                className="transition-colors cursor-pointer border-b border-light-border dark:border-dark-border"
-                onClick={() => onClick(r.team)}
+    // <div className="flex-1 overflow-hidden select-none">
+    <div className="overflow-y-auto select-none h-[calc(100vh-8rem)] lg:h-[calc(100vh-6rem)]">
+      <table className="w-full">
+        {/* Sticky table header */}
+        <thead className="sticky top-0 z-10 shadow-sm bg-light-surface dark:bg-dark-surface border-b border-light-border dark:border-dark-border">
+          <tr>
+            {headings.map((heading, index) => (
+              <th
+                key={index + heading?.label}
+                className={heading?.class + ` text-xs font-semibold`}
               >
-                <td className="px-4 py-3">
-                  <div className="flex items-center gap-1">
-                    <span className="inline-flex h-6 w-6 items-center justify-center text-xs font-semibold">
-                      {i + 1}
-                    </span>
-                    <div className="text-light-bg"><Delta d={r.pos_change} /></div>
-                    
-                  </div>
-                </td>
-                <td className="px-2 py-3">
-                  <p className="text-[15px] font-semibold leading-tight">
-                    {r.team}
-                  </p>
-                  {/* <p className="text-xs text-gray-500">{"Manager"}</p> */}
-                </td>
-                <td className="px-2 py-3 text-center font-semibold">
-                  {r.current_gw}
-                </td>
-                <td className="px-4 py-3 text-right text-base font-semibold">
-                  {r.total}
-                </td>
-              </tr>
+                {heading?.label}
+              </th>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </tr>
+        </thead>
+
+        {/* Scrollable tbody */}
+        <tbody>
+          {content?.map((r, i) => (
+            <tr
+              key={i}
+              className="transition-colors cursor-pointer border-b border-light-border dark:border-dark-border"
+              onClick={() => onClick(r.team)}
+            >
+              <td className="px-4 py-3">
+                <div className="flex items-center gap-1">
+                  <span className="inline-flex h-6 w-6 items-center justify-center text-xs font-semibold">
+                    {i + 1}
+                  </span>
+                  <div className="text-light-bg">
+                    <Delta d={r.pos_change} />
+                  </div>
+                </div>
+              </td>
+              <td className="px-2 py-3">
+                <p className="text-[15px] font-semibold leading-tight">
+                  {r.team}
+                </p>
+                {/* <p className="text-xs text-gray-500">{"Manager"}</p> */}
+              </td>
+              <td className="px-2 py-3 text-center font-semibold">
+                {r.current_gw}
+              </td>
+              <td className="px-4 py-3 text-right text-base font-semibold">
+                {r.total}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
+    // </div>
   );
 };
 

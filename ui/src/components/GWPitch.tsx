@@ -45,7 +45,7 @@ const GWPitch = ({
   return (
     <>
       <div
-        className="relative flex flex-col gap-5 bg-top bg-no-repeat box-border py-6 max-w-[1400px] overflow-auto h-screen items-center justify-center"
+        className="relative flex flex-col gap-5 bg-top bg-no-repeat box-border py-6 max-w-[1400px] h-screen items-center"
         style={{
           backgroundImage: "url('/pitch.svg')",
           //   backgroundSize: "850px auto"
@@ -104,7 +104,7 @@ const GWPitch = ({
             ))}
           </div>
         ))}
-        <div className="select-none relative w-auto rounded-2xl bottom-0 left-0 right-0 bg-gradient-to-b from-light-secondary to-light-secondary backdrop-blur-sm py-4 px-4 mt-auto">
+        <div className="select-none relative w-auto rounded-2xl bottom-0 left-0 right-0 bg-gradient-to-b from-light-secondary to-light-secondary backdrop-blur-sm py-4 px-4 mx-auto">
           <div className="flex justify-center gap-6 md:gap-8 mb-2">
             {bench?.map((eachPlayer) => (
               <div

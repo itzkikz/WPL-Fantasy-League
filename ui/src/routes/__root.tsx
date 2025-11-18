@@ -2,12 +2,13 @@ import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import Logo from "./../assets/wplf1-dark.png";
 import BottomNavbar from "../components/common/BottomNavbar";
+import SideNavbar from "../components/common/SideNavbar";
 
 export const Route = createRootRoute({
   component: () => (
     <>
       <main className="font-outfit min-h-screen shadow-sm text-primary">
-        <div className="max-w-7xl mx-auto">
+        <div className="">
           <div className="flex h-screen flex-col mx-auto w-full">
             <header className="hidden relative w-full h-10 overflow-hidden">
               {/* Animated gradient overlay */}
@@ -53,9 +54,20 @@ export const Route = createRootRoute({
                 </svg>
               </div>
             </header>
-            <Outlet />
+            <div className="flex flex-col lg:flex-row">
+              {/* Sidebar: hidden on mobile, visible on lg+ */}
+              <div className="hidden lg:block lg:w-64">
+                <SideNavbar />
+              </div>
+
+              {/* Main content: always visible, grows to fill space */}
+              <div className="flex-1 lg:px-6 lg:py-6">
+                <Outlet />
+              </div>
+            </div>
+
             <TanStackRouterDevtools />
-           <BottomNavbar />
+            <BottomNavbar />
           </div>
         </div>
       </main>
