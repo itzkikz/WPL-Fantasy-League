@@ -6,6 +6,8 @@ import { createRouter, Navigate, RouterProvider } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 import "./index.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { SpeedInsights } from '@vercel/speed-insights/react';
+import { Analytics } from "@vercel/analytics/react"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,6 +43,8 @@ if (!rootElement.innerHTML) {
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeProvider>
+      <SpeedInsights />
+      <Analytics />
     </StrictMode>
   );
 }
