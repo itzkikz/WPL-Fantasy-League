@@ -34,7 +34,7 @@ export const subscribe = async (req: Request, res: Response, next: NextFunction)
 
         const subscribers: Subscribers[] = convertToJSON(subscriberRows, 'subscribers');
 
-        const subscriber = subscribers.find((val) => val?.username === teamName && val?.endpoint === subscription.endpoint)
+        const subscriber = subscribers.find((val) => val?.username === teamName && val?.endpoint === subscription?.endpoint)
 
         if (subscriber?.endpoint) {
             return res.status(200).json({ data: { message: "Already Subscribed" } })
