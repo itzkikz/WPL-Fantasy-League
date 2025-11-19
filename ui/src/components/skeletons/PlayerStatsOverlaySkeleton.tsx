@@ -13,31 +13,15 @@ const PlayerStatsOverlaySkeleton = ({
   showStats,
   showDetails,
   pickMyTeam,
-  player
+  player,
 }: PlayerStatsOverlaySkeletonProps) => {
   return (
     <>
       {/* Header with Player Info Skeleton */}
-      <div className="relative px-6 pt-6 pb-4 rounded-3xl" style={{ backgroundColor: player?.teamColor }}>
-        <button
-          onClick={onClose}
-          className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-
+      <div
+        className="relative px-6 pt-6 pb-4 rounded-3xl"
+        style={{ backgroundColor: player?.teamColor }}
+      >
         <div className="flex items-start gap-4 mt-8">
           {/* Player Details Skeleton */}
           <div className="flex-1 pt-4 space-y-3">

@@ -3,11 +3,13 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import Logo from "./../assets/wplf1-dark.png";
 import BottomNavbar from "../components/common/BottomNavbar";
 import SideNavbar from "../components/common/SideNavbar";
+import PWAInstallBanner from "../components/PWAInstallBanner";
 
 export const Route = createRootRoute({
   component: () => (
     <>
       <main className="font-outfit min-h-screen shadow-sm text-primary">
+        <PWAInstallBanner />
         <div className="">
           <div className="flex h-screen flex-col mx-auto w-full">
             <header className="hidden relative w-full h-10 overflow-hidden">
