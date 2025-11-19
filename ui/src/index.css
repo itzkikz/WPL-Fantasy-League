@@ -229,4 +229,33 @@ html:active-view-transition-type(tab-switch) {
   }
 }
 
+/* For bottom navbar */
+.bottom-navbar {
+  view-transition-name: bottom-nav;
+}
+
+/* For side navbar */
+.side-navbar {
+  view-transition-name: side-nav;
+}
+
+/* For header */
+header {
+  view-transition-name: header-static;
+}
+
+/* Disable animations for all navigation elements */
+::view-transition-group(bottom-nav),
+::view-transition-old(bottom-nav),
+::view-transition-new(bottom-nav),
+::view-transition-group(side-nav),
+::view-transition-old(side-nav),
+::view-transition-new(side-nav),
+::view-transition-group(header-static),
+::view-transition-old(header-static),
+::view-transition-new(header-static) {
+  animation-duration: 0s !important;
+}
+
+
 

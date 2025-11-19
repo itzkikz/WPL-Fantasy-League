@@ -25,7 +25,7 @@ const BottomNavbar = () => {
   }
 
   return (
-    <nav className="absolute bottom-0 bg-light-bg dark:bg-dark-bg w-full block lg:hidden flex-none border-t border-light-border dark:border-dark-border">
+    <nav className="bottom-navbar fixed bottom-0 bg-light-bg dark:bg-dark-bg w-full block lg:hidden flex-none border-t border-light-border dark:border-dark-border">
       <div className="grid h-16 grid-cols-5">
         {navItems.map(({ label, path }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });

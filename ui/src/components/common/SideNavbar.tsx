@@ -25,7 +25,7 @@ const SideNavbar = () => {
   }
 
   return (
-    <nav className="hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-light-border dark:border-dark-border lg:h-screen lg:py-4 lg:px-2">
+    <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-light-border dark:border-dark-border lg:h-screen lg:py-4 lg:px-2">
       <div className="flex flex-col gap-2">
         {navItems.map(({ label, path }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });

@@ -12,7 +12,7 @@ export const Route = createRootRoute({
         <PWAInstallBanner />
         <div className="">
           <div className="flex h-screen flex-col mx-auto w-full">
-            <header className="hidden relative w-full h-10 overflow-hidden">
+            <header className="header hidden relative w-full h-10 overflow-hidden">
               {/* Animated gradient overlay */}
               {/* Content container */}
               <div className="relative z-10 flex items-center h-full px-4 max-w-md mx-auto bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
