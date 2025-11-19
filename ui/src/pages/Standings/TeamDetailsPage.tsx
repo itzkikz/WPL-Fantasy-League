@@ -1,4 +1,4 @@
-import { getRouteApi } from "@tanstack/react-router";
+import { getRouteApi, useNavigate } from "@tanstack/react-router";
 import { useTeamDetails } from "../../features/standings/hooks";
 import { useState } from "react";
 import Header from "../../components/Header";
@@ -18,6 +18,8 @@ import { usePlayerStore } from "../../store/usePlayerStore";
 const TeamDetailsPage = () => {
   const route = getRouteApi("/standings/$teamName");
 
+  const navigate = useNavigate();
+
   const { teamName } = route.useParams();
   const [gameWeek, setGameWeek] = useState(0);
   const [activeTab, setActiveTab] = useState("pitch");
@@ -34,59 +36,71 @@ const TeamDetailsPage = () => {
     setShowOverlay(!showOverlay);
   };
 
+  const handleGoBack = () => {
+    navigate({
+      to: "/standings",
+      viewTransition: {
+      types: ["back"], // different type name
+    },
+    });
+  };
+
   return (
     <>
-        <div className="flex flex-col h-screen overflow-auto-y">
-
-      <Header teamName={teamName} />
-      {isLoading ? (
-        <GWNavigationSkeleton />
-      ) : (
-        <GWNavigation
-          gameWeek={gw}
-          currentGW={currentGw}
-          setGameweek={setGameWeek}
-        />
-      )}
-
-      {isLoading ? (
-        <GWStatsCardsSkeleton />
-      ) : (
-        <GWStatsCards avg={avg} highest={highest} totalGWScore={totalGWScore} />
-      )}
-      <GWTabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === "pitch" &&
-        (isLoading ? (
-          <GWPitchSkeleton />
+      <div className="flex flex-col h-screen overflow-auto-y">
+        <Header teamName={teamName} onBack={handleGoBack} />
+        {isLoading ? (
+          <GWNavigationSkeleton />
         ) : (
-          <GWPitch
+          <GWNavigation
+            gameWeek={gw}
+            currentGW={currentGw}
+            setGameweek={setGameWeek}
+          />
+        )}
+
+        {isLoading ? (
+          <GWStatsCardsSkeleton />
+        ) : (
+          <GWStatsCards
+            avg={avg}
+            highest={highest}
+            totalGWScore={totalGWScore}
+          />
+        )}
+        <GWTabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
+        {activeTab === "pitch" &&
+          (isLoading ? (
+            <GWPitchSkeleton />
+          ) : (
+            <GWPitch
+              starting={starting}
+              bench={bench}
+              onClick={handlePlayerOverlay}
+            />
+          ))}
+        {activeTab === "list" && (
+          <GWPlayerList
             starting={starting}
             bench={bench}
             onClick={handlePlayerOverlay}
           />
-        ))}
-      {activeTab === "list" && (
-        <GWPlayerList
-          starting={starting}
-          bench={bench}
-          onClick={handlePlayerOverlay}
-        />
-      )}
+        )}
 
-      <Overlay
-        isOpen={showOverlay}
-        onClose={() => handlePlayerOverlay(null)}
-        children={
-          player && (
-            <PlayerStatsCard
-              onBack={() => handlePlayerOverlay}
-              showDetails={false}
-              showStats={true}
-              pickMyTeam={false}
-            />
-          )
-        }
-      />
+        <Overlay
+          isOpen={showOverlay}
+          onClose={() => handlePlayerOverlay(null)}
+          children={
+            player && (
+              <PlayerStatsCard
+                onBack={() => handlePlayerOverlay}
+                showDetails={false}
+                showStats={true}
+                pickMyTeam={false}
+              />
+            )
+          }
+        />
       </div>
     </>
   );

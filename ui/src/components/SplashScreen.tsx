@@ -11,7 +11,12 @@ const SplashScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSplash(false);
-      navigate({ to: "/standings" });
+      navigate({
+        to: "/standings",
+        viewTransition: {
+          types: ["forward"], // custom type name
+        },
+      });
     }, 3000);
 
     return () => clearTimeout(timer);

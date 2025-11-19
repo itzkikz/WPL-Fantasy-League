@@ -133,3 +133,100 @@ body {
   background-color: #1e0021;
   /* Dark theme thumb hover color */
 }
+
+/* 1. Keyframes for both directions */
+@keyframes slide-out-left {
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-out-right {
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Optional: shared duration/timing */
+::view-transition-group(root) {
+  animation-duration: 180ms;
+  animation-timing-function: ease-out;
+}
+
+/* 2. Standings → TeamDetails (forward) */
+html:active-view-transition-type(forward) {
+  &::view-transition-old(root) {
+    animation-name: slide-out-left;
+  }
+
+  &::view-transition-new(root) {
+    animation-name: slide-in-right;
+  }
+}
+
+/* 3. TeamDetails → Standings (back) */
+html:active-view-transition-type(back) {
+  &::view-transition-old(root) {
+    animation-name: slide-out-right;
+  }
+
+  &::view-transition-new(root) {
+    animation-name: slide-in-left;
+  }
+}
+
+@keyframes tab-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tab-fade-out-down {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* Only when a bottom‑nav transition is active */
+html:active-view-transition-type(tab-switch) {
+  &::view-transition-group(root) {
+    animation-duration: 150ms;
+    animation-timing-function: ease-out;
+  }
+
+  &::view-transition-old(root) {
+    animation-name: tab-fade-out-down;
+  }
+
+  &::view-transition-new(root) {
+    animation-name: tab-fade-in-up;
+  }
+}
+
+

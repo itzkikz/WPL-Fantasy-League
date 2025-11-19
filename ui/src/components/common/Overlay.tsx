@@ -1,76 +1,149 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const Overlay = ({
   isOpen,
   onClose,
   children,
-  showBackButton = true
 }: {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
-  showBackButton: boolean;
 }) => {
-  // Keep this in sync with the Tailwind duration classes below (700ms)
-  const ANIM_MS = 700;
+  const DURATION = 300;
 
   const [mounted, setMounted] = useState(isOpen);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [animate, setAnimate] = useState(false);
 
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const startY = useRef<number | null>(null);
+  const currentY = useRef(0);
+
+  // Smooth close used by click AND swipe
+  const closeWithAnimation = () => {
+    if (panelRef.current) {
+      // Remove inline styles completely so Tailwind classes can work
+      panelRef.current.style.removeProperty('transition');
+      panelRef.current.style.removeProperty('transform');
+    }
+    
+    // Trigger animation first
+    setAnimate(false);
+    
+    // Wait for animation to complete before unmounting
+    setTimeout(() => {
+      onClose();
+    }, DURATION);
+  };
+
+  // Mount/unmount animation
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
-      // Trigger enter transition on the next frame to ensure the initial styles apply before animating
-      requestAnimationFrame(() => setIsAnimating(true));
+      // Double rAF ensures browser paints initial state before animating
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setAnimate(true);
+        });
+      });
     } else {
-      // Start exit transition
-      setIsAnimating(false);
-      // Unmount after the transition finishes
-      const t = setTimeout(() => setMounted(false), ANIM_MS);
+      setAnimate(false);
+      const t = setTimeout(() => setMounted(false), DURATION);
       return () => clearTimeout(t);
     }
   }, [isOpen]);
 
   if (!mounted) return null;
 
-  const requestClose = () => onClose();
+  // ───────────────────────────────
+  // TOUCH HANDLERS FOR SWIPE DOWN
+  // ───────────────────────────────
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startY.current = e.touches[0].clientY;
+    currentY.current = 0;
+
+    if (panelRef.current) {
+      panelRef.current.style.transition = "none"; // disable animation during drag
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (startY.current == null) return;
+
+    const y = e.touches[0].clientY;
+    const delta = y - startY.current;
+
+    if (delta > 0) {
+      currentY.current = delta;
+      if (panelRef.current) {
+        panelRef.current.style.transform = `translateY(${delta}px)`;
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    const dragged = currentY.current;
+    startY.current = null;
+
+    if (!panelRef.current) return;
+
+    if (dragged > 80) {
+      // Sufficient swipe → animate to bottom then close
+      panelRef.current.style.transition = `transform ${DURATION}ms cubic-bezier(0.25, 1, 0.5, 1)`;
+      panelRef.current.style.transform = `translateY(100%)`;
+
+      setTimeout(() => {
+        if (panelRef.current) {
+          panelRef.current.style.removeProperty('transition');
+          panelRef.current.style.removeProperty('transform');
+        }
+        setAnimate(false);
+        setTimeout(() => onClose(), DURATION);
+      }, DURATION);
+    } else {
+      // Snap back to top
+      panelRef.current.style.transition = `transform ${DURATION}ms cubic-bezier(0.25, 1, 0.5, 1)`;
+      panelRef.current.style.transform = `translateY(0)`;
+    }
+  };
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-end justify-center transition-opacity duration-700 ease-in-out ${
-        isAnimating ? "opacity-100" : "opacity-0 pointer-events-none"
-      }`}
-      onClick={requestClose}
+      className={`
+        fixed inset-0 z-50 flex items-end 
+        transition-opacity duration-300
+        ${animate ? "opacity-100" : "opacity-0"}
+      `}
+      style={{ transitionTimingFunction: "cubic-bezier(0.25, 1, 0.5, 1)" }}
+      onClick={closeWithAnimation} // clicking outside closes with animation
     >
-      <div className="absolute inset-0 bg-dark-bg/80" />
-      <div
-        className={`relative w-full h-[90vh] bg-light-bg dark:bg-dark-bg rounded-t-3xl shadow-xl transform transition-transform duration-700 ease-in-out ${
-          isAnimating ? "translate-y-0" : "translate-y-full"
-        }`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {showBackButton && (
-          <button
-            onClick={requestClose}
-            className="absolute z-10 top-4 left-4 w-10 h-10 rounded-full bg-light-text-secondary backdrop-blur-sm flex items-center justify-center"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-        )}
+      <div className="absolute inset-0 bg-black/50" />
 
-        {children}
+      <div
+        ref={panelRef}
+        className={`
+          relative w-full transform transition-transform duration-300
+          ${animate ? "translate-y-0" : "translate-y-full"}
+        `}
+        style={{ transitionTimingFunction: "cubic-bezier(0.25, 1, 0.5, 1)" }}
+        onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div className="w-full h-[90vh] bg-white dark:bg-dark-bg rounded-t-3xl shadow-xl flex flex-col">
+
+          {/* Drag Handle */}
+          <div
+            onClick={closeWithAnimation}
+            className="absolute z-10 top-4 w-full flex justify-center py-3 cursor-pointer"
+          >
+            <div className="h-1.5 w-14 bg-gray-400 rounded-full opacity-70" />
+          </div>
+
+          <div className="overflow-y-auto flex-1 px-0">
+            {children}
+          </div>
+        </div>
       </div>
     </div>
   );

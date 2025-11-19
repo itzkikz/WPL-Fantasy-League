@@ -21,7 +21,7 @@ const BottomNavbar = () => {
     matchRoute({ to: "/maintenance" }) ||
     matchRoute({ to: "/" })
   ) {
-    return null; // Truthy check works for both {} and { params }
+    return null;
   }
 
   return (
@@ -34,7 +34,8 @@ const BottomNavbar = () => {
             <Link
               key={label}
               to={path}
-              className={`inline-flex flex-col items-center justify-center text-[11px] transition-colors`}
+              viewTransition={{ types: ["tab-switch"] }}
+              className="inline-flex flex-col items-center justify-center text-[11px] transition-colors"
             >
               {label === "Home" && <Home isActive={isActive} />}
               {label === "Manage" && <User isActive={isActive} />}

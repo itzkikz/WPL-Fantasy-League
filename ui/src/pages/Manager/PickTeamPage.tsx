@@ -26,6 +26,7 @@ import timezone from "dayjs/plugin/timezone";
 import { Roles } from "../../store/types";
 import StatRow from "../../components/StatRow";
 import Toast from "../../components/common/Toast";
+import { useNavigate } from "@tanstack/react-router";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -70,6 +71,8 @@ const PickTeamPage = () => {
   } = useManageTeamStore();
 
   const mutation = useSubstitution();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isSuccess) {
@@ -209,12 +212,22 @@ const PickTeamPage = () => {
     setRoles({ ...roles, ...updatedRole });
   };
 
+  const handleGoBack = () => {
+    navigate({
+      to: "/manager",
+      viewTransition: {
+      types: ["back"], // different type name
+    },
+    });
+  };
+
   // Execute the swap
   //const updatedTeam = executeSwap(teamData, 10, 11); // Swap Biereth with Nico Williams
 
   return (
-    <>
-      {user?.teamName && <Header teamName={user?.teamName} />}
+          <div className="flex flex-col h-screen overflow-auto-y">
+
+      {user?.teamName && <Header teamName={user?.teamName} onBack={handleGoBack}/>}
       {pickMyTeam ? (
         <div className="flex items-center justify-center px-4 pt-4 pb-3 bg-dark-bg dark:bg-light-bg text-dark-text-primary dark:text-light-text-primary">
           <h6 className="text-center text-base">
@@ -373,7 +386,7 @@ const PickTeamPage = () => {
           }}
         />
       )}
-    </>
+    </div>
   );
 };
 

@@ -8,11 +8,14 @@ const ManagerPage = () => {
   const navigate = useNavigate();
   const { user } = useUserStore();
 
-  const { data: managerDetails, isLoading, isSuccess } = useManagerDetails();  
+  const { data: managerDetails, isLoading, isSuccess } = useManagerDetails();
 
   const handlePickTeamNavigation = () => {
     navigate({
       to: "/manager/pick-team",
+      viewTransition: {
+        types: ["forward"], // different type name
+      },
     });
   };
 
@@ -23,19 +26,18 @@ const ManagerPage = () => {
   };
 
   return (
-   <div className="w-full p-3 flex flex-col h-full overflow-y-auto">
-  {managerDetails && (
-    <>
-      <ManagerStatsCard
-        navigateToPickTeam={handlePickTeamNavigation}
-        navigateToTeamPoints={handleTeamPointsNavigation}
-        managerDetails={managerDetails}
-      />
-      <ManagerPointsCards managerDetails={managerDetails} />
-    </>
-  )}
-</div>
-
+    <div className="flex flex-col px-2 py-2 space-y-4 overflow-y-auto select-none h-[calc(100vh-4rem)] lg:h-[calc(100vh-6rem)]">
+      {managerDetails && (
+        <>
+          <ManagerStatsCard
+            navigateToPickTeam={handlePickTeamNavigation}
+            navigateToTeamPoints={handleTeamPointsNavigation}
+            managerDetails={managerDetails}
+          />
+          <ManagerPointsCards managerDetails={managerDetails} />
+        </>
+      )}
+    </div>
   );
 };
 

@@ -11,6 +11,9 @@ const StandingsPage = () => {
     navigate({
       to: "/standings/$teamName",
       params: { teamName },
+      viewTransition: {
+      types: ["forward"], // custom type name
+    },
     });
   };
 

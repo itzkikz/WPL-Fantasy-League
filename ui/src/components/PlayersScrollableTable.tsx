@@ -44,8 +44,7 @@ const PlayersScrollableTable = ({
   return (
       <div
         ref={tableContainerRef}
-        className="overflow-y-auto"
-        style={{ height: `calc(100vh - 8rem)` }}
+        className="overflow-y-auto select-none h-[calc(100vh-8rem)] lg:h-[calc(100vh-6rem)]"
         // style={{ height: containerHeight }}
       >
         <table className="w-full border-collapse">

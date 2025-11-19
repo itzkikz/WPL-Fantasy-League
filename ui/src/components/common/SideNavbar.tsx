@@ -32,6 +32,7 @@ const SideNavbar = () => {
 
           return (
             <Link
+            viewTransition={{ types: ["tab-switch"] }}
               key={label}
               to={path}
               className={`flex items-center gap-3 px-3 py-2 text-sm transition-colors`}
