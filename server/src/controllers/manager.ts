@@ -65,7 +65,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
     managerTeam = convertToFormation(pickTeamDetailsNextGW);
   } else {
     const teamDetailsGW = teamDetails.filter(
-      (item: TeamDetails) => item[propertyName] === teamName && item.gw === gw
+      (item: TeamDetails) => item[propertyName] === teamName && item.gw === nextGw
     );
     managerTeam = convertToFormation(teamDetailsGW);
   }
@@ -178,7 +178,7 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
       managerTeam = convertToFormation(pickTeamDetailsNextGW);
     } else {
       const teamDetailsGW = teamDetails.filter(
-        (item: TeamDetails) => item[propertyName] === teamName && item.gw === gw
+        (item: TeamDetails) => item[propertyName] === teamName && item.gw === nextGw
       );
       managerTeam = convertToFormation(teamDetailsGW);
     }
