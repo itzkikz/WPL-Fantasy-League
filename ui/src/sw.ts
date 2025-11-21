@@ -58,16 +58,26 @@ registerRoute(
 // ---------------------------
 // API runtime caching
 // ---------------------------
+// These calls should never be cached
 registerRoute(
-  ({ url }) => /^https:\/\/api-proxy\.wplfantasy\.workers\.dev\/api\/.*$/i.test(url.href),
-  new StaleWhileRevalidate({
-    cacheName: 'api-cache-v1',
-    plugins: [
-      new CacheableResponsePlugin({ statuses: [0, 200] }),
-      new ExpirationPlugin({ maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 }),
-    ],
-  })
-)
+  ({ url }) =>
+    url.pathname.startsWith("/api/manager"),
+  new NetworkOnly()
+);
+
+// Everything else → cached
+registerRoute(
+  ({ url }) =>
+    /^https:\/\/api-proxy\.wplfantasy\.workers\.dev\/api\/.*$/i.test(url.href),
+  new StaleWhileRevalidate({
+    cacheName: 'api-cache-v1',
+    plugins: [
+      new CacheableResponsePlugin({ statuses: [0, 200] }),
+      new ExpirationPlugin({ maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 }),
+    ],
+  })
+);
+
 
 
 // Conservative default for unmatched requests; combine with offline fallback below
