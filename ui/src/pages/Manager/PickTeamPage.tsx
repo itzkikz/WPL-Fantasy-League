@@ -231,7 +231,7 @@ const PickTeamPage = () => {
       {pickMyTeam ? (
         <div className="flex items-center justify-center px-4 pt-4 pb-3 bg-dark-bg dark:bg-light-bg text-dark-text-primary dark:text-light-text-primary">
           <h6 className="text-center text-base">
-            Gameweek {managerDetails?.gw + 1}
+            Gameweek {managerDetails?.gw}
           </h6>
           <span aria-hidden="true">&nbsp;•&nbsp;</span>
           <h6 className="text-center text-base font-semibold">

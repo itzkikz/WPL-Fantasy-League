@@ -48,7 +48,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
 
   const manager = users.find((val) => val?.username === teamName)
   const { deadline, gw, pickmyteam, utlisation, total_budget, balance, managers } = manager || { gw: 0 };
-  const nextGw = gw + 1;
+  const nextGw = gw;
 
   const rank = standings.findIndex(item => item.team === teamName) + 1;
   const teamStanding = standings.find(item => item.team === teamName);
@@ -164,7 +164,7 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
     const teamDetails: TeamDetails[] = convertToJSON(detailsRows, 'teamDetails');
     const pickTeamDetails: TeamDetails[] = convertToJSON(pickteamRows, 'teamDetails');
 
-    const nextGw = gw + 1;
+    const nextGw = gw;
 
 
     const pickTeamDetailsNextGW = pickTeamDetails.filter(
