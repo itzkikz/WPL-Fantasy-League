@@ -10,9 +10,16 @@ import PlayerInfo from "../components/player/PlayerInfo";
 import PlayerOverall from "../components/player/PlayerOverall";
 import AngleDown from "../components/icons/AngleDown";
 import StatRow from "../components/StatRow";
+import { getRouteApi, useNavigate } from "@tanstack/react-router";
+
+const routeApi = getRouteApi("/stats/");
 
 export default function Stats() {
-  const { data: players, isLoading, error } = usePlayers();
+  const navigate = useNavigate({ from: "/stats/" });
+  const search = routeApi.useSearch();
+  const { clubs: selectedClubs, leagues: selectedLeagues, positions: selectedPositions, freeAgents: freeAgentSelected } = search;
+
+  const { data: players } = usePlayers();
   const player = usePlayerStore((state) => state.player);
   const setPlayer = usePlayerStore((state) => state.setPlayer);
 
@@ -21,34 +28,63 @@ export default function Stats() {
   const [clubs, setClubs] = useState<string[]>([]);
   const [leagues, setLeagues] = useState<string[]>([]);
 
-  const [selectedClubs, setSelectedClubs] = useState<string[]>([]);
-  const [selectedLeagues, setSelectedLeagues] = useState<string[]>([]);
-  const [selectedPositions, setSelectedPositions] = useState<string[]>([]);
-
   const [showClubOverlay, setShowClubOverlay] = useState(false);
   const [showLeagueOverlay, setShowLeagueOverlay] = useState(false);
   const [showMoreOverlay, setShowMoreOverlay] = useState(false);
 
-  const [freeAgentSelected, setFreeAgentSelected] = useState(false);
-
-  const handlePlayerOverlay = (eachPlayer: Player | null) => {
-    if (eachPlayer) setPlayer(eachPlayer);
+  const handlePlayerOverlay = (eachPlayer: PlayerStats | null) => {
+    if (eachPlayer) {
+      // Map PlayerStats to Player
+      const mappedPlayer: Player = {
+        ...eachPlayer, // Spread original stats to ensure PlayerInfo has required data
+        id: 0, // ID is missing in PlayerStats, using 0 or need to fetch detail
+        name: eachPlayer.player_name,
+        team: eachPlayer.team_name,
+        teamColor: "", // Missing, will fallback to club color in PlayerInfo
+        point: eachPlayer.total_point,
+        position: eachPlayer.position,
+        fullTeamName: eachPlayer.team_name,
+        clean_sheet: eachPlayer.clean_sheet,
+        goal: eachPlayer.goal,
+        assist: eachPlayer.assist,
+        yellow_card: eachPlayer.yellow_card,
+        red_card: eachPlayer.red_card,
+        save: eachPlayer.save,
+        penalty_save: eachPlayer.penalty_save,
+        penalty_miss: eachPlayer.penalty_miss,
+        app: eachPlayer.app,
+        gw: 0, // Missing
+      } as unknown as Player;
+      setPlayer(mappedPlayer);
+    }
     setShowOverlay((p) => !p);
   };
 
-  const toggleSelect = (list: string[], setList: any, value: string) => {
-    if (list.includes(value)) {
-      setList(list.filter((x) => x !== value));
-    } else {
-      setList([...list, value]);
-    }
+  const updateSearch = (updates: Partial<typeof search>) => {
+    navigate({
+      search: (prev: any) => ({ ...prev, ...updates }),
+      replace: true,
+    });
+  };
+
+  const toggleSelect = (list: string[], key: "clubs" | "leagues" | "positions", value: string) => {
+    const newList = list.includes(value)
+      ? list.filter((x) => x !== value)
+      : [...list, value];
+
+    updateSearch({ [key]: newList });
   };
 
   const handleReset = () => {
-    setSelectedClubs([]);
-    setSelectedLeagues([]);
-    setSelectedPositions([]);
-    setFreeAgentSelected(false);
+    navigate({
+      search: {
+        clubs: [],
+        leagues: [],
+        positions: [],
+        freeAgents: false,
+      },
+      replace: true,
+    });
   };
 
   // extract unique clubs/leagues when players load
@@ -87,16 +123,19 @@ export default function Stats() {
         <Button
           label="All Leagues"
           size="text-sm"
+          type="Primary"
           onClick={() => setShowLeagueOverlay(true)}
         />
         <Button
           label="All Clubs"
           size="text-sm"
+          type="Primary"
           onClick={() => setShowClubOverlay(true)}
         />
         <Button
           label="More"
           size="text-sm"
+          type="Primary"
           icon={<AngleDown width="3" height="3" />}
           onClick={() => setShowMoreOverlay(true)}
         />
@@ -118,8 +157,8 @@ export default function Stats() {
       <Overlay isOpen={showOverlay} onClose={() => setShowOverlay(false)}>
         {player && (
           <>
-            <PlayerInfo player={player} playerStats={player} />
-            <PlayerOverall noGW={true} playerStats={player} />
+            <PlayerInfo player={player as Player} playerStats={player as any} />
+            <PlayerOverall noGW={true} playerStats={player as any} />
           </>
         )}
       </Overlay>
@@ -143,9 +182,11 @@ export default function Stats() {
                 border={false}
               />
               <Checkbox
+                label=""
+                type="checkbox"
                 checked={selectedClubs.includes(club)}
                 onChange={() =>
-                  toggleSelect(selectedClubs, setSelectedClubs, club)
+                  toggleSelect(selectedClubs, "clubs", club)
                 }
               />
             </div>
@@ -172,9 +213,11 @@ export default function Stats() {
                 border={false}
               />
               <Checkbox
+                label=""
+                type="checkbox"
                 checked={selectedLeagues.includes(league)}
                 onChange={() =>
-                  toggleSelect(selectedLeagues, setSelectedLeagues, league)
+                  toggleSelect(selectedLeagues, "leagues", league)
                 }
               />
             </div>
@@ -209,9 +252,11 @@ export default function Stats() {
                 border={false}
               />
               <Checkbox
+                label=""
+                type="checkbox"
                 checked={selectedPositions.includes(pos)}
                 onChange={() =>
-                  toggleSelect(selectedPositions, setSelectedPositions, pos)
+                  toggleSelect(selectedPositions, "positions", pos)
                 }
               />
             </div>
@@ -220,8 +265,10 @@ export default function Stats() {
           <div className="flex items-center justify-between px-2 py-2 mt-6">
             <StatRow label="Free Agents" value="" border={false} />
             <Checkbox
+              label=""
+              type="checkbox"
               checked={freeAgentSelected}
-              onChange={() => setFreeAgentSelected((p) => !p)}
+              onChange={() => updateSearch({ freeAgents: !freeAgentSelected })}
             />
           </div>
         </div>

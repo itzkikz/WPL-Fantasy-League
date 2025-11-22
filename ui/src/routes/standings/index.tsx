@@ -1,9 +1,13 @@
-// src/routes/books/index.tsx
 import { createFileRoute } from "@tanstack/react-router";
-import StandingsPage from "../../pages/Standings/StandingsPage";
+import { z } from "zod";
+
+const standingsSearchSchema = z.object({
+  sort: z.enum(["asc", "desc"]).optional(),
+  filter: z.string().optional(),
+});
 
 export const Route = createFileRoute("/standings/")({
-  component: StandingsPage,
+  validateSearch: (search) => standingsSearchSchema.parse(search),
 });
 
 

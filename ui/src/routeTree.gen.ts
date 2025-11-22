@@ -25,7 +25,7 @@ const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() => import('./routes/settings.lazy').then((d) => d.Route))
 const NotificationsRoute = NotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
@@ -55,17 +55,19 @@ const StatsIndexRoute = StatsIndexRouteImport.update({
   id: '/stats/',
   path: '/stats/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() => import('./routes/stats/index.lazy').then((d) => d.Route))
 const StandingsIndexRoute = StandingsIndexRouteImport.update({
   id: '/standings/',
   path: '/standings/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() =>
+  import('./routes/standings/index.lazy').then((d) => d.Route),
+)
 const ManagerIndexRoute = ManagerIndexRouteImport.update({
   id: '/manager/',
   path: '/manager/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() => import('./routes/manager/index.lazy').then((d) => d.Route))
 const StandingsTeamNameRoute = StandingsTeamNameRouteImport.update({
   id: '/standings/$teamName',
   path: '/standings/$teamName',
