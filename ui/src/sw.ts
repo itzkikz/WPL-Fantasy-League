@@ -123,6 +123,13 @@ self.addEventListener('activate', (event: ExtendableEvent) => {
   event.waitUntil(self.clients.claim())
 })
 
+// Handle SKIP_WAITING message from update prompt
+self.addEventListener('message', (event: ExtendableMessageEvent) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting()
+  }
+})
+
 // Handle push messages (kept from your file)
 self.addEventListener('push', (event: PushEvent) => {
   let payload: PushPayload = { title: 'Update Check', body: '' }

@@ -8,6 +8,7 @@ import "./index.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { injectSpeedInsights } from '@vercel/speed-insights';
 import { Analytics } from "@vercel/analytics/react"
+import { UpdatePrompt } from "./components/UpdatePrompt";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,6 +45,7 @@ if (!rootElement.innerHTML) {
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
           <ReactQueryDevtools initialIsOpen={false} />
+          <UpdatePrompt />
         </QueryClientProvider>
       </ThemeProvider>
       <Analytics />

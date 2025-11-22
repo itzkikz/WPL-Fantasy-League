@@ -37,19 +37,43 @@ const PWAInstallBanner: React.FC = () => {
       // Check if running in standalone mode
       const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
       const isIOSStandalone = (window.navigator as any).standalone === true;
-      
+
       // Check localStorage
       const isInstalledFromStorage = localStorage.getItem('pwa-installed') === 'true';
-      const isDismissed = localStorage.getItem('pwa-install-dismissed') === 'true';
+      const dismissedTimestamp = localStorage.getItem('pwa-install-dismissed-timestamp');
 
-      // If already installed or dismissed, don't show banner
-      if (isStandalone || isIOSStandalone || isInstalledFromStorage || isDismissed) {
+      // Clear dismissed state after 7 days
+      const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
+      let isDismissed = false;
+
+      if (dismissedTimestamp) {
+        const dismissedTime = parseInt(dismissedTimestamp, 10);
+        if (Date.now() - dismissedTime < SEVEN_DAYS) {
+          isDismissed = true;
+        } else {
+          // Clear old dismissal
+          localStorage.removeItem('pwa-install-dismissed');
+          localStorage.removeItem('pwa-install-dismissed-timestamp');
+        }
+      }
+
+      // If already installed, don't show banner
+      if (isStandalone || isIOSStandalone || isInstalledFromStorage) {
+        console.log('PWA already installed, not showing banner');
+        setShowBanner(false);
+        return;
+      }
+
+      // If dismissed recently, don't show
+      if (isDismissed) {
+        console.log('PWA banner dismissed recently, not showing');
         setShowBanner(false);
         return;
       }
 
       // For iOS, show manual instructions banner
       if (isIOSSafari) {
+        console.log('iOS detected, showing manual install instructions');
         setShowBanner(true);
         return;
       }
@@ -59,6 +83,7 @@ const PWAInstallBanner: React.FC = () => {
         try {
           const relatedApps = await (navigator as any).getInstalledRelatedApps();
           if (relatedApps.length > 0) {
+            console.log('Related apps installed, not showing banner');
             setShowBanner(false);
             return;
           }
@@ -66,22 +91,43 @@ const PWAInstallBanner: React.FC = () => {
           console.log('getInstalledRelatedApps not available');
         }
       }
+
+      // For Android, we need to wait for beforeinstallprompt
+      // Don't show banner yet, it will be shown when event fires
+      console.log('Waiting for beforeinstallprompt event');
     };
 
     checkInstallation();
 
     // Listen for beforeinstallprompt (Chrome/Edge only)
     const handleBeforeInstallPrompt = (e: BeforeInstallPromptEvent): void => {
+      console.log('beforeinstallprompt event fired');
       e.preventDefault();
       setDeferredPrompt(e);
-      
+
       const isInstalled = localStorage.getItem('pwa-installed') === 'true';
-      if (!isInstalled) {
+      const dismissedTimestamp = localStorage.getItem('pwa-install-dismissed-timestamp');
+
+      // Check if recently dismissed
+      let isDismissed = false;
+      if (dismissedTimestamp) {
+        const dismissedTime = parseInt(dismissedTimestamp, 10);
+        const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
+        if (Date.now() - dismissedTime < SEVEN_DAYS) {
+          isDismissed = true;
+        }
+      }
+
+      if (!isInstalled && !isDismissed) {
+        console.log('Showing install banner');
         setShowBanner(true);
+      } else {
+        console.log('Not showing banner - installed:', isInstalled, 'dismissed:', isDismissed);
       }
     };
 
     const handleAppInstalled = (): void => {
+      console.log('App installed');
       localStorage.setItem('pwa-installed', 'true');
       setShowBanner(false);
       setDeferredPrompt(null);
@@ -115,8 +161,10 @@ const PWAInstallBanner: React.FC = () => {
   };
 
   const handleDismiss = (): void => {
+    console.log('Banner dismissed');
     setShowBanner(false);
     localStorage.setItem('pwa-install-dismissed', 'true');
+    localStorage.setItem('pwa-install-dismissed-timestamp', Date.now().toString());
   };
 
   if (!showBanner) return null;
@@ -133,14 +181,14 @@ const PWAInstallBanner: React.FC = () => {
                 <p className="text-xs opacity-90">
                   Tap <span className="inline-flex items-center mx-1">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.11 0-2-.9-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .89 2 2z"/>
+                      <path d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.11 0-2-.9-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .89 2 2z" />
                     </svg>
                   </span> then "Add to Home Screen"
                 </p>
               </div>
               <button
                 onClick={handleDismiss}
-                className="px-3 py-2 text-white hover:bg-white/20 rounded-lg transition flex-shrink-0"
+                className="px-3 py-2 text-white hover:bg-white/20 rounded-lg transition shrink-0"
                 aria-label="Dismiss"
               >
                 ✕
