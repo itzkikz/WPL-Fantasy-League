@@ -23,7 +23,8 @@ const TeamDetailsPage = () => {
   const { teamName } = route.useParams();
   const [gameWeek, setGameWeek] = useState(0);
   const [activeTab, setActiveTab] = useState("pitch");
-  const { player, setPlayer } = usePlayerStore();
+  const player = usePlayerStore((state) => state.player);
+  const setPlayer = usePlayerStore((state) => state.setPlayer);
   const [showOverlay, setShowOverlay] = useState(false);
 
   const { data: teamDetails, isLoading } = useTeamDetails(teamName, gameWeek);
@@ -40,8 +41,8 @@ const TeamDetailsPage = () => {
     navigate({
       to: "/standings",
       viewTransition: {
-      types: ["back"], // different type name
-    },
+        types: ["back"], // different type name
+      },
     });
   };
 

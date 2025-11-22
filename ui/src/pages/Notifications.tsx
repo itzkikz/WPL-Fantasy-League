@@ -75,7 +75,7 @@ export default function Notifications() {
     return out;
   }
 
-  const { user } = useUserStore();
+  const user = useUserStore((state) => state.user);
 
   const { data: notifications, isLoading, error } = useNotifications();
 
@@ -87,7 +87,7 @@ export default function Notifications() {
     return <div>Loading...</div>;
   }
 
-const handleDismiss = (id) => {
+  const handleDismiss = (id) => {
     setNotificationsList(notificationsList.filter(notif => notif.id !== id));
   };
 
@@ -122,7 +122,7 @@ const handleDismiss = (id) => {
                 </div>
               )}</div>              </div>
 
-             
+
         </>
       ) : (
         <>Login to get notifications</>

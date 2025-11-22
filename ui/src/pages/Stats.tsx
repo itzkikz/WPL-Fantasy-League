@@ -13,7 +13,8 @@ import StatRow from "../components/StatRow";
 
 export default function Stats() {
   const { data: players, isLoading, error } = usePlayers();
-  const { player, setPlayer } = usePlayerStore();
+  const player = usePlayerStore((state) => state.player);
+  const setPlayer = usePlayerStore((state) => state.setPlayer);
 
   const [showOverlay, setShowOverlay] = useState(false);
 

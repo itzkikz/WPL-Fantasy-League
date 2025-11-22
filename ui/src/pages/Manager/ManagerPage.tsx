@@ -6,7 +6,7 @@ import { useManagerDetails } from "../../features/manager/hooks";
 
 const ManagerPage = () => {
   const navigate = useNavigate();
-  const { user } = useUserStore();
+  const user = useUserStore((state) => state.user);
 
   const { data: managerDetails, isLoading, isSuccess } = useManagerDetails();
 

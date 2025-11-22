@@ -12,7 +12,7 @@ export default function PlayerOverall({
 }) {
   const [activeTab, setActiveTab] = useState<"stats" | "ostats">(noGW ? "ostats" : "stats");
 
-  const { player } = usePlayerStore();
+  const player = usePlayerStore((state) => state.player);
 
   return (
     <>
@@ -20,9 +20,8 @@ export default function PlayerOverall({
         {noGW ? (<></>) : (<div className="flex gap-8">
           <button
             onClick={() => setActiveTab("stats")}
-            className={`py-3 text-sm font-semibold relative ${
-              activeTab === "stats" ? "" : "text-[#ebe5eb] dark:text-[#541e5d]"
-            }`}
+            className={`py-3 text-sm font-semibold relative ${activeTab === "stats" ? "" : "text-[#ebe5eb] dark:text-[#541e5d]"
+              }`}
           >
             GW {player?.gw} Stats
             {activeTab === "stats" && (
@@ -31,9 +30,8 @@ export default function PlayerOverall({
           </button>
           <button
             onClick={() => setActiveTab("ostats")}
-            className={`py-3 text-sm font-semibold relative ${
-              activeTab === "ostats" ? "" : "text-[#ebe5eb] dark:text-[#541e5d]"
-            }`}
+            className={`py-3 text-sm font-semibold relative ${activeTab === "ostats" ? "" : "text-[#ebe5eb] dark:text-[#541e5d]"
+              }`}
           >
             Overall Stats
             {activeTab === "ostats" && (
@@ -41,7 +39,7 @@ export default function PlayerOverall({
             )}
           </button>
         </div>)}
-        
+
       </div>
 
       <div className="flex-1 overflow-y-auto">

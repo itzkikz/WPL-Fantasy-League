@@ -31,7 +31,7 @@ const StatsCard = ({
   changeRole?: (role: Roles) => void;
   error?: string;
 }) => {
-  const { player } = usePlayerStore();
+  const player = usePlayerStore((state) => state.player);
   const { data: playerStats, isLoading } = usePlayerDetails(player.name);
 
   const initialRole: "captain" | "vice" | "" = player?.isCaptain

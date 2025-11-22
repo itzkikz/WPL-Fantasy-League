@@ -10,7 +10,7 @@ export default function ProtectedRoute({
 }) {
   const navigate = useNavigate();
   const { data, isLoading, isError } = useValidateToken();
-  const { setUser } = useUserStore();
+  const setUser = useUserStore((state) => state.setUser);
 
   useEffect(() => {
     if (isError || (data && !data.valid)) {
