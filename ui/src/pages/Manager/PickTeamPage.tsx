@@ -229,7 +229,7 @@ const PickTeamPage = () => {
 
       {user?.teamName && <Header teamName={user?.teamName} onBack={handleGoBack} />}
       {pickMyTeam ? (
-        <div className="flex items-center justify-center px-4 pt-4 pb-3 bg-dark-bg dark:bg-light-bg text-dark-text-primary dark:text-light-text-primary">
+        <div className="flex items-center justify-center px-4 pt-4 pb-3 bg-light-surface dark:bg-dark-surface text-light-text-primary dark:text-dark-text-primary">
           <h6 className="text-center text-base">
             Gameweek {managerDetails?.gw}
           </h6>
@@ -239,7 +239,7 @@ const PickTeamPage = () => {
           </h6>
         </div>
       ) : (
-        <div className="flex items-center justify-center px-4 pt-4 pb-3 bg-dark-bg dark:bg-light-bg text-dark-text-primary dark:text-light-text-primary">
+        <div className="flex items-center justify-center px-4 pt-4 pb-3 bg-light-surface dark:bg-dark-surface text-light-text-primary dark:text-dark-text-primary">
           <h6 className="text-center text-base font-semibold">Not Enabled</h6>
         </div>
       )}

@@ -47,7 +47,7 @@ const GWPitch = ({
       <div className="flex flex-col lg:flex-row w-full max-w-6xl mx-auto gap-4 lg:gap-8 lg:h-full lg:overflow-hidden">
         {/* Pitch Container */}
         <div
-          className="relative flex flex-col flex-1 gap-5 bg-top bg-no-repeat box-border py-6 w-full items-center justify-start min-h-[80vh] lg:min-h-0 lg:h-full lg:bg-center lg:bg-contain lg:py-2"
+          className="relative flex flex-col flex-1 gap-5 bg-top bg-no-repeat box-border py-6 w-full justify-start min-h-[80vh] lg:min-h-0 lg:h-full lg:bg-center lg:bg-contain lg:py-2"
           style={{
             backgroundImage: "url('/pitch.svg')",
           }}

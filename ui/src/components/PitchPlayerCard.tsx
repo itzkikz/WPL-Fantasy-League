@@ -63,12 +63,12 @@ const PitchPlayerCard = ({
         </div>
       </div>
       {/* Info Box Container */}
-      <div className="flex flex-col w-full bg-white rounded-sm overflow-hidden shadow-sm z-10">
+      <div className="flex flex-col w-full bg-white dark:bg-gray-700 rounded-sm overflow-hidden shadow-sm z-10">
         {/* Player Name */}
-        <div className="px-1 py-0.5 text-center bg-white border-b border-gray-100">
+        <div className="px-1 py-0.5 text-center bg-white dark:bg-gray-700 border-b border-gray-100 dark:border-gray-600">
           <p
             className={`${isSmall ? "text-[9px] md:text-[10px]" : "text-[10px] md:text-xs"
-              } font-bold text-gray-900 truncate leading-tight`}
+              } font-bold text-gray-900 dark:text-white truncate leading-tight`}
           >
             {player?.name && pickMyteam && playerFirstName !== playerLastName ? (
               player.name.trim().split(/\s+/).slice(0)[0]
@@ -80,12 +80,12 @@ const PitchPlayerCard = ({
 
         {/* Points / Team Info */}
         <div
-          className={`px-1 py-0.5 text-center truncate bg-white text-gray-600`}
+          className={`px-1 py-0.5 text-center truncate bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300`}
         >
           <p className={`${isSmall ? "text-[8px] md:text-[9px]" : "text-[9px] md:text-[10px]"} font-medium leading-tight`}>
             {pickMyteam ? playerFirstName !== playerLastName ? playerLastName : (<>&nbsp;</>) : (
               <>
-                {player?.point} <span className="text-gray-400 text-[7px] md:text-[8px]">{player?.team}</span>
+                {player?.point}
               </>
             )}
           </p>
