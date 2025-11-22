@@ -25,10 +25,10 @@ const Overlay = ({
       panelRef.current.style.removeProperty('transition');
       panelRef.current.style.removeProperty('transform');
     }
-    
+
     // Trigger animation first
     setAnimate(false);
-    
+
     // Wait for animation to complete before unmounting
     setTimeout(() => {
       onClose();
@@ -36,15 +36,16 @@ const Overlay = ({
   };
 
   // Mount/unmount animation
+  // Mount/unmount animation
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
-      // Double rAF ensures browser paints initial state before animating
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setAnimate(true);
-        });
-      });
+      // Use a small timeout to ensure the browser paints the initial state (translate-y-full)
+      // before we switch to the animate state (translate-y-0).
+      const t = setTimeout(() => {
+        setAnimate(true);
+      }, 10);
+      return () => clearTimeout(t);
     } else {
       setAnimate(false);
       const t = setTimeout(() => setMounted(false), DURATION);
