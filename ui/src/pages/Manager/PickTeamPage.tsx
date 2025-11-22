@@ -32,8 +32,9 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 const PickTeamPage = () => {
-  const { player, setPlayer } = usePlayerStore();
-  const { user } = useUserStore();
+  const player = usePlayerStore((state) => state.player);
+  const setPlayer = usePlayerStore((state) => state.setPlayer);
+  const user = useUserStore((state) => state.user);
 
   const {
     data: managerDetails,
@@ -60,15 +61,14 @@ const PickTeamPage = () => {
   const [editedBench, setEditedBench] = useState<TeamDetails["bench"]>(bench);
   const [roleError, setRoleError] = useState("");
   const [teamError, setTeamError] = useState("");
-  const {
-    setIsSubstitution,
-    isSubstitution,
-    substitutions,
-    setSubstitutions,
-    resetSubstitutions,
-    roles,
-    setRoles,
-  } = useManageTeamStore();
+
+  const setIsSubstitution = useManageTeamStore((state) => state.setIsSubstitution);
+  const isSubstitution = useManageTeamStore((state) => state.isSubstitution);
+  const substitutions = useManageTeamStore((state) => state.substitutions);
+  const setSubstitutions = useManageTeamStore((state) => state.setSubstitutions);
+  const resetSubstitutions = useManageTeamStore((state) => state.resetSubstitutions);
+  const roles = useManageTeamStore((state) => state.roles);
+  const setRoles = useManageTeamStore((state) => state.setRoles);
 
   const mutation = useSubstitution();
 
@@ -216,8 +216,8 @@ const PickTeamPage = () => {
     navigate({
       to: "/manager",
       viewTransition: {
-      types: ["back"], // different type name
-    },
+        types: ["back"], // different type name
+      },
     });
   };
 
@@ -225,9 +225,9 @@ const PickTeamPage = () => {
   //const updatedTeam = executeSwap(teamData, 10, 11); // Swap Biereth with Nico Williams
 
   return (
-          <div className="flex flex-col h-screen overflow-auto-y">
+    <div className="flex flex-col h-screen overflow-y-auto lg:overflow-hidden pb-48 lg:pb-0">
 
-      {user?.teamName && <Header teamName={user?.teamName} onBack={handleGoBack}/>}
+      {user?.teamName && <Header teamName={user?.teamName} onBack={handleGoBack} />}
       {pickMyTeam ? (
         <div className="flex items-center justify-center px-4 pt-4 pb-3 bg-dark-bg dark:bg-light-bg text-dark-text-primary dark:text-light-text-primary">
           <h6 className="text-center text-base">
@@ -260,7 +260,6 @@ const PickTeamPage = () => {
           label="Save"
         />
       </div>
-
       <GWPitch
         starting={editedStarting}
         bench={editedBench}
@@ -268,7 +267,6 @@ const PickTeamPage = () => {
         pickMyTeam={true}
         reset={handleSubReset}
       />
-
       <Overlay
         isOpen={showOverlay}
         onClose={() => handlePlayerOverlay(null)}
@@ -328,18 +326,18 @@ const PickTeamPage = () => {
               )}
               {!teamError && (
                 <>
-                 {Object.keys(roles).length > 0 &&
-                  (<div className="px-6 py-4">
-                    <h3 className="text-lg font-bold mb-4">Roles</h3>
-                    <div className="space-y-3">
-                      {roles?.captain && (
-                        <StatRow label="Captain" value={roles?.captain} />
-                      )}
-                      {roles?.vice && (
-                        <StatRow label="Vice Captain" value={roles?.vice} />
-                      )}
-                    </div>
-                  </div>)}
+                  {Object.keys(roles).length > 0 &&
+                    (<div className="px-6 py-4">
+                      <h3 className="text-lg font-bold mb-4">Roles</h3>
+                      <div className="space-y-3">
+                        {roles?.captain && (
+                          <StatRow label="Captain" value={roles?.captain} />
+                        )}
+                        {roles?.vice && (
+                          <StatRow label="Vice Captain" value={roles?.vice} />
+                        )}
+                      </div>
+                    </div>)}
                   {substitutions && substitutions?.length > 0 && (
                     <div className="px-6 py-4">
                       <h3 className="text-lg font-bold mb-4">Subs</h3>

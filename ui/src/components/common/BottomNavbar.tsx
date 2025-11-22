@@ -25,7 +25,7 @@ const BottomNavbar = () => {
   }
 
   return (
-    <nav className="bottom-navbar fixed bottom-0 bg-light-bg dark:bg-dark-bg w-full block lg:hidden flex-none border-t border-light-border dark:border-dark-border">
+    <nav className="bottom-navbar fixed bottom-0 bg-light-bg dark:bg-dark-bg w-full block lg:hidden flex-none border-t border-light-border dark:border-dark-border z-50">
       <div className="grid h-16 grid-cols-5">
         {navItems.map(({ label, path }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });
@@ -44,11 +44,10 @@ const BottomNavbar = () => {
               {label === "Notifications" && <Notification isActive={isActive} />}
 
               <span
-                className={`mt-1 ${
-                  isActive
+                className={`mt-1 ${isActive
                     ? "text-gray-400 dark:text-light-text-secondary font-semibold"
                     : ""
-                }`}
+                  }`}
               >
                 {label}
               </span>

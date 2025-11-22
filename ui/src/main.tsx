@@ -6,7 +6,7 @@ import { createRouter, Navigate, RouterProvider } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 import "./index.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { SpeedInsights } from '@vercel/speed-insights/react';
+import { injectSpeedInsights } from '@vercel/speed-insights';
 import { Analytics } from "@vercel/analytics/react"
 
 const queryClient = new QueryClient({
@@ -31,6 +31,9 @@ declare module "@tanstack/react-router" {
   }
 }
 
+injectSpeedInsights();
+
+
 const rootElement = document.getElementById("root")!;
 
 if (!rootElement.innerHTML) {
@@ -43,7 +46,6 @@ if (!rootElement.innerHTML) {
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeProvider>
-      <SpeedInsights />
       <Analytics />
     </StrictMode>
   );
