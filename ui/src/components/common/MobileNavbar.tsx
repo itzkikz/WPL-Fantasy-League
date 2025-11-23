@@ -25,7 +25,7 @@ const MobileNavbar = () => {
   }
 
   return (
-    <nav className="mobile-navbar w-full block lg:hidden flex-none border-b border-light-border dark:border-dark-border z-50 bg-light-bg dark:bg-dark-bg">
+    <nav className="mobile-navbar sticky top-0 w-full block lg:hidden flex-none border-b border-light-border dark:border-dark-border z-50 bg-light-bg dark:bg-dark-bg">
       <div className="grid h-16 grid-cols-5">
         {navItems.map(({ label, path }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });

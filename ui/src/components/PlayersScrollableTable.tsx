@@ -44,11 +44,11 @@ const PlayersScrollableTable = ({
   return (
     <div
       ref={tableContainerRef}
-      className="overflow-y-auto select-none h-[calc(100vh-10rem)] lg:h-[calc(100vh-6rem)]"
+      className="select-none lg:overflow-y-auto lg:h-[calc(100vh-6rem)]"
     // style={{ height: containerHeight }}
     >
       <table className="w-full border-collapse">
-        <thead className="sticky top-0 z-10 shadow-sm bg-light-surface dark:bg-dark-surface border-b border-light-border dark:border-dark-border">
+        <thead className="sticky top-16 lg:top-0 z-10 shadow-sm bg-light-surface dark:bg-dark-surface border-b border-light-border dark:border-dark-border">
           <tr>
             {headings.map((heading, index) => (
               <th

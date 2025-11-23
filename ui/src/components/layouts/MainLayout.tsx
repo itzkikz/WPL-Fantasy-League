@@ -11,7 +11,7 @@ export const MainLayout = () => {
         <main className="font-outfit min-h-screen shadow-sm text-primary">
             <PWAInstallBanner />
             <div className="">
-                <div className="flex h-screen flex-col mx-auto w-full">
+                <div className="flex h-screen flex-col mx-auto w-full overflow-y-auto">
                     <header className="header relative w-full h-15 shrink-0 overflow-hidden lg:hidden">
                         {/* Animated gradient overlay */}
                         {/* Content container */}

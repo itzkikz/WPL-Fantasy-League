@@ -26,7 +26,7 @@ const ManagerPage = () => {
   };
 
   return (
-    <div className="flex flex-col px-2 py-2 space-y-4 select-none h-[calc(100vh-10rem)] lg:h-[calc(100vh-6rem)]">
+    <div className="flex flex-col px-2 py-2 space-y-4 select-none lg:h-[calc(100vh-6rem)]">
       {managerDetails && (
         <>
           <ManagerStatsCard
