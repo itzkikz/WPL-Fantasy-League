@@ -41,6 +41,13 @@
   --color-text-secondary: var(--color-light-text-secondary);
   --color-border: var(--color-light-border);
   --color-skeleton: var(--color-light-skeleton);
+
+  /* Animation Duration Variables */
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 500ms;
 }
 
 /* Only apply dark colors when data-theme="dark" */
@@ -60,7 +67,7 @@ body {
   font-family: var(--font-sans);
   background-color: var(--color-bg);
   color: var(--color-text-primary);
-  transition: background-color 200ms, color 200ms;
+  transition: background-color var(--duration-normal), color var(--duration-normal);
 }
 
 
@@ -257,4 +264,82 @@ header {
 ::view-transition-old(header-static),
 ::view-transition-new(header-static) {
   animation-duration: 0s !important;
+}
+
+/* ============================================ */
+/* REUSABLE TRANSITION UTILITY CLASSES */
+/* ============================================ */
+
+/* Interactive elements: buttons, links, inputs */
+.transition-interactive {
+  transition: background-color var(--duration-normal),
+    border-color var(--duration-normal),
+    color var(--duration-normal),
+    opacity var(--duration-normal);
+}
+
+/* Color transitions only */
+.transition-colors {
+  transition: background-color var(--duration-normal),
+    border-color var(--duration-normal),
+    color var(--duration-normal);
+}
+
+/* Transform transitions only */
+.transition-transform {
+  transition: transform var(--duration-normal);
+}
+
+/* Opacity transitions */
+.transition-opacity {
+  transition: opacity var(--duration-slow);
+}
+
+/* Combined transform and opacity */
+.transition-all {
+  transition: all var(--duration-slow);
+}
+
+/* ============================================ */
+/* SKELETON LOADING ANIMATIONS */
+/* ============================================ */
+
+@keyframes skeleton-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.skeleton-pulse {
+  animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ============================================ */
+/* STAGGER ANIMATION UTILITIES */
+/* ============================================ */
+
+.stagger-1 {
+  animation-delay: 50ms;
+}
+
+.stagger-2 {
+  animation-delay: 100ms;
+}
+
+.stagger-3 {
+  animation-delay: 150ms;
+}
+
+.stagger-4 {
+  animation-delay: 200ms;
+}
+
+.stagger-5 {
+  animation-delay: 250ms;
 }

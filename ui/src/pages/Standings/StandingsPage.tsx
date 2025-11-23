@@ -1,4 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
+import { ViewTransitions } from "../../types/viewTransitions";
 import { useStandings } from "../../features/standings/hooks";
 import ScrollableTable from "../../components/ScrollableTable";
 import ScrollableTableSkeleton from "../../components/skeletons/ScrollableTableSkeleton";
@@ -11,19 +12,17 @@ const StandingsPage = () => {
     navigate({
       to: "/standings/$teamName",
       params: { teamName },
-      viewTransition: {
-      types: ["forward"], // custom type name
-    },
+      viewTransition: ViewTransitions.forward,
     });
   };
 
   return (
     <>
       <div className="flex-none px-4 pt-4 pb-3">
-          <p className="mt-2 text-xs text-center">
-            Last updated: <b>{standings && standings[0]?.last_update_date}</b>
-            (Local Time)
-          </p>
+        <p className="mt-2 text-xs text-center">
+          Last updated: <b>{standings && standings[0]?.last_update_date}</b>
+          (Local Time)
+        </p>
       </div>
       {isLoading ? (
         <ScrollableTableSkeleton />

@@ -27,6 +27,7 @@ import { Roles } from "../../store/types";
 import StatRow from "../../components/StatRow";
 import Toast from "../../components/common/Toast";
 import { useNavigate } from "@tanstack/react-router";
+import { ViewTransitions } from "../../types/viewTransitions";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -215,9 +216,7 @@ const PickTeamPage = () => {
   const handleGoBack = () => {
     navigate({
       to: "/manager",
-      viewTransition: {
-        types: ["back"], // different type name
-      },
+      viewTransition: ViewTransitions.back,
     });
   };
 

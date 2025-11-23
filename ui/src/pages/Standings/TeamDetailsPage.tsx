@@ -1,4 +1,5 @@
 import { getRouteApi, useNavigate } from "@tanstack/react-router";
+import { ViewTransitions } from "../../types/viewTransitions";
 import { useTeamDetails } from "../../features/standings/hooks";
 import { useState } from "react";
 import Header from "../../components/Header";
@@ -40,9 +41,7 @@ const TeamDetailsPage = () => {
   const handleGoBack = () => {
     navigate({
       to: "/standings",
-      viewTransition: {
-        types: ["back"], // different type name
-      },
+      viewTransition: ViewTransitions.back,
     });
   };
 

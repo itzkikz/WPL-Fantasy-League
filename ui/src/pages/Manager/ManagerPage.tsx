@@ -1,4 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
+import { ViewTransitions } from "../../types/viewTransitions";
 import ManagerStatsCard from "../../components/ManagerStatsCard";
 import ManagerPointsCards from "../../components/ManagerPointsCard";
 import { useUserStore } from "../../store/useUserStore";
@@ -13,9 +14,7 @@ const ManagerPage = () => {
   const handlePickTeamNavigation = () => {
     navigate({
       to: "/manager/pick-team",
-      viewTransition: {
-        types: ["forward"], // different type name
-      },
+      viewTransition: ViewTransitions.forward,
     });
   };
 
