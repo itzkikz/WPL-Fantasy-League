@@ -110,17 +110,17 @@ const GWPitch = ({
         </div>
 
         {/* Bench Container */}
-        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-b from-gray-900 to-black border-t-4 border-dark-accent shadow-[0_-4px_10px_rgba(0,0,0,0.5)] py-2 px-2 z-20 lg:static lg:bg-none lg:bg-transparent lg:border-none lg:shadow-none lg:w-64 lg:flex-none lg:p-0 lg:z-0">
+        <div className="fixed bottom-0 left-0 right-0 bg-light-bg dark:bg-dark-bg border-t-4 border-dark-accent shadow-[0_-4px_10px_rgba(0,0,0,0.5)] py-2 px-2 z-20 lg:static lg:bg-none lg:bg-transparent lg:border-none lg:shadow-none lg:w-64 lg:flex-none lg:p-0 lg:z-0">
           <div className="max-w-4xl mx-auto lg:mx-0 lg:h-full lg:flex lg:flex-col lg:justify-center">
-            <h3 className="text-center text-white lg:text-gray-800 lg:dark:text-white font-bold text-sm md:text-base mb-2 tracking-wider uppercase lg:mb-4">Substitutes</h3>
-            <div className="flex justify-center gap-2 md:gap-6 lg:flex-col lg:gap-4">
+            <h3 className="text-center lg:text-gray-800 lg:dark:text-white font-bold text-sm md:text-base mb-2 tracking-wider uppercase lg:mb-4">Substitutes</h3>
+            <div className="grid grid-cols-4 lg:flex lg:flex-col lg:gap-4">
               {bench?.map((eachPlayer) => (
                 <div key={eachPlayer.id} className="flex flex-col items-center lg:flex-row lg:gap-3 lg:bg-white lg:dark:bg-gray-800 lg:p-2 lg:rounded-md lg:shadow-sm lg:w-full">
                   <div className="text-[10px] md:text-xs font-bold text-gray-400 mb-1 lg:mb-0 lg:w-8 lg:text-center">
                     {eachPlayer.position}
                   </div>
                   <div
-                    className={`rounded-sm relative cursor-pointer ${getCardClass(eachPlayer?.isAvlSub || false, eachPlayer.name)}`}
+                    className={`bg-light-secondary rounded-sm relative cursor-pointer ${getCardClass(eachPlayer?.isAvlSub || false, eachPlayer.name)}`}
                   >
                     <PitchPlayerCard
                       player={eachPlayer}

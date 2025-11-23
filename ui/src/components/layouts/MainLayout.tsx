@@ -38,7 +38,7 @@ export const MainLayout = () => {
                                     </div>
 
                                     {/* Fantasy Text */}
-                                    <h1 className="text-white text-2xl font-bold tracking-tight">
+                                    <h1 className="text-2xl font-bold tracking-tight">
                                         WPL Fantasy
                                     </h1>
                                 </div>
@@ -49,7 +49,7 @@ export const MainLayout = () => {
                                     className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors border border-white/30"
                                 >
                                     <svg
-                                        className="w-6 h-6 text-white"
+                                        className="w-6 h-6"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
