@@ -343,3 +343,76 @@ header {
 .stagger-5 {
   animation-delay: 250ms;
 }
+
+/* ============================================
+   ACCESSIBILITY & MOBILE OPTIMIZATIONS
+   ============================================ */
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Touch optimizations for interactive elements */
+.touch-optimized,
+button,
+a,
+[role="button"],
+input[type="button"],
+input[type="submit"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Prevent text selection on interactive elements */
+.no-select,
+button,
+.cursor-pointer {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Active state for better touch feedback */
+.active-scale:active {
+  transform: scale(0.95);
+  transition: transform 100ms ease-out;
+}
+
+/* Global reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+  /* Disable smooth scroll */
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Disable all animations and transitions */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable specific animations */
+  .skeleton-pulse,
+  .animate-fade-in,
+  .animate-slide-up,
+  .stagger-1,
+  .stagger-2,
+  .stagger-3,
+  .stagger-4,
+  .stagger-5 {
+    animation: none !important;
+    animation-delay: 0ms !important;
+  }
+
+  /* Disable view transitions */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

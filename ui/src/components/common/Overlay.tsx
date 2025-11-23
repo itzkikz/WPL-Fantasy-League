@@ -20,12 +20,6 @@ const Overlay = ({
 
   // Smooth close used by click AND swipe
   const closeWithAnimation = () => {
-    if (panelRef.current) {
-      // Remove inline styles completely so Tailwind classes can work
-      panelRef.current.style.removeProperty('transition');
-      panelRef.current.style.removeProperty('transform');
-    }
-
     // Trigger animation first
     setAnimate(false);
 
@@ -36,12 +30,10 @@ const Overlay = ({
   };
 
   // Mount/unmount animation
-  // Mount/unmount animation
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
-      // Use a small timeout to ensure the browser paints the initial state (translate-y-full)
-      // before we switch to the animate state (translate-y-0).
+      // Small timeout to ensure browser paints initial state before animating
       const t = setTimeout(() => {
         setAnimate(true);
       }, 10);
@@ -55,15 +47,13 @@ const Overlay = ({
 
   if (!mounted) return null;
 
-  // ───────────────────────────────
-  // TOUCH HANDLERS FOR SWIPE DOWN
-  // ───────────────────────────────
+  // Touch handlers for swipe down
   const handleTouchStart = (e: React.TouchEvent) => {
     startY.current = e.touches[0].clientY;
     currentY.current = 0;
 
     if (panelRef.current) {
-      panelRef.current.style.transition = "none"; // disable animation during drag
+      panelRef.current.style.transition = "none";
     }
   };
 
@@ -88,7 +78,7 @@ const Overlay = ({
     if (!panelRef.current) return;
 
     if (dragged > 80) {
-      // Sufficient swipe → animate to bottom then close
+      // Swipe down to close
       panelRef.current.style.transition = `transform ${DURATION}ms cubic-bezier(0.25, 1, 0.5, 1)`;
       panelRef.current.style.transform = `translateY(100%)`;
 
@@ -101,7 +91,7 @@ const Overlay = ({
         setTimeout(() => onClose(), DURATION);
       }, DURATION);
     } else {
-      // Snap back to top
+      // Snap back
       panelRef.current.style.transition = `transform ${DURATION}ms cubic-bezier(0.25, 1, 0.5, 1)`;
       panelRef.current.style.transform = `translateY(0)`;
     }
@@ -109,30 +99,28 @@ const Overlay = ({
 
   return (
     <div
-      className={`
-        fixed inset-0 z-50 flex items-end 
-        transition-opacity duration-300
-        ${animate ? "opacity-100" : "opacity-0"}
-      `}
-      style={{ transitionTimingFunction: "cubic-bezier(0.25, 1, 0.5, 1)" }}
-      onClick={closeWithAnimation} // clicking outside closes with animation
+      className="fixed inset-0 z-50 flex items-end"
+      style={{
+        opacity: animate ? 1 : 0,
+        transition: "opacity 300ms cubic-bezier(0.25, 1, 0.5, 1)"
+      }}
+      onClick={closeWithAnimation}
     >
       <div className="absolute inset-0 bg-black/50" />
 
       <div
         ref={panelRef}
-        className={`
-          relative w-full transform transition-transform duration-300
-          ${animate ? "translate-y-0" : "translate-y-full"}
-        `}
-        style={{ transitionTimingFunction: "cubic-bezier(0.25, 1, 0.5, 1)" }}
-        onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+        className="relative w-full"
+        style={{
+          transform: animate ? "translateY(0)" : "translateY(100%)",
+          transition: "transform 300ms cubic-bezier(0.25, 1, 0.5, 1)"
+        }}
+        onClick={(e) => e.stopPropagation()}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="w-full h-[90vh] bg-white dark:bg-dark-bg rounded-t-3xl shadow-xl flex flex-col">
-
+        <div className="w-full max-h-[80vh] bg-white dark:bg-dark-bg rounded-t-3xl shadow-xl flex flex-col">
           {/* Drag Handle */}
           <div
             onClick={closeWithAnimation}

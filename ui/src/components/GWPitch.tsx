@@ -85,7 +85,7 @@ const GWPitch = ({
             </div>
           )}
 
-          <div className="flex flex-col justify-top w-full h-full gap-4 mt-8 mb-4 lg:mb-0 lg:mt-0 lg:justify-center">
+          <div className="flex flex-col justify-top w-full h-full gap-4 mb-4 lg:mb-0 lg:mt-0 lg:justify-center">
             {Object.keys(starting).map((key: string) => (
               <div key={key} className="flex justify-evenly gap-1 md:gap-3 select-none w-full px-2">
                 {starting[key].map((eachPlayer: Player) => (
