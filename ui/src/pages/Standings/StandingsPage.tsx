@@ -23,7 +23,18 @@ const StandingsPage = () => {
           (Local Time)
         </p>
       </div>
-      <ScrollableTable content={standings} onClick={handleTeamClick} />
+      {isLoading ? (
+        <div className="flex-1 overflow-hidden px-4">
+          {[...Array(10)].map((_, i) => (
+            <div
+              key={i}
+              className={`h-12 bg-light-surface dark:bg-dark-surface rounded mb-2 skeleton-pulse stagger-${Math.min(i + 1, 5)}`}
+            />
+          ))}
+        </div>
+      ) : (
+        <ScrollableTable content={standings} onClick={handleTeamClick} />
+      )}
     </>
   );
 };
