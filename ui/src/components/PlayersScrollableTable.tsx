@@ -42,88 +42,88 @@ const PlayersScrollableTable = ({
   const totalSize = rowVirtualizer.getTotalSize();
 
   return (
-      <div
-        ref={tableContainerRef}
-        className="overflow-y-auto select-none h-[calc(100vh-8rem)] lg:h-[calc(100vh-6rem)]"
-        // style={{ height: containerHeight }}
-      >
-        <table className="w-full border-collapse">
-          <thead className="sticky top-0 z-10 shadow-sm bg-light-surface dark:bg-dark-surface border-b border-light-border dark:border-dark-border">
+    <div
+      ref={tableContainerRef}
+      className="overflow-y-auto select-none h-[calc(100vh-10rem)] lg:h-[calc(100vh-6rem)]"
+    // style={{ height: containerHeight }}
+    >
+      <table className="w-full border-collapse">
+        <thead className="sticky top-0 z-10 shadow-sm bg-light-surface dark:bg-dark-surface border-b border-light-border dark:border-dark-border">
+          <tr>
+            {headings.map((heading, index) => (
+              <th
+                key={index + heading?.label}
+                className={heading?.class + ` text-xs font-semibold`}
+              >
+                {heading?.label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {/* Top spacer */}
+          {virtualItems.length > 0 && (
             <tr>
-              {headings.map((heading, index) => (
-                <th
-                  key={index + heading?.label}
-                  className={heading?.class + ` text-xs font-semibold`}
-                >
-                  {heading?.label}
-                </th>
-              ))}
+              <td
+                colSpan={headings.length}
+                style={{
+                  height: `${virtualItems[0]?.start ?? 0}px`,
+                }}
+              />
             </tr>
-          </thead>
-          <tbody>
-            {/* Top spacer */}
-            {virtualItems.length > 0 && (
-              <tr>
-                <td
-                  colSpan={headings.length}
-                  style={{
-                    height: `${virtualItems[0]?.start ?? 0}px`,
-                  }}
-                />
-              </tr>
-            )}
+          )}
 
-            {/* Render only visible items */}
-            {virtualItems.map((virtualItem) => {
-              const record = content[virtualItem.index];
-              return (
-                <tr
-                  key={`row-${virtualItem.index}`}
-                  className="transition-colors cursor-pointer hover:bg-light-border dark:hover:bg-dark-border border-b border-light-border dark:border-dark-border"
-                  onClick={() => onClick(record)}
-                  data-index={virtualItem.index}
-                >
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-1">
-                      <div className="px-2 py-2">
-                        <Info width="5" height="5" />
-                      </div>
-                      <div>
-                        <p className="text-[15px] leading-tight">
-                          {record.player_name}
-                        </p>
-                        <p className="text-xs text-gray-500">
-                          {getTeamData(record.club).abbreviation} | {mapPosition(record.position)} |{" "}
-                          {record?.team_name}
-                        </p>
-                      </div>
+          {/* Render only visible items */}
+          {virtualItems.map((virtualItem) => {
+            const record = content[virtualItem.index];
+            return (
+              <tr
+                key={`row-${virtualItem.index}`}
+                className="transition-colors cursor-pointer hover:bg-light-border dark:hover:bg-dark-border border-b border-light-border dark:border-dark-border"
+                onClick={() => onClick(record)}
+                data-index={virtualItem.index}
+              >
+                <td className="px-4 py-3">
+                  <div className="flex items-center gap-1">
+                    <div className="px-2 py-2">
+                      <Info width="5" height="5" />
                     </div>
-                  </td>
-                  <td className="px-4 py-3 text-right text-base font-semibold">
-                    {record.total_point}
-                  </td>
-                </tr>
-              );
-            })}
-
-            {/* Bottom spacer */}
-            {virtualItems.length > 0 && (
-              <tr>
-                <td
-                  colSpan={headings.length}
-                  style={{
-                    height: `${Math.max(
-                      0,
-                      totalSize -
-                        (virtualItems[virtualItems.length - 1]?.end ?? 0)
-                    )}px`,
-                  }}
-                />
+                    <div>
+                      <p className="text-[15px] leading-tight">
+                        {record.player_name}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {getTeamData(record.club).abbreviation} | {mapPosition(record.position)} |{" "}
+                        {record?.team_name}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td className="px-4 py-3 text-right text-base font-semibold">
+                  {record.total_point}
+                </td>
               </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+            );
+          })}
+
+          {/* Bottom spacer */}
+          {virtualItems.length > 0 && (
+            <tr>
+              <td
+                colSpan={headings.length}
+                style={{
+                  height: `${Math.max(
+                    0,
+                    totalSize -
+                    (virtualItems[virtualItems.length - 1]?.end ?? 0)
+                  )}px`,
+                }}
+              />
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

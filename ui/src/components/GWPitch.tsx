@@ -85,7 +85,7 @@ const GWPitch = ({
             </div>
           )}
 
-          <div className="flex flex-col justify-top w-full h-full gap-4 mt-8 mb-24 lg:mb-0 lg:mt-0 lg:justify-center">
+          <div className="flex flex-col justify-top w-full h-full gap-4 mt-8 mb-4 lg:mb-0 lg:mt-0 lg:justify-center">
             {Object.keys(starting).map((key: string) => (
               <div key={key} className="flex justify-evenly gap-1 md:gap-3 select-none w-full px-2">
                 {starting[key].map((eachPlayer: Player) => (
@@ -110,7 +110,7 @@ const GWPitch = ({
         </div>
 
         {/* Bench Container */}
-        <div className="fixed bottom-16 left-0 right-0 bg-gradient-to-b from-gray-900 to-black border-t-4 border-dark-accent shadow-[0_-4px_10px_rgba(0,0,0,0.5)] py-2 px-2 z-20 lg:static lg:bg-none lg:bg-transparent lg:border-none lg:shadow-none lg:w-64 lg:flex-none lg:p-0 lg:z-0">
+        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-b from-gray-900 to-black border-t-4 border-dark-accent shadow-[0_-4px_10px_rgba(0,0,0,0.5)] py-2 px-2 z-20 lg:static lg:bg-none lg:bg-transparent lg:border-none lg:shadow-none lg:w-64 lg:flex-none lg:p-0 lg:z-0">
           <div className="max-w-4xl mx-auto lg:mx-0 lg:h-full lg:flex lg:flex-col lg:justify-center">
             <h3 className="text-center text-white lg:text-gray-800 lg:dark:text-white font-bold text-sm md:text-base mb-2 tracking-wider uppercase lg:mb-4">Substitutes</h3>
             <div className="flex justify-center gap-2 md:gap-6 lg:flex-col lg:gap-4">

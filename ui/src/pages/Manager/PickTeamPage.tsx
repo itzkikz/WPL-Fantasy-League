@@ -225,7 +225,7 @@ const PickTeamPage = () => {
   //const updatedTeam = executeSwap(teamData, 10, 11); // Swap Biereth with Nico Williams
 
   return (
-    <div className="flex flex-col h-screen overflow-y-auto lg:overflow-hidden pb-48 lg:pb-0">
+    <div className="flex flex-col h-screen overflow-y-auto lg:overflow-hidden lg:pb-0">
 
       {user?.teamName && <Header teamName={user?.teamName} onBack={handleGoBack} />}
       {pickMyTeam ? (

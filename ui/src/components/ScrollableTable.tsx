@@ -26,7 +26,7 @@ const ScrollableTable = ({
 }: ScrollableTableProps) => {
   return (
     // <div className="flex-1 overflow-hidden select-none">
-    <div className="overflow-y-auto select-none h-[calc(100vh-8rem)] lg:h-[calc(100vh-6rem)]">
+    <div className="overflow-y-auto select-none h-[calc(100vh-10rem)] lg:h-[calc(100vh-6rem)]">
       <table className="w-full">
         {/* Sticky table header */}
         <thead className="sticky top-0 z-10 shadow-sm bg-light-surface dark:bg-dark-surface border-b border-light-border dark:border-dark-border">

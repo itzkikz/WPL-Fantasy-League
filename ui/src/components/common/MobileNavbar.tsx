@@ -5,7 +5,7 @@ import UserSettings from "../icons/UserSettings";
 import Graph from "../icons/Graph";
 import Notification from "../icons/Notification";
 
-const BottomNavbar = () => {
+const MobileNavbar = () => {
   const matchRoute = useMatchRoute();
 
   const navItems = [
@@ -16,16 +16,16 @@ const BottomNavbar = () => {
     { label: "Settings", path: "/settings" },
   ];
 
-  if (
-    matchRoute({ to: "/login" }) ||
-    matchRoute({ to: "/maintenance" }) ||
-    matchRoute({ to: "/" })
-  ) {
+  const isBaseRoute = navItems.some((item) =>
+    matchRoute({ to: item.path, fuzzy: false })
+  );
+
+  if (!isBaseRoute) {
     return null;
   }
 
   return (
-    <nav className="bottom-navbar fixed bottom-0 bg-light-bg dark:bg-dark-bg w-full block lg:hidden flex-none border-t border-light-border dark:border-dark-border z-50">
+    <nav className="mobile-navbar w-full block lg:hidden flex-none border-b border-light-border dark:border-dark-border z-50 bg-light-bg dark:bg-dark-bg">
       <div className="grid h-16 grid-cols-5">
         {navItems.map(({ label, path }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });
@@ -45,8 +45,8 @@ const BottomNavbar = () => {
 
               <span
                 className={`mt-1 ${isActive
-                    ? "text-gray-400 dark:text-light-text-secondary font-semibold"
-                    : ""
+                  ? "text-gray-400 dark:text-light-text-secondary font-semibold"
+                  : ""
                   }`}
               >
                 {label}
@@ -59,4 +59,4 @@ const BottomNavbar = () => {
   );
 };
 
-export default BottomNavbar;
+export default MobileNavbar;

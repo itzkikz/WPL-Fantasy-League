@@ -48,7 +48,7 @@ const TeamDetailsPage = () => {
 
   return (
     <>
-      <div className="flex flex-col h-screen overflow-y-auto lg:overflow-hidden pb-48 lg:pb-0">
+      <div className="flex flex-col h-screen overflow-y-auto lg:overflow-hidden lg:pb-0">
         <Header teamName={teamName} onBack={handleGoBack} />
         {isLoading ? (
           <GWNavigationSkeleton />
