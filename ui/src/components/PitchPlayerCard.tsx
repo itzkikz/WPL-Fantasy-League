@@ -57,9 +57,9 @@ const PitchPlayerCard = ({
           <span className="text-[5px] md:text-[6px] font-bold text-white/90 drop-shadow-md uppercase tracking-tighter leading-none">
             {player?.team}
           </span>
-          <span className="text-[7px] md:text-[8px] font-bold text-white drop-shadow-md leading-none mt-0.5">
+          {/* <span className="text-[7px] md:text-[8px] font-bold text-white drop-shadow-md leading-none mt-0.5">
             {player?.id ? player.id % 99 || 99 : ""}
-          </span>
+          </span> */}
         </div>
       </div>
       {/* Info Box Container */}

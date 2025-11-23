@@ -25,7 +25,7 @@ export const MainLayout = () => {
         <main className="font-outfit min-h-screen shadow-sm text-primary">
             <PWAInstallBanner />
             <div className="">
-                <div className="flex h-screen flex-col mx-auto w-full overflow-y-auto">
+                <div className="flex h-screen flex-col mx-auto w-full overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
                     {isBaseRoute && (
                         <header className="header relative w-full h-15 shrink-0 overflow-hidden lg:hidden">
                             {/* Animated gradient overlay */}

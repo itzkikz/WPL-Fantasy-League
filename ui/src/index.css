@@ -402,6 +402,201 @@ button,
   .animate-slide-up,
   .stagger-1,
   .stagger-2,
+  }
+}
+
+@keyframes tab-fade-out-down {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* Only when a bottom‑nav transition is active */
+html:active-view-transition-type(tab-switch) {
+  &::view-transition-group(root) {
+    animation-duration: 150ms;
+    animation-timing-function: ease-out;
+  }
+
+  &::view-transition-old(root) {
+    animation-name: tab-fade-out-down;
+  }
+
+  &::view-transition-new(root) {
+    animation-name: tab-fade-in-up;
+  }
+}
+
+/* For bottom navbar */
+.mobile-navbar {
+  view-transition-name: bottom-nav;
+}
+
+/* For side navbar */
+.side-navbar {
+  view-transition-name: side-nav;
+}
+
+/* For header */
+header {
+  view-transition-name: header-static;
+}
+
+/* Disable animations for all navigation elements */
+::view-transition-group(bottom-nav),
+::view-transition-old(bottom-nav),
+::view-transition-new(bottom-nav),
+::view-transition-group(side-nav),
+::view-transition-old(side-nav),
+::view-transition-new(side-nav),
+::view-transition-group(header-static),
+::view-transition-old(header-static),
+::view-transition-new(header-static) {
+  animation-duration: 0s !important;
+}
+
+/* ============================================ */
+/* REUSABLE TRANSITION UTILITY CLASSES */
+/* ============================================ */
+
+/* Interactive elements: buttons, links, inputs */
+.transition-interactive {
+  transition: background-color var(--duration-normal),
+    border-color var(--duration-normal),
+    color var(--duration-normal),
+    opacity var(--duration-normal);
+}
+
+/* Color transitions only */
+.transition-colors {
+  transition: background-color var(--duration-normal),
+    border-color var(--duration-normal),
+    color var(--duration-normal);
+}
+
+/* Transform transitions only */
+.transition-transform {
+  transition: transform var(--duration-normal);
+}
+
+/* Opacity transitions */
+.transition-opacity {
+  transition: opacity var(--duration-slow);
+}
+
+/* Combined transform and opacity */
+.transition-all {
+  transition: all var(--duration-slow);
+}
+
+/* ============================================ */
+/* SKELETON LOADING ANIMATIONS */
+/* ============================================ */
+
+@keyframes skeleton-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.skeleton-pulse {
+  animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ============================================ */
+/* STAGGER ANIMATION UTILITIES */
+/* ============================================ */
+
+.stagger-1 {
+  animation-delay: 50ms;
+}
+
+.stagger-2 {
+  animation-delay: 100ms;
+}
+
+.stagger-3 {
+  animation-delay: 150ms;
+}
+
+.stagger-4 {
+  animation-delay: 200ms;
+}
+
+.stagger-5 {
+  animation-delay: 250ms;
+}
+
+/* ============================================
+   ACCESSIBILITY & MOBILE OPTIMIZATIONS
+   ============================================ */
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Touch optimizations for interactive elements */
+.touch-optimized,
+button,
+a,
+[role="button"],
+input[type="button"],
+input[type="submit"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Prevent text selection on interactive elements */
+.no-select,
+button,
+.cursor-pointer {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Active state for better touch feedback */
+.active-scale:active {
+  transform: scale(0.95);
+  transition: transform 100ms ease-out;
+}
+
+/* Global reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+  /* Disable smooth scroll */
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Disable all animations and transitions */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable specific animations */
+  .skeleton-pulse,
+  .animate-fade-in,
+  .animate-slide-up,
+  .stagger-1,
+  .stagger-2,
   .stagger-3,
   .stagger-4,
   .stagger-5 {
@@ -414,5 +609,20 @@ button,
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation: none !important;
+  }
+}
+
+/* iOS-specific fixes for sticky positioning and scrolling */
+.mobile-navbar {
+  position: -webkit-sticky; /* For older iOS versions */
+  position: sticky;
+  transform: translateZ(0); /* Force GPU acceleration on iOS */
+  -webkit-transform: translateZ(0);
+}
+
+/* Ensure smooth scrolling on iOS */
+@supports (-webkit-overflow-scrolling: touch) {
+  * {
+    -webkit-overflow-scrolling: touch;
   }
 }

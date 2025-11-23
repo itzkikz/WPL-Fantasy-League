@@ -91,7 +91,7 @@ const GWPitch = ({
                 {starting[key].map((eachPlayer: Player) => (
                   <div key={eachPlayer.id} className={`flex flex-col items-center`}>
                     <div
-                      className={`rounded-md relative cursor-pointer transition-all duration-300 ${getCardClass(eachPlayer?.isAvlSub || false, eachPlayer?.name)}`}
+                      className={`bg-light-secondary rounded-md relative cursor-pointer transition-all duration-300 ${getCardClass(eachPlayer?.isAvlSub || false, eachPlayer?.name)}`}
                     >
                       <PitchPlayerCard
                         key={eachPlayer.id}
