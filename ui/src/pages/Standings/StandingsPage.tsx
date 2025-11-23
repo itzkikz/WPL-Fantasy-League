@@ -2,7 +2,6 @@ import { useNavigate } from "@tanstack/react-router";
 import { ViewTransitions } from "../../types/viewTransitions";
 import { useStandings } from "../../features/standings/hooks";
 import ScrollableTable from "../../components/ScrollableTable";
-import ScrollableTableSkeleton from "../../components/skeletons/ScrollableTableSkeleton";
 
 const StandingsPage = () => {
   const navigate = useNavigate();
@@ -24,11 +23,7 @@ const StandingsPage = () => {
           (Local Time)
         </p>
       </div>
-      {isLoading ? (
-        <ScrollableTableSkeleton />
-      ) : (
-        <ScrollableTable content={standings} onClick={handleTeamClick} />
-      )}
+      <ScrollableTable content={standings} onClick={handleTeamClick} />
     </>
   );
 };

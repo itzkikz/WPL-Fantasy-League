@@ -8,10 +8,7 @@ import GWStatsCards from "../../components/GWStatsCards";
 import GWTabSwitcher from "../../components/GWTabSwitcher";
 import GWPitch from "../../components/GWPitch";
 import GWPlayerList from "../../components/GWPlayerList";
-import GWPitchSkeleton from "../../components/skeletons/GWPitchSkeleton";
-import GWStatsCardsSkeleton from "../../components/skeletons/GWStatsCardsSkeleton";
 import PlayerStatsCard from "../../components/player/PlayerStatsCard";
-import GWNavigationSkeleton from "../../components/skeletons/GWNavigationSkeleton";
 import Overlay from "../../components/common/Overlay";
 import { Player } from "../../features/players/types";
 import { usePlayerStore } from "../../store/usePlayerStore";
@@ -49,36 +46,25 @@ const TeamDetailsPage = () => {
     <>
       <div className="flex flex-col lg:h-screen lg:overflow-hidden lg:pb-0">
         <Header teamName={teamName} onBack={handleGoBack} />
-        {isLoading ? (
-          <GWNavigationSkeleton />
-        ) : (
-          <GWNavigation
-            gameWeek={gw}
-            currentGW={currentGw}
-            setGameweek={setGameWeek}
-          />
-        )}
+        <GWNavigation
+          gameWeek={gw}
+          currentGW={currentGw}
+          setGameweek={setGameWeek}
+        />
 
-        {isLoading ? (
-          <GWStatsCardsSkeleton />
-        ) : (
-          <GWStatsCards
-            avg={avg}
-            highest={highest}
-            totalGWScore={totalGWScore}
-          />
-        )}
+        <GWStatsCards
+          avg={avg}
+          highest={highest}
+          totalGWScore={totalGWScore}
+        />
         <GWTabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
         {activeTab === "pitch" &&
-          (isLoading ? (
-            <GWPitchSkeleton />
-          ) : (
-            <GWPitch
-              starting={starting}
-              bench={bench}
-              onClick={handlePlayerOverlay}
-            />
-          ))}
+          <GWPitch
+            starting={starting}
+            bench={bench}
+            onClick={handlePlayerOverlay}
+          />
+        }
         {activeTab === "list" && (
           <GWPlayerList
             starting={starting}
