@@ -52,7 +52,6 @@ const GWPitch = ({
             backgroundImage: "url('/pitch.svg')",
           }}
         >
-          <PitchBanner />
           <div className="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-sm items-center  justify-center mr-2">
             <img
               src={Logo}

@@ -43,29 +43,54 @@ const PitchPlayerCard = ({
       )}
 
       {/* Jersey Image/Placeholder */}
-      <div className="relative mb-1 z-10 drop-shadow-lg">
-        {/* Using the teamColor to simulate a jersey if no image is available, or could use an SVG jersey icon colored dynamically */}
-        <svg
-          viewBox="0 0 24 24"
-          fill={player?.teamColor || "#ccc"}
-          className={`w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 drop-shadow-sm`}
-          xmlns="http://www.w3.org/2000/svg"
+      <div className="relative mb-1 z-10 drop-shadow-lg flex items-center justify-center">
+        <div
+          className="relative w-12 h-12 md:w-12 md:h-12 lg:w-14 lg:h-14"
         >
-          <path d="M20.5 5.5l-4-2c-0.5-0.2-1-0.3-1.5-0.3H9c-0.5 0-1 0.1-1.5 0.3l-4 2C3.2 5.6 3 6 3.1 6.4l1 3c0.1 0.4 0.5 0.6 0.9 0.6h0.5v10c0 0.6 0.4 1 1 1h11c0.6 0 1-0.4 1-1V10h0.5c0.4 0 0.8-0.2 0.9-0.6l1-3C21 6 20.8 5.6 20.5 5.5z" />
-        </svg>
-        <div className="absolute inset-0 flex flex-col items-center justify-center pt-1.5 pointer-events-none">
-          <span className="text-[5px] md:text-[6px] font-bold text-white/90 drop-shadow-md uppercase tracking-tighter leading-none">
-            {player?.team}
-          </span>
-          {/* <span className="text-[7px] md:text-[8px] font-bold text-white drop-shadow-md leading-none mt-0.5">
-            {player?.id ? player.id % 99 || 99 : ""}
-          </span> */}
+          {/* Base color layer */}
+          <div
+            className="absolute inset-0 w-full h-full"
+            style={{
+              backgroundColor: player?.teamColor || "#ccc",
+              maskImage: "url('/jersey-3d.png')",
+              WebkitMaskImage: "url('/jersey-3d.png')",
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+            }}
+          />
+
+          {/* Texture/Shading layer */}
+          <img
+            src="/jersey-3d.png"
+            alt="Jersey"
+            className="absolute inset-0 w-full h-full object-contain mix-blend-multiply"
+          />
+
+          {/* Highlight layer to bring back some whites/highlights if multiply makes it too dark */}
+          <img
+            src="/jersey-3d.png"
+            alt="Jersey Highlight"
+            className="absolute inset-0 w-full h-full object-contain mix-blend-hard-light opacity-40"
+          />
+
+          <div className="absolute inset-0 flex flex-col items-center justify-center pt-1.5 pointer-events-none z-20">
+            <span className="text-[8px] md:text-[10px] font-bold text-white/90 drop-shadow-md leading-none mb-0.5 font-mono">
+              {player?.id ? (player.id % 99 === 0 ? 99 : player.id % 99) : 10}
+            </span>
+            <span className="text-[5px] md:text-[6px] font-bold text-white/90 drop-shadow-md uppercase tracking-tighter leading-none">
+              {player?.team}
+            </span>
+          </div>
         </div>
       </div>
       {/* Info Box Container */}
-      <div className="flex flex-col w-full bg-white dark:bg-gray-700 rounded-sm overflow-hidden shadow-sm z-10">
+      <div className="flex flex-col w-full bg-light-bg dark:bg-dark-bg rounded-sm overflow-hidden shadow-sm z-10">
         {/* Player Name */}
-        <div className="px-1 py-0.5 text-center bg-white dark:bg-gray-700 border-b border-gray-100 dark:border-gray-600">
+        <div className="px-1 py-0.5 text-center  border-b border-gray-100 dark:border-gray-600">
           <p
             className={`${isSmall ? "text-[9px] md:text-[10px]" : "text-[10px] md:text-xs"
               } font-bold text-gray-900 dark:text-white truncate leading-tight`}
@@ -80,7 +105,7 @@ const PitchPlayerCard = ({
 
         {/* Points / Team Info */}
         <div
-          className={`px-1 py-0.5 text-center truncate bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300`}
+          className={`px-1 py-0.5 text-center truncate bg-light-bg dark:bg-dark-bg text-gray-600 dark:text-gray-300`}
         >
           <p className={`${isSmall ? "text-[8px] md:text-[9px]" : "text-[9px] md:text-[10px]"} font-medium leading-tight`}>
             {pickMyteam ? playerFirstName !== playerLastName ? playerLastName : (<>&nbsp;</>) : (
