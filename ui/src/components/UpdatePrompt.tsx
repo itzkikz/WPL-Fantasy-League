@@ -19,10 +19,25 @@ export function UpdatePrompt() {
                     console.log('SW Registered:', reg)
                     setRegistration(reg)
 
-                    // Check for updates periodically
+                    // Check for updates more frequently (every 5 minutes instead of 1 hour)
+                    // This helps iOS PWAs detect updates faster
                     setInterval(() => {
+                        console.log('Checking for SW updates...')
                         reg.update()
-                    }, 60 * 60 * 1000) // Check every hour
+                    }, 5 * 60 * 1000) // Check every 5 minutes
+
+                    // Also check for updates when the app gains focus
+                    // This is critical for iOS PWAs that may not check otherwise
+                    const checkOnFocus = () => {
+                        console.log('App focused - checking for updates')
+                        reg.update()
+                    }
+                    window.addEventListener('focus', checkOnFocus)
+                    document.addEventListener('visibilitychange', () => {
+                        if (!document.hidden) {
+                            checkOnFocus()
+                        }
+                    })
 
                     // Listen for updates
                     reg.addEventListener('updatefound', () => {
@@ -30,6 +45,7 @@ export function UpdatePrompt() {
                         if (newWorker) {
                             newWorker.addEventListener('statechange', () => {
                                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    console.log('New service worker installed - prompting user')
                                     setNeedRefresh(true)
                                 }
                             })

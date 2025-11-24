@@ -10,7 +10,7 @@ import { CacheableResponsePlugin } from 'workbox-cacheable-response'
 declare const self: ServiceWorkerGlobalScope
 
 // VERSION - INCREMENT THIS ON EACH DEPLOYMENT TO FORCE CACHE REFRESH
-const CACHE_VERSION = 'v2'
+const CACHE_VERSION = 'v3'
 const CACHE_NAME = `wpl-fantasy-${CACHE_VERSION}`
 
 // Take control ASAP
