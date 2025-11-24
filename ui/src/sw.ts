@@ -9,6 +9,10 @@ import { CacheableResponsePlugin } from 'workbox-cacheable-response'
 
 declare const self: ServiceWorkerGlobalScope
 
+// VERSION - INCREMENT THIS ON EACH DEPLOYMENT TO FORCE CACHE REFRESH
+const CACHE_VERSION = 'v2'
+const CACHE_NAME = `wpl-fantasy-${CACHE_VERSION}`
+
 // Take control ASAP
 self.skipWaiting()
 clientsClaim()
@@ -38,7 +42,7 @@ registerRoute(
     request.destination === 'worker' ||
     request.destination === 'font',
   new StaleWhileRevalidate({
-    cacheName: 'assets',
+    cacheName: `${CACHE_NAME}-assets`,
     plugins: [new CacheableResponsePlugin({ statuses: [200] })],
   })
 )
@@ -47,7 +51,7 @@ registerRoute(
 registerRoute(
   ({ request }) => request.destination === 'image',
   new CacheFirst({
-    cacheName: 'images',
+    cacheName: `${CACHE_NAME}-images`,
     plugins: [
       new CacheableResponsePlugin({ statuses: [200] }),
       new ExpirationPlugin({ maxEntries: 60, maxAgeSeconds: 60 * 60 * 24 * 30 }),
@@ -70,7 +74,7 @@ registerRoute(
   ({ url }) =>
     /^https:\/\/api-proxy\.wplfantasy\.workers\.dev\/api\/.*$/i.test(url.href),
   new StaleWhileRevalidate({
-    cacheName: 'api-cache-v1',
+    cacheName: `${CACHE_NAME}-api`,
     plugins: [
       new CacheableResponsePlugin({ statuses: [0, 200] }),
       new ExpirationPlugin({ maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 }),
@@ -120,7 +124,18 @@ self.addEventListener('install', (_event: ExtendableEvent) => {
 })
 
 self.addEventListener('activate', (event: ExtendableEvent) => {
-  event.waitUntil(self.clients.claim())
+  event.waitUntil(
+    (async () => {
+      // Delete old caches when service worker activates
+      const cacheNames = await caches.keys()
+      await Promise.all(
+        cacheNames
+          .filter((name) => name.startsWith('wpl-fantasy-') && !name.startsWith(CACHE_NAME))
+          .map((name) => caches.delete(name))
+      )
+      await self.clients.claim()
+    })()
+  )
 })
 
 // Handle SKIP_WAITING message from update prompt
@@ -151,12 +166,15 @@ self.addEventListener('push', (event: PushEvent) => {
   const options: NotificationOptions = {
     body: payload.body ?? '',
     tag: payload.tag ?? 'live-activity',
-    renotify: payload.renotify ?? true,
     // Use paths that exist in your deployed public path; adjust if app is served under a subpath.
     badge: payload.badge ?? '/pwa-192x192.png',
     icon: payload.icon ?? '/pwa-192x192.png',
     data: payload.data ?? { url: payload.url ?? '/' },
-    actions: payload.actions ?? [],
+  }
+
+  // Add actions separately if provided (not in TS definition but supported by browsers)
+  if (payload.actions) {
+    (options as any).actions = payload.actions
   }
 
   const showPromise = self.registration.showNotification(title, options)
@@ -193,7 +211,7 @@ registerRoute(
     url.origin === 'https://fonts.googleapis.com' &&
     url.pathname.startsWith('/css2'),
   new StaleWhileRevalidate({
-    cacheName: 'google-fonts-stylesheets',
+    cacheName: `${CACHE_NAME}-google-fonts-stylesheets`,
   })
 )
 
@@ -203,7 +221,7 @@ registerRoute(
     url.origin === 'https://fonts.gstatic.com' &&
     (url.pathname.endsWith('.woff2') || url.pathname.endsWith('.ttf')),
   new CacheFirst({
-    cacheName: 'google-fonts-webfonts',
+    cacheName: `${CACHE_NAME}-google-fonts-webfonts`,
     plugins: [
       new CacheableResponsePlugin({ statuses: [0, 200] }),
       new ExpirationPlugin({ maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 365 }),

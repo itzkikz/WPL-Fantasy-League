@@ -79,7 +79,7 @@ const PitchPlayerCard = ({
 
           <div className="absolute inset-0 flex flex-col items-center justify-center pt-1.5 pointer-events-none z-20">
             <span className="text-[8px] md:text-[10px] font-bold text-white/90 drop-shadow-md leading-none mb-0.5 font-mono">
-              {player?.id ? (player.id % 99 === 0 ? 99 : player.id % 99) : 10}
+              {"00"}
             </span>
             <span className="text-[5px] md:text-[6px] font-bold text-white/90 drop-shadow-md uppercase tracking-tighter leading-none">
               {player?.team}
@@ -88,7 +88,7 @@ const PitchPlayerCard = ({
         </div>
       </div>
       {/* Info Box Container */}
-      <div className="flex flex-col w-full bg-light-bg dark:bg-dark-bg rounded-sm overflow-hidden shadow-sm z-10">
+      <div className="flex flex-col w-full bg-light-bg dark:bg-dark-surface rounded-sm overflow-hidden shadow-sm z-10">
         {/* Player Name */}
         <div className="px-1 py-0.5 text-center  border-b border-gray-100 dark:border-gray-600">
           <p
@@ -105,9 +105,9 @@ const PitchPlayerCard = ({
 
         {/* Points / Team Info */}
         <div
-          className={`px-1 py-0.5 text-center truncate bg-light-bg dark:bg-dark-bg text-gray-600 dark:text-gray-300`}
+          className={`px-1 py-0.5 text-center truncate bg-light-bg dark:bg-light-bg text-gray-600 dark:text-dark-surface`}
         >
-          <p className={`${isSmall ? "text-[8px] md:text-[9px]" : "text-[9px] md:text-[10px]"} font-medium leading-tight`}>
+          <p className={`${isSmall ? "text-[8px] md:text-[9px]" : "text-xl md:text-[10px]"} font-semibold leading-tight`}>
             {pickMyteam ? playerFirstName !== playerLastName ? playerLastName : (<>&nbsp;</>) : (
               <>
                 {player?.point}
