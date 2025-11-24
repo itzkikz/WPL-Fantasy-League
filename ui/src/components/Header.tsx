@@ -9,7 +9,7 @@ interface HeaderProps {
 const Header = ({ teamName, onBack }: HeaderProps) => {
 
   return (
-    <div className="flex-none">
+    <div className="sticky top-0 z-50 bg-light-bg dark:bg-dark-bg/90 backdrop-blur-md flex-none transition-colors duration-200">
       <div className="flex items-center justify-between px-2">
         <Button onClick={onBack} type="NoBackground">
           <AngleLeft height="8" width="8" />

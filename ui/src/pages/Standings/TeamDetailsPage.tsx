@@ -44,66 +44,70 @@ const TeamDetailsPage = () => {
 
   return (
     <>
-      <div className="flex flex-col lg:h-screen lg:overflow-hidden lg:pb-0">
+      <div className="flex flex-col h-screen overflow-hidden bg-light-bg dark:bg-dark-bg">
         <Header teamName={teamName} onBack={handleGoBack} />
 
-        {isLoading ? (
-          <div className="flex items-center justify-center gap-4 px-4 py-3">
-            <div className="h-10 w-20 bg-light-surface dark:bg-dark-surface rounded skeleton-pulse" />
-            <div className="h-10 flex-1 bg-light-surface dark:bg-dark-surface rounded skeleton-pulse" />
-            <div className="h-10 w-20 bg-light-surface dark:bg-dark-surface rounded skeleton-pulse" />
-          </div>
-        ) : (
-          <GWNavigation
-            gameWeek={gw}
-            currentGW={currentGw}
-            setGameweek={setGameWeek}
-          />
-        )}
-
-        {isLoading ? (
-          <div className="grid grid-cols-3 gap-3 px-4 py-3">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className={`skeleton-pulse stagger-${i}`}>
-                <div className="h-16 bg-light-surface dark:bg-dark-surface rounded" />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <GWStatsCards
-            avg={avg}
-            highest={highest}
-            totalGWScore={totalGWScore}
-          />
-        )}
-
-        <GWTabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
-
-        {activeTab === "pitch" && (
-          isLoading ? (
-            <div className="flex-1 flex flex-col items-center justify-center gap-4 p-4">
-              <div className="h-64 w-full max-w-2xl bg-light-surface dark:bg-dark-surface rounded-lg skeleton-pulse" />
-              <div className="grid grid-cols-4 gap-2 w-full max-w-2xl">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className={`h-16 bg-light-surface dark:bg-dark-surface rounded skeleton-pulse stagger-${i}`} />
-                ))}
-              </div>
+        <div className="flex-none z-40 bg-light-bg dark:bg-dark-bg">
+          {isLoading ? (
+            <div className="flex items-center justify-center gap-4 px-4 py-3">
+              <div className="h-10 w-20 bg-light-surface dark:bg-dark-surface rounded skeleton-pulse" />
+              <div className="h-10 flex-1 bg-light-surface dark:bg-dark-surface rounded skeleton-pulse" />
+              <div className="h-10 w-20 bg-light-surface dark:bg-dark-surface rounded skeleton-pulse" />
             </div>
           ) : (
-            <GWPitch
+            <GWNavigation
+              gameWeek={gw}
+              currentGW={currentGw}
+              setGameweek={setGameWeek}
+            />
+          )}
+
+          {isLoading ? (
+            <div className="grid grid-cols-3 gap-3 px-4 py-3">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className={`skeleton-pulse stagger-${i}`}>
+                  <div className="h-16 bg-light-surface dark:bg-dark-surface rounded" />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <GWStatsCards
+              avg={avg}
+              highest={highest}
+              totalGWScore={totalGWScore}
+            />
+          )}
+
+          <GWTabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
+        </div>
+
+        <div className="flex-1 overflow-y-auto relative">
+          {activeTab === "pitch" && (
+            isLoading ? (
+              <div className="flex-1 flex flex-col items-center justify-center gap-4 p-4">
+                <div className="h-64 w-full max-w-2xl bg-light-surface dark:bg-dark-surface rounded-lg skeleton-pulse" />
+                <div className="grid grid-cols-4 gap-2 w-full max-w-2xl">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className={`h-16 bg-light-surface dark:bg-dark-surface rounded skeleton-pulse stagger-${i}`} />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              starting && <GWPitch
+                starting={starting}
+                bench={bench || []}
+                onClick={handlePlayerOverlay}
+              />
+            )
+          )}
+          {activeTab === "list" && starting && (
+            <GWPlayerList
               starting={starting}
-              bench={bench}
+              bench={bench || []}
               onClick={handlePlayerOverlay}
             />
-          )
-        )}
-        {activeTab === "list" && (
-          <GWPlayerList
-            starting={starting}
-            bench={bench}
-            onClick={handlePlayerOverlay}
-          />
-        )}
+          )}
+        </div>
 
         <Overlay
           isOpen={showOverlay}
@@ -111,7 +115,6 @@ const TeamDetailsPage = () => {
           children={
             player && (
               <PlayerStatsCard
-                onBack={() => handlePlayerOverlay}
                 showDetails={false}
                 showStats={true}
                 pickMyTeam={false}

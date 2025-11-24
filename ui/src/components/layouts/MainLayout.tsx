@@ -1,6 +1,7 @@
 import { Outlet, useNavigate, useMatchRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import Logo from "../../assets/wplf1-dark.png";
+import DarkLogo from "../../assets/wplf1-dark.png";
+import LightLogo from "../../assets/wplf1-light.png";
 import MobileNavbar from "../common/MobileNavbar";
 import SideNavbar from "../common/SideNavbar";
 import PWAInstallBanner from "../PWAInstallBanner";
@@ -30,11 +31,20 @@ export const MainLayout = () => {
                         <header className="header relative w-full h-15 shrink-0 overflow-hidden lg:hidden">
                             {/* Animated gradient overlay */}
                             {/* Content container */}
-                            <div className="relative z-10 flex items-center justify-between h-full px-4 w-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
+                            <div className="relative z-10 flex items-center justify-between h-full px-4 w-full">
                                 {/* Premier League Logo */}
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 rounded-sm flex items-center justify-center">
-                                        <img src={Logo} alt="PLogo" className="w-8 h-8" />
+                                        <img
+                                            src={DarkLogo}
+                                            alt="WPL Logo"
+                                            className="hidden dark:block logo-image w-8 h-8"
+                                        />
+                                        <img
+                                            src={LightLogo}
+                                            alt="WPL Logo"
+                                            className="block dark:hidden logo-image w-8 h-8"
+                                        />
                                     </div>
 
                                     {/* Fantasy Text */}

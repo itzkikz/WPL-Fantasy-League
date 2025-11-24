@@ -14,7 +14,7 @@ const formatKey = (key: string): string => {
 
 const GWPlayerList = ({ starting, bench, onClick }: GWPlayerListProps) => {
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1">
       <div>
         {/* Column Headers */}
         <div className="sticky top-0 bg-light-bg dark:bg-dark-surface border-b border-light-border dark:border-dark-border px-4 py-3 flex items-center">
