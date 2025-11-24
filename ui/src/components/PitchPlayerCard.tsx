@@ -24,7 +24,7 @@ const PitchPlayerCard = ({
   return (
     <div
       onClick={onClick}
-      className={`relative flex flex-col items-center ${isSmall ? "w-12 md:w-16" : "w-14 md:w-20 lg:w-24"} cursor-pointer transition-transform hover:scale-105`}
+      className={`relative flex flex-col items-center ${isSmall ? "w-14 md:w-16" : "w-14 md:w-20 lg:w-24"} cursor-pointer transition-transform hover:scale-105`}
     >
       {/* Captain/Vice Captain Badge */}
       {(player?.isCaptain || player?.isViceCaptain) && (
@@ -45,7 +45,7 @@ const PitchPlayerCard = ({
       {/* Jersey Image/Placeholder */}
       <div className="relative mb-1 z-10 drop-shadow-lg flex items-center justify-center">
         <div
-          className="relative w-12 h-12 md:w-12 md:h-12 lg:w-14 lg:h-14"
+          className="relative w-14 h-12 md:w-14 md:h-12 lg:w-14 lg:h-14"
         >
           {/* Base color layer */}
           <div
