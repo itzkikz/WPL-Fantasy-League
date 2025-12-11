@@ -54,6 +54,7 @@ export default defineConfig({
       },
       // NOTE: runtimeCaching here is only for generateSW; with injectManifest,
       // implement runtime routes/plugins inside src/sw.ts instead.
+      // cleanupOutdatedCaches is already handled in our custom sw.ts
     }),
   ],
 });
