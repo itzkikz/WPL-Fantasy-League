@@ -10,6 +10,9 @@ import managerRouter from './routes/manager'
 import { setSheets } from './lib/store/globals';
 import { authenticateToken } from './middlewares/authMiddleware';
 import { logMiddleware } from './middlewares/logMiddleware';
+import connectDB from './config/db';
+
+connectDB();
 
 const cors = require("cors");
 const { google } = require("googleapis");
