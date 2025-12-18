@@ -1,5 +1,5 @@
 export interface LoginRequest {
-  teamName: string;
+  email: string;
   password: string;
 }
 

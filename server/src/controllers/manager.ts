@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { getSheets } from "../lib/store/globals";
 import { convertToJSON } from "../utils";
-import { Users } from "../types/users";
+import { User } from "../models/User";
+import { FantasyTeam } from "../models/FantasyTeam";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { StandingsResponse, TeamDetails } from "../types/standings";
@@ -24,7 +25,6 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
   const batchDetails = await getSheets()?.spreadsheets.values.batchGet({
     spreadsheetId: SPREADSHEET_ID,
     ranges: [
-      'Users!A:K',
       'Pick Team!A:G',
       'Master Data!H:O',
       'Master Data!B:G'
@@ -36,18 +36,44 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
 
   const valueRanges: sheets_v4.Schema$ValueRange[] = batchDetails?.data.valueRanges ?? [];
 
-  const usersRows: Row[] = (valueRanges[0].values as Row[]) ?? []; // 2D array
-  const pickteamRows: Row[] = (valueRanges[1].values as Row[]) ?? []; // 2D array
-  const detailsRows: Row[] = (valueRanges[2].values as Row[]) ?? []; // 2D array
-  const standingsRows: Row[] = (valueRanges[3].values as Row[]) ?? []; // 2D array
+  const pickteamRows: Row[] = (valueRanges[0].values as Row[]) ?? []; // 2D array
+  const detailsRows: Row[] = (valueRanges[1].values as Row[]) ?? []; // 2D array
+  const standingsRows: Row[] = (valueRanges[2].values as Row[]) ?? []; // 2D array
 
-  const users: Users[] = convertToJSON(usersRows, 'users');
   const teamDetails: TeamDetails[] = convertToJSON(detailsRows, 'teamDetails');
   const standings: StandingsResponse[] = convertToJSON(standingsRows, 'standings');
   const pickTeamDetails: TeamDetails[] = convertToJSON(pickteamRows, 'teamDetails');
 
-  const manager = users.find((val) => val?.username === teamName)
-  const { deadline, gw, pickmyteam, utlisation, total_budget, balance, managers } = manager || { gw: 0 };
+  // 1. Find the User
+  const user = await User.findOne({ username: teamName });
+  if (!user) {
+    console.log(`[Manager Details] User not found: ${teamName}`);
+    return res.status(404).json({ error: 'User not found' });
+  }
+
+  // 2. Find the FantasyTeam managed by this user
+  // Strategy: Use the first team in managedTeams, or search FantasyTeam by managers
+  // Fallback: If managedTeams is empty, search by 'managers' field in FantasyTeam
+  let fantasyTeam = await FantasyTeam.findOne({
+    $or: [
+      { _id: { $in: user.managedTeams } }, // If user has references
+      { managers: user._id }               // If team has references
+    ]
+  }).populate('managers', 'username'); // Populate managers to get names
+
+  if (!fantasyTeam) {
+    console.log(`[Manager Details] FantasyTeam not found for user: ${teamName}`);
+    return res.status(404).json({ error: 'Fantasy Team not found' });
+  }
+
+  const { deadline, currentGw, pickMyTeam, finance } = fantasyTeam;
+  const { totalBudget, utilisation, balance } = finance; // Extract from finance sub-document
+
+  // Transform managers ObjectId[] (populated) to string[]
+  const managersList = (fantasyTeam.managers as any[]).map(m => m.username);
+
+  const gw = currentGw; // Map currentGw to gw
+
   const nextGw = gw;
 
   const rank = standings.findIndex(item => item.team === teamName) + 1;
@@ -108,7 +134,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
     data: {
       deadline,
       gw,
-      pickMyTeam: pickmyteam,
+      pickMyTeam,
       avg,
       highest,
       total,
@@ -118,10 +144,10 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
       rank,
       managerTeam,
       team: teamName,
-      utlisation,
-      total_budget,
+      utlisation: utilisation,
+      total_budget: totalBudget, // Return mapped field
       balance,
-      managers
+      managers: managersList // Return string[]
     }
   });
 }
@@ -134,7 +160,6 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
   const batchDetails = await getSheets()?.spreadsheets.values.batchGet({
     spreadsheetId: SPREADSHEET_ID,
     ranges: [
-      'Users!A:G',
       'Pick Team!A:G',
       'Master Data!H:O',
     ],
@@ -145,17 +170,28 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
 
   const valueRanges: sheets_v4.Schema$ValueRange[] = batchDetails?.data.valueRanges ?? [];
 
-  const usersRows: Row[] = (valueRanges[0].values as Row[]) ?? []; // 2D array
+  const pickteamRows: Row[] = (valueRanges[0].values as Row[]) ?? []; // 2D array
+  const detailsRows: Row[] = (valueRanges[1].values as Row[]) ?? []; // 2D array
 
+  const user = await User.findOne({ username: teamName });
+  if (!user) {
+    return res.status(404).json({ error: 'User not found' });
+  }
 
+  const fantasyTeam = await FantasyTeam.findOne({
+    $or: [
+      { _id: { $in: user.managedTeams } },
+      { managers: user._id }
+    ]
+  });
 
-  const pickteamRows: Row[] = (valueRanges[1].values as Row[]) ?? []; // 2D array
-  const detailsRows: Row[] = (valueRanges[2].values as Row[]) ?? []; // 2D array
+  if (!fantasyTeam) {
+    return res.status(404).json({ error: 'Fantasy Team not found' });
+  }
 
-  const users: Users[] = convertToJSON(usersRows, 'users');
-  const manager = users.find((val) => val?.username === teamName)
-
-  const { deadline, gw, pickmyteam } = manager || { gw: 0 };
+  const { deadline, currentGw, pickMyTeam } = fantasyTeam;
+  const gw = currentGw;
+  const pickmyteam = pickMyTeam;
 
 
   if (pickmyteam) {

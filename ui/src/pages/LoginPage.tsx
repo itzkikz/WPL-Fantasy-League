@@ -6,13 +6,9 @@ import { useLogin } from "../features/auth/hooks";
 import Button from "../components/common/Button";
 
 const LoginPage = () => {
-  const [selectedUser, setSelectedUser] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -23,61 +19,14 @@ const LoginPage = () => {
     navigate({ to: "/manager" });
   });
 
-  // Preselected user options
-  const userOptions = [
-    "InConsistent",
-    "Air10 Srikers",
-    "Magical Magyars",
-    "Gunda Koyi",
-    "Seal Breakers",
-    "Relegated FC",
-    "COF 26",
-    "Airjith Strikers",
-    "Peeranki FC",
-    "Vava FC",
-    "Athiradi FC",
-    "4 Guys 1 Cup",
-    "Blaublancos",
-    "Mamangam DC",
-    "Kona Kona FC",
-  ];
-
-  const filteredUsers = useMemo(() => {
-    if (!searchTerm) return userOptions;
-    return userOptions.filter((user) =>
-      user.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [searchTerm, userOptions]);
-
   // Check if form is complete
-  const isFormComplete = selectedUser && password.trim();
-
-  const handleSelectUser = (user) => {
-    setSelectedUser(user);
-    setIsDropdownOpen(false);
-    setSearchTerm("");
-  };
-
-  // Close dropdown if clicked outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  const isFormComplete = email.trim() && password.trim();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const form = e.target;
     mutation.mutate({
-      teamName: form.teamName.value,
-      password: form.password.value,
+      email: email,
+      password: password,
     });
   };
 
@@ -110,86 +59,16 @@ const LoginPage = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Email/teamName Input */}
-          <div className="relative" ref={dropdownRef}>
-            <button
-              type="button"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="w-full px-6 py-4 bg-white border-2 border-slate-600 rounded-full text-left text-[#2a1134] placeholder-gray-400 focus:outline-none focus:border-[#2a1134] transition-colors flex items-center justify-between"
-              aria-expanded={isDropdownOpen}
-              aria-haspopup="listbox"
-            >
-              <span
-                className={selectedUser ? "text-[#2a1134]" : "text-gray-400"}
-              >
-                {selectedUser || "Select Team"}
-              </span>
-              <svg
-                className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
-                  isDropdownOpen ? "rotate-180" : ""
-                }`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
-
-            {/* Hidden input keeping track of final selected value */}
+          {/* Email Input */}
+          <div className="relative">
             <input
-              type="text"
-              name="teamName"
-              value={selectedUser || ""}
-              readOnly
-              className="hidden"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-6 py-4 bg-white border-2 border-slate-600 rounded-full text-[#2a1134] placeholder-gray-400 focus:outline-none focus:border-[#2a1134] transition-colors"
+              placeholder="Email"
+              name="email"
             />
-
-            {/* Dropdown Menu with Search */}
-            {isDropdownOpen && (
-              <div className="absolute z-10 w-full mt-2 bg-white border-2 border-slate-400 rounded-2xl shadow-lg max-h-60 overflow-hidden">
-                {/* Search Input */}
-                <div className="p-2 border-b border-slate-300">
-                  <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Search teams..."
-                    className="w-full px-4 py-2 text-[#2a1134] placeholder-gray-400 border border-slate-300 rounded-lg focus:outline-none  transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                    autoFocus
-                  />
-                </div>
-
-                {/* Filtered Results */}
-                <div className="overflow-y-auto max-h-48">
-                  <ul className="py-2" role="listbox">
-                    {filteredUsers.length > 0 ? (
-                      filteredUsers.map((user, index) => (
-                        <li
-                          key={index}
-                          onClick={() => handleSelectUser(user)}
-                          className="px-6 py-3 text-[#2a1134] hover:bg-slate-600 cursor-pointer transition-colors"
-                          role="option"
-                          aria-selected={selectedUser === user}
-                        >
-                          {user}
-                        </li>
-                      ))
-                    ) : (
-                      <li className="px-6 py-3 text-gray-400 text-center">
-                        No teams found
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Password Input */}
@@ -251,11 +130,10 @@ const LoginPage = () => {
           <button
             type="submit"
             disabled={!isFormComplete}
-            className={`w-full py-4 text-xl font-semibold rounded-full transition-all duration-300 transform focus:outline-none focus:ring-4 focus:ring-purple-500/50 mt-6 ${
-              isFormComplete
+            className={`w-full py-4 text-xl font-semibold rounded-full transition-all duration-300 transform focus:outline-none focus:ring-4 focus:ring-purple-500/50 mt-6 ${isFormComplete
                 ? "bg-[#1e0021] dark:bg-white text-white dark:text-[#1e0021] hover:scale-[1.02] cursor-pointer"
                 : "bg-[#ebe5eb] dark:bg-[#541e5d] cursor-not-allowed opacity-60"
-            }`}
+              }`}
           >
             Log In
           </button>

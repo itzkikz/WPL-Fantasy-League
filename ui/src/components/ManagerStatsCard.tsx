@@ -22,7 +22,7 @@ const ManagerStatsCard = ({ navigateToPickTeam, navigateToTeamPoints, managerDet
             <h1 className="text-2xl font-bold">{managerDetails?.team}</h1>
             <h1 className="text-sm">Managed By </h1>
             <div className="flex items-center gap-2 mt-1">
-              <span className="text-sm">{managerDetails?.managers}</span>
+              <span className="text-sm">{Array.isArray(managerDetails?.managers) ? managerDetails.managers.join(', ') : managerDetails?.managers}</span>
               <img
                 src="https://flagcdn.com/w20/in.png"
                 alt="India flag"
@@ -30,7 +30,7 @@ const ManagerStatsCard = ({ navigateToPickTeam, navigateToTeamPoints, managerDet
               />
             </div>
           </div>
-          <Button onClick={navigateToTeamPoints} icon={<ArrowRight height={6} width={6} />} />
+          <Button onClick={navigateToTeamPoints} type="NoBackground" icon={<ArrowRight height={6} width={6} />} />
           {/* <button className="bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors">
             <ArrowRight height={6} width={6} />
           </button> */}
@@ -77,6 +77,7 @@ const ManagerStatsCard = ({ navigateToPickTeam, navigateToTeamPoints, managerDet
             type="Primary"
             icon={<Dollar height={5} width={5} />}
             children={<span className="font-semibold">Transfers</span>}
+            onClick={() => { }}
           />
           {/* <button disabled={true} className="flex-1 bg-purple-900/40 hover:bg-purple-900/50 backdrop-blur-sm rounded-full py-3 px-4 flex items-center justify-center gap-2 transition-colors">
             

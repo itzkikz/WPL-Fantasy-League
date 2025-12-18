@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { getSheets } from "../lib/store/globals";
 import { convertToJSON } from "../utils";
-import { Notifications, Subscribers, Users } from "../types/users";
+import { Notifications, Subscribers } from "../types/users";
 import jwt from 'jsonwebtoken'
 import { sheets_v4 } from "googleapis";
 const webpush = require("web-push");

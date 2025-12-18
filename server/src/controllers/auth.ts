@@ -1,8 +1,7 @@
 import fs from "fs";
+
 import { NextFunction, Request, Response } from "express";
-import { getSheets } from "../lib/store/globals";
-import { convertToJSON } from "../utils";
-import { Users } from "../types/users";
+import { User } from "../models/User";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
@@ -14,26 +13,27 @@ const privateKey = fs.readFileSync("./private.key", "utf8");
 
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
-  const { teamName, password } = req.body;
-  const response = await getSheets()?.spreadsheets.values.get({
-    spreadsheetId: SPREADSHEET_ID,
-    range: "Users!A:E", // Adjust range as needed
-  });
+  const { email, password } = req.body;
 
-  const rows = response?.data?.values || [];
-  const users: Users[] = convertToJSON(rows, 'users');
-  const user = users.find(u => u.username === teamName);
+  try {
+    const user = await User.findOne({ email: email });
 
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    return res.status(401).json({ error: 'Invalid credentials' });
-  }
-  const token = jwt.sign({ userId: user.username, info: user.info, isTempPassword: user.isTempPassword }, privateKey, {
-    algorithm: "RS256",
-  });
-  res.json({
-    data: {
-      token,
-      user: { username: user.username }
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
-  });
+
+    const token = jwt.sign({ userId: user.username, info: user.info, isTempPassword: user.isTempPassword }, privateKey, {
+      algorithm: "RS256",
+    });
+
+    res.json({
+      data: {
+        token,
+        user: { username: user.username }
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 }

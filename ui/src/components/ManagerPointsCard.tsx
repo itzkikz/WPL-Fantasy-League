@@ -59,7 +59,7 @@ const ManagerPointsCards = ({ managerDetails }: ManagerPointsCardsProps) => {
           />
           <StatRow
             label="Balance"
-            value={`£${(managerDetails?.balance).toFixed(2)}m`}
+            value={`£${(managerDetails?.balance ?? 0).toFixed(2)}m`}
             border={false}
           />
         </div>

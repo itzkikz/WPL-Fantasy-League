@@ -78,7 +78,7 @@ export default function Settings() {
           value=""
           border={false}
         />
-        {managerDetails?.managers.split(',').map((val) => (<StatRow
+        {(Array.isArray(managerDetails?.managers) ? managerDetails?.managers : managerDetails?.managers?.split(',').map(s => s.trim()))?.map((val) => (<StatRow
           textSize="text-xl"
           label={val}
           value=""
@@ -133,10 +133,10 @@ export default function Settings() {
             onClick={handleClearCache}
             disabled={clearing || cleared}
             className={`px-4 py-2 rounded-lg font-semibold transition-colors ${cleared
-                ? 'bg-green-500 text-white'
-                : clearing
-                  ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
-                  : 'bg-red-500 hover:bg-red-600 text-white'
+              ? 'bg-green-500 text-white'
+              : clearing
+                ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                : 'bg-red-500 hover:bg-red-600 text-white'
               }`}
           >
             {cleared ? '✓ Cleared' : clearing ? 'Clearing...' : 'Clear Cache'}
