@@ -22,6 +22,8 @@ export interface ITeam extends Document {
         secondary: string;
         text: string;
     };
+
+    league?: mongoose.Types.ObjectId;
 }
 
 const TeamSchema: Schema = new Schema({
@@ -44,7 +46,9 @@ const TeamSchema: Schema = new Schema({
         primary: String,
         secondary: String,
         text: String
-    }
+    },
+
+    league: { type: Schema.Types.ObjectId, ref: 'League' }
 }, { timestamps: true });
 
 export const Team = mongoose.model<ITeam>('Team', TeamSchema);

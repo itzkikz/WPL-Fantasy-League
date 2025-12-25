@@ -49,6 +49,8 @@ export interface IFantasyTeam extends Document {
     currentSquad: {
         picks: IPick[];
         activeChip: string | null;
+        gameweek: number;
+        points: number;
     };
 
     history: IHistory[];
@@ -102,7 +104,9 @@ const FantasyTeamSchema: Schema = new Schema({
     // SQUADS
     currentSquad: {
         picks: { type: [PickSchema], default: [] },
-        activeChip: { type: String, default: null }
+        activeChip: { type: String, default: null },
+        gameweek: { type: Number, default: 0 },
+        points: { type: Number, default: 0 }
     },
 
     history: [HistorySchema]

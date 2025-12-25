@@ -6,7 +6,7 @@ interface IPlayerStats {
     totalPoints: number;
     form: string;
     pointsPerGame: string;
-    minutes: number;
+    appearances: number;
     goalsScored: number;
     assists: number;
     cleanSheets: number;
@@ -25,6 +25,7 @@ interface IPlayerStats {
     ictIndex: string;
     expectedGoals: string; // xG
     expectedAssists: string; // xA
+    xPoints: number;
 }
 
 interface IPlayerStatus {
@@ -45,6 +46,7 @@ export interface IPlayer extends Document {
 
     // Relationships
     teamId: number; // SofaScore Team ID
+    clubName?: string;
 
     // SofaScore specific
     shirtNumber: number;
@@ -82,9 +84,20 @@ export interface IPlayer extends Document {
         opponentTeamId: number;
         wasHome: boolean;
         totalPoints: number;
-        minutes: number;
+        xPoints: number;
+        appearances: number;
         goalsScored: number;
         assists: number;
+        cleanSheets: number;
+        goalsConceded: number;
+        ownGoals: number;
+        penaltiesSaved: number;
+        penaltiesMissed: number;
+        yellowCards: number;
+        redCards: number;
+        saves: number;
+        bonus: number;
+        bps: number;
         price: number; // Price at that specific GW
     }[];
 }
@@ -95,7 +108,7 @@ const PlayerStatsSchema = new Schema({
     totalPoints: { type: Number, default: 0, index: true }, // Index for sorting "Top Players"
     form: String,
     pointsPerGame: String,
-    minutes: Number,
+    appearances: Number,
     goalsScored: Number,
     assists: Number,
     cleanSheets: Number,
@@ -113,7 +126,8 @@ const PlayerStatsSchema = new Schema({
     threat: String,
     ictIndex: String,
     expectedGoals: String,
-    expectedAssists: String
+    expectedAssists: String,
+    xPoints: { type: Number, default: 0 } // Add xPoints to stats
 }, { _id: false });
 
 const PlayerHistorySchema = new Schema({
@@ -122,9 +136,20 @@ const PlayerHistorySchema = new Schema({
     opponentTeamId: Number,
     wasHome: Boolean,
     totalPoints: Number,
-    minutes: Number,
+    xPoints: { type: Number, default: 0 }, // Add xPoints to history
+    appearances: Number,
     goalsScored: Number,
     assists: Number,
+    cleanSheets: Number,
+    goalsConceded: Number,
+    ownGoals: Number,
+    penaltiesSaved: Number,
+    penaltiesMissed: Number,
+    yellowCards: Number,
+    redCards: Number,
+    saves: Number,
+    bonus: Number,
+    bps: Number,
     price: Number
 }, { _id: false });
 
@@ -137,6 +162,7 @@ const PlayerSchema: Schema = new Schema({
     fullName: String,
 
     teamId: { type: Number, required: true, index: true }, // SofaScore Team ID
+    clubName: String, // from Google Sheet
 
     // SofaScore Data
     shirtNumber: Number,
