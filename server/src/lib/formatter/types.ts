@@ -4,6 +4,7 @@ export interface Player {
     name: string;
     team: string;
     teamColor: string;
+    teamTextColor?: string;
     point: number;
     position: "GK" | "DEF" | "MID" | "FWD";
     isCaptain?: boolean;
@@ -21,6 +22,7 @@ export interface Player {
     penalty_miss: number;
     app: number;
     gw: number;
+    shirtNumber?: number;
 }
 export interface Formation {
     goalkeeper: Player[];

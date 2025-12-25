@@ -11,6 +11,7 @@ import { setSheets } from './lib/store/globals';
 import { authenticateToken } from './middlewares/authMiddleware';
 import { logMiddleware } from './middlewares/logMiddleware';
 import connectDB from './config/db';
+import syncRouter from './routes/syncRoutes';
 
 connectDB();
 
@@ -45,6 +46,7 @@ app.use(logMiddleware);
 app.use("/api", standingsRouter);
 app.use("/api", playersRouter);
 app.use("/api", authRouter);
+app.use("/api/sync", syncRouter);
 
 app.get('/api/validate-token', authenticateToken, (req: any, res) => {
   res.json({ data: { valid: true, user: req.user } });

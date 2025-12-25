@@ -15,5 +15,9 @@ export interface PlayerStats {
     price: number,
     release_value: number,
     club: string,
-    league: string
+    league: string;
+    team_short_name: string;
+    team_color: string;
+    team_text_color: string;
+    player_id: number;
 }
