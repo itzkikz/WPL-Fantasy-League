@@ -3,7 +3,7 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import { Player, PlayerStats } from "../features/players/types";
 import Delta from "./Delta";
 import Info from "./icons/Info";
-import { getTeamData, mapPosition } from "../libs/helpers/lineupFormatter";
+import { mapPosition } from "../libs/helpers/lineupFormatter";
 
 interface Heading {
   label: string;
@@ -15,6 +15,8 @@ interface PlayersScrollableTableProps {
   content?: PlayerStats[];
   onClick: (player: PlayerStats) => void;
   containerHeight?: string;
+  onEndReached?: () => void;
+  isFetching?: boolean;
 }
 
 const DEFAULT_HEADINGS: Heading[] = [
@@ -27,6 +29,8 @@ const PlayersScrollableTable = ({
   content = [],
   onClick,
   containerHeight = "600px",
+  onEndReached,
+  isFetching = false
 }: PlayersScrollableTableProps) => {
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
@@ -41,14 +45,25 @@ const PlayersScrollableTable = ({
   const virtualItems = rowVirtualizer.getVirtualItems();
   const totalSize = rowVirtualizer.getTotalSize();
 
+  // Detect end of list
+  React.useEffect(() => {
+    if (!onEndReached) return;
+    const lastItem = virtualItems[virtualItems.length - 1];
+    if (!lastItem) return;
+
+    if (lastItem.index >= content.length - 1) {
+      onEndReached();
+    }
+  }, [virtualItems, content.length, onEndReached]);
+
   return (
     <div
       ref={tableContainerRef}
-      className="select-none lg:overflow-y-auto lg:h-[calc(100vh-6rem)]"
+      className="select-none overflow-y-auto h-[calc(100vh-6rem)]"
     // style={{ height: containerHeight }}
     >
       <table className="w-full border-collapse">
-        <thead className="sticky top-16 lg:top-0 z-10 shadow-sm bg-light-surface dark:bg-dark-surface border-b border-light-border dark:border-dark-border">
+        <thead className="sticky top-0 z-10 shadow-sm bg-light-surface dark:bg-dark-surface border-b border-light-border dark:border-dark-border">
           <tr>
             {headings.map((heading, index) => (
               <th
@@ -93,7 +108,7 @@ const PlayersScrollableTable = ({
                         {record.player_name}
                       </p>
                       <p className="text-xs text-gray-500">
-                        {getTeamData(record.club).abbreviation} | {mapPosition(record.position)} |{" "}
+                        {record.team_short_name} | {mapPosition(record.position)} |{" "}
                         {record?.team_name}
                       </p>
                     </div>
@@ -119,6 +134,15 @@ const PlayersScrollableTable = ({
                   )}px`,
                 }}
               />
+            </tr>
+          )}
+
+          {/* Loading Indicator */}
+          {isFetching && (
+            <tr>
+              <td colSpan={headings.length} className="text-center py-4">
+                Loading more...
+              </td>
             </tr>
           )}
         </tbody>

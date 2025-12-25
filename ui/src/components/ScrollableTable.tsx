@@ -9,7 +9,7 @@ interface Heading {
 interface ScrollableTableProps {
   headings?: Heading[];
   content?: Standings[];
-  onClick: (teamName: string) => void;
+  onClick: (team: Standings) => void;
 }
 
 const DEFAULT_HEADINGS: Heading[] = [
@@ -48,7 +48,7 @@ const ScrollableTable = ({
             <tr
               key={i}
               className="transition-colors cursor-pointer border-b border-light-border dark:border-dark-border"
-              onClick={() => onClick(r.team)}
+              onClick={() => onClick(r)}
             >
               <td className="px-4 py-3">
                 <div className="flex items-center gap-1">

@@ -83,24 +83,24 @@ export const benchSwap = (
 
   // Clone bench array
   const newBench: Player[] = [...teamData.bench];
-  
+
   // Swap their subNumber values if they exist
   const subNoA = (playerA as any).subNumber;
   const subNoB = (playerB as any).subNumber;
-  
+
   // Create swapped players with exchanged subNumbers
   const playerASwapped: Player = {
     ...playerB,
-    ...(subNoA !== undefined ? { subNumber: subNoA } : 
-        subNoB !== undefined ? { subNumber: undefined } : {})
+    ...(subNoA !== undefined ? { subNumber: subNoA } :
+      subNoB !== undefined ? { subNumber: undefined } : {})
   };
-  
+
   const playerBSwapped: Player = {
     ...playerA,
-    ...(subNoB !== undefined ? { subNumber: subNoB } : 
-        subNoA !== undefined ? { subNumber: undefined } : {})
+    ...(subNoB !== undefined ? { subNumber: subNoB } :
+      subNoA !== undefined ? { subNumber: undefined } : {})
   };
-  
+
   // Swap positions in array
   newBench[benchIndexA] = playerASwapped;
   newBench[benchIndexB] = playerBSwapped;
@@ -363,26 +363,26 @@ type RoleKey = "isCaptain" | "isViceCaptain";
 
 function setCaptaincyRole(
   teamData: Pick<TeamDetails, "starting" | "bench">,
-  playerName: string,
+  playerId: number,
   roleKey: RoleKey
 ):
   | {
     starting: Formation;
     bench: Player[];
     role: RoleKey;
-    assignedTo: string;
+    assignedTo: number;
   }
   | { error: "Player not found" } {
   const otherKey: RoleKey = roleKey === "isCaptain" ? "isViceCaptain" : "isCaptain";
 
   // Verify the player exists in either starting or bench
   const inStarting =
-    teamData.starting.goalkeeper.some(p => p.name === playerName) ||
-    teamData.starting.defenders.some(p => p.name === playerName) ||
-    teamData.starting.midfielders.some(p => p.name === playerName) ||
-    teamData.starting.forwards.some(p => p.name === playerName);
+    teamData.starting.goalkeeper.some(p => p.id === playerId) ||
+    teamData.starting.defenders.some(p => p.id === playerId) ||
+    teamData.starting.midfielders.some(p => p.id === playerId) ||
+    teamData.starting.forwards.some(p => p.id === playerId);
 
-  const inBench = teamData.bench.some(p => p.name === playerName);
+  const inBench = teamData.bench.some(p => p.id === playerId);
   if (!inStarting && !inBench) {
     return { error: "Player not found" };
   }
@@ -391,7 +391,7 @@ function setCaptaincyRole(
   // - The selected player: set chosen role true, and clear the other role
   // - All other players: clear the chosen role
   const mapRoleUpdate = (p: Player): Player => {
-    if (p.name === playerName) {
+    if (p.id === playerId) {
       return {
         ...(p as any),
         [roleKey]: true,
@@ -417,21 +417,21 @@ function setCaptaincyRole(
     starting: newStarting,
     bench: newBench,
     role: roleKey,
-    assignedTo: playerName,
+    assignedTo: playerId,
   };
 }
 
 // Public API: choose a captain from starting or bench
 export const setCaptain = (
   teamData: Pick<TeamDetails, "starting" | "bench">,
-  playerName: string
-) => setCaptaincyRole(teamData, playerName, "isCaptain");
+  playerId: number
+) => setCaptaincyRole(teamData, playerId, "isCaptain");
 
 // Public API: choose a vice-captain from starting or bench
 export const setViceCaptain = (
   teamData: Pick<TeamDetails, "starting" | "bench">,
-  playerName: string
-) => setCaptaincyRole(teamData, playerName, "isViceCaptain");
+  playerId: number
+) => setCaptaincyRole(teamData, playerId, "isViceCaptain");
 
 
 

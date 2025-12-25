@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import PlayersScrollableTable from "../components/PlayersScrollableTable";
-import { usePlayers } from "../features/players/hooks";
+import { usePlayers, usePlayerFilters } from "../features/players/hooks";
 import Button from "../components/common/Button";
 import Checkbox from "../components/common/Checkbox";
 import Overlay from "../components/common/Overlay";
@@ -19,14 +19,23 @@ export default function Stats() {
   const search = routeApi.useSearch();
   const { clubs: selectedClubs, leagues: selectedLeagues, positions: selectedPositions, freeAgents: freeAgentSelected } = search;
 
-  const { data: players } = usePlayers();
+  // Pass search params to usePlayers hook for server-side filtering
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = usePlayers({
+    clubs: selectedClubs,
+    leagues: selectedLeagues,
+    positions: selectedPositions,
+    freeAgents: freeAgentSelected
+  });
+  const players = useMemo(() => data?.pages.flatMap(p => p.data) || [], [data]);
   const player = usePlayerStore((state) => state.player);
   const setPlayer = usePlayerStore((state) => state.setPlayer);
 
   const [showOverlay, setShowOverlay] = useState(false);
 
-  const [clubs, setClubs] = useState<string[]>([]);
-  const [leagues, setLeagues] = useState<string[]>([]);
+  // Fetch filters from API
+  const { data: filterData } = usePlayerFilters();
+  const clubs = filterData?.clubs || [];
+  const leagues = filterData?.leagues || [];
 
   const [showClubOverlay, setShowClubOverlay] = useState(false);
   const [showLeagueOverlay, setShowLeagueOverlay] = useState(false);
@@ -37,10 +46,11 @@ export default function Stats() {
       // Map PlayerStats to Player
       const mappedPlayer: Player = {
         ...eachPlayer, // Spread original stats to ensure PlayerInfo has required data
-        id: 0, // ID is missing in PlayerStats, using 0 or need to fetch detail
+        id: eachPlayer.player_id,
         name: eachPlayer.player_name,
-        team: eachPlayer.team_name,
-        teamColor: "", // Missing, will fallback to club color in PlayerInfo
+        team: eachPlayer.team_short_name || eachPlayer.team_name.substring(0, 3).toUpperCase(),
+        teamColor: eachPlayer.team_color,
+        teamTextColor: eachPlayer.team_text_color,
         point: eachPlayer.total_point,
         position: eachPlayer.position,
         fullTeamName: eachPlayer.team_name,
@@ -87,34 +97,10 @@ export default function Stats() {
     });
   };
 
-  // extract unique clubs/leagues when players load
-  useEffect(() => {
-    if (players?.length) {
-      setClubs([...new Set(players.map((p) => p.club))]);
-      setLeagues([...new Set(players.map((p) => p.league))]);
-    }
-  }, [players]);
-
-  // FINAL FILTERED PLAYERS
-  const filteredPlayers = useMemo(() => {
-    if (!players) return [];
-
-    return players.filter((p) => {
-      if (selectedLeagues.length && !selectedLeagues.includes(p.league))
-        return false;
-      if (selectedClubs.length && !selectedClubs.includes(p.club)) return false;
-      if (selectedPositions.length && !selectedPositions.includes(p.position))
-        return false;
-      if (freeAgentSelected && p.team_name !== "Free Agent") return false;
-      return true;
-    });
-  }, [
-    players,
-    selectedLeagues,
-    selectedClubs,
-    selectedPositions,
-    freeAgentSelected,
-  ]);
+  // FINAL FILTERED PLAYERS - No longer client-side filtering needed for main logic
+  // But we might want to keep it if we want to filter loaded pages instantly?
+  // No, server-side is better for consistency.
+  const filteredPlayers = players;
 
   return (
     <div className="flex flex-col h-screen">
@@ -151,6 +137,12 @@ export default function Stats() {
       <PlayersScrollableTable
         content={filteredPlayers}
         onClick={handlePlayerOverlay}
+        onEndReached={() => {
+          if (hasNextPage && !isFetchingNextPage) {
+            fetchNextPage();
+          }
+        }}
+        isFetching={isFetchingNextPage}
       />
 
       {/* Player Detail Overlay */}

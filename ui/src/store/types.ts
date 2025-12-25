@@ -10,6 +10,6 @@ export interface Substitutions {
 }
 
 export interface Roles {
-  captain?: Player['name'],
-  vice?: Player['name']
+  captain?: number,
+  vice?: number
 }

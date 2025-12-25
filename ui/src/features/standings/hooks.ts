@@ -7,8 +7,8 @@ export const useStandings = () => {
   return useQuery(standingsQueries.all())
 }
 
-export const useTeamDetails = (teamName: string, gameWeek: number) => {
-  return useQuery(standingsQueries.detail(teamName, gameWeek))
+export const useTeamDetails = (teamId: string, gameWeek: number) => {
+  return useQuery(standingsQueries.detail(teamId, gameWeek))
 }
 
 // export const useCreateBook = () => {

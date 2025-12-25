@@ -9,7 +9,7 @@ export const API_ENDPOINTS = {
   // Books endpoints
   STANDINGS: {
     BASE: '/standings',
-    BY_TEAMNAME: (teamName: string, gameWeek: number) => `/standings/${teamName}/${gameWeek}`,
+    BY_TEAM_ID: (teamId: string, gameWeek: number) => `/standings/${teamId}/${gameWeek}`,
   },
 
   PLAYERS: {
@@ -23,7 +23,7 @@ export const API_ENDPOINTS = {
   },
   NOTIFICATION: {
     BASE: '/notify/notifications',
-    SUBSCRIBE:'/notify/subscribe',
+    SUBSCRIBE: '/notify/subscribe',
     // SUBSTITUTION: '/manager/sub'
     // BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
   },

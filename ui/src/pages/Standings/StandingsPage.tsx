@@ -7,10 +7,10 @@ const StandingsPage = () => {
   const navigate = useNavigate();
   const { data: standings, isLoading, error } = useStandings();
 
-  const handleTeamClick = (teamName: string) => {
+  const handleTeamClick = (team: any) => {
     navigate({
-      to: "/standings/$teamName",
-      params: { teamName },
+      to: "/standings/$teamId",
+      params: { teamId: team.team_id },
       viewTransition: ViewTransitions.forward,
     });
   };

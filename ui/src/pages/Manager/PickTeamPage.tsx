@@ -326,17 +326,23 @@ const PickTeamPage = () => {
               {!teamError && (
                 <>
                   {Object.keys(roles).length > 0 &&
-                    (<div className="px-6 py-4">
-                      <h3 className="text-lg font-bold mb-4">Roles</h3>
-                      <div className="space-y-3">
-                        {roles?.captain && (
-                          <StatRow label="Captain" value={roles?.captain} />
-                        )}
-                        {roles?.vice && (
-                          <StatRow label="Vice Captain" value={roles?.vice} />
-                        )}
-                      </div>
-                    </div>)}
+                    (() => {
+                      const allPlayers = [...editedStarting.goalkeeper, ...editedStarting.defenders, ...editedStarting.midfielders, ...editedStarting.forwards, ...editedBench];
+                      const getPlayerName = (id?: number) => allPlayers.find(p => p.id === id)?.webName || allPlayers.find(p => p.id === id)?.name || "Unknown";
+                      return (
+                        <div className="px-6 py-4">
+                          <h3 className="text-lg font-bold mb-4">Roles</h3>
+                          <div className="space-y-3">
+                            {roles?.captain && (
+                              <StatRow label="Captain" value={getPlayerName(roles.captain)} />
+                            )}
+                            {roles?.vice && (
+                              <StatRow label="Vice Captain" value={getPlayerName(roles.vice)} />
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })()}
                   {substitutions && substitutions?.length > 0 && (
                     <div className="px-6 py-4">
                       <h3 className="text-lg font-bold mb-4">Subs</h3>

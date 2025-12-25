@@ -7,12 +7,13 @@ export interface Standings {
     last_update_date: string,
     pos_change: number,
     team: string,
+    team_id: string,
     total: string,
     total_point_before_this_gw: string
 }
 
 export interface Formation {
-    [key: string ]: any;
+    [key: string]: any;
     goalkeeper: Player[];
     defenders: Player[];
     midfielders: Player[];
@@ -26,5 +27,8 @@ export interface TeamDetails {
     avg: number,
     highest: number,
     gw: number,
-    currentGw: number
+    gw: number,
+    currentGw: number,
+    team_name: string,
+    team_id: string
 }

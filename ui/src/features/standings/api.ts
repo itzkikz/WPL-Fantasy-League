@@ -9,8 +9,8 @@ export const standingsApi = {
     return response.data.data
   },
 
-  getByTeamName: async (teamName: string, gameWeek: number): Promise<TeamDetails> => {
-    const response = await apiClient.get(API_ENDPOINTS.STANDINGS.BY_TEAMNAME(teamName, gameWeek))
+  getByTeamId: async (teamId: string, gameWeek: number): Promise<TeamDetails> => {
+    const response = await apiClient.get(API_ENDPOINTS.STANDINGS.BY_TEAM_ID(teamId, gameWeek))
     return response.data.data
   },
 

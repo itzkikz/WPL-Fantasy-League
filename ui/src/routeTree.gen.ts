@@ -18,7 +18,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as StatsIndexRouteImport } from './routes/stats/index'
 import { Route as StandingsIndexRouteImport } from './routes/standings/index'
 import { Route as ManagerIndexRouteImport } from './routes/manager/index'
-import { Route as StandingsTeamNameRouteImport } from './routes/standings/$teamName'
+import { Route as StandingsTeamIdRouteImport } from './routes/standings/$teamId'
 import { Route as ManagerPickTeamIndexRouteImport } from './routes/manager/pick-team/index'
 
 const SettingsRoute = SettingsRouteImport.update({
@@ -68,9 +68,9 @@ const ManagerIndexRoute = ManagerIndexRouteImport.update({
   path: '/manager/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/manager/index.lazy').then((d) => d.Route))
-const StandingsTeamNameRoute = StandingsTeamNameRouteImport.update({
-  id: '/standings/$teamName',
-  path: '/standings/$teamName',
+const StandingsTeamIdRoute = StandingsTeamIdRouteImport.update({
+  id: '/standings/$teamId',
+  path: '/standings/$teamId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ManagerPickTeamIndexRoute = ManagerPickTeamIndexRouteImport.update({
@@ -86,7 +86,7 @@ export interface FileRoutesByFullPath {
   '/maintenance': typeof MaintenanceRoute
   '/notifications': typeof NotificationsRoute
   '/settings': typeof SettingsRoute
-  '/standings/$teamName': typeof StandingsTeamNameRoute
+  '/standings/$teamId': typeof StandingsTeamIdRoute
   '/manager': typeof ManagerIndexRoute
   '/standings': typeof StandingsIndexRoute
   '/stats': typeof StatsIndexRoute
@@ -99,7 +99,7 @@ export interface FileRoutesByTo {
   '/maintenance': typeof MaintenanceRoute
   '/notifications': typeof NotificationsRoute
   '/settings': typeof SettingsRoute
-  '/standings/$teamName': typeof StandingsTeamNameRoute
+  '/standings/$teamId': typeof StandingsTeamIdRoute
   '/manager': typeof ManagerIndexRoute
   '/standings': typeof StandingsIndexRoute
   '/stats': typeof StatsIndexRoute
@@ -113,7 +113,7 @@ export interface FileRoutesById {
   '/maintenance': typeof MaintenanceRoute
   '/notifications': typeof NotificationsRoute
   '/settings': typeof SettingsRoute
-  '/standings/$teamName': typeof StandingsTeamNameRoute
+  '/standings/$teamId': typeof StandingsTeamIdRoute
   '/manager/': typeof ManagerIndexRoute
   '/standings/': typeof StandingsIndexRoute
   '/stats/': typeof StatsIndexRoute
@@ -128,7 +128,7 @@ export interface FileRouteTypes {
     | '/maintenance'
     | '/notifications'
     | '/settings'
-    | '/standings/$teamName'
+    | '/standings/$teamId'
     | '/manager'
     | '/standings'
     | '/stats'
@@ -141,7 +141,7 @@ export interface FileRouteTypes {
     | '/maintenance'
     | '/notifications'
     | '/settings'
-    | '/standings/$teamName'
+    | '/standings/$teamId'
     | '/manager'
     | '/standings'
     | '/stats'
@@ -154,7 +154,7 @@ export interface FileRouteTypes {
     | '/maintenance'
     | '/notifications'
     | '/settings'
-    | '/standings/$teamName'
+    | '/standings/$teamId'
     | '/manager/'
     | '/standings/'
     | '/stats/'
@@ -168,7 +168,7 @@ export interface RootRouteChildren {
   MaintenanceRoute: typeof MaintenanceRoute
   NotificationsRoute: typeof NotificationsRoute
   SettingsRoute: typeof SettingsRoute
-  StandingsTeamNameRoute: typeof StandingsTeamNameRoute
+  StandingsTeamIdRoute: typeof StandingsTeamIdRoute
   ManagerIndexRoute: typeof ManagerIndexRoute
   StandingsIndexRoute: typeof StandingsIndexRoute
   StatsIndexRoute: typeof StatsIndexRoute
@@ -240,11 +240,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManagerIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/standings/$teamName': {
-      id: '/standings/$teamName'
-      path: '/standings/$teamName'
-      fullPath: '/standings/$teamName'
-      preLoaderRoute: typeof StandingsTeamNameRouteImport
+    '/standings/$teamId': {
+      id: '/standings/$teamId'
+      path: '/standings/$teamId'
+      fullPath: '/standings/$teamId'
+      preLoaderRoute: typeof StandingsTeamIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/manager/pick-team/': {
@@ -264,7 +264,7 @@ const rootRouteChildren: RootRouteChildren = {
   MaintenanceRoute: MaintenanceRoute,
   NotificationsRoute: NotificationsRoute,
   SettingsRoute: SettingsRoute,
-  StandingsTeamNameRoute: StandingsTeamNameRoute,
+  StandingsTeamIdRoute: StandingsTeamIdRoute,
   ManagerIndexRoute: ManagerIndexRoute,
   StandingsIndexRoute: StandingsIndexRoute,
   StatsIndexRoute: StatsIndexRoute,

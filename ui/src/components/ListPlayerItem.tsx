@@ -23,7 +23,9 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
         className="w-10 h-10 rounded flex items-center justify-center mr-3"
         style={{ backgroundColor: player.teamColor }}
       >
-        <span className="text-xs font-bold">{player.team}</span>
+        <span className="text-xs font-bold" style={{ color: player.teamTextColor || "#ffffff" }}>
+          {player.team}
+        </span>
       </div>
 
       {/* Player Info */}

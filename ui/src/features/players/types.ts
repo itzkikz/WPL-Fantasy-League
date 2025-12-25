@@ -4,6 +4,7 @@ export interface Player {
     name: string;
     team: string;
     teamColor: string;
+    teamTextColor?: string;
     point: number;
     position: string;
     isCaptain?: boolean;
@@ -22,6 +23,7 @@ export interface Player {
     app: number;
     gw: number;
     isAvlSub?: boolean;
+    shirtNumber?: number;
 }
 
 export interface PlayerStats {
@@ -40,6 +42,33 @@ export interface PlayerStats {
     total_point: number,
     price: number,
     release_value: number,
-    club: string,
-    league: string
+    club: string;
+    league: string;
+    team_short_name: string;
+    team_color: string;
+    team_text_color: string;
+    player_id: number;
+}
+
+export interface PaginatedResponse<T> {
+    data: T[];
+    meta: {
+        page: number;
+        limit: number;
+        totalPlayers: number;
+        totalPages: number;
+        hasNextPage: boolean;
+    };
+}
+
+export interface PlayerFilters {
+    clubs?: string[];
+    leagues?: string[];
+    positions?: string[];
+    freeAgents?: boolean;
+}
+
+export interface PlayerFilterOptions {
+    clubs: string[];
+    leagues: string[];
 }

@@ -13,10 +13,10 @@ export const standingsQueries = {
       gcTime: 1000 * 60 * 10, // cache for 10 minutes
     }),
 
-  detail: (teamName: string, gameWeek: number) =>
+  detail: (teamId: string, gameWeek: number) =>
     queryOptions({
-      queryKey: [QUERY_KEYS.STANDINGS, teamName, gameWeek],
-      queryFn: () => standingsApi.getByTeamName(teamName, gameWeek),
-      enabled: !!teamName,
+      queryKey: [QUERY_KEYS.STANDINGS, teamId, gameWeek],
+      queryFn: () => standingsApi.getByTeamId(teamId, gameWeek),
+      enabled: !!teamId,
     }),
 }

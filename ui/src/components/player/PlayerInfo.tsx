@@ -1,6 +1,6 @@
 import React from "react";
 import { Player, PlayerStats } from "../../features/players/types";
-import {getTeamData, mapPosition} from "../../libs/helpers/lineupFormatter"
+import { mapPosition } from "../../libs/helpers/lineupFormatter"
 
 export default function PlayerInfo({
   player,
@@ -11,12 +11,24 @@ export default function PlayerInfo({
 }) {
   return (
     <div
-      className={`relative px-6 pt-6 pb-4 rounded-t-3xl text-white`}
-      style={{ backgroundColor: player?.teamColor || getTeamData(playerStats?.club).color }}
+      className={`relative px-6 pt-6 pb-4 rounded-t-3xl`}
+      style={{ backgroundColor: player?.teamColor || "#000000", color: player?.teamTextColor || "#ffffff" }}
     >
       <div className="flex items-start gap-4 mt-8">
         {/* Player Details */}
         <div className="flex-1 pt-4">
+          {/* Player Image - adjusted layout */}
+          <div className="mb-2">
+            <img
+              src={`https://bqyqpmeugdydxbcteohm.supabase.co/storage/v1/object/public/images/players/${player?.id}.png`}
+              alt={player?.name}
+              className="w-20 h-20 object-cover rounded-full border-2 border-white/20 bg-white drop-shadow-md"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = '/player-placeholder.png';
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
+          </div>
           <p className="text-sm font-medium mb-1">{player.position.length === 1 ? mapPosition(player.position) : player?.position}</p>
           <h2 className="text-2xl font-bold mb-1">
             {player?.name?.split(" ")[0] || playerStats?.player_name.split(" ")[0]}
@@ -26,6 +38,7 @@ export default function PlayerInfo({
           </h2>
           <p className="text-sm">{player.fullTeamName || player.team || playerStats?.club}</p>
         </div>
+
         <div className="flex-1 pt-4">
           <h2 className="text-right text-5xl font-bold mb-1">
             {playerStats?.total_point}
