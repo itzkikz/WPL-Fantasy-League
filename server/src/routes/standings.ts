@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/standings", getStandings);
 
-router.get("/standings/:teamName/:gameWeek", getTeamDetails);
+router.get("/standings/:teamId/:gameWeek", getTeamDetails);
 
 
 
