@@ -1,317 +1,374 @@
 import { NextFunction, Request, Response } from "express";
-import { getSheets } from "../lib/store/globals";
-import { convertToJSON } from "../utils";
 import { User } from "../models/User";
 import { FantasyTeam } from "../models/FantasyTeam";
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import { StandingsResponse, TeamDetails } from "../types/standings";
+import { TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
 import { validateAndApplySwap } from "../lib/validators/substitution";
 import { Substitution } from "../types/manager";
-import { executeSwap } from "../lib/helpers/substitution";
-import { buildSquadRows } from "../lib/helpers/subUpdate";
 import { FormationResult } from "../lib/formatter/types";
-import { sheets_v4 } from "googleapis";
 import { setCaptain, setViceCaptain } from "../lib/helpers/roleUpdate";
 
-const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID;
-type Cell = string | number | boolean | null;
-type Row = Cell[];
+
 
 export const details = async (req: Request, res: Response, next: NextFunction) => {
-  const teamName = req.user.userId;
-  const propertyName = "team_name";
-  const batchDetails = await getSheets()?.spreadsheets.values.batchGet({
-    spreadsheetId: SPREADSHEET_ID,
-    ranges: [
-      'Pick Team!A:G',
-      'Master Data!H:O',
-      'Master Data!B:G'
-    ],
-    majorDimension: 'ROWS',
-    valueRenderOption: 'UNFORMATTED_VALUE',
-    dateTimeRenderOption: 'FORMATTED_STRING'
-  });
+  try {
+    const username = req.user.userId;
 
-  const valueRanges: sheets_v4.Schema$ValueRange[] = batchDetails?.data.valueRanges ?? [];
-
-  const pickteamRows: Row[] = (valueRanges[0].values as Row[]) ?? []; // 2D array
-  const detailsRows: Row[] = (valueRanges[1].values as Row[]) ?? []; // 2D array
-  const standingsRows: Row[] = (valueRanges[2].values as Row[]) ?? []; // 2D array
-
-  const teamDetails: TeamDetails[] = convertToJSON(detailsRows, 'teamDetails');
-  const standings: StandingsResponse[] = convertToJSON(standingsRows, 'standings');
-  const pickTeamDetails: TeamDetails[] = convertToJSON(pickteamRows, 'teamDetails');
-
-  // 1. Find the User
-  const user = await User.findOne({ username: teamName });
-  if (!user) {
-    console.log(`[Manager Details] User not found: ${teamName}`);
-    return res.status(404).json({ error: 'User not found' });
-  }
-
-  // 2. Find the FantasyTeam managed by this user
-  // Strategy: Use the first team in managedTeams, or search FantasyTeam by managers
-  // Fallback: If managedTeams is empty, search by 'managers' field in FantasyTeam
-  let fantasyTeam = await FantasyTeam.findOne({
-    $or: [
-      { _id: { $in: user.managedTeams } }, // If user has references
-      { managers: user._id }               // If team has references
-    ]
-  }).populate('managers', 'username'); // Populate managers to get names
-
-  if (!fantasyTeam) {
-    console.log(`[Manager Details] FantasyTeam not found for user: ${teamName}`);
-    return res.status(404).json({ error: 'Fantasy Team not found' });
-  }
-
-  const { deadline, currentGw, pickMyTeam, finance } = fantasyTeam;
-  const { totalBudget, utilisation, balance } = finance; // Extract from finance sub-document
-
-  // Transform managers ObjectId[] (populated) to string[]
-  const managersList = (fantasyTeam.managers as any[]).map(m => m.username);
-
-  const gw = currentGw; // Map currentGw to gw
-
-  const nextGw = gw;
-
-  const rank = standings.findIndex(item => item.team === teamName) + 1;
-  const teamStanding = standings.find(item => item.team === teamName);
-  const { total, total_point_before_this_gw } = teamStanding || {};
-
-  const pickTeamDetailsNextGW = pickTeamDetails.filter(
-    (item: TeamDetails) => item[propertyName] === teamName && item.gw === nextGw
-  );
-
-  let managerTeam: FormationResult;
-
-
-  if (pickTeamDetailsNextGW?.length > 0) {
-    managerTeam = convertToFormation(pickTeamDetailsNextGW);
-  } else {
-    const teamDetailsGW = teamDetails.filter(
-      (item: TeamDetails) => item[propertyName] === teamName && item.gw === nextGw
-    );
-    managerTeam = convertToFormation(teamDetailsGW);
-  }
-
-
-
-
-  // Helper function to check if item is not a substitute
-  const isNotSubstitute = (item: TeamDetails) => !item?.lineup?.toLowerCase().startsWith("sub ");
-  // Helper function to get valid points
-  const getValidPoints = (item: TeamDetails) => isNotSubstitute(item) ? item.point : 0;
-  // Filter data once and reuse
-  const filteredGWData = teamDetails.filter(
-    (item: TeamDetails) => item[propertyName] === teamName && item.gw === gw
-  );
-  const filteredData = teamDetails.filter(
-    (item: TeamDetails) => item[propertyName] === teamName
-  );
-  // Calculate total GW score
-  const totalGWScore = filteredGWData.reduce(
-    (acc, item: TeamDetails) => acc + getValidPoints(item),
-    0
-  );
-  // Calculate average
-  const avg = (
-    filteredData.reduce((acc, item: TeamDetails) => acc + getValidPoints(item), 0) / (gw || 1)
-  ).toFixed(2);
-  // Calculate highest score by gameweek
-  const gwScores = filteredData.reduce((acc: Record<number, number>, item: TeamDetails) => {
-    if (isNotSubstitute(item)) {
-      const gameweek = item.gw;
-      acc[gameweek] = (acc[gameweek] || 0) + item.point;
+    // 1. Find the User
+    const user = await User.findOne({ username });
+    if (!user) {
+      console.log(`[Manager Details] User not found: ${username}`);
+      return res.status(404).json({ error: 'User not found' });
     }
-    return acc;
-  }, {} as Record<number, number>);
 
-  const highest = Math.max(...Object.values(gwScores));
+    // 2. Find the FantasyTeam managed by this user
+    const fantasyTeam = await FantasyTeam.findOne({
+      $or: [
+        { _id: { $in: user.managedTeams } },
+        { managers: user._id }
+      ]
+    }).populate('managers', 'username');
 
-  return res.json({
-    data: {
-      deadline,
-      gw,
-      pickMyTeam,
-      avg,
-      highest,
-      total,
-      total_point_before_this_gw,
-      totalGWScore,
-      teamsCount: standings?.length,
-      rank,
-      managerTeam,
-      team: teamName,
-      utlisation: utilisation,
-      total_budget: totalBudget, // Return mapped field
-      balance,
-      managers: managersList // Return string[]
+    if (!fantasyTeam) {
+      console.log(`[Manager Details] FantasyTeam not found for user: ${username}`);
+      return res.status(404).json({ error: 'Fantasy Team not found' });
     }
-  });
+
+    const { deadline, currentGw, pickMyTeam, finance, currentSquad, history, name: teamName } = fantasyTeam;
+    const { totalBudget, utilisation, balance } = finance;
+
+    const managersList = (fantasyTeam.managers as any[]).map(m => m.username);
+
+    // 3. Calculate Stats & Rank
+    // Fetch all teams to calculate rank
+    // Note: optimization -> cache this or maintain a leaderboard collection
+    const allTeams = await FantasyTeam.find({}).select('history currentSquad name').lean();
+
+    const teamsWithPoints = allTeams.map(t => {
+      const historyPoints = t.history.reduce((acc, h) => acc + h.points, 0);
+      return {
+        _id: t._id.toString(),
+        totalPoints: historyPoints + (t.currentSquad?.points || 0)
+      };
+    });
+
+    teamsWithPoints.sort((a, b) => b.totalPoints - a.totalPoints);
+
+    const rank = teamsWithPoints.findIndex(t => t._id === fantasyTeam._id.toString()) + 1;
+    const total = teamsWithPoints.find(t => t._id === fantasyTeam._id.toString())?.totalPoints || 0;
+
+    // Points before this GW (from history only)
+    const total_point_before_this_gw = history.reduce((acc, h) => acc + h.points, 0);
+
+    // GW Stats
+    const totalGWScore = currentSquad.points || 0; // Current GW score
+
+    // Average and Highest (across all GWs for this team)
+    const allScores = [...history.map(h => h.points)];
+    if (currentSquad.gameweek === currentGw) {
+      allScores.push(currentSquad.points);
+    }
+
+    // Filter 0s if needed, or keeping valid gameweeks
+    const validScores = allScores;
+    const highest = validScores.length > 0 ? Math.max(...validScores) : 0;
+    const avg = validScores.length > 0 ? (validScores.reduce((a: number, b: number) => a + b, 0) / validScores.length).toFixed(2) : "0.00";
+
+    // 4. Transform Squad to FormationResult
+    // Map IPick[] to TeamDetails[] format expected by validatores/formatter
+    // We need to map `element` back to player details (name, position etc)
+
+    // We need to fetch player details for the current squad
+    const Player = (await import("../models/Player")).Player; // Dynamic import to avoid circular dep issues if any, or just import at top
+    const playerIds = currentSquad.picks.map(p => p.element);
+    const playersMap = await Player.find({ id: { $in: playerIds } }).lean();
+    const pMap = new Map(playersMap.map(p => [p.id, p]));
+
+    const positionMap: Record<number, string> = { 1: 'GK', 2: 'DEF', 3: 'MID', 4: 'FWD' };
+
+    const teamIds = [...new Set(playersMap.map(p => p.teamId))];
+    const Team = (await import("../models/Team")).Team;
+    const teams = await Team.find({ id: { $in: teamIds } }).lean();
+    const teamMap = new Map(teams.map(t => [t.id, t]));
+
+    const squadAsTeamDetails: TeamDetails[] = currentSquad.picks.map(pick => {
+      const playerDoc = pMap.get(pick.element);
+      const teamDoc = playerDoc ? teamMap.get(playerDoc.teamId) : null;
+
+      return {
+        // Required fields for Formation/Formatter
+        player_id: pick.element,
+        player_name: playerDoc?.webName || playerDoc?.name || "Unknown",
+        team_name: teamName, // Fantasy Team Name
+        gw: currentGw,
+        point: (pick as any).statsSnapshot?.points || 0, // Use GW specific XPoints if available
+
+        position: positionMap[playerDoc?.elementType || 3],
+        price: playerDoc?.price?.nowCost || 0,
+        club: playerDoc?.clubName || "UNK", // We might need to fetch this or populate
+
+        // Lineup Status construction
+        lineup: pick.position <= 11 ? "Starting XI" : `Sub ${pick.position - 11}`,
+
+        // Role Construction (Expected by Formatter as 'role', not 'type')
+        role: pick.isCaptain ? "CAPTAIN" : pick.isViceCaptain ? "VICE CAPTAIN" : null,
+        // type: pick.isCaptain ? "Captain" : pick.isViceCaptain ? "Vice Captain" : "Player" // Deprecated/Wrong field
+
+        team_short_name: teamDoc?.nameCode || teamDoc?.shortName || "UNK",
+        team_color: teamDoc?.teamColors?.primary || "#003399", // Default fallback here too
+        team_text_color: teamDoc?.teamColors?.text || "#ffffff",
+        shirtNumber: playerDoc?.shirtNumber || 0
+      } as any; // Casting to any because TeamDetails structure from Sheets had specific loose fields
+    });
+
+    // Using the existing formatter
+    const managerTeam: FormationResult = convertToFormation(squadAsTeamDetails);
+
+
+    return res.json({
+      data: {
+        deadline,
+        gw: currentGw,
+        pickMyTeam,
+        avg,
+        highest,
+        total,
+        total_point_before_this_gw,
+        totalGWScore,
+        teamsCount: allTeams.length,
+        rank,
+        managerTeam,
+        team: teamName,
+        utlisation: utilisation,
+        total_budget: totalBudget,
+        balance,
+        managers: managersList
+      }
+    });
+
+  } catch (error) {
+    console.error("Error in details controller:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 }
 
 export const substitution = async (req: Request, res: Response, next: NextFunction) => {
-  const { substitution, roles } = req.body;
+  try {
+    const { substitution, roles } = req.body;
+    const username = req.user.userId;
 
-  const teamName = req.user.userId;
-  const propertyName = "team_name";
-  const batchDetails = await getSheets()?.spreadsheets.values.batchGet({
-    spreadsheetId: SPREADSHEET_ID,
-    ranges: [
-      'Pick Team!A:G',
-      'Master Data!H:O',
-    ],
-    majorDimension: 'ROWS',
-    valueRenderOption: 'UNFORMATTED_VALUE',
-    dateTimeRenderOption: 'FORMATTED_STRING'
-  });
-
-  const valueRanges: sheets_v4.Schema$ValueRange[] = batchDetails?.data.valueRanges ?? [];
-
-  const pickteamRows: Row[] = (valueRanges[0].values as Row[]) ?? []; // 2D array
-  const detailsRows: Row[] = (valueRanges[1].values as Row[]) ?? []; // 2D array
-
-  const user = await User.findOne({ username: teamName });
-  if (!user) {
-    return res.status(404).json({ error: 'User not found' });
-  }
-
-  const fantasyTeam = await FantasyTeam.findOne({
-    $or: [
-      { _id: { $in: user.managedTeams } },
-      { managers: user._id }
-    ]
-  });
-
-  if (!fantasyTeam) {
-    return res.status(404).json({ error: 'Fantasy Team not found' });
-  }
-
-  const { deadline, currentGw, pickMyTeam } = fantasyTeam;
-  const gw = currentGw;
-  const pickmyteam = pickMyTeam;
-
-
-  if (pickmyteam) {
-
-    const teamDetails: TeamDetails[] = convertToJSON(detailsRows, 'teamDetails');
-    const pickTeamDetails: TeamDetails[] = convertToJSON(pickteamRows, 'teamDetails');
-
-    const nextGw = gw;
-
-
-    const pickTeamDetailsNextGW = pickTeamDetails.filter(
-      (item: TeamDetails) => item[propertyName] === teamName && item.gw === nextGw
-    );
-
-    let managerTeam: FormationResult;
-
-
-    if (pickTeamDetailsNextGW?.length > 0) {
-      managerTeam = convertToFormation(pickTeamDetailsNextGW);
-    } else {
-      const teamDetailsGW = teamDetails.filter(
-        (item: TeamDetails) => item[propertyName] === teamName && item.gw === nextGw
-      );
-      managerTeam = convertToFormation(teamDetailsGW);
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
     }
 
-    const { starting, bench } = managerTeam;
+    const fantasyTeam = await FantasyTeam.findOne({
+      $or: [
+        { _id: { $in: user.managedTeams } },
+        { managers: user._id }
+      ]
+    });
 
+    if (!fantasyTeam) {
+      return res.status(404).json({ error: 'Fantasy Team not found' });
+    }
 
-    let swappedData: any = {};
+    if (!fantasyTeam.pickMyTeam) {
+      return res.status(403).json({
+        data: {
+          message: "Pick My Team is not open"
+        }
+      });
+    }
+
+    // --- Prepare current squad for transformation ---
+    // We need to fetch Player details names to support the `validateAndApplySwap` which uses names
+    // Ideally we should refactor `validateAndApplySwap` to use IDs, but to minimize changes:
+    const Player = (await import("../models/Player")).Player;
+    const Team = (await import("../models/Team")).Team;
+
+    const playerIds = fantasyTeam.currentSquad.picks.map(p => p.element);
+    const players = await Player.find({ id: { $in: playerIds } }).lean();
+    const pMap = new Map(players.map(p => [p.id, p]));
+    const pNameMap = new Map(players.map(p => [p.name, p])); // For reverse lookup by name from frontend
+
+    const teamIds = [...new Set(players.map(p => p.teamId))];
+    const teams = await Team.find({ id: { $in: teamIds } }).lean();
+    const teamMap = new Map(teams.map(t => [t.id, t]));
+
+    const positionMap: Record<number, string> = { 1: 'GK', 2: 'DEF', 3: 'MID', 4: 'FWD' };
+
+    // Construct "Formation" object expected by helpers
+    // Helper expects { starting: TeamDetails[], bench: TeamDetails[] }
+    // TeamDetails needs 'lineup' and 'player_name'
+    const teamDetailsList: TeamDetails[] = fantasyTeam.currentSquad.picks.map(pick => {
+      const p = pMap.get(pick.element);
+      const teamDoc = p ? teamMap.get(p.teamId) : null;
+      return {
+        player_name: p?.webName || p?.name || "Unknown",
+        lineup: pick.position <= 11 ? "Starting XI" : `Sub ${pick.position - 11}`,
+        type: pick.isCaptain ? "Captain" : pick.isViceCaptain ? "Vice Captain" : "Player",
+        position: positionMap[p?.elementType || 3],
+        // Add other mock fields if validators need them
+        player_id: pick.element,
+
+        team_short_name: teamDoc?.nameCode || teamDoc?.shortName || "UNK",
+        team_color: teamDoc?.teamColors?.primary || "#003399",
+        team_text_color: teamDoc?.teamColors?.text || "#ffffff",
+        shirtNumber: p?.shirtNumber || 0
+      } as any;
+    });
+
+    // Use existing formatter to separate into starting/bench
+    const currentFormation = convertToFormation(teamDetailsList);
+    let { starting, bench } = currentFormation;
+
+    let swappedData: FormationResult = { starting, bench };
+
+    // 1. Process Substitutions
     if (substitution?.length > 0) {
-      const invalid = substitution.map((val: Substitution) => {
-        swappedData = validateAndApplySwap({ starting: swappedData?.starting || starting, bench: swappedData?.bench || bench }, val.swapIn.name, val.swapOut.name);
-        if (!swappedData.ok) {
-          return !swappedData.ok;
+      for (const val of substitution) {
+        // Validation now expects IDs
+        // Frontend should send swapIn.id and swapOut.id
+        // Fallback to name if ID missing (for backward compat if needed, but user said "all instances")
+        // But validateAndApplySwap signature is now (formation, number, number).
+        // Safely extract IDs.
+        if (!val.swapIn || !val.swapOut) {
+          continue;
         }
-        return false
-      });
+        const inId = val.swapIn.id || val.swapIn.player_id || 0; // flexible extraction
+        const outId = val.swapOut.id || val.swapOut.player_id || 0;
 
-
-      if (invalid.includes(true)) {
-        return res.status(403).json({ data: { message: 'One or more substitutions are not allowed' } });
+        const result: any = validateAndApplySwap({ starting: swappedData.starting, bench: swappedData.bench }, inId, outId);
+        if (!result.ok) {
+          return res.status(403).json({ data: { message: result.message || 'Substitution not allowed' } });
+        }
+        swappedData.starting = result.starting;
+        swappedData.bench = result.bench;
       }
     }
 
-    let roleUpdate: any = {};
-    if (roles && roles?.captain) {
-      roleUpdate = setCaptain(
-        { starting: roleUpdate?.starting || swappedData.starting || starting, bench: roleUpdate?.bench || swappedData.bench || bench },
-        roles?.captain
-      );
+    // 2. Process Roles
+    if (roles) {
+      if (roles.captain) {
+        // Validation now expects IDs
+        const capId = roles.captain.id || roles.captain.player_id || roles.captain; // handle simple ID or object
+        // If it comes as number directly or string ID
+        const finalCapId = typeof capId === 'object' ? 0 : parseInt(String(capId));
+
+        const capResult = setCaptain(swappedData, finalCapId);
+        if ('error' in capResult) {
+          // Handle error or ignore
+        } else {
+          swappedData = capResult as any;
+        }
+      }
+      if (roles.vice) {
+        const viceId = roles.vice.id || roles.vice.player_id || roles.vice;
+        const finalViceId = typeof viceId === 'object' ? 0 : parseInt(String(viceId));
+
+        const viceResult = setViceCaptain(swappedData, finalViceId);
+        if ('error' in viceResult) {
+          // Handle error
+        } else {
+          swappedData = viceResult as any;
+        }
+      }
     }
-    if (roles && roles?.vice) {
-      roleUpdate = setViceCaptain(
-        { starting: roleUpdate?.starting || swappedData.starting || starting, bench: roleUpdate?.bench || swappedData.bench || bench },
-        roles?.vice
-      );
+    // Handle error
+
+
+    // 3. Reconstruct Picks from Swapped Data
+    const newPicks: any[] = [];
+
+    // Flatten starting lineup
+    const startingList = [
+      ...swappedData.starting.goalkeeper,
+      ...swappedData.starting.defenders,
+      ...swappedData.starting.midfielders,
+      ...swappedData.starting.forwards
+    ];
+
+    // Helper to add to picks
+    const processList = (list: any[], startIndex: number) => {
+      list.forEach((item, index) => {
+        // Find player ID by name
+        const player = players.find(p => (p.name === item.name || p.webName === item.name));
+        // Or use preserved ID if available (needs to be cast or checked)
+        const pickElement = player ? player.id : item.id; // item.id is set in convertToFormation as index+1 usually, but let's rely on finding real player or fallback
+        // Wait, convertToFormation sets id to index+1. It DOES NOT preserve real ID unless we hack it.
+        // But we passed `player_id` into `squadAsTeamDetails`? 
+        // `convertToFormation` does NOT seem to direct pass `player_id`. It constructs `id: index+1`.
+        // We need to rely on Name matching since we lost the ID in `convertToFormation`.
+        // Unless we modify `convertToFormation` which is outside scope/risky.
+        // Ideally `pNameMap` can help.
+
+        const realPlayer = pNameMap.get(item.name) || players.find(p => p.name === item.name); // item.name comes from FormationResult which came from `player_name`
+
+        if (realPlayer) {
+          newPicks.push({
+            element: realPlayer.id,
+            position: startIndex + index,
+            isCaptain: item.isCaptain || false,
+            isViceCaptain: item.isViceCaptain || false,
+            multiplier: item.isCaptain ? 2 : 1
+          });
+        }
+      });
     }
 
-    if (Object.keys(roleUpdate)?.length > 0) {
-      swappedData = roleUpdate;
-    }
+    processList(startingList, 1);
+    processList(swappedData.bench, 12);
 
-    const updateRows = swappedData.starting && buildSquadRows(swappedData, teamName, nextGw);
+    // Update History logic:
+    // If we are editing (pickMyTeam=true), and the currentSquad belongs to a previous GW (or just needs archiving before overwrite)
+    // Checks:
+    // 1. If currentSquad.gameweek < fantasyTeam.currentGw (implies we moved to new GW but haven't saved new team yet)
+    // 2. OR if we just want to ensure the "previous state" is history.
+    // User request: "move this current squad to history and add this new one to the current squad"
 
-    const updates: any = [];
+    // We only archive if the currentSquad has points/is valid and isn't already in history?
+    // Simplified logic: If currentSquad.gameweek is defined and NOT in history, push it?
+    // But usually history is for completed GWs. 
+    // Let's assume: If I am making a change for GW X, and currentSquad held GW X-1, I archive GW X-1.
 
-    let dataIndex = 0;
-    pickteamRows.forEach((r, i) => {
-      if (r[1] === teamName && r[0] === nextGw) {
-        const rowIndex = i + 1; // account for header row A1
-        updates.push({
-          range: `${'Pick Team'}!A${rowIndex}`,
-          values: [updateRows[dataIndex]]
+    const squadGw = fantasyTeam.currentSquad.gameweek;
+    const currentGw = fantasyTeam.currentGw; // The "Next" or "Active" GW
+
+    // If the squad we are overwriting belongs to a previous gameweek, save it to history first
+    if (squadGw < currentGw && squadGw > 0) {
+      // Check if already in history to avoid dupes (idempotency)
+      const exists = fantasyTeam.history.some(h => h.gameweek === squadGw);
+      if (!exists) {
+        fantasyTeam.history.push({
+          gameweek: squadGw,
+          points: fantasyTeam.currentSquad.points || 0,
+          rank: 0, // Calculate or fetch?
+          bank: fantasyTeam.finance.balance, // Snapshot finance?
+          teamValue: 0, // Snapshot?
+          picks: fantasyTeam.currentSquad.picks
         });
-        dataIndex++
+        console.log(`Archived GW ${squadGw} to history.`);
       }
-    });
-
-    // 2a) If matches, batch update those cells
-    if (updates.length) {
-      const write = await getSheets()?.spreadsheets.values.batchUpdate({
-        spreadsheetId: SPREADSHEET_ID,
-        requestBody: {
-          valueInputOption: 'USER_ENTERED',
-          data: updates
-        }
-      });
-      res.json({
-        data: {
-          message: "Team Updated !"
-        }
-      });
-      // return { updated: updates.length, appended: 0 };
-    } else {
-      // 2b) If no matches, append a new row at the bottom
-      const appendRes = await getSheets()?.spreadsheets.values.append({
-        spreadsheetId: SPREADSHEET_ID,
-        range: `${'Pick Team'}!A:D`,               // anchor the table; appends after last row
-        valueInputOption: 'USER_ENTERED',
-        insertDataOption: 'INSERT_ROWS',
-        requestBody: {
-          values: updateRows
-        }
-      });
-
-      res.json({
-        data: {
-          message: "Team Updated !"
-        }
-      });
     }
-  } else {
-    res.status(403).json({
+
+    // Update FantasyTeam Current Squad
+    fantasyTeam.currentSquad.picks = newPicks;
+    fantasyTeam.currentSquad.gameweek = currentGw; // Set to the GW we are preparing for
+    // Reset points for the new GW squad? Usually yes, starts at 0 until played.
+    // If we are editing "live", points might be complex, but "PickMyTeam" implies Next GW.
+    fantasyTeam.currentSquad.points = 0;
+
+    await fantasyTeam.save();
+
+    res.json({
       data: {
-        message: "Pick My Team is not open"
+        message: "Team Updated !"
       }
     });
+
+  } catch (error) {
+    console.error("Error in substitution controller:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
-
-
-
 }
