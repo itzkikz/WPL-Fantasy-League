@@ -6,7 +6,7 @@ const router = express.Router();
 // 1. Get rounds for a season
 router.get('/rounds/:seasonId', async (req, res) => {
     const { seasonId } = req.params;
-    const url = `https://api.sofascore.com/api/v1/unique-tournament/17/season/${seasonId}/rounds`;
+    const url = `https://www.sofascore.com/api/v1/unique-tournament/17/season/${seasonId}/rounds`;
 
     try {
         const data = await fetchSofascoreJSON(url);
@@ -20,7 +20,7 @@ router.get('/rounds/:seasonId', async (req, res) => {
 // 2. Get events for a specific round in a season
 router.get('/events/:seasonId/round/:round', async (req, res) => {
     const { seasonId, round } = req.params;
-    const url = `https://api.sofascore.com/api/v1/unique-tournament/17/season/${seasonId}/events/round/${round}`;
+    const url = `https://www.sofascore.com/api/v1/unique-tournament/17/season/${seasonId}/events/round/${round}`;
 
     try {
         const data = await fetchSofascoreJSON(url);
@@ -34,7 +34,7 @@ router.get('/events/:seasonId/round/:round', async (req, res) => {
 // 3. Get incidents for a specific match
 router.get('/event/:matchId/incidents', async (req, res) => {
     const { matchId } = req.params;
-    const url = `https://api.sofascore.com/api/v1/event/${matchId}/incidents`;
+    const url = `https://www.sofascore.com/api/v1/event/${matchId}/incidents`;
 
     try {
         const data = await fetchSofascoreJSON(url);
@@ -48,7 +48,7 @@ router.get('/event/:matchId/incidents', async (req, res) => {
 // 4. Get lineups for a specific match
 router.get('/event/:matchId/lineups', async (req, res) => {
     const { matchId } = req.params;
-    const url = `https://api.sofascore.com/api/v1/event/${matchId}/lineups`;
+    const url = `https://www.sofascore.com/api/v1/event/${matchId}/lineups`;
 
     try {
         const data = await fetchSofascoreJSON(url);
@@ -62,7 +62,7 @@ router.get('/event/:matchId/lineups', async (req, res) => {
 // 5. Get best players summary for a specific match
 router.get('/event/:matchId/best-players', async (req, res) => {
     const { matchId } = req.params;
-    const url = `https://api.sofascore.com/api/v1/event/${matchId}/best-players/summary`;
+    const url = `https://www.sofascore.com/api/v1/event/${matchId}/best-players/summary`;
 
     try {
         const data = await fetchSofascoreJSON(url);
@@ -76,7 +76,7 @@ router.get('/event/:matchId/best-players', async (req, res) => {
 // 6. Get overall standings for a season
 router.get('/standings/:seasonId', async (req, res) => {
     const { seasonId } = req.params;
-    const url = `https://api.sofascore.com/api/v1/unique-tournament/17/season/${seasonId}/standings/total`;
+    const url = `https://www.sofascore.com/api/v1/unique-tournament/17/season/${seasonId}/standings/total`;
 
     try {
         const data = await fetchSofascoreJSON(url);
@@ -90,7 +90,7 @@ router.get('/standings/:seasonId', async (req, res) => {
 // 7. Get players for a specific team
 router.get('/team/:teamId/players', async (req, res) => {
     const { teamId } = req.params;
-    const url = `https://api.sofascore.com/api/v1/team/${teamId}/players`;
+    const url = `https://www.sofascore.com/api/v1/team/${teamId}/players`;
 
     try {
         const data = await fetchSofascoreJSON(url);
