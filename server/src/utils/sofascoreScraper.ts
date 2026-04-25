@@ -11,27 +11,31 @@ export const fetchSofascoreJSON = async (url: string) => {
     let browser;
     try {
         browser = await puppeteer.launch({
-            headless: true, // Use the new headless mode if 'true' causes issues, e.g headless: "new"
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
+            headless: true,
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-blink-features=AutomationControlled'
+            ]
         });
         const page = await browser.newPage();
 
-        // Realistic viewport and user agent are handled largely by the stealth plugin, 
-        // but we can enforce a standard one to be safe.
-        await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36");
+        // 1. First go to the main page to get Cloudflare clearance cookies.
+        // Cloudflare challenges often fail if you request an API/JSON endpoint directly 
+        // from a datacenter IP because it injects HTML into a JSON parser.
+        await page.goto('https://www.sofascore.com/', { waitUntil: 'networkidle2', timeout: 30000 });
 
-        // Wait until network is idle so Cloudflare's JS challenges have time to execute and resolve
+        // Wait an extra moment to ensure the clearance cookie (cf_clearance) is saved
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
+        // 2. Now navigate to the actual API endpoint
         await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
-
-        // Wait a brief moment just to ensure any fast JS redirects finish
-        await new Promise(resolve => setTimeout(resolve, 1500));
 
         // Extract JSON from the page body
         const data = await page.evaluate(() => {
             try {
                 return JSON.parse(document.body.innerText);
             } catch (err) {
-                // If it fails to parse, we might be stuck on a challenge page or got HTML back
                 return { _rawText: document.body.innerText };
             }
         });
