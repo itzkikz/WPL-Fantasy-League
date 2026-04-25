@@ -2,11 +2,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
+import puppeteer from 'puppeteer';
 import standingsRouter from './routes/standings';
 import playersRouter from './routes/players';
 import authRouter from './routes/auth';
 import notificationRouter from './routes/notification';
-import managerRouter from './routes/manager'
+import managerRouter from './routes/manager';
+import sofascoreRouter from './routes/sofascore';
 import { setSheets } from './lib/store/globals';
 import { authenticateToken } from './middlewares/authMiddleware';
 import { logMiddleware } from './middlewares/logMiddleware';
@@ -46,6 +48,8 @@ app.use("/api", authRouter);
 app.get('/api/validate-token', authenticateToken, (req: any, res) => {
   res.json({ data: { valid: true, user: req.user } });
 });
+
+app.use('/api/sofascore', sofascoreRouter);
 
 app.use('/api', authenticateToken, managerRouter);
 
