@@ -155,7 +155,7 @@ const PlayerHistorySchema = new Schema({
 
 const PlayerSchema: Schema = new Schema({
     id: { type: Number, required: true, unique: true }, // SofaScore ID now
-    slug: { type: String, required: true },
+    slug: { type: String, required: true, index: true },
     name: { type: String }, // Display name
     shortName: String,
     webName: { type: String, index: true }, // Keeping for compatibility, default to shortName

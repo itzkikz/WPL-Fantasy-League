@@ -13,7 +13,9 @@ import { Team } from "../models/Team";
 
 export const getStandings = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const teams = await FantasyTeam.find({}).lean();
+        const teams = await FantasyTeam.find({})
+            .select('name currentGw history currentSquad updatedAt')
+            .lean();
 
         // Calculate global current gameweek (max of all teams)
         const globalCurrentGw = teams.reduce((max, team) => Math.max(max, team.currentGw), 0);

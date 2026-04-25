@@ -40,28 +40,39 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
     const managersList = (fantasyTeam.managers as any[]).map(m => m.username);
 
     // 3. Calculate Stats & Rank
-    // Fetch all teams to calculate rank
-    // Note: optimization -> cache this or maintain a leaderboard collection
-    const allTeams = await FantasyTeam.find({}).select('history currentSquad name').lean();
-
-    const teamsWithPoints = allTeams.map(t => {
-      const historyPoints = t.history.reduce((acc, h) => acc + h.points, 0);
-      return {
-        _id: t._id.toString(),
-        totalPoints: historyPoints + (t.currentSquad?.points || 0)
-      };
-    });
-
-    teamsWithPoints.sort((a, b) => b.totalPoints - a.totalPoints);
-
-    const rank = teamsWithPoints.findIndex(t => t._id === fantasyTeam._id.toString()) + 1;
-    const total = teamsWithPoints.find(t => t._id === fantasyTeam._id.toString())?.totalPoints || 0;
+    // Updated to use Aggregation for performance (avoid fetching all teams)
 
     // Points before this GW (from history only)
     const total_point_before_this_gw = history.reduce((acc, h) => acc + h.points, 0);
+    const totalGWScore = currentSquad.points || 0;
+    const myTotalPoints = total_point_before_this_gw + totalGWScore;
 
-    // GW Stats
-    const totalGWScore = currentSquad.points || 0; // Current GW score
+    const rankResult = await FantasyTeam.aggregate([
+      {
+        $addFields: {
+          calculatedTotalPoints: {
+            $add: [
+              { $sum: "$history.points" },
+              { $ifNull: ["$currentSquad.points", 0] }
+            ]
+          }
+        }
+      },
+      {
+        $match: {
+          calculatedTotalPoints: { $gt: myTotalPoints }
+        }
+      },
+      {
+        $count: "rank"
+      }
+    ]);
+
+    const rank = (rankResult[0]?.rank || 0) + 1;
+    const total = myTotalPoints;
+
+    // Count teams for "teamsCount"
+    const teamsCount = await FantasyTeam.countDocuments({});
 
     // Average and Highest (across all GWs for this team)
     const allScores = [...history.map(h => h.points)];
@@ -135,7 +146,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
         total,
         total_point_before_this_gw,
         totalGWScore,
-        teamsCount: allTeams.length,
+        teamsCount: teamsCount,
         rank,
         managerTeam,
         team: teamName,

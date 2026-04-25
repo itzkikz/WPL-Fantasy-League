@@ -15,6 +15,7 @@ const LeagueSchema: Schema = new Schema({
     code: { type: String, unique: true, index: true }, // Optional for system leagues
     admin: { type: Schema.Types.ObjectId, ref: 'User' }, // Optional for system leagues
     // Participants reference FantasyTeams so we can easily show standings
+    // @deprecated - Use FantasyTeam.leagues instead for scalability
     participants: [{ type: Schema.Types.ObjectId, ref: 'FantasyTeam' }],
     type: { type: String, enum: ['public', 'private'], default: 'private' },
     createdOn: { type: Date, default: Date.now },

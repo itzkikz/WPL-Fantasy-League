@@ -140,14 +140,15 @@ export class SyncController {
                 currentGameweek = maxGameweek > 0 ? maxGameweek : 1;
             }
 
-            // 4. Update Players
-            console.log('Updating Players...');
+            // 4. Update Players (Prepare Bulk Ops)
+            console.log('Preparing Player Bulk Updates...');
+            const playerBulkOps: any[] = [];
 
             for (const [playerId, data] of playerUpdates) {
                 let player = playerMap.get(playerId);
-                if (!player) {
-                    console.log(`Creating new player: ${playerId} (${data.metadata.name})`);
 
+                // Construct new player object if doesn't exist (in memory)
+                if (!player) {
                     // Map Position String to Element Type
                     const pos = data.metadata.position.trim().toUpperCase();
                     let elementType = 3; // Default MID
@@ -170,9 +171,7 @@ export class SyncController {
                         history: [],
                         stats: {}
                     });
-
-                    // Add to map so we don't try to create duplicate if logic changes
-                    playerMap.set(playerId, player);
+                    playerMap.set(playerId, player); // Add to map for subsequent reference if needed
                 }
 
                 // Update metadata for existing (or new) players if changed (e.g. transfers)
@@ -245,7 +244,7 @@ export class SyncController {
                     });
 
                     player.stats.totalPoints = totalStats.totalPoints;
-                    player.stats.xPoints = totalStats.xPoints; // Update global stat
+                    player.stats.xPoints = totalStats.xPoints;
                     player.stats.appearances = totalStats.appearances;
                     player.stats.goalsScored = totalStats.goalsScored;
                     player.stats.assists = totalStats.assists;
@@ -260,16 +259,44 @@ export class SyncController {
                     player.stats.bonus = totalStats.bonus;
                     player.stats.bps = totalStats.bps;
 
-                    try {
-                        await player.save();
-                    } catch (saveError) {
-                        console.error(`Failed to save player ${playerId} (${player.name}):`, saveError);
-                    }
+                    // Push to Bulk Write
+                    // We use updateOne with upsert to handle both new and existing
+                    playerBulkOps.push({
+                        updateOne: {
+                            filter: { id: player.id },
+                            update: {
+                                $set: {
+                                    name: player.name,
+                                    webName: player.webName,
+                                    shortName: player.shortName,
+                                    slug: player.slug,
+                                    teamId: player.teamId,
+                                    clubName: player.clubName,
+                                    position: player.position,
+                                    elementType: player.elementType,
+                                    price: player.price,
+                                    history: player.history, // Full replace of history array
+                                    stats: player.stats
+                                },
+                                $setOnInsert: {
+                                    // Set fields that should only be set on creation if missing
+                                }
+                            },
+                            upsert: true
+                        }
+                    });
                 }
             }
 
-            // 5. Update Fantasy Teams
-            console.log('Updating Fantasy Teams...');
+            if (playerBulkOps.length > 0) {
+                console.log(`Executing ${playerBulkOps.length} player updates...`);
+                await Player.bulkWrite(playerBulkOps);
+            }
+
+            // 5. Update Fantasy Teams (Prepare Bulk Ops)
+            console.log('Preparing Fantasy Team Bulk Updates...');
+            const teamBulkOps: any[] = [];
+
             for (const [teamName, gwMap] of fantasyTeamHistory) {
                 const team = fantasyTeamMap.get(teamName);
                 if (!team) {
@@ -356,9 +383,28 @@ export class SyncController {
                             points: gwPoints
                         };
                     }
+                    teamChanged = true;
                 }
 
-                await team.save();
+                if (teamChanged) {
+                    teamBulkOps.push({
+                        updateOne: {
+                            filter: { _id: team._id },
+                            update: {
+                                $set: {
+                                    currentGw: team.currentGw,
+                                    history: team.history,
+                                    currentSquad: team.currentSquad
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            if (teamBulkOps.length > 0) {
+                console.log(`Executing ${teamBulkOps.length} fantasy team updates...`);
+                await FantasyTeam.bulkWrite(teamBulkOps);
             }
 
             res.status(200).json({

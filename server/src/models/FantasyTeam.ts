@@ -54,6 +54,7 @@ export interface IFantasyTeam extends Document {
     };
 
     history: IHistory[];
+    leagues?: mongoose.Types.ObjectId[];
 }
 
 // --- Schemas ---
@@ -109,7 +110,10 @@ const FantasyTeamSchema: Schema = new Schema({
         points: { type: Number, default: 0 }
     },
 
-    history: [HistorySchema]
+    history: [HistorySchema],
+
+    // LEAGUES: Inverted relationship for scalability
+    leagues: [{ type: Schema.Types.ObjectId, ref: 'League' }]
 }, { timestamps: true });
 
 // Pre-save hook to calculate balance automatically

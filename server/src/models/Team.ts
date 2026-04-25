@@ -29,9 +29,9 @@ export interface ITeam extends Document {
 const TeamSchema: Schema = new Schema({
     id: { type: Number, required: true, unique: true },
     name: { type: String, required: true },
-    shortName: { type: String, required: true },
+    shortName: { type: String, required: true, index: true },
     nameCode: { type: String, required: true },
-    slug: { type: String, required: true },
+    slug: { type: String, required: true, index: true },
 
     strength: Number,
     strengthOverallHome: Number,
