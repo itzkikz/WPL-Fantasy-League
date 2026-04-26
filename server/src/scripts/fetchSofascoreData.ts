@@ -62,18 +62,7 @@ async function main() {
             saveJSON(`${SEASON_ID}_standings.json`, standingsData);
             await delay(2000);
 
-            // 3. Fetch events for each round
-            const totalRounds = roundsData?.currentRound?.round || roundsData?.rounds?.length || 1;
-            console.log(`⚽ Fetching events for ${totalRounds} rounds...`);
-            // for (let round = 1; round <= totalRounds; round++) {
-            //     console.log(`   Round ${round}/${totalRounds}`);
-            const eventsUrl = `https://www.sofascore.com/api/v1/unique-tournament/${TOURNAMENT_ID}/season/${SEASON_ID}/events/round/${roundsData?.currentRound?.round}`;
-            const eventsData = await fetchSofascoreJSON(eventsUrl, page);
-            saveJSON(`${SEASON_ID}_events_round_${roundsData?.currentRound?.round}.json`, eventsData);
-            //     await delay(1500);
-            // }
-
-            // 4. Fetch team players from standings
+            // 3. Fetch team players from standings (Done once per season)
             if (standingsData?.standings?.[0]?.rows) {
                 const teams = standingsData.standings[0].rows;
                 console.log(`👥 Fetching players for ${teams.length} teams...`);
@@ -89,15 +78,23 @@ async function main() {
                 }
             }
 
-            // 5. Fetch match details (incidents, lineups, best-players) for the latest round
-            const latestRound = roundsData?.currentRound?.round || totalRounds;
-            const latestEventsFile = path.join(DATA_DIR, `${SEASON_ID}_events_round_${latestRound}.json`);
-            if (fs.existsSync(latestEventsFile)) {
-                const latestEvents = JSON.parse(fs.readFileSync(latestEventsFile, 'utf-8'));
-                const matches = latestEvents?.events || [];
-                console.log(`🏟️  Fetching match details for ${matches.length} matches in round ${latestRound}...`);
+            // 4. Fetch events and match details for ALL rounds
+            const totalRounds = roundsData?.currentRound?.round;
+            console.log(`⚽ Fetching events and match details for ${totalRounds} rounds...`);
 
+            for (let round = totalRounds; round >= totalRounds - 2; round--) {
+                console.log(`\n   --- Round ${round}/${totalRounds} ---`);
+
+                // Fetch events for this round
+                const eventsUrl = `https://www.sofascore.com/api/v1/unique-tournament/${TOURNAMENT_ID}/season/${SEASON_ID}/events/round/${round}`;
+                const eventsData = await fetchSofascoreJSON(eventsUrl, page);
+                saveJSON(`${SEASON_ID}_events_round_${round}.json`, eventsData);
+                await delay(1500);
+
+                const matches = eventsData?.events || [];
                 const fantasyPlayerStats: any[] = [];
+
+                console.log(`🏟️  Fetching match details for ${matches.length} matches in Round ${round}...`);
 
                 for (const match of matches) {
                     const matchId = match.id;
@@ -110,21 +107,21 @@ async function main() {
                         const incidentsData = await fetchSofascoreJSON(
                             `https://www.sofascore.com/api/v1/event/${matchId}/incidents`, page
                         );
-                        saveJSON(`${SEASON_ID}_match_${matchId}_incidents.json`, incidentsData);
+                        saveJSON(`${SEASON_ID}_round_${round}_match_${matchId}_incidents.json`, incidentsData);
                         await delay(1000);
 
                         // Lineups
                         const lineupsData = await fetchSofascoreJSON(
                             `https://www.sofascore.com/api/v1/event/${matchId}/lineups`, page
                         );
-                        saveJSON(`${SEASON_ID}_match_${matchId}_lineups.json`, lineupsData);
+                        saveJSON(`${SEASON_ID}_round_${round}_match_${matchId}_lineups.json`, lineupsData);
                         await delay(1000);
 
                         // Best players
                         const bestPlayersData = await fetchSofascoreJSON(
                             `https://www.sofascore.com/api/v1/event/${matchId}/best-players/summary`, page
                         );
-                        saveJSON(`${SEASON_ID}_match_${matchId}_best_players.json`, bestPlayersData);
+                        saveJSON(`${SEASON_ID}_round_${round}_match_${matchId}_best_players.json`, bestPlayersData);
                         await delay(1000);
 
                         // --- FANTASY DATA EXTRACTION ---
@@ -181,7 +178,7 @@ async function main() {
                                         penaltyMiss,
                                         penaltySave,
                                         isPom: isPom ? 1 : 0,
-                                        round: latestRound,
+                                        round: round,
                                         minutesPlayed: players.statistics?.minutesPlayed || 0,
                                         teamName: players.teamName,
                                         game: players.game,
@@ -198,12 +195,12 @@ async function main() {
                     }
                 } // End inner matches loop
 
-                // Save compiled stats array
+                // Save compiled stats array for the round
                 if (fantasyPlayerStats.length > 0) {
-                    saveJSON(`${SEASON_ID}_fantasy_players_round_${latestRound}.json`, fantasyPlayerStats);
-                    console.log(`   ✨ Saved fantasy player stats for ${fantasyPlayerStats.length} players in Round ${latestRound}!`);
+                    saveJSON(`${SEASON_ID}_fantasy_players_round_${round}.json`, fantasyPlayerStats);
+                    console.log(`   ✨ Saved fantasy player stats for ${fantasyPlayerStats.length} players in Round ${round}!`);
                 }
-            } // End events file check
+            } // End round loop
         } // End outer season loop
 
         console.log('\n✅ Sofascore data sync complete for all seasons!');
