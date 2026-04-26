@@ -1,0 +1,41 @@
+name: Sync Sofascore Data
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Every 6 hours
+  workflow_dispatch: # Manual trigger from GitHub UI
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: server/package-lock.json
+
+      - name: Install dependencies
+        run: cd server && npm ci
+
+      - name: Install Chrome for Puppeteer
+        run: cd server && npx puppeteer browsers install chrome
+
+      - name: Run Sofascore data fetch
+        run: cd server && npx ts-node src/scripts/fetchSofascoreData.ts
+        timeout-minutes: 15
+
+      - name: Commit and push data files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: sync sofascore data [skip ci]'
+          file_pattern: 'server/src/data/sofascore/*.json'
+          commit_user_name: 'github-actions[bot]'
+          commit_user_email: 'github-actions[bot]@users.noreply.github.com'
