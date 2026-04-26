@@ -2,7 +2,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
-import puppeteer from 'puppeteer';
 import standingsRouter from './routes/standings';
 import playersRouter from './routes/players';
 import authRouter from './routes/auth';
