@@ -4,7 +4,7 @@ import fs from 'fs';
 
 const router = express.Router();
 
-const DATA_DIR = path.resolve(__dirname, '../data/sofascore');
+const DATA_DIR = path.join(process.cwd(), 'src', 'data', 'sofascore');
 
 /**
  * Reads a cached JSON file. Returns parsed data or null.
