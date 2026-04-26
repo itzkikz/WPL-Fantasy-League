@@ -15,6 +15,9 @@ export const fetchSofascoreJSON = async (url: string, existingPage?: any) => {
             try { return JSON.parse(document.body.innerText); }
             catch { return { _rawText: document.body.innerText }; }
         });
+        if (data && data.error && data.error.code === 403) {
+            throw new Error(`Cloudflare 403 Forbidden on URL: ${url}`);
+        }
         return data;
     }
 
@@ -51,6 +54,10 @@ export const fetchSofascoreJSON = async (url: string, existingPage?: any) => {
             try { return JSON.parse(document.body.innerText); }
             catch { return { _rawText: document.body.innerText }; }
         });
+
+        if (data && data.error && data.error.code === 403) {
+            throw new Error(`Cloudflare 403 Forbidden on URL: ${url}`);
+        }
 
         await browser.close();
         return data;

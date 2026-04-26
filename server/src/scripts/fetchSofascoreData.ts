@@ -65,13 +65,13 @@ async function main() {
             // 3. Fetch events for each round
             const totalRounds = roundsData?.currentRound?.round || roundsData?.rounds?.length || 1;
             console.log(`⚽ Fetching events for ${totalRounds} rounds...`);
-            for (let round = 1; round <= totalRounds; round++) {
-                console.log(`   Round ${round}/${totalRounds}`);
-                const eventsUrl = `https://www.sofascore.com/api/v1/unique-tournament/${TOURNAMENT_ID}/season/${SEASON_ID}/events/round/${round}`;
-                const eventsData = await fetchSofascoreJSON(eventsUrl, page);
-                saveJSON(`${SEASON_ID}_events_round_${round}.json`, eventsData);
-                await delay(1500);
-            }
+            // for (let round = 1; round <= totalRounds; round++) {
+            //     console.log(`   Round ${round}/${totalRounds}`);
+            const eventsUrl = `https://www.sofascore.com/api/v1/unique-tournament/${TOURNAMENT_ID}/season/${SEASON_ID}/events/round/${roundsData?.currentRound?.round}`;
+            const eventsData = await fetchSofascoreJSON(eventsUrl, page);
+            saveJSON(`${SEASON_ID}_events_round_${roundsData?.currentRound?.round}.json`, eventsData);
+            //     await delay(1500);
+            // }
 
             // 4. Fetch team players from standings
             if (standingsData?.standings?.[0]?.rows) {
