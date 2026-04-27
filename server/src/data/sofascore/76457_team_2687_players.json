@@ -3095,9 +3095,9 @@
         "slug": "vasilije-adzic",
         "shortName": "V. Adžić",
         "team": {
-          "name": "Juventus Next Gen U23",
-          "slug": "juventus-next-gen",
-          "shortName": "Juventus NG U23",
+          "name": "Juventus",
+          "slug": "juventus",
+          "shortName": "Juventus",
           "gender": "M",
           "sport": {
             "name": "Football",
@@ -3105,8 +3105,8 @@
             "id": 1
           },
           "tournament": {
-            "name": "Serie C, Group A",
-            "slug": "serie-c-girone-a",
+            "name": "Serie A",
+            "slug": "serie-a",
             "category": {
               "name": "Italy",
               "slug": "italy",
@@ -3136,213 +3136,6 @@
               }
             },
             "uniqueTournament": {
-              "name": "Serie C, Girone A",
-              "slug": "serie-c-girone-a",
-              "primaryColorHex": "#9f0609",
-              "secondaryColorHex": "#bababa",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 5332,
-              "country": {},
-              "id": 11445,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "دوري C، المجموعة A",
-                  "bn": "সিরি সি, গিরোন এ",
-                  "hi": "सीरी सी, गिरोन ए"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 0,
-            "isLive": false,
-            "id": 37884,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "دوري C، المجموعة A",
-                "bn": "সেরি সি, জিরোন এ",
-                "hi": "सीरी सी, गिरोन ए"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Serie C, Girone B",
-            "slug": "serie-c-girone-b",
-            "primaryColorHex": "#9f0609",
-            "secondaryColorHex": "#bababa",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 5053,
-            "country": {},
-            "id": 11447,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإيطالي C، المجموعة B",
-                "bn": "সিরি সি, গ্রুপ বি",
-                "hi": "सीरी सी, गिरोन बी"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 15597,
-          "nameCode": "JUV",
-          "disabled": false,
-          "national": false,
-          "parentTeam": {
-            "name": "Juventus",
-            "slug": "juventus",
-            "shortName": "Juventus",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "tournament": {
-              "name": "Serie A",
-              "slug": "serie-a",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "uniqueTournament": {
-                "name": "Serie A",
-                "slug": "serie-a",
-                "primaryColorHex": "#09519e",
-                "secondaryColorHex": "#008fd7",
-                "category": {
-                  "name": "Italy",
-                  "slug": "italy",
-                  "sport": {
-                    "name": "Football",
-                    "slug": "football",
-                    "id": 1
-                  },
-                  "priority": 7,
-                  "country": {
-                    "alpha2": "IT",
-                    "alpha3": "ITA",
-                    "name": "Italy",
-                    "slug": "italy"
-                  },
-                  "id": 31,
-                  "flag": "italy",
-                  "alpha2": "IT",
-                  "fieldTranslations": {
-                    "nameTranslation": {
-                      "ar": "إيطاليا",
-                      "bn": "ইতালি",
-                      "hi": "इटली",
-                      "ru": "Италия"
-                    },
-                    "shortNameTranslation": {}
-                  }
-                },
-                "userCount": 642447,
-                "country": {},
-                "id": 23,
-                "displayInverseHomeAwayTeams": false,
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "الدوري الإيطالي",
-                    "hi": "सीरी ए",
-                    "bn": "সিরি আ"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "priority": 700,
-              "isLive": false,
-              "id": 33,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "hi": "सीरी ए",
-                  "ar": "الدوري الإيطالي",
-                  "bn": "সিরি আ"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "primaryUniqueTournament": {
               "name": "Serie A",
               "slug": "serie-a",
               "primaryColorHex": "#09519e",
@@ -3388,33 +3181,68 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1597037,
-            "nameCode": "JUV",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "IT",
-              "alpha3": "ITA",
-              "name": "Italy",
-              "slug": "italy"
-            },
-            "id": 2687,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#000000",
-              "text": "#000000"
-            },
+            "priority": 700,
+            "isLive": false,
+            "id": 33,
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "يوفنتوس",
-                "bn": "জুভেন্টাস",
-                "hi": "जुवेंटस",
-                "ru": "Ювентус"
+                "hi": "सीरी ए",
+                "ar": "الدوري الإيطالي",
+                "bn": "সিরি আ"
               },
               "shortNameTranslation": {}
             }
           },
+          "primaryUniqueTournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "primaryColorHex": "#09519e",
+            "secondaryColorHex": "#008fd7",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 642447,
+            "country": {},
+            "id": 23,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإيطالي",
+                "hi": "सीरी ए",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 1597037,
+          "nameCode": "JUV",
+          "disabled": false,
+          "national": false,
           "type": 0,
           "country": {
             "alpha2": "IT",
@@ -3422,7 +3250,7 @@
             "name": "Italy",
             "slug": "italy"
           },
-          "id": 294884,
+          "id": 2687,
           "teamColors": {
             "primary": "#ffffff",
             "secondary": "#000000",
@@ -3430,9 +3258,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "يوفنتوس الجيل القادم تحت 23",
-              "hi": "जुवेंटस नेक्स्ट जेन U23",
-              "ru": "Ювентус Некст Джен U23"
+              "ar": "يوفنتوس",
+              "bn": "জুভেন্টাস",
+              "hi": "जुवेंटस",
+              "ru": "Ювентус"
             },
             "shortNameTranslation": {}
           }
@@ -7878,9 +7707,9 @@
         "slug": "vasilije-adzic",
         "shortName": "V. Adžić",
         "team": {
-          "name": "Juventus Next Gen U23",
-          "slug": "juventus-next-gen",
-          "shortName": "Juventus NG U23",
+          "name": "Juventus",
+          "slug": "juventus",
+          "shortName": "Juventus",
           "gender": "M",
           "sport": {
             "name": "Football",
@@ -7888,8 +7717,8 @@
             "id": 1
           },
           "tournament": {
-            "name": "Serie C, Group A",
-            "slug": "serie-c-girone-a",
+            "name": "Serie A",
+            "slug": "serie-a",
             "category": {
               "name": "Italy",
               "slug": "italy",
@@ -7919,213 +7748,6 @@
               }
             },
             "uniqueTournament": {
-              "name": "Serie C, Girone A",
-              "slug": "serie-c-girone-a",
-              "primaryColorHex": "#9f0609",
-              "secondaryColorHex": "#bababa",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 5332,
-              "country": {},
-              "id": 11445,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "دوري C، المجموعة A",
-                  "bn": "সিরি সি, গিরোন এ",
-                  "hi": "सीरी सी, गिरोन ए"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 0,
-            "isLive": false,
-            "id": 37884,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "دوري C، المجموعة A",
-                "bn": "সেরি সি, জিরোন এ",
-                "hi": "सीरी सी, गिरोन ए"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Serie C, Girone B",
-            "slug": "serie-c-girone-b",
-            "primaryColorHex": "#9f0609",
-            "secondaryColorHex": "#bababa",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 5053,
-            "country": {},
-            "id": 11447,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإيطالي C، المجموعة B",
-                "bn": "সিরি সি, গ্রুপ বি",
-                "hi": "सीरी सी, गिरोन बी"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 15597,
-          "nameCode": "JUV",
-          "disabled": false,
-          "national": false,
-          "parentTeam": {
-            "name": "Juventus",
-            "slug": "juventus",
-            "shortName": "Juventus",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "tournament": {
-              "name": "Serie A",
-              "slug": "serie-a",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "uniqueTournament": {
-                "name": "Serie A",
-                "slug": "serie-a",
-                "primaryColorHex": "#09519e",
-                "secondaryColorHex": "#008fd7",
-                "category": {
-                  "name": "Italy",
-                  "slug": "italy",
-                  "sport": {
-                    "name": "Football",
-                    "slug": "football",
-                    "id": 1
-                  },
-                  "priority": 7,
-                  "country": {
-                    "alpha2": "IT",
-                    "alpha3": "ITA",
-                    "name": "Italy",
-                    "slug": "italy"
-                  },
-                  "id": 31,
-                  "flag": "italy",
-                  "alpha2": "IT",
-                  "fieldTranslations": {
-                    "nameTranslation": {
-                      "ar": "إيطاليا",
-                      "bn": "ইতালি",
-                      "hi": "इटली",
-                      "ru": "Италия"
-                    },
-                    "shortNameTranslation": {}
-                  }
-                },
-                "userCount": 642447,
-                "country": {},
-                "id": 23,
-                "displayInverseHomeAwayTeams": false,
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "الدوري الإيطالي",
-                    "hi": "सीरी ए",
-                    "bn": "সিরি আ"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "priority": 700,
-              "isLive": false,
-              "id": 33,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "hi": "सीरी ए",
-                  "ar": "الدوري الإيطالي",
-                  "bn": "সিরি আ"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "primaryUniqueTournament": {
               "name": "Serie A",
               "slug": "serie-a",
               "primaryColorHex": "#09519e",
@@ -8171,33 +7793,68 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1597037,
-            "nameCode": "JUV",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "IT",
-              "alpha3": "ITA",
-              "name": "Italy",
-              "slug": "italy"
-            },
-            "id": 2687,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#000000",
-              "text": "#000000"
-            },
+            "priority": 700,
+            "isLive": false,
+            "id": 33,
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "يوفنتوس",
-                "bn": "জুভেন্টাস",
-                "hi": "जुवेंटस",
-                "ru": "Ювентус"
+                "hi": "सीरी ए",
+                "ar": "الدوري الإيطالي",
+                "bn": "সিরি আ"
               },
               "shortNameTranslation": {}
             }
           },
+          "primaryUniqueTournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "primaryColorHex": "#09519e",
+            "secondaryColorHex": "#008fd7",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 642447,
+            "country": {},
+            "id": 23,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإيطالي",
+                "hi": "सीरी ए",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 1597037,
+          "nameCode": "JUV",
+          "disabled": false,
+          "national": false,
           "type": 0,
           "country": {
             "alpha2": "IT",
@@ -8205,7 +7862,7 @@
             "name": "Italy",
             "slug": "italy"
           },
-          "id": 294884,
+          "id": 2687,
           "teamColors": {
             "primary": "#ffffff",
             "secondary": "#000000",
@@ -8213,9 +7870,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "يوفنتوس الجيل القادم تحت 23",
-              "hi": "जुवेंटस नेक्स्ट जेन U23",
-              "ru": "Ювентус Некст Джен U23"
+              "ar": "يوفنتوس",
+              "bn": "জুভেন্টাস",
+              "hi": "जुवेंटस",
+              "ru": "Ювентус"
             },
             "shortNameTranslation": {}
           }
@@ -13545,9 +13203,9 @@
         "slug": "vasilije-adzic",
         "shortName": "V. Adžić",
         "team": {
-          "name": "Juventus Next Gen U23",
-          "slug": "juventus-next-gen",
-          "shortName": "Juventus NG U23",
+          "name": "Juventus",
+          "slug": "juventus",
+          "shortName": "Juventus",
           "gender": "M",
           "sport": {
             "name": "Football",
@@ -13555,8 +13213,8 @@
             "id": 1
           },
           "tournament": {
-            "name": "Serie C, Group A",
-            "slug": "serie-c-girone-a",
+            "name": "Serie A",
+            "slug": "serie-a",
             "category": {
               "name": "Italy",
               "slug": "italy",
@@ -13586,213 +13244,6 @@
               }
             },
             "uniqueTournament": {
-              "name": "Serie C, Girone A",
-              "slug": "serie-c-girone-a",
-              "primaryColorHex": "#9f0609",
-              "secondaryColorHex": "#bababa",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 5332,
-              "country": {},
-              "id": 11445,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "دوري C، المجموعة A",
-                  "bn": "সিরি সি, গিরোন এ",
-                  "hi": "सीरी सी, गिरोन ए"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 0,
-            "isLive": false,
-            "id": 37884,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "دوري C، المجموعة A",
-                "bn": "সেরি সি, জিরোন এ",
-                "hi": "सीरी सी, गिरोन ए"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Serie C, Girone B",
-            "slug": "serie-c-girone-b",
-            "primaryColorHex": "#9f0609",
-            "secondaryColorHex": "#bababa",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 5053,
-            "country": {},
-            "id": 11447,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإيطالي C، المجموعة B",
-                "bn": "সিরি সি, গ্রুপ বি",
-                "hi": "सीरी सी, गिरोन बी"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 15597,
-          "nameCode": "JUV",
-          "disabled": false,
-          "national": false,
-          "parentTeam": {
-            "name": "Juventus",
-            "slug": "juventus",
-            "shortName": "Juventus",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "tournament": {
-              "name": "Serie A",
-              "slug": "serie-a",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "uniqueTournament": {
-                "name": "Serie A",
-                "slug": "serie-a",
-                "primaryColorHex": "#09519e",
-                "secondaryColorHex": "#008fd7",
-                "category": {
-                  "name": "Italy",
-                  "slug": "italy",
-                  "sport": {
-                    "name": "Football",
-                    "slug": "football",
-                    "id": 1
-                  },
-                  "priority": 7,
-                  "country": {
-                    "alpha2": "IT",
-                    "alpha3": "ITA",
-                    "name": "Italy",
-                    "slug": "italy"
-                  },
-                  "id": 31,
-                  "flag": "italy",
-                  "alpha2": "IT",
-                  "fieldTranslations": {
-                    "nameTranslation": {
-                      "ar": "إيطاليا",
-                      "bn": "ইতালি",
-                      "hi": "इटली",
-                      "ru": "Италия"
-                    },
-                    "shortNameTranslation": {}
-                  }
-                },
-                "userCount": 642447,
-                "country": {},
-                "id": 23,
-                "displayInverseHomeAwayTeams": false,
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "الدوري الإيطالي",
-                    "hi": "सीरी ए",
-                    "bn": "সিরি আ"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "priority": 700,
-              "isLive": false,
-              "id": 33,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "hi": "सीरी ए",
-                  "ar": "الدوري الإيطالي",
-                  "bn": "সিরি আ"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "primaryUniqueTournament": {
               "name": "Serie A",
               "slug": "serie-a",
               "primaryColorHex": "#09519e",
@@ -13838,33 +13289,68 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1597037,
-            "nameCode": "JUV",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "IT",
-              "alpha3": "ITA",
-              "name": "Italy",
-              "slug": "italy"
-            },
-            "id": 2687,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#000000",
-              "text": "#000000"
-            },
+            "priority": 700,
+            "isLive": false,
+            "id": 33,
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "يوفنتوس",
-                "bn": "জুভেন্টাস",
-                "hi": "जुवेंटस",
-                "ru": "Ювентус"
+                "hi": "सीरी ए",
+                "ar": "الدوري الإيطالي",
+                "bn": "সিরি আ"
               },
               "shortNameTranslation": {}
             }
           },
+          "primaryUniqueTournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "primaryColorHex": "#09519e",
+            "secondaryColorHex": "#008fd7",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 642447,
+            "country": {},
+            "id": 23,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإيطالي",
+                "hi": "सीरी ए",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 1597037,
+          "nameCode": "JUV",
+          "disabled": false,
+          "national": false,
           "type": 0,
           "country": {
             "alpha2": "IT",
@@ -13872,7 +13358,7 @@
             "name": "Italy",
             "slug": "italy"
           },
-          "id": 294884,
+          "id": 2687,
           "teamColors": {
             "primary": "#ffffff",
             "secondary": "#000000",
@@ -13880,9 +13366,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "يوفنتوس الجيل القادم تحت 23",
-              "hi": "जुवेंटस नेक्स्ट जेन U23",
-              "ru": "Ювентус Некст Джен U23"
+              "ar": "يوفنتوس",
+              "bn": "জুভেন্টাস",
+              "hi": "जुवेंटस",
+              "ru": "Ювентус"
             },
             "shortNameTranslation": {}
           }
@@ -19288,9 +18775,9 @@
         "slug": "vasilije-adzic",
         "shortName": "V. Adžić",
         "team": {
-          "name": "Juventus Next Gen U23",
-          "slug": "juventus-next-gen",
-          "shortName": "Juventus NG U23",
+          "name": "Juventus",
+          "slug": "juventus",
+          "shortName": "Juventus",
           "gender": "M",
           "sport": {
             "name": "Football",
@@ -19298,8 +18785,8 @@
             "id": 1
           },
           "tournament": {
-            "name": "Serie C, Group A",
-            "slug": "serie-c-girone-a",
+            "name": "Serie A",
+            "slug": "serie-a",
             "category": {
               "name": "Italy",
               "slug": "italy",
@@ -19329,213 +18816,6 @@
               }
             },
             "uniqueTournament": {
-              "name": "Serie C, Girone A",
-              "slug": "serie-c-girone-a",
-              "primaryColorHex": "#9f0609",
-              "secondaryColorHex": "#bababa",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 5332,
-              "country": {},
-              "id": 11445,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "دوري C، المجموعة A",
-                  "bn": "সিরি সি, গিরোন এ",
-                  "hi": "सीरी सी, गिरोन ए"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 0,
-            "isLive": false,
-            "id": 37884,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "دوري C، المجموعة A",
-                "bn": "সেরি সি, জিরোন এ",
-                "hi": "सीरी सी, गिरोन ए"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Serie C, Girone B",
-            "slug": "serie-c-girone-b",
-            "primaryColorHex": "#9f0609",
-            "secondaryColorHex": "#bababa",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 5053,
-            "country": {},
-            "id": 11447,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإيطالي C، المجموعة B",
-                "bn": "সিরি সি, গ্রুপ বি",
-                "hi": "सीरी सी, गिरोन बी"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 15597,
-          "nameCode": "JUV",
-          "disabled": false,
-          "national": false,
-          "parentTeam": {
-            "name": "Juventus",
-            "slug": "juventus",
-            "shortName": "Juventus",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "tournament": {
-              "name": "Serie A",
-              "slug": "serie-a",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "uniqueTournament": {
-                "name": "Serie A",
-                "slug": "serie-a",
-                "primaryColorHex": "#09519e",
-                "secondaryColorHex": "#008fd7",
-                "category": {
-                  "name": "Italy",
-                  "slug": "italy",
-                  "sport": {
-                    "name": "Football",
-                    "slug": "football",
-                    "id": 1
-                  },
-                  "priority": 7,
-                  "country": {
-                    "alpha2": "IT",
-                    "alpha3": "ITA",
-                    "name": "Italy",
-                    "slug": "italy"
-                  },
-                  "id": 31,
-                  "flag": "italy",
-                  "alpha2": "IT",
-                  "fieldTranslations": {
-                    "nameTranslation": {
-                      "ar": "إيطاليا",
-                      "bn": "ইতালি",
-                      "hi": "इटली",
-                      "ru": "Италия"
-                    },
-                    "shortNameTranslation": {}
-                  }
-                },
-                "userCount": 642447,
-                "country": {},
-                "id": 23,
-                "displayInverseHomeAwayTeams": false,
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "الدوري الإيطالي",
-                    "hi": "सीरी ए",
-                    "bn": "সিরি আ"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "priority": 700,
-              "isLive": false,
-              "id": 33,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "hi": "सीरी ए",
-                  "ar": "الدوري الإيطالي",
-                  "bn": "সিরি আ"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "primaryUniqueTournament": {
               "name": "Serie A",
               "slug": "serie-a",
               "primaryColorHex": "#09519e",
@@ -19581,33 +18861,68 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1597037,
-            "nameCode": "JUV",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "IT",
-              "alpha3": "ITA",
-              "name": "Italy",
-              "slug": "italy"
-            },
-            "id": 2687,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#000000",
-              "text": "#000000"
-            },
+            "priority": 700,
+            "isLive": false,
+            "id": 33,
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "يوفنتوس",
-                "bn": "জুভেন্টাস",
-                "hi": "जुवेंटस",
-                "ru": "Ювентус"
+                "hi": "सीरी ए",
+                "ar": "الدوري الإيطالي",
+                "bn": "সিরি আ"
               },
               "shortNameTranslation": {}
             }
           },
+          "primaryUniqueTournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "primaryColorHex": "#09519e",
+            "secondaryColorHex": "#008fd7",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 642447,
+            "country": {},
+            "id": 23,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإيطالي",
+                "hi": "सीरी ए",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 1597037,
+          "nameCode": "JUV",
+          "disabled": false,
+          "national": false,
           "type": 0,
           "country": {
             "alpha2": "IT",
@@ -19615,7 +18930,7 @@
             "name": "Italy",
             "slug": "italy"
           },
-          "id": 294884,
+          "id": 2687,
           "teamColors": {
             "primary": "#ffffff",
             "secondary": "#000000",
@@ -19623,9 +18938,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "يوفنتوس الجيل القادم تحت 23",
-              "hi": "जुवेंटस नेक्स्ट जेन U23",
-              "ru": "Ювентус Некст Джен U23"
+              "ar": "يوفنتوس",
+              "bn": "জুভেন্টাস",
+              "hi": "जुवेंटस",
+              "ru": "Ювентус"
             },
             "shortNameTranslation": {}
           }

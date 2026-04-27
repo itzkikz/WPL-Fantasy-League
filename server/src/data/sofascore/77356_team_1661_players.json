@@ -2340,6 +2340,15 @@
         "retired": false,
         "userCount": 2732,
         "gender": "M",
+        "injury": {
+          "reason": "Unknown",
+          "status": "out",
+          "expectedReturn": 13,
+          "id": 21218,
+          "startDateTimestamp": 1776816000,
+          "updateDateTimestamp": 1777248037,
+          "endDateTimestamp": 1778457637
+        },
         "country": {
           "alpha2": "FR",
           "alpha3": "FRA",
@@ -5591,19 +5600,6 @@
         "userCount": 1262,
         "deceased": false,
         "gender": "M",
-        "injury": {
-          "reason": "Calf Injury",
-          "status": "out",
-          "expectedReturn": 5,
-          "id": 20455,
-          "startDateTimestamp": 1775260800,
-          "updateDateTimestamp": 1777190456,
-          "endDateTimestamp": 1778371200,
-          "expectedReturnDateData": {
-            "month": 5,
-            "year": 2026
-          }
-        },
         "country": {
           "alpha2": "BR",
           "alpha3": "BRA",
@@ -5828,7 +5824,7 @@
           "expectedReturn": 6,
           "id": 17996,
           "startDateTimestamp": 1759622400,
-          "updateDateTimestamp": 1777190452,
+          "updateDateTimestamp": 1777248045,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -7960,19 +7956,6 @@
         "userCount": 1262,
         "deceased": false,
         "gender": "M",
-        "injury": {
-          "reason": "Calf Injury",
-          "status": "out",
-          "expectedReturn": 5,
-          "id": 20455,
-          "startDateTimestamp": 1775260800,
-          "updateDateTimestamp": 1777190456,
-          "endDateTimestamp": 1778371200,
-          "expectedReturnDateData": {
-            "month": 5,
-            "year": 2026
-          }
-        },
         "country": {
           "alpha2": "BR",
           "alpha3": "BRA",
@@ -8197,7 +8180,7 @@
           "expectedReturn": 6,
           "id": 17996,
           "startDateTimestamp": 1759622400,
-          "updateDateTimestamp": 1777190452,
+          "updateDateTimestamp": 1777248045,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -13008,7 +12991,7 @@
           "expectedReturn": 6,
           "id": 17996,
           "startDateTimestamp": 1759622400,
-          "updateDateTimestamp": 1777190452,
+          "updateDateTimestamp": 1777248045,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -18891,7 +18874,7 @@
           "expectedReturn": 6,
           "id": 17996,
           "startDateTimestamp": 1759622400,
-          "updateDateTimestamp": 1777190452,
+          "updateDateTimestamp": 1777248045,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -19682,6 +19665,15 @@
         "retired": false,
         "userCount": 2732,
         "gender": "M",
+        "injury": {
+          "reason": "Unknown",
+          "status": "out",
+          "expectedReturn": 13,
+          "id": 21218,
+          "startDateTimestamp": 1776816000,
+          "updateDateTimestamp": 1777248037,
+          "endDateTimestamp": 1778457637
+        },
         "country": {
           "alpha2": "FR",
           "alpha3": "FRA",
@@ -23563,19 +23555,6 @@
         "userCount": 1262,
         "deceased": false,
         "gender": "M",
-        "injury": {
-          "reason": "Calf Injury",
-          "status": "out",
-          "expectedReturn": 5,
-          "id": 20455,
-          "startDateTimestamp": 1775260800,
-          "updateDateTimestamp": 1777190456,
-          "endDateTimestamp": 1778371200,
-          "expectedReturnDateData": {
-            "month": 5,
-            "year": 2026
-          }
-        },
         "country": {
           "alpha2": "BR",
           "alpha3": "BRA",

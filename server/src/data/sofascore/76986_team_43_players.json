@@ -1297,7 +1297,7 @@
           "expectedReturn": 6,
           "id": 20813,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190438,
+          "updateDateTimestamp": 1777248040,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -4377,6 +4377,19 @@
         "userCount": 1795,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 6,
+          "id": 21235,
+          "startDateTimestamp": 1777075200,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1779235200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "EN",
           "alpha3": "ENG",
@@ -4603,7 +4616,7 @@
           "expectedReturn": 5,
           "id": 19014,
           "startDateTimestamp": 1774051200,
-          "updateDateTimestamp": 1777190438,
+          "updateDateTimestamp": 1777248040,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -7891,7 +7904,7 @@
           "expectedReturn": 6,
           "id": 20813,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190438,
+          "updateDateTimestamp": 1777248040,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -8562,7 +8575,7 @@
           "expectedReturn": 5,
           "id": 19014,
           "startDateTimestamp": 1774051200,
-          "updateDateTimestamp": 1777190438,
+          "updateDateTimestamp": 1777248040,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -10777,7 +10790,7 @@
           "expectedReturn": 6,
           "id": 20813,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190438,
+          "updateDateTimestamp": 1777248040,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -16516,6 +16529,19 @@
         "userCount": 1795,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 6,
+          "id": 21235,
+          "startDateTimestamp": 1777075200,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1779235200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "EN",
           "alpha3": "ENG",
@@ -17384,7 +17410,7 @@
           "expectedReturn": 6,
           "id": 20813,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190438,
+          "updateDateTimestamp": 1777248040,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -20931,7 +20957,7 @@
           "expectedReturn": 5,
           "id": 19014,
           "startDateTimestamp": 1774051200,
-          "updateDateTimestamp": 1777190438,
+          "updateDateTimestamp": 1777248040,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,

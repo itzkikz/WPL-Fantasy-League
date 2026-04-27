@@ -1628,6 +1628,51 @@
       },
       {
         "player": {
+          "name": "Eberechi Eze",
+          "firstName": "",
+          "lastName": "",
+          "slug": "eberechi-eze",
+          "shortName": "E. Eze",
+          "position": "M",
+          "jerseyNumber": "10",
+          "height": 178,
+          "userCount": 61944,
+          "gender": "M",
+          "sofascoreId": "eze",
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 864921,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 899078400,
+          "proposedMarketValueRaw": {
+            "value": 63000000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "إيبيريشي إيزي",
+              "bn": "ইবেরেচি এজ",
+              "hi": "एबेरची ईज़े"
+            },
+            "shortNameTranslation": {
+              "ar": "إ. إيزي",
+              "bn": "ই. এজ",
+              "hi": "ई. ईज़े"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Physical Discomfort",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-12T00:00:36+00:00"
+      },
+      {
+        "player": {
           "name": "Kai Havertz",
           "slug": "kai-havertz",
           "shortName": "K. Havertz",
@@ -1667,7 +1712,7 @@
         "reason": 1,
         "description": "Knock Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-11T08:00:29+00:00"
+        "expectedEndDate": "2026-05-12T00:00:37+00:00"
       }
     ]
   },

@@ -1548,9 +1548,9 @@
         "slug": "hugo-lopez",
         "shortName": "H. Lopez",
         "team": {
-          "name": "Villarreal B U23",
-          "slug": "villarreal-b",
-          "shortName": "Villarreal B U23",
+          "name": "Villarreal",
+          "slug": "villarreal",
+          "shortName": "Villarreal",
           "gender": "M",
           "sport": {
             "name": "Football",
@@ -1558,8 +1558,8 @@
             "id": 1
           },
           "tournament": {
-            "name": "Primera Federacion, Group 2",
-            "slug": "primera-federacion-group-2",
+            "name": "LaLiga",
+            "slug": "laliga",
             "category": {
               "name": "Spain",
               "slug": "spain",
@@ -1589,213 +1589,6 @@
               }
             },
             "uniqueTournament": {
-              "name": "Primera Federación",
-              "slug": "primera-federacion",
-              "primaryColorHex": "#fe0235",
-              "secondaryColorHex": "#8c8c8c",
-              "category": {
-                "name": "Spain",
-                "slug": "spain",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 9,
-                "country": {
-                  "alpha2": "ES",
-                  "alpha3": "ESP",
-                  "name": "Spain",
-                  "slug": "spain"
-                },
-                "id": 32,
-                "flag": "spain",
-                "alpha2": "ES",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إسبانيا",
-                    "bn": "স্পেন",
-                    "hi": "स्पेन",
-                    "ru": "Испания"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 6627,
-              "country": {},
-              "id": 17073,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الأول الفيدرالي",
-                  "bn": "প্রিমেরা ফেডারেশন",
-                  "hi": "प्राइमेरा फ़ेडरेशन"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 0,
-            "isLive": false,
-            "id": 94191,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإسباني الممتاز، المجموعة 2",
-                "bn": "প্রাইমেরা ফেদেরাসিওন, গ্রুপ 2",
-                "hi": "प्राइमेरा फेडरेशन, ग्रुप 2"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Primera Federación",
-            "slug": "primera-federacion",
-            "primaryColorHex": "#fe0235",
-            "secondaryColorHex": "#8c8c8c",
-            "category": {
-              "name": "Spain",
-              "slug": "spain",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 9,
-              "country": {
-                "alpha2": "ES",
-                "alpha3": "ESP",
-                "name": "Spain",
-                "slug": "spain"
-              },
-              "id": 32,
-              "flag": "spain",
-              "alpha2": "ES",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إسبانيا",
-                  "bn": "স্পেন",
-                  "hi": "स्पेन",
-                  "ru": "Испания"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 6627,
-            "country": {},
-            "id": 17073,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الأول الفيدرالي",
-                "bn": "প্রিমেরা ফেডারেশন",
-                "hi": "प्राइमेरा फ़ेडरेशन"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 6131,
-          "nameCode": "VIB",
-          "disabled": false,
-          "national": false,
-          "parentTeam": {
-            "name": "Villarreal",
-            "slug": "villarreal",
-            "shortName": "Villarreal",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "tournament": {
-              "name": "LaLiga",
-              "slug": "laliga",
-              "category": {
-                "name": "Spain",
-                "slug": "spain",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 9,
-                "country": {
-                  "alpha2": "ES",
-                  "alpha3": "ESP",
-                  "name": "Spain",
-                  "slug": "spain"
-                },
-                "id": 32,
-                "flag": "spain",
-                "alpha2": "ES",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إسبانيا",
-                    "bn": "স্পেন",
-                    "hi": "स्पेन",
-                    "ru": "Испания"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "uniqueTournament": {
-                "name": "LaLiga",
-                "slug": "laliga",
-                "primaryColorHex": "#2f4a89",
-                "secondaryColorHex": "#f4a32e",
-                "category": {
-                  "name": "Spain",
-                  "slug": "spain",
-                  "sport": {
-                    "name": "Football",
-                    "slug": "football",
-                    "id": 1
-                  },
-                  "priority": 9,
-                  "country": {
-                    "alpha2": "ES",
-                    "alpha3": "ESP",
-                    "name": "Spain",
-                    "slug": "spain"
-                  },
-                  "id": 32,
-                  "flag": "spain",
-                  "alpha2": "ES",
-                  "fieldTranslations": {
-                    "nameTranslation": {
-                      "ar": "إسبانيا",
-                      "bn": "স্পেন",
-                      "hi": "स्पेन",
-                      "ru": "Испания"
-                    },
-                    "shortNameTranslation": {}
-                  }
-                },
-                "userCount": 841903,
-                "country": {},
-                "id": 8,
-                "displayInverseHomeAwayTeams": false,
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "الدوري الإسباني",
-                    "hi": "ला लिगा",
-                    "bn": "লা লীগা"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "priority": 699,
-              "isLive": false,
-              "id": 36,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "hi": "ला लीगा",
-                  "ar": "الدوري الإسباني",
-                  "bn": "লা লীগা"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "primaryUniqueTournament": {
               "name": "LaLiga",
               "slug": "laliga",
               "primaryColorHex": "#2f4a89",
@@ -1841,33 +1634,68 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 449308,
-            "nameCode": "VIL",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "ES",
-              "alpha3": "ESP",
-              "name": "Spain",
-              "slug": "spain"
-            },
-            "id": 2819,
-            "teamColors": {
-              "primary": "#ffff00",
-              "secondary": "#013765",
-              "text": "#013765"
-            },
+            "priority": 699,
+            "isLive": false,
+            "id": 36,
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "فياريال",
-                "bn": "ভিলারিয়াল",
-                "hi": "विल्लारियल",
-                "ru": "Вильярреал"
+                "hi": "ला लीगा",
+                "ar": "الدوري الإسباني",
+                "bn": "লা লীগা"
               },
               "shortNameTranslation": {}
             }
           },
+          "primaryUniqueTournament": {
+            "name": "LaLiga",
+            "slug": "laliga",
+            "primaryColorHex": "#2f4a89",
+            "secondaryColorHex": "#f4a32e",
+            "category": {
+              "name": "Spain",
+              "slug": "spain",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 9,
+              "country": {
+                "alpha2": "ES",
+                "alpha3": "ESP",
+                "name": "Spain",
+                "slug": "spain"
+              },
+              "id": 32,
+              "flag": "spain",
+              "alpha2": "ES",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إسبانيا",
+                  "bn": "স্পেন",
+                  "hi": "स्पेन",
+                  "ru": "Испания"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 841903,
+            "country": {},
+            "id": 8,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإسباني",
+                "hi": "ला लिगा",
+                "bn": "লা লীগা"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 449308,
+          "nameCode": "VIL",
+          "disabled": false,
+          "national": false,
           "type": 0,
           "country": {
             "alpha2": "ES",
@@ -1875,7 +1703,7 @@
             "name": "Spain",
             "slug": "spain"
           },
-          "id": 24338,
+          "id": 2819,
           "teamColors": {
             "primary": "#ffff00",
             "secondary": "#013765",
@@ -1883,13 +1711,12 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "فياريال ب",
-              "hi": "विल्लार्रियल सी ऍफ़ बी U23",
-              "ru": "Вильярреал Б U23"
+              "ar": "فياريال",
+              "bn": "ভিলারিয়াল",
+              "hi": "विल्लारियल",
+              "ru": "Вильярреал"
             },
-            "shortNameTranslation": {
-              "ar": "فياريال ب"
-            }
+            "shortNameTranslation": {}
           }
         },
         "position": "F",
@@ -4485,8 +4312,8 @@
           "expectedReturn": 9,
           "id": 21062,
           "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190437,
-          "endDateTimestamp": 1778486437
+          "updateDateTimestamp": 1777248039,
+          "endDateTimestamp": 1778544039
         },
         "country": {
           "alpha2": "UY",
@@ -5568,19 +5395,6 @@
         "preferredFoot": "Right",
         "userCount": 708,
         "gender": "M",
-        "injury": {
-          "reason": "Knee Injury",
-          "status": "out",
-          "expectedReturn": 5,
-          "id": 20057,
-          "startDateTimestamp": 1772064000,
-          "updateDateTimestamp": 1777190460,
-          "endDateTimestamp": 1778371200,
-          "expectedReturnDateData": {
-            "month": 5,
-            "year": 2026
-          }
-        },
         "country": {
           "alpha2": "CV",
           "alpha3": "CPV",
@@ -8840,19 +8654,6 @@
         "preferredFoot": "Right",
         "userCount": 708,
         "gender": "M",
-        "injury": {
-          "reason": "Knee Injury",
-          "status": "out",
-          "expectedReturn": 5,
-          "id": 20057,
-          "startDateTimestamp": 1772064000,
-          "updateDateTimestamp": 1777190460,
-          "endDateTimestamp": 1778371200,
-          "expectedReturnDateData": {
-            "month": 5,
-            "year": 2026
-          }
-        },
         "country": {
           "alpha2": "CV",
           "alpha3": "CPV",
@@ -10600,8 +10401,8 @@
           "expectedReturn": 9,
           "id": 21062,
           "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190437,
-          "endDateTimestamp": 1778486437
+          "updateDateTimestamp": 1777248039,
+          "endDateTimestamp": 1778544039
         },
         "country": {
           "alpha2": "UY",
@@ -15536,8 +15337,8 @@
           "expectedReturn": 9,
           "id": 21062,
           "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190437,
-          "endDateTimestamp": 1778486437
+          "updateDateTimestamp": 1777248039,
+          "endDateTimestamp": 1778544039
         },
         "country": {
           "alpha2": "UY",
@@ -18067,19 +17868,6 @@
         "preferredFoot": "Right",
         "userCount": 708,
         "gender": "M",
-        "injury": {
-          "reason": "Knee Injury",
-          "status": "out",
-          "expectedReturn": 5,
-          "id": 20057,
-          "startDateTimestamp": 1772064000,
-          "updateDateTimestamp": 1777190460,
-          "endDateTimestamp": 1778371200,
-          "expectedReturnDateData": {
-            "month": 5,
-            "year": 2026
-          }
-        },
         "country": {
           "alpha2": "CV",
           "alpha3": "CPV",

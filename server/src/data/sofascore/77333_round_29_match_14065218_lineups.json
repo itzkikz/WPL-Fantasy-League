@@ -3495,6 +3495,49 @@
         "description": "Muscle Injury",
         "externalType": 114,
         "expectedEndDate": "2026-05-02T16:00:31+00:00"
+      },
+      {
+        "player": {
+          "name": "Victor Okoh Boniface",
+          "slug": "victor-okoh-boniface",
+          "shortName": "V. O. Boniface",
+          "position": "F",
+          "jerseyNumber": "44",
+          "height": 193,
+          "userCount": 27903,
+          "gender": "M",
+          "sofascoreId": "boniface_jrn",
+          "country": {
+            "alpha2": "NG",
+            "alpha3": "NGA",
+            "name": "Nigeria",
+            "slug": "nigeria"
+          },
+          "id": 978521,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 977529600,
+          "proposedMarketValueRaw": {
+            "value": 13200000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "فيكتور بونيفاس",
+              "bn": "ভিক্টর ওকোহ বোনিফেস",
+              "hi": "विक्टर ओकोह बोनिफेस"
+            },
+            "shortNameTranslation": {
+              "ar": "ف. بونيفاس",
+              "bn": "ভি. ও. বোনিফেস",
+              "hi": "वी.ओ. बोनिफेस"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Knee Surgery",
+        "externalType": 114,
+        "expectedEndDate": "2026-04-26T00:00:00+00:00"
       }
     ]
   },

@@ -1736,6 +1736,48 @@
         "description": "Foot Injury",
         "externalType": 72,
         "expectedEndDate": "2026-05-03T00:00:00+00:00"
+      },
+      {
+        "player": {
+          "name": "Ryan Sessegnon",
+          "slug": "ryan-sessegnon",
+          "shortName": "R. Sessegnon",
+          "position": "D",
+          "jerseyNumber": "30",
+          "height": 178,
+          "userCount": 1795,
+          "gender": "M",
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 836698,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 958608000,
+          "proposedMarketValueRaw": {
+            "value": 19400000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "ريان سيسينيون",
+              "bn": "রায়ান সেসেগনন",
+              "hi": "रयान सेसेग्नन"
+            },
+            "shortNameTranslation": {
+              "ar": "ر. سيسينيون",
+              "bn": "আর. সেসেগনন",
+              "hi": "आर. सेसेग्नन"
+            }
+          }
+        },
+        "type": "missing",
+        "reason": 1,
+        "description": "Muscle Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-20T00:00:00+00:00"
       }
     ]
   },
