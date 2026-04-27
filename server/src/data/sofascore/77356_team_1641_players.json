@@ -404,7 +404,7 @@
           "ST"
         ],
         "weight": 80,
-        "jerseyNumber": "97",
+        "jerseyNumber": "17",
         "height": 187,
         "dateOfBirth": "1989-06-18T00:00:00+00:00",
         "preferredFoot": "Right",
@@ -420,7 +420,7 @@
           "slug": "gabon"
         },
         "id": 51498,
-        "shirtNumber": 97,
+        "shirtNumber": 17,
         "dateOfBirthTimestamp": 614131200,
         "contractUntilTimestamp": 1814313600,
         "proposedMarketValue": 2900000,
@@ -640,8 +640,8 @@
           "expectedReturn": 13,
           "id": 21070,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190441,
-          "endDateTimestamp": 1778400041
+          "updateDateTimestamp": 1777248041,
+          "endDateTimestamp": 1778457641
         },
         "sofascoreId": "amine_gouiri",
         "country": {
@@ -856,7 +856,7 @@
         "positionsDetailed": [
           "MC"
         ],
-        "jerseyNumber": "22",
+        "jerseyNumber": "11",
         "height": 176,
         "dateOfBirth": "2007-03-21T00:00:00+00:00",
         "preferredFoot": "Left",
@@ -871,7 +871,7 @@
           "slug": "england"
         },
         "id": 1401702,
-        "shirtNumber": 22,
+        "shirtNumber": 11,
         "dateOfBirthTimestamp": 1174435200,
         "contractUntilTimestamp": 1782777600,
         "proposedMarketValue": 39000000,
@@ -1090,8 +1090,8 @@
           "expectedReturn": 11,
           "id": 21071,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190441,
-          "endDateTimestamp": 1779609641
+          "updateDateTimestamp": 1777248041,
+          "endDateTimestamp": 1779667241
         },
         "country": {
           "alpha2": "BR",
@@ -1988,7 +1988,7 @@
           "expectedReturn": 6,
           "id": 21174,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190432,
+          "updateDateTimestamp": 1777248037,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -2660,6 +2660,15 @@
         "preferredFoot": "Right",
         "userCount": 3180,
         "gender": "M",
+        "injury": {
+          "reason": "Illness",
+          "status": "out",
+          "expectedReturn": 13,
+          "id": 21229,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778457636
+        },
         "country": {
           "alpha2": "CI",
           "alpha3": "CIV",
@@ -2887,7 +2896,7 @@
           "expectedReturn": 5,
           "id": 19651,
           "startDateTimestamp": 1775001600,
-          "updateDateTimestamp": 1777190449,
+          "updateDateTimestamp": 1777248044,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -3338,7 +3347,7 @@
           "expectedReturn": 6,
           "id": 17987,
           "startDateTimestamp": 1772582400,
-          "updateDateTimestamp": 1777190454,
+          "updateDateTimestamp": 1777248045,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -4228,6 +4237,7 @@
         "dateOfBirth": "1994-08-03T00:00:00+00:00",
         "preferredFoot": "Left",
         "userCount": 2421,
+        "deceased": false,
         "gender": "M",
         "country": {
           "alpha2": "IT",
@@ -7144,8 +7154,8 @@
           "expectedReturn": 11,
           "id": 21071,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190441,
-          "endDateTimestamp": 1779609641
+          "updateDateTimestamp": 1777248041,
+          "endDateTimestamp": 1779667241
         },
         "country": {
           "alpha2": "BR",
@@ -7374,7 +7384,7 @@
           "expectedReturn": 5,
           "id": 19651,
           "startDateTimestamp": 1775001600,
-          "updateDateTimestamp": 1777190449,
+          "updateDateTimestamp": 1777248044,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -7603,6 +7613,15 @@
         "preferredFoot": "Right",
         "userCount": 3180,
         "gender": "M",
+        "injury": {
+          "reason": "Illness",
+          "status": "out",
+          "expectedReturn": 13,
+          "id": 21229,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778457636
+        },
         "country": {
           "alpha2": "CI",
           "alpha3": "CIV",
@@ -8052,8 +8071,8 @@
           "expectedReturn": 13,
           "id": 21070,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190441,
-          "endDateTimestamp": 1778400041
+          "updateDateTimestamp": 1777248041,
+          "endDateTimestamp": 1778457641
         },
         "sofascoreId": "amine_gouiri",
         "country": {
@@ -8720,7 +8739,7 @@
         "positionsDetailed": [
           "MC"
         ],
-        "jerseyNumber": "22",
+        "jerseyNumber": "11",
         "height": 176,
         "dateOfBirth": "2007-03-21T00:00:00+00:00",
         "preferredFoot": "Left",
@@ -8735,7 +8754,7 @@
           "slug": "england"
         },
         "id": 1401702,
-        "shirtNumber": 22,
+        "shirtNumber": 11,
         "dateOfBirthTimestamp": 1174435200,
         "contractUntilTimestamp": 1782777600,
         "proposedMarketValue": 39000000,
@@ -9161,7 +9180,7 @@
           "ST"
         ],
         "weight": 80,
-        "jerseyNumber": "97",
+        "jerseyNumber": "17",
         "height": 187,
         "dateOfBirth": "1989-06-18T00:00:00+00:00",
         "preferredFoot": "Right",
@@ -9177,7 +9196,7 @@
           "slug": "gabon"
         },
         "id": 51498,
-        "shirtNumber": 97,
+        "shirtNumber": 17,
         "dateOfBirthTimestamp": 614131200,
         "contractUntilTimestamp": 1814313600,
         "proposedMarketValue": 2900000,
@@ -9390,6 +9409,7 @@
         "dateOfBirth": "1994-08-03T00:00:00+00:00",
         "preferredFoot": "Left",
         "userCount": 2421,
+        "deceased": false,
         "gender": "M",
         "country": {
           "alpha2": "IT",
@@ -9616,7 +9636,7 @@
           "expectedReturn": 6,
           "id": 21174,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190432,
+          "updateDateTimestamp": 1777248037,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -9848,7 +9868,7 @@
           "expectedReturn": 6,
           "id": 17987,
           "startDateTimestamp": 1772582400,
-          "updateDateTimestamp": 1777190454,
+          "updateDateTimestamp": 1777248045,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -10949,7 +10969,7 @@
           "ST"
         ],
         "weight": 80,
-        "jerseyNumber": "97",
+        "jerseyNumber": "17",
         "height": 187,
         "dateOfBirth": "1989-06-18T00:00:00+00:00",
         "preferredFoot": "Right",
@@ -10965,7 +10985,7 @@
           "slug": "gabon"
         },
         "id": 51498,
-        "shirtNumber": 97,
+        "shirtNumber": 17,
         "dateOfBirthTimestamp": 614131200,
         "contractUntilTimestamp": 1814313600,
         "proposedMarketValue": 2900000,
@@ -11854,8 +11874,8 @@
           "expectedReturn": 13,
           "id": 21070,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190441,
-          "endDateTimestamp": 1778400041
+          "updateDateTimestamp": 1777248041,
+          "endDateTimestamp": 1778457641
         },
         "sofascoreId": "amine_gouiri",
         "country": {
@@ -13147,7 +13167,7 @@
           "expectedReturn": 6,
           "id": 21174,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190432,
+          "updateDateTimestamp": 1777248037,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -14865,7 +14885,7 @@
         "positionsDetailed": [
           "MC"
         ],
-        "jerseyNumber": "22",
+        "jerseyNumber": "11",
         "height": 176,
         "dateOfBirth": "2007-03-21T00:00:00+00:00",
         "preferredFoot": "Left",
@@ -14880,7 +14900,7 @@
           "slug": "england"
         },
         "id": 1401702,
-        "shirtNumber": 22,
+        "shirtNumber": 11,
         "dateOfBirthTimestamp": 1174435200,
         "contractUntilTimestamp": 1782777600,
         "proposedMarketValue": 39000000,
@@ -15666,7 +15686,7 @@
           "expectedReturn": 6,
           "id": 17987,
           "startDateTimestamp": 1772582400,
-          "updateDateTimestamp": 1777190454,
+          "updateDateTimestamp": 1777248045,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -16070,6 +16090,7 @@
         "dateOfBirth": "1994-08-03T00:00:00+00:00",
         "preferredFoot": "Left",
         "userCount": 2421,
+        "deceased": false,
         "gender": "M",
         "country": {
           "alpha2": "IT",
@@ -16865,6 +16886,15 @@
         "preferredFoot": "Right",
         "userCount": 3180,
         "gender": "M",
+        "injury": {
+          "reason": "Illness",
+          "status": "out",
+          "expectedReturn": 13,
+          "id": 21229,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778457636
+        },
         "country": {
           "alpha2": "CI",
           "alpha3": "CIV",
@@ -17264,8 +17294,8 @@
           "expectedReturn": 11,
           "id": 21071,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190441,
-          "endDateTimestamp": 1779609641
+          "updateDateTimestamp": 1777248041,
+          "endDateTimestamp": 1779667241
         },
         "country": {
           "alpha2": "BR",
@@ -17647,7 +17677,7 @@
           "ST"
         ],
         "weight": 80,
-        "jerseyNumber": "97",
+        "jerseyNumber": "17",
         "height": 187,
         "dateOfBirth": "1989-06-18T00:00:00+00:00",
         "preferredFoot": "Right",
@@ -17663,7 +17693,7 @@
           "slug": "gabon"
         },
         "id": 51498,
-        "shirtNumber": 97,
+        "shirtNumber": 17,
         "dateOfBirthTimestamp": 614131200,
         "contractUntilTimestamp": 1814313600,
         "proposedMarketValue": 2900000,
@@ -19251,8 +19281,8 @@
           "expectedReturn": 13,
           "id": 21070,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190441,
-          "endDateTimestamp": 1778400041
+          "updateDateTimestamp": 1777248041,
+          "endDateTimestamp": 1778457641
         },
         "sofascoreId": "amine_gouiri",
         "country": {
@@ -20826,7 +20856,7 @@
           "expectedReturn": 5,
           "id": 19651,
           "startDateTimestamp": 1775001600,
-          "updateDateTimestamp": 1777190449,
+          "updateDateTimestamp": 1777248044,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,

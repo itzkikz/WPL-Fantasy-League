@@ -1600,48 +1600,6 @@
       },
       {
         "player": {
-          "name": "Guéla Doué",
-          "slug": "guela-doue",
-          "shortName": "G. Doué",
-          "position": "D",
-          "jerseyNumber": "22",
-          "height": 187,
-          "userCount": 10866,
-          "gender": "M",
-          "country": {
-            "alpha2": "CI",
-            "alpha3": "CIV",
-            "name": "Côte d'Ivoire",
-            "slug": "cote-divoire"
-          },
-          "id": 1002033,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 1034812800,
-          "proposedMarketValueRaw": {
-            "value": 18800000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "جيلا دوي",
-              "bn": "গুয়েলা ডুয়ে",
-              "hi": "गुएला दोउए"
-            },
-            "shortNameTranslation": {
-              "ar": "ج. دوي",
-              "bn": "জি. ডুয়ে",
-              "hi": "जी. दोउए"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Illness",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-11T08:00:32+00:00"
-      },
-      {
-        "player": {
           "name": "Joaquin Panichelli",
           "firstName": "Joaquín Panichelli",
           "slug": "panichelli-joaquin",
@@ -1763,7 +1721,49 @@
         "reason": 1,
         "description": "Ankle Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-11T08:00:32+00:00"
+        "expectedEndDate": "2026-05-12T00:00:37+00:00"
+      },
+      {
+        "player": {
+          "name": "Guéla Doué",
+          "slug": "guela-doue",
+          "shortName": "G. Doué",
+          "position": "D",
+          "jerseyNumber": "22",
+          "height": 187,
+          "userCount": 10866,
+          "gender": "M",
+          "country": {
+            "alpha2": "CI",
+            "alpha3": "CIV",
+            "name": "Côte d'Ivoire",
+            "slug": "cote-divoire"
+          },
+          "id": 1002033,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 1034812800,
+          "proposedMarketValueRaw": {
+            "value": 18800000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "جيلا دوي",
+              "bn": "গুয়েলা ডুয়ে",
+              "hi": "गुएला दोउए"
+            },
+            "shortNameTranslation": {
+              "ar": "ج. دوي",
+              "bn": "জি. ডুয়ে",
+              "hi": "जी. दोउए"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Illness",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-12T00:00:36+00:00"
       }
     ]
   },
@@ -2120,7 +2120,7 @@
           "slug": "quentin-merlin",
           "shortName": "Q. Merlin",
           "position": "M",
-          "jerseyNumber": "3",
+          "jerseyNumber": "26",
           "height": 173,
           "userCount": 1191,
           "gender": "M",

@@ -52,14 +52,14 @@
             "id": 804
           },
           "position": 1,
-          "matches": 33,
+          "matches": 34,
           "wins": 25,
-          "scoresFor": 78,
-          "scoresAgainst": 29,
+          "scoresFor": 80,
+          "scoresAgainst": 31,
           "id": 1609091,
           "losses": 5,
-          "draws": 3,
-          "points": 78,
+          "draws": 4,
+          "points": 79,
           "scoreDiffFormatted": "+49"
         },
         {
@@ -160,14 +160,14 @@
             "id": 804
           },
           "position": 3,
-          "matches": 33,
+          "matches": 34,
           "wins": 19,
           "scoresFor": 48,
           "scoresAgainst": 27,
           "id": 1609082,
           "losses": 5,
-          "draws": 9,
-          "points": 66,
+          "draws": 10,
+          "points": 67,
           "scoreDiffFormatted": "+21"
         },
         {
@@ -214,15 +214,66 @@
             "id": 804
           },
           "position": 4,
-          "matches": 33,
+          "matches": 34,
           "wins": 18,
           "scoresFor": 57,
           "scoresAgainst": 29,
           "id": 1609092,
           "losses": 6,
-          "draws": 9,
-          "points": 63,
+          "draws": 10,
+          "points": 64,
           "scoreDiffFormatted": "+28"
+        },
+        {
+          "team": {
+            "name": "Como",
+            "slug": "como",
+            "shortName": "Como",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 254128,
+            "nameCode": "COM",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "IT",
+              "alpha3": "ITA",
+              "name": "Italy",
+              "slug": "italy"
+            },
+            "id": 2704,
+            "teamColors": {
+              "primary": "#09436b",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "كومو 1907"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "UEFA Europa League",
+            "id": 808
+          },
+          "position": 5,
+          "matches": 34,
+          "wins": 17,
+          "scoresFor": 59,
+          "scoresAgainst": 28,
+          "id": 1609088,
+          "losses": 7,
+          "draws": 10,
+          "points": 61,
+          "scoreDiffFormatted": "+31"
         },
         {
           "team": {
@@ -264,10 +315,10 @@
           },
           "descriptions": [],
           "promotion": {
-            "text": "UEFA Europa League",
-            "id": 808
+            "text": "Conference League Qualification",
+            "id": 503
           },
-          "position": 5,
+          "position": 6,
           "matches": 34,
           "wins": 19,
           "scoresFor": 48,
@@ -277,57 +328,6 @@
           "draws": 4,
           "points": 61,
           "scoreDiffFormatted": "+19"
-        },
-        {
-          "team": {
-            "name": "Como",
-            "slug": "como",
-            "shortName": "Como",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 254128,
-            "nameCode": "COM",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "IT",
-              "alpha3": "ITA",
-              "name": "Italy",
-              "slug": "italy"
-            },
-            "id": 2704,
-            "teamColors": {
-              "primary": "#09436b",
-              "secondary": "#ffffff",
-              "text": "#ffffff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "كومو 1907"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Conference League Qualification",
-            "id": 503
-          },
-          "position": 6,
-          "matches": 33,
-          "wins": 16,
-          "scoresFor": 57,
-          "scoresAgainst": 28,
-          "id": 1609088,
-          "losses": 7,
-          "draws": 10,
-          "points": 58,
-          "scoreDiffFormatted": "+29"
         },
         {
           "team": {
@@ -521,14 +521,14 @@
           },
           "descriptions": [],
           "position": 10,
-          "matches": 33,
+          "matches": 34,
           "wins": 13,
           "scoresFor": 41,
           "scoresAgainst": 44,
           "id": 1609096,
           "losses": 14,
-          "draws": 6,
-          "points": 45,
+          "draws": 7,
+          "points": 46,
           "scoreDiffFormatted": "-3"
         },
         {
@@ -671,14 +671,14 @@
           },
           "descriptions": [],
           "position": 13,
-          "matches": 33,
+          "matches": 34,
           "wins": 11,
-          "scoresFor": 37,
-          "scoresAgainst": 54,
+          "scoresFor": 39,
+          "scoresAgainst": 56,
           "id": 1609098,
           "losses": 15,
-          "draws": 7,
-          "points": 40,
+          "draws": 8,
+          "points": 41,
           "scoreDiffFormatted": "-17"
         },
         {
@@ -721,15 +721,15 @@
           },
           "descriptions": [],
           "position": 14,
-          "matches": 33,
+          "matches": 34,
           "wins": 10,
           "scoresFor": 40,
-          "scoresAgainst": 46,
+          "scoresAgainst": 48,
           "id": 1609089,
-          "losses": 14,
+          "losses": 15,
           "draws": 9,
           "points": 39,
-          "scoreDiffFormatted": "-6"
+          "scoreDiffFormatted": "-8"
         },
         {
           "team": {
@@ -773,14 +773,14 @@
           },
           "descriptions": [],
           "position": 15,
-          "matches": 33,
+          "matches": 34,
           "wins": 8,
           "scoresFor": 38,
           "scoresAgainst": 45,
           "id": 1609083,
           "losses": 13,
-          "draws": 12,
-          "points": 36,
+          "draws": 13,
+          "points": 37,
           "scoreDiffFormatted": "-7"
         },
         {
@@ -1142,7 +1142,7 @@
         }
       },
       "name": "Serie A 25/26",
-      "updatedAtTimestamp": 1777157658
+      "updatedAtTimestamp": 1777240443
     }
   ]
 }

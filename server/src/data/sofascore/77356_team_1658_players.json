@@ -1286,6 +1286,15 @@
         "userCount": 411,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Physical Discomfort",
+          "status": "out",
+          "expectedReturn": 13,
+          "id": 21219,
+          "startDateTimestamp": 1777075200,
+          "updateDateTimestamp": 1777248037,
+          "endDateTimestamp": 1778457637
+        },
         "country": {
           "alpha2": "FR",
           "alpha3": "FRA",
@@ -2233,7 +2242,7 @@
           "DL",
           "ML"
         ],
-        "jerseyNumber": "3",
+        "jerseyNumber": "26",
         "height": 173,
         "dateOfBirth": "2002-05-16T00:00:00+00:00",
         "preferredFoot": "Left",
@@ -2247,7 +2256,7 @@
           "slug": "france"
         },
         "id": 1102502,
-        "shirtNumber": 3,
+        "shirtNumber": 26,
         "dateOfBirthTimestamp": 1021507200,
         "contractUntilTimestamp": 1877472000,
         "proposedMarketValue": 11600000,
@@ -10859,6 +10868,15 @@
         "userCount": 411,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Physical Discomfort",
+          "status": "out",
+          "expectedReturn": 13,
+          "id": 21219,
+          "startDateTimestamp": 1777075200,
+          "updateDateTimestamp": 1777248037,
+          "endDateTimestamp": 1778457637
+        },
         "country": {
           "alpha2": "FR",
           "alpha3": "FRA",
@@ -13598,7 +13616,7 @@
           "DL",
           "ML"
         ],
-        "jerseyNumber": "3",
+        "jerseyNumber": "26",
         "height": 173,
         "dateOfBirth": "2002-05-16T00:00:00+00:00",
         "preferredFoot": "Left",
@@ -13612,7 +13630,7 @@
           "slug": "france"
         },
         "id": 1102502,
-        "shirtNumber": 3,
+        "shirtNumber": 26,
         "dateOfBirthTimestamp": 1021507200,
         "contractUntilTimestamp": 1877472000,
         "proposedMarketValue": 11600000,

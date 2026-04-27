@@ -160,15 +160,15 @@
             "id": 804
           },
           "position": 3,
-          "matches": 32,
-          "wins": 19,
-          "scoresFor": 57,
-          "scoresAgainst": 37,
+          "matches": 33,
+          "wins": 20,
+          "scoresFor": 59,
+          "scoresAgainst": 38,
           "id": 1945370,
           "losses": 8,
           "draws": 5,
-          "points": 62,
-          "scoreDiffFormatted": "+20"
+          "points": 65,
+          "scoreDiffFormatted": "+21"
         },
         {
           "team": {
@@ -284,6 +284,58 @@
         },
         {
           "team": {
+            "name": "Celta Vigo",
+            "slug": "celta-vigo",
+            "shortName": "Celta",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 259635,
+            "nameCode": "CEL",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 2821,
+            "teamColors": {
+              "primary": "#6cace4",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "سيلتا فيغو",
+                "bn": "সেলটা ভিগো",
+                "ru": "Сельта"
+              },
+              "shortNameTranslation": {
+                "ar": "سيلتا",
+                "hi": "सेल्टा"
+              }
+            }
+          },
+          "descriptions": [],
+          "position": 6,
+          "matches": 33,
+          "wins": 11,
+          "scoresFor": 45,
+          "scoresAgainst": 43,
+          "id": 1945382,
+          "losses": 11,
+          "draws": 11,
+          "points": 44,
+          "scoreDiffFormatted": "+2"
+        },
+        {
+          "team": {
             "name": "Getafe",
             "slug": "getafe",
             "shortName": "Getafe",
@@ -325,7 +377,7 @@
             "text": "Conference League Qualification",
             "id": 503
           },
-          "position": 6,
+          "position": 7,
           "matches": 33,
           "wins": 13,
           "scoresFor": 28,
@@ -335,58 +387,6 @@
           "draws": 5,
           "points": 44,
           "scoreDiffFormatted": "-6"
-        },
-        {
-          "team": {
-            "name": "Celta Vigo",
-            "slug": "celta-vigo",
-            "shortName": "Celta",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 259635,
-            "nameCode": "CEL",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "ES",
-              "alpha3": "ESP",
-              "name": "Spain",
-              "slug": "spain"
-            },
-            "id": 2821,
-            "teamColors": {
-              "primary": "#6cace4",
-              "secondary": "#ffffff",
-              "text": "#ffffff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "سيلتا فيغو",
-                "bn": "সেলটা ভিগো",
-                "ru": "Сельта"
-              },
-              "shortNameTranslation": {
-                "ar": "سيلتا",
-                "hi": "सेल्टा"
-              }
-            }
-          },
-          "descriptions": [],
-          "position": 7,
-          "matches": 32,
-          "wins": 11,
-          "scoresFor": 44,
-          "scoresAgainst": 41,
-          "id": 1945382,
-          "losses": 10,
-          "draws": 11,
-          "points": 44,
-          "scoreDiffFormatted": "+3"
         },
         {
           "team": {
@@ -432,65 +432,15 @@
             "id": 808
           },
           "position": 8,
-          "matches": 32,
+          "matches": 33,
           "wins": 11,
-          "scoresFor": 49,
-          "scoresAgainst": 49,
+          "scoresFor": 52,
+          "scoresAgainst": 52,
           "id": 1945384,
           "losses": 12,
-          "draws": 9,
-          "points": 42,
+          "draws": 10,
+          "points": 43,
           "scoreDiffFormatted": "0"
-        },
-        {
-          "team": {
-            "name": "Athletic Club",
-            "slug": "athletic-club",
-            "shortName": "Athletic Club",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 512832,
-            "nameCode": "ATH",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "ES",
-              "alpha3": "ESP",
-              "name": "Spain",
-              "slug": "spain"
-            },
-            "id": 2825,
-            "teamColors": {
-              "primary": "#aa0000",
-              "secondary": "#ffffff",
-              "text": "#ffffff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "نادي أتليتيك",
-                "bn": "অ্যাথলেটিক ক্লাব",
-                "hi": "एथलेटिक क्लब",
-                "ru": "Атлетик Бильбао"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 9,
-          "matches": 33,
-          "wins": 12,
-          "scoresFor": 36,
-          "scoresAgainst": 48,
-          "id": 1945375,
-          "losses": 16,
-          "draws": 5,
-          "points": 41,
-          "scoreDiffFormatted": "-12"
         },
         {
           "team": {
@@ -531,30 +481,30 @@
             }
           },
           "descriptions": [],
-          "position": 10,
-          "matches": 32,
-          "wins": 10,
-          "scoresFor": 37,
-          "scoresAgainst": 39,
+          "position": 9,
+          "matches": 33,
+          "wins": 11,
+          "scoresFor": 39,
+          "scoresAgainst": 40,
           "id": 1945380,
           "losses": 13,
           "draws": 9,
-          "points": 39,
-          "scoreDiffFormatted": "-2"
+          "points": 42,
+          "scoreDiffFormatted": "-1"
         },
         {
           "team": {
-            "name": "Valencia",
-            "slug": "valencia",
-            "shortName": "Valencia",
+            "name": "Athletic Club",
+            "slug": "athletic-club",
+            "shortName": "Athletic Club",
             "gender": "M",
             "sport": {
               "name": "Football",
               "slug": "football",
               "id": 1
             },
-            "userCount": 277310,
-            "nameCode": "VAL",
+            "userCount": 512832,
+            "nameCode": "ATH",
             "disabled": false,
             "national": false,
             "type": 0,
@@ -564,33 +514,33 @@
               "name": "Spain",
               "slug": "spain"
             },
-            "id": 2828,
+            "id": 2825,
             "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#000000",
-              "text": "#000000"
+              "primary": "#aa0000",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
             },
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "فالنسيا",
-                "bn": "ভ্যালেন্সিয়া",
-                "hi": "वेलेंसिया",
-                "ru": "Валенсия"
+                "ar": "نادي أتليتيك",
+                "bn": "অ্যাথলেটিক ক্লাব",
+                "hi": "एथलेटिक क्लब",
+                "ru": "Атлетик Бильбао"
               },
               "shortNameTranslation": {}
             }
           },
           "descriptions": [],
-          "position": 11,
+          "position": 10,
           "matches": 33,
-          "wins": 10,
-          "scoresFor": 37,
+          "wins": 12,
+          "scoresFor": 36,
           "scoresAgainst": 48,
-          "id": 1945378,
-          "losses": 14,
-          "draws": 9,
-          "points": 39,
-          "scoreDiffFormatted": "-11"
+          "id": 1945375,
+          "losses": 16,
+          "draws": 5,
+          "points": 41,
+          "scoreDiffFormatted": "-12"
         },
         {
           "team": {
@@ -631,30 +581,30 @@
             }
           },
           "descriptions": [],
-          "position": 12,
-          "matches": 32,
+          "position": 11,
+          "matches": 33,
           "wins": 9,
-          "scoresFor": 30,
-          "scoresAgainst": 38,
+          "scoresFor": 33,
+          "scoresAgainst": 41,
           "id": 1945381,
           "losses": 12,
-          "draws": 11,
-          "points": 38,
+          "draws": 12,
+          "points": 39,
           "scoreDiffFormatted": "-8"
         },
         {
           "team": {
-            "name": "Girona FC",
-            "slug": "girona-fc",
-            "shortName": "Girona",
+            "name": "Valencia",
+            "slug": "valencia",
+            "shortName": "Valencia",
             "gender": "M",
             "sport": {
               "name": "Football",
               "slug": "football",
               "id": 1
             },
-            "userCount": 357572,
-            "nameCode": "GIR",
+            "userCount": 277310,
+            "nameCode": "VAL",
             "disabled": false,
             "national": false,
             "type": 0,
@@ -664,36 +614,83 @@
               "name": "Spain",
               "slug": "spain"
             },
-            "id": 24264,
+            "id": 2828,
             "teamColors": {
               "primary": "#ffffff",
-              "secondary": "#ff0000",
-              "text": "#ff0000"
+              "secondary": "#000000",
+              "text": "#000000"
             },
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "جيرونا إف سي",
-                "hi": "जिरोना",
-                "ru": "Жирона"
+                "ar": "فالنسيا",
+                "bn": "ভ্যালেন্সিয়া",
+                "hi": "वेलेंसिया",
+                "ru": "Валенсия"
               },
-              "shortNameTranslation": {
-                "ar": "جيرونا",
-                "bn": "জিরোনা",
-                "hi": "गिरोना"
-              }
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "position": 12,
+          "matches": 33,
+          "wins": 10,
+          "scoresFor": 37,
+          "scoresAgainst": 48,
+          "id": 1945378,
+          "losses": 14,
+          "draws": 9,
+          "points": 39,
+          "scoreDiffFormatted": "-11"
+        },
+        {
+          "team": {
+            "name": "Elche",
+            "slug": "elche",
+            "shortName": "Elche",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 111877,
+            "nameCode": "ELC",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 2846,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#336600",
+              "text": "#336600"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "إلتشي",
+                "bn": "এলচে",
+                "hi": "एल्चे",
+                "ru": "Эльче"
+              },
+              "shortNameTranslation": {}
             }
           },
           "descriptions": [],
           "position": 13,
           "matches": 33,
           "wins": 9,
-          "scoresFor": 36,
+          "scoresFor": 44,
           "scoresAgainst": 50,
-          "id": 1945387,
+          "id": 1945374,
           "losses": 13,
           "draws": 11,
           "points": 38,
-          "scoreDiffFormatted": "-14"
+          "scoreDiffFormatted": "-6"
         },
         {
           "team": {
@@ -747,6 +744,59 @@
         },
         {
           "team": {
+            "name": "Girona FC",
+            "slug": "girona-fc",
+            "shortName": "Girona",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 357572,
+            "nameCode": "GIR",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 24264,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#ff0000",
+              "text": "#ff0000"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "جيرونا إف سي",
+                "hi": "जिरोना",
+                "ru": "Жирона"
+              },
+              "shortNameTranslation": {
+                "ar": "جيرونا",
+                "bn": "জিরোনা",
+                "hi": "गिरोना"
+              }
+            }
+          },
+          "descriptions": [],
+          "position": 15,
+          "matches": 33,
+          "wins": 9,
+          "scoresFor": 36,
+          "scoresAgainst": 50,
+          "id": 1945387,
+          "losses": 13,
+          "draws": 11,
+          "points": 38,
+          "scoreDiffFormatted": "-14"
+        },
+        {
+          "team": {
             "name": "Deportivo Alavés",
             "slug": "deportivo-alaves",
             "shortName": "Alavés",
@@ -786,7 +836,7 @@
             }
           },
           "descriptions": [],
-          "position": 15,
+          "position": 16,
           "matches": 33,
           "wins": 9,
           "scoresFor": 38,
@@ -836,7 +886,7 @@
             }
           },
           "descriptions": [],
-          "position": 16,
+          "position": 17,
           "matches": 33,
           "wins": 9,
           "scoresFor": 41,
@@ -846,56 +896,6 @@
           "draws": 8,
           "points": 35,
           "scoreDiffFormatted": "-10"
-        },
-        {
-          "team": {
-            "name": "Elche",
-            "slug": "elche",
-            "shortName": "Elche",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 111877,
-            "nameCode": "ELC",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "ES",
-              "alpha3": "ESP",
-              "name": "Spain",
-              "slug": "spain"
-            },
-            "id": 2846,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#336600",
-              "text": "#336600"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "إلتشي",
-                "bn": "এলচে",
-                "hi": "एल्चे",
-                "ru": "Эльче"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 17,
-          "matches": 32,
-          "wins": 8,
-          "scoresFor": 42,
-          "scoresAgainst": 49,
-          "id": 1945374,
-          "losses": 13,
-          "draws": 11,
-          "points": 35,
-          "scoreDiffFormatted": "-7"
         },
         {
           "team": {
@@ -941,15 +941,15 @@
             "id": 3
           },
           "position": 18,
-          "matches": 32,
+          "matches": 33,
           "wins": 9,
-          "scoresFor": 39,
-          "scoresAgainst": 53,
+          "scoresFor": 40,
+          "scoresAgainst": 55,
           "id": 1945379,
-          "losses": 16,
+          "losses": 17,
           "draws": 7,
           "points": 34,
-          "scoreDiffFormatted": "-14"
+          "scoreDiffFormatted": "-15"
         },
         {
           "team": {
@@ -1051,15 +1051,15 @@
             "id": 3
           },
           "position": 20,
-          "matches": 32,
+          "matches": 33,
           "wins": 6,
-          "scoresFor": 25,
-          "scoresAgainst": 49,
+          "scoresFor": 26,
+          "scoresAgainst": 51,
           "id": 1945386,
-          "losses": 16,
+          "losses": 17,
           "draws": 10,
           "points": 28,
-          "scoreDiffFormatted": "-24"
+          "scoreDiffFormatted": "-25"
         }
       ],
       "id": 224907,
@@ -1155,7 +1155,7 @@
         }
       },
       "name": "LaLiga 25/26",
-      "updatedAtTimestamp": 1777184471
+      "updatedAtTimestamp": 1777242557
     }
   ]
 }

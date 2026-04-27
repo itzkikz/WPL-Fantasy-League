@@ -1732,7 +1732,7 @@
           "expectedReturn": 6,
           "id": 21162,
           "startDateTimestamp": 1777075200,
-          "updateDateTimestamp": 1777190434,
+          "updateDateTimestamp": 1777248038,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -2188,7 +2188,7 @@
           "expectedReturn": 6,
           "id": 21163,
           "startDateTimestamp": 1777075200,
-          "updateDateTimestamp": 1777190434,
+          "updateDateTimestamp": 1777248038,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -2405,7 +2405,7 @@
         "positionsDetailed": [
           "AM"
         ],
-        "jerseyNumber": "28",
+        "jerseyNumber": "8",
         "height": 186,
         "dateOfBirth": "2004-05-24T00:00:00+00:00",
         "preferredFoot": "Left",
@@ -2419,7 +2419,7 @@
           "slug": "spain"
         },
         "id": 1526628,
-        "shirtNumber": 28,
+        "shirtNumber": 8,
         "dateOfBirthTimestamp": 1085356800,
         "contractUntilTimestamp": 1782777600,
         "proposedMarketValue": 17500000,
@@ -3518,7 +3518,7 @@
           "expectedReturn": 4,
           "id": 18018,
           "startDateTimestamp": 1773187200,
-          "updateDateTimestamp": 1777190445
+          "updateDateTimestamp": 1777248042
         },
         "country": {
           "alpha2": "ES",
@@ -4629,7 +4629,30 @@
             "bn": "এম. আলোনসো",
             "hi": "एम. अलोंसो"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3305,
+            "startDateTimestamp": 1777238797,
+            "endDateTimestamp": 1777820400,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          }
+        ]
       }
     },
     {
@@ -4829,8 +4852,8 @@
           "expectedReturn": 9,
           "id": 21175,
           "startDateTimestamp": 1777075200,
-          "updateDateTimestamp": 1777190433,
-          "endDateTimestamp": 1778486433
+          "updateDateTimestamp": 1777248038,
+          "endDateTimestamp": 1778544038
         },
         "country": {
           "alpha2": "GH",
@@ -5060,8 +5083,8 @@
           "expectedReturn": 9,
           "id": 19735,
           "startDateTimestamp": 1775260800,
-          "updateDateTimestamp": 1777190445,
-          "endDateTimestamp": 1778486445
+          "updateDateTimestamp": 1777248042,
+          "endDateTimestamp": 1778544042
         },
         "country": {
           "alpha2": "SE",
@@ -7688,8 +7711,8 @@
           "expectedReturn": 9,
           "id": 21175,
           "startDateTimestamp": 1777075200,
-          "updateDateTimestamp": 1777190433,
-          "endDateTimestamp": 1778486433
+          "updateDateTimestamp": 1777248038,
+          "endDateTimestamp": 1778544038
         },
         "country": {
           "alpha2": "GH",
@@ -8798,8 +8821,8 @@
           "expectedReturn": 9,
           "id": 19735,
           "startDateTimestamp": 1775260800,
-          "updateDateTimestamp": 1777190445,
-          "endDateTimestamp": 1778486445
+          "updateDateTimestamp": 1777248042,
+          "endDateTimestamp": 1778544042
         },
         "country": {
           "alpha2": "SE",
@@ -9027,7 +9050,7 @@
           "expectedReturn": 6,
           "id": 21162,
           "startDateTimestamp": 1777075200,
-          "updateDateTimestamp": 1777190434,
+          "updateDateTimestamp": 1777248038,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -9262,7 +9285,7 @@
           "expectedReturn": 6,
           "id": 21163,
           "startDateTimestamp": 1777075200,
-          "updateDateTimestamp": 1777190434,
+          "updateDateTimestamp": 1777248038,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -9497,8 +9520,8 @@
           "expectedReturn": 9,
           "id": 19735,
           "startDateTimestamp": 1775260800,
-          "updateDateTimestamp": 1777190445,
-          "endDateTimestamp": 1778486445
+          "updateDateTimestamp": 1777248042,
+          "endDateTimestamp": 1778544042
         },
         "country": {
           "alpha2": "SE",
@@ -10387,7 +10410,7 @@
           "expectedReturn": 6,
           "id": 21162,
           "startDateTimestamp": 1777075200,
-          "updateDateTimestamp": 1777190434,
+          "updateDateTimestamp": 1777248038,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -10625,7 +10648,7 @@
           "expectedReturn": 6,
           "id": 21163,
           "startDateTimestamp": 1777075200,
-          "updateDateTimestamp": 1777190434,
+          "updateDateTimestamp": 1777248038,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -11405,7 +11428,7 @@
         "positionsDetailed": [
           "AM"
         ],
-        "jerseyNumber": "28",
+        "jerseyNumber": "8",
         "height": 186,
         "dateOfBirth": "2004-05-24T00:00:00+00:00",
         "preferredFoot": "Left",
@@ -11419,7 +11442,7 @@
           "slug": "spain"
         },
         "id": 1526628,
-        "shirtNumber": 28,
+        "shirtNumber": 8,
         "dateOfBirthTimestamp": 1085356800,
         "contractUntilTimestamp": 1782777600,
         "proposedMarketValue": 17500000,
@@ -14113,7 +14136,7 @@
           "expectedReturn": 4,
           "id": 18018,
           "startDateTimestamp": 1773187200,
-          "updateDateTimestamp": 1777190445
+          "updateDateTimestamp": 1777248042
         },
         "country": {
           "alpha2": "ES",
@@ -15641,8 +15664,8 @@
           "expectedReturn": 9,
           "id": 21175,
           "startDateTimestamp": 1777075200,
-          "updateDateTimestamp": 1777190433,
-          "endDateTimestamp": 1778486433
+          "updateDateTimestamp": 1777248038,
+          "endDateTimestamp": 1778544038
         },
         "country": {
           "alpha2": "GH",
@@ -16832,7 +16855,30 @@
             "bn": "এম. আলোনসো",
             "hi": "एम. अलोंसो"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3305,
+            "startDateTimestamp": 1777238797,
+            "endDateTimestamp": 1777820400,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          }
+        ]
       },
       "previousTeam": {
         "name": "FC Barcelona",
@@ -19682,8 +19728,8 @@
           "expectedReturn": 9,
           "id": 19735,
           "startDateTimestamp": 1775260800,
-          "updateDateTimestamp": 1777190445,
-          "endDateTimestamp": 1778486445
+          "updateDateTimestamp": 1777248042,
+          "endDateTimestamp": 1778544042
         },
         "country": {
           "alpha2": "SE",
@@ -21605,7 +21651,7 @@
           "expectedReturn": 6,
           "id": 21162,
           "startDateTimestamp": 1777075200,
-          "updateDateTimestamp": 1777190434,
+          "updateDateTimestamp": 1777248038,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,

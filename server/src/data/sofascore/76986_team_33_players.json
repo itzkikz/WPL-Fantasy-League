@@ -638,6 +638,19 @@
         "preferredFoot": "Right",
         "userCount": 11735,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 5,
+          "id": 21236,
+          "startDateTimestamp": 1777075200,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778371200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "sofascoreId": "Dom_Solanke",
         "country": {
           "alpha2": "EN",
@@ -1747,7 +1760,7 @@
           "expectedReturn": 6,
           "id": 20244,
           "startDateTimestamp": 1767484800,
-          "updateDateTimestamp": 1777190451,
+          "updateDateTimestamp": 1777248044,
           "endDateTimestamp": 1784505600,
           "expectedReturnDateData": {
             "month": 7,
@@ -1976,6 +1989,15 @@
         "userCount": 50978,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Knee Injury",
+          "status": "out",
+          "expectedReturn": 3,
+          "id": 21220,
+          "startDateTimestamp": 1777075200,
+          "updateDateTimestamp": 1777248037,
+          "endDateTimestamp": 1778457637
+        },
         "sofascoreId": "XaviSimons",
         "country": {
           "alpha2": "NL",
@@ -2207,7 +2229,7 @@
           "expectedReturn": 5,
           "id": 21094,
           "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190437,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -5345,7 +5367,7 @@
           "expectedReturn": 5,
           "id": 21093,
           "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190436,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -6239,7 +6261,7 @@
           "expectedReturn": 5,
           "id": 20797,
           "startDateTimestamp": 1768608000,
-          "updateDateTimestamp": 1777190456,
+          "updateDateTimestamp": 1777248046,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -7116,7 +7138,7 @@
           "expectedReturn": 5,
           "id": 20275,
           "startDateTimestamp": 1775779200,
-          "updateDateTimestamp": 1777190437,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -9796,7 +9818,7 @@
           "expectedReturn": 6,
           "id": 20244,
           "startDateTimestamp": 1767484800,
-          "updateDateTimestamp": 1777190451,
+          "updateDateTimestamp": 1777248044,
           "endDateTimestamp": 1784505600,
           "expectedReturnDateData": {
             "month": 7,
@@ -10031,7 +10053,7 @@
           "expectedReturn": 5,
           "id": 21093,
           "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190436,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -10265,7 +10287,7 @@
           "expectedReturn": 5,
           "id": 20275,
           "startDateTimestamp": 1775779200,
-          "updateDateTimestamp": 1777190437,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -10939,6 +10961,15 @@
         "userCount": 50978,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Knee Injury",
+          "status": "out",
+          "expectedReturn": 3,
+          "id": 21220,
+          "startDateTimestamp": 1777075200,
+          "updateDateTimestamp": 1777248037,
+          "endDateTimestamp": 1778457637
+        },
         "sofascoreId": "XaviSimons",
         "country": {
           "alpha2": "NL",
@@ -12069,7 +12100,7 @@
           "expectedReturn": 5,
           "id": 21094,
           "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190437,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -12743,7 +12774,7 @@
           "expectedReturn": 5,
           "id": 20797,
           "startDateTimestamp": 1768608000,
-          "updateDateTimestamp": 1777190456,
+          "updateDateTimestamp": 1777248046,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -12974,6 +13005,19 @@
         "preferredFoot": "Right",
         "userCount": 11735,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 5,
+          "id": 21236,
+          "startDateTimestamp": 1777075200,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778371200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "sofascoreId": "Dom_Solanke",
         "country": {
           "alpha2": "EN",
@@ -13426,7 +13470,7 @@
           "expectedReturn": 5,
           "id": 20275,
           "startDateTimestamp": 1775779200,
-          "updateDateTimestamp": 1777190437,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -15439,6 +15483,15 @@
         "userCount": 50978,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Knee Injury",
+          "status": "out",
+          "expectedReturn": 3,
+          "id": 21220,
+          "startDateTimestamp": 1777075200,
+          "updateDateTimestamp": 1777248037,
+          "endDateTimestamp": 1778457637
+        },
         "sofascoreId": "XaviSimons",
         "country": {
           "alpha2": "NL",
@@ -15893,7 +15946,7 @@
           "expectedReturn": 5,
           "id": 21094,
           "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190437,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -17525,6 +17578,15 @@
         "userCount": 50978,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Knee Injury",
+          "status": "out",
+          "expectedReturn": 3,
+          "id": 21220,
+          "startDateTimestamp": 1777075200,
+          "updateDateTimestamp": 1777248037,
+          "endDateTimestamp": 1778457637
+        },
         "sofascoreId": "XaviSimons",
         "country": {
           "alpha2": "NL",
@@ -18331,7 +18393,7 @@
           "expectedReturn": 6,
           "id": 20244,
           "startDateTimestamp": 1767484800,
-          "updateDateTimestamp": 1777190451,
+          "updateDateTimestamp": 1777248044,
           "endDateTimestamp": 1784505600,
           "expectedReturnDateData": {
             "month": 7,
@@ -20315,6 +20377,19 @@
         "preferredFoot": "Right",
         "userCount": 11735,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 5,
+          "id": 21236,
+          "startDateTimestamp": 1777075200,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778371200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "sofascoreId": "Dom_Solanke",
         "country": {
           "alpha2": "EN",
@@ -23486,7 +23561,7 @@
           "expectedReturn": 5,
           "id": 20275,
           "startDateTimestamp": 1775779200,
-          "updateDateTimestamp": 1777190437,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -24297,7 +24372,7 @@
           "expectedReturn": 5,
           "id": 21093,
           "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190436,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -25909,7 +25984,7 @@
           "expectedReturn": 5,
           "id": 21094,
           "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190437,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -27276,7 +27351,7 @@
           "expectedReturn": 5,
           "id": 20797,
           "startDateTimestamp": 1768608000,
-          "updateDateTimestamp": 1777190456,
+          "updateDateTimestamp": 1777248046,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,

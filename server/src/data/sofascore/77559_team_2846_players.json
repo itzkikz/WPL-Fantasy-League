@@ -848,7 +848,7 @@
           "expectedReturn": 5,
           "id": 20904,
           "startDateTimestamp": 1776729600,
-          "updateDateTimestamp": 1777190447,
+          "updateDateTimestamp": 1777248043,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -2831,7 +2831,30 @@
             "bn": "ভি. জার্মেইন",
             "hi": "वी. वेलेरा"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "red_card_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3306,
+            "startDateTimestamp": 1777235477,
+            "endDateTimestamp": 1777820400,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          }
+        ]
       }
     },
     {
@@ -8447,7 +8470,7 @@
           "expectedReturn": 5,
           "id": 20904,
           "startDateTimestamp": 1776729600,
-          "updateDateTimestamp": 1777190447,
+          "updateDateTimestamp": 1777248043,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -16650,7 +16673,30 @@
             "bn": "ভি. জার্মেইন",
             "hi": "वी. वेलेरा"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "red_card_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3306,
+            "startDateTimestamp": 1777235477,
+            "endDateTimestamp": 1777820400,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          }
+        ]
       },
       "previousTeam": {
         "name": "Valencia",
@@ -19130,7 +19176,7 @@
           "expectedReturn": 5,
           "id": 20904,
           "startDateTimestamp": 1776729600,
-          "updateDateTimestamp": 1777190447,
+          "updateDateTimestamp": 1777248043,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,

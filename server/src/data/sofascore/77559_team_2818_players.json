@@ -1062,7 +1062,7 @@
           "expectedReturn": 5,
           "id": 20933,
           "startDateTimestamp": 1776729600,
-          "updateDateTimestamp": 1777190435,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -1962,7 +1962,30 @@
             "bn": "আই. পালাজোন",
             "hi": "आई. पलाज़ोन"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "red_card_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3307,
+            "startDateTimestamp": 1777235263,
+            "endDateTimestamp": 1777828500,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          }
+        ]
       }
     },
     {
@@ -2162,7 +2185,7 @@
           "expectedReturn": 5,
           "id": 20690,
           "startDateTimestamp": 1776297600,
-          "updateDateTimestamp": 1777190435,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -5000,7 +5023,7 @@
           "expectedReturn": 4,
           "id": 20763,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190435
+          "updateDateTimestamp": 1777248039
         },
         "country": {
           "alpha2": "IT",
@@ -5873,15 +5896,6 @@
         "userCount": 226,
         "deceased": false,
         "gender": "M",
-        "injury": {
-          "reason": "Physical Discomfort",
-          "status": "dayToDay",
-          "expectedReturn": 9,
-          "id": 21077,
-          "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190442,
-          "endDateTimestamp": 1778486442
-        },
         "country": {
           "alpha2": "NL",
           "alpha3": "NLD",
@@ -6333,30 +6347,7 @@
             "bn": "এ. বাটাল্লা",
             "hi": "ए. बटाला"
           }
-        },
-        "activeSeasonSuspensions": [
-          {
-            "reason": "yellow_card_accumulation_suspension",
-            "type": "matches",
-            "matches": 1,
-            "id": 3259,
-            "startDateTimestamp": 1776976399,
-            "endDateTimestamp": 1777215600,
-            "uniqueTournament": {
-              "id": 8,
-              "name": "LaLiga",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإسباني",
-                  "hi": "ला लिगा",
-                  "bn": "লা লীগা"
-                },
-                "shortNameTranslation": {}
-              },
-              "slug": "laliga"
-            }
-          }
-        ]
+        }
       }
     },
     {
@@ -7405,7 +7396,7 @@
           "expectedReturn": 5,
           "id": 20933,
           "startDateTimestamp": 1776729600,
-          "updateDateTimestamp": 1777190435,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -7657,30 +7648,7 @@
             "bn": "এ. বাটাল্লা",
             "hi": "ए. बटाला"
           }
-        },
-        "activeSeasonSuspensions": [
-          {
-            "reason": "yellow_card_accumulation_suspension",
-            "type": "matches",
-            "matches": 1,
-            "id": 3259,
-            "startDateTimestamp": 1776976399,
-            "endDateTimestamp": 1777215600,
-            "uniqueTournament": {
-              "id": 8,
-              "name": "LaLiga",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإسباني",
-                  "hi": "ला लिगा",
-                  "bn": "লা লীগা"
-                },
-                "shortNameTranslation": {}
-              },
-              "slug": "laliga"
-            }
-          }
-        ]
+        }
       }
     },
     {
@@ -8738,7 +8706,7 @@
           "expectedReturn": 4,
           "id": 20763,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190435
+          "updateDateTimestamp": 1777248039
         },
         "country": {
           "alpha2": "IT",
@@ -9181,15 +9149,6 @@
         "userCount": 226,
         "deceased": false,
         "gender": "M",
-        "injury": {
-          "reason": "Physical Discomfort",
-          "status": "dayToDay",
-          "expectedReturn": 9,
-          "id": 21077,
-          "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190442,
-          "endDateTimestamp": 1778486442
-        },
         "country": {
           "alpha2": "NL",
           "alpha3": "NLD",
@@ -10720,7 +10679,7 @@
           "expectedReturn": 5,
           "id": 20933,
           "startDateTimestamp": 1776729600,
-          "updateDateTimestamp": 1777190435,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -11168,15 +11127,6 @@
         "userCount": 226,
         "deceased": false,
         "gender": "M",
-        "injury": {
-          "reason": "Physical Discomfort",
-          "status": "dayToDay",
-          "expectedReturn": 9,
-          "id": 21077,
-          "startDateTimestamp": 1776988800,
-          "updateDateTimestamp": 1777190442,
-          "endDateTimestamp": 1778486442
-        },
         "country": {
           "alpha2": "NL",
           "alpha3": "NLD",
@@ -13914,7 +13864,7 @@
           "expectedReturn": 4,
           "id": 20763,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1777190435
+          "updateDateTimestamp": 1777248039
         },
         "country": {
           "alpha2": "IT",
@@ -14336,30 +14286,7 @@
             "bn": "এ. বাটাল্লা",
             "hi": "ए. बटाला"
           }
-        },
-        "activeSeasonSuspensions": [
-          {
-            "reason": "yellow_card_accumulation_suspension",
-            "type": "matches",
-            "matches": 1,
-            "id": 3259,
-            "startDateTimestamp": 1776976399,
-            "endDateTimestamp": 1777215600,
-            "uniqueTournament": {
-              "id": 8,
-              "name": "LaLiga",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإسباني",
-                  "hi": "ला लिगा",
-                  "bn": "লা লীগা"
-                },
-                "shortNameTranslation": {}
-              },
-              "slug": "laliga"
-            }
-          }
-        ]
+        }
       },
       "previousTeam": {
         "name": "River Plate",
@@ -17466,7 +17393,7 @@
           "expectedReturn": 5,
           "id": 20933,
           "startDateTimestamp": 1776729600,
-          "updateDateTimestamp": 1777190435,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -19838,7 +19765,30 @@
             "bn": "আই. পালাজোন",
             "hi": "आई. पलाज़ोन"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "red_card_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3307,
+            "startDateTimestamp": 1777235263,
+            "endDateTimestamp": 1777828500,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          }
+        ]
       },
       "previousTeam": {
         "name": "SD Ponferradina",
@@ -20602,7 +20552,7 @@
           "expectedReturn": 5,
           "id": 20690,
           "startDateTimestamp": 1776297600,
-          "updateDateTimestamp": 1777190435,
+          "updateDateTimestamp": 1777248039,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,

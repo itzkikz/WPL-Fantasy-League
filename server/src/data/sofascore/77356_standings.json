@@ -120,6 +120,60 @@
         },
         {
           "team": {
+            "name": "Lille",
+            "slug": "lille",
+            "shortName": "Lille",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 312256,
+            "nameCode": "LIL",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1643,
+            "teamColors": {
+              "primary": "#df0000",
+              "secondary": "#24216a",
+              "text": "#24216a"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "ليل",
+                "bn": "লিল",
+                "hi": "लिली",
+                "ru": "Лилль"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "Champions League Qualification",
+            "id": 24
+          },
+          "position": 3,
+          "matches": 31,
+          "wins": 17,
+          "scoresFor": 50,
+          "scoresAgainst": 34,
+          "id": 1662421,
+          "losses": 8,
+          "draws": 6,
+          "points": 57,
+          "scoreDiffFormatted": "+16"
+        },
+        {
+          "team": {
             "name": "Olympique Lyonnais",
             "slug": "olympique-lyonnais",
             "shortName": "Lyon",
@@ -163,7 +217,7 @@
             "text": "Champions League",
             "id": 804
           },
-          "position": 3,
+          "position": 4,
           "matches": 31,
           "wins": 17,
           "scoresFor": 48,
@@ -173,60 +227,6 @@
           "draws": 6,
           "points": 57,
           "scoreDiffFormatted": "+16"
-        },
-        {
-          "team": {
-            "name": "Lille",
-            "slug": "lille",
-            "shortName": "Lille",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 312256,
-            "nameCode": "LIL",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1643,
-            "teamColors": {
-              "primary": "#df0000",
-              "secondary": "#24216a",
-              "text": "#24216a"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "ليل",
-                "bn": "লিল",
-                "hi": "लिली",
-                "ru": "Лилль"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Champions League Qualification",
-            "id": 24
-          },
-          "position": 4,
-          "matches": 30,
-          "wins": 16,
-          "scoresFor": 49,
-          "scoresAgainst": 34,
-          "id": 1662421,
-          "losses": 8,
-          "draws": 6,
-          "points": 54,
-          "scoreDiffFormatted": "+15"
         },
         {
           "team": {
@@ -274,15 +274,15 @@
             "id": 808
           },
           "position": 5,
-          "matches": 30,
-          "wins": 15,
-          "scoresFor": 52,
-          "scoresAgainst": 41,
+          "matches": 31,
+          "wins": 16,
+          "scoresFor": 54,
+          "scoresAgainst": 42,
           "id": 1662429,
           "losses": 7,
           "draws": 8,
-          "points": 53,
-          "scoreDiffFormatted": "+11"
+          "points": 56,
+          "scoreDiffFormatted": "+12"
         },
         {
           "team": {
@@ -330,14 +330,14 @@
             "id": 503
           },
           "position": 6,
-          "matches": 30,
+          "matches": 31,
           "wins": 16,
-          "scoresFor": 58,
-          "scoresAgainst": 40,
+          "scoresFor": 59,
+          "scoresAgainst": 41,
           "id": 1662424,
           "losses": 10,
-          "draws": 4,
-          "points": 52,
+          "draws": 5,
+          "points": 53,
           "scoreDiffFormatted": "+18"
         },
         {
@@ -434,15 +434,15 @@
           },
           "descriptions": [],
           "position": 8,
-          "matches": 29,
-          "wins": 12,
-          "scoresFor": 46,
-          "scoresAgainst": 37,
+          "matches": 30,
+          "wins": 13,
+          "scoresFor": 49,
+          "scoresAgainst": 39,
           "id": 1662430,
           "losses": 10,
           "draws": 7,
-          "points": 43,
-          "scoreDiffFormatted": "+9"
+          "points": 46,
+          "scoreDiffFormatted": "+10"
         },
         {
           "team": {
@@ -484,15 +484,15 @@
           },
           "descriptions": [],
           "position": 9,
-          "matches": 30,
+          "matches": 31,
           "wins": 10,
-          "scoresFor": 40,
-          "scoresAgainst": 44,
+          "scoresFor": 42,
+          "scoresAgainst": 47,
           "id": 1662417,
-          "losses": 9,
+          "losses": 10,
           "draws": 11,
           "points": 41,
-          "scoreDiffFormatted": "-4"
+          "scoreDiffFormatted": "-5"
         },
         {
           "team": {
@@ -639,15 +639,15 @@
           },
           "descriptions": [],
           "position": 12,
-          "matches": 30,
+          "matches": 31,
           "wins": 9,
           "scoresFor": 40,
-          "scoresAgainst": 46,
+          "scoresAgainst": 47,
           "id": 1662425,
-          "losses": 10,
+          "losses": 11,
           "draws": 11,
           "points": 38,
-          "scoreDiffFormatted": "-6"
+          "scoreDiffFormatted": "-7"
         },
         {
           "team": {
@@ -739,14 +739,14 @@
           },
           "descriptions": [],
           "position": 14,
-          "matches": 30,
+          "matches": 31,
           "wins": 6,
-          "scoresFor": 25,
-          "scoresAgainst": 38,
+          "scoresFor": 29,
+          "scoresAgainst": 42,
           "id": 1662420,
           "losses": 12,
-          "draws": 12,
-          "points": 30,
+          "draws": 13,
+          "points": 31,
           "scoreDiffFormatted": "-13"
         },
         {
@@ -789,14 +789,14 @@
           },
           "descriptions": [],
           "position": 15,
-          "matches": 30,
+          "matches": 31,
           "wins": 7,
-          "scoresFor": 34,
-          "scoresAgainst": 56,
+          "scoresFor": 35,
+          "scoresAgainst": 57,
           "id": 1662422,
           "losses": 15,
-          "draws": 8,
-          "points": 29,
+          "draws": 9,
+          "points": 30,
           "scoreDiffFormatted": "-22"
         },
         {
@@ -897,15 +897,15 @@
             "id": 3
           },
           "position": 17,
-          "matches": 30,
+          "matches": 31,
           "wins": 4,
-          "scoresFor": 25,
-          "scoresAgainst": 49,
+          "scoresFor": 26,
+          "scoresAgainst": 51,
           "id": 1662419,
-          "losses": 18,
+          "losses": 19,
           "draws": 8,
           "points": 20,
-          "scoreDiffFormatted": "-24"
+          "scoreDiffFormatted": "-25"
         },
         {
           "team": {
@@ -951,14 +951,14 @@
             "id": 3
           },
           "position": 18,
-          "matches": 30,
+          "matches": 31,
           "wins": 3,
-          "scoresFor": 27,
-          "scoresAgainst": 66,
+          "scoresFor": 31,
+          "scoresAgainst": 70,
           "id": 1662418,
           "losses": 21,
-          "draws": 6,
-          "points": 15,
+          "draws": 7,
+          "points": 16,
           "scoreDiffFormatted": "-39"
         }
       ],
@@ -1055,7 +1055,7 @@
         }
       },
       "name": "Ligue 1 25/26",
-      "updatedAtTimestamp": 1777157908
+      "updatedAtTimestamp": 1777237733
     }
   ]
 }

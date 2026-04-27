@@ -642,7 +642,7 @@
           "expectedReturn": 4,
           "id": 20930,
           "startDateTimestamp": 1776729600,
-          "updateDateTimestamp": 1777190443
+          "updateDateTimestamp": 1777248042
         },
         "country": {
           "alpha2": "CO",
@@ -5068,7 +5068,30 @@
             "bn": "এন. ভ্যালেন্টিনি",
             "hi": "एन. वैलेंटिनी"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3297,
+            "startDateTimestamp": 1777196171,
+            "endDateTimestamp": 1777834800,
+            "uniqueTournament": {
+              "id": 23,
+              "name": "Serie A",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإيطالي",
+                  "hi": "सीरी ए",
+                  "bn": "সিরি আ"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "serie-a"
+            }
+          }
+        ]
       }
     },
     {
@@ -6592,7 +6615,7 @@
           "expectedReturn": 7,
           "id": 21039,
           "startDateTimestamp": 1776902400,
-          "updateDateTimestamp": 1777190441,
+          "updateDateTimestamp": 1777248041,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -8147,7 +8170,30 @@
             "bn": "এন. ভ্যালেন্টিনি",
             "hi": "एन. वैलेंटिनी"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3297,
+            "startDateTimestamp": 1777196171,
+            "endDateTimestamp": 1777834800,
+            "uniqueTournament": {
+              "id": 23,
+              "name": "Serie A",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإيطالي",
+                  "hi": "सीरी ए",
+                  "bn": "সিরি আ"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "serie-a"
+            }
+          }
+        ]
       }
     },
     {
@@ -9217,7 +9263,7 @@
           "expectedReturn": 4,
           "id": 20930,
           "startDateTimestamp": 1776729600,
-          "updateDateTimestamp": 1777190443
+          "updateDateTimestamp": 1777248042
         },
         "country": {
           "alpha2": "CO",
@@ -10764,7 +10810,7 @@
           "expectedReturn": 7,
           "id": 21039,
           "startDateTimestamp": 1776902400,
-          "updateDateTimestamp": 1777190441,
+          "updateDateTimestamp": 1777248041,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -23153,7 +23199,30 @@
             "bn": "এন. ভ্যালেন্টিনি",
             "hi": "एन. वैलेंटिनी"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3297,
+            "startDateTimestamp": 1777196171,
+            "endDateTimestamp": 1777834800,
+            "uniqueTournament": {
+              "id": 23,
+              "name": "Serie A",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإيطالي",
+                  "hi": "सीरी ए",
+                  "bn": "সিরি আ"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "serie-a"
+            }
+          }
+        ]
       },
       "previousTeam": {
         "name": "Fiorentina",
@@ -23916,7 +23985,7 @@
           "expectedReturn": 7,
           "id": 21039,
           "startDateTimestamp": 1776902400,
-          "updateDateTimestamp": 1777190441,
+          "updateDateTimestamp": 1777248041,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -25088,7 +25157,7 @@
           "expectedReturn": 4,
           "id": 20930,
           "startDateTimestamp": 1776729600,
-          "updateDateTimestamp": 1777190443
+          "updateDateTimestamp": 1777248042
         },
         "country": {
           "alpha2": "CO",

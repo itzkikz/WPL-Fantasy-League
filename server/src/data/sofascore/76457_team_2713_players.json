@@ -1064,6 +1064,19 @@
         "preferredFoot": "Right",
         "userCount": 926,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 5,
+          "id": 21215,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778371200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "GH",
           "alpha3": "GHA",
@@ -1718,6 +1731,19 @@
         "userCount": 2468,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 5,
+          "id": 21216,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248037,
+          "endDateTimestamp": 1778371200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "IT",
           "alpha3": "ITA",
@@ -3890,7 +3916,7 @@
           "expectedReturn": 5,
           "id": 19323,
           "startDateTimestamp": 1774742400,
-          "updateDateTimestamp": 1777190442,
+          "updateDateTimestamp": 1777248041,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -4325,7 +4351,7 @@
         "positionsDetailed": [
           "DC"
         ],
-        "jerseyNumber": "35",
+        "jerseyNumber": "13",
         "height": 192,
         "dateOfBirth": "2005-03-29T00:00:00+00:00",
         "preferredFoot": "Left",
@@ -4338,7 +4364,7 @@
           "slug": "sweden"
         },
         "id": 1435226,
-        "shirtNumber": 35,
+        "shirtNumber": 13,
         "dateOfBirthTimestamp": 1112054400,
         "contractUntilTimestamp": 1782777600,
         "proposedMarketValue": 2900000,
@@ -5219,6 +5245,215 @@
     },
     {
       "player": {
+        "name": "Mamedi Doucoure",
+        "slug": "mamedi-doucoure",
+        "shortName": "M. Doucouré",
+        "team": {
+          "name": "Genoa",
+          "slug": "genoa",
+          "shortName": "Genoa",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "Serie A",
+              "slug": "serie-a",
+              "primaryColorHex": "#09519e",
+              "secondaryColorHex": "#008fd7",
+              "category": {
+                "name": "Italy",
+                "slug": "italy",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 7,
+                "country": {
+                  "alpha2": "IT",
+                  "alpha3": "ITA",
+                  "name": "Italy",
+                  "slug": "italy"
+                },
+                "id": 31,
+                "flag": "italy",
+                "alpha2": "IT",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إيطاليا",
+                    "bn": "ইতালি",
+                    "hi": "इटली",
+                    "ru": "Италия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 642447,
+              "country": {},
+              "id": 23,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإيطالي",
+                  "hi": "सीरी ए",
+                  "bn": "সিরি আ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 700,
+            "isLive": false,
+            "id": 33,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "सीरी ए",
+                "ar": "الدوري الإيطالي",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "primaryColorHex": "#09519e",
+            "secondaryColorHex": "#008fd7",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 642447,
+            "country": {},
+            "id": 23,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإيطالي",
+                "hi": "सीरी ए",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 124282,
+          "nameCode": "GEN",
+          "disabled": false,
+          "national": false,
+          "type": 0,
+          "country": {
+            "alpha2": "IT",
+            "alpha3": "ITA",
+            "name": "Italy",
+            "slug": "italy"
+          },
+          "id": 2713,
+          "teamColors": {
+            "primary": "#000033",
+            "secondary": "#660000",
+            "text": "#660000"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "جنوة",
+              "bn": "জেনোয়া",
+              "hi": "जेनोआ",
+              "ru": "Дженоа"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "position": "D",
+        "positionsDetailed": [
+          "DC",
+          "DR"
+        ],
+        "jerseyNumber": "74",
+        "height": 180,
+        "dateOfBirth": "2007-01-19T00:00:00+00:00",
+        "preferredFoot": "Right",
+        "retired": false,
+        "userCount": 32,
+        "deceased": false,
+        "gender": "M",
+        "country": {
+          "alpha2": "FR",
+          "alpha3": "FRA",
+          "name": "France",
+          "slug": "france"
+        },
+        "id": 1526308,
+        "shirtNumber": 74,
+        "dateOfBirthTimestamp": 1169164800,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "ماميدي دوكور"
+          },
+          "shortNameTranslation": {
+            "ar": "م. دوكور"
+          }
+        }
+      }
+    },
+    {
+      "player": {
         "name": "Justin Bijlow",
         "slug": "bijlow-justin",
         "shortName": "J. Bijlow",
@@ -5405,6 +5640,19 @@
         "preferredFoot": "Right",
         "userCount": 1488,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 5,
+          "id": 21231,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778371200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "NL",
           "alpha3": "NLD",
@@ -8239,7 +8487,7 @@
           "expectedReturn": 5,
           "id": 19323,
           "startDateTimestamp": 1774742400,
-          "updateDateTimestamp": 1777190442,
+          "updateDateTimestamp": 1777248041,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -8487,6 +8735,215 @@
             "ar": "أ. مارتين",
             "bn": "এ. মার্টিন",
             "hi": "ए. मार्टिन"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "name": "Mamedi Doucoure",
+        "slug": "mamedi-doucoure",
+        "shortName": "M. Doucouré",
+        "team": {
+          "name": "Genoa",
+          "slug": "genoa",
+          "shortName": "Genoa",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "Serie A",
+              "slug": "serie-a",
+              "primaryColorHex": "#09519e",
+              "secondaryColorHex": "#008fd7",
+              "category": {
+                "name": "Italy",
+                "slug": "italy",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 7,
+                "country": {
+                  "alpha2": "IT",
+                  "alpha3": "ITA",
+                  "name": "Italy",
+                  "slug": "italy"
+                },
+                "id": 31,
+                "flag": "italy",
+                "alpha2": "IT",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إيطاليا",
+                    "bn": "ইতালি",
+                    "hi": "इटली",
+                    "ru": "Италия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 642447,
+              "country": {},
+              "id": 23,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإيطالي",
+                  "hi": "सीरी ए",
+                  "bn": "সিরি আ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 700,
+            "isLive": false,
+            "id": 33,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "सीरी ए",
+                "ar": "الدوري الإيطالي",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "primaryColorHex": "#09519e",
+            "secondaryColorHex": "#008fd7",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 642447,
+            "country": {},
+            "id": 23,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإيطالي",
+                "hi": "सीरी ए",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 124282,
+          "nameCode": "GEN",
+          "disabled": false,
+          "national": false,
+          "type": 0,
+          "country": {
+            "alpha2": "IT",
+            "alpha3": "ITA",
+            "name": "Italy",
+            "slug": "italy"
+          },
+          "id": 2713,
+          "teamColors": {
+            "primary": "#000033",
+            "secondary": "#660000",
+            "text": "#660000"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "جنوة",
+              "bn": "জেনোয়া",
+              "hi": "जेनोआ",
+              "ru": "Дженоа"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "position": "D",
+        "positionsDetailed": [
+          "DC",
+          "DR"
+        ],
+        "jerseyNumber": "74",
+        "height": 180,
+        "dateOfBirth": "2007-01-19T00:00:00+00:00",
+        "preferredFoot": "Right",
+        "retired": false,
+        "userCount": 32,
+        "deceased": false,
+        "gender": "M",
+        "country": {
+          "alpha2": "FR",
+          "alpha3": "FRA",
+          "name": "France",
+          "slug": "france"
+        },
+        "id": 1526308,
+        "shirtNumber": 74,
+        "dateOfBirthTimestamp": 1169164800,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "ماميدي دوكور"
+          },
+          "shortNameTranslation": {
+            "ar": "م. دوكور"
           }
         }
       }
@@ -8891,6 +9348,19 @@
         "preferredFoot": "Right",
         "userCount": 926,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 5,
+          "id": 21215,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778371200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "GH",
           "alpha3": "GHA",
@@ -9759,6 +10229,19 @@
         "preferredFoot": "Right",
         "userCount": 1488,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 5,
+          "id": 21231,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778371200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "NL",
           "alpha3": "NLD",
@@ -10407,7 +10890,7 @@
         "positionsDetailed": [
           "DC"
         ],
-        "jerseyNumber": "35",
+        "jerseyNumber": "13",
         "height": 192,
         "dateOfBirth": "2005-03-29T00:00:00+00:00",
         "preferredFoot": "Left",
@@ -10420,7 +10903,7 @@
           "slug": "sweden"
         },
         "id": 1435226,
-        "shirtNumber": 35,
+        "shirtNumber": 13,
         "dateOfBirthTimestamp": 1112054400,
         "contractUntilTimestamp": 1782777600,
         "proposedMarketValue": 2900000,
@@ -11070,6 +11553,19 @@
         "preferredFoot": "Right",
         "userCount": 1488,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 5,
+          "id": 21231,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778371200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "NL",
           "alpha3": "NLD",
@@ -12933,7 +13429,7 @@
         "positionsDetailed": [
           "DC"
         ],
-        "jerseyNumber": "35",
+        "jerseyNumber": "13",
         "height": 192,
         "dateOfBirth": "2005-03-29T00:00:00+00:00",
         "preferredFoot": "Left",
@@ -12946,7 +13442,7 @@
           "slug": "sweden"
         },
         "id": 1435226,
-        "shirtNumber": 35,
+        "shirtNumber": 13,
         "dateOfBirthTimestamp": 1112054400,
         "contractUntilTimestamp": 1782777600,
         "proposedMarketValue": 2900000,
@@ -13328,6 +13824,19 @@
         "userCount": 2468,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 5,
+          "id": 21216,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248037,
+          "endDateTimestamp": 1778371200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "IT",
           "alpha3": "ITA",
@@ -13718,6 +14227,19 @@
         "preferredFoot": "Right",
         "userCount": 1488,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 5,
+          "id": 21231,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778371200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "NL",
           "alpha3": "NLD",
@@ -17302,7 +17824,7 @@
           "expectedReturn": 5,
           "id": 19323,
           "startDateTimestamp": 1774742400,
-          "updateDateTimestamp": 1777190442,
+          "updateDateTimestamp": 1777248041,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -22250,6 +22772,19 @@
         "preferredFoot": "Right",
         "userCount": 926,
         "gender": "M",
+        "injury": {
+          "reason": "Muscle Injury",
+          "status": "out",
+          "expectedReturn": 5,
+          "id": 21215,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778371200,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "GH",
           "alpha3": "GHA",

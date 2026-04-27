@@ -1736,7 +1736,7 @@
           "expectedReturn": 6,
           "id": 17171,
           "startDateTimestamp": 1721865600,
-          "updateDateTimestamp": 1777190453,
+          "updateDateTimestamp": 1777248045,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -2890,9 +2890,9 @@
         "slug": "tarnutzer-rouven",
         "shortName": "R. Tarnutzer",
         "team": {
-          "name": "SC Freiburg II U23",
-          "slug": "sc-freiburg-ii-u23",
-          "shortName": "Freiburg II",
+          "name": "SC Freiburg",
+          "slug": "sc-freiburg",
+          "shortName": "Freiburg",
           "gender": "M",
           "sport": {
             "name": "Football",
@@ -2900,8 +2900,8 @@
             "id": 1
           },
           "tournament": {
-            "name": "3. Liga",
-            "slug": "3-liga",
+            "name": "Bundesliga",
+            "slug": "bundesliga",
             "category": {
               "name": "Germany",
               "slug": "germany",
@@ -2931,209 +2931,6 @@
               }
             },
             "uniqueTournament": {
-              "name": "3. Liga",
-              "slug": "3-liga",
-              "primaryColorHex": "#00111c",
-              "secondaryColorHex": "#858585",
-              "category": {
-                "name": "Germany",
-                "slug": "germany",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 8,
-                "country": {
-                  "alpha2": "DE",
-                  "alpha3": "DEU",
-                  "name": "Germany",
-                  "slug": "germany"
-                },
-                "id": 30,
-                "flag": "germany",
-                "alpha2": "DE",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "ألمانيا",
-                    "bn": "জার্মানি",
-                    "hi": "जर्मनी",
-                    "ru": "Германия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 13069,
-              "country": {},
-              "id": 491,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "دوري الدرجة الثالثة",
-                  "bn": "3. লীগ",
-                  "hi": "3. लीगा"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 0,
-            "isLive": false,
-            "id": 8343,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الثالث",
-                "bn": "3. লিগা",
-                "hi": "3. लीगा"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Regionalliga Südwest",
-            "slug": "regionalliga-sudwest",
-            "primaryColorHex": "#132a54",
-            "secondaryColorHex": "#0f48b0",
-            "category": {
-              "name": "Germany Amateur",
-              "slug": "germany-amateur",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 0,
-              "country": {
-                "alpha2": "DE",
-                "alpha3": "DEU",
-                "name": "Germany",
-                "slug": "germany"
-              },
-              "id": 122,
-              "flag": "germany",
-              "alpha2": "DE",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "ألمانيا هواة",
-                  "ru": "Германия Любители"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 1194,
-            "country": {},
-            "id": 1079,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإقليمي جنوب غرب"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 3027,
-          "nameCode": "SCF",
-          "disabled": false,
-          "national": false,
-          "parentTeam": {
-            "name": "SC Freiburg",
-            "slug": "sc-freiburg",
-            "shortName": "Freiburg",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "tournament": {
-              "name": "Bundesliga",
-              "slug": "bundesliga",
-              "category": {
-                "name": "Germany",
-                "slug": "germany",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 8,
-                "country": {
-                  "alpha2": "DE",
-                  "alpha3": "DEU",
-                  "name": "Germany",
-                  "slug": "germany"
-                },
-                "id": 30,
-                "flag": "germany",
-                "alpha2": "DE",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "ألمانيا",
-                    "bn": "জার্মানি",
-                    "hi": "जर्मनी",
-                    "ru": "Германия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "uniqueTournament": {
-                "name": "Bundesliga",
-                "slug": "bundesliga",
-                "primaryColorHex": "#e2080e",
-                "secondaryColorHex": "#8e0902",
-                "category": {
-                  "name": "Germany",
-                  "slug": "germany",
-                  "sport": {
-                    "name": "Football",
-                    "slug": "football",
-                    "id": 1
-                  },
-                  "priority": 8,
-                  "country": {
-                    "alpha2": "DE",
-                    "alpha3": "DEU",
-                    "name": "Germany",
-                    "slug": "germany"
-                  },
-                  "id": 30,
-                  "flag": "germany",
-                  "alpha2": "DE",
-                  "fieldTranslations": {
-                    "nameTranslation": {
-                      "ar": "ألمانيا",
-                      "bn": "জার্মানি",
-                      "hi": "जर्मनी",
-                      "ru": "Германия"
-                    },
-                    "shortNameTranslation": {}
-                  }
-                },
-                "userCount": 527210,
-                "country": {},
-                "id": 35,
-                "displayInverseHomeAwayTeams": false,
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "bn": "বুন্দেসলীগা",
-                    "ar": "الدوري الألماني",
-                    "hi": "बुंडेसलीगा"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "priority": 696,
-              "isLive": false,
-              "id": 42,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "hi": "बुंडेसलीगा",
-                  "ar": "الدوري الألماني",
-                  "bn": "বুন্দেসলীগা"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "primaryUniqueTournament": {
               "name": "Bundesliga",
               "slug": "bundesliga",
               "primaryColorHex": "#e2080e",
@@ -3179,36 +2976,68 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 132288,
-            "nameCode": "SCF",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "DE",
-              "alpha3": "DEU",
-              "name": "Germany",
-              "slug": "germany"
-            },
-            "id": 2538,
-            "teamColors": {
-              "primary": "#cc3333",
-              "secondary": "#000000",
-              "text": "#000000"
-            },
+            "priority": 696,
+            "isLive": false,
+            "id": 42,
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "نادي فرايبورغ",
-                "hi": "एससी फ्रैबर्ग",
-                "ru": "Фрайбург"
+                "hi": "बुंडेसलीगा",
+                "ar": "الدوري الألماني",
+                "bn": "বুন্দেসলীগা"
               },
-              "shortNameTranslation": {
-                "ar": "فرايبورغ",
-                "bn": "ফ্রেইবার্গ",
-                "hi": "फ्रायबर्ग"
-              }
+              "shortNameTranslation": {}
             }
           },
+          "primaryUniqueTournament": {
+            "name": "Bundesliga",
+            "slug": "bundesliga",
+            "primaryColorHex": "#e2080e",
+            "secondaryColorHex": "#8e0902",
+            "category": {
+              "name": "Germany",
+              "slug": "germany",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 8,
+              "country": {
+                "alpha2": "DE",
+                "alpha3": "DEU",
+                "name": "Germany",
+                "slug": "germany"
+              },
+              "id": 30,
+              "flag": "germany",
+              "alpha2": "DE",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "ألمانيا",
+                  "bn": "জার্মানি",
+                  "hi": "जर्मनी",
+                  "ru": "Германия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 527210,
+            "country": {},
+            "id": 35,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "bn": "বুন্দেসলীগা",
+                "ar": "الدوري الألماني",
+                "hi": "बुंडेसलीगा"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 132288,
+          "nameCode": "SCF",
+          "disabled": false,
+          "national": false,
           "type": 0,
           "country": {
             "alpha2": "DE",
@@ -3216,7 +3045,7 @@
             "name": "Germany",
             "slug": "germany"
           },
-          "id": 5889,
+          "id": 2538,
           "teamColors": {
             "primary": "#cc3333",
             "secondary": "#000000",
@@ -3224,11 +3053,15 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "إس سي فرايبورج ٢ تحت 23",
-              "hi": "एससी फ्रीबर्ग II U23",
-              "ru": "СК Фрейбург II U23"
+              "ar": "نادي فرايبورغ",
+              "hi": "एससी फ्रैबर्ग",
+              "ru": "Фрайбург"
             },
-            "shortNameTranslation": {}
+            "shortNameTranslation": {
+              "ar": "فرايبورغ",
+              "bn": "ফ্রেইবার্গ",
+              "hi": "फ्रायबर्ग"
+            }
           }
         },
         "position": "M",
@@ -4558,7 +4391,7 @@
           "expectedReturn": 5,
           "id": 18956,
           "startDateTimestamp": 1771027200,
-          "updateDateTimestamp": 1777190448,
+          "updateDateTimestamp": 1777248044,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -5255,9 +5088,9 @@
         "slug": "karl-steinmann",
         "shortName": "K. Steinmann",
         "team": {
-          "name": "SC Freiburg II U23",
-          "slug": "sc-freiburg-ii-u23",
-          "shortName": "Freiburg II",
+          "name": "SC Freiburg",
+          "slug": "sc-freiburg",
+          "shortName": "Freiburg",
           "gender": "M",
           "sport": {
             "name": "Football",
@@ -5265,8 +5098,8 @@
             "id": 1
           },
           "tournament": {
-            "name": "3. Liga",
-            "slug": "3-liga",
+            "name": "Bundesliga",
+            "slug": "bundesliga",
             "category": {
               "name": "Germany",
               "slug": "germany",
@@ -5296,209 +5129,6 @@
               }
             },
             "uniqueTournament": {
-              "name": "3. Liga",
-              "slug": "3-liga",
-              "primaryColorHex": "#00111c",
-              "secondaryColorHex": "#858585",
-              "category": {
-                "name": "Germany",
-                "slug": "germany",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 8,
-                "country": {
-                  "alpha2": "DE",
-                  "alpha3": "DEU",
-                  "name": "Germany",
-                  "slug": "germany"
-                },
-                "id": 30,
-                "flag": "germany",
-                "alpha2": "DE",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "ألمانيا",
-                    "bn": "জার্মানি",
-                    "hi": "जर्मनी",
-                    "ru": "Германия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 13069,
-              "country": {},
-              "id": 491,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "دوري الدرجة الثالثة",
-                  "bn": "3. লীগ",
-                  "hi": "3. लीगा"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 0,
-            "isLive": false,
-            "id": 8343,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الثالث",
-                "bn": "3. লিগা",
-                "hi": "3. लीगा"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Regionalliga Südwest",
-            "slug": "regionalliga-sudwest",
-            "primaryColorHex": "#132a54",
-            "secondaryColorHex": "#0f48b0",
-            "category": {
-              "name": "Germany Amateur",
-              "slug": "germany-amateur",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 0,
-              "country": {
-                "alpha2": "DE",
-                "alpha3": "DEU",
-                "name": "Germany",
-                "slug": "germany"
-              },
-              "id": 122,
-              "flag": "germany",
-              "alpha2": "DE",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "ألمانيا هواة",
-                  "ru": "Германия Любители"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 1194,
-            "country": {},
-            "id": 1079,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإقليمي جنوب غرب"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 3027,
-          "nameCode": "SCF",
-          "disabled": false,
-          "national": false,
-          "parentTeam": {
-            "name": "SC Freiburg",
-            "slug": "sc-freiburg",
-            "shortName": "Freiburg",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "tournament": {
-              "name": "Bundesliga",
-              "slug": "bundesliga",
-              "category": {
-                "name": "Germany",
-                "slug": "germany",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 8,
-                "country": {
-                  "alpha2": "DE",
-                  "alpha3": "DEU",
-                  "name": "Germany",
-                  "slug": "germany"
-                },
-                "id": 30,
-                "flag": "germany",
-                "alpha2": "DE",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "ألمانيا",
-                    "bn": "জার্মানি",
-                    "hi": "जर्मनी",
-                    "ru": "Германия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "uniqueTournament": {
-                "name": "Bundesliga",
-                "slug": "bundesliga",
-                "primaryColorHex": "#e2080e",
-                "secondaryColorHex": "#8e0902",
-                "category": {
-                  "name": "Germany",
-                  "slug": "germany",
-                  "sport": {
-                    "name": "Football",
-                    "slug": "football",
-                    "id": 1
-                  },
-                  "priority": 8,
-                  "country": {
-                    "alpha2": "DE",
-                    "alpha3": "DEU",
-                    "name": "Germany",
-                    "slug": "germany"
-                  },
-                  "id": 30,
-                  "flag": "germany",
-                  "alpha2": "DE",
-                  "fieldTranslations": {
-                    "nameTranslation": {
-                      "ar": "ألمانيا",
-                      "bn": "জার্মানি",
-                      "hi": "जर्मनी",
-                      "ru": "Германия"
-                    },
-                    "shortNameTranslation": {}
-                  }
-                },
-                "userCount": 527210,
-                "country": {},
-                "id": 35,
-                "displayInverseHomeAwayTeams": false,
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "bn": "বুন্দেসলীগা",
-                    "ar": "الدوري الألماني",
-                    "hi": "बुंडेसलीगा"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "priority": 696,
-              "isLive": false,
-              "id": 42,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "hi": "बुंडेसलीगा",
-                  "ar": "الدوري الألماني",
-                  "bn": "বুন্দেসলীগা"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "primaryUniqueTournament": {
               "name": "Bundesliga",
               "slug": "bundesliga",
               "primaryColorHex": "#e2080e",
@@ -5544,36 +5174,68 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 132288,
-            "nameCode": "SCF",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "DE",
-              "alpha3": "DEU",
-              "name": "Germany",
-              "slug": "germany"
-            },
-            "id": 2538,
-            "teamColors": {
-              "primary": "#cc3333",
-              "secondary": "#000000",
-              "text": "#000000"
-            },
+            "priority": 696,
+            "isLive": false,
+            "id": 42,
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "نادي فرايبورغ",
-                "hi": "एससी फ्रैबर्ग",
-                "ru": "Фрайбург"
+                "hi": "बुंडेसलीगा",
+                "ar": "الدوري الألماني",
+                "bn": "বুন্দেসলীগা"
               },
-              "shortNameTranslation": {
-                "ar": "فرايبورغ",
-                "bn": "ফ্রেইবার্গ",
-                "hi": "फ्रायबर्ग"
-              }
+              "shortNameTranslation": {}
             }
           },
+          "primaryUniqueTournament": {
+            "name": "Bundesliga",
+            "slug": "bundesliga",
+            "primaryColorHex": "#e2080e",
+            "secondaryColorHex": "#8e0902",
+            "category": {
+              "name": "Germany",
+              "slug": "germany",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 8,
+              "country": {
+                "alpha2": "DE",
+                "alpha3": "DEU",
+                "name": "Germany",
+                "slug": "germany"
+              },
+              "id": 30,
+              "flag": "germany",
+              "alpha2": "DE",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "ألمانيا",
+                  "bn": "জার্মানি",
+                  "hi": "जर्मनी",
+                  "ru": "Германия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 527210,
+            "country": {},
+            "id": 35,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "bn": "বুন্দেসলীগা",
+                "ar": "الدوري الألماني",
+                "hi": "बुंडेसलीगा"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 132288,
+          "nameCode": "SCF",
+          "disabled": false,
+          "national": false,
           "type": 0,
           "country": {
             "alpha2": "DE",
@@ -5581,7 +5243,7 @@
             "name": "Germany",
             "slug": "germany"
           },
-          "id": 5889,
+          "id": 2538,
           "teamColors": {
             "primary": "#cc3333",
             "secondary": "#000000",
@@ -5589,11 +5251,15 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "إس سي فرايبورج ٢ تحت 23",
-              "hi": "एससी फ्रीबर्ग II U23",
-              "ru": "СК Фрейбург II U23"
+              "ar": "نادي فرايبورغ",
+              "hi": "एससी फ्रैबर्ग",
+              "ru": "Фрайбург"
             },
-            "shortNameTranslation": {}
+            "shortNameTranslation": {
+              "ar": "فرايبورغ",
+              "bn": "ফ্রেইবার্গ",
+              "hi": "फ्रायबर्ग"
+            }
           }
         },
         "position": "D",
@@ -7163,9 +6829,9 @@
         "slug": "tarnutzer-rouven",
         "shortName": "R. Tarnutzer",
         "team": {
-          "name": "SC Freiburg II U23",
-          "slug": "sc-freiburg-ii-u23",
-          "shortName": "Freiburg II",
+          "name": "SC Freiburg",
+          "slug": "sc-freiburg",
+          "shortName": "Freiburg",
           "gender": "M",
           "sport": {
             "name": "Football",
@@ -7173,8 +6839,8 @@
             "id": 1
           },
           "tournament": {
-            "name": "3. Liga",
-            "slug": "3-liga",
+            "name": "Bundesliga",
+            "slug": "bundesliga",
             "category": {
               "name": "Germany",
               "slug": "germany",
@@ -7204,209 +6870,6 @@
               }
             },
             "uniqueTournament": {
-              "name": "3. Liga",
-              "slug": "3-liga",
-              "primaryColorHex": "#00111c",
-              "secondaryColorHex": "#858585",
-              "category": {
-                "name": "Germany",
-                "slug": "germany",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 8,
-                "country": {
-                  "alpha2": "DE",
-                  "alpha3": "DEU",
-                  "name": "Germany",
-                  "slug": "germany"
-                },
-                "id": 30,
-                "flag": "germany",
-                "alpha2": "DE",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "ألمانيا",
-                    "bn": "জার্মানি",
-                    "hi": "जर्मनी",
-                    "ru": "Германия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 13069,
-              "country": {},
-              "id": 491,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "دوري الدرجة الثالثة",
-                  "bn": "3. লীগ",
-                  "hi": "3. लीगा"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 0,
-            "isLive": false,
-            "id": 8343,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الثالث",
-                "bn": "3. লিগা",
-                "hi": "3. लीगा"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Regionalliga Südwest",
-            "slug": "regionalliga-sudwest",
-            "primaryColorHex": "#132a54",
-            "secondaryColorHex": "#0f48b0",
-            "category": {
-              "name": "Germany Amateur",
-              "slug": "germany-amateur",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 0,
-              "country": {
-                "alpha2": "DE",
-                "alpha3": "DEU",
-                "name": "Germany",
-                "slug": "germany"
-              },
-              "id": 122,
-              "flag": "germany",
-              "alpha2": "DE",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "ألمانيا هواة",
-                  "ru": "Германия Любители"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 1194,
-            "country": {},
-            "id": 1079,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإقليمي جنوب غرب"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 3027,
-          "nameCode": "SCF",
-          "disabled": false,
-          "national": false,
-          "parentTeam": {
-            "name": "SC Freiburg",
-            "slug": "sc-freiburg",
-            "shortName": "Freiburg",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "tournament": {
-              "name": "Bundesliga",
-              "slug": "bundesliga",
-              "category": {
-                "name": "Germany",
-                "slug": "germany",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 8,
-                "country": {
-                  "alpha2": "DE",
-                  "alpha3": "DEU",
-                  "name": "Germany",
-                  "slug": "germany"
-                },
-                "id": 30,
-                "flag": "germany",
-                "alpha2": "DE",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "ألمانيا",
-                    "bn": "জার্মানি",
-                    "hi": "जर्मनी",
-                    "ru": "Германия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "uniqueTournament": {
-                "name": "Bundesliga",
-                "slug": "bundesliga",
-                "primaryColorHex": "#e2080e",
-                "secondaryColorHex": "#8e0902",
-                "category": {
-                  "name": "Germany",
-                  "slug": "germany",
-                  "sport": {
-                    "name": "Football",
-                    "slug": "football",
-                    "id": 1
-                  },
-                  "priority": 8,
-                  "country": {
-                    "alpha2": "DE",
-                    "alpha3": "DEU",
-                    "name": "Germany",
-                    "slug": "germany"
-                  },
-                  "id": 30,
-                  "flag": "germany",
-                  "alpha2": "DE",
-                  "fieldTranslations": {
-                    "nameTranslation": {
-                      "ar": "ألمانيا",
-                      "bn": "জার্মানি",
-                      "hi": "जर्मनी",
-                      "ru": "Германия"
-                    },
-                    "shortNameTranslation": {}
-                  }
-                },
-                "userCount": 527210,
-                "country": {},
-                "id": 35,
-                "displayInverseHomeAwayTeams": false,
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "bn": "বুন্দেসলীগা",
-                    "ar": "الدوري الألماني",
-                    "hi": "बुंडेसलीगा"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "priority": 696,
-              "isLive": false,
-              "id": 42,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "hi": "बुंडेसलीगा",
-                  "ar": "الدوري الألماني",
-                  "bn": "বুন্দেসলীগা"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "primaryUniqueTournament": {
               "name": "Bundesliga",
               "slug": "bundesliga",
               "primaryColorHex": "#e2080e",
@@ -7452,36 +6915,68 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 132288,
-            "nameCode": "SCF",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "DE",
-              "alpha3": "DEU",
-              "name": "Germany",
-              "slug": "germany"
-            },
-            "id": 2538,
-            "teamColors": {
-              "primary": "#cc3333",
-              "secondary": "#000000",
-              "text": "#000000"
-            },
+            "priority": 696,
+            "isLive": false,
+            "id": 42,
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "نادي فرايبورغ",
-                "hi": "एससी फ्रैबर्ग",
-                "ru": "Фрайбург"
+                "hi": "बुंडेसलीगा",
+                "ar": "الدوري الألماني",
+                "bn": "বুন্দেসলীগা"
               },
-              "shortNameTranslation": {
-                "ar": "فرايبورغ",
-                "bn": "ফ্রেইবার্গ",
-                "hi": "फ्रायबर्ग"
-              }
+              "shortNameTranslation": {}
             }
           },
+          "primaryUniqueTournament": {
+            "name": "Bundesliga",
+            "slug": "bundesliga",
+            "primaryColorHex": "#e2080e",
+            "secondaryColorHex": "#8e0902",
+            "category": {
+              "name": "Germany",
+              "slug": "germany",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 8,
+              "country": {
+                "alpha2": "DE",
+                "alpha3": "DEU",
+                "name": "Germany",
+                "slug": "germany"
+              },
+              "id": 30,
+              "flag": "germany",
+              "alpha2": "DE",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "ألمانيا",
+                  "bn": "জার্মানি",
+                  "hi": "जर्मनी",
+                  "ru": "Германия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 527210,
+            "country": {},
+            "id": 35,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "bn": "বুন্দেসলীগা",
+                "ar": "الدوري الألماني",
+                "hi": "बुंडेसलीगा"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 132288,
+          "nameCode": "SCF",
+          "disabled": false,
+          "national": false,
           "type": 0,
           "country": {
             "alpha2": "DE",
@@ -7489,7 +6984,7 @@
             "name": "Germany",
             "slug": "germany"
           },
-          "id": 5889,
+          "id": 2538,
           "teamColors": {
             "primary": "#cc3333",
             "secondary": "#000000",
@@ -7497,11 +6992,15 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "إس سي فرايبورج ٢ تحت 23",
-              "hi": "एससी फ्रीबर्ग II U23",
-              "ru": "СК Фрейбург II U23"
+              "ar": "نادي فرايبورغ",
+              "hi": "एससी फ्रैबर्ग",
+              "ru": "Фрайбург"
             },
-            "shortNameTranslation": {}
+            "shortNameTranslation": {
+              "ar": "فرايبورغ",
+              "bn": "ফ্রেইবার্গ",
+              "hi": "फ्रायबर्ग"
+            }
           }
         },
         "position": "M",
@@ -7955,7 +7454,7 @@
           "expectedReturn": 6,
           "id": 17171,
           "startDateTimestamp": 1721865600,
-          "updateDateTimestamp": 1777190453,
+          "updateDateTimestamp": 1777248045,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,
@@ -15017,7 +14516,7 @@
           "expectedReturn": 5,
           "id": 18956,
           "startDateTimestamp": 1771027200,
-          "updateDateTimestamp": 1777190448,
+          "updateDateTimestamp": 1777248044,
           "endDateTimestamp": 1778371200,
           "expectedReturnDateData": {
             "month": 5,
@@ -16946,7 +16445,7 @@
           "expectedReturn": 6,
           "id": 17171,
           "startDateTimestamp": 1721865600,
-          "updateDateTimestamp": 1777190453,
+          "updateDateTimestamp": 1777248045,
           "endDateTimestamp": 1779235200,
           "expectedReturnDateData": {
             "month": 5,

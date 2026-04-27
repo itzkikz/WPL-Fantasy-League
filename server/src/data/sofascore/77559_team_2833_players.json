@@ -1089,30 +1089,7 @@
             "bn": "আই. রোমেরো",
             "hi": "आई. रोमेरो"
           }
-        },
-        "activeSeasonSuspensions": [
-          {
-            "reason": "yellow_card_accumulation_suspension",
-            "type": "matches",
-            "matches": 1,
-            "id": 3257,
-            "startDateTimestamp": 1776976458,
-            "endDateTimestamp": 1777231800,
-            "uniqueTournament": {
-              "id": 8,
-              "name": "LaLiga",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإسباني",
-                  "hi": "ला लिगा",
-                  "bn": "লা লীগা"
-                },
-                "shortNameTranslation": {}
-              },
-              "slug": "laliga"
-            }
-          }
-        ]
+        }
       }
     },
     {
@@ -1304,6 +1281,15 @@
         "preferredFoot": "Right",
         "userCount": 2794,
         "gender": "M",
+        "injury": {
+          "reason": "Physical Discomfort",
+          "status": "dayToDay",
+          "expectedReturn": 9,
+          "id": 21230,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778544036
+        },
         "country": {
           "alpha2": "CH",
           "alpha3": "CHE",
@@ -1522,6 +1508,15 @@
         "preferredFoot": "Right",
         "userCount": 2532,
         "gender": "M",
+        "injury": {
+          "reason": "Physical Discomfort",
+          "status": "dayToDay",
+          "expectedReturn": 9,
+          "id": 21232,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778544036
+        },
         "country": {
           "alpha2": "CH",
           "alpha3": "CHE",
@@ -1548,7 +1543,51 @@
             "bn": "ডি.সো",
             "hi": "डी. सो"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3304,
+            "startDateTimestamp": 1777232737,
+            "endDateTimestamp": 1777932000,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          },
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3303,
+            "startDateTimestamp": 1777232747,
+            "endDateTimestamp": 1777932000,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          }
+        ]
       }
     },
     {
@@ -7179,6 +7218,15 @@
         "preferredFoot": "Right",
         "userCount": 2532,
         "gender": "M",
+        "injury": {
+          "reason": "Physical Discomfort",
+          "status": "dayToDay",
+          "expectedReturn": 9,
+          "id": 21232,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778544036
+        },
         "country": {
           "alpha2": "CH",
           "alpha3": "CHE",
@@ -7205,7 +7253,51 @@
             "bn": "ডি.সো",
             "hi": "डी. सो"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3304,
+            "startDateTimestamp": 1777232737,
+            "endDateTimestamp": 1777932000,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          },
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3303,
+            "startDateTimestamp": 1777232747,
+            "endDateTimestamp": 1777932000,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          }
+        ]
       }
     },
     {
@@ -7397,6 +7489,15 @@
         "preferredFoot": "Right",
         "userCount": 2794,
         "gender": "M",
+        "injury": {
+          "reason": "Physical Discomfort",
+          "status": "dayToDay",
+          "expectedReturn": 9,
+          "id": 21230,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778544036
+        },
         "country": {
           "alpha2": "CH",
           "alpha3": "CHE",
@@ -10894,6 +10995,15 @@
         "preferredFoot": "Right",
         "userCount": 2532,
         "gender": "M",
+        "injury": {
+          "reason": "Physical Discomfort",
+          "status": "dayToDay",
+          "expectedReturn": 9,
+          "id": 21232,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778544036
+        },
         "country": {
           "alpha2": "CH",
           "alpha3": "CHE",
@@ -10920,7 +11030,51 @@
             "bn": "ডি.সো",
             "hi": "डी. सो"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3304,
+            "startDateTimestamp": 1777232737,
+            "endDateTimestamp": 1777932000,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          },
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3303,
+            "startDateTimestamp": 1777232747,
+            "endDateTimestamp": 1777932000,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          }
+        ]
       }
     },
     {
@@ -11330,6 +11484,15 @@
         "preferredFoot": "Right",
         "userCount": 2794,
         "gender": "M",
+        "injury": {
+          "reason": "Physical Discomfort",
+          "status": "dayToDay",
+          "expectedReturn": 9,
+          "id": 21230,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778544036
+        },
         "country": {
           "alpha2": "CH",
           "alpha3": "CHE",
@@ -17969,6 +18132,15 @@
         "preferredFoot": "Right",
         "userCount": 2794,
         "gender": "M",
+        "injury": {
+          "reason": "Physical Discomfort",
+          "status": "dayToDay",
+          "expectedReturn": 9,
+          "id": 21230,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778544036
+        },
         "country": {
           "alpha2": "CH",
           "alpha3": "CHE",
@@ -19944,30 +20116,7 @@
             "bn": "আই. রোমেরো",
             "hi": "आई. रोमेरो"
           }
-        },
-        "activeSeasonSuspensions": [
-          {
-            "reason": "yellow_card_accumulation_suspension",
-            "type": "matches",
-            "matches": 1,
-            "id": 3257,
-            "startDateTimestamp": 1776976458,
-            "endDateTimestamp": 1777231800,
-            "uniqueTournament": {
-              "id": 8,
-              "name": "LaLiga",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإسباني",
-                  "hi": "ला लिगा",
-                  "bn": "লা লীগা"
-                },
-                "shortNameTranslation": {}
-              },
-              "slug": "laliga"
-            }
-          }
-        ]
+        }
       },
       "previousTeam": {
         "name": "Sevilla Atlético",
@@ -20897,6 +21046,15 @@
         "preferredFoot": "Right",
         "userCount": 2532,
         "gender": "M",
+        "injury": {
+          "reason": "Physical Discomfort",
+          "status": "dayToDay",
+          "expectedReturn": 9,
+          "id": 21232,
+          "startDateTimestamp": 1777161600,
+          "updateDateTimestamp": 1777248036,
+          "endDateTimestamp": 1778544036
+        },
         "country": {
           "alpha2": "CH",
           "alpha3": "CHE",
@@ -20923,7 +21081,51 @@
             "bn": "ডি.সো",
             "hi": "डी. सो"
           }
-        }
+        },
+        "activeSeasonSuspensions": [
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3304,
+            "startDateTimestamp": 1777232737,
+            "endDateTimestamp": 1777932000,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          },
+          {
+            "reason": "yellow_card_accumulation_suspension",
+            "type": "matches",
+            "matches": 1,
+            "id": 3303,
+            "startDateTimestamp": 1777232747,
+            "endDateTimestamp": 1777932000,
+            "uniqueTournament": {
+              "id": 8,
+              "name": "LaLiga",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              },
+              "slug": "laliga"
+            }
+          }
+        ]
       },
       "previousTeam": {
         "name": "Eintracht Frankfurt",
