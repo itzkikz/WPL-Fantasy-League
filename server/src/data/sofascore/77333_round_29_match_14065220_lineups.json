@@ -5,12 +5,14 @@
       {
         "player": {
           "name": "Diant Ramaj",
-          "slug": "ramaj-diant",
+          "firstName": "Diant",
+          "lastName": "Ramaj",
+          "slug": "diant-ramaj",
           "shortName": "D. Ramaj",
           "position": "G",
           "jerseyNumber": "41",
           "height": 189,
-          "userCount": 916,
+          "userCount": 917,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -95,7 +97,7 @@
           "position": "D",
           "jerseyNumber": "2",
           "height": 182,
-          "userCount": 84,
+          "userCount": 85,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -448,14 +450,14 @@
       {
         "player": {
           "name": "Eren Dinkçi",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Eren",
+          "lastName": "Dinkci",
           "slug": "eren-dinkci",
           "shortName": "E. Dinkçi",
           "position": "F",
           "jerseyNumber": "8",
           "height": 188,
-          "userCount": 869,
+          "userCount": 877,
           "gender": "M",
           "country": {
             "alpha2": "TR",
@@ -537,14 +539,14 @@
       {
         "player": {
           "name": "Julian Niehues",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Julian",
+          "lastName": "Niehues",
           "slug": "julian-niehues",
           "shortName": "J. Niehues",
           "position": "M",
           "jerseyNumber": "16",
           "height": 195,
-          "userCount": 116,
+          "userCount": 115,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -622,8 +624,8 @@
       {
         "player": {
           "name": "Jan Schöppner",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Jan",
+          "lastName": "Schoppner",
           "slug": "jan-schoppner",
           "shortName": "J. Schöppner",
           "position": "M",
@@ -711,6 +713,8 @@
       {
         "player": {
           "name": "Mathias Honsak",
+          "firstName": "Mathias",
+          "lastName": "Honsak",
           "slug": "mathias-honsak",
           "shortName": "M. Honsak",
           "position": "M",
@@ -803,12 +807,14 @@
       {
         "player": {
           "name": "Stefan Schimmer",
+          "firstName": "Stefan",
+          "lastName": "Schimmer",
           "slug": "stefan-schimmer",
           "shortName": "S. Schimmer",
           "position": "F",
           "jerseyNumber": "9",
           "height": 185,
-          "userCount": 100,
+          "userCount": 98,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -882,12 +888,14 @@
       {
         "player": {
           "name": "Marvin Pieringer",
+          "firstName": "Marvin",
+          "lastName": "Pieringer",
           "slug": "marvin-pieringer",
           "shortName": "M. Pieringer",
           "position": "F",
           "jerseyNumber": "18",
           "height": 189,
-          "userCount": 345,
+          "userCount": 344,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -981,7 +989,7 @@
           "position": "F",
           "jerseyNumber": "11",
           "height": 189,
-          "userCount": 2933,
+          "userCount": 2940,
           "gender": "M",
           "country": {
             "alpha2": "GE",
@@ -1065,7 +1073,9 @@
       {
         "player": {
           "name": "Niklas Dorsch",
-          "slug": "dorsch-niklas",
+          "firstName": "Niklas",
+          "lastName": "Dorsch",
+          "slug": "niklas-dorsch",
           "shortName": "N. Dorsch",
           "position": "M",
           "jerseyNumber": "30",
@@ -1150,7 +1160,7 @@
           "position": "M",
           "jerseyNumber": "22",
           "height": 176,
-          "userCount": 2986,
+          "userCount": 2989,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -1231,14 +1241,14 @@
       {
         "player": {
           "name": "Luca Kerber",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Luca",
+          "lastName": "Kerber",
           "slug": "luca-kerber",
           "shortName": "L. Kerber",
           "position": "M",
           "jerseyNumber": "20",
           "height": 180,
-          "userCount": 133,
+          "userCount": 132,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -1298,6 +1308,8 @@
       {
         "player": {
           "name": "Adrian Beck",
+          "firstName": "Adrian",
+          "lastName": "Beck",
           "slug": "adrian-beck",
           "shortName": "A. Beck",
           "position": "M",
@@ -1422,11 +1434,11 @@
       },
       {
         "player": {
-          "name": "Haktab Omar Traore",
-          "firstName": "",
-          "lastName": "",
-          "slug": "haktab-omar-traore",
-          "shortName": "H. O. Traore",
+          "name": "Omar Haktab Traore",
+          "firstName": "Omar Haktab",
+          "lastName": "Traore",
+          "slug": "omar-haktab-traore",
+          "shortName": "O. Traore",
           "position": "D",
           "jerseyNumber": "23",
           "height": 184,
@@ -1447,12 +1459,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "هكتاب عمر تراوري",
               "bn": "হকতাব ওমর ট্রাওর",
               "hi": "हकतब उमर ट्राओरे"
             },
             "shortNameTranslation": {
-              "ar": "ه. تراوري",
               "bn": "এইচ. ও. ট্রাওর",
               "hi": "एच.ओ. ट्राओरे"
             }
@@ -1524,11 +1534,11 @@
       },
       {
         "player": {
-          "name": "Christian Joe Conteh",
-          "firstName": "",
-          "lastName": "",
-          "slug": "christian-joe-conteh",
-          "shortName": "C. J. Conteh",
+          "name": "Christian Conteh",
+          "firstName": "Christian",
+          "lastName": "Conteh",
+          "slug": "christian-conteh",
+          "shortName": "C. Conteh",
           "position": "F",
           "jerseyNumber": "10",
           "height": 182,
@@ -1549,12 +1559,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "كريستيان جو كونتيه",
               "bn": "ক্রিশ্চিয়ান জো কোন্তে",
               "hi": "क्रिश्चियन जो कोंटेह"
             },
             "shortNameTranslation": {
-              "ar": "ك. ج. كونتيه",
               "bn": "সি. জে. কোন্তে",
               "hi": "सी.जे. कोंटेह"
             }
@@ -1592,12 +1600,14 @@
       {
         "player": {
           "name": "Mikkel Kaufmann",
+          "firstName": "Mikkel",
+          "lastName": "Kaufmann",
           "slug": "mikkel-kaufmann",
-          "shortName": "M. K. Sorensen",
+          "shortName": "M. Kaufmann",
           "position": "F",
           "jerseyNumber": "29",
           "height": 190,
-          "userCount": 285,
+          "userCount": 287,
           "gender": "M",
           "country": {
             "alpha2": "DK",
@@ -1614,12 +1624,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "ميكيل كوفمان",
               "bn": "মিকেল কাউফম্যান",
               "hi": "मिकेल कॉफ़मैन"
             },
             "shortNameTranslation": {
-              "ar": "م. كوفمان",
               "bn": "এম. কে. সোরেনসেন",
               "hi": "एम.के. कॉफ़मैन"
             }
@@ -1634,14 +1642,14 @@
       {
         "player": {
           "name": "Sirlord Conteh",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Sirlord",
+          "lastName": "Conteh",
           "slug": "sirlord-conteh",
           "shortName": "S. Conteh",
           "position": "F",
           "jerseyNumber": "31",
           "height": 178,
-          "userCount": 182,
+          "userCount": 183,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -1684,7 +1692,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 188,
-          "userCount": 667,
+          "userCount": 669,
           "gender": "M",
           "country": {
             "alpha2": "DK",
@@ -1765,7 +1773,7 @@
           "position": "M",
           "jerseyNumber": "19",
           "height": 187,
-          "userCount": 182,
+          "userCount": 183,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -1848,14 +1856,14 @@
       {
         "player": {
           "name": "Danilho Doekhi",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Danilho",
+          "lastName": "Doekhi",
           "slug": "danilho-doekhi",
           "shortName": "D. Doekhi",
           "position": "D",
           "jerseyNumber": "5",
           "height": 187,
-          "userCount": 793,
+          "userCount": 802,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -1937,7 +1945,9 @@
       {
         "player": {
           "name": "Leopold Querfeld",
-          "slug": "querfeld-leopold",
+          "firstName": "Leopold",
+          "lastName": "Querfeld",
+          "slug": "leopold-querfeld",
           "shortName": "L. Querfeld",
           "position": "D",
           "jerseyNumber": "14",
@@ -2029,9 +2039,9 @@
       {
         "player": {
           "name": "Diogo Leite",
-          "firstName": "",
-          "lastName": "",
-          "slug": "leite-diogo",
+          "firstName": "Diogo",
+          "lastName": "Leite",
+          "slug": "diogo-leite",
           "shortName": "D. Leite",
           "position": "D",
           "jerseyNumber": "4",
@@ -2119,12 +2129,14 @@
       {
         "player": {
           "name": "Derrick Köhn",
+          "firstName": "Derrick",
+          "lastName": "Kohn",
           "slug": "derrick-kohn",
           "shortName": "D. Köhn",
           "position": "M",
           "jerseyNumber": "39",
           "height": 180,
-          "userCount": 2439,
+          "userCount": 2445,
           "gender": "M",
           "country": {
             "alpha2": "GH",
@@ -2204,14 +2216,14 @@
       {
         "player": {
           "name": "Alex Král",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Alex",
+          "lastName": "Kral",
           "slug": "alex-kral",
           "shortName": "A. Král",
           "position": "M",
           "jerseyNumber": "33",
           "height": 185,
-          "userCount": 627,
+          "userCount": 628,
           "gender": "M",
           "country": {
             "alpha2": "CZ",
@@ -2379,12 +2391,14 @@
       {
         "player": {
           "name": "András Schäfer",
+          "firstName": "Andras",
+          "lastName": "Schafer",
           "slug": "andras-schafer",
           "shortName": "A. Schäfer",
           "position": "M",
           "jerseyNumber": "13",
           "height": 179,
-          "userCount": 2453,
+          "userCount": 2455,
           "gender": "M",
           "country": {
             "alpha2": "HU",
@@ -2462,12 +2476,14 @@
       {
         "player": {
           "name": "Oliver Burke",
+          "firstName": "Oliver",
+          "lastName": "Burke",
           "slug": "oliver-burke",
           "shortName": "O. Burke",
           "position": "F",
           "jerseyNumber": "7",
           "height": 188,
-          "userCount": 507,
+          "userCount": 505,
           "gender": "M",
           "country": {
             "alpha2": "SX",
@@ -2543,12 +2559,14 @@
       {
         "player": {
           "name": "Andrej Ilić",
+          "firstName": "Andrej",
+          "lastName": "Ilic",
           "slug": "andrej-ilic",
           "shortName": "A. Ilić",
           "position": "F",
           "jerseyNumber": "23",
           "height": 189,
-          "userCount": 934,
+          "userCount": 933,
           "gender": "M",
           "country": {
             "alpha2": "RS",
@@ -2630,13 +2648,15 @@
       },
       {
         "player": {
-          "name": "Tom Rothe",
-          "slug": "rothe-tom",
+          "name": "Tom Alexander Rothe",
+          "firstName": "Tom Alexander",
+          "lastName": "Rothe",
+          "slug": "tom-alexander-rothe",
           "shortName": "T. Rothe",
           "position": "D",
           "jerseyNumber": "15",
           "height": 192,
-          "userCount": 817,
+          "userCount": 819,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -2653,12 +2673,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "روثي، توم",
               "bn": "রোথে, টম",
               "hi": "रोथ, टॉम"
             },
             "shortNameTranslation": {
-              "ar": "ت. روثي",
               "bn": "টি. রোথে",
               "hi": "टी. रोथ"
             }
@@ -2715,12 +2733,14 @@
       {
         "player": {
           "name": "Tim Skarke",
+          "firstName": "Tim",
+          "lastName": "Skarke",
           "slug": "tim-skarke",
           "shortName": "T. Skarke",
           "position": "M",
           "jerseyNumber": "21",
           "height": 179,
-          "userCount": 210,
+          "userCount": 211,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -2804,7 +2824,7 @@
           "position": "F",
           "jerseyNumber": "10",
           "height": 197,
-          "userCount": 2121,
+          "userCount": 2123,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -2959,7 +2979,7 @@
           "position": "F",
           "jerseyNumber": "49",
           "height": 175,
-          "userCount": 88,
+          "userCount": 92,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -3069,7 +3089,7 @@
           "position": "M",
           "jerseyNumber": "6",
           "height": 185,
-          "userCount": 377,
+          "userCount": 379,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -3113,14 +3133,14 @@
       {
         "player": {
           "name": "Josip Juranović",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Josip",
+          "lastName": "Juranovic",
           "slug": "josip-juranovic",
           "shortName": "J. Juranović",
           "position": "M",
           "jerseyNumber": "18",
           "height": 173,
-          "userCount": 3078,
+          "userCount": 3079,
           "gender": "M",
           "country": {
             "alpha2": "HR",
@@ -3169,7 +3189,7 @@
           "position": "M",
           "jerseyNumber": "28",
           "height": 189,
-          "userCount": 366,
+          "userCount": 368,
           "gender": "M",
           "country": {
             "alpha2": "AT",
@@ -3228,52 +3248,10 @@
     "missingPlayers": [
       {
         "player": {
-          "name": "Matheo Raab",
-          "firstName": "",
-          "lastName": "",
-          "slug": "matheo-raab",
-          "shortName": "M. Raab",
-          "position": "G",
-          "jerseyNumber": "31",
-          "height": 186,
-          "userCount": 115,
-          "gender": "M",
-          "country": {
-            "alpha2": "DE",
-            "alpha3": "DEU",
-            "name": "Germany",
-            "slug": "germany"
-          },
-          "id": 842718,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 913939200,
-          "proposedMarketValueRaw": {
-            "value": 560000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "ماثيو راب",
-              "bn": "ম্যাথিও রাব",
-              "hi": "माथेओ रब"
-            },
-            "shortNameTranslation": {
-              "ar": "م. راب",
-              "bn": "এম. রব",
-              "hi": "एम. राब"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Broken Hand",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "David Preu",
-          "slug": "preu-david",
+          "firstName": "David",
+          "lastName": "Preu",
+          "slug": "david-preu",
           "shortName": "D. Preu",
           "position": "F",
           "jerseyNumber": "17",
@@ -3310,13 +3288,57 @@
       },
       {
         "player": {
+          "name": "Matheo Raab",
+          "firstName": "Matheo",
+          "lastName": "Raab",
+          "slug": "matheo-raab",
+          "shortName": "M. Raab",
+          "position": "G",
+          "jerseyNumber": "31",
+          "height": 186,
+          "userCount": 114,
+          "gender": "M",
+          "country": {
+            "alpha2": "DE",
+            "alpha3": "DEU",
+            "name": "Germany",
+            "slug": "germany"
+          },
+          "id": 842718,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 913939200,
+          "proposedMarketValueRaw": {
+            "value": 560000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "ماثيو راب",
+              "bn": "ম্যাথিও রাব",
+              "hi": "माथेओ रब"
+            },
+            "shortNameTranslation": {
+              "ar": "م. راب",
+              "bn": "এম. রব",
+              "hi": "एम. राब"
+            }
+          }
+        },
+        "type": "missing",
+        "reason": 1,
+        "description": "Broken Hand",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+      },
+      {
+        "player": {
           "name": "Woo-Yeong Jeong",
           "slug": "woo-yeong-jeong",
           "shortName": "W. Jeong",
           "position": "F",
           "jerseyNumber": "11",
           "height": 179,
-          "userCount": 1600,
+          "userCount": 1599,
           "gender": "M",
           "country": {
             "alpha2": "KR",

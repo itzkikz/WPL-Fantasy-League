@@ -2,8 +2,6 @@
   "events": [
     {
       "eventState": {},
-      "correctAiInsight": true,
-      "correctHalftimeAiInsight": true,
       "tournament": {
         "name": "Serie A",
         "slug": "serie-a",
@@ -68,7 +66,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 642447,
+          "userCount": 643616,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -122,7 +120,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 1112427,
+        "userCount": 1113376,
         "nameCode": "NAP",
         "disabled": false,
         "national": false,
@@ -160,7 +158,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 65512,
+        "userCount": 65558,
         "nameCode": "CRE",
         "disabled": false,
         "national": false,
@@ -221,6 +219,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 13980105,
       "slug": "cremonese-napoli",
       "startTimestamp": 1777056300,
@@ -242,8 +242,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": true,
-      "correctHalftimeAiInsight": false,
       "tournament": {
         "name": "Serie A",
         "slug": "serie-a",
@@ -308,7 +306,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 642447,
+          "userCount": 643616,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -362,7 +360,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 103007,
+        "userCount": 103020,
         "nameCode": "PAR",
         "disabled": false,
         "national": false,
@@ -400,7 +398,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 64083,
+        "userCount": 64102,
         "nameCode": "PIS",
         "disabled": false,
         "national": false,
@@ -461,6 +459,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": false,
       "id": 13980107,
       "slug": "pisa-parma",
       "startTimestamp": 1777122000,
@@ -482,8 +482,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": true,
-      "correctHalftimeAiInsight": true,
       "tournament": {
         "name": "Serie A",
         "slug": "serie-a",
@@ -548,7 +546,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 642447,
+          "userCount": 643616,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -602,7 +600,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 239149,
+        "userCount": 239125,
         "nameCode": "BOL",
         "disabled": false,
         "national": false,
@@ -640,7 +638,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 762486,
+        "userCount": 762871,
         "nameCode": "ASR",
         "disabled": false,
         "national": false,
@@ -695,12 +693,14 @@
         ],
         "changeTimestamp": 1777139661
       },
-      "hasGlobalHighlights": false,
+      "hasGlobalHighlights": true,
       "hasXg": true,
       "hasEventPlayerStatistics": true,
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 13980113,
       "slug": "roma-bologna",
       "startTimestamp": 1777132800,
@@ -722,8 +722,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": false,
-      "correctHalftimeAiInsight": false,
       "tournament": {
         "name": "Serie A",
         "slug": "serie-a",
@@ -788,7 +786,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 642447,
+          "userCount": 643616,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -842,7 +840,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 106600,
+        "userCount": 106558,
         "nameCode": "VER",
         "disabled": false,
         "national": false,
@@ -883,7 +881,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 113112,
+        "userCount": 113139,
         "nameCode": "LEC",
         "disabled": false,
         "national": false,
@@ -944,6 +942,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 13980114,
       "slug": "hellas-verona-lecce",
       "startTimestamp": 1777142700,
@@ -965,8 +965,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": false,
-      "correctHalftimeAiInsight": false,
       "tournament": {
         "name": "Serie A",
         "slug": "serie-a",
@@ -1031,7 +1029,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 642447,
+          "userCount": 643616,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -1085,7 +1083,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 310313,
+        "userCount": 311782,
         "nameCode": "FIO",
         "disabled": false,
         "national": false,
@@ -1125,7 +1123,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 114799,
+        "userCount": 115705,
         "nameCode": "SAS",
         "disabled": false,
         "national": false,
@@ -1186,6 +1184,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 13980110,
       "slug": "sassuolo-fiorentina",
       "startTimestamp": 1777199400,
@@ -1207,8 +1207,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": true,
-      "correctHalftimeAiInsight": false,
       "tournament": {
         "name": "Serie A",
         "slug": "serie-a",
@@ -1273,7 +1271,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 642447,
+          "userCount": 643616,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -1327,7 +1325,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 124282,
+        "userCount": 125367,
         "nameCode": "GEN",
         "disabled": false,
         "national": false,
@@ -1365,7 +1363,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 254128,
+        "userCount": 256830,
         "nameCode": "COM",
         "disabled": false,
         "national": false,
@@ -1423,6 +1421,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": false,
       "id": 13980109,
       "slug": "genoa-como",
       "startTimestamp": 1777208400,
@@ -1444,8 +1444,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": false,
-      "correctHalftimeAiInsight": false,
       "tournament": {
         "name": "Serie A",
         "slug": "serie-a",
@@ -1510,7 +1508,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 642447,
+          "userCount": 643616,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -1564,7 +1562,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 140420,
+        "userCount": 142113,
         "nameCode": "TOR",
         "disabled": false,
         "national": false,
@@ -1602,7 +1600,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 1926808,
+        "userCount": 1933257,
         "nameCode": "INT",
         "disabled": false,
         "national": false,
@@ -1657,12 +1655,14 @@
         ],
         "changeTimestamp": 1777226043
       },
-      "hasGlobalHighlights": true,
+      "hasGlobalHighlights": false,
       "hasXg": true,
       "hasEventPlayerStatistics": true,
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 13980104,
       "slug": "inter-torino",
       "startTimestamp": 1777219200,
@@ -1684,8 +1684,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": false,
-      "correctHalftimeAiInsight": false,
       "tournament": {
         "name": "Serie A",
         "slug": "serie-a",
@@ -1750,7 +1748,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 642447,
+          "userCount": 643616,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -1804,7 +1802,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 1685188,
+        "userCount": 1689865,
         "nameCode": "ACM",
         "disabled": false,
         "national": false,
@@ -1842,7 +1840,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 1597037,
+        "userCount": 1601173,
         "nameCode": "JUV",
         "disabled": false,
         "national": false,
@@ -1897,12 +1895,14 @@
         ],
         "changeTimestamp": 1777236209
       },
-      "hasGlobalHighlights": true,
+      "hasGlobalHighlights": false,
       "hasXg": true,
       "hasEventPlayerStatistics": true,
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 13980106,
       "slug": "milan-juventus",
       "startTimestamp": 1777229100,
@@ -1988,7 +1988,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 642447,
+          "userCount": 643616,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -2027,10 +2027,11 @@
       },
       "customId": "Ldbsueb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 1,
       "homeTeam": {
         "name": "Cagliari",
         "slug": "cagliari",
@@ -2041,7 +2042,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 112290,
+        "userCount": 114021,
         "nameCode": "CAG",
         "disabled": false,
         "national": false,
@@ -2079,7 +2080,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 644989,
+        "userCount": 647728,
         "nameCode": "ATA",
         "disabled": false,
         "national": false,
@@ -2109,15 +2110,41 @@
           }
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
+      "homeScore": {
+        "current": 3,
+        "display": 3,
+        "period1": 2,
+        "period2": 1,
+        "normaltime": 3
+      },
+      "awayScore": {
+        "current": 2,
+        "display": 2,
+        "period1": 2,
+        "period2": 0,
+        "normaltime": 2
+      },
+      "time": {
+        "injuryTime1": 5,
+        "injuryTime2": 6,
+        "currentPeriodStartTimestamp": 1777311481
+      },
       "changes": {
-        "changeTimestamp": 0
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1777314617
       },
       "hasGlobalHighlights": false,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 13980111,
       "slug": "cagliari-atalanta",
       "startTimestamp": 1777307400,
@@ -2203,7 +2230,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 642447,
+          "userCount": 643616,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -2242,10 +2269,11 @@
       },
       "customId": "VdbsZdb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 3,
       "homeTeam": {
         "name": "Lazio",
         "slug": "lazio",
@@ -2256,7 +2284,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 382621,
+        "userCount": 385632,
         "nameCode": "LAZ",
         "disabled": false,
         "national": false,
@@ -2294,7 +2322,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 123779,
+        "userCount": 124765,
         "nameCode": "UDI",
         "disabled": false,
         "national": false,
@@ -2322,15 +2350,43 @@
           "shortNameTranslation": {}
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
+      "homeScore": {
+        "current": 3,
+        "display": 3,
+        "period1": 0,
+        "period2": 3,
+        "normaltime": 3
+      },
+      "awayScore": {
+        "current": 3,
+        "display": 3,
+        "period1": 1,
+        "period2": 2,
+        "normaltime": 3
+      },
+      "time": {
+        "injuryTime1": 1,
+        "injuryTime2": 4,
+        "currentPeriodStartTimestamp": 1777319353
+      },
       "changes": {
-        "changeTimestamp": 0
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type",
+          "homeScore.normaltime",
+          "awayScore.normaltime"
+        ],
+        "changeTimestamp": 1777322480
       },
       "hasGlobalHighlights": false,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": true,
       "id": 13980112,
       "slug": "lazio-udinese",
       "startTimestamp": 1777315500,

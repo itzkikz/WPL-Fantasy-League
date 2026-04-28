@@ -15,31 +15,37 @@
     },
     {
       "player": {
-        "name": "Timothee Pembele",
-        "slug": "timothee-pembele",
-        "shortName": "T. Pembele",
+        "name": "Gautier Lloris",
+        "firstName": "Gautier",
+        "lastName": "Lloris",
+        "slug": "gautier-lloris",
+        "shortName": "G. Lloris",
         "position": "D",
-        "jerseyNumber": "32",
-        "height": 182,
-        "userCount": 703,
+        "jerseyNumber": "4",
+        "height": 188,
+        "userCount": 202,
         "gender": "M",
-        "id": 1824137,
+        "id": 287887,
         "marketValueCurrency": "EUR",
-        "dateOfBirthTimestamp": 1031529600,
+        "dateOfBirthTimestamp": 806025600,
         "proposedMarketValueRaw": {
-          "value": 1900000,
+          "value": 3100000,
           "currency": "EUR"
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "تيموثي بيمبلي"
+            "ar": "غوتييه لوريس",
+            "bn": "গৌতিয়ার লোরিস",
+            "hi": "गौटियर लॉरिस"
           },
           "shortNameTranslation": {
-            "ar": "ت. بيمبلي"
+            "ar": "غ. لوريس",
+            "bn": "জি. লোরিস",
+            "hi": "जी. लॉरिस"
           }
         }
       },
-      "playerName": "Timothee Pembele",
+      "playerName": "Gautier Lloris",
       "reason": "Argument",
       "rescinded": false,
       "id": 125113451,
@@ -60,7 +66,7 @@
         "position": "M",
         "jerseyNumber": "78",
         "height": 188,
-        "userCount": 154,
+        "userCount": 157,
         "gender": "M",
         "id": 1895829,
         "marketValueCurrency": "EUR",
@@ -85,7 +91,7 @@
         "position": "M",
         "jerseyNumber": "26",
         "height": 180,
-        "userCount": 176,
+        "userCount": 179,
         "gender": "M",
         "id": 1490783,
         "marketValueCurrency": "EUR",
@@ -120,7 +126,7 @@
         "position": "M",
         "jerseyNumber": "26",
         "height": 180,
-        "userCount": 176,
+        "userCount": 179,
         "gender": "M",
         "id": 1490783,
         "marketValueCurrency": "EUR",
@@ -161,12 +167,14 @@
       "awayScore": 4,
       "player": {
         "name": "Gauthier Hein",
+        "firstName": "Gauthier",
+        "lastName": "Hein",
         "slug": "gauthier-hein",
         "shortName": "G. Hein",
         "position": "M",
         "jerseyNumber": "10",
         "height": 170,
-        "userCount": 627,
+        "userCount": 639,
         "gender": "M",
         "id": 842391,
         "marketValueCurrency": "EUR",
@@ -195,7 +203,7 @@
         "position": "F",
         "jerseyNumber": "34",
         "height": 179,
-        "userCount": 392,
+        "userCount": 437,
         "gender": "M",
         "id": 2195736,
         "marketValueCurrency": "EUR",
@@ -220,7 +228,7 @@
             "position": "D",
             "jerseyNumber": "70",
             "height": 177,
-            "userCount": 1613,
+            "userCount": 1621,
             "gender": "M",
             "id": 158233,
             "marketValueCurrency": "EUR",
@@ -262,7 +270,7 @@
             "shortName": "J. Pandore",
             "position": "M",
             "jerseyNumber": "35",
-            "userCount": 8,
+            "userCount": 21,
             "id": 2509490,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 1195948800
@@ -289,7 +297,7 @@
             "position": "D",
             "jerseyNumber": "70",
             "height": 177,
-            "userCount": 1613,
+            "userCount": 1621,
             "gender": "M",
             "id": 158233,
             "marketValueCurrency": "EUR",
@@ -331,7 +339,7 @@
             "shortName": "J. Pandore",
             "position": "M",
             "jerseyNumber": "35",
-            "userCount": 8,
+            "userCount": 21,
             "id": 2509490,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 1195948800
@@ -356,7 +364,7 @@
             "position": "F",
             "jerseyNumber": "34",
             "height": 179,
-            "userCount": 392,
+            "userCount": 437,
             "gender": "M",
             "id": 2195736,
             "marketValueCurrency": "EUR",
@@ -386,12 +394,14 @@
         {
           "player": {
             "name": "Gauthier Hein",
+            "firstName": "Gauthier",
+            "lastName": "Hein",
             "slug": "gauthier-hein",
             "shortName": "G. Hein",
             "position": "M",
             "jerseyNumber": "10",
             "height": 170,
-            "userCount": 627,
+            "userCount": 639,
             "gender": "M",
             "id": 842391,
             "marketValueCurrency": "EUR",
@@ -417,8 +427,8 @@
           "bodyPart": "head",
           "time": 85,
           "playerCoordinates": {
-            "x": 10.7,
-            "y": 46
+            "x": 9.2,
+            "y": 49.3
           },
           "gkCoordinates": {
             "x": 1.2,
@@ -434,6 +444,8 @@
           },
           "goalkeeper": {
             "name": "Mory Diaw",
+            "firstName": "Mory",
+            "lastName": "Diaw",
             "slug": "mory-diaw",
             "shortName": "M. Diaw",
             "position": "G",
@@ -482,7 +494,7 @@
         "position": "F",
         "jerseyNumber": "19",
         "height": 167,
-        "userCount": 617,
+        "userCount": 619,
         "gender": "M",
         "id": 1154647,
         "marketValueCurrency": "EUR",
@@ -513,7 +525,7 @@
         "position": "F",
         "jerseyNumber": "11",
         "height": 191,
-        "userCount": 589,
+        "userCount": 606,
         "gender": "M",
         "id": 300412,
         "marketValueCurrency": "EUR",
@@ -553,7 +565,7 @@
         "position": "M",
         "jerseyNumber": "9",
         "height": 175,
-        "userCount": 528,
+        "userCount": 531,
         "gender": "M",
         "id": 985199,
         "marketValueCurrency": "EUR",
@@ -582,7 +594,7 @@
         "position": "M",
         "jerseyNumber": "20",
         "height": 178,
-        "userCount": 128,
+        "userCount": 129,
         "gender": "M",
         "id": 902657,
         "marketValueCurrency": "EUR",
@@ -615,8 +627,8 @@
     {
       "player": {
         "name": "Lucas Gourna-Douath",
-        "firstName": "",
-        "lastName": "",
+        "firstName": "Lucas",
+        "lastName": "Gourna-Douath",
         "slug": "lucas-gourna-douath",
         "shortName": "L. Gourna-Douath",
         "position": "M",
@@ -664,7 +676,7 @@
         "position": "F",
         "jerseyNumber": "17",
         "height": 175,
-        "userCount": 13938,
+        "userCount": 13961,
         "gender": "M",
         "sofascoreId": "Sofianeboufal_19",
         "id": 257205,
@@ -694,7 +706,7 @@
         "position": "M",
         "jerseyNumber": "8",
         "height": 166,
-        "userCount": 2066,
+        "userCount": 2081,
         "gender": "M",
         "id": 1000442,
         "marketValueCurrency": "EUR",
@@ -732,7 +744,7 @@
         "position": "D",
         "jerseyNumber": "32",
         "height": 182,
-        "userCount": 703,
+        "userCount": 705,
         "gender": "M",
         "id": 1824137,
         "marketValueCurrency": "EUR",
@@ -758,7 +770,7 @@
         "position": "D",
         "jerseyNumber": "18",
         "height": 183,
-        "userCount": 353,
+        "userCount": 361,
         "gender": "M",
         "id": 1397882,
         "marketValueCurrency": "EUR",
@@ -787,12 +799,14 @@
     {
       "playerIn": {
         "name": "Godson Kyeremeh",
-        "slug": "kyeremeh-godson",
+        "firstName": "Godson",
+        "lastName": "Kyeremeh",
+        "slug": "godson-kyeremeh",
         "shortName": "G. Kyeremeh",
         "position": "F",
         "jerseyNumber": "11",
         "height": 175,
-        "userCount": 104,
+        "userCount": 107,
         "gender": "M",
         "id": 975300,
         "marketValueCurrency": "EUR",
@@ -819,7 +833,7 @@
         "position": "M",
         "jerseyNumber": "13",
         "height": 172,
-        "userCount": 1288,
+        "userCount": 1291,
         "gender": "M",
         "id": 1035695,
         "marketValueCurrency": "EUR",
@@ -861,7 +875,7 @@
         "position": "M",
         "jerseyNumber": "13",
         "height": 172,
-        "userCount": 1288,
+        "userCount": 1291,
         "gender": "M",
         "id": 1035695,
         "marketValueCurrency": "EUR",
@@ -892,7 +906,7 @@
         "position": "F",
         "jerseyNumber": "45",
         "height": 182,
-        "userCount": 1022,
+        "userCount": 1039,
         "gender": "M",
         "id": 1001458,
         "marketValueCurrency": "EUR",
@@ -924,7 +938,7 @@
             "position": "D",
             "jerseyNumber": "18",
             "height": 183,
-            "userCount": 353,
+            "userCount": 361,
             "gender": "M",
             "id": 1397882,
             "marketValueCurrency": "EUR",
@@ -956,13 +970,15 @@
         },
         {
           "player": {
-            "name": "Mbwana Ally Samatta",
-            "slug": "mbwana-ally-samatta",
-            "shortName": "M. Samatta",
+            "name": "Ally Samatta",
+            "firstName": "Ally",
+            "lastName": "Samatta",
+            "slug": "ally-samatta",
+            "shortName": "A. Samatta",
             "position": "F",
             "jerseyNumber": "25",
             "height": 183,
-            "userCount": 17405,
+            "userCount": 17477,
             "gender": "M",
             "sofascoreId": "samagoal77",
             "id": 825088,
@@ -974,12 +990,10 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "مبوانا ساماتا",
                 "bn": "মিবাওয়ানা অ্যালি সামত্তা",
                 "hi": "मबवाना एली समत्ता"
               },
               "shortNameTranslation": {
-                "ar": "م. ساماتا",
                 "bn": "এম. সামত্তা",
                 "hi": "एम. समत्ता"
               }
@@ -1006,7 +1020,7 @@
             "position": "D",
             "jerseyNumber": "18",
             "height": 183,
-            "userCount": 353,
+            "userCount": 361,
             "gender": "M",
             "id": 1397882,
             "marketValueCurrency": "EUR",
@@ -1046,7 +1060,7 @@
             "position": "F",
             "jerseyNumber": "45",
             "height": 182,
-            "userCount": 1022,
+            "userCount": 1039,
             "gender": "M",
             "id": 1001458,
             "marketValueCurrency": "EUR",
@@ -1087,7 +1101,7 @@
             "position": "M",
             "jerseyNumber": "13",
             "height": 172,
-            "userCount": 1288,
+            "userCount": 1291,
             "gender": "M",
             "id": 1035695,
             "marketValueCurrency": "EUR",
@@ -1117,8 +1131,8 @@
             "y": 41.3
           },
           "gkCoordinates": {
-            "x": 96.7,
-            "y": 45.7
+            "x": 98.6,
+            "y": 46.6
           },
           "goalShotCoordinates": {
             "x": 100,
@@ -1136,7 +1150,7 @@
             "position": "G",
             "jerseyNumber": "61",
             "height": 195,
-            "userCount": 1127,
+            "userCount": 1136,
             "gender": "M",
             "id": 1463509,
             "marketValueCurrency": "EUR",
@@ -1175,7 +1189,7 @@
         "shortName": "J. Pandore",
         "position": "M",
         "jerseyNumber": "35",
-        "userCount": 8,
+        "userCount": 21,
         "id": 2509490,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1195948800
@@ -1187,7 +1201,7 @@
         "position": "F",
         "jerseyNumber": "34",
         "height": 179,
-        "userCount": 392,
+        "userCount": 437,
         "gender": "M",
         "id": 2195736,
         "marketValueCurrency": "EUR",
@@ -1210,7 +1224,7 @@
             "position": "M",
             "jerseyNumber": "20",
             "height": 178,
-            "userCount": 128,
+            "userCount": 129,
             "gender": "M",
             "id": 902657,
             "marketValueCurrency": "EUR",
@@ -1246,13 +1260,15 @@
         },
         {
           "player": {
-            "name": "Georgiy Tsitaishvili",
+            "name": "Giorgi Tsitaishvili",
+            "firstName": "Giorgi",
+            "lastName": "Tsitaishvili",
             "slug": "giorgi-tsitaishvili",
             "shortName": "G. Tsitaishvili",
             "position": "M",
             "jerseyNumber": "7",
             "height": 171,
-            "userCount": 1513,
+            "userCount": 1516,
             "gender": "M",
             "id": 875677,
             "marketValueCurrency": "EUR",
@@ -1263,12 +1279,10 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "جيورجيي تسيتايشفيلي",
                 "bn": "জিওর্জি সিতাইশভিলি",
                 "hi": "जियोर्जी त्सिताइशविली"
               },
               "shortNameTranslation": {
-                "ar": "ج. تسيتايشفيلي",
                 "bn": "জি. সিতাইশভিলি",
                 "hi": "जी. त्सिताइशविली"
               }
@@ -1296,7 +1310,7 @@
             "position": "D",
             "jerseyNumber": "70",
             "height": 177,
-            "userCount": 1613,
+            "userCount": 1621,
             "gender": "M",
             "id": 158233,
             "marketValueCurrency": "EUR",
@@ -1340,7 +1354,7 @@
             "position": "D",
             "jerseyNumber": "70",
             "height": 177,
-            "userCount": 1613,
+            "userCount": 1621,
             "gender": "M",
             "id": 158233,
             "marketValueCurrency": "EUR",
@@ -1377,12 +1391,14 @@
         {
           "player": {
             "name": "Gauthier Hein",
+            "firstName": "Gauthier",
+            "lastName": "Hein",
             "slug": "gauthier-hein",
             "shortName": "G. Hein",
             "position": "M",
             "jerseyNumber": "10",
             "height": 170,
-            "userCount": 627,
+            "userCount": 639,
             "gender": "M",
             "id": 842391,
             "marketValueCurrency": "EUR",
@@ -1424,7 +1440,7 @@
             "position": "F",
             "jerseyNumber": "34",
             "height": 179,
-            "userCount": 392,
+            "userCount": 437,
             "gender": "M",
             "id": 2195736,
             "marketValueCurrency": "EUR",
@@ -1459,7 +1475,7 @@
             "shortName": "J. Pandore",
             "position": "M",
             "jerseyNumber": "35",
-            "userCount": 8,
+            "userCount": 21,
             "id": 2509490,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 1195948800
@@ -1472,8 +1488,8 @@
             "y": 59.1
           },
           "gkCoordinates": {
-            "x": 0.9,
-            "y": 52.7
+            "x": 1,
+            "y": 50.9
           },
           "goalShotCoordinates": {
             "x": 0,
@@ -1485,6 +1501,8 @@
           },
           "goalkeeper": {
             "name": "Mory Diaw",
+            "firstName": "Mory",
+            "lastName": "Diaw",
             "slug": "mory-diaw",
             "shortName": "M. Diaw",
             "position": "G",
@@ -1535,7 +1553,7 @@
         "position": "D",
         "jerseyNumber": "18",
         "height": 183,
-        "userCount": 353,
+        "userCount": 361,
         "gender": "M",
         "id": 1397882,
         "marketValueCurrency": "EUR",
@@ -1563,7 +1581,7 @@
             "position": "D",
             "jerseyNumber": "18",
             "height": 183,
-            "userCount": 353,
+            "userCount": 361,
             "gender": "M",
             "id": 1397882,
             "marketValueCurrency": "EUR",
@@ -1594,11 +1612,11 @@
           },
           "goalShotCoordinates": {
             "x": 100,
-            "y": 54
+            "y": 53.9
           },
           "goalMouthCoordinates": {
-            "x": 28.49,
-            "y": 95.83
+            "x": 29.03,
+            "y": 97.83
           },
           "goalkeeper": {
             "name": "Pape Sy",
@@ -1608,7 +1626,7 @@
             "position": "G",
             "jerseyNumber": "61",
             "height": 195,
-            "userCount": 1127,
+            "userCount": 1136,
             "gender": "M",
             "id": 1463509,
             "marketValueCurrency": "EUR",
@@ -1647,7 +1665,7 @@
         "position": "F",
         "jerseyNumber": "11",
         "height": 191,
-        "userCount": 589,
+        "userCount": 606,
         "gender": "M",
         "id": 300412,
         "marketValueCurrency": "EUR",
@@ -1687,7 +1705,7 @@
         "shortName": "J. Pandore",
         "position": "M",
         "jerseyNumber": "35",
-        "userCount": 8,
+        "userCount": 21,
         "id": 2509490,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1195948800
@@ -1701,7 +1719,7 @@
         "position": "D",
         "jerseyNumber": "4",
         "height": 183,
-        "userCount": 296,
+        "userCount": 302,
         "gender": "M",
         "id": 1397934,
         "marketValueCurrency": "EUR",
@@ -1730,8 +1748,8 @@
     {
       "playerIn": {
         "name": "Lucas Gourna-Douath",
-        "firstName": "",
-        "lastName": "",
+        "firstName": "Lucas",
+        "lastName": "Gourna-Douath",
         "slug": "lucas-gourna-douath",
         "shortName": "L. Gourna-Douath",
         "position": "M",
@@ -1766,7 +1784,7 @@
         "position": "M",
         "jerseyNumber": "14",
         "height": 179,
-        "userCount": 1998,
+        "userCount": 2002,
         "gender": "M",
         "id": 992026,
         "marketValueCurrency": "EUR",
@@ -1837,7 +1855,7 @@
         "position": "M",
         "jerseyNumber": "12",
         "height": 180,
-        "userCount": 700,
+        "userCount": 706,
         "gender": "M",
         "id": 1597191,
         "marketValueCurrency": "EUR",
@@ -1878,12 +1896,14 @@
       "awayScore": 2,
       "player": {
         "name": "Gauthier Hein",
+        "firstName": "Gauthier",
+        "lastName": "Hein",
         "slug": "gauthier-hein",
         "shortName": "G. Hein",
         "position": "M",
         "jerseyNumber": "10",
         "height": 170,
-        "userCount": 627,
+        "userCount": 639,
         "gender": "M",
         "id": 842391,
         "marketValueCurrency": "EUR",
@@ -1909,12 +1929,14 @@
         {
           "player": {
             "name": "Gauthier Hein",
+            "firstName": "Gauthier",
+            "lastName": "Hein",
             "slug": "gauthier-hein",
             "shortName": "G. Hein",
             "position": "M",
             "jerseyNumber": "10",
             "height": 170,
-            "userCount": 627,
+            "userCount": 639,
             "gender": "M",
             "id": 842391,
             "marketValueCurrency": "EUR",
@@ -1957,6 +1979,8 @@
           },
           "goalkeeper": {
             "name": "Mory Diaw",
+            "firstName": "Mory",
+            "lastName": "Diaw",
             "slug": "mory-diaw",
             "shortName": "M. Diaw",
             "position": "G",
@@ -1999,13 +2023,15 @@
     {
       "confirmed": false,
       "player": {
-        "name": "Georgiy Tsitaishvili",
+        "name": "Giorgi Tsitaishvili",
+        "firstName": "Giorgi",
+        "lastName": "Tsitaishvili",
         "slug": "giorgi-tsitaishvili",
         "shortName": "G. Tsitaishvili",
         "position": "M",
         "jerseyNumber": "7",
         "height": 171,
-        "userCount": 1513,
+        "userCount": 1516,
         "gender": "M",
         "id": 875677,
         "marketValueCurrency": "EUR",
@@ -2016,12 +2042,10 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "جيورجيي تسيتايشفيلي",
             "bn": "জিওর্জি সিতাইশভিলি",
             "hi": "जियोर्जी त्सिताइशविली"
           },
           "shortNameTranslation": {
-            "ar": "ج. تسيتايشفيلي",
             "bn": "জি. সিতাইশভিলি",
             "hi": "जी. त्सिताइशविली"
           }
@@ -2050,7 +2074,7 @@
         "position": "F",
         "jerseyNumber": "34",
         "height": 179,
-        "userCount": 392,
+        "userCount": 437,
         "gender": "M",
         "id": 2195736,
         "marketValueCurrency": "EUR",
@@ -2073,7 +2097,7 @@
         "position": "D",
         "jerseyNumber": "5",
         "height": 186,
-        "userCount": 1329,
+        "userCount": 1331,
         "gender": "M",
         "id": 326343,
         "marketValueCurrency": "EUR",
@@ -2113,7 +2137,7 @@
         "position": "M",
         "jerseyNumber": "8",
         "height": 166,
-        "userCount": 2066,
+        "userCount": 2081,
         "gender": "M",
         "id": 1000442,
         "marketValueCurrency": "EUR",
@@ -2144,7 +2168,7 @@
             "position": "M",
             "jerseyNumber": "8",
             "height": 166,
-            "userCount": 2066,
+            "userCount": 2081,
             "gender": "M",
             "id": 1000442,
             "marketValueCurrency": "EUR",
@@ -2193,7 +2217,7 @@
             "position": "G",
             "jerseyNumber": "61",
             "height": 195,
-            "userCount": 1127,
+            "userCount": 1136,
             "gender": "M",
             "id": 1463509,
             "marketValueCurrency": "EUR",
@@ -2234,7 +2258,7 @@
         "position": "F",
         "jerseyNumber": "11",
         "height": 191,
-        "userCount": 589,
+        "userCount": 606,
         "gender": "M",
         "id": 300412,
         "marketValueCurrency": "EUR",
@@ -2258,12 +2282,14 @@
       },
       "assist1": {
         "name": "Gauthier Hein",
+        "firstName": "Gauthier",
+        "lastName": "Hein",
         "slug": "gauthier-hein",
         "shortName": "G. Hein",
         "position": "M",
         "jerseyNumber": "10",
         "height": 170,
-        "userCount": 627,
+        "userCount": 639,
         "gender": "M",
         "id": 842391,
         "marketValueCurrency": "EUR",
@@ -2288,13 +2314,15 @@
       "footballPassingNetworkAction": [
         {
           "player": {
-            "name": "Georgiy Tsitaishvili",
+            "name": "Giorgi Tsitaishvili",
+            "firstName": "Giorgi",
+            "lastName": "Tsitaishvili",
             "slug": "giorgi-tsitaishvili",
             "shortName": "G. Tsitaishvili",
             "position": "M",
             "jerseyNumber": "7",
             "height": 171,
-            "userCount": 1513,
+            "userCount": 1516,
             "gender": "M",
             "id": 875677,
             "marketValueCurrency": "EUR",
@@ -2305,12 +2333,10 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "جيورجيي تسيتايشفيلي",
                 "bn": "জিওর্জি সিতাইশভিলি",
                 "hi": "जियोर्जी त्सिताइशविली"
               },
               "shortNameTranslation": {
-                "ar": "ج. تسيتايشفيلي",
                 "bn": "জি. সিতাইশভিলি",
                 "hi": "जी. त्सिताइशविली"
               }
@@ -2338,7 +2364,7 @@
             "position": "D",
             "jerseyNumber": "70",
             "height": 177,
-            "userCount": 1613,
+            "userCount": 1621,
             "gender": "M",
             "id": 158233,
             "marketValueCurrency": "EUR",
@@ -2375,12 +2401,14 @@
         {
           "player": {
             "name": "Gauthier Hein",
+            "firstName": "Gauthier",
+            "lastName": "Hein",
             "slug": "gauthier-hein",
             "shortName": "G. Hein",
             "position": "M",
             "jerseyNumber": "10",
             "height": 170,
-            "userCount": 627,
+            "userCount": 639,
             "gender": "M",
             "id": 842391,
             "marketValueCurrency": "EUR",
@@ -2425,7 +2453,7 @@
             "position": "F",
             "jerseyNumber": "11",
             "height": 191,
-            "userCount": 589,
+            "userCount": 606,
             "gender": "M",
             "id": 300412,
             "marketValueCurrency": "EUR",
@@ -2460,14 +2488,16 @@
           },
           "goalShotCoordinates": {
             "x": 0,
-            "y": 47.4
+            "y": 47.2
           },
           "goalMouthCoordinates": {
-            "x": 36.02,
-            "y": 56.83
+            "x": 34.95,
+            "y": 45.17
           },
           "goalkeeper": {
             "name": "Mory Diaw",
+            "firstName": "Mory",
+            "lastName": "Diaw",
             "slug": "mory-diaw",
             "shortName": "M. Diaw",
             "position": "G",
@@ -2510,13 +2540,15 @@
       "homeScore": 1,
       "awayScore": 0,
       "player": {
-        "name": "Mbwana Ally Samatta",
-        "slug": "mbwana-ally-samatta",
-        "shortName": "M. Samatta",
+        "name": "Ally Samatta",
+        "firstName": "Ally",
+        "lastName": "Samatta",
+        "slug": "ally-samatta",
+        "shortName": "A. Samatta",
         "position": "F",
         "jerseyNumber": "25",
         "height": 183,
-        "userCount": 17405,
+        "userCount": 17477,
         "gender": "M",
         "sofascoreId": "samagoal77",
         "id": 825088,
@@ -2528,12 +2560,10 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "مبوانا ساماتا",
             "bn": "মিবাওয়ানা অ্যালি সামত্তা",
             "hi": "मबवाना एली समत्ता"
           },
           "shortNameTranslation": {
-            "ar": "م. ساماتا",
             "bn": "এম. সামত্তা",
             "hi": "एम. समत्ता"
           }
@@ -2542,51 +2572,15 @@
       "footballPassingNetworkAction": [
         {
           "player": {
-            "name": "Yassine Kechta",
-            "slug": "yassine-kechta",
-            "shortName": "Y. Kechta",
-            "position": "M",
-            "jerseyNumber": "8",
-            "height": 166,
-            "userCount": 2066,
-            "gender": "M",
-            "id": 1000442,
-            "marketValueCurrency": "EUR",
-            "dateOfBirthTimestamp": 1014595200,
-            "proposedMarketValueRaw": {
-              "value": 4800000,
-              "currency": "EUR"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "ياسين كشطة",
-                "bn": "ইয়াসিন কেছতা",
-                "hi": "यासीन केचटा"
-              },
-              "shortNameTranslation": {
-                "ar": "ي. كشطة",
-                "bn": "ওয়াই. কেছতা",
-                "hi": "वाई. केचटा"
-              }
-            }
-          },
-          "eventType": "ball-touch",
-          "time": 5,
-          "playerCoordinates": {
-            "x": 86.9,
-            "y": 46.1
-          },
-          "isHome": true
-        },
-        {
-          "player": {
-            "name": "Mbwana Ally Samatta",
-            "slug": "mbwana-ally-samatta",
-            "shortName": "M. Samatta",
+            "name": "Ally Samatta",
+            "firstName": "Ally",
+            "lastName": "Samatta",
+            "slug": "ally-samatta",
+            "shortName": "A. Samatta",
             "position": "F",
             "jerseyNumber": "25",
             "height": 183,
-            "userCount": 17405,
+            "userCount": 17477,
             "gender": "M",
             "sofascoreId": "samagoal77",
             "id": 825088,
@@ -2598,12 +2592,10 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "مبوانا ساماتا",
                 "bn": "মিবাওয়ানা অ্যালি সামত্তা",
                 "hi": "मबवाना एली समत्ता"
               },
               "shortNameTranslation": {
-                "ar": "م. ساماتا",
                 "bn": "এম. সামত্তা",
                 "hi": "एम. समत्ता"
               }
@@ -2613,8 +2605,8 @@
           "bodyPart": "right-foot",
           "time": 5,
           "playerCoordinates": {
-            "x": 88.9,
-            "y": 54.3
+            "x": 89.9,
+            "y": 53.2
           },
           "gkCoordinates": {
             "x": 98.1,
@@ -2636,7 +2628,7 @@
             "position": "G",
             "jerseyNumber": "61",
             "height": 195,
-            "userCount": 1127,
+            "userCount": 1136,
             "gender": "M",
             "id": 1463509,
             "marketValueCurrency": "EUR",

@@ -12,7 +12,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 190,
-          "userCount": 11415,
+          "userCount": 11443,
           "gender": "M",
           "country": {
             "alpha2": "ID",
@@ -89,12 +89,14 @@
       {
         "player": {
           "name": "Filippo Terracciano",
-          "slug": "terracciano-filippo",
+          "firstName": "Filippo",
+          "lastName": "Terracciano",
+          "slug": "filippo-terracciano",
           "shortName": "F. Terracciano",
           "position": "D",
           "jerseyNumber": "24",
           "height": 181,
-          "userCount": 1663,
+          "userCount": 1667,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -176,12 +178,14 @@
       {
         "player": {
           "name": "Federico Baschirotto",
+          "firstName": "Federico",
+          "lastName": "Baschirotto",
           "slug": "federico-baschirotto",
           "shortName": "F. Baschirotto",
           "position": "D",
           "jerseyNumber": "6",
           "height": 187,
-          "userCount": 1408,
+          "userCount": 1410,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -266,7 +270,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 191,
-          "userCount": 822,
+          "userCount": 821,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -348,6 +352,8 @@
       {
         "player": {
           "name": "Giuseppe Pezzella",
+          "firstName": "Giuseppe",
+          "lastName": "Pezzella",
           "slug": "giuseppe-pezzella",
           "shortName": "G. Pezzella",
           "position": "M",
@@ -446,7 +452,7 @@
           "position": "M",
           "jerseyNumber": "22",
           "height": 188,
-          "userCount": 1681,
+          "userCount": 1683,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -528,7 +534,7 @@
           "position": "M",
           "jerseyNumber": "38",
           "height": 177,
-          "userCount": 2087,
+          "userCount": 2090,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -618,7 +624,7 @@
           "position": "M",
           "jerseyNumber": "33",
           "height": 183,
-          "userCount": 265,
+          "userCount": 267,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -709,7 +715,7 @@
           "position": "M",
           "jerseyNumber": "27",
           "height": 174,
-          "userCount": 900,
+          "userCount": 898,
           "gender": "M",
           "country": {
             "alpha2": "BE",
@@ -895,7 +901,7 @@
           "position": "F",
           "jerseyNumber": "99",
           "height": 181,
-          "userCount": 3606,
+          "userCount": 3615,
           "gender": "M",
           "country": {
             "alpha2": "PY",
@@ -979,7 +985,7 @@
           "position": "M",
           "jerseyNumber": "7",
           "height": 182,
-          "userCount": 1032,
+          "userCount": 1033,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1057,12 +1063,14 @@
       {
         "player": {
           "name": "David Okereke",
+          "firstName": "David",
+          "lastName": "Okereke",
           "slug": "david-okereke",
           "shortName": "D. Okereke",
           "position": "F",
           "jerseyNumber": "77",
           "height": 182,
-          "userCount": 891,
+          "userCount": 890,
           "gender": "M",
           "country": {
             "alpha2": "NG",
@@ -1306,7 +1314,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 199,
-          "userCount": 839,
+          "userCount": 843,
           "gender": "M",
           "country": {
             "alpha2": "BA",
@@ -1428,7 +1436,7 @@
           "position": "G",
           "jerseyNumber": "69",
           "height": 189,
-          "userCount": 478,
+          "userCount": 479,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1479,7 +1487,7 @@
           "position": "D",
           "jerseyNumber": "15",
           "height": 189,
-          "userCount": 189,
+          "userCount": 190,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1530,7 +1538,7 @@
           "position": "D",
           "jerseyNumber": "23",
           "height": 187,
-          "userCount": 144,
+          "userCount": 142,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1574,6 +1582,8 @@
       {
         "player": {
           "name": "Francesco Folino",
+          "firstName": "Francesco",
+          "lastName": "Folino",
           "slug": "francesco-folino",
           "shortName": "F. Folino",
           "position": "D",
@@ -1624,7 +1634,7 @@
           "position": "D",
           "jerseyNumber": "30",
           "height": 183,
-          "userCount": 9166,
+          "userCount": 9171,
           "gender": "M",
           "sofascoreId": "mikayilfaye",
           "country": {
@@ -1731,7 +1741,9 @@
       {
         "player": {
           "name": "Youssef Maleh",
-          "slug": "maleh-youssef",
+          "firstName": "Youssef",
+          "lastName": "Maleh",
+          "slug": "youssef-maleh",
           "shortName": "Y. Maleh",
           "position": "M",
           "jerseyNumber": "29",
@@ -1780,7 +1792,7 @@
           "position": "F",
           "jerseyNumber": "10",
           "height": 178,
-          "userCount": 22936,
+          "userCount": 22966,
           "gender": "M",
           "sofascoreId": "Vardy7",
           "country": {
@@ -1823,7 +1835,7 @@
           "position": "F",
           "jerseyNumber": "14",
           "height": 185,
-          "userCount": 1825,
+          "userCount": 1830,
           "gender": "M",
           "country": {
             "alpha2": "CM",
@@ -1867,7 +1879,7 @@
           "position": "M",
           "jerseyNumber": "2",
           "height": 189,
-          "userCount": 771,
+          "userCount": 773,
           "gender": "M",
           "country": {
             "alpha2": "NO",
@@ -1915,7 +1927,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 192,
-          "userCount": 428,
+          "userCount": 434,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1994,12 +2006,14 @@
       {
         "player": {
           "name": "Saúl Coco",
+          "firstName": "Saul",
+          "lastName": "Coco",
           "slug": "saul-coco",
           "shortName": "S. Coco",
           "position": "D",
           "jerseyNumber": "23",
           "height": 188,
-          "userCount": 1263,
+          "userCount": 1265,
           "gender": "M",
           "country": {
             "alpha2": "GQ",
@@ -2089,7 +2103,7 @@
           "position": "D",
           "jerseyNumber": "13",
           "height": 193,
-          "userCount": 2150,
+          "userCount": 2153,
           "gender": "M",
           "country": {
             "alpha2": "CL",
@@ -2166,8 +2180,8 @@
       {
         "player": {
           "name": "Enzo Ebosse",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Enzo",
+          "lastName": "Ebosse",
           "slug": "enzo-ebosse",
           "shortName": "E. Ebosse",
           "position": "D",
@@ -2257,7 +2271,7 @@
           "position": "M",
           "jerseyNumber": "16",
           "height": 178,
-          "userCount": 678,
+          "userCount": 677,
           "gender": "M",
           "country": {
             "alpha2": "NO",
@@ -2348,7 +2362,7 @@
           "position": "M",
           "jerseyNumber": "22",
           "height": 192,
-          "userCount": 6571,
+          "userCount": 6581,
           "gender": "M",
           "sofascoreId": "cesarecasadei",
           "country": {
@@ -2436,7 +2450,7 @@
           "position": "M",
           "jerseyNumber": "66",
           "height": 191,
-          "userCount": 1606,
+          "userCount": 1623,
           "gender": "M",
           "country": {
             "alpha2": "LT",
@@ -2531,7 +2545,7 @@
           "position": "D",
           "jerseyNumber": "33",
           "height": 181,
-          "userCount": 1985,
+          "userCount": 1991,
           "gender": "M",
           "country": {
             "alpha2": "ES",
@@ -2611,7 +2625,7 @@
           "position": "M",
           "jerseyNumber": "10",
           "height": 178,
-          "userCount": 5692,
+          "userCount": 5720,
           "gender": "M",
           "sofascoreId": "niksivlasic_",
           "country": {
@@ -2696,7 +2710,7 @@
           "position": "F",
           "jerseyNumber": "18",
           "height": 179,
-          "userCount": 10144,
+          "userCount": 10215,
           "gender": "M",
           "sofascoreId": "simeonegiovanni",
           "country": {
@@ -2775,12 +2789,14 @@
       {
         "player": {
           "name": "Che Adams",
+          "firstName": "Che",
+          "lastName": "Adams",
           "slug": "che-adams",
           "shortName": "C. Adams",
           "position": "F",
           "jerseyNumber": "19",
           "height": 175,
-          "userCount": 3001,
+          "userCount": 3006,
           "gender": "M",
           "country": {
             "alpha2": "SX",
@@ -2867,7 +2883,7 @@
           "position": "D",
           "jerseyNumber": "35",
           "height": 186,
-          "userCount": 914,
+          "userCount": 919,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -2951,7 +2967,7 @@
           "position": "F",
           "jerseyNumber": "92",
           "height": 185,
-          "userCount": 386,
+          "userCount": 392,
           "gender": "M",
           "country": {
             "alpha2": "SE",
@@ -3031,7 +3047,7 @@
           "position": "D",
           "jerseyNumber": "34",
           "height": 184,
-          "userCount": 1286,
+          "userCount": 1284,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -3100,15 +3116,15 @@
       },
       {
         "player": {
-          "name": "Faustino Anjorin",
-          "firstName": "",
-          "lastName": "",
-          "slug": "faustino-anjorin",
-          "shortName": "F. Anjorin",
+          "name": "Tino Anjorin",
+          "firstName": "Tino",
+          "lastName": "Anjorin",
+          "slug": "tino-anjorin",
+          "shortName": "T. Anjorin",
           "position": "M",
           "jerseyNumber": "14",
           "height": 186,
-          "userCount": 1166,
+          "userCount": 1169,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -3125,12 +3141,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "فوستينو أنجورين",
               "bn": "ফাউস্টিনো আনজোরিন",
               "hi": "फॉस्टिनो अंजोरिन"
             },
             "shortNameTranslation": {
-              "ar": "ف. أنجورين",
               "bn": "এফ. আনজোরিন",
               "hi": "एफ. अंजोरिन"
             }
@@ -3183,12 +3197,14 @@
       {
         "player": {
           "name": "Sandro Kulenović",
+          "firstName": "Sandro",
+          "lastName": "Kulenovic",
           "slug": "sandro-kulenovic",
           "shortName": "S. Kulenović",
           "position": "F",
           "jerseyNumber": "17",
           "height": 191,
-          "userCount": 3240,
+          "userCount": 3252,
           "gender": "M",
           "country": {
             "alpha2": "HR",
@@ -3249,12 +3265,14 @@
       {
         "player": {
           "name": "Franco Israel",
+          "firstName": "Franco",
+          "lastName": "Israel",
           "slug": "franco-israel",
           "shortName": "F. Israel",
           "position": "G",
           "jerseyNumber": "81",
           "height": 189,
-          "userCount": 2267,
+          "userCount": 2266,
           "gender": "M",
           "country": {
             "alpha2": "UY",
@@ -3304,7 +3322,7 @@
           "position": "G",
           "jerseyNumber": "99",
           "height": 195,
-          "userCount": 80,
+          "userCount": 82,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -3351,7 +3369,7 @@
           "position": "D",
           "jerseyNumber": "61",
           "height": 182,
-          "userCount": 352,
+          "userCount": 354,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3395,12 +3413,14 @@
       {
         "player": {
           "name": "Matteo Prati",
+          "firstName": "Matteo",
+          "lastName": "Prati",
           "slug": "matteo-prati",
           "shortName": "M. Prati",
           "position": "M",
           "jerseyNumber": "4",
           "height": 182,
-          "userCount": 719,
+          "userCount": 721,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -3451,7 +3471,7 @@
           "position": "M",
           "jerseyNumber": "6",
           "height": 175,
-          "userCount": 1146,
+          "userCount": 1151,
           "gender": "M",
           "country": {
             "alpha2": "TR",
@@ -3502,7 +3522,7 @@
           "position": "M",
           "jerseyNumber": "20",
           "height": 180,
-          "userCount": 1028,
+          "userCount": 1030,
           "gender": "M",
           "country": {
             "alpha2": "AT",
@@ -3546,12 +3566,14 @@
       {
         "player": {
           "name": "Ivan Ilić",
+          "firstName": "Ivan",
+          "lastName": "Ilic",
           "slug": "ivan-ilic",
           "shortName": "I. Ilić",
           "position": "M",
           "jerseyNumber": "8",
           "height": 185,
-          "userCount": 1804,
+          "userCount": 1807,
           "gender": "M",
           "country": {
             "alpha2": "RS",
@@ -3611,12 +3633,14 @@
       {
         "player": {
           "name": "Ardian Ismajli",
+          "firstName": "Ardian",
+          "lastName": "Ismajli",
           "slug": "ardian-ismajli",
           "shortName": "A. Ismajli",
           "position": "D",
           "jerseyNumber": "44",
           "height": 188,
-          "userCount": 1185,
+          "userCount": 1192,
           "gender": "M",
           "country": {
             "alpha2": "AL",
@@ -3658,7 +3682,7 @@
           "position": "F",
           "jerseyNumber": "91",
           "height": 189,
-          "userCount": 5962,
+          "userCount": 5966,
           "gender": "M",
           "sofascoreId": "duvanzapata91",
           "country": {
@@ -3701,7 +3725,7 @@
           "position": "M",
           "jerseyNumber": "79",
           "height": 188,
-          "userCount": 255,
+          "userCount": 257,
           "gender": "M",
           "country": {
             "alpha2": "CY",
@@ -3738,12 +3762,14 @@
       {
         "player": {
           "name": "Zakaria Aboukhlal",
+          "firstName": "Zakaria",
+          "lastName": "Aboukhlal",
           "slug": "zakaria-aboukhlal",
           "shortName": "Z. Aboukhlal",
           "position": "F",
           "jerseyNumber": "7",
           "height": 179,
-          "userCount": 7783,
+          "userCount": 7789,
           "gender": "M",
           "sofascoreId": "zakariaaboukhlal",
           "country": {

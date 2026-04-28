@@ -12,7 +12,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 188,
-          "userCount": 2284,
+          "userCount": 2286,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -92,14 +92,14 @@
       {
         "player": {
           "name": "Mark McKenzie",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Mark",
+          "lastName": "McKenzie",
           "slug": "mark-mckenzie",
           "shortName": "M. McKenzie",
           "position": "D",
           "jerseyNumber": "3",
           "height": 183,
-          "userCount": 721,
+          "userCount": 722,
           "gender": "M",
           "country": {
             "alpha2": "US",
@@ -188,7 +188,7 @@
           "position": "D",
           "jerseyNumber": "4",
           "height": 190,
-          "userCount": 1175,
+          "userCount": 1178,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -279,14 +279,14 @@
       {
         "player": {
           "name": "Rasmus Nicolaisen",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Rasmus",
+          "lastName": "Nicolaisen",
           "slug": "rasmus-nicolaisen",
           "shortName": "R. Nicolaisen",
           "position": "D",
           "jerseyNumber": "2",
           "height": 190,
-          "userCount": 284,
+          "userCount": 286,
           "gender": "M",
           "country": {
             "alpha2": "DK",
@@ -369,12 +369,14 @@
       {
         "player": {
           "name": "Aron Dønnum",
+          "firstName": "Aron",
+          "lastName": "Donnum",
           "slug": "aron-donnum",
           "shortName": "A. Dønnum",
           "position": "M",
           "jerseyNumber": "15",
           "height": 179,
-          "userCount": 723,
+          "userCount": 719,
           "gender": "M",
           "country": {
             "alpha2": "NO",
@@ -470,7 +472,7 @@
           "position": "M",
           "jerseyNumber": "45",
           "height": 181,
-          "userCount": 297,
+          "userCount": 296,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -551,12 +553,14 @@
       {
         "player": {
           "name": "Cristian Cásseres Jr.",
+          "firstName": "Cristian",
+          "lastName": "Casseres Jr",
           "slug": "cristian-casseres-jr",
           "shortName": "C. Cásseres Jr.",
           "position": "M",
           "jerseyNumber": "23",
           "height": 174,
-          "userCount": 1541,
+          "userCount": 1542,
           "gender": "M",
           "country": {
             "alpha2": "VE",
@@ -646,7 +650,7 @@
           "position": "M",
           "jerseyNumber": "24",
           "height": 186,
-          "userCount": 533,
+          "userCount": 534,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -732,7 +736,7 @@
           "position": "F",
           "jerseyNumber": "11",
           "height": 174,
-          "userCount": 1074,
+          "userCount": 1076,
           "gender": "M",
           "country": {
             "alpha2": "AR",
@@ -818,7 +822,7 @@
           "position": "M",
           "jerseyNumber": "18",
           "height": 182,
-          "userCount": 2838,
+          "userCount": 2842,
           "gender": "M",
           "country": {
             "alpha2": "SN",
@@ -899,13 +903,15 @@
       },
       {
         "player": {
-          "name": "Jacen Russell-Rowe",
+          "name": "Jacen Russell Rowe",
+          "firstName": "Jacen",
+          "lastName": "Russell Rowe",
           "slug": "jacen-russell-rowe",
-          "shortName": "J. Russell-Rowe",
+          "shortName": "J. Russell Rowe",
           "position": "F",
           "jerseyNumber": "13",
           "height": 184,
-          "userCount": 452,
+          "userCount": 451,
           "gender": "M",
           "country": {
             "alpha2": "CA",
@@ -919,14 +925,6 @@
           "proposedMarketValueRaw": {
             "value": 3400000,
             "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "جاسين راسل رو"
-            },
-            "shortNameTranslation": {
-              "ar": "ج. ر. رو"
-            }
           }
         },
         "teamId": 1681,
@@ -994,7 +992,7 @@
           "position": "F",
           "jerseyNumber": "20",
           "height": 186,
-          "userCount": 667,
+          "userCount": 668,
           "gender": "M",
           "country": {
             "alpha2": "BR",
@@ -1068,6 +1066,8 @@
       {
         "player": {
           "name": "Mario Sauer",
+          "firstName": "Mario",
+          "lastName": "Sauer",
           "slug": "mario-sauer",
           "shortName": "M. Sauer",
           "position": "M",
@@ -1149,7 +1149,7 @@
           "position": "F",
           "jerseyNumber": "37",
           "height": 173,
-          "userCount": 357,
+          "userCount": 358,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -1219,15 +1219,15 @@
       },
       {
         "player": {
-          "name": "Warren Kamanzi",
-          "firstName": "",
-          "lastName": "",
-          "slug": "warren-kamanzi",
+          "name": "Waren Kamanzi",
+          "firstName": "Waren",
+          "lastName": "Kamanzi",
+          "slug": "waren-kamanzi",
           "shortName": "W. Kamanzi",
           "position": "M",
           "jerseyNumber": "12",
           "height": 177,
-          "userCount": 235,
+          "userCount": 232,
           "gender": "M",
           "country": {
             "alpha2": "NO",
@@ -1244,12 +1244,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "وارن كامانزي",
               "bn": "ওয়ারেন কামানজি",
               "hi": "वॉरेन कामांजी"
             },
             "shortNameTranslation": {
-              "ar": "و. كامانزي",
               "bn": "ডব্লিউ. কামানজি",
               "hi": "डब्लू. कामांजी"
             }
@@ -1294,7 +1292,7 @@
           "position": "F",
           "jerseyNumber": "7",
           "height": 185,
-          "userCount": 373,
+          "userCount": 378,
           "gender": "M",
           "country": {
             "alpha2": "AR",
@@ -1381,12 +1379,14 @@
       {
         "player": {
           "name": "Kjetil Haug",
+          "firstName": "Kjetil",
+          "lastName": "Haug",
           "slug": "kjetil-haug",
           "shortName": "K. Haug",
           "position": "G",
           "jerseyNumber": "16",
           "height": 187,
-          "userCount": 157,
+          "userCount": 159,
           "gender": "M",
           "country": {
             "alpha2": "NO",
@@ -1485,7 +1485,7 @@
           "position": "D",
           "jerseyNumber": "35",
           "height": 187,
-          "userCount": 168,
+          "userCount": 169,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -1541,12 +1541,14 @@
       {
         "player": {
           "name": "Yann Gboho",
+          "firstName": "Yann",
+          "lastName": "Gboho",
           "slug": "yann-gboho",
           "shortName": "Y. Gboho",
           "position": "F",
           "jerseyNumber": "10",
           "height": 173,
-          "userCount": 1344,
+          "userCount": 1346,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -1590,7 +1592,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 178,
-          "userCount": 1837,
+          "userCount": 1838,
           "gender": "M",
           "country": {
             "alpha2": "CM",
@@ -1634,7 +1636,7 @@
           "position": "M",
           "jerseyNumber": "22",
           "height": 177,
-          "userCount": 919,
+          "userCount": 922,
           "gender": "M",
           "country": {
             "alpha2": "DZ",
@@ -1676,7 +1678,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 190,
-          "userCount": 2487,
+          "userCount": 2491,
           "gender": "M",
           "country": {
             "alpha2": "FI",
@@ -1761,7 +1763,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 186,
-          "userCount": 1943,
+          "userCount": 1945,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -1847,7 +1849,7 @@
           "position": "D",
           "jerseyNumber": "25",
           "height": 185,
-          "userCount": 1817,
+          "userCount": 1815,
           "gender": "M",
           "country": {
             "alpha2": "BE",
@@ -1929,12 +1931,14 @@
       {
         "player": {
           "name": "Christian Mawissa",
+          "firstName": "Christian",
+          "lastName": "Mawissa",
           "slug": "christian-mawissa",
           "shortName": "C. Mawissa",
           "position": "D",
           "jerseyNumber": "13",
           "height": 184,
-          "userCount": 964,
+          "userCount": 967,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2019,12 +2023,14 @@
       {
         "player": {
           "name": "Jordan Teze",
+          "firstName": "Jordan",
+          "lastName": "Teze",
           "slug": "jordan-teze",
           "shortName": "J. Teze",
           "position": "D",
           "jerseyNumber": "4",
           "height": 183,
-          "userCount": 1143,
+          "userCount": 1148,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -2098,7 +2104,7 @@
             "alternative": 7.6
           },
           "totalShots": 1,
-          "shotValueNormalized": 0.46,
+          "shotValueNormalized": 0.48,
           "passValueNormalized": 0.11,
           "dribbleValueNormalized": 0.26,
           "defensiveValueNormalized": 0.52,
@@ -2118,7 +2124,7 @@
           "position": "M",
           "jerseyNumber": "15",
           "height": 174,
-          "userCount": 21035,
+          "userCount": 21049,
           "gender": "M",
           "sofascoreId": "lamine_camara_5",
           "country": {
@@ -2209,14 +2215,14 @@
       {
         "player": {
           "name": "Denis Zakaria",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Denis",
+          "lastName": "Zakaria",
           "slug": "denis-zakaria",
           "shortName": "D. Zakaria",
           "position": "M",
           "jerseyNumber": "6",
           "height": 191,
-          "userCount": 3365,
+          "userCount": 3362,
           "gender": "M",
           "country": {
             "alpha2": "CH",
@@ -2308,7 +2314,7 @@
           "position": "M",
           "jerseyNumber": "24",
           "height": 175,
-          "userCount": 62008,
+          "userCount": 62191,
           "gender": "M",
           "sofascoreId": "simon.adingra",
           "country": {
@@ -2343,15 +2349,16 @@
         "position": "M",
         "substitute": false,
         "statistics": {
-          "totalPass": 31,
-          "accuratePass": 23,
+          "totalPass": 30,
+          "accuratePass": 22,
           "totalLongBalls": 1,
           "goalAssist": 1,
           "accurateOwnHalfPasses": 9,
           "totalOwnHalfPasses": 10,
-          "accurateOppositionHalfPasses": 14,
-          "totalOppositionHalfPasses": 21,
-          "totalCross": 1,
+          "accurateOppositionHalfPasses": 13,
+          "totalOppositionHalfPasses": 20,
+          "totalCross": 2,
+          "accurateCross": 1,
           "duelLost": 7,
           "duelWon": 3,
           "challengeLost": 1,
@@ -2372,7 +2379,7 @@
           "possessionLostCtrl": 16,
           "expectedGoals": 0.2987,
           "expectedGoalsOnTarget": 0.3765,
-          "expectedAssists": 0.432257,
+          "expectedAssists": 0.346603,
           "totalBallCarriesDistance": 189.24985769096,
           "ballCarriesCount": 17,
           "totalProgression": 132.79656361712,
@@ -2386,7 +2393,7 @@
           },
           "totalShots": 2,
           "shotValueNormalized": 0.08,
-          "passValueNormalized": -0.05,
+          "passValueNormalized": 0.01,
           "dribbleValueNormalized": 0.37,
           "defensiveValueNormalized": -0.09,
           "statisticsType": {
@@ -2405,7 +2412,7 @@
           "position": "M",
           "jerseyNumber": "11",
           "height": 183,
-          "userCount": 7969,
+          "userCount": 7970,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2439,7 +2446,7 @@
         "position": "F",
         "substitute": false,
         "statistics": {
-          "totalPass": 40,
+          "totalPass": 39,
           "accuratePass": 36,
           "totalLongBalls": 2,
           "accurateLongBalls": 2,
@@ -2447,8 +2454,8 @@
           "accurateOwnHalfPasses": 18,
           "totalOwnHalfPasses": 20,
           "accurateOppositionHalfPasses": 18,
-          "totalOppositionHalfPasses": 20,
-          "totalCross": 1,
+          "totalOppositionHalfPasses": 19,
+          "totalCross": 2,
           "duelLost": 5,
           "duelWon": 7,
           "dispossessed": 2,
@@ -2483,7 +2490,7 @@
           },
           "totalShots": 1,
           "shotValueNormalized": -0.1,
-          "passValueNormalized": 0.16,
+          "passValueNormalized": 0.19,
           "dribbleValueNormalized": 0.3,
           "defensiveValueNormalized": 0.14,
           "statisticsType": {
@@ -2500,7 +2507,7 @@
           "position": "F",
           "jerseyNumber": "31",
           "height": 178,
-          "userCount": 165819,
+          "userCount": 165871,
           "gender": "M",
           "sofascoreId": "AnsuFati",
           "country": {
@@ -2584,14 +2591,14 @@
       {
         "player": {
           "name": "Folarin Balogun",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Folarin",
+          "lastName": "Balogun",
           "slug": "folarin-balogun",
           "shortName": "F. Balogun",
           "position": "F",
           "jerseyNumber": "9",
           "height": 179,
-          "userCount": 8004,
+          "userCount": 7997,
           "gender": "M",
           "sofascoreId": "balogun",
           "country": {
@@ -2675,7 +2682,7 @@
           "position": "M",
           "jerseyNumber": "10",
           "height": 180,
-          "userCount": 9631,
+          "userCount": 9644,
           "gender": "M",
           "sofascoreId": "alex_golovin17",
           "country": {
@@ -2758,7 +2765,7 @@
           "position": "D",
           "jerseyNumber": "3",
           "height": 191,
-          "userCount": 4264,
+          "userCount": 4267,
           "gender": "M",
           "sofascoreId": "ericdier",
           "country": {
@@ -2834,7 +2841,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 191,
-          "userCount": 166898,
+          "userCount": 166965,
           "gender": "M",
           "sofascoreId": "Pogba",
           "country": {
@@ -2909,7 +2916,7 @@
           "position": "F",
           "jerseyNumber": "14",
           "height": 187,
-          "userCount": 5242,
+          "userCount": 5240,
           "gender": "M",
           "country": {
             "alpha2": "DK",
@@ -2986,14 +2993,14 @@
       {
         "player": {
           "name": "Philipp Köhn",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Philipp",
+          "lastName": "Kohn",
           "slug": "philipp-kohn",
           "shortName": "P. Köhn",
           "position": "G",
           "jerseyNumber": "16",
           "height": 191,
-          "userCount": 757,
+          "userCount": 758,
           "gender": "M",
           "country": {
             "alpha2": "CH",
@@ -3043,7 +3050,7 @@
           "position": "M",
           "jerseyNumber": "23",
           "height": 181,
-          "userCount": 1534,
+          "userCount": 1536,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3089,7 +3096,7 @@
           "position": "M",
           "jerseyNumber": "49",
           "height": 180,
-          "userCount": 153,
+          "userCount": 156,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3135,7 +3142,7 @@
           "position": "M",
           "jerseyNumber": "44",
           "height": 198,
-          "userCount": 410,
+          "userCount": 412,
           "gender": "M",
           "country": {
             "alpha2": "BE",
@@ -3176,7 +3183,7 @@
           "position": "M",
           "jerseyNumber": "28",
           "height": 179,
-          "userCount": 2600,
+          "userCount": 2599,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3236,14 +3243,14 @@
       {
         "player": {
           "name": "Caio Henrique",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Caio",
+          "lastName": "Henrique",
           "slug": "caio-henrique",
           "shortName": "C. Henrique",
           "position": "D",
           "jerseyNumber": "12",
           "height": 178,
-          "userCount": 3981,
+          "userCount": 3993,
           "gender": "M",
           "country": {
             "alpha2": "BR",
@@ -3280,7 +3287,9 @@
       {
         "player": {
           "name": "Kassoum Ouattara",
-          "slug": "ouattara-kassoum",
+          "firstName": "Kassoum",
+          "lastName": "Ouattara",
+          "slug": "kassoum-ouattara",
           "shortName": "K. Ouattara",
           "position": "D",
           "jerseyNumber": "20",
@@ -3327,7 +3336,7 @@
           "position": "F",
           "jerseyNumber": "29",
           "height": 185,
-          "userCount": 2092,
+          "userCount": 2096,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -3371,7 +3380,7 @@
           "position": "M",
           "jerseyNumber": "17",
           "height": 170,
-          "userCount": 894,
+          "userCount": 893,
           "gender": "M",
           "country": {
             "alpha2": "BE",

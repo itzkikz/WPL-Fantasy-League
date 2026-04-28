@@ -2,8 +2,6 @@
   "events": [
     {
       "eventState": {},
-      "correctAiInsight": false,
-      "correctHalftimeAiInsight": false,
       "tournament": {
         "name": "Ligue 1",
         "slug": "ligue-1",
@@ -68,7 +66,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 431027,
+          "userCount": 431834,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 34,
@@ -122,7 +120,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 111127,
+        "userCount": 111100,
         "nameCode": "BRE",
         "disabled": false,
         "national": false,
@@ -162,7 +160,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 199305,
+        "userCount": 201476,
         "nameCode": "RCL",
         "disabled": false,
         "national": false,
@@ -224,6 +222,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 14167982,
       "slug": "stade-brestois-rc-lens",
       "startTimestamp": 1777056300,
@@ -245,8 +245,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": true,
-      "correctHalftimeAiInsight": true,
       "tournament": {
         "name": "Ligue 1",
         "slug": "ligue-1",
@@ -311,7 +309,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 431027,
+          "userCount": 431834,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 34,
@@ -365,7 +363,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 526873,
+        "userCount": 527405,
         "nameCode": "OL",
         "disabled": false,
         "national": false,
@@ -405,7 +403,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 51317,
+        "userCount": 51328,
         "nameCode": "AJA",
         "disabled": false,
         "national": false,
@@ -466,6 +464,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 14167980,
       "slug": "olympique-lyonnais-auxerre",
       "startTimestamp": 1777122000,
@@ -487,8 +487,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": true,
-      "correctHalftimeAiInsight": true,
       "tournament": {
         "name": "Ligue 1",
         "slug": "ligue-1",
@@ -553,7 +551,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 431027,
+          "userCount": 431834,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 34,
@@ -607,7 +605,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 56085,
+        "userCount": 56067,
         "nameCode": "ANG",
         "disabled": false,
         "national": false,
@@ -645,7 +643,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 3112270,
+        "userCount": 3122444,
         "nameCode": "PSG",
         "disabled": false,
         "national": false,
@@ -702,12 +700,14 @@
         ],
         "changeTimestamp": 1777143269
       },
-      "hasGlobalHighlights": false,
+      "hasGlobalHighlights": true,
       "hasXg": true,
       "hasEventPlayerStatistics": true,
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 14167976,
       "awayRedCards": 1,
       "slug": "angers-paris-saint-germain",
@@ -730,8 +730,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": false,
-      "correctHalftimeAiInsight": false,
       "tournament": {
         "name": "Ligue 1",
         "slug": "ligue-1",
@@ -796,7 +794,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 431027,
+          "userCount": 431834,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 34,
@@ -850,7 +848,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 86897,
+        "userCount": 86857,
         "nameCode": "TFC",
         "disabled": false,
         "national": false,
@@ -888,7 +886,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 514889,
+        "userCount": 514895,
         "nameCode": "ASM",
         "disabled": false,
         "national": false,
@@ -951,6 +949,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 14167981,
       "slug": "toulouse-as-monaco",
       "startTimestamp": 1777143900,
@@ -972,8 +972,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": true,
-      "correctHalftimeAiInsight": false,
       "tournament": {
         "name": "Ligue 1",
         "slug": "ligue-1",
@@ -1038,7 +1036,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 431027,
+          "userCount": 431834,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 34,
@@ -1092,7 +1090,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 57828,
+        "userCount": 58899,
         "nameCode": "FCL",
         "disabled": false,
         "national": false,
@@ -1130,7 +1128,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 151321,
+        "userCount": 151932,
         "nameCode": "STR",
         "disabled": false,
         "national": false,
@@ -1194,6 +1192,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": false,
       "id": 14167979,
       "slug": "rc-strasbourg-lorient",
       "startTimestamp": 1777208400,
@@ -1215,8 +1215,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": false,
-      "correctHalftimeAiInsight": false,
       "tournament": {
         "name": "Ligue 1",
         "slug": "ligue-1",
@@ -1281,7 +1279,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 431027,
+          "userCount": 431834,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 34,
@@ -1335,7 +1333,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 53201,
+        "userCount": 54003,
         "nameCode": "HAC",
         "disabled": false,
         "national": false,
@@ -1373,7 +1371,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 54617,
+        "userCount": 55014,
         "nameCode": "FCM",
         "disabled": false,
         "national": false,
@@ -1434,6 +1432,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 14167977,
       "slug": "le-havre-metz",
       "startTimestamp": 1777216500,
@@ -1455,8 +1455,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": true,
-      "correctHalftimeAiInsight": true,
       "tournament": {
         "name": "Ligue 1",
         "slug": "ligue-1",
@@ -1521,7 +1519,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 431027,
+          "userCount": 431834,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 34,
@@ -1575,7 +1573,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 67327,
+        "userCount": 68555,
         "nameCode": "PFC",
         "disabled": false,
         "national": false,
@@ -1616,7 +1614,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 312256,
+        "userCount": 313432,
         "nameCode": "LIL",
         "disabled": false,
         "national": false,
@@ -1677,6 +1675,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 14167978,
       "homeRedCards": 1,
       "slug": "paris-fc-lille",
@@ -1699,8 +1699,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": true,
-      "correctHalftimeAiInsight": false,
       "tournament": {
         "name": "Ligue 1",
         "slug": "ligue-1",
@@ -1765,7 +1763,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 431027,
+          "userCount": 431834,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 34,
@@ -1819,7 +1817,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 125844,
+        "userCount": 127867,
         "nameCode": "SR",
         "disabled": false,
         "national": false,
@@ -1859,7 +1857,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 84387,
+        "userCount": 84965,
         "nameCode": "FCN",
         "disabled": false,
         "national": false,
@@ -1920,6 +1918,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": false,
       "id": 14167975,
       "slug": "stade-rennais-nantes",
       "startTimestamp": 1777216500,
@@ -1941,8 +1941,6 @@
     },
     {
       "eventState": {},
-      "correctAiInsight": false,
-      "correctHalftimeAiInsight": false,
       "tournament": {
         "name": "Ligue 1",
         "slug": "ligue-1",
@@ -2007,7 +2005,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 431027,
+          "userCount": 431834,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 34,
@@ -2061,7 +2059,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 649750,
+        "userCount": 653144,
         "nameCode": "OM",
         "disabled": false,
         "national": false,
@@ -2101,7 +2099,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 153354,
+        "userCount": 154608,
         "nameCode": "OGC",
         "disabled": false,
         "national": false,
@@ -2162,6 +2160,8 @@
       "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 14167983,
       "slug": "nice-olympique-de-marseille",
       "startTimestamp": 1777229100,
