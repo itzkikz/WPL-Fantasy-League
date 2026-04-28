@@ -5,6 +5,8 @@
       "label": "rating",
       "player": {
         "name": "Moritz Nicolas",
+        "firstName": "Moritz",
+        "lastName": "Nicolas",
         "slug": "moritz-nicolas",
         "shortName": "M. Nicolas",
         "position": "G",
@@ -43,7 +45,7 @@
         "position": "M",
         "jerseyNumber": "7",
         "height": 175,
-        "userCount": 708,
+        "userCount": 706,
         "gender": "M",
         "id": 95381,
         "marketValueCurrency": "EUR",
@@ -68,8 +70,10 @@
       "value": "7.3",
       "label": "rating",
       "player": {
-        "name": "Joseph Scally",
-        "slug": "scally-joseph",
+        "name": "Joe Scally",
+        "firstName": "Joe",
+        "lastName": "Scally",
+        "slug": "joe-scally",
         "shortName": "J. Scally",
         "position": "D",
         "jerseyNumber": "29",
@@ -85,12 +89,10 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "سكالي، جوزيف",
             "bn": "স্ক্যালি, জোসেফ",
             "hi": "स्कैली, जोसेफ"
           },
           "shortNameTranslation": {
-            "ar": "ج. سكالي",
             "bn": "জে. স্ক্যালি",
             "hi": "जे. स्कैली"
           }
@@ -111,7 +113,7 @@
         "position": "D",
         "jerseyNumber": "4",
         "height": 188,
-        "userCount": 1411,
+        "userCount": 1409,
         "gender": "M",
         "id": 355486,
         "marketValueCurrency": "EUR",
@@ -146,7 +148,7 @@
         "position": "M",
         "jerseyNumber": "10",
         "height": 180,
-        "userCount": 3128,
+        "userCount": 3130,
         "gender": "M",
         "id": 327755,
         "marketValueCurrency": "EUR",
@@ -174,12 +176,14 @@
       "label": "rating",
       "player": {
         "name": "Anthony Caci",
+        "firstName": "Anthony",
+        "lastName": "Caci",
         "slug": "anthony-caci",
         "shortName": "A. Caci",
         "position": "M",
         "jerseyNumber": "19",
         "height": 184,
-        "userCount": 365,
+        "userCount": 367,
         "gender": "M",
         "id": 846471,
         "marketValueCurrency": "EUR",
@@ -208,6 +212,8 @@
     "label": "rating",
     "player": {
       "name": "Moritz Nicolas",
+      "firstName": "Moritz",
+      "lastName": "Nicolas",
       "slug": "moritz-nicolas",
       "shortName": "M. Nicolas",
       "position": "G",

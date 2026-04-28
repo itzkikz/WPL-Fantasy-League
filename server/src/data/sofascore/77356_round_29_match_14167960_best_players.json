@@ -12,7 +12,7 @@
         "position": "M",
         "jerseyNumber": "2",
         "height": 183,
-        "userCount": 4320,
+        "userCount": 4333,
         "gender": "M",
         "id": 919027,
         "marketValueCurrency": "EUR",
@@ -23,12 +23,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "علي عبدي",
+            "ar": "علي العابدي",
             "bn": "আলী আবদি",
             "hi": "अली आब्दी"
           },
           "shortNameTranslation": {
-            "ar": "ع. عبدي",
+            "ar": "ع. العابدي",
             "bn": "এ. আবদি",
             "hi": "ए. आब्दी"
           }
@@ -40,14 +40,14 @@
       "label": "rating",
       "player": {
         "name": "Yehvann Diouf",
-        "firstName": "",
-        "lastName": "",
+        "firstName": "Yehvann",
+        "lastName": "Diouf",
         "slug": "yehvann-diouf",
         "shortName": "Y. Diouf",
         "position": "G",
         "jerseyNumber": "80",
         "height": 188,
-        "userCount": 3558,
+        "userCount": 3571,
         "gender": "M",
         "id": 845183,
         "marketValueCurrency": "EUR",
@@ -118,7 +118,7 @@
         "position": "D",
         "jerseyNumber": "18",
         "height": 183,
-        "userCount": 353,
+        "userCount": 360,
         "gender": "M",
         "id": 1397882,
         "marketValueCurrency": "EUR",
@@ -142,6 +142,8 @@
       "label": "rating",
       "player": {
         "name": "Mory Diaw",
+        "firstName": "Mory",
+        "lastName": "Diaw",
         "slug": "mory-diaw",
         "shortName": "M. Diaw",
         "position": "G",
@@ -174,13 +176,15 @@
       "value": "7.1",
       "label": "rating",
       "player": {
-        "name": "Mbwana Ally Samatta",
-        "slug": "mbwana-ally-samatta",
-        "shortName": "M. Samatta",
+        "name": "Ally Samatta",
+        "firstName": "Ally",
+        "lastName": "Samatta",
+        "slug": "ally-samatta",
+        "shortName": "A. Samatta",
         "position": "F",
         "jerseyNumber": "25",
         "height": 183,
-        "userCount": 17405,
+        "userCount": 17530,
         "gender": "M",
         "sofascoreId": "samagoal77",
         "id": 825088,
@@ -192,12 +196,10 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "مبوانا ساماتا",
             "bn": "মিবাওয়ানা অ্যালি সামত্তা",
             "hi": "मबवाना एली समत्ता"
           },
           "shortNameTranslation": {
-            "ar": "م. ساماتا",
             "bn": "এম. সামত্তা",
             "hi": "एम. समत्ता"
           }
@@ -216,7 +218,7 @@
       "position": "D",
       "jerseyNumber": "18",
       "height": 183,
-      "userCount": 353,
+      "userCount": 360,
       "gender": "M",
       "id": 1397882,
       "marketValueCurrency": "EUR",

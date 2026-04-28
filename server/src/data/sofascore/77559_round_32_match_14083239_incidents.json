@@ -21,7 +21,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 182,
-        "userCount": 1402,
+        "userCount": 1416,
         "gender": "M",
         "id": 981604,
         "marketValueCurrency": "EUR",
@@ -59,7 +59,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 182,
-        "userCount": 1402,
+        "userCount": 1416,
         "gender": "M",
         "id": 981604,
         "marketValueCurrency": "EUR",
@@ -84,7 +84,7 @@
         "position": "M",
         "jerseyNumber": "4",
         "height": 180,
-        "userCount": 589,
+        "userCount": 594,
         "gender": "M",
         "id": 900669,
         "marketValueCurrency": "EUR",
@@ -113,7 +113,7 @@
             "position": "M",
             "jerseyNumber": "15",
             "height": 187,
-            "userCount": 391,
+            "userCount": 392,
             "gender": "M",
             "id": 326471,
             "marketValueCurrency": "EUR",
@@ -155,7 +155,7 @@
             "position": "M",
             "jerseyNumber": "4",
             "height": 180,
-            "userCount": 589,
+            "userCount": 594,
             "gender": "M",
             "id": 900669,
             "marketValueCurrency": "EUR",
@@ -193,7 +193,7 @@
             "position": "D",
             "jerseyNumber": "3",
             "height": 174,
-            "userCount": 657,
+            "userCount": 661,
             "gender": "M",
             "id": 1010421,
             "marketValueCurrency": "EUR",
@@ -235,7 +235,7 @@
             "position": "M",
             "jerseyNumber": "4",
             "height": 180,
-            "userCount": 589,
+            "userCount": 594,
             "gender": "M",
             "id": 900669,
             "marketValueCurrency": "EUR",
@@ -257,12 +257,12 @@
           "isAssist": true,
           "time": 90,
           "playerCoordinates": {
-            "x": 95.3,
-            "y": 76.1
+            "x": 95.4,
+            "y": 76.5
           },
           "passEndCoordinates": {
-            "x": 96.9,
-            "y": 47.2
+            "x": 96.5,
+            "y": 47.7
           },
           "isHome": true
         },
@@ -274,7 +274,7 @@
             "position": "F",
             "jerseyNumber": "9",
             "height": 182,
-            "userCount": 1402,
+            "userCount": 1416,
             "gender": "M",
             "id": 981604,
             "marketValueCurrency": "EUR",
@@ -296,29 +296,31 @@
           "bodyPart": "head",
           "time": 90,
           "playerCoordinates": {
-            "x": 96.9,
-            "y": 47.2
+            "x": 96.5,
+            "y": 47.7
           },
           "gkCoordinates": {
-            "x": 99.5,
-            "y": 49.6
+            "x": 99,
+            "y": 48.2
           },
           "goalShotCoordinates": {
             "x": 100,
-            "y": 48.2
+            "y": 47.3
           },
           "goalMouthCoordinates": {
-            "x": 59.68,
-            "y": 67.33
+            "x": 64.52,
+            "y": 72.5
           },
           "goalkeeper": {
             "name": "Álex Remiro",
+            "firstName": "Alex",
+            "lastName": "Remiro",
             "slug": "alex-remiro",
             "shortName": "Á. Remiro",
             "position": "G",
             "jerseyNumber": "1",
             "height": 191,
-            "userCount": 3112,
+            "userCount": 3122,
             "gender": "M",
             "id": 791773,
             "marketValueCurrency": "EUR",
@@ -355,12 +357,14 @@
     {
       "player": {
         "name": "Carlos Soler",
+        "firstName": "Carlos",
+        "lastName": "Soler",
         "slug": "carlos-soler",
         "shortName": "C. Soler",
         "position": "M",
         "jerseyNumber": "18",
         "height": 180,
-        "userCount": 4271,
+        "userCount": 4278,
         "gender": "M",
         "sofascoreId": "Carlos10Soler",
         "id": 832427,
@@ -402,7 +406,7 @@
         "position": "D",
         "jerseyNumber": "24",
         "height": 190,
-        "userCount": 1216,
+        "userCount": 1224,
         "gender": "M",
         "id": 88528,
         "marketValueCurrency": "EUR",
@@ -467,6 +471,8 @@
       },
       "playerOut": {
         "name": "Sergio Gómez",
+        "firstName": "Sergio",
+        "lastName": "Gomez",
         "slug": "sergio-gomez",
         "shortName": "S. Gómez",
         "position": "D",
@@ -521,7 +527,7 @@
         "position": "D",
         "jerseyNumber": "24",
         "height": 190,
-        "userCount": 1216,
+        "userCount": 1224,
         "gender": "M",
         "id": 88528,
         "marketValueCurrency": "EUR",
@@ -552,7 +558,7 @@
             "position": "D",
             "jerseyNumber": "24",
             "height": 190,
-            "userCount": 1216,
+            "userCount": 1224,
             "gender": "M",
             "id": 88528,
             "marketValueCurrency": "EUR",
@@ -578,12 +584,12 @@
           "bodyPart": "right-foot",
           "time": 84,
           "playerCoordinates": {
-            "x": 95,
-            "y": 46
+            "x": 95.5,
+            "y": 47.7
           },
           "gkCoordinates": {
-            "x": 98.2,
-            "y": 49.8
+            "x": 98.9,
+            "y": 48.4
           },
           "goalShotCoordinates": {
             "x": 100,
@@ -595,12 +601,14 @@
           },
           "goalkeeper": {
             "name": "Álex Remiro",
+            "firstName": "Alex",
+            "lastName": "Remiro",
             "slug": "alex-remiro",
             "shortName": "Á. Remiro",
             "position": "G",
             "jerseyNumber": "1",
             "height": 191,
-            "userCount": 3112,
+            "userCount": 3122,
             "gender": "M",
             "id": 791773,
             "marketValueCurrency": "EUR",
@@ -643,7 +651,7 @@
         "position": "M",
         "jerseyNumber": "21",
         "height": 176,
-        "userCount": 512,
+        "userCount": 509,
         "gender": "M",
         "id": 966637,
         "marketValueCurrency": "EUR",
@@ -667,12 +675,14 @@
       },
       "playerOut": {
         "name": "Unai López",
+        "firstName": "Unai",
+        "lastName": "Lopez",
         "slug": "unai-lopez",
         "shortName": "U. López",
         "position": "M",
         "jerseyNumber": "17",
         "height": 169,
-        "userCount": 557,
+        "userCount": 560,
         "gender": "M",
         "id": 588566,
         "marketValueCurrency": "EUR",
@@ -695,11 +705,11 @@
         }
       },
       "id": 126115703,
-      "time": 82,
+      "time": 81,
       "injury": false,
       "isHome": true,
       "incidentClass": "regular",
-      "reversedPeriodTime": 9,
+      "reversedPeriodTime": 10,
       "incidentType": "substitution"
     },
     {
@@ -708,12 +718,14 @@
       "awayScore": 3,
       "player": {
         "name": "Mikel Oyarzabal",
+        "firstName": "Mikel",
+        "lastName": "Oyarzabal",
         "slug": "mikel-oyarzabal",
         "shortName": "M. Oyarzabal",
         "position": "F",
         "jerseyNumber": "10",
         "height": 181,
-        "userCount": 14850,
+        "userCount": 14913,
         "gender": "M",
         "sofascoreId": "mikel10oyar",
         "id": 823622,
@@ -740,12 +752,14 @@
         {
           "player": {
             "name": "Mikel Oyarzabal",
+            "firstName": "Mikel",
+            "lastName": "Oyarzabal",
             "slug": "mikel-oyarzabal",
             "shortName": "M. Oyarzabal",
             "position": "F",
             "jerseyNumber": "10",
             "height": 181,
-            "userCount": 14850,
+            "userCount": 14913,
             "gender": "M",
             "sofascoreId": "mikel10oyar",
             "id": 823622,
@@ -796,7 +810,7 @@
             "position": "G",
             "jerseyNumber": "1",
             "height": 185,
-            "userCount": 216,
+            "userCount": 218,
             "gender": "M",
             "id": 965832,
             "marketValueCurrency": "EUR",
@@ -837,7 +851,7 @@
         "position": "D",
         "jerseyNumber": "2",
         "height": 183,
-        "userCount": 9237,
+        "userCount": 9261,
         "gender": "M",
         "sofascoreId": "Sonic",
         "id": 965031,
@@ -879,7 +893,7 @@
         "position": "M",
         "jerseyNumber": "4",
         "height": 180,
-        "userCount": 589,
+        "userCount": 594,
         "gender": "M",
         "id": 900669,
         "marketValueCurrency": "EUR",
@@ -914,7 +928,7 @@
         "position": "M",
         "jerseyNumber": "15",
         "height": 187,
-        "userCount": 391,
+        "userCount": 392,
         "gender": "M",
         "id": 326471,
         "marketValueCurrency": "EUR",
@@ -983,7 +997,7 @@
         "position": "M",
         "jerseyNumber": "12",
         "height": 184,
-        "userCount": 4334,
+        "userCount": 4325,
         "gender": "M",
         "sofascoreId": "YangelHerrera8",
         "id": 839585,
@@ -1008,12 +1022,14 @@
       },
       "playerOut": {
         "name": "Beñat Turrientes",
+        "firstName": "Benat",
+        "lastName": "Turrientes",
         "slug": "benat-turrientes",
         "shortName": "B. Turrientes",
         "position": "M",
         "jerseyNumber": "8",
         "height": 179,
-        "userCount": 846,
+        "userCount": 852,
         "gender": "M",
         "id": 980410,
         "marketValueCurrency": "EUR",
@@ -1052,7 +1068,7 @@
         "position": "M",
         "jerseyNumber": "4",
         "height": 177,
-        "userCount": 689,
+        "userCount": 690,
         "gender": "M",
         "id": 1216309,
         "marketValueCurrency": "EUR",
@@ -1077,7 +1093,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 186,
-        "userCount": 3057,
+        "userCount": 3082,
         "gender": "M",
         "id": 1026015,
         "marketValueCurrency": "EUR",
@@ -1115,7 +1131,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 182,
-        "userCount": 1402,
+        "userCount": 1416,
         "gender": "M",
         "id": 981604,
         "marketValueCurrency": "EUR",
@@ -1140,7 +1156,7 @@
         "position": "D",
         "jerseyNumber": "32",
         "height": 187,
-        "userCount": 6276,
+        "userCount": 6301,
         "gender": "M",
         "id": 1458073,
         "marketValueCurrency": "EUR",
@@ -1180,7 +1196,7 @@
         "position": "F",
         "jerseyNumber": "19",
         "height": 173,
-        "userCount": 2332,
+        "userCount": 2326,
         "gender": "M",
         "id": 900003,
         "marketValueCurrency": "EUR",
@@ -1204,14 +1220,14 @@
       },
       "playerOut": {
         "name": "Sergio Camello",
-        "firstName": "",
-        "lastName": "",
+        "firstName": "Sergio",
+        "lastName": "Camello",
         "slug": "sergio-camello",
         "shortName": "S. Camello",
         "position": "F",
         "jerseyNumber": "10",
         "height": 177,
-        "userCount": 1018,
+        "userCount": 1028,
         "gender": "M",
         "id": 910024,
         "marketValueCurrency": "EUR",
@@ -1249,7 +1265,7 @@
         "position": "M",
         "jerseyNumber": "4",
         "height": 180,
-        "userCount": 589,
+        "userCount": 594,
         "gender": "M",
         "id": 900669,
         "marketValueCurrency": "EUR",
@@ -1275,7 +1291,7 @@
         "position": "F",
         "jerseyNumber": "14",
         "height": 182,
-        "userCount": 1203,
+        "userCount": 1202,
         "gender": "M",
         "id": 1131581,
         "marketValueCurrency": "EUR",
@@ -1315,7 +1331,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 186,
-        "userCount": 3057,
+        "userCount": 3082,
         "gender": "M",
         "id": 1026015,
         "marketValueCurrency": "EUR",
@@ -1339,6 +1355,8 @@
       },
       "assist1": {
         "name": "Sergio Gómez",
+        "firstName": "Sergio",
+        "lastName": "Gomez",
         "slug": "sergio-gomez",
         "shortName": "S. Gómez",
         "position": "D",
@@ -1376,7 +1394,7 @@
             "position": "F",
             "jerseyNumber": "9",
             "height": 186,
-            "userCount": 3057,
+            "userCount": 3082,
             "gender": "M",
             "id": 1026015,
             "marketValueCurrency": "EUR",
@@ -1423,7 +1441,7 @@
             "position": "M",
             "jerseyNumber": "15",
             "height": 178,
-            "userCount": 548,
+            "userCount": 551,
             "gender": "M",
             "id": 1139409,
             "marketValueCurrency": "EUR",
@@ -1460,6 +1478,8 @@
         {
           "player": {
             "name": "Sergio Gómez",
+            "firstName": "Sergio",
+            "lastName": "Gomez",
             "slug": "sergio-gomez",
             "shortName": "S. Gómez",
             "position": "D",
@@ -1503,12 +1523,14 @@
         {
           "player": {
             "name": "Carlos Soler",
+            "firstName": "Carlos",
+            "lastName": "Soler",
             "slug": "carlos-soler",
             "shortName": "C. Soler",
             "position": "M",
             "jerseyNumber": "18",
             "height": 180,
-            "userCount": 4271,
+            "userCount": 4278,
             "gender": "M",
             "sofascoreId": "Carlos10Soler",
             "id": 832427,
@@ -1546,6 +1568,8 @@
         {
           "player": {
             "name": "Sergio Gómez",
+            "firstName": "Sergio",
+            "lastName": "Gomez",
             "slug": "sergio-gomez",
             "shortName": "S. Gómez",
             "position": "D",
@@ -1578,12 +1602,12 @@
           "isAssist": true,
           "time": 63,
           "playerCoordinates": {
-            "x": 12.5,
-            "y": 38.3
+            "x": 12.8,
+            "y": 41.9
           },
           "passEndCoordinates": {
-            "x": 12,
-            "y": 49.9
+            "x": 12.7,
+            "y": 53.8
           },
           "isHome": false
         },
@@ -1595,7 +1619,7 @@
             "position": "F",
             "jerseyNumber": "9",
             "height": 186,
-            "userCount": 3057,
+            "userCount": 3082,
             "gender": "M",
             "id": 1026015,
             "marketValueCurrency": "EUR",
@@ -1621,8 +1645,8 @@
           "bodyPart": "right-foot",
           "time": 63,
           "playerCoordinates": {
-            "x": 10.9,
-            "y": 52.2
+            "x": 10.5,
+            "y": 54
           },
           "gkCoordinates": {
             "x": 2.5,
@@ -1630,11 +1654,11 @@
           },
           "goalShotCoordinates": {
             "x": 0,
-            "y": 47.4
+            "y": 46.7
           },
           "goalMouthCoordinates": {
-            "x": 36.02,
-            "y": 92.67
+            "x": 32.26,
+            "y": 95.83
           },
           "goalkeeper": {
             "name": "Dani Cárdenas",
@@ -1645,7 +1669,7 @@
             "position": "G",
             "jerseyNumber": "1",
             "height": 185,
-            "userCount": 216,
+            "userCount": 218,
             "gender": "M",
             "id": 965832,
             "marketValueCurrency": "EUR",
@@ -1686,7 +1710,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 186,
-        "userCount": 3057,
+        "userCount": 3082,
         "gender": "M",
         "id": 1026015,
         "marketValueCurrency": "EUR",
@@ -1727,7 +1751,7 @@
         "position": "M",
         "jerseyNumber": "15",
         "height": 178,
-        "userCount": 548,
+        "userCount": 551,
         "gender": "M",
         "id": 1139409,
         "marketValueCurrency": "EUR",
@@ -1756,7 +1780,7 @@
         "position": "M",
         "jerseyNumber": "7",
         "height": 174,
-        "userCount": 2163,
+        "userCount": 2183,
         "gender": "M",
         "id": 966862,
         "marketValueCurrency": "EUR",
@@ -1789,12 +1813,14 @@
     {
       "playerIn": {
         "name": "Luka Sučić",
+        "firstName": "Luka",
+        "lastName": "Sucic",
         "slug": "luka-sucic",
         "shortName": "L. Sučić",
         "position": "M",
         "jerseyNumber": "24",
         "height": 185,
-        "userCount": 6546,
+        "userCount": 6552,
         "gender": "M",
         "sofascoreId": "luka_sucic",
         "id": 949156,
@@ -1819,12 +1845,14 @@
       },
       "playerOut": {
         "name": "Takefusa Kubo",
-        "slug": "kubo-takefusa",
+        "firstName": "Takefusa",
+        "lastName": "Kubo",
+        "slug": "takefusa-kubo",
         "shortName": "T. Kubo",
         "position": "M",
         "jerseyNumber": "14",
         "height": 174,
-        "userCount": 24046,
+        "userCount": 24074,
         "gender": "M",
         "sofascoreId": "KuboTake",
         "id": 880218,
@@ -1865,7 +1893,7 @@
         "position": "M",
         "jerseyNumber": "6",
         "height": 183,
-        "userCount": 5302,
+        "userCount": 5322,
         "gender": "M",
         "id": 913679,
         "marketValueCurrency": "EUR",
@@ -1913,6 +1941,8 @@
     {
       "player": {
         "name": "Sergio Gómez",
+        "firstName": "Sergio",
+        "lastName": "Gomez",
         "slug": "sergio-gomez",
         "shortName": "S. Gómez",
         "position": "D",
@@ -1964,14 +1994,14 @@
       "awayScore": 1,
       "player": {
         "name": "Sergio Camello",
-        "firstName": "",
-        "lastName": "",
+        "firstName": "Sergio",
+        "lastName": "Camello",
         "slug": "sergio-camello",
         "shortName": "S. Camello",
         "position": "F",
         "jerseyNumber": "10",
         "height": 177,
-        "userCount": 1018,
+        "userCount": 1028,
         "gender": "M",
         "id": 910024,
         "marketValueCurrency": "EUR",
@@ -1997,14 +2027,14 @@
         {
           "player": {
             "name": "Sergio Camello",
-            "firstName": "",
-            "lastName": "",
+            "firstName": "Sergio",
+            "lastName": "Camello",
             "slug": "sergio-camello",
             "shortName": "S. Camello",
             "position": "F",
             "jerseyNumber": "10",
             "height": 177,
-            "userCount": 1018,
+            "userCount": 1028,
             "gender": "M",
             "id": 910024,
             "marketValueCurrency": "EUR",
@@ -2030,8 +2060,8 @@
           "bodyPart": "left-foot",
           "time": 30,
           "playerCoordinates": {
-            "x": 91.6,
-            "y": 45.3
+            "x": 92.3,
+            "y": 46.2
           },
           "gkCoordinates": {
             "x": 98.9,
@@ -2047,12 +2077,14 @@
           },
           "goalkeeper": {
             "name": "Álex Remiro",
+            "firstName": "Alex",
+            "lastName": "Remiro",
             "slug": "alex-remiro",
             "shortName": "Á. Remiro",
             "position": "G",
             "jerseyNumber": "1",
             "height": 191,
-            "userCount": 3112,
+            "userCount": 3122,
             "gender": "M",
             "id": 791773,
             "marketValueCurrency": "EUR",
@@ -2137,7 +2169,7 @@
         "position": "F",
         "jerseyNumber": "14",
         "height": 182,
-        "userCount": 1203,
+        "userCount": 1202,
         "gender": "M",
         "id": 1131581,
         "marketValueCurrency": "EUR",
@@ -2171,12 +2203,14 @@
       "awayScore": 1,
       "player": {
         "name": "Mikel Oyarzabal",
+        "firstName": "Mikel",
+        "lastName": "Oyarzabal",
         "slug": "mikel-oyarzabal",
         "shortName": "M. Oyarzabal",
         "position": "F",
         "jerseyNumber": "10",
         "height": 181,
-        "userCount": 14850,
+        "userCount": 14913,
         "gender": "M",
         "sofascoreId": "mikel10oyar",
         "id": 823622,
@@ -2206,7 +2240,7 @@
         "position": "M",
         "jerseyNumber": "7",
         "height": 174,
-        "userCount": 2163,
+        "userCount": 2183,
         "gender": "M",
         "id": 966862,
         "marketValueCurrency": "EUR",
@@ -2237,7 +2271,7 @@
             "position": "M",
             "jerseyNumber": "7",
             "height": 174,
-            "userCount": 2163,
+            "userCount": 2183,
             "gender": "M",
             "id": 966862,
             "marketValueCurrency": "EUR",
@@ -2280,7 +2314,7 @@
             "position": "D",
             "jerseyNumber": "31",
             "height": 185,
-            "userCount": 1575,
+            "userCount": 1598,
             "gender": "M",
             "id": 1466116,
             "marketValueCurrency": "EUR",
@@ -2322,7 +2356,7 @@
             "position": "M",
             "jerseyNumber": "7",
             "height": 174,
-            "userCount": 2163,
+            "userCount": 2183,
             "gender": "M",
             "id": 966862,
             "marketValueCurrency": "EUR",
@@ -2359,54 +2393,14 @@
         {
           "player": {
             "name": "Beñat Turrientes",
+            "firstName": "Benat",
+            "lastName": "Turrientes",
             "slug": "benat-turrientes",
             "shortName": "B. Turrientes",
             "position": "M",
             "jerseyNumber": "8",
             "height": 179,
-            "userCount": 846,
-            "gender": "M",
-            "id": 980410,
-            "marketValueCurrency": "EUR",
-            "dateOfBirthTimestamp": 1012435200,
-            "proposedMarketValueRaw": {
-              "value": 8500000,
-              "currency": "EUR"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "بينات تورينتيس",
-                "bn": "বেনাত তুরিয়েন্তেস",
-                "hi": "बेनात टुरिएंटेस"
-              },
-              "shortNameTranslation": {
-                "ar": "ب. تورينتيس",
-                "bn": "বি. তুরিয়েন্তেস",
-                "hi": "बी. टुरिएंटेस"
-              }
-            }
-          },
-          "eventType": "ball-movement",
-          "time": 22,
-          "playerCoordinates": {
-            "x": 53.8,
-            "y": 60
-          },
-          "passEndCoordinates": {
-            "x": 36,
-            "y": 68.5
-          },
-          "isHome": false
-        },
-        {
-          "player": {
-            "name": "Beñat Turrientes",
-            "slug": "benat-turrientes",
-            "shortName": "B. Turrientes",
-            "position": "M",
-            "jerseyNumber": "8",
-            "height": 179,
-            "userCount": 846,
+            "userCount": 852,
             "gender": "M",
             "id": 980410,
             "marketValueCurrency": "EUR",
@@ -2431,12 +2425,12 @@
           "eventType": "pass",
           "time": 22,
           "playerCoordinates": {
-            "x": 39.6,
-            "y": 56.4
+            "x": 46.4,
+            "y": 56.8
           },
           "passEndCoordinates": {
-            "x": 36,
-            "y": 68.5
+            "x": 42.6,
+            "y": 69.3
           },
           "isHome": false
         },
@@ -2448,7 +2442,7 @@
             "position": "M",
             "jerseyNumber": "7",
             "height": 174,
-            "userCount": 2163,
+            "userCount": 2183,
             "gender": "M",
             "id": 966862,
             "marketValueCurrency": "EUR",
@@ -2474,64 +2468,26 @@
           "isAssist": true,
           "time": 22,
           "playerCoordinates": {
-            "x": 34,
-            "y": 67.5
+            "x": 36.2,
+            "y": 68.1
           },
           "passEndCoordinates": {
-            "x": 24,
-            "y": 63.9
+            "x": 22.5,
+            "y": 64.8
           },
           "isHome": false
         },
         {
           "player": {
             "name": "Mikel Oyarzabal",
+            "firstName": "Mikel",
+            "lastName": "Oyarzabal",
             "slug": "mikel-oyarzabal",
             "shortName": "M. Oyarzabal",
             "position": "F",
             "jerseyNumber": "10",
             "height": 181,
-            "userCount": 14850,
-            "gender": "M",
-            "sofascoreId": "mikel10oyar",
-            "id": 823622,
-            "marketValueCurrency": "EUR",
-            "dateOfBirthTimestamp": 861580800,
-            "proposedMarketValueRaw": {
-              "value": 27000000,
-              "currency": "EUR"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "ميكيل أويارزابال",
-                "bn": "মাইকেল ওয়ারজাবাল",
-                "hi": "मिकेल ओयार्जाबेल"
-              },
-              "shortNameTranslation": {
-                "ar": "م. أويارزابال",
-                "bn": "এম.ওয়ারজাবাল",
-                "hi": "एम. ओयार्जाबेल"
-              }
-            }
-          },
-          "eventType": "ball-movement",
-          "bodyPart": "left-foot",
-          "time": 22,
-          "playerCoordinates": {
-            "x": 24,
-            "y": 63.9
-          },
-          "isHome": false
-        },
-        {
-          "player": {
-            "name": "Mikel Oyarzabal",
-            "slug": "mikel-oyarzabal",
-            "shortName": "M. Oyarzabal",
-            "position": "F",
-            "jerseyNumber": "10",
-            "height": 181,
-            "userCount": 14850,
+            "userCount": 14913,
             "gender": "M",
             "sofascoreId": "mikel10oyar",
             "id": 823622,
@@ -2558,8 +2514,8 @@
           "bodyPart": "left-foot",
           "time": 22,
           "playerCoordinates": {
-            "x": 14.2,
-            "y": 49.7
+            "x": 14.5,
+            "y": 50.3
           },
           "gkCoordinates": {
             "x": 2.4,
@@ -2567,10 +2523,10 @@
           },
           "goalShotCoordinates": {
             "x": 0,
-            "y": 53.5
+            "y": 53.9
           },
           "goalMouthCoordinates": {
-            "x": 68.82,
+            "x": 70.97,
             "y": 93.67
           },
           "goalkeeper": {
@@ -2582,7 +2538,7 @@
             "position": "G",
             "jerseyNumber": "1",
             "height": 185,
-            "userCount": 216,
+            "userCount": 218,
             "gender": "M",
             "id": 965832,
             "marketValueCurrency": "EUR",
@@ -2660,12 +2616,14 @@
     {
       "player": {
         "name": "Takefusa Kubo",
-        "slug": "kubo-takefusa",
+        "firstName": "Takefusa",
+        "lastName": "Kubo",
+        "slug": "takefusa-kubo",
         "shortName": "T. Kubo",
         "position": "M",
         "jerseyNumber": "14",
         "height": 174,
-        "userCount": 24046,
+        "userCount": 24074,
         "gender": "M",
         "sofascoreId": "KuboTake",
         "id": 880218,
@@ -2706,7 +2664,7 @@
         "position": "D",
         "jerseyNumber": "32",
         "height": 187,
-        "userCount": 6276,
+        "userCount": 6301,
         "gender": "M",
         "id": 1458073,
         "marketValueCurrency": "EUR",

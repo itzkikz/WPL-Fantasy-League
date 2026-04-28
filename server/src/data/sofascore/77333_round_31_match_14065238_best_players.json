@@ -5,12 +5,14 @@
       "label": "rating",
       "player": {
         "name": "Said El Mala",
-        "slug": "el-mala-said",
-        "shortName": "S. E. Mala",
+        "firstName": "Said",
+        "lastName": "El Mala",
+        "slug": "said-el-mala",
+        "shortName": "S. El Mala",
         "position": "M",
         "jerseyNumber": "13",
         "height": 185,
-        "userCount": 3141,
+        "userCount": 3150,
         "gender": "M",
         "id": 1800475,
         "marketValueCurrency": "EUR",
@@ -18,14 +20,6 @@
         "proposedMarketValueRaw": {
           "value": 36000000,
           "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "الملا، سعيد"
-          },
-          "shortNameTranslation": {
-            "ar": "س. الملا"
-          }
         }
       }
     },
@@ -41,7 +35,7 @@
         "position": "F",
         "jerseyNumber": "7",
         "height": 181,
-        "userCount": 729,
+        "userCount": 727,
         "gender": "M",
         "id": 319861,
         "marketValueCurrency": "EUR",
@@ -68,8 +62,10 @@
       "value": "7.2",
       "label": "rating",
       "player": {
-        "name": "Jan Thielmann",
-        "slug": "thielmann-jan",
+        "name": "Jan Uwe Thielmann",
+        "firstName": "Jan Uwe",
+        "lastName": "Thielmann",
+        "slug": "jan-uwe-thielmann",
         "shortName": "J. Thielmann",
         "position": "M",
         "jerseyNumber": "29",
@@ -85,12 +81,10 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "ثيلمان، جان",
             "bn": "থিয়েলম্যান, জান",
             "hi": "थिएलमैन, जान"
           },
           "shortNameTranslation": {
-            "ar": "ج. ثيلمان",
             "bn": "জে. থিয়েলম্যান",
             "hi": "जे. थिएलमैन"
           }
@@ -109,7 +103,7 @@
         "position": "G",
         "jerseyNumber": "28",
         "height": 193,
-        "userCount": 736,
+        "userCount": 739,
         "gender": "M",
         "id": 96832,
         "marketValueCurrency": "EUR",
@@ -137,12 +131,14 @@
       "label": "rating",
       "player": {
         "name": "Edmond Tapsoba",
+        "firstName": "Edmond",
+        "lastName": "Tapsoba",
         "slug": "edmond-tapsoba",
         "shortName": "E. Tapsoba",
         "position": "D",
         "jerseyNumber": "12",
         "height": 193,
-        "userCount": 36991,
+        "userCount": 37085,
         "gender": "M",
         "sofascoreId": "edmondtapsoba",
         "id": 883262,
@@ -178,7 +174,7 @@
         "position": "F",
         "jerseyNumber": "14",
         "height": 191,
-        "userCount": 11272,
+        "userCount": 11281,
         "gender": "M",
         "sofascoreId": "p_shicky",
         "id": 280609,
@@ -213,7 +209,7 @@
       "position": "G",
       "jerseyNumber": "28",
       "height": 193,
-      "userCount": 736,
+      "userCount": 739,
       "gender": "M",
       "id": 96832,
       "marketValueCurrency": "EUR",

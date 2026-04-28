@@ -12,7 +12,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 189,
-          "userCount": 13519,
+          "userCount": 13536,
           "gender": "M",
           "sofascoreId": "gerorulli",
           "country": {
@@ -90,12 +90,14 @@
       {
         "player": {
           "name": "Benjamin Pavard",
+          "firstName": "Benjamin",
+          "lastName": "Pavard",
           "slug": "benjamin-pavard",
           "shortName": "B. Pavard",
           "position": "D",
           "jerseyNumber": "28",
           "height": 186,
-          "userCount": 10986,
+          "userCount": 11003,
           "gender": "M",
           "sofascoreId": "benpavard21",
           "country": {
@@ -185,7 +187,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 188,
-          "userCount": 7119,
+          "userCount": 7139,
           "gender": "M",
           "sofascoreId": "leobalerdi5",
           "country": {
@@ -282,7 +284,7 @@
           "position": "D",
           "jerseyNumber": "32",
           "height": 184,
-          "userCount": 4485,
+          "userCount": 4495,
           "gender": "M",
           "country": {
             "alpha2": "AR",
@@ -368,15 +370,15 @@
       },
       {
         "player": {
-          "name": "Timothy Weah",
-          "firstName": "",
-          "lastName": "",
-          "slug": "weah-timothy",
+          "name": "Tim Weah",
+          "firstName": "Tim",
+          "lastName": "Weah",
+          "slug": "tim-weah",
           "shortName": "T. Weah",
           "position": "M",
           "jerseyNumber": "22",
           "height": 185,
-          "userCount": 11625,
+          "userCount": 11636,
           "gender": "M",
           "sofascoreId": "timothyweah",
           "country": {
@@ -394,12 +396,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "وياه، تيموثي",
               "bn": "ওহ, টিমোথি",
               "hi": "वेआह, टिमोथी"
             },
             "shortNameTranslation": {
-              "ar": "ت. وياه",
               "bn": "টি. ওহ",
               "hi": "टी. वेआह"
             }
@@ -455,15 +455,15 @@
       },
       {
         "player": {
-          "name": "Pierre Emile Hojbjerg",
-          "firstName": "Pierre Emile",
-          "lastName": "Hojbjerg",
+          "name": "Pierre-Emile Højbjerg",
+          "firstName": "Pierre-Emile",
+          "lastName": "Højbjerg",
           "slug": "pierre-emile-hojbjerg",
-          "shortName": "P. Hojbjerg",
+          "shortName": "P. Højbjerg",
           "position": "M",
           "jerseyNumber": "23",
           "height": 185,
-          "userCount": 4572,
+          "userCount": 4594,
           "gender": "M",
           "sofascoreId": "hojbjerg23",
           "country": {
@@ -548,14 +548,14 @@
       {
         "player": {
           "name": "Quinten Timber",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Quinten",
+          "lastName": "Timber",
           "slug": "quinten-timber",
           "shortName": "Q. Timber",
           "position": "M",
           "jerseyNumber": "27",
           "height": 177,
-          "userCount": 8659,
+          "userCount": 8683,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -647,7 +647,7 @@
           "position": "M",
           "jerseyNumber": "14",
           "height": 168,
-          "userCount": 12772,
+          "userCount": 12779,
           "gender": "M",
           "country": {
             "alpha2": "BR",
@@ -744,7 +744,7 @@
           "position": "F",
           "jerseyNumber": "10",
           "height": 181,
-          "userCount": 65627,
+          "userCount": 65728,
           "gender": "M",
           "sofascoreId": "MGreenwood",
           "country": {
@@ -830,12 +830,14 @@
       {
         "player": {
           "name": "Amine Gouiri",
+          "firstName": "Amine",
+          "lastName": "Gouiri",
           "slug": "amine-gouiri",
           "shortName": "A. Gouiri",
           "position": "F",
           "jerseyNumber": "9",
           "height": 180,
-          "userCount": 29213,
+          "userCount": 29276,
           "gender": "M",
           "sofascoreId": "amine_gouiri",
           "country": {
@@ -929,7 +931,7 @@
           "position": "F",
           "jerseyNumber": "17",
           "height": 187,
-          "userCount": 49718,
+          "userCount": 49818,
           "gender": "M",
           "sofascoreId": "Auba",
           "country": {
@@ -1024,7 +1026,7 @@
           "position": "M",
           "jerseyNumber": "18",
           "height": 180,
-          "userCount": 4690,
+          "userCount": 4701,
           "gender": "M",
           "sofascoreId": "arthurvermeeren",
           "country": {
@@ -1106,7 +1108,7 @@
           "position": "M",
           "jerseyNumber": "20",
           "height": 177,
-          "userCount": 3180,
+          "userCount": 3186,
           "gender": "M",
           "country": {
             "alpha2": "CI",
@@ -1187,7 +1189,7 @@
           "position": "M",
           "jerseyNumber": "6",
           "height": 176,
-          "userCount": 1113,
+          "userCount": 1143,
           "gender": "M",
           "country": {
             "alpha2": "NG",
@@ -1264,7 +1266,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 185,
-          "userCount": 7907,
+          "userCount": 7921,
           "gender": "M",
           "country": {
             "alpha2": "DZ",
@@ -1309,13 +1311,15 @@
       },
       {
         "player": {
-          "name": "Jeffrey de Lange",
+          "name": "Jeffrey De Lange",
+          "firstName": "Jeffrey",
+          "lastName": "De Lange",
           "slug": "jeffrey-de-lange",
-          "shortName": "J. de Lange",
+          "shortName": "J. De Lange",
           "position": "G",
           "jerseyNumber": "12",
           "height": 188,
-          "userCount": 629,
+          "userCount": 632,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -1329,14 +1333,6 @@
           "proposedMarketValueRaw": {
             "value": 2100000,
             "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "جيفري دي لانج"
-            },
-            "shortNameTranslation": {
-              "ar": "ج. دي لانج"
-            }
           }
         },
         "teamId": 1641,
@@ -1362,7 +1358,7 @@
           "position": "D",
           "jerseyNumber": "33",
           "height": 176,
-          "userCount": 2421,
+          "userCount": 2429,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1411,7 +1407,7 @@
           "position": "M",
           "jerseyNumber": "26",
           "height": 178,
-          "userCount": 4807,
+          "userCount": 4816,
           "gender": "M",
           "country": {
             "alpha2": "MA",
@@ -1460,7 +1456,7 @@
           "position": "M",
           "jerseyNumber": "11",
           "height": 176,
-          "userCount": 28439,
+          "userCount": 28467,
           "gender": "M",
           "sofascoreId": "ethan_nwaneri",
           "country": {
@@ -1512,7 +1508,7 @@
           "position": "F",
           "jerseyNumber": "78",
           "height": 179,
-          "userCount": 143,
+          "userCount": 145,
           "gender": "M",
           "country": {
             "alpha2": "CI",
@@ -1571,7 +1567,7 @@
           "position": "D",
           "jerseyNumber": "4",
           "height": 183,
-          "userCount": 1135,
+          "userCount": 1137,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -1613,7 +1609,7 @@
           "position": "M",
           "jerseyNumber": "19",
           "height": 188,
-          "userCount": 2514,
+          "userCount": 2528,
           "gender": "M",
           "country": {
             "alpha2": "CF",
@@ -1650,14 +1646,14 @@
       {
         "player": {
           "name": "Nayef Aguerd",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Nayef",
+          "lastName": "Aguerd",
           "slug": "nayef-aguerd",
           "shortName": "N. Aguerd",
           "position": "D",
           "jerseyNumber": "21",
           "height": 188,
-          "userCount": 25367,
+          "userCount": 25384,
           "gender": "M",
           "sofascoreId": "nayefaguard",
           "country": {
@@ -1705,7 +1701,7 @@
           "position": "G",
           "jerseyNumber": "61",
           "height": 195,
-          "userCount": 1127,
+          "userCount": 1136,
           "gender": "M",
           "country": {
             "alpha2": "SN",
@@ -1778,12 +1774,14 @@
       {
         "player": {
           "name": "Koffi Kouao",
-          "slug": "kouao-koffi",
+          "firstName": "Koffi",
+          "lastName": "Kouao",
+          "slug": "koffi-kouao",
           "shortName": "K. Kouao",
           "position": "D",
           "jerseyNumber": "39",
           "height": 173,
-          "userCount": 365,
+          "userCount": 367,
           "gender": "M",
           "country": {
             "alpha2": "CI",
@@ -1871,7 +1869,7 @@
           "position": "D",
           "jerseyNumber": "38",
           "height": 185,
-          "userCount": 845,
+          "userCount": 851,
           "gender": "M",
           "country": {
             "alpha2": "SN",
@@ -1959,7 +1957,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 186,
-          "userCount": 1329,
+          "userCount": 1331,
           "gender": "M",
           "country": {
             "alpha2": "CI",
@@ -2049,7 +2047,7 @@
           "position": "D",
           "jerseyNumber": "2",
           "height": 179,
-          "userCount": 55,
+          "userCount": 56,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2137,7 +2135,7 @@
           "position": "M",
           "jerseyNumber": "20",
           "height": 178,
-          "userCount": 128,
+          "userCount": 129,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2228,7 +2226,7 @@
           "position": "M",
           "jerseyNumber": "12",
           "height": 180,
-          "userCount": 700,
+          "userCount": 706,
           "gender": "M",
           "country": {
             "alpha2": "SN",
@@ -2305,7 +2303,7 @@
           "position": "D",
           "jerseyNumber": "70",
           "height": 177,
-          "userCount": 1613,
+          "userCount": 1623,
           "gender": "M",
           "country": {
             "alpha2": "SN",
@@ -2396,12 +2394,14 @@
       {
         "player": {
           "name": "Gauthier Hein",
+          "firstName": "Gauthier",
+          "lastName": "Hein",
           "slug": "gauthier-hein",
           "shortName": "G. Hein",
           "position": "M",
           "jerseyNumber": "10",
           "height": 170,
-          "userCount": 627,
+          "userCount": 641,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2488,13 +2488,15 @@
       },
       {
         "player": {
-          "name": "Georgiy Tsitaishvili",
+          "name": "Giorgi Tsitaishvili",
+          "firstName": "Giorgi",
+          "lastName": "Tsitaishvili",
           "slug": "giorgi-tsitaishvili",
           "shortName": "G. Tsitaishvili",
           "position": "M",
           "jerseyNumber": "7",
           "height": 171,
-          "userCount": 1513,
+          "userCount": 1516,
           "gender": "M",
           "country": {
             "alpha2": "GE",
@@ -2511,12 +2513,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "جيورجيي تسيتايشفيلي",
               "bn": "জিওর্জি সিতাইশভিলি",
               "hi": "जियोर्जी त्सिताइशविली"
             },
             "shortNameTranslation": {
-              "ar": "ج. تسيتايشفيلي",
               "bn": "জি. সিতাইশভিলি",
               "hi": "जी. त्सिताइशविली"
             }
@@ -2582,13 +2582,15 @@
       },
       {
         "player": {
-          "name": "Habib Diallo",
-          "slug": "habib-diallo",
+          "name": "Habibou Diallo",
+          "firstName": "Habibou",
+          "lastName": "Diallo",
+          "slug": "habibou-diallo",
           "shortName": "H. Diallo",
           "position": "F",
           "jerseyNumber": "30",
           "height": 186,
-          "userCount": 7590,
+          "userCount": 7587,
           "gender": "M",
           "sofascoreId": "habibdiallo28",
           "country": {
@@ -2606,12 +2608,10 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "حبيب ديالو",
               "bn": "হাবিব দিয়ালো",
               "hi": "हबीब डायलो"
             },
             "shortNameTranslation": {
-              "ar": "ح. ديالو",
               "bn": "এইচ. দিয়ালো",
               "hi": "एच. डायलो"
             }
@@ -2668,7 +2668,7 @@
           "position": "F",
           "jerseyNumber": "34",
           "height": 179,
-          "userCount": 392,
+          "userCount": 446,
           "gender": "M",
           "country": {
             "alpha2": "CD",
@@ -2721,8 +2721,8 @@
       {
         "player": {
           "name": "Fodé Ballo-Touré",
-          "firstName": "",
-          "lastName": "",
+          "firstName": "Fode",
+          "lastName": "Ballo-Toure",
           "slug": "fode-ballo-toure",
           "shortName": "F. Ballo-Touré",
           "position": "D",
@@ -2804,7 +2804,7 @@
           "position": "F",
           "jerseyNumber": "19",
           "height": 167,
-          "userCount": 617,
+          "userCount": 618,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2861,7 +2861,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 197,
-          "userCount": 279,
+          "userCount": 278,
           "gender": "M",
           "country": {
             "alpha2": "DK",
@@ -2908,7 +2908,7 @@
           "position": "D",
           "jerseyNumber": "4",
           "height": 183,
-          "userCount": 296,
+          "userCount": 302,
           "gender": "M",
           "country": {
             "alpha2": "GA",
@@ -2955,7 +2955,7 @@
           "position": "D",
           "jerseyNumber": "15",
           "height": 195,
-          "userCount": 371,
+          "userCount": 376,
           "gender": "M",
           "country": {
             "alpha2": "GH",
@@ -3053,7 +3053,7 @@
           "position": "M",
           "jerseyNumber": "9",
           "height": 175,
-          "userCount": 528,
+          "userCount": 531,
           "gender": "M",
           "country": {
             "alpha2": "GE",
@@ -3104,7 +3104,7 @@
           "position": "F",
           "jerseyNumber": "11",
           "height": 191,
-          "userCount": 589,
+          "userCount": 607,
           "gender": "M",
           "country": {
             "alpha2": "GE",
@@ -3169,7 +3169,7 @@
           "position": "M",
           "jerseyNumber": "33",
           "height": 188,
-          "userCount": 284,
+          "userCount": 285,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3202,6 +3202,8 @@
       {
         "player": {
           "name": "Boubacar Traoré",
+          "firstName": "Boubacar",
+          "lastName": "Traore",
           "slug": "boubacar-traore",
           "shortName": "B. Traoré",
           "position": "M",
@@ -3250,7 +3252,7 @@
           "shortName": "I. Guerti",
           "position": "M",
           "jerseyNumber": "29",
-          "userCount": 258,
+          "userCount": 257,
           "country": {
             "alpha2": "MA",
             "alpha3": "MAR",
@@ -3284,7 +3286,7 @@
           "position": "D",
           "jerseyNumber": "2",
           "height": 179,
-          "userCount": 55,
+          "userCount": 56,
           "gender": "M",
           "country": {
             "alpha2": "FR",
