@@ -4,8 +4,8 @@
       "type": "total",
       "descriptions": [],
       "tieBreakingRule": {
-        "text": "In the event that two (or more) teams have an equal number of points, the following rules break the tie: 1. Goal difference 2. Goals scored 3. H2H",
-        "id": 2393
+        "text": "In the event that two (or more) teams have an equal number of points, the following rules break the tie:\n1. Goal difference\n2. H2H (Points, Goal difference) - applied if both matches between the clubs have been played\n3. Goals scored",
+        "id": 10460
       },
       "rows": [
         {
@@ -19,7 +19,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 3122444,
+            "userCount": 3172771,
             "nameCode": "PSG",
             "disabled": false,
             "national": false,
@@ -54,14 +54,14 @@
             "id": 804
           },
           "position": 1,
-          "matches": 30,
+          "matches": 31,
           "wins": 22,
-          "scoresFor": 68,
-          "scoresAgainst": 25,
+          "scoresFor": 70,
+          "scoresAgainst": 27,
           "id": 1662426,
           "losses": 5,
-          "draws": 3,
-          "points": 69,
+          "draws": 4,
+          "points": 70,
           "scoreDiffFormatted": "+43"
         },
         {
@@ -75,7 +75,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 201476,
+            "userCount": 203447,
             "nameCode": "RCL",
             "disabled": false,
             "national": false,
@@ -108,14 +108,14 @@
             "id": 804
           },
           "position": 2,
-          "matches": 30,
+          "matches": 31,
           "wins": 20,
-          "scoresFor": 60,
-          "scoresAgainst": 32,
+          "scoresFor": 61,
+          "scoresAgainst": 33,
           "id": 1662427,
           "losses": 7,
-          "draws": 3,
-          "points": 63,
+          "draws": 4,
+          "points": 64,
           "scoreDiffFormatted": "+28"
         },
         {
@@ -129,7 +129,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 527405,
+            "userCount": 528475,
             "nameCode": "OL",
             "disabled": false,
             "national": false,
@@ -185,7 +185,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 313432,
+            "userCount": 313876,
             "nameCode": "LIL",
             "disabled": false,
             "national": false,
@@ -239,7 +239,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 127867,
+            "userCount": 128049,
             "nameCode": "SR",
             "disabled": false,
             "national": false,
@@ -286,62 +286,6 @@
         },
         {
           "team": {
-            "name": "Olympique de Marseille",
-            "slug": "olympique-de-marseille",
-            "shortName": "Marseille",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 653144,
-            "nameCode": "OM",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1641,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#66b3ff",
-              "text": "#66b3ff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "أولمبيك دي مارسيليا",
-                "ru": "Олимпик Марсель"
-              },
-              "shortNameTranslation": {
-                "ar": "مارسيليا",
-                "bn": "মার্সেই",
-                "hi": "मार्सिले"
-              }
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Conference League Qualification",
-            "id": 503
-          },
-          "position": 6,
-          "matches": 31,
-          "wins": 16,
-          "scoresFor": 59,
-          "scoresAgainst": 41,
-          "id": 1662424,
-          "losses": 10,
-          "draws": 5,
-          "points": 53,
-          "scoreDiffFormatted": "+18"
-        },
-        {
-          "team": {
             "name": "AS Monaco",
             "slug": "as-monaco",
             "shortName": "AS Monaco",
@@ -351,7 +295,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 514895,
+            "userCount": 515439,
             "nameCode": "ASM",
             "disabled": false,
             "national": false,
@@ -381,16 +325,72 @@
             }
           },
           "descriptions": [],
-          "position": 7,
-          "matches": 31,
-          "wins": 15,
-          "scoresFor": 54,
-          "scoresAgainst": 47,
+          "promotion": {
+            "text": "Conference League Qualification",
+            "id": 503
+          },
+          "position": 6,
+          "matches": 32,
+          "wins": 16,
+          "scoresFor": 56,
+          "scoresAgainst": 48,
           "id": 1662416,
           "losses": 10,
           "draws": 6,
-          "points": 51,
-          "scoreDiffFormatted": "+7"
+          "points": 54,
+          "scoreDiffFormatted": "+8"
+        },
+        {
+          "team": {
+            "name": "Olympique de Marseille",
+            "slug": "olympique-de-marseille",
+            "shortName": "Marseille",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 654815,
+            "nameCode": "OM",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1641,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#66b3ff",
+              "text": "#66b3ff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "أولمبيك دي مارسيليا",
+                "ru": "Олимпик Марсель"
+              },
+              "shortNameTranslation": {
+                "ar": "مارسيليا",
+                "bn": "মার্সেই",
+                "hi": "मार्सिले"
+              }
+            }
+          },
+          "descriptions": [],
+          "position": 7,
+          "matches": 32,
+          "wins": 16,
+          "scoresFor": 59,
+          "scoresAgainst": 44,
+          "id": 1662424,
+          "losses": 11,
+          "draws": 5,
+          "points": 53,
+          "scoreDiffFormatted": "+15"
         },
         {
           "team": {
@@ -403,7 +403,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 151932,
+            "userCount": 154426,
             "nameCode": "STR",
             "disabled": false,
             "national": false,
@@ -455,7 +455,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 58899,
+            "userCount": 59038,
             "nameCode": "FCL",
             "disabled": false,
             "national": false,
@@ -484,14 +484,14 @@
           },
           "descriptions": [],
           "position": 9,
-          "matches": 31,
+          "matches": 32,
           "wins": 10,
-          "scoresFor": 42,
-          "scoresAgainst": 47,
+          "scoresFor": 44,
+          "scoresAgainst": 49,
           "id": 1662417,
           "losses": 10,
-          "draws": 11,
-          "points": 41,
+          "draws": 12,
+          "points": 42,
           "scoreDiffFormatted": "-5"
         },
         {
@@ -505,7 +505,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 86857,
+            "userCount": 86908,
             "nameCode": "TFC",
             "disabled": false,
             "national": false,
@@ -555,7 +555,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 111100,
+            "userCount": 111140,
             "nameCode": "BRE",
             "disabled": false,
             "national": false,
@@ -607,7 +607,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 68555,
+            "userCount": 68558,
             "nameCode": "PFC",
             "disabled": false,
             "national": false,
@@ -660,7 +660,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 56067,
+            "userCount": 56084,
             "nameCode": "ANG",
             "disabled": false,
             "national": false,
@@ -710,7 +710,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 54003,
+            "userCount": 54017,
             "nameCode": "HAC",
             "disabled": false,
             "national": false,
@@ -760,7 +760,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 154608,
+            "userCount": 154801,
             "nameCode": "OGC",
             "disabled": false,
             "national": false,
@@ -789,14 +789,14 @@
           },
           "descriptions": [],
           "position": 15,
-          "matches": 31,
+          "matches": 32,
           "wins": 7,
-          "scoresFor": 35,
-          "scoresAgainst": 57,
+          "scoresFor": 36,
+          "scoresAgainst": 58,
           "id": 1662422,
           "losses": 15,
-          "draws": 9,
-          "points": 30,
+          "draws": 10,
+          "points": 31,
           "scoreDiffFormatted": "-22"
         },
         {
@@ -810,7 +810,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 51328,
+            "userCount": 51375,
             "nameCode": "AJA",
             "disabled": false,
             "national": false,
@@ -864,7 +864,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 84965,
+            "userCount": 85241,
             "nameCode": "FCN",
             "disabled": false,
             "national": false,
@@ -897,15 +897,15 @@
             "id": 3
           },
           "position": 17,
-          "matches": 31,
-          "wins": 4,
-          "scoresFor": 26,
+          "matches": 32,
+          "wins": 5,
+          "scoresFor": 29,
           "scoresAgainst": 51,
           "id": 1662419,
           "losses": 19,
           "draws": 8,
-          "points": 20,
-          "scoreDiffFormatted": "-25"
+          "points": 23,
+          "scoreDiffFormatted": "-22"
         },
         {
           "team": {
@@ -918,7 +918,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 55014,
+            "userCount": 55111,
             "nameCode": "FCM",
             "disabled": false,
             "national": false,
@@ -951,15 +951,15 @@
             "id": 3
           },
           "position": 18,
-          "matches": 31,
+          "matches": 32,
           "wins": 3,
-          "scoresFor": 31,
-          "scoresAgainst": 70,
+          "scoresFor": 32,
+          "scoresAgainst": 72,
           "id": 1662418,
-          "losses": 21,
+          "losses": 22,
           "draws": 7,
           "points": 16,
-          "scoreDiffFormatted": "-39"
+          "scoreDiffFormatted": "-40"
         }
       ],
       "id": 180283,
@@ -1027,7 +1027,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 431834,
+          "userCount": 433056,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 34,
@@ -1055,7 +1055,7 @@
         }
       },
       "name": "Ligue 1 25/26",
-      "updatedAtTimestamp": 1777270942
+      "updatedAtTimestamp": 1777762464
     }
   ]
 }

@@ -19,7 +19,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 2753881,
+            "userCount": 2808407,
             "nameCode": "FCB",
             "disabled": false,
             "national": false,
@@ -54,14 +54,14 @@
             "id": 804
           },
           "position": 1,
-          "matches": 31,
+          "matches": 32,
           "wins": 26,
-          "scoresFor": 113,
-          "scoresAgainst": 32,
+          "scoresFor": 116,
+          "scoresAgainst": 35,
           "id": 1661886,
           "losses": 1,
-          "draws": 4,
-          "points": 82,
+          "draws": 5,
+          "points": 83,
           "scoreDiffFormatted": "+81"
         },
         {
@@ -75,7 +75,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 1388707,
+            "userCount": 1391964,
             "nameCode": "BVB",
             "disabled": false,
             "national": false,
@@ -132,7 +132,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 401641,
+            "userCount": 402164,
             "nameCode": "RBL",
             "disabled": false,
             "national": false,
@@ -168,15 +168,71 @@
             "id": 804
           },
           "position": 3,
-          "matches": 31,
+          "matches": 32,
           "wins": 19,
-          "scoresFor": 62,
-          "scoresAgainst": 38,
+          "scoresFor": 63,
+          "scoresAgainst": 42,
           "id": 1661897,
-          "losses": 7,
+          "losses": 8,
           "draws": 5,
           "points": 62,
-          "scoreDiffFormatted": "+24"
+          "scoreDiffFormatted": "+21"
+        },
+        {
+          "team": {
+            "name": "Bayer 04 Leverkusen",
+            "slug": "bayer-04-leverkusen",
+            "shortName": "Leverkusen",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 1050858,
+            "nameCode": "B04",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "DE",
+              "alpha3": "DEU",
+              "name": "Germany",
+              "slug": "germany"
+            },
+            "id": 2681,
+            "teamColors": {
+              "primary": "#000000",
+              "secondary": "#ff2222",
+              "text": "#ff2222"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "باير 04 ليفركوزن",
+                "ru": "Байер Леверкузен"
+              },
+              "shortNameTranslation": {
+                "ar": "ليفركوزن",
+                "bn": "লেভারকুসেন",
+                "hi": "लेवरकुसेन"
+              }
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "Champions League",
+            "id": 804
+          },
+          "position": 4,
+          "matches": 32,
+          "wins": 17,
+          "scoresFor": 66,
+          "scoresAgainst": 43,
+          "id": 1661885,
+          "losses": 8,
+          "draws": 7,
+          "points": 58,
+          "scoreDiffFormatted": "+23"
         },
         {
           "team": {
@@ -189,7 +245,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 255124,
+            "userCount": 257303,
             "nameCode": "VFB",
             "disabled": false,
             "national": false,
@@ -221,18 +277,18 @@
           },
           "descriptions": [],
           "promotion": {
-            "text": "Champions League",
-            "id": 804
+            "text": "UEFA Europa League",
+            "id": 808
           },
-          "position": 4,
-          "matches": 31,
+          "position": 5,
+          "matches": 32,
           "wins": 17,
-          "scoresFor": 63,
-          "scoresAgainst": 43,
+          "scoresFor": 66,
+          "scoresAgainst": 46,
           "id": 1661905,
           "losses": 8,
-          "draws": 6,
-          "points": 57,
+          "draws": 7,
+          "points": 58,
           "scoreDiffFormatted": "+20"
         },
         {
@@ -246,7 +302,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 104100,
+            "userCount": 104328,
             "nameCode": "TSG",
             "disabled": false,
             "national": false,
@@ -281,72 +337,16 @@
             "text": "UEFA Europa League",
             "id": 808
           },
-          "position": 5,
-          "matches": 31,
+          "position": 6,
+          "matches": 32,
           "wins": 17,
-          "scoresFor": 61,
-          "scoresAgainst": 45,
+          "scoresFor": 64,
+          "scoresAgainst": 48,
           "id": 1661901,
           "losses": 8,
-          "draws": 6,
-          "points": 57,
-          "scoreDiffFormatted": "+16"
-        },
-        {
-          "team": {
-            "name": "Bayer 04 Leverkusen",
-            "slug": "bayer-04-leverkusen",
-            "shortName": "Leverkusen",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 1048498,
-            "nameCode": "B04",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "DE",
-              "alpha3": "DEU",
-              "name": "Germany",
-              "slug": "germany"
-            },
-            "id": 2681,
-            "teamColors": {
-              "primary": "#000000",
-              "secondary": "#ff2222",
-              "text": "#ff2222"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "باير 04 ليفركوزن",
-                "ru": "Байер Леверкузен"
-              },
-              "shortNameTranslation": {
-                "ar": "ليفركوزن",
-                "bn": "লেভারকুসেন",
-                "hi": "लेवरकुसेन"
-              }
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "UEFA Europa League",
-            "id": 808
-          },
-          "position": 6,
-          "matches": 31,
-          "wins": 16,
-          "scoresFor": 62,
-          "scoresAgainst": 42,
-          "id": 1661885,
-          "losses": 8,
           "draws": 7,
-          "points": 55,
-          "scoreDiffFormatted": "+20"
+          "points": 58,
+          "scoreDiffFormatted": "+16"
         },
         {
           "team": {
@@ -359,7 +359,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 273454,
+            "userCount": 273876,
             "nameCode": "SGE",
             "disabled": false,
             "national": false,
@@ -395,15 +395,15 @@
             "id": 503
           },
           "position": 7,
-          "matches": 31,
+          "matches": 32,
           "wins": 11,
-          "scoresFor": 56,
-          "scoresAgainst": 58,
+          "scoresFor": 57,
+          "scoresAgainst": 60,
           "id": 1661889,
-          "losses": 10,
+          "losses": 11,
           "draws": 10,
           "points": 43,
-          "scoreDiffFormatted": "-2"
+          "scoreDiffFormatted": "-3"
         },
         {
           "team": {
@@ -416,7 +416,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 132944,
+            "userCount": 134969,
             "nameCode": "SCF",
             "disabled": false,
             "national": false,
@@ -469,7 +469,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 78182,
+            "userCount": 78260,
             "nameCode": "FCA",
             "disabled": false,
             "national": false,
@@ -501,15 +501,15 @@
           },
           "descriptions": [],
           "position": 9,
-          "matches": 31,
-          "wins": 10,
-          "scoresFor": 39,
-          "scoresAgainst": 55,
+          "matches": 32,
+          "wins": 11,
+          "scoresFor": 42,
+          "scoresAgainst": 56,
           "id": 1661890,
           "losses": 14,
           "draws": 7,
-          "points": 37,
-          "scoreDiffFormatted": "-16"
+          "points": 40,
+          "scoreDiffFormatted": "-14"
         },
         {
           "team": {
@@ -522,7 +522,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 105478,
+            "userCount": 105490,
             "nameCode": "M05",
             "disabled": false,
             "national": false,
@@ -565,214 +565,6 @@
         },
         {
           "team": {
-            "name": "Borussia M'gladbach",
-            "slug": "borussia-mgladbach",
-            "shortName": "M'gladbach",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 114375,
-            "nameCode": "BMG",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "DE",
-              "alpha3": "DEU",
-              "name": "Germany",
-              "slug": "germany"
-            },
-            "id": 2527,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#000000",
-              "text": "#000000"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "بوروسيا م'غلادباخ",
-                "ru": "Боруссия Мёнхенгладбах"
-              },
-              "shortNameTranslation": {
-                "ar": "م'غلادباخ",
-                "bn": "এম'গ্লাডবাখ",
-                "hi": "एम'ग्लैडबाक"
-              }
-            }
-          },
-          "descriptions": [],
-          "position": 11,
-          "matches": 31,
-          "wins": 7,
-          "scoresFor": 36,
-          "scoresAgainst": 50,
-          "id": 1661888,
-          "losses": 13,
-          "draws": 11,
-          "points": 32,
-          "scoreDiffFormatted": "-14"
-        },
-        {
-          "team": {
-            "name": "SV Werder Bremen",
-            "slug": "sv-werder-bremen",
-            "shortName": "Bremen",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 90326,
-            "nameCode": "SVW",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "DE",
-              "alpha3": "DEU",
-              "name": "Germany",
-              "slug": "germany"
-            },
-            "id": 2534,
-            "teamColors": {
-              "primary": "#009966",
-              "secondary": "#ffffff",
-              "text": "#ffffff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "إس في فيردر بريمن",
-                "ru": "Вердер Бремен"
-              },
-              "shortNameTranslation": {
-                "ar": "بريمن",
-                "bn": "ব্রেমেন",
-                "hi": "ब्रेमन"
-              }
-            }
-          },
-          "descriptions": [],
-          "position": 12,
-          "matches": 31,
-          "wins": 8,
-          "scoresFor": 36,
-          "scoresAgainst": 54,
-          "id": 1661909,
-          "losses": 15,
-          "draws": 8,
-          "points": 32,
-          "scoreDiffFormatted": "-18"
-        },
-        {
-          "team": {
-            "name": "1. FC Union Berlin",
-            "slug": "1-fc-union-berlin",
-            "shortName": "Union Berlin",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 129384,
-            "nameCode": "FCU",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "DE",
-              "alpha3": "DEU",
-              "name": "Germany",
-              "slug": "germany"
-            },
-            "id": 2547,
-            "teamColors": {
-              "primary": "#ff0000",
-              "secondary": "#ffffff",
-              "text": "#ffffff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "1 إف سي يونيون برلين",
-                "ru": "Унион Берлин"
-              },
-              "shortNameTranslation": {
-                "ar": "يونيون برلين",
-                "bn": "ইউনিয়ন বার্লিন",
-                "hi": "यूनियन बर्लिन"
-              }
-            }
-          },
-          "descriptions": [],
-          "position": 13,
-          "matches": 31,
-          "wins": 8,
-          "scoresFor": 35,
-          "scoresAgainst": 55,
-          "id": 1661903,
-          "losses": 15,
-          "draws": 8,
-          "points": 32,
-          "scoreDiffFormatted": "-20"
-        },
-        {
-          "team": {
-            "name": "1. FC Köln",
-            "slug": "1-fc-koln",
-            "shortName": "Köln",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 83680,
-            "nameCode": "KOE",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "DE",
-              "alpha3": "DEU",
-              "name": "Germany",
-              "slug": "germany"
-            },
-            "id": 2671,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#e30613",
-              "text": "#e30613"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "1. إف سي كولن",
-                "ru": "Кёльн"
-              },
-              "shortNameTranslation": {
-                "ar": "كولن",
-                "bn": "কোলন",
-                "hi": "कोलन"
-              }
-            }
-          },
-          "descriptions": [],
-          "position": 14,
-          "matches": 31,
-          "wins": 7,
-          "scoresFor": 45,
-          "scoresAgainst": 53,
-          "id": 1661883,
-          "losses": 14,
-          "draws": 10,
-          "points": 31,
-          "scoreDiffFormatted": "-8"
-        },
-        {
-          "team": {
             "name": "Hamburger SV",
             "slug": "hamburger-sv",
             "shortName": "HSV",
@@ -782,7 +574,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 86722,
+            "userCount": 86887,
             "nameCode": "HSV",
             "disabled": false,
             "national": false,
@@ -813,16 +605,224 @@
             }
           },
           "descriptions": [],
-          "position": 15,
-          "matches": 31,
-          "wins": 7,
-          "scoresFor": 34,
-          "scoresAgainst": 50,
+          "position": 11,
+          "matches": 32,
+          "wins": 8,
+          "scoresFor": 36,
+          "scoresAgainst": 51,
           "id": 1661895,
           "losses": 14,
           "draws": 10,
-          "points": 31,
-          "scoreDiffFormatted": "-16"
+          "points": 34,
+          "scoreDiffFormatted": "-15"
+        },
+        {
+          "team": {
+            "name": "1. FC Union Berlin",
+            "slug": "1-fc-union-berlin",
+            "shortName": "Union Berlin",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 129590,
+            "nameCode": "FCU",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "DE",
+              "alpha3": "DEU",
+              "name": "Germany",
+              "slug": "germany"
+            },
+            "id": 2547,
+            "teamColors": {
+              "primary": "#ff0000",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "1 إف سي يونيون برلين",
+                "ru": "Унион Берлин"
+              },
+              "shortNameTranslation": {
+                "ar": "يونيون برلين",
+                "bn": "ইউনিয়ন বার্লিন",
+                "hi": "यूनियन बर्लिन"
+              }
+            }
+          },
+          "descriptions": [],
+          "position": 12,
+          "matches": 32,
+          "wins": 8,
+          "scoresFor": 37,
+          "scoresAgainst": 57,
+          "id": 1661903,
+          "losses": 15,
+          "draws": 9,
+          "points": 33,
+          "scoreDiffFormatted": "-20"
+        },
+        {
+          "team": {
+            "name": "1. FC Köln",
+            "slug": "1-fc-koln",
+            "shortName": "Köln",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 83803,
+            "nameCode": "KOE",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "DE",
+              "alpha3": "DEU",
+              "name": "Germany",
+              "slug": "germany"
+            },
+            "id": 2671,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#e30613",
+              "text": "#e30613"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "1. إف سي كولن",
+                "ru": "Кёльн"
+              },
+              "shortNameTranslation": {
+                "ar": "كولن",
+                "bn": "কোলন",
+                "hi": "कोलन"
+              }
+            }
+          },
+          "descriptions": [],
+          "position": 13,
+          "matches": 32,
+          "wins": 7,
+          "scoresFor": 47,
+          "scoresAgainst": 55,
+          "id": 1661883,
+          "losses": 14,
+          "draws": 11,
+          "points": 32,
+          "scoreDiffFormatted": "-8"
+        },
+        {
+          "team": {
+            "name": "Borussia M'gladbach",
+            "slug": "borussia-mgladbach",
+            "shortName": "M'gladbach",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 114451,
+            "nameCode": "BMG",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "DE",
+              "alpha3": "DEU",
+              "name": "Germany",
+              "slug": "germany"
+            },
+            "id": 2527,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#000000",
+              "text": "#000000"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "بوروسيا م'غلادباخ",
+                "ru": "Боруссия Мёнхенгладбах"
+              },
+              "shortNameTranslation": {
+                "ar": "م'غلادباخ",
+                "bn": "এম'গ্লাডবাখ",
+                "hi": "एम'ग्लैडबाक"
+              }
+            }
+          },
+          "descriptions": [],
+          "position": 14,
+          "matches": 31,
+          "wins": 7,
+          "scoresFor": 36,
+          "scoresAgainst": 50,
+          "id": 1661888,
+          "losses": 13,
+          "draws": 11,
+          "points": 32,
+          "scoreDiffFormatted": "-14"
+        },
+        {
+          "team": {
+            "name": "SV Werder Bremen",
+            "slug": "sv-werder-bremen",
+            "shortName": "Bremen",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 90463,
+            "nameCode": "SVW",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "DE",
+              "alpha3": "DEU",
+              "name": "Germany",
+              "slug": "germany"
+            },
+            "id": 2534,
+            "teamColors": {
+              "primary": "#009966",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "إس في فيردر بريمن",
+                "ru": "Вердер Бремен"
+              },
+              "shortNameTranslation": {
+                "ar": "بريمن",
+                "bn": "ব্রেমেন",
+                "hi": "ब्रेमन"
+              }
+            }
+          },
+          "descriptions": [],
+          "position": 15,
+          "matches": 32,
+          "wins": 8,
+          "scoresFor": 37,
+          "scoresAgainst": 57,
+          "id": 1661909,
+          "losses": 16,
+          "draws": 8,
+          "points": 32,
+          "scoreDiffFormatted": "-20"
         },
         {
           "team": {
@@ -835,7 +835,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 84754,
+            "userCount": 84844,
             "nameCode": "STP",
             "disabled": false,
             "national": false,
@@ -888,7 +888,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 106488,
+            "userCount": 106560,
             "nameCode": "WOB",
             "disabled": false,
             "national": false,
@@ -945,7 +945,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 66126,
+            "userCount": 66353,
             "nameCode": "SCH",
             "disabled": false,
             "national": false,
@@ -981,14 +981,14 @@
             "id": 3
           },
           "position": 18,
-          "matches": 31,
+          "matches": 32,
           "wins": 5,
-          "scoresFor": 35,
-          "scoresAgainst": 66,
+          "scoresFor": 38,
+          "scoresAgainst": 69,
           "id": 1661884,
           "losses": 19,
-          "draws": 7,
-          "points": 22,
+          "draws": 8,
+          "points": 23,
           "scoreDiffFormatted": "-31"
         }
       ],
@@ -1057,7 +1057,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 528036,
+          "userCount": 529349,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 35,
@@ -1085,7 +1085,7 @@
         }
       },
       "name": "Bundesliga 25/26",
-      "updatedAtTimestamp": 1777303534
+      "updatedAtTimestamp": 1777749967
     }
   ]
 }
