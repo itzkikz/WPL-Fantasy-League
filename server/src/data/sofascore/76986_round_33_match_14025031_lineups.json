@@ -12,7 +12,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 188,
-          "userCount": 9890,
+          "userCount": 9899,
           "gender": "M",
           "sofascoreId": "caoimhinkelleher98",
           "country": {
@@ -94,7 +94,7 @@
           "position": "D",
           "jerseyNumber": "33",
           "height": 179,
-          "userCount": 2865,
+          "userCount": 2861,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -269,7 +269,7 @@
           "position": "D",
           "jerseyNumber": "22",
           "height": 193,
-          "userCount": 1649,
+          "userCount": 1646,
           "gender": "M",
           "country": {
             "alpha2": "IE",
@@ -362,7 +362,7 @@
           "position": "D",
           "jerseyNumber": "23",
           "height": 170,
-          "userCount": 1163,
+          "userCount": 1161,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -461,7 +461,7 @@
           "position": "M",
           "jerseyNumber": "18",
           "height": 180,
-          "userCount": 2705,
+          "userCount": 2713,
           "gender": "M",
           "country": {
             "alpha2": "UA",
@@ -549,7 +549,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 180,
-          "userCount": 1208,
+          "userCount": 1219,
           "gender": "M",
           "country": {
             "alpha2": "DK",
@@ -639,7 +639,7 @@
           "position": "M",
           "jerseyNumber": "19",
           "height": 177,
-          "userCount": 37090,
+          "userCount": 37218,
           "gender": "M",
           "sofascoreId": "d.ouattara15",
           "country": {
@@ -736,7 +736,7 @@
           "position": "M",
           "jerseyNumber": "24",
           "height": 180,
-          "userCount": 3885,
+          "userCount": 3893,
           "gender": "M",
           "country": {
             "alpha2": "DK",
@@ -830,7 +830,7 @@
           "position": "M",
           "jerseyNumber": "7",
           "height": 183,
-          "userCount": 3561,
+          "userCount": 3563,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -925,7 +925,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 191,
-          "userCount": 40237,
+          "userCount": 40722,
           "gender": "M",
           "country": {
             "alpha2": "BR",
@@ -1070,7 +1070,7 @@
           "position": "D",
           "jerseyNumber": "2",
           "height": 185,
-          "userCount": 864,
+          "userCount": 866,
           "gender": "M",
           "country": {
             "alpha2": "SX",
@@ -1121,7 +1121,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 194,
-          "userCount": 1257,
+          "userCount": 1259,
           "gender": "M",
           "country": {
             "alpha2": "JM",
@@ -1172,7 +1172,7 @@
           "position": "D",
           "jerseyNumber": "20",
           "height": 196,
-          "userCount": 1209,
+          "userCount": 1207,
           "gender": "M",
           "country": {
             "alpha2": "NO",
@@ -1203,6 +1203,39 @@
         "teamId": 50,
         "shirtNumber": 20,
         "jerseyNumber": "20",
+        "position": "D",
+        "substitute": true,
+        "statistics": {
+          "totalShots": 0,
+          "statisticsType": {
+            "sportSlug": "football",
+            "statisticsType": "player"
+          }
+        }
+      },
+      {
+        "player": {
+          "name": "Ollie Shield",
+          "firstName": "Ollie Shield",
+          "slug": "ollie-shield",
+          "shortName": "O. Shield",
+          "position": "D",
+          "jerseyNumber": "49",
+          "userCount": 34,
+          "gender": "M",
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 2469397,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 1159142400
+        },
+        "teamId": 258657,
+        "shirtNumber": 49,
+        "jerseyNumber": "49",
         "position": "D",
         "substitute": true,
         "statistics": {
@@ -1265,7 +1298,7 @@
           "position": "M",
           "jerseyNumber": "11",
           "height": 175,
-          "userCount": 4855,
+          "userCount": 4864,
           "gender": "M",
           "sofascoreId": "reissnelson",
           "country": {
@@ -1335,43 +1368,10 @@
             }
           }
         },
-        "teamId": 50,
+        "teamId": 258657,
         "shirtNumber": 48,
         "jerseyNumber": "48",
         "position": "M",
-        "substitute": true,
-        "statistics": {
-          "totalShots": 0,
-          "statisticsType": {
-            "sportSlug": "football",
-            "statisticsType": "player"
-          }
-        }
-      },
-      {
-        "player": {
-          "name": "Ollie Shield",
-          "firstName": "Ollie Shield",
-          "slug": "ollie-shield",
-          "shortName": "O. Shield",
-          "position": "F",
-          "jerseyNumber": "49",
-          "userCount": 33,
-          "gender": "M",
-          "country": {
-            "alpha2": "EN",
-            "alpha3": "ENG",
-            "name": "England",
-            "slug": "england"
-          },
-          "id": 2469397,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 1159142400
-        },
-        "teamId": 50,
-        "shirtNumber": 49,
-        "jerseyNumber": "49",
-        "position": "D",
         "substitute": true,
         "statistics": {
           "totalShots": 0,
@@ -1454,7 +1454,7 @@
           "position": "M",
           "jerseyNumber": "17",
           "height": 179,
-          "userCount": 1647,
+          "userCount": 1655,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -1498,7 +1498,7 @@
           "position": "F",
           "jerseyNumber": "14",
           "height": 170,
-          "userCount": 4091,
+          "userCount": 4094,
           "gender": "M",
           "sofascoreId": "_fabio.10",
           "country": {
@@ -1535,56 +1535,13 @@
       },
       {
         "player": {
-          "name": "Jordan Henderson",
-          "slug": "jordan-henderson",
-          "shortName": "J. Henderson",
-          "position": "M",
-          "jerseyNumber": "6",
-          "height": 183,
-          "userCount": 6404,
-          "gender": "M",
-          "sofascoreId": "jordanhenderson",
-          "country": {
-            "alpha2": "EN",
-            "alpha3": "ENG",
-            "name": "England",
-            "slug": "england"
-          },
-          "id": 42694,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 645580800,
-          "proposedMarketValueRaw": {
-            "value": 2200000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "جوردان هندرسون",
-              "bn": "জর্ডান হেন্ডারসন",
-              "hi": "जॉर्डन हेंडरसन"
-            },
-            "shortNameTranslation": {
-              "ar": "ج. هندرسون",
-              "bn": "জে. হেন্ডারসন",
-              "hi": "जे. हेंडरसन"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Knock Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-10T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Kaye Furo",
           "slug": "kaye-iyowuna-furo",
           "shortName": "K. I. Furo",
           "position": "F",
           "jerseyNumber": "47",
           "height": 190,
-          "userCount": 805,
+          "userCount": 809,
           "gender": "M",
           "country": {
             "alpha2": "BE",
@@ -1624,7 +1581,7 @@
           "position": "D",
           "jerseyNumber": "3",
           "height": 175,
-          "userCount": 778,
+          "userCount": 782,
           "gender": "M",
           "country": {
             "alpha2": "JM",
@@ -1656,7 +1613,7 @@
         "reason": 1,
         "description": "Hamstring Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-10T00:00:00+00:00"
+        "expectedEndDate": "2026-05-20T00:00:00+00:00"
       },
       {
         "player": {
@@ -1700,7 +1657,50 @@
         "reason": 1,
         "description": "Knock Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-10T00:00:00+00:00"
+        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+      },
+      {
+        "player": {
+          "name": "Jordan Henderson",
+          "slug": "jordan-henderson",
+          "shortName": "J. Henderson",
+          "position": "M",
+          "jerseyNumber": "6",
+          "height": 183,
+          "userCount": 6422,
+          "gender": "M",
+          "sofascoreId": "jordanhenderson",
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 42694,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 645580800,
+          "proposedMarketValueRaw": {
+            "value": 2200000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "جوردان هندرسون",
+              "bn": "জর্ডান হেন্ডারসন",
+              "hi": "जॉर्डन हेंडरसन"
+            },
+            "shortNameTranslation": {
+              "ar": "ج. هندرسون",
+              "bn": "জে. হেন্ডারসন",
+              "hi": "जे. हेंडरसन"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Knock Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-18T04:00:34+00:00"
       },
       {
         "player": {
@@ -1712,7 +1712,7 @@
           "position": "M",
           "jerseyNumber": "10",
           "height": 184,
-          "userCount": 495,
+          "userCount": 500,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -1758,7 +1758,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 190,
-          "userCount": 2681,
+          "userCount": 2687,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -1934,7 +1934,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 190,
-          "userCount": 2486,
+          "userCount": 2483,
           "gender": "M",
           "country": {
             "alpha2": "DK",
@@ -2026,7 +2026,7 @@
           "position": "D",
           "jerseyNumber": "3",
           "height": 185,
-          "userCount": 8639,
+          "userCount": 8636,
           "gender": "M",
           "country": {
             "alpha2": "NG",
@@ -2119,7 +2119,7 @@
           "position": "D",
           "jerseyNumber": "30",
           "height": 178,
-          "userCount": 1833,
+          "userCount": 1916,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -2205,15 +2205,13 @@
       },
       {
         "player": {
-          "name": "Sasa Lukic",
-          "firstName": "Sasa",
-          "lastName": "Lukic",
+          "name": "Saša Lukić",
           "slug": "sasa-lukic",
-          "shortName": "S. Lukic",
+          "shortName": "S. Lukić",
           "position": "M",
           "jerseyNumber": "20",
           "height": 183,
-          "userCount": 2127,
+          "userCount": 2131,
           "gender": "M",
           "country": {
             "alpha2": "RS",
@@ -2303,7 +2301,7 @@
           "position": "M",
           "jerseyNumber": "10",
           "height": 185,
-          "userCount": 810,
+          "userCount": 813,
           "gender": "M",
           "country": {
             "alpha2": "SX",
@@ -2392,7 +2390,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 173,
-          "userCount": 5560,
+          "userCount": 5566,
           "gender": "M",
           "country": {
             "alpha2": "WA",
@@ -2490,7 +2488,7 @@
           "position": "M",
           "jerseyNumber": "32",
           "height": 182,
-          "userCount": 7325,
+          "userCount": 7338,
           "gender": "M",
           "sofascoreId": "esr",
           "country": {
@@ -2580,7 +2578,7 @@
           "position": "M",
           "jerseyNumber": "17",
           "height": 183,
-          "userCount": 8499,
+          "userCount": 8511,
           "gender": "M",
           "sofascoreId": "alexanderiwobi",
           "country": {
@@ -2666,7 +2664,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 184,
-          "userCount": 4548,
+          "userCount": 4565,
           "gender": "M",
           "sofascoreId": "RodrigoMuniz019",
           "country": {
@@ -2750,7 +2748,7 @@
           "position": "F",
           "jerseyNumber": "19",
           "height": 172,
-          "userCount": 21640,
+          "userCount": 21656,
           "gender": "M",
           "sofascoreId": "chukwuezesamuel8",
           "country": {
@@ -2834,7 +2832,7 @@
           "position": "M",
           "jerseyNumber": "24",
           "height": 172,
-          "userCount": 1929,
+          "userCount": 1932,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -2903,15 +2901,13 @@
       },
       {
         "player": {
-          "name": "Raul Jimenez",
-          "firstName": "Raul",
-          "lastName": "Jimenez",
+          "name": "Raúl Jiménez",
           "slug": "raul-jimenez",
-          "shortName": "R. Jimenez",
+          "shortName": "R. Jiménez",
           "position": "F",
           "jerseyNumber": "7",
           "height": 189,
-          "userCount": 19376,
+          "userCount": 19405,
           "gender": "M",
           "sofascoreId": "RJimenez9",
           "country": {
@@ -2994,7 +2990,7 @@
           "position": "D",
           "jerseyNumber": "33",
           "height": 183,
-          "userCount": 2940,
+          "userCount": 2949,
           "gender": "M",
           "country": {
             "alpha2": "US",
@@ -3076,7 +3072,7 @@
           "position": "M",
           "jerseyNumber": "14",
           "height": 174,
-          "userCount": 20880,
+          "userCount": 20898,
           "gender": "M",
           "sofascoreId": "oscarbobb",
           "country": {
@@ -3214,7 +3210,7 @@
           "position": "D",
           "jerseyNumber": "31",
           "height": 194,
-          "userCount": 5742,
+          "userCount": 5889,
           "gender": "M",
           "country": {
             "alpha2": "MA",
@@ -3265,7 +3261,7 @@
           "position": "M",
           "jerseyNumber": "6",
           "height": 176,
-          "userCount": 375,
+          "userCount": 376,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -3316,7 +3312,7 @@
           "position": "M",
           "jerseyNumber": "16",
           "height": 195,
-          "userCount": 2191,
+          "userCount": 2190,
           "gender": "M",
           "country": {
             "alpha2": "NO",
@@ -3383,7 +3379,7 @@
           "position": "M",
           "jerseyNumber": "17",
           "height": 183,
-          "userCount": 8499,
+          "userCount": 8511,
           "gender": "M",
           "sofascoreId": "alexanderiwobi",
           "country": {
@@ -3420,50 +3416,6 @@
       },
       {
         "player": {
-          "name": "Kenny Tete",
-          "firstName": "Kenny",
-          "lastName": "Tete",
-          "slug": "kenny-tete",
-          "shortName": "K. Tete",
-          "position": "D",
-          "jerseyNumber": "2",
-          "height": 180,
-          "userCount": 1170,
-          "gender": "M",
-          "country": {
-            "alpha2": "NL",
-            "alpha3": "NLD",
-            "name": "Netherlands",
-            "slug": "netherlands"
-          },
-          "id": 190877,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 813196800,
-          "proposedMarketValueRaw": {
-            "value": 11900000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "كيني تيتي",
-              "bn": "কেনি টেটে",
-              "hi": "केनी टेटे"
-            },
-            "shortNameTranslation": {
-              "ar": "ك. تيتي",
-              "bn": "কে. টেটে",
-              "hi": "के. टेटे"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Foot Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-10T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Kevin",
           "firstName": "Kevin",
           "slug": "kevin",
@@ -3471,7 +3423,7 @@
           "position": "M",
           "jerseyNumber": "22",
           "height": 176,
-          "userCount": 5661,
+          "userCount": 5670,
           "gender": "M",
           "country": {
             "alpha2": "BR",
@@ -3504,6 +3456,50 @@
         "description": "Foot Injury",
         "externalType": 72,
         "expectedEndDate": "2026-05-03T00:00:00+00:00"
+      },
+      {
+        "player": {
+          "name": "Kenny Tete",
+          "firstName": "Kenny",
+          "lastName": "Tete",
+          "slug": "kenny-tete",
+          "shortName": "K. Tete",
+          "position": "D",
+          "jerseyNumber": "2",
+          "height": 180,
+          "userCount": 1173,
+          "gender": "M",
+          "country": {
+            "alpha2": "NL",
+            "alpha3": "NLD",
+            "name": "Netherlands",
+            "slug": "netherlands"
+          },
+          "id": 190877,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 813196800,
+          "proposedMarketValueRaw": {
+            "value": 11900000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "كيني تيتي",
+              "bn": "কেনি টেটে",
+              "hi": "केनी टेटे"
+            },
+            "shortNameTranslation": {
+              "ar": "ك. تيتي",
+              "bn": "কে. টেটে",
+              "hi": "के. टेटे"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Foot Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-17T12:00:41+00:00"
       }
     ]
   },

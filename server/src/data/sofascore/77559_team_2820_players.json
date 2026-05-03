@@ -79,7 +79,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -137,7 +137,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -150,7 +150,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -185,9 +185,22 @@
         "height": 173,
         "dateOfBirth": "2003-07-13T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 16466,
+        "userCount": 16501,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Calf Injury",
+          "status": "out",
+          "expectedReturn": 7,
+          "id": 21539,
+          "startDateTimestamp": 1777420800,
+          "updateDateTimestamp": 1777780837,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "ES",
           "alpha3": "ESP",
@@ -197,6 +210,7 @@
         "id": 1145642,
         "shirtNumber": 21,
         "dateOfBirthTimestamp": 1058054400,
+        "contractUntilTimestamp": 1909008000,
         "proposedMarketValue": 19400000,
         "proposedMarketValueRaw": {
           "value": 19400000,
@@ -291,7 +305,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -349,7 +363,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -362,7 +376,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -399,7 +413,7 @@
         "dateOfBirth": "1991-07-22T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 9808,
+        "userCount": 9810,
         "gender": "M",
         "sofascoreId": "budimir_ante",
         "country": {
@@ -510,7 +524,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -568,7 +582,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -581,7 +595,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -616,7 +630,7 @@
         "height": 192,
         "dateOfBirth": "2000-11-03T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 925,
+        "userCount": 931,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -729,7 +743,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -787,7 +801,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -800,7 +814,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -956,7 +970,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -1014,7 +1028,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -1027,7 +1041,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -1064,7 +1078,7 @@
         "height": 178,
         "dateOfBirth": "1997-04-04T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 194,
+        "userCount": 195,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -1093,422 +1107,6 @@
             "hi": "के. बार्जा"
           }
         }
-      }
-    },
-    {
-      "player": {
-        "name": "Roberto Arroyo",
-        "firstName": "",
-        "lastName": "",
-        "slug": "roberto-arroyo",
-        "shortName": "R. Arroyo",
-        "team": {
-          "name": "Osasuna",
-          "slug": "osasuna",
-          "shortName": "Osasuna",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "LaLiga",
-            "slug": "laliga",
-            "category": {
-              "name": "Spain",
-              "slug": "spain",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 9,
-              "country": {
-                "alpha2": "ES",
-                "alpha3": "ESP",
-                "name": "Spain",
-                "slug": "spain"
-              },
-              "id": 32,
-              "flag": "spain",
-              "alpha2": "ES",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إسبانيا",
-                  "bn": "স্পেন",
-                  "hi": "स्पेन",
-                  "ru": "Испания"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "LaLiga",
-              "slug": "laliga",
-              "primaryColorHex": "#2f4a89",
-              "secondaryColorHex": "#f4a32e",
-              "category": {
-                "name": "Spain",
-                "slug": "spain",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 9,
-                "country": {
-                  "alpha2": "ES",
-                  "alpha3": "ESP",
-                  "name": "Spain",
-                  "slug": "spain"
-                },
-                "id": 32,
-                "flag": "spain",
-                "alpha2": "ES",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إسبانيا",
-                    "bn": "স্পেন",
-                    "hi": "स्पेन",
-                    "ru": "Испания"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 842742,
-              "country": {},
-              "id": 8,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإسباني",
-                  "hi": "ला लिगा",
-                  "bn": "লা লীগা"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 699,
-            "isLive": false,
-            "id": 36,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "ला लीगा",
-                "ar": "الدوري الإسباني",
-                "bn": "লা লীগা"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "LaLiga",
-            "slug": "laliga",
-            "primaryColorHex": "#2f4a89",
-            "secondaryColorHex": "#f4a32e",
-            "category": {
-              "name": "Spain",
-              "slug": "spain",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 9,
-              "country": {
-                "alpha2": "ES",
-                "alpha3": "ESP",
-                "name": "Spain",
-                "slug": "spain"
-              },
-              "id": 32,
-              "flag": "spain",
-              "alpha2": "ES",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إسبانيا",
-                  "bn": "স্পেন",
-                  "hi": "स्पेन",
-                  "ru": "Испания"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 842742,
-            "country": {},
-            "id": 8,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإسباني",
-                "hi": "ला लिगा",
-                "bn": "লা লীগা"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 190355,
-          "nameCode": "OSA",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "ES",
-            "alpha3": "ESP",
-            "name": "Spain",
-            "slug": "spain"
-          },
-          "id": 2820,
-          "teamColors": {
-            "primary": "#cc0000",
-            "secondary": "#14213d",
-            "text": "#14213d"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "أوساسونا",
-              "bn": "ওসাসুনা",
-              "hi": "ओसासुना",
-              "ru": "Осасуна"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "position": "F",
-        "positionsDetailed": [
-          "ST"
-        ],
-        "jerseyNumber": "37",
-        "height": 181,
-        "dateOfBirth": "2003-08-25T00:00:00+00:00",
-        "preferredFoot": "Both",
-        "retired": false,
-        "userCount": 29,
-        "gender": "M",
-        "country": {
-          "alpha2": "ES",
-          "alpha3": "ESP",
-          "name": "Spain",
-          "slug": "spain"
-        },
-        "id": 1137585,
-        "shirtNumber": 37,
-        "dateOfBirthTimestamp": 1061769600,
-        "contractUntilTimestamp": 1782777600,
-        "proposedMarketValue": 275000,
-        "proposedMarketValueRaw": {
-          "value": 275000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "روبرتو أرويو",
-            "bn": "রবার্তো অ্যারোয়ো",
-            "hi": "रॉबर्टो अरोयो"
-          },
-          "shortNameTranslation": {
-            "ar": "ر. أرويو",
-            "bn": "আর. অরোয়ো",
-            "hi": "आर. अरोयो"
-          }
-        }
-      }
-    },
-    {
-      "player": {
-        "name": "Aly Kall Doumbia Cisse",
-        "firstName": "Aly Kall",
-        "lastName": "Doumbia Cisse",
-        "slug": "aly-kall-doumbia-cisse",
-        "shortName": "A. Doumbia Cisse",
-        "team": {
-          "name": "Osasuna",
-          "slug": "osasuna",
-          "shortName": "Osasuna",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "LaLiga",
-            "slug": "laliga",
-            "category": {
-              "name": "Spain",
-              "slug": "spain",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 9,
-              "country": {
-                "alpha2": "ES",
-                "alpha3": "ESP",
-                "name": "Spain",
-                "slug": "spain"
-              },
-              "id": 32,
-              "flag": "spain",
-              "alpha2": "ES",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إسبانيا",
-                  "bn": "স্পেন",
-                  "hi": "स्पेन",
-                  "ru": "Испания"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "LaLiga",
-              "slug": "laliga",
-              "primaryColorHex": "#2f4a89",
-              "secondaryColorHex": "#f4a32e",
-              "category": {
-                "name": "Spain",
-                "slug": "spain",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 9,
-                "country": {
-                  "alpha2": "ES",
-                  "alpha3": "ESP",
-                  "name": "Spain",
-                  "slug": "spain"
-                },
-                "id": 32,
-                "flag": "spain",
-                "alpha2": "ES",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إسبانيا",
-                    "bn": "স্পেন",
-                    "hi": "स्पेन",
-                    "ru": "Испания"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 842742,
-              "country": {},
-              "id": 8,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإسباني",
-                  "hi": "ला लिगा",
-                  "bn": "লা লীগা"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 699,
-            "isLive": false,
-            "id": 36,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "ला लीगा",
-                "ar": "الدوري الإسباني",
-                "bn": "লা লীগা"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "LaLiga",
-            "slug": "laliga",
-            "primaryColorHex": "#2f4a89",
-            "secondaryColorHex": "#f4a32e",
-            "category": {
-              "name": "Spain",
-              "slug": "spain",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 9,
-              "country": {
-                "alpha2": "ES",
-                "alpha3": "ESP",
-                "name": "Spain",
-                "slug": "spain"
-              },
-              "id": 32,
-              "flag": "spain",
-              "alpha2": "ES",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إسبانيا",
-                  "bn": "স্পেন",
-                  "hi": "स्पेन",
-                  "ru": "Испания"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 842742,
-            "country": {},
-            "id": 8,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإسباني",
-                "hi": "ला लिगा",
-                "bn": "লা লীগা"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 190355,
-          "nameCode": "OSA",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "ES",
-            "alpha3": "ESP",
-            "name": "Spain",
-            "slug": "spain"
-          },
-          "id": 2820,
-          "teamColors": {
-            "primary": "#cc0000",
-            "secondary": "#14213d",
-            "text": "#14213d"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "أوساسونا",
-              "bn": "ওসাসুনা",
-              "hi": "ओसासुना",
-              "ru": "Осасуна"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "position": "F",
-        "jerseyNumber": "47",
-        "dateOfBirth": "2007-11-06T00:00:00+00:00",
-        "userCount": 22,
-        "deceased": false,
-        "gender": "M",
-        "country": {
-          "alpha2": "ES",
-          "alpha3": "ESP",
-          "name": "Spain",
-          "slug": "spain"
-        },
-        "id": 2425119,
-        "shirtNumber": 47,
-        "dateOfBirthTimestamp": 1194307200,
-        "contractUntilTimestamp": 1877472000
       }
     },
     {
@@ -1592,7 +1190,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -1650,7 +1248,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -1663,7 +1261,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -1698,7 +1296,7 @@
         "height": 169,
         "dateOfBirth": "2002-12-05T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 1545,
+        "userCount": 1547,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -1710,9 +1308,9 @@
         "shirtNumber": 18,
         "dateOfBirthTimestamp": 1039046400,
         "contractUntilTimestamp": 1940544000,
-        "proposedMarketValue": 6700000,
+        "proposedMarketValue": 4800000,
         "proposedMarketValueRaw": {
-          "value": 6700000,
+          "value": 4800000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -1810,7 +1408,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -1868,7 +1466,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -1881,7 +1479,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -1917,16 +1515,8 @@
         "height": 177,
         "dateOfBirth": "2001-11-27T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 1308,
+        "userCount": 1312,
         "gender": "M",
-        "injury": {
-          "reason": "Knee Injury",
-          "status": "out",
-          "id": 14382,
-          "startDateTimestamp": 1768694400,
-          "updateDateTimestamp": 1768996865,
-          "endDateTimestamp": 1769299200
-        },
         "country": {
           "alpha2": "ES",
           "alpha3": "ESP",
@@ -1958,11 +1548,9 @@
     },
     {
       "player": {
-        "name": "Ruben Garcia",
-        "firstName": "Ruben",
-        "lastName": "Garcia",
+        "name": "Rubén García",
         "slug": "ruben-garcia",
-        "shortName": "R. Garcia",
+        "shortName": "R. García",
         "team": {
           "name": "Osasuna",
           "slug": "osasuna",
@@ -2037,7 +1625,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -2095,7 +1683,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -2108,7 +1696,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -2145,7 +1733,7 @@
         "dateOfBirth": "1993-07-14T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 1070,
+        "userCount": 1075,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -2254,7 +1842,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -2312,7 +1900,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -2325,7 +1913,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -2395,11 +1983,9 @@
     },
     {
       "player": {
-        "name": "Lucas Torro",
-        "firstName": "Lucas",
-        "lastName": "Torro",
+        "name": "Lucas Torró",
         "slug": "lucas-torro",
-        "shortName": "L. Torro",
+        "shortName": "L. Torró",
         "team": {
           "name": "Osasuna",
           "slug": "osasuna",
@@ -2474,7 +2060,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -2532,7 +2118,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -2545,7 +2131,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -2583,7 +2169,7 @@
         "dateOfBirth": "1994-07-19T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 693,
+        "userCount": 694,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -2614,11 +2200,9 @@
     },
     {
       "player": {
-        "name": "Moi Gomez",
-        "firstName": "Moi",
-        "lastName": "Gomez",
+        "name": "Moi Gómez",
         "slug": "moi-gomez",
-        "shortName": "M. Gomez",
+        "shortName": "M. Gómez",
         "team": {
           "name": "Osasuna",
           "slug": "osasuna",
@@ -2693,7 +2277,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -2751,7 +2335,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -2764,7 +2348,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -2801,7 +2385,7 @@
         "height": 174,
         "dateOfBirth": "1994-06-23T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 604,
+        "userCount": 608,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -2911,7 +2495,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -2969,7 +2553,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -2982,7 +2566,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -3018,7 +2602,7 @@
         "height": 179,
         "dateOfBirth": "2002-11-05T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 267,
+        "userCount": 268,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -3029,7 +2613,7 @@
         "id": 1119586,
         "shirtNumber": 8,
         "dateOfBirthTimestamp": 1036454400,
-        "contractUntilTimestamp": 1814313600,
+        "contractUntilTimestamp": 1909008000,
         "proposedMarketValue": 1800000,
         "proposedMarketValueRaw": {
           "value": 1800000,
@@ -3045,434 +2629,6 @@
             "ar": "إ. مونيوز",
             "bn": "আই. মুনোজ",
             "hi": "आई. मुनोज़"
-          }
-        }
-      }
-    },
-    {
-      "player": {
-        "name": "Asier Osambela",
-        "slug": "asier-osambela",
-        "shortName": "A. Osambela",
-        "team": {
-          "name": "Osasuna",
-          "slug": "osasuna",
-          "shortName": "Osasuna",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "LaLiga",
-            "slug": "laliga",
-            "category": {
-              "name": "Spain",
-              "slug": "spain",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 9,
-              "country": {
-                "alpha2": "ES",
-                "alpha3": "ESP",
-                "name": "Spain",
-                "slug": "spain"
-              },
-              "id": 32,
-              "flag": "spain",
-              "alpha2": "ES",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إسبانيا",
-                  "bn": "স্পেন",
-                  "hi": "स्पेन",
-                  "ru": "Испания"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "LaLiga",
-              "slug": "laliga",
-              "primaryColorHex": "#2f4a89",
-              "secondaryColorHex": "#f4a32e",
-              "category": {
-                "name": "Spain",
-                "slug": "spain",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 9,
-                "country": {
-                  "alpha2": "ES",
-                  "alpha3": "ESP",
-                  "name": "Spain",
-                  "slug": "spain"
-                },
-                "id": 32,
-                "flag": "spain",
-                "alpha2": "ES",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إسبانيا",
-                    "bn": "স্পেন",
-                    "hi": "स्पेन",
-                    "ru": "Испания"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 842742,
-              "country": {},
-              "id": 8,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإسباني",
-                  "hi": "ला लिगा",
-                  "bn": "লা লীগা"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 699,
-            "isLive": false,
-            "id": 36,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "ला लीगा",
-                "ar": "الدوري الإسباني",
-                "bn": "লা লীগা"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "LaLiga",
-            "slug": "laliga",
-            "primaryColorHex": "#2f4a89",
-            "secondaryColorHex": "#f4a32e",
-            "category": {
-              "name": "Spain",
-              "slug": "spain",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 9,
-              "country": {
-                "alpha2": "ES",
-                "alpha3": "ESP",
-                "name": "Spain",
-                "slug": "spain"
-              },
-              "id": 32,
-              "flag": "spain",
-              "alpha2": "ES",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إسبانيا",
-                  "bn": "স্পেন",
-                  "hi": "स्पेन",
-                  "ru": "Испания"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 842742,
-            "country": {},
-            "id": 8,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإسباني",
-                "hi": "ला लिगा",
-                "bn": "লা লীগা"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 190355,
-          "nameCode": "OSA",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "ES",
-            "alpha3": "ESP",
-            "name": "Spain",
-            "slug": "spain"
-          },
-          "id": 2820,
-          "teamColors": {
-            "primary": "#cc0000",
-            "secondary": "#14213d",
-            "text": "#14213d"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "أوساسونا",
-              "bn": "ওসাসুনা",
-              "hi": "ओसासुना",
-              "ru": "Осасуна"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "position": "M",
-        "positionsDetailed": [
-          "MC",
-          "AM"
-        ],
-        "jerseyNumber": "29",
-        "height": 186,
-        "dateOfBirth": "2004-10-30T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "userCount": 102,
-        "deceased": false,
-        "gender": "M",
-        "country": {
-          "alpha2": "ES",
-          "alpha3": "ESP",
-          "name": "Spain",
-          "slug": "spain"
-        },
-        "id": 1399702,
-        "shirtNumber": 29,
-        "dateOfBirthTimestamp": 1099094400,
-        "contractUntilTimestamp": 1877472000,
-        "proposedMarketValue": 1000000,
-        "proposedMarketValueRaw": {
-          "value": 1000000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "أسيير أوسامبيلا"
-          },
-          "shortNameTranslation": {
-            "ar": "أ. أوسامبيلا"
-          }
-        }
-      }
-    },
-    {
-      "player": {
-        "name": "Martin Pedroarena",
-        "firstName": "Martin",
-        "lastName": "Pedroarena Espinal",
-        "slug": "martin-pedroarena-espinal",
-        "shortName": "M. Pedroarena",
-        "team": {
-          "name": "Osasuna",
-          "slug": "osasuna",
-          "shortName": "Osasuna",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "LaLiga",
-            "slug": "laliga",
-            "category": {
-              "name": "Spain",
-              "slug": "spain",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 9,
-              "country": {
-                "alpha2": "ES",
-                "alpha3": "ESP",
-                "name": "Spain",
-                "slug": "spain"
-              },
-              "id": 32,
-              "flag": "spain",
-              "alpha2": "ES",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إسبانيا",
-                  "bn": "স্পেন",
-                  "hi": "स्पेन",
-                  "ru": "Испания"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "LaLiga",
-              "slug": "laliga",
-              "primaryColorHex": "#2f4a89",
-              "secondaryColorHex": "#f4a32e",
-              "category": {
-                "name": "Spain",
-                "slug": "spain",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 9,
-                "country": {
-                  "alpha2": "ES",
-                  "alpha3": "ESP",
-                  "name": "Spain",
-                  "slug": "spain"
-                },
-                "id": 32,
-                "flag": "spain",
-                "alpha2": "ES",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إسبانيا",
-                    "bn": "স্পেন",
-                    "hi": "स्पेन",
-                    "ru": "Испания"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 842742,
-              "country": {},
-              "id": 8,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإسباني",
-                  "hi": "ला लिगा",
-                  "bn": "লা লীগা"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 699,
-            "isLive": false,
-            "id": 36,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "ला लीगा",
-                "ar": "الدوري الإسباني",
-                "bn": "লা লীগা"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "LaLiga",
-            "slug": "laliga",
-            "primaryColorHex": "#2f4a89",
-            "secondaryColorHex": "#f4a32e",
-            "category": {
-              "name": "Spain",
-              "slug": "spain",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 9,
-              "country": {
-                "alpha2": "ES",
-                "alpha3": "ESP",
-                "name": "Spain",
-                "slug": "spain"
-              },
-              "id": 32,
-              "flag": "spain",
-              "alpha2": "ES",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إسبانيا",
-                  "bn": "স্পেন",
-                  "hi": "स्पेन",
-                  "ru": "Испания"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 842742,
-            "country": {},
-            "id": 8,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإسباني",
-                "hi": "ला लिगा",
-                "bn": "লা লীগা"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 190355,
-          "nameCode": "OSA",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "ES",
-            "alpha3": "ESP",
-            "name": "Spain",
-            "slug": "spain"
-          },
-          "id": 2820,
-          "teamColors": {
-            "primary": "#cc0000",
-            "secondary": "#14213d",
-            "text": "#14213d"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "أوساسونا",
-              "bn": "ওসাসুনা",
-              "hi": "ओसासुना",
-              "ru": "Осасуна"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "position": "M",
-        "positionsDetailed": [
-          "RW"
-        ],
-        "jerseyNumber": "27",
-        "dateOfBirth": "2003-08-18T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "userCount": 43,
-        "deceased": false,
-        "gender": "M",
-        "country": {
-          "alpha2": "ES",
-          "alpha3": "ESP",
-          "name": "Spain",
-          "slug": "spain"
-        },
-        "id": 1924868,
-        "shirtNumber": 27,
-        "dateOfBirthTimestamp": 1061164800,
-        "contractUntilTimestamp": 1782777600,
-        "proposedMarketValue": 190000,
-        "proposedMarketValueRaw": {
-          "value": 190000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "مارتن بيدروأرينا"
-          },
-          "shortNameTranslation": {
-            "ar": "م. بيدروأرينا"
           }
         }
       }
@@ -3558,7 +2714,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -3616,7 +2772,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -3629,7 +2785,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -3664,7 +2820,7 @@
         "height": 181,
         "dateOfBirth": "2001-10-07T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 2573,
+        "userCount": 2579,
         "gender": "M",
         "country": {
           "alpha2": "CM",
@@ -3764,7 +2920,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -3822,7 +2978,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -3835,7 +2991,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -3871,7 +3027,7 @@
         "height": 172,
         "dateOfBirth": "1994-11-19T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 2454,
+        "userCount": 2457,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -3884,9 +3040,9 @@
         "shirtNumber": 20,
         "dateOfBirthTimestamp": 785203200,
         "contractUntilTimestamp": 1782777600,
-        "proposedMarketValue": 3400000,
+        "proposedMarketValue": 1900000,
         "proposedMarketValueRaw": {
-          "value": 3400000,
+          "value": 1900000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -3984,7 +3140,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -4042,7 +3198,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -4055,7 +3211,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -4090,7 +3246,7 @@
         "height": 194,
         "dateOfBirth": "1994-10-28T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 931,
+        "userCount": 933,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -4202,7 +3358,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -4260,7 +3416,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -4273,7 +3429,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -4419,7 +3575,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -4477,7 +3633,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -4490,7 +3646,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -4525,7 +3681,7 @@
         "height": 188,
         "dateOfBirth": "2000-08-21T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 411,
+        "userCount": 414,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -4634,7 +3790,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -4692,7 +3848,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -4705,7 +3861,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -4740,7 +3896,7 @@
         "height": 192,
         "dateOfBirth": "2001-02-28T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 271,
+        "userCount": 272,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -4852,7 +4008,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -4910,7 +4066,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -4923,7 +4079,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -4959,7 +4115,7 @@
         "height": 180,
         "dateOfBirth": "1992-07-28T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 212,
+        "userCount": 214,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -4986,6 +4142,220 @@
             "ar": "خ. كروز",
             "bn": "জে. ক্রুজ",
             "hi": "जे. क्रूज़"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "name": "Asier Osambela",
+        "slug": "asier-osambela",
+        "shortName": "A. Osambela",
+        "team": {
+          "name": "Osasuna",
+          "slug": "osasuna",
+          "shortName": "Osasuna",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "LaLiga",
+            "slug": "laliga",
+            "category": {
+              "name": "Spain",
+              "slug": "spain",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 9,
+              "country": {
+                "alpha2": "ES",
+                "alpha3": "ESP",
+                "name": "Spain",
+                "slug": "spain"
+              },
+              "id": 32,
+              "flag": "spain",
+              "alpha2": "ES",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إسبانيا",
+                  "bn": "স্পেন",
+                  "hi": "स्पेन",
+                  "ru": "Испания"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "LaLiga",
+              "slug": "laliga",
+              "primaryColorHex": "#2f4a89",
+              "secondaryColorHex": "#f4a32e",
+              "category": {
+                "name": "Spain",
+                "slug": "spain",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 9,
+                "country": {
+                  "alpha2": "ES",
+                  "alpha3": "ESP",
+                  "name": "Spain",
+                  "slug": "spain"
+                },
+                "id": 32,
+                "flag": "spain",
+                "alpha2": "ES",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إسبانيا",
+                    "bn": "স্পেন",
+                    "hi": "स्पेन",
+                    "ru": "Испания"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 845163,
+              "country": {},
+              "id": 8,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإسباني",
+                  "hi": "ला लिगा",
+                  "bn": "লা লীগা"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 699,
+            "isLive": false,
+            "id": 36,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "ला लीगा",
+                "ar": "الدوري الإسباني",
+                "bn": "লা লীগা"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "LaLiga",
+            "slug": "laliga",
+            "primaryColorHex": "#2f4a89",
+            "secondaryColorHex": "#f4a32e",
+            "category": {
+              "name": "Spain",
+              "slug": "spain",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 9,
+              "country": {
+                "alpha2": "ES",
+                "alpha3": "ESP",
+                "name": "Spain",
+                "slug": "spain"
+              },
+              "id": 32,
+              "flag": "spain",
+              "alpha2": "ES",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إسبانيا",
+                  "bn": "স্পেন",
+                  "hi": "स्पेन",
+                  "ru": "Испания"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 845163,
+            "country": {},
+            "id": 8,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإسباني",
+                "hi": "ला लिगा",
+                "bn": "লা লীগা"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 190873,
+          "nameCode": "OSA",
+          "disabled": false,
+          "national": false,
+          "type": 0,
+          "country": {
+            "alpha2": "ES",
+            "alpha3": "ESP",
+            "name": "Spain",
+            "slug": "spain"
+          },
+          "id": 2820,
+          "teamColors": {
+            "primary": "#cc0000",
+            "secondary": "#14213d",
+            "text": "#14213d"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "أوساسونا",
+              "bn": "ওসাসুনা",
+              "hi": "ओसासुना",
+              "ru": "Осасуна"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "position": "D",
+        "positionsDetailed": [
+          "MC",
+          "AM"
+        ],
+        "jerseyNumber": "29",
+        "height": 186,
+        "dateOfBirth": "2004-10-30T00:00:00+00:00",
+        "preferredFoot": "Right",
+        "userCount": 104,
+        "deceased": false,
+        "gender": "M",
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 1399702,
+        "shirtNumber": 29,
+        "dateOfBirthTimestamp": 1099094400,
+        "contractUntilTimestamp": 1877472000,
+        "proposedMarketValue": 1000000,
+        "proposedMarketValueRaw": {
+          "value": 1000000,
+          "currency": "EUR"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "أسيير أوسامبيلا"
+          },
+          "shortNameTranslation": {
+            "ar": "أ. أوسامبيلا"
           }
         }
       }
@@ -5069,7 +4439,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -5127,7 +4497,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -5140,7 +4510,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -5176,7 +4546,7 @@
         "dateOfBirth": "2005-04-19T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 66,
+        "userCount": 68,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -5189,9 +4559,9 @@
         "shirtNumber": 41,
         "dateOfBirthTimestamp": 1113868800,
         "contractUntilTimestamp": 1814313600,
-        "proposedMarketValue": 530000,
+        "proposedMarketValue": 850000,
         "proposedMarketValueRaw": {
-          "value": 530000,
+          "value": 850000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -5200,218 +4570,6 @@
           },
           "shortNameTranslation": {
             "ar": "إ. أرجويبيد"
-          }
-        }
-      }
-    },
-    {
-      "player": {
-        "name": "Unai Santos",
-        "slug": "unai-santos",
-        "shortName": "U. Santos",
-        "team": {
-          "name": "Osasuna",
-          "slug": "osasuna",
-          "shortName": "Osasuna",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "LaLiga",
-            "slug": "laliga",
-            "category": {
-              "name": "Spain",
-              "slug": "spain",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 9,
-              "country": {
-                "alpha2": "ES",
-                "alpha3": "ESP",
-                "name": "Spain",
-                "slug": "spain"
-              },
-              "id": 32,
-              "flag": "spain",
-              "alpha2": "ES",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إسبانيا",
-                  "bn": "স্পেন",
-                  "hi": "स्पेन",
-                  "ru": "Испания"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "LaLiga",
-              "slug": "laliga",
-              "primaryColorHex": "#2f4a89",
-              "secondaryColorHex": "#f4a32e",
-              "category": {
-                "name": "Spain",
-                "slug": "spain",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 9,
-                "country": {
-                  "alpha2": "ES",
-                  "alpha3": "ESP",
-                  "name": "Spain",
-                  "slug": "spain"
-                },
-                "id": 32,
-                "flag": "spain",
-                "alpha2": "ES",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إسبانيا",
-                    "bn": "স্পেন",
-                    "hi": "स्पेन",
-                    "ru": "Испания"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 842742,
-              "country": {},
-              "id": 8,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإسباني",
-                  "hi": "ला लिगा",
-                  "bn": "লা লীগা"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 699,
-            "isLive": false,
-            "id": 36,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "ला लीगा",
-                "ar": "الدوري الإسباني",
-                "bn": "লা লীগা"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "LaLiga",
-            "slug": "laliga",
-            "primaryColorHex": "#2f4a89",
-            "secondaryColorHex": "#f4a32e",
-            "category": {
-              "name": "Spain",
-              "slug": "spain",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 9,
-              "country": {
-                "alpha2": "ES",
-                "alpha3": "ESP",
-                "name": "Spain",
-                "slug": "spain"
-              },
-              "id": 32,
-              "flag": "spain",
-              "alpha2": "ES",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إسبانيا",
-                  "bn": "স্পেন",
-                  "hi": "स्पेन",
-                  "ru": "Испания"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 842742,
-            "country": {},
-            "id": 8,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإسباني",
-                "hi": "ला लिगा",
-                "bn": "লা লীগা"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 190355,
-          "nameCode": "OSA",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "ES",
-            "alpha3": "ESP",
-            "name": "Spain",
-            "slug": "spain"
-          },
-          "id": 2820,
-          "teamColors": {
-            "primary": "#cc0000",
-            "secondary": "#14213d",
-            "text": "#14213d"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "أوساسونا",
-              "bn": "ওসাসুনা",
-              "hi": "ओसासुना",
-              "ru": "Осасуна"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "position": "D",
-        "positionsDetailed": [
-          "DC"
-        ],
-        "jerseyNumber": "35",
-        "height": 180,
-        "dateOfBirth": "2005-11-03T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "userCount": 8,
-        "gender": "M",
-        "country": {
-          "alpha2": "ES",
-          "alpha3": "ESP",
-          "name": "Spain",
-          "slug": "spain"
-        },
-        "id": 1917864,
-        "shirtNumber": 35,
-        "dateOfBirthTimestamp": 1130976000,
-        "contractUntilTimestamp": 1782777600,
-        "proposedMarketValue": 105000,
-        "proposedMarketValueRaw": {
-          "value": 105000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "أوناي سانتوس"
-          },
-          "shortNameTranslation": {
-            "ar": "أ. سانتوس"
           }
         }
       }
@@ -5497,7 +4655,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -5555,7 +4713,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -5568,7 +4726,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -5604,7 +4762,7 @@
         "height": 192,
         "dateOfBirth": "1993-05-06T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 999,
+        "userCount": 996,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -5714,7 +4872,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -5772,7 +4930,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -5785,7 +4943,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -5821,7 +4979,7 @@
         "height": 182,
         "dateOfBirth": "1991-05-03T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 251,
+        "userCount": 249,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -5929,7 +5087,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -5987,7 +5145,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -6000,7 +5158,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -6036,7 +5194,7 @@
         "height": 191,
         "dateOfBirth": "2003-04-23T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 139,
+        "userCount": 140,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -6151,7 +5309,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -6209,7 +5367,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -6222,7 +5380,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -6257,7 +5415,7 @@
         "height": 181,
         "dateOfBirth": "2001-10-07T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 2573,
+        "userCount": 2579,
         "gender": "M",
         "country": {
           "alpha2": "CM",
@@ -6357,7 +5515,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -6415,7 +5573,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -6428,7 +5586,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -6574,7 +5732,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -6632,7 +5790,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -6645,7 +5803,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -6681,7 +5839,7 @@
         "height": 191,
         "dateOfBirth": "2003-04-23T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 139,
+        "userCount": 140,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -6792,7 +5950,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -6850,7 +6008,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -6863,7 +6021,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -6900,7 +6058,7 @@
         "dateOfBirth": "1991-07-22T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 9808,
+        "userCount": 9810,
         "gender": "M",
         "sofascoreId": "budimir_ante",
         "country": {
@@ -7013,7 +6171,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -7071,7 +6229,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -7084,7 +6242,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -7121,7 +6279,7 @@
         "dateOfBirth": "1991-07-22T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 9808,
+        "userCount": 9810,
         "gender": "M",
         "sofascoreId": "budimir_ante",
         "country": {
@@ -7234,7 +6392,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -7292,7 +6450,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -7305,7 +6463,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -7340,7 +6498,7 @@
         "height": 181,
         "dateOfBirth": "2001-10-07T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 2573,
+        "userCount": 2579,
         "gender": "M",
         "country": {
           "alpha2": "CM",
@@ -7438,7 +6596,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -7496,7 +6654,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -7509,7 +6667,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -7544,9 +6702,22 @@
         "height": 173,
         "dateOfBirth": "2003-07-13T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 16466,
+        "userCount": 16501,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Calf Injury",
+          "status": "out",
+          "expectedReturn": 7,
+          "id": 21539,
+          "startDateTimestamp": 1777420800,
+          "updateDateTimestamp": 1777780837,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "ES",
           "alpha3": "ESP",
@@ -7556,6 +6727,7 @@
         "id": 1145642,
         "shirtNumber": 21,
         "dateOfBirthTimestamp": 1058054400,
+        "contractUntilTimestamp": 1909008000,
         "proposedMarketValue": 19400000,
         "proposedMarketValueRaw": {
           "value": 19400000,
@@ -7655,7 +6827,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -7713,7 +6885,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -7726,7 +6898,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -7761,7 +6933,7 @@
         "height": 169,
         "dateOfBirth": "2002-12-05T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 1545,
+        "userCount": 1547,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -7773,9 +6945,9 @@
         "shirtNumber": 18,
         "dateOfBirthTimestamp": 1039046400,
         "contractUntilTimestamp": 1940544000,
-        "proposedMarketValue": 6700000,
+        "proposedMarketValue": 4800000,
         "proposedMarketValueRaw": {
-          "value": 6700000,
+          "value": 4800000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -7861,7 +7033,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 155247,
+            "userCount": 155305,
             "country": {},
             "id": 37,
             "displayInverseHomeAwayTeams": false,
@@ -7917,7 +7089,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 155247,
+          "userCount": 155305,
           "country": {},
           "id": 37,
           "displayInverseHomeAwayTeams": false,
@@ -7930,7 +7102,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 498453,
+        "userCount": 499133,
         "nameCode": "AJA",
         "disabled": false,
         "national": false,
@@ -8042,7 +7214,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -8100,7 +7272,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -8113,7 +7285,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -8149,7 +7321,7 @@
         "height": 172,
         "dateOfBirth": "1994-11-19T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 2454,
+        "userCount": 2457,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -8162,9 +7334,9 @@
         "shirtNumber": 20,
         "dateOfBirthTimestamp": 785203200,
         "contractUntilTimestamp": 1782777600,
-        "proposedMarketValue": 3400000,
+        "proposedMarketValue": 1900000,
         "proposedMarketValueRaw": {
-          "value": 3400000,
+          "value": 1900000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -8254,7 +7426,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -8312,7 +7484,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 842742,
+          "userCount": 845163,
           "country": {},
           "id": 8,
           "displayInverseHomeAwayTeams": false,
@@ -8325,7 +7497,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 2450265,
+        "userCount": 2478733,
         "nameCode": "ATM",
         "disabled": false,
         "national": false,
@@ -8435,7 +7607,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -8493,7 +7665,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -8506,7 +7678,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -8541,9 +7713,22 @@
         "height": 173,
         "dateOfBirth": "2003-07-13T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 16466,
+        "userCount": 16501,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Calf Injury",
+          "status": "out",
+          "expectedReturn": 7,
+          "id": 21539,
+          "startDateTimestamp": 1777420800,
+          "updateDateTimestamp": 1777780837,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "country": {
           "alpha2": "ES",
           "alpha3": "ESP",
@@ -8553,6 +7738,7 @@
         "id": 1145642,
         "shirtNumber": 21,
         "dateOfBirthTimestamp": 1058054400,
+        "contractUntilTimestamp": 1909008000,
         "proposedMarketValue": 19400000,
         "proposedMarketValueRaw": {
           "value": 19400000,
@@ -8641,7 +7827,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 6648,
+            "userCount": 6703,
             "country": {},
             "id": 17073,
             "displayInverseHomeAwayTeams": false,
@@ -8699,7 +7885,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 6648,
+          "userCount": 6703,
           "country": {},
           "id": 17073,
           "displayInverseHomeAwayTeams": false,
@@ -8712,7 +7898,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 47093,
+        "userCount": 48182,
         "nameCode": "RMA",
         "disabled": false,
         "national": false,
@@ -8790,7 +7976,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -8848,7 +8034,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -8861,7 +8047,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 7423094,
+          "userCount": 7459833,
           "nameCode": "RMA",
           "disabled": false,
           "national": false,
@@ -8993,7 +8179,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -9051,7 +8237,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -9064,7 +8250,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -9091,7 +8277,7 @@
             "shortNameTranslation": {}
           }
         },
-        "position": "M",
+        "position": "D",
         "positionsDetailed": [
           "MC",
           "AM"
@@ -9100,7 +8286,7 @@
         "height": 186,
         "dateOfBirth": "2004-10-30T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 102,
+        "userCount": 104,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -9201,7 +8387,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 4111,
+            "userCount": 4128,
             "country": {},
             "id": 544,
             "displayInverseHomeAwayTeams": false,
@@ -9259,7 +8445,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 6648,
+          "userCount": 6703,
           "country": {},
           "id": 17073,
           "displayInverseHomeAwayTeams": false,
@@ -9272,7 +8458,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 2993,
+        "userCount": 3098,
         "nameCode": "OSB",
         "national": false,
         "parentTeam": {
@@ -9349,7 +8535,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -9407,7 +8593,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -9420,7 +8606,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -9553,7 +8739,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -9611,7 +8797,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -9624,7 +8810,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -9764,7 +8950,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 54162,
+            "userCount": 54523,
             "country": {},
             "id": 54,
             "displayInverseHomeAwayTeams": false,
@@ -9822,7 +9008,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 54162,
+          "userCount": 54523,
           "country": {},
           "id": 54,
           "displayInverseHomeAwayTeams": false,
@@ -9835,7 +9021,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 77862,
+        "userCount": 78691,
         "nameCode": "LEG",
         "disabled": false,
         "national": false,
@@ -9945,7 +9131,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -10003,7 +9189,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -10016,7 +9202,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -10164,7 +9350,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 54162,
+            "userCount": 54523,
             "country": {},
             "id": 54,
             "displayInverseHomeAwayTeams": false,
@@ -10222,7 +9408,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 54162,
+          "userCount": 54523,
           "country": {},
           "id": 54,
           "displayInverseHomeAwayTeams": false,
@@ -10235,7 +9421,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 21308,
+        "userCount": 21309,
         "nameCode": "MIR",
         "disabled": false,
         "national": false,
@@ -10345,7 +9531,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -10403,7 +9589,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -10416,7 +9602,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -10451,7 +9637,7 @@
         "height": 181,
         "dateOfBirth": "2001-10-07T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 2573,
+        "userCount": 2579,
         "gender": "M",
         "country": {
           "alpha2": "CM",
@@ -10543,7 +9729,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 54162,
+            "userCount": 54523,
             "country": {},
             "id": 54,
             "displayInverseHomeAwayTeams": false,
@@ -10601,7 +9787,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 54162,
+          "userCount": 54523,
           "country": {},
           "id": 54,
           "displayInverseHomeAwayTeams": false,
@@ -10614,7 +9800,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 85226,
+        "userCount": 85280,
         "nameCode": "VLL",
         "disabled": false,
         "national": false,
@@ -10724,7 +9910,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -10782,7 +9968,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -10795,7 +9981,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -10830,7 +10016,7 @@
         "height": 188,
         "dateOfBirth": "2000-08-21T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 411,
+        "userCount": 414,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -10931,7 +10117,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 54162,
+            "userCount": 54523,
             "country": {},
             "id": 54,
             "displayInverseHomeAwayTeams": false,
@@ -10989,7 +10175,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 842742,
+          "userCount": 845163,
           "country": {},
           "id": 8,
           "displayInverseHomeAwayTeams": false,
@@ -11002,7 +10188,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 95545,
+        "userCount": 95695,
         "nameCode": "OVI",
         "disabled": false,
         "national": false,
@@ -11109,7 +10295,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -11167,7 +10353,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -11180,7 +10366,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -11215,7 +10401,7 @@
         "height": 192,
         "dateOfBirth": "2000-11-03T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 925,
+        "userCount": 931,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -11320,7 +10506,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -11378,7 +10564,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 842742,
+          "userCount": 845163,
           "country": {},
           "id": 8,
           "displayInverseHomeAwayTeams": false,
@@ -11391,7 +10577,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 588208,
+        "userCount": 589325,
         "nameCode": "BET",
         "disabled": false,
         "national": false,
@@ -11503,7 +10689,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -11561,7 +10747,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -11574,7 +10760,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -11610,7 +10796,7 @@
         "height": 179,
         "dateOfBirth": "2002-11-05T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 267,
+        "userCount": 268,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -11621,7 +10807,7 @@
         "id": 1119586,
         "shirtNumber": 8,
         "dateOfBirthTimestamp": 1036454400,
-        "contractUntilTimestamp": 1814313600,
+        "contractUntilTimestamp": 1909008000,
         "proposedMarketValue": 1800000,
         "proposedMarketValueRaw": {
           "value": 1800000,
@@ -11714,7 +10900,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 4111,
+            "userCount": 4128,
             "country": {},
             "id": 544,
             "displayInverseHomeAwayTeams": false,
@@ -11772,7 +10958,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 6648,
+          "userCount": 6703,
           "country": {},
           "id": 17073,
           "displayInverseHomeAwayTeams": false,
@@ -11785,7 +10971,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 2993,
+        "userCount": 3098,
         "nameCode": "OSB",
         "national": false,
         "parentTeam": {
@@ -11862,7 +11048,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -11920,7 +11106,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -11933,7 +11119,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -12066,7 +11252,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -12124,7 +11310,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -12137,7 +11323,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -12172,7 +11358,7 @@
         "height": 194,
         "dateOfBirth": "1994-10-28T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 931,
+        "userCount": 933,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -12276,7 +11462,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -12334,7 +11520,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 842742,
+          "userCount": 845163,
           "country": {},
           "id": 8,
           "displayInverseHomeAwayTeams": false,
@@ -12347,7 +11533,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 208255,
+        "userCount": 212110,
         "nameCode": "RAY",
         "disabled": false,
         "national": false,
@@ -12457,7 +11643,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -12515,7 +11701,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -12528,7 +11714,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -12563,7 +11749,7 @@
         "height": 192,
         "dateOfBirth": "2001-02-28T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 271,
+        "userCount": 272,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -12667,7 +11853,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 4111,
+            "userCount": 4128,
             "country": {},
             "id": 544,
             "displayInverseHomeAwayTeams": false,
@@ -12725,7 +11911,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 6648,
+          "userCount": 6703,
           "country": {},
           "id": 17073,
           "displayInverseHomeAwayTeams": false,
@@ -12738,7 +11924,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 2993,
+        "userCount": 3098,
         "nameCode": "OSB",
         "national": false,
         "parentTeam": {
@@ -12815,7 +12001,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -12873,7 +12059,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -12886,7 +12072,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -12940,11 +12126,9 @@
     },
     {
       "player": {
-        "name": "Moi Gomez",
-        "firstName": "Moi",
-        "lastName": "Gomez",
+        "name": "Moi Gómez",
         "slug": "moi-gomez",
-        "shortName": "M. Gomez",
+        "shortName": "M. Gómez",
         "team": {
           "name": "Osasuna",
           "slug": "osasuna",
@@ -13019,7 +12203,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -13077,7 +12261,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -13090,7 +12274,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -13127,7 +12311,7 @@
         "height": 174,
         "dateOfBirth": "1994-06-23T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 604,
+        "userCount": 608,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -13229,7 +12413,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -13287,7 +12471,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 842742,
+          "userCount": 845163,
           "country": {},
           "id": 8,
           "displayInverseHomeAwayTeams": false,
@@ -13300,7 +12484,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 451579,
+        "userCount": 453543,
         "nameCode": "VIL",
         "disabled": false,
         "national": false,
@@ -13408,7 +12592,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -13466,7 +12650,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -13479,7 +12663,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -13515,7 +12699,7 @@
         "height": 182,
         "dateOfBirth": "1991-05-03T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 251,
+        "userCount": 249,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -13617,7 +12801,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -13675,7 +12859,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 842742,
+          "userCount": 845163,
           "country": {},
           "id": 8,
           "displayInverseHomeAwayTeams": false,
@@ -13688,7 +12872,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 109814,
+        "userCount": 110080,
         "nameCode": "LEV",
         "disabled": false,
         "national": false,
@@ -13801,7 +12985,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -13859,7 +13043,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -13872,7 +13056,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -13908,16 +13092,8 @@
         "height": 177,
         "dateOfBirth": "2001-11-27T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 1308,
+        "userCount": 1312,
         "gender": "M",
-        "injury": {
-          "reason": "Knee Injury",
-          "status": "out",
-          "id": 14382,
-          "startDateTimestamp": 1768694400,
-          "updateDateTimestamp": 1768996865,
-          "endDateTimestamp": 1769299200
-        },
         "country": {
           "alpha2": "ES",
           "alpha3": "ESP",
@@ -14020,7 +13196,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 4111,
+            "userCount": 4128,
             "country": {},
             "id": 544,
             "displayInverseHomeAwayTeams": false,
@@ -14078,7 +13254,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 6648,
+          "userCount": 6703,
           "country": {},
           "id": 17073,
           "displayInverseHomeAwayTeams": false,
@@ -14091,7 +13267,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 2993,
+        "userCount": 3098,
         "nameCode": "OSB",
         "national": false,
         "parentTeam": {
@@ -14168,7 +13344,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -14226,7 +13402,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -14239,7 +13415,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -14370,7 +13546,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -14428,7 +13604,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -14441,7 +13617,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -14478,7 +13654,7 @@
         "dateOfBirth": "1991-07-22T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 9808,
+        "userCount": 9810,
         "gender": "M",
         "sofascoreId": "budimir_ante",
         "country": {
@@ -14583,7 +13759,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -14641,7 +13817,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 842742,
+          "userCount": 845163,
           "country": {},
           "id": 8,
           "displayInverseHomeAwayTeams": false,
@@ -14654,7 +13830,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 192304,
+        "userCount": 193948,
         "nameCode": "MLL",
         "disabled": false,
         "national": false,
@@ -14764,7 +13940,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -14822,7 +13998,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -14835,7 +14011,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -14871,7 +14047,7 @@
         "height": 180,
         "dateOfBirth": "1992-07-28T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 212,
+        "userCount": 214,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -14975,7 +14151,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -15033,7 +14209,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 842742,
+          "userCount": 845163,
           "country": {},
           "id": 8,
           "displayInverseHomeAwayTeams": false,
@@ -15046,7 +14222,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 112610,
+        "userCount": 112712,
         "nameCode": "ELC",
         "disabled": false,
         "national": false,
@@ -15077,11 +14253,9 @@
     },
     {
       "player": {
-        "name": "Lucas Torro",
-        "firstName": "Lucas",
-        "lastName": "Torro",
+        "name": "Lucas Torró",
         "slug": "lucas-torro",
-        "shortName": "L. Torro",
+        "shortName": "L. Torró",
         "team": {
           "name": "Osasuna",
           "slug": "osasuna",
@@ -15156,7 +14330,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -15214,7 +14388,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -15227,7 +14401,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -15265,7 +14439,7 @@
         "dateOfBirth": "1994-07-19T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 693,
+        "userCount": 694,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -15367,7 +14541,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 528036,
+            "userCount": 529349,
             "country": {},
             "id": 35,
             "displayInverseHomeAwayTeams": false,
@@ -15425,7 +14599,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 528036,
+          "userCount": 529349,
           "country": {},
           "id": 35,
           "displayInverseHomeAwayTeams": false,
@@ -15438,7 +14612,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 273454,
+        "userCount": 273876,
         "nameCode": "SGE",
         "disabled": false,
         "national": false,
@@ -15472,11 +14646,9 @@
     },
     {
       "player": {
-        "name": "Ruben Garcia",
-        "firstName": "Ruben",
-        "lastName": "Garcia",
+        "name": "Rubén García",
         "slug": "ruben-garcia",
-        "shortName": "R. Garcia",
+        "shortName": "R. García",
         "team": {
           "name": "Osasuna",
           "slug": "osasuna",
@@ -15551,7 +14723,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -15609,7 +14781,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -15622,7 +14794,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -15659,7 +14831,7 @@
         "dateOfBirth": "1993-07-14T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 1070,
+        "userCount": 1075,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -15762,7 +14934,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -15820,7 +14992,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 842742,
+          "userCount": 845163,
           "country": {},
           "id": 8,
           "displayInverseHomeAwayTeams": false,
@@ -15833,7 +15005,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 109814,
+        "userCount": 110080,
         "nameCode": "LEV",
         "disabled": false,
         "national": false,
@@ -15944,7 +15116,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -16002,7 +15174,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -16015,7 +15187,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -16156,7 +15328,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 4111,
+            "userCount": 4128,
             "country": {},
             "id": 544,
             "displayInverseHomeAwayTeams": false,
@@ -16214,7 +15386,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 6648,
+          "userCount": 6703,
           "country": {},
           "id": 17073,
           "displayInverseHomeAwayTeams": false,
@@ -16227,7 +15399,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 2993,
+        "userCount": 3098,
         "nameCode": "OSB",
         "national": false,
         "parentTeam": {
@@ -16304,7 +15476,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -16362,7 +15534,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -16375,7 +15547,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -16508,7 +15680,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -16566,7 +15738,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -16579,7 +15751,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -16616,7 +15788,7 @@
         "height": 178,
         "dateOfBirth": "1997-04-04T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 194,
+        "userCount": 195,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -16720,7 +15892,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 4111,
+            "userCount": 4128,
             "country": {},
             "id": 544,
             "displayInverseHomeAwayTeams": false,
@@ -16778,7 +15950,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 6648,
+          "userCount": 6703,
           "country": {},
           "id": 17073,
           "displayInverseHomeAwayTeams": false,
@@ -16791,7 +15963,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 2993,
+        "userCount": 3098,
         "nameCode": "OSB",
         "national": false,
         "parentTeam": {
@@ -16868,7 +16040,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -16926,7 +16098,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -16939,7 +16111,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -17072,7 +16244,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 842742,
+              "userCount": 845163,
               "country": {},
               "id": 8,
               "displayInverseHomeAwayTeams": false,
@@ -17130,7 +16302,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 842742,
+            "userCount": 845163,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -17143,7 +16315,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 190355,
+          "userCount": 190873,
           "nameCode": "OSA",
           "disabled": false,
           "national": false,
@@ -17179,7 +16351,7 @@
         "height": 192,
         "dateOfBirth": "1993-05-06T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 999,
+        "userCount": 996,
         "gender": "M",
         "country": {
           "alpha2": "ES",
@@ -17283,7 +16455,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 54162,
+            "userCount": 54523,
             "country": {},
             "id": 54,
             "displayInverseHomeAwayTeams": false,
@@ -17341,7 +16513,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 54162,
+          "userCount": 54523,
           "country": {},
           "id": 54,
           "displayInverseHomeAwayTeams": false,
@@ -17354,7 +16526,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 21512,
+        "userCount": 21537,
         "nameCode": "HUE",
         "disabled": false,
         "national": false,
