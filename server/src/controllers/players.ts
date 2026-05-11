@@ -15,7 +15,11 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
         const playerStats: PlayerStats[] = convertToJSON(rows, 'playerStats');
         const { playerName } = req.params;
         const propertyName = "player_name";
-        const searchValue = decodeURI(playerName);
+const searchValue = decodeURI(
+
+    Array.isArray(playerName) ? playerName[0] : playerName
+
+);
 
         const filteredData = playerStats.find((item: PlayerStats) => {
             return item[propertyName] === searchValue;
