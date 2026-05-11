@@ -53,8 +53,19 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
         const teamDetails: TeamDetails[] = convertToJSON(rows, 'teamDetails');
         const { teamName, gameWeek } = req.params;
         const propertyName = "team_name";
-        const searchValue = decodeURI(teamName);
-        let gw = parseInt(gameWeek);
+        const searchValue = decodeURI(
+
+    Array.isArray(teamName) ? teamName[0] : teamName
+
+);
+
+let gw = parseInt(
+
+    Array.isArray(gameWeek) ? gameWeek[0] : gameWeek,
+
+    10
+
+);
         const currentGw = teamDetails[teamDetails.length - 1].gw;
         if (gw === 0) {
             gw = currentGw;
