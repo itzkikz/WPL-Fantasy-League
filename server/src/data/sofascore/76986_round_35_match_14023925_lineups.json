@@ -1664,11 +1664,11 @@
             }
           }
         },
-        "type": "missing",
+        "type": "doubtful",
         "reason": 1,
         "description": "Hamstring Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-27T04:00:31+00:00"
       },
       {
         "player": {
@@ -1707,11 +1707,11 @@
             }
           }
         },
-        "type": "missing",
+        "type": "doubtful",
         "reason": 1,
         "description": "Hamstring Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-27T04:00:32+00:00"
       }
     ]
   },
@@ -3512,50 +3512,6 @@
       },
       {
         "player": {
-          "name": "Ola Aina",
-          "firstName": "Ola",
-          "lastName": "Aina",
-          "slug": "ola-aina",
-          "shortName": "O. Aina",
-          "position": "D",
-          "jerseyNumber": "34",
-          "height": 182,
-          "userCount": 4180,
-          "gender": "M",
-          "country": {
-            "alpha2": "NG",
-            "alpha3": "NGA",
-            "name": "Nigeria",
-            "slug": "nigeria"
-          },
-          "id": 800417,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 844732800,
-          "proposedMarketValueRaw": {
-            "value": 18200000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "أولا أينا",
-              "bn": "ওলা আইনা",
-              "hi": "ओला आइना"
-            },
-            "shortNameTranslation": {
-              "ar": "أ. أينا",
-              "bn": "ও. আইনা",
-              "hi": "ओ. आइना"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Knock Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Willy Boly",
           "firstName": "Willy",
           "lastName": "Boly",
@@ -3769,6 +3725,50 @@
         "description": "Muscle Injury",
         "externalType": 114,
         "expectedEndDate": "2026-05-22T16:00:31+00:00"
+      },
+      {
+        "player": {
+          "name": "Ola Aina",
+          "firstName": "Ola",
+          "lastName": "Aina",
+          "slug": "ola-aina",
+          "shortName": "O. Aina",
+          "position": "D",
+          "jerseyNumber": "34",
+          "height": 182,
+          "userCount": 4180,
+          "gender": "M",
+          "country": {
+            "alpha2": "NG",
+            "alpha3": "NGA",
+            "name": "Nigeria",
+            "slug": "nigeria"
+          },
+          "id": 800417,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 844732800,
+          "proposedMarketValueRaw": {
+            "value": 18200000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "أولا أينا",
+              "bn": "ওলা আইনা",
+              "hi": "ओला आइना"
+            },
+            "shortNameTranslation": {
+              "ar": "أ. أينا",
+              "bn": "ও. আইনা",
+              "hi": "ओ. आइना"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Knock Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:32+00:00"
       }
     ]
   },

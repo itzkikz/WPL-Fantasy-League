@@ -498,56 +498,6 @@
         },
         {
           "team": {
-            "name": "Osasuna",
-            "slug": "osasuna",
-            "shortName": "Osasuna",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 197008,
-            "nameCode": "OSA",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "ES",
-              "alpha3": "ESP",
-              "name": "Spain",
-              "slug": "spain"
-            },
-            "id": 2820,
-            "teamColors": {
-              "primary": "#cc0000",
-              "secondary": "#14213d",
-              "text": "#14213d"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "أوساسونا",
-                "bn": "ওসাসুনা",
-                "hi": "ओसासुना",
-                "ru": "Осасуна"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 10,
-          "matches": 35,
-          "wins": 11,
-          "scoresFor": 42,
-          "scoresAgainst": 45,
-          "id": 1945380,
-          "losses": 15,
-          "draws": 9,
-          "points": 42,
-          "scoreDiffFormatted": "-3"
-        },
-        {
-          "team": {
             "name": "Rayo Vallecano",
             "slug": "rayo-vallecano",
             "shortName": "Rayo Vallecano",
@@ -585,16 +535,66 @@
             }
           },
           "descriptions": [],
-          "position": 11,
-          "matches": 34,
+          "position": 10,
+          "matches": 35,
           "wins": 10,
-          "scoresFor": 35,
-          "scoresAgainst": 41,
+          "scoresFor": 36,
+          "scoresAgainst": 42,
           "id": 1945381,
           "losses": 12,
-          "draws": 12,
-          "points": 42,
+          "draws": 13,
+          "points": 43,
           "scoreDiffFormatted": "-6"
+        },
+        {
+          "team": {
+            "name": "Osasuna",
+            "slug": "osasuna",
+            "shortName": "Osasuna",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 197008,
+            "nameCode": "OSA",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 2820,
+            "teamColors": {
+              "primary": "#cc0000",
+              "secondary": "#14213d",
+              "text": "#14213d"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "أوساسونا",
+                "bn": "ওসাসুনা",
+                "hi": "ओसासुना",
+                "ru": "Осасуна"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "position": 11,
+          "matches": 35,
+          "wins": 11,
+          "scoresFor": 42,
+          "scoresAgainst": 45,
+          "id": 1945380,
+          "losses": 15,
+          "draws": 9,
+          "points": 42,
+          "scoreDiffFormatted": "-3"
         },
         {
           "team": {
@@ -698,56 +698,6 @@
         },
         {
           "team": {
-            "name": "Espanyol",
-            "slug": "espanyol",
-            "shortName": "Espanyol",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 181438,
-            "nameCode": "ESP",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "ES",
-              "alpha3": "ESP",
-              "name": "Spain",
-              "slug": "spain"
-            },
-            "id": 2814,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#1369d2",
-              "text": "#1369d2"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "اسبانيول",
-                "bn": "এসপানিওল",
-                "hi": "एस्पेनयोल",
-                "ru": "Эспаньол"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 14,
-          "matches": 35,
-          "wins": 10,
-          "scoresFor": 38,
-          "scoresAgainst": 53,
-          "id": 1945372,
-          "losses": 16,
-          "draws": 9,
-          "points": 39,
-          "scoreDiffFormatted": "-15"
-        },
-        {
-          "team": {
             "name": "Mallorca",
             "slug": "mallorca",
             "shortName": "Mallorca",
@@ -785,7 +735,7 @@
             }
           },
           "descriptions": [],
-          "position": 15,
+          "position": 14,
           "matches": 35,
           "wins": 10,
           "scoresFor": 43,
@@ -795,6 +745,56 @@
           "draws": 9,
           "points": 39,
           "scoreDiffFormatted": "-9"
+        },
+        {
+          "team": {
+            "name": "Espanyol",
+            "slug": "espanyol",
+            "shortName": "Espanyol",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 181438,
+            "nameCode": "ESP",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 2814,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#1369d2",
+              "text": "#1369d2"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "اسبانيول",
+                "bn": "এসপানিওল",
+                "hi": "एस्पेनयोल",
+                "ru": "Эспаньол"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "position": 15,
+          "matches": 35,
+          "wins": 10,
+          "scoresFor": 38,
+          "scoresAgainst": 53,
+          "id": 1945372,
+          "losses": 16,
+          "draws": 9,
+          "points": 39,
+          "scoreDiffFormatted": "-15"
         },
         {
           "team": {
@@ -889,14 +889,14 @@
           },
           "descriptions": [],
           "position": 17,
-          "matches": 34,
+          "matches": 35,
           "wins": 9,
-          "scoresFor": 36,
-          "scoresAgainst": 51,
+          "scoresFor": 37,
+          "scoresAgainst": 52,
           "id": 1945387,
           "losses": 14,
-          "draws": 11,
-          "points": 38,
+          "draws": 12,
+          "points": 39,
           "scoreDiffFormatted": "-15"
         },
         {
@@ -1159,7 +1159,7 @@
         }
       },
       "name": "LaLiga 25/26",
-      "updatedAtTimestamp": 1778446639
+      "updatedAtTimestamp": 1778532973
     }
   ]
 }

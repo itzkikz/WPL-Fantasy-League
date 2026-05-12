@@ -23,7 +23,7 @@
         "position": "M",
         "jerseyNumber": "8",
         "height": 182,
-        "userCount": 181,
+        "userCount": 183,
         "gender": "M",
         "id": 997583,
         "marketValueCurrency": "EUR",
@@ -63,7 +63,7 @@
         "position": "F",
         "jerseyNumber": "77",
         "height": 182,
-        "userCount": 900,
+        "userCount": 926,
         "gender": "M",
         "id": 831290,
         "marketValueCurrency": "EUR",
@@ -94,7 +94,7 @@
         "position": "M",
         "jerseyNumber": "7",
         "height": 182,
-        "userCount": 1037,
+        "userCount": 1042,
         "gender": "M",
         "id": 869888,
         "marketValueCurrency": "EUR",
@@ -127,7 +127,7 @@
             "position": "F",
             "jerseyNumber": "77",
             "height": 182,
-            "userCount": 900,
+            "userCount": 926,
             "gender": "M",
             "id": 831290,
             "marketValueCurrency": "EUR",
@@ -171,7 +171,7 @@
             "position": "M",
             "jerseyNumber": "7",
             "height": 182,
-            "userCount": 1037,
+            "userCount": 1042,
             "gender": "M",
             "id": 869888,
             "marketValueCurrency": "EUR",
@@ -197,12 +197,12 @@
           "isAssist": true,
           "time": 86,
           "playerCoordinates": {
-            "x": 84,
-            "y": 86.8
+            "x": 81.5,
+            "y": 84.4
           },
           "passEndCoordinates": {
             "x": 96.2,
-            "y": 86.7
+            "y": 87.9
           },
           "isHome": true
         },
@@ -216,7 +216,48 @@
             "position": "F",
             "jerseyNumber": "77",
             "height": 182,
-            "userCount": 900,
+            "userCount": 926,
+            "gender": "M",
+            "id": 831290,
+            "marketValueCurrency": "EUR",
+            "dateOfBirthTimestamp": 872812800,
+            "proposedMarketValueRaw": {
+              "value": 1600000,
+              "currency": "EUR"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "ديفيد أوكيرك",
+                "bn": "ডেভিড ওকেরেকে",
+                "hi": "डेविड ओकेरेके"
+              },
+              "shortNameTranslation": {
+                "ar": "د. أوكيرك",
+                "bn": "ডি. ওকেরেকে",
+                "hi": "डी. ओकेरेके"
+              }
+            }
+          },
+          "eventType": "ball-movement",
+          "bodyPart": "right-foot",
+          "time": 86,
+          "playerCoordinates": {
+            "x": 96.2,
+            "y": 87.9
+          },
+          "isHome": true
+        },
+        {
+          "player": {
+            "name": "David Okereke",
+            "firstName": "David",
+            "lastName": "Okereke",
+            "slug": "david-okereke",
+            "shortName": "D. Okereke",
+            "position": "F",
+            "jerseyNumber": "77",
+            "height": 182,
+            "userCount": 926,
             "gender": "M",
             "id": 831290,
             "marketValueCurrency": "EUR",
@@ -242,12 +283,12 @@
           "bodyPart": "right-foot",
           "time": 86,
           "playerCoordinates": {
-            "x": 96.9,
-            "y": 66.8
+            "x": 96.7,
+            "y": 67.7
           },
           "gkCoordinates": {
-            "x": 99.4,
-            "y": 54
+            "x": 99.3,
+            "y": 55.8
           },
           "goalShotCoordinates": {
             "x": 100,
@@ -266,7 +307,7 @@
             "position": "G",
             "jerseyNumber": "1",
             "height": 192,
-            "userCount": 744,
+            "userCount": 747,
             "gender": "M",
             "id": 814876,
             "marketValueCurrency": "EUR",
@@ -309,7 +350,7 @@
         "position": "D",
         "jerseyNumber": "55",
         "height": 192,
-        "userCount": 174,
+        "userCount": 176,
         "gender": "M",
         "id": 1424353,
         "marketValueCurrency": "EUR",
@@ -336,7 +377,7 @@
         "position": "D",
         "jerseyNumber": "5",
         "height": 191,
-        "userCount": 825,
+        "userCount": 821,
         "gender": "M",
         "id": 352736,
         "marketValueCurrency": "EUR",
@@ -376,7 +417,7 @@
         "position": "F",
         "jerseyNumber": "99",
         "height": 181,
-        "userCount": 3633,
+        "userCount": 3644,
         "gender": "M",
         "id": 333261,
         "marketValueCurrency": "EUR",
@@ -407,7 +448,7 @@
         "position": "F",
         "jerseyNumber": "10",
         "height": 178,
-        "userCount": 23096,
+        "userCount": 23176,
         "gender": "M",
         "sofascoreId": "Vardy7",
         "id": 173827,
@@ -446,7 +487,7 @@
         "position": "M",
         "jerseyNumber": "36",
         "height": 184,
-        "userCount": 133,
+        "userCount": 137,
         "gender": "M",
         "id": 970778,
         "marketValueCurrency": "EUR",
@@ -511,7 +552,7 @@
         "position": "F",
         "jerseyNumber": "77",
         "height": 182,
-        "userCount": 900,
+        "userCount": 926,
         "gender": "M",
         "id": 831290,
         "marketValueCurrency": "EUR",
@@ -542,7 +583,7 @@
         "position": "M",
         "jerseyNumber": "27",
         "height": 174,
-        "userCount": 906,
+        "userCount": 905,
         "gender": "M",
         "id": 318645,
         "marketValueCurrency": "EUR",
@@ -605,7 +646,7 @@
         "position": "F",
         "jerseyNumber": "81",
         "height": 186,
-        "userCount": 433,
+        "userCount": 435,
         "gender": "M",
         "id": 959003,
         "marketValueCurrency": "EUR",
@@ -645,7 +686,7 @@
         "position": "M",
         "jerseyNumber": "8",
         "height": 182,
-        "userCount": 181,
+        "userCount": 183,
         "gender": "M",
         "id": 997583,
         "marketValueCurrency": "EUR",
@@ -670,7 +711,7 @@
         "position": "M",
         "jerseyNumber": "21",
         "height": 190,
-        "userCount": 1095,
+        "userCount": 1102,
         "gender": "M",
         "id": 1210995,
         "marketValueCurrency": "EUR",
@@ -681,7 +722,7 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "إيساك فورا"
+            "ar": "سيلفا ج / فيفيرو أ"
           },
           "shortNameTranslation": {
             "ar": "إ. فورا"
@@ -706,7 +747,7 @@
         "position": "M",
         "jerseyNumber": "2",
         "height": 189,
-        "userCount": 774,
+        "userCount": 782,
         "gender": "M",
         "id": 280991,
         "marketValueCurrency": "EUR",
@@ -737,7 +778,7 @@
         "position": "M",
         "jerseyNumber": "29",
         "height": 177,
-        "userCount": 1443,
+        "userCount": 1437,
         "gender": "M",
         "id": 849274,
         "marketValueCurrency": "EUR",
@@ -777,7 +818,7 @@
         "position": "M",
         "jerseyNumber": "7",
         "height": 182,
-        "userCount": 1037,
+        "userCount": 1042,
         "gender": "M",
         "id": 869888,
         "marketValueCurrency": "EUR",
@@ -808,7 +849,7 @@
         "position": "M",
         "jerseyNumber": "3",
         "height": 187,
-        "userCount": 678,
+        "userCount": 674,
         "gender": "M",
         "id": 814589,
         "marketValueCurrency": "EUR",
@@ -847,7 +888,7 @@
         "position": "M",
         "jerseyNumber": "35",
         "height": 177,
-        "userCount": 4185,
+        "userCount": 4191,
         "gender": "M",
         "id": 1125917,
         "marketValueCurrency": "EUR",
@@ -891,7 +932,7 @@
         "position": "F",
         "jerseyNumber": "90",
         "height": 182,
-        "userCount": 1103,
+        "userCount": 1117,
         "gender": "M",
         "id": 284363,
         "marketValueCurrency": "EUR",
@@ -922,7 +963,7 @@
         "position": "M",
         "jerseyNumber": "27",
         "height": 174,
-        "userCount": 906,
+        "userCount": 905,
         "gender": "M",
         "id": 318645,
         "marketValueCurrency": "EUR",
@@ -943,6 +984,50 @@
       "footballPassingNetworkAction": [
         {
           "player": {
+            "name": "Alberto Grassi",
+            "firstName": "Alberto",
+            "lastName": "Grassi",
+            "slug": "alberto-grassi",
+            "shortName": "A. Grassi",
+            "position": "M",
+            "jerseyNumber": "33",
+            "height": 183,
+            "userCount": 279,
+            "gender": "M",
+            "id": 186845,
+            "marketValueCurrency": "EUR",
+            "dateOfBirthTimestamp": 794534400,
+            "proposedMarketValueRaw": {
+              "value": 1600000,
+              "currency": "EUR"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "ألبرتو جراسي",
+                "bn": "আলবার্তো গ্রাসি",
+                "hi": "अल्बर्टो ग्रासी"
+              },
+              "shortNameTranslation": {
+                "ar": "أ. جراسي",
+                "bn": "এ. গ্রাসি",
+                "hi": "ए. ग्रासी"
+              }
+            }
+          },
+          "eventType": "clearance",
+          "time": 51,
+          "playerCoordinates": {
+            "x": 12.5,
+            "y": 39.7
+          },
+          "passEndCoordinates": {
+            "x": 22.3,
+            "y": 42.4
+          },
+          "isHome": true
+        },
+        {
+          "player": {
             "name": "Jamie Vardy",
             "firstName": "Jamie",
             "lastName": "Vardy",
@@ -951,7 +1036,7 @@
             "position": "F",
             "jerseyNumber": "10",
             "height": 178,
-            "userCount": 23096,
+            "userCount": 23176,
             "gender": "M",
             "sofascoreId": "Vardy7",
             "id": 173827,
@@ -977,8 +1062,8 @@
           "eventType": "pass",
           "time": 51,
           "playerCoordinates": {
-            "x": 27.1,
-            "y": 46.6
+            "x": 22.3,
+            "y": 42.4
           },
           "passEndCoordinates": {
             "x": 28,
@@ -996,7 +1081,7 @@
             "position": "M",
             "jerseyNumber": "29",
             "height": 177,
-            "userCount": 1443,
+            "userCount": 1437,
             "gender": "M",
             "id": 849274,
             "marketValueCurrency": "EUR",
@@ -1040,7 +1125,7 @@
             "position": "F",
             "jerseyNumber": "10",
             "height": 178,
-            "userCount": 23096,
+            "userCount": 23176,
             "gender": "M",
             "sofascoreId": "Vardy7",
             "id": 173827,
@@ -1066,12 +1151,12 @@
           "eventType": "pass",
           "time": 51,
           "playerCoordinates": {
-            "x": 41.7,
-            "y": 40.2
+            "x": 41.5,
+            "y": 39.7
           },
           "passEndCoordinates": {
-            "x": 66.3,
-            "y": 61.5
+            "x": 70.5,
+            "y": 61.7
           },
           "isHome": true
         },
@@ -1085,7 +1170,7 @@
             "position": "M",
             "jerseyNumber": "27",
             "height": 174,
-            "userCount": 906,
+            "userCount": 905,
             "gender": "M",
             "id": 318645,
             "marketValueCurrency": "EUR",
@@ -1107,12 +1192,12 @@
           "isAssist": true,
           "time": 51,
           "playerCoordinates": {
-            "x": 75.7,
-            "y": 59.2
+            "x": 75.6,
+            "y": 59.3
           },
           "passEndCoordinates": {
-            "x": 85.8,
-            "y": 42.6
+            "x": 83.8,
+            "y": 46.6
           },
           "isHome": true
         },
@@ -1126,7 +1211,7 @@
             "position": "F",
             "jerseyNumber": "90",
             "height": 182,
-            "userCount": 1103,
+            "userCount": 1117,
             "gender": "M",
             "id": 284363,
             "marketValueCurrency": "EUR",
@@ -1152,8 +1237,8 @@
           "bodyPart": "left-foot",
           "time": 51,
           "playerCoordinates": {
-            "x": 87.5,
-            "y": 42.9
+            "x": 87.7,
+            "y": 45.2
           },
           "gkCoordinates": {
             "x": 95.1,
@@ -1161,11 +1246,11 @@
           },
           "goalShotCoordinates": {
             "x": 100,
-            "y": 54.2
+            "y": 52.9
           },
           "goalMouthCoordinates": {
-            "x": 27.42,
-            "y": 97.83
+            "x": 34.41,
+            "y": 95.83
           },
           "goalkeeper": {
             "name": "Adrian Šemper",
@@ -1176,7 +1261,7 @@
             "position": "G",
             "jerseyNumber": "1",
             "height": 192,
-            "userCount": 744,
+            "userCount": 747,
             "gender": "M",
             "id": 814876,
             "marketValueCurrency": "EUR",
@@ -1281,7 +1366,7 @@
         "position": "M",
         "jerseyNumber": "3",
         "height": 184,
-        "userCount": 718,
+        "userCount": 721,
         "gender": "M",
         "id": 1174457,
         "marketValueCurrency": "EUR",
@@ -1379,7 +1464,7 @@
         "position": "F",
         "jerseyNumber": "32",
         "height": 191,
-        "userCount": 713,
+        "userCount": 712,
         "gender": "M",
         "id": 346948,
         "marketValueCurrency": "EUR",
@@ -1417,7 +1502,7 @@
         "position": "F",
         "jerseyNumber": "10",
         "height": 178,
-        "userCount": 23096,
+        "userCount": 23176,
         "gender": "M",
         "sofascoreId": "Vardy7",
         "id": 173827,
@@ -1451,7 +1536,7 @@
             "position": "F",
             "jerseyNumber": "10",
             "height": 178,
-            "userCount": 23096,
+            "userCount": 23176,
             "gender": "M",
             "sofascoreId": "Vardy7",
             "id": 173827,
@@ -1482,8 +1567,8 @@
             "y": 60.3
           },
           "gkCoordinates": {
-            "x": 98.8,
-            "y": 51.8
+            "x": 98.5,
+            "y": 52.9
           },
           "goalShotCoordinates": {
             "x": 100,
@@ -1502,7 +1587,7 @@
             "position": "G",
             "jerseyNumber": "1",
             "height": 192,
-            "userCount": 744,
+            "userCount": 747,
             "gender": "M",
             "id": 814876,
             "marketValueCurrency": "EUR",
@@ -1545,7 +1630,7 @@
         "position": "D",
         "jerseyNumber": "2",
         "height": 195,
-        "userCount": 657,
+        "userCount": 663,
         "gender": "M",
         "id": 1152943,
         "marketValueCurrency": "EUR",
@@ -1583,7 +1668,7 @@
         "position": "D",
         "jerseyNumber": "2",
         "height": 195,
-        "userCount": 657,
+        "userCount": 663,
         "gender": "M",
         "id": 1152943,
         "marketValueCurrency": "EUR",

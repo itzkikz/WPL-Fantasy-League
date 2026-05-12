@@ -1613,51 +1613,6 @@
     "missingPlayers": [
       {
         "player": {
-          "name": "Alex Iwobi",
-          "firstName": "Alex",
-          "lastName": "Iwobi",
-          "slug": "alex-iwobi",
-          "shortName": "A. Iwobi",
-          "position": "M",
-          "jerseyNumber": "17",
-          "height": 183,
-          "userCount": 8551,
-          "gender": "M",
-          "sofascoreId": "alexanderiwobi",
-          "country": {
-            "alpha2": "NG",
-            "alpha3": "NGA",
-            "name": "Nigeria",
-            "slug": "nigeria"
-          },
-          "id": 352770,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 831081600,
-          "proposedMarketValueRaw": {
-            "value": 26000000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "أليكس إيووبي",
-              "bn": "অ্যালেক্স ইওবি",
-              "hi": "एलेक्स इवोबी"
-            },
-            "shortNameTranslation": {
-              "ar": "أ. إيووبي",
-              "bn": "এ. ইওবি",
-              "hi": "ए. इवोबी"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Hamstring Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Ryan Sessegnon",
           "firstName": "Ryan",
           "lastName": "Sessegnon",
@@ -1699,6 +1654,51 @@
         "description": "Muscle Injury",
         "externalType": 114,
         "expectedEndDate": "2026-05-20T00:00:00+00:00"
+      },
+      {
+        "player": {
+          "name": "Alex Iwobi",
+          "firstName": "Alex",
+          "lastName": "Iwobi",
+          "slug": "alex-iwobi",
+          "shortName": "A. Iwobi",
+          "position": "M",
+          "jerseyNumber": "17",
+          "height": 183,
+          "userCount": 8551,
+          "gender": "M",
+          "sofascoreId": "alexanderiwobi",
+          "country": {
+            "alpha2": "NG",
+            "alpha3": "NGA",
+            "name": "Nigeria",
+            "slug": "nigeria"
+          },
+          "id": 352770,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 831081600,
+          "proposedMarketValueRaw": {
+            "value": 26000000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "أليكس إيووبي",
+              "bn": "অ্যালেক্স ইওবি",
+              "hi": "एलेक्स इवोबी"
+            },
+            "shortNameTranslation": {
+              "ar": "أ. إيووبي",
+              "bn": "এ. ইওবি",
+              "hi": "ए. इवोबी"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Hamstring Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:31+00:00"
       },
       {
         "player": {
@@ -3435,7 +3435,7 @@
         "reason": 1,
         "description": "Muscle Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-26T12:01:06+00:00"
+        "expectedEndDate": "2026-05-27T04:00:38+00:00"
       }
     ]
   },

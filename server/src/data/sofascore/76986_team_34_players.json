@@ -200,7 +200,7 @@
           "expectedReturn": 7,
           "id": 22421,
           "startDateTimestamp": 1778198400,
-          "updateDateTimestamp": 1778500848,
+          "updateDateTimestamp": 1778558435,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -3142,6 +3142,379 @@
     },
     {
       "player": {
+        "name": "Rhys Chadwick-Chaplin",
+        "slug": "rhys-chadwick-chaplin",
+        "shortName": "R. Chadwick-Chaplin",
+        "team": {
+          "name": "Leeds United U21",
+          "slug": "leeds-united-u21",
+          "shortName": "Leeds U21",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "Premier League 2, Division 1",
+            "slug": "premier-league-2-division-1",
+            "category": {
+              "name": "England Amateur",
+              "slug": "england-amateur",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 0,
+              "country": {
+                "alpha2": "EN",
+                "alpha3": "ENG",
+                "name": "England",
+                "slug": "england"
+              },
+              "id": 252,
+              "flag": "england",
+              "alpha2": "EN",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إنجلترا هواة",
+                  "ru": "Англия Любители"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "Premier League 2, Division 1",
+              "slug": "premier-league-2-division-1",
+              "primaryColorHex": "#3c1c5a",
+              "secondaryColorHex": "#67c079",
+              "category": {
+                "name": "England Amateur",
+                "slug": "england-amateur",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 0,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 252,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا هواة",
+                    "ru": "Англия Любители"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 6143,
+              "country": {},
+              "id": 1129,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإنجليزي 2 - القسم الأول",
+                  "bn": "প্রিমিয়ার লীগ 2, ডিভিশন 1",
+                  "hi": "प्रीमियर लीग 2, डिवीज़न 1"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 0,
+            "isLive": false,
+            "id": 55399,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الممتاز 2، القسم 1",
+                "bn": "প্রিমিয়ার লীগ 2, ডিভিশন 1",
+                "hi": "प्रीमियर लीग 2, डिवीज़न 1"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "Premier League 2, Division 1",
+            "slug": "premier-league-2-division-1",
+            "primaryColorHex": "#3c1c5a",
+            "secondaryColorHex": "#67c079",
+            "category": {
+              "name": "England Amateur",
+              "slug": "england-amateur",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 0,
+              "country": {
+                "alpha2": "EN",
+                "alpha3": "ENG",
+                "name": "England",
+                "slug": "england"
+              },
+              "id": 252,
+              "flag": "england",
+              "alpha2": "EN",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إنجلترا هواة",
+                  "ru": "Англия Любители"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 6143,
+            "country": {},
+            "id": 1129,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإنجليزي 2 - القسم الأول",
+                "bn": "প্রিমিয়ার লীগ 2, ডিভিশন 1",
+                "hi": "प्रीमियर लीग 2, डिवीज़न 1"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 5223,
+          "nameCode": "LEE",
+          "disabled": false,
+          "national": false,
+          "parentTeam": {
+            "name": "Leeds United",
+            "slug": "leeds-united",
+            "shortName": "Leeds",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "tournament": {
+              "name": "Premier League",
+              "slug": "premier-league",
+              "category": {
+                "name": "England",
+                "slug": "england",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 10,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 1,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا",
+                    "bn": "ইংল্যান্ড",
+                    "hi": "इंग्लैंड",
+                    "ru": "Англия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "uniqueTournament": {
+                "name": "Premier League",
+                "slug": "premier-league",
+                "primaryColorHex": "#3c1c5a",
+                "secondaryColorHex": "#f80158",
+                "category": {
+                  "name": "England",
+                  "slug": "england",
+                  "sport": {
+                    "name": "Football",
+                    "slug": "football",
+                    "id": 1
+                  },
+                  "priority": 10,
+                  "country": {
+                    "alpha2": "EN",
+                    "alpha3": "ENG",
+                    "name": "England",
+                    "slug": "england"
+                  },
+                  "id": 1,
+                  "flag": "england",
+                  "alpha2": "EN",
+                  "fieldTranslations": {
+                    "nameTranslation": {
+                      "ar": "إنجلترا",
+                      "bn": "ইংল্যান্ড",
+                      "hi": "इंग्लैंड",
+                      "ru": "Англия"
+                    },
+                    "shortNameTranslation": {}
+                  }
+                },
+                "userCount": 1214572,
+                "country": {},
+                "id": 17,
+                "displayInverseHomeAwayTeams": false,
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "الدوري الإنجليزي الممتاز",
+                    "hi": "प्रिमियर लीग",
+                    "bn": "প্রিমিয়ার লীগ"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "priority": 703,
+              "isLive": false,
+              "id": 1,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "hi": "प्रिमियर लीग",
+                  "ar": "الدوري الإنجليزي الممتاز",
+                  "bn": "প্রিমিয়ার লীগ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "primaryUniqueTournament": {
+              "name": "Premier League",
+              "slug": "premier-league",
+              "primaryColorHex": "#3c1c5a",
+              "secondaryColorHex": "#f80158",
+              "category": {
+                "name": "England",
+                "slug": "england",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 10,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 1,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا",
+                    "bn": "ইংল্যান্ড",
+                    "hi": "इंग्लैंड",
+                    "ru": "Англия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 1214572,
+              "country": {},
+              "id": 17,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإنجليزي الممتاز",
+                  "hi": "प्रिमियर लीग",
+                  "bn": "প্রিমিয়ার লীগ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 257027,
+            "nameCode": "LEE",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "EN",
+              "alpha3": "ENG",
+              "name": "England",
+              "slug": "england"
+            },
+            "id": 34,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#1d4189",
+              "text": "#1d4189"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "ليدز يونايتد",
+                "bn": "লিডস",
+                "hi": "लीड्स यूनाइटेड",
+                "ru": "Лидс"
+              },
+              "shortNameTranslation": {
+                "ar": "ليدز",
+                "hi": "लीड्स"
+              }
+            }
+          },
+          "type": 0,
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 202954,
+          "teamColors": {
+            "primary": "#ffffff",
+            "secondary": "#1d4189",
+            "text": "#1d4189"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "ليدز يونايتد تحت 21",
+              "ru": "Leeds United Reserve U21"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "position": "M",
+        "positionsDetailed": [
+          "MC"
+        ],
+        "jerseyNumber": "47",
+        "dateOfBirth": "2007-02-19T00:00:00+00:00",
+        "userCount": 115,
+        "deceased": false,
+        "gender": "M",
+        "country": {
+          "alpha2": "EN",
+          "alpha3": "ENG",
+          "name": "England",
+          "slug": "england"
+        },
+        "id": 1808314,
+        "shirtNumber": 47,
+        "dateOfBirthTimestamp": 1171843200,
+        "contractUntilTimestamp": 1814313600,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "رايس تشادويك-تشابلين"
+          },
+          "shortNameTranslation": {
+            "ar": "ر. تشابلين"
+          }
+        }
+      }
+    },
+    {
+      "player": {
         "name": "Jaka Bijol",
         "firstName": "Jaka",
         "lastName": "Bijol",
@@ -3554,15 +3927,6 @@
         "userCount": 1621,
         "deceased": false,
         "gender": "M",
-        "injury": {
-          "reason": "Hip Injury",
-          "status": "dayToDay",
-          "expectedReturn": 9,
-          "id": 22422,
-          "startDateTimestamp": 1778198400,
-          "updateDateTimestamp": 1778500848,
-          "endDateTimestamp": 1779796848
-        },
         "country": {
           "alpha2": "NL",
           "alpha3": "NLD",
@@ -4010,16 +4374,12 @@
         "gender": "M",
         "injury": {
           "reason": "Hamstring Injury",
-          "status": "out",
-          "expectedReturn": 6,
+          "status": "dayToDay",
+          "expectedReturn": 9,
           "id": 21654,
           "startDateTimestamp": 1777420800,
-          "updateDateTimestamp": 1778227233,
-          "endDateTimestamp": 1779235200,
-          "expectedReturnDateData": {
-            "month": 5,
-            "year": 2026
-          }
+          "updateDateTimestamp": 1778558431,
+          "endDateTimestamp": 1779854431
         },
         "country": {
           "alpha2": "SE",
@@ -4684,6 +5044,7 @@
         "dateOfBirth": "1999-03-22T00:00:00+00:00",
         "preferredFoot": "Right",
         "userCount": 882,
+        "deceased": false,
         "gender": "M",
         "country": {
           "alpha2": "BE",
@@ -4935,6 +5296,380 @@
             "ar": "س. بيرام",
             "bn": "এস. বাইরাম",
             "hi": "एस. बायरम"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "name": "Jayden Lienou",
+        "firstName": "Jayden Lienou",
+        "slug": "jayden-lienou",
+        "shortName": "J. Lienou",
+        "team": {
+          "name": "Leeds United U21",
+          "slug": "leeds-united-u21",
+          "shortName": "Leeds U21",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "Premier League 2, Division 1",
+            "slug": "premier-league-2-division-1",
+            "category": {
+              "name": "England Amateur",
+              "slug": "england-amateur",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 0,
+              "country": {
+                "alpha2": "EN",
+                "alpha3": "ENG",
+                "name": "England",
+                "slug": "england"
+              },
+              "id": 252,
+              "flag": "england",
+              "alpha2": "EN",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إنجلترا هواة",
+                  "ru": "Англия Любители"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "Premier League 2, Division 1",
+              "slug": "premier-league-2-division-1",
+              "primaryColorHex": "#3c1c5a",
+              "secondaryColorHex": "#67c079",
+              "category": {
+                "name": "England Amateur",
+                "slug": "england-amateur",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 0,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 252,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا هواة",
+                    "ru": "Англия Любители"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 6143,
+              "country": {},
+              "id": 1129,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإنجليزي 2 - القسم الأول",
+                  "bn": "প্রিমিয়ার লীগ 2, ডিভিশন 1",
+                  "hi": "प्रीमियर लीग 2, डिवीज़न 1"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 0,
+            "isLive": false,
+            "id": 55399,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الممتاز 2، القسم 1",
+                "bn": "প্রিমিয়ার লীগ 2, ডিভিশন 1",
+                "hi": "प्रीमियर लीग 2, डिवीज़न 1"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "Premier League 2, Division 1",
+            "slug": "premier-league-2-division-1",
+            "primaryColorHex": "#3c1c5a",
+            "secondaryColorHex": "#67c079",
+            "category": {
+              "name": "England Amateur",
+              "slug": "england-amateur",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 0,
+              "country": {
+                "alpha2": "EN",
+                "alpha3": "ENG",
+                "name": "England",
+                "slug": "england"
+              },
+              "id": 252,
+              "flag": "england",
+              "alpha2": "EN",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إنجلترا هواة",
+                  "ru": "Англия Любители"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 6143,
+            "country": {},
+            "id": 1129,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإنجليزي 2 - القسم الأول",
+                "bn": "প্রিমিয়ার লীগ 2, ডিভিশন 1",
+                "hi": "प्रीमियर लीग 2, डिवीज़न 1"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 5223,
+          "nameCode": "LEE",
+          "disabled": false,
+          "national": false,
+          "parentTeam": {
+            "name": "Leeds United",
+            "slug": "leeds-united",
+            "shortName": "Leeds",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "tournament": {
+              "name": "Premier League",
+              "slug": "premier-league",
+              "category": {
+                "name": "England",
+                "slug": "england",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 10,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 1,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا",
+                    "bn": "ইংল্যান্ড",
+                    "hi": "इंग्लैंड",
+                    "ru": "Англия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "uniqueTournament": {
+                "name": "Premier League",
+                "slug": "premier-league",
+                "primaryColorHex": "#3c1c5a",
+                "secondaryColorHex": "#f80158",
+                "category": {
+                  "name": "England",
+                  "slug": "england",
+                  "sport": {
+                    "name": "Football",
+                    "slug": "football",
+                    "id": 1
+                  },
+                  "priority": 10,
+                  "country": {
+                    "alpha2": "EN",
+                    "alpha3": "ENG",
+                    "name": "England",
+                    "slug": "england"
+                  },
+                  "id": 1,
+                  "flag": "england",
+                  "alpha2": "EN",
+                  "fieldTranslations": {
+                    "nameTranslation": {
+                      "ar": "إنجلترا",
+                      "bn": "ইংল্যান্ড",
+                      "hi": "इंग्लैंड",
+                      "ru": "Англия"
+                    },
+                    "shortNameTranslation": {}
+                  }
+                },
+                "userCount": 1214572,
+                "country": {},
+                "id": 17,
+                "displayInverseHomeAwayTeams": false,
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "الدوري الإنجليزي الممتاز",
+                    "hi": "प्रिमियर लीग",
+                    "bn": "প্রিমিয়ার লীগ"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "priority": 703,
+              "isLive": false,
+              "id": 1,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "hi": "प्रिमियर लीग",
+                  "ar": "الدوري الإنجليزي الممتاز",
+                  "bn": "প্রিমিয়ার লীগ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "primaryUniqueTournament": {
+              "name": "Premier League",
+              "slug": "premier-league",
+              "primaryColorHex": "#3c1c5a",
+              "secondaryColorHex": "#f80158",
+              "category": {
+                "name": "England",
+                "slug": "england",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 10,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 1,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا",
+                    "bn": "ইংল্যান্ড",
+                    "hi": "इंग्लैंड",
+                    "ru": "Англия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 1214572,
+              "country": {},
+              "id": 17,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإنجليزي الممتاز",
+                  "hi": "प्रिमियर लीग",
+                  "bn": "প্রিমিয়ার লীগ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 257027,
+            "nameCode": "LEE",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "EN",
+              "alpha3": "ENG",
+              "name": "England",
+              "slug": "england"
+            },
+            "id": 34,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#1d4189",
+              "text": "#1d4189"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "ليدز يونايتد",
+                "bn": "লিডস",
+                "hi": "लीड्स यूनाइटेड",
+                "ru": "Лидс"
+              },
+              "shortNameTranslation": {
+                "ar": "ليدز",
+                "hi": "लीड्स"
+              }
+            }
+          },
+          "type": 0,
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 202954,
+          "teamColors": {
+            "primary": "#ffffff",
+            "secondary": "#1d4189",
+            "text": "#1d4189"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "ليدز يونايتد تحت 21",
+              "ru": "Leeds United Reserve U21"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "position": "D",
+        "positionsDetailed": [
+          "DL"
+        ],
+        "jerseyNumber": "65",
+        "dateOfBirth": "2008-04-08T00:00:00+00:00",
+        "preferredFoot": "Left",
+        "userCount": 64,
+        "gender": "M",
+        "country": {
+          "alpha2": "WA",
+          "alpha3": "WAL",
+          "name": "Wales",
+          "slug": "wales"
+        },
+        "id": 1899485,
+        "shirtNumber": 65,
+        "dateOfBirthTimestamp": 1207612800,
+        "contractUntilTimestamp": 1845936000,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "جادين ليينو"
+          },
+          "shortNameTranslation": {
+            "ar": "ج. ليينو"
           }
         }
       }
@@ -6240,6 +6975,7 @@
         "dateOfBirth": "1999-03-22T00:00:00+00:00",
         "preferredFoot": "Right",
         "userCount": 882,
+        "deceased": false,
         "gender": "M",
         "country": {
           "alpha2": "BE",
@@ -6928,7 +7664,7 @@
           "expectedReturn": 7,
           "id": 22421,
           "startDateTimestamp": 1778198400,
-          "updateDateTimestamp": 1778500848,
+          "updateDateTimestamp": 1778558435,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -8269,15 +9005,6 @@
         "userCount": 1621,
         "deceased": false,
         "gender": "M",
-        "injury": {
-          "reason": "Hip Injury",
-          "status": "dayToDay",
-          "expectedReturn": 9,
-          "id": 22422,
-          "startDateTimestamp": 1778198400,
-          "updateDateTimestamp": 1778500848,
-          "endDateTimestamp": 1779796848
-        },
         "country": {
           "alpha2": "NL",
           "alpha3": "NLD",
@@ -8503,16 +9230,12 @@
         "gender": "M",
         "injury": {
           "reason": "Hamstring Injury",
-          "status": "out",
-          "expectedReturn": 6,
+          "status": "dayToDay",
+          "expectedReturn": 9,
           "id": 21654,
           "startDateTimestamp": 1777420800,
-          "updateDateTimestamp": 1778227233,
-          "endDateTimestamp": 1779235200,
-          "expectedReturnDateData": {
-            "month": 5,
-            "year": 2026
-          }
+          "updateDateTimestamp": 1778558431,
+          "endDateTimestamp": 1779854431
         },
         "country": {
           "alpha2": "SE",
@@ -9872,6 +10595,380 @@
             "ar": "إ. أمبادو",
             "bn": "ই. আমপাদু",
             "hi": "ई. अम्पादु"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "name": "Jayden Lienou",
+        "firstName": "Jayden Lienou",
+        "slug": "jayden-lienou",
+        "shortName": "J. Lienou",
+        "team": {
+          "name": "Leeds United U21",
+          "slug": "leeds-united-u21",
+          "shortName": "Leeds U21",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "Premier League 2, Division 1",
+            "slug": "premier-league-2-division-1",
+            "category": {
+              "name": "England Amateur",
+              "slug": "england-amateur",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 0,
+              "country": {
+                "alpha2": "EN",
+                "alpha3": "ENG",
+                "name": "England",
+                "slug": "england"
+              },
+              "id": 252,
+              "flag": "england",
+              "alpha2": "EN",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إنجلترا هواة",
+                  "ru": "Англия Любители"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "Premier League 2, Division 1",
+              "slug": "premier-league-2-division-1",
+              "primaryColorHex": "#3c1c5a",
+              "secondaryColorHex": "#67c079",
+              "category": {
+                "name": "England Amateur",
+                "slug": "england-amateur",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 0,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 252,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا هواة",
+                    "ru": "Англия Любители"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 6143,
+              "country": {},
+              "id": 1129,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإنجليزي 2 - القسم الأول",
+                  "bn": "প্রিমিয়ার লীগ 2, ডিভিশন 1",
+                  "hi": "प्रीमियर लीग 2, डिवीज़न 1"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 0,
+            "isLive": false,
+            "id": 55399,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الممتاز 2، القسم 1",
+                "bn": "প্রিমিয়ার লীগ 2, ডিভিশন 1",
+                "hi": "प्रीमियर लीग 2, डिवीज़न 1"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "Premier League 2, Division 1",
+            "slug": "premier-league-2-division-1",
+            "primaryColorHex": "#3c1c5a",
+            "secondaryColorHex": "#67c079",
+            "category": {
+              "name": "England Amateur",
+              "slug": "england-amateur",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 0,
+              "country": {
+                "alpha2": "EN",
+                "alpha3": "ENG",
+                "name": "England",
+                "slug": "england"
+              },
+              "id": 252,
+              "flag": "england",
+              "alpha2": "EN",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إنجلترا هواة",
+                  "ru": "Англия Любители"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 6143,
+            "country": {},
+            "id": 1129,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإنجليزي 2 - القسم الأول",
+                "bn": "প্রিমিয়ার লীগ 2, ডিভিশন 1",
+                "hi": "प्रीमियर लीग 2, डिवीज़न 1"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 5223,
+          "nameCode": "LEE",
+          "disabled": false,
+          "national": false,
+          "parentTeam": {
+            "name": "Leeds United",
+            "slug": "leeds-united",
+            "shortName": "Leeds",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "tournament": {
+              "name": "Premier League",
+              "slug": "premier-league",
+              "category": {
+                "name": "England",
+                "slug": "england",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 10,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 1,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا",
+                    "bn": "ইংল্যান্ড",
+                    "hi": "इंग्लैंड",
+                    "ru": "Англия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "uniqueTournament": {
+                "name": "Premier League",
+                "slug": "premier-league",
+                "primaryColorHex": "#3c1c5a",
+                "secondaryColorHex": "#f80158",
+                "category": {
+                  "name": "England",
+                  "slug": "england",
+                  "sport": {
+                    "name": "Football",
+                    "slug": "football",
+                    "id": 1
+                  },
+                  "priority": 10,
+                  "country": {
+                    "alpha2": "EN",
+                    "alpha3": "ENG",
+                    "name": "England",
+                    "slug": "england"
+                  },
+                  "id": 1,
+                  "flag": "england",
+                  "alpha2": "EN",
+                  "fieldTranslations": {
+                    "nameTranslation": {
+                      "ar": "إنجلترا",
+                      "bn": "ইংল্যান্ড",
+                      "hi": "इंग्लैंड",
+                      "ru": "Англия"
+                    },
+                    "shortNameTranslation": {}
+                  }
+                },
+                "userCount": 1214572,
+                "country": {},
+                "id": 17,
+                "displayInverseHomeAwayTeams": false,
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "الدوري الإنجليزي الممتاز",
+                    "hi": "प्रिमियर लीग",
+                    "bn": "প্রিমিয়ার লীগ"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "priority": 703,
+              "isLive": false,
+              "id": 1,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "hi": "प्रिमियर लीग",
+                  "ar": "الدوري الإنجليزي الممتاز",
+                  "bn": "প্রিমিয়ার লীগ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "primaryUniqueTournament": {
+              "name": "Premier League",
+              "slug": "premier-league",
+              "primaryColorHex": "#3c1c5a",
+              "secondaryColorHex": "#f80158",
+              "category": {
+                "name": "England",
+                "slug": "england",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 10,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 1,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا",
+                    "bn": "ইংল্যান্ড",
+                    "hi": "इंग्लैंड",
+                    "ru": "Англия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 1214572,
+              "country": {},
+              "id": 17,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإنجليزي الممتاز",
+                  "hi": "प्रिमियर लीग",
+                  "bn": "প্রিমিয়ার লীগ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 257027,
+            "nameCode": "LEE",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "EN",
+              "alpha3": "ENG",
+              "name": "England",
+              "slug": "england"
+            },
+            "id": 34,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#1d4189",
+              "text": "#1d4189"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "ليدز يونايتد",
+                "bn": "লিডস",
+                "hi": "लीड्स यूनाइटेड",
+                "ru": "Лидс"
+              },
+              "shortNameTranslation": {
+                "ar": "ليدز",
+                "hi": "लीड्स"
+              }
+            }
+          },
+          "type": 0,
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 202954,
+          "teamColors": {
+            "primary": "#ffffff",
+            "secondary": "#1d4189",
+            "text": "#1d4189"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "ليدز يونايتد تحت 21",
+              "ru": "Leeds United Reserve U21"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "position": "D",
+        "positionsDetailed": [
+          "DL"
+        ],
+        "jerseyNumber": "65",
+        "dateOfBirth": "2008-04-08T00:00:00+00:00",
+        "preferredFoot": "Left",
+        "userCount": 64,
+        "gender": "M",
+        "country": {
+          "alpha2": "WA",
+          "alpha3": "WAL",
+          "name": "Wales",
+          "slug": "wales"
+        },
+        "id": 1899485,
+        "shirtNumber": 65,
+        "dateOfBirthTimestamp": 1207612800,
+        "contractUntilTimestamp": 1845936000,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "جادين ليينو"
+          },
+          "shortNameTranslation": {
+            "ar": "ج. ليينو"
           }
         }
       }
@@ -11407,16 +12504,12 @@
         "gender": "M",
         "injury": {
           "reason": "Hamstring Injury",
-          "status": "out",
-          "expectedReturn": 6,
+          "status": "dayToDay",
+          "expectedReturn": 9,
           "id": 21654,
           "startDateTimestamp": 1777420800,
-          "updateDateTimestamp": 1778227233,
-          "endDateTimestamp": 1779235200,
-          "expectedReturnDateData": {
-            "month": 5,
-            "year": 2026
-          }
+          "updateDateTimestamp": 1778558431,
+          "endDateTimestamp": 1779854431
         },
         "country": {
           "alpha2": "SE",
@@ -12094,7 +13187,7 @@
           "expectedReturn": 7,
           "id": 22421,
           "startDateTimestamp": 1778198400,
-          "updateDateTimestamp": 1778500848,
+          "updateDateTimestamp": 1778558435,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -14644,7 +15737,7 @@
           "expectedReturn": 7,
           "id": 22421,
           "startDateTimestamp": 1778198400,
-          "updateDateTimestamp": 1778500848,
+          "updateDateTimestamp": 1778558435,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -16639,16 +17732,12 @@
         "gender": "M",
         "injury": {
           "reason": "Hamstring Injury",
-          "status": "out",
-          "expectedReturn": 6,
+          "status": "dayToDay",
+          "expectedReturn": 9,
           "id": 21654,
           "startDateTimestamp": 1777420800,
-          "updateDateTimestamp": 1778227233,
-          "endDateTimestamp": 1779235200,
-          "expectedReturnDateData": {
-            "month": 5,
-            "year": 2026
-          }
+          "updateDateTimestamp": 1778558431,
+          "endDateTimestamp": 1779854431
         },
         "country": {
           "alpha2": "SE",
@@ -17835,6 +18924,7 @@
         "dateOfBirth": "1999-03-22T00:00:00+00:00",
         "preferredFoot": "Right",
         "userCount": 882,
+        "deceased": false,
         "gender": "M",
         "country": {
           "alpha2": "BE",
@@ -23396,15 +24486,6 @@
         "userCount": 1621,
         "deceased": false,
         "gender": "M",
-        "injury": {
-          "reason": "Hip Injury",
-          "status": "dayToDay",
-          "expectedReturn": 9,
-          "id": 22422,
-          "startDateTimestamp": 1778198400,
-          "updateDateTimestamp": 1778500848,
-          "endDateTimestamp": 1779796848
-        },
         "country": {
           "alpha2": "NL",
           "alpha3": "NLD",

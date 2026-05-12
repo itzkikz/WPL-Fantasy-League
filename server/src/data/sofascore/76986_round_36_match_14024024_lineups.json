@@ -1632,7 +1632,7 @@
         "reason": 1,
         "description": "Hamstring Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       },
       {
         "player": {
@@ -1677,7 +1677,7 @@
         "reason": 1,
         "description": "Hamstring Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       },
       {
         "player": {
@@ -3277,93 +3277,6 @@
       },
       {
         "player": {
-          "name": "Estêvão",
-          "firstName": "Estêvão",
-          "slug": "estevao",
-          "shortName": "Estêvão",
-          "position": "M",
-          "jerseyNumber": "41",
-          "height": 176,
-          "userCount": 217852,
-          "gender": "M",
-          "sofascoreId": "Estêvão",
-          "country": {
-            "alpha2": "BR",
-            "alpha3": "BRA",
-            "name": "Brazil",
-            "slug": "brazil"
-          },
-          "id": 1597265,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 1177372800,
-          "proposedMarketValueRaw": {
-            "value": 82000000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "إستيفاو",
-              "bn": "এস্তেভাও",
-              "hi": "एस्टेवाओ"
-            },
-            "shortNameTranslation": {
-              "ar": "إستيفاو",
-              "bn": "এস্তেভাও",
-              "hi": "एस्टेवाओ"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Hamstring Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
-          "name": "Jamie Gittens",
-          "slug": "jamie-bynoe-gittens",
-          "shortName": "J. Gittens",
-          "position": "M",
-          "jerseyNumber": "11",
-          "height": 178,
-          "userCount": 24778,
-          "gender": "M",
-          "sofascoreId": "jbgittens",
-          "country": {
-            "alpha2": "EN",
-            "alpha3": "ENG",
-            "name": "England",
-            "slug": "england"
-          },
-          "id": 1140599,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 1091923200,
-          "proposedMarketValueRaw": {
-            "value": 34000000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "جيمي باينو غيتنز",
-              "bn": "জেমি বাইনো-গিটেনস",
-              "hi": "जेमी बायनो-गिटेंस"
-            },
-            "shortNameTranslation": {
-              "ar": "ج. باينو غيتنز",
-              "bn": "জে. বাইনো-গিটেনস",
-              "hi": "जे. बायनो-गिटेंस"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Hamstring Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Jesse Derry",
           "slug": "jesse-derry",
           "shortName": "J. Derry",
@@ -3479,6 +3392,93 @@
         "type": "doubtful",
         "reason": 1,
         "externalType": 5
+      },
+      {
+        "player": {
+          "name": "Estêvão",
+          "firstName": "Estêvão",
+          "slug": "estevao",
+          "shortName": "Estêvão",
+          "position": "M",
+          "jerseyNumber": "41",
+          "height": 176,
+          "userCount": 217852,
+          "gender": "M",
+          "sofascoreId": "Estêvão",
+          "country": {
+            "alpha2": "BR",
+            "alpha3": "BRA",
+            "name": "Brazil",
+            "slug": "brazil"
+          },
+          "id": 1597265,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 1177372800,
+          "proposedMarketValueRaw": {
+            "value": 82000000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "إستيفاو",
+              "bn": "এস্তেভাও",
+              "hi": "एस्टेवाओ"
+            },
+            "shortNameTranslation": {
+              "ar": "إستيفاو",
+              "bn": "এস্তেভাও",
+              "hi": "एस्टेवाओ"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Hamstring Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:31+00:00"
+      },
+      {
+        "player": {
+          "name": "Jamie Gittens",
+          "slug": "jamie-bynoe-gittens",
+          "shortName": "J. Gittens",
+          "position": "M",
+          "jerseyNumber": "11",
+          "height": 178,
+          "userCount": 24778,
+          "gender": "M",
+          "sofascoreId": "jbgittens",
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 1140599,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 1091923200,
+          "proposedMarketValueRaw": {
+            "value": 34000000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "جيمي باينو غيتنز",
+              "bn": "জেমি বাইনো-গিটেনস",
+              "hi": "जेमी बायनो-गिटेंस"
+            },
+            "shortNameTranslation": {
+              "ar": "ج. باينو غيتنز",
+              "bn": "জে. বাইনো-গিটেনস",
+              "hi": "जे. बायनो-गिटेंस"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Hamstring Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:32+00:00"
       },
       {
         "player": {

@@ -1514,51 +1514,6 @@
     "missingPlayers": [
       {
         "player": {
-          "name": "Idrissa Gana Gueye",
-          "firstName": "Idrissa Gana",
-          "lastName": "Gueye",
-          "slug": "idrissa-gana-gueye",
-          "shortName": "I. Gueye",
-          "position": "M",
-          "jerseyNumber": "27",
-          "height": 174,
-          "userCount": 22000,
-          "gender": "M",
-          "sofascoreId": "iganagueye",
-          "country": {
-            "alpha2": "SN",
-            "alpha3": "SEN",
-            "name": "Senegal",
-            "slug": "senegal"
-          },
-          "id": 106337,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 622771200,
-          "proposedMarketValueRaw": {
-            "value": 970000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "إدريسا غي",
-              "bn": "ইদ্রিসা গুইয়ে",
-              "hi": "इद्रिसा गुये"
-            },
-            "shortNameTranslation": {
-              "ar": "إ. غي",
-              "bn": "আই. গুইয়ে",
-              "hi": "आई. गुये"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Muscle Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Jack Grealish",
           "firstName": "Jack",
           "lastName": "Grealish",
@@ -1643,6 +1598,51 @@
         "description": "Hamstring Injury",
         "externalType": 114,
         "expectedEndDate": "2026-06-10T00:00:00+00:00"
+      },
+      {
+        "player": {
+          "name": "Idrissa Gana Gueye",
+          "firstName": "Idrissa Gana",
+          "lastName": "Gueye",
+          "slug": "idrissa-gana-gueye",
+          "shortName": "I. Gueye",
+          "position": "M",
+          "jerseyNumber": "27",
+          "height": 174,
+          "userCount": 22000,
+          "gender": "M",
+          "sofascoreId": "iganagueye",
+          "country": {
+            "alpha2": "SN",
+            "alpha3": "SEN",
+            "name": "Senegal",
+            "slug": "senegal"
+          },
+          "id": 106337,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 622771200,
+          "proposedMarketValueRaw": {
+            "value": 970000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "إدريسا غي",
+              "bn": "ইদ্রিসা গুইয়ে",
+              "hi": "इद्रिसा गुये"
+            },
+            "shortNameTranslation": {
+              "ar": "إ. غي",
+              "bn": "আই. গুইয়ে",
+              "hi": "आई. गुये"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Muscle Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:31+00:00"
       }
     ]
   },
@@ -3300,7 +3300,7 @@
         "reason": 1,
         "description": "Broken Leg",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       },
       {
         "player": {

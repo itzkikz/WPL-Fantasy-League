@@ -196,7 +196,7 @@
           "expectedReturn": 7,
           "id": 22032,
           "startDateTimestamp": 1778025600,
-          "updateDateTimestamp": 1778500854,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -1528,7 +1528,7 @@
           "expectedReturn": 7,
           "id": 22111,
           "startDateTimestamp": 1778112000,
-          "updateDateTimestamp": 1778500854,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -1765,7 +1765,7 @@
           "expectedReturn": 7,
           "id": 21542,
           "startDateTimestamp": 1777420800,
-          "updateDateTimestamp": 1778500852,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -2241,12 +2241,12 @@
         "deceased": false,
         "gender": "M",
         "injury": {
-          "reason": "Muscle Injury",
+          "reason": "Ankle Injury",
           "status": "out",
           "expectedReturn": 4,
           "id": 22116,
           "startDateTimestamp": 1778112000,
-          "updateDateTimestamp": 1778500874
+          "updateDateTimestamp": 1778558430
         },
         "country": {
           "alpha2": "US",
@@ -2474,7 +2474,7 @@
           "expectedReturn": 7,
           "id": 21183,
           "startDateTimestamp": 1777075200,
-          "updateDateTimestamp": 1778500852,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -3798,12 +3798,17 @@
         "deceased": false,
         "gender": "M",
         "injury": {
-          "reason": "Hamstring Injury",
+          "reason": "Thigh Injury",
           "status": "out",
-          "expectedReturn": 4,
+          "expectedReturn": 7,
           "id": 22428,
           "startDateTimestamp": 1778371200,
-          "updateDateTimestamp": 1778500847
+          "updateDateTimestamp": 1778558432,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
         },
         "sofascoreId": "nahuelmolina_35",
         "country": {
@@ -4693,6 +4698,19 @@
         "userCount": 6311,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Ankle Injury",
+          "status": "out",
+          "expectedReturn": 7,
+          "id": 22491,
+          "startDateTimestamp": 1778457600,
+          "updateDateTimestamp": 1778558432,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "sofascoreId": "JoseMaGimenez13",
         "country": {
           "alpha2": "UY",
@@ -7457,7 +7475,7 @@
           "expectedReturn": 7,
           "id": 22111,
           "startDateTimestamp": 1778112000,
-          "updateDateTimestamp": 1778500854,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -7912,7 +7930,7 @@
           "expectedReturn": 7,
           "id": 22032,
           "startDateTimestamp": 1778025600,
-          "updateDateTimestamp": 1778500854,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -8144,12 +8162,17 @@
         "deceased": false,
         "gender": "M",
         "injury": {
-          "reason": "Hamstring Injury",
+          "reason": "Thigh Injury",
           "status": "out",
-          "expectedReturn": 4,
+          "expectedReturn": 7,
           "id": 22428,
           "startDateTimestamp": 1778371200,
-          "updateDateTimestamp": 1778500847
+          "updateDateTimestamp": 1778558432,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
         },
         "sofascoreId": "nahuelmolina_35",
         "country": {
@@ -8381,7 +8404,7 @@
           "expectedReturn": 7,
           "id": 21542,
           "startDateTimestamp": 1777420800,
-          "updateDateTimestamp": 1778500852,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -10820,12 +10843,12 @@
         "deceased": false,
         "gender": "M",
         "injury": {
-          "reason": "Muscle Injury",
+          "reason": "Ankle Injury",
           "status": "out",
           "expectedReturn": 4,
           "id": 22116,
           "startDateTimestamp": 1778112000,
-          "updateDateTimestamp": 1778500874
+          "updateDateTimestamp": 1778558430
         },
         "country": {
           "alpha2": "US",
@@ -11046,6 +11069,19 @@
         "userCount": 6311,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Ankle Injury",
+          "status": "out",
+          "expectedReturn": 7,
+          "id": 22491,
+          "startDateTimestamp": 1778457600,
+          "updateDateTimestamp": 1778558432,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "sofascoreId": "JoseMaGimenez13",
         "country": {
           "alpha2": "UY",
@@ -11932,6 +11968,19 @@
         "userCount": 6311,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Ankle Injury",
+          "status": "out",
+          "expectedReturn": 7,
+          "id": 22491,
+          "startDateTimestamp": 1778457600,
+          "updateDateTimestamp": 1778558432,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "sofascoreId": "JoseMaGimenez13",
         "country": {
           "alpha2": "UY",
@@ -12823,12 +12872,17 @@
         "deceased": false,
         "gender": "M",
         "injury": {
-          "reason": "Hamstring Injury",
+          "reason": "Thigh Injury",
           "status": "out",
-          "expectedReturn": 4,
+          "expectedReturn": 7,
           "id": 22428,
           "startDateTimestamp": 1778371200,
-          "updateDateTimestamp": 1778500847
+          "updateDateTimestamp": 1778558432,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
         },
         "sofascoreId": "nahuelmolina_35",
         "country": {
@@ -13060,7 +13114,7 @@
           "expectedReturn": 7,
           "id": 21542,
           "startDateTimestamp": 1777420800,
-          "updateDateTimestamp": 1778500852,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -13538,7 +13592,7 @@
           "expectedReturn": 7,
           "id": 22032,
           "startDateTimestamp": 1778025600,
-          "updateDateTimestamp": 1778500854,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -13991,12 +14045,12 @@
         "deceased": false,
         "gender": "M",
         "injury": {
-          "reason": "Muscle Injury",
+          "reason": "Ankle Injury",
           "status": "out",
           "expectedReturn": 4,
           "id": 22116,
           "startDateTimestamp": 1778112000,
-          "updateDateTimestamp": 1778500874
+          "updateDateTimestamp": 1778558430
         },
         "country": {
           "alpha2": "US",
@@ -14223,7 +14277,7 @@
           "expectedReturn": 7,
           "id": 22111,
           "startDateTimestamp": 1778112000,
-          "updateDateTimestamp": 1778500854,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -15858,7 +15912,7 @@
           "expectedReturn": 7,
           "id": 21542,
           "startDateTimestamp": 1777420800,
-          "updateDateTimestamp": 1778500852,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -17433,12 +17487,12 @@
         "deceased": false,
         "gender": "M",
         "injury": {
-          "reason": "Muscle Injury",
+          "reason": "Ankle Injury",
           "status": "out",
           "expectedReturn": 4,
           "id": 22116,
           "startDateTimestamp": 1778112000,
-          "updateDateTimestamp": 1778500874
+          "updateDateTimestamp": 1778558430
         },
         "country": {
           "alpha2": "US",
@@ -19448,7 +19502,7 @@
           "expectedReturn": 7,
           "id": 22032,
           "startDateTimestamp": 1778025600,
-          "updateDateTimestamp": 1778500854,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -20646,7 +20700,7 @@
           "expectedReturn": 7,
           "id": 22111,
           "startDateTimestamp": 1778112000,
-          "updateDateTimestamp": 1778500854,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -21448,7 +21502,7 @@
           "expectedReturn": 7,
           "id": 21183,
           "startDateTimestamp": 1777075200,
-          "updateDateTimestamp": 1778500852,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -22027,12 +22081,17 @@
         "deceased": false,
         "gender": "M",
         "injury": {
-          "reason": "Hamstring Injury",
+          "reason": "Thigh Injury",
           "status": "out",
-          "expectedReturn": 4,
+          "expectedReturn": 7,
           "id": 22428,
           "startDateTimestamp": 1778371200,
-          "updateDateTimestamp": 1778500847
+          "updateDateTimestamp": 1778558432,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
         },
         "sofascoreId": "nahuelmolina_35",
         "country": {
@@ -23211,6 +23270,19 @@
         "userCount": 6311,
         "deceased": false,
         "gender": "M",
+        "injury": {
+          "reason": "Ankle Injury",
+          "status": "out",
+          "expectedReturn": 7,
+          "id": 22491,
+          "startDateTimestamp": 1778457600,
+          "updateDateTimestamp": 1778558432,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
+        },
         "sofascoreId": "JoseMaGimenez13",
         "country": {
           "alpha2": "UY",

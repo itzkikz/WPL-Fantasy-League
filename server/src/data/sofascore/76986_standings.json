@@ -698,6 +698,59 @@
         },
         {
           "team": {
+            "name": "Leeds United",
+            "slug": "leeds-united",
+            "shortName": "Leeds",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 257027,
+            "nameCode": "LEE",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "EN",
+              "alpha3": "ENG",
+              "name": "England",
+              "slug": "england"
+            },
+            "id": 34,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#1d4189",
+              "text": "#1d4189"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "ليدز يونايتد",
+                "bn": "লিডস",
+                "hi": "लीड्स यूनाइटेड",
+                "ru": "Лидс"
+              },
+              "shortNameTranslation": {
+                "ar": "ليدز",
+                "hi": "लीड्स"
+              }
+            }
+          },
+          "descriptions": [],
+          "position": 14,
+          "matches": 36,
+          "wins": 10,
+          "scoresFor": 48,
+          "scoresAgainst": 53,
+          "id": 1637263,
+          "losses": 12,
+          "draws": 14,
+          "points": 44,
+          "scoreDiffFormatted": "-5"
+        },
+        {
+          "team": {
             "name": "Crystal Palace",
             "slug": "crystal-palace",
             "shortName": "Crystal Palace",
@@ -735,7 +788,7 @@
             }
           },
           "descriptions": [],
-          "position": 14,
+          "position": 15,
           "matches": 35,
           "wins": 11,
           "scoresFor": 38,
@@ -788,7 +841,7 @@
             }
           },
           "descriptions": [],
-          "position": 15,
+          "position": 16,
           "matches": 36,
           "wins": 11,
           "scoresFor": 45,
@@ -798,59 +851,6 @@
           "draws": 10,
           "points": 43,
           "scoreDiffFormatted": "-2"
-        },
-        {
-          "team": {
-            "name": "Leeds United",
-            "slug": "leeds-united",
-            "shortName": "Leeds",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 257027,
-            "nameCode": "LEE",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "EN",
-              "alpha3": "ENG",
-              "name": "England",
-              "slug": "england"
-            },
-            "id": 34,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#1d4189",
-              "text": "#1d4189"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "ليدز يونايتد",
-                "bn": "লিডস",
-                "hi": "लीड्स यूनाइटेड",
-                "ru": "Лидс"
-              },
-              "shortNameTranslation": {
-                "ar": "ليدز",
-                "hi": "लीड्स"
-              }
-            }
-          },
-          "descriptions": [],
-          "position": 16,
-          "matches": 35,
-          "wins": 10,
-          "scoresFor": 47,
-          "scoresAgainst": 52,
-          "id": 1637263,
-          "losses": 12,
-          "draws": 13,
-          "points": 43,
-          "scoreDiffFormatted": "-5"
         },
         {
           "team": {
@@ -895,14 +895,14 @@
           },
           "descriptions": [],
           "position": 17,
-          "matches": 35,
+          "matches": 36,
           "wins": 9,
-          "scoresFor": 45,
-          "scoresAgainst": 54,
+          "scoresFor": 46,
+          "scoresAgainst": 55,
           "id": 1637270,
           "losses": 16,
-          "draws": 10,
-          "points": 37,
+          "draws": 11,
+          "points": 38,
           "scoreDiffFormatted": "-9"
         },
         {
@@ -1166,7 +1166,7 @@
         }
       },
       "name": "Premier League 25/26",
-      "updatedAtTimestamp": 1778434378
+      "updatedAtTimestamp": 1778540794
     }
   ]
 }

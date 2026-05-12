@@ -106,15 +106,15 @@
             "id": 804
           },
           "position": 2,
-          "matches": 35,
+          "matches": 36,
           "wins": 21,
-          "scoresFor": 52,
-          "scoresAgainst": 33,
+          "scoresFor": 54,
+          "scoresAgainst": 36,
           "id": 1609097,
-          "losses": 7,
+          "losses": 8,
           "draws": 7,
           "points": 70,
-          "scoreDiffFormatted": "+19"
+          "scoreDiffFormatted": "+18"
         },
         {
           "team": {
@@ -383,6 +383,56 @@
         },
         {
           "team": {
+            "name": "Bologna",
+            "slug": "bologna",
+            "shortName": "Bologna",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 240785,
+            "nameCode": "BOL",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "IT",
+              "alpha3": "ITA",
+              "name": "Italy",
+              "slug": "italy"
+            },
+            "id": 2685,
+            "teamColors": {
+              "primary": "#003366",
+              "secondary": "#cc0000",
+              "text": "#cc0000"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "بولونيا",
+                "bn": "বোলোগনা",
+                "hi": "बोलोग्ना",
+                "ru": "Болонья"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "position": 8,
+          "matches": 36,
+          "wins": 15,
+          "scoresFor": 45,
+          "scoresAgainst": 43,
+          "id": 1609086,
+          "losses": 14,
+          "draws": 7,
+          "points": 52,
+          "scoreDiffFormatted": "+2"
+        },
+        {
+          "team": {
             "name": "Lazio",
             "slug": "lazio",
             "shortName": "Lazio",
@@ -420,7 +470,7 @@
             }
           },
           "descriptions": [],
-          "position": 8,
+          "position": 9,
           "matches": 36,
           "wins": 13,
           "scoresFor": 39,
@@ -470,7 +520,7 @@
             }
           },
           "descriptions": [],
-          "position": 9,
+          "position": 10,
           "matches": 36,
           "wins": 14,
           "scoresFor": 45,
@@ -480,56 +530,6 @@
           "draws": 8,
           "points": 50,
           "scoreDiffFormatted": "-1"
-        },
-        {
-          "team": {
-            "name": "Bologna",
-            "slug": "bologna",
-            "shortName": "Bologna",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 240785,
-            "nameCode": "BOL",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "IT",
-              "alpha3": "ITA",
-              "name": "Italy",
-              "slug": "italy"
-            },
-            "id": 2685,
-            "teamColors": {
-              "primary": "#003366",
-              "secondary": "#cc0000",
-              "text": "#cc0000"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "بولونيا",
-                "bn": "বোলোগনা",
-                "hi": "बोलोग्ना",
-                "ru": "Болонья"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 10,
-          "matches": 35,
-          "wins": 14,
-          "scoresFor": 42,
-          "scoresAgainst": 41,
-          "id": 1609086,
-          "losses": 14,
-          "draws": 7,
-          "points": 49,
-          "scoreDiffFormatted": "+1"
         },
         {
           "team": {
@@ -1142,7 +1142,7 @@
         }
       },
       "name": "Serie A 25/26",
-      "updatedAtTimestamp": 1778480297
+      "updatedAtTimestamp": 1778539488
     }
   ]
 }

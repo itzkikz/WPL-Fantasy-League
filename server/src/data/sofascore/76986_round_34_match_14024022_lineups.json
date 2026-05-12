@@ -1627,48 +1627,6 @@
       },
       {
         "player": {
-          "name": "Sam Johnstone",
-          "slug": "sam-johnstone",
-          "shortName": "S. Johnstone",
-          "position": "G",
-          "jerseyNumber": "31",
-          "height": 193,
-          "userCount": 632,
-          "gender": "M",
-          "country": {
-            "alpha2": "EN",
-            "alpha3": "ENG",
-            "name": "England",
-            "slug": "england"
-          },
-          "id": 98427,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 733017600,
-          "proposedMarketValueRaw": {
-            "value": 3200000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "سام جونستون",
-              "bn": "স্যাম জনস্টোন",
-              "hi": "सैम जॉनस्टोन"
-            },
-            "shortNameTranslation": {
-              "ar": "س. جونستون",
-              "bn": "এস. জনস্টোন",
-              "hi": "एस. जॉनस्टोन"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Shoulder Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Ladislav Krejčí",
           "firstName": "Ladislav",
           "lastName": "Krejci",
@@ -1710,6 +1668,48 @@
         "description": "Neck Injury",
         "externalType": 114,
         "expectedEndDate": "2026-05-16T20:01:10+00:00"
+      },
+      {
+        "player": {
+          "name": "Sam Johnstone",
+          "slug": "sam-johnstone",
+          "shortName": "S. Johnstone",
+          "position": "G",
+          "jerseyNumber": "31",
+          "height": 193,
+          "userCount": 632,
+          "gender": "M",
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 98427,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 733017600,
+          "proposedMarketValueRaw": {
+            "value": 3200000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "سام جونستون",
+              "bn": "স্যাম জনস্টোন",
+              "hi": "सैम जॉनस्टोन"
+            },
+            "shortNameTranslation": {
+              "ar": "س. جونستون",
+              "bn": "এস. জনস্টোন",
+              "hi": "एस. जॉनस्टोन"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Shoulder Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:31+00:00"
       }
     ]
   },
@@ -3492,7 +3492,7 @@
         "reason": 1,
         "description": "Groin Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       },
       {
         "player": {

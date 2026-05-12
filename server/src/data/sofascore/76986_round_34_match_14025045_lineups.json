@@ -1691,7 +1691,7 @@
         "reason": 1,
         "description": "Muscle Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-26T12:01:05+00:00"
+        "expectedEndDate": "2026-05-27T04:00:38+00:00"
       },
       {
         "player": {
@@ -3414,46 +3414,6 @@
       },
       {
         "player": {
-          "name": "Fabian Schär",
-          "slug": "fabian-schar",
-          "shortName": "F. Schär",
-          "position": "D",
-          "jerseyNumber": "5",
-          "height": 186,
-          "userCount": 3118,
-          "gender": "M",
-          "country": {
-            "alpha2": "CH",
-            "alpha3": "CHE",
-            "name": "Switzerland",
-            "slug": "switzerland"
-          },
-          "id": 101882,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 693187200,
-          "proposedMarketValueRaw": {
-            "value": 5800000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "bn": "ফ্যাবিয়ান শার",
-              "hi": "फेबियन शार"
-            },
-            "shortNameTranslation": {
-              "bn": "এফ. শার",
-              "hi": "एफ. शार"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Ankle Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Tino Livramento",
           "firstName": "Tino",
           "lastName": "Livramento",
@@ -3492,7 +3452,7 @@
         "reason": 1,
         "description": "Leg Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-06-20T00:00:00+00:00"
       },
       {
         "player": {
@@ -3538,6 +3498,46 @@
         "description": "Hip Injury",
         "externalType": 114,
         "expectedEndDate": "2026-05-17T12:00:42+00:00"
+      },
+      {
+        "player": {
+          "name": "Fabian Schär",
+          "slug": "fabian-schar",
+          "shortName": "F. Schär",
+          "position": "D",
+          "jerseyNumber": "5",
+          "height": 186,
+          "userCount": 3118,
+          "gender": "M",
+          "country": {
+            "alpha2": "CH",
+            "alpha3": "CHE",
+            "name": "Switzerland",
+            "slug": "switzerland"
+          },
+          "id": 101882,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 693187200,
+          "proposedMarketValueRaw": {
+            "value": 5800000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "bn": "ফ্যাবিয়ান শার",
+              "hi": "फेबियन शार"
+            },
+            "shortNameTranslation": {
+              "bn": "এফ. শার",
+              "hi": "एफ. शार"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Ankle Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:30+00:00"
       }
     ]
   },

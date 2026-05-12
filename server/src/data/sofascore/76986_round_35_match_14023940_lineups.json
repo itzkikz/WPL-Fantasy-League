@@ -1595,50 +1595,6 @@
     "missingPlayers": [
       {
         "player": {
-          "name": "Gabriel Gudmundsson",
-          "firstName": "Gabriel",
-          "lastName": "Gudmundsson",
-          "slug": "gabriel-gudmundsson",
-          "shortName": "G. Gudmundsson",
-          "position": "D",
-          "jerseyNumber": "3",
-          "height": 181,
-          "userCount": 1342,
-          "gender": "M",
-          "country": {
-            "alpha2": "SE",
-            "alpha3": "SWE",
-            "name": "Sweden",
-            "slug": "sweden"
-          },
-          "id": 834308,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 925344000,
-          "proposedMarketValueRaw": {
-            "value": 21000000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "غابرييل غودمندسون",
-              "bn": "গ্যাব্রিয়েল গুডমুন্ডসন",
-              "hi": "गेब्रियल गुडमंडसन"
-            },
-            "shortNameTranslation": {
-              "ar": "غ. غودمندسون",
-              "bn": "জি. গুডমুন্ডসন",
-              "hi": "जी. गुडमंडसन"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Hamstring Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Ilia Gruev",
           "firstName": "Ilia",
           "lastName": "Gruev",
@@ -1680,6 +1636,50 @@
         "description": "Meniscus Injury",
         "externalType": 114,
         "expectedEndDate": "2026-07-20T00:00:00+00:00"
+      },
+      {
+        "player": {
+          "name": "Gabriel Gudmundsson",
+          "firstName": "Gabriel",
+          "lastName": "Gudmundsson",
+          "slug": "gabriel-gudmundsson",
+          "shortName": "G. Gudmundsson",
+          "position": "D",
+          "jerseyNumber": "3",
+          "height": 181,
+          "userCount": 1342,
+          "gender": "M",
+          "country": {
+            "alpha2": "SE",
+            "alpha3": "SWE",
+            "name": "Sweden",
+            "slug": "sweden"
+          },
+          "id": 834308,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 925344000,
+          "proposedMarketValueRaw": {
+            "value": 21000000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "غابرييل غودمندسون",
+              "bn": "গ্যাব্রিয়েল গুডমুন্ডসন",
+              "hi": "गेब्रियल गुडमंडसन"
+            },
+            "shortNameTranslation": {
+              "ar": "غ. غودمندسون",
+              "bn": "জি. গুডমুন্ডসন",
+              "hi": "जी. गुडमंडसन"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Hamstring Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:31+00:00"
       }
     ]
   },
@@ -3328,7 +3328,7 @@
         "reason": 1,
         "description": "Strain Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       },
       {
         "player": {
@@ -3372,7 +3372,7 @@
         "reason": 1,
         "description": "Knee Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       },
       {
         "player": {
