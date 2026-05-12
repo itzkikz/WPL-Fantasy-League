@@ -194,8 +194,8 @@
           "expectedReturn": 9,
           "id": 20869,
           "startDateTimestamp": 1776643200,
-          "updateDateTimestamp": 1778500861,
-          "endDateTimestamp": 1779796861
+          "updateDateTimestamp": 1778558437,
+          "endDateTimestamp": 1779854437
         },
         "country": {
           "alpha2": "MA",
@@ -851,17 +851,12 @@
         "deceased": false,
         "gender": "M",
         "injury": {
-          "reason": "Muscle Injury",
+          "reason": "Hamstring Injury",
           "status": "out",
-          "expectedReturn": 7,
+          "expectedReturn": 4,
           "id": 22410,
           "startDateTimestamp": 1778371200,
-          "updateDateTimestamp": 1778500849,
-          "endDateTimestamp": 1780185600,
-          "expectedReturnDateData": {
-            "month": 5,
-            "year": 2026
-          }
+          "updateDateTimestamp": 1778558432
         },
         "sofascoreId": "NicoWill",
         "country": {
@@ -1303,13 +1298,17 @@
         "userCount": 3481,
         "gender": "M",
         "injury": {
-          "reason": "Physical Discomfort",
-          "status": "dayToDay",
-          "expectedReturn": 9,
+          "reason": "Hamstring Injury",
+          "status": "out",
+          "expectedReturn": 7,
           "id": 22429,
           "startDateTimestamp": 1778371200,
-          "updateDateTimestamp": 1778500848,
-          "endDateTimestamp": 1779796847
+          "updateDateTimestamp": 1778558432,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
         },
         "country": {
           "alpha2": "ES",
@@ -5678,8 +5677,8 @@
           "expectedReturn": 9,
           "id": 22223,
           "startDateTimestamp": 1778198400,
-          "updateDateTimestamp": 1778500870,
-          "endDateTimestamp": 1779796870
+          "updateDateTimestamp": 1778558439,
+          "endDateTimestamp": 1779854439
         },
         "country": {
           "alpha2": "ES",
@@ -6565,8 +6564,8 @@
           "expectedReturn": 9,
           "id": 20869,
           "startDateTimestamp": 1776643200,
-          "updateDateTimestamp": 1778500861,
-          "endDateTimestamp": 1779796861
+          "updateDateTimestamp": 1778558437,
+          "endDateTimestamp": 1779854437
         },
         "country": {
           "alpha2": "MA",
@@ -10168,8 +10167,8 @@
           "expectedReturn": 9,
           "id": 22223,
           "startDateTimestamp": 1778198400,
-          "updateDateTimestamp": 1778500870,
-          "endDateTimestamp": 1779796870
+          "updateDateTimestamp": 1778558439,
+          "endDateTimestamp": 1779854439
         },
         "country": {
           "alpha2": "ES",
@@ -11342,8 +11341,8 @@
           "expectedReturn": 9,
           "id": 20869,
           "startDateTimestamp": 1776643200,
-          "updateDateTimestamp": 1778500861,
-          "endDateTimestamp": 1779796861
+          "updateDateTimestamp": 1778558437,
+          "endDateTimestamp": 1779854437
         },
         "country": {
           "alpha2": "MA",
@@ -15564,17 +15563,12 @@
         "deceased": false,
         "gender": "M",
         "injury": {
-          "reason": "Muscle Injury",
+          "reason": "Hamstring Injury",
           "status": "out",
-          "expectedReturn": 7,
+          "expectedReturn": 4,
           "id": 22410,
           "startDateTimestamp": 1778371200,
-          "updateDateTimestamp": 1778500849,
-          "endDateTimestamp": 1780185600,
-          "expectedReturnDateData": {
-            "month": 5,
-            "year": 2026
-          }
+          "updateDateTimestamp": 1778558432
         },
         "sofascoreId": "NicoWill",
         "country": {
@@ -16923,13 +16917,17 @@
         "userCount": 3481,
         "gender": "M",
         "injury": {
-          "reason": "Physical Discomfort",
-          "status": "dayToDay",
-          "expectedReturn": 9,
+          "reason": "Hamstring Injury",
+          "status": "out",
+          "expectedReturn": 7,
           "id": 22429,
           "startDateTimestamp": 1778371200,
-          "updateDateTimestamp": 1778500848,
-          "endDateTimestamp": 1779796847
+          "updateDateTimestamp": 1778558432,
+          "endDateTimestamp": 1780185600,
+          "expectedReturnDateData": {
+            "month": 5,
+            "year": 2026
+          }
         },
         "country": {
           "alpha2": "ES",

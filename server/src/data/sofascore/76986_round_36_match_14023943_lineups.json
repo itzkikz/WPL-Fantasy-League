@@ -1647,50 +1647,6 @@
       },
       {
         "player": {
-          "name": "Ola Aina",
-          "firstName": "Ola",
-          "lastName": "Aina",
-          "slug": "ola-aina",
-          "shortName": "O. Aina",
-          "position": "D",
-          "jerseyNumber": "34",
-          "height": 182,
-          "userCount": 4180,
-          "gender": "M",
-          "country": {
-            "alpha2": "NG",
-            "alpha3": "NGA",
-            "name": "Nigeria",
-            "slug": "nigeria"
-          },
-          "id": 800417,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 844732800,
-          "proposedMarketValueRaw": {
-            "value": 18200000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "أولا أينا",
-              "bn": "ওলা আইনা",
-              "hi": "ओला आइना"
-            },
-            "shortNameTranslation": {
-              "ar": "أ. أينا",
-              "bn": "ও. আইনা",
-              "hi": "ओ. आइना"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Knock Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Morgan Gibbs-White",
           "firstName": "Morgan",
           "lastName": "Gibbs-White",
@@ -1732,7 +1688,51 @@
         "reason": 1,
         "description": "Head Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-26T12:01:05+00:00"
+        "expectedEndDate": "2026-05-27T04:00:38+00:00"
+      },
+      {
+        "player": {
+          "name": "Ola Aina",
+          "firstName": "Ola",
+          "lastName": "Aina",
+          "slug": "ola-aina",
+          "shortName": "O. Aina",
+          "position": "D",
+          "jerseyNumber": "34",
+          "height": 182,
+          "userCount": 4180,
+          "gender": "M",
+          "country": {
+            "alpha2": "NG",
+            "alpha3": "NGA",
+            "name": "Nigeria",
+            "slug": "nigeria"
+          },
+          "id": 800417,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 844732800,
+          "proposedMarketValueRaw": {
+            "value": 18200000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "أولا أينا",
+              "bn": "ওলা আইনা",
+              "hi": "ओला आइना"
+            },
+            "shortNameTranslation": {
+              "ar": "أ. أينا",
+              "bn": "ও. আইনা",
+              "hi": "ओ. आइना"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Knock Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:32+00:00"
       },
       {
         "player": {
@@ -1774,7 +1774,7 @@
         "reason": 1,
         "description": "Concussion",
         "externalType": 114,
-        "expectedEndDate": "2026-05-26T12:01:05+00:00"
+        "expectedEndDate": "2026-05-27T04:00:38+00:00"
       }
     ]
   },
@@ -3372,46 +3372,6 @@
     "missingPlayers": [
       {
         "player": {
-          "name": "Fabian Schär",
-          "slug": "fabian-schar",
-          "shortName": "F. Schär",
-          "position": "D",
-          "jerseyNumber": "5",
-          "height": 186,
-          "userCount": 3118,
-          "gender": "M",
-          "country": {
-            "alpha2": "CH",
-            "alpha3": "CHE",
-            "name": "Switzerland",
-            "slug": "switzerland"
-          },
-          "id": 101882,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 693187200,
-          "proposedMarketValueRaw": {
-            "value": 5800000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "bn": "ফ্যাবিয়ান শার",
-              "hi": "फेबियन शार"
-            },
-            "shortNameTranslation": {
-              "bn": "এফ. শার",
-              "hi": "एफ. शार"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Ankle Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Lewis Miley",
           "firstName": "Lewis Miley",
           "slug": "lewis-miley",
@@ -3493,7 +3453,47 @@
         "reason": 1,
         "description": "Leg Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-06-20T00:00:00+00:00"
+      },
+      {
+        "player": {
+          "name": "Fabian Schär",
+          "slug": "fabian-schar",
+          "shortName": "F. Schär",
+          "position": "D",
+          "jerseyNumber": "5",
+          "height": 186,
+          "userCount": 3118,
+          "gender": "M",
+          "country": {
+            "alpha2": "CH",
+            "alpha3": "CHE",
+            "name": "Switzerland",
+            "slug": "switzerland"
+          },
+          "id": 101882,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 693187200,
+          "proposedMarketValueRaw": {
+            "value": 5800000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "bn": "ফ্যাবিয়ান শার",
+              "hi": "फेबियन शार"
+            },
+            "shortNameTranslation": {
+              "bn": "এফ. শার",
+              "hi": "एफ. शार"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Ankle Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:30+00:00"
       }
     ]
   },

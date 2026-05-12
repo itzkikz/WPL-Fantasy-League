@@ -1658,51 +1658,7 @@
         "reason": 1,
         "description": "Muscle Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
-          "name": "Lewis Cook",
-          "firstName": "Lewis",
-          "lastName": "Cook",
-          "slug": "lewis-cook",
-          "shortName": "L. Cook",
-          "position": "M",
-          "jerseyNumber": "4",
-          "height": 175,
-          "userCount": 959,
-          "gender": "M",
-          "country": {
-            "alpha2": "EN",
-            "alpha3": "ENG",
-            "name": "England",
-            "slug": "england"
-          },
-          "id": 548188,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 854928000,
-          "proposedMarketValueRaw": {
-            "value": 13700000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "لويس كوك",
-              "bn": "লুইস কুক",
-              "hi": "लुईस कुक"
-            },
-            "shortNameTranslation": {
-              "ar": "ل. كوك",
-              "bn": "এল. কুক",
-              "hi": "एल. कुक"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Hamstring Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       },
       {
         "player": {
@@ -1748,6 +1704,50 @@
         "description": "Knee Surgery",
         "externalType": 114,
         "expectedEndDate": "2026-05-23T12:00:45+00:00"
+      },
+      {
+        "player": {
+          "name": "Lewis Cook",
+          "firstName": "Lewis",
+          "lastName": "Cook",
+          "slug": "lewis-cook",
+          "shortName": "L. Cook",
+          "position": "M",
+          "jerseyNumber": "4",
+          "height": 175,
+          "userCount": 959,
+          "gender": "M",
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 548188,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 854928000,
+          "proposedMarketValueRaw": {
+            "value": 13700000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "لويس كوك",
+              "bn": "লুইস কুক",
+              "hi": "लुईस कुक"
+            },
+            "shortNameTranslation": {
+              "ar": "ل. كوك",
+              "bn": "এল. কুক",
+              "hi": "एल. कुक"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Hamstring Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:31+00:00"
       }
     ]
   },

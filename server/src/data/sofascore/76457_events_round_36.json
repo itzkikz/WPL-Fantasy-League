@@ -2144,7 +2144,7 @@
         ],
         "changeTimestamp": 1778445933
       },
-      "hasGlobalHighlights": false,
+      "hasGlobalHighlights": true,
       "hasXg": true,
       "hasEventPlayerStatistics": true,
       "hasEventPlayerHeatMap": true,
@@ -2276,10 +2276,11 @@
       },
       "customId": "Kdbsoeb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 2,
       "homeTeam": {
         "name": "SSC Napoli",
         "slug": "napoli",
@@ -2356,15 +2357,41 @@
           "shortNameTranslation": {}
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 2,
+        "display": 2,
+        "period1": 1,
+        "period2": 1,
+        "normaltime": 2
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 3,
+        "display": 3,
+        "period1": 2,
+        "period2": 1,
+        "normaltime": 3
+      },
+      "time": {
+        "injuryTime1": 3,
+        "injuryTime2": 4,
+        "currentPeriodStartTimestamp": 1778529248
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1778532287
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 13980089,
       "slug": "napoli-bologna",
       "startTimestamp": 1778525100,

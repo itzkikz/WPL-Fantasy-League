@@ -1656,51 +1656,6 @@
       },
       {
         "player": {
-          "name": "Matthijs de Ligt",
-          "firstName": "Matthijs",
-          "lastName": "de Ligt",
-          "slug": "matthijs-de-ligt",
-          "shortName": "M. de Ligt",
-          "position": "D",
-          "jerseyNumber": "4",
-          "height": 188,
-          "userCount": 35403,
-          "gender": "M",
-          "sofascoreId": "mdeligt",
-          "country": {
-            "alpha2": "NL",
-            "alpha3": "NLD",
-            "name": "Netherlands",
-            "slug": "netherlands"
-          },
-          "id": 803031,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 934416000,
-          "proposedMarketValueRaw": {
-            "value": 42000000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "ماتياس دي ليخت",
-              "bn": "ম্যাথিজ ডি লিগট",
-              "hi": "मैथिज डी लिग्ट"
-            },
-            "shortNameTranslation": {
-              "ar": "م. دي ليخت",
-              "bn": "এম. ডি লিগট",
-              "hi": "एम. लिग्ट"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Back Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Luke Shaw",
           "firstName": "Luke",
           "lastName": "Shaw",
@@ -1788,6 +1743,51 @@
         "description": "Groin Injury",
         "externalType": 114,
         "expectedEndDate": "2026-05-17T20:01:04+00:00"
+      },
+      {
+        "player": {
+          "name": "Matthijs de Ligt",
+          "firstName": "Matthijs",
+          "lastName": "de Ligt",
+          "slug": "matthijs-de-ligt",
+          "shortName": "M. de Ligt",
+          "position": "D",
+          "jerseyNumber": "4",
+          "height": 188,
+          "userCount": 35403,
+          "gender": "M",
+          "sofascoreId": "mdeligt",
+          "country": {
+            "alpha2": "NL",
+            "alpha3": "NLD",
+            "name": "Netherlands",
+            "slug": "netherlands"
+          },
+          "id": 803031,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 934416000,
+          "proposedMarketValueRaw": {
+            "value": 42000000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "ماتياس دي ليخت",
+              "bn": "ম্যাথিজ ডি লিগট",
+              "hi": "मैथिज डी लिग्ट"
+            },
+            "shortNameTranslation": {
+              "ar": "م. دي ليخت",
+              "bn": "এম. ডি লিগট",
+              "hi": "एम. लिग्ट"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Back Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:32+00:00"
       }
     ]
   },
@@ -3321,50 +3321,6 @@
       },
       {
         "player": {
-          "name": "Rico Henry",
-          "firstName": "Rico",
-          "lastName": "Henry",
-          "slug": "rico-henry",
-          "shortName": "R. Henry",
-          "position": "D",
-          "jerseyNumber": "3",
-          "height": 175,
-          "userCount": 789,
-          "gender": "M",
-          "country": {
-            "alpha2": "JM",
-            "alpha3": "JAM",
-            "name": "Jamaica",
-            "slug": "jamaica"
-          },
-          "id": 599128,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 868320000,
-          "proposedMarketValueRaw": {
-            "value": 15900000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "ريكو هنري",
-              "bn": "রিকো হেনরি",
-              "hi": "रिको हेनरी"
-            },
-            "shortNameTranslation": {
-              "ar": "ر. هنري",
-              "bn": "আর. হেনরি",
-              "hi": "आर. हेनरी"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Hamstring Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Vitaly Janelt",
           "firstName": "Vitaly",
           "lastName": "Janelt",
@@ -3449,6 +3405,50 @@
         "description": "Knock Injury",
         "externalType": 114,
         "expectedEndDate": "2026-05-23T08:00:33+00:00"
+      },
+      {
+        "player": {
+          "name": "Rico Henry",
+          "firstName": "Rico",
+          "lastName": "Henry",
+          "slug": "rico-henry",
+          "shortName": "R. Henry",
+          "position": "D",
+          "jerseyNumber": "3",
+          "height": 175,
+          "userCount": 789,
+          "gender": "M",
+          "country": {
+            "alpha2": "JM",
+            "alpha3": "JAM",
+            "name": "Jamaica",
+            "slug": "jamaica"
+          },
+          "id": 599128,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 868320000,
+          "proposedMarketValueRaw": {
+            "value": 15900000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "ريكو هنري",
+              "bn": "রিকো হেনরি",
+              "hi": "रिको हेनरी"
+            },
+            "shortNameTranslation": {
+              "ar": "ر. هنري",
+              "bn": "আর. হেনরি",
+              "hi": "आर. हेनरी"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Hamstring Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:31+00:00"
       }
     ]
   },

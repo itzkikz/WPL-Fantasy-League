@@ -798,7 +798,7 @@
           "status": "out",
           "id": 18416,
           "startDateTimestamp": 1773446400,
-          "updateDateTimestamp": 1778500886,
+          "updateDateTimestamp": 1778544199,
           "endDateTimestamp": 1778976000
         },
         "country": {
@@ -3470,7 +3470,7 @@
           "status": "out",
           "id": 18437,
           "startDateTimestamp": 1773273600,
-          "updateDateTimestamp": 1778500885,
+          "updateDateTimestamp": 1778544195,
           "endDateTimestamp": 1778976000
         },
         "country": {
@@ -3695,8 +3695,8 @@
           "expectedReturn": 11,
           "id": 22225,
           "startDateTimestamp": 1778025600,
-          "updateDateTimestamp": 1778500870,
-          "endDateTimestamp": 1780920070
+          "updateDateTimestamp": 1778558439,
+          "endDateTimestamp": 1780977639
         },
         "sofascoreId": "ADavies19",
         "country": {
@@ -5650,7 +5650,7 @@
           "status": "out",
           "id": 16861,
           "startDateTimestamp": 1771977600,
-          "updateDateTimestamp": 1778500884,
+          "updateDateTimestamp": 1778544194,
           "endDateTimestamp": 1778976000
         },
         "country": {
@@ -6389,16 +6389,17 @@
         },
         "position": "D",
         "jerseyNumber": "43",
+        "height": 193,
         "dateOfBirth": "2010-01-16T00:00:00+00:00",
         "preferredFoot": "Right",
         "userCount": 873,
         "deceased": false,
         "gender": "M",
         "country": {
-          "alpha2": "DE",
-          "alpha3": "DEU",
-          "name": "Germany",
-          "slug": "germany"
+          "alpha2": "HR",
+          "alpha3": "HRV",
+          "name": "Croatia",
+          "slug": "croatia"
         },
         "id": 2518029,
         "shirtNumber": 43,
@@ -7800,7 +7801,7 @@
           "status": "out",
           "id": 21736,
           "startDateTimestamp": 1765411200,
-          "updateDateTimestamp": 1778500885,
+          "updateDateTimestamp": 1778544197,
           "endDateTimestamp": 1779580800
         },
         "country": {
@@ -8260,8 +8261,8 @@
           "expectedReturn": 11,
           "id": 22225,
           "startDateTimestamp": 1778025600,
-          "updateDateTimestamp": 1778500870,
-          "endDateTimestamp": 1780920070
+          "updateDateTimestamp": 1778558439,
+          "endDateTimestamp": 1780977639
         },
         "sofascoreId": "ADavies19",
         "country": {
@@ -9175,6 +9176,372 @@
             "ar": "م. أوليس",
             "bn": "এম. ওলিস",
             "hi": "एम. ओलिस"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "name": "Filip Pavić",
+        "slug": "pavic-filip",
+        "shortName": "F. Pavić",
+        "team": {
+          "name": "FC Bayern München U19",
+          "slug": "bayern-munchen-u19",
+          "shortName": "Bayern U19",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "A-Junioren-Bundesliga South/Southwest",
+            "slug": "a-junioren-bundesliga-southsouthwest",
+            "category": {
+              "name": "Germany Amateur",
+              "slug": "germany-amateur",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 0,
+              "country": {
+                "alpha2": "DE",
+                "alpha3": "DEU",
+                "name": "Germany",
+                "slug": "germany"
+              },
+              "id": 122,
+              "flag": "germany",
+              "alpha2": "DE",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "ألمانيا هواة",
+                  "ru": "Германия Любители"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "A-Jun-BL S/S-W",
+              "slug": "a-jun-bl-ss-w",
+              "primaryColorHex": "#008955",
+              "secondaryColorHex": "#c50000",
+              "category": {
+                "name": "Germany Amateur",
+                "slug": "germany-amateur",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 0,
+                "country": {
+                  "alpha2": "DE",
+                  "alpha3": "DEU",
+                  "name": "Germany",
+                  "slug": "germany"
+                },
+                "id": 122,
+                "flag": "germany",
+                "alpha2": "DE",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "ألمانيا هواة",
+                    "ru": "Германия Любители"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 390,
+              "country": {},
+              "id": 811,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "A-Jun-BL S/S-W"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 0,
+            "isLive": false,
+            "id": 12790,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "دوري الشباب تحت 19 جنوب/جنوب غرب"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "U19 DFB Nachwuchsliga",
+            "slug": "a-junioren-bundesliga-playoffs",
+            "primaryColorHex": "#008955",
+            "secondaryColorHex": "#c50000",
+            "category": {
+              "name": "Germany Amateur",
+              "slug": "germany-amateur",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 0,
+              "country": {
+                "alpha2": "DE",
+                "alpha3": "DEU",
+                "name": "Germany",
+                "slug": "germany"
+              },
+              "id": 122,
+              "flag": "germany",
+              "alpha2": "DE",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "ألمانيا هواة",
+                  "ru": "Германия Любители"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 631,
+            "country": {},
+            "id": 11105,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "دوري الناشئين تحت 19 DFB"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 8715,
+          "nameCode": "BAY",
+          "disabled": false,
+          "national": false,
+          "parentTeam": {
+            "name": "FC Bayern München",
+            "slug": "fc-bayern-munchen",
+            "shortName": "Bayern",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "tournament": {
+              "name": "Bundesliga",
+              "slug": "bundesliga",
+              "category": {
+                "name": "Germany",
+                "slug": "germany",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 8,
+                "country": {
+                  "alpha2": "DE",
+                  "alpha3": "DEU",
+                  "name": "Germany",
+                  "slug": "germany"
+                },
+                "id": 30,
+                "flag": "germany",
+                "alpha2": "DE",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "ألمانيا",
+                    "bn": "জার্মানি",
+                    "hi": "जर्मनी",
+                    "ru": "Германия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "uniqueTournament": {
+                "name": "Bundesliga",
+                "slug": "bundesliga",
+                "primaryColorHex": "#e2080e",
+                "secondaryColorHex": "#8e0902",
+                "category": {
+                  "name": "Germany",
+                  "slug": "germany",
+                  "sport": {
+                    "name": "Football",
+                    "slug": "football",
+                    "id": 1
+                  },
+                  "priority": 8,
+                  "country": {
+                    "alpha2": "DE",
+                    "alpha3": "DEU",
+                    "name": "Germany",
+                    "slug": "germany"
+                  },
+                  "id": 30,
+                  "flag": "germany",
+                  "alpha2": "DE",
+                  "fieldTranslations": {
+                    "nameTranslation": {
+                      "ar": "ألمانيا",
+                      "bn": "জার্মানি",
+                      "hi": "जर्मनी",
+                      "ru": "Германия"
+                    },
+                    "shortNameTranslation": {}
+                  }
+                },
+                "userCount": 534828,
+                "country": {},
+                "id": 35,
+                "displayInverseHomeAwayTeams": false,
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "bn": "বুন্দেসলীগা",
+                    "ar": "الدوري الألماني",
+                    "hi": "बुंडेसलीगा"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "priority": 698,
+              "isLive": false,
+              "id": 42,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "hi": "बुंडेसलीगा",
+                  "ar": "الدوري الألماني",
+                  "bn": "বুন্দেসলীগা"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "primaryUniqueTournament": {
+              "name": "Bundesliga",
+              "slug": "bundesliga",
+              "primaryColorHex": "#e2080e",
+              "secondaryColorHex": "#8e0902",
+              "category": {
+                "name": "Germany",
+                "slug": "germany",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 8,
+                "country": {
+                  "alpha2": "DE",
+                  "alpha3": "DEU",
+                  "name": "Germany",
+                  "slug": "germany"
+                },
+                "id": 30,
+                "flag": "germany",
+                "alpha2": "DE",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "ألمانيا",
+                    "bn": "জার্মানি",
+                    "hi": "जर्मनी",
+                    "ru": "Германия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 534828,
+              "country": {},
+              "id": 35,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "bn": "বুন্দেসলীগা",
+                  "ar": "الدوري الألماني",
+                  "hi": "बुंडेसलीगा"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 2889369,
+            "nameCode": "FCB",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "DE",
+              "alpha3": "DEU",
+              "name": "Germany",
+              "slug": "germany"
+            },
+            "id": 2672,
+            "teamColors": {
+              "primary": "#cf142f",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "إف سي بايرن ميونيخ",
+                "ru": "Бавария Мюнхен"
+              },
+              "shortNameTranslation": {
+                "ar": "بايرن",
+                "bn": "বায়ার্ন",
+                "hi": "बायर्न"
+              }
+            }
+          },
+          "type": 0,
+          "country": {
+            "alpha2": "DE",
+            "alpha3": "DEU",
+            "name": "Germany",
+            "slug": "germany"
+          },
+          "id": 43728,
+          "teamColors": {
+            "primary": "#ff0000",
+            "secondary": "#ffffff",
+            "text": "#ffffff"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "بايرن ميونخ تحت 19",
+              "ru": "ФК Бавария Мюнхен"
+            },
+            "shortNameTranslation": {
+              "ar": "بايرن تحت 19"
+            }
+          }
+        },
+        "position": "D",
+        "jerseyNumber": "43",
+        "height": 193,
+        "dateOfBirth": "2010-01-16T00:00:00+00:00",
+        "preferredFoot": "Right",
+        "userCount": 873,
+        "deceased": false,
+        "gender": "M",
+        "country": {
+          "alpha2": "HR",
+          "alpha3": "HRV",
+          "name": "Croatia",
+          "slug": "croatia"
+        },
+        "id": 2518029,
+        "shirtNumber": 43,
+        "dateOfBirthTimestamp": 1263600000,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "فيليب بافيتش"
+          },
+          "shortNameTranslation": {
+            "ar": "ف. بافيتش"
           }
         }
       }
@@ -10204,7 +10571,7 @@
           "status": "out",
           "id": 18437,
           "startDateTimestamp": 1773273600,
-          "updateDateTimestamp": 1778500885,
+          "updateDateTimestamp": 1778544195,
           "endDateTimestamp": 1778976000
         },
         "country": {
@@ -22254,8 +22621,8 @@
           "expectedReturn": 11,
           "id": 22225,
           "startDateTimestamp": 1778025600,
-          "updateDateTimestamp": 1778500870,
-          "endDateTimestamp": 1780920070
+          "updateDateTimestamp": 1778558439,
+          "endDateTimestamp": 1780977639
         },
         "sofascoreId": "ADavies19",
         "country": {

@@ -1645,51 +1645,6 @@
       },
       {
         "player": {
-          "name": "Matthijs de Ligt",
-          "firstName": "Matthijs",
-          "lastName": "de Ligt",
-          "slug": "matthijs-de-ligt",
-          "shortName": "M. de Ligt",
-          "position": "D",
-          "jerseyNumber": "4",
-          "height": 188,
-          "userCount": 35403,
-          "gender": "M",
-          "sofascoreId": "mdeligt",
-          "country": {
-            "alpha2": "NL",
-            "alpha3": "NLD",
-            "name": "Netherlands",
-            "slug": "netherlands"
-          },
-          "id": 803031,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 934416000,
-          "proposedMarketValueRaw": {
-            "value": 42000000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "ماتياس دي ليخت",
-              "bn": "ম্যাথিজ ডি লিগট",
-              "hi": "मैथिज डी लिग्ट"
-            },
-            "shortNameTranslation": {
-              "ar": "م. دي ليخت",
-              "bn": "এম. ডি লিগট",
-              "hi": "एम. लिग्ट"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Back Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Benjamin Šeško",
           "slug": "benjamin-sesko",
           "shortName": "B. Šeško",
@@ -1730,6 +1685,51 @@
         "description": "Knock Injury",
         "externalType": 114,
         "expectedEndDate": "2026-05-21T08:00:24+00:00"
+      },
+      {
+        "player": {
+          "name": "Matthijs de Ligt",
+          "firstName": "Matthijs",
+          "lastName": "de Ligt",
+          "slug": "matthijs-de-ligt",
+          "shortName": "M. de Ligt",
+          "position": "D",
+          "jerseyNumber": "4",
+          "height": 188,
+          "userCount": 35403,
+          "gender": "M",
+          "sofascoreId": "mdeligt",
+          "country": {
+            "alpha2": "NL",
+            "alpha3": "NLD",
+            "name": "Netherlands",
+            "slug": "netherlands"
+          },
+          "id": 803031,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 934416000,
+          "proposedMarketValueRaw": {
+            "value": 42000000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "ماتياس دي ليخت",
+              "bn": "ম্যাথিজ ডি লিগট",
+              "hi": "मैथिज डी लिग्ट"
+            },
+            "shortNameTranslation": {
+              "ar": "م. دي ليخت",
+              "bn": "এম. ডি লিগট",
+              "hi": "एम. लिग्ट"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Back Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-27T04:00:32+00:00"
       }
     ]
   },
@@ -3363,7 +3363,7 @@
         "reason": 1,
         "description": "Hamstring Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       },
       {
         "player": {
@@ -3408,7 +3408,7 @@
         "reason": 1,
         "description": "Hamstring Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       },
       {
         "player": {

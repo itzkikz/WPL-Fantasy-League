@@ -198,7 +198,7 @@
           "expectedReturn": 7,
           "id": 20519,
           "startDateTimestamp": 1776038400,
-          "updateDateTimestamp": 1778500856,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -3547,238 +3547,6 @@
           },
           "shortNameTranslation": {
             "ar": "ن. فورتيني"
-          }
-        }
-      }
-    },
-    {
-      "player": {
-        "name": "Tariq Lamptey",
-        "firstName": "Tariq",
-        "lastName": "Lamptey",
-        "slug": "tariq-lamptey",
-        "shortName": "T. Lamptey",
-        "team": {
-          "name": "Fiorentina",
-          "slug": "fiorentina",
-          "shortName": "Fiorentina",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "Serie A",
-              "slug": "serie-a",
-              "primaryColorHex": "#09519e",
-              "secondaryColorHex": "#008fd7",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 650606,
-              "country": {},
-              "id": 23,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإيطالي",
-                  "hi": "सीरी ए",
-                  "bn": "সিরি আ"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 702,
-            "isLive": false,
-            "id": 33,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "सीरी ए",
-                "ar": "الدوري الإيطالي",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "primaryColorHex": "#09519e",
-            "secondaryColorHex": "#008fd7",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 650606,
-            "country": {},
-            "id": 23,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإيطالي",
-                "hi": "सीरी ए",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 313676,
-          "nameCode": "FIO",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "IT",
-            "alpha3": "ITA",
-            "name": "Italy",
-            "slug": "italy"
-          },
-          "id": 2693,
-          "teamColors": {
-            "primary": "#542baa",
-            "secondary": "#ffffff",
-            "text": "#ffffff"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "فيورنتينا",
-              "bn": "ফিওরেন্টিনা",
-              "hi": "फियोरेंटीना",
-              "ru": "Фиорентина"
-            },
-            "shortNameTranslation": {
-              "ar": "فيورنتينا"
-            }
-          }
-        },
-        "position": "D",
-        "positionsDetailed": [
-          "DR",
-          "MR"
-        ],
-        "jerseyNumber": "48",
-        "height": 165,
-        "dateOfBirth": "2000-09-30T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "userCount": 4146,
-        "deceased": false,
-        "gender": "M",
-        "injury": {
-          "reason": "Knee Injury",
-          "status": "out",
-          "expectedReturn": 3,
-          "id": 20046,
-          "startDateTimestamp": 1758412800,
-          "updateDateTimestamp": 1776268853,
-          "endDateTimestamp": 1777478453
-        },
-        "sofascoreId": "TariqLamptey",
-        "country": {
-          "alpha2": "GH",
-          "alpha3": "GHA",
-          "name": "Ghana",
-          "slug": "ghana"
-        },
-        "id": 914691,
-        "shirtNumber": 48,
-        "dateOfBirthTimestamp": 970272000,
-        "contractUntilTimestamp": 1845936000,
-        "proposedMarketValue": 4600000,
-        "proposedMarketValueRaw": {
-          "value": 4600000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "لامبتي، تاريك",
-            "bn": "ল্যাম্পটে, তারিক",
-            "hi": "लैम्पटे, तारिक"
-          },
-          "shortNameTranslation": {
-            "ar": "ت. لامبتي",
-            "bn": "টি. ল্যাম্পটে",
-            "hi": "टी. लैम्पटे"
           }
         }
       }
@@ -7531,238 +7299,6 @@
     },
     {
       "player": {
-        "name": "Tariq Lamptey",
-        "firstName": "Tariq",
-        "lastName": "Lamptey",
-        "slug": "tariq-lamptey",
-        "shortName": "T. Lamptey",
-        "team": {
-          "name": "Fiorentina",
-          "slug": "fiorentina",
-          "shortName": "Fiorentina",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "Serie A",
-              "slug": "serie-a",
-              "primaryColorHex": "#09519e",
-              "secondaryColorHex": "#008fd7",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 650606,
-              "country": {},
-              "id": 23,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإيطالي",
-                  "hi": "सीरी ए",
-                  "bn": "সিরি আ"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 702,
-            "isLive": false,
-            "id": 33,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "सीरी ए",
-                "ar": "الدوري الإيطالي",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "primaryColorHex": "#09519e",
-            "secondaryColorHex": "#008fd7",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 650606,
-            "country": {},
-            "id": 23,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإيطالي",
-                "hi": "सीरी ए",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 313676,
-          "nameCode": "FIO",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "IT",
-            "alpha3": "ITA",
-            "name": "Italy",
-            "slug": "italy"
-          },
-          "id": 2693,
-          "teamColors": {
-            "primary": "#542baa",
-            "secondary": "#ffffff",
-            "text": "#ffffff"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "فيورنتينا",
-              "bn": "ফিওরেন্টিনা",
-              "hi": "फियोरेंटीना",
-              "ru": "Фиорентина"
-            },
-            "shortNameTranslation": {
-              "ar": "فيورنتينا"
-            }
-          }
-        },
-        "position": "D",
-        "positionsDetailed": [
-          "DR",
-          "MR"
-        ],
-        "jerseyNumber": "48",
-        "height": 165,
-        "dateOfBirth": "2000-09-30T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "userCount": 4146,
-        "deceased": false,
-        "gender": "M",
-        "injury": {
-          "reason": "Knee Injury",
-          "status": "out",
-          "expectedReturn": 3,
-          "id": 20046,
-          "startDateTimestamp": 1758412800,
-          "updateDateTimestamp": 1776268853,
-          "endDateTimestamp": 1777478453
-        },
-        "sofascoreId": "TariqLamptey",
-        "country": {
-          "alpha2": "GH",
-          "alpha3": "GHA",
-          "name": "Ghana",
-          "slug": "ghana"
-        },
-        "id": 914691,
-        "shirtNumber": 48,
-        "dateOfBirthTimestamp": 970272000,
-        "contractUntilTimestamp": 1845936000,
-        "proposedMarketValue": 4600000,
-        "proposedMarketValueRaw": {
-          "value": 4600000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "لامبتي، تاريك",
-            "bn": "ল্যাম্পটে, তারিক",
-            "hi": "लैम्पटे, तारिक"
-          },
-          "shortNameTranslation": {
-            "ar": "ت. لامبتي",
-            "bn": "টি. ল্যাম্পটে",
-            "hi": "टी. लैम्पटे"
-          }
-        }
-      }
-    },
-    {
-      "player": {
         "name": "Marin Pongračić",
         "firstName": "Marin",
         "lastName": "Pongracic",
@@ -9285,7 +8821,7 @@
           "expectedReturn": 7,
           "id": 20519,
           "startDateTimestamp": 1776038400,
-          "updateDateTimestamp": 1778500856,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -10201,401 +9737,6 @@
   "playerPreviousTeam": [
     {
       "player": {
-        "name": "Giovanni Fabbian",
-        "firstName": "",
-        "lastName": "",
-        "slug": "giovanni-fabbian",
-        "shortName": "G. Fabbian",
-        "team": {
-          "name": "Fiorentina",
-          "slug": "fiorentina",
-          "shortName": "Fiorentina",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "Serie A",
-              "slug": "serie-a",
-              "primaryColorHex": "#09519e",
-              "secondaryColorHex": "#008fd7",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 650606,
-              "country": {},
-              "id": 23,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإيطالي",
-                  "hi": "सीरी ए",
-                  "bn": "সিরি আ"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 702,
-            "isLive": false,
-            "id": 33,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "सीरी ए",
-                "ar": "الدوري الإيطالي",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "primaryColorHex": "#09519e",
-            "secondaryColorHex": "#008fd7",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 650606,
-            "country": {},
-            "id": 23,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإيطالي",
-                "hi": "सीरी ए",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 313676,
-          "nameCode": "FIO",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "IT",
-            "alpha3": "ITA",
-            "name": "Italy",
-            "slug": "italy"
-          },
-          "id": 2693,
-          "teamColors": {
-            "primary": "#542baa",
-            "secondary": "#ffffff",
-            "text": "#ffffff"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "فيورنتينا",
-              "bn": "ফিওরেন্টিনা",
-              "hi": "फियोरेंटीना",
-              "ru": "Фиорентина"
-            },
-            "shortNameTranslation": {
-              "ar": "فيورنتينا"
-            }
-          }
-        },
-        "position": "M",
-        "positionsDetailed": [
-          "MC",
-          "AM"
-        ],
-        "jerseyNumber": "80",
-        "height": 186,
-        "dateOfBirth": "2003-01-14T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "userCount": 1475,
-        "deceased": false,
-        "gender": "M",
-        "country": {
-          "alpha2": "IT",
-          "alpha3": "ITA",
-          "name": "Italy",
-          "slug": "italy"
-        },
-        "id": 1067204,
-        "shirtNumber": 80,
-        "dateOfBirthTimestamp": 1042502400,
-        "contractUntilTimestamp": 1909008000,
-        "proposedMarketValue": 9300000,
-        "proposedMarketValueRaw": {
-          "value": 9300000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "جيوفاني فابيان",
-            "bn": "জিওভানি ফ্যাবিয়ান",
-            "hi": "जियोवानी फैबियान"
-          },
-          "shortNameTranslation": {
-            "ar": "ج. فابيان",
-            "bn": "জি. ফ্যাবিয়ান",
-            "hi": "जी. फैबियान"
-          }
-        }
-      },
-      "previousTeam": {
-        "name": "Bologna",
-        "slug": "bologna",
-        "shortName": "Bologna",
-        "gender": "M",
-        "sport": {
-          "name": "Football",
-          "slug": "football",
-          "id": 1
-        },
-        "tournament": {
-          "name": "Serie A",
-          "slug": "serie-a",
-          "category": {
-            "name": "Italy",
-            "slug": "italy",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "priority": 7,
-            "country": {
-              "alpha2": "IT",
-              "alpha3": "ITA",
-              "name": "Italy",
-              "slug": "italy"
-            },
-            "id": 31,
-            "flag": "italy",
-            "alpha2": "IT",
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "إيطاليا",
-                "bn": "ইতালি",
-                "hi": "इटली",
-                "ru": "Италия"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "uniqueTournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "primaryColorHex": "#09519e",
-            "secondaryColorHex": "#008fd7",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 650606,
-            "country": {},
-            "id": 23,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإيطالي",
-                "hi": "सीरी ए",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "priority": 702,
-          "isLive": false,
-          "id": 33,
-          "fieldTranslations": {
-            "nameTranslation": {
-              "hi": "सीरी ए",
-              "ar": "الدوري الإيطالي",
-              "bn": "সিরি আ"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "primaryUniqueTournament": {
-          "name": "Serie A",
-          "slug": "serie-a",
-          "primaryColorHex": "#09519e",
-          "secondaryColorHex": "#008fd7",
-          "category": {
-            "name": "Italy",
-            "slug": "italy",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "priority": 7,
-            "country": {
-              "alpha2": "IT",
-              "alpha3": "ITA",
-              "name": "Italy",
-              "slug": "italy"
-            },
-            "id": 31,
-            "flag": "italy",
-            "alpha2": "IT",
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "إيطاليا",
-                "bn": "ইতালি",
-                "hi": "इटली",
-                "ru": "Италия"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 650606,
-          "country": {},
-          "id": 23,
-          "displayInverseHomeAwayTeams": false,
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "الدوري الإيطالي",
-              "hi": "सीरी ए",
-              "bn": "সিরি আ"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "userCount": 240785,
-        "nameCode": "BOL",
-        "disabled": false,
-        "national": false,
-        "type": 0,
-        "country": {
-          "alpha2": "IT",
-          "alpha3": "ITA",
-          "name": "Italy",
-          "slug": "italy"
-        },
-        "id": 2685,
-        "teamColors": {
-          "primary": "#003366",
-          "secondary": "#cc0000",
-          "text": "#cc0000"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "بولونيا",
-            "bn": "বোলোগনা",
-            "hi": "बोलोग्ना",
-            "ru": "Болонья"
-          },
-          "shortNameTranslation": {}
-        }
-      },
-      "transferDate": "2026-07-01T00:00:00+00:00"
-    },
-    {
-      "player": {
         "name": "Marco Brescianini",
         "firstName": "",
         "lastName": "",
@@ -10986,6 +10127,401 @@
           "shortNameTranslation": {
             "ar": "أتالانتا"
           }
+        }
+      },
+      "transferDate": "2026-07-01T00:00:00+00:00"
+    },
+    {
+      "player": {
+        "name": "Giovanni Fabbian",
+        "firstName": "",
+        "lastName": "",
+        "slug": "giovanni-fabbian",
+        "shortName": "G. Fabbian",
+        "team": {
+          "name": "Fiorentina",
+          "slug": "fiorentina",
+          "shortName": "Fiorentina",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "Serie A",
+              "slug": "serie-a",
+              "primaryColorHex": "#09519e",
+              "secondaryColorHex": "#008fd7",
+              "category": {
+                "name": "Italy",
+                "slug": "italy",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 7,
+                "country": {
+                  "alpha2": "IT",
+                  "alpha3": "ITA",
+                  "name": "Italy",
+                  "slug": "italy"
+                },
+                "id": 31,
+                "flag": "italy",
+                "alpha2": "IT",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إيطاليا",
+                    "bn": "ইতালি",
+                    "hi": "इटली",
+                    "ru": "Италия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 650606,
+              "country": {},
+              "id": 23,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإيطالي",
+                  "hi": "सीरी ए",
+                  "bn": "সিরি আ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 702,
+            "isLive": false,
+            "id": 33,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "सीरी ए",
+                "ar": "الدوري الإيطالي",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "primaryColorHex": "#09519e",
+            "secondaryColorHex": "#008fd7",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 650606,
+            "country": {},
+            "id": 23,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإيطالي",
+                "hi": "सीरी ए",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 313676,
+          "nameCode": "FIO",
+          "disabled": false,
+          "national": false,
+          "type": 0,
+          "country": {
+            "alpha2": "IT",
+            "alpha3": "ITA",
+            "name": "Italy",
+            "slug": "italy"
+          },
+          "id": 2693,
+          "teamColors": {
+            "primary": "#542baa",
+            "secondary": "#ffffff",
+            "text": "#ffffff"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "فيورنتينا",
+              "bn": "ফিওরেন্টিনা",
+              "hi": "फियोरेंटीना",
+              "ru": "Фиорентина"
+            },
+            "shortNameTranslation": {
+              "ar": "فيورنتينا"
+            }
+          }
+        },
+        "position": "M",
+        "positionsDetailed": [
+          "MC",
+          "AM"
+        ],
+        "jerseyNumber": "80",
+        "height": 186,
+        "dateOfBirth": "2003-01-14T00:00:00+00:00",
+        "preferredFoot": "Right",
+        "userCount": 1475,
+        "deceased": false,
+        "gender": "M",
+        "country": {
+          "alpha2": "IT",
+          "alpha3": "ITA",
+          "name": "Italy",
+          "slug": "italy"
+        },
+        "id": 1067204,
+        "shirtNumber": 80,
+        "dateOfBirthTimestamp": 1042502400,
+        "contractUntilTimestamp": 1909008000,
+        "proposedMarketValue": 9300000,
+        "proposedMarketValueRaw": {
+          "value": 9300000,
+          "currency": "EUR"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "جيوفاني فابيان",
+            "bn": "জিওভানি ফ্যাবিয়ান",
+            "hi": "जियोवानी फैबियान"
+          },
+          "shortNameTranslation": {
+            "ar": "ج. فابيان",
+            "bn": "জি. ফ্যাবিয়ান",
+            "hi": "जी. फैबियान"
+          }
+        }
+      },
+      "previousTeam": {
+        "name": "Bologna",
+        "slug": "bologna",
+        "shortName": "Bologna",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "tournament": {
+          "name": "Serie A",
+          "slug": "serie-a",
+          "category": {
+            "name": "Italy",
+            "slug": "italy",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 7,
+            "country": {
+              "alpha2": "IT",
+              "alpha3": "ITA",
+              "name": "Italy",
+              "slug": "italy"
+            },
+            "id": 31,
+            "flag": "italy",
+            "alpha2": "IT",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "إيطاليا",
+                "bn": "ইতালি",
+                "hi": "इटली",
+                "ru": "Италия"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "uniqueTournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "primaryColorHex": "#09519e",
+            "secondaryColorHex": "#008fd7",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 650606,
+            "country": {},
+            "id": 23,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإيطالي",
+                "hi": "सीरी ए",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "priority": 702,
+          "isLive": false,
+          "id": 33,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "hi": "सीरी ए",
+              "ar": "الدوري الإيطالي",
+              "bn": "সিরি আ"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "primaryUniqueTournament": {
+          "name": "Serie A",
+          "slug": "serie-a",
+          "primaryColorHex": "#09519e",
+          "secondaryColorHex": "#008fd7",
+          "category": {
+            "name": "Italy",
+            "slug": "italy",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 7,
+            "country": {
+              "alpha2": "IT",
+              "alpha3": "ITA",
+              "name": "Italy",
+              "slug": "italy"
+            },
+            "id": 31,
+            "flag": "italy",
+            "alpha2": "IT",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "إيطاليا",
+                "bn": "ইতালি",
+                "hi": "इटली",
+                "ru": "Италия"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 650606,
+          "country": {},
+          "id": 23,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "الدوري الإيطالي",
+              "hi": "सीरी ए",
+              "bn": "সিরি আ"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "userCount": 240785,
+        "nameCode": "BOL",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "IT",
+          "alpha3": "ITA",
+          "name": "Italy",
+          "slug": "italy"
+        },
+        "id": 2685,
+        "teamColors": {
+          "primary": "#003366",
+          "secondary": "#cc0000",
+          "text": "#cc0000"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "بولونيا",
+            "bn": "বোলোগনা",
+            "hi": "बोलोग्ना",
+            "ru": "Болонья"
+          },
+          "shortNameTranslation": {}
         }
       },
       "transferDate": "2026-07-01T00:00:00+00:00"
@@ -13043,414 +12579,6 @@
         }
       },
       "transferDate": "2025-12-31T00:00:00+00:00"
-    },
-    {
-      "player": {
-        "name": "Tariq Lamptey",
-        "firstName": "Tariq",
-        "lastName": "Lamptey",
-        "slug": "tariq-lamptey",
-        "shortName": "T. Lamptey",
-        "team": {
-          "name": "Fiorentina",
-          "slug": "fiorentina",
-          "shortName": "Fiorentina",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "Serie A",
-              "slug": "serie-a",
-              "primaryColorHex": "#09519e",
-              "secondaryColorHex": "#008fd7",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 650606,
-              "country": {},
-              "id": 23,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإيطالي",
-                  "hi": "सीरी ए",
-                  "bn": "সিরি আ"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 702,
-            "isLive": false,
-            "id": 33,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "सीरी ए",
-                "ar": "الدوري الإيطالي",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "primaryColorHex": "#09519e",
-            "secondaryColorHex": "#008fd7",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 650606,
-            "country": {},
-            "id": 23,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإيطالي",
-                "hi": "सीरी ए",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 313676,
-          "nameCode": "FIO",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "IT",
-            "alpha3": "ITA",
-            "name": "Italy",
-            "slug": "italy"
-          },
-          "id": 2693,
-          "teamColors": {
-            "primary": "#542baa",
-            "secondary": "#ffffff",
-            "text": "#ffffff"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "فيورنتينا",
-              "bn": "ফিওরেন্টিনা",
-              "hi": "फियोरेंटीना",
-              "ru": "Фиорентина"
-            },
-            "shortNameTranslation": {
-              "ar": "فيورنتينا"
-            }
-          }
-        },
-        "position": "D",
-        "positionsDetailed": [
-          "DR",
-          "MR"
-        ],
-        "jerseyNumber": "48",
-        "height": 165,
-        "dateOfBirth": "2000-09-30T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "userCount": 4146,
-        "deceased": false,
-        "gender": "M",
-        "injury": {
-          "reason": "Knee Injury",
-          "status": "out",
-          "expectedReturn": 3,
-          "id": 20046,
-          "startDateTimestamp": 1758412800,
-          "updateDateTimestamp": 1776268853,
-          "endDateTimestamp": 1777478453
-        },
-        "sofascoreId": "TariqLamptey",
-        "country": {
-          "alpha2": "GH",
-          "alpha3": "GHA",
-          "name": "Ghana",
-          "slug": "ghana"
-        },
-        "id": 914691,
-        "shirtNumber": 48,
-        "dateOfBirthTimestamp": 970272000,
-        "contractUntilTimestamp": 1845936000,
-        "proposedMarketValue": 4600000,
-        "proposedMarketValueRaw": {
-          "value": 4600000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "لامبتي، تاريك",
-            "bn": "ল্যাম্পটে, তারিক",
-            "hi": "लैम्पटे, तारिक"
-          },
-          "shortNameTranslation": {
-            "ar": "ت. لامبتي",
-            "bn": "টি. ল্যাম্পটে",
-            "hi": "टी. लैम्पटे"
-          }
-        }
-      },
-      "previousTeam": {
-        "name": "Brighton & Hove Albion",
-        "slug": "brighton-and-hove-albion",
-        "shortName": "Brighton",
-        "gender": "M",
-        "sport": {
-          "name": "Football",
-          "slug": "football",
-          "id": 1
-        },
-        "tournament": {
-          "name": "Premier League",
-          "slug": "premier-league",
-          "category": {
-            "name": "England",
-            "slug": "england",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "priority": 10,
-            "country": {
-              "alpha2": "EN",
-              "alpha3": "ENG",
-              "name": "England",
-              "slug": "england"
-            },
-            "id": 1,
-            "flag": "england",
-            "alpha2": "EN",
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "إنجلترا",
-                "bn": "ইংল্যান্ড",
-                "hi": "इंग्लैंड",
-                "ru": "Англия"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "uniqueTournament": {
-            "name": "Premier League",
-            "slug": "premier-league",
-            "primaryColorHex": "#3c1c5a",
-            "secondaryColorHex": "#f80158",
-            "category": {
-              "name": "England",
-              "slug": "england",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 10,
-              "country": {
-                "alpha2": "EN",
-                "alpha3": "ENG",
-                "name": "England",
-                "slug": "england"
-              },
-              "id": 1,
-              "flag": "england",
-              "alpha2": "EN",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إنجلترا",
-                  "bn": "ইংল্যান্ড",
-                  "hi": "इंग्लैंड",
-                  "ru": "Англия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 1214572,
-            "country": {},
-            "id": 17,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإنجليزي الممتاز",
-                "hi": "प्रिमियर लीग",
-                "bn": "প্রিমিয়ার লীগ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "priority": 703,
-          "isLive": false,
-          "id": 1,
-          "fieldTranslations": {
-            "nameTranslation": {
-              "hi": "प्रिमियर लीग",
-              "ar": "الدوري الإنجليزي الممتاز",
-              "bn": "প্রিমিয়ার লীগ"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "primaryUniqueTournament": {
-          "name": "Premier League",
-          "slug": "premier-league",
-          "primaryColorHex": "#3c1c5a",
-          "secondaryColorHex": "#f80158",
-          "category": {
-            "name": "England",
-            "slug": "england",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "priority": 10,
-            "country": {
-              "alpha2": "EN",
-              "alpha3": "ENG",
-              "name": "England",
-              "slug": "england"
-            },
-            "id": 1,
-            "flag": "england",
-            "alpha2": "EN",
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "إنجلترا",
-                "bn": "ইংল্যান্ড",
-                "hi": "इंग्लैंड",
-                "ru": "Англия"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 1214572,
-          "country": {},
-          "id": 17,
-          "displayInverseHomeAwayTeams": false,
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "الدوري الإنجليزي الممتاز",
-              "hi": "प्रिमियर लीग",
-              "bn": "প্রিমিয়ার লীগ"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "userCount": 431456,
-        "nameCode": "BHA",
-        "disabled": false,
-        "national": false,
-        "type": 0,
-        "country": {
-          "alpha2": "EN",
-          "alpha3": "ENG",
-          "name": "England",
-          "slug": "england"
-        },
-        "id": 30,
-        "teamColors": {
-          "primary": "#0054a6",
-          "secondary": "#ffffff",
-          "text": "#ffffff"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "برايتون أند هوف ألبيون",
-            "hi": "ब्राइटोन एंड होव एल्बिओन ऍफ़सी",
-            "ru": "Брайтон энд Хоув Альбион"
-          },
-          "shortNameTranslation": {
-            "ar": "برايتون",
-            "bn": "ব্রাইটন",
-            "hi": "ब्राइटन"
-          }
-        }
-      },
-      "transferDate": "2025-09-01T00:00:00+00:00"
     },
     {
       "player": {
@@ -16672,394 +15800,6 @@
     },
     {
       "player": {
-        "name": "Niccolò Fortini",
-        "firstName": "Niccolò Fortini",
-        "slug": "niccolo-fortini",
-        "shortName": "N. Fortini",
-        "team": {
-          "name": "Fiorentina",
-          "slug": "fiorentina",
-          "shortName": "Fiorentina",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "Serie A",
-              "slug": "serie-a",
-              "primaryColorHex": "#09519e",
-              "secondaryColorHex": "#008fd7",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 650606,
-              "country": {},
-              "id": 23,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإيطالي",
-                  "hi": "सीरी ए",
-                  "bn": "সিরি আ"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 702,
-            "isLive": false,
-            "id": 33,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "सीरी ए",
-                "ar": "الدوري الإيطالي",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "primaryColorHex": "#09519e",
-            "secondaryColorHex": "#008fd7",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 650606,
-            "country": {},
-            "id": 23,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإيطالي",
-                "hi": "सीरी ए",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 313676,
-          "nameCode": "FIO",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "IT",
-            "alpha3": "ITA",
-            "name": "Italy",
-            "slug": "italy"
-          },
-          "id": 2693,
-          "teamColors": {
-            "primary": "#542baa",
-            "secondary": "#ffffff",
-            "text": "#ffffff"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "فيورنتينا",
-              "bn": "ফিওরেন্টিনা",
-              "hi": "फियोरेंटीना",
-              "ru": "Фиорентина"
-            },
-            "shortNameTranslation": {
-              "ar": "فيورنتينا"
-            }
-          }
-        },
-        "position": "M",
-        "positionsDetailed": [
-          "ML"
-        ],
-        "jerseyNumber": "29",
-        "height": 185,
-        "dateOfBirth": "2006-02-13T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "retired": false,
-        "userCount": 669,
-        "deceased": false,
-        "gender": "M",
-        "country": {
-          "alpha2": "IT",
-          "alpha3": "ITA",
-          "name": "Italy",
-          "slug": "italy"
-        },
-        "id": 1526934,
-        "shirtNumber": 29,
-        "dateOfBirthTimestamp": 1139788800,
-        "contractUntilTimestamp": 1814313600,
-        "proposedMarketValue": 10900000,
-        "proposedMarketValueRaw": {
-          "value": 10900000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "نيكولو فورتيني"
-          },
-          "shortNameTranslation": {
-            "ar": "ن. فورتيني"
-          }
-        }
-      },
-      "previousTeam": {
-        "name": "Juve Stabia",
-        "slug": "juve-stabia",
-        "shortName": "Juve Stabia",
-        "gender": "M",
-        "sport": {
-          "name": "Football",
-          "slug": "football",
-          "id": 1
-        },
-        "tournament": {
-          "name": "Serie C, Group C",
-          "slug": "serie-c-girone-c",
-          "category": {
-            "name": "Italy",
-            "slug": "italy",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "priority": 7,
-            "country": {
-              "alpha2": "IT",
-              "alpha3": "ITA",
-              "name": "Italy",
-              "slug": "italy"
-            },
-            "id": 31,
-            "flag": "italy",
-            "alpha2": "IT",
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "إيطاليا",
-                "bn": "ইতালি",
-                "hi": "इटली",
-                "ru": "Италия"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "uniqueTournament": {
-            "name": "Serie C, Girone C",
-            "slug": "serie-c-girone-c",
-            "primaryColorHex": "#9f0609",
-            "secondaryColorHex": "#bababa",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 6293,
-            "country": {},
-            "id": 11446,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "دوري الدرجة الثالثة – المجموعة الثالثة",
-                "bn": "সিরি সি, গিরোন সি",
-                "hi": "सीरी सी, गिरोन सी"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "priority": 0,
-          "isLive": false,
-          "id": 37886,
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "دوري C، المجموعة B",
-              "bn": "সেরি সি, জিরোন সি",
-              "hi": "सीरी सी, गिरोन सी"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "primaryUniqueTournament": {
-          "name": "Serie B",
-          "slug": "serie-b",
-          "primaryColorHex": "#027d32",
-          "secondaryColorHex": "#f18f01",
-          "category": {
-            "name": "Italy",
-            "slug": "italy",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "priority": 7,
-            "country": {
-              "alpha2": "IT",
-              "alpha3": "ITA",
-              "name": "Italy",
-              "slug": "italy"
-            },
-            "id": 31,
-            "flag": "italy",
-            "alpha2": "IT",
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "إيطاليا",
-                "bn": "ইতালি",
-                "hi": "इटली",
-                "ru": "Италия"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 37011,
-          "country": {},
-          "id": 53,
-          "displayInverseHomeAwayTeams": false,
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "دوري الدرجة الثانية",
-              "bn": "সেরি বি",
-              "hi": "सीरी बी"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "userCount": 10996,
-        "nameCode": "STA",
-        "national": false,
-        "type": 0,
-        "country": {
-          "alpha2": "IT",
-          "alpha3": "ITA",
-          "name": "Italy",
-          "slug": "italy"
-        },
-        "id": 5324,
-        "teamColors": {
-          "primary": "#ffff00",
-          "secondary": "#050569",
-          "text": "#050569"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "يوفي ستابيا",
-            "hi": "एस एस जुवे स्टेबिया",
-            "ru": "ФК Юве Стабиа"
-          },
-          "shortNameTranslation": {}
-        }
-      },
-      "transferDate": "2025-06-30T00:00:00+00:00"
-    },
-    {
-      "player": {
         "name": "Abdelhamid Sabiri",
         "firstName": "Abdelhamid",
         "lastName": "Sabiri",
@@ -17447,6 +16187,394 @@
             "bn": "আল-তাওউন",
             "hi": "अल-तावोन",
             "ru": "Аль-Таавун"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "transferDate": "2025-06-30T00:00:00+00:00"
+    },
+    {
+      "player": {
+        "name": "Niccolò Fortini",
+        "firstName": "Niccolò Fortini",
+        "slug": "niccolo-fortini",
+        "shortName": "N. Fortini",
+        "team": {
+          "name": "Fiorentina",
+          "slug": "fiorentina",
+          "shortName": "Fiorentina",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "Serie A",
+              "slug": "serie-a",
+              "primaryColorHex": "#09519e",
+              "secondaryColorHex": "#008fd7",
+              "category": {
+                "name": "Italy",
+                "slug": "italy",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 7,
+                "country": {
+                  "alpha2": "IT",
+                  "alpha3": "ITA",
+                  "name": "Italy",
+                  "slug": "italy"
+                },
+                "id": 31,
+                "flag": "italy",
+                "alpha2": "IT",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إيطاليا",
+                    "bn": "ইতালি",
+                    "hi": "इटली",
+                    "ru": "Италия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 650606,
+              "country": {},
+              "id": 23,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإيطالي",
+                  "hi": "सीरी ए",
+                  "bn": "সিরি আ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 702,
+            "isLive": false,
+            "id": 33,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "सीरी ए",
+                "ar": "الدوري الإيطالي",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "Serie A",
+            "slug": "serie-a",
+            "primaryColorHex": "#09519e",
+            "secondaryColorHex": "#008fd7",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 650606,
+            "country": {},
+            "id": 23,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإيطالي",
+                "hi": "सीरी ए",
+                "bn": "সিরি আ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 313676,
+          "nameCode": "FIO",
+          "disabled": false,
+          "national": false,
+          "type": 0,
+          "country": {
+            "alpha2": "IT",
+            "alpha3": "ITA",
+            "name": "Italy",
+            "slug": "italy"
+          },
+          "id": 2693,
+          "teamColors": {
+            "primary": "#542baa",
+            "secondary": "#ffffff",
+            "text": "#ffffff"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "فيورنتينا",
+              "bn": "ফিওরেন্টিনা",
+              "hi": "फियोरेंटीना",
+              "ru": "Фиорентина"
+            },
+            "shortNameTranslation": {
+              "ar": "فيورنتينا"
+            }
+          }
+        },
+        "position": "M",
+        "positionsDetailed": [
+          "ML"
+        ],
+        "jerseyNumber": "29",
+        "height": 185,
+        "dateOfBirth": "2006-02-13T00:00:00+00:00",
+        "preferredFoot": "Right",
+        "retired": false,
+        "userCount": 669,
+        "deceased": false,
+        "gender": "M",
+        "country": {
+          "alpha2": "IT",
+          "alpha3": "ITA",
+          "name": "Italy",
+          "slug": "italy"
+        },
+        "id": 1526934,
+        "shirtNumber": 29,
+        "dateOfBirthTimestamp": 1139788800,
+        "contractUntilTimestamp": 1814313600,
+        "proposedMarketValue": 10900000,
+        "proposedMarketValueRaw": {
+          "value": 10900000,
+          "currency": "EUR"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "نيكولو فورتيني"
+          },
+          "shortNameTranslation": {
+            "ar": "ن. فورتيني"
+          }
+        }
+      },
+      "previousTeam": {
+        "name": "Juve Stabia",
+        "slug": "juve-stabia",
+        "shortName": "Juve Stabia",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "tournament": {
+          "name": "Serie C, Group C",
+          "slug": "serie-c-girone-c",
+          "category": {
+            "name": "Italy",
+            "slug": "italy",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 7,
+            "country": {
+              "alpha2": "IT",
+              "alpha3": "ITA",
+              "name": "Italy",
+              "slug": "italy"
+            },
+            "id": 31,
+            "flag": "italy",
+            "alpha2": "IT",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "إيطاليا",
+                "bn": "ইতালি",
+                "hi": "इटली",
+                "ru": "Италия"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "uniqueTournament": {
+            "name": "Serie C, Girone C",
+            "slug": "serie-c-girone-c",
+            "primaryColorHex": "#9f0609",
+            "secondaryColorHex": "#bababa",
+            "category": {
+              "name": "Italy",
+              "slug": "italy",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 7,
+              "country": {
+                "alpha2": "IT",
+                "alpha3": "ITA",
+                "name": "Italy",
+                "slug": "italy"
+              },
+              "id": 31,
+              "flag": "italy",
+              "alpha2": "IT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إيطاليا",
+                  "bn": "ইতালি",
+                  "hi": "इटली",
+                  "ru": "Италия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 6293,
+            "country": {},
+            "id": 11446,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "دوري الدرجة الثالثة – المجموعة الثالثة",
+                "bn": "সিরি সি, গিরোন সি",
+                "hi": "सीरी सी, गिरोन सी"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "priority": 0,
+          "isLive": false,
+          "id": 37886,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "دوري C، المجموعة B",
+              "bn": "সেরি সি, জিরোন সি",
+              "hi": "सीरी सी, गिरोन सी"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "primaryUniqueTournament": {
+          "name": "Serie B",
+          "slug": "serie-b",
+          "primaryColorHex": "#027d32",
+          "secondaryColorHex": "#f18f01",
+          "category": {
+            "name": "Italy",
+            "slug": "italy",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 7,
+            "country": {
+              "alpha2": "IT",
+              "alpha3": "ITA",
+              "name": "Italy",
+              "slug": "italy"
+            },
+            "id": 31,
+            "flag": "italy",
+            "alpha2": "IT",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "إيطاليا",
+                "bn": "ইতালি",
+                "hi": "इटली",
+                "ru": "Италия"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 37011,
+          "country": {},
+          "id": 53,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "دوري الدرجة الثانية",
+              "bn": "সেরি বি",
+              "hi": "सीरी बी"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "userCount": 10996,
+        "nameCode": "STA",
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "IT",
+          "alpha3": "ITA",
+          "name": "Italy",
+          "slug": "italy"
+        },
+        "id": 5324,
+        "teamColors": {
+          "primary": "#ffff00",
+          "secondary": "#050569",
+          "text": "#050569"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "يوفي ستابيا",
+            "hi": "एस एस जुवे स्टेबिया",
+            "ru": "ФК Юве Стабиа"
           },
           "shortNameTranslation": {}
         }
@@ -18684,7 +17812,7 @@
           "expectedReturn": 7,
           "id": 20519,
           "startDateTimestamp": 1776038400,
-          "updateDateTimestamp": 1778500856,
+          "updateDateTimestamp": 1778558436,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
