@@ -12,7 +12,7 @@
         "position": "D",
         "jerseyNumber": "15",
         "height": 192,
-        "userCount": 839,
+        "userCount": 837,
         "gender": "M",
         "id": 1210666,
         "marketValueCurrency": "EUR",
@@ -23,10 +23,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
+            "ar": "توم ألكسندر روث",
             "bn": "রোথে, টম",
             "hi": "रोथ, टॉम"
           },
           "shortNameTranslation": {
+            "ar": "ت. روث",
             "bn": "টি. রোথে",
             "hi": "टी. रोथ"
           }
@@ -43,7 +45,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 178,
-        "userCount": 473,
+        "userCount": 471,
         "gender": "M",
         "id": 1513469,
         "marketValueCurrency": "EUR",
@@ -72,7 +74,7 @@
         "position": "M",
         "jerseyNumber": "28",
         "height": 189,
-        "userCount": 376,
+        "userCount": 378,
         "gender": "M",
         "id": 48557,
         "marketValueCurrency": "EUR",
@@ -117,6 +119,14 @@
         "proposedMarketValueRaw": {
           "value": 36000000,
           "currency": "EUR"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "سعيد المالا"
+          },
+          "shortNameTranslation": {
+            "ar": "س. المالا"
+          }
         }
       }
     },
@@ -130,7 +140,7 @@
         "position": "F",
         "jerseyNumber": "30",
         "height": 188,
-        "userCount": 451,
+        "userCount": 449,
         "gender": "M",
         "id": 378340,
         "marketValueCurrency": "EUR",
@@ -141,10 +151,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
+            "ar": "ماريوس بيلتر",
             "bn": "মারিয়াস বুল্টার",
             "hi": "मारियस बुल्टर"
           },
           "shortNameTranslation": {
+            "ar": "م. بيلتر",
             "bn": "এম. বুল্টার",
             "hi": "एम. बुल्टर"
           }
@@ -207,6 +219,14 @@
       "proposedMarketValueRaw": {
         "value": 36000000,
         "currency": "EUR"
+      },
+      "fieldTranslations": {
+        "nameTranslation": {
+          "ar": "سعيد المالا"
+        },
+        "shortNameTranslation": {
+          "ar": "س. المالا"
+        }
       }
     }
   }

@@ -23,7 +23,7 @@
         "position": "D",
         "jerseyNumber": "21",
         "height": 182,
-        "userCount": 420,
+        "userCount": 419,
         "gender": "M",
         "id": 996929,
         "marketValueCurrency": "EUR",
@@ -54,7 +54,7 @@
         "position": "D",
         "jerseyNumber": "20",
         "height": 178,
-        "userCount": 1175,
+        "userCount": 1183,
         "gender": "M",
         "id": 315916,
         "marketValueCurrency": "EUR",
@@ -102,7 +102,7 @@
         "position": "F",
         "jerseyNumber": "6",
         "height": 192,
-        "userCount": 3109,
+        "userCount": 3141,
         "gender": "M",
         "id": 754710,
         "marketValueCurrency": "EUR",
@@ -142,7 +142,7 @@
         "position": "D",
         "jerseyNumber": "4",
         "height": 186,
-        "userCount": 799,
+        "userCount": 797,
         "gender": "M",
         "id": 892521,
         "marketValueCurrency": "EUR",
@@ -213,7 +213,7 @@
         "position": "F",
         "jerseyNumber": "6",
         "height": 192,
-        "userCount": 3109,
+        "userCount": 3141,
         "gender": "M",
         "id": 754710,
         "marketValueCurrency": "EUR",
@@ -242,7 +242,7 @@
         "position": "M",
         "jerseyNumber": "11",
         "height": 173,
-        "userCount": 903,
+        "userCount": 893,
         "gender": "M",
         "id": 900433,
         "marketValueCurrency": "EUR",
@@ -265,46 +265,6 @@
         }
       },
       "footballPassingNetworkAction": [
-        {
-          "player": {
-            "name": "Umar Sadiq",
-            "firstName": "Umar",
-            "lastName": "Sadiq",
-            "slug": "umar-sadiq",
-            "shortName": "U. Sadiq",
-            "position": "F",
-            "jerseyNumber": "6",
-            "height": 192,
-            "userCount": 3109,
-            "gender": "M",
-            "id": 754710,
-            "marketValueCurrency": "EUR",
-            "dateOfBirthTimestamp": 854841600,
-            "proposedMarketValueRaw": {
-              "value": 3900000,
-              "currency": "EUR"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "عمر صادق",
-                "bn": "উমর সাদিক",
-                "hi": "उमर सादिक"
-              },
-              "shortNameTranslation": {
-                "ar": "ع. صادق",
-                "bn": "ইউ. সাদিক",
-                "hi": "यू. सादिक"
-              }
-            }
-          },
-          "eventType": "ball-touch",
-          "time": 71,
-          "playerCoordinates": {
-            "x": 69.9,
-            "y": 44.2
-          },
-          "isHome": false
-        },
         {
           "player": {
             "name": "Javier Guerra",
@@ -357,7 +317,7 @@
             "position": "F",
             "jerseyNumber": "17",
             "height": 167,
-            "userCount": 1953,
+            "userCount": 1965,
             "gender": "M",
             "id": 909966,
             "marketValueCurrency": "EUR",
@@ -401,7 +361,7 @@
             "position": "F",
             "jerseyNumber": "17",
             "height": 167,
-            "userCount": 1953,
+            "userCount": 1965,
             "gender": "M",
             "id": 909966,
             "marketValueCurrency": "EUR",
@@ -443,7 +403,7 @@
             "position": "M",
             "jerseyNumber": "11",
             "height": 173,
-            "userCount": 903,
+            "userCount": 893,
             "gender": "M",
             "id": 900433,
             "marketValueCurrency": "EUR",
@@ -485,7 +445,7 @@
             "position": "M",
             "jerseyNumber": "11",
             "height": 173,
-            "userCount": 903,
+            "userCount": 893,
             "gender": "M",
             "id": 900433,
             "marketValueCurrency": "EUR",
@@ -530,7 +490,7 @@
             "position": "F",
             "jerseyNumber": "6",
             "height": 192,
-            "userCount": 3109,
+            "userCount": 3141,
             "gender": "M",
             "id": 754710,
             "marketValueCurrency": "EUR",
@@ -580,7 +540,7 @@
             "position": "G",
             "jerseyNumber": "1",
             "height": 189,
-            "userCount": 7250,
+            "userCount": 7258,
             "gender": "M",
             "sofascoreId": "unai_simon",
             "id": 797291,
@@ -655,7 +615,7 @@
         "position": "M",
         "jerseyNumber": "30",
         "height": 192,
-        "userCount": 653,
+        "userCount": 655,
         "gender": "M",
         "id": 2110897,
         "marketValueCurrency": "EUR",
@@ -663,6 +623,14 @@
         "proposedMarketValueRaw": {
           "value": 3300000,
           "currency": "EUR"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "أليخاندرو ريجو مورا"
+          },
+          "shortNameTranslation": {
+            "ar": "أ. مورا"
+          }
         }
       },
       "id": 126196416,
@@ -681,7 +649,7 @@
         "position": "M",
         "jerseyNumber": "20",
         "height": 183,
-        "userCount": 827,
+        "userCount": 829,
         "gender": "M",
         "id": 1391375,
         "marketValueCurrency": "EUR",
@@ -712,7 +680,7 @@
         "position": "M",
         "jerseyNumber": "23",
         "height": 178,
-        "userCount": 929,
+        "userCount": 940,
         "gender": "M",
         "id": 944165,
         "marketValueCurrency": "EUR",
@@ -752,7 +720,7 @@
         "position": "F",
         "jerseyNumber": "17",
         "height": 167,
-        "userCount": 1953,
+        "userCount": 1965,
         "gender": "M",
         "id": 909966,
         "marketValueCurrency": "EUR",
@@ -783,7 +751,7 @@
         "position": "M",
         "jerseyNumber": "16",
         "height": 172,
-        "userCount": 1351,
+        "userCount": 1353,
         "gender": "M",
         "id": 998950,
         "marketValueCurrency": "EUR",
@@ -823,7 +791,7 @@
         "position": "M",
         "jerseyNumber": "23",
         "height": 185,
-        "userCount": 689,
+        "userCount": 688,
         "gender": "M",
         "id": 857482,
         "marketValueCurrency": "EUR",
@@ -852,7 +820,7 @@
         "position": "M",
         "jerseyNumber": "18",
         "height": 185,
-        "userCount": 1755,
+        "userCount": 1758,
         "gender": "M",
         "id": 826948,
         "marketValueCurrency": "EUR",
@@ -892,7 +860,7 @@
         "position": "F",
         "jerseyNumber": "6",
         "height": 192,
-        "userCount": 3109,
+        "userCount": 3141,
         "gender": "M",
         "id": 754710,
         "marketValueCurrency": "EUR",
@@ -921,7 +889,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 180,
-        "userCount": 2888,
+        "userCount": 2899,
         "gender": "M",
         "id": 909119,
         "marketValueCurrency": "EUR",
@@ -992,7 +960,7 @@
         "position": "M",
         "jerseyNumber": "8",
         "height": 188,
-        "userCount": 3471,
+        "userCount": 3480,
         "gender": "M",
         "id": 966801,
         "marketValueCurrency": "EUR",
@@ -1030,7 +998,7 @@
         "position": "M",
         "jerseyNumber": "18",
         "height": 185,
-        "userCount": 1755,
+        "userCount": 1758,
         "gender": "M",
         "id": 826948,
         "marketValueCurrency": "EUR",
@@ -1072,7 +1040,7 @@
         "position": "M",
         "jerseyNumber": "30",
         "height": 192,
-        "userCount": 653,
+        "userCount": 655,
         "gender": "M",
         "id": 2110897,
         "marketValueCurrency": "EUR",
@@ -1080,6 +1048,14 @@
         "proposedMarketValueRaw": {
           "value": 3300000,
           "currency": "EUR"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "أليخاندرو ريجو مورا"
+          },
+          "shortNameTranslation": {
+            "ar": "أ. مورا"
+          }
         }
       },
       "playerName": "Alejandro Rego Mora",
@@ -1102,7 +1078,7 @@
         "position": "D",
         "jerseyNumber": "24",
         "height": 183,
-        "userCount": 617,
+        "userCount": 605,
         "gender": "M",
         "id": 814023,
         "marketValueCurrency": "EUR",
@@ -1144,7 +1120,7 @@
         "position": "D",
         "jerseyNumber": "3",
         "height": 183,
-        "userCount": 3312,
+        "userCount": 3300,
         "gender": "M",
         "id": 910978,
         "marketValueCurrency": "EUR",
@@ -1155,10 +1131,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
+            "ar": "داني فيفيان",
             "bn": "ড্যানিয়েল ভিভিয়ান",
             "hi": "डैनियल विवियन"
           },
           "shortNameTranslation": {
+            "ar": "د. فيفيان",
             "bn": "ডি. ভিভিয়ান",
             "hi": "डी. विवियन"
           }
@@ -1173,7 +1151,7 @@
         "position": "D",
         "jerseyNumber": "14",
         "height": 191,
-        "userCount": 10514,
+        "userCount": 10519,
         "gender": "M",
         "sofascoreId": "laporte27",
         "id": 149734,
@@ -1234,7 +1212,7 @@
         "position": "M",
         "jerseyNumber": "9",
         "height": 186,
-        "userCount": 20385,
+        "userCount": 20399,
         "gender": "M",
         "sofascoreId": "IñakiWill",
         "id": 783374,
@@ -1266,7 +1244,7 @@
         "position": "M",
         "jerseyNumber": "10",
         "height": 180,
-        "userCount": 84716,
+        "userCount": 84750,
         "gender": "M",
         "sofascoreId": "NicoWill",
         "id": 1085400,
@@ -1306,7 +1284,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 180,
-        "userCount": 2888,
+        "userCount": 2899,
         "gender": "M",
         "id": 909119,
         "marketValueCurrency": "EUR",
@@ -1338,7 +1316,7 @@
             "position": "F",
             "jerseyNumber": "9",
             "height": 180,
-            "userCount": 2888,
+            "userCount": 2899,
             "gender": "M",
             "id": 909119,
             "marketValueCurrency": "EUR",
@@ -1387,7 +1365,7 @@
             "position": "G",
             "jerseyNumber": "1",
             "height": 189,
-            "userCount": 7250,
+            "userCount": 7258,
             "gender": "M",
             "sofascoreId": "unai_simon",
             "id": 797291,
@@ -1430,7 +1408,7 @@
         "position": "D",
         "jerseyNumber": "14",
         "height": 191,
-        "userCount": 10514,
+        "userCount": 10519,
         "gender": "M",
         "sofascoreId": "laporte27",
         "id": 149734,
