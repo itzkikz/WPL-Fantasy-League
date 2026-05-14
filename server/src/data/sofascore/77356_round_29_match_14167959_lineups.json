@@ -12,7 +12,7 @@
           "position": "G",
           "jerseyNumber": "30",
           "height": 186,
-          "userCount": 2438,
+          "userCount": 2483,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -24,7 +24,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 767232000,
           "proposedMarketValueRaw": {
-            "value": 9200000,
+            "value": 7400000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -96,7 +96,7 @@
           "position": "D",
           "jerseyNumber": "36",
           "height": 173,
-          "userCount": 2300,
+          "userCount": 2326,
           "gender": "M",
           "country": {
             "alpha2": "GH",
@@ -186,7 +186,7 @@
           "position": "D",
           "jerseyNumber": "48",
           "height": 190,
-          "userCount": 5350,
+          "userCount": 5440,
           "gender": "M",
           "country": {
             "alpha2": "MA",
@@ -273,7 +273,7 @@
           "position": "D",
           "jerseyNumber": "3",
           "height": 184,
-          "userCount": 573,
+          "userCount": 578,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -355,10 +355,10 @@
           "firstName": "Quentin Merlin",
           "slug": "quentin-merlin",
           "shortName": "Q. Merlin",
-          "position": "M",
+          "position": "D",
           "jerseyNumber": "26",
           "height": 173,
-          "userCount": 1195,
+          "userCount": 1216,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -449,10 +449,10 @@
           "lastName": "Blas",
           "slug": "ludovic-blas",
           "shortName": "L. Blas",
-          "position": "F",
+          "position": "M",
           "jerseyNumber": "10",
           "height": 180,
-          "userCount": 1195,
+          "userCount": 1208,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -548,7 +548,7 @@
           "position": "M",
           "jerseyNumber": "21",
           "height": 172,
-          "userCount": 1174,
+          "userCount": 1192,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -640,7 +640,7 @@
           "position": "M",
           "jerseyNumber": "45",
           "height": 178,
-          "userCount": 1039,
+          "userCount": 1042,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -733,7 +733,7 @@
           "position": "F",
           "jerseyNumber": "11",
           "height": 175,
-          "userCount": 6382,
+          "userCount": 6649,
           "gender": "M",
           "country": {
             "alpha2": "JO",
@@ -745,7 +745,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 865900800,
           "proposedMarketValueRaw": {
-            "value": 6500000,
+            "value": 8600000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -830,7 +830,7 @@
           "position": "F",
           "jerseyNumber": "7",
           "height": 185,
-          "userCount": 4633,
+          "userCount": 4673,
           "gender": "M",
           "sofascoreId": "breelembolo97",
           "country": {
@@ -919,7 +919,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 177,
-          "userCount": 2520,
+          "userCount": 3019,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -931,7 +931,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 956016000,
           "proposedMarketValueRaw": {
-            "value": 13700000,
+            "value": 18300000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -1002,15 +1002,13 @@
       },
       {
         "player": {
-          "name": "Przemyslaw Frankowski",
-          "firstName": "Przemyslaw",
-          "lastName": "Frankowski",
-          "slug": "przemyslaw-frankowski",
+          "name": "Przemysław Frankowski",
+          "slug": "przemysaw-frankowski",
           "shortName": "P. Frankowski",
           "position": "M",
           "jerseyNumber": "95",
           "height": 176,
-          "userCount": 5699,
+          "userCount": 5728,
           "gender": "M",
           "sofascoreId": "przemek.franek_",
           "country": {
@@ -1028,10 +1026,12 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
+              "ar": "بزيميسواف فرانكوفسكي",
               "bn": "প্রজেমিস্লো ফ্রাঙ্কোস্কি",
               "hi": "प्रेज़ेमिस्लाव फ़्रैंकोव्स्की"
             },
             "shortNameTranslation": {
+              "ar": "ب. فرانكوفسكي",
               "bn": "পি. ফ্রাঙ্কোস্কি",
               "hi": "पी. फ़्रैंकोव्स्की"
             }
@@ -1092,7 +1092,7 @@
           "position": "M",
           "jerseyNumber": "17",
           "height": 174,
-          "userCount": 11008,
+          "userCount": 11085,
           "gender": "M",
           "sofascoreId": "szymanski_11",
           "country": {
@@ -1176,7 +1176,8 @@
           "shortName": "N. Mukiele",
           "position": "F",
           "jerseyNumber": "65",
-          "userCount": 193,
+          "height": 184,
+          "userCount": 207,
           "country": {
             "alpha2": "FR",
             "alpha3": "FRA",
@@ -1246,7 +1247,7 @@
           "position": "D",
           "jerseyNumber": "18",
           "height": 176,
-          "userCount": 1225,
+          "userCount": 1248,
           "gender": "M",
           "country": {
             "alpha2": "CM",
@@ -1325,7 +1326,8 @@
           "shortName": "M. Silistrie",
           "position": "G",
           "jerseyNumber": "50",
-          "userCount": 69,
+          "height": 188,
+          "userCount": 71,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -1366,7 +1368,7 @@
           "position": "D",
           "jerseyNumber": "24",
           "height": 186,
-          "userCount": 624,
+          "userCount": 635,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -1378,7 +1380,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 991094400,
           "proposedMarketValueRaw": {
-            "value": 9700000,
+            "value": 13000000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -1415,7 +1417,7 @@
           "position": "M",
           "jerseyNumber": "6",
           "height": 188,
-          "userCount": 1192,
+          "userCount": 1205,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -1462,7 +1464,7 @@
           "position": "M",
           "jerseyNumber": "4",
           "height": 183,
-          "userCount": 795,
+          "userCount": 802,
           "gender": "M",
           "country": {
             "alpha2": "FI",
@@ -1512,7 +1514,7 @@
           "position": "F",
           "jerseyNumber": "77",
           "height": 182,
-          "userCount": 25020,
+          "userCount": 25092,
           "gender": "M",
           "country": {
             "alpha2": "MA",
@@ -1575,7 +1577,7 @@
           "position": "F",
           "jerseyNumber": "70",
           "height": 170,
-          "userCount": 413,
+          "userCount": 421,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -1611,15 +1613,13 @@
       },
       {
         "player": {
-          "name": "Przemyslaw Frankowski",
-          "firstName": "Przemyslaw",
-          "lastName": "Frankowski",
-          "slug": "przemyslaw-frankowski",
+          "name": "Przemysław Frankowski",
+          "slug": "przemysaw-frankowski",
           "shortName": "P. Frankowski",
           "position": "M",
           "jerseyNumber": "95",
           "height": 176,
-          "userCount": 5699,
+          "userCount": 5728,
           "gender": "M",
           "sofascoreId": "przemek.franek_",
           "country": {
@@ -1637,10 +1637,12 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
+              "ar": "بزيميسواف فرانكوفسكي",
               "bn": "প্রজেমিস্লো ফ্রাঙ্কোস্কি",
               "hi": "प्रेज़ेमिस्लाव फ़्रैंकोव्स्की"
             },
             "shortNameTranslation": {
+              "ar": "ب. فرانكوفسكي",
               "bn": "পি. ফ্রাঙ্কোস্কি",
               "hi": "पी. फ़्रैंकोव्स्की"
             }
@@ -1666,7 +1668,7 @@
           "position": "G",
           "jerseyNumber": "12",
           "height": 187,
-          "userCount": 16376,
+          "userCount": 16460,
           "gender": "M",
           "sofascoreId": "HKoffi",
           "country": {
@@ -1751,7 +1753,7 @@
           "position": "D",
           "jerseyNumber": "27",
           "height": 178,
-          "userCount": 274,
+          "userCount": 277,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -1763,7 +1765,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 961113600,
           "proposedMarketValueRaw": {
-            "value": 1900000,
+            "value": 3600000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -1922,7 +1924,7 @@
           "position": "D",
           "jerseyNumber": "4",
           "height": 197,
-          "userCount": 1777,
+          "userCount": 1781,
           "gender": "M",
           "country": {
             "alpha2": "ML",
@@ -1934,7 +1936,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 1046908800,
           "proposedMarketValueRaw": {
-            "value": 4099999,
+            "value": 8199999,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -2010,7 +2012,7 @@
           "position": "D",
           "jerseyNumber": "21",
           "height": 184,
-          "userCount": 776,
+          "userCount": 790,
           "gender": "M",
           "country": {
             "alpha2": "MR",
@@ -2096,7 +2098,7 @@
           "position": "D",
           "jerseyNumber": "3",
           "height": 179,
-          "userCount": 601,
+          "userCount": 612,
           "gender": "M",
           "country": {
             "alpha2": "GA",
@@ -2108,7 +2110,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 1061251200,
           "proposedMarketValueRaw": {
-            "value": 3700000,
+            "value": 6500000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -2275,7 +2277,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 190,
-          "userCount": 1195,
+          "userCount": 1198,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -2292,10 +2294,12 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
+              "ar": "برانكو فان دن بومين",
               "bn": "ব্রাঙ্কো ভ্যান ডেন বুমেন",
               "hi": "ब्रैंको वान डेन बूमेन"
             },
             "shortNameTranslation": {
+              "ar": "ب. فان دن بومين",
               "bn": "বি. ভ্যান ডেন বুমেন",
               "hi": "बी. वान"
             }
@@ -2369,7 +2373,7 @@
           "position": "M",
           "jerseyNumber": "93",
           "height": 177,
-          "userCount": 1890,
+          "userCount": 1896,
           "gender": "M",
           "country": {
             "alpha2": "DZ",
@@ -2456,7 +2460,7 @@
           "position": "F",
           "jerseyNumber": "36",
           "height": 187,
-          "userCount": 68,
+          "userCount": 69,
           "country": {
             "alpha2": "FR",
             "alpha3": "FRA",
@@ -2529,7 +2533,7 @@
           "position": "M",
           "jerseyNumber": "7",
           "height": 175,
-          "userCount": 518,
+          "userCount": 532,
           "gender": "M",
           "country": {
             "alpha2": "MA",
@@ -2541,7 +2545,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 973382400,
           "proposedMarketValueRaw": {
-            "value": 1400000,
+            "value": 2300000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -2616,7 +2620,7 @@
           "position": "M",
           "jerseyNumber": "15",
           "height": 181,
-          "userCount": 67,
+          "userCount": 74,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2704,7 +2708,7 @@
           "position": "F",
           "jerseyNumber": "35",
           "height": 177,
-          "userCount": 359,
+          "userCount": 372,
           "country": {
             "alpha2": "FR",
             "alpha3": "FRA",
@@ -2780,7 +2784,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 183,
-          "userCount": 1181,
+          "userCount": 1205,
           "gender": "M",
           "country": {
             "alpha2": "CF",
@@ -2842,7 +2846,8 @@
           "shortName": "D. Sinaté",
           "position": "D",
           "jerseyNumber": "23",
-          "userCount": 215,
+          "height": 181,
+          "userCount": 219,
           "gender": "M",
           "country": {
             "alpha2": "ML",
@@ -2893,7 +2898,7 @@
           "position": "D",
           "jerseyNumber": "26",
           "height": 177,
-          "userCount": 73,
+          "userCount": 74,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2998,7 +3003,7 @@
           "shortName": "M. Gernigon",
           "position": "D",
           "jerseyNumber": "42",
-          "userCount": 30,
+          "userCount": 35,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3041,7 +3046,7 @@
           "position": "D",
           "jerseyNumber": "24",
           "height": 185,
-          "userCount": 127,
+          "userCount": 129,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3086,7 +3091,7 @@
           "shortName": "B. Diatta",
           "position": "M",
           "jerseyNumber": "46",
-          "userCount": 17,
+          "userCount": 22,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3096,7 +3101,15 @@
           },
           "id": 2557443,
           "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 1214524800
+          "dateOfBirthTimestamp": 1214438400,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "بانيه دياتا"
+            },
+            "shortNameTranslation": {
+              "ar": "ب. دياتا"
+            }
+          }
         },
         "teamId": 296235,
         "shirtNumber": 46,
@@ -3137,7 +3150,7 @@
           "position": "D",
           "jerseyNumber": "25",
           "height": 182,
-          "userCount": 182,
+          "userCount": 187,
           "gender": "M",
           "country": {
             "alpha2": "CI",
@@ -3173,50 +3186,6 @@
       },
       {
         "player": {
-          "name": "Carlens Arcus",
-          "firstName": "Carlens",
-          "lastName": "Arcus",
-          "slug": "carlens-arcus",
-          "shortName": "C. Arcus",
-          "position": "D",
-          "jerseyNumber": "2",
-          "height": 180,
-          "userCount": 6389,
-          "gender": "M",
-          "country": {
-            "alpha2": "HT",
-            "alpha3": "HTI",
-            "name": "Haiti",
-            "slug": "haiti"
-          },
-          "id": 794373,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 835920000,
-          "proposedMarketValueRaw": {
-            "value": 1900000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "كارلينس أركوس",
-              "bn": "কার্লেনস আর্কাস",
-              "hi": "कार्लेंस आर्कस"
-            },
-            "shortNameTranslation": {
-              "ar": "ك. أركوس",
-              "bn": "সি. আর্কাস",
-              "hi": "सी. आर्कस"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Groin Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-10T00:00:00+00:00"
-      },
-      {
-        "player": {
           "name": "Marius Courcoul",
           "firstName": "Marius Courcoul",
           "slug": "courcoul-marius",
@@ -3224,7 +3193,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 182,
-          "userCount": 166,
+          "userCount": 165,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3263,7 +3232,7 @@
           "position": "M",
           "jerseyNumber": "14",
           "height": 175,
-          "userCount": 1224,
+          "userCount": 1235,
           "gender": "M",
           "country": {
             "alpha2": "MA",
@@ -3298,6 +3267,50 @@
       },
       {
         "player": {
+          "name": "Carlens Arcus",
+          "firstName": "Carlens",
+          "lastName": "Arcus",
+          "slug": "carlens-arcus",
+          "shortName": "C. Arcus",
+          "position": "D",
+          "jerseyNumber": "2",
+          "height": 180,
+          "userCount": 6500,
+          "gender": "M",
+          "country": {
+            "alpha2": "HT",
+            "alpha3": "HTI",
+            "name": "Haiti",
+            "slug": "haiti"
+          },
+          "id": 794373,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 835920000,
+          "proposedMarketValueRaw": {
+            "value": 1900000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "كارلينس أركوس",
+              "bn": "কার্লেনস আর্কাস",
+              "hi": "कार्लेंस आर्कस"
+            },
+            "shortNameTranslation": {
+              "ar": "ك. أركوس",
+              "bn": "সি. আর্কাস",
+              "hi": "सी. आर्कस"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Groin Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-17T16:00:58+00:00"
+      },
+      {
+        "player": {
           "name": "Djibirin Harouna",
           "firstName": "Djibirin Harouna",
           "slug": "djibirin-harouna",
@@ -3305,7 +3318,7 @@
           "position": "F",
           "jerseyNumber": "31",
           "height": 175,
-          "userCount": 340,
+          "userCount": 339,
           "country": {
             "alpha2": "CM",
             "alpha3": "CMR",

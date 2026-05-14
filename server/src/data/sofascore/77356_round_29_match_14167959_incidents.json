@@ -22,7 +22,8 @@
         "shortName": "D. Sinaté",
         "position": "D",
         "jerseyNumber": "23",
-        "userCount": 211,
+        "height": 181,
+        "userCount": 219,
         "gender": "M",
         "id": 1493480,
         "marketValueCurrency": "EUR",
@@ -51,7 +52,7 @@
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 961113600,
         "proposedMarketValueRaw": {
-          "value": 1900000,
+          "value": 3600000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -110,18 +111,20 @@
       },
       "playerOut": {
         "name": "Amine Sbai",
-        "slug": "sbai-amine",
+        "firstName": "Amine",
+        "lastName": "Sbai",
+        "slug": "amine-sbai",
         "shortName": "A. Sbai",
         "position": "M",
         "jerseyNumber": "7",
         "height": 175,
-        "userCount": 515,
+        "userCount": 532,
         "gender": "M",
         "id": 1392829,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 973382400,
         "proposedMarketValueRaw": {
-          "value": 1400000,
+          "value": 2300000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -159,7 +162,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 183,
-        "userCount": 1179,
+        "userCount": 1205,
         "gender": "M",
         "id": 891505,
         "marketValueCurrency": "EUR",
@@ -186,7 +189,7 @@
         "position": "M",
         "jerseyNumber": "8",
         "height": 190,
-        "userCount": 1193,
+        "userCount": 1198,
         "gender": "M",
         "id": 190883,
         "marketValueCurrency": "EUR",
@@ -197,10 +200,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
+            "ar": "برانكو فان دن بومين",
             "bn": "ব্রাঙ্কো ভ্যান ডেন বুমেন",
             "hi": "ब्रैंको वान डेन बूमेन"
           },
           "shortNameTranslation": {
+            "ar": "ب. فان دن بومين",
             "bn": "বি. ভ্যান ডেন বুমেন",
             "hi": "बी. वान"
           }
@@ -223,7 +228,7 @@
         "position": "D",
         "jerseyNumber": "18",
         "height": 176,
-        "userCount": 1219,
+        "userCount": 1248,
         "gender": "M",
         "id": 1545409,
         "marketValueCurrency": "EUR",
@@ -247,12 +252,14 @@
       },
       "playerOut": {
         "name": "Ludovic Blas",
+        "firstName": "Ludovic",
+        "lastName": "Blas",
         "slug": "ludovic-blas",
         "shortName": "L. Blas",
-        "position": "F",
+        "position": "M",
         "jerseyNumber": "10",
         "height": 180,
-        "userCount": 1182,
+        "userCount": 1208,
         "gender": "M",
         "id": 806076,
         "marketValueCurrency": "EUR",
@@ -286,18 +293,20 @@
       "time": 81,
       "player": {
         "name": "Amine Sbai",
-        "slug": "sbai-amine",
+        "firstName": "Amine",
+        "lastName": "Sbai",
+        "slug": "amine-sbai",
         "shortName": "A. Sbai",
         "position": "M",
         "jerseyNumber": "7",
         "height": 175,
-        "userCount": 515,
+        "userCount": 532,
         "gender": "M",
         "id": 1392829,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 973382400,
         "proposedMarketValueRaw": {
-          "value": 1400000,
+          "value": 2300000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -314,18 +323,20 @@
         {
           "player": {
             "name": "Amine Sbai",
-            "slug": "sbai-amine",
+            "firstName": "Amine",
+            "lastName": "Sbai",
+            "slug": "amine-sbai",
             "shortName": "A. Sbai",
             "position": "M",
             "jerseyNumber": "7",
             "height": 175,
-            "userCount": 515,
+            "userCount": 532,
             "gender": "M",
             "id": 1392829,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 973382400,
             "proposedMarketValueRaw": {
-              "value": 1400000,
+              "value": 2300000,
               "currency": "EUR"
             },
             "fieldTranslations": {
@@ -360,13 +371,13 @@
             "position": "G",
             "jerseyNumber": "30",
             "height": 186,
-            "userCount": 2418,
+            "userCount": 2483,
             "gender": "M",
             "id": 164055,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 767232000,
             "proposedMarketValueRaw": {
-              "value": 9200000,
+              "value": 7400000,
               "currency": "EUR"
             },
             "fieldTranslations": {
@@ -395,12 +406,14 @@
     {
       "playerIn": {
         "name": "Sebastian Szymański",
+        "firstName": "Sebastian",
+        "lastName": "Szymanski",
         "slug": "sebastian-szymanski",
         "shortName": "S. Szymański",
         "position": "M",
         "jerseyNumber": "17",
         "height": 174,
-        "userCount": 11006,
+        "userCount": 11085,
         "gender": "M",
         "sofascoreId": "szymanski_11",
         "id": 847983,
@@ -432,7 +445,7 @@
         "position": "F",
         "jerseyNumber": "7",
         "height": 185,
-        "userCount": 4608,
+        "userCount": 4673,
         "gender": "M",
         "sofascoreId": "breelembolo97",
         "id": 352296,
@@ -472,7 +485,8 @@
         "shortName": "N. Mukiele",
         "position": "F",
         "jerseyNumber": "65",
-        "userCount": 188,
+        "height": 184,
+        "userCount": 207,
         "id": 1891021,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1139702400,
@@ -492,13 +506,13 @@
         "position": "F",
         "jerseyNumber": "11",
         "height": 175,
-        "userCount": 6344,
+        "userCount": 6649,
         "gender": "M",
         "id": 876600,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 865900800,
         "proposedMarketValueRaw": {
-          "value": 6500000,
+          "value": 8600000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -524,15 +538,13 @@
     },
     {
       "playerIn": {
-        "name": "Przemyslaw Frankowski",
-        "firstName": "Przemyslaw",
-        "lastName": "Frankowski",
-        "slug": "przemyslaw-frankowski",
+        "name": "Przemysław Frankowski",
+        "slug": "przemysaw-frankowski",
         "shortName": "P. Frankowski",
         "position": "M",
         "jerseyNumber": "95",
         "height": 176,
-        "userCount": 5699,
+        "userCount": 5728,
         "gender": "M",
         "sofascoreId": "przemek.franek_",
         "id": 286909,
@@ -544,10 +556,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
+            "ar": "بزيميسواف فرانكوفسكي",
             "bn": "প্রজেমিস্লো ফ্রাঙ্কোস্কি",
             "hi": "प्रेज़ेमिस्लाव फ़्रैंकोव्स्की"
           },
           "shortNameTranslation": {
+            "ar": "ب. فرانكوفسكي",
             "bn": "পি. ফ্রাঙ্কোস্কি",
             "hi": "पी. फ़्रैंकोव्स्की"
           }
@@ -562,7 +576,7 @@
         "position": "D",
         "jerseyNumber": "36",
         "height": 173,
-        "userCount": 2291,
+        "userCount": 2326,
         "gender": "M",
         "id": 1049515,
         "marketValueCurrency": "EUR",
@@ -635,7 +649,7 @@
         "position": "F",
         "jerseyNumber": "35",
         "height": 177,
-        "userCount": 358,
+        "userCount": 372,
         "id": 2137784,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1186617600,
@@ -663,7 +677,7 @@
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 961113600,
         "proposedMarketValueRaw": {
-          "value": 1900000,
+          "value": 3600000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -690,7 +704,7 @@
             "position": "D",
             "jerseyNumber": "21",
             "height": 184,
-            "userCount": 766,
+            "userCount": 790,
             "gender": "M",
             "id": 363042,
             "marketValueCurrency": "EUR",
@@ -734,13 +748,13 @@
             "position": "D",
             "jerseyNumber": "3",
             "height": 179,
-            "userCount": 596,
+            "userCount": 612,
             "gender": "M",
             "id": 1170532,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 1061251200,
             "proposedMarketValueRaw": {
-              "value": 3700000,
+              "value": 6500000,
               "currency": "EUR"
             },
             "fieldTranslations": {
@@ -778,13 +792,13 @@
             "position": "D",
             "jerseyNumber": "3",
             "height": 179,
-            "userCount": 596,
+            "userCount": 612,
             "gender": "M",
             "id": 1170532,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 1061251200,
             "proposedMarketValueRaw": {
-              "value": 3700000,
+              "value": 6500000,
               "currency": "EUR"
             },
             "fieldTranslations": {
@@ -822,7 +836,7 @@
             "position": "M",
             "jerseyNumber": "8",
             "height": 190,
-            "userCount": 1193,
+            "userCount": 1198,
             "gender": "M",
             "id": 190883,
             "marketValueCurrency": "EUR",
@@ -833,10 +847,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "برانكو فان دن بومين",
                 "bn": "ব্রাঙ্কো ভ্যান ডেন বুমেন",
                 "hi": "ब्रैंको वान डेन बूमेन"
               },
               "shortNameTranslation": {
+                "ar": "ب. فان دن بومين",
                 "bn": "বি. ভ্যান ডেন বুমেন",
                 "hi": "बी. वान"
               }
@@ -870,7 +886,7 @@
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 961113600,
             "proposedMarketValueRaw": {
-              "value": 1900000,
+              "value": 3600000,
               "currency": "EUR"
             },
             "fieldTranslations": {
@@ -908,7 +924,7 @@
             "position": "F",
             "jerseyNumber": "35",
             "height": 177,
-            "userCount": 358,
+            "userCount": 372,
             "id": 2137784,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 1186617600,
@@ -949,13 +965,13 @@
             "position": "G",
             "jerseyNumber": "30",
             "height": 186,
-            "userCount": 2418,
+            "userCount": 2483,
             "gender": "M",
             "id": 164055,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 767232000,
             "proposedMarketValueRaw": {
-              "value": 9200000,
+              "value": 7400000,
               "currency": "EUR"
             },
             "fieldTranslations": {
@@ -992,7 +1008,7 @@
         "position": "M",
         "jerseyNumber": "15",
         "height": 181,
-        "userCount": 68,
+        "userCount": 74,
         "gender": "M",
         "id": 209768,
         "marketValueCurrency": "EUR",
@@ -1023,7 +1039,7 @@
         "position": "M",
         "jerseyNumber": "6",
         "height": 180,
-        "userCount": 150,
+        "userCount": 149,
         "gender": "M",
         "id": 1172936,
         "marketValueCurrency": "EUR",
@@ -1062,7 +1078,7 @@
         "position": "F",
         "jerseyNumber": "35",
         "height": 177,
-        "userCount": 358,
+        "userCount": 372,
         "id": 2137784,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1186617600,
@@ -1083,7 +1099,7 @@
         "position": "F",
         "jerseyNumber": "36",
         "height": 187,
-        "userCount": 66,
+        "userCount": 69,
         "id": 2142283,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1129161600,
@@ -1134,13 +1150,13 @@
         "position": "F",
         "jerseyNumber": "11",
         "height": 175,
-        "userCount": 6344,
+        "userCount": 6649,
         "gender": "M",
         "id": 876600,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 865900800,
         "proposedMarketValueRaw": {
-          "value": 6500000,
+          "value": 8600000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -1158,12 +1174,14 @@
       },
       "assist1": {
         "name": "Valentin Rongier",
+        "firstName": "Valentin",
+        "lastName": "Rongier",
         "slug": "valentin-rongier",
         "shortName": "V. Rongier",
         "position": "M",
         "jerseyNumber": "21",
         "height": 172,
-        "userCount": 1163,
+        "userCount": 1192,
         "gender": "M",
         "id": 581314,
         "marketValueCurrency": "EUR",
@@ -1192,10 +1210,10 @@
             "firstName": "Quentin Merlin",
             "slug": "quentin-merlin",
             "shortName": "Q. Merlin",
-            "position": "M",
+            "position": "D",
             "jerseyNumber": "26",
             "height": 173,
-            "userCount": 1191,
+            "userCount": 1216,
             "gender": "M",
             "id": 1102502,
             "marketValueCurrency": "EUR",
@@ -1232,14 +1250,14 @@
         {
           "player": {
             "name": "Mahdi Camara",
-            "firstName": "",
-            "lastName": "",
-            "slug": "camara-mahdi",
+            "firstName": "Mahdi",
+            "lastName": "Camara",
+            "slug": "mahdi-camara",
             "shortName": "M. Camara",
             "position": "M",
             "jerseyNumber": "45",
             "height": 178,
-            "userCount": 1035,
+            "userCount": 1042,
             "gender": "M",
             "id": 916041,
             "marketValueCurrency": "EUR",
@@ -1276,12 +1294,14 @@
         {
           "player": {
             "name": "Valentin Rongier",
+            "firstName": "Valentin",
+            "lastName": "Rongier",
             "slug": "valentin-rongier",
             "shortName": "V. Rongier",
             "position": "M",
             "jerseyNumber": "21",
             "height": 172,
-            "userCount": 1163,
+            "userCount": 1192,
             "gender": "M",
             "id": 581314,
             "marketValueCurrency": "EUR",
@@ -1321,10 +1341,10 @@
             "firstName": "Quentin Merlin",
             "slug": "quentin-merlin",
             "shortName": "Q. Merlin",
-            "position": "M",
+            "position": "D",
             "jerseyNumber": "26",
             "height": 173,
-            "userCount": 1191,
+            "userCount": 1216,
             "gender": "M",
             "id": 1102502,
             "marketValueCurrency": "EUR",
@@ -1361,12 +1381,14 @@
         {
           "player": {
             "name": "Valentin Rongier",
+            "firstName": "Valentin",
+            "lastName": "Rongier",
             "slug": "valentin-rongier",
             "shortName": "V. Rongier",
             "position": "M",
             "jerseyNumber": "21",
             "height": 172,
-            "userCount": 1163,
+            "userCount": 1192,
             "gender": "M",
             "id": 581314,
             "marketValueCurrency": "EUR",
@@ -1409,13 +1431,13 @@
             "position": "F",
             "jerseyNumber": "11",
             "height": 175,
-            "userCount": 6344,
+            "userCount": 6649,
             "gender": "M",
             "id": 876600,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 865900800,
             "proposedMarketValueRaw": {
-              "value": 6500000,
+              "value": 8600000,
               "currency": "EUR"
             },
             "fieldTranslations": {
@@ -1452,12 +1474,14 @@
           },
           "goalkeeper": {
             "name": "Hervé Koffi",
+            "firstName": "Herve",
+            "lastName": "Koffi",
             "slug": "herve-koffi",
             "shortName": "H. Koffi",
             "position": "G",
             "jerseyNumber": "12",
             "height": 187,
-            "userCount": 16374,
+            "userCount": 16460,
             "gender": "M",
             "sofascoreId": "HKoffi",
             "id": 867299,
@@ -1500,13 +1524,13 @@
         "position": "D",
         "jerseyNumber": "4",
         "height": 197,
-        "userCount": 1778,
+        "userCount": 1781,
         "gender": "M",
         "id": 1049538,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1046908800,
         "proposedMarketValueRaw": {
-          "value": 4099999,
+          "value": 8199999,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -1561,12 +1585,14 @@
         {
           "player": {
             "name": "Valentin Rongier",
+            "firstName": "Valentin",
+            "lastName": "Rongier",
             "slug": "valentin-rongier",
             "shortName": "V. Rongier",
             "position": "M",
             "jerseyNumber": "21",
             "height": 172,
-            "userCount": 1163,
+            "userCount": 1192,
             "gender": "M",
             "id": 581314,
             "marketValueCurrency": "EUR",
@@ -1603,14 +1629,14 @@
         {
           "player": {
             "name": "Mahdi Camara",
-            "firstName": "",
-            "lastName": "",
-            "slug": "camara-mahdi",
+            "firstName": "Mahdi",
+            "lastName": "Camara",
+            "slug": "mahdi-camara",
             "shortName": "M. Camara",
             "position": "M",
             "jerseyNumber": "45",
             "height": 178,
-            "userCount": 1035,
+            "userCount": 1042,
             "gender": "M",
             "id": 916041,
             "marketValueCurrency": "EUR",
@@ -1652,13 +1678,13 @@
             "position": "F",
             "jerseyNumber": "11",
             "height": 175,
-            "userCount": 6344,
+            "userCount": 6649,
             "gender": "M",
             "id": 876600,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 865900800,
             "proposedMarketValueRaw": {
-              "value": 6500000,
+              "value": 8600000,
               "currency": "EUR"
             },
             "fieldTranslations": {
@@ -1689,12 +1715,14 @@
         {
           "player": {
             "name": "Ludovic Blas",
+            "firstName": "Ludovic",
+            "lastName": "Blas",
             "slug": "ludovic-blas",
             "shortName": "L. Blas",
-            "position": "F",
+            "position": "M",
             "jerseyNumber": "10",
             "height": 180,
-            "userCount": 1182,
+            "userCount": 1208,
             "gender": "M",
             "id": 806076,
             "marketValueCurrency": "EUR",
@@ -1731,14 +1759,14 @@
         {
           "player": {
             "name": "Mahdi Camara",
-            "firstName": "",
-            "lastName": "",
-            "slug": "camara-mahdi",
+            "firstName": "Mahdi",
+            "lastName": "Camara",
+            "slug": "mahdi-camara",
             "shortName": "M. Camara",
             "position": "M",
             "jerseyNumber": "45",
             "height": 178,
-            "userCount": 1035,
+            "userCount": 1042,
             "gender": "M",
             "id": 916041,
             "marketValueCurrency": "EUR",
@@ -1815,12 +1843,14 @@
           },
           "goalkeeper": {
             "name": "Hervé Koffi",
+            "firstName": "Herve",
+            "lastName": "Koffi",
             "slug": "herve-koffi",
             "shortName": "H. Koffi",
             "position": "G",
             "jerseyNumber": "12",
             "height": 187,
-            "userCount": 16374,
+            "userCount": 16460,
             "gender": "M",
             "sofascoreId": "HKoffi",
             "id": 867299,
