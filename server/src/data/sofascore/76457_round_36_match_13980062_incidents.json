@@ -26,7 +26,7 @@
         "position": "F",
         "jerseyNumber": "14",
         "height": 176,
-        "userCount": 16880,
+        "userCount": 17055,
         "gender": "M",
         "sofascoreId": "donyellmalen",
         "id": 803039,
@@ -60,7 +60,7 @@
             "position": "F",
             "jerseyNumber": "14",
             "height": 176,
-            "userCount": 16880,
+            "userCount": 17055,
             "gender": "M",
             "sofascoreId": "donyellmalen",
             "id": 803039,
@@ -111,7 +111,7 @@
             "position": "G",
             "jerseyNumber": "31",
             "height": 189,
-            "userCount": 5760,
+            "userCount": 5773,
             "gender": "M",
             "id": 905351,
             "marketValueCurrency": "EUR",
@@ -122,10 +122,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "زيون سوزوكي",
                 "bn": "জিয়ন সুজুকি",
                 "hi": "सियोन सुजुकी"
               },
               "shortNameTranslation": {
+                "ar": "ز. سوزوكي",
                 "bn": "জেড. সুজুকি",
                 "hi": "जेड. सुजुकी"
               }
@@ -151,7 +153,7 @@
         "position": "D",
         "jerseyNumber": "27",
         "height": 182,
-        "userCount": 542,
+        "userCount": 541,
         "gender": "M",
         "id": 1963449,
         "marketValueCurrency": "EUR",
@@ -189,7 +191,7 @@
         "position": "M",
         "jerseyNumber": "2",
         "height": 182,
-        "userCount": 2519,
+        "userCount": 2522,
         "gender": "M",
         "id": 982778,
         "marketValueCurrency": "EUR",
@@ -229,7 +231,7 @@
         "position": "M",
         "jerseyNumber": "2",
         "height": 182,
-        "userCount": 2519,
+        "userCount": 2522,
         "gender": "M",
         "id": 982778,
         "marketValueCurrency": "EUR",
@@ -254,13 +256,53 @@
       "footballPassingNetworkAction": [
         {
           "player": {
+            "name": "Gianluca Mancini",
+            "firstName": "Gianluca",
+            "lastName": "Mancini",
+            "slug": "gianluca-mancini",
+            "shortName": "G. Mancini",
+            "position": "D",
+            "jerseyNumber": "23",
+            "height": 190,
+            "userCount": 4407,
+            "gender": "M",
+            "id": 611210,
+            "marketValueCurrency": "EUR",
+            "dateOfBirthTimestamp": 829699200,
+            "proposedMarketValueRaw": {
+              "value": 14600000,
+              "currency": "EUR"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "جيانلوكا مانشيني",
+                "bn": "জিয়ানলুকা মানচিনি",
+                "hi": "जियानलुका मैनसिनी"
+              },
+              "shortNameTranslation": {
+                "ar": "ج. مانشيني",
+                "bn": "জি. মানচিনি",
+                "hi": "जी. मैनसिनी"
+              }
+            }
+          },
+          "eventType": "ball-touch",
+          "time": 90,
+          "playerCoordinates": {
+            "x": 10.7,
+            "y": 49.3
+          },
+          "isHome": false
+        },
+        {
+          "player": {
             "name": "Devyne Rensch",
             "slug": "devyne-rensch",
             "shortName": "D. Rensch",
             "position": "M",
             "jerseyNumber": "2",
             "height": 182,
-            "userCount": 2519,
+            "userCount": 2522,
             "gender": "M",
             "id": 982778,
             "marketValueCurrency": "EUR",
@@ -310,7 +352,7 @@
             "position": "G",
             "jerseyNumber": "31",
             "height": 189,
-            "userCount": 5760,
+            "userCount": 5773,
             "gender": "M",
             "id": 905351,
             "marketValueCurrency": "EUR",
@@ -321,10 +363,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "زيون سوزوكي",
                 "bn": "জিয়ন সুজুকি",
                 "hi": "सियोन सुजुकी"
               },
               "shortNameTranslation": {
+                "ar": "ز. سوزوكي",
                 "bn": "জেড. সুজুকি",
                 "hi": "जेड. सुजुकी"
               }
@@ -361,7 +405,7 @@
         "position": "M",
         "jerseyNumber": "16",
         "height": 180,
-        "userCount": 1417,
+        "userCount": 1456,
         "gender": "M",
         "id": 1110136,
         "marketValueCurrency": "EUR",
@@ -392,7 +436,7 @@
         "position": "M",
         "jerseyNumber": "8",
         "height": 183,
-        "userCount": 579,
+        "userCount": 580,
         "gender": "M",
         "id": 895868,
         "marketValueCurrency": "EUR",
@@ -425,7 +469,7 @@
             "position": "M",
             "jerseyNumber": "29",
             "height": 190,
-            "userCount": 1019,
+            "userCount": 1021,
             "gender": "M",
             "id": 1086199,
             "marketValueCurrency": "EUR",
@@ -469,7 +513,7 @@
             "position": "M",
             "jerseyNumber": "16",
             "height": 180,
-            "userCount": 1417,
+            "userCount": 1456,
             "gender": "M",
             "id": 1110136,
             "marketValueCurrency": "EUR",
@@ -513,7 +557,7 @@
             "position": "M",
             "jerseyNumber": "8",
             "height": 183,
-            "userCount": 579,
+            "userCount": 580,
             "gender": "M",
             "id": 895868,
             "marketValueCurrency": "EUR",
@@ -558,7 +602,7 @@
             "position": "M",
             "jerseyNumber": "16",
             "height": 180,
-            "userCount": 1417,
+            "userCount": 1456,
             "gender": "M",
             "id": 1110136,
             "marketValueCurrency": "EUR",
@@ -599,7 +643,7 @@
             "position": "M",
             "jerseyNumber": "16",
             "height": 180,
-            "userCount": 1417,
+            "userCount": 1456,
             "gender": "M",
             "id": 1110136,
             "marketValueCurrency": "EUR",
@@ -649,7 +693,7 @@
             "position": "G",
             "jerseyNumber": "99",
             "height": 189,
-            "userCount": 4842,
+            "userCount": 4846,
             "gender": "M",
             "id": 793986,
             "marketValueCurrency": "EUR",
@@ -692,7 +736,7 @@
         "position": "F",
         "jerseyNumber": "11",
         "height": 183,
-        "userCount": 464,
+        "userCount": 467,
         "gender": "M",
         "id": 856065,
         "marketValueCurrency": "EUR",
@@ -758,7 +802,7 @@
         "position": "M",
         "jerseyNumber": "8",
         "height": 183,
-        "userCount": 579,
+        "userCount": 580,
         "gender": "M",
         "id": 895868,
         "marketValueCurrency": "EUR",
@@ -800,10 +844,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
+            "ar": "هانس نيكولوسي كافيجليا",
             "bn": "হ্যান্স নিকোলুসি ক্যাভিগলিয়া",
             "hi": "हंस निकोलुसी कैविग्लिया"
           },
           "shortNameTranslation": {
+            "ar": "ه. كافيجليا",
             "bn": "এইচ. এন. ক্যাভিগলিয়া",
             "hi": "एच.एन. कैविग्लिया"
           }
@@ -825,7 +871,7 @@
         "position": "D",
         "jerseyNumber": "27",
         "height": 182,
-        "userCount": 542,
+        "userCount": 541,
         "gender": "M",
         "id": 1963449,
         "marketValueCurrency": "EUR",
@@ -861,7 +907,7 @@
         "position": "M",
         "jerseyNumber": "2",
         "height": 182,
-        "userCount": 2519,
+        "userCount": 2522,
         "gender": "M",
         "id": 982778,
         "marketValueCurrency": "EUR",
@@ -892,7 +938,7 @@
         "position": "D",
         "jerseyNumber": "19",
         "height": 180,
-        "userCount": 3282,
+        "userCount": 3289,
         "gender": "M",
         "id": 893008,
         "marketValueCurrency": "EUR",
@@ -930,7 +976,7 @@
         "position": "F",
         "jerseyNumber": "20",
         "height": 178,
-        "userCount": 982,
+        "userCount": 984,
         "gender": "M",
         "id": 1618563,
         "marketValueCurrency": "EUR",
@@ -957,7 +1003,7 @@
         "position": "M",
         "jerseyNumber": "17",
         "height": 186,
-        "userCount": 7480,
+        "userCount": 7492,
         "gender": "M",
         "id": 974087,
         "marketValueCurrency": "EUR",
@@ -995,7 +1041,7 @@
         "position": "D",
         "jerseyNumber": "27",
         "height": 182,
-        "userCount": 542,
+        "userCount": 541,
         "gender": "M",
         "id": 1963449,
         "marketValueCurrency": "EUR",
@@ -1020,7 +1066,7 @@
         "position": "D",
         "jerseyNumber": "15",
         "height": 183,
-        "userCount": 912,
+        "userCount": 913,
         "gender": "M",
         "id": 928103,
         "marketValueCurrency": "EUR",
@@ -1060,7 +1106,7 @@
         "position": "M",
         "jerseyNumber": "29",
         "height": 190,
-        "userCount": 1019,
+        "userCount": 1021,
         "gender": "M",
         "id": 1086199,
         "marketValueCurrency": "EUR",
@@ -1089,7 +1135,7 @@
         "position": "M",
         "jerseyNumber": "14",
         "height": 180,
-        "userCount": 893,
+        "userCount": 894,
         "gender": "M",
         "id": 891346,
         "marketValueCurrency": "EUR",
@@ -1128,7 +1174,7 @@
         "position": "D",
         "jerseyNumber": "37",
         "height": 194,
-        "userCount": 1877,
+        "userCount": 1876,
         "gender": "M",
         "id": 1516324,
         "marketValueCurrency": "EUR",
@@ -1166,7 +1212,7 @@
         "position": "M",
         "jerseyNumber": "8",
         "height": 186,
-        "userCount": 17853,
+        "userCount": 17856,
         "gender": "M",
         "id": 1128530,
         "marketValueCurrency": "EUR",
@@ -1197,7 +1243,7 @@
         "position": "M",
         "jerseyNumber": "4",
         "height": 186,
-        "userCount": 2986,
+        "userCount": 2991,
         "gender": "M",
         "id": 186855,
         "marketValueCurrency": "EUR",
@@ -1235,7 +1281,7 @@
         "position": "M",
         "jerseyNumber": "61",
         "height": 180,
-        "userCount": 2838,
+        "userCount": 2839,
         "gender": "M",
         "id": 1175821,
         "marketValueCurrency": "EUR",
@@ -1246,12 +1292,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "نيكولو بيسيلي",
+            "ar": "إيفان بلانكو",
             "bn": "নিকোলো পিসিলি",
             "hi": "निकोलो पिसिली"
           },
           "shortNameTranslation": {
-            "ar": "ن. بيسيلي",
+            "ar": "إ. بلانكو",
             "bn": "এন. পিসিলি",
             "hi": "एन. पिसिली"
           }
@@ -1266,7 +1312,7 @@
         "position": "F",
         "jerseyNumber": "18",
         "height": 182,
-        "userCount": 12923,
+        "userCount": 12931,
         "gender": "M",
         "sofascoreId": "matiassoule11",
         "id": 1082406,
@@ -1307,7 +1353,7 @@
         "position": "D",
         "jerseyNumber": "87",
         "height": 189,
-        "userCount": 1334,
+        "userCount": 1331,
         "gender": "M",
         "id": 1384847,
         "marketValueCurrency": "EUR",
@@ -1334,7 +1380,7 @@
         "position": "D",
         "jerseyNumber": "22",
         "height": 184,
-        "userCount": 2808,
+        "userCount": 2803,
         "gender": "M",
         "id": 353130,
         "marketValueCurrency": "EUR",
@@ -1374,7 +1420,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 192,
-        "userCount": 3355,
+        "userCount": 3371,
         "gender": "M",
         "id": 1099296,
         "marketValueCurrency": "EUR",
@@ -1526,10 +1572,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
+            "ar": "هانس نيكولوسي كافيجليا",
             "bn": "হ্যান্স নিকোলুসি ক্যাভিগলিয়া",
             "hi": "हंस निकोलुसी कैविग्लिया"
           },
           "shortNameTranslation": {
+            "ar": "ه. كافيجليا",
             "bn": "এইচ. এন. ক্যাভিগলিয়া",
             "hi": "एच.एन. कैविग्लिया"
           }
@@ -1557,10 +1605,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "هانس نيكولوسي كافيجليا",
                 "bn": "হ্যান্স নিকোলুসি ক্যাভিগলিয়া",
                 "hi": "हंस निकोलुसी कैविग्लिया"
               },
               "shortNameTranslation": {
+                "ar": "ه. كافيجليا",
                 "bn": "এইচ. এন. ক্যাভিগলিয়া",
                 "hi": "एच.एन. कैविग्लिया"
               }
@@ -1595,10 +1645,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "هانس نيكولوسي كافيجليا",
                 "bn": "হ্যান্স নিকোলুসি ক্যাভিগলিয়া",
                 "hi": "हंस निकोलुसी कैविग्लिया"
               },
               "shortNameTranslation": {
+                "ar": "ه. كافيجليا",
                 "bn": "এইচ. এন. ক্যাভিগলিয়া",
                 "hi": "एच.एन. कैविग्लिया"
               }
@@ -1677,7 +1729,7 @@
             "position": "G",
             "jerseyNumber": "99",
             "height": 189,
-            "userCount": 4842,
+            "userCount": 4846,
             "gender": "M",
             "id": 793986,
             "marketValueCurrency": "EUR",
@@ -1742,7 +1794,7 @@
         "position": "F",
         "jerseyNumber": "14",
         "height": 176,
-        "userCount": 16880,
+        "userCount": 17055,
         "gender": "M",
         "sofascoreId": "donyellmalen",
         "id": 803039,
@@ -1774,7 +1826,7 @@
         "position": "F",
         "jerseyNumber": "21",
         "height": 177,
-        "userCount": 119528,
+        "userCount": 119793,
         "gender": "M",
         "sofascoreId": "LaJoya",
         "id": 256219,
@@ -1808,7 +1860,7 @@
             "position": "M",
             "jerseyNumber": "4",
             "height": 186,
-            "userCount": 2986,
+            "userCount": 2991,
             "gender": "M",
             "id": 186855,
             "marketValueCurrency": "EUR",
@@ -1848,7 +1900,7 @@
             "position": "M",
             "jerseyNumber": "17",
             "height": 186,
-            "userCount": 7480,
+            "userCount": 7492,
             "gender": "M",
             "id": 974087,
             "marketValueCurrency": "EUR",
@@ -1892,7 +1944,7 @@
             "position": "F",
             "jerseyNumber": "21",
             "height": 177,
-            "userCount": 119528,
+            "userCount": 119793,
             "gender": "M",
             "sofascoreId": "LaJoya",
             "id": 256219,
@@ -1938,7 +1990,7 @@
             "position": "F",
             "jerseyNumber": "14",
             "height": 176,
-            "userCount": 16880,
+            "userCount": 17055,
             "gender": "M",
             "sofascoreId": "donyellmalen",
             "id": 803039,
@@ -1989,7 +2041,7 @@
             "position": "G",
             "jerseyNumber": "31",
             "height": 189,
-            "userCount": 5760,
+            "userCount": 5773,
             "gender": "M",
             "id": 905351,
             "marketValueCurrency": "EUR",
@@ -2000,10 +2052,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "زيون سوزوكي",
                 "bn": "জিয়ন সুজুকি",
                 "hi": "सियोन सुजुकी"
               },
               "shortNameTranslation": {
+                "ar": "ز. سوزوكي",
                 "bn": "জেড. সুজুকি",
                 "hi": "जेड. सुजुकी"
               }

@@ -30,7 +30,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 185,
-        "userCount": 798,
+        "userCount": 817,
         "gender": "M",
         "id": 877979,
         "marketValueCurrency": "EUR",
@@ -61,7 +61,7 @@
         "position": "F",
         "jerseyNumber": "27",
         "height": 168,
-        "userCount": 4569,
+        "userCount": 4595,
         "gender": "M",
         "id": 330051,
         "marketValueCurrency": "EUR",
@@ -101,13 +101,13 @@
         "position": "F",
         "jerseyNumber": "14",
         "height": 187,
-        "userCount": 5239,
+        "userCount": 5274,
         "gender": "M",
         "id": 1083007,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1044662400,
         "proposedMarketValueRaw": {
-          "value": 23000000,
+          "value": 19100000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -130,14 +130,14 @@
         "position": "F",
         "jerseyNumber": "31",
         "height": 178,
-        "userCount": 165841,
+        "userCount": 166523,
         "gender": "M",
         "sofascoreId": "AnsuFati",
         "id": 962883,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1036022400,
         "proposedMarketValueRaw": {
-          "value": 10400000,
+          "value": 15600000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -171,7 +171,7 @@
         "position": "F",
         "jerseyNumber": "7",
         "height": 182,
-        "userCount": 187,
+        "userCount": 184,
         "gender": "M",
         "id": 842399,
         "marketValueCurrency": "EUR",
@@ -200,7 +200,7 @@
         "position": "F",
         "jerseyNumber": "36",
         "height": 185,
-        "userCount": 17153,
+        "userCount": 17245,
         "gender": "M",
         "sofascoreId": "ciroimmobile17",
         "id": 45923,
@@ -242,7 +242,7 @@
         "position": "F",
         "jerseyNumber": "24",
         "height": 175,
-        "userCount": 1835,
+        "userCount": 1867,
         "gender": "M",
         "id": 1216282,
         "marketValueCurrency": "EUR",
@@ -274,7 +274,7 @@
             "position": "F",
             "jerseyNumber": "24",
             "height": 175,
-            "userCount": 1835,
+            "userCount": 1867,
             "gender": "M",
             "id": 1216282,
             "marketValueCurrency": "EUR",
@@ -322,7 +322,7 @@
             "position": "G",
             "jerseyNumber": "1",
             "height": 190,
-            "userCount": 2490,
+            "userCount": 2508,
             "gender": "M",
             "id": 15219,
             "marketValueCurrency": "EUR",
@@ -333,10 +333,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "لوكاش هرايديكي",
                 "bn": "লুকাস হ্রাডেকি",
                 "hi": "लुकास ह्राडेकी"
               },
               "shortNameTranslation": {
+                "ar": "ل. هرايديكي",
                 "bn": "এল. হ্রাডেকি",
                 "hi": "एल. ह्राडेकी"
               }
@@ -363,7 +365,7 @@
         "position": "M",
         "jerseyNumber": "11",
         "height": 183,
-        "userCount": 7970,
+        "userCount": 8105,
         "gender": "M",
         "id": 1130939,
         "marketValueCurrency": "EUR",
@@ -392,7 +394,7 @@
         "position": "M",
         "jerseyNumber": "28",
         "height": 179,
-        "userCount": 2599,
+        "userCount": 2594,
         "gender": "M",
         "id": 1410148,
         "marketValueCurrency": "EUR",
@@ -432,7 +434,7 @@
         "position": "M",
         "jerseyNumber": "8",
         "height": 191,
-        "userCount": 166941,
+        "userCount": 167733,
         "gender": "M",
         "sofascoreId": "Pogba",
         "id": 111802,
@@ -464,7 +466,7 @@
         "position": "D",
         "jerseyNumber": "5",
         "height": 186,
-        "userCount": 1944,
+        "userCount": 1957,
         "gender": "M",
         "id": 281277,
         "marketValueCurrency": "EUR",
@@ -503,7 +505,7 @@
         "position": "F",
         "jerseyNumber": "24",
         "height": 175,
-        "userCount": 1835,
+        "userCount": 1867,
         "gender": "M",
         "id": 1216282,
         "marketValueCurrency": "EUR",
@@ -534,7 +536,7 @@
         "position": "F",
         "jerseyNumber": "93",
         "height": 180,
-        "userCount": 1551,
+        "userCount": 1559,
         "gender": "M",
         "id": 802142,
         "marketValueCurrency": "EUR",
@@ -573,7 +575,7 @@
         "position": "M",
         "jerseyNumber": "23",
         "height": 180,
-        "userCount": 579,
+        "userCount": 684,
         "gender": "M",
         "id": 1961626,
         "marketValueCurrency": "EUR",
@@ -592,15 +594,13 @@
         }
       },
       "playerOut": {
-        "name": "Maxime Lopez",
-        "firstName": "Maxime",
-        "lastName": "Lopez",
+        "name": "Maxime López",
         "slug": "maxime-lopez",
-        "shortName": "M. Lopez",
+        "shortName": "M. López",
         "position": "M",
         "jerseyNumber": "21",
         "height": 167,
-        "userCount": 1310,
+        "userCount": 1320,
         "gender": "M",
         "id": 352802,
         "marketValueCurrency": "EUR",
@@ -611,10 +611,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
+            "ar": "ماكسيم لوبيز",
             "bn": "ম্যাক্সিম লোপেজ",
             "hi": "मैक्सिम लोपेज़"
           },
           "shortNameTranslation": {
+            "ar": "م. لوبيز",
             "bn": "এম. লোপেজ",
             "hi": "एम. लोपेज़"
           }
@@ -630,15 +632,13 @@
     },
     {
       "playerIn": {
-        "name": "Hamari Traore",
-        "firstName": "Hamari",
-        "lastName": "Traore",
+        "name": "Hamari Traoré",
         "slug": "hamari-traore",
-        "shortName": "H. Traore",
+        "shortName": "H. Traoré",
         "position": "D",
         "jerseyNumber": "14",
         "height": 175,
-        "userCount": 4087,
+        "userCount": 4088,
         "gender": "M",
         "sofascoreId": "hamarintos27",
         "id": 362014,
@@ -650,10 +650,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
+            "ar": "هاماري تراوري",
             "bn": "হামারি ট্রাওরে",
             "hi": "हामारी ट्रैओरे"
           },
           "shortNameTranslation": {
+            "ar": "ه. تراوري",
             "bn": "এইচ. ট্রাওরে",
             "hi": "एच. ट्रैओरे"
           }
@@ -667,7 +669,7 @@
         "position": "M",
         "jerseyNumber": "17",
         "height": 180,
-        "userCount": 467,
+        "userCount": 476,
         "gender": "M",
         "id": 1507384,
         "marketValueCurrency": "EUR",
@@ -702,7 +704,7 @@
         "position": "M",
         "jerseyNumber": "17",
         "height": 180,
-        "userCount": 467,
+        "userCount": 476,
         "gender": "M",
         "id": 1507384,
         "marketValueCurrency": "EUR",
@@ -740,7 +742,7 @@
         "position": "D",
         "jerseyNumber": "13",
         "height": 184,
-        "userCount": 966,
+        "userCount": 992,
         "gender": "M",
         "id": 1407848,
         "marketValueCurrency": "EUR",
@@ -771,14 +773,14 @@
         "position": "M",
         "jerseyNumber": "15",
         "height": 174,
-        "userCount": 21035,
+        "userCount": 21201,
         "gender": "M",
         "sofascoreId": "lamine_camara_5",
         "id": 1389846,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1072915200,
         "proposedMarketValueRaw": {
-          "value": 31000000,
+          "value": 36000000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -812,7 +814,7 @@
         "position": "M",
         "jerseyNumber": "27",
         "height": 173,
-        "userCount": 13402,
+        "userCount": 13481,
         "gender": "M",
         "sofascoreId": "krepindiatta",
         "id": 873534,
@@ -844,13 +846,13 @@
         "position": "D",
         "jerseyNumber": "4",
         "height": 183,
-        "userCount": 1146,
+        "userCount": 1162,
         "gender": "M",
         "id": 825846,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 938649600,
         "proposedMarketValueRaw": {
-          "value": 13100000,
+          "value": 16399999,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -906,14 +908,14 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 179,
-        "userCount": 7996,
+        "userCount": 8140,
         "gender": "M",
         "sofascoreId": "balogun",
         "id": 934237,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 994118400,
         "proposedMarketValueRaw": {
-          "value": 20000000,
+          "value": 27000000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -937,13 +939,13 @@
         "position": "M",
         "jerseyNumber": "23",
         "height": 181,
-        "userCount": 1535,
+        "userCount": 1550,
         "gender": "M",
         "id": 1868591,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1152835200,
         "proposedMarketValueRaw": {
-          "value": 3200000,
+          "value": 9300000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -966,14 +968,14 @@
             "position": "F",
             "jerseyNumber": "9",
             "height": 179,
-            "userCount": 7996,
+            "userCount": 8140,
             "gender": "M",
             "sofascoreId": "balogun",
             "id": 934237,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 994118400,
             "proposedMarketValueRaw": {
-              "value": 20000000,
+              "value": 27000000,
               "currency": "EUR"
             },
             "fieldTranslations": {
@@ -1015,7 +1017,7 @@
             "position": "G",
             "jerseyNumber": "35",
             "height": 189,
-            "userCount": 1743,
+            "userCount": 1763,
             "gender": "M",
             "id": 38440,
             "marketValueCurrency": "EUR",
@@ -1060,7 +1062,7 @@
         "position": "F",
         "jerseyNumber": "93",
         "height": 180,
-        "userCount": 1551,
+        "userCount": 1559,
         "gender": "M",
         "id": 802142,
         "marketValueCurrency": "EUR",
@@ -1089,7 +1091,7 @@
         "position": "F",
         "jerseyNumber": "36",
         "height": 185,
-        "userCount": 17153,
+        "userCount": 17245,
         "gender": "M",
         "sofascoreId": "ciroimmobile17",
         "id": 45923,
@@ -1121,7 +1123,7 @@
             "position": "F",
             "jerseyNumber": "36",
             "height": 185,
-            "userCount": 17153,
+            "userCount": 17245,
             "gender": "M",
             "sofascoreId": "ciroimmobile17",
             "id": 45923,
@@ -1158,15 +1160,13 @@
         },
         {
           "player": {
-            "name": "Maxime Lopez",
-            "firstName": "Maxime",
-            "lastName": "Lopez",
+            "name": "Maxime López",
             "slug": "maxime-lopez",
-            "shortName": "M. Lopez",
+            "shortName": "M. López",
             "position": "M",
             "jerseyNumber": "21",
             "height": 167,
-            "userCount": 1310,
+            "userCount": 1320,
             "gender": "M",
             "id": 352802,
             "marketValueCurrency": "EUR",
@@ -1177,10 +1177,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "ماكسيم لوبيز",
                 "bn": "ম্যাক্সিম লোপেজ",
                 "hi": "मैक्सिम लोपेज़"
               },
               "shortNameTranslation": {
+                "ar": "م. لوبيز",
                 "bn": "এম. লোপেজ",
                 "hi": "एम. लोपेज़"
               }
@@ -1208,7 +1210,7 @@
             "position": "F",
             "jerseyNumber": "27",
             "height": 168,
-            "userCount": 4569,
+            "userCount": 4595,
             "gender": "M",
             "id": 330051,
             "marketValueCurrency": "EUR",
@@ -1244,15 +1246,13 @@
         },
         {
           "player": {
-            "name": "Maxime Lopez",
-            "firstName": "Maxime",
-            "lastName": "Lopez",
+            "name": "Maxime López",
             "slug": "maxime-lopez",
-            "shortName": "M. Lopez",
+            "shortName": "M. López",
             "position": "M",
             "jerseyNumber": "21",
             "height": 167,
-            "userCount": 1310,
+            "userCount": 1320,
             "gender": "M",
             "id": 352802,
             "marketValueCurrency": "EUR",
@@ -1263,10 +1263,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "ماكسيم لوبيز",
                 "bn": "ম্যাক্সিম লোপেজ",
                 "hi": "मैक्सिम लोपेज़"
               },
               "shortNameTranslation": {
+                "ar": "م. لوبيز",
                 "bn": "এম. লোপেজ",
                 "hi": "एम. लोपेज़"
               }
@@ -1286,15 +1288,13 @@
         },
         {
           "player": {
-            "name": "Maxime Lopez",
-            "firstName": "Maxime",
-            "lastName": "Lopez",
+            "name": "Maxime López",
             "slug": "maxime-lopez",
-            "shortName": "M. Lopez",
+            "shortName": "M. López",
             "position": "M",
             "jerseyNumber": "21",
             "height": 167,
-            "userCount": 1310,
+            "userCount": 1320,
             "gender": "M",
             "id": 352802,
             "marketValueCurrency": "EUR",
@@ -1305,10 +1305,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "ماكسيم لوبيز",
                 "bn": "ম্যাক্সিম লোপেজ",
                 "hi": "मैक्सिम लोपेज़"
               },
               "shortNameTranslation": {
+                "ar": "م. لوبيز",
                 "bn": "এম. লোপেজ",
                 "hi": "एम. लोपेज़"
               }
@@ -1334,7 +1336,7 @@
             "position": "F",
             "jerseyNumber": "36",
             "height": 185,
-            "userCount": 17153,
+            "userCount": 17245,
             "gender": "M",
             "sofascoreId": "ciroimmobile17",
             "id": 45923,
@@ -1377,7 +1379,7 @@
             "position": "F",
             "jerseyNumber": "36",
             "height": 185,
-            "userCount": 17153,
+            "userCount": 17245,
             "gender": "M",
             "sofascoreId": "ciroimmobile17",
             "id": 45923,
@@ -1423,7 +1425,7 @@
             "position": "F",
             "jerseyNumber": "93",
             "height": 180,
-            "userCount": 1551,
+            "userCount": 1559,
             "gender": "M",
             "id": 802142,
             "marketValueCurrency": "EUR",
@@ -1471,7 +1473,7 @@
             "position": "G",
             "jerseyNumber": "1",
             "height": 190,
-            "userCount": 2490,
+            "userCount": 2508,
             "gender": "M",
             "id": 15219,
             "marketValueCurrency": "EUR",
@@ -1482,10 +1484,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "لوكاش هرايديكي",
                 "bn": "লুকাস হ্রাডেকি",
                 "hi": "लुकास ह्राडेकी"
               },
               "shortNameTranslation": {
+                "ar": "ل. هرايديكي",
                 "bn": "এল. হ্রাডেকি",
                 "hi": "एल. ह्राडेकी"
               }
@@ -1512,7 +1516,7 @@
         "position": "F",
         "jerseyNumber": "36",
         "height": 185,
-        "userCount": 17153,
+        "userCount": 17245,
         "gender": "M",
         "sofascoreId": "ciroimmobile17",
         "id": 45923,
@@ -1544,7 +1548,7 @@
         "position": "M",
         "jerseyNumber": "18",
         "height": 187,
-        "userCount": 2130,
+        "userCount": 2139,
         "gender": "M",
         "id": 894733,
         "marketValueCurrency": "EUR",
@@ -1569,15 +1573,13 @@
       "footballPassingNetworkAction": [
         {
           "player": {
-            "name": "Maxime Lopez",
-            "firstName": "Maxime",
-            "lastName": "Lopez",
+            "name": "Maxime López",
             "slug": "maxime-lopez",
-            "shortName": "M. Lopez",
+            "shortName": "M. López",
             "position": "M",
             "jerseyNumber": "21",
             "height": 167,
-            "userCount": 1310,
+            "userCount": 1320,
             "gender": "M",
             "id": 352802,
             "marketValueCurrency": "EUR",
@@ -1588,10 +1590,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "ماكسيم لوبيز",
                 "bn": "ম্যাক্সিম লোপেজ",
                 "hi": "मैक्सिम लोपेज़"
               },
               "shortNameTranslation": {
+                "ar": "م. لوبيز",
                 "bn": "এম. লোপেজ",
                 "hi": "एम. लोपेज़"
               }
@@ -1617,7 +1621,7 @@
             "position": "D",
             "jerseyNumber": "19",
             "height": 178,
-            "userCount": 367,
+            "userCount": 377,
             "gender": "M",
             "id": 1426221,
             "marketValueCurrency": "EUR",
@@ -1659,7 +1663,7 @@
             "position": "D",
             "jerseyNumber": "42",
             "height": 192,
-            "userCount": 1538,
+            "userCount": 1550,
             "gender": "M",
             "id": 1050692,
             "marketValueCurrency": "EUR",
@@ -1703,7 +1707,7 @@
             "position": "F",
             "jerseyNumber": "93",
             "height": 180,
-            "userCount": 1551,
+            "userCount": 1559,
             "gender": "M",
             "id": 802142,
             "marketValueCurrency": "EUR",
@@ -1747,7 +1751,7 @@
             "position": "M",
             "jerseyNumber": "18",
             "height": 187,
-            "userCount": 2130,
+            "userCount": 2139,
             "gender": "M",
             "id": 894733,
             "marketValueCurrency": "EUR",
@@ -1790,7 +1794,7 @@
             "position": "F",
             "jerseyNumber": "36",
             "height": 185,
-            "userCount": 17153,
+            "userCount": 17245,
             "gender": "M",
             "sofascoreId": "ciroimmobile17",
             "id": 45923,
@@ -1839,7 +1843,7 @@
             "position": "G",
             "jerseyNumber": "1",
             "height": 190,
-            "userCount": 2490,
+            "userCount": 2508,
             "gender": "M",
             "id": 15219,
             "marketValueCurrency": "EUR",
@@ -1850,10 +1854,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "لوكاش هرايديكي",
                 "bn": "লুকাস হ্রাডেকি",
                 "hi": "लुकास ह्राडेकी"
               },
               "shortNameTranslation": {
+                "ar": "ل. هرايديكي",
                 "bn": "এল. হ্রাডেকি",
                 "hi": "एल. ह्राडेकी"
               }
@@ -1882,7 +1888,7 @@
         "position": "F",
         "jerseyNumber": "93",
         "height": 180,
-        "userCount": 1551,
+        "userCount": 1559,
         "gender": "M",
         "id": 802142,
         "marketValueCurrency": "EUR",
@@ -1913,7 +1919,7 @@
         "position": "F",
         "jerseyNumber": "27",
         "height": 168,
-        "userCount": 4569,
+        "userCount": 4595,
         "gender": "M",
         "id": 330051,
         "marketValueCurrency": "EUR",
@@ -1944,7 +1950,7 @@
             "position": "D",
             "jerseyNumber": "19",
             "height": 178,
-            "userCount": 367,
+            "userCount": 377,
             "gender": "M",
             "id": 1426221,
             "marketValueCurrency": "EUR",
@@ -1986,7 +1992,7 @@
             "position": "F",
             "jerseyNumber": "36",
             "height": 185,
-            "userCount": 17153,
+            "userCount": 17245,
             "gender": "M",
             "sofascoreId": "ciroimmobile17",
             "id": 45923,
@@ -2023,15 +2029,13 @@
         },
         {
           "player": {
-            "name": "Maxime Lopez",
-            "firstName": "Maxime",
-            "lastName": "Lopez",
+            "name": "Maxime López",
             "slug": "maxime-lopez",
-            "shortName": "M. Lopez",
+            "shortName": "M. López",
             "position": "M",
             "jerseyNumber": "21",
             "height": 167,
-            "userCount": 1310,
+            "userCount": 1320,
             "gender": "M",
             "id": 352802,
             "marketValueCurrency": "EUR",
@@ -2042,10 +2046,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "ماكسيم لوبيز",
                 "bn": "ম্যাক্সিম লোপেজ",
                 "hi": "मैक्सिम लोपेज़"
               },
               "shortNameTranslation": {
+                "ar": "م. لوبيز",
                 "bn": "এম. লোপেজ",
                 "hi": "एम. लोपेज़"
               }
@@ -2073,7 +2079,7 @@
             "position": "F",
             "jerseyNumber": "27",
             "height": 168,
-            "userCount": 4569,
+            "userCount": 4595,
             "gender": "M",
             "id": 330051,
             "marketValueCurrency": "EUR",
@@ -2118,7 +2124,7 @@
             "position": "F",
             "jerseyNumber": "93",
             "height": 180,
-            "userCount": 1551,
+            "userCount": 1559,
             "gender": "M",
             "id": 802142,
             "marketValueCurrency": "EUR",
@@ -2166,7 +2172,7 @@
             "position": "G",
             "jerseyNumber": "1",
             "height": 190,
-            "userCount": 2490,
+            "userCount": 2508,
             "gender": "M",
             "id": 15219,
             "marketValueCurrency": "EUR",
@@ -2177,10 +2183,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
+                "ar": "لوكاش هرايديكي",
                 "bn": "লুকাস হ্রাডেকি",
                 "hi": "लुकास ह्राडेकी"
               },
               "shortNameTranslation": {
+                "ar": "ل. هرايديكي",
                 "bn": "এল. হ্রাডেকি",
                 "hi": "एल. ह्राडेकी"
               }

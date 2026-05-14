@@ -4,15 +4,13 @@
     "players": [
       {
         "player": {
-          "name": "Geronimo Rulli",
-          "firstName": "Geronimo",
-          "lastName": "Rulli",
+          "name": "Gerónimo Rulli",
           "slug": "geronimo-rulli",
           "shortName": "G. Rulli",
           "position": "G",
           "jerseyNumber": "1",
           "height": 189,
-          "userCount": 13536,
+          "userCount": 13608,
           "gender": "M",
           "sofascoreId": "gerorulli",
           "country": {
@@ -97,7 +95,7 @@
           "position": "D",
           "jerseyNumber": "28",
           "height": 186,
-          "userCount": 11003,
+          "userCount": 11046,
           "gender": "M",
           "sofascoreId": "benpavard21",
           "country": {
@@ -110,7 +108,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 827971200,
           "proposedMarketValueRaw": {
-            "value": 21000000,
+            "value": 15900000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -187,7 +185,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 188,
-          "userCount": 7139,
+          "userCount": 7163,
           "gender": "M",
           "sofascoreId": "leobalerdi5",
           "country": {
@@ -200,7 +198,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 917308800,
           "proposedMarketValueRaw": {
-            "value": 18200000,
+            "value": 16399999,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -284,7 +282,7 @@
           "position": "D",
           "jerseyNumber": "32",
           "height": 184,
-          "userCount": 4495,
+          "userCount": 4505,
           "gender": "M",
           "country": {
             "alpha2": "AR",
@@ -296,7 +294,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 927849600,
           "proposedMarketValueRaw": {
-            "value": 18100000,
+            "value": 16300000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -378,7 +376,7 @@
           "position": "M",
           "jerseyNumber": "22",
           "height": 185,
-          "userCount": 11636,
+          "userCount": 11708,
           "gender": "M",
           "sofascoreId": "timothyweah",
           "country": {
@@ -396,10 +394,12 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
+              "ar": "تيم ويه",
               "bn": "ওহ, টিমোথি",
               "hi": "वेआह, टिमोथी"
             },
             "shortNameTranslation": {
+              "ar": "ت. ويه",
               "bn": "টি. ওহ",
               "hi": "टी. वेआह"
             }
@@ -456,14 +456,12 @@
       {
         "player": {
           "name": "Pierre-Emile Højbjerg",
-          "firstName": "Pierre-Emile",
-          "lastName": "Højbjerg",
-          "slug": "pierre-emile-hojbjerg",
+          "slug": "pierre-emile-hjbjerg",
           "shortName": "P. Højbjerg",
           "position": "M",
           "jerseyNumber": "23",
           "height": 185,
-          "userCount": 4594,
+          "userCount": 4607,
           "gender": "M",
           "sofascoreId": "hojbjerg23",
           "country": {
@@ -481,10 +479,12 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
+              "ar": "بيير-إميل هويبييرغ",
               "bn": "পিয়েরে-এমিল হজবজের্গ",
               "hi": "पियरे-एमिले होजबर्ज"
             },
             "shortNameTranslation": {
+              "ar": "ب. هويبييرغ",
               "bn": "পি. হজবজের্গ",
               "hi": "पी. होजबर्ज"
             }
@@ -555,7 +555,7 @@
           "position": "M",
           "jerseyNumber": "27",
           "height": 177,
-          "userCount": 8683,
+          "userCount": 8776,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -647,7 +647,7 @@
           "position": "M",
           "jerseyNumber": "14",
           "height": 168,
-          "userCount": 12779,
+          "userCount": 12847,
           "gender": "M",
           "country": {
             "alpha2": "BR",
@@ -744,7 +744,7 @@
           "position": "F",
           "jerseyNumber": "10",
           "height": 181,
-          "userCount": 65728,
+          "userCount": 66260,
           "gender": "M",
           "sofascoreId": "MGreenwood",
           "country": {
@@ -757,7 +757,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 1001894400,
           "proposedMarketValueRaw": {
-            "value": 49000000,
+            "value": 53000000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -837,7 +837,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 180,
-          "userCount": 29276,
+          "userCount": 29848,
           "gender": "M",
           "sofascoreId": "amine_gouiri",
           "country": {
@@ -931,7 +931,7 @@
           "position": "F",
           "jerseyNumber": "17",
           "height": 187,
-          "userCount": 49818,
+          "userCount": 50248,
           "gender": "M",
           "sofascoreId": "Auba",
           "country": {
@@ -1026,7 +1026,7 @@
           "position": "M",
           "jerseyNumber": "18",
           "height": 180,
-          "userCount": 4701,
+          "userCount": 4722,
           "gender": "M",
           "sofascoreId": "arthurvermeeren",
           "country": {
@@ -1039,7 +1039,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 1107734400,
           "proposedMarketValueRaw": {
-            "value": 27000000,
+            "value": 21000000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -1108,7 +1108,7 @@
           "position": "M",
           "jerseyNumber": "20",
           "height": 177,
-          "userCount": 3186,
+          "userCount": 3196,
           "gender": "M",
           "country": {
             "alpha2": "CI",
@@ -1189,7 +1189,7 @@
           "position": "M",
           "jerseyNumber": "6",
           "height": 176,
-          "userCount": 1143,
+          "userCount": 1388,
           "gender": "M",
           "country": {
             "alpha2": "NG",
@@ -1201,7 +1201,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 1056931200,
           "proposedMarketValueRaw": {
-            "value": 2100000,
+            "value": 3200000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -1266,7 +1266,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 185,
-          "userCount": 7921,
+          "userCount": 8073,
           "gender": "M",
           "country": {
             "alpha2": "DZ",
@@ -1319,7 +1319,7 @@
           "position": "G",
           "jerseyNumber": "12",
           "height": 188,
-          "userCount": 632,
+          "userCount": 814,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -1331,8 +1331,16 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 891388800,
           "proposedMarketValueRaw": {
-            "value": 2100000,
+            "value": 3200000,
             "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "جيفري دي لانج"
+            },
+            "shortNameTranslation": {
+              "ar": "ج. دي لانج"
+            }
           }
         },
         "teamId": 1641,
@@ -1358,7 +1366,7 @@
           "position": "D",
           "jerseyNumber": "33",
           "height": 176,
-          "userCount": 2429,
+          "userCount": 2432,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1375,10 +1383,12 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
+              "ar": "إيمرسون",
               "bn": "এমারসন পালমিরি",
               "hi": "एमर्सन पामिएरी"
             },
             "shortNameTranslation": {
+              "ar": "إيمرسون",
               "bn": "এমারসন",
               "hi": "एमर्सन पामिएरी"
             }
@@ -1407,7 +1417,7 @@
           "position": "M",
           "jerseyNumber": "26",
           "height": 178,
-          "userCount": 4816,
+          "userCount": 4832,
           "gender": "M",
           "country": {
             "alpha2": "MA",
@@ -1419,7 +1429,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 1069891200,
           "proposedMarketValueRaw": {
-            "value": 260000,
+            "value": 9400000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -1456,7 +1466,7 @@
           "position": "M",
           "jerseyNumber": "11",
           "height": 176,
-          "userCount": 28467,
+          "userCount": 28575,
           "gender": "M",
           "sofascoreId": "ethan_nwaneri",
           "country": {
@@ -1508,7 +1518,7 @@
           "position": "F",
           "jerseyNumber": "78",
           "height": 179,
-          "userCount": 145,
+          "userCount": 170,
           "gender": "M",
           "country": {
             "alpha2": "CI",
@@ -1518,7 +1528,7 @@
           },
           "id": 1512333,
           "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 1080086400,
+          "dateOfBirthTimestamp": 1080000000,
           "fieldTranslations": {
             "nameTranslation": {
               "ar": "أنج لاغو"
@@ -1609,7 +1619,7 @@
           "position": "M",
           "jerseyNumber": "19",
           "height": 188,
-          "userCount": 2528,
+          "userCount": 2590,
           "gender": "M",
           "country": {
             "alpha2": "CF",
@@ -1641,7 +1651,7 @@
         "reason": 1,
         "description": "Thigh Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-10T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       },
       {
         "player": {
@@ -1653,7 +1663,7 @@
           "position": "D",
           "jerseyNumber": "21",
           "height": 188,
-          "userCount": 25384,
+          "userCount": 25423,
           "gender": "M",
           "sofascoreId": "nayefaguard",
           "country": {
@@ -1666,7 +1676,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 828144000,
           "proposedMarketValueRaw": {
-            "value": 23000000,
+            "value": 21000000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -1686,7 +1696,7 @@
         "reason": 1,
         "description": "Groin Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       }
     ]
   },
@@ -1701,7 +1711,7 @@
           "position": "G",
           "jerseyNumber": "61",
           "height": 195,
-          "userCount": 1136,
+          "userCount": 1218,
           "gender": "M",
           "country": {
             "alpha2": "SN",
@@ -1781,7 +1791,7 @@
           "position": "D",
           "jerseyNumber": "39",
           "height": 173,
-          "userCount": 367,
+          "userCount": 370,
           "gender": "M",
           "country": {
             "alpha2": "CI",
@@ -1869,7 +1879,7 @@
           "position": "D",
           "jerseyNumber": "38",
           "height": 185,
-          "userCount": 851,
+          "userCount": 882,
           "gender": "M",
           "country": {
             "alpha2": "SN",
@@ -1957,7 +1967,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 186,
-          "userCount": 1331,
+          "userCount": 1337,
           "gender": "M",
           "country": {
             "alpha2": "CI",
@@ -2047,7 +2057,7 @@
           "position": "D",
           "jerseyNumber": "2",
           "height": 179,
-          "userCount": 56,
+          "userCount": 58,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2135,7 +2145,7 @@
           "position": "M",
           "jerseyNumber": "20",
           "height": 178,
-          "userCount": 129,
+          "userCount": 140,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2226,7 +2236,7 @@
           "position": "M",
           "jerseyNumber": "12",
           "height": 180,
-          "userCount": 706,
+          "userCount": 719,
           "gender": "M",
           "country": {
             "alpha2": "SN",
@@ -2237,6 +2247,10 @@
           "id": 1597191,
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 1138147200,
+          "proposedMarketValueRaw": {
+            "value": 4600000,
+            "currency": "EUR"
+          },
           "fieldTranslations": {
             "nameTranslation": {
               "ar": "ألفا توريه"
@@ -2303,7 +2317,7 @@
           "position": "D",
           "jerseyNumber": "70",
           "height": 177,
-          "userCount": 1623,
+          "userCount": 1676,
           "gender": "M",
           "country": {
             "alpha2": "SN",
@@ -2401,7 +2415,7 @@
           "position": "M",
           "jerseyNumber": "10",
           "height": 170,
-          "userCount": 641,
+          "userCount": 665,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2496,7 +2510,7 @@
           "position": "M",
           "jerseyNumber": "7",
           "height": 171,
-          "userCount": 1516,
+          "userCount": 1532,
           "gender": "M",
           "country": {
             "alpha2": "GE",
@@ -2513,10 +2527,12 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
+              "ar": "جورجي تسيتايشفيلي",
               "bn": "জিওর্জি সিতাইশভিলি",
               "hi": "जियोर्जी त्सिताइशविली"
             },
             "shortNameTranslation": {
+              "ar": "ج. تسيتايشفيلي",
               "bn": "জি. সিতাইশভিলি",
               "hi": "जी. त्सिताइशविली"
             }
@@ -2590,7 +2606,7 @@
           "position": "F",
           "jerseyNumber": "30",
           "height": 186,
-          "userCount": 7587,
+          "userCount": 7612,
           "gender": "M",
           "sofascoreId": "habibdiallo28",
           "country": {
@@ -2608,10 +2624,12 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
+              "ar": "حبيبو ديالو",
               "bn": "হাবিব দিয়ালো",
               "hi": "हबीब डायलो"
             },
             "shortNameTranslation": {
+              "ar": "ح. ديالو",
               "bn": "এইচ. দিয়ালো",
               "hi": "एच. डायलो"
             }
@@ -2668,7 +2686,7 @@
           "position": "F",
           "jerseyNumber": "34",
           "height": 179,
-          "userCount": 446,
+          "userCount": 512,
           "gender": "M",
           "country": {
             "alpha2": "CD",
@@ -2728,7 +2746,7 @@
           "position": "D",
           "jerseyNumber": "97",
           "height": 177,
-          "userCount": 1474,
+          "userCount": 1488,
           "gender": "M",
           "country": {
             "alpha2": "SN",
@@ -2804,7 +2822,7 @@
           "position": "F",
           "jerseyNumber": "19",
           "height": 167,
-          "userCount": 618,
+          "userCount": 676,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2861,7 +2879,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 197,
-          "userCount": 278,
+          "userCount": 275,
           "gender": "M",
           "country": {
             "alpha2": "DK",
@@ -2908,7 +2926,7 @@
           "position": "D",
           "jerseyNumber": "4",
           "height": 183,
-          "userCount": 302,
+          "userCount": 306,
           "gender": "M",
           "country": {
             "alpha2": "GA",
@@ -2955,7 +2973,7 @@
           "position": "D",
           "jerseyNumber": "15",
           "height": 195,
-          "userCount": 376,
+          "userCount": 386,
           "gender": "M",
           "country": {
             "alpha2": "GH",
@@ -3002,7 +3020,7 @@
           "position": "M",
           "jerseyNumber": "21",
           "height": 180,
-          "userCount": 163,
+          "userCount": 170,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3053,7 +3071,7 @@
           "position": "M",
           "jerseyNumber": "9",
           "height": 175,
-          "userCount": 531,
+          "userCount": 535,
           "gender": "M",
           "country": {
             "alpha2": "GE",
@@ -3103,8 +3121,8 @@
           "shortName": "G. Kvilitaia",
           "position": "F",
           "jerseyNumber": "11",
-          "height": 191,
-          "userCount": 607,
+          "height": 193,
+          "userCount": 629,
           "gender": "M",
           "country": {
             "alpha2": "GE",
@@ -3169,7 +3187,7 @@
           "position": "M",
           "jerseyNumber": "33",
           "height": 188,
-          "userCount": 285,
+          "userCount": 319,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3181,7 +3199,7 @@
           "marketValueCurrency": "EUR",
           "dateOfBirthTimestamp": 1258934400,
           "proposedMarketValueRaw": {
-            "value": 910000,
+            "value": 9100000,
             "currency": "EUR"
           },
           "fieldTranslations": {
@@ -3209,7 +3227,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 183,
-          "userCount": 1038,
+          "userCount": 1043,
           "gender": "M",
           "country": {
             "alpha2": "ML",
@@ -3241,7 +3259,7 @@
         "reason": 1,
         "description": "Knee Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-20T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       },
       {
         "player": {
@@ -3252,7 +3270,8 @@
           "shortName": "I. Guerti",
           "position": "M",
           "jerseyNumber": "29",
-          "userCount": 257,
+          "height": 178,
+          "userCount": 267,
           "country": {
             "alpha2": "MA",
             "alpha3": "MAR",
@@ -3286,7 +3305,7 @@
           "position": "D",
           "jerseyNumber": "2",
           "height": 179,
-          "userCount": 56,
+          "userCount": 58,
           "gender": "M",
           "country": {
             "alpha2": "FR",
