@@ -192,7 +192,7 @@
           "position": "D",
           "jerseyNumber": "15",
           "height": 192,
-          "userCount": 2809,
+          "userCount": 2811,
           "gender": "M",
           "country": {
             "alpha2": "SI",
@@ -280,7 +280,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 190,
-          "userCount": 1626,
+          "userCount": 1624,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -369,7 +369,7 @@
           "position": "D",
           "jerseyNumber": "2",
           "height": 178,
-          "userCount": 968,
+          "userCount": 967,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -464,7 +464,7 @@
           "position": "M",
           "jerseyNumber": "18",
           "height": 192,
-          "userCount": 2017,
+          "userCount": 2015,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -562,7 +562,7 @@
           "position": "M",
           "jerseyNumber": "4",
           "height": 182,
-          "userCount": 3078,
+          "userCount": 3079,
           "gender": "M",
           "country": {
             "alpha2": "WA",
@@ -652,7 +652,7 @@
           "position": "M",
           "jerseyNumber": "22",
           "height": 180,
-          "userCount": 5427,
+          "userCount": 5424,
           "gender": "M",
           "country": {
             "alpha2": "JP",
@@ -742,9 +742,9 @@
           "slug": "james-justin",
           "shortName": "J. Justin",
           "position": "D",
-          "jerseyNumber": "24",
+          "jerseyNumber": "2",
           "height": 183,
-          "userCount": 1385,
+          "userCount": 1387,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -834,7 +834,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 187,
-          "userCount": 6566,
+          "userCount": 6568,
           "gender": "M",
           "sofascoreId": "CalvertLewin14",
           "country": {
@@ -927,7 +927,7 @@
           "position": "F",
           "jerseyNumber": "19",
           "height": 185,
-          "userCount": 11249,
+          "userCount": 11252,
           "gender": "M",
           "sofascoreId": "noah.arinze",
           "country": {
@@ -1025,7 +1025,7 @@
           "position": "F",
           "jerseyNumber": "14",
           "height": 185,
-          "userCount": 2731,
+          "userCount": 2730,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -1103,7 +1103,7 @@
           "position": "M",
           "jerseyNumber": "11",
           "height": 178,
-          "userCount": 2854,
+          "userCount": 2855,
           "gender": "M",
           "country": {
             "alpha2": "US",
@@ -1179,7 +1179,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 187,
-          "userCount": 1700,
+          "userCount": 1698,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -1323,7 +1323,7 @@
           "position": "F",
           "jerseyNumber": "29",
           "height": 170,
-          "userCount": 3791,
+          "userCount": 3794,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1383,7 +1383,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 196,
-          "userCount": 3649,
+          "userCount": 3647,
           "gender": "M",
           "country": {
             "alpha2": "BR",
@@ -1485,7 +1485,7 @@
           "position": "D",
           "jerseyNumber": "23",
           "height": 190,
-          "userCount": 887,
+          "userCount": 886,
           "gender": "M",
           "country": {
             "alpha2": "BE",
@@ -1595,6 +1595,50 @@
     "missingPlayers": [
       {
         "player": {
+          "name": "Gabriel Gudmundsson",
+          "firstName": "Gabriel",
+          "lastName": "Gudmundsson",
+          "slug": "gabriel-gudmundsson",
+          "shortName": "G. Gudmundsson",
+          "position": "D",
+          "jerseyNumber": "3",
+          "height": 181,
+          "userCount": 1356,
+          "gender": "M",
+          "country": {
+            "alpha2": "SE",
+            "alpha3": "SWE",
+            "name": "Sweden",
+            "slug": "sweden"
+          },
+          "id": 834308,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 925344000,
+          "proposedMarketValueRaw": {
+            "value": 21000000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "غابرييل غودمندسون",
+              "bn": "গ্যাব্রিয়েল গুডমুন্ডসন",
+              "hi": "गेब्रियल गुडमंडसन"
+            },
+            "shortNameTranslation": {
+              "ar": "غ. غودمندسون",
+              "bn": "জি. গুডমুন্ডসন",
+              "hi": "जी. गुडमंडसन"
+            }
+          }
+        },
+        "type": "missing",
+        "reason": 1,
+        "description": "Hamstring Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
+      },
+      {
+        "player": {
           "name": "Ilia Gruev",
           "firstName": "Ilia",
           "lastName": "Gruev",
@@ -1603,7 +1647,7 @@
           "position": "M",
           "jerseyNumber": "44",
           "height": 185,
-          "userCount": 2966,
+          "userCount": 2965,
           "gender": "M",
           "country": {
             "alpha2": "BG",
@@ -1636,50 +1680,6 @@
         "description": "Meniscus Injury",
         "externalType": 114,
         "expectedEndDate": "2026-07-20T00:00:00+00:00"
-      },
-      {
-        "player": {
-          "name": "Gabriel Gudmundsson",
-          "firstName": "Gabriel",
-          "lastName": "Gudmundsson",
-          "slug": "gabriel-gudmundsson",
-          "shortName": "G. Gudmundsson",
-          "position": "D",
-          "jerseyNumber": "3",
-          "height": 181,
-          "userCount": 1353,
-          "gender": "M",
-          "country": {
-            "alpha2": "SE",
-            "alpha3": "SWE",
-            "name": "Sweden",
-            "slug": "sweden"
-          },
-          "id": 834308,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 925344000,
-          "proposedMarketValueRaw": {
-            "value": 21000000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "غابرييل غودمندسون",
-              "bn": "গ্যাব্রিয়েল গুডমুন্ডসন",
-              "hi": "गेब्रियल गुडमंडसन"
-            },
-            "shortNameTranslation": {
-              "ar": "غ. غودمندسون",
-              "bn": "জি. গুডমুন্ডসন",
-              "hi": "जी. गुडमंडसन"
-            }
-          }
-        },
-        "type": "doubtful",
-        "reason": 1,
-        "description": "Hamstring Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-30T00:00:47+00:00"
       }
     ]
   },
@@ -1693,7 +1693,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 190,
-          "userCount": 3058,
+          "userCount": 3057,
           "gender": "M",
           "country": {
             "alpha2": "SK",
@@ -1775,7 +1775,7 @@
           "position": "D",
           "jerseyNumber": "2",
           "height": 183,
-          "userCount": 25592,
+          "userCount": 25593,
           "gender": "M",
           "sofascoreId": "KyleWalker2",
           "country": {
@@ -1871,7 +1871,7 @@
           "position": "D",
           "jerseyNumber": "18",
           "height": 187,
-          "userCount": 561,
+          "userCount": 563,
           "gender": "M",
           "country": {
             "alpha2": "SE",
@@ -1888,12 +1888,12 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "هالمار إيكدال",
+              "ar": "هالمار إكدال",
               "bn": "হজলমার একদল",
               "hi": "हजलमर एकदल"
             },
             "shortNameTranslation": {
-              "ar": "ه. إيكدال",
+              "ar": "ه. إكدال",
               "bn": "এইচ. একডাল",
               "hi": "एच. एकदल"
             }
@@ -1960,7 +1960,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 192,
-          "userCount": 1509,
+          "userCount": 1512,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2048,7 +2048,7 @@
           "position": "D",
           "jerseyNumber": "12",
           "height": 186,
-          "userCount": 1336,
+          "userCount": 1334,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -2141,7 +2141,7 @@
           "position": "D",
           "jerseyNumber": "3",
           "height": 183,
-          "userCount": 1320,
+          "userCount": 1321,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -2407,7 +2407,7 @@
           "position": "M",
           "jerseyNumber": "20",
           "height": 177,
-          "userCount": 4260,
+          "userCount": 4257,
           "gender": "M",
           "sofascoreId": "prowsey16",
           "country": {
@@ -2493,7 +2493,7 @@
           "position": "M",
           "jerseyNumber": "11",
           "height": 177,
-          "userCount": 1206,
+          "userCount": 1205,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -2585,7 +2585,7 @@
           "position": "F",
           "jerseyNumber": "19",
           "height": 183,
-          "userCount": 1836,
+          "userCount": 1835,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -2671,7 +2671,7 @@
           "position": "M",
           "jerseyNumber": "28",
           "height": 182,
-          "userCount": 26223,
+          "userCount": 26254,
           "gender": "M",
           "sofascoreId": "hannibal_mj",
           "country": {
@@ -2842,7 +2842,7 @@
           "position": "M",
           "jerseyNumber": "16",
           "height": 184,
-          "userCount": 3600,
+          "userCount": 3603,
           "gender": "M",
           "country": {
             "alpha2": "PT",
@@ -2925,7 +2925,7 @@
           "position": "F",
           "jerseyNumber": "25",
           "height": 183,
-          "userCount": 2782,
+          "userCount": 2783,
           "gender": "M",
           "country": {
             "alpha2": "CH",
@@ -3009,7 +3009,7 @@
           "position": "F",
           "jerseyNumber": "27",
           "height": 191,
-          "userCount": 8810,
+          "userCount": 8813,
           "gender": "M",
           "sofascoreId": "armando.broja",
           "country": {
@@ -3087,7 +3087,7 @@
           "position": "G",
           "jerseyNumber": "13",
           "height": 190,
-          "userCount": 279,
+          "userCount": 280,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -3181,7 +3181,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 188,
-          "userCount": 5051,
+          "userCount": 5048,
           "gender": "M",
           "sofascoreId": "l.ugochukwu8",
           "country": {
@@ -3233,7 +3233,7 @@
           "position": "F",
           "jerseyNumber": "10",
           "height": 167,
-          "userCount": 2838,
+          "userCount": 2837,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -3386,7 +3386,7 @@
           "position": "D",
           "jerseyNumber": "6",
           "height": 185,
-          "userCount": 7782,
+          "userCount": 7779,
           "gender": "M",
           "country": {
             "alpha2": "CD",

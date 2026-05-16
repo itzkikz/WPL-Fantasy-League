@@ -4,8 +4,8 @@
       "type": "total",
       "descriptions": [],
       "tieBreakingRule": {
-        "text": "In the event that two (or more) teams have an equal number of points, the following rules break the tie:\n1. Goal difference\n2. Goals scored\n3. H2H",
-        "id": 16443
+        "text": "In the event that two (or more) teams have an equal number of points, the following rules break the tie: 1. Goal difference 2. Goals scored 3. H2H",
+        "id": 2393
       },
       "rows": [
         {
@@ -19,7 +19,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 3575608,
+            "userCount": 3579893,
             "nameCode": "ARS",
             "disabled": false,
             "national": false,
@@ -73,7 +73,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 4198594,
+            "userCount": 4202782,
             "nameCode": "MCI",
             "disabled": false,
             "national": false,
@@ -130,7 +130,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 3605097,
+            "userCount": 3607986,
             "nameCode": "MUN",
             "disabled": false,
             "national": false,
@@ -178,60 +178,6 @@
         },
         {
           "team": {
-            "name": "Liverpool FC",
-            "slug": "liverpool",
-            "shortName": "Liverpool",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 3798842,
-            "nameCode": "LIV",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "EN",
-              "alpha3": "ENG",
-              "name": "England",
-              "slug": "england"
-            },
-            "id": 44,
-            "teamColors": {
-              "primary": "#cc0000",
-              "secondary": "#ffffff",
-              "text": "#ffffff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "ليفربول",
-                "bn": "লিভারপুল",
-                "hi": "लिवरपूल",
-                "ru": "Ливерпуль"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Champions League",
-            "id": 804
-          },
-          "position": 4,
-          "matches": 36,
-          "wins": 17,
-          "scoresFor": 60,
-          "scoresAgainst": 48,
-          "id": 1637264,
-          "losses": 11,
-          "draws": 8,
-          "points": 59,
-          "scoreDiffFormatted": "+12"
-        },
-        {
-          "team": {
             "name": "Aston Villa",
             "slug": "aston-villa",
             "shortName": "Aston Villa",
@@ -241,7 +187,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 989456,
+            "userCount": 990382,
             "nameCode": "AVL",
             "disabled": false,
             "national": false,
@@ -273,16 +219,70 @@
             "text": "Champions League",
             "id": 804
           },
-          "position": 5,
-          "matches": 36,
-          "wins": 17,
-          "scoresFor": 50,
-          "scoresAgainst": 46,
+          "position": 4,
+          "matches": 37,
+          "wins": 18,
+          "scoresFor": 54,
+          "scoresAgainst": 48,
           "id": 1637255,
           "losses": 11,
           "draws": 8,
+          "points": 62,
+          "scoreDiffFormatted": "+6"
+        },
+        {
+          "team": {
+            "name": "Liverpool FC",
+            "slug": "liverpool",
+            "shortName": "Liverpool",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 3800749,
+            "nameCode": "LIV",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "EN",
+              "alpha3": "ENG",
+              "name": "England",
+              "slug": "england"
+            },
+            "id": 44,
+            "teamColors": {
+              "primary": "#cc0000",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "ليفربول",
+                "bn": "লিভারপুল",
+                "hi": "लिवरपूल",
+                "ru": "Ливерпуль"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "Champions League",
+            "id": 804
+          },
+          "position": 5,
+          "matches": 37,
+          "wins": 17,
+          "scoresFor": 62,
+          "scoresAgainst": 52,
+          "id": 1637264,
+          "losses": 12,
+          "draws": 8,
           "points": 59,
-          "scoreDiffFormatted": "+4"
+          "scoreDiffFormatted": "+10"
         },
         {
           "team": {
@@ -295,7 +295,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 313882,
+            "userCount": 314267,
             "nameCode": "BOU",
             "disabled": false,
             "national": false,
@@ -349,7 +349,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 431829,
+            "userCount": 431897,
             "nameCode": "BHA",
             "disabled": false,
             "national": false,
@@ -406,7 +406,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 305522,
+            "userCount": 305496,
             "nameCode": "BRE",
             "disabled": false,
             "national": false,
@@ -456,7 +456,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 3138900,
+            "userCount": 3140448,
             "nameCode": "CHE",
             "disabled": false,
             "national": false,
@@ -506,7 +506,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 385706,
+            "userCount": 385677,
             "nameCode": "EVE",
             "disabled": false,
             "national": false,
@@ -556,7 +556,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 327675,
+            "userCount": 327656,
             "nameCode": "FUL",
             "disabled": false,
             "national": false,
@@ -606,7 +606,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 223711,
+            "userCount": 223675,
             "nameCode": "SUN",
             "disabled": false,
             "national": false,
@@ -654,7 +654,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 930052,
+            "userCount": 929997,
             "nameCode": "NEW",
             "disabled": false,
             "national": false,
@@ -707,7 +707,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 258758,
+            "userCount": 258707,
             "nameCode": "LEE",
             "disabled": false,
             "national": false,
@@ -760,7 +760,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 441768,
+            "userCount": 442138,
             "nameCode": "CRY",
             "disabled": false,
             "national": false,
@@ -810,7 +810,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 445419,
+            "userCount": 445337,
             "nameCode": "NFO",
             "disabled": false,
             "national": false,
@@ -863,7 +863,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 1503413,
+            "userCount": 1504869,
             "nameCode": "TOT",
             "disabled": false,
             "national": false,
@@ -916,7 +916,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 489946,
+            "userCount": 490902,
             "nameCode": "WHU",
             "disabled": false,
             "national": false,
@@ -973,7 +973,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 164435,
+            "userCount": 164428,
             "nameCode": "BUR",
             "disabled": false,
             "national": false,
@@ -1027,7 +1027,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 308881,
+            "userCount": 308875,
             "nameCode": "WOL",
             "disabled": false,
             "national": false,
@@ -1138,7 +1138,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1216259,
+          "userCount": 1216792,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 17,
@@ -1166,7 +1166,7 @@
         }
       },
       "name": "Premier League 25/26",
-      "updatedAtTimestamp": 1778705618
+      "updatedAtTimestamp": 1778878652
     }
   ]
 }

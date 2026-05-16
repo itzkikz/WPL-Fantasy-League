@@ -12,7 +12,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 190,
-          "userCount": 2709,
+          "userCount": 2711,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -268,7 +268,7 @@
           "position": "D",
           "jerseyNumber": "3",
           "height": 185,
-          "userCount": 8669,
+          "userCount": 8667,
           "gender": "M",
           "country": {
             "alpha2": "NG",
@@ -355,7 +355,7 @@
           "position": "D",
           "jerseyNumber": "33",
           "height": 183,
-          "userCount": 2985,
+          "userCount": 2991,
           "gender": "M",
           "country": {
             "alpha2": "US",
@@ -451,7 +451,7 @@
           "position": "M",
           "jerseyNumber": "20",
           "height": 183,
-          "userCount": 2155,
+          "userCount": 2156,
           "gender": "M",
           "country": {
             "alpha2": "RS",
@@ -730,7 +730,7 @@
           "position": "M",
           "jerseyNumber": "32",
           "height": 182,
-          "userCount": 7371,
+          "userCount": 7372,
           "gender": "M",
           "sofascoreId": "esr",
           "country": {
@@ -821,7 +821,7 @@
           "position": "F",
           "jerseyNumber": "19",
           "height": 172,
-          "userCount": 21716,
+          "userCount": 21714,
           "gender": "M",
           "sofascoreId": "chukwuezesamuel8",
           "country": {
@@ -904,7 +904,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 184,
-          "userCount": 4631,
+          "userCount": 4635,
           "gender": "M",
           "sofascoreId": "RodrigoMuniz019",
           "country": {
@@ -993,7 +993,7 @@
           "position": "D",
           "jerseyNumber": "31",
           "height": 194,
-          "userCount": 5991,
+          "userCount": 5994,
           "gender": "M",
           "country": {
             "alpha2": "MA",
@@ -1076,7 +1076,7 @@
           "position": "M",
           "jerseyNumber": "14",
           "height": 174,
-          "userCount": 20952,
+          "userCount": 20957,
           "gender": "M",
           "sofascoreId": "oscarbobb",
           "country": {
@@ -1165,7 +1165,7 @@
           "position": "M",
           "jerseyNumber": "22",
           "height": 176,
-          "userCount": 5730,
+          "userCount": 5732,
           "gender": "M",
           "country": {
             "alpha2": "BR",
@@ -1255,7 +1255,7 @@
           "position": "M",
           "jerseyNumber": "24",
           "height": 172,
-          "userCount": 1957,
+          "userCount": 1954,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -1338,7 +1338,7 @@
           "position": "F",
           "jerseyNumber": "18",
           "height": 196,
-          "userCount": 4013,
+          "userCount": 4014,
           "gender": "M",
           "country": {
             "alpha2": "SE",
@@ -1468,7 +1468,7 @@
           "position": "D",
           "jerseyNumber": "2",
           "height": 180,
-          "userCount": 1182,
+          "userCount": 1181,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -1519,7 +1519,7 @@
           "position": "M",
           "jerseyNumber": "6",
           "height": 176,
-          "userCount": 395,
+          "userCount": 396,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -1570,7 +1570,7 @@
           "position": "M",
           "jerseyNumber": "16",
           "height": 195,
-          "userCount": 2197,
+          "userCount": 2198,
           "gender": "M",
           "country": {
             "alpha2": "NO",
@@ -1629,6 +1629,50 @@
     "missingPlayers": [
       {
         "player": {
+          "name": "Ryan Sessegnon",
+          "firstName": "Ryan",
+          "lastName": "Sessegnon",
+          "slug": "ryan-sessegnon",
+          "shortName": "R. Sessegnon",
+          "position": "D",
+          "jerseyNumber": "30",
+          "height": 178,
+          "userCount": 1924,
+          "gender": "M",
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 836698,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 958608000,
+          "proposedMarketValueRaw": {
+            "value": 19400000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "ريان سيسينيون",
+              "bn": "রায়ান সেসেগনন",
+              "hi": "रयान सेसेग्नन"
+            },
+            "shortNameTranslation": {
+              "ar": "ر. سيسينيون",
+              "bn": "আর. সেসেগনন",
+              "hi": "आर. सेसेग्नन"
+            }
+          }
+        },
+        "type": "missing",
+        "reason": 1,
+        "description": "Muscle Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
+      },
+      {
+        "player": {
           "name": "Alex Iwobi",
           "firstName": "Alex",
           "lastName": "Iwobi",
@@ -1637,7 +1681,7 @@
           "position": "M",
           "jerseyNumber": "17",
           "height": 183,
-          "userCount": 8554,
+          "userCount": 8552,
           "gender": "M",
           "sofascoreId": "alexanderiwobi",
           "country": {
@@ -1670,51 +1714,7 @@
         "reason": 1,
         "description": "Hamstring Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-30T00:00:47+00:00"
-      },
-      {
-        "player": {
-          "name": "Ryan Sessegnon",
-          "firstName": "Ryan",
-          "lastName": "Sessegnon",
-          "slug": "ryan-sessegnon",
-          "shortName": "R. Sessegnon",
-          "position": "D",
-          "jerseyNumber": "30",
-          "height": 178,
-          "userCount": 1920,
-          "gender": "M",
-          "country": {
-            "alpha2": "EN",
-            "alpha3": "ENG",
-            "name": "England",
-            "slug": "england"
-          },
-          "id": 836698,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 958608000,
-          "proposedMarketValueRaw": {
-            "value": 19400000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "ريان سيسينيون",
-              "bn": "রায়ান সেসেগনন",
-              "hi": "रयान सेसेग्नन"
-            },
-            "shortNameTranslation": {
-              "ar": "ر. سيسينيون",
-              "bn": "আর. সেসেগনন",
-              "hi": "आर. सेसेग्नन"
-            }
-          }
-        },
-        "type": "doubtful",
-        "reason": 1,
-        "description": "Muscle Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-30T00:00:47+00:00"
+        "expectedEndDate": "2026-05-31T04:00:45+00:00"
       }
     ]
   },
@@ -1730,7 +1730,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 194,
-          "userCount": 8659,
+          "userCount": 8657,
           "gender": "M",
           "sofascoreId": "dj.petrovic12",
           "country": {
@@ -1906,7 +1906,7 @@
           "position": "D",
           "jerseyNumber": "23",
           "height": 184,
-          "userCount": 979,
+          "userCount": 981,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -1996,7 +1996,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 184,
-          "userCount": 7044,
+          "userCount": 7052,
           "gender": "M",
           "country": {
             "alpha2": "AR",
@@ -2084,7 +2084,7 @@
           "position": "D",
           "jerseyNumber": "3",
           "height": 176,
-          "userCount": 1670,
+          "userCount": 1672,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2178,7 +2178,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 178,
-          "userCount": 3573,
+          "userCount": 3578,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -2268,7 +2268,7 @@
           "position": "M",
           "jerseyNumber": "10",
           "height": 178,
-          "userCount": 1291,
+          "userCount": 1289,
           "gender": "M",
           "country": {
             "alpha2": "SX",
@@ -2355,7 +2355,7 @@
           "position": "M",
           "jerseyNumber": "37",
           "height": 185,
-          "userCount": 38610,
+          "userCount": 38796,
           "gender": "M",
           "country": {
             "alpha2": "BR",
@@ -2447,7 +2447,7 @@
           "position": "F",
           "jerseyNumber": "22",
           "height": 179,
-          "userCount": 9397,
+          "userCount": 9415,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2529,7 +2529,7 @@
           "position": "M",
           "jerseyNumber": "16",
           "height": 178,
-          "userCount": 2144,
+          "userCount": 2140,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -2622,7 +2622,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 181,
-          "userCount": 7820,
+          "userCount": 7822,
           "gender": "M",
           "sofascoreId": "evanilsonlima99",
           "country": {
@@ -2709,7 +2709,7 @@
           "position": "M",
           "jerseyNumber": "12",
           "height": 175,
-          "userCount": 3016,
+          "userCount": 3018,
           "gender": "M",
           "country": {
             "alpha2": "US",
@@ -2798,7 +2798,7 @@
           "position": "F",
           "jerseyNumber": "21",
           "height": 174,
-          "userCount": 18022,
+          "userCount": 18025,
           "gender": "M",
           "sofascoreId": "amine_ad10",
           "country": {
@@ -2879,7 +2879,7 @@
           "position": "M",
           "jerseyNumber": "7",
           "height": 173,
-          "userCount": 1336,
+          "userCount": 1334,
           "gender": "M",
           "country": {
             "alpha2": "WA",
@@ -2959,7 +2959,7 @@
           "position": "F",
           "jerseyNumber": "26",
           "height": 185,
-          "userCount": 3825,
+          "userCount": 3826,
           "gender": "M",
           "sofascoreId": "EnesUnal16",
           "country": {
@@ -3041,7 +3041,7 @@
           "position": "M",
           "jerseyNumber": "27",
           "height": 181,
-          "userCount": 4155,
+          "userCount": 4154,
           "gender": "M",
           "country": {
             "alpha2": "HU",
@@ -3108,7 +3108,7 @@
           "position": "G",
           "jerseyNumber": "29",
           "height": 189,
-          "userCount": 1908,
+          "userCount": 1906,
           "gender": "M",
           "country": {
             "alpha2": "GR",
@@ -3210,7 +3210,7 @@
           "position": "M",
           "jerseyNumber": "11",
           "height": 174,
-          "userCount": 6812,
+          "userCount": 6806,
           "gender": "M",
           "sofascoreId": "bendoak._",
           "country": {
@@ -3262,7 +3262,7 @@
           "position": "M",
           "jerseyNumber": "19",
           "height": 171,
-          "userCount": 7015,
+          "userCount": 7016,
           "gender": "M",
           "sofascoreId": "justinkluivert",
           "country": {
@@ -3330,7 +3330,7 @@
           "position": "D",
           "jerseyNumber": "20",
           "height": 177,
-          "userCount": 3920,
+          "userCount": 3943,
           "gender": "M",
           "country": {
             "alpha2": "ES",
@@ -3373,7 +3373,7 @@
           "position": "D",
           "jerseyNumber": "6",
           "height": 175,
-          "userCount": 4090,
+          "userCount": 4091,
           "gender": "M",
           "country": {
             "alpha2": "AR",
@@ -3401,11 +3401,11 @@
             }
           }
         },
-        "type": "missing",
+        "type": "doubtful",
         "reason": 1,
         "description": "Muscle Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-31T00:00:00+00:00"
+        "expectedEndDate": "2026-05-31T04:00:32+00:00"
       },
       {
         "player": {
@@ -3449,7 +3449,7 @@
         "reason": 1,
         "description": "Hamstring Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-30T00:00:50+00:00"
+        "expectedEndDate": "2026-05-31T04:00:47+00:00"
       }
     ]
   },
