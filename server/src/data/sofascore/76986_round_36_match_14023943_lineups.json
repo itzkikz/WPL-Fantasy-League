@@ -10,7 +10,7 @@
           "position": "G",
           "jerseyNumber": "26",
           "height": 188,
-          "userCount": 2584,
+          "userCount": 2587,
           "gender": "M",
           "country": {
             "alpha2": "BE",
@@ -92,7 +92,7 @@
           "position": "D",
           "jerseyNumber": "31",
           "height": 195,
-          "userCount": 5292,
+          "userCount": 5296,
           "gender": "M",
           "sofascoreId": "milenkovicn_4",
           "country": {
@@ -179,7 +179,7 @@
           "position": "D",
           "jerseyNumber": "23",
           "height": 198,
-          "userCount": 3191,
+          "userCount": 3188,
           "gender": "M",
           "country": {
             "alpha2": "BR",
@@ -360,7 +360,7 @@
           "position": "D",
           "jerseyNumber": "3",
           "height": 183,
-          "userCount": 3505,
+          "userCount": 3500,
           "gender": "M",
           "country": {
             "alpha2": "WA",
@@ -456,7 +456,7 @@
           "position": "M",
           "jerseyNumber": "16",
           "height": 179,
-          "userCount": 3375,
+          "userCount": 3372,
           "gender": "M",
           "country": {
             "alpha2": "AR",
@@ -541,7 +541,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 179,
-          "userCount": 9367,
+          "userCount": 9375,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -729,7 +729,7 @@
           "position": "M",
           "jerseyNumber": "29",
           "height": 179,
-          "userCount": 2339,
+          "userCount": 2340,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -819,7 +819,7 @@
           "position": "F",
           "jerseyNumber": "19",
           "height": 179,
-          "userCount": 23300,
+          "userCount": 23299,
           "gender": "M",
           "sofascoreId": "igorjesus",
           "country": {
@@ -917,7 +917,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 183,
-          "userCount": 4632,
+          "userCount": 4631,
           "gender": "M",
           "country": {
             "alpha2": "NG",
@@ -1006,7 +1006,7 @@
           "position": "M",
           "jerseyNumber": "22",
           "height": 190,
-          "userCount": 1089,
+          "userCount": 1087,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -1095,7 +1095,7 @@
           "position": "M",
           "jerseyNumber": "21",
           "height": 174,
-          "userCount": 3920,
+          "userCount": 3919,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -1182,7 +1182,7 @@
           "position": "F",
           "jerseyNumber": "11",
           "height": 191,
-          "userCount": 7533,
+          "userCount": 7541,
           "gender": "M",
           "sofascoreId": "wodsy39",
           "country": {
@@ -1252,7 +1252,7 @@
           "position": "M",
           "jerseyNumber": "24",
           "height": 180,
-          "userCount": 10361,
+          "userCount": 10357,
           "gender": "M",
           "sofascoreId": "jamesmcatee_",
           "country": {
@@ -1334,7 +1334,7 @@
           "position": "F",
           "jerseyNumber": "20",
           "height": 201,
-          "userCount": 5020,
+          "userCount": 5022,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1414,7 +1414,7 @@
           "position": "G",
           "jerseyNumber": "27",
           "height": 186,
-          "userCount": 11715,
+          "userCount": 11717,
           "gender": "M",
           "sofascoreId": "stefan.ortega1",
           "country": {
@@ -1465,7 +1465,7 @@
           "position": "D",
           "jerseyNumber": "17",
           "height": 185,
-          "userCount": 802,
+          "userCount": 801,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -1571,7 +1571,7 @@
             }
           }
         },
-        "teamId": 14,
+        "teamId": 324738,
         "shirtNumber": 61,
         "jerseyNumber": "61",
         "position": "M",
@@ -1610,7 +1610,7 @@
           "position": "M",
           "jerseyNumber": "7",
           "height": 177,
-          "userCount": 9474,
+          "userCount": 9469,
           "gender": "M",
           "sofascoreId": "Calteck10",
           "country": {
@@ -1644,6 +1644,95 @@
         "description": "Muscle Injury",
         "externalType": 114,
         "expectedEndDate": "2026-07-20T00:00:00+00:00"
+      },
+      {
+        "player": {
+          "name": "Murillo",
+          "firstName": "Murillo",
+          "lastName": "",
+          "slug": "murillo",
+          "shortName": "Murillo",
+          "position": "D",
+          "jerseyNumber": "5",
+          "height": 180,
+          "userCount": 10505,
+          "gender": "M",
+          "sofascoreId": "murillosantiago40",
+          "country": {
+            "alpha2": "BR",
+            "alpha3": "BRA",
+            "name": "Brazil",
+            "slug": "brazil"
+          },
+          "id": 1199282,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 1025740800,
+          "proposedMarketValueRaw": {
+            "value": 49000000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "موريو",
+              "bn": "মুরিলো",
+              "hi": "मुरिलो"
+            },
+            "shortNameTranslation": {
+              "ar": "موريو",
+              "bn": "মুরিলো",
+              "hi": "मुरिलो"
+            }
+          }
+        },
+        "type": "missing",
+        "reason": 1,
+        "description": "Hamstring Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
+      },
+      {
+        "player": {
+          "name": "Ola Aina",
+          "firstName": "Ola",
+          "lastName": "Aina",
+          "slug": "ola-aina",
+          "shortName": "O. Aina",
+          "position": "D",
+          "jerseyNumber": "34",
+          "height": 182,
+          "userCount": 4186,
+          "gender": "M",
+          "country": {
+            "alpha2": "NG",
+            "alpha3": "NGA",
+            "name": "Nigeria",
+            "slug": "nigeria"
+          },
+          "id": 800417,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 844732800,
+          "proposedMarketValueRaw": {
+            "value": 18200000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "أولا أينا",
+              "bn": "ওলা আইনা",
+              "hi": "ओला आइना"
+            },
+            "shortNameTranslation": {
+              "ar": "أ. أينا",
+              "bn": "ও. আইনা",
+              "hi": "ओ. आइना"
+            }
+          }
+        },
+        "type": "missing",
+        "reason": 1,
+        "description": "Knock Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-31T00:00:00+00:00"
       },
       {
         "player": {
@@ -1686,7 +1775,7 @@
         "reason": 1,
         "description": "Lack of Fitness",
         "externalType": 114,
-        "expectedEndDate": "2026-05-30T00:01:22+00:00"
+        "expectedEndDate": "2026-05-30T12:00:53+00:00"
       },
       {
         "player": {
@@ -1731,96 +1820,7 @@
         "reason": 1,
         "description": "Head Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-30T00:01:22+00:00"
-      },
-      {
-        "player": {
-          "name": "Murillo",
-          "firstName": "Murillo",
-          "lastName": "",
-          "slug": "murillo",
-          "shortName": "Murillo",
-          "position": "D",
-          "jerseyNumber": "5",
-          "height": 180,
-          "userCount": 10502,
-          "gender": "M",
-          "sofascoreId": "murillosantiago40",
-          "country": {
-            "alpha2": "BR",
-            "alpha3": "BRA",
-            "name": "Brazil",
-            "slug": "brazil"
-          },
-          "id": 1199282,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 1025740800,
-          "proposedMarketValueRaw": {
-            "value": 49000000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "موريو",
-              "bn": "মুরিলো",
-              "hi": "मुरिलो"
-            },
-            "shortNameTranslation": {
-              "ar": "موريو",
-              "bn": "মুরিলো",
-              "hi": "मुरिलो"
-            }
-          }
-        },
-        "type": "doubtful",
-        "reason": 1,
-        "description": "Hamstring Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-30T00:01:22+00:00"
-      },
-      {
-        "player": {
-          "name": "Ola Aina",
-          "firstName": "Ola",
-          "lastName": "Aina",
-          "slug": "ola-aina",
-          "shortName": "O. Aina",
-          "position": "D",
-          "jerseyNumber": "34",
-          "height": 182,
-          "userCount": 4181,
-          "gender": "M",
-          "country": {
-            "alpha2": "NG",
-            "alpha3": "NGA",
-            "name": "Nigeria",
-            "slug": "nigeria"
-          },
-          "id": 800417,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 844732800,
-          "proposedMarketValueRaw": {
-            "value": 18200000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "أولا أينا",
-              "bn": "ওলা আইনা",
-              "hi": "ओला आइना"
-            },
-            "shortNameTranslation": {
-              "ar": "أ. أينا",
-              "bn": "ও. আইনা",
-              "hi": "ओ. आइना"
-            }
-          }
-        },
-        "type": "doubtful",
-        "reason": 1,
-        "description": "Knock Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-30T00:00:52+00:00"
+        "expectedEndDate": "2026-05-30T12:00:53+00:00"
       },
       {
         "player": {
@@ -1830,7 +1830,7 @@
           "position": "D",
           "jerseyNumber": "44",
           "height": 180,
-          "userCount": 573,
+          "userCount": 572,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -1862,7 +1862,7 @@
         "reason": 1,
         "description": "Concussion",
         "externalType": 114,
-        "expectedEndDate": "2026-05-30T00:01:22+00:00"
+        "expectedEndDate": "2026-05-30T12:00:53+00:00"
       }
     ]
   },
@@ -1878,7 +1878,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 198,
-          "userCount": 4883,
+          "userCount": 4882,
           "gender": "M",
           "sofascoreId": "npope29",
           "country": {
@@ -1965,7 +1965,7 @@
           "position": "D",
           "jerseyNumber": "3",
           "height": 179,
-          "userCount": 5022,
+          "userCount": 5020,
           "gender": "M",
           "sofascoreId": "lewishall_10",
           "country": {
@@ -2058,7 +2058,7 @@
           "position": "D",
           "jerseyNumber": "12",
           "height": 194,
-          "userCount": 6979,
+          "userCount": 6976,
           "gender": "M",
           "sofascoreId": "MThiaw",
           "country": {
@@ -2144,7 +2144,7 @@
           "position": "D",
           "jerseyNumber": "4",
           "height": 193,
-          "userCount": 3556,
+          "userCount": 3552,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -2230,7 +2230,7 @@
           "position": "D",
           "jerseyNumber": "33",
           "height": 201,
-          "userCount": 4770,
+          "userCount": 4772,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -2317,7 +2317,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 181,
-          "userCount": 16102,
+          "userCount": 16105,
           "gender": "M",
           "sofascoreId": "sandrotonali",
           "country": {
@@ -2412,7 +2412,7 @@
           "position": "M",
           "jerseyNumber": "39",
           "height": 182,
-          "userCount": 35512,
+          "userCount": 35514,
           "gender": "M",
           "sofascoreId": "BrunoGuimarães",
           "country": {
@@ -2517,7 +2517,7 @@
           "position": "F",
           "jerseyNumber": "23",
           "height": 176,
-          "userCount": 3693,
+          "userCount": 3695,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -2599,7 +2599,7 @@
           "position": "F",
           "jerseyNumber": "27",
           "height": 198,
-          "userCount": 55952,
+          "userCount": 55941,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -2686,7 +2686,7 @@
           "position": "M",
           "jerseyNumber": "7",
           "height": 186,
-          "userCount": 11178,
+          "userCount": 11179,
           "gender": "M",
           "sofascoreId": "joelinton34",
           "country": {
@@ -2783,7 +2783,7 @@
           "position": "F",
           "jerseyNumber": "18",
           "height": 191,
-          "userCount": 6550,
+          "userCount": 6549,
           "gender": "M",
           "country": {
             "alpha2": "DK",
@@ -2878,7 +2878,7 @@
           "position": "M",
           "jerseyNumber": "41",
           "height": 180,
-          "userCount": 3501,
+          "userCount": 3500,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -2964,7 +2964,7 @@
           "position": "F",
           "jerseyNumber": "11",
           "height": 181,
-          "userCount": 6364,
+          "userCount": 6368,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -3049,7 +3049,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 176,
-          "userCount": 63771,
+          "userCount": 63879,
           "gender": "M",
           "sofascoreId": "yowissa",
           "country": {
@@ -3126,7 +3126,7 @@
           "position": "D",
           "jerseyNumber": "2",
           "height": 174,
-          "userCount": 8342,
+          "userCount": 8339,
           "gender": "M",
           "sofascoreId": "ktrippier2",
           "country": {
@@ -3196,7 +3196,7 @@
           "position": "G",
           "jerseyNumber": "32",
           "height": 191,
-          "userCount": 8909,
+          "userCount": 8912,
           "gender": "M",
           "sofascoreId": "ARamsdale",
           "country": {
@@ -3348,7 +3348,7 @@
           "position": "F",
           "jerseyNumber": "10",
           "height": 183,
-          "userCount": 25892,
+          "userCount": 25896,
           "gender": "M",
           "sofascoreId": "AGordon",
           "country": {
@@ -3366,7 +3366,7 @@
           },
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "غوردون، أنتوني",
+              "ar": "أنتوني غوردون",
               "bn": "গর্ডন, অ্যান্টনি",
               "hi": "गॉर्डन, एंथनी"
             },
@@ -3400,7 +3400,7 @@
           "position": "F",
           "jerseyNumber": "20",
           "height": 178,
-          "userCount": 13477,
+          "userCount": 13480,
           "gender": "M",
           "sofascoreId": "anthonyelanga",
           "country": {
@@ -3460,6 +3460,48 @@
     "missingPlayers": [
       {
         "player": {
+          "name": "Fabian Schär",
+          "slug": "fabian-schar",
+          "shortName": "F. Schär",
+          "position": "D",
+          "jerseyNumber": "5",
+          "height": 186,
+          "userCount": 3128,
+          "gender": "M",
+          "country": {
+            "alpha2": "CH",
+            "alpha3": "CHE",
+            "name": "Switzerland",
+            "slug": "switzerland"
+          },
+          "id": 101882,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 693187200,
+          "proposedMarketValueRaw": {
+            "value": 5800000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "فابيان شير",
+              "bn": "ফ্যাবিয়ান শার",
+              "hi": "फेबियन शार"
+            },
+            "shortNameTranslation": {
+              "ar": "ف. شير",
+              "bn": "এফ. শার",
+              "hi": "एफ. शार"
+            }
+          }
+        },
+        "type": "missing",
+        "reason": 1,
+        "description": "Ankle Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-06-20T00:00:00+00:00"
+      },
+      {
+        "player": {
           "name": "Lewis Miley",
           "firstName": "Lewis Miley",
           "slug": "lewis-miley",
@@ -3467,7 +3509,7 @@
           "position": "M",
           "jerseyNumber": "67",
           "height": 188,
-          "userCount": 3490,
+          "userCount": 3485,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -3511,7 +3553,7 @@
           "position": "D",
           "jerseyNumber": "21",
           "height": 181,
-          "userCount": 5198,
+          "userCount": 5200,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -3544,48 +3586,6 @@
         "description": "Leg Injury",
         "externalType": 114,
         "expectedEndDate": "2026-06-20T00:00:00+00:00"
-      },
-      {
-        "player": {
-          "name": "Fabian Schär",
-          "slug": "fabian-schar",
-          "shortName": "F. Schär",
-          "position": "D",
-          "jerseyNumber": "5",
-          "height": 186,
-          "userCount": 3126,
-          "gender": "M",
-          "country": {
-            "alpha2": "CH",
-            "alpha3": "CHE",
-            "name": "Switzerland",
-            "slug": "switzerland"
-          },
-          "id": 101882,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 693187200,
-          "proposedMarketValueRaw": {
-            "value": 5800000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "فابيان شير",
-              "bn": "ফ্যাবিয়ান শার",
-              "hi": "फेबियन शार"
-            },
-            "shortNameTranslation": {
-              "ar": "ف. شير",
-              "bn": "এফ. শার",
-              "hi": "एफ. शार"
-            }
-          }
-        },
-        "type": "doubtful",
-        "reason": 1,
-        "description": "Ankle Injury",
-        "externalType": 114,
-        "expectedEndDate": "2026-05-30T00:00:46+00:00"
       }
     ]
   },
