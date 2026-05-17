@@ -1,0 +1,2158 @@
+{
+  "events": [
+    {
+      "eventState": {},
+      "tournament": {
+        "name": "LaLiga",
+        "slug": "laliga",
+        "category": {
+          "name": "Spain",
+          "slug": "spain",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "priority": 9,
+          "country": {
+            "alpha2": "ES",
+            "alpha3": "ESP",
+            "name": "Spain",
+            "slug": "spain"
+          },
+          "id": 32,
+          "flag": "spain",
+          "alpha2": "ES",
+          "fieldTranslations": {
+            "nameTranslation": {
+              "hi": "स्पेन",
+              "ar": "إسبانيا",
+              "bn": "স্পেন",
+              "ru": "Испания"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "uniqueTournament": {
+          "name": "LaLiga",
+          "slug": "laliga",
+          "primaryColorHex": "#2f4a89",
+          "secondaryColorHex": "#f4a32e",
+          "category": {
+            "name": "Spain",
+            "slug": "spain",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 9,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 32,
+            "flag": "spain",
+            "alpha2": "ES",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "स्पेन",
+                "ar": "إسبانيا",
+                "bn": "স্পেন",
+                "ru": "Испания"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 855861,
+          "hasPerformanceGraphFeature": true,
+          "country": {},
+          "id": 8,
+          "hasEventPlayerStatistics": true,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "الدوري الإسباني",
+              "hi": "ला लिगा",
+              "bn": "লা লীগা"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "priority": 701,
+        "isGroup": false,
+        "isLive": false,
+        "id": 36,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "hi": "ला लीगा",
+            "ar": "الدوري الإسباني",
+            "bn": "লা লীগা"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "season": {
+        "name": "LaLiga 25/26",
+        "year": "25/26",
+        "editor": false,
+        "seasonCoverageInfo": {},
+        "id": 77559
+      },
+      "roundInfo": {
+        "round": 37
+      },
+      "customId": "wgbsAgb",
+      "status": {
+        "code": 0,
+        "description": "Not started",
+        "type": "notstarted"
+      },
+      "homeTeam": {
+        "name": "Athletic Club",
+        "slug": "athletic-club",
+        "shortName": "Athletic Club",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 517576,
+        "nameCode": "ATH",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2825,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#aa0000",
+          "secondary": "#ffffff",
+          "text": "#ffffff"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "نادي أتليتيك",
+            "bn": "অ্যাথলেটিক ক্লাব",
+            "hi": "एथलेटिक क्लब",
+            "ru": "Атлетик Бильбао"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "awayTeam": {
+        "name": "Celta Vigo",
+        "slug": "celta-vigo",
+        "shortName": "Celta",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 265428,
+        "nameCode": "CEL",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2821,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#6cace4",
+          "secondary": "#ffffff",
+          "text": "#ffffff"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "سيلتا فيغو",
+            "bn": "সেলটা ভিগো",
+            "ru": "Сельта"
+          },
+          "shortNameTranslation": {
+            "ar": "سيلتا",
+            "hi": "सेल्टा"
+          }
+        }
+      },
+      "homeScore": {},
+      "awayScore": {},
+      "time": {},
+      "changes": {
+        "changeTimestamp": 0
+      },
+      "hasGlobalHighlights": false,
+      "detailId": 1,
+      "crowdsourcingDataDisplayEnabled": false,
+      "id": 14083656,
+      "slug": "athletic-club-celta-vigo",
+      "startTimestamp": 1779037200,
+      "finalResultOnly": false,
+      "feedLocked": true,
+      "isEditor": false,
+      "eventFilters": {
+        "category": [
+          "club"
+        ],
+        "level": [
+          "top-competitions",
+          "pro"
+        ],
+        "gender": [
+          "M"
+        ]
+      }
+    },
+    {
+      "eventState": {},
+      "tournament": {
+        "name": "LaLiga",
+        "slug": "laliga",
+        "category": {
+          "name": "Spain",
+          "slug": "spain",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "priority": 9,
+          "country": {
+            "alpha2": "ES",
+            "alpha3": "ESP",
+            "name": "Spain",
+            "slug": "spain"
+          },
+          "id": 32,
+          "flag": "spain",
+          "alpha2": "ES",
+          "fieldTranslations": {
+            "nameTranslation": {
+              "hi": "स्पेन",
+              "ar": "إسبانيا",
+              "bn": "স্পেন",
+              "ru": "Испания"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "uniqueTournament": {
+          "name": "LaLiga",
+          "slug": "laliga",
+          "primaryColorHex": "#2f4a89",
+          "secondaryColorHex": "#f4a32e",
+          "category": {
+            "name": "Spain",
+            "slug": "spain",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 9,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 32,
+            "flag": "spain",
+            "alpha2": "ES",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "स्पेन",
+                "ar": "إسبانيا",
+                "bn": "স্পেন",
+                "ru": "Испания"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 855861,
+          "hasPerformanceGraphFeature": true,
+          "country": {},
+          "id": 8,
+          "hasEventPlayerStatistics": true,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "الدوري الإسباني",
+              "hi": "ला लिगा",
+              "bn": "লা লীগা"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "priority": 701,
+        "isGroup": false,
+        "isLive": false,
+        "id": 36,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "hi": "ला लीगा",
+            "ar": "الدوري الإسباني",
+            "bn": "লা লীগা"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "season": {
+        "name": "LaLiga 25/26",
+        "year": "25/26",
+        "editor": false,
+        "seasonCoverageInfo": {},
+        "id": 77559
+      },
+      "roundInfo": {
+        "round": 37
+      },
+      "customId": "LgbsoKj",
+      "status": {
+        "code": 0,
+        "description": "Not started",
+        "type": "notstarted"
+      },
+      "homeTeam": {
+        "name": "Atlético Madrid",
+        "slug": "atletico-madrid",
+        "shortName": "Atl. Madrid",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 2533414,
+        "nameCode": "ATM",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2836,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#ffffff",
+          "secondary": "#c40000",
+          "text": "#c40000"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "أتلتيكو مدريد",
+            "hi": "एटलेटिको मैड्रिड",
+            "ru": "Атлетико Мадрид"
+          },
+          "shortNameTranslation": {
+            "ar": "أتل. مدريد",
+            "bn": "এটিএল. মাদ্রিদ"
+          }
+        }
+      },
+      "awayTeam": {
+        "name": "Girona FC",
+        "slug": "girona-fc",
+        "shortName": "Girona",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 365145,
+        "nameCode": "GIR",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 24264,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#ffffff",
+          "secondary": "#ff0000",
+          "text": "#ff0000"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "جيرونا إف سي",
+            "hi": "जिरोना",
+            "ru": "Жирона"
+          },
+          "shortNameTranslation": {
+            "ar": "جيرونا",
+            "bn": "জিরোনা",
+            "hi": "गिरोना"
+          }
+        }
+      },
+      "homeScore": {},
+      "awayScore": {},
+      "time": {},
+      "changes": {
+        "changeTimestamp": 0
+      },
+      "hasGlobalHighlights": false,
+      "detailId": 1,
+      "crowdsourcingDataDisplayEnabled": false,
+      "id": 14083661,
+      "slug": "girona-fc-atletico-madrid",
+      "startTimestamp": 1779037200,
+      "finalResultOnly": false,
+      "feedLocked": true,
+      "isEditor": false,
+      "eventFilters": {
+        "category": [
+          "club"
+        ],
+        "level": [
+          "top-competitions",
+          "pro"
+        ],
+        "gender": [
+          "M"
+        ]
+      }
+    },
+    {
+      "eventState": {},
+      "tournament": {
+        "name": "LaLiga",
+        "slug": "laliga",
+        "category": {
+          "name": "Spain",
+          "slug": "spain",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "priority": 9,
+          "country": {
+            "alpha2": "ES",
+            "alpha3": "ESP",
+            "name": "Spain",
+            "slug": "spain"
+          },
+          "id": 32,
+          "flag": "spain",
+          "alpha2": "ES",
+          "fieldTranslations": {
+            "nameTranslation": {
+              "hi": "स्पेन",
+              "ar": "إسبانيا",
+              "bn": "স্পেন",
+              "ru": "Испания"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "uniqueTournament": {
+          "name": "LaLiga",
+          "slug": "laliga",
+          "primaryColorHex": "#2f4a89",
+          "secondaryColorHex": "#f4a32e",
+          "category": {
+            "name": "Spain",
+            "slug": "spain",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 9,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 32,
+            "flag": "spain",
+            "alpha2": "ES",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "स्पेन",
+                "ar": "إسبانيا",
+                "bn": "স্পেন",
+                "ru": "Испания"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 855861,
+          "hasPerformanceGraphFeature": true,
+          "country": {},
+          "id": 8,
+          "hasEventPlayerStatistics": true,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "الدوري الإسباني",
+              "hi": "ला लिगा",
+              "bn": "লা লীগা"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "priority": 701,
+        "isGroup": false,
+        "isLive": false,
+        "id": 36,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "hi": "ला लीगा",
+            "ar": "الدوري الإسباني",
+            "bn": "লা লীগা"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "season": {
+        "name": "LaLiga 25/26",
+        "year": "25/26",
+        "editor": false,
+        "seasonCoverageInfo": {},
+        "id": 77559
+      },
+      "roundInfo": {
+        "round": 37
+      },
+      "customId": "Wgbsjhb",
+      "status": {
+        "code": 0,
+        "description": "Not started",
+        "type": "notstarted"
+      },
+      "homeTeam": {
+        "name": "Elche",
+        "slug": "elche",
+        "shortName": "Elche",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 115919,
+        "nameCode": "ELC",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2846,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#ffffff",
+          "secondary": "#336600",
+          "text": "#336600"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "إلتشي",
+            "bn": "এলচে",
+            "hi": "एल्चे",
+            "ru": "Эльче"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "awayTeam": {
+        "name": "Getafe",
+        "slug": "getafe",
+        "shortName": "Getafe",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 198193,
+        "nameCode": "GET",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2859,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#00369e",
+          "secondary": "#ffffff",
+          "text": "#ffffff"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "خيتافي",
+            "bn": "গেটাফে",
+            "hi": "गेटाफे",
+            "ru": "Хетафе"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "homeScore": {},
+      "awayScore": {},
+      "time": {},
+      "changes": {
+        "changeTimestamp": 0
+      },
+      "hasGlobalHighlights": false,
+      "detailId": 1,
+      "crowdsourcingDataDisplayEnabled": false,
+      "id": 14083671,
+      "slug": "getafe-elche",
+      "startTimestamp": 1779037200,
+      "finalResultOnly": false,
+      "feedLocked": true,
+      "isEditor": false,
+      "eventFilters": {
+        "category": [
+          "club"
+        ],
+        "level": [
+          "top-competitions",
+          "pro"
+        ],
+        "gender": [
+          "M"
+        ]
+      }
+    },
+    {
+      "eventState": {},
+      "tournament": {
+        "name": "LaLiga",
+        "slug": "laliga",
+        "category": {
+          "name": "Spain",
+          "slug": "spain",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "priority": 9,
+          "country": {
+            "alpha2": "ES",
+            "alpha3": "ESP",
+            "name": "Spain",
+            "slug": "spain"
+          },
+          "id": 32,
+          "flag": "spain",
+          "alpha2": "ES",
+          "fieldTranslations": {
+            "nameTranslation": {
+              "hi": "स्पेन",
+              "ar": "إسبانيا",
+              "bn": "স্পেন",
+              "ru": "Испания"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "uniqueTournament": {
+          "name": "LaLiga",
+          "slug": "laliga",
+          "primaryColorHex": "#2f4a89",
+          "secondaryColorHex": "#f4a32e",
+          "category": {
+            "name": "Spain",
+            "slug": "spain",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 9,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 32,
+            "flag": "spain",
+            "alpha2": "ES",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "स्पेन",
+                "ar": "إسبانيا",
+                "bn": "স্পেন",
+                "ru": "Испания"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 855861,
+          "hasPerformanceGraphFeature": true,
+          "country": {},
+          "id": 8,
+          "hasEventPlayerStatistics": true,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "الدوري الإسباني",
+              "hi": "ला लिगा",
+              "bn": "লা লীগা"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "priority": 701,
+        "isGroup": false,
+        "isLive": false,
+        "id": 36,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "hi": "ला लीगा",
+            "ar": "الدوري الإسباني",
+            "bn": "লা লীগা"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "season": {
+        "name": "LaLiga 25/26",
+        "year": "25/26",
+        "editor": false,
+        "seasonCoverageInfo": {},
+        "id": 77559
+      },
+      "roundInfo": {
+        "round": 37
+      },
+      "customId": "BgbsZgb",
+      "status": {
+        "code": 0,
+        "description": "Not started",
+        "type": "notstarted"
+      },
+      "homeTeam": {
+        "name": "Levante UD",
+        "slug": "levante-ud",
+        "shortName": "Levante",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 115199,
+        "nameCode": "LEV",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2849,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#0e3b68",
+          "secondary": "#d70000",
+          "text": "#d70000"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "ليفانتي يو دي",
+            "hi": "लेवांटे यूडी",
+            "ru": "Леванте"
+          },
+          "shortNameTranslation": {
+            "ar": "ليفانتي",
+            "bn": "লেভান্তে",
+            "hi": "लेवांते"
+          }
+        }
+      },
+      "awayTeam": {
+        "name": "Mallorca",
+        "slug": "mallorca",
+        "shortName": "Mallorca",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 196583,
+        "nameCode": "MLL",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2826,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#cc0000",
+          "secondary": "#000000",
+          "text": "#000000"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "مايوركا",
+            "bn": "ম্যালোর্কা",
+            "hi": "मल्लोर्का",
+            "ru": "Мальорка"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "homeScore": {},
+      "awayScore": {},
+      "time": {},
+      "changes": {
+        "changeTimestamp": 0
+      },
+      "hasGlobalHighlights": false,
+      "detailId": 1,
+      "crowdsourcingDataDisplayEnabled": false,
+      "id": 14083676,
+      "slug": "levante-ud-mallorca",
+      "startTimestamp": 1779037200,
+      "finalResultOnly": false,
+      "feedLocked": true,
+      "isEditor": false,
+      "eventFilters": {
+        "category": [
+          "club"
+        ],
+        "level": [
+          "top-competitions",
+          "pro"
+        ],
+        "gender": [
+          "M"
+        ]
+      }
+    },
+    {
+      "eventState": {},
+      "tournament": {
+        "name": "LaLiga",
+        "slug": "laliga",
+        "category": {
+          "name": "Spain",
+          "slug": "spain",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "priority": 9,
+          "country": {
+            "alpha2": "ES",
+            "alpha3": "ESP",
+            "name": "Spain",
+            "slug": "spain"
+          },
+          "id": 32,
+          "flag": "spain",
+          "alpha2": "ES",
+          "fieldTranslations": {
+            "nameTranslation": {
+              "hi": "स्पेन",
+              "ar": "إسبانيا",
+              "bn": "স্পেন",
+              "ru": "Испания"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "uniqueTournament": {
+          "name": "LaLiga",
+          "slug": "laliga",
+          "primaryColorHex": "#2f4a89",
+          "secondaryColorHex": "#f4a32e",
+          "category": {
+            "name": "Spain",
+            "slug": "spain",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 9,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 32,
+            "flag": "spain",
+            "alpha2": "ES",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "स्पेन",
+                "ar": "إسبانيا",
+                "bn": "স্পেন",
+                "ru": "Испания"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 855861,
+          "hasPerformanceGraphFeature": true,
+          "country": {},
+          "id": 8,
+          "hasEventPlayerStatistics": true,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "الدوري الإسباني",
+              "hi": "ला लिगा",
+              "bn": "লা লীগা"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "priority": 701,
+        "isGroup": false,
+        "isLive": false,
+        "id": 36,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "hi": "ला लीगा",
+            "ar": "الدوري الإسباني",
+            "bn": "লা লীগা"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "season": {
+        "name": "LaLiga 25/26",
+        "year": "25/26",
+        "editor": false,
+        "seasonCoverageInfo": {},
+        "id": 77559
+      },
+      "roundInfo": {
+        "round": 37
+      },
+      "customId": "ogbsvgb",
+      "status": {
+        "code": 0,
+        "description": "Not started",
+        "type": "notstarted"
+      },
+      "homeTeam": {
+        "name": "Osasuna",
+        "slug": "osasuna",
+        "shortName": "Osasuna",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 198586,
+        "nameCode": "OSA",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2820,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#cc0000",
+          "secondary": "#14213d",
+          "text": "#14213d"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "أوساسونا",
+            "bn": "ওসাসুনা",
+            "hi": "ओसासुना",
+            "ru": "Осасуна"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "awayTeam": {
+        "name": "Espanyol",
+        "slug": "espanyol",
+        "shortName": "Espanyol",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 183415,
+        "nameCode": "ESP",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2814,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#ffffff",
+          "secondary": "#1369d2",
+          "text": "#1369d2"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "اسبانيول",
+            "bn": "এসপানিওল",
+            "hi": "एस्पेनयोल",
+            "ru": "Эспаньол"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "homeScore": {},
+      "awayScore": {},
+      "time": {},
+      "changes": {
+        "changeTimestamp": 0
+      },
+      "hasGlobalHighlights": false,
+      "detailId": 1,
+      "crowdsourcingDataDisplayEnabled": false,
+      "id": 14083696,
+      "slug": "osasuna-espanyol",
+      "startTimestamp": 1779037200,
+      "finalResultOnly": false,
+      "feedLocked": true,
+      "isEditor": false,
+      "eventFilters": {
+        "category": [
+          "club"
+        ],
+        "level": [
+          "top-competitions",
+          "pro"
+        ],
+        "gender": [
+          "M"
+        ]
+      }
+    },
+    {
+      "eventState": {},
+      "tournament": {
+        "name": "LaLiga",
+        "slug": "laliga",
+        "category": {
+          "name": "Spain",
+          "slug": "spain",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "priority": 9,
+          "country": {
+            "alpha2": "ES",
+            "alpha3": "ESP",
+            "name": "Spain",
+            "slug": "spain"
+          },
+          "id": 32,
+          "flag": "spain",
+          "alpha2": "ES",
+          "fieldTranslations": {
+            "nameTranslation": {
+              "hi": "स्पेन",
+              "ar": "إسبانيا",
+              "bn": "স্পেন",
+              "ru": "Испания"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "uniqueTournament": {
+          "name": "LaLiga",
+          "slug": "laliga",
+          "primaryColorHex": "#2f4a89",
+          "secondaryColorHex": "#f4a32e",
+          "category": {
+            "name": "Spain",
+            "slug": "spain",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 9,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 32,
+            "flag": "spain",
+            "alpha2": "ES",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "स्पेन",
+                "ar": "إسبانيا",
+                "bn": "স্পেন",
+                "ru": "Испания"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 855861,
+          "hasPerformanceGraphFeature": true,
+          "country": {},
+          "id": 8,
+          "hasEventPlayerStatistics": true,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "الدوري الإسباني",
+              "hi": "ला लिगा",
+              "bn": "লা লীগা"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "priority": 701,
+        "isGroup": false,
+        "isLive": false,
+        "id": 36,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "hi": "ला लीगा",
+            "ar": "الدوري الإسباني",
+            "bn": "লা লীগা"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "season": {
+        "name": "LaLiga 25/26",
+        "year": "25/26",
+        "editor": false,
+        "seasonCoverageInfo": {},
+        "id": 77559
+      },
+      "roundInfo": {
+        "round": 37
+      },
+      "customId": "tgbsugb",
+      "status": {
+        "code": 0,
+        "description": "Not started",
+        "type": "notstarted"
+      },
+      "homeTeam": {
+        "name": "Rayo Vallecano",
+        "slug": "rayo-vallecano",
+        "shortName": "Rayo Vallecano",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 219049,
+        "nameCode": "RAY",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2818,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#ffffff",
+          "secondary": "#ffffff",
+          "text": "#ffffff"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "رايو فاليكانو",
+            "bn": "রায়ো ভ্যালেকানো",
+            "hi": "रेयो वैलेकैनो",
+            "ru": "Райо Вальекано"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "awayTeam": {
+        "name": "Villarreal",
+        "slug": "villarreal",
+        "shortName": "Villarreal",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 460666,
+        "nameCode": "VIL",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2819,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#ffff00",
+          "secondary": "#013765",
+          "text": "#013765"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "فياريال",
+            "bn": "ভিলারিয়াল",
+            "hi": "विल्लारियल",
+            "ru": "Вильярреал"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "homeScore": {},
+      "awayScore": {},
+      "time": {},
+      "changes": {
+        "changeTimestamp": 0
+      },
+      "hasGlobalHighlights": false,
+      "detailId": 1,
+      "crowdsourcingDataDisplayEnabled": false,
+      "id": 14083682,
+      "slug": "villarreal-rayo-vallecano",
+      "startTimestamp": 1779037200,
+      "finalResultOnly": false,
+      "feedLocked": true,
+      "isEditor": false,
+      "eventFilters": {
+        "category": [
+          "club"
+        ],
+        "level": [
+          "top-competitions",
+          "pro"
+        ],
+        "gender": [
+          "M"
+        ]
+      }
+    },
+    {
+      "eventState": {},
+      "tournament": {
+        "name": "LaLiga",
+        "slug": "laliga",
+        "category": {
+          "name": "Spain",
+          "slug": "spain",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "priority": 9,
+          "country": {
+            "alpha2": "ES",
+            "alpha3": "ESP",
+            "name": "Spain",
+            "slug": "spain"
+          },
+          "id": 32,
+          "flag": "spain",
+          "alpha2": "ES",
+          "fieldTranslations": {
+            "nameTranslation": {
+              "hi": "स्पेन",
+              "ar": "إسبانيا",
+              "bn": "স্পেন",
+              "ru": "Испания"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "uniqueTournament": {
+          "name": "LaLiga",
+          "slug": "laliga",
+          "primaryColorHex": "#2f4a89",
+          "secondaryColorHex": "#f4a32e",
+          "category": {
+            "name": "Spain",
+            "slug": "spain",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 9,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 32,
+            "flag": "spain",
+            "alpha2": "ES",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "स्पेन",
+                "ar": "إسبانيا",
+                "bn": "স্পেন",
+                "ru": "Испания"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 855861,
+          "hasPerformanceGraphFeature": true,
+          "country": {},
+          "id": 8,
+          "hasEventPlayerStatistics": true,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "الدوري الإسباني",
+              "hi": "ला लिगा",
+              "bn": "লা লীগা"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "priority": 701,
+        "isGroup": false,
+        "isLive": false,
+        "id": 36,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "hi": "ला लीगा",
+            "ar": "الدوري الإسباني",
+            "bn": "লা লীগা"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "season": {
+        "name": "LaLiga 25/26",
+        "year": "25/26",
+        "editor": false,
+        "seasonCoverageInfo": {},
+        "id": 77559
+      },
+      "roundInfo": {
+        "round": 37
+      },
+      "customId": "bhbsKhb",
+      "status": {
+        "code": 0,
+        "description": "Not started",
+        "type": "notstarted"
+      },
+      "homeTeam": {
+        "name": "Real Oviedo",
+        "slug": "real-oviedo",
+        "shortName": "Real Oviedo",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 100150,
+        "nameCode": "OVI",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2851,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#3300ff",
+          "secondary": "#ffffff",
+          "text": "#ffffff"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "ريال اوفيدو",
+            "hi": "रियल ओविएडो",
+            "ru": "Реал Овьедо"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "awayTeam": {
+        "name": "Deportivo Alavés",
+        "slug": "deportivo-alaves",
+        "shortName": "Alavés",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 151458,
+        "nameCode": "ALA",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2885,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#0232a0",
+          "secondary": "#ffffff",
+          "text": "#ffffff"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "ديبورتيفو ألافيس",
+            "ru": "Алавес"
+          },
+          "shortNameTranslation": {
+            "ar": "ألافيس",
+            "bn": "আলাভেস",
+            "hi": "अलावेस"
+          }
+        }
+      },
+      "homeScore": {},
+      "awayScore": {},
+      "time": {},
+      "changes": {
+        "changeTimestamp": 0
+      },
+      "hasGlobalHighlights": false,
+      "detailId": 1,
+      "crowdsourcingDataDisplayEnabled": false,
+      "id": 14083692,
+      "slug": "deportivo-alaves-real-oviedo",
+      "startTimestamp": 1779037200,
+      "finalResultOnly": false,
+      "feedLocked": true,
+      "isEditor": false,
+      "eventFilters": {
+        "category": [
+          "club"
+        ],
+        "level": [
+          "top-competitions",
+          "pro"
+        ],
+        "gender": [
+          "M"
+        ]
+      }
+    },
+    {
+      "eventState": {},
+      "tournament": {
+        "name": "LaLiga",
+        "slug": "laliga",
+        "category": {
+          "name": "Spain",
+          "slug": "spain",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "priority": 9,
+          "country": {
+            "alpha2": "ES",
+            "alpha3": "ESP",
+            "name": "Spain",
+            "slug": "spain"
+          },
+          "id": 32,
+          "flag": "spain",
+          "alpha2": "ES",
+          "fieldTranslations": {
+            "nameTranslation": {
+              "hi": "स्पेन",
+              "ar": "إسبانيا",
+              "bn": "স্পেন",
+              "ru": "Испания"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "uniqueTournament": {
+          "name": "LaLiga",
+          "slug": "laliga",
+          "primaryColorHex": "#2f4a89",
+          "secondaryColorHex": "#f4a32e",
+          "category": {
+            "name": "Spain",
+            "slug": "spain",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 9,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 32,
+            "flag": "spain",
+            "alpha2": "ES",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "स्पेन",
+                "ar": "إسبانيا",
+                "bn": "স্পেন",
+                "ru": "Испания"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 855861,
+          "hasPerformanceGraphFeature": true,
+          "country": {},
+          "id": 8,
+          "hasEventPlayerStatistics": true,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "الدوري الإسباني",
+              "hi": "ला लिगा",
+              "bn": "লা লীগা"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "priority": 701,
+        "isGroup": false,
+        "isLive": false,
+        "id": 36,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "hi": "ला लीगा",
+            "ar": "الدوري الإسباني",
+            "bn": "লা লীগা"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "season": {
+        "name": "LaLiga 25/26",
+        "year": "25/26",
+        "editor": false,
+        "seasonCoverageInfo": {},
+        "id": 77559
+      },
+      "roundInfo": {
+        "round": 37
+      },
+      "customId": "zgbsDgb",
+      "status": {
+        "code": 0,
+        "description": "Not started",
+        "type": "notstarted"
+      },
+      "homeTeam": {
+        "name": "Real Sociedad",
+        "slug": "real-sociedad",
+        "shortName": "Real Sociedad",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 412492,
+        "nameCode": "RSO",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2824,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#ffffff",
+          "secondary": "#0077c7",
+          "text": "#0077c7"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "ريال سوسيداد",
+            "bn": "রিয়াল সোসিয়েদাদ",
+            "hi": "रियल सोसियदाद",
+            "ru": "Реал Сосьедад"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "awayTeam": {
+        "name": "Valencia",
+        "slug": "valencia",
+        "shortName": "Valencia",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 283424,
+        "nameCode": "VAL",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2828,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#ffffff",
+          "secondary": "#000000",
+          "text": "#000000"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "فالنسيا",
+            "bn": "ভ্যালেন্সিয়া",
+            "hi": "वेलेंसिया",
+            "ru": "Валенсия"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "homeScore": {},
+      "awayScore": {},
+      "time": {},
+      "changes": {
+        "changeTimestamp": 0
+      },
+      "hasGlobalHighlights": false,
+      "detailId": 1,
+      "crowdsourcingDataDisplayEnabled": false,
+      "id": 14083687,
+      "slug": "valencia-real-sociedad",
+      "startTimestamp": 1779037200,
+      "finalResultOnly": false,
+      "feedLocked": true,
+      "isEditor": false,
+      "eventFilters": {
+        "category": [
+          "club"
+        ],
+        "level": [
+          "top-competitions",
+          "pro"
+        ],
+        "gender": [
+          "M"
+        ]
+      }
+    },
+    {
+      "eventState": {},
+      "tournament": {
+        "name": "LaLiga",
+        "slug": "laliga",
+        "category": {
+          "name": "Spain",
+          "slug": "spain",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "priority": 9,
+          "country": {
+            "alpha2": "ES",
+            "alpha3": "ESP",
+            "name": "Spain",
+            "slug": "spain"
+          },
+          "id": 32,
+          "flag": "spain",
+          "alpha2": "ES",
+          "fieldTranslations": {
+            "nameTranslation": {
+              "hi": "स्पेन",
+              "ar": "إسبانيا",
+              "bn": "স্পেন",
+              "ru": "Испания"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "uniqueTournament": {
+          "name": "LaLiga",
+          "slug": "laliga",
+          "primaryColorHex": "#2f4a89",
+          "secondaryColorHex": "#f4a32e",
+          "category": {
+            "name": "Spain",
+            "slug": "spain",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 9,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 32,
+            "flag": "spain",
+            "alpha2": "ES",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "स्पेन",
+                "ar": "إسبانيا",
+                "bn": "স্পেন",
+                "ru": "Испания"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 855861,
+          "hasPerformanceGraphFeature": true,
+          "country": {},
+          "id": 8,
+          "hasEventPlayerStatistics": true,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "الدوري الإسباني",
+              "hi": "ला लिगा",
+              "bn": "লা লীগা"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "priority": 701,
+        "isGroup": false,
+        "isLive": false,
+        "id": 36,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "hi": "ला लीगा",
+            "ar": "الدوري الإسباني",
+            "bn": "লা লীগা"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "season": {
+        "name": "LaLiga 25/26",
+        "year": "25/26",
+        "editor": false,
+        "seasonCoverageInfo": {},
+        "id": 77559
+      },
+      "roundInfo": {
+        "round": 37
+      },
+      "customId": "EgbsIgb",
+      "status": {
+        "code": 0,
+        "description": "Not started",
+        "type": "notstarted"
+      },
+      "homeTeam": {
+        "name": "Sevilla",
+        "slug": "sevilla",
+        "shortName": "Sevilla",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 395988,
+        "nameCode": "SEV",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2833,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#ffffff",
+          "secondary": "#cc1020",
+          "text": "#cc1020"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "إشبيلية",
+            "bn": "সেভিলা",
+            "hi": "सेविला",
+            "ru": "Cевилья"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "awayTeam": {
+        "name": "Real Madrid",
+        "slug": "real-madrid",
+        "shortName": "Real Madrid",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 7594073,
+        "nameCode": "RMA",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2829,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#ffffff",
+          "secondary": "#004996",
+          "text": "#004996"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "ريال مدريد",
+            "bn": "রিয়াল মাদ্রিদ",
+            "hi": "रियल मैड्रिड",
+            "ru": "Реал Мадрид"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "homeScore": {},
+      "awayScore": {},
+      "time": {},
+      "changes": {
+        "changeTimestamp": 0
+      },
+      "hasGlobalHighlights": false,
+      "detailId": 1,
+      "crowdsourcingDataDisplayEnabled": false,
+      "id": 14083702,
+      "slug": "sevilla-real-madrid",
+      "startTimestamp": 1779037200,
+      "finalResultOnly": false,
+      "feedLocked": true,
+      "isEditor": false,
+      "eventFilters": {
+        "category": [
+          "club"
+        ],
+        "level": [
+          "top-competitions",
+          "pro"
+        ],
+        "gender": [
+          "M"
+        ]
+      }
+    },
+    {
+      "eventState": {},
+      "tournament": {
+        "name": "LaLiga",
+        "slug": "laliga",
+        "category": {
+          "name": "Spain",
+          "slug": "spain",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "priority": 9,
+          "country": {
+            "alpha2": "ES",
+            "alpha3": "ESP",
+            "name": "Spain",
+            "slug": "spain"
+          },
+          "id": 32,
+          "flag": "spain",
+          "alpha2": "ES",
+          "fieldTranslations": {
+            "nameTranslation": {
+              "hi": "स्पेन",
+              "ar": "إسبانيا",
+              "bn": "স্পেন",
+              "ru": "Испания"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "uniqueTournament": {
+          "name": "LaLiga",
+          "slug": "laliga",
+          "primaryColorHex": "#2f4a89",
+          "secondaryColorHex": "#f4a32e",
+          "category": {
+            "name": "Spain",
+            "slug": "spain",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 9,
+            "country": {
+              "alpha2": "ES",
+              "alpha3": "ESP",
+              "name": "Spain",
+              "slug": "spain"
+            },
+            "id": 32,
+            "flag": "spain",
+            "alpha2": "ES",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "स्पेन",
+                "ar": "إسبانيا",
+                "bn": "স্পেন",
+                "ru": "Испания"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 855861,
+          "hasPerformanceGraphFeature": true,
+          "country": {},
+          "id": 8,
+          "hasEventPlayerStatistics": true,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "الدوري الإسباني",
+              "hi": "ला लिगा",
+              "bn": "লা লীগা"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "priority": 701,
+        "isGroup": false,
+        "isLive": false,
+        "id": 36,
+        "fieldTranslations": {
+          "nameTranslation": {
+            "hi": "ला लीगा",
+            "ar": "الدوري الإسباني",
+            "bn": "লা লীগা"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "season": {
+        "name": "LaLiga 25/26",
+        "year": "25/26",
+        "editor": false,
+        "seasonCoverageInfo": {},
+        "id": 77559
+      },
+      "roundInfo": {
+        "round": 37
+      },
+      "customId": "qgbsrgb",
+      "status": {
+        "code": 0,
+        "description": "Not started",
+        "type": "notstarted"
+      },
+      "homeTeam": {
+        "name": "FC Barcelona",
+        "slug": "barcelona",
+        "shortName": "Barcelona",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 7287264,
+        "nameCode": "BAR",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2817,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#154284",
+          "secondary": "#9d1009",
+          "text": "#9d1009"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "برشلونة",
+            "bn": "বার্সেলোনা",
+            "hi": "बार्सिलोना",
+            "ru": "Барселона"
+          },
+          "shortNameTranslation": {}
+        }
+      },
+      "awayTeam": {
+        "name": "Real Betis",
+        "slug": "real-betis",
+        "shortName": "Real Betis",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "userCount": 596908,
+        "nameCode": "BET",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "ES",
+          "alpha3": "ESP",
+          "name": "Spain",
+          "slug": "spain"
+        },
+        "id": 2816,
+        "subTeams": [],
+        "teamColors": {
+          "primary": "#ffffff",
+          "secondary": "#006633",
+          "text": "#006633"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "ريال بيتيس",
+            "ru": "Реал Бетис"
+          },
+          "shortNameTranslation": {
+            "ar": "ريال بيتيس",
+            "bn": "বেটিস",
+            "hi": "बेटिस"
+          }
+        }
+      },
+      "homeScore": {},
+      "awayScore": {},
+      "time": {},
+      "changes": {
+        "changeTimestamp": 0
+      },
+      "hasGlobalHighlights": false,
+      "detailId": 1,
+      "crowdsourcingDataDisplayEnabled": false,
+      "id": 14083666,
+      "slug": "barcelona-real-betis",
+      "startTimestamp": 1779045300,
+      "finalResultOnly": false,
+      "feedLocked": true,
+      "isEditor": false,
+      "eventFilters": {
+        "category": [
+          "club"
+        ],
+        "level": [
+          "top-competitions",
+          "pro"
+        ],
+        "gender": [
+          "M"
+        ]
+      }
+    }
+  ],
+  "hasNextPage": false
+}

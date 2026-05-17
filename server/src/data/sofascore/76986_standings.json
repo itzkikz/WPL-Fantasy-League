@@ -4,8 +4,8 @@
       "type": "total",
       "descriptions": [],
       "tieBreakingRule": {
-        "text": "In the event that two (or more) teams have an equal number of points, the following rules break the tie: 1. Goal difference 2. Goals scored 3. H2H",
-        "id": 2393
+        "text": "In the event that two (or more) teams have an equal number of points, the following rules break the tie:\n1. Goal difference\n2. Goals scored\n3. H2H",
+        "id": 16443
       },
       "rows": [
         {
@@ -19,7 +19,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 3579893,
+            "userCount": 3583859,
             "nameCode": "ARS",
             "disabled": false,
             "national": false,
@@ -73,7 +73,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 4202782,
+            "userCount": 4207088,
             "nameCode": "MCI",
             "disabled": false,
             "national": false,
@@ -130,7 +130,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 3607986,
+            "userCount": 3610853,
             "nameCode": "MUN",
             "disabled": false,
             "national": false,
@@ -187,7 +187,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 990382,
+            "userCount": 994258,
             "nameCode": "AVL",
             "disabled": false,
             "national": false,
@@ -241,7 +241,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 3800749,
+            "userCount": 3804782,
             "nameCode": "LIV",
             "disabled": false,
             "national": false,
@@ -295,7 +295,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 314267,
+            "userCount": 314716,
             "nameCode": "BOU",
             "disabled": false,
             "national": false,
@@ -349,7 +349,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 431897,
+            "userCount": 432016,
             "nameCode": "BHA",
             "disabled": false,
             "national": false,
@@ -381,8 +381,8 @@
           },
           "descriptions": [],
           "promotion": {
-            "text": "Conference League Qualification",
-            "id": 503
+            "text": "UEFA Europa League",
+            "id": 808
           },
           "position": 7,
           "matches": 36,
@@ -406,7 +406,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 305496,
+            "userCount": 305520,
             "nameCode": "BRE",
             "disabled": false,
             "national": false,
@@ -434,6 +434,10 @@
             }
           },
           "descriptions": [],
+          "promotion": {
+            "text": "Conference League Qualification",
+            "id": 503
+          },
           "position": 8,
           "matches": 36,
           "wins": 14,
@@ -456,7 +460,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 3140448,
+            "userCount": 3142187,
             "nameCode": "CHE",
             "disabled": false,
             "national": false,
@@ -506,7 +510,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 385677,
+            "userCount": 385691,
             "nameCode": "EVE",
             "disabled": false,
             "national": false,
@@ -556,7 +560,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 327656,
+            "userCount": 327654,
             "nameCode": "FUL",
             "disabled": false,
             "national": false,
@@ -606,7 +610,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 223675,
+            "userCount": 223643,
             "nameCode": "SUN",
             "disabled": false,
             "national": false,
@@ -654,7 +658,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 929997,
+            "userCount": 929954,
             "nameCode": "NEW",
             "disabled": false,
             "national": false,
@@ -707,7 +711,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 258707,
+            "userCount": 258700,
             "nameCode": "LEE",
             "disabled": false,
             "national": false,
@@ -760,7 +764,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 442138,
+            "userCount": 442351,
             "nameCode": "CRY",
             "disabled": false,
             "national": false,
@@ -810,7 +814,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 445337,
+            "userCount": 445293,
             "nameCode": "NFO",
             "disabled": false,
             "national": false,
@@ -863,7 +867,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 1504869,
+            "userCount": 1506083,
             "nameCode": "TOT",
             "disabled": false,
             "national": false,
@@ -916,7 +920,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 490902,
+            "userCount": 491711,
             "nameCode": "WHU",
             "disabled": false,
             "national": false,
@@ -973,7 +977,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 164428,
+            "userCount": 164458,
             "nameCode": "BUR",
             "disabled": false,
             "national": false,
@@ -1027,7 +1031,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 308875,
+            "userCount": 308870,
             "nameCode": "WOL",
             "disabled": false,
             "national": false,
@@ -1138,7 +1142,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1216792,
+          "userCount": 1217570,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 17,
@@ -1166,7 +1170,7 @@
         }
       },
       "name": "Premier League 25/26",
-      "updatedAtTimestamp": 1778878652
+      "updatedAtTimestamp": 1778965052
     }
   ]
 }

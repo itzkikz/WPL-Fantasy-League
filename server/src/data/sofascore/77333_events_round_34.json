@@ -66,7 +66,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 535547,
+          "userCount": 535928,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 35,
@@ -105,10 +105,11 @@
       },
       "customId": "gbbsKrc",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 2,
       "homeTeam": {
         "name": "1. FC Heidenheim",
         "slug": "1-fc-heidenheim",
@@ -119,7 +120,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 68961,
+        "userCount": 69193,
         "nameCode": "SCH",
         "disabled": false,
         "national": false,
@@ -160,7 +161,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 106958,
+        "userCount": 107058,
         "nameCode": "M05",
         "disabled": false,
         "national": false,
@@ -190,15 +191,41 @@
           }
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 0,
+        "display": 0,
+        "period1": 0,
+        "period2": 0,
+        "normaltime": 0
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 2,
+        "display": 2,
+        "period1": 2,
+        "period2": 0,
+        "normaltime": 2
+      },
+      "time": {
+        "injuryTime1": 3,
+        "injuryTime2": 3,
+        "currentPeriodStartTimestamp": 1778942127
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1778945014
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": true,
       "id": 14065562,
       "slug": "1-fc-heidenheim-1-fsv-mainz-05",
       "startTimestamp": 1778938200,
@@ -284,7 +311,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 535547,
+          "userCount": 535928,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 35,
@@ -323,10 +350,11 @@
       },
       "customId": "Xabsacb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 1,
       "homeTeam": {
         "name": "1. FC Union Berlin",
         "slug": "1-fc-union-berlin",
@@ -337,7 +365,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 131246,
+        "userCount": 131372,
         "nameCode": "FCU",
         "disabled": false,
         "national": false,
@@ -377,7 +405,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 79458,
+        "userCount": 79590,
         "nameCode": "FCA",
         "disabled": false,
         "national": false,
@@ -408,15 +436,41 @@
           }
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 4,
+        "display": 4,
+        "period1": 2,
+        "period2": 2,
+        "normaltime": 4
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 0,
+        "display": 0,
+        "period1": 0,
+        "period2": 0,
+        "normaltime": 0
+      },
+      "time": {
+        "injuryTime1": 3,
+        "injuryTime2": 3,
+        "currentPeriodStartTimestamp": 1778942072
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1778944965
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": true,
       "id": 14065558,
       "slug": "fc-augsburg-1-fc-union-berlin",
       "startTimestamp": 1778938200,
@@ -502,7 +556,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 535547,
+          "userCount": 535928,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 35,
@@ -541,10 +595,11 @@
       },
       "customId": "BdbsGdb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 3,
       "homeTeam": {
         "name": "Bayer 04 Leverkusen",
         "slug": "bayer-04-leverkusen",
@@ -555,7 +610,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 1058442,
+        "userCount": 1059025,
         "nameCode": "B04",
         "disabled": false,
         "national": false,
@@ -595,7 +650,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 88497,
+        "userCount": 88590,
         "nameCode": "HSV",
         "disabled": false,
         "national": false,
@@ -626,15 +681,41 @@
           }
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 1,
+        "display": 1,
+        "period1": 0,
+        "period2": 1,
+        "normaltime": 1
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 1,
+        "display": 1,
+        "period1": 0,
+        "period2": 1,
+        "normaltime": 1
+      },
+      "time": {
+        "injuryTime1": 2,
+        "injuryTime2": 7,
+        "currentPeriodStartTimestamp": 1778942022
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1778945210
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 14065557,
       "slug": "bayer-04-leverkusen-hamburger-sv",
       "startTimestamp": 1778938200,
@@ -720,7 +801,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 535547,
+          "userCount": 535928,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 35,
@@ -759,10 +840,11 @@
       },
       "customId": "Cabsubb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 1,
       "homeTeam": {
         "name": "Borussia M'gladbach",
         "slug": "borussia-mgladbach",
@@ -773,7 +855,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 116575,
+        "userCount": 116689,
         "nameCode": "BMG",
         "disabled": false,
         "national": false,
@@ -813,7 +895,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 106776,
+        "userCount": 107037,
         "nameCode": "TSG",
         "disabled": false,
         "national": false,
@@ -844,16 +926,44 @@
           }
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 4,
+        "display": 4,
+        "period1": 2,
+        "period2": 2,
+        "normaltime": 4
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 0,
+        "display": 0,
+        "period1": 0,
+        "period2": 0,
+        "normaltime": 0
+      },
+      "time": {
+        "injuryTime1": 1,
+        "injuryTime2": 4,
+        "currentPeriodStartTimestamp": 1778941993
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type",
+          "homeScore.normaltime"
+        ],
+        "changeTimestamp": 1778944943
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": true,
       "id": 14065559,
+      "awayRedCards": 1,
       "slug": "tsg-hoffenheim-borussia-mgladbach",
       "startTimestamp": 1778938200,
       "finalResultOnly": false,
@@ -938,7 +1048,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 535547,
+          "userCount": 535928,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 35,
@@ -977,10 +1087,11 @@
       },
       "customId": "zdbsCdb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 3,
       "homeTeam": {
         "name": "Eintracht Frankfurt",
         "slug": "eintracht-frankfurt",
@@ -991,7 +1102,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 276686,
+        "userCount": 276879,
         "nameCode": "SGE",
         "disabled": false,
         "national": false,
@@ -1032,7 +1143,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 259891,
+        "userCount": 260165,
         "nameCode": "VFB",
         "disabled": false,
         "national": false,
@@ -1063,15 +1174,42 @@
           }
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 2,
+        "display": 2,
+        "period1": 0,
+        "period2": 2,
+        "normaltime": 2
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 2,
+        "display": 2,
+        "period1": 2,
+        "period2": 0,
+        "normaltime": 2
+      },
+      "time": {
+        "injuryTime1": 4,
+        "injuryTime2": 4,
+        "currentPeriodStartTimestamp": 1778942607
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type",
+          "homeScore.normaltime"
+        ],
+        "changeTimestamp": 1778945643
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 14065560,
       "slug": "vfb-stuttgart-eintracht-frankfurt",
       "startTimestamp": 1778938200,
@@ -1157,7 +1295,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 535547,
+          "userCount": 535928,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 35,
@@ -1196,10 +1334,11 @@
       },
       "customId": "wdbsxdb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 1,
       "homeTeam": {
         "name": "FC Bayern München",
         "slug": "fc-bayern-munchen",
@@ -1210,7 +1349,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 2902333,
+        "userCount": 2905529,
         "nameCode": "FCB",
         "disabled": false,
         "national": false,
@@ -1250,7 +1389,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 85079,
+        "userCount": 85182,
         "nameCode": "KOE",
         "disabled": false,
         "national": false,
@@ -1280,15 +1419,41 @@
           }
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 5,
+        "display": 5,
+        "period1": 3,
+        "period2": 2,
+        "normaltime": 5
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 1,
+        "display": 1,
+        "period1": 1,
+        "period2": 0,
+        "normaltime": 1
+      },
+      "time": {
+        "injuryTime1": 3,
+        "injuryTime2": 4,
+        "currentPeriodStartTimestamp": 1778942332
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1778945286
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 14065556,
       "slug": "fc-bayern-munchen-1-fc-koln",
       "startTimestamp": 1778938200,
@@ -1374,7 +1539,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 535547,
+          "userCount": 535928,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 35,
@@ -1413,10 +1578,11 @@
       },
       "customId": "zabsBab",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 2,
       "homeTeam": {
         "name": "FC St. Pauli",
         "slug": "fc-st-pauli",
@@ -1427,7 +1593,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 86296,
+        "userCount": 86453,
         "nameCode": "STP",
         "disabled": false,
         "national": false,
@@ -1464,7 +1630,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 109578,
+        "userCount": 109760,
         "nameCode": "WOB",
         "disabled": false,
         "national": false,
@@ -1495,15 +1661,41 @@
           }
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 1,
+        "display": 1,
+        "period1": 0,
+        "period2": 1,
+        "normaltime": 1
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 3,
+        "display": 3,
+        "period1": 1,
+        "period2": 2,
+        "normaltime": 3
+      },
+      "time": {
+        "injuryTime1": 1,
+        "injuryTime2": 7,
+        "currentPeriodStartTimestamp": 1778942031
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1778945174
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 14065563,
       "slug": "fc-st-pauli-vfl-wolfsburg",
       "startTimestamp": 1778938200,
@@ -1589,7 +1781,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 535547,
+          "userCount": 535928,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 35,
@@ -1628,10 +1820,11 @@
       },
       "customId": "NabskCo",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 1,
       "homeTeam": {
         "name": "SC Freiburg",
         "slug": "sc-freiburg",
@@ -1642,7 +1835,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 142680,
+        "userCount": 142844,
         "nameCode": "SCF",
         "disabled": false,
         "national": false,
@@ -1683,7 +1876,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 405909,
+        "userCount": 406102,
         "nameCode": "RBL",
         "disabled": false,
         "national": false,
@@ -1714,15 +1907,41 @@
           }
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 4,
+        "display": 4,
+        "period1": 2,
+        "period2": 2,
+        "normaltime": 4
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 1,
+        "display": 1,
+        "period1": 1,
+        "period2": 0,
+        "normaltime": 1
+      },
+      "time": {
+        "injuryTime1": 3,
+        "injuryTime2": 4,
+        "currentPeriodStartTimestamp": 1778942133
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1778945096
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 14065555,
       "slug": "rb-leipzig-sc-freiburg",
       "startTimestamp": 1778938200,
@@ -1808,7 +2027,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 535547,
+          "userCount": 535928,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 35,
@@ -1847,10 +2066,11 @@
       },
       "customId": "Jabsydb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 2,
       "homeTeam": {
         "name": "SV Werder Bremen",
         "slug": "sv-werder-bremen",
@@ -1861,7 +2081,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 91596,
+        "userCount": 91752,
         "nameCode": "SVW",
         "disabled": false,
         "national": false,
@@ -1901,7 +2121,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 1409420,
+        "userCount": 1410076,
         "nameCode": "BVB",
         "disabled": false,
         "national": false,
@@ -1932,15 +2152,42 @@
           }
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 0,
+        "display": 0,
+        "period1": 0,
+        "period2": 0,
+        "normaltime": 0
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 2,
+        "display": 2,
+        "period1": 0,
+        "period2": 2,
+        "normaltime": 2
+      },
+      "time": {
+        "injuryTime1": 0,
+        "injuryTime2": 5,
+        "currentPeriodStartTimestamp": 1778942019
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type",
+          "awayScore.normaltime"
+        ],
+        "changeTimestamp": 1778945063
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 14065561,
       "slug": "borussia-dortmund-sv-werder-bremen",
       "startTimestamp": 1778938200,
