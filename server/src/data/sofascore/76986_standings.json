@@ -4,8 +4,8 @@
       "type": "total",
       "descriptions": [],
       "tieBreakingRule": {
-        "text": "In the event that two (or more) teams have an equal number of points, the following rules break the tie:\n1. Goal difference\n2. Goals scored\n3. H2H",
-        "id": 16443
+        "text": "In the event that two (or more) teams have an equal number of points, the following rules break the tie: 1. Goal difference 2. Goals scored 3. H2H",
+        "id": 2393
       },
       "rows": [
         {
@@ -19,7 +19,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 3583859,
+            "userCount": 3589859,
             "nameCode": "ARS",
             "disabled": false,
             "national": false,
@@ -73,7 +73,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 4207088,
+            "userCount": 4218854,
             "nameCode": "MCI",
             "disabled": false,
             "national": false,
@@ -130,7 +130,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 3610853,
+            "userCount": 3614681,
             "nameCode": "MUN",
             "disabled": false,
             "national": false,
@@ -166,15 +166,15 @@
             "id": 804
           },
           "position": 3,
-          "matches": 36,
-          "wins": 18,
-          "scoresFor": 63,
-          "scoresAgainst": 48,
+          "matches": 37,
+          "wins": 19,
+          "scoresFor": 66,
+          "scoresAgainst": 50,
           "id": 1637266,
           "losses": 7,
           "draws": 11,
-          "points": 65,
-          "scoreDiffFormatted": "+15"
+          "points": 68,
+          "scoreDiffFormatted": "+16"
         },
         {
           "team": {
@@ -187,7 +187,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 994258,
+            "userCount": 995028,
             "nameCode": "AVL",
             "disabled": false,
             "national": false,
@@ -241,7 +241,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 3804782,
+            "userCount": 3806691,
             "nameCode": "LIV",
             "disabled": false,
             "national": false,
@@ -295,7 +295,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 314716,
+            "userCount": 314911,
             "nameCode": "BOU",
             "disabled": false,
             "national": false,
@@ -349,7 +349,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 432016,
+            "userCount": 432122,
             "nameCode": "BHA",
             "disabled": false,
             "national": false,
@@ -385,15 +385,15 @@
             "id": 808
           },
           "position": 7,
-          "matches": 36,
+          "matches": 37,
           "wins": 14,
           "scoresFor": 52,
-          "scoresAgainst": 42,
+          "scoresAgainst": 43,
           "id": 1637257,
-          "losses": 11,
+          "losses": 12,
           "draws": 11,
           "points": 53,
-          "scoreDiffFormatted": "+10"
+          "scoreDiffFormatted": "+9"
         },
         {
           "team": {
@@ -406,7 +406,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 305520,
+            "userCount": 305632,
             "nameCode": "BRE",
             "disabled": false,
             "national": false,
@@ -439,15 +439,63 @@
             "id": 503
           },
           "position": 8,
-          "matches": 36,
+          "matches": 37,
           "wins": 14,
-          "scoresFor": 52,
-          "scoresAgainst": 49,
+          "scoresFor": 54,
+          "scoresAgainst": 51,
           "id": 1637256,
           "losses": 13,
-          "draws": 9,
-          "points": 51,
+          "draws": 10,
+          "points": 52,
           "scoreDiffFormatted": "+3"
+        },
+        {
+          "team": {
+            "name": "Sunderland",
+            "slug": "sunderland",
+            "shortName": "Sunderland",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 223609,
+            "nameCode": "SUN",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "EN",
+              "alpha3": "ENG",
+              "name": "England",
+              "slug": "england"
+            },
+            "id": 41,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#ca0000",
+              "text": "#ca0000"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "سندرلاند",
+                "ru": "АФК Сандерленд"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "position": 9,
+          "matches": 37,
+          "wins": 13,
+          "scoresFor": 40,
+          "scoresAgainst": 47,
+          "id": 1637269,
+          "losses": 12,
+          "draws": 12,
+          "points": 51,
+          "scoreDiffFormatted": "-7"
         },
         {
           "team": {
@@ -460,7 +508,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 3142187,
+            "userCount": 3148007,
             "nameCode": "CHE",
             "disabled": false,
             "national": false,
@@ -488,7 +536,7 @@
             }
           },
           "descriptions": [],
-          "position": 9,
+          "position": 10,
           "matches": 36,
           "wins": 13,
           "scoresFor": 55,
@@ -501,154 +549,6 @@
         },
         {
           "team": {
-            "name": "Everton",
-            "slug": "everton",
-            "shortName": "Everton",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 385691,
-            "nameCode": "EVE",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "EN",
-              "alpha3": "ENG",
-              "name": "England",
-              "slug": "england"
-            },
-            "id": 48,
-            "teamColors": {
-              "primary": "#274488",
-              "secondary": "#ffffff",
-              "text": "#ffffff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "إيفرتون",
-                "bn": "এভারটন",
-                "hi": "एवर्टन",
-                "ru": "Эвертон"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 10,
-          "matches": 36,
-          "wins": 13,
-          "scoresFor": 46,
-          "scoresAgainst": 46,
-          "id": 1637261,
-          "losses": 13,
-          "draws": 10,
-          "points": 49,
-          "scoreDiffFormatted": "0"
-        },
-        {
-          "team": {
-            "name": "Fulham",
-            "slug": "fulham",
-            "shortName": "Fulham",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 327654,
-            "nameCode": "FUL",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "EN",
-              "alpha3": "ENG",
-              "name": "England",
-              "slug": "england"
-            },
-            "id": 43,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#000000",
-              "text": "#000000"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "فولهام",
-                "bn": "ফুলহাম",
-                "hi": "फुलहम",
-                "ru": "Фулхэм"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 11,
-          "matches": 36,
-          "wins": 14,
-          "scoresFor": 44,
-          "scoresAgainst": 50,
-          "id": 1637262,
-          "losses": 16,
-          "draws": 6,
-          "points": 48,
-          "scoreDiffFormatted": "-6"
-        },
-        {
-          "team": {
-            "name": "Sunderland",
-            "slug": "sunderland",
-            "shortName": "Sunderland",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 223643,
-            "nameCode": "SUN",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "EN",
-              "alpha3": "ENG",
-              "name": "England",
-              "slug": "england"
-            },
-            "id": 41,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#ca0000",
-              "text": "#ca0000"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "سندرلاند",
-                "ru": "АФК Сандерленд"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 12,
-          "matches": 36,
-          "wins": 12,
-          "scoresFor": 37,
-          "scoresAgainst": 46,
-          "id": 1637269,
-          "losses": 12,
-          "draws": 12,
-          "points": 48,
-          "scoreDiffFormatted": "-9"
-        },
-        {
-          "team": {
             "name": "Newcastle United",
             "slug": "newcastle-united",
             "shortName": "Newcastle",
@@ -658,7 +558,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 929954,
+            "userCount": 929999,
             "nameCode": "NEW",
             "disabled": false,
             "national": false,
@@ -689,16 +589,116 @@
             }
           },
           "descriptions": [],
-          "position": 13,
-          "matches": 36,
-          "wins": 13,
-          "scoresFor": 50,
-          "scoresAgainst": 52,
+          "position": 11,
+          "matches": 37,
+          "wins": 14,
+          "scoresFor": 53,
+          "scoresAgainst": 53,
           "id": 1637267,
           "losses": 16,
           "draws": 7,
-          "points": 46,
+          "points": 49,
+          "scoreDiffFormatted": "0"
+        },
+        {
+          "team": {
+            "name": "Everton",
+            "slug": "everton",
+            "shortName": "Everton",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 385805,
+            "nameCode": "EVE",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "EN",
+              "alpha3": "ENG",
+              "name": "England",
+              "slug": "england"
+            },
+            "id": 48,
+            "teamColors": {
+              "primary": "#274488",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "إيفرتون",
+                "bn": "এভারটন",
+                "hi": "एवर्टन",
+                "ru": "Эвертон"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "position": 12,
+          "matches": 37,
+          "wins": 13,
+          "scoresFor": 47,
+          "scoresAgainst": 49,
+          "id": 1637261,
+          "losses": 14,
+          "draws": 10,
+          "points": 49,
           "scoreDiffFormatted": "-2"
+        },
+        {
+          "team": {
+            "name": "Fulham",
+            "slug": "fulham",
+            "shortName": "Fulham",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 327716,
+            "nameCode": "FUL",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "EN",
+              "alpha3": "ENG",
+              "name": "England",
+              "slug": "england"
+            },
+            "id": 43,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#000000",
+              "text": "#000000"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "فولهام",
+                "bn": "ফুলহাম",
+                "hi": "फुलहम",
+                "ru": "Фулхэм"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "position": 13,
+          "matches": 37,
+          "wins": 14,
+          "scoresFor": 45,
+          "scoresAgainst": 51,
+          "id": 1637262,
+          "losses": 16,
+          "draws": 7,
+          "points": 49,
+          "scoreDiffFormatted": "-6"
         },
         {
           "team": {
@@ -711,7 +711,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 258700,
+            "userCount": 258694,
             "nameCode": "LEE",
             "disabled": false,
             "national": false,
@@ -743,15 +743,15 @@
           },
           "descriptions": [],
           "position": 14,
-          "matches": 36,
-          "wins": 10,
-          "scoresFor": 48,
+          "matches": 37,
+          "wins": 11,
+          "scoresFor": 49,
           "scoresAgainst": 53,
           "id": 1637263,
           "losses": 12,
           "draws": 14,
-          "points": 44,
-          "scoreDiffFormatted": "-5"
+          "points": 47,
+          "scoreDiffFormatted": "-4"
         },
         {
           "team": {
@@ -764,7 +764,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 442351,
+            "userCount": 442981,
             "nameCode": "CRY",
             "disabled": false,
             "national": false,
@@ -793,14 +793,14 @@
           },
           "descriptions": [],
           "position": 15,
-          "matches": 36,
+          "matches": 37,
           "wins": 11,
-          "scoresFor": 38,
-          "scoresAgainst": 47,
+          "scoresFor": 40,
+          "scoresAgainst": 49,
           "id": 1637260,
           "losses": 14,
-          "draws": 11,
-          "points": 44,
+          "draws": 12,
+          "points": 45,
           "scoreDiffFormatted": "-9"
         },
         {
@@ -814,7 +814,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 445293,
+            "userCount": 445288,
             "nameCode": "NFO",
             "disabled": false,
             "national": false,
@@ -846,15 +846,15 @@
           },
           "descriptions": [],
           "position": 16,
-          "matches": 36,
+          "matches": 37,
           "wins": 11,
-          "scoresFor": 45,
-          "scoresAgainst": 47,
+          "scoresFor": 47,
+          "scoresAgainst": 50,
           "id": 1637268,
-          "losses": 15,
+          "losses": 16,
           "draws": 10,
           "points": 43,
-          "scoreDiffFormatted": "-2"
+          "scoreDiffFormatted": "-3"
         },
         {
           "team": {
@@ -867,7 +867,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 1506083,
+            "userCount": 1508059,
             "nameCode": "TOT",
             "disabled": false,
             "national": false,
@@ -920,7 +920,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 491711,
+            "userCount": 493167,
             "nameCode": "WHU",
             "disabled": false,
             "national": false,
@@ -956,15 +956,15 @@
             "id": 3
           },
           "position": 18,
-          "matches": 36,
+          "matches": 37,
           "wins": 9,
-          "scoresFor": 42,
-          "scoresAgainst": 62,
+          "scoresFor": 43,
+          "scoresAgainst": 65,
           "id": 1637271,
-          "losses": 18,
+          "losses": 19,
           "draws": 9,
           "points": 36,
-          "scoreDiffFormatted": "-20"
+          "scoreDiffFormatted": "-22"
         },
         {
           "team": {
@@ -977,7 +977,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 164458,
+            "userCount": 164505,
             "nameCode": "BUR",
             "disabled": false,
             "national": false,
@@ -1031,7 +1031,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 308870,
+            "userCount": 308884,
             "nameCode": "WOL",
             "disabled": false,
             "national": false,
@@ -1066,14 +1066,14 @@
             "id": 3
           },
           "position": 20,
-          "matches": 36,
+          "matches": 37,
           "wins": 3,
-          "scoresFor": 25,
-          "scoresAgainst": 66,
+          "scoresFor": 26,
+          "scoresAgainst": 67,
           "id": 1637272,
           "losses": 24,
-          "draws": 9,
-          "points": 18,
+          "draws": 10,
+          "points": 19,
           "scoreDiffFormatted": "-41"
         }
       ],
@@ -1142,7 +1142,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1217570,
+          "userCount": 1218281,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 17,
@@ -1170,7 +1170,7 @@
         }
       },
       "name": "Premier League 25/26",
-      "updatedAtTimestamp": 1778965052
+      "updatedAtTimestamp": 1779047713
     }
   ]
 }

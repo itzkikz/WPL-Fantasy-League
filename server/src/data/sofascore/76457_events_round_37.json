@@ -66,7 +66,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 651585,
+          "userCount": 651930,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -105,10 +105,11 @@
       },
       "customId": "Zdbsceb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 1,
       "homeTeam": {
         "name": "AS Roma",
         "slug": "roma",
@@ -119,7 +120,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 773898,
+        "userCount": 774899,
         "nameCode": "ASR",
         "disabled": false,
         "national": false,
@@ -157,7 +158,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 391484,
+        "userCount": 391457,
         "nameCode": "LAZ",
         "disabled": false,
         "national": false,
@@ -185,16 +186,44 @@
           "shortNameTranslation": {}
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 2,
+        "display": 2,
+        "period1": 1,
+        "period2": 1,
+        "normaltime": 2
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 0,
+        "display": 0,
+        "period1": 0,
+        "period2": 0,
+        "normaltime": 0
+      },
+      "time": {
+        "injuryTime1": 4,
+        "injuryTime2": 5,
+        "currentPeriodStartTimestamp": 1779016164
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1779019183
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 13980063,
+      "homeRedCards": 1,
+      "awayRedCards": 1,
       "slug": "roma-lazio",
       "startTimestamp": 1779012000,
       "finalResultOnly": false,
@@ -279,7 +308,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 651585,
+          "userCount": 651930,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -318,10 +347,11 @@
       },
       "customId": "Pdbseeb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 1,
       "homeTeam": {
         "name": "Como",
         "slug": "como",
@@ -332,7 +362,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 268574,
+        "userCount": 269378,
         "nameCode": "COM",
         "disabled": false,
         "national": false,
@@ -367,7 +397,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 105187,
+        "userCount": 105201,
         "nameCode": "PAR",
         "disabled": false,
         "national": false,
@@ -395,15 +425,41 @@
           "shortNameTranslation": {}
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 1,
+        "display": 1,
+        "period1": 0,
+        "period2": 1,
+        "normaltime": 1
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 0,
+        "display": 0,
+        "period1": 0,
+        "period2": 0,
+        "normaltime": 0
+      },
+      "time": {
+        "injuryTime1": 2,
+        "injuryTime2": 5,
+        "currentPeriodStartTimestamp": 1779016163
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1779019255
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 13980069,
       "slug": "como-parma",
       "startTimestamp": 1779012000,
@@ -489,7 +545,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 651585,
+          "userCount": 651930,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -528,10 +584,11 @@
       },
       "customId": "Rdbsneb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 2,
       "homeTeam": {
         "name": "Genoa",
         "slug": "genoa",
@@ -542,7 +599,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 126567,
+        "userCount": 126623,
         "nameCode": "GEN",
         "disabled": false,
         "national": false,
@@ -580,7 +637,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 1712745,
+        "userCount": 1714586,
         "nameCode": "ACM",
         "disabled": false,
         "national": false,
@@ -608,15 +665,41 @@
           "shortNameTranslation": {}
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 1,
+        "display": 1,
+        "period1": 0,
+        "period2": 1,
+        "normaltime": 1
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 2,
+        "display": 2,
+        "period1": 0,
+        "period2": 2,
+        "normaltime": 2
+      },
+      "time": {
+        "injuryTime1": 1,
+        "injuryTime2": 10,
+        "currentPeriodStartTimestamp": 1779016162
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1779019479
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 13980068,
       "slug": "genoa-milan",
       "startTimestamp": 1779012000,
@@ -702,7 +785,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 651585,
+          "userCount": 651930,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -741,10 +824,11 @@
       },
       "customId": "MdbsTdb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 2,
       "homeTeam": {
         "name": "Juventus",
         "slug": "juventus",
@@ -755,7 +839,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 1625423,
+        "userCount": 1626302,
         "nameCode": "JUV",
         "disabled": false,
         "national": false,
@@ -793,7 +877,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 313440,
+        "userCount": 313434,
         "nameCode": "FIO",
         "disabled": false,
         "national": false,
@@ -823,15 +907,41 @@
           }
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 0,
+        "display": 0,
+        "period1": 0,
+        "period2": 0,
+        "normaltime": 0
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 2,
+        "display": 2,
+        "period1": 1,
+        "period2": 1,
+        "normaltime": 2
+      },
+      "time": {
+        "injuryTime1": 3,
+        "injuryTime2": 7,
+        "currentPeriodStartTimestamp": 1779016162
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1779019289
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 13980075,
       "slug": "fiorentina-juventus",
       "startTimestamp": 1779012000,
@@ -917,7 +1027,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 651585,
+          "userCount": 651930,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -956,10 +1066,11 @@
       },
       "customId": "oebsMeb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 2,
       "homeTeam": {
         "name": "Pisa",
         "slug": "pisa",
@@ -970,7 +1081,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 65937,
+        "userCount": 65979,
         "nameCode": "PIS",
         "disabled": false,
         "national": false,
@@ -1008,7 +1119,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 1124647,
+        "userCount": 1125173,
         "nameCode": "NAP",
         "disabled": false,
         "national": false,
@@ -1036,15 +1147,42 @@
           "shortNameTranslation": {}
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 0,
+        "display": 0,
+        "period1": 0,
+        "period2": 0,
+        "normaltime": 0
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 3,
+        "display": 3,
+        "period1": 2,
+        "period2": 1,
+        "normaltime": 3
+      },
+      "time": {
+        "injuryTime1": 1,
+        "injuryTime2": 4,
+        "currentPeriodStartTimestamp": 1779016159
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type",
+          "awayScore.normaltime"
+        ],
+        "changeTimestamp": 1779019113
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 13980065,
       "slug": "pisa-napoli",
       "startTimestamp": 1779012000,
@@ -1130,7 +1268,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 651585,
+          "userCount": 651930,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -1169,10 +1307,11 @@
       },
       "customId": "Xdbsbeb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 3,
       "homeTeam": {
         "name": "Inter",
         "slug": "inter",
@@ -1183,7 +1322,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 1967832,
+        "userCount": 1968940,
         "nameCode": "INT",
         "disabled": false,
         "national": false,
@@ -1221,7 +1360,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 108703,
+        "userCount": 108696,
         "nameCode": "VER",
         "disabled": false,
         "national": false,
@@ -1252,15 +1391,41 @@
           }
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 1,
+        "display": 1,
+        "period1": 0,
+        "period2": 1,
+        "normaltime": 1
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 1,
+        "display": 1,
+        "period1": 0,
+        "period2": 1,
+        "normaltime": 1
+      },
+      "time": {
+        "injuryTime1": 1,
+        "injuryTime2": 4,
+        "currentPeriodStartTimestamp": 1779027059
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1779030021
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 13980067,
       "slug": "hellas-verona-inter",
       "startTimestamp": 1779022800,
@@ -1346,7 +1511,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 651585,
+          "userCount": 651930,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -1385,10 +1550,11 @@
       },
       "customId": "KdbsLdb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 2,
       "homeTeam": {
         "name": "Atalanta",
         "slug": "atalanta",
@@ -1399,7 +1565,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 651875,
+        "userCount": 651817,
         "nameCode": "ATA",
         "disabled": false,
         "national": false,
@@ -1439,7 +1605,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 241497,
+        "userCount": 241443,
         "nameCode": "BOL",
         "disabled": false,
         "national": false,
@@ -1467,15 +1633,41 @@
           "shortNameTranslation": {}
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 0,
+        "display": 0,
+        "period1": 0,
+        "period2": 0,
+        "normaltime": 0
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 1,
+        "display": 1,
+        "period1": 0,
+        "period2": 1,
+        "normaltime": 1
+      },
+      "time": {
+        "injuryTime1": 1,
+        "injuryTime2": 4,
+        "currentPeriodStartTimestamp": 1779037403
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1779040385
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": true,
       "id": 13980058,
       "slug": "atalanta-bologna",
       "startTimestamp": 1779033600,
@@ -1561,7 +1753,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 651585,
+          "userCount": 651930,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -1600,10 +1792,11 @@
       },
       "customId": "Wdbsueb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 1,
       "homeTeam": {
         "name": "Cagliari",
         "slug": "cagliari",
@@ -1614,7 +1807,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 115387,
+        "userCount": 115365,
         "nameCode": "CAG",
         "disabled": false,
         "national": false,
@@ -1652,7 +1845,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 144672,
+        "userCount": 144651,
         "nameCode": "TOR",
         "disabled": false,
         "national": false,
@@ -1680,15 +1873,42 @@
           "shortNameTranslation": {}
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 2,
+        "display": 2,
+        "period1": 2,
+        "period2": 0,
+        "normaltime": 2
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 1,
+        "display": 1,
+        "period1": 1,
+        "period2": 0,
+        "normaltime": 1
+      },
+      "time": {
+        "injuryTime1": 2,
+        "injuryTime2": 5,
+        "currentPeriodStartTimestamp": 1779047555
+      },
+      "changes": {
+        "changes": [
+          "eventState.statusIndicator",
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1779050615
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": true,
+      "correctHalftimeAiInsight": true,
       "id": 13980060,
       "slug": "cagliari-torino",
       "startTimestamp": 1779043500,
@@ -1774,7 +1994,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 651585,
+          "userCount": 651930,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -1813,10 +2033,11 @@
       },
       "customId": "OdbsTfb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 2,
       "homeTeam": {
         "name": "Sassuolo",
         "slug": "sassuolo",
@@ -1827,7 +2048,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 118126,
+        "userCount": 118166,
         "nameCode": "SAS",
         "disabled": false,
         "national": false,
@@ -1865,7 +2086,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 116007,
+        "userCount": 115996,
         "nameCode": "LEC",
         "disabled": false,
         "national": false,
@@ -1893,15 +2114,41 @@
           "shortNameTranslation": {}
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 2,
+        "display": 2,
+        "period1": 1,
+        "period2": 1,
+        "normaltime": 2
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 3,
+        "display": 3,
+        "period1": 2,
+        "period2": 1,
+        "normaltime": 3
+      },
+      "time": {
+        "injuryTime1": 2,
+        "injuryTime2": 5,
+        "currentPeriodStartTimestamp": 1779047547
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1779050847
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": false,
       "id": 13980078,
       "slug": "sassuolo-lecce",
       "startTimestamp": 1779043500,
@@ -1987,7 +2234,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 651585,
+          "userCount": 651930,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -2026,10 +2273,11 @@
       },
       "customId": "Vdbslfb",
       "status": {
-        "code": 0,
-        "description": "Not started",
-        "type": "notstarted"
+        "code": 100,
+        "description": "Ended",
+        "type": "finished"
       },
+      "winnerCode": 2,
       "homeTeam": {
         "name": "Udinese",
         "slug": "udinese",
@@ -2040,7 +2288,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 126166,
+        "userCount": 126210,
         "nameCode": "UDI",
         "disabled": false,
         "national": false,
@@ -2078,7 +2326,7 @@
           "slug": "football",
           "id": 1
         },
-        "userCount": 67999,
+        "userCount": 68001,
         "nameCode": "CRE",
         "disabled": false,
         "national": false,
@@ -2106,15 +2354,41 @@
           "shortNameTranslation": {}
         }
       },
-      "homeScore": {},
-      "awayScore": {},
-      "time": {},
-      "changes": {
-        "changeTimestamp": 0
+      "homeScore": {
+        "current": 0,
+        "display": 0,
+        "period1": 0,
+        "period2": 0,
+        "normaltime": 0
       },
-      "hasGlobalHighlights": false,
+      "awayScore": {
+        "current": 1,
+        "display": 1,
+        "period1": 1,
+        "period2": 0,
+        "normaltime": 1
+      },
+      "time": {
+        "injuryTime1": 2,
+        "injuryTime2": 6,
+        "currentPeriodStartTimestamp": 1779047545
+      },
+      "changes": {
+        "changes": [
+          "status.code",
+          "status.description",
+          "status.type"
+        ],
+        "changeTimestamp": 1779050611
+      },
+      "hasGlobalHighlights": true,
+      "hasXg": true,
+      "hasEventPlayerStatistics": true,
+      "hasEventPlayerHeatMap": true,
       "detailId": 1,
       "crowdsourcingDataDisplayEnabled": false,
+      "correctAiInsight": false,
+      "correctHalftimeAiInsight": true,
       "id": 13980076,
       "slug": "cremonese-udinese",
       "startTimestamp": 1779043500,
