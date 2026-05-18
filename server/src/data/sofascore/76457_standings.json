@@ -19,7 +19,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 1967832,
+            "userCount": 1968940,
             "nameCode": "INT",
             "disabled": false,
             "national": false,
@@ -52,14 +52,14 @@
             "id": 804
           },
           "position": 1,
-          "matches": 36,
+          "matches": 37,
           "wins": 27,
-          "scoresFor": 85,
-          "scoresAgainst": 31,
+          "scoresFor": 86,
+          "scoresAgainst": 32,
           "id": 1609091,
           "losses": 5,
-          "draws": 4,
-          "points": 85,
+          "draws": 5,
+          "points": 86,
           "scoreDiffFormatted": "+54"
         },
         {
@@ -73,7 +73,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 1124647,
+            "userCount": 1125173,
             "nameCode": "NAP",
             "disabled": false,
             "national": false,
@@ -106,69 +106,15 @@
             "id": 804
           },
           "position": 2,
-          "matches": 36,
-          "wins": 21,
-          "scoresFor": 54,
+          "matches": 37,
+          "wins": 22,
+          "scoresFor": 57,
           "scoresAgainst": 36,
           "id": 1609097,
           "losses": 8,
           "draws": 7,
-          "points": 70,
-          "scoreDiffFormatted": "+18"
-        },
-        {
-          "team": {
-            "name": "Juventus",
-            "slug": "juventus",
-            "shortName": "Juventus",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 1625423,
-            "nameCode": "JUV",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "IT",
-              "alpha3": "ITA",
-              "name": "Italy",
-              "slug": "italy"
-            },
-            "id": 2687,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#000000",
-              "text": "#000000"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "يوفنتوس",
-                "bn": "জুভেন্টাস",
-                "hi": "जुवेंटस",
-                "ru": "Ювентус"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Champions League",
-            "id": 804
-          },
-          "position": 3,
-          "matches": 36,
-          "wins": 19,
-          "scoresFor": 59,
-          "scoresAgainst": 30,
-          "id": 1609092,
-          "losses": 6,
-          "draws": 11,
-          "points": 68,
-          "scoreDiffFormatted": "+29"
+          "points": 73,
+          "scoreDiffFormatted": "+21"
         },
         {
           "team": {
@@ -181,7 +127,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 1712745,
+            "userCount": 1714586,
             "nameCode": "ACM",
             "disabled": false,
             "national": false,
@@ -213,16 +159,16 @@
             "text": "Champions League",
             "id": 804
           },
-          "position": 4,
-          "matches": 36,
-          "wins": 19,
-          "scoresFor": 50,
-          "scoresAgainst": 32,
+          "position": 3,
+          "matches": 37,
+          "wins": 20,
+          "scoresFor": 52,
+          "scoresAgainst": 33,
           "id": 1609082,
           "losses": 7,
           "draws": 10,
-          "points": 67,
-          "scoreDiffFormatted": "+18"
+          "points": 70,
+          "scoreDiffFormatted": "+19"
         },
         {
           "team": {
@@ -235,7 +181,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 773898,
+            "userCount": 774899,
             "nameCode": "ASR",
             "disabled": false,
             "national": false,
@@ -264,19 +210,19 @@
           },
           "descriptions": [],
           "promotion": {
-            "text": "UEFA Europa League",
-            "id": 808
+            "text": "Champions League",
+            "id": 804
           },
-          "position": 5,
-          "matches": 36,
-          "wins": 21,
-          "scoresFor": 55,
+          "position": 4,
+          "matches": 37,
+          "wins": 22,
+          "scoresFor": 57,
           "scoresAgainst": 31,
           "id": 1609084,
           "losses": 11,
           "draws": 4,
-          "points": 67,
-          "scoreDiffFormatted": "+24"
+          "points": 70,
+          "scoreDiffFormatted": "+26"
         },
         {
           "team": {
@@ -289,7 +235,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 268574,
+            "userCount": 269378,
             "nameCode": "COM",
             "disabled": false,
             "national": false,
@@ -318,16 +264,70 @@
             "text": "UEFA Europa League",
             "id": 808
           },
-          "position": 6,
-          "matches": 36,
-          "wins": 18,
-          "scoresFor": 60,
+          "position": 5,
+          "matches": 37,
+          "wins": 19,
+          "scoresFor": 61,
           "scoresAgainst": 28,
           "id": 1609088,
           "losses": 7,
           "draws": 11,
-          "points": 65,
-          "scoreDiffFormatted": "+32"
+          "points": 68,
+          "scoreDiffFormatted": "+33"
+        },
+        {
+          "team": {
+            "name": "Juventus",
+            "slug": "juventus",
+            "shortName": "Juventus",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 1626302,
+            "nameCode": "JUV",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "IT",
+              "alpha3": "ITA",
+              "name": "Italy",
+              "slug": "italy"
+            },
+            "id": 2687,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#000000",
+              "text": "#000000"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "يوفنتوس",
+                "bn": "জুভেন্টাস",
+                "hi": "जुवेंटस",
+                "ru": "Ювентус"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "UEFA Europa League",
+            "id": 808
+          },
+          "position": 6,
+          "matches": 37,
+          "wins": 19,
+          "scoresFor": 59,
+          "scoresAgainst": 32,
+          "id": 1609092,
+          "losses": 7,
+          "draws": 11,
+          "points": 68,
+          "scoreDiffFormatted": "+27"
         },
         {
           "team": {
@@ -340,7 +340,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 651875,
+            "userCount": 651817,
             "nameCode": "ATA",
             "disabled": false,
             "national": false,
@@ -375,15 +375,15 @@
             "id": 503
           },
           "position": 7,
-          "matches": 36,
+          "matches": 37,
           "wins": 15,
           "scoresFor": 50,
-          "scoresAgainst": 34,
+          "scoresAgainst": 35,
           "id": 1609085,
-          "losses": 8,
+          "losses": 9,
           "draws": 13,
           "points": 58,
-          "scoreDiffFormatted": "+16"
+          "scoreDiffFormatted": "+15"
         },
         {
           "team": {
@@ -396,7 +396,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 241497,
+            "userCount": 241443,
             "nameCode": "BOL",
             "disabled": false,
             "national": false,
@@ -425,15 +425,15 @@
           },
           "descriptions": [],
           "position": 8,
-          "matches": 36,
-          "wins": 15,
-          "scoresFor": 45,
+          "matches": 37,
+          "wins": 16,
+          "scoresFor": 46,
           "scoresAgainst": 43,
           "id": 1609086,
           "losses": 14,
           "draws": 7,
-          "points": 52,
-          "scoreDiffFormatted": "+2"
+          "points": 55,
+          "scoreDiffFormatted": "+3"
         },
         {
           "team": {
@@ -446,7 +446,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 391484,
+            "userCount": 391457,
             "nameCode": "LAZ",
             "disabled": false,
             "national": false,
@@ -475,15 +475,15 @@
           },
           "descriptions": [],
           "position": 9,
-          "matches": 36,
+          "matches": 37,
           "wins": 13,
           "scoresFor": 39,
-          "scoresAgainst": 37,
+          "scoresAgainst": 39,
           "id": 1609093,
-          "losses": 11,
+          "losses": 12,
           "draws": 12,
           "points": 51,
-          "scoreDiffFormatted": "+2"
+          "scoreDiffFormatted": "0"
         },
         {
           "team": {
@@ -496,7 +496,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 126166,
+            "userCount": 126210,
             "nameCode": "UDI",
             "disabled": false,
             "national": false,
@@ -525,15 +525,15 @@
           },
           "descriptions": [],
           "position": 10,
-          "matches": 36,
+          "matches": 37,
           "wins": 14,
           "scoresFor": 45,
-          "scoresAgainst": 46,
+          "scoresAgainst": 47,
           "id": 1609099,
-          "losses": 14,
+          "losses": 15,
           "draws": 8,
           "points": 50,
-          "scoreDiffFormatted": "-1"
+          "scoreDiffFormatted": "-2"
         },
         {
           "team": {
@@ -546,7 +546,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 118126,
+            "userCount": 118166,
             "nameCode": "SAS",
             "disabled": false,
             "national": false,
@@ -575,15 +575,15 @@
           },
           "descriptions": [],
           "position": 11,
-          "matches": 36,
+          "matches": 37,
           "wins": 14,
-          "scoresFor": 44,
-          "scoresAgainst": 46,
+          "scoresFor": 46,
+          "scoresAgainst": 49,
           "id": 1609096,
-          "losses": 15,
+          "losses": 16,
           "draws": 7,
           "points": 49,
-          "scoreDiffFormatted": "-2"
+          "scoreDiffFormatted": "-3"
         },
         {
           "team": {
@@ -596,7 +596,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 144672,
+            "userCount": 144651,
             "nameCode": "TOR",
             "disabled": false,
             "national": false,
@@ -625,15 +625,15 @@
           },
           "descriptions": [],
           "position": 12,
-          "matches": 36,
+          "matches": 37,
           "wins": 12,
-          "scoresFor": 41,
-          "scoresAgainst": 59,
+          "scoresFor": 42,
+          "scoresAgainst": 61,
           "id": 1609098,
-          "losses": 16,
+          "losses": 17,
           "draws": 8,
           "points": 44,
-          "scoreDiffFormatted": "-18"
+          "scoreDiffFormatted": "-19"
         },
         {
           "team": {
@@ -646,7 +646,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 105187,
+            "userCount": 105201,
             "nameCode": "PAR",
             "disabled": false,
             "national": false,
@@ -675,15 +675,15 @@
           },
           "descriptions": [],
           "position": 13,
-          "matches": 36,
+          "matches": 37,
           "wins": 10,
           "scoresFor": 27,
-          "scoresAgainst": 45,
+          "scoresAgainst": 46,
           "id": 1609094,
-          "losses": 14,
+          "losses": 15,
           "draws": 12,
           "points": 42,
-          "scoreDiffFormatted": "-18"
+          "scoreDiffFormatted": "-19"
         },
         {
           "team": {
@@ -696,7 +696,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 126567,
+            "userCount": 126623,
             "nameCode": "GEN",
             "disabled": false,
             "national": false,
@@ -725,15 +725,15 @@
           },
           "descriptions": [],
           "position": 14,
-          "matches": 36,
+          "matches": 37,
           "wins": 10,
-          "scoresFor": 40,
-          "scoresAgainst": 48,
+          "scoresFor": 41,
+          "scoresAgainst": 50,
           "id": 1609089,
-          "losses": 15,
+          "losses": 16,
           "draws": 11,
           "points": 41,
-          "scoreDiffFormatted": "-8"
+          "scoreDiffFormatted": "-9"
         },
         {
           "team": {
@@ -746,7 +746,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 313440,
+            "userCount": 313434,
             "nameCode": "FIO",
             "disabled": false,
             "national": false,
@@ -777,15 +777,15 @@
           },
           "descriptions": [],
           "position": 15,
-          "matches": 36,
-          "wins": 8,
-          "scoresFor": 38,
+          "matches": 37,
+          "wins": 9,
+          "scoresFor": 40,
           "scoresAgainst": 49,
           "id": 1609083,
           "losses": 14,
           "draws": 14,
-          "points": 38,
-          "scoreDiffFormatted": "-11"
+          "points": 41,
+          "scoreDiffFormatted": "-9"
         },
         {
           "team": {
@@ -798,7 +798,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 115387,
+            "userCount": 115365,
             "nameCode": "CAG",
             "disabled": false,
             "national": false,
@@ -827,15 +827,15 @@
           },
           "descriptions": [],
           "position": 16,
-          "matches": 36,
-          "wins": 9,
-          "scoresFor": 36,
-          "scoresAgainst": 51,
+          "matches": 37,
+          "wins": 10,
+          "scoresFor": 38,
+          "scoresAgainst": 52,
           "id": 1609087,
           "losses": 17,
           "draws": 10,
-          "points": 37,
-          "scoreDiffFormatted": "-15"
+          "points": 40,
+          "scoreDiffFormatted": "-14"
         },
         {
           "team": {
@@ -848,7 +848,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 116007,
+            "userCount": 115996,
             "nameCode": "LEC",
             "disabled": false,
             "national": false,
@@ -877,15 +877,15 @@
           },
           "descriptions": [],
           "position": 17,
-          "matches": 36,
-          "wins": 8,
-          "scoresFor": 24,
-          "scoresAgainst": 48,
+          "matches": 37,
+          "wins": 9,
+          "scoresFor": 27,
+          "scoresAgainst": 50,
           "id": 1609101,
           "losses": 20,
           "draws": 8,
-          "points": 32,
-          "scoreDiffFormatted": "-24"
+          "points": 35,
+          "scoreDiffFormatted": "-23"
         },
         {
           "team": {
@@ -898,7 +898,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 67999,
+            "userCount": 68001,
             "nameCode": "CRE",
             "disabled": false,
             "national": false,
@@ -931,15 +931,15 @@
             "id": 3
           },
           "position": 18,
-          "matches": 36,
-          "wins": 7,
-          "scoresFor": 30,
+          "matches": 37,
+          "wins": 8,
+          "scoresFor": 31,
           "scoresAgainst": 53,
           "id": 1609100,
           "losses": 19,
           "draws": 10,
-          "points": 31,
-          "scoreDiffFormatted": "-23"
+          "points": 34,
+          "scoreDiffFormatted": "-22"
         },
         {
           "team": {
@@ -952,7 +952,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 108703,
+            "userCount": 108696,
             "nameCode": "VER",
             "disabled": false,
             "national": false,
@@ -988,14 +988,14 @@
             "id": 3
           },
           "position": 19,
-          "matches": 36,
+          "matches": 37,
           "wins": 3,
-          "scoresFor": 24,
-          "scoresAgainst": 58,
+          "scoresFor": 25,
+          "scoresAgainst": 59,
           "id": 1609090,
           "losses": 22,
-          "draws": 11,
-          "points": 20,
+          "draws": 12,
+          "points": 21,
           "scoreDiffFormatted": "-34"
         },
         {
@@ -1009,7 +1009,7 @@
               "slug": "football",
               "id": 1
             },
-            "userCount": 65937,
+            "userCount": 65979,
             "nameCode": "PIS",
             "disabled": false,
             "national": false,
@@ -1042,15 +1042,15 @@
             "id": 3
           },
           "position": 20,
-          "matches": 36,
+          "matches": 37,
           "wins": 2,
           "scoresFor": 25,
-          "scoresAgainst": 66,
+          "scoresAgainst": 69,
           "id": 1609095,
-          "losses": 22,
+          "losses": 23,
           "draws": 12,
           "points": 18,
-          "scoreDiffFormatted": "-41"
+          "scoreDiffFormatted": "-44"
         }
       ],
       "id": 176904,
@@ -1118,7 +1118,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 651585,
+          "userCount": 651930,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 23,
@@ -1146,7 +1146,7 @@
         }
       },
       "name": "Serie A 25/26",
-      "updatedAtTimestamp": 1778741300
+      "updatedAtTimestamp": 1779054786
     }
   ]
 }
