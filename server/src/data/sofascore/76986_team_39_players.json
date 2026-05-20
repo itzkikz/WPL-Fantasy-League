@@ -2356,8 +2356,8 @@
           "expectedReturn": 9,
           "id": 23042,
           "startDateTimestamp": 1778976000,
-          "updateDateTimestamp": 1779192071,
-          "endDateTimestamp": 1780488071
+          "updateDateTimestamp": 1779235250,
+          "endDateTimestamp": 1780531250
         },
         "sofascoreId": "sandrotonali",
         "country": {
@@ -2589,7 +2589,7 @@
           "expectedReturn": 5,
           "id": 22855,
           "startDateTimestamp": 1778803200,
-          "updateDateTimestamp": 1779192050,
+          "updateDateTimestamp": 1779235242,
           "endDateTimestamp": 1781049600,
           "expectedReturnDateData": {
             "month": 6,
@@ -4845,7 +4845,7 @@
           "expectedReturn": 6,
           "id": 20243,
           "startDateTimestamp": 1767744000,
-          "updateDateTimestamp": 1779192083,
+          "updateDateTimestamp": 1779235254,
           "endDateTimestamp": 1781913600,
           "expectedReturnDateData": {
             "month": 6,
@@ -6665,7 +6665,7 @@
           "expectedReturn": 5,
           "id": 22855,
           "startDateTimestamp": 1778803200,
-          "updateDateTimestamp": 1779192050,
+          "updateDateTimestamp": 1779235242,
           "endDateTimestamp": 1781049600,
           "expectedReturnDateData": {
             "month": 6,
@@ -7122,7 +7122,7 @@
           "expectedReturn": 6,
           "id": 20243,
           "startDateTimestamp": 1767744000,
-          "updateDateTimestamp": 1779192083,
+          "updateDateTimestamp": 1779235254,
           "endDateTimestamp": 1781913600,
           "expectedReturnDateData": {
             "month": 6,
@@ -8251,8 +8251,8 @@
           "expectedReturn": 9,
           "id": 23042,
           "startDateTimestamp": 1778976000,
-          "updateDateTimestamp": 1779192071,
-          "endDateTimestamp": 1780488071
+          "updateDateTimestamp": 1779235250,
+          "endDateTimestamp": 1780531250
         },
         "sofascoreId": "sandrotonali",
         "country": {
@@ -9854,6 +9854,228 @@
     },
     {
       "player": {
+        "name": "Bruno Guimarães",
+        "slug": "bruno-guimaraes",
+        "shortName": "B. Guimarães",
+        "team": {
+          "name": "Newcastle United",
+          "slug": "newcastle-united",
+          "shortName": "Newcastle",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "Premier League",
+            "slug": "premier-league",
+            "category": {
+              "name": "England",
+              "slug": "england",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 10,
+              "country": {
+                "alpha2": "EN",
+                "alpha3": "ENG",
+                "name": "England",
+                "slug": "england"
+              },
+              "id": 1,
+              "flag": "england",
+              "alpha2": "EN",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إنجلترا",
+                  "bn": "ইংল্যান্ড",
+                  "hi": "इंग्लैंड",
+                  "ru": "Англия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "Premier League",
+              "slug": "premier-league",
+              "primaryColorHex": "#3c1c5a",
+              "secondaryColorHex": "#f80158",
+              "category": {
+                "name": "England",
+                "slug": "england",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 10,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 1,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا",
+                    "bn": "ইংল্যান্ড",
+                    "hi": "इंग्लैंड",
+                    "ru": "Англия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 1219767,
+              "country": {},
+              "id": 17,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإنجليزي الممتاز",
+                  "hi": "प्रिमियर लीग",
+                  "bn": "প্রিমিয়ার লীগ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 703,
+            "isLive": false,
+            "id": 1,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "प्रिमियर लीग",
+                "ar": "الدوري الإنجليزي الممتاز",
+                "bn": "প্রিমিয়ার লীগ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "Premier League",
+            "slug": "premier-league",
+            "primaryColorHex": "#3c1c5a",
+            "secondaryColorHex": "#f80158",
+            "category": {
+              "name": "England",
+              "slug": "england",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 10,
+              "country": {
+                "alpha2": "EN",
+                "alpha3": "ENG",
+                "name": "England",
+                "slug": "england"
+              },
+              "id": 1,
+              "flag": "england",
+              "alpha2": "EN",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إنجلترا",
+                  "bn": "ইংল্যান্ড",
+                  "hi": "इंग्लैंड",
+                  "ru": "Англия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 1219767,
+            "country": {},
+            "id": 17,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإنجليزي الممتاز",
+                "hi": "प्रिमियर लीग",
+                "bn": "প্রিমিয়ার লীগ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 931293,
+          "nameCode": "NEW",
+          "disabled": false,
+          "national": false,
+          "type": 0,
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 39,
+          "teamColors": {
+            "primary": "#000000",
+            "secondary": "#ffffff",
+            "text": "#ffffff"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "نيوكاسل يونايتد",
+              "hi": "न्यू कास्सेल यूनाइटेड ऍफ़सी",
+              "ru": "Ньюкасл Юнайтед"
+            },
+            "shortNameTranslation": {
+              "ar": "نيوكاسل",
+              "bn": "নিউক্যাসল",
+              "hi": "न्यूकैसल"
+            }
+          }
+        },
+        "position": "M",
+        "positionsDetailed": [
+          "MC",
+          "DM"
+        ],
+        "jerseyNumber": "39",
+        "height": 182,
+        "dateOfBirth": "1997-11-16T00:00:00+00:00",
+        "preferredFoot": "Right",
+        "userCount": 35633,
+        "deceased": false,
+        "gender": "M",
+        "sofascoreId": "BrunoGuimarães",
+        "country": {
+          "alpha2": "BR",
+          "alpha3": "BRA",
+          "name": "Brazil",
+          "slug": "brazil"
+        },
+        "id": 866469,
+        "shirtNumber": 39,
+        "dateOfBirthTimestamp": 879638400,
+        "contractUntilTimestamp": 1845936000,
+        "proposedMarketValue": 77000000,
+        "proposedMarketValueRaw": {
+          "value": 77000000,
+          "currency": "EUR"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "برونو غيماريش",
+            "bn": "ব্রুনো গুইমারেস",
+            "hi": "ब्रूनो गीमरेस"
+          },
+          "shortNameTranslation": {
+            "ar": "ب. غيمارايش",
+            "bn": "বি. গুইমারেস",
+            "hi": "बी. गीमरेस"
+          }
+        }
+      }
+    },
+    {
+      "player": {
         "name": "Sandro Tonali",
         "firstName": "",
         "lastName": "",
@@ -10050,8 +10272,8 @@
           "expectedReturn": 9,
           "id": 23042,
           "startDateTimestamp": 1778976000,
-          "updateDateTimestamp": 1779192071,
-          "endDateTimestamp": 1780488071
+          "updateDateTimestamp": 1779235250,
+          "endDateTimestamp": 1780531250
         },
         "sofascoreId": "sandrotonali",
         "country": {
@@ -16795,8 +17017,8 @@
           "expectedReturn": 9,
           "id": 23042,
           "startDateTimestamp": 1778976000,
-          "updateDateTimestamp": 1779192071,
-          "endDateTimestamp": 1780488071
+          "updateDateTimestamp": 1779235250,
+          "endDateTimestamp": 1780531250
         },
         "sofascoreId": "sandrotonali",
         "country": {
@@ -21748,7 +21970,7 @@
           "expectedReturn": 5,
           "id": 22855,
           "startDateTimestamp": 1778803200,
-          "updateDateTimestamp": 1779192050,
+          "updateDateTimestamp": 1779235242,
           "endDateTimestamp": 1781049600,
           "expectedReturnDateData": {
             "month": 6,
@@ -22159,7 +22381,7 @@
           "expectedReturn": 6,
           "id": 20243,
           "startDateTimestamp": 1767744000,
-          "updateDateTimestamp": 1779192083,
+          "updateDateTimestamp": 1779235254,
           "endDateTimestamp": 1781913600,
           "expectedReturnDateData": {
             "month": 6,

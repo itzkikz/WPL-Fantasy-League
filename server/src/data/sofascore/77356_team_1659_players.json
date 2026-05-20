@@ -198,7 +198,7 @@
           "expectedReturn": 5,
           "id": 19244,
           "startDateTimestamp": 1774483200,
-          "updateDateTimestamp": 1779192065,
+          "updateDateTimestamp": 1779235248,
           "endDateTimestamp": 1796860800,
           "expectedReturnDateData": {
             "month": 12,
@@ -8019,7 +8019,7 @@
           "expectedReturn": 5,
           "id": 19244,
           "startDateTimestamp": 1774483200,
-          "updateDateTimestamp": 1779192065,
+          "updateDateTimestamp": 1779235248,
           "endDateTimestamp": 1796860800,
           "expectedReturnDateData": {
             "month": 12,
@@ -13115,226 +13115,6 @@
     },
     {
       "player": {
-        "name": "Martial Godo",
-        "slug": "martial-godo",
-        "shortName": "M. Godo",
-        "team": {
-          "name": "RC Strasbourg",
-          "slug": "rc-strasbourg",
-          "shortName": "Strasbourg",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "Ligue 1",
-            "slug": "ligue-1",
-            "category": {
-              "name": "France",
-              "slug": "france",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 6,
-              "country": {
-                "alpha2": "FR",
-                "alpha3": "FRA",
-                "name": "France",
-                "slug": "france"
-              },
-              "id": 7,
-              "flag": "france",
-              "alpha2": "FR",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "فرنسا",
-                  "bn": "ফ্রান্স",
-                  "hi": "फ्रांस",
-                  "ru": "Франция"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "Ligue 1",
-              "slug": "ligue-1",
-              "primaryColorHex": "#091c3e",
-              "secondaryColorHex": "#a9c011",
-              "category": {
-                "name": "France",
-                "slug": "france",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 6,
-                "country": {
-                  "alpha2": "FR",
-                  "alpha3": "FRA",
-                  "name": "France",
-                  "slug": "france"
-                },
-                "id": 7,
-                "flag": "france",
-                "alpha2": "FR",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "فرنسا",
-                    "bn": "ফ্রান্স",
-                    "hi": "फ्रांस",
-                    "ru": "Франция"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 439114,
-              "country": {},
-              "id": 34,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "bn": "লীগ 1",
-                  "ar": "الدوري الفرنسي",
-                  "hi": "लीग 1"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 700,
-            "isLive": false,
-            "id": 4,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "bn": "লীগ 1",
-                "hi": "लीग 1",
-                "ar": "الدوري الفرنسي 1"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Ligue 1",
-            "slug": "ligue-1",
-            "primaryColorHex": "#091c3e",
-            "secondaryColorHex": "#a9c011",
-            "category": {
-              "name": "France",
-              "slug": "france",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 6,
-              "country": {
-                "alpha2": "FR",
-                "alpha3": "FRA",
-                "name": "France",
-                "slug": "france"
-              },
-              "id": 7,
-              "flag": "france",
-              "alpha2": "FR",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "فرنسا",
-                  "bn": "ফ্রান্স",
-                  "hi": "फ्रांस",
-                  "ru": "Франция"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 439114,
-            "country": {},
-            "id": 34,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "bn": "লীগ 1",
-                "ar": "الدوري الفرنسي",
-                "hi": "लीग 1"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 159250,
-          "nameCode": "STR",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "FR",
-            "alpha3": "FRA",
-            "name": "France",
-            "slug": "france"
-          },
-          "id": 1659,
-          "teamColors": {
-            "primary": "#00458e",
-            "secondary": "#ffffff",
-            "text": "#ffffff"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "آر سي ستراسبورغ",
-              "ru": "Страсбур"
-            },
-            "shortNameTranslation": {
-              "ar": "ستراسبورغ",
-              "bn": "স্ট্রাসবার্গ",
-              "hi": "स्ट्रासबर्ग"
-            }
-          }
-        },
-        "position": "M",
-        "positionsDetailed": [
-          "LW",
-          "RW"
-        ],
-        "jerseyNumber": "20",
-        "height": 177,
-        "dateOfBirth": "2003-03-14T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "userCount": 3451,
-        "deceased": false,
-        "gender": "M",
-        "country": {
-          "alpha2": "CI",
-          "alpha3": "CIV",
-          "name": "Côte d'Ivoire",
-          "slug": "cote-divoire"
-        },
-        "id": 1190938,
-        "shirtNumber": 20,
-        "dateOfBirthTimestamp": 1047600000,
-        "contractUntilTimestamp": 1909008000,
-        "proposedMarketValue": 18500000,
-        "proposedMarketValueRaw": {
-          "value": 18500000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "مارسيال جودو",
-            "bn": "মার্শাল গোডো",
-            "hi": "मार्शल गोडो"
-          },
-          "shortNameTranslation": {
-            "ar": "م. جودو",
-            "bn": "এম. গোডো",
-            "hi": "एम. गोडो"
-          }
-        }
-      }
-    },
-    {
-      "player": {
         "name": "Joaquin Panichelli",
         "firstName": "Joaquín Panichelli",
         "slug": "panichelli-joaquin",
@@ -13531,7 +13311,7 @@
           "expectedReturn": 5,
           "id": 19244,
           "startDateTimestamp": 1774483200,
-          "updateDateTimestamp": 1779192065,
+          "updateDateTimestamp": 1779235248,
           "endDateTimestamp": 1796860800,
           "expectedReturnDateData": {
             "month": 12,
@@ -18895,7 +18675,7 @@
           "expectedReturn": 5,
           "id": 19244,
           "startDateTimestamp": 1774483200,
-          "updateDateTimestamp": 1779192065,
+          "updateDateTimestamp": 1779235248,
           "endDateTimestamp": 1796860800,
           "expectedReturnDateData": {
             "month": 12,

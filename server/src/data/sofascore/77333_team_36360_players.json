@@ -12194,6 +12194,223 @@
           }
         }
       }
+    },
+    {
+      "player": {
+        "name": "Yan Diomande",
+        "firstName": "Yan Diomande",
+        "slug": "yan-diomande",
+        "shortName": "Y. Diomande",
+        "team": {
+          "name": "RB Leipzig",
+          "slug": "rb-leipzig",
+          "shortName": "Leipzig",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "Bundesliga",
+            "slug": "bundesliga",
+            "category": {
+              "name": "Germany",
+              "slug": "germany",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 8,
+              "country": {
+                "alpha2": "DE",
+                "alpha3": "DEU",
+                "name": "Germany",
+                "slug": "germany"
+              },
+              "id": 30,
+              "flag": "germany",
+              "alpha2": "DE",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "ألمانيا",
+                  "bn": "জার্মানি",
+                  "hi": "जर्मनी",
+                  "ru": "Германия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "Bundesliga",
+              "slug": "bundesliga",
+              "primaryColorHex": "#e2080e",
+              "secondaryColorHex": "#8e0902",
+              "category": {
+                "name": "Germany",
+                "slug": "germany",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 8,
+                "country": {
+                  "alpha2": "DE",
+                  "alpha3": "DEU",
+                  "name": "Germany",
+                  "slug": "germany"
+                },
+                "id": 30,
+                "flag": "germany",
+                "alpha2": "DE",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "ألمانيا",
+                    "bn": "জার্মানি",
+                    "hi": "जर्मनी",
+                    "ru": "Германия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 537029,
+              "country": {},
+              "id": 35,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "bn": "বুন্দেসলীগা",
+                  "ar": "الدوري الألماني",
+                  "hi": "बुंडेसलीगा"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 698,
+            "isLive": false,
+            "id": 42,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "hi": "बुंडेसलीगा",
+                "ar": "الدوري الألماني",
+                "bn": "বুন্দেসলীগা"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "Bundesliga",
+            "slug": "bundesliga",
+            "primaryColorHex": "#e2080e",
+            "secondaryColorHex": "#8e0902",
+            "category": {
+              "name": "Germany",
+              "slug": "germany",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 8,
+              "country": {
+                "alpha2": "DE",
+                "alpha3": "DEU",
+                "name": "Germany",
+                "slug": "germany"
+              },
+              "id": 30,
+              "flag": "germany",
+              "alpha2": "DE",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "ألمانيا",
+                  "bn": "জার্মানি",
+                  "hi": "जर्मनी",
+                  "ru": "Германия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 537029,
+            "country": {},
+            "id": 35,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "bn": "বুন্দেসলীগা",
+                "ar": "الدوري الألماني",
+                "hi": "बुंडेसलीगा"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 406469,
+          "nameCode": "RBL",
+          "disabled": false,
+          "national": false,
+          "type": 0,
+          "country": {
+            "alpha2": "DE",
+            "alpha3": "DEU",
+            "name": "Germany",
+            "slug": "germany"
+          },
+          "id": 36360,
+          "teamColors": {
+            "primary": "#ffffff",
+            "secondary": "#dd0000",
+            "text": "#dd0000"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "آر بي لايبزيغ",
+              "hi": "RB लैपज़िग",
+              "ru": "РБ Лейпциг"
+            },
+            "shortNameTranslation": {
+              "ar": "لايبزيغ",
+              "bn": "লিপজিগ",
+              "hi": "लीपज़िग"
+            }
+          }
+        },
+        "position": "F",
+        "positionsDetailed": [
+          "RW"
+        ],
+        "jerseyNumber": "49",
+        "height": 180,
+        "dateOfBirth": "2006-11-14T00:00:00+00:00",
+        "preferredFoot": "Right",
+        "userCount": 29789,
+        "deceased": false,
+        "gender": "M",
+        "country": {
+          "alpha2": "CI",
+          "alpha3": "CIV",
+          "name": "Côte d'Ivoire",
+          "slug": "cote-divoire"
+        },
+        "id": 2087085,
+        "shirtNumber": 49,
+        "dateOfBirthTimestamp": 1163462400,
+        "contractUntilTimestamp": 1909008000,
+        "proposedMarketValue": 82000000,
+        "proposedMarketValueRaw": {
+          "value": 82000000,
+          "currency": "EUR"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "ديوماند، يان"
+          },
+          "shortNameTranslation": {
+            "ar": "ي. ديوماند"
+          }
+        }
+      }
     }
   ],
   "supportStaff": [],

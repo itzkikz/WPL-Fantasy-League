@@ -416,8 +416,8 @@
           "expectedReturn": 9,
           "id": 23028,
           "startDateTimestamp": 1778889600,
-          "updateDateTimestamp": 1779192072,
-          "endDateTimestamp": 1780488072
+          "updateDateTimestamp": 1779235250,
+          "endDateTimestamp": 1780531250
         },
         "sofascoreId": "joaopedro",
         "country": {
@@ -1299,7 +1299,7 @@
           "expectedReturn": 7,
           "id": 20817,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1779192086,
+          "updateDateTimestamp": 1779235255,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -2658,7 +2658,7 @@
           "expectedReturn": 7,
           "id": 19829,
           "startDateTimestamp": 1775260800,
-          "updateDateTimestamp": 1779192086,
+          "updateDateTimestamp": 1779235255,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -7952,7 +7952,7 @@
           "expectedReturn": 7,
           "id": 20817,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1779192086,
+          "updateDateTimestamp": 1779235255,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -8184,8 +8184,8 @@
           "expectedReturn": 9,
           "id": 23028,
           "startDateTimestamp": 1778889600,
-          "updateDateTimestamp": 1779192072,
-          "endDateTimestamp": 1780488072
+          "updateDateTimestamp": 1779235250,
+          "endDateTimestamp": 1780531250
         },
         "sofascoreId": "joaopedro",
         "country": {
@@ -12435,234 +12435,6 @@
     },
     {
       "player": {
-        "name": "João Pedro",
-        "slug": "joao-pedro",
-        "shortName": "J. Pedro",
-        "team": {
-          "name": "Chelsea",
-          "slug": "chelsea",
-          "shortName": "Chelsea",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "Premier League",
-            "slug": "premier-league",
-            "category": {
-              "name": "England",
-              "slug": "england",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 10,
-              "country": {
-                "alpha2": "EN",
-                "alpha3": "ENG",
-                "name": "England",
-                "slug": "england"
-              },
-              "id": 1,
-              "flag": "england",
-              "alpha2": "EN",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إنجلترا",
-                  "bn": "ইংল্যান্ড",
-                  "hi": "इंग्लैंड",
-                  "ru": "Англия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "Premier League",
-              "slug": "premier-league",
-              "primaryColorHex": "#3c1c5a",
-              "secondaryColorHex": "#f80158",
-              "category": {
-                "name": "England",
-                "slug": "england",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 10,
-                "country": {
-                  "alpha2": "EN",
-                  "alpha3": "ENG",
-                  "name": "England",
-                  "slug": "england"
-                },
-                "id": 1,
-                "flag": "england",
-                "alpha2": "EN",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إنجلترا",
-                    "bn": "ইংল্যান্ড",
-                    "hi": "इंग्लैंड",
-                    "ru": "Англия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 1219767,
-              "country": {},
-              "id": 17,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإنجليزي الممتاز",
-                  "hi": "प्रिमियर लीग",
-                  "bn": "প্রিমিয়ার লীগ"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 703,
-            "isLive": false,
-            "id": 1,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "प्रिमियर लीग",
-                "ar": "الدوري الإنجليزي الممتاز",
-                "bn": "প্রিমিয়ার লীগ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Premier League",
-            "slug": "premier-league",
-            "primaryColorHex": "#3c1c5a",
-            "secondaryColorHex": "#f80158",
-            "category": {
-              "name": "England",
-              "slug": "england",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 10,
-              "country": {
-                "alpha2": "EN",
-                "alpha3": "ENG",
-                "name": "England",
-                "slug": "england"
-              },
-              "id": 1,
-              "flag": "england",
-              "alpha2": "EN",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إنجلترا",
-                  "bn": "ইংল্যান্ড",
-                  "hi": "इंग्लैंड",
-                  "ru": "Англия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 1219767,
-            "country": {},
-            "id": 17,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإنجليزي الممتاز",
-                "hi": "प्रिमियर लीग",
-                "bn": "প্রিমিয়ার লীগ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 3151386,
-          "nameCode": "CHE",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "EN",
-            "alpha3": "ENG",
-            "name": "England",
-            "slug": "england"
-          },
-          "id": 38,
-          "teamColors": {
-            "primary": "#0310a7",
-            "secondary": "#ffffff",
-            "text": "#ffffff"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "تشيلسي",
-              "bn": "চেলসি",
-              "hi": "चेल्सी",
-              "ru": "Челси"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "position": "F",
-        "positionsDetailed": [
-          "ST",
-          "AM"
-        ],
-        "jerseyNumber": "20",
-        "height": 182,
-        "dateOfBirth": "2001-09-26T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "userCount": 122298,
-        "deceased": false,
-        "gender": "M",
-        "injury": {
-          "reason": "Hamstring Injury",
-          "status": "dayToDay",
-          "expectedReturn": 9,
-          "id": 23028,
-          "startDateTimestamp": 1778889600,
-          "updateDateTimestamp": 1779192072,
-          "endDateTimestamp": 1780488072
-        },
-        "sofascoreId": "joaopedro",
-        "country": {
-          "alpha2": "BR",
-          "alpha3": "BRA",
-          "name": "Brazil",
-          "slug": "brazil"
-        },
-        "id": 975079,
-        "shirtNumber": 20,
-        "dateOfBirthTimestamp": 1001462400,
-        "contractUntilTimestamp": 2003702400,
-        "proposedMarketValue": 69000000,
-        "proposedMarketValueRaw": {
-          "value": 69000000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "جواو بيدرو",
-            "bn": "জন পেড্রো",
-            "hi": "जोआओ पेड्रो"
-          },
-          "shortNameTranslation": {
-            "ar": "ج. بيدرو",
-            "bn": "জে. পেড্রো",
-            "hi": "जे. पेड्रो"
-          }
-        }
-      }
-    },
-    {
-      "player": {
         "name": "Cole Palmer",
         "slug": "cole-palmer",
         "shortName": "C. Palmer",
@@ -13315,227 +13087,6 @@
             "ar": "م. غوستو",
             "bn": "এম. গুস্টো",
             "hi": "एम. गुस्टो"
-          }
-        }
-      }
-    },
-    {
-      "player": {
-        "name": "Andrey Santos",
-        "firstName": "Andrey Santos",
-        "slug": "santos-andrey",
-        "shortName": "A. Santos",
-        "team": {
-          "name": "Chelsea",
-          "slug": "chelsea",
-          "shortName": "Chelsea",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "Premier League",
-            "slug": "premier-league",
-            "category": {
-              "name": "England",
-              "slug": "england",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 10,
-              "country": {
-                "alpha2": "EN",
-                "alpha3": "ENG",
-                "name": "England",
-                "slug": "england"
-              },
-              "id": 1,
-              "flag": "england",
-              "alpha2": "EN",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إنجلترا",
-                  "bn": "ইংল্যান্ড",
-                  "hi": "इंग्लैंड",
-                  "ru": "Англия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "Premier League",
-              "slug": "premier-league",
-              "primaryColorHex": "#3c1c5a",
-              "secondaryColorHex": "#f80158",
-              "category": {
-                "name": "England",
-                "slug": "england",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 10,
-                "country": {
-                  "alpha2": "EN",
-                  "alpha3": "ENG",
-                  "name": "England",
-                  "slug": "england"
-                },
-                "id": 1,
-                "flag": "england",
-                "alpha2": "EN",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إنجلترا",
-                    "bn": "ইংল্যান্ড",
-                    "hi": "इंग्लैंड",
-                    "ru": "Англия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 1219767,
-              "country": {},
-              "id": 17,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإنجليزي الممتاز",
-                  "hi": "प्रिमियर लीग",
-                  "bn": "প্রিমিয়ার লীগ"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 703,
-            "isLive": false,
-            "id": 1,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "प्रिमियर लीग",
-                "ar": "الدوري الإنجليزي الممتاز",
-                "bn": "প্রিমিয়ার লীগ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Premier League",
-            "slug": "premier-league",
-            "primaryColorHex": "#3c1c5a",
-            "secondaryColorHex": "#f80158",
-            "category": {
-              "name": "England",
-              "slug": "england",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 10,
-              "country": {
-                "alpha2": "EN",
-                "alpha3": "ENG",
-                "name": "England",
-                "slug": "england"
-              },
-              "id": 1,
-              "flag": "england",
-              "alpha2": "EN",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إنجلترا",
-                  "bn": "ইংল্যান্ড",
-                  "hi": "इंग्लैंड",
-                  "ru": "Англия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 1219767,
-            "country": {},
-            "id": 17,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإنجليزي الممتاز",
-                "hi": "प्रिमियर लीग",
-                "bn": "প্রিমিয়ার লীগ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 3151386,
-          "nameCode": "CHE",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "EN",
-            "alpha3": "ENG",
-            "name": "England",
-            "slug": "england"
-          },
-          "id": 38,
-          "teamColors": {
-            "primary": "#0310a7",
-            "secondary": "#ffffff",
-            "text": "#ffffff"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "تشيلسي",
-              "bn": "চেলসি",
-              "hi": "चेल्सी",
-              "ru": "Челси"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "position": "M",
-        "positionsDetailed": [
-          "MC",
-          "DM"
-        ],
-        "weight": 77,
-        "jerseyNumber": "17",
-        "height": 180,
-        "dateOfBirth": "2004-05-03T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "userCount": 30707,
-        "deceased": false,
-        "gender": "M",
-        "sofascoreId": "andreysantos_5",
-        "country": {
-          "alpha2": "BR",
-          "alpha3": "BRA",
-          "name": "Brazil",
-          "slug": "brazil"
-        },
-        "id": 1105779,
-        "shirtNumber": 17,
-        "dateOfBirthTimestamp": 1083542400,
-        "contractUntilTimestamp": 1909008000,
-        "proposedMarketValue": 44000000,
-        "proposedMarketValueRaw": {
-          "value": 44000000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "أندري سانتوس",
-            "bn": "সান্তোস, আন্দ্রে",
-            "hi": "सैंटोस, एंड्री"
-          },
-          "shortNameTranslation": {
-            "ar": "أ. سانتوس",
-            "bn": "এ. সান্তোস",
-            "hi": "ए. सैंटोस"
           }
         }
       }
@@ -16696,7 +16247,7 @@
           "expectedReturn": 7,
           "id": 20817,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1779192086,
+          "updateDateTimestamp": 1779235255,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -17094,7 +16645,7 @@
           "expectedReturn": 7,
           "id": 19829,
           "startDateTimestamp": 1775260800,
-          "updateDateTimestamp": 1779192086,
+          "updateDateTimestamp": 1779235255,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -17502,8 +17053,8 @@
           "expectedReturn": 9,
           "id": 23028,
           "startDateTimestamp": 1778889600,
-          "updateDateTimestamp": 1779192072,
-          "endDateTimestamp": 1780488072
+          "updateDateTimestamp": 1779235250,
+          "endDateTimestamp": 1780531250
         },
         "sofascoreId": "joaopedro",
         "country": {

@@ -5000,7 +5000,7 @@
           "expectedReturn": 7,
           "id": 22466,
           "startDateTimestamp": 1778371200,
-          "updateDateTimestamp": 1779192067,
+          "updateDateTimestamp": 1779235249,
           "endDateTimestamp": 1801353600,
           "expectedReturnDateData": {
             "month": 1,
@@ -7556,7 +7556,7 @@
           "expectedReturn": 7,
           "id": 22466,
           "startDateTimestamp": 1778371200,
-          "updateDateTimestamp": 1779192067,
+          "updateDateTimestamp": 1779235249,
           "endDateTimestamp": 1801353600,
           "expectedReturnDateData": {
             "month": 1,
@@ -12618,6 +12618,396 @@
   "playerPreviousTeam": [
     {
       "player": {
+        "name": "Danny Namaso",
+        "firstName": "Danny",
+        "lastName": "Namaso",
+        "slug": "danny-namaso",
+        "shortName": "D. Namaso",
+        "team": {
+          "name": "Auxerre",
+          "slug": "auxerre",
+          "shortName": "Auxerre",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "Ligue 2",
+            "slug": "ligue-2",
+            "category": {
+              "name": "France",
+              "slug": "france",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 6,
+              "country": {
+                "alpha2": "FR",
+                "alpha3": "FRA",
+                "name": "France",
+                "slug": "france"
+              },
+              "id": 7,
+              "flag": "france",
+              "alpha2": "FR",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "فرنسا",
+                  "bn": "ফ্রান্স",
+                  "hi": "फ्रांस",
+                  "ru": "Франция"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "Ligue 2",
+              "slug": "ligue-2",
+              "primaryColorHex": "#091c3e",
+              "secondaryColorHex": "#36d3b4",
+              "category": {
+                "name": "France",
+                "slug": "france",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 6,
+                "country": {
+                  "alpha2": "FR",
+                  "alpha3": "FRA",
+                  "name": "France",
+                  "slug": "france"
+                },
+                "id": 7,
+                "flag": "france",
+                "alpha2": "FR",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "فرنسا",
+                    "bn": "ফ্রান্স",
+                    "hi": "फ्रांस",
+                    "ru": "Франция"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 30824,
+              "country": {},
+              "id": 182,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الفرنسي الدرجة الثانية",
+                  "bn": "লিগ 2",
+                  "hi": "लीग 2"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 345,
+            "isLive": false,
+            "id": 19,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "دوري الدرجة الثانية",
+                "bn": "লিগ 2",
+                "hi": "लीग 2"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "Ligue 1",
+            "slug": "ligue-1",
+            "primaryColorHex": "#091c3e",
+            "secondaryColorHex": "#a9c011",
+            "category": {
+              "name": "France",
+              "slug": "france",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 6,
+              "country": {
+                "alpha2": "FR",
+                "alpha3": "FRA",
+                "name": "France",
+                "slug": "france"
+              },
+              "id": 7,
+              "flag": "france",
+              "alpha2": "FR",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "فرنسا",
+                  "bn": "ফ্রান্স",
+                  "hi": "फ्रांस",
+                  "ru": "Франция"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 439114,
+            "country": {},
+            "id": 34,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "bn": "লীগ 1",
+                "ar": "الدوري الفرنسي",
+                "hi": "लीग 1"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 53153,
+          "nameCode": "AJA",
+          "disabled": false,
+          "national": false,
+          "type": 0,
+          "country": {
+            "alpha2": "FR",
+            "alpha3": "FRA",
+            "name": "France",
+            "slug": "france"
+          },
+          "id": 1646,
+          "teamColors": {
+            "primary": "#ffffff",
+            "secondary": "#0033ff",
+            "text": "#0033ff"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "أوكسير",
+              "bn": "অক্সের",
+              "hi": "ऑक्सेरे",
+              "ru": "Осер"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "position": "F",
+        "positionsDetailed": [
+          "ST",
+          "AM"
+        ],
+        "jerseyNumber": "19",
+        "height": 182,
+        "dateOfBirth": "2000-08-28T00:00:00+00:00",
+        "preferredFoot": "Right",
+        "userCount": 4923,
+        "deceased": false,
+        "gender": "M",
+        "country": {
+          "alpha2": "CM",
+          "alpha3": "CMR",
+          "name": "Cameroon",
+          "slug": "cameroon"
+        },
+        "id": 867440,
+        "shirtNumber": 19,
+        "dateOfBirthTimestamp": 967420800,
+        "contractUntilTimestamp": 1782777600,
+        "proposedMarketValue": 4800000,
+        "proposedMarketValueRaw": {
+          "value": 4800000,
+          "currency": "EUR"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "داني ناماسو",
+            "bn": "ড্যানি নামাসো",
+            "hi": "डैनी नामसो"
+          },
+          "shortNameTranslation": {
+            "ar": "د. ناماسو",
+            "bn": "ডি. লোডার",
+            "hi": "डी. नामसो"
+          }
+        }
+      },
+      "previousTeam": {
+        "name": "FC Porto",
+        "slug": "fc-porto",
+        "shortName": "Porto",
+        "gender": "M",
+        "sport": {
+          "name": "Football",
+          "slug": "football",
+          "id": 1
+        },
+        "tournament": {
+          "name": "Liga Portugal Betclic",
+          "slug": "liga-portugal-betclic",
+          "category": {
+            "name": "Portugal",
+            "slug": "portugal",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 0,
+            "country": {
+              "alpha2": "PT",
+              "alpha3": "PRT",
+              "name": "Portugal",
+              "slug": "portugal"
+            },
+            "id": 44,
+            "flag": "portugal",
+            "alpha2": "PT",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "البرتغال",
+                "ru": "Португалия"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "uniqueTournament": {
+            "name": "Liga Portugal Betclic",
+            "slug": "liga-portugal-betclic",
+            "primaryColorHex": "#ffc501",
+            "secondaryColorHex": "#e6a100",
+            "category": {
+              "name": "Portugal",
+              "slug": "portugal",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 0,
+              "country": {
+                "alpha2": "PT",
+                "alpha3": "PRT",
+                "name": "Portugal",
+                "slug": "portugal"
+              },
+              "id": 44,
+              "flag": "portugal",
+              "alpha2": "PT",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "البرتغال",
+                  "ru": "Португалия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 160703,
+            "country": {},
+            "id": 238,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "دوري بيتكليك البرتغالي",
+                "bn": "লিগা পর্তুগাল বেটক্লিক",
+                "hi": "लीगा पुर्तगाल बेटक्लिक"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "priority": 519,
+          "isLive": false,
+          "id": 52,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "الدوري البرتغالي بيتكليك",
+              "bn": "লিগা পর্তুগাল বেটক্লিক",
+              "hi": "लीगा पुर्तगाल बेटक्लिक"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "primaryUniqueTournament": {
+          "name": "Liga Portugal Betclic",
+          "slug": "liga-portugal-betclic",
+          "primaryColorHex": "#ffc501",
+          "secondaryColorHex": "#e6a100",
+          "category": {
+            "name": "Portugal",
+            "slug": "portugal",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "priority": 0,
+            "country": {
+              "alpha2": "PT",
+              "alpha3": "PRT",
+              "name": "Portugal",
+              "slug": "portugal"
+            },
+            "id": 44,
+            "flag": "portugal",
+            "alpha2": "PT",
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "البرتغال",
+                "ru": "Португалия"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 160703,
+          "country": {},
+          "id": 238,
+          "displayInverseHomeAwayTeams": false,
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "دوري بيتكليك البرتغالي",
+              "bn": "লিগা পর্তুগাল বেটক্লিক",
+              "hi": "लीगा पुर्तगाल बेटक्लिक"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "userCount": 697105,
+        "nameCode": "FCP",
+        "disabled": false,
+        "national": false,
+        "type": 0,
+        "country": {
+          "alpha2": "PT",
+          "alpha3": "PRT",
+          "name": "Portugal",
+          "slug": "portugal"
+        },
+        "id": 3002,
+        "teamColors": {
+          "primary": "#194f93",
+          "secondary": "#ffffff",
+          "text": "#ffffff"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "اف سي بورتو",
+            "hi": "ऍफ़सी पोर्टो",
+            "ru": "Порту"
+          },
+          "shortNameTranslation": {
+            "ar": "بورتو",
+            "bn": "পোর্তো",
+            "hi": "पोर्तो"
+          }
+        }
+      },
+      "transferDate": "2026-07-01T00:00:00+00:00"
+    },
+    {
+      "player": {
         "name": "Bryan Okoh",
         "firstName": "",
         "lastName": "",
@@ -12812,7 +13202,7 @@
           "expectedReturn": 7,
           "id": 22466,
           "startDateTimestamp": 1778371200,
-          "updateDateTimestamp": 1779192067,
+          "updateDateTimestamp": 1779235249,
           "endDateTimestamp": 1801353600,
           "expectedReturnDateData": {
             "month": 1,
@@ -14189,396 +14579,6 @@
     },
     {
       "player": {
-        "name": "Danny Namaso",
-        "firstName": "Danny",
-        "lastName": "Namaso",
-        "slug": "danny-namaso",
-        "shortName": "D. Namaso",
-        "team": {
-          "name": "Auxerre",
-          "slug": "auxerre",
-          "shortName": "Auxerre",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "Ligue 2",
-            "slug": "ligue-2",
-            "category": {
-              "name": "France",
-              "slug": "france",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 6,
-              "country": {
-                "alpha2": "FR",
-                "alpha3": "FRA",
-                "name": "France",
-                "slug": "france"
-              },
-              "id": 7,
-              "flag": "france",
-              "alpha2": "FR",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "فرنسا",
-                  "bn": "ফ্রান্স",
-                  "hi": "फ्रांस",
-                  "ru": "Франция"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "Ligue 2",
-              "slug": "ligue-2",
-              "primaryColorHex": "#091c3e",
-              "secondaryColorHex": "#36d3b4",
-              "category": {
-                "name": "France",
-                "slug": "france",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 6,
-                "country": {
-                  "alpha2": "FR",
-                  "alpha3": "FRA",
-                  "name": "France",
-                  "slug": "france"
-                },
-                "id": 7,
-                "flag": "france",
-                "alpha2": "FR",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "فرنسا",
-                    "bn": "ফ্রান্স",
-                    "hi": "फ्रांस",
-                    "ru": "Франция"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 30824,
-              "country": {},
-              "id": 182,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الفرنسي الدرجة الثانية",
-                  "bn": "লিগ 2",
-                  "hi": "लीग 2"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 345,
-            "isLive": false,
-            "id": 19,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "دوري الدرجة الثانية",
-                "bn": "লিগ 2",
-                "hi": "लीग 2"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Ligue 1",
-            "slug": "ligue-1",
-            "primaryColorHex": "#091c3e",
-            "secondaryColorHex": "#a9c011",
-            "category": {
-              "name": "France",
-              "slug": "france",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 6,
-              "country": {
-                "alpha2": "FR",
-                "alpha3": "FRA",
-                "name": "France",
-                "slug": "france"
-              },
-              "id": 7,
-              "flag": "france",
-              "alpha2": "FR",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "فرنسا",
-                  "bn": "ফ্রান্স",
-                  "hi": "फ्रांस",
-                  "ru": "Франция"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 439114,
-            "country": {},
-            "id": 34,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "bn": "লীগ 1",
-                "ar": "الدوري الفرنسي",
-                "hi": "लीग 1"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 53153,
-          "nameCode": "AJA",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "FR",
-            "alpha3": "FRA",
-            "name": "France",
-            "slug": "france"
-          },
-          "id": 1646,
-          "teamColors": {
-            "primary": "#ffffff",
-            "secondary": "#0033ff",
-            "text": "#0033ff"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "أوكسير",
-              "bn": "অক্সের",
-              "hi": "ऑक्सेरे",
-              "ru": "Осер"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "position": "F",
-        "positionsDetailed": [
-          "ST",
-          "AM"
-        ],
-        "jerseyNumber": "19",
-        "height": 182,
-        "dateOfBirth": "2000-08-28T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "userCount": 4923,
-        "deceased": false,
-        "gender": "M",
-        "country": {
-          "alpha2": "CM",
-          "alpha3": "CMR",
-          "name": "Cameroon",
-          "slug": "cameroon"
-        },
-        "id": 867440,
-        "shirtNumber": 19,
-        "dateOfBirthTimestamp": 967420800,
-        "contractUntilTimestamp": 1782777600,
-        "proposedMarketValue": 4800000,
-        "proposedMarketValueRaw": {
-          "value": 4800000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "داني ناماسو",
-            "bn": "ড্যানি নামাসো",
-            "hi": "डैनी नामसो"
-          },
-          "shortNameTranslation": {
-            "ar": "د. ناماسو",
-            "bn": "ডি. লোডার",
-            "hi": "डी. नामसो"
-          }
-        }
-      },
-      "previousTeam": {
-        "name": "FC Porto",
-        "slug": "fc-porto",
-        "shortName": "Porto",
-        "gender": "M",
-        "sport": {
-          "name": "Football",
-          "slug": "football",
-          "id": 1
-        },
-        "tournament": {
-          "name": "Liga Portugal Betclic",
-          "slug": "liga-portugal-betclic",
-          "category": {
-            "name": "Portugal",
-            "slug": "portugal",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "priority": 0,
-            "country": {
-              "alpha2": "PT",
-              "alpha3": "PRT",
-              "name": "Portugal",
-              "slug": "portugal"
-            },
-            "id": 44,
-            "flag": "portugal",
-            "alpha2": "PT",
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "البرتغال",
-                "ru": "Португалия"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "uniqueTournament": {
-            "name": "Liga Portugal Betclic",
-            "slug": "liga-portugal-betclic",
-            "primaryColorHex": "#ffc501",
-            "secondaryColorHex": "#e6a100",
-            "category": {
-              "name": "Portugal",
-              "slug": "portugal",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 0,
-              "country": {
-                "alpha2": "PT",
-                "alpha3": "PRT",
-                "name": "Portugal",
-                "slug": "portugal"
-              },
-              "id": 44,
-              "flag": "portugal",
-              "alpha2": "PT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "البرتغال",
-                  "ru": "Португалия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 160703,
-            "country": {},
-            "id": 238,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "دوري بيتكليك البرتغالي",
-                "bn": "লিগা পর্তুগাল বেটক্লিক",
-                "hi": "लीगा पुर्तगाल बेटक्लिक"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "priority": 519,
-          "isLive": false,
-          "id": 52,
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "الدوري البرتغالي بيتكليك",
-              "bn": "লিগা পর্তুগাল বেটক্লিক",
-              "hi": "लीगा पुर्तगाल बेटक्लिक"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "primaryUniqueTournament": {
-          "name": "Liga Portugal Betclic",
-          "slug": "liga-portugal-betclic",
-          "primaryColorHex": "#ffc501",
-          "secondaryColorHex": "#e6a100",
-          "category": {
-            "name": "Portugal",
-            "slug": "portugal",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "priority": 0,
-            "country": {
-              "alpha2": "PT",
-              "alpha3": "PRT",
-              "name": "Portugal",
-              "slug": "portugal"
-            },
-            "id": 44,
-            "flag": "portugal",
-            "alpha2": "PT",
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "البرتغال",
-                "ru": "Португалия"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 160703,
-          "country": {},
-          "id": 238,
-          "displayInverseHomeAwayTeams": false,
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "دوري بيتكليك البرتغالي",
-              "bn": "লিগা পর্তুগাল বেটক্লিক",
-              "hi": "लीगा पुर्तगाल बेटक्लिक"
-            },
-            "shortNameTranslation": {}
-          }
-        },
-        "userCount": 697105,
-        "nameCode": "FCP",
-        "disabled": false,
-        "national": false,
-        "type": 0,
-        "country": {
-          "alpha2": "PT",
-          "alpha3": "PRT",
-          "name": "Portugal",
-          "slug": "portugal"
-        },
-        "id": 3002,
-        "teamColors": {
-          "primary": "#194f93",
-          "secondary": "#ffffff",
-          "text": "#ffffff"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "اف سي بورتو",
-            "hi": "ऍफ़सी पोर्टो",
-            "ru": "Порту"
-          },
-          "shortNameTranslation": {
-            "ar": "بورتو",
-            "bn": "পোর্তো",
-            "hi": "पोर्तो"
-          }
-        }
-      },
-      "transferDate": "2025-08-17T00:00:00+00:00"
-    },
-    {
-      "player": {
         "name": "Oussama El Azzouzi",
         "firstName": "Oussama El Azzouzi",
         "lastName": "",
@@ -15365,11 +15365,11 @@
     },
     {
       "player": {
-        "name": "Marvin Senaya",
-        "firstName": "Marvin Senaya",
+        "name": "Josué Casimir",
+        "firstName": "",
         "lastName": "",
-        "slug": "marvin-senaya",
-        "shortName": "M. Senaya",
+        "slug": "josue-casimir",
+        "shortName": "J. Casimir",
         "team": {
           "name": "Auxerre",
           "slug": "auxerre",
@@ -15542,50 +15542,49 @@
             "shortNameTranslation": {}
           }
         },
-        "position": "D",
+        "position": "M",
         "positionsDetailed": [
-          "DR",
+          "RW",
           "MR"
         ],
-        "jerseyNumber": "29",
-        "height": 179,
-        "dateOfBirth": "2001-01-28T00:00:00+00:00",
+        "jerseyNumber": "7",
+        "height": 178,
+        "dateOfBirth": "2001-09-24T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 819,
-        "deceased": false,
+        "userCount": 11447,
         "gender": "M",
         "country": {
-          "alpha2": "GH",
-          "alpha3": "GHA",
-          "name": "Ghana",
-          "slug": "ghana"
+          "alpha2": "HT",
+          "alpha3": "HTI",
+          "name": "Haiti",
+          "slug": "haiti"
         },
-        "id": 1087805,
-        "shirtNumber": 29,
-        "dateOfBirthTimestamp": 980640000,
-        "contractUntilTimestamp": 1877472000,
-        "proposedMarketValue": 3100000,
+        "id": 1035986,
+        "shirtNumber": 7,
+        "dateOfBirthTimestamp": 1001289600,
+        "contractUntilTimestamp": 1845936000,
+        "proposedMarketValue": 3200000,
         "proposedMarketValueRaw": {
-          "value": 3100000,
+          "value": 3200000,
           "currency": "EUR"
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "مارفن سينايا",
-            "bn": "মারভিন সেনায়া",
-            "hi": "मार्विन सेनया"
+            "ar": "جوشوا كازيمير",
+            "bn": "জোশুয়া ক্যাসিমির",
+            "hi": "जोस्यू कासिमिर"
           },
           "shortNameTranslation": {
-            "ar": "م. سينايا",
-            "bn": "এম. সেনায়া",
-            "hi": "एम. सेनया"
+            "ar": "ج. كازيمير",
+            "bn": "জে. কাসিমির",
+            "hi": "जे. कासिमिर"
           }
         }
       },
       "previousTeam": {
-        "name": "RC Strasbourg",
-        "slug": "rc-strasbourg",
-        "shortName": "Strasbourg",
+        "name": "Le Havre",
+        "slug": "le-havre",
+        "shortName": "Le Havre",
         "gender": "M",
         "sport": {
           "name": "Football",
@@ -15593,8 +15592,8 @@
           "id": 1
         },
         "tournament": {
-          "name": "Ligue 1",
-          "slug": "ligue-1",
+          "name": "Ligue 2",
+          "slug": "ligue-2",
           "category": {
             "name": "France",
             "slug": "france",
@@ -15624,10 +15623,10 @@
             }
           },
           "uniqueTournament": {
-            "name": "Ligue 1",
-            "slug": "ligue-1",
+            "name": "Ligue 2",
+            "slug": "ligue-2",
             "primaryColorHex": "#091c3e",
-            "secondaryColorHex": "#a9c011",
+            "secondaryColorHex": "#36d3b4",
             "category": {
               "name": "France",
               "slug": "france",
@@ -15656,27 +15655,27 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 439114,
+            "userCount": 30824,
             "country": {},
-            "id": 34,
+            "id": 182,
             "displayInverseHomeAwayTeams": false,
             "fieldTranslations": {
               "nameTranslation": {
-                "bn": "লীগ 1",
-                "ar": "الدوري الفرنسي",
-                "hi": "लीग 1"
+                "ar": "الدوري الفرنسي الدرجة الثانية",
+                "bn": "লিগ 2",
+                "hi": "लीग 2"
               },
               "shortNameTranslation": {}
             }
           },
-          "priority": 700,
+          "priority": 345,
           "isLive": false,
-          "id": 4,
+          "id": 19,
           "fieldTranslations": {
             "nameTranslation": {
-              "bn": "লীগ 1",
-              "hi": "लीग 1",
-              "ar": "الدوري الفرنسي 1"
+              "ar": "دوري الدرجة الثانية",
+              "bn": "লিগ 2",
+              "hi": "लीग 2"
             },
             "shortNameTranslation": {}
           }
@@ -15727,8 +15726,8 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 159250,
-        "nameCode": "STR",
+        "userCount": 55770,
+        "nameCode": "HAC",
         "disabled": false,
         "national": false,
         "type": 0,
@@ -15738,22 +15737,20 @@
           "name": "France",
           "slug": "france"
         },
-        "id": 1659,
+        "id": 1662,
         "teamColors": {
-          "primary": "#00458e",
-          "secondary": "#ffffff",
-          "text": "#ffffff"
+          "primary": "#3399ff",
+          "secondary": "#3399ff",
+          "text": "#3399ff"
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "آر سي ستراسبورغ",
-            "ru": "Страсбур"
+            "ar": "لوهافر",
+            "bn": "লে হাভরে",
+            "hi": "ले हावरे",
+            "ru": "Гавр"
           },
-          "shortNameTranslation": {
-            "ar": "ستراسبورغ",
-            "bn": "স্ট্রাসবার্গ",
-            "hi": "स्ट्रासबर्ग"
-          }
+          "shortNameTranslation": {}
         }
       },
       "transferDate": "2025-07-01T00:00:00+00:00"
@@ -16145,11 +16142,11 @@
     },
     {
       "player": {
-        "name": "Josué Casimir",
-        "firstName": "",
+        "name": "Marvin Senaya",
+        "firstName": "Marvin Senaya",
         "lastName": "",
-        "slug": "josue-casimir",
-        "shortName": "J. Casimir",
+        "slug": "marvin-senaya",
+        "shortName": "M. Senaya",
         "team": {
           "name": "Auxerre",
           "slug": "auxerre",
@@ -16322,49 +16319,50 @@
             "shortNameTranslation": {}
           }
         },
-        "position": "M",
+        "position": "D",
         "positionsDetailed": [
-          "RW",
+          "DR",
           "MR"
         ],
-        "jerseyNumber": "7",
-        "height": 178,
-        "dateOfBirth": "2001-09-24T00:00:00+00:00",
+        "jerseyNumber": "29",
+        "height": 179,
+        "dateOfBirth": "2001-01-28T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 11447,
+        "userCount": 819,
+        "deceased": false,
         "gender": "M",
         "country": {
-          "alpha2": "HT",
-          "alpha3": "HTI",
-          "name": "Haiti",
-          "slug": "haiti"
+          "alpha2": "GH",
+          "alpha3": "GHA",
+          "name": "Ghana",
+          "slug": "ghana"
         },
-        "id": 1035986,
-        "shirtNumber": 7,
-        "dateOfBirthTimestamp": 1001289600,
-        "contractUntilTimestamp": 1845936000,
-        "proposedMarketValue": 3200000,
+        "id": 1087805,
+        "shirtNumber": 29,
+        "dateOfBirthTimestamp": 980640000,
+        "contractUntilTimestamp": 1877472000,
+        "proposedMarketValue": 3100000,
         "proposedMarketValueRaw": {
-          "value": 3200000,
+          "value": 3100000,
           "currency": "EUR"
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "جوشوا كازيمير",
-            "bn": "জোশুয়া ক্যাসিমির",
-            "hi": "जोस्यू कासिमिर"
+            "ar": "مارفن سينايا",
+            "bn": "মারভিন সেনায়া",
+            "hi": "मार्विन सेनया"
           },
           "shortNameTranslation": {
-            "ar": "ج. كازيمير",
-            "bn": "জে. কাসিমির",
-            "hi": "जे. कासिमिर"
+            "ar": "م. سينايا",
+            "bn": "এম. সেনায়া",
+            "hi": "एम. सेनया"
           }
         }
       },
       "previousTeam": {
-        "name": "Le Havre",
-        "slug": "le-havre",
-        "shortName": "Le Havre",
+        "name": "RC Strasbourg",
+        "slug": "rc-strasbourg",
+        "shortName": "Strasbourg",
         "gender": "M",
         "sport": {
           "name": "Football",
@@ -16372,8 +16370,8 @@
           "id": 1
         },
         "tournament": {
-          "name": "Ligue 2",
-          "slug": "ligue-2",
+          "name": "Ligue 1",
+          "slug": "ligue-1",
           "category": {
             "name": "France",
             "slug": "france",
@@ -16403,10 +16401,10 @@
             }
           },
           "uniqueTournament": {
-            "name": "Ligue 2",
-            "slug": "ligue-2",
+            "name": "Ligue 1",
+            "slug": "ligue-1",
             "primaryColorHex": "#091c3e",
-            "secondaryColorHex": "#36d3b4",
+            "secondaryColorHex": "#a9c011",
             "category": {
               "name": "France",
               "slug": "france",
@@ -16435,27 +16433,27 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 30824,
+            "userCount": 439114,
             "country": {},
-            "id": 182,
+            "id": 34,
             "displayInverseHomeAwayTeams": false,
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "الدوري الفرنسي الدرجة الثانية",
-                "bn": "লিগ 2",
-                "hi": "लीग 2"
+                "bn": "লীগ 1",
+                "ar": "الدوري الفرنسي",
+                "hi": "लीग 1"
               },
               "shortNameTranslation": {}
             }
           },
-          "priority": 345,
+          "priority": 700,
           "isLive": false,
-          "id": 19,
+          "id": 4,
           "fieldTranslations": {
             "nameTranslation": {
-              "ar": "دوري الدرجة الثانية",
-              "bn": "লিগ 2",
-              "hi": "लीग 2"
+              "bn": "লীগ 1",
+              "hi": "लीग 1",
+              "ar": "الدوري الفرنسي 1"
             },
             "shortNameTranslation": {}
           }
@@ -16506,8 +16504,8 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 55770,
-        "nameCode": "HAC",
+        "userCount": 159250,
+        "nameCode": "STR",
         "disabled": false,
         "national": false,
         "type": 0,
@@ -16517,20 +16515,22 @@
           "name": "France",
           "slug": "france"
         },
-        "id": 1662,
+        "id": 1659,
         "teamColors": {
-          "primary": "#3399ff",
-          "secondary": "#3399ff",
-          "text": "#3399ff"
+          "primary": "#00458e",
+          "secondary": "#ffffff",
+          "text": "#ffffff"
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "لوهافر",
-            "bn": "লে হাভরে",
-            "hi": "ले हावरे",
-            "ru": "Гавр"
+            "ar": "آر سي ستراسبورغ",
+            "ru": "Страсбур"
           },
-          "shortNameTranslation": {}
+          "shortNameTranslation": {
+            "ar": "ستراسبورغ",
+            "bn": "স্ট্রাসবার্গ",
+            "hi": "स्ट्रासबर्ग"
+          }
         }
       },
       "transferDate": "2025-07-01T00:00:00+00:00"

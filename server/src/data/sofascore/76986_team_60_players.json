@@ -3515,7 +3515,7 @@
           "expectedReturn": 7,
           "id": 20278,
           "startDateTimestamp": 1769040000,
-          "updateDateTimestamp": 1779192050,
+          "updateDateTimestamp": 1779235242,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -3780,30 +3780,7 @@
             "bn": "এ. জিমেনেজ",
             "hi": "ए. जिमेनेज़"
           }
-        },
-        "activeSeasonSuspensions": [
-          {
-            "reason": "club_decision",
-            "type": "matches",
-            "matches": 2,
-            "id": 3476,
-            "startDateTimestamp": 1778249610,
-            "endDateTimestamp": 1779226200,
-            "uniqueTournament": {
-              "id": 17,
-              "name": "Premier League",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإنجليزي الممتاز",
-                  "hi": "प्रिमियर लीग",
-                  "bn": "প্রিমিয়ার লীগ"
-                },
-                "shortNameTranslation": {}
-              },
-              "slug": "premier-league"
-            }
-          }
-        ]
+        }
       }
     },
     {
@@ -5965,7 +5942,7 @@
           "expectedReturn": 7,
           "id": 20278,
           "startDateTimestamp": 1769040000,
-          "updateDateTimestamp": 1779192050,
+          "updateDateTimestamp": 1779235242,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -6886,30 +6863,7 @@
             "bn": "এ. জিমেনেজ",
             "hi": "ए. जिमेनेज़"
           }
-        },
-        "activeSeasonSuspensions": [
-          {
-            "reason": "club_decision",
-            "type": "matches",
-            "matches": 2,
-            "id": 3476,
-            "startDateTimestamp": 1778249610,
-            "endDateTimestamp": 1779226200,
-            "uniqueTournament": {
-              "id": 17,
-              "name": "Premier League",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإنجليزي الممتاز",
-                  "hi": "प्रिमियर लीग",
-                  "bn": "প্রিমিয়ার লীগ"
-                },
-                "shortNameTranslation": {}
-              },
-              "slug": "premier-league"
-            }
-          }
-        ]
+        }
       }
     },
     {
@@ -11566,6 +11520,226 @@
     },
     {
       "player": {
+        "name": "Ben Gannon-Doak",
+        "firstName": "Ben Doak",
+        "lastName": "",
+        "slug": "ben-doak",
+        "shortName": "B. Doak",
+        "team": {
+          "name": "Bournemouth",
+          "slug": "bournemouth",
+          "shortName": "Bournemouth",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "Championship",
+            "slug": "championship",
+            "category": {
+              "name": "England",
+              "slug": "england",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 10,
+              "country": {
+                "alpha2": "EN",
+                "alpha3": "ENG",
+                "name": "England",
+                "slug": "england"
+              },
+              "id": 1,
+              "flag": "england",
+              "alpha2": "EN",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إنجلترا",
+                  "bn": "ইংল্যান্ড",
+                  "hi": "इंग्लैंड",
+                  "ru": "Англия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "Championship",
+              "slug": "championship",
+              "primaryColorHex": "#20429a",
+              "secondaryColorHex": "#ac944a",
+              "category": {
+                "name": "England",
+                "slug": "england",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 10,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 1,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا",
+                    "bn": "ইংল্যান্ড",
+                    "hi": "इंग्लैंड",
+                    "ru": "Англия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 128188,
+              "country": {},
+              "id": 18,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "bn": "চ্যাম্পিয়নশিপ",
+                  "hi": "चैंपियनशिप",
+                  "ar": "دوري البطولة الإنجليزية"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 359,
+            "isLive": false,
+            "id": 2,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "تشامبيونشيب",
+                "bn": "চ্যাম্পিয়নশিপ",
+                "hi": "चैंपियनशिप"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "Premier League",
+            "slug": "premier-league",
+            "primaryColorHex": "#3c1c5a",
+            "secondaryColorHex": "#f80158",
+            "category": {
+              "name": "England",
+              "slug": "england",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 10,
+              "country": {
+                "alpha2": "EN",
+                "alpha3": "ENG",
+                "name": "England",
+                "slug": "england"
+              },
+              "id": 1,
+              "flag": "england",
+              "alpha2": "EN",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إنجلترا",
+                  "bn": "ইংল্যান্ড",
+                  "hi": "इंग्लैंड",
+                  "ru": "Англия"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 1219767,
+            "country": {},
+            "id": 17,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإنجليزي الممتاز",
+                "hi": "प्रिमियर लीग",
+                "bn": "প্রিমিয়ার লীগ"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 316539,
+          "nameCode": "BOU",
+          "disabled": false,
+          "national": false,
+          "type": 0,
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 60,
+          "teamColors": {
+            "primary": "#000000",
+            "secondary": "#cc0000",
+            "text": "#cc0000"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "بورنموث",
+              "bn": "বোর্নেমাউথ",
+              "hi": "बोर्नमाउथ",
+              "ru": "Борнмут"
+            },
+            "shortNameTranslation": {}
+          }
+        },
+        "position": "M",
+        "positionsDetailed": [
+          "RW"
+        ],
+        "jerseyNumber": "11",
+        "height": 174,
+        "dateOfBirth": "2005-11-11T00:00:00+00:00",
+        "preferredFoot": "Right",
+        "userCount": 6814,
+        "deceased": false,
+        "gender": "M",
+        "sofascoreId": "bendoak._",
+        "country": {
+          "alpha2": "SX",
+          "alpha3": "SCO",
+          "name": "Scotland",
+          "slug": "scotland"
+        },
+        "id": 1154861,
+        "shirtNumber": 11,
+        "dateOfBirthTimestamp": 1131667200,
+        "contractUntilTimestamp": 1909008000,
+        "proposedMarketValue": 15500000,
+        "proposedMarketValueRaw": {
+          "value": 15500000,
+          "currency": "EUR"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "بن دوك",
+            "bn": "বেন ডোয়াক",
+            "hi": "बेन डोक"
+          },
+          "shortNameTranslation": {
+            "ar": "ب. دوك",
+            "bn": "বি. দোয়াক",
+            "hi": "बी. डोक"
+          }
+        }
+      }
+    },
+    {
+      "player": {
         "name": "Julio Soler",
         "firstName": "Julio Soler",
         "slug": "julio-soler",
@@ -11761,7 +11935,7 @@
           "expectedReturn": 7,
           "id": 20278,
           "startDateTimestamp": 1769040000,
-          "updateDateTimestamp": 1779192050,
+          "updateDateTimestamp": 1779235242,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,
@@ -12469,30 +12643,7 @@
             "bn": "এ. জিমেনেজ",
             "hi": "ए. जिमेनेज़"
           }
-        },
-        "activeSeasonSuspensions": [
-          {
-            "reason": "club_decision",
-            "type": "matches",
-            "matches": 2,
-            "id": 3476,
-            "startDateTimestamp": 1778249610,
-            "endDateTimestamp": 1779226200,
-            "uniqueTournament": {
-              "id": 17,
-              "name": "Premier League",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإنجليزي الممتاز",
-                  "hi": "प्रिमियर लीग",
-                  "bn": "প্রিমিয়ার লীগ"
-                },
-                "shortNameTranslation": {}
-              },
-              "slug": "premier-league"
-            }
-          }
-        ]
+        }
       },
       "previousTeam": {
         "name": "Milan",
@@ -17015,7 +17166,7 @@
           "expectedReturn": 7,
           "id": 20278,
           "startDateTimestamp": 1769040000,
-          "updateDateTimestamp": 1779192050,
+          "updateDateTimestamp": 1779235242,
           "endDateTimestamp": 1780185600,
           "expectedReturnDateData": {
             "month": 5,

@@ -198,7 +198,7 @@
           "expectedReturn": 5,
           "id": 20519,
           "startDateTimestamp": 1776038400,
-          "updateDateTimestamp": 1779192052,
+          "updateDateTimestamp": 1779235243,
           "endDateTimestamp": 1781049600,
           "expectedReturnDateData": {
             "month": 6,
@@ -4877,7 +4877,7 @@
           "expectedReturn": 5,
           "id": 23065,
           "startDateTimestamp": 1779062400,
-          "updateDateTimestamp": 1779192057,
+          "updateDateTimestamp": 1779235244,
           "endDateTimestamp": 1794268800,
           "expectedReturnDateData": {
             "month": 11,
@@ -8858,7 +8858,7 @@
           "expectedReturn": 5,
           "id": 20519,
           "startDateTimestamp": 1776038400,
-          "updateDateTimestamp": 1779192052,
+          "updateDateTimestamp": 1779235243,
           "endDateTimestamp": 1781049600,
           "expectedReturnDateData": {
             "month": 6,
@@ -9549,222 +9549,6 @@
           },
           "shortNameTranslation": {
             "ar": "ل. بالبو"
-          }
-        }
-      }
-    },
-    {
-      "player": {
-        "name": "Eman Košpo",
-        "firstName": "Eman Kospo",
-        "slug": "eman-kospo",
-        "shortName": "E. Kospo",
-        "team": {
-          "name": "Fiorentina",
-          "slug": "fiorentina",
-          "shortName": "Fiorentina",
-          "gender": "M",
-          "sport": {
-            "name": "Football",
-            "slug": "football",
-            "id": 1
-          },
-          "tournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "uniqueTournament": {
-              "name": "Serie A",
-              "slug": "serie-a",
-              "primaryColorHex": "#09519e",
-              "secondaryColorHex": "#008fd7",
-              "category": {
-                "name": "Italy",
-                "slug": "italy",
-                "sport": {
-                  "name": "Football",
-                  "slug": "football",
-                  "id": 1
-                },
-                "priority": 7,
-                "country": {
-                  "alpha2": "IT",
-                  "alpha3": "ITA",
-                  "name": "Italy",
-                  "slug": "italy"
-                },
-                "id": 31,
-                "flag": "italy",
-                "alpha2": "IT",
-                "fieldTranslations": {
-                  "nameTranslation": {
-                    "ar": "إيطاليا",
-                    "bn": "ইতালি",
-                    "hi": "इटली",
-                    "ru": "Италия"
-                  },
-                  "shortNameTranslation": {}
-                }
-              },
-              "userCount": 652607,
-              "country": {},
-              "id": 23,
-              "displayInverseHomeAwayTeams": false,
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "الدوري الإيطالي",
-                  "hi": "सीरी ए",
-                  "bn": "সিরি আ"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "priority": 702,
-            "isLive": false,
-            "id": 33,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "hi": "सीरी ए",
-                "ar": "الدوري الإيطالي",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "primaryUniqueTournament": {
-            "name": "Serie A",
-            "slug": "serie-a",
-            "primaryColorHex": "#09519e",
-            "secondaryColorHex": "#008fd7",
-            "category": {
-              "name": "Italy",
-              "slug": "italy",
-              "sport": {
-                "name": "Football",
-                "slug": "football",
-                "id": 1
-              },
-              "priority": 7,
-              "country": {
-                "alpha2": "IT",
-                "alpha3": "ITA",
-                "name": "Italy",
-                "slug": "italy"
-              },
-              "id": 31,
-              "flag": "italy",
-              "alpha2": "IT",
-              "fieldTranslations": {
-                "nameTranslation": {
-                  "ar": "إيطاليا",
-                  "bn": "ইতালি",
-                  "hi": "इटली",
-                  "ru": "Италия"
-                },
-                "shortNameTranslation": {}
-              }
-            },
-            "userCount": 652607,
-            "country": {},
-            "id": 23,
-            "displayInverseHomeAwayTeams": false,
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "الدوري الإيطالي",
-                "hi": "सीरी ए",
-                "bn": "সিরি আ"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "userCount": 313915,
-          "nameCode": "FIO",
-          "disabled": false,
-          "national": false,
-          "type": 0,
-          "country": {
-            "alpha2": "IT",
-            "alpha3": "ITA",
-            "name": "Italy",
-            "slug": "italy"
-          },
-          "id": 2693,
-          "teamColors": {
-            "primary": "#542baa",
-            "secondary": "#ffffff",
-            "text": "#ffffff"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "فيورنتينا",
-              "bn": "ফিওরেন্টিনা",
-              "hi": "फियोरेंटीना",
-              "ru": "Фиорентина"
-            },
-            "shortNameTranslation": {
-              "ar": "فيورنتينا"
-            }
-          }
-        },
-        "position": "D",
-        "positionsDetailed": [
-          "DC"
-        ],
-        "jerseyNumber": "23",
-        "height": 191,
-        "dateOfBirth": "2007-05-17T00:00:00+00:00",
-        "preferredFoot": "Right",
-        "userCount": 2497,
-        "deceased": false,
-        "gender": "M",
-        "country": {
-          "alpha2": "BA",
-          "alpha3": "BIH",
-          "name": "Bosnia & Herzegovina",
-          "slug": "bosnia-and-herzegovina"
-        },
-        "id": 1542041,
-        "shirtNumber": 23,
-        "dateOfBirthTimestamp": 1179360000,
-        "contractUntilTimestamp": 1909008000,
-        "proposedMarketValue": 1600000,
-        "proposedMarketValueRaw": {
-          "value": 1600000,
-          "currency": "EUR"
-        },
-        "fieldTranslations": {
-          "nameTranslation": {
-            "ar": "إيمان كوسبو"
-          },
-          "shortNameTranslation": {
-            "ar": "إ. كوسبو"
           }
         }
       }
@@ -18322,7 +18106,7 @@
           "expectedReturn": 5,
           "id": 20519,
           "startDateTimestamp": 1776038400,
-          "updateDateTimestamp": 1779192052,
+          "updateDateTimestamp": 1779235243,
           "endDateTimestamp": 1781049600,
           "expectedReturnDateData": {
             "month": 6,
@@ -18729,7 +18513,7 @@
           "expectedReturn": 5,
           "id": 23065,
           "startDateTimestamp": 1779062400,
-          "updateDateTimestamp": 1779192057,
+          "updateDateTimestamp": 1779235244,
           "endDateTimestamp": 1794268800,
           "expectedReturnDateData": {
             "month": 11,

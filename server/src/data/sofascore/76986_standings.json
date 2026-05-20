@@ -109,14 +109,14 @@
             "id": 804
           },
           "position": 2,
-          "matches": 36,
+          "matches": 37,
           "wins": 23,
-          "scoresFor": 75,
-          "scoresAgainst": 32,
+          "scoresFor": 76,
+          "scoresAgainst": 33,
           "id": 1637265,
           "losses": 5,
-          "draws": 8,
-          "points": 77,
+          "draws": 9,
+          "points": 78,
           "scoreDiffFormatted": "+43"
         },
         {
@@ -328,14 +328,14 @@
             "id": 808
           },
           "position": 6,
-          "matches": 36,
+          "matches": 37,
           "wins": 13,
-          "scoresFor": 56,
-          "scoresAgainst": 52,
+          "scoresFor": 57,
+          "scoresAgainst": 53,
           "id": 1637253,
           "losses": 7,
-          "draws": 16,
-          "points": 55,
+          "draws": 17,
+          "points": 56,
           "scoreDiffFormatted": "+4"
         },
         {
@@ -397,6 +397,60 @@
         },
         {
           "team": {
+            "name": "Chelsea",
+            "slug": "chelsea",
+            "shortName": "Chelsea",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 3151386,
+            "nameCode": "CHE",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "EN",
+              "alpha3": "ENG",
+              "name": "England",
+              "slug": "england"
+            },
+            "id": 38,
+            "teamColors": {
+              "primary": "#0310a7",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "تشيلسي",
+                "bn": "চেলসি",
+                "hi": "चेल्सी",
+                "ru": "Челси"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "Conference League Qualification",
+            "id": 503
+          },
+          "position": 8,
+          "matches": 37,
+          "wins": 14,
+          "scoresFor": 57,
+          "scoresAgainst": 50,
+          "id": 1637259,
+          "losses": 13,
+          "draws": 10,
+          "points": 52,
+          "scoreDiffFormatted": "+7"
+        },
+        {
+          "team": {
             "name": "Brentford",
             "slug": "brentford",
             "shortName": "Brentford",
@@ -434,11 +488,7 @@
             }
           },
           "descriptions": [],
-          "promotion": {
-            "text": "Conference League Qualification",
-            "id": 503
-          },
-          "position": 8,
+          "position": 9,
           "matches": 37,
           "wins": 14,
           "scoresFor": 54,
@@ -486,7 +536,7 @@
             }
           },
           "descriptions": [],
-          "position": 9,
+          "position": 10,
           "matches": 37,
           "wins": 13,
           "scoresFor": 40,
@@ -496,56 +546,6 @@
           "draws": 12,
           "points": 51,
           "scoreDiffFormatted": "-7"
-        },
-        {
-          "team": {
-            "name": "Chelsea",
-            "slug": "chelsea",
-            "shortName": "Chelsea",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 3151386,
-            "nameCode": "CHE",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "EN",
-              "alpha3": "ENG",
-              "name": "England",
-              "slug": "england"
-            },
-            "id": 38,
-            "teamColors": {
-              "primary": "#0310a7",
-              "secondary": "#ffffff",
-              "text": "#ffffff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "تشيلسي",
-                "bn": "চেলসি",
-                "hi": "चेल्सी",
-                "ru": "Челси"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 10,
-          "matches": 36,
-          "wins": 13,
-          "scoresFor": 55,
-          "scoresAgainst": 49,
-          "id": 1637259,
-          "losses": 13,
-          "draws": 10,
-          "points": 49,
-          "scoreDiffFormatted": "+6"
         },
         {
           "team": {
@@ -899,15 +899,15 @@
           },
           "descriptions": [],
           "position": 17,
-          "matches": 36,
+          "matches": 37,
           "wins": 9,
-          "scoresFor": 46,
-          "scoresAgainst": 55,
+          "scoresFor": 47,
+          "scoresAgainst": 57,
           "id": 1637270,
-          "losses": 16,
+          "losses": 17,
           "draws": 11,
           "points": 38,
-          "scoreDiffFormatted": "-9"
+          "scoreDiffFormatted": "-10"
         },
         {
           "team": {
@@ -1170,7 +1170,7 @@
         }
       },
       "name": "Premier League 25/26",
-      "updatedAtTimestamp": 1779137851
+      "updatedAtTimestamp": 1779229485
     }
   ]
 }
