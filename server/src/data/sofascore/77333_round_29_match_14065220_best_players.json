@@ -12,13 +12,13 @@
         "position": "F",
         "jerseyNumber": "18",
         "height": 189,
-        "userCount": 344,
+        "userCount": 351,
         "gender": "M",
         "id": 909485,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 938995200,
         "proposedMarketValueRaw": {
-          "value": 4099999,
+          "value": 3600000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -47,7 +47,7 @@
         "position": "F",
         "jerseyNumber": "11",
         "height": 189,
-        "userCount": 2934,
+        "userCount": 3160,
         "gender": "M",
         "id": 149728,
         "marketValueCurrency": "EUR",
@@ -82,7 +82,7 @@
         "position": "D",
         "jerseyNumber": "6",
         "height": 194,
-        "userCount": 339,
+        "userCount": 340,
         "gender": "M",
         "id": 254429,
         "marketValueCurrency": "EUR",
@@ -119,7 +119,7 @@
         "position": "D",
         "jerseyNumber": "14",
         "height": 190,
-        "userCount": 1321,
+        "userCount": 1331,
         "gender": "M",
         "id": 1086547,
         "marketValueCurrency": "EUR",
@@ -146,11 +146,9 @@
       "value": "6.9",
       "label": "rating",
       "player": {
-        "name": "Frederik Ronnow",
-        "firstName": "Frederik",
-        "lastName": "Ronnow",
-        "slug": "frederik-ronnow",
-        "shortName": "F. Ronnow",
+        "name": "Frederik Rønnow",
+        "slug": "frederik-rnnow",
+        "shortName": "F. Rønnow",
         "position": "G",
         "jerseyNumber": "1",
         "height": 188,
@@ -165,10 +163,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
+            "ar": "فريدريك رينوف",
             "bn": "ফ্রেডরিক রননো",
             "hi": "फ्रेडरिक रोन्नो"
           },
           "shortNameTranslation": {
+            "ar": "ف. رينوف",
             "bn": "এফ. রননো",
             "hi": "एफ. रोन्नो"
           }
@@ -187,7 +187,7 @@
         "position": "M",
         "jerseyNumber": "21",
         "height": 179,
-        "userCount": 210,
+        "userCount": 205,
         "gender": "M",
         "id": 800252,
         "marketValueCurrency": "EUR",
@@ -223,13 +223,13 @@
       "position": "F",
       "jerseyNumber": "18",
       "height": 189,
-      "userCount": 344,
+      "userCount": 351,
       "gender": "M",
       "id": 909485,
       "marketValueCurrency": "EUR",
       "dateOfBirthTimestamp": 938995200,
       "proposedMarketValueRaw": {
-        "value": 4099999,
+        "value": 3600000,
         "currency": "EUR"
       },
       "fieldTranslations": {

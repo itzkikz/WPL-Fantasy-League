@@ -98,7 +98,7 @@
           "position": "D",
           "jerseyNumber": "27",
           "height": 171,
-          "userCount": 911,
+          "userCount": 917,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -193,7 +193,7 @@
           "position": "D",
           "jerseyNumber": "20",
           "height": 184,
-          "userCount": 789,
+          "userCount": 790,
           "gender": "M",
           "country": {
             "alpha2": "CI",
@@ -282,7 +282,7 @@
           "position": "D",
           "jerseyNumber": "24",
           "height": 187,
-          "userCount": 393,
+          "userCount": 391,
           "gender": "M",
           "country": {
             "alpha2": "CH",
@@ -369,7 +369,7 @@
           "position": "D",
           "jerseyNumber": "14",
           "height": 177,
-          "userCount": 2548,
+          "userCount": 2563,
           "gender": "M",
           "country": {
             "alpha2": "GH",
@@ -550,7 +550,7 @@
           "position": "M",
           "jerseyNumber": "42",
           "height": 179,
-          "userCount": 1464,
+          "userCount": 1474,
           "gender": "M",
           "country": {
             "alpha2": "GH",
@@ -639,7 +639,7 @@
           "position": "M",
           "jerseyNumber": "5",
           "height": 183,
-          "userCount": 679,
+          "userCount": 687,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -732,7 +732,7 @@
           "position": "F",
           "jerseyNumber": "10",
           "height": 186,
-          "userCount": 10232,
+          "userCount": 10282,
           "gender": "M",
           "country": {
             "alpha2": "ML",
@@ -833,7 +833,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 184,
-          "userCount": 1067,
+          "userCount": 1075,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -1022,7 +1022,7 @@
           "position": "D",
           "jerseyNumber": "92",
           "height": 183,
-          "userCount": 1071,
+          "userCount": 1085,
           "gender": "M",
           "country": {
             "alpha2": "CI",
@@ -1095,7 +1095,7 @@
           "position": "M",
           "jerseyNumber": "7",
           "height": 178,
-          "userCount": 11390,
+          "userCount": 11447,
           "gender": "M",
           "country": {
             "alpha2": "HT",
@@ -1377,7 +1377,7 @@
           "position": "G",
           "jerseyNumber": "30",
           "height": 195,
-          "userCount": 44,
+          "userCount": 43,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -1428,7 +1428,7 @@
           "position": "D",
           "jerseyNumber": "29",
           "height": 179,
-          "userCount": 811,
+          "userCount": 819,
           "gender": "M",
           "country": {
             "alpha2": "GH",
@@ -1478,7 +1478,7 @@
           "shortName": "T. Siwe",
           "position": "D",
           "jerseyNumber": "13",
-          "userCount": 80,
+          "userCount": 77,
           "country": {
             "alpha2": "FR",
             "alpha3": "FRA",
@@ -1520,7 +1520,7 @@
           "position": "D",
           "jerseyNumber": "4",
           "height": 192,
-          "userCount": 1183,
+          "userCount": 1186,
           "gender": "M",
           "country": {
             "alpha2": "CL",
@@ -1585,7 +1585,7 @@
           "position": "G",
           "jerseyNumber": "16",
           "height": 186,
-          "userCount": 334,
+          "userCount": 339,
           "gender": "M",
           "country": {
             "alpha2": "GF",
@@ -1627,7 +1627,7 @@
           "position": "D",
           "jerseyNumber": "22",
           "height": 175,
-          "userCount": 218,
+          "userCount": 217,
           "gender": "M",
           "country": {
             "alpha2": "NO",
@@ -1671,7 +1671,7 @@
           "position": "M",
           "jerseyNumber": "28",
           "height": 180,
-          "userCount": 1044,
+          "userCount": 1045,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -1704,6 +1704,51 @@
         "description": "Unknown",
         "externalType": 114,
         "expectedEndDate": "2026-05-23T16:00:56+00:00"
+      },
+      {
+        "player": {
+          "name": "Oussama El Azzouzi",
+          "firstName": "Oussama El Azzouzi",
+          "lastName": "",
+          "slug": "oussama-el-azzouzi",
+          "shortName": "O. E. Azzouzi",
+          "position": "M",
+          "jerseyNumber": "17",
+          "height": 189,
+          "userCount": 7584,
+          "gender": "M",
+          "sofascoreId": "o.elazzouzi",
+          "country": {
+            "alpha2": "MA",
+            "alpha3": "MAR",
+            "name": "Morocco",
+            "slug": "morocco"
+          },
+          "id": 1127191,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 991094400,
+          "proposedMarketValueRaw": {
+            "value": 1900000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "أسامة العزوزي",
+              "bn": "ওসামা এল আজৌজি",
+              "hi": "ओसामा एल अज़्ज़ौज़ी"
+            },
+            "shortNameTranslation": {
+              "ar": "أ. العزوزي",
+              "bn": "ও. ই. আজৌজি",
+              "hi": "ओ.ई. अज़्ज़ौज़ी"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Sprained Knee Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-18T00:00:00+00:00"
       }
     ]
   },
@@ -1719,7 +1764,7 @@
           "position": "G",
           "jerseyNumber": "12",
           "height": 187,
-          "userCount": 16569,
+          "userCount": 16660,
           "gender": "M",
           "sofascoreId": "HKoffi",
           "country": {
@@ -1879,7 +1924,7 @@
           "position": "D",
           "jerseyNumber": "4",
           "height": 197,
-          "userCount": 1783,
+          "userCount": 1780,
           "gender": "M",
           "country": {
             "alpha2": "ML",
@@ -1969,7 +2014,7 @@
           "position": "D",
           "jerseyNumber": "21",
           "height": 184,
-          "userCount": 789,
+          "userCount": 791,
           "gender": "M",
           "country": {
             "alpha2": "MR",
@@ -2057,7 +2102,7 @@
           "position": "D",
           "jerseyNumber": "3",
           "height": 179,
-          "userCount": 613,
+          "userCount": 614,
           "gender": "M",
           "country": {
             "alpha2": "GA",
@@ -2242,7 +2287,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 190,
-          "userCount": 1200,
+          "userCount": 1199,
           "gender": "M",
           "country": {
             "alpha2": "NL",
@@ -2340,7 +2385,7 @@
           "position": "D",
           "jerseyNumber": "27",
           "height": 178,
-          "userCount": 276,
+          "userCount": 279,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2517,7 +2562,7 @@
           "position": "M",
           "jerseyNumber": "7",
           "height": 175,
-          "userCount": 533,
+          "userCount": 545,
           "gender": "M",
           "country": {
             "alpha2": "MA",
@@ -2600,7 +2645,7 @@
           "position": "F",
           "jerseyNumber": "35",
           "height": 177,
-          "userCount": 374,
+          "userCount": 379,
           "country": {
             "alpha2": "FR",
             "alpha3": "FRA",
@@ -2674,7 +2719,7 @@
           "position": "M",
           "jerseyNumber": "6",
           "height": 180,
-          "userCount": 147,
+          "userCount": 146,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -2840,7 +2885,7 @@
           "position": "F",
           "jerseyNumber": "36",
           "height": 187,
-          "userCount": 70,
+          "userCount": 71,
           "country": {
             "alpha2": "FR",
             "alpha3": "FRA",
@@ -2981,7 +3026,7 @@
           "position": "D",
           "jerseyNumber": "2",
           "height": 180,
-          "userCount": 6534,
+          "userCount": 6560,
           "gender": "M",
           "country": {
             "alpha2": "HT",
@@ -3059,7 +3104,7 @@
           "position": "G",
           "jerseyNumber": "16",
           "height": 187,
-          "userCount": 129,
+          "userCount": 130,
           "gender": "M",
           "country": {
             "alpha2": "CG",
@@ -3106,7 +3151,7 @@
           "position": "D",
           "jerseyNumber": "23",
           "height": 181,
-          "userCount": 218,
+          "userCount": 221,
           "gender": "M",
           "country": {
             "alpha2": "ML",
@@ -3146,7 +3191,7 @@
           "shortName": "M. Gernigon",
           "position": "D",
           "jerseyNumber": "42",
-          "userCount": 35,
+          "userCount": 36,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3189,7 +3234,7 @@
           "position": "D",
           "jerseyNumber": "25",
           "height": 182,
-          "userCount": 187,
+          "userCount": 188,
           "gender": "M",
           "country": {
             "alpha2": "CI",
@@ -3245,51 +3290,7 @@
       "outline": "7cdac0",
       "fancyNumber": "222226"
     },
-    "missingPlayers": [
-      {
-        "player": {
-          "name": "Yassin Belkhdim",
-          "firstName": "Yassin",
-          "lastName": "Belkhdim",
-          "slug": "yassin-belkhdim",
-          "shortName": "Y. Belkhdim",
-          "position": "M",
-          "jerseyNumber": "14",
-          "height": 175,
-          "userCount": 1232,
-          "gender": "M",
-          "country": {
-            "alpha2": "MA",
-            "alpha3": "MAR",
-            "name": "Morocco",
-            "slug": "morocco"
-          },
-          "id": 1195241,
-          "marketValueCurrency": "EUR",
-          "dateOfBirthTimestamp": 1013644800,
-          "proposedMarketValueRaw": {
-            "value": 6800000,
-            "currency": "EUR"
-          },
-          "fieldTranslations": {
-            "nameTranslation": {
-              "ar": "بلخادم، ياسين",
-              "bn": "বেলখদিম, ইয়াসিন",
-              "hi": "बेलखदीम, यासीन"
-            },
-            "shortNameTranslation": {
-              "ar": "ي. بلخادم",
-              "bn": "ওয়াই. বেলখদিম",
-              "hi": "वाई. बेलखदीम"
-            }
-          }
-        },
-        "type": "missing",
-        "reason": 1,
-        "description": "Broken Arm",
-        "externalType": 114
-      }
-    ]
+    "missingPlayers": []
   },
   "statisticalVersion": 3
 }

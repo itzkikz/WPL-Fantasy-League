@@ -12,7 +12,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 190,
-          "userCount": 11548,
+          "userCount": 11561,
           "gender": "M",
           "country": {
             "alpha2": "ID",
@@ -92,7 +92,7 @@
           "position": "D",
           "jerseyNumber": "24",
           "height": 181,
-          "userCount": 1685,
+          "userCount": 1688,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -180,7 +180,7 @@
           "position": "D",
           "jerseyNumber": "15",
           "height": 189,
-          "userCount": 197,
+          "userCount": 199,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -270,7 +270,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 191,
-          "userCount": 817,
+          "userCount": 819,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -451,7 +451,7 @@
           "position": "M",
           "jerseyNumber": "4",
           "height": 181,
-          "userCount": 520,
+          "userCount": 524,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -540,7 +540,7 @@
           "position": "M",
           "jerseyNumber": "33",
           "height": 183,
-          "userCount": 275,
+          "userCount": 278,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -633,7 +633,7 @@
           "position": "M",
           "jerseyNumber": "29",
           "height": 177,
-          "userCount": 1431,
+          "userCount": 1453,
           "gender": "M",
           "country": {
             "alpha2": "MA",
@@ -721,7 +721,7 @@
           "position": "M",
           "jerseyNumber": "27",
           "height": 174,
-          "userCount": 901,
+          "userCount": 915,
           "gender": "M",
           "country": {
             "alpha2": "BE",
@@ -811,7 +811,7 @@
           "position": "F",
           "jerseyNumber": "90",
           "height": 182,
-          "userCount": 1112,
+          "userCount": 1122,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -903,7 +903,7 @@
           "position": "F",
           "jerseyNumber": "10",
           "height": 178,
-          "userCount": 23298,
+          "userCount": 23412,
           "gender": "M",
           "sofascoreId": "Vardy7",
           "country": {
@@ -998,7 +998,7 @@
           "position": "M",
           "jerseyNumber": "7",
           "height": 182,
-          "userCount": 1043,
+          "userCount": 1050,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1083,7 +1083,7 @@
           "position": "M",
           "jerseyNumber": "2",
           "height": 189,
-          "userCount": 791,
+          "userCount": 822,
           "gender": "M",
           "country": {
             "alpha2": "NO",
@@ -1160,7 +1160,7 @@
           "position": "F",
           "jerseyNumber": "77",
           "height": 182,
-          "userCount": 924,
+          "userCount": 928,
           "gender": "M",
           "country": {
             "alpha2": "NG",
@@ -1250,7 +1250,7 @@
           "position": "F",
           "jerseyNumber": "99",
           "height": 181,
-          "userCount": 3649,
+          "userCount": 3664,
           "gender": "M",
           "country": {
             "alpha2": "PY",
@@ -1532,7 +1532,7 @@
           "position": "D",
           "jerseyNumber": "30",
           "height": 183,
-          "userCount": 9208,
+          "userCount": 9210,
           "gender": "M",
           "sofascoreId": "mikayilfaye",
           "country": {
@@ -1582,7 +1582,7 @@
           "position": "M",
           "jerseyNumber": "38",
           "height": 177,
-          "userCount": 2121,
+          "userCount": 2122,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -1633,7 +1633,7 @@
           "position": "M",
           "jerseyNumber": "18",
           "height": 188,
-          "userCount": 363,
+          "userCount": 381,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1737,6 +1737,48 @@
     "missingPlayers": [
       {
         "player": {
+          "name": "Faris Moumbagna",
+          "slug": "faris-pemi-moumbagna",
+          "shortName": "F. P. Moumbagna",
+          "position": "F",
+          "jerseyNumber": "14",
+          "height": 185,
+          "userCount": 1849,
+          "gender": "M",
+          "country": {
+            "alpha2": "CM",
+            "alpha3": "CMR",
+            "name": "Cameroon",
+            "slug": "cameroon"
+          },
+          "id": 1029456,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 962409600,
+          "proposedMarketValueRaw": {
+            "value": 4099999,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "فارس بييمي مومبانيه",
+              "bn": "ফারিস পেমি মোম্বাগনা",
+              "hi": "फ़ारिस पेमी मौम्बागना"
+            },
+            "shortNameTranslation": {
+              "ar": "ف. ب. مومبانيه",
+              "bn": "এফ. পি. মোম্বাগনা",
+              "hi": "एफपी पेमी"
+            }
+          }
+        },
+        "type": "missing",
+        "reason": 1,
+        "description": "Muscle Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-06-10T00:00:00+00:00"
+      },
+      {
+        "player": {
           "name": "Federico Baschirotto",
           "firstName": "Federico",
           "lastName": "Baschirotto",
@@ -1745,7 +1787,7 @@
           "position": "D",
           "jerseyNumber": "6",
           "height": 187,
-          "userCount": 1402,
+          "userCount": 1401,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1777,7 +1819,7 @@
         "reason": 1,
         "description": "Thigh Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-31T00:00:00+00:00"
+        "expectedEndDate": "2026-06-10T00:00:00+00:00"
       }
     ]
   },
@@ -1793,7 +1835,7 @@
           "position": "G",
           "jerseyNumber": "1",
           "height": 192,
-          "userCount": 744,
+          "userCount": 749,
           "gender": "M",
           "country": {
             "alpha2": "HR",
@@ -1882,7 +1924,7 @@
           "position": "D",
           "jerseyNumber": "5",
           "height": 192,
-          "userCount": 493,
+          "userCount": 496,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1971,7 +2013,7 @@
           "position": "D",
           "jerseyNumber": "4",
           "height": 185,
-          "userCount": 335,
+          "userCount": 345,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -2055,7 +2097,7 @@
           "position": "D",
           "jerseyNumber": "2",
           "height": 195,
-          "userCount": 673,
+          "userCount": 674,
           "gender": "M",
           "country": {
             "alpha2": "BG",
@@ -2134,7 +2176,7 @@
           "position": "M",
           "jerseyNumber": "15",
           "height": 187,
-          "userCount": 855,
+          "userCount": 856,
           "gender": "M",
           "country": {
             "alpha2": "DE",
@@ -2218,7 +2260,7 @@
           "position": "M",
           "jerseyNumber": "14",
           "height": 184,
-          "userCount": 2013,
+          "userCount": 2022,
           "gender": "M",
           "country": {
             "alpha2": "NG",
@@ -2305,7 +2347,7 @@
           "position": "M",
           "jerseyNumber": "35",
           "height": 177,
-          "userCount": 4192,
+          "userCount": 4194,
           "gender": "M",
           "country": {
             "alpha2": "CL",
@@ -2392,7 +2434,7 @@
           "position": "M",
           "jerseyNumber": "7",
           "height": 186,
-          "userCount": 1565,
+          "userCount": 1579,
           "gender": "M",
           "country": {
             "alpha2": "DZ",
@@ -2474,7 +2516,7 @@
           "position": "F",
           "jerseyNumber": "32",
           "height": 191,
-          "userCount": 710,
+          "userCount": 714,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -2554,7 +2596,7 @@
           "position": "M",
           "jerseyNumber": "21",
           "height": 190,
-          "userCount": 1110,
+          "userCount": 1114,
           "gender": "M",
           "country": {
             "alpha2": "TR",
@@ -2638,7 +2680,7 @@
           "position": "F",
           "jerseyNumber": "81",
           "height": 186,
-          "userCount": 436,
+          "userCount": 438,
           "gender": "M",
           "country": {
             "alpha2": "CH",
@@ -2717,7 +2759,7 @@
           "position": "D",
           "jerseyNumber": "33",
           "height": 186,
-          "userCount": 208,
+          "userCount": 212,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -2800,7 +2842,7 @@
           "position": "M",
           "jerseyNumber": "3",
           "height": 184,
-          "userCount": 721,
+          "userCount": 724,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -2876,7 +2918,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 182,
-          "userCount": 182,
+          "userCount": 188,
           "gender": "M",
           "country": {
             "alpha2": "DK",
@@ -2943,7 +2985,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 191,
-          "userCount": 699,
+          "userCount": 706,
           "gender": "M",
           "country": {
             "alpha2": "DK",
@@ -3016,7 +3058,7 @@
           "position": "M",
           "jerseyNumber": "36",
           "height": 184,
-          "userCount": 138,
+          "userCount": 142,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -3088,7 +3130,7 @@
           "position": "G",
           "jerseyNumber": "12",
           "height": 190,
-          "userCount": 140,
+          "userCount": 144,
           "gender": "M",
           "country": {
             "alpha2": "BR",
@@ -3139,7 +3181,7 @@
           "position": "G",
           "jerseyNumber": "22",
           "height": 193,
-          "userCount": 678,
+          "userCount": 681,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -3188,7 +3230,7 @@
           "position": "D",
           "jerseyNumber": "39",
           "height": 190,
-          "userCount": 1213,
+          "userCount": 1221,
           "gender": "M",
           "country": {
             "alpha2": "ES",
@@ -3239,7 +3281,7 @@
           "position": "M",
           "jerseyNumber": "20",
           "height": 182,
-          "userCount": 1294,
+          "userCount": 1311,
           "gender": "M",
           "country": {
             "alpha2": "CH",
@@ -3288,7 +3330,7 @@
           "position": "M",
           "jerseyNumber": "11",
           "height": 179,
-          "userCount": 11274,
+          "userCount": 11277,
           "gender": "M",
           "sofascoreId": "cuadrado",
           "country": {
@@ -3340,7 +3382,7 @@
           "position": "M",
           "jerseyNumber": "6",
           "height": 182,
-          "userCount": 1502,
+          "userCount": 1509,
           "gender": "M",
           "country": {
             "alpha2": "RO",
@@ -3389,7 +3431,7 @@
           "position": "M",
           "jerseyNumber": "99",
           "height": 180,
-          "userCount": 6064,
+          "userCount": 6065,
           "gender": "M",
           "sofascoreId": "lorranlucas10",
           "country": {
@@ -3441,7 +3483,7 @@
           "position": "F",
           "jerseyNumber": "19",
           "height": 182,
-          "userCount": 2488,
+          "userCount": 2491,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -3492,7 +3534,7 @@
           "position": "F",
           "jerseyNumber": "17",
           "height": 192,
-          "userCount": 1728,
+          "userCount": 1736,
           "gender": "M",
           "country": {
             "alpha2": "NG",
@@ -3547,6 +3589,45 @@
     "missingPlayers": [
       {
         "player": {
+          "name": "Daniel Denoon",
+          "firstName": "Daniel Denoon",
+          "slug": "daniel-denoon",
+          "shortName": "D. Denoon",
+          "position": "D",
+          "jerseyNumber": "44",
+          "height": 187,
+          "userCount": 137,
+          "gender": "M",
+          "country": {
+            "alpha2": "CH",
+            "alpha3": "CHE",
+            "name": "Switzerland",
+            "slug": "switzerland"
+          },
+          "id": 1922473,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 1075248000,
+          "proposedMarketValueRaw": {
+            "value": 455000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "دانييل دينون"
+            },
+            "shortNameTranslation": {
+              "ar": "د. دينون"
+            }
+          }
+        },
+        "type": "missing",
+        "reason": 1,
+        "description": "Muscle Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-06-10T00:00:00+00:00"
+      },
+      {
+        "player": {
           "name": "Matteo Tramoni",
           "firstName": "",
           "lastName": "",
@@ -3555,7 +3636,7 @@
           "position": "F",
           "jerseyNumber": "10",
           "height": 175,
-          "userCount": 1186,
+          "userCount": 1192,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3583,11 +3664,11 @@
             }
           }
         },
-        "type": "doubtful",
+        "type": "missing",
         "reason": 1,
-        "description": "Physical Discomfort",
+        "description": "Muscle Injury",
         "externalType": 114,
-        "expectedEndDate": "2026-05-16T16:00:36+00:00"
+        "expectedEndDate": "2026-06-10T00:00:00+00:00"
       }
     ]
   },

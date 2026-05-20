@@ -23,7 +23,7 @@
         "position": "F",
         "jerseyNumber": "17",
         "height": 188,
-        "userCount": 1148,
+        "userCount": 1180,
         "gender": "M",
         "id": 1127790,
         "marketValueCurrency": "EUR",
@@ -54,7 +54,7 @@
         "position": "F",
         "jerseyNumber": "11",
         "height": 186,
-        "userCount": 875,
+        "userCount": 908,
         "gender": "M",
         "id": 1180758,
         "marketValueCurrency": "EUR",
@@ -65,7 +65,7 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "آدم داغيم"
+            "ar": "فيكتور ماكيافيلو كارمي"
           },
           "shortNameTranslation": {
             "ar": "آ. داغيم"
@@ -81,13 +81,13 @@
             "position": "M",
             "jerseyNumber": "5",
             "height": 187,
-            "userCount": 1771,
+            "userCount": 1818,
             "gender": "M",
             "id": 979290,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 929577600,
             "proposedMarketValueRaw": {
-              "value": 11300000,
+              "value": 7600000,
               "currency": "EUR"
             },
             "fieldTranslations": {
@@ -169,7 +169,7 @@
             "position": "F",
             "jerseyNumber": "11",
             "height": 186,
-            "userCount": 875,
+            "userCount": 908,
             "gender": "M",
             "id": 1180758,
             "marketValueCurrency": "EUR",
@@ -180,7 +180,7 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "آدم داغيم"
+                "ar": "فيكتور ماكيافيلو كارمي"
               },
               "shortNameTranslation": {
                 "ar": "آ. داغيم"
@@ -208,7 +208,7 @@
             "position": "F",
             "jerseyNumber": "17",
             "height": 188,
-            "userCount": 1148,
+            "userCount": 1180,
             "gender": "M",
             "id": 1127790,
             "marketValueCurrency": "EUR",
@@ -258,7 +258,7 @@
             "position": "G",
             "jerseyNumber": "23",
             "height": 187,
-            "userCount": 504,
+            "userCount": 507,
             "gender": "M",
             "id": 190161,
             "marketValueCurrency": "EUR",
@@ -300,7 +300,7 @@
         "position": "M",
         "jerseyNumber": "31",
         "height": 178,
-        "userCount": 450,
+        "userCount": 459,
         "gender": "M",
         "id": 1977245,
         "marketValueCurrency": "EUR",
@@ -325,7 +325,7 @@
         "position": "F",
         "jerseyNumber": "25",
         "height": 175,
-        "userCount": 3686,
+        "userCount": 3734,
         "gender": "M",
         "id": 954061,
         "marketValueCurrency": "EUR",
@@ -373,7 +373,7 @@
         "position": "F",
         "jerseyNumber": "11",
         "height": 186,
-        "userCount": 875,
+        "userCount": 908,
         "gender": "M",
         "id": 1180758,
         "marketValueCurrency": "EUR",
@@ -384,7 +384,7 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "آدم داغيم"
+            "ar": "فيكتور ماكيافيلو كارمي"
           },
           "shortNameTranslation": {
             "ar": "آ. داغيم"
@@ -400,7 +400,7 @@
         "position": "D",
         "jerseyNumber": "25",
         "height": 180,
-        "userCount": 588,
+        "userCount": 590,
         "gender": "M",
         "id": 1127788,
         "marketValueCurrency": "EUR",
@@ -438,7 +438,7 @@
         "position": "F",
         "jerseyNumber": "11",
         "height": 191,
-        "userCount": 1962,
+        "userCount": 1983,
         "gender": "M",
         "id": 1474296,
         "marketValueCurrency": "EUR",
@@ -463,7 +463,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 181,
-        "userCount": 4050,
+        "userCount": 4088,
         "gender": "M",
         "id": 939830,
         "marketValueCurrency": "EUR",
@@ -503,7 +503,7 @@
         "position": "M",
         "jerseyNumber": "42",
         "height": 186,
-        "userCount": 10927,
+        "userCount": 11189,
         "gender": "M",
         "sofascoreId": "can.uzun10",
         "id": 1440948,
@@ -528,14 +528,14 @@
       },
       "playerOut": {
         "name": "Farès Chaïbi",
-        "firstName": "",
-        "lastName": "",
+        "firstName": "Fares",
+        "lastName": "Chaibi",
         "slug": "fares-chaibi",
         "shortName": "F. Chaïbi",
         "position": "M",
         "jerseyNumber": "8",
         "height": 183,
-        "userCount": 18219,
+        "userCount": 18350,
         "gender": "M",
         "sofascoreId": "fareschaibi28",
         "id": 1192318,
@@ -547,12 +547,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "فارس شعيبي",
+            "ar": "فارس شايبي",
             "bn": "ফারেস চাইবি",
             "hi": "फ़रेस चाइबी"
           },
           "shortNameTranslation": {
-            "ar": "ف. شعيبي",
+            "ar": "ف. شايبي",
             "bn": "এফ. চাইবি",
             "hi": "एफ. चाइबी"
           }
@@ -569,12 +569,14 @@
     {
       "playerIn": {
         "name": "Ellyes Skhiri",
+        "firstName": "Ellyes",
+        "lastName": "Skhiri",
         "slug": "ellyes-skhiri",
         "shortName": "E. Skhiri",
         "position": "M",
         "jerseyNumber": "15",
         "height": 185,
-        "userCount": 4869,
+        "userCount": 4943,
         "gender": "M",
         "sofascoreId": "ellyes_skhiri",
         "id": 591706,
@@ -606,13 +608,13 @@
         "position": "M",
         "jerseyNumber": "6",
         "height": 184,
-        "userCount": 1119,
+        "userCount": 1142,
         "gender": "M",
         "id": 1149113,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1104796800,
         "proposedMarketValueRaw": {
-          "value": 7300000,
+          "value": 9700000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -644,21 +646,21 @@
         "position": "F",
         "jerseyNumber": "7",
         "height": 180,
-        "userCount": 1355,
+        "userCount": 1418,
         "gender": "M",
         "id": 1499696,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1111795200,
         "proposedMarketValueRaw": {
-          "value": 2600000,
+          "value": 8199999,
           "currency": "EUR"
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "شيوغاي، كينتو"
+            "ar": "كينتو شيوجاي"
           },
           "shortNameTranslation": {
-            "ar": "ك. شيوغاي"
+            "ar": "ك. شيوجاي"
           }
         }
       },
@@ -671,13 +673,13 @@
         "position": "D",
         "jerseyNumber": "3",
         "height": 187,
-        "userCount": 658,
+        "userCount": 669,
         "gender": "M",
         "id": 293127,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 829094400,
         "proposedMarketValueRaw": {
-          "value": 6500000,
+          "value": 4700000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -742,7 +744,7 @@
         "position": "M",
         "jerseyNumber": "24",
         "height": 182,
-        "userCount": 20274,
+        "userCount": 20399,
         "gender": "M",
         "sofascoreId": "chriseriksen8",
         "id": 105734,
@@ -781,7 +783,7 @@
         "position": "F",
         "jerseyNumber": "17",
         "height": 188,
-        "userCount": 1148,
+        "userCount": 1180,
         "gender": "M",
         "id": 1127790,
         "marketValueCurrency": "EUR",
@@ -810,7 +812,7 @@
         "position": "M",
         "jerseyNumber": "39",
         "height": 182,
-        "userCount": 1079,
+        "userCount": 1098,
         "gender": "M",
         "id": 987504,
         "marketValueCurrency": "EUR",
@@ -848,7 +850,7 @@
         "position": "F",
         "jerseyNumber": "7",
         "height": 180,
-        "userCount": 2048,
+        "userCount": 2067,
         "gender": "M",
         "id": 997012,
         "marketValueCurrency": "EUR",
@@ -871,27 +873,29 @@
         }
       },
       "playerOut": {
-        "name": "Ayoube Amaimouni-Echghouyab",
-        "slug": "amaimouni-echghouyab-ayoube",
-        "shortName": "A. A. Echghouyab",
+        "name": "Ayoube Amaimouni Echghouyab",
+        "firstName": "Ayoube",
+        "lastName": "Amaimouni Echghouyab",
+        "slug": "ayoube-amaimouni-echghouyab",
+        "shortName": "A. Amaimouni Echghouyab",
         "position": "F",
         "jerseyNumber": "29",
         "height": 178,
-        "userCount": 1757,
+        "userCount": 1823,
         "gender": "M",
         "id": 1898148,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1101772800,
         "proposedMarketValueRaw": {
-          "value": 2200000,
+          "value": 7600000,
           "currency": "EUR"
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "أمائموني إتشغوياب، أيوب"
+            "ar": "أيوب أمعيموني إيشغوياب"
           },
           "shortNameTranslation": {
-            "ar": "أ. إتشغوياب"
+            "ar": "أ. إيشغوياب"
           }
         }
       },
@@ -911,13 +915,13 @@
         "position": "D",
         "jerseyNumber": "5",
         "height": 194,
-        "userCount": 785,
+        "userCount": 808,
         "gender": "M",
         "id": 999276,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1059609600,
         "proposedMarketValueRaw": {
-          "value": 6200000,
+          "value": 8199999,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -951,13 +955,13 @@
         "position": "M",
         "jerseyNumber": "5",
         "height": 187,
-        "userCount": 1771,
+        "userCount": 1818,
         "gender": "M",
         "id": 979290,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 929577600,
         "proposedMarketValueRaw": {
-          "value": 11300000,
+          "value": 7600000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -986,21 +990,21 @@
     {
       "playerIn": {
         "name": "Lovro Majer",
-        "firstName": "",
-        "lastName": "",
+        "firstName": "Lovro",
+        "lastName": "Majer",
         "slug": "lovro-majer",
         "shortName": "L. Majer",
         "position": "M",
         "jerseyNumber": "10",
         "height": 179,
-        "userCount": 4865,
+        "userCount": 4886,
         "gender": "M",
         "sofascoreId": "lovromajer",
         "id": 841947,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 884995200,
         "proposedMarketValueRaw": {
-          "value": 16100000,
+          "value": 10700000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -1018,18 +1022,20 @@
       },
       "playerOut": {
         "name": "Jesper Lindstrøm",
+        "firstName": "Jesper",
+        "lastName": "Lindstrom",
         "slug": "jesper-lindstrom",
         "shortName": "J. Lindstrøm",
         "position": "M",
         "jerseyNumber": "19",
         "height": 182,
-        "userCount": 2672,
+        "userCount": 2695,
         "gender": "M",
         "id": 947929,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 951782400,
         "proposedMarketValueRaw": {
-          "value": 8700000,
+          "value": 5400000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -1083,7 +1089,7 @@
         "position": "F",
         "jerseyNumber": "25",
         "height": 175,
-        "userCount": 3686,
+        "userCount": 3734,
         "gender": "M",
         "id": 954061,
         "marketValueCurrency": "EUR",
@@ -1109,14 +1115,14 @@
         {
           "player": {
             "name": "Farès Chaïbi",
-            "firstName": "",
-            "lastName": "",
+            "firstName": "Fares",
+            "lastName": "Chaibi",
             "slug": "fares-chaibi",
             "shortName": "F. Chaïbi",
             "position": "M",
             "jerseyNumber": "8",
             "height": 183,
-            "userCount": 18219,
+            "userCount": 18350,
             "gender": "M",
             "sofascoreId": "fareschaibi28",
             "id": 1192318,
@@ -1128,12 +1134,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "فارس شعيبي",
+                "ar": "فارس شايبي",
                 "bn": "ফারেস চাইবি",
                 "hi": "फ़रेस चाइबी"
               },
               "shortNameTranslation": {
-                "ar": "ف. شعيبي",
+                "ar": "ف. شايبي",
                 "bn": "এফ. চাইবি",
                 "hi": "एफ. चाइबी"
               }
@@ -1159,7 +1165,7 @@
             "position": "F",
             "jerseyNumber": "9",
             "height": 181,
-            "userCount": 4050,
+            "userCount": 4088,
             "gender": "M",
             "id": 939830,
             "marketValueCurrency": "EUR",
@@ -1205,7 +1211,7 @@
             "position": "F",
             "jerseyNumber": "25",
             "height": 175,
-            "userCount": 3686,
+            "userCount": 3734,
             "gender": "M",
             "id": 954061,
             "marketValueCurrency": "EUR",
@@ -1248,12 +1254,14 @@
           },
           "goalkeeper": {
             "name": "Kamil Grabara",
-            "slug": "grabara-kamil",
+            "firstName": "Kamil",
+            "lastName": "Grabara",
+            "slug": "kamil-grabara",
             "shortName": "K. Grabara",
             "position": "G",
             "jerseyNumber": "1",
             "height": 195,
-            "userCount": 3407,
+            "userCount": 3480,
             "gender": "M",
             "id": 902080,
             "marketValueCurrency": "EUR",
@@ -1289,12 +1297,14 @@
     {
       "player": {
         "name": "Jeanuël Belocian",
+        "firstName": "Jeanuel",
+        "lastName": "Belocian",
         "slug": "jeanuel-belocian",
         "shortName": "J. Belocian",
         "position": "D",
         "jerseyNumber": "6",
         "height": 186,
-        "userCount": 1286,
+        "userCount": 1310,
         "gender": "M",
         "id": 1173172,
         "marketValueCurrency": "EUR",
@@ -1305,12 +1315,12 @@
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "جيانويل بيلوسيان",
+            "ar": "أوني فانس أمريكان ريسينغ تيم",
             "bn": "জিনুয়েল বেলোসিয়ান",
             "hi": "जीनुएल बेलोसियन"
           },
           "shortNameTranslation": {
-            "ar": "ج. بيلوسيان",
+            "ar": "أ. تيم",
             "bn": "জে. বেলোসিয়ান",
             "hi": "जे. बेलोसियन"
           }
@@ -1338,13 +1348,13 @@
         "position": "M",
         "jerseyNumber": "6",
         "height": 184,
-        "userCount": 1119,
+        "userCount": 1142,
         "gender": "M",
         "id": 1149113,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1104796800,
         "proposedMarketValueRaw": {
-          "value": 7300000,
+          "value": 9700000,
           "currency": "EUR"
         },
         "fieldTranslations": {
@@ -1361,27 +1371,29 @@
         }
       },
       "assist1": {
-        "name": "Ayoube Amaimouni-Echghouyab",
-        "slug": "amaimouni-echghouyab-ayoube",
-        "shortName": "A. A. Echghouyab",
+        "name": "Ayoube Amaimouni Echghouyab",
+        "firstName": "Ayoube",
+        "lastName": "Amaimouni Echghouyab",
+        "slug": "ayoube-amaimouni-echghouyab",
+        "shortName": "A. Amaimouni Echghouyab",
         "position": "F",
         "jerseyNumber": "29",
         "height": 178,
-        "userCount": 1757,
+        "userCount": 1823,
         "gender": "M",
         "id": 1898148,
         "marketValueCurrency": "EUR",
         "dateOfBirthTimestamp": 1101772800,
         "proposedMarketValueRaw": {
-          "value": 2200000,
+          "value": 7600000,
           "currency": "EUR"
         },
         "fieldTranslations": {
           "nameTranslation": {
-            "ar": "أمائموني إتشغوياب، أيوب"
+            "ar": "أيوب أمعيموني إيشغوياب"
           },
           "shortNameTranslation": {
-            "ar": "أ. إتشغوياب"
+            "ar": "أ. إيشغوياب"
           }
         }
       },
@@ -1389,12 +1401,14 @@
         {
           "player": {
             "name": "Robin Koch",
+            "firstName": "Robin",
+            "lastName": "Koch",
             "slug": "robin-koch",
             "shortName": "R. Koch",
             "position": "D",
             "jerseyNumber": "4",
             "height": 190,
-            "userCount": 1840,
+            "userCount": 1858,
             "gender": "M",
             "id": 581302,
             "marketValueCurrency": "EUR",
@@ -1436,13 +1450,13 @@
             "position": "D",
             "jerseyNumber": "5",
             "height": 194,
-            "userCount": 785,
+            "userCount": 808,
             "gender": "M",
             "id": 999276,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 1059609600,
             "proposedMarketValueRaw": {
-              "value": 6200000,
+              "value": 8199999,
               "currency": "EUR"
             },
             "fieldTranslations": {
@@ -1473,14 +1487,14 @@
         {
           "player": {
             "name": "Farès Chaïbi",
-            "firstName": "",
-            "lastName": "",
+            "firstName": "Fares",
+            "lastName": "Chaibi",
             "slug": "fares-chaibi",
             "shortName": "F. Chaïbi",
             "position": "M",
             "jerseyNumber": "8",
             "height": 183,
-            "userCount": 18219,
+            "userCount": 18350,
             "gender": "M",
             "sofascoreId": "fareschaibi28",
             "id": 1192318,
@@ -1492,12 +1506,12 @@
             },
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "فارس شعيبي",
+                "ar": "فارس شايبي",
                 "bn": "ফারেস চাইবি",
                 "hi": "फ़रेस चाइबी"
               },
               "shortNameTranslation": {
-                "ar": "ف. شعيبي",
+                "ar": "ف. شايبي",
                 "bn": "এফ. চাইবি",
                 "hi": "एफ. चाइबी"
               }
@@ -1523,7 +1537,7 @@
             "position": "F",
             "jerseyNumber": "9",
             "height": 181,
-            "userCount": 4050,
+            "userCount": 4088,
             "gender": "M",
             "id": 939830,
             "marketValueCurrency": "EUR",
@@ -1559,27 +1573,29 @@
         },
         {
           "player": {
-            "name": "Ayoube Amaimouni-Echghouyab",
-            "slug": "amaimouni-echghouyab-ayoube",
-            "shortName": "A. A. Echghouyab",
+            "name": "Ayoube Amaimouni Echghouyab",
+            "firstName": "Ayoube",
+            "lastName": "Amaimouni Echghouyab",
+            "slug": "ayoube-amaimouni-echghouyab",
+            "shortName": "A. Amaimouni Echghouyab",
             "position": "F",
             "jerseyNumber": "29",
             "height": 178,
-            "userCount": 1757,
+            "userCount": 1823,
             "gender": "M",
             "id": 1898148,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 1101772800,
             "proposedMarketValueRaw": {
-              "value": 2200000,
+              "value": 7600000,
               "currency": "EUR"
             },
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "أمائموني إتشغوياب، أيوب"
+                "ar": "أيوب أمعيموني إيشغوياب"
               },
               "shortNameTranslation": {
-                "ar": "أ. إتشغوياب"
+                "ar": "أ. إيشغوياب"
               }
             }
           },
@@ -1597,27 +1613,29 @@
         },
         {
           "player": {
-            "name": "Ayoube Amaimouni-Echghouyab",
-            "slug": "amaimouni-echghouyab-ayoube",
-            "shortName": "A. A. Echghouyab",
+            "name": "Ayoube Amaimouni Echghouyab",
+            "firstName": "Ayoube",
+            "lastName": "Amaimouni Echghouyab",
+            "slug": "ayoube-amaimouni-echghouyab",
+            "shortName": "A. Amaimouni Echghouyab",
             "position": "F",
             "jerseyNumber": "29",
             "height": 178,
-            "userCount": 1757,
+            "userCount": 1823,
             "gender": "M",
             "id": 1898148,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 1101772800,
             "proposedMarketValueRaw": {
-              "value": 2200000,
+              "value": 7600000,
               "currency": "EUR"
             },
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "أمائموني إتشغوياب، أيوب"
+                "ar": "أيوب أمعيموني إيشغوياب"
               },
               "shortNameTranslation": {
-                "ar": "أ. إتشغوياب"
+                "ar": "أ. إيشغوياب"
               }
             }
           },
@@ -1644,13 +1662,13 @@
             "position": "M",
             "jerseyNumber": "6",
             "height": 184,
-            "userCount": 1119,
+            "userCount": 1142,
             "gender": "M",
             "id": 1149113,
             "marketValueCurrency": "EUR",
             "dateOfBirthTimestamp": 1104796800,
             "proposedMarketValueRaw": {
-              "value": 7300000,
+              "value": 9700000,
               "currency": "EUR"
             },
             "fieldTranslations": {
@@ -1687,12 +1705,14 @@
           },
           "goalkeeper": {
             "name": "Kamil Grabara",
-            "slug": "grabara-kamil",
+            "firstName": "Kamil",
+            "lastName": "Grabara",
+            "slug": "kamil-grabara",
             "shortName": "K. Grabara",
             "position": "G",
             "jerseyNumber": "1",
             "height": 195,
-            "userCount": 3407,
+            "userCount": 3480,
             "gender": "M",
             "id": 902080,
             "marketValueCurrency": "EUR",
