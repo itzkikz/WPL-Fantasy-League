@@ -1,968 +1,8 @@
 {
   "standings": [
     {
-      "type": "total",
-      "descriptions": [],
-      "tieBreakingRule": {
-        "text": "In the event that two (or more) teams have an equal number of points, the following rules break the tie: 1. Goal difference 2. Goals scored 3. H2H",
-        "id": 2393
-      },
-      "rows": [
-        {
-          "team": {
-            "name": "Paris Saint-Germain",
-            "slug": "paris-saint-germain",
-            "shortName": "PSG",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 3285720,
-            "nameCode": "PSG",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1644,
-            "teamColors": {
-              "primary": "#000066",
-              "secondary": "#ff1541",
-              "text": "#ff1541"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "باريس سان جيرمان",
-                "hi": "पेरिस सेंट-जर्मेन",
-                "ru": "Пари Сен-Жермен"
-              },
-              "shortNameTranslation": {
-                "bn": "পিএসজি",
-                "hi": "पीएसजी"
-              }
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Champions League",
-            "id": 804
-          },
-          "position": 1,
-          "matches": 34,
-          "wins": 24,
-          "scoresFor": 74,
-          "scoresAgainst": 29,
-          "id": 1662426,
-          "losses": 6,
-          "draws": 4,
-          "points": 76,
-          "scoreDiffFormatted": "+45"
-        },
-        {
-          "team": {
-            "name": "RC Lens",
-            "slug": "rc-lens",
-            "shortName": "Lens",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 217268,
-            "nameCode": "RCL",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1648,
-            "teamColors": {
-              "primary": "#a71a1b",
-              "secondary": "#ffce00",
-              "text": "#ffce00"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "لينس",
-                "bn": "লেন্স",
-                "hi": "लेंस",
-                "ru": "Ланс"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Champions League",
-            "id": 804
-          },
-          "position": 2,
-          "matches": 34,
-          "wins": 22,
-          "scoresFor": 66,
-          "scoresAgainst": 35,
-          "id": 1662427,
-          "losses": 8,
-          "draws": 4,
-          "points": 70,
-          "scoreDiffFormatted": "+31"
-        },
-        {
-          "team": {
-            "name": "Lille",
-            "slug": "lille",
-            "shortName": "Lille",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 318998,
-            "nameCode": "LIL",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1643,
-            "teamColors": {
-              "primary": "#df0000",
-              "secondary": "#24216a",
-              "text": "#24216a"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "ليل",
-                "bn": "লিল",
-                "hi": "लिली",
-                "ru": "Лилль"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Champions League",
-            "id": 804
-          },
-          "position": 3,
-          "matches": 34,
-          "wins": 18,
-          "scoresFor": 52,
-          "scoresAgainst": 37,
-          "id": 1662421,
-          "losses": 9,
-          "draws": 7,
-          "points": 61,
-          "scoreDiffFormatted": "+15"
-        },
-        {
-          "team": {
-            "name": "Olympique Lyonnais",
-            "slug": "olympique-lyonnais",
-            "shortName": "Lyon",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 537483,
-            "nameCode": "OL",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1649,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#004080",
-              "text": "#004080"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "أولمبيك ليون",
-                "ru": "Лион"
-              },
-              "shortNameTranslation": {
-                "ar": "ليون",
-                "bn": "লিওন",
-                "hi": "लियोन"
-              }
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Champions League Qualification",
-            "id": 24
-          },
-          "position": 4,
-          "matches": 34,
-          "wins": 18,
-          "scoresFor": 53,
-          "scoresAgainst": 40,
-          "id": 1662423,
-          "losses": 10,
-          "draws": 6,
-          "points": 60,
-          "scoreDiffFormatted": "+13"
-        },
-        {
-          "team": {
-            "name": "Olympique de Marseille",
-            "slug": "olympique-de-marseille",
-            "shortName": "Marseille",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 661538,
-            "nameCode": "OM",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1641,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#66b3ff",
-              "text": "#66b3ff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "أولمبيك دي مارسيليا",
-                "ru": "Олимпик Марсель"
-              },
-              "shortNameTranslation": {
-                "ar": "مارسيليا",
-                "bn": "মার্সেই",
-                "hi": "मार्सिले"
-              }
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "UEFA Europa League",
-            "id": 808
-          },
-          "position": 5,
-          "matches": 34,
-          "wins": 18,
-          "scoresFor": 63,
-          "scoresAgainst": 45,
-          "id": 1662424,
-          "losses": 11,
-          "draws": 5,
-          "points": 59,
-          "scoreDiffFormatted": "+18"
-        },
-        {
-          "team": {
-            "name": "Stade Rennais",
-            "slug": "stade-rennais",
-            "shortName": "Rennes",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 131040,
-            "nameCode": "SR",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1658,
-            "teamColors": {
-              "primary": "#ff0000",
-              "secondary": "#000000",
-              "text": "#000000"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "ستاد رين",
-                "ru": "Ренн"
-              },
-              "shortNameTranslation": {
-                "ar": "رين",
-                "bn": "রেনাইস",
-                "hi": "रेनेस"
-              }
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Conference League Qualification",
-            "id": 503
-          },
-          "position": 6,
-          "matches": 34,
-          "wins": 17,
-          "scoresFor": 59,
-          "scoresAgainst": 50,
-          "id": 1662429,
-          "losses": 9,
-          "draws": 8,
-          "points": 59,
-          "scoreDiffFormatted": "+9"
-        },
-        {
-          "team": {
-            "name": "AS Monaco",
-            "slug": "as-monaco",
-            "shortName": "AS Monaco",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 518818,
-            "nameCode": "ASM",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "MC",
-              "alpha3": "MCO",
-              "name": "Monaco",
-              "slug": "monaco"
-            },
-            "id": 1653,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#ff0000",
-              "text": "#ff0000"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "نادي موناكو",
-                "bn": "এএস মোনাকো",
-                "hi": "एएस मोनाको",
-                "ru": "Монако"
-              },
-              "shortNameTranslation": {
-                "ar": "موناكو"
-              }
-            }
-          },
-          "descriptions": [],
-          "position": 7,
-          "matches": 34,
-          "wins": 16,
-          "scoresFor": 60,
-          "scoresAgainst": 54,
-          "id": 1662416,
-          "losses": 12,
-          "draws": 6,
-          "points": 54,
-          "scoreDiffFormatted": "+6"
-        },
-        {
-          "team": {
-            "name": "RC Strasbourg",
-            "slug": "rc-strasbourg",
-            "shortName": "Strasbourg",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 159250,
-            "nameCode": "STR",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1659,
-            "teamColors": {
-              "primary": "#00458e",
-              "secondary": "#ffffff",
-              "text": "#ffffff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "آر سي ستراسبورغ",
-                "ru": "Страсбур"
-              },
-              "shortNameTranslation": {
-                "ar": "ستراسبورغ",
-                "bn": "স্ট্রাসবার্গ",
-                "hi": "स्ट्रासबर्ग"
-              }
-            }
-          },
-          "descriptions": [],
-          "position": 8,
-          "matches": 34,
-          "wins": 15,
-          "scoresFor": 58,
-          "scoresAgainst": 47,
-          "id": 1662430,
-          "losses": 11,
-          "draws": 8,
-          "points": 53,
-          "scoreDiffFormatted": "+11"
-        },
-        {
-          "team": {
-            "name": "Lorient",
-            "slug": "lorient",
-            "shortName": "Lorient",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 61027,
-            "nameCode": "FCL",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1656,
-            "teamColors": {
-              "primary": "#ff6600",
-              "secondary": "#000000",
-              "text": "#000000"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "لوريان",
-                "bn": "লরিয়েন্ট",
-                "hi": "लॉरिअन्ट",
-                "ru": "Лорьян"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 9,
-          "matches": 34,
-          "wins": 11,
-          "scoresFor": 48,
-          "scoresAgainst": 51,
-          "id": 1662417,
-          "losses": 11,
-          "draws": 12,
-          "points": 45,
-          "scoreDiffFormatted": "-3"
-        },
-        {
-          "team": {
-            "name": "Toulouse",
-            "slug": "toulouse",
-            "shortName": "Toulouse",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 88840,
-            "nameCode": "TFC",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1681,
-            "teamColors": {
-              "primary": "#660099",
-              "secondary": "#ffffff",
-              "text": "#ffffff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "تولوز",
-                "bn": "টুলুজ",
-                "hi": "टूलूज़",
-                "ru": "Тулуза"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 10,
-          "matches": 33,
-          "wins": 12,
-          "scoresFor": 47,
-          "scoresAgainst": 46,
-          "id": 1662431,
-          "losses": 13,
-          "draws": 8,
-          "points": 44,
-          "scoreDiffFormatted": "+1"
-        },
-        {
-          "team": {
-            "name": "Paris FC",
-            "slug": "paris-fc",
-            "shortName": "Paris",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 71252,
-            "nameCode": "PFC",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 6070,
-            "teamColors": {
-              "primary": "#2e3552",
-              "secondary": "#ef570e",
-              "text": "#ef570e"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "باريس إف سي",
-                "hi": "पेरिस एफसी",
-                "ru": "Париж ФК"
-              },
-              "shortNameTranslation": {
-                "ar": "باريس",
-                "bn": "এফসি",
-                "hi": "पेरिस"
-              }
-            }
-          },
-          "descriptions": [],
-          "position": 11,
-          "matches": 34,
-          "wins": 11,
-          "scoresFor": 47,
-          "scoresAgainst": 50,
-          "id": 1662425,
-          "losses": 12,
-          "draws": 11,
-          "points": 44,
-          "scoreDiffFormatted": "-3"
-        },
-        {
-          "team": {
-            "name": "Stade Brestois",
-            "slug": "stade-brestois",
-            "shortName": "Brest",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 113797,
-            "nameCode": "BRE",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1715,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#d20000",
-              "text": "#d20000"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "ستاد بريستوا",
-                "ru": "Брест"
-              },
-              "shortNameTranslation": {
-                "ar": "بريست",
-                "bn": "ব্রেস্ট",
-                "hi": "ब्रेस्ट"
-              }
-            }
-          },
-          "descriptions": [],
-          "position": 12,
-          "matches": 34,
-          "wins": 10,
-          "scoresFor": 43,
-          "scoresAgainst": 55,
-          "id": 1662428,
-          "losses": 15,
-          "draws": 9,
-          "points": 39,
-          "scoreDiffFormatted": "-12"
-        },
-        {
-          "team": {
-            "name": "Angers",
-            "slug": "angers",
-            "shortName": "Angers",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 56885,
-            "nameCode": "ANG",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1684,
-            "teamColors": {
-              "primary": "#000000",
-              "secondary": "#ffffff",
-              "text": "#ffffff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "أنغرز",
-                "bn": "এংগারস",
-                "hi": "एंजर्स",
-                "ru": "Анже"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 13,
-          "matches": 34,
-          "wins": 9,
-          "scoresFor": 29,
-          "scoresAgainst": 48,
-          "id": 1662415,
-          "losses": 16,
-          "draws": 9,
-          "points": 36,
-          "scoreDiffFormatted": "-19"
-        },
-        {
-          "team": {
-            "name": "Le Havre",
-            "slug": "le-havre",
-            "shortName": "Le Havre",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 55770,
-            "nameCode": "HAC",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1662,
-            "teamColors": {
-              "primary": "#3399ff",
-              "secondary": "#3399ff",
-              "text": "#3399ff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "لوهافر",
-                "bn": "লে হাভরে",
-                "hi": "ले हावरे",
-                "ru": "Гавр"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 14,
-          "matches": 34,
-          "wins": 7,
-          "scoresFor": 32,
-          "scoresAgainst": 44,
-          "id": 1662420,
-          "losses": 13,
-          "draws": 14,
-          "points": 35,
-          "scoreDiffFormatted": "-12"
-        },
-        {
-          "team": {
-            "name": "Auxerre",
-            "slug": "auxerre",
-            "shortName": "Auxerre",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 53153,
-            "nameCode": "AJA",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1646,
-            "teamColors": {
-              "primary": "#ffffff",
-              "secondary": "#0033ff",
-              "text": "#0033ff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "أوكسير",
-                "bn": "অক্সের",
-                "hi": "ऑक्सेरे",
-                "ru": "Осер"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "position": 15,
-          "matches": 34,
-          "wins": 8,
-          "scoresFor": 34,
-          "scoresAgainst": 44,
-          "id": 1662414,
-          "losses": 16,
-          "draws": 10,
-          "points": 34,
-          "scoreDiffFormatted": "-10"
-        },
-        {
-          "team": {
-            "name": "Nice",
-            "slug": "nice",
-            "shortName": "Nice",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 157373,
-            "nameCode": "OGC",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1661,
-            "teamColors": {
-              "primary": "#000000",
-              "secondary": "#cc0000",
-              "text": "#cc0000"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "نيس",
-                "bn": "নাইস",
-                "hi": "नाइस",
-                "ru": "Ницца"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Relegation Playoffs",
-            "id": 45
-          },
-          "position": 16,
-          "matches": 34,
-          "wins": 7,
-          "scoresFor": 37,
-          "scoresAgainst": 60,
-          "id": 1662422,
-          "losses": 16,
-          "draws": 11,
-          "points": 32,
-          "scoreDiffFormatted": "-23"
-        },
-        {
-          "team": {
-            "name": "Nantes",
-            "slug": "nantes",
-            "shortName": "Nantes",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 88267,
-            "nameCode": "FCN",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1647,
-            "teamColors": {
-              "primary": "#ffdc12",
-              "secondary": "#00a94e",
-              "text": "#00a94e"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "نانت",
-                "bn": "ন্যান্টেস",
-                "hi": "नांत",
-                "ru": "Нант"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Relegation",
-            "id": 3
-          },
-          "position": 17,
-          "matches": 33,
-          "wins": 5,
-          "scoresFor": 29,
-          "scoresAgainst": 52,
-          "id": 1662419,
-          "losses": 20,
-          "draws": 8,
-          "points": 23,
-          "scoreDiffFormatted": "-23"
-        },
-        {
-          "team": {
-            "name": "Metz",
-            "slug": "metz",
-            "shortName": "Metz",
-            "gender": "M",
-            "sport": {
-              "name": "Football",
-              "slug": "football",
-              "id": 1
-            },
-            "userCount": 56567,
-            "nameCode": "FCM",
-            "disabled": false,
-            "national": false,
-            "type": 0,
-            "country": {
-              "alpha2": "FR",
-              "alpha3": "FRA",
-              "name": "France",
-              "slug": "france"
-            },
-            "id": 1651,
-            "teamColors": {
-              "primary": "#a2052c",
-              "secondary": "#ffffff",
-              "text": "#ffffff"
-            },
-            "fieldTranslations": {
-              "nameTranslation": {
-                "ar": "ميتز",
-                "bn": "মেটজ",
-                "hi": "मेट्ज़",
-                "ru": "Метц"
-              },
-              "shortNameTranslation": {}
-            }
-          },
-          "descriptions": [],
-          "promotion": {
-            "text": "Relegation",
-            "id": 3
-          },
-          "position": 18,
-          "matches": 34,
-          "wins": 3,
-          "scoresFor": 32,
-          "scoresAgainst": 76,
-          "id": 1662418,
-          "losses": 23,
-          "draws": 8,
-          "points": 17,
-          "scoreDiffFormatted": "-44"
-        }
-      ],
       "id": 180283,
+      "type": "total",
       "tournament": {
         "name": "Ligue 1",
         "slug": "ligue-1",
@@ -1027,7 +67,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 439114,
+          "userCount": 439471,
           "hasPerformanceGraphFeature": true,
           "country": {},
           "id": 34,
@@ -1055,6 +95,966 @@
         }
       },
       "name": "Ligue 1 25/26",
+      "descriptions": [],
+      "tieBreakingRule": {
+        "text": "In the event that two (or more) teams have an equal number of points, the following rules break the tie: 1. Goal difference 2. Goals scored 3. H2H",
+        "id": 2393
+      },
+      "rows": [
+        {
+          "team": {
+            "name": "Paris Saint-Germain",
+            "slug": "paris-saint-germain",
+            "shortName": "PSG",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 3295123,
+            "nameCode": "PSG",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1644,
+            "teamColors": {
+              "primary": "#000066",
+              "secondary": "#ff1541",
+              "text": "#ff1541"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "باريس سان جيرمان",
+                "hi": "पेरिस सेंट-जर्मेन",
+                "ru": "Пари Сен-Жермен"
+              },
+              "shortNameTranslation": {
+                "bn": "পিএসজি",
+                "hi": "पीएसजी"
+              }
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "Champions League",
+            "id": 804
+          },
+          "position": 1,
+          "matches": 34,
+          "wins": 24,
+          "scoresFor": 74,
+          "scoresAgainst": 29,
+          "id": 1662426,
+          "losses": 6,
+          "draws": 4,
+          "points": 76,
+          "scoreDiffFormatted": "+45"
+        },
+        {
+          "team": {
+            "name": "RC Lens",
+            "slug": "rc-lens",
+            "shortName": "Lens",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 220505,
+            "nameCode": "RCL",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1648,
+            "teamColors": {
+              "primary": "#a71a1b",
+              "secondary": "#ffce00",
+              "text": "#ffce00"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "لينس",
+                "bn": "লেন্স",
+                "hi": "लेंस",
+                "ru": "Ланс"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "Champions League",
+            "id": 804
+          },
+          "position": 2,
+          "matches": 34,
+          "wins": 22,
+          "scoresFor": 66,
+          "scoresAgainst": 35,
+          "id": 1662427,
+          "losses": 8,
+          "draws": 4,
+          "points": 70,
+          "scoreDiffFormatted": "+31"
+        },
+        {
+          "team": {
+            "name": "Lille",
+            "slug": "lille",
+            "shortName": "Lille",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 318895,
+            "nameCode": "LIL",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1643,
+            "teamColors": {
+              "primary": "#df0000",
+              "secondary": "#24216a",
+              "text": "#24216a"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "ليل",
+                "bn": "লিল",
+                "hi": "लिली",
+                "ru": "Лилль"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "Champions League",
+            "id": 804
+          },
+          "position": 3,
+          "matches": 34,
+          "wins": 18,
+          "scoresFor": 52,
+          "scoresAgainst": 37,
+          "id": 1662421,
+          "losses": 9,
+          "draws": 7,
+          "points": 61,
+          "scoreDiffFormatted": "+15"
+        },
+        {
+          "team": {
+            "name": "Olympique Lyonnais",
+            "slug": "olympique-lyonnais",
+            "shortName": "Lyon",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 537233,
+            "nameCode": "OL",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1649,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#004080",
+              "text": "#004080"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "أولمبيك ليون",
+                "ru": "Лион"
+              },
+              "shortNameTranslation": {
+                "ar": "ليون",
+                "bn": "লিওন",
+                "hi": "लियोन"
+              }
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "Champions League Qualification",
+            "id": 24
+          },
+          "position": 4,
+          "matches": 34,
+          "wins": 18,
+          "scoresFor": 53,
+          "scoresAgainst": 40,
+          "id": 1662423,
+          "losses": 10,
+          "draws": 6,
+          "points": 60,
+          "scoreDiffFormatted": "+13"
+        },
+        {
+          "team": {
+            "name": "Olympique de Marseille",
+            "slug": "olympique-de-marseille",
+            "shortName": "Marseille",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 661811,
+            "nameCode": "OM",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1641,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#66b3ff",
+              "text": "#66b3ff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "أولمبيك دي مارسيليا",
+                "ru": "Олимпик Марсель"
+              },
+              "shortNameTranslation": {
+                "ar": "مارسيليا",
+                "bn": "মার্সেই",
+                "hi": "मार्सिले"
+              }
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "UEFA Europa League",
+            "id": 808
+          },
+          "position": 5,
+          "matches": 34,
+          "wins": 18,
+          "scoresFor": 63,
+          "scoresAgainst": 45,
+          "id": 1662424,
+          "losses": 11,
+          "draws": 5,
+          "points": 59,
+          "scoreDiffFormatted": "+18"
+        },
+        {
+          "team": {
+            "name": "Stade Rennais",
+            "slug": "stade-rennais",
+            "shortName": "Rennes",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 130969,
+            "nameCode": "SR",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1658,
+            "teamColors": {
+              "primary": "#ff0000",
+              "secondary": "#000000",
+              "text": "#000000"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "ستاد رين",
+                "ru": "Ренн"
+              },
+              "shortNameTranslation": {
+                "ar": "رين",
+                "bn": "রেনাইস",
+                "hi": "रेनेस"
+              }
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "Conference League Qualification",
+            "id": 503
+          },
+          "position": 6,
+          "matches": 34,
+          "wins": 17,
+          "scoresFor": 59,
+          "scoresAgainst": 50,
+          "id": 1662429,
+          "losses": 9,
+          "draws": 8,
+          "points": 59,
+          "scoreDiffFormatted": "+9"
+        },
+        {
+          "team": {
+            "name": "AS Monaco",
+            "slug": "as-monaco",
+            "shortName": "AS Monaco",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 518617,
+            "nameCode": "ASM",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "MC",
+              "alpha3": "MCO",
+              "name": "Monaco",
+              "slug": "monaco"
+            },
+            "id": 1653,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#ff0000",
+              "text": "#ff0000"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "نادي موناكو",
+                "bn": "এএস মোনাকো",
+                "hi": "एएस मोनाको",
+                "ru": "Монако"
+              },
+              "shortNameTranslation": {
+                "ar": "موناكو"
+              }
+            }
+          },
+          "descriptions": [],
+          "position": 7,
+          "matches": 34,
+          "wins": 16,
+          "scoresFor": 60,
+          "scoresAgainst": 54,
+          "id": 1662416,
+          "losses": 12,
+          "draws": 6,
+          "points": 54,
+          "scoreDiffFormatted": "+6"
+        },
+        {
+          "team": {
+            "name": "RC Strasbourg",
+            "slug": "rc-strasbourg",
+            "shortName": "Strasbourg",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 159054,
+            "nameCode": "STR",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1659,
+            "teamColors": {
+              "primary": "#00458e",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "آر سي ستراسبورغ",
+                "ru": "Страсбур"
+              },
+              "shortNameTranslation": {
+                "ar": "ستراسبورغ",
+                "bn": "স্ট্রাসবার্গ",
+                "hi": "स्ट्रासबर्ग"
+              }
+            }
+          },
+          "descriptions": [],
+          "position": 8,
+          "matches": 34,
+          "wins": 15,
+          "scoresFor": 58,
+          "scoresAgainst": 47,
+          "id": 1662430,
+          "losses": 11,
+          "draws": 8,
+          "points": 53,
+          "scoreDiffFormatted": "+11"
+        },
+        {
+          "team": {
+            "name": "Lorient",
+            "slug": "lorient",
+            "shortName": "Lorient",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 60933,
+            "nameCode": "FCL",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1656,
+            "teamColors": {
+              "primary": "#ff6600",
+              "secondary": "#000000",
+              "text": "#000000"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "لوريان",
+                "bn": "লরিয়েন্ট",
+                "hi": "लॉरिअन्ट",
+                "ru": "Лорьян"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "position": 9,
+          "matches": 34,
+          "wins": 11,
+          "scoresFor": 48,
+          "scoresAgainst": 51,
+          "id": 1662417,
+          "losses": 11,
+          "draws": 12,
+          "points": 45,
+          "scoreDiffFormatted": "-3"
+        },
+        {
+          "team": {
+            "name": "Toulouse",
+            "slug": "toulouse",
+            "shortName": "Toulouse",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 88746,
+            "nameCode": "TFC",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1681,
+            "teamColors": {
+              "primary": "#660099",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "تولوز",
+                "bn": "টুলুজ",
+                "hi": "टूलूज़",
+                "ru": "Тулуза"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "position": 10,
+          "matches": 33,
+          "wins": 12,
+          "scoresFor": 47,
+          "scoresAgainst": 46,
+          "id": 1662431,
+          "losses": 13,
+          "draws": 8,
+          "points": 44,
+          "scoreDiffFormatted": "+1"
+        },
+        {
+          "team": {
+            "name": "Paris FC",
+            "slug": "paris-fc",
+            "shortName": "Paris",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 71196,
+            "nameCode": "PFC",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 6070,
+            "teamColors": {
+              "primary": "#2e3552",
+              "secondary": "#ef570e",
+              "text": "#ef570e"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "باريس إف سي",
+                "hi": "पेरिस एफसी",
+                "ru": "Париж ФК"
+              },
+              "shortNameTranslation": {
+                "ar": "باريس",
+                "bn": "এফসি",
+                "hi": "पेरिस"
+              }
+            }
+          },
+          "descriptions": [],
+          "position": 11,
+          "matches": 34,
+          "wins": 11,
+          "scoresFor": 47,
+          "scoresAgainst": 50,
+          "id": 1662425,
+          "losses": 12,
+          "draws": 11,
+          "points": 44,
+          "scoreDiffFormatted": "-3"
+        },
+        {
+          "team": {
+            "name": "Stade Brestois",
+            "slug": "stade-brestois",
+            "shortName": "Brest",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 113691,
+            "nameCode": "BRE",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1715,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#d20000",
+              "text": "#d20000"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "ستاد بريستوا",
+                "ru": "Брест"
+              },
+              "shortNameTranslation": {
+                "ar": "بريست",
+                "bn": "ব্রেস্ট",
+                "hi": "ब्रेस्ट"
+              }
+            }
+          },
+          "descriptions": [],
+          "position": 12,
+          "matches": 34,
+          "wins": 10,
+          "scoresFor": 43,
+          "scoresAgainst": 55,
+          "id": 1662428,
+          "losses": 15,
+          "draws": 9,
+          "points": 39,
+          "scoreDiffFormatted": "-12"
+        },
+        {
+          "team": {
+            "name": "Angers",
+            "slug": "angers",
+            "shortName": "Angers",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 56794,
+            "nameCode": "ANG",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1684,
+            "teamColors": {
+              "primary": "#000000",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "أنغرز",
+                "bn": "এংগারস",
+                "hi": "एंजर्स",
+                "ru": "Анже"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "position": 13,
+          "matches": 34,
+          "wins": 9,
+          "scoresFor": 29,
+          "scoresAgainst": 48,
+          "id": 1662415,
+          "losses": 16,
+          "draws": 9,
+          "points": 36,
+          "scoreDiffFormatted": "-19"
+        },
+        {
+          "team": {
+            "name": "Le Havre",
+            "slug": "le-havre",
+            "shortName": "Le Havre",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 55720,
+            "nameCode": "HAC",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1662,
+            "teamColors": {
+              "primary": "#3399ff",
+              "secondary": "#3399ff",
+              "text": "#3399ff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "لوهافر",
+                "bn": "লে হাভরে",
+                "hi": "ले हावरे",
+                "ru": "Гавр"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "position": 14,
+          "matches": 34,
+          "wins": 7,
+          "scoresFor": 32,
+          "scoresAgainst": 44,
+          "id": 1662420,
+          "losses": 13,
+          "draws": 14,
+          "points": 35,
+          "scoreDiffFormatted": "-12"
+        },
+        {
+          "team": {
+            "name": "Auxerre",
+            "slug": "auxerre",
+            "shortName": "Auxerre",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 53077,
+            "nameCode": "AJA",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1646,
+            "teamColors": {
+              "primary": "#ffffff",
+              "secondary": "#0033ff",
+              "text": "#0033ff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "أوكسير",
+                "bn": "অক্সের",
+                "hi": "ऑक्सेरे",
+                "ru": "Осер"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "position": 15,
+          "matches": 34,
+          "wins": 8,
+          "scoresFor": 34,
+          "scoresAgainst": 44,
+          "id": 1662414,
+          "losses": 16,
+          "draws": 10,
+          "points": 34,
+          "scoreDiffFormatted": "-10"
+        },
+        {
+          "team": {
+            "name": "Nice",
+            "slug": "nice",
+            "shortName": "Nice",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 158473,
+            "nameCode": "OGC",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1661,
+            "teamColors": {
+              "primary": "#000000",
+              "secondary": "#cc0000",
+              "text": "#cc0000"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "نيس",
+                "bn": "নাইস",
+                "hi": "नाइस",
+                "ru": "Ницца"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "Relegation Playoffs",
+            "id": 45
+          },
+          "position": 16,
+          "matches": 34,
+          "wins": 7,
+          "scoresFor": 37,
+          "scoresAgainst": 60,
+          "id": 1662422,
+          "losses": 16,
+          "draws": 11,
+          "points": 32,
+          "scoreDiffFormatted": "-23"
+        },
+        {
+          "team": {
+            "name": "Nantes",
+            "slug": "nantes",
+            "shortName": "Nantes",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 88205,
+            "nameCode": "FCN",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1647,
+            "teamColors": {
+              "primary": "#ffdc12",
+              "secondary": "#00a94e",
+              "text": "#00a94e"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "نانت",
+                "bn": "ন্যান্টেস",
+                "hi": "नांत",
+                "ru": "Нант"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "Relegation",
+            "id": 3
+          },
+          "position": 17,
+          "matches": 33,
+          "wins": 5,
+          "scoresFor": 29,
+          "scoresAgainst": 52,
+          "id": 1662419,
+          "losses": 20,
+          "draws": 8,
+          "points": 23,
+          "scoreDiffFormatted": "-23"
+        },
+        {
+          "team": {
+            "name": "Metz",
+            "slug": "metz",
+            "shortName": "Metz",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "userCount": 56507,
+            "nameCode": "FCM",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "FR",
+              "alpha3": "FRA",
+              "name": "France",
+              "slug": "france"
+            },
+            "id": 1651,
+            "teamColors": {
+              "primary": "#a2052c",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "ميتز",
+                "bn": "মেটজ",
+                "hi": "मेट्ज़",
+                "ru": "Метц"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "descriptions": [],
+          "promotion": {
+            "text": "Relegation",
+            "id": 3
+          },
+          "position": 18,
+          "matches": 34,
+          "wins": 3,
+          "scoresFor": 32,
+          "scoresAgainst": 76,
+          "id": 1662418,
+          "losses": 23,
+          "draws": 8,
+          "points": 17,
+          "scoreDiffFormatted": "-44"
+        }
+      ],
       "updatedAtTimestamp": 1779058066
     }
   ]

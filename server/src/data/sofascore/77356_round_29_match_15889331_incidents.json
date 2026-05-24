@@ -23,7 +23,7 @@
         "position": "F",
         "jerseyNumber": "49",
         "height": 175,
-        "userCount": 41047,
+        "userCount": 41504,
         "gender": "M",
         "id": 1590918,
         "marketValueCurrency": "EUR",
@@ -54,7 +54,7 @@
         "position": "F",
         "jerseyNumber": "14",
         "height": 181,
-        "userCount": 104115,
+        "userCount": 104869,
         "gender": "M",
         "sofascoreId": "DD14",
         "id": 1154605,
@@ -80,41 +80,36 @@
       "footballPassingNetworkAction": [
         {
           "player": {
-            "name": "Lucas Beraldo",
-            "firstName": "Lucas Beraldo",
-            "slug": "lucas-beraldo",
-            "shortName": "L. Beraldo",
+            "name": "Dimitri Lucea",
+            "firstName": "Dimitri Lucea",
+            "slug": "dimitri-lucea",
+            "shortName": "D. Lucea",
             "position": "D",
-            "jerseyNumber": "4",
-            "height": 186,
-            "userCount": 19903,
+            "jerseyNumber": "54",
+            "height": 189,
+            "userCount": 255,
             "gender": "M",
-            "sofascoreId": "lberaldo",
-            "id": 1108441,
+            "id": 1936801,
             "marketValueCurrency": "EUR",
-            "dateOfBirthTimestamp": 1069632000,
-            "proposedMarketValueRaw": {
-              "value": 18500000,
-              "currency": "EUR"
-            },
+            "dateOfBirthTimestamp": 1168992000,
             "fieldTranslations": {
               "nameTranslation": {
-                "ar": "لوكاس بيرالدو",
-                "bn": "লুকাস বেরালদো",
-                "hi": "लुकास बेराल्डो"
+                "ar": "ديمتري لوسيا"
               },
               "shortNameTranslation": {
-                "ar": "ل. بيرالدو",
-                "bn": "লুকাস বেরালদো",
-                "hi": "लुकास बेराल्डो"
+                "ar": "د. لوسيا"
               }
             }
           },
-          "eventType": "interception",
+          "eventType": "clearance",
           "time": 90,
           "playerCoordinates": {
-            "x": 95.2,
-            "y": 51.2
+            "x": 93.1,
+            "y": 47.2
+          },
+          "passEndCoordinates": {
+            "x": 73.1,
+            "y": 7.9
           },
           "isHome": false
         },
@@ -126,7 +121,7 @@
             "position": "F",
             "jerseyNumber": "49",
             "height": 175,
-            "userCount": 41047,
+            "userCount": 41504,
             "gender": "M",
             "id": 1590918,
             "marketValueCurrency": "EUR",
@@ -170,7 +165,7 @@
             "position": "F",
             "jerseyNumber": "9",
             "height": 185,
-            "userCount": 25293,
+            "userCount": 25487,
             "gender": "M",
             "sofascoreId": "goncaloramos88",
             "id": 934510,
@@ -213,7 +208,7 @@
             "position": "F",
             "jerseyNumber": "49",
             "height": 175,
-            "userCount": 41047,
+            "userCount": 41504,
             "gender": "M",
             "id": 1590918,
             "marketValueCurrency": "EUR",
@@ -257,7 +252,7 @@
             "position": "F",
             "jerseyNumber": "14",
             "height": 181,
-            "userCount": 104115,
+            "userCount": 104869,
             "gender": "M",
             "sofascoreId": "DD14",
             "id": 1154605,
@@ -288,8 +283,8 @@
             "y": 74.1
           },
           "passEndCoordinates": {
-            "x": 14.5,
-            "y": 54.2
+            "x": 15.6,
+            "y": 54.4
           },
           "isHome": false
         },
@@ -301,7 +296,7 @@
             "position": "F",
             "jerseyNumber": "49",
             "height": 175,
-            "userCount": 41047,
+            "userCount": 41504,
             "gender": "M",
             "id": 1590918,
             "marketValueCurrency": "EUR",
@@ -327,8 +322,8 @@
           "bodyPart": "right-foot",
           "time": 90,
           "playerCoordinates": {
-            "x": 14.5,
-            "y": 54.2
+            "x": 15.6,
+            "y": 54.4
           },
           "gkCoordinates": {
             "x": 1.1,
@@ -350,7 +345,7 @@
             "position": "G",
             "jerseyNumber": "40",
             "height": 193,
-            "userCount": 1168,
+            "userCount": 1369,
             "gender": "M",
             "id": 1387161,
             "marketValueCurrency": "EUR",
@@ -401,7 +396,7 @@
         "position": "F",
         "jerseyNumber": "7",
         "height": 187,
-        "userCount": 818,
+        "userCount": 892,
         "gender": "M",
         "id": 788921,
         "marketValueCurrency": "EUR",
@@ -430,7 +425,7 @@
         "position": "F",
         "jerseyNumber": "19",
         "height": 188,
-        "userCount": 2970,
+        "userCount": 3032,
         "gender": "M",
         "id": 1029018,
         "marketValueCurrency": "EUR",
@@ -468,7 +463,7 @@
         "position": "M",
         "jerseyNumber": "5",
         "height": 180,
-        "userCount": 691,
+        "userCount": 734,
         "gender": "M",
         "id": 1423504,
         "marketValueCurrency": "EUR",
@@ -495,7 +490,7 @@
         "position": "M",
         "jerseyNumber": "2",
         "height": 172,
-        "userCount": 447,
+        "userCount": 448,
         "gender": "M",
         "id": 579576,
         "marketValueCurrency": "EUR",
@@ -533,7 +528,7 @@
         "position": "F",
         "jerseyNumber": "49",
         "height": 175,
-        "userCount": 41047,
+        "userCount": 41504,
         "gender": "M",
         "id": 1590918,
         "marketValueCurrency": "EUR",
@@ -564,7 +559,7 @@
         "position": "F",
         "jerseyNumber": "10",
         "height": 178,
-        "userCount": 279188,
+        "userCount": 286772,
         "gender": "M",
         "sofascoreId": "ODembélé",
         "id": 818244,
@@ -603,11 +598,12 @@
         "shortName": "D. Lucea",
         "position": "D",
         "jerseyNumber": "54",
-        "userCount": 94,
+        "height": 189,
+        "userCount": 255,
         "gender": "M",
         "id": 1936801,
         "marketValueCurrency": "EUR",
-        "dateOfBirthTimestamp": 1169251200,
+        "dateOfBirthTimestamp": 1168992000,
         "fieldTranslations": {
           "nameTranslation": {
             "ar": "ديمتري لوسيا"
@@ -626,7 +622,7 @@
         "position": "M",
         "jerseyNumber": "87",
         "height": 174,
-        "userCount": 42814,
+        "userCount": 43270,
         "gender": "M",
         "sofascoreId": "joao_neves",
         "id": 1190933,
@@ -667,7 +663,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 185,
-        "userCount": 25293,
+        "userCount": 25487,
         "gender": "M",
         "sofascoreId": "goncaloramos88",
         "id": 934510,
@@ -699,7 +695,7 @@
         "position": "F",
         "jerseyNumber": "7",
         "height": 183,
-        "userCount": 138947,
+        "userCount": 145185,
         "gender": "M",
         "sofascoreId": "Kvaradona",
         "id": 889259,
@@ -740,7 +736,7 @@
         "position": "M",
         "jerseyNumber": "8",
         "height": 189,
-        "userCount": 23490,
+        "userCount": 23595,
         "gender": "M",
         "sofascoreId": "fabianruiz52",
         "id": 784655,
@@ -770,7 +766,7 @@
         "position": "D",
         "jerseyNumber": "21",
         "height": 183,
-        "userCount": 11637,
+        "userCount": 11802,
         "gender": "M",
         "sofascoreId": "lucashernandez21",
         "id": 352370,
@@ -811,7 +807,7 @@
         "position": "F",
         "jerseyNumber": "9",
         "height": 173,
-        "userCount": 13665,
+        "userCount": 13715,
         "gender": "M",
         "sofascoreId": "st_maximin",
         "id": 347010,
@@ -843,7 +839,7 @@
         "position": "F",
         "jerseyNumber": "11",
         "height": 187,
-        "userCount": 9504,
+        "userCount": 9827,
         "gender": "M",
         "id": 795228,
         "marketValueCurrency": "EUR",
@@ -881,7 +877,7 @@
         "position": "D",
         "jerseyNumber": "32",
         "height": 183,
-        "userCount": 283,
+        "userCount": 318,
         "gender": "M",
         "id": 1546405,
         "marketValueCurrency": "EUR",
@@ -908,7 +904,7 @@
         "position": "D",
         "jerseyNumber": "6",
         "height": 190,
-        "userCount": 1434,
+        "userCount": 1509,
         "gender": "M",
         "id": 1099117,
         "marketValueCurrency": "EUR",
@@ -948,7 +944,7 @@
         "position": "F",
         "jerseyNumber": "10",
         "height": 179,
-        "userCount": 8937,
+        "userCount": 8982,
         "gender": "M",
         "id": 148824,
         "marketValueCurrency": "EUR",
@@ -977,7 +973,7 @@
         "position": "F",
         "jerseyNumber": "22",
         "height": 171,
-        "userCount": 1224,
+        "userCount": 1275,
         "gender": "M",
         "id": 227862,
         "marketValueCurrency": "EUR",
@@ -1017,7 +1013,7 @@
         "position": "M",
         "jerseyNumber": "17",
         "height": 172,
-        "userCount": 63704,
+        "userCount": 64325,
         "gender": "M",
         "sofascoreId": "vitinha",
         "id": 902029,
@@ -1047,7 +1043,7 @@
         "position": "F",
         "jerseyNumber": "29",
         "height": 182,
-        "userCount": 41413,
+        "userCount": 41769,
         "gender": "M",
         "sofascoreId": "bradley_b",
         "id": 996952,
@@ -1099,7 +1095,7 @@
         "position": "D",
         "jerseyNumber": "6",
         "height": 189,
-        "userCount": 18120,
+        "userCount": 18310,
         "gender": "M",
         "sofascoreId": "IlliaZabarnyi",
         "id": 1023567,
@@ -1151,7 +1147,7 @@
         "position": "F",
         "jerseyNumber": "7",
         "height": 183,
-        "userCount": 138947,
+        "userCount": 145185,
         "gender": "M",
         "sofascoreId": "Kvaradona",
         "id": 889259,
@@ -1183,7 +1179,7 @@
         "position": "F",
         "jerseyNumber": "10",
         "height": 178,
-        "userCount": 279188,
+        "userCount": 286772,
         "gender": "M",
         "sofascoreId": "ODembélé",
         "id": 818244,
@@ -1217,7 +1213,7 @@
             "position": "F",
             "jerseyNumber": "10",
             "height": 178,
-            "userCount": 279188,
+            "userCount": 286772,
             "gender": "M",
             "sofascoreId": "ODembélé",
             "id": 818244,
@@ -1243,8 +1239,8 @@
           "eventType": "tackle",
           "time": 29,
           "playerCoordinates": {
-            "x": 28.8,
-            "y": 53.1
+            "x": 30.5,
+            "y": 46.4
           },
           "isHome": false
         },
@@ -1258,7 +1254,7 @@
             "position": "F",
             "jerseyNumber": "10",
             "height": 178,
-            "userCount": 279188,
+            "userCount": 286772,
             "gender": "M",
             "sofascoreId": "ODembélé",
             "id": 818244,
@@ -1285,12 +1281,12 @@
           "isAssist": true,
           "time": 29,
           "playerCoordinates": {
-            "x": 31.2,
-            "y": 55.8
+            "x": 29.9,
+            "y": 54.6
           },
           "passEndCoordinates": {
-            "x": 14.2,
-            "y": 51.2
+            "x": 15.7,
+            "y": 54.6
           },
           "isHome": false
         },
@@ -1304,7 +1300,7 @@
             "position": "F",
             "jerseyNumber": "7",
             "height": 183,
-            "userCount": 138947,
+            "userCount": 145185,
             "gender": "M",
             "sofascoreId": "Kvaradona",
             "id": 889259,
@@ -1331,8 +1327,8 @@
           "bodyPart": "right-foot",
           "time": 29,
           "playerCoordinates": {
-            "x": 10.5,
-            "y": 53.8
+            "x": 9.5,
+            "y": 53.4
           },
           "gkCoordinates": {
             "x": 3.5,
@@ -1354,7 +1350,7 @@
             "position": "G",
             "jerseyNumber": "40",
             "height": 193,
-            "userCount": 1168,
+            "userCount": 1369,
             "gender": "M",
             "id": 1387161,
             "marketValueCurrency": "EUR",
