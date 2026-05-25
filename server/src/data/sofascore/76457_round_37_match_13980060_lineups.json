@@ -95,7 +95,7 @@
           "position": "D",
           "jerseyNumber": "28",
           "height": 183,
-          "userCount": 630,
+          "userCount": 631,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -187,7 +187,7 @@
           "position": "D",
           "jerseyNumber": "26",
           "height": 195,
-          "userCount": 6160,
+          "userCount": 6156,
           "gender": "M",
           "sofascoreId": "yerrymina",
           "country": {
@@ -281,7 +281,7 @@
           "position": "D",
           "jerseyNumber": "22",
           "height": 195,
-          "userCount": 551,
+          "userCount": 549,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -544,7 +544,7 @@
           "position": "M",
           "jerseyNumber": "10",
           "height": 183,
-          "userCount": 1190,
+          "userCount": 1189,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -637,7 +637,7 @@
           "position": "M",
           "jerseyNumber": "14",
           "height": 189,
-          "userCount": 304,
+          "userCount": 305,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -727,7 +727,7 @@
           "position": "M",
           "jerseyNumber": "2",
           "height": 186,
-          "userCount": 3466,
+          "userCount": 3480,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -824,7 +824,7 @@
           "position": "F",
           "jerseyNumber": "94",
           "height": 186,
-          "userCount": 4546,
+          "userCount": 4542,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -923,7 +923,7 @@
           "position": "F",
           "jerseyNumber": "31",
           "height": 180,
-          "userCount": 1829,
+          "userCount": 1833,
           "gender": "M",
           "country": {
             "alpha2": "SN",
@@ -1173,7 +1173,7 @@
           "position": "D",
           "jerseyNumber": "15",
           "height": 190,
-          "userCount": 876,
+          "userCount": 879,
           "gender": "M",
           "country": {
             "alpha2": "UY",
@@ -1244,7 +1244,7 @@
           "position": "F",
           "jerseyNumber": "19",
           "height": 181,
-          "userCount": 3500,
+          "userCount": 3498,
           "gender": "M",
           "sofascoreId": "gallobelotti",
           "country": {
@@ -1318,7 +1318,7 @@
           "position": "G",
           "jerseyNumber": "24",
           "height": 190,
-          "userCount": 226,
+          "userCount": 227,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1420,7 +1420,7 @@
           "position": "M",
           "jerseyNumber": "20",
           "height": 174,
-          "userCount": 289,
+          "userCount": 291,
           "gender": "M",
           "country": {
             "alpha2": "UY",
@@ -1467,7 +1467,7 @@
           "position": "F",
           "jerseyNumber": "29",
           "height": 194,
-          "userCount": 586,
+          "userCount": 585,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1516,7 +1516,7 @@
           "position": "F",
           "jerseyNumber": "9",
           "height": 178,
-          "userCount": 12165,
+          "userCount": 12140,
           "gender": "M",
           "sofascoreId": "semihkilicsoy9",
           "country": {
@@ -1662,7 +1662,7 @@
           "position": "F",
           "jerseyNumber": "30",
           "height": 188,
-          "userCount": 592,
+          "userCount": 593,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -1749,7 +1749,7 @@
           "position": "D",
           "jerseyNumber": "4",
           "height": 187,
-          "userCount": 1483,
+          "userCount": 1484,
           "gender": "M",
           "country": {
             "alpha2": "PL",
@@ -1782,6 +1782,46 @@
         "description": "Cruciate Ligament Injury",
         "externalType": 114,
         "expectedEndDate": "2026-05-31T00:00:00+00:00"
+      },
+      {
+        "player": {
+          "name": "Mattia Felici",
+          "firstName": "Mattia",
+          "lastName": "Felici",
+          "slug": "mattia-felici",
+          "shortName": "M. Felici",
+          "position": "F",
+          "jerseyNumber": "17",
+          "height": 180,
+          "userCount": 354,
+          "gender": "M",
+          "country": {
+            "alpha2": "IT",
+            "alpha3": "ITA",
+            "name": "Italy",
+            "slug": "italy"
+          },
+          "id": 975811,
+          "marketValueCurrency": "EUR",
+          "dateOfBirthTimestamp": 987465600,
+          "proposedMarketValueRaw": {
+            "value": 2900000,
+            "currency": "EUR"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "فيليتشي، ماتيا"
+            },
+            "shortNameTranslation": {
+              "ar": "م. فيليتشي"
+            }
+          }
+        },
+        "type": "doubtful",
+        "reason": 1,
+        "description": "Cruciate Ligament Injury",
+        "externalType": 114,
+        "expectedEndDate": "2026-05-24T00:00:00+00:00"
       }
     ]
   },
@@ -2061,7 +2101,7 @@
           "position": "D",
           "jerseyNumber": "77",
           "height": 185,
-          "userCount": 563,
+          "userCount": 562,
           "gender": "M",
           "country": {
             "alpha2": "CM",
@@ -2147,7 +2187,7 @@
           "position": "M",
           "jerseyNumber": "16",
           "height": 178,
-          "userCount": 688,
+          "userCount": 690,
           "gender": "M",
           "country": {
             "alpha2": "NO",
@@ -2413,7 +2453,7 @@
           "position": "D",
           "jerseyNumber": "33",
           "height": 181,
-          "userCount": 1982,
+          "userCount": 1984,
           "gender": "M",
           "country": {
             "alpha2": "ES",
@@ -2507,7 +2547,7 @@
           "position": "F",
           "jerseyNumber": "18",
           "height": 179,
-          "userCount": 11327,
+          "userCount": 11328,
           "gender": "M",
           "sofascoreId": "simeonegiovanni",
           "country": {
@@ -2603,7 +2643,7 @@
           "position": "M",
           "jerseyNumber": "10",
           "height": 178,
-          "userCount": 5805,
+          "userCount": 5809,
           "gender": "M",
           "sofascoreId": "niksivlasic_",
           "country": {
@@ -2696,7 +2736,7 @@
           "position": "F",
           "jerseyNumber": "91",
           "height": 189,
-          "userCount": 5992,
+          "userCount": 5995,
           "gender": "M",
           "sofascoreId": "duvanzapata91",
           "country": {
@@ -2782,7 +2822,7 @@
           "position": "D",
           "jerseyNumber": "13",
           "height": 193,
-          "userCount": 2175,
+          "userCount": 2174,
           "gender": "M",
           "country": {
             "alpha2": "CL",
@@ -2865,7 +2905,7 @@
           "position": "M",
           "jerseyNumber": "22",
           "height": 192,
-          "userCount": 6627,
+          "userCount": 6624,
           "gender": "M",
           "sofascoreId": "cesarecasadei",
           "country": {
@@ -2952,7 +2992,7 @@
           "position": "F",
           "jerseyNumber": "19",
           "height": 175,
-          "userCount": 3027,
+          "userCount": 3023,
           "gender": "M",
           "country": {
             "alpha2": "SX",
@@ -3123,7 +3163,7 @@
           "position": "F",
           "jerseyNumber": "17",
           "height": 191,
-          "userCount": 3297,
+          "userCount": 3299,
           "gender": "M",
           "country": {
             "alpha2": "HR",
@@ -3201,7 +3241,7 @@
           "position": "G",
           "jerseyNumber": "81",
           "height": 189,
-          "userCount": 2274,
+          "userCount": 2272,
           "gender": "M",
           "country": {
             "alpha2": "UY",
@@ -3298,7 +3338,7 @@
           "position": "D",
           "jerseyNumber": "25",
           "height": 184,
-          "userCount": 569,
+          "userCount": 570,
           "gender": "M",
           "country": {
             "alpha2": "FR",
@@ -3349,7 +3389,7 @@
           "position": "D",
           "jerseyNumber": "34",
           "height": 184,
-          "userCount": 1287,
+          "userCount": 1288,
           "gender": "M",
           "country": {
             "alpha2": "IT",
@@ -3442,7 +3482,7 @@
           "position": "M",
           "jerseyNumber": "20",
           "height": 180,
-          "userCount": 1040,
+          "userCount": 1042,
           "gender": "M",
           "country": {
             "alpha2": "AT",
@@ -3493,7 +3533,7 @@
           "position": "M",
           "jerseyNumber": "79",
           "height": 188,
-          "userCount": 262,
+          "userCount": 263,
           "gender": "M",
           "country": {
             "alpha2": "CY",
@@ -3585,7 +3625,7 @@
           "position": "M",
           "jerseyNumber": "8",
           "height": 185,
-          "userCount": 1810,
+          "userCount": 1808,
           "gender": "M",
           "country": {
             "alpha2": "RS",
@@ -3636,7 +3676,7 @@
           "position": "M",
           "jerseyNumber": "83",
           "height": 180,
-          "userCount": 398,
+          "userCount": 397,
           "gender": "M",
           "country": {
             "alpha2": "MD",
@@ -3699,7 +3739,7 @@
           "position": "M",
           "jerseyNumber": "66",
           "height": 191,
-          "userCount": 1658,
+          "userCount": 1661,
           "gender": "M",
           "country": {
             "alpha2": "LT",
@@ -3743,7 +3783,7 @@
           "position": "D",
           "jerseyNumber": "44",
           "height": 188,
-          "userCount": 1199,
+          "userCount": 1198,
           "gender": "M",
           "country": {
             "alpha2": "AL",
@@ -3787,7 +3827,7 @@
           "position": "M",
           "jerseyNumber": "14",
           "height": 186,
-          "userCount": 1186,
+          "userCount": 1185,
           "gender": "M",
           "country": {
             "alpha2": "EN",
@@ -3831,7 +3871,7 @@
           "position": "F",
           "jerseyNumber": "7",
           "height": 179,
-          "userCount": 7810,
+          "userCount": 7811,
           "gender": "M",
           "sofascoreId": "zakariaaboukhlal",
           "country": {
