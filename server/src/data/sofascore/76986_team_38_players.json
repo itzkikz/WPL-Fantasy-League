@@ -81,7 +81,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -139,7 +139,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -152,7 +152,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -189,7 +189,7 @@
         "dateOfBirth": "2004-07-01T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 137360,
+        "userCount": 137348,
         "gender": "M",
         "sofascoreId": "AleGarnacho",
         "country": {
@@ -300,7 +300,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -358,7 +358,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -371,7 +371,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -407,18 +407,9 @@
         "height": 182,
         "dateOfBirth": "2001-09-26T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 126149,
+        "userCount": 127408,
         "deceased": false,
         "gender": "M",
-        "injury": {
-          "reason": "Hamstring Injury",
-          "status": "dayToDay",
-          "expectedReturn": 9,
-          "id": 23028,
-          "startDateTimestamp": 1778889600,
-          "updateDateTimestamp": 1779581015,
-          "endDateTimestamp": 1780877015
-        },
         "sofascoreId": "joaopedro",
         "country": {
           "alpha2": "BR",
@@ -528,7 +519,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -586,7 +577,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -599,7 +590,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -635,7 +626,7 @@
         "dateOfBirth": "2006-01-04T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 28762,
+        "userCount": 28764,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "marcguiu9",
@@ -747,7 +738,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -805,7 +796,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -818,7 +809,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -853,7 +844,7 @@
         "height": 186,
         "dateOfBirth": "2003-02-08T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 25668,
+        "userCount": 25666,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -881,6 +872,384 @@
             "ar": "ل. ديلاب",
             "bn": "এল. ডেলাপ",
             "hi": "एल. डेलाप"
+          }
+        }
+      }
+    },
+    {
+      "player": {
+        "name": "Jesse Derry",
+        "slug": "jesse-derry",
+        "shortName": "J. Derry",
+        "team": {
+          "name": "Chelsea U21",
+          "slug": "chelsea-u21",
+          "shortName": "Chelsea U21",
+          "gender": "M",
+          "sport": {
+            "name": "Football",
+            "slug": "football",
+            "id": 1
+          },
+          "tournament": {
+            "name": "U21 Premier League 2",
+            "slug": "premier-league-2-division-1",
+            "category": {
+              "name": "England Amateur",
+              "slug": "england-amateur",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 0,
+              "country": {
+                "alpha2": "EN",
+                "alpha3": "ENG",
+                "name": "England",
+                "slug": "england"
+              },
+              "id": 252,
+              "flag": "england",
+              "alpha2": "EN",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إنجلترا هواة",
+                  "ru": "Англия Любители"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "uniqueTournament": {
+              "name": "Premier League 2, Division 1",
+              "slug": "premier-league-2-division-1",
+              "primaryColorHex": "#3c1c5a",
+              "secondaryColorHex": "#67c079",
+              "category": {
+                "name": "England Amateur",
+                "slug": "england-amateur",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 0,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 252,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا هواة",
+                    "ru": "Англия Любители"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 6132,
+              "country": {},
+              "id": 1129,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإنجليزي 2 - القسم الأول",
+                  "bn": "প্রিমিয়ার লীগ 2, ডিভিশন 1",
+                  "hi": "प्रीमियर लीग 2, डिवीज़न 1"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "priority": 0,
+            "isLive": false,
+            "id": 55398,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الممتاز 2، القسم 1",
+                "bn": "প্রিমিয়ার লীগ 2, ডিভিশন 1",
+                "hi": "प्रीमियर लीग 2, डिवीज़न 1"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "primaryUniqueTournament": {
+            "name": "Premier League 2, Division 1",
+            "slug": "premier-league-2-division-1",
+            "primaryColorHex": "#3c1c5a",
+            "secondaryColorHex": "#67c079",
+            "category": {
+              "name": "England Amateur",
+              "slug": "england-amateur",
+              "sport": {
+                "name": "Football",
+                "slug": "football",
+                "id": 1
+              },
+              "priority": 0,
+              "country": {
+                "alpha2": "EN",
+                "alpha3": "ENG",
+                "name": "England",
+                "slug": "england"
+              },
+              "id": 252,
+              "flag": "england",
+              "alpha2": "EN",
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "إنجلترا هواة",
+                  "ru": "Англия Любители"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 6132,
+            "country": {},
+            "id": 1129,
+            "displayInverseHomeAwayTeams": false,
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "الدوري الإنجليزي 2 - القسم الأول",
+                "bn": "প্রিমিয়ার লীগ 2, ডিভিশন 1",
+                "hi": "प्रीमियर लीग 2, डिवीज़न 1"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "userCount": 21041,
+          "nameCode": "CFC",
+          "disabled": false,
+          "national": false,
+          "parentTeam": {
+            "name": "Chelsea",
+            "slug": "chelsea",
+            "shortName": "Chelsea",
+            "gender": "M",
+            "sport": {
+              "name": "Football",
+              "slug": "football",
+              "id": 1
+            },
+            "tournament": {
+              "name": "Premier League",
+              "slug": "premier-league",
+              "category": {
+                "name": "England",
+                "slug": "england",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 10,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 1,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا",
+                    "bn": "ইংল্যান্ড",
+                    "hi": "इंग्लैंड",
+                    "ru": "Англия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "uniqueTournament": {
+                "name": "Premier League",
+                "slug": "premier-league",
+                "primaryColorHex": "#3c1c5a",
+                "secondaryColorHex": "#f80158",
+                "category": {
+                  "name": "England",
+                  "slug": "england",
+                  "sport": {
+                    "name": "Football",
+                    "slug": "football",
+                    "id": 1
+                  },
+                  "priority": 10,
+                  "country": {
+                    "alpha2": "EN",
+                    "alpha3": "ENG",
+                    "name": "England",
+                    "slug": "england"
+                  },
+                  "id": 1,
+                  "flag": "england",
+                  "alpha2": "EN",
+                  "fieldTranslations": {
+                    "nameTranslation": {
+                      "ar": "إنجلترا",
+                      "bn": "ইংল্যান্ড",
+                      "hi": "इंग्लैंड",
+                      "ru": "Англия"
+                    },
+                    "shortNameTranslation": {}
+                  }
+                },
+                "userCount": 1222931,
+                "country": {},
+                "id": 17,
+                "displayInverseHomeAwayTeams": false,
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "الدوري الإنجليزي الممتاز",
+                    "hi": "प्रिमियर लीग",
+                    "bn": "প্রিমিয়ার লীগ"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "priority": 703,
+              "isLive": false,
+              "id": 1,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "hi": "प्रिमियर लीग",
+                  "ar": "الدوري الإنجليزي الممتاز",
+                  "bn": "প্রিমিয়ার লীগ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "primaryUniqueTournament": {
+              "name": "Premier League",
+              "slug": "premier-league",
+              "primaryColorHex": "#3c1c5a",
+              "secondaryColorHex": "#f80158",
+              "category": {
+                "name": "England",
+                "slug": "england",
+                "sport": {
+                  "name": "Football",
+                  "slug": "football",
+                  "id": 1
+                },
+                "priority": 10,
+                "country": {
+                  "alpha2": "EN",
+                  "alpha3": "ENG",
+                  "name": "England",
+                  "slug": "england"
+                },
+                "id": 1,
+                "flag": "england",
+                "alpha2": "EN",
+                "fieldTranslations": {
+                  "nameTranslation": {
+                    "ar": "إنجلترا",
+                    "bn": "ইংল্যান্ড",
+                    "hi": "इंग्लैंड",
+                    "ru": "Англия"
+                  },
+                  "shortNameTranslation": {}
+                }
+              },
+              "userCount": 1222931,
+              "country": {},
+              "id": 17,
+              "displayInverseHomeAwayTeams": false,
+              "fieldTranslations": {
+                "nameTranslation": {
+                  "ar": "الدوري الإنجليزي الممتاز",
+                  "hi": "प्रिमियर लीग",
+                  "bn": "প্রিমিয়ার লীগ"
+                },
+                "shortNameTranslation": {}
+              }
+            },
+            "userCount": 3165394,
+            "nameCode": "CHE",
+            "disabled": false,
+            "national": false,
+            "type": 0,
+            "country": {
+              "alpha2": "EN",
+              "alpha3": "ENG",
+              "name": "England",
+              "slug": "england"
+            },
+            "id": 38,
+            "teamColors": {
+              "primary": "#0310a7",
+              "secondary": "#ffffff",
+              "text": "#ffffff"
+            },
+            "fieldTranslations": {
+              "nameTranslation": {
+                "ar": "تشيلسي",
+                "bn": "চেলসি",
+                "hi": "चेल्सी",
+                "ru": "Челси"
+              },
+              "shortNameTranslation": {}
+            }
+          },
+          "type": 0,
+          "country": {
+            "alpha2": "EN",
+            "alpha3": "ENG",
+            "name": "England",
+            "slug": "england"
+          },
+          "id": 36539,
+          "teamColors": {
+            "primary": "#0310a7",
+            "secondary": "#ffffff",
+            "text": "#ffffff"
+          },
+          "fieldTranslations": {
+            "nameTranslation": {
+              "ar": "تشيلسي تحت 21",
+              "ru": "Челси"
+            },
+            "shortNameTranslation": {
+              "ar": "تشيلسي تحت 21"
+            }
+          }
+        },
+        "position": "F",
+        "positionsDetailed": [
+          "LW"
+        ],
+        "jerseyNumber": "55",
+        "height": 188,
+        "dateOfBirth": "2007-06-30T00:00:00+00:00",
+        "userCount": 8495,
+        "deceased": false,
+        "gender": "M",
+        "country": {
+          "alpha2": "EN",
+          "alpha3": "ENG",
+          "name": "England",
+          "slug": "england"
+        },
+        "id": 1550775,
+        "shirtNumber": 55,
+        "dateOfBirthTimestamp": 1183161600,
+        "contractUntilTimestamp": 1877472000,
+        "proposedMarketValue": 1900000,
+        "proposedMarketValueRaw": {
+          "value": 1900000,
+          "currency": "EUR"
+        },
+        "fieldTranslations": {
+          "nameTranslation": {
+            "ar": "جيسي ديري"
+          },
+          "shortNameTranslation": {
+            "ar": "ج. ديري"
           }
         }
       }
@@ -964,7 +1333,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -1022,7 +1391,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -1035,7 +1404,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -1071,7 +1440,7 @@
         "height": 185,
         "dateOfBirth": "2002-05-06T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 373899,
+        "userCount": 374188,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "ColdPalmer",
@@ -1184,7 +1553,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -1242,7 +1611,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -1255,7 +1624,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -1290,7 +1659,7 @@
         "height": 176,
         "dateOfBirth": "2007-04-24T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 218186,
+        "userCount": 218166,
         "deceased": false,
         "gender": "M",
         "injury": {
@@ -1299,7 +1668,7 @@
           "expectedReturn": 5,
           "id": 20817,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1779580935,
+          "updateDateTimestamp": 1779667323,
           "endDateTimestamp": 1786320000,
           "expectedReturnDateData": {
             "month": 8,
@@ -1417,7 +1786,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -1475,7 +1844,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -1488,7 +1857,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -1526,7 +1895,7 @@
         "dateOfBirth": "2001-01-17T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 128910,
+        "userCount": 129214,
         "gender": "M",
         "sofascoreId": "Enzo8",
         "country": {
@@ -1639,7 +2008,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -1697,7 +2066,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -1710,7 +2079,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -1746,7 +2115,7 @@
         "height": 178,
         "dateOfBirth": "2001-11-02T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 83455,
+        "userCount": 83476,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "MoisesCaicedo55",
@@ -1860,7 +2229,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -1918,7 +2287,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -1931,7 +2300,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -1967,7 +2336,7 @@
         "height": 175,
         "dateOfBirth": "2001-01-05T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 59459,
+        "userCount": 59483,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "MMudryk10",
@@ -2103,7 +2472,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -2161,7 +2530,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -2174,7 +2543,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -2211,7 +2580,7 @@
         "height": 172,
         "dateOfBirth": "2000-03-09T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 42865,
+        "userCount": 42885,
         "gender": "M",
         "sofascoreId": "pedroneto_30",
         "country": {
@@ -2323,7 +2692,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -2381,7 +2750,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -2394,7 +2763,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -2431,7 +2800,7 @@
         "height": 180,
         "dateOfBirth": "2004-05-03T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 30870,
+        "userCount": 30976,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "andreysantos_5",
@@ -2543,7 +2912,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -2601,7 +2970,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -2614,7 +2983,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -2649,7 +3018,7 @@
         "height": 178,
         "dateOfBirth": "2004-08-08T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 24831,
+        "userCount": 24829,
         "deceased": false,
         "gender": "M",
         "injury": {
@@ -2658,8 +3027,8 @@
           "expectedReturn": 9,
           "id": 19829,
           "startDateTimestamp": 1775260800,
-          "updateDateTimestamp": 1779580935,
-          "endDateTimestamp": 1780876935
+          "updateDateTimestamp": 1779667322,
+          "endDateTimestamp": 1780963322
         },
         "sofascoreId": "jbgittens",
         "country": {
@@ -2771,7 +3140,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -2829,7 +3198,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -2842,7 +3211,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -2878,7 +3247,7 @@
         "height": 181,
         "dateOfBirth": "2004-01-06T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 17872,
+        "userCount": 17877,
         "deceased": false,
         "gender": "M",
         "injury": {
@@ -2887,8 +3256,8 @@
           "expectedReturn": 9,
           "id": 24117,
           "startDateTimestamp": 1779148800,
-          "updateDateTimestamp": 1779580863,
-          "endDateTimestamp": 1780876863
+          "updateDateTimestamp": 1779667264,
+          "endDateTimestamp": 1780963264
         },
         "sofascoreId": "romeolavia",
         "country": {
@@ -3001,7 +3370,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -3059,7 +3428,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -3072,7 +3441,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -3108,7 +3477,7 @@
         "height": 178,
         "dateOfBirth": "2005-03-14T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 10438,
+        "userCount": 10437,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -3221,7 +3590,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -3279,7 +3648,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -3292,7 +3661,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -3330,7 +3699,7 @@
         "dateOfBirth": "1999-12-08T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 52773,
+        "userCount": 52817,
         "gender": "M",
         "sofascoreId": "ReeceJ",
         "country": {
@@ -3443,7 +3812,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -3501,7 +3870,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -3514,7 +3883,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -3551,7 +3920,7 @@
         "dateOfBirth": "1998-07-22T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 40071,
+        "userCount": 40114,
         "gender": "M",
         "sofascoreId": "cucurella3",
         "country": {
@@ -3663,7 +4032,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -3721,7 +4090,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -3734,7 +4103,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -3769,7 +4138,7 @@
         "height": 194,
         "dateOfBirth": "2005-08-29T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 27228,
+        "userCount": 27243,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -3880,7 +4249,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -3938,7 +4307,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -3951,7 +4320,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -3986,7 +4355,7 @@
         "height": 179,
         "dateOfBirth": "2003-05-19T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 20908,
+        "userCount": 20921,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "malogst",
@@ -4098,7 +4467,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -4156,7 +4525,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -4169,7 +4538,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -4205,7 +4574,7 @@
         "height": 187,
         "dateOfBirth": "2003-02-26T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 20262,
+        "userCount": 20277,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "LColwill",
@@ -4317,7 +4686,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -4375,7 +4744,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -4388,7 +4757,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -4424,7 +4793,7 @@
         "height": 182,
         "dateOfBirth": "2006-03-07T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 16761,
+        "userCount": 16780,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -4537,7 +4906,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -4595,7 +4964,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -4608,7 +4977,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -4645,7 +5014,7 @@
         "dateOfBirth": "2000-12-17T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 15572,
+        "userCount": 15574,
         "gender": "M",
         "injury": {
           "reason": "Unknown",
@@ -4766,7 +5135,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -4824,7 +5193,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -4837,7 +5206,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -4873,7 +5242,7 @@
         "height": 190,
         "dateOfBirth": "1999-07-05T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 15240,
+        "userCount": 15245,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "yungchalobah",
@@ -4987,7 +5356,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -5045,7 +5414,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -5058,7 +5427,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -5095,7 +5464,7 @@
         "height": 190,
         "dateOfBirth": "2006-05-05T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 14722,
+        "userCount": 14725,
         "gender": "M",
         "sofascoreId": "joshkofi2",
         "country": {
@@ -5208,7 +5577,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -5266,7 +5635,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -5279,7 +5648,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -5316,7 +5685,7 @@
         "dateOfBirth": "1997-09-24T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 10971,
+        "userCount": 10972,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "tosinadarabioyo",
@@ -5430,7 +5799,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -5488,7 +5857,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -5501,7 +5870,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -5537,7 +5906,7 @@
         "dateOfBirth": "2001-03-26T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 10938,
+        "userCount": 10945,
         "gender": "M",
         "sofascoreId": "badiashile",
         "country": {
@@ -5650,7 +6019,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -5708,7 +6077,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -5721,7 +6090,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -5758,7 +6127,7 @@
         "height": 178,
         "dateOfBirth": "2004-12-22T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 3266,
+        "userCount": 3268,
         "gender": "M",
         "injury": {
           "reason": "Back Injury",
@@ -5875,7 +6244,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -5933,7 +6302,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -5946,7 +6315,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -5981,7 +6350,7 @@
         "height": 197,
         "dateOfBirth": "1997-11-18T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 19382,
+        "userCount": 19386,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "RS1",
@@ -6095,7 +6464,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -6153,7 +6522,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -6166,7 +6535,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -6201,7 +6570,7 @@
         "height": 190,
         "dateOfBirth": "2002-04-16T00:00:00+00:00",
         "preferredFoot": "Both",
-        "userCount": 14466,
+        "userCount": 14465,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "filipjorgensen1",
@@ -6313,7 +6682,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -6371,7 +6740,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -6384,7 +6753,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -6419,7 +6788,7 @@
         "height": 193,
         "dateOfBirth": "2004-05-15T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 6293,
+        "userCount": 6291,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -6532,7 +6901,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -6590,7 +6959,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -6603,7 +6972,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -6745,7 +7114,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -6803,7 +7172,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -6816,7 +7185,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -6851,7 +7220,7 @@
         "dateOfBirth": "2001-01-14T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": true,
-        "userCount": 115,
+        "userCount": 117,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -6959,7 +7328,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -7017,7 +7386,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -7030,7 +7399,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -7067,7 +7436,7 @@
         "dateOfBirth": "2004-07-01T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 137360,
+        "userCount": 137348,
         "gender": "M",
         "sofascoreId": "AleGarnacho",
         "country": {
@@ -7180,7 +7549,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -7238,7 +7607,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -7251,7 +7620,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -7289,7 +7658,7 @@
         "dateOfBirth": "2001-01-17T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 128910,
+        "userCount": 129214,
         "gender": "M",
         "sofascoreId": "Enzo8",
         "country": {
@@ -7401,7 +7770,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -7459,7 +7828,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -7472,7 +7841,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -7508,7 +7877,7 @@
         "height": 181,
         "dateOfBirth": "2004-01-06T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 17872,
+        "userCount": 17877,
         "deceased": false,
         "gender": "M",
         "injury": {
@@ -7517,8 +7886,8 @@
           "expectedReturn": 9,
           "id": 24117,
           "startDateTimestamp": 1779148800,
-          "updateDateTimestamp": 1779580863,
-          "endDateTimestamp": 1780876863
+          "updateDateTimestamp": 1779667264,
+          "endDateTimestamp": 1780963264
         },
         "sofascoreId": "romeolavia",
         "country": {
@@ -7630,7 +7999,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -7688,7 +8057,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -7701,7 +8070,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -7738,7 +8107,7 @@
         "height": 180,
         "dateOfBirth": "2004-05-03T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 30870,
+        "userCount": 30976,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "andreysantos_5",
@@ -7851,7 +8220,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -7909,7 +8278,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -7922,7 +8291,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -7957,7 +8326,7 @@
         "height": 176,
         "dateOfBirth": "2007-04-24T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 218186,
+        "userCount": 218166,
         "deceased": false,
         "gender": "M",
         "injury": {
@@ -7966,7 +8335,7 @@
           "expectedReturn": 5,
           "id": 20817,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1779580935,
+          "updateDateTimestamp": 1779667323,
           "endDateTimestamp": 1786320000,
           "expectedReturnDateData": {
             "month": 8,
@@ -8082,7 +8451,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -8140,7 +8509,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -8153,7 +8522,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -8189,18 +8558,9 @@
         "height": 182,
         "dateOfBirth": "2001-09-26T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 126149,
+        "userCount": 127408,
         "deceased": false,
         "gender": "M",
-        "injury": {
-          "reason": "Hamstring Injury",
-          "status": "dayToDay",
-          "expectedReturn": 9,
-          "id": 23028,
-          "startDateTimestamp": 1778889600,
-          "updateDateTimestamp": 1779581015,
-          "endDateTimestamp": 1780877015
-        },
         "sofascoreId": "joaopedro",
         "country": {
           "alpha2": "BR",
@@ -8312,7 +8672,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -8370,7 +8730,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -8383,7 +8743,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -8418,7 +8778,7 @@
         "height": 190,
         "dateOfBirth": "2002-04-16T00:00:00+00:00",
         "preferredFoot": "Both",
-        "userCount": 14466,
+        "userCount": 14465,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "filipjorgensen1",
@@ -8532,7 +8892,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -8590,7 +8950,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -8603,7 +8963,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -8639,7 +8999,7 @@
         "height": 178,
         "dateOfBirth": "2001-11-02T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 83455,
+        "userCount": 83476,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "MoisesCaicedo55",
@@ -8753,7 +9113,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -8811,7 +9171,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -8824,7 +9184,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -8861,7 +9221,7 @@
         "dateOfBirth": "1998-07-22T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 40071,
+        "userCount": 40114,
         "gender": "M",
         "sofascoreId": "cucurella3",
         "country": {
@@ -8972,7 +9332,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -9030,7 +9390,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -9043,7 +9403,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -9079,7 +9439,7 @@
         "dateOfBirth": "2006-01-04T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 28762,
+        "userCount": 28764,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "marcguiu9",
@@ -9191,7 +9551,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -9249,7 +9609,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -9262,7 +9622,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -9297,7 +9657,7 @@
         "height": 197,
         "dateOfBirth": "1997-11-18T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 19382,
+        "userCount": 19386,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "RS1",
@@ -9411,7 +9771,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -9469,7 +9829,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -9482,7 +9842,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -9518,7 +9878,7 @@
         "dateOfBirth": "2001-03-26T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 10938,
+        "userCount": 10945,
         "gender": "M",
         "sofascoreId": "badiashile",
         "country": {
@@ -9629,7 +9989,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -9687,7 +10047,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -9700,7 +10060,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -9735,7 +10095,7 @@
         "height": 179,
         "dateOfBirth": "2003-05-19T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 20908,
+        "userCount": 20921,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "malogst",
@@ -9849,7 +10209,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -9907,7 +10267,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -9920,7 +10280,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -9957,7 +10317,7 @@
         "dateOfBirth": "2000-12-17T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 15572,
+        "userCount": 15574,
         "gender": "M",
         "injury": {
           "reason": "Unknown",
@@ -10076,7 +10436,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -10134,7 +10494,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -10147,7 +10507,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -10183,7 +10543,7 @@
         "height": 182,
         "dateOfBirth": "2006-03-07T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 16761,
+        "userCount": 16780,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -10296,7 +10656,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -10354,7 +10714,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -10367,7 +10727,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -10403,7 +10763,7 @@
         "height": 178,
         "dateOfBirth": "2005-03-14T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 10438,
+        "userCount": 10437,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -10516,7 +10876,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -10574,7 +10934,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -10587,7 +10947,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -10624,7 +10984,7 @@
         "height": 172,
         "dateOfBirth": "2000-03-09T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 42865,
+        "userCount": 42885,
         "gender": "M",
         "sofascoreId": "pedroneto_30",
         "country": {
@@ -10736,7 +11096,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -10794,7 +11154,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -10807,7 +11167,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -10842,7 +11202,7 @@
         "height": 194,
         "dateOfBirth": "2005-08-29T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 27228,
+        "userCount": 27243,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -10955,7 +11315,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -11013,7 +11373,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -11026,7 +11386,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -11062,7 +11422,7 @@
         "height": 175,
         "dateOfBirth": "2001-01-05T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 59459,
+        "userCount": 59483,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "MMudryk10",
@@ -11198,7 +11558,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -11256,7 +11616,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -11269,7 +11629,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -11306,7 +11666,7 @@
         "height": 178,
         "dateOfBirth": "2004-12-22T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 3266,
+        "userCount": 3268,
         "gender": "M",
         "injury": {
           "reason": "Back Injury",
@@ -11423,7 +11783,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -11481,7 +11841,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -11494,7 +11854,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -11529,7 +11889,7 @@
         "height": 193,
         "dateOfBirth": "2004-05-15T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 6293,
+        "userCount": 6291,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -11644,7 +12004,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -11702,7 +12062,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -11715,7 +12075,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -11752,7 +12112,7 @@
         "dateOfBirth": "1998-07-22T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 40071,
+        "userCount": 40114,
         "gender": "M",
         "sofascoreId": "cucurella3",
         "country": {
@@ -11865,7 +12225,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -11923,7 +12283,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -11936,7 +12296,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -11973,7 +12333,7 @@
         "height": 172,
         "dateOfBirth": "2000-03-09T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 42865,
+        "userCount": 42885,
         "gender": "M",
         "sofascoreId": "pedroneto_30",
         "country": {
@@ -12086,7 +12446,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -12144,7 +12504,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -12157,7 +12517,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -12195,7 +12555,7 @@
         "dateOfBirth": "1999-12-08T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 52773,
+        "userCount": 52817,
         "gender": "M",
         "sofascoreId": "ReeceJ",
         "country": {
@@ -12308,7 +12668,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -12366,7 +12726,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -12379,7 +12739,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -12414,7 +12774,7 @@
         "height": 190,
         "dateOfBirth": "2002-04-16T00:00:00+00:00",
         "preferredFoot": "Both",
-        "userCount": 14466,
+        "userCount": 14465,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "filipjorgensen1",
@@ -12528,7 +12888,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -12586,7 +12946,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -12599,7 +12959,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -12637,7 +12997,7 @@
         "dateOfBirth": "2001-01-17T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 128910,
+        "userCount": 129214,
         "gender": "M",
         "sofascoreId": "Enzo8",
         "country": {
@@ -12750,7 +13110,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -12808,7 +13168,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -12821,7 +13181,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -12857,7 +13217,7 @@
         "height": 178,
         "dateOfBirth": "2001-11-02T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 83455,
+        "userCount": 83476,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "MoisesCaicedo55",
@@ -12969,7 +13329,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -13027,7 +13387,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -13040,7 +13400,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -13075,7 +13435,7 @@
         "height": 179,
         "dateOfBirth": "2003-05-19T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 20908,
+        "userCount": 20921,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "malogst",
@@ -13187,7 +13547,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -13245,7 +13605,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -13258,7 +13618,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -13294,7 +13654,7 @@
         "height": 182,
         "dateOfBirth": "2006-03-07T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 16761,
+        "userCount": 16780,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -13406,7 +13766,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -13464,7 +13824,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -13477,7 +13837,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -13512,7 +13872,7 @@
         "height": 194,
         "dateOfBirth": "2005-08-29T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 27228,
+        "userCount": 27243,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -13627,7 +13987,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -13685,7 +14045,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -13698,7 +14058,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -13733,7 +14093,7 @@
         "height": 194,
         "dateOfBirth": "2005-08-29T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 27228,
+        "userCount": 27243,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -13838,7 +14198,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 439471,
+            "userCount": 439618,
             "country": {},
             "id": 34,
             "displayInverseHomeAwayTeams": false,
@@ -13896,7 +14256,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 439471,
+          "userCount": 439618,
           "country": {},
           "id": 34,
           "displayInverseHomeAwayTeams": false,
@@ -13909,7 +14269,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 159054,
+        "userCount": 158953,
         "nameCode": "STR",
         "disabled": false,
         "national": false,
@@ -14021,7 +14381,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -14079,7 +14439,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -14092,7 +14452,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -14224,7 +14584,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 6137,
+            "userCount": 6132,
             "country": {},
             "id": 1129,
             "displayInverseHomeAwayTeams": false,
@@ -14280,7 +14640,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 6137,
+          "userCount": 6132,
           "country": {},
           "id": 1129,
           "displayInverseHomeAwayTeams": false,
@@ -14293,7 +14653,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 21037,
+        "userCount": 21041,
         "nameCode": "CFC",
         "disabled": false,
         "national": false,
@@ -14371,7 +14731,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -14429,7 +14789,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -14442,7 +14802,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -14575,7 +14935,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -14633,7 +14993,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -14646,7 +15006,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -14683,7 +15043,7 @@
         "height": 178,
         "dateOfBirth": "2004-12-22T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 3266,
+        "userCount": 3268,
         "gender": "M",
         "injury": {
           "reason": "Back Injury",
@@ -14794,7 +15154,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -14852,7 +15212,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 128366,
+          "userCount": 128542,
           "country": {},
           "id": 18,
           "displayInverseHomeAwayTeams": false,
@@ -14865,7 +15225,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 51545,
+        "userCount": 51519,
         "nameCode": "WAT",
         "disabled": false,
         "national": false,
@@ -14974,7 +15334,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -15032,7 +15392,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -15045,7 +15405,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -15081,7 +15441,7 @@
         "dateOfBirth": "2006-01-04T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 28762,
+        "userCount": 28764,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "marcguiu9",
@@ -15187,7 +15547,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 26467,
+            "userCount": 26465,
             "country": {},
             "id": 24,
             "displayInverseHomeAwayTeams": false,
@@ -15245,7 +15605,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1222222,
+          "userCount": 1222931,
           "country": {},
           "id": 17,
           "displayInverseHomeAwayTeams": false,
@@ -15258,7 +15618,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 224062,
+        "userCount": 224203,
         "nameCode": "SUN",
         "disabled": false,
         "national": false,
@@ -15366,7 +15726,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -15424,7 +15784,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -15437,7 +15797,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -15474,7 +15834,7 @@
         "dateOfBirth": "2004-07-01T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 137360,
+        "userCount": 137348,
         "gender": "M",
         "sofascoreId": "AleGarnacho",
         "country": {
@@ -15579,7 +15939,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -15637,7 +15997,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1222222,
+          "userCount": 1222931,
           "country": {},
           "id": 17,
           "displayInverseHomeAwayTeams": false,
@@ -15650,7 +16010,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 3635143,
+        "userCount": 3638630,
         "nameCode": "MUN",
         "disabled": false,
         "national": false,
@@ -15761,7 +16121,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -15819,7 +16179,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -15832,7 +16192,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -15868,7 +16228,7 @@
         "height": 182,
         "dateOfBirth": "2006-03-07T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 16761,
+        "userCount": 16780,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -15969,7 +16329,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 157437,
+            "userCount": 157373,
             "country": {},
             "id": 37,
             "displayInverseHomeAwayTeams": false,
@@ -16025,7 +16385,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 157437,
+          "userCount": 157373,
           "country": {},
           "id": 37,
           "displayInverseHomeAwayTeams": false,
@@ -16038,7 +16398,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 506700,
+        "userCount": 506817,
         "nameCode": "AJA",
         "disabled": false,
         "national": false,
@@ -16149,7 +16509,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -16207,7 +16567,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -16220,7 +16580,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -16255,7 +16615,7 @@
         "height": 176,
         "dateOfBirth": "2007-04-24T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 218186,
+        "userCount": 218166,
         "deceased": false,
         "gender": "M",
         "injury": {
@@ -16264,7 +16624,7 @@
           "expectedReturn": 5,
           "id": 20817,
           "startDateTimestamp": 1776470400,
-          "updateDateTimestamp": 1779580935,
+          "updateDateTimestamp": 1779667323,
           "endDateTimestamp": 1786320000,
           "expectedReturnDateData": {
             "month": 8,
@@ -16370,7 +16730,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 324535,
+            "userCount": 324986,
             "country": {},
             "id": 325,
             "displayInverseHomeAwayTeams": false,
@@ -16426,7 +16786,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 324535,
+          "userCount": 324986,
           "country": {},
           "id": 325,
           "displayInverseHomeAwayTeams": false,
@@ -16439,7 +16799,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 644540,
+        "userCount": 645854,
         "nameCode": "PAL",
         "disabled": false,
         "national": false,
@@ -16547,7 +16907,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -16605,7 +16965,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -16618,7 +16978,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -16653,7 +17013,7 @@
         "height": 178,
         "dateOfBirth": "2004-08-08T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 24831,
+        "userCount": 24829,
         "deceased": false,
         "gender": "M",
         "injury": {
@@ -16662,8 +17022,8 @@
           "expectedReturn": 9,
           "id": 19829,
           "startDateTimestamp": 1775260800,
-          "updateDateTimestamp": 1779580935,
-          "endDateTimestamp": 1780876935
+          "updateDateTimestamp": 1779667322,
+          "endDateTimestamp": 1780963322
         },
         "sofascoreId": "jbgittens",
         "country": {
@@ -16768,7 +17128,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 537467,
+            "userCount": 537709,
             "country": {},
             "id": 35,
             "displayInverseHomeAwayTeams": false,
@@ -16826,7 +17186,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 537467,
+          "userCount": 537709,
           "country": {},
           "id": 35,
           "displayInverseHomeAwayTeams": false,
@@ -16839,7 +17199,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 1413532,
+        "userCount": 1413751,
         "nameCode": "BVB",
         "disabled": false,
         "national": false,
@@ -16950,7 +17310,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -17008,7 +17368,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -17021,7 +17381,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -17057,18 +17417,9 @@
         "height": 182,
         "dateOfBirth": "2001-09-26T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 126149,
+        "userCount": 127408,
         "deceased": false,
         "gender": "M",
-        "injury": {
-          "reason": "Hamstring Injury",
-          "status": "dayToDay",
-          "expectedReturn": 9,
-          "id": 23028,
-          "startDateTimestamp": 1778889600,
-          "updateDateTimestamp": 1779581015,
-          "endDateTimestamp": 1780877015
-        },
         "sofascoreId": "joaopedro",
         "country": {
           "alpha2": "BR",
@@ -17172,7 +17523,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -17230,7 +17581,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1222222,
+          "userCount": 1222931,
           "country": {},
           "id": 17,
           "displayInverseHomeAwayTeams": false,
@@ -17243,7 +17594,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 434612,
+        "userCount": 435239,
         "nameCode": "BHA",
         "disabled": false,
         "national": false,
@@ -17356,7 +17707,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -17414,7 +17765,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -17427,7 +17778,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -17463,7 +17814,7 @@
         "height": 178,
         "dateOfBirth": "2005-03-14T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 10438,
+        "userCount": 10437,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -17564,7 +17915,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 160765,
+            "userCount": 160752,
             "country": {},
             "id": 238,
             "displayInverseHomeAwayTeams": false,
@@ -17620,7 +17971,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 160765,
+          "userCount": 160752,
           "country": {},
           "id": 238,
           "displayInverseHomeAwayTeams": false,
@@ -17633,7 +17984,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 785737,
+        "userCount": 785678,
         "nameCode": "SCP",
         "disabled": false,
         "national": false,
@@ -17741,7 +18092,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -17799,7 +18150,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -17812,7 +18163,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -17847,7 +18198,7 @@
         "height": 186,
         "dateOfBirth": "2003-02-08T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 25668,
+        "userCount": 25666,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -17952,7 +18303,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 26467,
+            "userCount": 26465,
             "country": {},
             "id": 24,
             "displayInverseHomeAwayTeams": false,
@@ -18010,7 +18361,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 128366,
+          "userCount": 128542,
           "country": {},
           "id": 18,
           "displayInverseHomeAwayTeams": false,
@@ -18023,7 +18374,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 121721,
+        "userCount": 121720,
         "nameCode": "IPS",
         "disabled": false,
         "national": false,
@@ -18131,7 +18482,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -18189,7 +18540,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -18202,7 +18553,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -18239,7 +18590,7 @@
         "height": 180,
         "dateOfBirth": "2004-05-03T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 30870,
+        "userCount": 30976,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "andreysantos_5",
@@ -18345,7 +18696,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 439471,
+            "userCount": 439618,
             "country": {},
             "id": 34,
             "displayInverseHomeAwayTeams": false,
@@ -18403,7 +18754,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 439471,
+          "userCount": 439618,
           "country": {},
           "id": 34,
           "displayInverseHomeAwayTeams": false,
@@ -18416,7 +18767,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 159054,
+        "userCount": 158953,
         "nameCode": "STR",
         "disabled": false,
         "national": false,
@@ -18528,7 +18879,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -18586,7 +18937,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -18599,7 +18950,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -18635,7 +18986,7 @@
         "height": 190,
         "dateOfBirth": "1999-07-05T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 15240,
+        "userCount": 15245,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "yungchalobah",
@@ -18741,7 +19092,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -18799,7 +19150,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1222222,
+          "userCount": 1222931,
           "country": {},
           "id": 17,
           "displayInverseHomeAwayTeams": false,
@@ -18812,7 +19163,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 444793,
+        "userCount": 444991,
         "nameCode": "CRY",
         "disabled": false,
         "national": false,
@@ -18920,7 +19271,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -18978,7 +19329,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -18991,7 +19342,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -19026,7 +19377,7 @@
         "height": 193,
         "dateOfBirth": "2004-05-15T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 6293,
+        "userCount": 6291,
         "deceased": false,
         "gender": "M",
         "country": {
@@ -19131,7 +19482,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 128366,
+            "userCount": 128542,
             "country": {},
             "id": 18,
             "displayInverseHomeAwayTeams": false,
@@ -19189,7 +19540,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 26467,
+          "userCount": 26465,
           "country": {},
           "id": 24,
           "displayInverseHomeAwayTeams": false,
@@ -19202,7 +19553,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 17615,
+        "userCount": 17604,
         "nameCode": "BAR",
         "disabled": false,
         "national": false,
@@ -19310,7 +19661,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -19368,7 +19719,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -19381,7 +19732,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -19418,7 +19769,7 @@
         "height": 190,
         "dateOfBirth": "2006-05-05T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 14722,
+        "userCount": 14725,
         "gender": "M",
         "sofascoreId": "joshkofi2",
         "country": {
@@ -19519,7 +19870,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 6137,
+            "userCount": 6132,
             "country": {},
             "id": 1129,
             "displayInverseHomeAwayTeams": false,
@@ -19575,7 +19926,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 6137,
+          "userCount": 6132,
           "country": {},
           "id": 1129,
           "displayInverseHomeAwayTeams": false,
@@ -19588,7 +19939,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 21037,
+        "userCount": 21041,
         "nameCode": "CFC",
         "disabled": false,
         "national": false,
@@ -19666,7 +20017,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -19724,7 +20075,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -19737,7 +20088,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -19870,7 +20221,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -19928,7 +20279,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -19941,7 +20292,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -19978,7 +20329,7 @@
         "height": 172,
         "dateOfBirth": "2000-03-09T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 42865,
+        "userCount": 42885,
         "gender": "M",
         "sofascoreId": "pedroneto_30",
         "country": {
@@ -20083,7 +20434,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -20141,7 +20492,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1222222,
+          "userCount": 1222931,
           "country": {},
           "id": 17,
           "displayInverseHomeAwayTeams": false,
@@ -20154,7 +20505,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 309434,
+        "userCount": 309407,
         "nameCode": "WOL",
         "disabled": false,
         "national": false,
@@ -20266,7 +20617,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -20324,7 +20675,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -20337,7 +20688,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -20372,7 +20723,7 @@
         "height": 190,
         "dateOfBirth": "2002-04-16T00:00:00+00:00",
         "preferredFoot": "Both",
-        "userCount": 14466,
+        "userCount": 14465,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "filipjorgensen1",
@@ -20478,7 +20829,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 857971,
+            "userCount": 858924,
             "country": {},
             "id": 8,
             "displayInverseHomeAwayTeams": false,
@@ -20536,7 +20887,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 857971,
+          "userCount": 858924,
           "country": {},
           "id": 8,
           "displayInverseHomeAwayTeams": false,
@@ -20549,7 +20900,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 461133,
+        "userCount": 461131,
         "nameCode": "VIL",
         "disabled": false,
         "national": false,
@@ -20659,7 +21010,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -20717,7 +21068,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -20730,7 +21081,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -20767,7 +21118,7 @@
         "dateOfBirth": "1997-09-24T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 10971,
+        "userCount": 10972,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "tosinadarabioyo",
@@ -20873,7 +21224,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 128366,
+            "userCount": 128542,
             "country": {},
             "id": 18,
             "displayInverseHomeAwayTeams": false,
@@ -20931,7 +21282,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1222222,
+          "userCount": 1222931,
           "country": {},
           "id": 17,
           "displayInverseHomeAwayTeams": false,
@@ -20944,7 +21295,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 328510,
+        "userCount": 328552,
         "nameCode": "FUL",
         "disabled": false,
         "national": false,
@@ -21052,7 +21403,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -21110,7 +21461,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -21123,7 +21474,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -21159,7 +21510,7 @@
         "height": 185,
         "dateOfBirth": "2002-05-06T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 373899,
+        "userCount": 374188,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "ColdPalmer",
@@ -21265,7 +21616,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -21323,7 +21674,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1222222,
+          "userCount": 1222931,
           "country": {},
           "id": 17,
           "displayInverseHomeAwayTeams": false,
@@ -21336,7 +21687,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 4245664,
+        "userCount": 4249236,
         "nameCode": "MCI",
         "disabled": false,
         "national": false,
@@ -21448,7 +21799,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -21506,7 +21857,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -21519,7 +21870,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -21555,7 +21906,7 @@
         "height": 181,
         "dateOfBirth": "2004-01-06T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 17872,
+        "userCount": 17877,
         "deceased": false,
         "gender": "M",
         "injury": {
@@ -21564,8 +21915,8 @@
           "expectedReturn": 9,
           "id": 24117,
           "startDateTimestamp": 1779148800,
-          "updateDateTimestamp": 1779580863,
-          "endDateTimestamp": 1780876863
+          "updateDateTimestamp": 1779667264,
+          "endDateTimestamp": 1780963264
         },
         "sofascoreId": "romeolavia",
         "country": {
@@ -21670,7 +22021,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -21728,7 +22079,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 128366,
+          "userCount": 128542,
           "country": {},
           "id": 18,
           "displayInverseHomeAwayTeams": false,
@@ -21741,7 +22092,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 153096,
+        "userCount": 152966,
         "nameCode": "SOU",
         "disabled": false,
         "national": false,
@@ -21851,7 +22202,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -21909,7 +22260,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -21922,7 +22273,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -21958,7 +22309,7 @@
         "height": 178,
         "dateOfBirth": "2001-11-02T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 83455,
+        "userCount": 83476,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "MoisesCaicedo55",
@@ -22064,7 +22415,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -22122,7 +22473,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1222222,
+          "userCount": 1222931,
           "country": {},
           "id": 17,
           "displayInverseHomeAwayTeams": false,
@@ -22135,7 +22486,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 434612,
+        "userCount": 435239,
         "nameCode": "BHA",
         "disabled": false,
         "national": false,
@@ -22246,7 +22597,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -22304,7 +22655,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -22317,7 +22668,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -22352,7 +22703,7 @@
         "height": 197,
         "dateOfBirth": "1997-11-18T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 19382,
+        "userCount": 19386,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "RS1",
@@ -22458,7 +22809,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -22516,7 +22867,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1222222,
+          "userCount": 1222931,
           "country": {},
           "id": 17,
           "displayInverseHomeAwayTeams": false,
@@ -22529,7 +22880,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 434612,
+        "userCount": 435239,
         "nameCode": "BHA",
         "disabled": false,
         "national": false,
@@ -22640,7 +22991,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -22698,7 +23049,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -22711,7 +23062,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -22746,7 +23097,7 @@
         "height": 179,
         "dateOfBirth": "2003-05-19T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 20908,
+        "userCount": 20921,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "malogst",
@@ -22852,7 +23203,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 439471,
+            "userCount": 439618,
             "country": {},
             "id": 34,
             "displayInverseHomeAwayTeams": false,
@@ -22910,7 +23261,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 439471,
+          "userCount": 439618,
           "country": {},
           "id": 34,
           "displayInverseHomeAwayTeams": false,
@@ -22923,7 +23274,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 537233,
+        "userCount": 537073,
         "nameCode": "OL",
         "disabled": false,
         "national": false,
@@ -23033,7 +23384,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -23091,7 +23442,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -23104,7 +23455,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -23140,7 +23491,7 @@
         "height": 187,
         "dateOfBirth": "2003-02-26T00:00:00+00:00",
         "preferredFoot": "Left",
-        "userCount": 20262,
+        "userCount": 20277,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "LColwill",
@@ -23246,7 +23597,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -23304,7 +23655,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1222222,
+          "userCount": 1222931,
           "country": {},
           "id": 17,
           "displayInverseHomeAwayTeams": false,
@@ -23317,7 +23668,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 434612,
+        "userCount": 435239,
         "nameCode": "BHA",
         "disabled": false,
         "national": false,
@@ -23430,7 +23781,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -23488,7 +23839,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -23501,7 +23852,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -23539,7 +23890,7 @@
         "dateOfBirth": "2001-01-17T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 128910,
+        "userCount": 129214,
         "gender": "M",
         "sofascoreId": "Enzo8",
         "country": {
@@ -23640,7 +23991,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 160765,
+            "userCount": 160752,
             "country": {},
             "id": 238,
             "displayInverseHomeAwayTeams": false,
@@ -23696,7 +24047,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 160765,
+          "userCount": 160752,
           "country": {},
           "id": 238,
           "displayInverseHomeAwayTeams": false,
@@ -23709,7 +24060,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 880237,
+        "userCount": 880024,
         "nameCode": "SLB",
         "disabled": false,
         "national": false,
@@ -23819,7 +24170,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -23877,7 +24228,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -23890,7 +24241,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -23926,7 +24277,7 @@
         "height": 175,
         "dateOfBirth": "2001-01-05T00:00:00+00:00",
         "preferredFoot": "Right",
-        "userCount": 59459,
+        "userCount": 59483,
         "deceased": false,
         "gender": "M",
         "sofascoreId": "MMudryk10",
@@ -24050,7 +24401,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 16262,
+            "userCount": 16264,
             "country": {},
             "id": 218,
             "displayInverseHomeAwayTeams": false,
@@ -24106,7 +24457,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 16262,
+          "userCount": 16264,
           "country": {},
           "id": 218,
           "displayInverseHomeAwayTeams": false,
@@ -24119,7 +24470,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 159841,
+        "userCount": 159811,
         "nameCode": "SHA",
         "disabled": false,
         "national": false,
@@ -24231,7 +24582,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -24289,7 +24640,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -24302,7 +24653,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -24338,7 +24689,7 @@
         "dateOfBirth": "2001-03-26T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 10938,
+        "userCount": 10945,
         "gender": "M",
         "sofascoreId": "badiashile",
         "country": {
@@ -24443,7 +24794,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 439471,
+            "userCount": 439618,
             "country": {},
             "id": 34,
             "displayInverseHomeAwayTeams": false,
@@ -24501,7 +24852,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 439471,
+          "userCount": 439618,
           "country": {},
           "id": 34,
           "displayInverseHomeAwayTeams": false,
@@ -24514,7 +24865,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 518617,
+        "userCount": 518452,
         "nameCode": "ASM",
         "disabled": false,
         "national": false,
@@ -24626,7 +24977,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -24684,7 +25035,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -24697,7 +25048,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -24734,7 +25085,7 @@
         "dateOfBirth": "2000-12-17T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 15572,
+        "userCount": 15574,
         "gender": "M",
         "injury": {
           "reason": "Unknown",
@@ -24847,7 +25198,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -24905,7 +25256,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 128366,
+          "userCount": 128542,
           "country": {},
           "id": 18,
           "displayInverseHomeAwayTeams": false,
@@ -24918,7 +25269,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 321230,
+        "userCount": 321228,
         "nameCode": "LEI",
         "disabled": false,
         "national": false,
@@ -25031,7 +25382,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -25089,7 +25440,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -25102,7 +25453,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -25139,7 +25490,7 @@
         "dateOfBirth": "1998-07-22T00:00:00+00:00",
         "preferredFoot": "Left",
         "retired": false,
-        "userCount": 40071,
+        "userCount": 40114,
         "gender": "M",
         "sofascoreId": "cucurella3",
         "country": {
@@ -25244,7 +25595,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -25302,7 +25653,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 1222222,
+          "userCount": 1222931,
           "country": {},
           "id": 17,
           "displayInverseHomeAwayTeams": false,
@@ -25315,7 +25666,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 434612,
+        "userCount": 435239,
         "nameCode": "BHA",
         "disabled": false,
         "national": false,
@@ -25428,7 +25779,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -25486,7 +25837,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -25499,7 +25850,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
@@ -25537,7 +25888,7 @@
         "dateOfBirth": "1999-12-08T00:00:00+00:00",
         "preferredFoot": "Right",
         "retired": false,
-        "userCount": 52773,
+        "userCount": 52817,
         "gender": "M",
         "sofascoreId": "ReeceJ",
         "country": {
@@ -25638,7 +25989,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 6137,
+            "userCount": 6132,
             "country": {},
             "id": 1129,
             "displayInverseHomeAwayTeams": false,
@@ -25694,7 +26045,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 6137,
+          "userCount": 6132,
           "country": {},
           "id": 1129,
           "displayInverseHomeAwayTeams": false,
@@ -25707,7 +26058,7 @@
             "shortNameTranslation": {}
           }
         },
-        "userCount": 21037,
+        "userCount": 21041,
         "nameCode": "CFC",
         "disabled": false,
         "national": false,
@@ -25785,7 +26136,7 @@
                   "shortNameTranslation": {}
                 }
               },
-              "userCount": 1222222,
+              "userCount": 1222931,
               "country": {},
               "id": 17,
               "displayInverseHomeAwayTeams": false,
@@ -25843,7 +26194,7 @@
                 "shortNameTranslation": {}
               }
             },
-            "userCount": 1222222,
+            "userCount": 1222931,
             "country": {},
             "id": 17,
             "displayInverseHomeAwayTeams": false,
@@ -25856,7 +26207,7 @@
               "shortNameTranslation": {}
             }
           },
-          "userCount": 3162837,
+          "userCount": 3165394,
           "nameCode": "CHE",
           "disabled": false,
           "national": false,
