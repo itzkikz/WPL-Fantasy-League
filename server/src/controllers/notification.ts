@@ -6,6 +6,8 @@ import jwt from 'jsonwebtoken'
 import { sheets_v4 } from "googleapis";
 import { Subscriber } from "../models/Subscriber";
 import { Notification } from "../models/Notification";
+import { User } from "../models/User";
+import { FantasyTeam } from "../models/FantasyTeam";
 const webpush = require("web-push");
 // Configure VAPID
 const vapidPublic = process.env.VAPID_PUBLIC_KEY;
@@ -27,7 +29,12 @@ type Row = Cell[];
 export const subscribe = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const subscription = req.body.subscription;
-        const userId = req.user.userId;
+        
+        const user = await User.findOne({ username: req.user.userId });
+        if (!user) {
+            return res.status(404).json({ data: { message: "User not found" } });
+        }
+        const userId = user._id.toString();
 
         const existingSubscriber = await Subscriber.findOne({ endpoint: subscription.endpoint });
 
@@ -56,7 +63,7 @@ export const subscribe = async (req: Request, res: Response, next: NextFunction)
 }
 
 export const send = async (req: Request, res: Response, next: NextFunction) => {
-    const { payload } = req.body;
+    const { payload, targetType = 'all', targetId } = req.body;
     
     try {
         await Notification.create({
@@ -65,7 +72,20 @@ export const send = async (req: Request, res: Response, next: NextFunction) => {
             time: Date.now()
         });
 
-        const subscribers = await Subscriber.find({});
+        let query = {};
+        
+        if (targetType === 'user' && targetId) {
+            query = { userId: targetId };
+        } else if (targetType === 'team' && targetId) {
+            const team = await FantasyTeam.findById(targetId);
+            if (team && team.managers) {
+                query = { userId: { $in: team.managers } };
+            } else {
+                return res.status(404).json({ data: { message: "Team not found or has no managers" } });
+            }
+        }
+
+        const subscribers = await Subscriber.find(query);
 
         subscribers.forEach((sub) => {
             const subscription = { endpoint: sub.endpoint, expirationTime: sub.expirationTime, keys: sub.keys };
@@ -76,7 +96,7 @@ export const send = async (req: Request, res: Response, next: NextFunction) => {
         });
         res.status(200).json({ message: "Notifications sent.." });
     } catch (e) {
-        console.log(e);
+        console.error(e);
         res.status(500).json({ data: { message: "Error sending notifications" } });
     }
 }

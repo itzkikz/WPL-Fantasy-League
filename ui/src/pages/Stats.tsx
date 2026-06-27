@@ -107,7 +107,7 @@ export default function Stats() {
 
       {/* Header Area */}
       <div className="pt-6 pb-2 px-4 lg:px-8">
-        <h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+        <h1 className="text-2xl lg:text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
           Player Stats
         </h1>
         <p className="text-gray-500 dark:text-gray-400 mt-1">

@@ -35,6 +35,8 @@ export const API_ENDPOINTS = {
     COMPLETE_GAMEWEEK: (id: string | number) => `/admin/gameweeks/${id}/complete`,
     SEASONS: '/admin/seasons',
     PICK_TEAM_STATUS: '/admin/settings/pick-team',
+    USERS: '/admin/users',
+    FANTASY_TEAMS: '/admin/fantasy-teams',
   },
 } as const
 
