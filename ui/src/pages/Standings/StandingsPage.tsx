@@ -19,7 +19,7 @@ const StandingsPage = () => {
     <div className="flex flex-col h-[100dvh] bg-light-bg dark:bg-dark-bg animate-in fade-in duration-500 overflow-hidden">
       {/* Header Area */}
       <div className="flex-none pt-6 pb-2 px-4 lg:px-8">
-        <h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+        <h1 className="text-2xl lg:text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
           League Standings
         </h1>
         <div className="flex items-center justify-between mt-1">

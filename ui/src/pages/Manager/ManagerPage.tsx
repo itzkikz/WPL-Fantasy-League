@@ -27,7 +27,7 @@ const ManagerPage = () => {
   return (
     <div className="flex flex-col h-full bg-light-bg dark:bg-dark-bg animate-in fade-in duration-500 overflow-y-auto pb-20">
       <div className="pt-6 pb-4 px-4 lg:px-8">
-        <h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+        <h1 className="text-2xl lg:text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
           Manager Profile
         </h1>
         <p className="text-gray-500 dark:text-gray-400 mt-1">
