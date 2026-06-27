@@ -2,24 +2,22 @@ import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ILeague extends Document {
     name: string;
-    code?: string; // Unique join code
-    admin?: mongoose.Types.ObjectId; // User who created it
     participants: mongoose.Types.ObjectId[]; // List of FantasyTeams (or Users)
-    type: 'public' | 'private';
     createdOn: Date;
     seasonId?: mongoose.Types.ObjectId;
+    leagueId?: number;
+    code?: string;
+    type?: string;
 }
 
 const LeagueSchema: Schema = new Schema({
     name: { type: String, required: true },
-    code: { type: String, unique: true, index: true }, // Optional for system leagues
-    admin: { type: Schema.Types.ObjectId, ref: 'User' }, // Optional for system leagues
-    // Participants reference FantasyTeams so we can easily show standings
-    // @deprecated - Use FantasyTeam.leagues instead for scalability
-    participants: [{ type: Schema.Types.ObjectId, ref: 'FantasyTeam' }],
-    type: { type: String, enum: ['public', 'private'], default: 'private' },
+    participants: [{ type: Schema.Types.ObjectId, ref: 'Team' }],
     createdOn: { type: Date, default: Date.now },
-    seasonId: { type: Schema.Types.ObjectId, ref: 'Season' }
+    seasonId: { type: Schema.Types.ObjectId, ref: 'Season' },
+    leagueId: { type: Number },
+    code: { type: String },
+    type: { type: String }
 }, { timestamps: true });
 
 export const League = mongoose.model<ILeague>('League', LeagueSchema);

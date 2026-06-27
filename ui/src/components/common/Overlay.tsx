@@ -129,7 +129,7 @@ const Overlay = ({
             <div className="h-1.5 w-14 bg-gray-400 rounded-full opacity-70" />
           </div>
 
-          <div className="overflow-y-auto flex-1 px-0">
+          <div className="flex-1 px-0 flex flex-col overflow-hidden">
             {children}
           </div>
         </div>

@@ -1,53 +1,46 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ITeam extends Document {
-    id: number; // SofaScore ID
-    name: string;
-    shortName: string;
-    nameCode: string; // "ARS"
-    slug: string;
-
-    // FPL specific fields (Optional now)
-    strength?: number;
-    strengthOverallHome?: number;
-    strengthOverallAway?: number;
-    strengthAttackHome?: number;
-    strengthAttackAway?: number;
-    strengthDefenceHome?: number;
-    strengthDefenceAway?: number;
-    pulseId?: number;
-
-    teamColors: {
-        primary: string;
-        secondary: string;
-        text: string;
+    team: {
+        id: number;
+        name: string;
+        code: string;
+        country: string;
+        founded: number;
+        national: boolean;
+        logo: string;
     };
-
+    venue: {
+        id: number;
+        name: string;
+        address: string;
+        city: string;
+        capacity: number;
+        surface: string;
+        image: string;
+    };
     league?: mongoose.Types.ObjectId;
 }
 
 const TeamSchema: Schema = new Schema({
-    id: { type: Number, required: true, unique: true },
-    name: { type: String, required: true },
-    shortName: { type: String, required: true, index: true },
-    nameCode: { type: String, required: true },
-    slug: { type: String, required: true, index: true },
-
-    strength: Number,
-    strengthOverallHome: Number,
-    strengthOverallAway: Number,
-    strengthAttackHome: Number,
-    strengthAttackAway: Number,
-    strengthDefenceHome: Number,
-    strengthDefenceAway: Number,
-    pulseId: Number,
-
-    teamColors: {
-        primary: String,
-        secondary: String,
-        text: String
+    team: {
+        id: { type: Number, required: true, unique: true },
+        name: { type: String, required: true },
+        code: { type: String },
+        country: { type: String },
+        founded: { type: Number },
+        national: { type: Boolean },
+        logo: { type: String }
     },
-
+    venue: {
+        id: { type: Number },
+        name: { type: String },
+        address: { type: String },
+        city: { type: String },
+        capacity: { type: Number },
+        surface: { type: String },
+        image: { type: String }
+    },
     league: { type: Schema.Types.ObjectId, ref: 'League' }
 }, { timestamps: true });
 

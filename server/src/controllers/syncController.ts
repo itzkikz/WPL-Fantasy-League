@@ -46,7 +46,7 @@ export class SyncController {
 
             // 2. Pre-fetch all Players and Teams for lookup
             const players = await Player.find({});
-            const playerMap = new Map<number, IPlayer>(); // SofaScore ID -> Player Doc
+            const playerMap = new Map<number, any>(); // SofaScore ID -> Player Doc
             players.forEach(p => playerMap.set(p.id, p));
 
             const fantasyTeams = await FantasyTeam.find({});
@@ -187,7 +187,7 @@ export class SyncController {
 
                 for (const [gw, stats] of gwMap) {
                     // Find existing history for this GW
-                    const existingIdx = player.history.findIndex(h => h.gameweek === gw);
+                    const existingIdx = player.history.findIndex((h: any) => h.gameweek === gw);
 
                     const historyEntry = {
                         gameweek: gw,
@@ -220,7 +220,7 @@ export class SyncController {
 
                 // Recalculate Season Stats
                 if (historyChanged) {
-                    const totalStats = player.history.reduce((acc, h) => ({
+                    const totalStats = player.history.reduce((acc: any, h: any) => ({
                         totalPoints: acc.totalPoints + (h.totalPoints || 0),
                         xPoints: acc.xPoints + (h.xPoints || 0), // Aggregate xPoints
                         appearances: acc.appearances + (h.appearances || 0),
@@ -306,12 +306,6 @@ export class SyncController {
 
                 let teamChanged = false;
 
-                // Update Current GW pointer
-                if (team.currentGw !== currentGameweek) {
-                    team.currentGw = currentGameweek;
-                    teamChanged = true;
-                }
-
                 for (const [gw, picksData] of gwMap) {
                     // Calculate GW Points
                     const starters = picksData.filter(p => p.lineupStatus.toLowerCase().includes('starting'));
@@ -329,58 +323,41 @@ export class SyncController {
                     let gwPoints = 0;
                     const picks = processedPicks.map((p) => {
                         const playerDoc = playerMap.get(p.playerId);
-
                         const isSub = p.lineupStatus.toLowerCase().startsWith('sub');
 
-                        // Use XPoint for Team Calculation
                         if (playerDoc && !isSub) {
                             gwPoints += p.stats.xPoints || 0;
                         }
 
-                        // --- NEW: Parse Role ---
                         const isCaptain = (p.role || '').trim().toUpperCase() === 'CAPTAIN';
                         const isViceCaptain = (p.role || '').trim().toUpperCase() === 'VICE CAPTAIN';
-                        // -----------------------
+                        
+                        let subNumber = 0;
+                        if (isSub) {
+                            const match = p.lineupStatus.toLowerCase().match(/sub\s*(\d+)/);
+                            subNumber = match ? parseInt(match[1]) : 1;
+                        }
 
                         return {
-                            element: playerDoc ? playerDoc.id : 0, // SofaScore ID (Number)
-                            position: p.finalPosition,
+                            playerId: playerDoc ? playerDoc.id : 0, // SofaScore ID (Number)
                             isCaptain: isCaptain,
                             isViceCaptain: isViceCaptain,
-                            multiplier: isCaptain ? 2 : 1,
-                            statsSnapshot: {
-                                points: p.stats.xPoints, // Snapshot XPoint for this gameweek pick
-                                goals: p.stats.goalsScored,
-                                assists: p.stats.assists,
-                                cleanSheets: p.stats.cleanSheets
-                            }
+                            isStarting: !isSub,
+                            subNumber
                         };
-                    }).filter(p => p.element !== null); // Remove unknown players
+                    }).filter(p => p.playerId !== null); // Remove unknown players
 
                     // Update History (only if NOT current gameweek)
                     if (gw !== currentGameweek) {
-                        const existingHistIdx = team.history.findIndex(h => h.gameweek === gw);
                         const historyEntry: any = {
-                            gameweek: gw,
-                            points: gwPoints,
-                            rank: 0,
-                            bank: 0,
-                            teamValue: 0,
                             picks: picks
                         };
 
-                        if (existingHistIdx !== -1) {
-                            team.history[existingHistIdx] = historyEntry;
-                        } else {
-                            team.history.push(historyEntry);
-                        }
+                        team.history.push(historyEntry);
                     } else {
                         // Update Current Squad if this IS the current GW
                         team.currentSquad = {
-                            picks: picks,
-                            activeChip: team.currentSquad?.activeChip || null,
-                            gameweek: gw,
-                            points: gwPoints
+                            picks: picks
                         };
                     }
                     teamChanged = true;
@@ -392,7 +369,6 @@ export class SyncController {
                             filter: { _id: team._id },
                             update: {
                                 $set: {
-                                    currentGw: team.currentGw,
                                     history: team.history,
                                     currentSquad: team.currentSquad
                                 }

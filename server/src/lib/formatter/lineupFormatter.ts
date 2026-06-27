@@ -39,15 +39,6 @@ export function convertToFormation(playersData: TeamDetails[]): FormationResult 
       point: playerData.point || 0,
       position: mapPosition(playerData.position),
       fullTeamName: playerData.club,
-      app: playerData.app,
-      clean_sheet: playerData.clean_sheet,
-      goal: playerData.goal,
-      assist: playerData.assist,
-      yellow_card: playerData.yellow_card,
-      red_card: playerData.red_card,
-      save: playerData.save,
-      penalty_save: playerData.penalty_save,
-      penalty_miss: playerData.penalty_miss,
       gw: playerData.gw,
       shirtNumber: playerData.shirtNumber
     };
@@ -79,18 +70,18 @@ export function convertToFormation(playersData: TeamDetails[]): FormationResult 
 
 
   // Organize lineup by position
-  const goalkeeper = lineupPlayers.filter((p) => p.position === "GK");
-  const defenders = lineupPlayers.filter((p) => p.position === "DEF");
-  const midfielders = lineupPlayers.filter((p) => p.position === "MID");
-  const forwards = lineupPlayers.filter((p) => p.position === "FWD");
+  const GK = lineupPlayers.filter((p) => p.position === "GK");
+  const DEF = lineupPlayers.filter((p) => p.position === "DEF");
+  const MID = lineupPlayers.filter((p) => p.position === "MID");
+  const FWD = lineupPlayers.filter((p) => p.position === "FWD");
 
   // Return Formation object
   return {
     starting: {
-      goalkeeper,
-      defenders,
-      midfielders,
-      forwards,
+      GK,
+      DEF,
+      MID,
+      FWD,
     },
     bench: benchPlayers,
   };

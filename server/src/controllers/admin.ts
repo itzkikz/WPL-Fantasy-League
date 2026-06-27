@@ -1,0 +1,988 @@
+import { Request, Response } from 'express';
+import mongoose from 'mongoose';
+import { Player } from '../models/Player';
+import { Fixture } from '../models/Fixture';
+import { Gameweek } from '../models/Gameweek';
+import { Season } from '../models/Season';
+import { ApiConfig } from '../models/ApiConfig';
+import { MatchDetails } from '../models/MatchDetails';
+import { User } from '../models/User';
+import { FantasyTeam } from '../models/FantasyTeam';
+import { fetchFixturesByDate, fetchFixturePlayers, fetchFixtureEvents } from '../services/apiSports.service';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import { PlayerStats } from '../models/PlayerStats';
+import { calculatePlayerPoints } from '../lib/points';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+export const getFixtures = async (req: Request, res: Response) => {
+    try {
+        console.log(req.user.role);
+        // Optional: Role check
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const fixtures = await Fixture.find().sort({ 'fixture.date': 1 }).lean();
+        const details = await MatchDetails.find({}, 'fixtureId').lean();
+        const detailFixtureIds = new Set(details.map(d => d.fixtureId));
+
+        const gameweeks = await Gameweek.find({}, 'fixtures').lean();
+        const assignedFixtureIds = new Set(gameweeks.flatMap(gw => gw.fixtures || []));
+
+        const fixturesWithDetailsFlag = fixtures.map(f => ({
+            ...f,
+            hasDetails: detailFixtureIds.has(f.fixture.id),
+            hasGameweek: assignedFixtureIds.has(f.fixture.id)
+        }));
+
+        res.status(200).json({ data: fixturesWithDetailsFlag });
+    } catch (error) {
+        console.error('Error fetching admin fixtures:', error);
+        res.status(500).json({ error: 'Failed to fetch fixtures' });
+    }
+};
+
+export const getGameweeks = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+        
+        const gameweeks = await Gameweek.find().sort({ number: 1 });
+        res.status(200).json({ data: gameweeks });
+    } catch (error) {
+        console.error('Error fetching gameweeks:', error);
+        res.status(500).json({ error: 'Failed to fetch gameweeks' });
+    }
+};
+
+export const getSeasons = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+        
+        const seasons = await Season.find().sort({ id: -1 });
+        res.status(200).json({ data: seasons });
+    } catch (error) {
+        console.error('Error fetching seasons:', error);
+        res.status(500).json({ error: 'Failed to fetch seasons' });
+    }
+};
+
+export const createGameweek = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const { number, fixtures, isCurrent, startDate, endDate, season } = req.body;
+        const newGameweek = new Gameweek({
+            number,
+            fixtures,
+            isCurrent,
+            startDate,
+            endDate,
+            season
+        });
+
+        await newGameweek.save();
+        res.status(201).json({ data: newGameweek });
+    } catch (error) {
+        console.error('Error creating gameweek:', error);
+        res.status(500).json({ error: 'Failed to create gameweek' });
+    }
+};
+
+export const updateGameweek = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const { id } = req.params;
+        const updateData = req.body;
+
+        // Fetch existing gameweek to compare fixtures
+        const existingGameweek = await Gameweek.findById(id);
+        if (!existingGameweek) {
+            return res.status(404).json({ error: 'Gameweek not found' });
+        }
+
+        // Determine if fixtures were removed
+        if (updateData.fixtures && Array.isArray(updateData.fixtures)) {
+            const oldFixtures = existingGameweek.fixtures || [];
+            const newFixtures = updateData.fixtures;
+            const removedFixtures = oldFixtures.filter(fId => !newFixtures.includes(fId));
+
+            if (removedFixtures.length > 0) {
+                // Remove MatchDetails for removed fixtures
+                await MatchDetails.deleteMany({ fixtureId: { $in: removedFixtures } });
+                
+                // Fetch players whose stats might be affected
+                const affectedPlayers = await PlayerStats.find({ 'gameweeks.fixtureId': { $in: removedFixtures } });
+                
+                for (const playerStat of affectedPlayers) {
+                    // Filter out removed fixtures
+                    playerStat.gameweeks = playerStat.gameweeks.filter(gw => !removedFixtures.includes(gw.fixtureId));
+                    // Recalculate total points
+                    const total = playerStat.gameweeks.reduce((sum, gw) => sum + (gw.points || 0), 0);
+                    playerStat.totalPoints = total;
+                    await playerStat.save();
+                }
+            }
+        }
+
+        const updatedGameweek = await Gameweek.findByIdAndUpdate(
+            id,
+            updateData,
+            { new: true, runValidators: true }
+        );
+        
+        // If it was set to current, trigger the pre-save logic manually since findByIdAndUpdate skips pre-save hooks
+        // Or better yet, save the document instead of findByIdAndUpdate
+        if (updateData.isCurrent) {
+            const gameweek = await Gameweek.findById(id);
+            if (gameweek) {
+                Object.assign(gameweek, updateData);
+                await gameweek.save(); // This triggers the pre-save hook
+                return res.status(200).json({ data: gameweek });
+            }
+        }
+
+        res.status(200).json({ data: updatedGameweek });
+    } catch (error) {
+        console.error('Error updating gameweek:', error);
+        res.status(500).json({ error: 'Failed to update gameweek' });
+    }
+};
+
+export const updateFixturesFromApi = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        if (!process.env.API_FOOTBALL_KEY) {
+            return res.status(500).json({ error: 'API_FOOTBALL_KEY not set' });
+        }
+
+        const today = dayjs();
+        const datesToFetch = [
+            today.subtract(1, 'day').format('YYYY-MM-DD'),
+            today.format('YYYY-MM-DD'),
+            today.add(1, 'day').format('YYYY-MM-DD')
+        ];
+
+        const todayStr = today.tz('Asia/Kolkata').format('YYYY-MM-DD');
+
+        // Check if already updated today
+        let apiConfig = await ApiConfig.findOne({ key: 'fixtures_update' });
+        if (apiConfig && apiConfig.lastUpdatedString === todayStr) {
+            return res.status(200).json({ 
+                success: true, 
+                message: `Already updated today (${todayStr}). API call skipped to save quota.` 
+            });
+        }
+
+        console.log(`Fetching fixtures for dates: ${datesToFetch.join(', ')}`);
+
+        // Run API requests in parallel
+        const responses = await Promise.all(
+            datesToFetch.map(date => fetchFixturesByDate(date))
+        );
+
+        let savedCount = 0;
+        let assignedCount = 0;
+        
+        // Get all gameweeks to check for assignments
+        const gameweeks = await Gameweek.find();
+
+        for (const data of responses) {
+            const apiFixtures = data.response;
+            if (!apiFixtures || !Array.isArray(apiFixtures)) continue;
+
+            // Filter for World Cup (league id 1) as requested by user
+            const worldCupFixtures = apiFixtures.filter((f: any) => f.league && f.league.id === 1);
+
+            for (const apiFixture of worldCupFixtures) {
+                const existing = await Fixture.findOne({ 'fixture.id': apiFixture.fixture.id });
+                
+                // If fixture exists and status was NS, update it.
+                // Or if it didn't exist, we insert it.
+                if (existing) {
+                    if (existing.fixture.status.short === 'NS' || existing.fixture.status.short !== apiFixture.fixture.status.short) {
+                        Object.assign(existing, apiFixture);
+                        await existing.save();
+                        savedCount++;
+                    }
+                } else {
+                    await Fixture.create(apiFixture);
+                    savedCount++;
+                }
+
+                // Check gameweek assignment based on IST date
+                const fixtureIstDate = dayjs(apiFixture.fixture.date).tz('Asia/Kolkata');
+                
+                for (const gw of gameweeks) {
+                    // Make end date fully inclusive of the day (e.g., end of 28th)
+                    const gwStartMs = dayjs(gw.startDate).valueOf();
+                    const gwEndMs = dayjs(gw.endDate).endOf('day').valueOf();
+                    const fixtureMs = fixtureIstDate.valueOf();
+                    
+                    if (fixtureMs >= gwStartMs && fixtureMs <= gwEndMs) {
+                        if (!gw.fixtures.includes(apiFixture.fixture.id)) {
+                            gw.fixtures.push(apiFixture.fixture.id);
+                            await gw.save();
+                            assignedCount++;
+                        }
+                        break; // Fixture falls in one gameweek
+                    }
+                }
+            }
+        }
+
+        // Save ApiConfig to prevent further calls today
+        if (!apiConfig) {
+            apiConfig = new ApiConfig({ key: 'fixtures_update' });
+        }
+        apiConfig.lastUpdated = new Date();
+        apiConfig.lastUpdatedString = todayStr;
+        await apiConfig.save();
+
+        res.status(200).json({ 
+            success: true, 
+            message: `Updated/Inserted ${savedCount} fixtures and assigned ${assignedCount} fixtures to gameweeks.` 
+        });
+
+    } catch (error: any) {
+        console.error('Error updating fixtures from API:', error.message || error);
+        res.status(500).json({ error: 'Failed to update fixtures from API' });
+    }
+};
+
+export const getMatchDetails = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const fixtureId = parseInt(req.params.id);
+        if (isNaN(fixtureId)) {
+            return res.status(400).json({ error: 'Invalid fixture ID' });
+        }
+
+        const [playersData, eventsData] = await Promise.all([
+            fetchFixturePlayers(fixtureId),
+            fetchFixtureEvents(fixtureId)
+        ]);
+
+        const players = playersData.response || [];
+        const events = eventsData.response || [];
+
+        // Save to MatchDetails model
+        await MatchDetails.findOneAndUpdate(
+            { fixtureId },
+            { 
+                fixtureId,
+                players,
+                events
+            },
+            { upsert: true, new: true }
+        );
+
+        const gw = await Gameweek.findOne({ fixtures: fixtureId });
+        if (!gw) {
+            return res.status(400).json({ error: 'Cannot fetch match details. Fixture is not assigned to any gameweek.' });
+        }
+        const gameweekId = gw.number;
+
+        if (players && players.length > 0) {
+            for (const teamData of players) {
+                const teamId = teamData.team.id;
+                for (const item of teamData.players) {
+                    const playerInfo = item.player;
+                    const stats = item.statistics[0]; // Assuming first item in array contains the relevant stats
+
+                    if (!stats) continue;
+
+                    let subOnMinute = 0;
+                    let subOffMinute = 90; // Default if they started and finished
+                    
+                    if (stats.games.substitute) {
+                        const subOnEvent = events.find((e: any) => e.type === 'subst' && e.assist.id === playerInfo.id);
+                        if (subOnEvent) {
+                            subOnMinute = subOnEvent.time.elapsed;
+                        } else {
+                            subOnMinute = 90 - (stats.games.minutes || 0); // rough estimate
+                        }
+                    }
+                    
+                    const subOffEvent = events.find((e: any) => e.type === 'subst' && e.player.id === playerInfo.id);
+                    if (subOffEvent) {
+                        subOffMinute = subOffEvent.time.elapsed;
+                    } else {
+                        const redCardEvent = events.find((e: any) => e.type === 'Card' && e.detail === 'Red Card' && e.player.id === playerInfo.id);
+                        if (redCardEvent) {
+                            subOffMinute = redCardEvent.time.elapsed;
+                        }
+                    }
+
+                    const goalsConceded = events.filter((e: any) => {
+                        if (e.type !== 'Goal') return false;
+                        let isConceded = false;
+                        if (e.team.id !== teamId && e.detail !== 'Own Goal') {
+                            isConceded = true;
+                        } else if (e.team.id === teamId && e.detail === 'Own Goal') {
+                            isConceded = true;
+                        }
+                        if (isConceded) {
+                            const goalMinute = e.time.elapsed;
+                            return goalMinute >= subOnMinute && goalMinute <= subOffMinute;
+                        }
+                        return false;
+                    });
+
+                    const played60Mins = (stats.games.minutes || 0) >= 60;
+                    const cleansheet = played60Mins && goalsConceded.length === 0;
+
+                    stats.games.cleansheet = cleansheet;
+
+                    const dummyPlayer = {
+                        position: stats.games.position
+                    } as any;
+                    
+                    const gwPoints = calculatePlayerPoints(dummyPlayer, stats);
+
+                    // Ensure PlayerStats exists
+                    await PlayerStats.findOneAndUpdate(
+                        { playerId: playerInfo.id },
+                        { $set: { playerId: playerInfo.id } },
+                        { upsert: true, new: true }
+                    );
+
+                    // Pull existing gameweek data and push the new one
+                    await PlayerStats.findOneAndUpdate(
+                        { playerId: playerInfo.id },
+                        { $pull: { gameweeks: { id: gameweekId } } }
+                    );
+                    
+                    const updatedStats = await PlayerStats.findOneAndUpdate(
+                        { playerId: playerInfo.id },
+                        { $push: { gameweeks: { id: gameweekId, stats, points: gwPoints, fixtureId } } },
+                        { new: true }
+                    );
+
+                    if (updatedStats) {
+                        const total = updatedStats.gameweeks.reduce((sum, gw) => sum + (gw.points || 0), 0);
+                        updatedStats.totalPoints = total;
+                        await updatedStats.save();
+                    }
+                }
+            }
+        }
+
+        res.status(200).json({ 
+            success: true, 
+            message: `Match details saved successfully for fixture ${fixtureId}`,
+            data: { players, events }
+        });
+
+    } catch (error: any) {
+        console.error('Error fetching/saving match details:', error.message || error);
+        res.status(500).json({ error: 'Failed to fetch match details' });
+    }
+};
+
+export const getUsers = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+        
+        // Fetch all users
+        const users = await User.find().select('-password').sort({ createdAt: -1 });
+        res.status(200).json({ data: users });
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({ error: 'Failed to fetch users' });
+    }
+};
+
+export const getAdminPlayers = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+        
+        const search = req.query.search as string;
+        
+        const { Player } = require('../models/Player');
+        const { Team } = require('../models/Team');
+
+        let query: any = {};
+        if (search) {
+            query.$or = [
+                { name: { $regex: new RegExp(search, 'i') } },
+                { webName: { $regex: new RegExp(search, 'i') } }
+            ];
+        }
+
+        const players = await Player.find(query).lean();
+        const teams = await Team.find({}).lean();
+        const teamMap = new Map(teams.map((t: any) => [t.id || (t.team && t.team.id), t.name || (t.team && t.team.name)]));
+
+        const mappedPlayers = players.map((p: any) => ({
+            id: p.id,
+            name: p.name || p.webName || 'Unknown',
+            position: p.position || 'Unknown',
+            team: teamMap.get(p.teamId) || 'Unknown'
+        }));
+
+        res.status(200).json({ data: mappedPlayers });
+    } catch (error) {
+        console.error('Error fetching admin players:', error);
+        res.status(500).json({ error: 'Failed to fetch admin players' });
+    }
+};
+
+export const createFantasyTeam = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const { name, managers, squad, finance } = req.body;
+
+        if (!name || !managers || managers.length === 0 || !squad || squad.length !== 15) {
+            return res.status(400).json({ error: 'Invalid input. Need name, at least one manager, and exactly 15 players in squad.' });
+        }
+
+        // Validate squad formation using rules similar to lineupFormatter/substitution
+        const positionCounts = { GK: 0, DEF: 0, MID: 0, FWD: 0 };
+        const startingCounts = { GK: 0, DEF: 0, MID: 0, FWD: 0 };
+
+        for (const player of squad) {
+            const p = (player.position || '').toUpperCase();
+            let normPos = '';
+            if (p === 'GK' || p === 'GOALKEEPER' || p === 'G') normPos = 'GK';
+            else if (p === 'DEF' || p === 'DEFENDER' || p === 'D') normPos = 'DEF';
+            else if (p === 'MID' || p === 'MIDFIELDER' || p === 'M') normPos = 'MID';
+            else if (p === 'FWD' || p === 'FORWARD' || p === 'ATTACKER' || p === 'A' || p === 'F') normPos = 'FWD';
+
+            if (normPos && positionCounts[normPos as keyof typeof positionCounts] !== undefined) {
+                positionCounts[normPos as keyof typeof positionCounts]++;
+                if (player.isStarting) {
+                    startingCounts[normPos as keyof typeof startingCounts]++;
+                }
+            }
+        }
+
+        if (positionCounts.GK !== 2 || positionCounts.DEF !== 5 || positionCounts.MID !== 5 || positionCounts.FWD !== 3) {
+            return res.status(400).json({ error: 'Squad must consist of exactly 2 GK, 5 DEF, 5 MID, 3 FWD' });
+        }
+
+        const totalStarting = startingCounts.GK + startingCounts.DEF + startingCounts.MID + startingCounts.FWD;
+        if (totalStarting !== 11) {
+            return res.status(400).json({ error: 'Exactly 11 players must be selected as starting.' });
+        }
+
+        if (startingCounts.GK !== 1 || 
+            startingCounts.DEF < 3 || startingCounts.DEF > 5 ||
+            startingCounts.MID < 2 || startingCounts.MID > 5 ||
+            startingCounts.FWD < 1 || startingCounts.FWD > 3) {
+            return res.status(400).json({ error: 'Invalid starting formation.' });
+        }
+
+        const picks = squad.map((p: any) => {
+            const isCaptain = !!p.isCaptain;
+            const isViceCaptain = !!p.isViceCaptain;
+            return {
+                playerId: p.element, // Player ID
+                isCaptain,
+                isViceCaptain,
+                isStarting: !!p.isStarting,
+                subNumber: p.subNumber || 0
+            };
+        });
+
+        // Ensure exactly one captain and one vice-captain
+        const captainCount = picks.filter((p: any) => p.isCaptain).length;
+        const vcCount = picks.filter((p: any) => p.isViceCaptain).length;
+        if (captainCount !== 1 || vcCount !== 1) {
+            return res.status(400).json({ error: 'Must select exactly one Captain and one Vice-Captain.' });
+        }
+
+        // Fetch the admin user to get their actual ObjectId for createdBy
+        const adminUser = await User.findOne({ username: req.user.userId });
+        if (!adminUser) {
+            return res.status(404).json({ error: 'Admin user not found.' });
+        }
+
+        const newFantasyTeam = new FantasyTeam({
+            name,
+            managers,
+            createdBy: adminUser._id,
+            currentSquad: {
+                picks
+            },
+            ...(finance && { finance })
+        });
+
+        await newFantasyTeam.save();
+
+        // Update User roles to manager (only for regular users)
+        await User.updateMany(
+            { _id: { $in: managers }, role: 'user' },
+            { $set: { role: 'manager' } }
+        );
+
+        res.status(201).json({ data: newFantasyTeam });
+    } catch (error) {
+        console.error('Error creating fantasy team:', error);
+        res.status(500).json({ error: 'Failed to create fantasy team' });
+    }
+};
+
+export const getFantasyTeams = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+        
+        // Fetch all fantasy teams, populate managers and createdBy to show names
+        const teams = await FantasyTeam.find()
+            .populate('managers', 'username email')
+            .populate('createdBy', 'username')
+            .sort({ createdAt: -1 });
+            
+        res.status(200).json({ data: teams });
+    } catch (error) {
+        console.error('Error fetching fantasy teams:', error);
+        res.status(500).json({ error: 'Failed to fetch fantasy teams' });
+    }
+};
+
+export const getFantasyTeamById = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+        
+        const team = await FantasyTeam.findById(req.params.id)
+            .populate('managers', 'username email')
+            .populate('createdBy', 'username')
+            .lean();
+            
+        if (!team) {
+            return res.status(404).json({ error: 'Fantasy team not found.' });
+        }
+
+        if (team.currentSquad && team.currentSquad.picks) {
+            const playerIds = team.currentSquad.picks.map(p => p.playerId);
+            const players = await Player.find({ id: { $in: playerIds } }).lean();
+            
+            team.currentSquad.picks = team.currentSquad.picks.map((pick: any) => {
+                const player = players.find(p => p.id === pick.playerId);
+                return {
+                    ...pick,
+                    playerId: player ? {
+                        id: player.id,
+                        webName: player.webName || player.name,
+                        name: player.name,
+                        position: player.position,
+                        teamId: player.teamId
+                    } : {
+                        id: pick.playerId,
+                        webName: 'Unknown Player',
+                        name: 'Unknown Player',
+                        position: 'Unknown',
+                        teamId: 0
+                    }
+                };
+            });
+        }
+            
+        res.status(200).json({ data: team });
+    } catch (error) {
+        console.error('Error fetching fantasy team:', error);
+        res.status(500).json({ error: 'Failed to fetch fantasy team' });
+    }
+};
+
+export const updateFantasyTeam = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const { name, managers, squad, finance } = req.body;
+
+        if (!name || !managers || !squad || !Array.isArray(squad)) {
+            return res.status(400).json({ error: 'Missing required fields.' });
+        }
+
+        if (squad.length !== 15) {
+            return res.status(400).json({ error: 'Squad must contain exactly 15 players.' });
+        }
+
+        const positionCounts = { GK: 0, DEF: 0, MID: 0, FWD: 0 };
+        const startingCounts = { GK: 0, DEF: 0, MID: 0, FWD: 0 };
+
+        for (const player of squad) {
+            const p = (player.position || '').toUpperCase();
+            let normPos = '';
+            if (p === 'GK' || p === 'GOALKEEPER' || p === 'G') normPos = 'GK';
+            else if (p === 'DEF' || p === 'DEFENDER' || p === 'D') normPos = 'DEF';
+            else if (p === 'MID' || p === 'MIDFIELDER' || p === 'M') normPos = 'MID';
+            else if (p === 'FWD' || p === 'FORWARD' || p === 'ATTACKER' || p === 'A' || p === 'F') normPos = 'FWD';
+
+            if (normPos && positionCounts[normPos as keyof typeof positionCounts] !== undefined) {
+                positionCounts[normPos as keyof typeof positionCounts]++;
+                if (player.isStarting) {
+                    startingCounts[normPos as keyof typeof startingCounts]++;
+                }
+            }
+        }
+
+        if (positionCounts.GK !== 2 || positionCounts.DEF !== 5 || positionCounts.MID !== 5 || positionCounts.FWD !== 3) {
+            return res.status(400).json({ error: 'Squad must consist of exactly 2 GK, 5 DEF, 5 MID, 3 FWD.' });
+        }
+
+        const totalStarting = startingCounts.GK + startingCounts.DEF + startingCounts.MID + startingCounts.FWD;
+        if (totalStarting !== 11) {
+            return res.status(400).json({ error: 'Exactly 11 players must be selected as starting.' });
+        }
+
+        const picks = squad.map((p: any) => {
+            const isCaptain = p.isCaptain || false;
+            const isViceCaptain = p.isViceCaptain || false;
+            return {
+                playerId: p.element,
+                isCaptain,
+                isViceCaptain,
+                isStarting: !!p.isStarting,
+                subNumber: p.subNumber || 0
+            };
+        });
+
+        const captainCount = picks.filter((p: any) => p.isCaptain).length;
+        const vcCount = picks.filter((p: any) => p.isViceCaptain).length;
+        if (captainCount !== 1 || vcCount !== 1) {
+            return res.status(400).json({ error: 'Must select exactly one Captain and one Vice-Captain.' });
+        }
+
+        const team = await FantasyTeam.findById(req.params.id);
+        if (!team) {
+            return res.status(404).json({ error: 'Fantasy team not found.' });
+        }
+
+        team.name = name;
+        team.managers = managers;
+        if (!team.currentSquad) {
+            team.currentSquad = { picks: [] };
+        }
+        team.currentSquad.picks = picks;
+        if (finance) {
+            if (!team.finance) {
+                team.finance = { totalBudget: 1000, utilisation: 0, balance: 1000 };
+            }
+            team.finance.totalBudget = finance.totalBudget;
+            team.finance.utilisation = finance.utilisation;
+        }
+
+        await team.save();
+
+        // Update User roles to manager (only for regular users)
+        await User.updateMany(
+            { _id: { $in: managers }, role: 'user' },
+            { $set: { role: 'manager' } }
+        );
+
+        res.status(200).json({ data: team });
+    } catch (error) {
+        console.error('Error updating fantasy team:', error);
+        res.status(500).json({ error: 'Failed to update fantasy team' });
+    }
+};
+
+export const completeGameweek = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const { id } = req.params;
+        const gameweek = await Gameweek.findById(id);
+        if (!gameweek) {
+            return res.status(404).json({ error: 'Gameweek not found' });
+        }
+
+        if (gameweek.isCompleted) {
+            return res.status(400).json({ error: 'Gameweek already completed' });
+        }
+
+        // Fetch PlayerStats for all players for this gameweek
+        const allPlayerStats = await PlayerStats.find({
+            'gameweeks.id': gameweek.number
+        }).lean();
+
+        // Create a map for quick lookup of minutes played
+        const minutesMap = new Map<number, number>();
+        for (const ps of allPlayerStats) {
+            const gwData = ps.gameweeks.find(gw => gw.id === gameweek.number);
+            if (gwData && gwData.stats && gwData.stats.games) {
+                minutesMap.set(ps.playerId, gwData.stats.games.minutes || 0);
+            }
+        }
+
+        // Fetch all players for position info
+        const { Player } = require('../models/Player');
+        const players = await Player.find().lean();
+        const pMap = new Map<number, any>(players.map((p: any) => [p.id, p]));
+        
+        const resolvePosition = (posStr: string) => {
+            const p = (posStr || '').toUpperCase();
+            if (p === 'GK' || p === 'GOALKEEPER' || p === 'G') return 'GK';
+            if (p === 'DEF' || p === 'DEFENDER' || p === 'D') return 'DEF';
+            if (p === 'MID' || p === 'MIDFIELDER' || p === 'M') return 'MID';
+            if (p === 'FWD' || p === 'FORWARD' || p === 'ATTACKER' || p === 'A' || p === 'F') return 'FWD';
+            return 'UNK';
+        };
+
+        const fantasyTeams = await FantasyTeam.find();
+
+        for (const team of fantasyTeams) {
+            if (!team.currentSquad || !team.currentSquad.picks || team.currentSquad.picks.length !== 15) {
+                continue; // Skip invalid teams
+            }
+
+            const rawPicks = team.currentSquad.picks.map(p => (p as any).toObject ? (p as any).toObject() : p);
+            const preAutoSubPicks = JSON.parse(JSON.stringify(rawPicks));
+            let picks = JSON.parse(JSON.stringify(rawPicks));
+            
+            // Auto-subs logic
+            const starters = picks.filter((p: any) => p.isStarting);
+            const bench = picks.filter((p: any) => !p.isStarting).sort((a: any, b: any) => (a.subNumber || 0) - (b.subNumber || 0));
+            
+            // Helper to get position of a pick
+            const getPos = (pick: any) => resolvePosition(pMap.get(pick.playerId)?.position);
+            
+            for (const starter of starters) {
+                const starterMins = minutesMap.get(starter.playerId) || 0;
+                if (starterMins === 0) {
+                    const starterPos = getPos(starter);
+                    
+                    if (starterPos === 'GK') {
+                        // Can only sub with bench GK
+                        const benchGk = bench.find((b: any) => getPos(b) === 'GK');
+                        if (benchGk && (minutesMap.get(benchGk.playerId) || 0) > 0) {
+                            // Swap
+                            starter.isStarting = false;
+                            starter.subNumber = benchGk.subNumber;
+                            benchGk.isStarting = true;
+                            benchGk.subNumber = 0;
+                        }
+                    } else {
+                        // Outfield player
+                        for (const sub of bench) {
+                            if (sub.isStarting || getPos(sub) === 'GK') continue; // already subbed in or is GK
+                            
+                            if ((minutesMap.get(sub.playerId) || 0) > 0) {
+                                // Check if formation remains valid if we swap starter and sub
+                                // Calculate formation WITHOUT the starter, WITH the sub
+                                const counts = { GK: 0, DEF: 0, MID: 0, FWD: 0 };
+                                for (const p of picks) {
+                                    if (p.isStarting && p.playerId !== starter.playerId) {
+                                        counts[getPos(p) as keyof typeof counts]++;
+                                    }
+                                }
+                                counts[getPos(sub) as keyof typeof counts]++; // Add sub
+                                
+                                if (counts.DEF >= 3 && counts.DEF <= 5 &&
+                                    counts.MID >= 2 && counts.MID <= 5 &&
+                                    counts.FWD >= 1 && counts.FWD <= 3) {
+                                    
+                                    // Swap
+                                    starter.isStarting = false;
+                                    starter.subNumber = sub.subNumber;
+                                    sub.isStarting = true;
+                                    sub.subNumber = 0;
+                                    break; // Found a valid sub for this starter, move to next starter
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Push to history
+            if (!team.history) team.history = [];
+            
+            // Clean up subNumber for starters (should be 0)
+            picks.forEach((p: any) => {
+                if (p.isStarting) p.subNumber = 0;
+            });
+
+            team.history.push({
+                gameweek: gameweek.number,
+                picks: picks,
+                preAutoSubPicks: preAutoSubPicks
+            });
+
+            team.currentSquad.picks = picks;
+            await team.save();
+        }
+
+        gameweek.isCompleted = true;
+        gameweek.isCurrent = false; // Usually it's no longer current
+        await gameweek.save();
+
+        // Update the next gameweek to be the current one
+        const nextGameweek = await Gameweek.findOne({ number: gameweek.number + 1 });
+        if (nextGameweek) {
+            nextGameweek.isCurrent = true;
+            nextGameweek.isNext = false;
+            await nextGameweek.save();
+
+            // Set the one after next to be the new next
+            const futureGameweek = await Gameweek.findOne({ number: gameweek.number + 2 });
+            if (futureGameweek) {
+                futureGameweek.isNext = true;
+                await futureGameweek.save();
+            }
+        }
+
+        // Enable pick team
+        let apiConfig = await ApiConfig.findOne({ key: 'pick_team_enabled' });
+        if (!apiConfig) {
+            apiConfig = new ApiConfig({ key: 'pick_team_enabled', lastUpdatedString: 'true', lastUpdated: new Date() });
+        } else {
+            apiConfig.lastUpdatedString = 'true';
+            apiConfig.lastUpdated = new Date();
+        }
+        await apiConfig.save();
+
+        res.status(200).json({ success: true, message: 'Gameweek completed successfully. Pick team enabled.' });
+
+    } catch (error: any) {
+        console.error('Error completing gameweek:', error);
+        res.status(500).json({ error: 'Failed to complete gameweek' });
+    }
+};
+
+export const revertGameweek = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const { id } = req.params;
+        const Gameweek = (await import("../models/Gameweek")).Gameweek;
+        
+        const gameweek = await Gameweek.findById(id);
+        if (!gameweek) {
+            return res.status(404).json({ error: 'Gameweek not found' });
+        }
+
+        if (!gameweek.isCompleted) {
+            return res.status(400).json({ error: 'Only completed gameweeks can be reverted' });
+        }
+
+        // Check if this is the most recently completed gameweek
+        const laterCompleted = await Gameweek.findOne({ number: { $gt: gameweek.number }, isCompleted: true });
+        if (laterCompleted) {
+            return res.status(400).json({ error: 'You must revert gameweeks in reverse chronological order' });
+        }
+
+        // 1. Rollback Gameweek flags
+        gameweek.isCompleted = false;
+        gameweek.isCurrent = true;
+        await gameweek.save();
+
+        // 2. Adjust next gameweeks
+        const nextGameweek = await Gameweek.findOne({ number: gameweek.number + 1 });
+        if (nextGameweek) {
+            nextGameweek.isCurrent = false;
+            nextGameweek.isNext = true;
+            await nextGameweek.save();
+
+            const futureGameweek = await Gameweek.findOne({ number: gameweek.number + 2 });
+            if (futureGameweek) {
+                futureGameweek.isNext = false;
+                await futureGameweek.save();
+            }
+        }
+
+        // 3. Remove history entry from all FantasyTeams and restore preAutoSubPicks if available
+        const FantasyTeam = (await import("../models/FantasyTeam")).FantasyTeam;
+        const teams = await FantasyTeam.find({ 'history.gameweek': gameweek.number });
+        
+        for (const team of teams) {
+            const gwHistory = team.history.find((h: any) => h.gameweek === gameweek.number);
+            if (gwHistory && gwHistory.preAutoSubPicks && gwHistory.preAutoSubPicks.length > 0) {
+                team.currentSquad.picks = gwHistory.preAutoSubPicks;
+            }
+            team.history = team.history.filter((h: any) => h.gameweek !== gameweek.number) as any;
+            await team.save();
+        }
+
+        res.status(200).json({ success: true, message: 'Gameweek reverted successfully' });
+
+    } catch (error: any) {
+        console.error('Error reverting gameweek:', error);
+        res.status(500).json({ error: 'Failed to revert gameweek' });
+    }
+};
+
+export const togglePickTeam = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const { enabled, deadlineDate } = req.body; // boolean
+        
+        let apiConfig = await ApiConfig.findOne({ key: 'pick_team_enabled' });
+        if (!apiConfig) {
+            apiConfig = new ApiConfig({ 
+                key: 'pick_team_enabled', 
+                lastUpdatedString: String(enabled), 
+                lastUpdated: new Date(),
+                deadlineDate: deadlineDate ? new Date(deadlineDate) : undefined
+            });
+        } else {
+            apiConfig.lastUpdatedString = String(enabled);
+            apiConfig.lastUpdated = new Date();
+            if (deadlineDate !== undefined) {
+                apiConfig.deadlineDate = deadlineDate ? new Date(deadlineDate) : undefined;
+            }
+        }
+        await apiConfig.save();
+
+        res.status(200).json({ success: true, data: { enabled: apiConfig.lastUpdatedString === 'true', deadlineDate: apiConfig.deadlineDate } });
+    } catch (error: any) {
+        console.error('Error toggling pick team:', error);
+        res.status(500).json({ error: 'Failed to toggle pick team' });
+    }
+};
+
+export const getPickTeamStatus = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const apiConfig = await ApiConfig.findOne({ key: 'pick_team_enabled' });
+        const enabled = apiConfig ? apiConfig.lastUpdatedString === 'true' : false;
+
+        res.status(200).json({ success: true, data: { enabled, deadlineDate: apiConfig?.deadlineDate } });
+    } catch (error: any) {
+        console.error('Error fetching pick team status:', error);
+        res.status(500).json({ error: 'Failed to fetch pick team status' });
+    }
+};

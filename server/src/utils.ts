@@ -72,3 +72,21 @@ export function convertToJSON<T extends DataType>(
     return obj as StandingsResponse;
   }) as ReturnTypeMap<T>;
 }
+
+/**
+ * Convert a full position name (e.g., "Goalkeeper", "Defender") to its shorthand code.
+ * Returns 'GK', 'DEF', 'MID', or 'FWD'. Falls back to the first character of the input.
+ */
+export function resolvePosition(fullName: string): 'GK' | 'DEF' | 'MID' | 'FWD' {
+  const normalized = fullName.trim().toLowerCase();
+  if (['goalkeeper', 'gk', 'keeper'].includes(normalized)) return 'GK';
+  if (['defender', 'defence', 'def'].includes(normalized)) return 'DEF';
+  if (['midfielder', 'midfield', 'mid'].includes(normalized)) return 'MID';
+  if (['forward', 'striker', 'attack', 'attacker', 'fwd'].includes(normalized)) return 'FWD';
+  const first = normalized.charAt(0).toUpperCase();
+  if (first === 'G') return 'GK';
+  if (first === 'D') return 'DEF';
+  if (first === 'M') return 'MID';
+  if (first === 'F') return 'FWD';
+  return 'FWD';
+}

@@ -12,23 +12,14 @@ export interface Player {
     isPowerPlayer?: boolean;
     fullTeamName: string;
     subNumber?: number;
-    clean_sheet: number;
-    goal: number;
-    assist: number;
-    yellow_card: number;
-    red_card: number;
-    save: number;
-    penalty_save: number;
-    penalty_miss: number;
-    app: number;
     gw: number;
     shirtNumber?: number;
 }
 export interface Formation {
-    goalkeeper: Player[];
-    defenders: Player[];
-    midfielders: Player[];
-    forwards: Player[];
+    GK: Player[];
+    DEF: Player[];
+    MID: Player[];
+    FWD: Player[];
 }
 export interface FormationResult {
     starting: Formation;

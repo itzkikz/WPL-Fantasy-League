@@ -20,17 +20,11 @@ export interface TeamDetails {
     role: 'CAPTAIN' | 'VICE CAPTAIN' | null,
     club: string,
     point: number,
-    app: number,
-    goal: number,
-    assist: number,
-    clean_sheet: number,
-    save: number,
-    red_card: number,
-    yellow_card: number,
-    penalty_miss: number,
-    penalty_save: number,
     team_short_name?: string,
     team_color?: string,
     team_text_color?: string,
     shirtNumber?: number;
+    isStarting?: boolean;
+    subNumber?: number;
+    photo?: string;
 }

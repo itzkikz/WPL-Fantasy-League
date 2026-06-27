@@ -4,8 +4,8 @@ import { API_ENDPOINTS } from '../../api/endpoints'
 import { LoginResponse, ValidateResponse } from './types'
 
 export const authApi = {
-  login: async (email: string, password: string): Promise<LoginResponse> => {
-    const response = await apiClient.post(API_ENDPOINTS.AUTH.LOGIN, { email, password })
+  login: async (credential: string): Promise<LoginResponse> => {
+    const response = await apiClient.post(API_ENDPOINTS.AUTH.LOGIN, { credential })
     return response.data.data
   },
   validate: async (): Promise<ValidateResponse> => {

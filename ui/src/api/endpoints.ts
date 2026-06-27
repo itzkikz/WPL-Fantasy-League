@@ -24,8 +24,17 @@ export const API_ENDPOINTS = {
   NOTIFICATION: {
     BASE: '/notify/notifications',
     SUBSCRIBE: '/notify/subscribe',
+    SEND: '/notify/send',
     // SUBSTITUTION: '/manager/sub'
-    // BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
+  },
+  ADMIN: {
+    FIXTURES: '/admin/fixtures',
+    UPDATE_FIXTURES: '/admin/fixtures/update',
+    FETCH_MATCH_DETAILS: (id: string | number) => `/admin/fixtures/${id}/details`,
+    GAMEWEEKS: '/admin/gameweeks',
+    COMPLETE_GAMEWEEK: (id: string | number) => `/admin/gameweeks/${id}/complete`,
+    SEASONS: '/admin/seasons',
+    PICK_TEAM_STATUS: '/admin/settings/pick-team',
   },
 } as const
 
@@ -37,4 +46,8 @@ export const QUERY_KEYS = {
   USERS: 'users',
   MANAGER: 'manager',
   NOTIFICATIONS: 'notifications',
+  ADMIN_FIXTURES: 'admin-fixtures',
+  ADMIN_GAMEWEEKS: 'admin-gameweeks',
+  ADMIN_SEASONS: 'admin-seasons',
+  ADMIN_PICK_TEAM_STATUS: 'admin-pick-team-status',
 } as const

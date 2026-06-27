@@ -51,7 +51,7 @@ export default function Stats() {
         team: eachPlayer.team_short_name || eachPlayer.team_name.substring(0, 3).toUpperCase(),
         teamColor: eachPlayer.team_color,
         teamTextColor: eachPlayer.team_text_color,
-        point: eachPlayer.total_point,
+        point: eachPlayer.overall?.total_point || 0,
         position: eachPlayer.position,
         fullTeamName: eachPlayer.team_name,
         clean_sheet: eachPlayer.clean_sheet,
@@ -103,166 +103,185 @@ export default function Stats() {
   const filteredPlayers = players;
 
   return (
-    <div className="flex flex-col h-screen">
-      {/* Top Filter Buttons */}
-      <div className="m-2 flex gap-2">
-        <Button
-          label="All Leagues"
-          size="text-sm"
-          type="Primary"
-          onClick={() => setShowLeagueOverlay(true)}
-        />
-        <Button
-          label="All Clubs"
-          size="text-sm"
-          type="Primary"
-          onClick={() => setShowClubOverlay(true)}
-        />
-        <Button
-          label="More"
-          size="text-sm"
-          type="Primary"
-          icon={<AngleDown width="3" height="3" />}
-          onClick={() => setShowMoreOverlay(true)}
-        />
-        <Button
-          label="Reset"
-          type="Danger"
-          width="w-1/4"
-          onClick={handleReset}
-        />
+    <div className="flex flex-col h-full bg-light-bg dark:bg-dark-bg animate-in fade-in duration-500">
+
+      {/* Header Area */}
+      <div className="pt-6 pb-2 px-4 lg:px-8">
+        <h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+          Player Stats
+        </h1>
+        <p className="text-gray-500 dark:text-gray-400 mt-1">
+          Explore and filter player performance data.
+        </p>
       </div>
 
-      {/* Players Table */}
-      <PlayersScrollableTable
-        content={filteredPlayers}
-        onClick={handlePlayerOverlay}
-        onEndReached={() => {
-          if (hasNextPage && !isFetchingNextPage) {
-            fetchNextPage();
-          }
-        }}
-        isFetching={isFetchingNextPage}
-      />
+      {/* Filter Bar */}
+      <div className="px-4 lg:px-8 pb-4 pt-2 sticky top-0 z-10 bg-light-bg/80 dark:bg-dark-bg/80 backdrop-blur-md">
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide items-center">
+          <Button
+            label="All Leagues"
+            size="text-sm"
+            type={selectedLeagues.length > 0 ? "Danger" : "Primary"}
+            onClick={() => setShowLeagueOverlay(true)}
+          />
+          <Button
+            label="All Clubs"
+            size="text-sm"
+            type={selectedClubs.length > 0 ? "Danger" : "Primary"}
+            onClick={() => setShowClubOverlay(true)}
+          />
+          <Button
+            label="More"
+            size="text-sm"
+            type={(selectedPositions.length > 0 || freeAgentSelected) ? "Danger" : "Primary"}
+            icon={<AngleDown width="3" height="3" />}
+            onClick={() => setShowMoreOverlay(true)}
+          />
+          <div className="ml-auto pl-2 border-l border-gray-200 dark:border-white/10">
+            <button
+              onClick={handleReset}
+              className="px-3 py-1.5 text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-full transition-colors whitespace-nowrap"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Players Table Container */}
+      <div className="flex-1 px-2 lg:px-8 pb-4 overflow-hidden">
+        <div className="h-full rounded-2xl bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 shadow-sm overflow-hidden flex flex-col">
+          <PlayersScrollableTable
+            content={filteredPlayers}
+            onClick={handlePlayerOverlay}
+            onEndReached={() => {
+              if (hasNextPage && !isFetchingNextPage) {
+                fetchNextPage();
+              }
+            }}
+            isFetching={isFetchingNextPage}
+          />
+        </div>
+      </div>
 
       {/* Player Detail Overlay */}
       <Overlay isOpen={showOverlay} onClose={() => setShowOverlay(false)}>
         {player && (
-          <>
-            <PlayerInfo player={player as Player} playerStats={player as any} />
-            <PlayerOverall noGW={true} playerStats={player as any} />
-          </>
+          <div className="w-full h-full flex flex-col overflow-hidden">
+            <div className="flex-none">
+              <PlayerInfo player={player as Player} playerStats={player as any} />
+            </div>
+            <div className="flex-1 flex flex-col overflow-hidden mt-4 pb-4 sm:pb-6">
+              <PlayerOverall noGW={true} playerStats={player as any} />
+            </div>
+          </div>
         )}
       </Overlay>
 
       {/* Clubs Overlay */}
-      <Overlay
-        isOpen={showClubOverlay}
-        onClose={() => setShowClubOverlay(false)}
-      >
-        <div className="relative px-6 pt-6 pb-4">
-          <h2 className="text-2xl font-bold mb-4 text-center">Clubs</h2>
-          {clubs.map((club) => (
-            <div
-              key={club}
-              className="flex items-center justify-between px-2 py-2"
-            >
-              <StatRow
-                label={club}
-                value=""
-                textSize="text-base"
-                border={false}
-              />
-              <Checkbox
-                label=""
-                type="checkbox"
-                checked={selectedClubs.includes(club)}
-                onChange={() =>
-                  toggleSelect(selectedClubs, "clubs", club)
-                }
-              />
-            </div>
-          ))}
+      <Overlay isOpen={showClubOverlay} onClose={() => setShowClubOverlay(false)}>
+        <div className="px-6 py-8 bg-white dark:bg-[#1a1a1a] rounded-t-3xl max-w-md mx-auto w-full max-h-[80vh] flex flex-col">
+          <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Filter by Club</h2>
+          <div className="overflow-y-auto flex-1 space-y-2 pr-2">
+            {clubs.map((club) => (
+              <div
+                key={club}
+                onClick={() => toggleSelect(selectedClubs, "clubs", club)}
+                className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors border border-transparent hover:border-gray-200 dark:hover:border-white/10"
+              >
+                <span className="text-gray-800 dark:text-gray-200 font-medium">{club}</span>
+                <Checkbox
+                  label=""
+                  type="checkbox"
+                  checked={selectedClubs.includes(club)}
+                  onChange={() => toggleSelect(selectedClubs, "clubs", club)}
+                />
+              </div>
+            ))}
+          </div>
+          <button onClick={() => setShowClubOverlay(false)} className="mt-6 w-full py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-bold active:scale-95 transition-transform">
+            Done
+          </button>
         </div>
       </Overlay>
 
       {/* Leagues Overlay */}
-      <Overlay
-        isOpen={showLeagueOverlay}
-        onClose={() => setShowLeagueOverlay(false)}
-      >
-        <div className="relative px-6 pt-6 pb-4">
-          <h2 className="text-2xl font-bold mb-4 text-center">Leagues</h2>
-          {leagues.map((league) => (
-            <div
-              key={league}
-              className="flex items-center justify-between px-2 py-2"
-            >
-              <StatRow
-                label={league}
-                value=""
-                textSize="text-base"
-                border={false}
-              />
-              <Checkbox
-                label=""
-                type="checkbox"
-                checked={selectedLeagues.includes(league)}
-                onChange={() =>
-                  toggleSelect(selectedLeagues, "leagues", league)
-                }
-              />
-            </div>
-          ))}
+      <Overlay isOpen={showLeagueOverlay} onClose={() => setShowLeagueOverlay(false)}>
+        <div className="px-6 py-8 bg-white dark:bg-[#1a1a1a] rounded-t-3xl max-w-md mx-auto w-full max-h-[80vh] flex flex-col">
+          <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Filter by League</h2>
+          <div className="overflow-y-auto flex-1 space-y-2 pr-2">
+            {leagues.map((league) => (
+              <div
+                key={league}
+                onClick={() => toggleSelect(selectedLeagues, "leagues", league)}
+                className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors border border-transparent hover:border-gray-200 dark:hover:border-white/10"
+              >
+                <span className="text-gray-800 dark:text-gray-200 font-medium">{league}</span>
+                <Checkbox
+                  label=""
+                  type="checkbox"
+                  checked={selectedLeagues.includes(league)}
+                  onChange={() => toggleSelect(selectedLeagues, "leagues", league)}
+                />
+              </div>
+            ))}
+          </div>
+          <button onClick={() => setShowLeagueOverlay(false)} className="mt-6 w-full py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-bold active:scale-95 transition-transform">
+            Done
+          </button>
         </div>
       </Overlay>
 
       {/* More Filters Overlay */}
-      <Overlay
-        isOpen={showMoreOverlay}
-        onClose={() => setShowMoreOverlay(false)}
-      >
-        <div className="relative px-6 pt-6 pb-4">
-          <h2 className="text-2xl font-bold mb-4 text-center">More</h2>
+      <Overlay isOpen={showMoreOverlay} onClose={() => setShowMoreOverlay(false)}>
+        <div className="px-6 py-8 bg-white dark:bg-[#1a1a1a] rounded-t-3xl max-w-md mx-auto w-full max-h-[80vh] flex flex-col">
+          <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">More Filters</h2>
+          <div className="space-y-6 flex-1 overflow-y-auto pr-2">
 
-          {["G", "D", "M", "F"].map((pos) => (
-            <div
-              key={pos}
-              className="flex items-center justify-between px-2 py-2"
-            >
-              <StatRow
-                label={
-                  pos === "G"
-                    ? "GK"
-                    : pos === "D"
-                      ? "DEF"
-                      : pos === "M"
-                        ? "MID"
-                        : "FWD"
-                }
-                value=""
-                border={false}
-              />
-              <Checkbox
-                label=""
-                type="checkbox"
-                checked={selectedPositions.includes(pos)}
-                onChange={() =>
-                  toggleSelect(selectedPositions, "positions", pos)
-                }
-              />
+            <div>
+              <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 uppercase tracking-wider">Position</h3>
+              <div className="space-y-2">
+                {["G", "D", "M", "F"].map((pos) => {
+                  const label = pos === "G" ? "Goalkeeper (GK)" : pos === "D" ? "Defender (DEF)" : pos === "M" ? "Midfielder (MID)" : "Forward (FWD)";
+                  return (
+                    <div
+                      key={pos}
+                      onClick={() => toggleSelect(selectedPositions, "positions", pos)}
+                      className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors border border-transparent hover:border-gray-200 dark:hover:border-white/10"
+                    >
+                      <span className="text-gray-800 dark:text-gray-200 font-medium">{label}</span>
+                      <Checkbox
+                        label=""
+                        type="checkbox"
+                        checked={selectedPositions.includes(pos)}
+                        onChange={() => toggleSelect(selectedPositions, "positions", pos)}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          ))}
 
-          <div className="flex items-center justify-between px-2 py-2 mt-6">
-            <StatRow label="Free Agents" value="" border={false} />
-            <Checkbox
-              label=""
-              type="checkbox"
-              checked={freeAgentSelected}
-              onChange={() => updateSearch({ freeAgents: !freeAgentSelected })}
-            />
+            <div className="border-t border-gray-100 dark:border-white/10 pt-6">
+              <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-3 uppercase tracking-wider">Status</h3>
+              <div
+                onClick={() => updateSearch({ freeAgents: !freeAgentSelected })}
+                className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 cursor-pointer transition-colors border border-transparent hover:border-gray-200 dark:hover:border-white/10"
+              >
+                <span className="text-gray-800 dark:text-gray-200 font-medium">Free Agents Only</span>
+                <Checkbox
+                  label=""
+                  type="checkbox"
+                  checked={freeAgentSelected}
+                  onChange={() => updateSearch({ freeAgents: !freeAgentSelected })}
+                />
+              </div>
+            </div>
+
           </div>
+          <button onClick={() => setShowMoreOverlay(false)} className="mt-6 w-full py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-bold active:scale-95 transition-transform">
+            Done
+          </button>
         </div>
       </Overlay>
     </div>

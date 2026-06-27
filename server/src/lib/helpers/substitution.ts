@@ -1,33 +1,33 @@
 import { Formation, FormationResult, Player } from "../formatter/types";
 
-type Category = "goalkeeper" | "defenders" | "midfielders" | "forwards";
+type Category = "GK" | "DEF" | "MID" | "FWD";
 type EnrichedPlayer = Player & { isAvlSub: boolean };
 
 const FORMATION_RULES: Record<Category, { min: number; max: number }> = {
-  goalkeeper: { min: 1, max: 1 },
-  defenders: { min: 3, max: 5 },
-  midfielders: { min: 2, max: 5 },
-  forwards: { min: 1, max: 3 },
+  GK: { min: 1, max: 1 },
+  DEF: { min: 3, max: 5 },
+  MID: { min: 2, max: 5 },
+  FWD: { min: 1, max: 3 },
 };
 
 function getPositionCategory(
   position: string
 ): Category {
   const positionMap: Record<string, Category> = {
-    GK: "goalkeeper",
-    DEF: "defenders",
-    MID: "midfielders",
-    FWD: "forwards",
+    GK: "GK",
+    DEF: "DEF",
+    MID: "MID",
+    FWD: "FWD",
   };
   return positionMap[position];
 }
 
 function countStartingPlayers(starting: Formation) {
   return {
-    goalkeeper: starting.goalkeeper.length,
-    defenders: starting.defenders.length,
-    midfielders: starting.midfielders.length,
-    forwards: starting.forwards.length,
+    GK: starting.GK.length,
+    DEF: starting.DEF.length,
+    MID: starting.MID.length,
+    FWD: starting.FWD.length,
   };
 }
 
@@ -40,14 +40,14 @@ function canSwap(
   next[outCat]--;
   next[inCat]++;
   return (
-    next.goalkeeper >= FORMATION_RULES.goalkeeper.min &&
-    next.goalkeeper <= FORMATION_RULES.goalkeeper.max &&
-    next.defenders >= FORMATION_RULES.defenders.min &&
-    next.defenders <= FORMATION_RULES.defenders.max &&
-    next.midfielders >= FORMATION_RULES.midfielders.min &&
-    next.midfielders <= FORMATION_RULES.midfielders.max &&
-    next.forwards >= FORMATION_RULES.forwards.min &&
-    next.forwards <= FORMATION_RULES.forwards.max
+    next.GK >= FORMATION_RULES.GK.min &&
+    next.GK <= FORMATION_RULES.GK.max &&
+    next.DEF >= FORMATION_RULES.DEF.min &&
+    next.DEF <= FORMATION_RULES.DEF.max &&
+    next.MID >= FORMATION_RULES.MID.min &&
+    next.MID <= FORMATION_RULES.MID.max &&
+    next.FWD >= FORMATION_RULES.FWD.min &&
+    next.FWD <= FORMATION_RULES.FWD.max
   );
 }
 
@@ -110,10 +110,10 @@ export const executeSwap = (
 
   // Clone
   const newStarting: Formation = {
-    goalkeeper: [...teamData.starting.goalkeeper],
-    defenders: [...teamData.starting.defenders],
-    midfielders: [...teamData.starting.midfielders],
-    forwards: [...teamData.starting.forwards],
+    GK: [...teamData.starting.GK],
+    DEF: [...teamData.starting.DEF],
+    MID: [...teamData.starting.MID],
+    FWD: [...teamData.starting.FWD],
   };
   const newBench: Player[] = [...teamData.bench];
 
@@ -155,9 +155,6 @@ export const executeSwap = (
     bench: newBench,
     // swappedIn: promotedToStarting,
     // swappedOut: demotedToBench,
-    currentFormation: `${nextCounts.defenders}-${nextCounts.midfielders}-${nextCounts.forwards}`,
+    currentFormation: `${nextCounts.DEF}-${nextCounts.MID}-${nextCounts.FWD}`,
   };
 };
-
-
-

@@ -25,16 +25,15 @@ const ScrollableTable = ({
   onClick,
 }: ScrollableTableProps) => {
   return (
-    // <div className="flex-1 overflow-hidden select-none">
-    <div className="select-none lg:overflow-y-auto lg:h-[calc(100vh-6rem)]">
-      <table className="w-full">
+    <div className="flex-1 overflow-y-auto scrollbar-hide select-none h-full bg-white dark:bg-transparent">
+      <table className="w-full text-sm text-left">
         {/* Sticky table header */}
-        <thead className="sticky top-16 lg:top-0 z-10 shadow-sm bg-light-surface dark:bg-dark-surface border-b border-light-border dark:border-dark-border">
+        <thead className="sticky top-0 z-10 bg-gray-50/90 dark:bg-[#1a1a1a]/90 backdrop-blur-md border-b border-gray-100 dark:border-white/10">
           <tr>
             {headings.map((heading, index) => (
               <th
                 key={index + heading?.label}
-                className={heading?.class + ` text-xs font-semibold`}
+                className={heading?.class + ` text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400`}
               >
                 {heading?.label}
               </th>
@@ -43,33 +42,33 @@ const ScrollableTable = ({
         </thead>
 
         {/* Scrollable tbody */}
-        <tbody>
+        <tbody className="divide-y divide-gray-100 dark:divide-white/5">
           {content?.map((r, i) => (
             <tr
               key={i}
-              className="transition-colors cursor-pointer border-b border-light-border dark:border-dark-border"
+              className="transition-colors duration-200 cursor-pointer hover:bg-indigo-50/50 dark:hover:bg-white/5 group"
               onClick={() => onClick(r)}
             >
-              <td className="px-4 py-3">
-                <div className="flex items-center gap-1">
-                  <span className="inline-flex h-6 w-6 items-center justify-center text-xs font-semibold">
+              <td className="px-4 py-4">
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 dark:bg-white/10 text-xs font-bold text-gray-700 dark:text-gray-300 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-500/20 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                     {i + 1}
                   </span>
-                  <div className="text-light-bg">
+                  <div className="opacity-80">
                     <Delta d={r.pos_change} />
                   </div>
                 </div>
               </td>
-              <td className="px-2 py-3">
-                <p className="text-[15px] font-semibold leading-tight">
+              <td className="px-2 py-4">
+                <p className="text-[15px] font-bold text-gray-900 dark:text-white leading-tight">
                   {r.team}
                 </p>
-                {/* <p className="text-xs text-gray-500">{"Manager"}</p> */}
+                {/* <p className="text-xs text-gray-500 mt-0.5">{"Manager"}</p> */}
               </td>
-              <td className="px-2 py-3 text-center font-semibold">
+              <td className="px-2 py-4 text-center font-semibold text-gray-600 dark:text-gray-300">
                 {r.current_gw}
               </td>
-              <td className="px-4 py-3 text-right text-base font-semibold">
+              <td className="px-4 py-4 text-right text-base font-black text-indigo-600 dark:text-indigo-400">
                 {r.total}
               </td>
             </tr>

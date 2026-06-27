@@ -7,11 +7,14 @@ import playersRouter from './routes/players';
 import authRouter from './routes/auth';
 import notificationRouter from './routes/notification';
 import managerRouter from './routes/manager'
+import sheetRouter from './routes/sheetRoutes';
 import { setSheets } from './lib/store/globals';
 import { authenticateToken } from './middlewares/authMiddleware';
 import { logMiddleware } from './middlewares/logMiddleware';
 import connectDB from './config/db';
 import syncRouter from './routes/syncRoutes';
+import footballApiRouter from './routes/footballApi';
+import adminRouter from './routes/admin';
 
 connectDB();
 
@@ -47,6 +50,8 @@ app.use("/api", standingsRouter);
 app.use("/api", playersRouter);
 app.use("/api", authRouter);
 app.use("/api/sync", syncRouter);
+app.use("/api", sheetRouter);
+app.use("/api", footballApiRouter);
 
 app.get('/api/validate-token', authenticateToken, (req: any, res) => {
   res.json({ data: { valid: true, user: req.user } });
@@ -55,9 +60,11 @@ app.get('/api/validate-token', authenticateToken, (req: any, res) => {
 app.use('/api', authenticateToken, managerRouter);
 
 app.use("/api", authenticateToken, notificationRouter);
+app.use("/api/admin", authenticateToken, adminRouter);
 
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+

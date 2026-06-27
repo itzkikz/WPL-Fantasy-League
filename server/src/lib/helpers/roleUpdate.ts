@@ -25,10 +25,10 @@ function setCaptaincyRole(
 
   // Verify the player exists in either starting or bench
   const inStarting =
-    teamData.starting.goalkeeper.some(p => p.id === playerId) ||
-    teamData.starting.defenders.some(p => p.id === playerId) ||
-    teamData.starting.midfielders.some(p => p.id === playerId) ||
-    teamData.starting.forwards.some(p => p.id === playerId);
+    teamData.starting.GK.some((p: Player) => p.id === playerId) ||
+    teamData.starting.DEF.some((p: Player) => p.id === playerId) ||
+    teamData.starting.MID.some((p: Player) => p.id === playerId) ||
+    teamData.starting.FWD.some((p: Player) => p.id === playerId);
 
   const inBench = teamData.bench.some(p => p.id === playerId);
   if (!inStarting && !inBench) {
@@ -53,10 +53,10 @@ function setCaptaincyRole(
   };
 
   const newStarting: Formation = {
-    goalkeeper: teamData.starting.goalkeeper.map(mapRoleUpdate),
-    defenders: teamData.starting.defenders.map(mapRoleUpdate),
-    midfielders: teamData.starting.midfielders.map(mapRoleUpdate),
-    forwards: teamData.starting.forwards.map(mapRoleUpdate),
+    GK: teamData.starting.GK.map(mapRoleUpdate),
+    DEF: teamData.starting.DEF.map(mapRoleUpdate),
+    MID: teamData.starting.MID.map(mapRoleUpdate),
+    FWD: teamData.starting.FWD.map(mapRoleUpdate),
   };
 
   const newBench: Player[] = teamData.bench.map(mapRoleUpdate);

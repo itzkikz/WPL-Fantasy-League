@@ -22,10 +22,15 @@ export const MainLayout = () => {
         matchRoute({ to: route, fuzzy: false })
     );
 
+    const noNavRoutes = ["/login", "/maintenance", "/"];
+    const hideNav = noNavRoutes.some((route) =>
+        matchRoute({ to: route, fuzzy: false })
+    );
+
     return (
-        <main className="font-outfit min-h-screen shadow-sm text-primary">
+        <main className="font-outfit min-h-screen shadow-sm text-primary flex flex-col">
             <PWAInstallBanner />
-            <div className="">
+            <div className="flex-1 flex">
                 <div className="flex h-screen flex-col mx-auto w-full overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
                     {isBaseRoute && (
                         <header className="header relative w-full h-15 shrink-0 overflow-hidden lg:hidden">
@@ -96,15 +101,17 @@ export const MainLayout = () => {
                             </div>
                         </header>
                     )}
-                    <MobileNavbar />
-                    <div className="flex flex-col lg:flex-row">
+                    {!hideNav && <MobileNavbar />}
+                    <div className="flex flex-col lg:flex-row flex-1">
                         {/* Sidebar: hidden on mobile, visible on lg+ */}
-                        <div className="hidden lg:block lg:w-64">
-                            <SideNavbar />
-                        </div>
+                        {!hideNav && (
+                            <div className="hidden lg:block lg:w-64">
+                                <SideNavbar />
+                            </div>
+                        )}
 
                         {/* Main content: always visible, grows to fill space */}
-                        <div className="flex-1 lg:px-6 lg:py-6">
+                        <div className={`flex-1 flex flex-col ${!hideNav ? 'lg:px-6 lg:py-6' : ''}`}>
                             <Outlet />
                         </div>
                     </div>
@@ -116,3 +123,4 @@ export const MainLayout = () => {
         </main>
     );
 };
+

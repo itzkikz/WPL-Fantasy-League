@@ -40,11 +40,23 @@ const PlayerStatsCard = ({
       : "";
   const [role, setRole] = useState<"captain" | "vice" | "">(initialRole);
 
+  // Sync state when the selected player changes
+  useEffect(() => {
+    setRole(
+      (player as Player)?.isCaptain
+        ? "captain"
+        : (player as Player)?.isViceCaptain
+          ? "vice"
+          : ""
+    );
+  }, [player]);
+
   /* Role Management */
-  const handleRoleChange = (role: "captain" | "vice") => {
+  const handleRoleChange = (newRole: "captain" | "vice") => {
+    setRole(newRole);
     // Ensure player has an ID (is a full Player object)
     if ('id' in player && typeof player.id === 'number') {
-      if (role === "captain") {
+      if (newRole === "captain") {
         changeRole?.({ captain: player.id });
       } else {
         changeRole?.({ vice: player.id });
@@ -86,13 +98,13 @@ const PlayerStatsCard = ({
                       <>
                         <Checkbox
                           checked={role === "captain"}
-                          onChange={() => handleRole("captain")}
-                          label="Captian"
+                          onChange={() => handleRoleChange("captain")}
+                          label="Captain"
                         />
                         <Checkbox
                           checked={role === "vice"}
-                          onChange={() => handleRole("vice")}
-                          label="Vice Captian"
+                          onChange={() => handleRoleChange("vice")}
+                          label="Vice Captain"
                         />
                       </>
                     )}

@@ -14,10 +14,10 @@ export interface Standings {
 
 export interface Formation {
     [key: string]: any;
-    goalkeeper: Player[];
-    defenders: Player[];
-    midfielders: Player[];
-    forwards: Player[];
+    GK: Player[];
+    DEF: Player[];
+    MID: Player[];
+    FWD: Player[];
 }
 
 export interface TeamDetails {
