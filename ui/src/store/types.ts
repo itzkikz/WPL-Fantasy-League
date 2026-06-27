@@ -2,6 +2,7 @@ import { Player } from "../features/players/types";
 
 export interface User {
   teamName: string;
+  role?: string;
 }
 
 export interface Substitutions {
@@ -10,6 +11,6 @@ export interface Substitutions {
 }
 
 export interface Roles {
-  captain?: Player['name'],
-  vice?: Player['name']
+  captain?: number,
+  vice?: number
 }

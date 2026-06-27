@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRouter, Navigate, RouterProvider } from "@tanstack/react-router";
@@ -43,13 +44,15 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <VersionCheck />
-      <ThemeProvider>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          <ReactQueryDevtools initialIsOpen={false} />
-          <UpdatePrompt />
-        </QueryClientProvider>
-      </ThemeProvider>
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || ''}>
+        <ThemeProvider>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen={false} />
+            <UpdatePrompt />
+          </QueryClientProvider>
+        </ThemeProvider>
+      </GoogleOAuthProvider>
       <Analytics />
     </StrictMode>
   );

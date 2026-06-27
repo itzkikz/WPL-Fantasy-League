@@ -1,12 +1,31 @@
 // src/features/standings/api.ts
 import apiClient from '../../api/client'
 import { API_ENDPOINTS } from '../../api/endpoints'
-import { PlayerStats } from './types'
+import { PlayerStats, PaginatedResponse, PlayerFilters } from './types'
 
 export const playersApi = {
-  getAll: async (): Promise<PlayerStats[]> => {
-    const response = await apiClient.get(API_ENDPOINTS.PLAYERS.BASE)
-    return response.data.data
+  getAll: async ({ pageParam = 1, filters = {} }: { pageParam?: number, filters?: PlayerFilters }): Promise<PaginatedResponse<PlayerStats>> => {
+    // Pass limit=20 or similar in query key or hardcode here
+    const params: any = { page: pageParam, limit: 20 };
+    if (filters.clubs?.length) params.clubs = filters.clubs.join(',');
+    if (filters.leagues?.length) params.leagues = filters.leagues.join(',');
+    if (filters.positions?.length) params.positions = filters.positions.join(',');
+    if (filters.freeAgents) params.freeAgents = 'true';
+
+    const response = await apiClient.get<any>(API_ENDPOINTS.PLAYERS.BASE, { params });
+    // If backend returns { success: true, data: [], meta: ... }
+    // but the response.data usually has extra wrapper?
+    // Looking at previous step, res.json({ success: true, data: ..., meta: ... })
+    // apiClient likely unwraps or not?
+    // Assuming apiClient.get returns AxiosReponse
+    // response.data is { success, data, meta }
+    // If we want to return full object:
+    return response.data;
+  },
+
+  getFilters: async (): Promise<{ clubs: string[], leagues: string[] }> => {
+    const response = await apiClient.get<any>(API_ENDPOINTS.PLAYERS.BASE + '/filters');
+    return response.data.data;
   },
 
   getByPlayerName: async (playerName: string): Promise<PlayerStats> => {

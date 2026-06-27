@@ -1,25 +1,25 @@
 import { Formation, FormationResult } from "../formatter/types";
 
-type Category = "goalkeeper" | "defenders" | "midfielders" | "forwards";
+type Category = "GK" | "DEF" | "MID" | "FWD";
 
 const FORMATION_RULES: Record<Category, { min: number; max: number }> = {
-  goalkeeper: { min: 1, max: 1 },
-  defenders: { min: 3, max: 5 },
-  midfielders: { min: 2, max: 5 },
-  forwards: { min: 1, max: 3 },
+  GK: { min: 1, max: 1 },
+  DEF: { min: 3, max: 5 },
+  MID: { min: 2, max: 5 },
+  FWD: { min: 1, max: 3 },
 };
 
 function getPositionCategory(pos: string): Category {
-  const map: Record<string, Category> = { GK: "goalkeeper", DEF: "defenders", MID: "midfielders", FWD: "forwards" };
+  const map: Record<string, Category> = { GK: "GK", DEF: "DEF", MID: "MID", FWD: "FWD" };
   return map[pos];
 }
 
 function countStartingPlayers(starting: Formation) {
   return {
-    goalkeeper: starting.goalkeeper.length,
-    defenders: starting.defenders.length,
-    midfielders: starting.midfielders.length,
-    forwards: starting.forwards.length,
+    GK: starting.GK.length,
+    DEF: starting.DEF.length,
+    MID: starting.MID.length,
+    FWD: starting.FWD.length,
   };
 }
 
@@ -35,26 +35,26 @@ function canSwap(counts: Record<Category, number>, outCat: Category, inCat: Cate
 
 export function validateAndApplySwap(
   oldTeam: Pick<FormationResult, "starting" | "bench">,
-  swapInName: string,   // player to swap in
-  swapOutName: string,  // player to swap out
+  swapInId: number,   // player id to swap in
+  swapOutId: number,  // player id to swap out
 ) {
-  if (swapInName === swapOutName) {
+  if (swapInId === swapOutId) {
     return { ok: false as const, error: "Cannot swap the same player" };
   }
 
   // Find players and locations in the authoritative snapshot
-  const findStarting = (name: string) => {
-    for (const k of ["goalkeeper", "defenders", "midfielders", "forwards"] as Category[]) {
-      const idx = oldTeam.starting[k].findIndex(p => p.name === name);
+  const findStarting = (id: number) => {
+    for (const k of ["GK", "DEF", "MID", "FWD"] as Category[]) {
+      const idx = oldTeam.starting[k].findIndex(p => p.id === id);
       if (idx !== -1) return { category: k, index: idx, player: oldTeam.starting[k][idx] };
     }
     return null;
   };
 
-  const startOut = findStarting(swapOutName);
-  const startIn  = findStarting(swapInName);
-  const benchInIdx = oldTeam.bench.findIndex(p => p.name === swapInName);
-  const benchOutIdx = oldTeam.bench.findIndex(p => p.name === swapOutName);
+  const startOut = findStarting(swapOutId);
+  const startIn = findStarting(swapInId);
+  const benchInIdx = oldTeam.bench.findIndex(p => p.id === swapInId);
+  const benchOutIdx = oldTeam.bench.findIndex(p => p.id === swapOutId);
 
   // Check if both players are on bench - handle bench-to-bench swap
   if (benchInIdx !== -1 && benchOutIdx !== -1) {
@@ -71,24 +71,24 @@ export function validateAndApplySwap(
 
     // Clone bench array
     const newBench = [...oldTeam.bench];
-    
+
     // Swap their subNumber values if they exist
     const subNoIn = (playerIn as any).subNumber;
     const subNoOut = (playerOut as any).subNumber;
-    
+
     // Create swapped players with exchanged subNumbers
     const playerInSwapped = {
       ...playerOut,
-      ...(subNoIn !== undefined ? { subNumber: subNoIn } : 
-          subNoOut !== undefined ? { subNumber: undefined } : {})
+      ...(subNoIn !== undefined ? { subNumber: subNoIn } :
+        subNoOut !== undefined ? { subNumber: undefined } : {})
     };
-    
+
     const playerOutSwapped = {
       ...playerIn,
-      ...(subNoOut !== undefined ? { subNumber: subNoOut } : 
-          subNoIn !== undefined ? { subNumber: undefined } : {})
+      ...(subNoOut !== undefined ? { subNumber: subNoOut } :
+        subNoIn !== undefined ? { subNumber: undefined } : {})
     };
-    
+
     // Swap positions in array
     newBench[benchInIdx] = playerInSwapped;
     newBench[benchOutIdx] = playerOutSwapped;
@@ -101,7 +101,7 @@ export function validateAndApplySwap(
       bench: newBench,
       swappedIn: playerInSwapped,
       swappedOut: playerOutSwapped,
-      currentFormation: `${counts.defenders}-${counts.midfielders}-${counts.forwards}`,
+      currentFormation: `${counts.DEF}-${counts.MID}-${counts.FWD}`,
     };
   }
 
@@ -122,10 +122,10 @@ export function validateAndApplySwap(
 
   // Compute canonical post-swap team
   const newStarting: Formation = {
-    goalkeeper: [...oldTeam.starting.goalkeeper],
-    defenders:  [...oldTeam.starting.defenders],
-    midfielders:[...oldTeam.starting.midfielders],
-    forwards:   [...oldTeam.starting.forwards],
+    GK: [...oldTeam.starting.GK],
+    DEF: [...oldTeam.starting.DEF],
+    MID: [...oldTeam.starting.MID],
+    FWD: [...oldTeam.starting.FWD],
   };
   const newBench = [...oldTeam.bench];
 
@@ -155,6 +155,6 @@ export function validateAndApplySwap(
     bench: newBench,
     swappedIn: promoted,
     swappedOut: demoted,
-    currentFormation: `${next.defenders}-${next.midfielders}-${next.forwards}`,
+    currentFormation: `${next.DEF}-${next.MID}-${next.FWD}`,
   };
 }

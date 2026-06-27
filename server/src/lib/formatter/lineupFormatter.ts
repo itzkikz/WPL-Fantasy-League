@@ -1,7 +1,6 @@
 // formationConverter.ts
 import { Player, FormationResult } from './types';
 import { TeamDetails } from '../../types/standings';
-import { teamsData } from './teamsData';
 
 /**
  * Converts fantasy team API response to Formation format
@@ -9,7 +8,6 @@ import { teamsData } from './teamsData';
  * @returns Object containing sampleTeam (Formation) and bench (Player[])
  */
 export function convertToFormation(playersData: TeamDetails[]): FormationResult {
-  const { teams } = teamsData;
 
   // Position mapping
   const positionMap: Record<string, "GK" | "DEF" | "MID" | "FWD"> = {
@@ -17,15 +15,6 @@ export function convertToFormation(playersData: TeamDetails[]): FormationResult 
     D: "DEF",
     M: "MID",
     F: "FWD",
-  };
-
-  // Helper function to get team data
-  const getTeamData = (clubName: string) => {
-    const teamData = teams[clubName as keyof typeof teams];
-    return {
-      abbreviation: teamData?.abbreviation || clubName?.substring(0, 3).toUpperCase(),
-      color: teamData?.color || "#000000"
-    };
   };
 
   // Helper function to map position
@@ -40,26 +29,18 @@ export function convertToFormation(playersData: TeamDetails[]): FormationResult 
   const maxPoints = Math.max(...playersData.map(p => Number(p.point) || 0));
 
   playersData.forEach((playerData, index) => {
-    const teamData = getTeamData(playerData.club);
 
     const player: Player = {
-      id: index + 1,
+      id: playerData.player_id || index + 1,
       name: playerData.player_name,
-      team: teamData.abbreviation,
-      teamColor: teamData.color,
+      team: playerData.team_short_name || playerData.club?.substring(0, 3).toUpperCase() || "UNK",
+      teamColor: (playerData.team_color && playerData.team_color !== "#000000") ? playerData.team_color : "#003399", // Default blue fallback instead of black? Or keep black.
+      teamTextColor: playerData.team_text_color || "#ffffff",
       point: playerData.point || 0,
       position: mapPosition(playerData.position),
       fullTeamName: playerData.club,
-      app: playerData.app,
-      clean_sheet: playerData.clean_sheet,
-      goal: playerData.goal,
-      assist: playerData.assist,
-      yellow_card: playerData.yellow_card,
-      red_card: playerData.red_card,
-      save: playerData.save,
-      penalty_save: playerData.penalty_save,
-      penalty_miss: playerData.penalty_miss,
-      gw: playerData.gw
+      gw: playerData.gw,
+      shirtNumber: playerData.shirtNumber
     };
 
     // Add captain/vice captain flags
@@ -89,18 +70,18 @@ export function convertToFormation(playersData: TeamDetails[]): FormationResult 
 
 
   // Organize lineup by position
-  const goalkeeper = lineupPlayers.filter((p) => p.position === "GK");
-  const defenders = lineupPlayers.filter((p) => p.position === "DEF");
-  const midfielders = lineupPlayers.filter((p) => p.position === "MID");
-  const forwards = lineupPlayers.filter((p) => p.position === "FWD");
+  const GK = lineupPlayers.filter((p) => p.position === "GK");
+  const DEF = lineupPlayers.filter((p) => p.position === "DEF");
+  const MID = lineupPlayers.filter((p) => p.position === "MID");
+  const FWD = lineupPlayers.filter((p) => p.position === "FWD");
 
   // Return Formation object
   return {
     starting: {
-      goalkeeper,
-      defenders,
-      midfielders,
-      forwards,
+      GK,
+      DEF,
+      MID,
+      FWD,
     },
     bench: benchPlayers,
   };

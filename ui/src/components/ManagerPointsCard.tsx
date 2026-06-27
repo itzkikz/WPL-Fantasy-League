@@ -8,31 +8,33 @@ const ManagerPointsCards = ({ managerDetails }: ManagerPointsCardsProps) => {
   return (
     <>
       {/* Points & Rankings Section */}
-      <div className="p-6 border-b border-light-border dark:border-dark-border">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold">Points & Rankings</h2>
+      <div className="flex-1 bg-white dark:bg-white/5 rounded-3xl p-6 shadow-sm border border-gray-100 dark:border-white/10 relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none transition-opacity group-hover:opacity-100 opacity-50" />
+        
+        <div className="flex items-center justify-between mb-6 relative z-10">
+          <h2 className="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white">Points & Rankings</h2>
         </div>
 
-        <div className="space-y-3 mb-4">
+        <div className="space-y-2 relative z-10">
           <StatRow
             label="Overall points"
             value={managerDetails?.total}
-            border={false}
+            border={true}
           />
           <StatRow
             label="Overall points before this GW"
             value={managerDetails?.total_point_before_this_gw}
-            border={false}
+            border={true}
           />
           <StatRow
             label="Overall rank"
             value={managerDetails?.rank}
-            border={false}
+            border={true}
           />
           <StatRow
             label="Total players"
             value={managerDetails?.teamsCount}
-            border={false}
+            border={true}
           />
           <StatRow
             label="Gameweek points"
@@ -41,25 +43,29 @@ const ManagerPointsCards = ({ managerDetails }: ManagerPointsCardsProps) => {
           />
         </div>
       </div>
-      <div className="p-6 border-b border-light-border dark:border-dark-border">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold">Finance</h2>
+
+      {/* Finance Section */}
+      <div className="flex-1 bg-white dark:bg-white/5 rounded-3xl p-6 shadow-sm border border-gray-100 dark:border-white/10 relative overflow-hidden group mt-6 md:mt-0">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-pink-500/5 dark:bg-pink-500/10 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none transition-opacity group-hover:opacity-100 opacity-50" />
+        
+        <div className="flex items-center justify-between mb-6 relative z-10">
+          <h2 className="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white">Finance</h2>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-2 relative z-10">
           <StatRow
             label="Total Budget (Bonus and Fine included)"
             value={`£${managerDetails?.total_budget}m`}
-            border={false}
+            border={true}
           />
           <StatRow
-            label="Utlisation"
+            label="Utilisation"
             value={`£${managerDetails?.utlisation}m`}
-            border={false}
+            border={true}
           />
           <StatRow
             label="Balance"
-            value={`£${(managerDetails?.balance).toFixed(2)}m`}
+            value={`£${(managerDetails?.balance ?? 0).toFixed(2)}m`}
             border={false}
           />
         </div>

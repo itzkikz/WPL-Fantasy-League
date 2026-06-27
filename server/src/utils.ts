@@ -1,12 +1,12 @@
 import { PlayerStats } from "./types/players";
 import { StandingsResponse, TeamDetails } from "./types/standings";
-import { Notifications, Subscribers, Users } from "./types/users";
+import { Notifications, Subscribers } from "./types/users";
 
 interface DataTypeMapping {
   teamDetails: TeamDetails[];
   standings: StandingsResponse[];
   playerStats: PlayerStats[];
-  users: Users[];
+
   subscribers: Subscribers[];
   notifications: Notifications[];
 }
@@ -19,7 +19,7 @@ const isNumeric = (value: any): boolean => {
 };
 
 // Type mapping
-type DataType = 'teamDetails' | 'standings' | 'playerStats' | 'users' | 'subscribers' | 'notifications';
+type DataType = 'teamDetails' | 'standings' | 'playerStats' | 'subscribers' | 'notifications';
 type ReturnTypeMap<T extends DataType> = DataTypeMapping[T];
 
 export function convertToJSON<T extends DataType>(
@@ -62,9 +62,7 @@ export function convertToJSON<T extends DataType>(
     if (type === 'playerStats') {
       return obj as PlayerStats;
     }
-    if (type === 'users') {
-      return obj as Users;
-    }
+
     if (type === 'subscribers') {
       return obj as Subscribers;
     }
@@ -73,4 +71,22 @@ export function convertToJSON<T extends DataType>(
     }
     return obj as StandingsResponse;
   }) as ReturnTypeMap<T>;
+}
+
+/**
+ * Convert a full position name (e.g., "Goalkeeper", "Defender") to its shorthand code.
+ * Returns 'GK', 'DEF', 'MID', or 'FWD'. Falls back to the first character of the input.
+ */
+export function resolvePosition(fullName: string): 'GK' | 'DEF' | 'MID' | 'FWD' {
+  const normalized = fullName.trim().toLowerCase();
+  if (['goalkeeper', 'gk', 'keeper'].includes(normalized)) return 'GK';
+  if (['defender', 'defence', 'def'].includes(normalized)) return 'DEF';
+  if (['midfielder', 'midfield', 'mid'].includes(normalized)) return 'MID';
+  if (['forward', 'striker', 'attack', 'attacker', 'fwd'].includes(normalized)) return 'FWD';
+  const first = normalized.charAt(0).toUpperCase();
+  if (first === 'G') return 'GK';
+  if (first === 'D') return 'DEF';
+  if (first === 'M') return 'MID';
+  if (first === 'F') return 'FWD';
+  return 'FWD';
 }

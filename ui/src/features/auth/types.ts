@@ -1,6 +1,5 @@
 export interface LoginRequest {
-  teamName: string;
-  password: string;
+  credential: string;
 }
 
 export interface LoginResponse {

@@ -41,11 +41,12 @@ const PickTeamPage = () => {
     data: managerDetails,
     isLoading,
     isSuccess,
+    isError,
     dataUpdatedAt,
   } = useManagerDetails();
   const { managerTeam, pickMyTeam } = managerDetails || {};
   const { starting, bench } = managerTeam || {
-    starting: { goalkeeper: [], forwards: [], midfielders: [], defenders: [] },
+    starting: { GK: [], FWD: [], MID: [], DEF: [] },
     bench: [],
   };
 
@@ -143,20 +144,20 @@ const PickTeamPage = () => {
   };
 
   const handleSaveOverlay = () => {
-    const forwards = editedStarting.forwards.filter(
+    const FWD = editedStarting.FWD?.filter(
       (val) => val?.isCaptain || val?.isViceCaptain
-    );
-    const midfielders = editedStarting.midfielders.filter(
+    ) || [];
+    const MID = editedStarting.MID?.filter(
       (val) => val?.isCaptain || val?.isViceCaptain
-    );
-    const defenders = editedStarting.defenders.filter(
+    ) || [];
+    const DEF = editedStarting.DEF?.filter(
       (val) => val?.isCaptain || val?.isViceCaptain
-    );
-    const goalkeeper = editedStarting.goalkeeper.filter(
+    ) || [];
+    const GK = editedStarting.GK?.filter(
       (val) => val?.isCaptain || val?.isViceCaptain
-    );
+    ) || [];
 
-    const role = [...forwards, ...midfielders, ...defenders, ...goalkeeper];
+    const role = [...FWD, ...MID, ...DEF, ...GK];
     if (role?.length !== 2) {
       const missingRole = role[0]?.isCaptain ? "Vice Captain" : "Captain";
       setTeamError(
@@ -224,48 +225,97 @@ const PickTeamPage = () => {
   //const updatedTeam = executeSwap(teamData, 10, 11); // Swap Biereth with Nico Williams
 
   return (
-    <div className="flex flex-col lg:h-screen lg:overflow-hidden lg:pb-0">
+    <div className="flex flex-col h-[100dvh] bg-light-bg dark:bg-dark-bg animate-in fade-in duration-500 overflow-hidden">
 
-      {user?.teamName && <Header teamName={user?.teamName} onBack={handleGoBack} />}
-      {pickMyTeam ? (
-        <div className="flex items-center justify-center px-4 pt-4 pb-3 bg-light-surface dark:bg-dark-surface text-light-text-primary dark:text-dark-text-primary">
-          <h6 className="text-center text-base">
-            Gameweek {managerDetails?.gw}
-          </h6>
-          <span aria-hidden="true">&nbsp;•&nbsp;</span>
-          <h6 className="text-center text-base font-semibold">
-            Deadline: {formatted}
-          </h6>
-        </div>
-      ) : (
-        <div className="flex items-center justify-center px-4 pt-4 pb-3 bg-light-surface dark:bg-dark-surface text-light-text-primary dark:text-dark-text-primary">
-          <h6 className="text-center text-base font-semibold">Not Enabled</h6>
+      {user?.teamName && (
+        <div className="px-4 pt-4">
+          <Header teamName={user?.teamName} onBack={handleGoBack} />
         </div>
       )}
 
-      <div className="flex justify-center items-center">
-        <div className="flex bg-light-surface dark:bg-dark-surface rounded-lg p-2 justify-center items-center text-center m-2">
-          <span className="text-xs">
-            To change your captain use the menu which appears when clicking on a
-            player
-          </span>
+      {isLoading && (
+        <div className="flex justify-center py-20 flex-1">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
         </div>
-        <Button
-          disabled={
-            substitutions?.length === 0 && Object.keys(roles)?.length === 0
-          }
+      )}
+
+      {isError && !isLoading && (
+        <div className="flex-1 flex flex-col items-center justify-center p-4">
+          <div className="flex flex-col items-center justify-center py-12 px-6 bg-white dark:bg-white/5 rounded-3xl border border-gray-100 dark:border-white/10 shadow-sm animate-in fade-in zoom-in-95 duration-500 max-w-sm w-full">
+            <span className="text-6xl mb-4 drop-shadow-md">🤷‍♂️</span>
+            <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-2 tracking-tight text-center">No Team Found</h2>
+            <p className="text-gray-500 dark:text-gray-400 text-center font-medium">
+              You are currently not managing any Fantasy Team. Once an admin assigns you to a team, you can pick your squad here!
+            </p>
+            <button
+              onClick={handleGoBack}
+              className="mt-6 px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-bold shadow-md hover:shadow-lg transition-all active:scale-95"
+            >
+              Go Back
+            </button>
+          </div>
+        </div>
+      )}
+
+      {!isError && !isLoading && (
+        <>
+          {/* Gameweek Deadline Bar */}
+      <div className="px-4 mt-4">
+        {pickMyTeam ? (
+          <div className="flex items-center justify-between px-5 py-3.5 bg-indigo-500/10 dark:bg-indigo-500/20 rounded-2xl border border-indigo-500/20 backdrop-blur-sm shadow-sm">
+            <div className="flex flex-col">
+              <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+                Gameweek {managerDetails?.gw}
+              </span>
+              <span className="text-sm font-semibold text-gray-900 dark:text-white mt-0.5">
+                Deadline: {formatted}
+              </span>
+            </div>
+            <div className="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center">
+              <span className="text-indigo-600 dark:text-indigo-400 text-xl">⏳</span>
+            </div>
+          </div>
+        ) : (
+          <div className="flex items-center justify-center px-5 py-3.5 bg-red-500/10 dark:bg-red-500/20 rounded-2xl border border-red-500/20 backdrop-blur-sm">
+            <h6 className="text-center text-sm font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">
+              Management Not Enabled
+            </h6>
+          </div>
+        )}
+      </div>
+
+      {/* Info & Save Actions */}
+      <div className="px-4 mt-4 flex items-center gap-3">
+        <div className="flex-1 bg-white dark:bg-white/5 rounded-2xl p-3 shadow-sm border border-gray-100 dark:border-white/10 flex items-center">
+          <p className="text-[11px] leading-tight text-gray-500 dark:text-gray-400 font-medium">
+            Tap a player to change Captain or substitute.
+          </p>
+        </div>
+        <button
+          disabled={substitutions?.length === 0 && Object.keys(roles)?.length === 0}
           onClick={handleSaveOverlay}
-          width="w-1/2"
-          label="Save"
+          className={`flex-none px-6 py-3 rounded-2xl font-bold shadow-md transition-all duration-200 active:scale-95 flex items-center gap-2
+            ${
+              substitutions?.length === 0 && Object.keys(roles)?.length === 0
+                ? "bg-gray-100 dark:bg-white/5 text-gray-400 dark:text-gray-600 cursor-not-allowed border border-transparent"
+                : "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-indigo-500/25"
+            }
+          `}
+        >
+          Save
+        </button>
+      </div>
+      
+      {/* Scrollable Pitch Area */}
+      <div className="flex-1 overflow-y-auto pb-24 lg:pb-0 mt-4">
+        <GWPitch
+          starting={editedStarting}
+          bench={editedBench}
+          onClick={!isSubstitution ? handlePlayerOverlay : handleExecuteSwap}
+          pickMyTeam={true}
+          reset={handleSubReset}
         />
       </div>
-      <GWPitch
-        starting={editedStarting}
-        bench={editedBench}
-        onClick={!isSubstitution ? handlePlayerOverlay : handleExecuteSwap}
-        pickMyTeam={true}
-        reset={handleSubReset}
-      />
       <Overlay
         isOpen={showOverlay}
         onClose={() => handlePlayerOverlay(null)}
@@ -294,81 +344,87 @@ const PickTeamPage = () => {
         onClose={() => setShowSaveOverlay(false)}
         children={
           <>
-            <div className={`relative px-6 pt-6 pb-4`}>
-              <div className="flex items-start gap-4 mt-8">
-                {/* Player Details */}
-                <div className="flex-1 pt-4">
-                  <h2 className="text-2xl text-center font-bold mb-1">
-                    Changes
-                  </h2>
-                </div>
-                {/* <div className="flex-1 pt-4">
-                <h2 className="text-right text-5xl font-bold mb-1">
-                  hii
-                  <span className="text-sm text-right">Pts</span>
-                </h2>
-                <h2 className="text-right text-3xl font-bold mb-2">
-                 hii
-                  <span className="text-sm text-right">
-                    Pts/Match
-                  </span>
-                </h2>
-                <h1 className="text-right text-xl">hii</h1>
-              </div> */}
-              </div>
+            <div className="flex-none pt-6 pb-4 px-6 border-b border-gray-100 dark:border-white/10">
+              <h2 className="text-2xl text-center font-extrabold tracking-tight text-gray-900 dark:text-white">
+                Confirm Changes
+              </h2>
+              <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Review your squad updates for Gameweek {managerDetails?.gw}.
+              </p>
             </div>
-            <div className="flex-1 overflow-y-auto items-center justify-center min-h-[200px]">
+            <div className="flex-1 overflow-y-auto p-6 scrollbar-hide min-h-[250px]">
               {teamError && (
-                <h1 className="text-light-accent text-center text-lg animate-pulse">
-                  {teamError}
-                </h1>
+                <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-2xl p-4 text-center animate-in slide-in-from-top-2">
+                  <span className="text-red-600 dark:text-red-400 font-medium">
+                    {teamError}
+                  </span>
+                </div>
               )}
               {!teamError && (
-                <>
+                <div className="space-y-6">
                   {Object.keys(roles).length > 0 &&
-                    (<div className="px-6 py-4">
-                      <h3 className="text-lg font-bold mb-4">Roles</h3>
-                      <div className="space-y-3">
-                        {roles?.captain && (
-                          <StatRow label="Captain" value={roles?.captain} />
-                        )}
-                        {roles?.vice && (
-                          <StatRow label="Vice Captain" value={roles?.vice} />
-                        )}
-                      </div>
-                    </div>)}
+                    (() => {
+                      const allPlayers = [...(editedStarting.GK || []), ...(editedStarting.DEF || []), ...(editedStarting.MID || []), ...(editedStarting.FWD || []), ...editedBench];
+                      const getPlayerName = (id?: number) => allPlayers.find(p => p.id === id)?.webName || allPlayers.find(p => p.id === id)?.name || "Unknown";
+                      return (
+                        <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
+                          <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Role Changes</h3>
+                          <div className="space-y-1">
+                            {roles?.captain && (
+                              <StatRow label="New Captain" value={getPlayerName(roles.captain)} border={roles?.vice ? true : false} />
+                            )}
+                            {roles?.vice && (
+                              <StatRow label="New Vice Captain" value={getPlayerName(roles.vice)} border={false} />
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  
                   {substitutions && substitutions?.length > 0 && (
-                    <div className="px-6 py-4">
-                      <h3 className="text-lg font-bold mb-4">Subs</h3>
-                      <div className="space-y-3">
-                        {substitutions?.map((sub) => (
-                          <>
-                            <StatRow
-                              label="Subbed In"
-                              value={sub?.swapIn?.name}
-                            />
-                            <StatRow
-                              label="Subbed Out"
-                              value={sub?.swapOut?.name}
-                            />
-                          </>
+                    <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
+                      <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Substitutions ({substitutions.length})</h3>
+                      <div className="space-y-4">
+                        {substitutions?.map((sub, idx) => (
+                          <div key={idx} className="flex flex-col gap-2 relative">
+                            {idx > 0 && <div className="absolute -top-2 left-0 right-0 border-t border-gray-200 dark:border-white/10" />}
+                            <div className="flex items-center justify-between text-sm">
+                              <span className="font-medium text-red-500 flex items-center gap-1">
+                                <span className="text-lg">↓</span> Out
+                              </span>
+                              <span className="font-bold text-gray-900 dark:text-white">{sub?.swapOut?.name}</span>
+                            </div>
+                            <div className="flex items-center justify-between text-sm">
+                              <span className="font-medium text-green-500 flex items-center gap-1">
+                                <span className="text-lg">↑</span> In
+                              </span>
+                              <span className="font-bold text-gray-900 dark:text-white">{sub?.swapIn?.name}</span>
+                            </div>
+                          </div>
                         ))}
                       </div>
                     </div>
                   )}
-                </>
+
+                  {Object.keys(roles).length === 0 && (!substitutions || substitutions.length === 0) && (
+                    <div className="flex flex-col items-center justify-center py-10 opacity-60">
+                      <span className="text-4xl mb-2">🤷‍♂️</span>
+                      <p className="text-gray-500 dark:text-gray-400 font-medium">No changes made.</p>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
-            {!teamError && (
-              <div className="flex items-center justify-center py-4">
-                <Button
-                  type="Primary"
-                  width="w-1/2"
-                  label="Confirm"
-                  onClick={handleSave}
-                />
-              </div>
-            )}
+            
+            <div className="flex-none p-6 pt-2">
+              <button
+                disabled={!!teamError || (Object.keys(roles).length === 0 && (!substitutions || substitutions.length === 0))}
+                onClick={handleSave}
+                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 disabled:from-gray-300 disabled:to-gray-300 dark:disabled:from-white/10 dark:disabled:to-white/10 disabled:text-gray-500 disabled:cursor-not-allowed text-white font-bold rounded-2xl py-4 shadow-md transition-all duration-200 active:scale-95"
+              >
+                Confirm Updates
+              </button>
+            </div>
           </>
         }
       />
@@ -382,6 +438,8 @@ const PickTeamPage = () => {
             setToastMessage("");
           }}
         />
+      )}
+        </>
       )}
     </div>
   );

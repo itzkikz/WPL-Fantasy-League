@@ -6,7 +6,7 @@ import { authQueries } from './queries'
 
 export const useLogin = (onSuccess?: (data: LoginResponse) => void) => {
   return useMutation({
-    mutationFn: ({ teamName, password }: LoginRequest) => authApi.login(teamName, password),
+    mutationFn: ({ credential }: LoginRequest) => authApi.login(credential),
     onSuccess,
   })
 }

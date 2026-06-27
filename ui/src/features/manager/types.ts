@@ -27,5 +27,5 @@ export interface ManagerDetailsResponse {
   total_budget: number,
   balance: number,
   utlisation: number,
-  managers: string;
+  managers: string | string[];
 }

@@ -24,15 +24,15 @@ const GWPitch = ({
   const isSubstitution = useManageTeamStore((state) => state.isSubstitution);
   const player = usePlayerStore((state) => state.player);
   const glowBorderClass =
-    "ring-2 ring-light-bg shadow-[0_0_8px_3px_rgba(255,255,255,0.45)] hover:shadow-[0_0_12px_5px_rgba(30,0,33,0.60)] transition-shadow";
+    "shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300";
   const glowBorderGreenClass =
-    "ring-2 ring-dark-secondary shadow-[0_0_8px_3px_rgba(255,255,255,0.45)] hover:shadow-[0_0_12px_5px_rgba(30,0,33,0.60)] transition-shadow";
+    "ring-2 ring-green-500 shadow-[0_0_15px_rgba(34,197,94,0.5)] scale-105 transition-all duration-300 animate-pulse";
   const glowBorderRedClass =
-    "ring-2 ring-dark-accent shadow-[0_0_8px_3px_rgba(255,255,255,0.45)] hover:shadow-[0_0_12px_5px_rgba(30,0,33,0.60)] transition-shadow";
+    "ring-2 ring-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)] scale-95 opacity-50 transition-all duration-300";
 
   const getCardClass = (subAvl: boolean, playerName: Player["name"]) => {
     if (!subAvl && isSubstitution && playerName !== player?.name) {
-      return `opacity-50`;
+      return `opacity-40 scale-95 grayscale transition-all duration-300`;
     }
     if (subAvl && isSubstitution) {
       return glowBorderGreenClass;
@@ -62,10 +62,11 @@ const GWPitch = ({
           {isSubstitution && (
             <div
               onClick={reset}
-              className="absolute top-4 right-4 w-8 h-8 bg-light-bg rounded-full flex items-center justify-center shadow-md cursor-pointer z-10"
+              className="absolute top-4 right-4 w-10 h-10 bg-white/80 hover:bg-white dark:bg-black/50 dark:hover:bg-black/70 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg cursor-pointer z-10 transition-all duration-200 border border-gray-200 dark:border-white/10 active:scale-95"
+              aria-label="Cancel Substitution"
             >
               <svg
-                className="w-6 h-6 text-dark-accent"
+                className="w-5 h-5 text-gray-800 dark:text-white"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -109,9 +110,9 @@ const GWPitch = ({
         </div>
 
         {/* Bench Container */}
-        <div className="fixed bottom-0 left-0 right-0 bg-light-bg dark:bg-dark-bg border-t-4 border-dark-accent shadow-[0_-4px_10px_rgba(0,0,0,0.5)] py-2 px-2 z-20 lg:static lg:bg-none lg:bg-transparent lg:border-none lg:shadow-none lg:w-64 lg:flex-none lg:p-0 lg:z-0">
+        <div className="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-[#1a1a1a]/90 backdrop-blur-lg border-t border-gray-200 dark:border-white/10 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] py-3 px-2 z-20 lg:static lg:bg-none lg:bg-transparent lg:border-none lg:shadow-none lg:w-64 lg:flex-none lg:p-0 lg:z-0">
           <div className="max-w-4xl mx-auto lg:mx-0 lg:h-full lg:flex lg:flex-col lg:justify-center">
-            <h3 className="text-center lg:text-gray-800 lg:dark:text-white font-bold text-sm md:text-base mb-2 tracking-wider uppercase lg:mb-4">Substitutes</h3>
+            <h3 className="text-center font-extrabold text-[10px] md:text-xs mb-3 tracking-widest uppercase text-gray-500 dark:text-gray-400 lg:mb-4">Substitutes</h3>
             <div className="grid grid-cols-4 lg:flex lg:flex-col lg:gap-4">
               {bench?.map((eachPlayer) => (
                 <div key={eachPlayer.id} className="flex flex-col items-center lg:flex-row lg:gap-3 lg:bg-white lg:dark:bg-gray-800 lg:p-2 lg:rounded-md lg:shadow-sm lg:w-full">

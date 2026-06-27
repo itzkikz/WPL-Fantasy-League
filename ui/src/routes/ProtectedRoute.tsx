@@ -18,7 +18,7 @@ export default function ProtectedRoute({
       navigate({ to: "/login" });
     }
     if (data && data?.valid) {
-      setUser({ teamName: data?.user?.userId });
+      setUser({ teamName: data?.user?.userId, role: data?.user?.role });
     }
   }, [data, isError, navigate]);
 

@@ -33,19 +33,34 @@ const PlayerStatsCard = ({
   const player = usePlayerStore((state) => state.player);
   const { data: playerStats, isLoading } = usePlayerDetails(player.name);
 
-  const initialRole: "captain" | "vice" | "" = player?.isCaptain
+  const initialRole: "captain" | "vice" | "" = (player as Player)?.isCaptain
     ? "captain"
-    : player?.isViceCaptain
+    : (player as Player)?.isViceCaptain
       ? "vice"
       : "";
   const [role, setRole] = useState<"captain" | "vice" | "">(initialRole);
 
-  const handleRole = (role: "captain" | "vice" | "") => {
-    setRole(role);
-    if (role) {
-      const playerName = player?.name || "";
-      const roles = { [role]: playerName };
-      playerName && changeRole && changeRole(roles);
+  // Sync state when the selected player changes
+  useEffect(() => {
+    setRole(
+      (player as Player)?.isCaptain
+        ? "captain"
+        : (player as Player)?.isViceCaptain
+          ? "vice"
+          : ""
+    );
+  }, [player]);
+
+  /* Role Management */
+  const handleRoleChange = (newRole: "captain" | "vice") => {
+    setRole(newRole);
+    // Ensure player has an ID (is a full Player object)
+    if ('id' in player && typeof player.id === 'number') {
+      if (newRole === "captain") {
+        changeRole?.({ captain: player.id });
+      } else {
+        changeRole?.({ vice: player.id });
+      }
     }
   };
 
@@ -83,13 +98,13 @@ const PlayerStatsCard = ({
                       <>
                         <Checkbox
                           checked={role === "captain"}
-                          onChange={() => handleRole("captain")}
-                          label="Captian"
+                          onChange={() => handleRoleChange("captain")}
+                          label="Captain"
                         />
                         <Checkbox
                           checked={role === "vice"}
-                          onChange={() => handleRole("vice")}
-                          label="Vice Captian"
+                          onChange={() => handleRoleChange("vice")}
+                          label="Vice Captain"
                         />
                       </>
                     )}
@@ -102,11 +117,12 @@ const PlayerStatsCard = ({
                   <Button
                     width="w-1/2"
                     onClick={() => {
+                      const p = player as Player;
                       handleSub(
-                        player?.name,
-                        player?.subNumber ? "bench" : "starting",
-                        player?.isCaptain,
-                        player?.isViceCaptain
+                        p.name,
+                        p.subNumber ? "bench" : "starting",
+                        p.isCaptain,
+                        p.isViceCaptain
                       );
                     }}
                     label="Substitute"

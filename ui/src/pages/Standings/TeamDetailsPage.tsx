@@ -14,20 +14,20 @@ import { Player } from "../../features/players/types";
 import { usePlayerStore } from "../../store/usePlayerStore";
 
 const TeamDetailsPage = () => {
-  const route = getRouteApi("/standings/$teamName");
+  const route = getRouteApi("/standings/$teamId");
 
   const navigate = useNavigate();
 
-  const { teamName } = route.useParams();
+  const { teamId } = route.useParams();
   const [gameWeek, setGameWeek] = useState(0);
   const [activeTab, setActiveTab] = useState("pitch");
   const player = usePlayerStore((state) => state.player);
   const setPlayer = usePlayerStore((state) => state.setPlayer);
   const [showOverlay, setShowOverlay] = useState(false);
 
-  const { data: teamDetails, isLoading } = useTeamDetails(teamName, gameWeek);
+  const { data: teamDetails, isLoading } = useTeamDetails(teamId, gameWeek);
 
-  const { gw, currentGw, avg, highest, totalGWScore, starting, bench } =
+  const { gw, currentGw, avg, highest, totalGWScore, starting, bench, team_name } =
     teamDetails || {};
 
   const handlePlayerOverlay = (eachPlayer: Player | null) => {
@@ -45,7 +45,7 @@ const TeamDetailsPage = () => {
   return (
     <>
       <div className="flex flex-col h-screen overflow-hidden bg-light-bg dark:bg-dark-bg">
-        <Header teamName={teamName} onBack={handleGoBack} />
+        <Header teamName={team_name || ''} onBack={handleGoBack} />
 
         <div className="flex-none z-40 bg-light-bg dark:bg-dark-bg">
           {isLoading ? (

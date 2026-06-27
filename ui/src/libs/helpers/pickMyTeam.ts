@@ -1,34 +1,34 @@
 import { Player } from "../../features/players/types";
 import { Formation, TeamDetails } from "../../features/standings/types";
 
-type Category = "goalkeeper" | "defenders" | "midfielders" | "forwards";
+type Category = "GK" | "DEF" | "MID" | "FWD";
 type EnrichedPlayer = Player & { isAvlSub: boolean };
 
 const FORMATION_RULES: Record<Category, { min: number; max: number }> = {
-  goalkeeper: { min: 1, max: 1 },
-  defenders: { min: 3, max: 5 },
-  midfielders: { min: 2, max: 5 },
-  forwards: { min: 1, max: 3 },
+  GK: { min: 1, max: 1 },
+  DEF: { min: 3, max: 5 },
+  MID: { min: 2, max: 5 },
+  FWD: { min: 1, max: 3 },
 };
 
 function getPositionCategory(
   position: string
 ): Category {
   const positionMap: Record<string, Category> = {
-    GK: "goalkeeper",
-    DEF: "defenders",
-    MID: "midfielders",
-    FWD: "forwards",
+    GK: "GK",
+    DEF: "DEF",
+    MID: "MID",
+    FWD: "FWD",
   };
-  return positionMap[position];
+  return positionMap[position] || "FWD";
 }
 
 function countStartingPlayers(starting: Formation) {
   return {
-    goalkeeper: starting.goalkeeper.length,
-    defenders: starting.defenders.length,
-    midfielders: starting.midfielders.length,
-    forwards: starting.forwards.length,
+    GK: starting.GK?.length || 0,
+    DEF: starting.DEF?.length || 0,
+    MID: starting.MID?.length || 0,
+    FWD: starting.FWD?.length || 0,
   };
 }
 
@@ -41,14 +41,14 @@ function canSwap(
   next[outCat]--;
   next[inCat]++;
   return (
-    next.goalkeeper >= FORMATION_RULES.goalkeeper.min &&
-    next.goalkeeper <= FORMATION_RULES.goalkeeper.max &&
-    next.defenders >= FORMATION_RULES.defenders.min &&
-    next.defenders <= FORMATION_RULES.defenders.max &&
-    next.midfielders >= FORMATION_RULES.midfielders.min &&
-    next.midfielders <= FORMATION_RULES.midfielders.max &&
-    next.forwards >= FORMATION_RULES.forwards.min &&
-    next.forwards <= FORMATION_RULES.forwards.max
+    next.GK >= FORMATION_RULES.GK.min &&
+    next.GK <= FORMATION_RULES.GK.max &&
+    next.DEF >= FORMATION_RULES.DEF.min &&
+    next.DEF <= FORMATION_RULES.DEF.max &&
+    next.MID >= FORMATION_RULES.MID.min &&
+    next.MID <= FORMATION_RULES.MID.max &&
+    next.FWD >= FORMATION_RULES.FWD.min &&
+    next.FWD <= FORMATION_RULES.FWD.max
   );
 }
 
@@ -83,24 +83,24 @@ export const benchSwap = (
 
   // Clone bench array
   const newBench: Player[] = [...teamData.bench];
-  
+
   // Swap their subNumber values if they exist
   const subNoA = (playerA as any).subNumber;
   const subNoB = (playerB as any).subNumber;
-  
+
   // Create swapped players with exchanged subNumbers
   const playerASwapped: Player = {
     ...playerB,
-    ...(subNoA !== undefined ? { subNumber: subNoA } : 
-        subNoB !== undefined ? { subNumber: undefined } : {})
+    ...(subNoA !== undefined ? { subNumber: subNoA } :
+      subNoB !== undefined ? { subNumber: undefined } : {})
   };
-  
+
   const playerBSwapped: Player = {
     ...playerA,
-    ...(subNoB !== undefined ? { subNumber: subNoB } : 
-        subNoA !== undefined ? { subNumber: undefined } : {})
+    ...(subNoB !== undefined ? { subNumber: subNoB } :
+      subNoA !== undefined ? { subNumber: undefined } : {})
   };
-  
+
   // Swap positions in array
   newBench[benchIndexA] = playerASwapped;
   newBench[benchIndexB] = playerBSwapped;
@@ -112,7 +112,7 @@ export const benchSwap = (
     bench: newBench,
     swappedIn: playerASwapped,  // Added for consistency
     swappedOut: playerBSwapped, // Added for consistency
-    currentFormation: `${counts.defenders}-${counts.midfielders}-${counts.forwards}`,
+    currentFormation: `${counts.DEF}-${counts.MID}-${counts.FWD}`,
   };
 };
 
@@ -151,15 +151,15 @@ export const playerSwap = (
 
   // Enrich starting with isAvlSub
   const enrichedStarting: {
-    goalkeeper: EnrichedPlayer[];
-    defenders: EnrichedPlayer[];
-    midfielders: EnrichedPlayer[];
-    forwards: EnrichedPlayer[];
+    GK: EnrichedPlayer[];
+    DEF: EnrichedPlayer[];
+    MID: EnrichedPlayer[];
+    FWD: EnrichedPlayer[];
   } = {
-    goalkeeper: [],
-    defenders: [],
-    midfielders: [],
-    forwards: [],
+    GK: [],
+    DEF: [],
+    MID: [],
+    FWD: [],
   };
 
   // Enrich bench with isAvlSub
@@ -210,7 +210,7 @@ export const playerSwap = (
     location,
     starting: enrichedStarting,
     bench: enrichedBench,
-    currentFormation: `${currentCounts.defenders}-${currentCounts.midfielders}-${currentCounts.forwards}`,
+    currentFormation: `${currentCounts.DEF}-${currentCounts.MID}-${currentCounts.FWD}`,
   };
 };
 
@@ -277,10 +277,10 @@ export const executeSwap = (
 
   // Clone
   const newStarting: Formation = {
-    goalkeeper: [...teamData.starting.goalkeeper],
-    defenders: [...teamData.starting.defenders],
-    midfielders: [...teamData.starting.midfielders],
-    forwards: [...teamData.starting.forwards],
+    GK: [...teamData.starting.GK],
+    DEF: [...teamData.starting.DEF],
+    MID: [...teamData.starting.MID],
+    FWD: [...teamData.starting.FWD],
   };
   const newBench: Player[] = [...teamData.bench];
 
@@ -322,7 +322,7 @@ export const executeSwap = (
     bench: newBench,
     swappedIn: promotedToStarting,
     swappedOut: demotedToBench,
-    currentFormation: `${nextCounts.defenders}-${nextCounts.midfielders}-${nextCounts.forwards}`,
+    currentFormation: `${nextCounts.DEF}-${nextCounts.MID}-${nextCounts.FWD}`,
   };
 };
 
@@ -331,15 +331,15 @@ export const clearSwapHighlights = (
   teamData: Pick<TeamDetails, "starting" | "bench">
 ) => {
   const starting: {
-    goalkeeper: EnrichedPlayer[];
-    defenders: EnrichedPlayer[];
-    midfielders: EnrichedPlayer[];
-    forwards: EnrichedPlayer[];
+    GK: EnrichedPlayer[];
+    DEF: EnrichedPlayer[];
+    MID: EnrichedPlayer[];
+    FWD: EnrichedPlayer[];
   } = {
-    goalkeeper: teamData.starting.goalkeeper.map((p) => ({ ...p, isAvlSub: false })),
-    defenders: teamData.starting.defenders.map((p) => ({ ...p, isAvlSub: false })),
-    midfielders: teamData.starting.midfielders.map((p) => ({ ...p, isAvlSub: false })),
-    forwards: teamData.starting.forwards.map((p) => ({ ...p, isAvlSub: false })),
+    GK: teamData.starting.GK.map((p) => ({ ...p, isAvlSub: false })),
+    DEF: teamData.starting.DEF.map((p) => ({ ...p, isAvlSub: false })),
+    MID: teamData.starting.MID.map((p) => ({ ...p, isAvlSub: false })),
+    FWD: teamData.starting.FWD.map((p) => ({ ...p, isAvlSub: false })),
   };
   const bench: EnrichedPlayer[] = teamData.bench.map((p) => ({ ...p, isAvlSub: false }));
   const counts = countStartingPlayers(teamData.starting);
@@ -348,7 +348,7 @@ export const clearSwapHighlights = (
     location: "starting" as "starting",
     starting,
     bench,
-    currentFormation: `${counts.defenders}-${counts.midfielders}-${counts.forwards}`,
+    currentFormation: `${counts.DEF}-${counts.MID}-${counts.FWD}`,
   };
 };
 
@@ -363,26 +363,26 @@ type RoleKey = "isCaptain" | "isViceCaptain";
 
 function setCaptaincyRole(
   teamData: Pick<TeamDetails, "starting" | "bench">,
-  playerName: string,
+  playerId: number,
   roleKey: RoleKey
 ):
   | {
     starting: Formation;
     bench: Player[];
     role: RoleKey;
-    assignedTo: string;
+    assignedTo: number;
   }
   | { error: "Player not found" } {
   const otherKey: RoleKey = roleKey === "isCaptain" ? "isViceCaptain" : "isCaptain";
 
   // Verify the player exists in either starting or bench
   const inStarting =
-    teamData.starting.goalkeeper.some(p => p.name === playerName) ||
-    teamData.starting.defenders.some(p => p.name === playerName) ||
-    teamData.starting.midfielders.some(p => p.name === playerName) ||
-    teamData.starting.forwards.some(p => p.name === playerName);
+    teamData.starting.GK?.some(p => p.id === playerId) ||
+    teamData.starting.DEF?.some(p => p.id === playerId) ||
+    teamData.starting.MID?.some(p => p.id === playerId) ||
+    teamData.starting.FWD?.some(p => p.id === playerId);
 
-  const inBench = teamData.bench.some(p => p.name === playerName);
+  const inBench = teamData.bench.some(p => p.id === playerId);
   if (!inStarting && !inBench) {
     return { error: "Player not found" };
   }
@@ -391,7 +391,7 @@ function setCaptaincyRole(
   // - The selected player: set chosen role true, and clear the other role
   // - All other players: clear the chosen role
   const mapRoleUpdate = (p: Player): Player => {
-    if (p.name === playerName) {
+    if (p.id === playerId) {
       return {
         ...(p as any),
         [roleKey]: true,
@@ -405,10 +405,10 @@ function setCaptaincyRole(
   };
 
   const newStarting: Formation = {
-    goalkeeper: teamData.starting.goalkeeper.map(mapRoleUpdate),
-    defenders: teamData.starting.defenders.map(mapRoleUpdate),
-    midfielders: teamData.starting.midfielders.map(mapRoleUpdate),
-    forwards: teamData.starting.forwards.map(mapRoleUpdate),
+    GK: teamData.starting.GK?.map(mapRoleUpdate) || [],
+    DEF: teamData.starting.DEF?.map(mapRoleUpdate) || [],
+    MID: teamData.starting.MID?.map(mapRoleUpdate) || [],
+    FWD: teamData.starting.FWD?.map(mapRoleUpdate) || [],
   };
 
   const newBench: Player[] = teamData.bench.map(mapRoleUpdate);
@@ -417,21 +417,21 @@ function setCaptaincyRole(
     starting: newStarting,
     bench: newBench,
     role: roleKey,
-    assignedTo: playerName,
+    assignedTo: playerId,
   };
 }
 
 // Public API: choose a captain from starting or bench
 export const setCaptain = (
   teamData: Pick<TeamDetails, "starting" | "bench">,
-  playerName: string
-) => setCaptaincyRole(teamData, playerName, "isCaptain");
+  playerId: number
+) => setCaptaincyRole(teamData, playerId, "isCaptain");
 
 // Public API: choose a vice-captain from starting or bench
 export const setViceCaptain = (
   teamData: Pick<TeamDetails, "starting" | "bench">,
-  playerName: string
-) => setCaptaincyRole(teamData, playerName, "isViceCaptain");
+  playerId: number
+) => setCaptaincyRole(teamData, playerId, "isViceCaptain");
 
 
 

@@ -15,73 +15,79 @@ const ManagerStatsCard = ({ navigateToPickTeam, navigateToTeamPoints, managerDet
   return (
     <>
       {/* Header Card with Gradient */}
-      <div className="bg-gradient-to-br  from-dark-primary rounded-3xl via-dark-primary to-dark-primary p-6 relative text-dark-bg">
-        {/* User Info */}
-        <div className="flex items-start justify-between mb-6">
-          <div>
-            <h1 className="text-2xl font-bold">{managerDetails?.team}</h1>
-            <h1 className="text-sm">Managed By </h1>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="text-sm">{managerDetails?.managers}</span>
-              <img
-                src="https://flagcdn.com/w20/in.png"
-                alt="India flag"
-                className="w-5 h-3"
-              />
+      <div className="relative overflow-hidden rounded-3xl shadow-lg bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white p-6 sm:p-8">
+        
+        {/* Decorative blur elements */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-2xl -ml-10 -mb-10 pointer-events-none" />
+
+        <div className="relative z-10">
+          {/* User Info */}
+          <div className="flex items-start justify-between mb-8">
+            <div>
+              <h1 className="text-3xl font-black tracking-tight drop-shadow-sm mb-1">{managerDetails?.team}</h1>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="text-sm font-medium text-white/90">
+                  {Array.isArray(managerDetails?.managers) ? managerDetails.managers.join(', ') : managerDetails?.managers}
+                </span>
+                <img
+                  src="https://flagcdn.com/w20/in.png"
+                  alt="India flag"
+                  className="w-5 h-3 rounded shadow-sm"
+                />
+              </div>
+            </div>
+            <button 
+              onClick={navigateToTeamPoints} 
+              className="bg-white/20 hover:bg-white/30 text-white rounded-full p-2.5 transition-all duration-200 active:scale-95 shadow-sm border border-white/10 backdrop-blur-sm"
+              aria-label="View Team Points"
+            >
+              <ArrowRight height={5} width={5} />
+            </button>
+          </div>
+
+          {/* Stats Section */}
+          <div className="mb-8">
+            <div className="inline-block px-3 py-1 rounded-full bg-black/20 backdrop-blur-sm border border-white/10 text-xs font-bold uppercase tracking-wider mb-4">
+              Gameweek {managerDetails?.gw}
+            </div>
+            
+            <div className="flex items-end justify-between sm:justify-start sm:gap-12">
+              <div className="flex flex-col items-start">
+                <p className="text-sm font-semibold uppercase tracking-wider text-white/70 mb-1">Average</p>
+                <p className="text-3xl sm:text-4xl font-bold">{managerDetails?.avg}</p>
+              </div>
+              
+              <div className="flex flex-col items-center">
+                <p className="text-sm font-semibold uppercase tracking-wider text-white/70 mb-1">Points</p>
+                <p className="text-5xl sm:text-6xl font-black drop-shadow-sm">{managerDetails?.totalGWScore}</p>
+              </div>
+              
+              <div className="flex flex-col items-end">
+                <p className="text-sm font-semibold uppercase tracking-wider text-white/70 mb-1">Highest</p>
+                <p className="text-3xl sm:text-4xl font-bold">{managerDetails?.highest}</p>
+              </div>
             </div>
           </div>
-          <Button onClick={navigateToTeamPoints} icon={<ArrowRight height={6} width={6} />} />
-          {/* <button className="bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors">
-            <ArrowRight height={6} width={6} />
-          </button> */}
-        </div>
 
-        {/* Stats Section */}
-        <div className="mb-6">
-          <p className="text-sm text-center mb-3 opacity-90">Gameweek {managerDetails?.gw}</p>
-          <div className="flex items-end justify-center gap-8">
-            <div className="text-center">
-              <p className="text-4xl font-bold">{managerDetails?.avg}</p>
-              <p className="text-xs mt-1 opacity-80">Average</p>
-            </div>
-            <div className="text-center">
-              <p className="text-6xl font-bold">{managerDetails?.totalGWScore}</p>
-              <p className="text-sm mt-1 flex items-center justify-center gap-1">
-                Points
-                <AngleRight height="4" width="4" />
-              </p>
-            </div>
-            <div className="text-center">
-              <p className="text-4xl font-bold">{managerDetails?.highest}</p>
-              <p className="text-xs mt-1 flex items-center justify-center gap-1 opacity-80">
-                Highest
-                <AngleRight height="3" width="3" />
-              </p>
-            </div>
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <button
+              onClick={() => navigateToPickTeam()}
+              className="flex-1 bg-white hover:bg-gray-50 text-indigo-900 font-bold rounded-2xl py-3.5 px-4 flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 shadow-md"
+            >
+              <Group />
+              <span>Pick Team</span>
+            </button>
+
+            <button
+              disabled={true}
+              className="flex-1 bg-black/20 text-white/50 cursor-not-allowed font-bold rounded-2xl py-3.5 px-4 flex items-center justify-center gap-2 backdrop-blur-sm border border-white/10"
+            >
+              <Dollar height={5} width={5} />
+              <span>Transfers</span>
+            </button>
           </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex gap-3">
-          <Button
-            onClick={() => navigateToPickTeam()}
-            width="w-1/2"
-            type="Primary"
-            icon={<Group />}
-            children={<span className="font-semibold">Pick Team</span>}
-          />
-
-          <Button
-            width="w-1/2"
-            disabled={true}
-            type="Primary"
-            icon={<Dollar height={5} width={5} />}
-            children={<span className="font-semibold">Transfers</span>}
-          />
-          {/* <button disabled={true} className="flex-1 bg-purple-900/40 hover:bg-purple-900/50 backdrop-blur-sm rounded-full py-3 px-4 flex items-center justify-center gap-2 transition-colors">
-            
-            
-          </button> */}
         </div>
       </div>
     </>
