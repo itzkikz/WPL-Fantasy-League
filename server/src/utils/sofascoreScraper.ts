@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer-extra';
+import { HTTPRequest } from 'puppeteer';
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
 puppeteer.use(StealthPlugin());
@@ -37,7 +38,7 @@ export const fetchSofascoreJSON = async (url: string, existingPage?: any) => {
         const page = await browser.newPage();
 
         await page.setRequestInterception(true);
-        page.on('request', (req) => {
+        page.on('request', (req: HTTPRequest) => {
             const rt = req.resourceType();
             if (rt === 'image' || rt === 'stylesheet' || rt === 'media' || rt === 'font') {
                 req.abort();
@@ -85,7 +86,7 @@ export const launchWarmSession = async () => {
     const page = await browser.newPage();
 
     await page.setRequestInterception(true);
-    page.on('request', (req) => {
+    page.on('request', (req: HTTPRequest) => {
         const rt = req.resourceType();
         if (rt === 'image' || rt === 'stylesheet' || rt === 'media' || rt === 'font') {
             req.abort();
