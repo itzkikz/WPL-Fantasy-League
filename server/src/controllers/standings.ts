@@ -18,111 +18,111 @@ export const getStandingsData = async () => {
         .select('name history currentSquad updatedAt')
         .lean();
 
-        const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
-        const globalCurrentGw = currentGwDoc ? currentGwDoc.number : 1;
+    const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
+    const globalCurrentGw = currentGwDoc ? currentGwDoc.number : 1;
 
-        const playerStats = await PlayerStats.find({}).lean();
-        const playerStatsMap = new Map();
-        playerStats.forEach(ps => playerStatsMap.set(ps.playerId, ps));
+    const playerStats = await PlayerStats.find({}).lean();
+    const playerStatsMap = new Map();
+    playerStats.forEach(ps => playerStatsMap.set(ps.playerId, ps));
 
-        const computeScore = (picks: any[], gwId: number) => {
-            let score = 0;
-            let captainPlayed = false;
+    const computeScore = (picks: any[], gwId: number) => {
+        let score = 0;
+        let captainPlayed = false;
 
-            const captainPick = picks.find(p => p.isCaptain);
-            if (captainPick) {
-                const cStats = playerStatsMap.get(captainPick.playerId);
-                if (cStats && cStats.gameweeks) {
-                    const cGw = cStats.gameweeks.find((g: any) => g.id === gwId);
-                    if (cGw && cGw.stats && cGw.stats.games && cGw.stats.games.minutes > 0) {
-                        captainPlayed = true;
-                    }
+        const captainPick = picks.find(p => p.isCaptain);
+        if (captainPick) {
+            const cStats = playerStatsMap.get(captainPick.playerId);
+            if (cStats && cStats.gameweeks) {
+                const cGw = cStats.gameweeks.find((g: any) => g.id === gwId);
+                if (cGw && cGw.stats && cGw.stats.games && cGw.stats.games.minutes > 0) {
+                    captainPlayed = true;
                 }
             }
+        }
 
-            picks.forEach(pick => {
-                if (!pick.isStarting) return;
-                
-                const statsDoc = playerStatsMap.get(pick.playerId);
-                if (statsDoc && statsDoc.gameweeks) {
-                    const gwData = statsDoc.gameweeks.find((g: any) => g.id === gwId);
-                    if (gwData) {
-                        let pts = gwData.points || 0;
+        picks.forEach(pick => {
+            if (!pick.isStarting) return;
 
-                        if (pick.isCaptain && captainPlayed) {
-                            pts *= 2;
-                        } else if (pick.isViceCaptain && !captainPlayed) {
-                            pts *= 2;
-                        }
-                        score += pts;
+            const statsDoc = playerStatsMap.get(pick.playerId);
+            if (statsDoc && statsDoc.gameweeks) {
+                const gwData = statsDoc.gameweeks.find((g: any) => g.id === gwId);
+                if (gwData) {
+                    let pts = gwData.points || 0;
+
+                    if (pick.isCaptain && captainPlayed) {
+                        pts *= 2;
+                    } else if (pick.isViceCaptain && !captainPlayed) {
+                        pts *= 2;
                     }
+                    score += pts;
+                }
+            }
+        });
+        return score;
+    };
+
+    const standingsData: StandingsResponse[] = teams.map(team => {
+        const history = team.history || [];
+
+        let totalPoints = 0;
+        let previousPoints = 0;
+        let currentGwPoints = 0;
+
+        if (history.length > 0) {
+            history.forEach((h: any) => {
+                const gwScore = computeScore(h.picks, h.gameweek);
+                totalPoints += gwScore;
+                if (h.gameweek === globalCurrentGw) {
+                    currentGwPoints = gwScore;
+                } else if (h.gameweek < globalCurrentGw) {
+                    previousPoints += gwScore;
                 }
             });
-            return score;
+        }
+
+        const hasCurrentGwHistory = history.some((h: any) => h.gameweek === globalCurrentGw);
+        if (!hasCurrentGwHistory && team.currentSquad && team.currentSquad.picks) {
+            const gwScore = computeScore(team.currentSquad.picks, globalCurrentGw);
+            currentGwPoints = gwScore;
+            totalPoints += gwScore;
+        }
+
+        return {
+            team: team.name,
+            team_id: team._id.toString(),
+            gw: globalCurrentGw,
+            current_gw: currentGwPoints,
+            total: totalPoints,
+            total_point_before_this_gw: previousPoints,
+            last_update_date: (team as any).updatedAt?.toISOString() || new Date().toISOString(),
+            pos_change: 0
         };
+    });
 
-        const standingsData: StandingsResponse[] = teams.map(team => {
-            const history = team.history || [];
+    // Calculate Previous Ranks (based on total_point_before_this_gw)
+    const prevStandings = [...standingsData].sort((a, b) => b.total_point_before_this_gw - a.total_point_before_this_gw);
+    const prevRankMap = new Map<string, number>();
+    prevStandings.forEach((team, index) => {
+        prevRankMap.set(team.team, index + 1);
+    });
 
-            let totalPoints = 0;
-            let previousPoints = 0;
-            let currentGwPoints = 0;
+    // Sort by total points descending to determine current rank
+    standingsData.sort((a, b) => b.total - a.total);
 
-            if (history.length > 0) {
-                history.forEach((h: any) => {
-                    const gwScore = computeScore(h.picks, h.gameweek);
-                    totalPoints += gwScore;
-                    if (h.gameweek === globalCurrentGw) {
-                        currentGwPoints = gwScore;
-                    } else if (h.gameweek < globalCurrentGw) {
-                        previousPoints += gwScore;
-                    }
-                });
-            }
+    // Update pos_change
+    standingsData.forEach((teamData, index) => {
+        const currentRank = index + 1;
+        const prevRank = prevRankMap.get(teamData.team) || 0;
 
-            const hasCurrentGwHistory = history.some((h: any) => h.gameweek === globalCurrentGw);
-            if (!hasCurrentGwHistory && team.currentSquad && team.currentSquad.picks) {
-                const gwScore = computeScore(team.currentSquad.picks, globalCurrentGw);
-                currentGwPoints = gwScore;
-                totalPoints += gwScore;
-            }
+        if (prevRank > 0) {
+            teamData.pos_change = prevRank - currentRank;
+        } else {
+            teamData.pos_change = 0; // New team or GW 1
+        }
+        (teamData as any).rank = currentRank;
 
-            return {
-                team: team.name,
-                team_id: team._id.toString(),
-                gw: globalCurrentGw,
-                current_gw: currentGwPoints,
-                total: totalPoints,
-                total_point_before_this_gw: previousPoints,
-                last_update_date: (team as any).updatedAt?.toISOString() || new Date().toISOString(),
-                pos_change: 0
-            };
-        });
-
-        // Calculate Previous Ranks (based on total_point_before_this_gw)
-        const prevStandings = [...standingsData].sort((a, b) => b.total_point_before_this_gw - a.total_point_before_this_gw);
-        const prevRankMap = new Map<string, number>();
-        prevStandings.forEach((team, index) => {
-            prevRankMap.set(team.team, index + 1);
-        });
-
-        // Sort by total points descending to determine current rank
-        standingsData.sort((a, b) => b.total - a.total);
-
-        // Update pos_change
-        standingsData.forEach((teamData, index) => {
-            const currentRank = index + 1;
-            const prevRank = prevRankMap.get(teamData.team) || 0;
-
-            if (prevRank > 0) {
-                teamData.pos_change = prevRank - currentRank;
-            } else {
-                teamData.pos_change = 0; // New team or GW 1
-            }
-            (teamData as any).rank = currentRank;
-
-            delete (teamData as any)._prevRank; // Cleanup
-        });
+        delete (teamData as any)._prevRank; // Cleanup
+    });
 
     return standingsData;
 };
@@ -169,7 +169,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
 
         // Calculate global average and highest points for targetGw dynamically
         const allTeams = await FantasyTeam.find({}).select('history currentSquad').lean();
-        
+
         const allPicks: any[] = [];
         const teamPicksList: any[][] = [];
 
@@ -189,7 +189,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
         const allPlayerStats = await PlayerStats.find({ playerId: { $in: allPlayerIds } })
             .select('playerId gameweeks.id gameweeks.points gameweeks.stats.games.minutes')
             .lean();
-        
+
         const allPsMap = new Map();
         allPlayerStats.forEach(ps => allPsMap.set(ps.playerId, ps));
 
@@ -210,7 +210,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
 
             picks.forEach(pick => {
                 if (!pick.isStarting) return;
-                
+
                 const statsDoc = psMap.get(pick.playerId);
                 if (statsDoc && statsDoc.gameweeks) {
                     const gwData = statsDoc.gameweeks.find((g: any) => g.id === gwId);

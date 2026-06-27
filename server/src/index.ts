@@ -57,6 +57,8 @@ app.get('/api/validate-token', authenticateToken, (req: any, res) => {
   res.json({ data: { valid: true, user: req.user } });
 });
 
+app.use('/api/sofascore', sofascoreRouter);
+
 app.use('/api', authenticateToken, managerRouter);
 
 app.use("/api", authenticateToken, notificationRouter);
