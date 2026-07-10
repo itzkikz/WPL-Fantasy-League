@@ -11,7 +11,7 @@ import AngleRight from "../icons/AngleRight";
 
 const SideNavbar = () => {
   const matchRoute = useMatchRoute();
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isAdminOpen, setIsAdminOpen] = useState(true);
   const user = useUserStore((state) => state.user);
 
   const navItems = [
@@ -89,6 +89,12 @@ const SideNavbar = () => {
                   className="py-1 text-sm transition-colors"
                 >
                   <span className={matchRoute({ to: "/admin/fantasy-teams", fuzzy: true }) ? "text-gray-400 dark:text-light-text-secondary font-semibold" : ""}>Fantasy Teams</span>
+                </Link>
+                <Link
+                  to="/admin/leagues"
+                  className="py-1 text-sm transition-colors"
+                >
+                  <span className={matchRoute({ to: "/admin/leagues", fuzzy: true }) ? "text-gray-400 dark:text-light-text-secondary font-semibold" : ""}>Leagues</span>
                 </Link>
                 <Link
                   to="/admin/notifications"

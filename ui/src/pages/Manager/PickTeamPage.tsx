@@ -116,7 +116,7 @@ const PickTeamPage = () => {
     isViceCaptain: Player["isViceCaptain"]
   ) => {
     if (isCaptain || isViceCaptain) {
-      setRoleError("Change Captain/Vice before subsitution");
+      setRoleError("Change Captain/Vice before substitution");
     } else {
       if (playerName) {
         handlePlayerOverlay(null);

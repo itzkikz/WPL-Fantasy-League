@@ -48,6 +48,7 @@ const ScrollableTable = ({
               key={i}
               className="transition-colors duration-200 cursor-pointer hover:bg-indigo-50/50 dark:hover:bg-white/5 group"
               onClick={() => onClick(r)}
+              style={{ viewTransitionName: `team-row-${r.team_id}` }}
             >
               <td className="px-4 py-4">
                 <div className="flex items-center gap-3">

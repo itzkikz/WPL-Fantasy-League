@@ -77,7 +77,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
     // Fetch PlayerStats for points
     const PlayerStats = (await import("../models/PlayerStats")).PlayerStats;
     const playerStatsList = await PlayerStats.find({ playerId: { $in: playerIds } })
-        .select('playerId gameweeks.id gameweeks.points gameweeks.stats.games.minutes')
+        .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
         .lean();
     const playerStatsMap = new Map(playerStatsList.map(ps => [ps.playerId, ps]));
 
@@ -87,7 +87,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
         const cPs = playerStatsMap.get(captainPick.playerId);
         if (cPs && cPs.gameweeks) {
             const cGw = cPs.gameweeks.find((g: any) => g.id === targetGw);
-            if (cGw && cGw.stats && cGw.stats.games && cGw.stats.games.minutes > 0) {
+            if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
                 captainPlayed = true;
             }
         }

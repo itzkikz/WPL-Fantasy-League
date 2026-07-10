@@ -31,12 +31,15 @@ export const API_ENDPOINTS = {
     FIXTURES: '/admin/fixtures',
     UPDATE_FIXTURES: '/admin/fixtures/update',
     FETCH_MATCH_DETAILS: (id: string | number) => `/admin/fixtures/${id}/details`,
+    FIXTURE_STATS: (id: string | number) => `/admin/fixtures/${id}/stats`,
     GAMEWEEKS: '/admin/gameweeks',
     COMPLETE_GAMEWEEK: (id: string | number) => `/admin/gameweeks/${id}/complete`,
     SEASONS: '/admin/seasons',
     PICK_TEAM_STATUS: '/admin/settings/pick-team',
     USERS: '/admin/users',
     FANTASY_TEAMS: '/admin/fantasy-teams',
+    LEAGUES: '/admin/leagues',
+    UPDATE_LEAGUE: (id: string) => `/admin/leagues/${id}`,
   },
 } as const
 
@@ -49,7 +52,9 @@ export const QUERY_KEYS = {
   MANAGER: 'manager',
   NOTIFICATIONS: 'notifications',
   ADMIN_FIXTURES: 'admin-fixtures',
+  ADMIN_FIXTURE_STATS: 'admin-fixture-stats',
   ADMIN_GAMEWEEKS: 'admin-gameweeks',
   ADMIN_SEASONS: 'admin-seasons',
   ADMIN_PICK_TEAM_STATUS: 'admin-pick-team-status',
+  ADMIN_LEAGUES: 'admin-leagues',
 } as const

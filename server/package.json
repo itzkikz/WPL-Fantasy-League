@@ -8,9 +8,11 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
-    "seed:league": "ts-node scripts/seedLeague.ts",
-    "seed:teams": "ts-node scripts/seedTeams.ts",
-    "seed:players": "ts-node scripts/seedPlayers.ts"
+    "seed:leagues": "ts-node src/scripts/seedLeagues.ts",
+    "seed:teams": "ts-node src/scripts/seedTeamsFromSofascore.ts",
+    "seed:players": "ts-node src/scripts/seedPlayers.ts",
+    "seed:rounds": "ts-node src/scripts/seedRounds.ts",
+    "seed:fixtures": "ts-node src/scripts/seedFixtures.ts"
   },
   "author": "",
   "license": "ISC",

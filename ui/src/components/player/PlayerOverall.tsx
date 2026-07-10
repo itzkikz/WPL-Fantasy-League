@@ -13,6 +13,16 @@ export default function PlayerOverall({
   const [activeTab, setActiveTab] = useState<"stats" | "ostats">(noGW ? "ostats" : "stats");
   const player = usePlayerStore((state) => state.player);
 
+  const passAccuracy = (data: any) => {
+    if (!data || !data.totalPass || !data.accuratePass) return null;
+    return `${Math.round((data.accuratePass / data.totalPass) * 100)}%`;
+  };
+
+  const duelTotal = (data: any) => {
+    if (!data) return null;
+    return (data.duelWon || 0) + (data.duelLost || 0);
+  };
+
   const renderStats = (data: any) => {
     if (!data) return null;
     return (
@@ -22,8 +32,10 @@ export default function PlayerOverall({
         <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
           <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Overview</h4>
           <div className="space-y-1">
-            <StatRow label="Starts" value={data?.games?.appearances} border={true} />
-            <StatRow label="Minutes Played" value={data?.games?.minutes} border={false} />
+            <StatRow label="Appearances" value={data?.appearances ?? "-"} border={true} />
+            <StatRow label="Minutes Played" value={data?.minutesPlayed} border={true} />
+            <StatRow label="Rating" value={data?.rating != null ? data.rating.toFixed(1) : "-"} border={true} />
+            <StatRow label="Touches" value={data?.touches} border={false} />
           </div>
         </div>
 
@@ -31,12 +43,14 @@ export default function PlayerOverall({
         <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
           <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Attacking</h4>
           <div className="space-y-1">
-            <StatRow label="Goals" value={data?.goals?.total} border={true} />
-            <StatRow label="Assists" value={data?.goals?.assists} border={true} />
-            <StatRow label="Shots (Total)" value={data?.shots?.total} border={true} />
-            <StatRow label="Shots (On Target)" value={data?.shots?.on} border={true} />
-            <StatRow label="Dribbles (Attempts)" value={data?.dribbles?.attempts} border={true} />
-            <StatRow label="Dribbles (Success)" value={data?.dribbles?.success} border={false} />
+            <StatRow label="Goals" value={data?.goals} border={true} />
+            <StatRow label="Assists" value={data?.goalAssist} border={true} />
+            <StatRow label="Shots (Total)" value={data?.totalShots} border={true} />
+            <StatRow label="Shots (On Target)" value={data?.onTargetScoringAttempt} border={true} />
+            <StatRow label="Expected Goals (xG)" value={data?.expectedGoals != null ? data.expectedGoals.toFixed(2) : "-"} border={true} />
+            <StatRow label="Expected Assists (xA)" value={data?.expectedAssists != null ? data.expectedAssists.toFixed(2) : "-"} border={true} />
+            <StatRow label="Dribbles (Attempts)" value={data?.totalContest} border={true} />
+            <StatRow label="Dribbles (Success)" value={data?.wonContest} border={false} />
           </div>
         </div>
 
@@ -44,9 +58,12 @@ export default function PlayerOverall({
         <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
           <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Passing & Playmaking</h4>
           <div className="space-y-1">
-            <StatRow label="Passes (Total)" value={data?.passes?.total} border={true} />
-            <StatRow label="Key Passes" value={data?.passes?.key} border={true} />
-            <StatRow label="Pass Accuracy (%)" value={data?.passes?.accuracy} border={false} />
+            <StatRow label="Passes (Total)" value={data?.totalPass} border={true} />
+            <StatRow label="Accurate Passes" value={data?.accuratePass} border={true} />
+            <StatRow label="Pass Accuracy" value={passAccuracy(data)} border={true} />
+            <StatRow label="Crosses" value={data?.totalCross} border={true} />
+            <StatRow label="Long Balls" value={data?.totalLongBalls} border={true} />
+            <StatRow label="Accurate Long Balls" value={data?.accurateLongBalls} border={false} />
           </div>
         </div>
 
@@ -54,11 +71,13 @@ export default function PlayerOverall({
         <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
           <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Defending</h4>
           <div className="space-y-1">
-            <StatRow label="Clean Sheets" value={Number(data?.games?.cleansheet) || 0} border={true} />
-            <StatRow label="Goals Conceded" value={data?.goals?.conceded} border={true} />
-            <StatRow label="Tackles" value={data?.tackles?.total} border={true} />
-            <StatRow label="Blocks" value={data?.tackles?.blocks} border={true} />
-            <StatRow label="Interceptions" value={data?.tackles?.interceptions} border={false} />
+            <StatRow label="Clean Sheets" value={Number(data?.cleanSheet) || 0} border={true} />
+            <StatRow label="Goals Conceded" value={data?.goalsConceded} border={true} />
+            <StatRow label="Tackles" value={data?.totalTackle} border={true} />
+            <StatRow label="Tackles Won" value={data?.wonTackle} border={true} />
+            <StatRow label="Clearances" value={data?.totalClearance} border={true} />
+            <StatRow label="Blocks" value={data?.outfielderBlock} border={true} />
+            <StatRow label="Ball Recoveries" value={data?.ballRecovery} border={false} />
           </div>
         </div>
 
@@ -66,13 +85,15 @@ export default function PlayerOverall({
         <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
           <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Duels & Discipline</h4>
           <div className="space-y-1">
-            <StatRow label="Duels (Total)" value={data?.duels?.total} border={true} />
-            <StatRow label="Duels (Won)" value={data?.duels?.won} border={true} />
-            <StatRow label="Fouls (Drawn)" value={data?.fouls?.drawn} border={true} />
-            <StatRow label="Fouls (Committed)" value={data?.fouls?.committed} border={true} />
+            <StatRow label="Duels (Total)" value={duelTotal(data)} border={true} />
+            <StatRow label="Duels (Won)" value={data?.duelWon} border={true} />
+            <StatRow label="Aerial Duels (Won)" value={data?.aerialWon} border={true} />
+            <StatRow label="Aerial Duels (Lost)" value={data?.aerialLost} border={true} />
+            <StatRow label="Fouls (Drawn)" value={data?.wasFouled} border={true} />
+            <StatRow label="Fouls (Committed)" value={data?.fouls} border={true} />
             <StatRow label="Offsides" value={data?.offsides} border={true} />
-            <StatRow label="Yellow Cards" value={data?.cards?.yellow} border={true} />
-            <StatRow label="Red Cards" value={data?.cards?.red} border={false} />
+            <StatRow label="Yellow Cards" value={data?.yellowCards} border={true} />
+            <StatRow label="Red Cards" value={data?.redCards} border={false} />
           </div>
         </div>
 
@@ -80,11 +101,26 @@ export default function PlayerOverall({
         <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
           <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Goalkeeping & Penalties</h4>
           <div className="space-y-1">
-            <StatRow label="Saves" value={data?.goals?.saves} border={true} />
-            <StatRow label="Penalty Won" value={data?.penalty?.won} border={true} />
-            <StatRow label="Penalty Committed" value={data?.penalty?.commited} border={true} />
-            <StatRow label="Penalty Save" value={data?.penalty?.saved} border={true} />
-            <StatRow label="Penalty Miss" value={data?.penalty?.missed} border={false} />
+            <StatRow label="Saves" value={data?.saves} border={true} />
+            <StatRow label="Saves (Inside Box)" value={data?.savedShotsFromInsideTheBox} border={true} />
+            <StatRow label="Punches" value={data?.punches} border={true} />
+            <StatRow label="Good High Claims" value={data?.goodHighClaim} border={true} />
+            <StatRow label="Goals Prevented" value={data?.goalsPrevented != null ? data.goalsPrevented.toFixed(2) : "-"} border={true} />
+            <StatRow label="Penalty Won" value={data?.penaltyWon} border={true} />
+            <StatRow label="Penalty Committed" value={data?.penaltyCommitted} border={true} />
+            <StatRow label="Penalty Save" value={data?.penaltySaved} border={true} />
+            <StatRow label="Penalty Miss" value={data?.penaltyMissed} border={false} />
+          </div>
+        </div>
+
+        {/* Physical */}
+        <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
+          <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Physical</h4>
+          <div className="space-y-1">
+            <StatRow label="Distance Covered (km)" value={data?.kilometersCovered != null ? data.kilometersCovered.toFixed(1) : "-"} border={true} />
+            <StatRow label="Top Speed (km/h)" value={data?.topSpeed != null ? data.topSpeed.toFixed(1) : "-"} border={true} />
+            <StatRow label="Sprints" value={data?.numberOfSprints} border={true} />
+            <StatRow label="Possession Lost" value={data?.possessionLostCtrl} border={false} />
           </div>
         </div>
 

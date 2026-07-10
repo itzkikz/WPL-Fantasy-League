@@ -34,7 +34,7 @@ export const getStandingsData = async () => {
             const cStats = playerStatsMap.get(captainPick.playerId);
             if (cStats && cStats.gameweeks) {
                 const cGw = cStats.gameweeks.find((g: any) => g.id === gwId);
-                if (cGw && cGw.stats && cGw.stats.games && cGw.stats.games.minutes > 0) {
+                if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
                     captainPlayed = true;
                 }
             }
@@ -187,7 +187,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
 
         const allPlayerIds = [...new Set(allPicks.map(p => p.playerId))];
         const allPlayerStats = await PlayerStats.find({ playerId: { $in: allPlayerIds } })
-            .select('playerId gameweeks.id gameweeks.points gameweeks.stats.games.minutes')
+            .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
             .lean();
 
         const allPsMap = new Map();
@@ -202,7 +202,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 const cStats = psMap.get(captainPick.playerId);
                 if (cStats && cStats.gameweeks) {
                     const cGw = cStats.gameweeks.find((g: any) => g.id === gwId);
-                    if (cGw && cGw.stats && cGw.stats.games && cGw.stats.games.minutes > 0) {
+                    if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
                         captainPlayed = true;
                     }
                 }
@@ -270,10 +270,10 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
 
         // Fetch Teams for Club Name lookup
         const teams = (await Team.find({}).lean()) as any[];
-        const teamMap = new Map(teams.map((t: any) => [t.team.id, t]));
+        const teamMap = new Map(teams.map((t: any) => [t.id, t]));
 
         const playerStatsList = await PlayerStats.find({ playerId: { $in: playerIds } })
-            .select('playerId gameweeks.id gameweeks.points gameweeks.stats.games.minutes')
+            .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
             .lean();
         const playerStatsMap = new Map(playerStatsList.map(ps => [ps.playerId, ps]));
 
@@ -283,7 +283,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
             const cPs = playerStatsMap.get(captainPick.playerId);
             if (cPs && cPs.gameweeks) {
                 const cGw = cPs.gameweeks.find((g: any) => g.id === targetGw);
-                if (cGw && cGw.stats && cGw.stats.games && cGw.stats.games.minutes > 0) {
+                if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
                     captainPlayed = true;
                 }
             }
@@ -303,8 +303,9 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 : `SUB ${pick.subNumber || 0}` as any;
 
             const clubData = teamMap.get(player.teamId);
-            const clubName = clubData && clubData.team ? clubData.team.name : "Unknown";
-            const teamShortName = clubData && clubData.team ? clubData.team.code : "UNK";
+            console.log(clubData);
+            const clubName = clubData ? clubData.name : "Unknown";
+            const teamShortName = clubData ? clubData.nameCode : "UNK";
             const teamColor = clubData && clubData.teamColors ? clubData.teamColors.primary : "#003399";
             const teamTextColor = clubData && clubData.teamColors ? clubData.teamColors.text : "#ffffff";
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Player, PlayerStats } from "../../features/players/types";
 import { mapPosition } from "../../libs/helpers/lineupFormatter"
+import { getContrastText } from "../../libs/helpers/color";
 
 export default function PlayerInfo({
   player,
@@ -10,7 +11,7 @@ export default function PlayerInfo({
   playerStats: PlayerStats;
 }) {
   const teamColor = player?.teamColor || "#000000";
-  const teamTextColor = player?.teamTextColor || "#ffffff";
+  const teamTextColor = getContrastText(teamColor, player?.teamTextColor || "#ffffff");
 
   return (
     <div
@@ -80,7 +81,7 @@ export default function PlayerInfo({
             <div className="flex items-center gap-2 bg-black/10 rounded-lg px-3 py-1.5 backdrop-blur-sm">
               <span className="opacity-70 text-xs uppercase font-bold tracking-wider">Avg</span>
               <span className="font-bold text-sm">
-                {((playerStats?.overall?.total_point || 0) / (playerStats?.overall?.games?.appearances || 1)).toFixed(2)}
+                {((playerStats?.overall?.total_point || 0) / (playerStats?.overall?.appearances || 1)).toFixed(2)}
               </span>
             </div>
 

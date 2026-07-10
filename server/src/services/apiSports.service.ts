@@ -14,6 +14,10 @@ export const fetchFixturesByDate = async (date: string) => {
         }
     });
 
+    if (response.data && response.data.errors && Object.keys(response.data.errors).length > 0) {
+        throw new Error(`API-Sports Error: ${JSON.stringify(response.data.errors)}`);
+    }
+
     return response.data;
 };
 
@@ -29,6 +33,10 @@ export const fetchFixturePlayers = async (fixtureId: number | string) => {
         }
     });
 
+    if (response.data && response.data.errors && Object.keys(response.data.errors).length > 0) {
+        throw new Error(`API-Sports Error: ${JSON.stringify(response.data.errors)}`);
+    }
+
     return response.data;
 };
 
@@ -43,6 +51,10 @@ export const fetchFixtureEvents = async (fixtureId: number | string) => {
             'x-apisports-key': process.env.API_FOOTBALL_KEY
         }
     });
+
+    if (response.data && response.data.errors && Object.keys(response.data.errors).length > 0) {
+        throw new Error(`API-Sports Error: ${JSON.stringify(response.data.errors)}`);
+    }
 
     return response.data;
 };

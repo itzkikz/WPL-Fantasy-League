@@ -43,27 +43,30 @@ export default function Stats() {
 
   const handlePlayerOverlay = (eachPlayer: PlayerStats | null) => {
     if (eachPlayer) {
-      // Map PlayerStats to Player
-      const mappedPlayer: Player = {
-        ...eachPlayer, // Spread original stats to ensure PlayerInfo has required data
+      const s = eachPlayer.overall || {} as any;
+      const mappedPlayer = {
+        ...eachPlayer,
         id: eachPlayer.player_id,
         name: eachPlayer.player_name,
-        team: eachPlayer.team_short_name || eachPlayer.team_name.substring(0, 3).toUpperCase(),
+        team: eachPlayer.team_short_name || eachPlayer.team_name?.substring(0, 3).toUpperCase(),
         teamColor: eachPlayer.team_color,
         teamTextColor: eachPlayer.team_text_color,
-        point: eachPlayer.overall?.total_point || 0,
+        point: s.total_point || 0,
         position: eachPlayer.position,
         fullTeamName: eachPlayer.team_name,
-        clean_sheet: eachPlayer.clean_sheet,
-        goal: eachPlayer.goal,
-        assist: eachPlayer.assist,
-        yellow_card: eachPlayer.yellow_card,
-        red_card: eachPlayer.red_card,
-        save: eachPlayer.save,
-        penalty_save: eachPlayer.penalty_save,
-        penalty_miss: eachPlayer.penalty_miss,
-        app: eachPlayer.app,
-        gw: 0, // Missing
+        clean_sheet: s.cleanSheet || 0,
+        goal: s.goals || 0,
+        assist: s.goalAssist || 0,
+        yellow_card: s.yellowCards || 0,
+        red_card: s.redCards || 0,
+        save: s.saves || 0,
+        penalty_save: s.penaltySaved || 0,
+        penalty_miss: s.penaltyMissed || 0,
+        app: s.appearances || 0,
+        gw: 0,
+        photo: eachPlayer.photo,
+        overall: eachPlayer.overall,
+        current_week: eachPlayer.current_week,
       } as unknown as Player;
       setPlayer(mappedPlayer);
     }

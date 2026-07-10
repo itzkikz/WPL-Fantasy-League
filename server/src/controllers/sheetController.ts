@@ -33,36 +33,35 @@ export class SheetController {
             const leagues = await mongoose.model('League').find({}).lean() as any[];
             const teamLeagueMap = new Map<string, string>();
             for (const league of leagues) {
-                // Read from participants array based on user's updated League model
-                if (league.participants && Array.isArray(league.participants)) {
-                    for (const participantId of league.participants) {
-                        teamLeagueMap.set(participantId.toString(), league.name);
+                if (league.teams && Array.isArray(league.teams)) {
+                    for (const teamId of league.teams) {
+                        teamLeagueMap.set(teamId.toString(), league.name);
                     }
                 }
             }
 
-            // Format data for sheet based strictly on Player.ts schema + Team/League lookups
+            // Format data for sheet based on Player.ts schema + Team/League lookups
             const headers = [
-                'ID', 'Name', 'Age', 'Number', 'Position', 'Photo', 'Team ID', 'Team Name', 'League Name'
+                'ID', 'Name', 'Age', 'Jersey Number', 'Position', 'Proposed Market Value', 'Country', 'Team ID', 'Team Name', 'League Name'
             ];
 
             const rows = players.map(p => {
                 const teamData = teamMap.get(p.teamId);
-                // FIX: Extract name from teamData.team.name
-                const teamName = teamData?.team?.name || 'Unknown';
-                
+                const teamName = teamData?.name || teamData?.team?.name || 'Unknown';
+
                 // Lookup league by Team's ObjectId
-                const leagueName = teamData && teamLeagueMap.has(teamData._id.toString()) 
-                    ? teamLeagueMap.get(teamData._id.toString()) 
+                const leagueName = teamData && teamLeagueMap.has(teamData._id.toString())
+                    ? teamLeagueMap.get(teamData._id.toString())
                     : 'Unknown';
 
                 return [
                     p.id || '',
                     p.name || '',
-                    p.age || '',
-                    p.number || '',
+                    p.age ?? '',
+                    p.jerseyNumber || p.shirtNumber || '',
                     p.position || '',
-                    p.photo || '',
+                    p.proposedMarketValue ?? '',
+                    p.country?.name || '',
                     p.teamId || '',
                     teamName,
                     leagueName

@@ -1,4 +1,5 @@
 import { Player } from "../features/players/types";
+import { getContrastText } from "../libs/helpers/color";
 
 interface PitchPlayerCardProps {
   isSmall?: boolean;
@@ -80,13 +81,13 @@ const PitchPlayerCard = ({
           <div className="absolute inset-0 flex flex-col items-center justify-center pt-1.5 pointer-events-none z-20">
             <span
               className="text-[8px] md:text-[10px] font-bold drop-shadow-md leading-none mb-0.5 font-mono"
-              style={{ color: player.teamTextColor || "#ffffff" }}
+              style={{ color: getContrastText(player?.teamColor || "#ccc", player.teamTextColor || "#ffffff") }}
             >
               {player.shirtNumber ? player.shirtNumber : "00"}
             </span>
             <span
               className="text-[5px] md:text-[6px] font-bold drop-shadow-md uppercase tracking-tighter leading-none"
-              style={{ color: player.teamTextColor || "#ffffff" }}
+              style={{ color: getContrastText(player?.teamColor || "#ccc", player.teamTextColor || "#ffffff") }}
             >
               {player?.team}
             </span>

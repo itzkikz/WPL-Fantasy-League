@@ -1,11 +1,12 @@
 import express from 'express';
-import { getFixtures, getGameweeks, createGameweek, updateGameweek, getSeasons, updateFixturesFromApi, getMatchDetails, getUsers, createFantasyTeam, getAdminPlayers, getFantasyTeams, getFantasyTeamById, updateFantasyTeam, completeGameweek, revertGameweek, togglePickTeam, getPickTeamStatus } from '../controllers/admin';
+import { getFixtures, getGameweeks, createGameweek, updateGameweek, getSeasons, updateFixturesFromApi, getMatchDetails, getMatchIncidentsAndStats, getUsers, createFantasyTeam, getAdminPlayers, getFantasyTeams, getFantasyTeamById, updateFantasyTeam, completeGameweek, revertGameweek, togglePickTeam, getPickTeamStatus, getLeagues, fetchLeagueRounds, updateLeague } from '../controllers/admin';
 
 const router = express.Router();
 
 router.get('/fixtures', getFixtures);
 router.post('/fixtures/update', updateFixturesFromApi);
 router.post('/fixtures/:id/details', getMatchDetails);
+router.get('/fixtures/:id/stats', getMatchIncidentsAndStats);
 router.get('/gameweeks', getGameweeks);
 router.post('/gameweeks', createGameweek);
 router.put('/gameweeks/:id', updateGameweek);
@@ -18,6 +19,9 @@ router.post('/fantasy-teams', createFantasyTeam);
 router.get('/fantasy-teams', getFantasyTeams);
 router.get('/fantasy-teams/:id', getFantasyTeamById);
 router.put('/fantasy-teams/:id', updateFantasyTeam);
+router.get('/leagues', getLeagues);
+router.post('/leagues/:id/fetch-rounds', fetchLeagueRounds);
+router.put('/leagues/:id', updateLeague);
 router.get('/settings/pick-team', getPickTeamStatus);
 router.post('/settings/pick-team', togglePickTeam);
 

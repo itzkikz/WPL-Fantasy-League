@@ -45,7 +45,11 @@ const TeamDetailsPage = () => {
   return (
     <>
       <div className="flex flex-col h-screen overflow-hidden bg-light-bg dark:bg-dark-bg">
-        <Header teamName={team_name || ''} onBack={handleGoBack} />
+        <Header 
+          teamName={team_name || ''} 
+          onBack={handleGoBack} 
+          style={{ viewTransitionName: `team-row-${teamId}` }}
+        />
 
         <div className="flex-none z-40 bg-light-bg dark:bg-dark-bg">
           {isLoading ? (

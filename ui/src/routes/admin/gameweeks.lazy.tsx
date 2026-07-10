@@ -52,6 +52,14 @@ function AdminGameweeks() {
     },
   });
 
+  const { data: leaguesData } = useQuery({
+    queryKey: [QUERY_KEYS.ADMIN_LEAGUES],
+    queryFn: async () => {
+      const response = await apiClient.get(API_ENDPOINTS.ADMIN.LEAGUES);
+      return response.data;
+    },
+  });
+
   const { data: fixturesData } = useQuery({
     queryKey: [QUERY_KEYS.ADMIN_FIXTURES],
     queryFn: async () => {
@@ -127,6 +135,7 @@ function AdminGameweeks() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ADMIN_GAMEWEEKS] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ADMIN_FIXTURES] });
       setAssigningGwId(null);
       setSelectedFixtures([]);
       setEditingGwId(null);
@@ -197,13 +206,14 @@ function AdminGameweeks() {
   const gameweeks = data?.data || [];
   const seasons = seasonsData?.data || [];
   const allFixtures = fixturesData?.data || [];
+  const leagues = leaguesData?.data || [];
 
   const allAssignedFixtureIds = new Set(
     gameweeks.flatMap((gw: any) => gw.fixtures || [])
   );
 
   const unassignedFixtures = allFixtures.filter(
-    (f: any) => !allAssignedFixtureIds.has(f.fixture.id)
+    (f: any) => !allAssignedFixtureIds.has(f.fixtureId)
   );
 
   const handleAssignFixtures = () => {
@@ -213,6 +223,23 @@ function AdminGameweeks() {
 
     const newFixtures = Array.from(new Set([...(gw.fixtures || []), ...selectedFixtures]));
     updateMutation.mutate({ id: assigningGwId, data: { fixtures: newFixtures } });
+  };
+
+  const handleAutoAssign = (gw: any) => {
+    const gwStart = dayjs(gw.startDate).valueOf() / 1000;
+    const gwEnd = dayjs(gw.endDate).valueOf() / 1000;
+
+    const matchingFixtures = unassignedFixtures
+      .filter((f: any) => f.startTimestamp >= gwStart && f.startTimestamp <= gwEnd)
+      .map((f: any) => f.fixtureId);
+
+    if (matchingFixtures.length === 0) {
+      alert("No unassigned fixtures found in this date range.");
+      return;
+    }
+
+    const newFixtures = Array.from(new Set([...(gw.fixtures || []), ...matchingFixtures]));
+    updateMutation.mutate({ id: gw._id, data: { fixtures: newFixtures } });
   };
 
   return (
@@ -281,25 +308,25 @@ function AdminGameweeks() {
                 </div>
               ) : (
                 unassignedFixtures.map((f: any) => (
-                  <label key={f.fixture.id} className="flex items-center space-x-4 p-4 bg-white/5 hover:bg-white/10 border border-white/5 rounded-2xl cursor-pointer transition-all group">
+                  <label key={f.fixtureId} className="flex items-center space-x-4 p-4 bg-white/5 hover:bg-white/10 border border-white/5 rounded-2xl cursor-pointer transition-all group">
                     <input
                       type="checkbox"
-                      checked={selectedFixtures.includes(f.fixture.id)}
+                      checked={selectedFixtures.includes(f.fixtureId)}
                       onChange={(e) => {
                         if (e.target.checked) {
-                          setSelectedFixtures([...selectedFixtures, f.fixture.id]);
+                          setSelectedFixtures([...selectedFixtures, f.fixtureId]);
                         } else {
-                          setSelectedFixtures(selectedFixtures.filter((id) => id !== f.fixture.id));
+                          setSelectedFixtures(selectedFixtures.filter((id) => id !== f.fixtureId));
                         }
                       }}
                       className="w-5 h-5 rounded border-white/20 text-purple-500 focus:ring-purple-500 bg-black/20 transition-all"
                     />
                     <div className="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                       <p className="font-bold text-text-primary text-lg">
-                        {f.teams.home.name} <span className="text-[10px] uppercase tracking-widest text-text-secondary mx-2">vs</span> {f.teams.away.name}
+                        {f.homeTeamName} <span className="text-[10px] uppercase tracking-widest text-text-secondary mx-2">vs</span> {f.awayTeamName}
                       </p>
                       <p className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 bg-black/20 rounded-full text-text-secondary">
-                        {dayjs(f.fixture.date).format("MMM D, YYYY HH:mm")}
+                        {dayjs.unix(f.startTimestamp).format("MMM D, YYYY HH:mm")}
                       </p>
                     </div>
                   </label>
@@ -643,6 +670,13 @@ function AdminGameweeks() {
                   >
                     Assign Fixtures
                   </button>
+                  <button
+                    onClick={() => handleAutoAssign(gw)}
+                    disabled={updateMutation.isPending}
+                    className="text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 transition-colors disabled:opacity-50"
+                  >
+                    {updateMutation.isPending ? "Assigning..." : "Auto Assign"}
+                  </button>
                   {!gw.isCompleted && (
                     <button
                       onClick={() => {
@@ -678,29 +712,46 @@ function AdminGameweeks() {
                 <h4 className="text-[11px] font-semibold text-text-secondary uppercase mb-3">
                   Assigned Fixtures ({gw.fixtures.length})
                 </h4>
-                <div className="flex flex-wrap gap-2">
-                  {gw.fixtures.map((fId: number) => {
-                    const f = allFixtures.find((af: any) => af.fixture.id === fId);
-                    if (!f) return null;
-                    return (
-                      <div key={fId} className="text-[11px] bg-bg border border-border px-2 py-1 rounded-md flex items-center space-x-1 whitespace-nowrap group">
-                        <span className="font-medium text-text-primary">{f.teams.home.name}</span>
-                        <span className="text-text-secondary px-1">v</span>
-                        <span className="font-medium text-text-primary">{f.teams.away.name}</span>
-                        <button
-                          onClick={() => {
-                             const newFixtures = gw.fixtures.filter((id: number) => id !== fId);
-                             updateMutation.mutate({ id: gw._id, data: { fixtures: newFixtures } });
-                          }}
-                          disabled={updateMutation.isPending}
-                          title="Remove fixture"
-                          className="ml-2 text-text-secondary hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-50"
-                        >
-                          ✕
-                        </button>
+                <div className="space-y-3">
+                  {(() => {
+                    const leagueMap = new Map(leagues.map((l: any) => [l.leagueId, l.name]));
+                    const grouped: Record<number, { name: string; fixtures: any[] }> = {};
+
+                    for (const fId of gw.fixtures) {
+                      const f = allFixtures.find((af: any) => af.fixtureId === fId);
+                      if (!f) continue;
+                      const leagueId = f.uniqueTournament?.id ?? 0;
+                      const leagueName = leagueMap.get(leagueId) || f.tournament?.name || `League #${leagueId}`;
+                      if (!grouped[leagueId]) grouped[leagueId] = { name: leagueName, fixtures: [] };
+                      grouped[leagueId].fixtures.push({ ...f, fId });
+                    }
+
+                    return Object.entries(grouped).sort(([, a], [, b]) => a.name.localeCompare(b.name)).map(([leagueId, group]) => (
+                      <div key={leagueId}>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-1.5">{group.name}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {group.fixtures.map((f: any) => (
+                            <div key={f.fId} className="text-[11px] bg-bg border border-border px-2 py-1 rounded-md flex items-center space-x-1 whitespace-nowrap group">
+                              <span className="font-medium text-text-primary">{f.homeTeamName}</span>
+                              <span className="text-text-secondary px-1">v</span>
+                              <span className="font-medium text-text-primary">{f.awayTeamName}</span>
+                              <button
+                                onClick={() => {
+                                   const newFixtures = gw.fixtures.filter((id: number) => id !== f.fId);
+                                   updateMutation.mutate({ id: gw._id, data: { fixtures: newFixtures } });
+                                }}
+                                disabled={updateMutation.isPending}
+                                title="Remove fixture"
+                                className="ml-2 text-text-secondary hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-50"
+                              >
+                                ✕
+                              </button>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    );
-                  })}
+                    ));
+                  })()}
                 </div>
               </div>
             )}
