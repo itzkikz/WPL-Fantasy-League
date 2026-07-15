@@ -238,6 +238,16 @@ html:active-view-transition-type(tab-switch) {
   }
 }
 
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* For bottom navbar */
 .mobile-navbar {
   view-transition-name: bottom-nav;

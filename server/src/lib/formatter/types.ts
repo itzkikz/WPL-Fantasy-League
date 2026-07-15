@@ -14,6 +14,7 @@ export interface Player {
     subNumber?: number;
     gw: number;
     shirtNumber?: number;
+    photo?: string;
 }
 export interface Formation {
     GK: Player[];

@@ -303,7 +303,6 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 : `SUB ${pick.subNumber || 0}` as any;
 
             const clubData = teamMap.get(player.teamId);
-            console.log(clubData);
             const clubName = clubData ? clubData.name : "Unknown";
             const teamShortName = clubData ? clubData.nameCode : "UNK";
             const teamColor = clubData && clubData.teamColors ? clubData.teamColors.primary : "#003399";

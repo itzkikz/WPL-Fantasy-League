@@ -4,17 +4,17 @@ import Home from "../icons/Home";
 import User from "../icons/User";
 import UserSettings from "../icons/UserSettings";
 import Graph from "../icons/Graph";
-import Notification from "../icons/Notification";
+import { Group } from "../icons/Group";
 
 const MobileNavbar = () => {
   const matchRoute = useMatchRoute();
 
   const navItems = [
-    { label: "Home", path: "/standings" },
+    { label: "Home", path: "/home" },
+    { label: "Leagues", path: "/standings" },
     { label: "Manage", path: "/manager" },
     { label: "Stats", path: "/stats" },
-    { label: "Notifications", path: "/notifications" },
-    { label: "Settings", path: "/settings" },
+    { label: "More", path: "/settings" },
   ];
 
   const isBaseRoute = navItems.some((item) =>
@@ -39,10 +39,10 @@ const MobileNavbar = () => {
               className={`${isActive ? "border-b border-light-border dark:border-dark-border" : ""} inline-flex flex-col items-center justify-center text-[11px] transition-colors`}
             >
               {label === "Home" && <Home isActive={isActive} />}
+              {label === "Leagues" && <Group height={6} width={6} />}
               {label === "Manage" && <User isActive={isActive} />}
-              {label === "Settings" && <UserSettings isActive={isActive} />}
               {label === "Stats" && <Graph isActive={isActive} />}
-              {label === "Notifications" && <Notification isActive={isActive} />}
+              {label === "More" && <UserSettings isActive={isActive} />}
 
               <span
                 className={`mt-1 ${isActive

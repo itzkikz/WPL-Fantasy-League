@@ -10,13 +10,14 @@ export const MainLayout = () => {
     const navigate = useNavigate();
     const matchRoute = useMatchRoute();
 
-    const baseRoutes = [
-        "/standings",
-        "/manager",
-        "/stats",
-        "/notifications",
-        "/settings",
-    ];
+  const baseRoutes = [
+    "/home",
+    "/standings",
+    "/manager",
+    "/stats",
+    "/notifications",
+    "/settings",
+  ];
 
     const isBaseRoute = baseRoutes.some((route) =>
         matchRoute({ to: route, fuzzy: false })

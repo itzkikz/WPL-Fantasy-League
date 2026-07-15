@@ -1,7 +1,6 @@
 import React from "react";
 import { Player, PlayerStats } from "../../features/players/types";
 import { mapPosition } from "../../libs/helpers/lineupFormatter"
-import { getContrastText } from "../../libs/helpers/color";
 
 export default function PlayerInfo({
   player,
@@ -10,21 +9,18 @@ export default function PlayerInfo({
   player: Player;
   playerStats: PlayerStats;
 }) {
-  const teamColor = player?.teamColor || "#000000";
-  const teamTextColor = getContrastText(teamColor, player?.teamTextColor || "#ffffff");
-
   return (
     <div
       className="relative px-6 pt-12 pb-6 rounded-t-3xl overflow-hidden shadow-lg flex-none"
       style={{
-        background: `linear-gradient(135deg, ${teamColor} 0%, ${teamColor}dd 100%)`,
-        color: teamTextColor
+        background: `linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%)`,
+        color: "var(--color-text-primary)"
       }}
     >
       {/* Decorative Background Element */}
       <div
         className="absolute top-0 right-0 w-48 h-48 rounded-full opacity-20 blur-3xl -mr-20 -mt-20 pointer-events-none"
-        style={{ backgroundColor: teamTextColor }}
+        style={{ backgroundColor: "var(--color-text-primary)" }}
       ></div>
 
       <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
