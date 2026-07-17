@@ -9,17 +9,77 @@ import Notification from "../icons/Notification";
 import AngleDown from "../icons/AngleDown";
 import AngleRight from "../icons/AngleRight";
 
+const MyTeamIcon = ({ isActive }: { isActive: boolean }) => (
+  <svg 
+    className={`w-6 h-6 transition-colors ${isActive ? "text-violet-400" : "text-gray-400"}`} 
+    viewBox="0 0 24 24" 
+    fill={isActive ? "rgba(139, 92, 246, 0.2)" : "none"} 
+    stroke="currentColor" 
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M20.38 3.46L16 6.14V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3.14L3.62 3.46a1 1 0 0 0-1.42.34l-1.5 2.5a1 1 0 0 0 .34 1.42L4 9.59V21a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9.59l2.96-1.87a1 1 0 0 0 .34-1.42l-1.5-2.5a1 1 0 0 0-1.42-.34z" />
+  </svg>
+);
+
+const PickTeamIcon = ({ isActive }: { isActive: boolean }) => (
+  <svg 
+    className={`w-6 h-6 transition-colors ${isActive ? "text-violet-400" : "text-gray-400"}`} 
+    viewBox="0 0 24 24" 
+    fill={isActive ? "rgba(139, 92, 246, 0.2)" : "none"} 
+    stroke="currentColor" 
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M20.38 3.46L16 6.14V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3.14L3.62 3.46a1 1 0 0 0-1.42.34l-1.5 2.5a1 1 0 0 0 .34 1.42L4 9.59V21a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9.59l2.96-1.87a1 1 0 0 0 .34-1.42l-1.5-2.5a1 1 0 0 0-1.42-.34z" />
+    <circle cx="12" cy="14" r="2.5" stroke="currentColor" strokeWidth="1.5" />
+    <path d="M12 13v2M11 14h2" stroke="currentColor" strokeWidth="1.2" />
+  </svg>
+);
+
+const LeagueIcon = ({ isActive }: { isActive: boolean }) => (
+  <svg 
+    className={`w-6 h-6 transition-colors ${isActive ? "text-violet-400" : "text-gray-400"}`}
+    viewBox="0 0 24 24" 
+    fill={isActive ? "rgba(139, 92, 246, 0.2)" : "none"} 
+    stroke="currentColor" 
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+    <path d="M2 17l10 5 10-5" />
+    <path d="M2 12l10 5 10-5" />
+  </svg>
+);
+
+const H2HIcon = ({ isActive }: { isActive: boolean }) => (
+  <svg 
+    className={`w-6 h-6 transition-colors ${isActive ? "text-violet-400" : "text-gray-400"}`}
+    viewBox="0 0 24 24" 
+    fill={isActive ? "rgba(139, 92, 246, 0.2)" : "none"} 
+    stroke="currentColor" 
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+  </svg>
+);
+
 const SideNavbar = () => {
   const matchRoute = useMatchRoute();
   const [isAdminOpen, setIsAdminOpen] = useState(true);
   const user = useUserStore((state) => state.user);
 
   const navItems = [
-    { label: "Home", path: "/standings" },
-    { label: "Manage", path: "/manager" },
+    { label: "Home", path: "/home" },
+    { label: "League", path: "/standings" },
+    { label: "My Team", path: "/my-team" },
+    { label: "H2H", path: "/h2h" },
     { label: "Stats", path: "/stats" },
-    { label: "Notifications", path: "/notifications" },
-    { label: "Settings", path: "/settings" },
   ];
 
   if (
@@ -38,22 +98,22 @@ const SideNavbar = () => {
 
           return (
             <Link
-            viewTransition={{ types: ["tab-switch"] }}
+              viewTransition={{ types: ["tab-switch"] }}
               key={label}
               to={path}
               className={`flex items-center gap-3 px-3 py-2 text-sm transition-colors`}
             >
               {label === "Home" && <Home isActive={isActive} />}
-              {label === "Manage" && <User isActive={isActive} />}
-              {label === "Settings" && <UserSettings isActive={isActive} />}
+              {label === "League" && <LeagueIcon isActive={isActive} />}
+              {label === "My Team" && <MyTeamIcon isActive={isActive} />}
+              {label === "H2H" && <H2HIcon isActive={isActive} />}
               {label === "Stats" && <Graph isActive={isActive} />}
-              {label === "Notifications" && <Notification isActive={isActive} />}
 
               <span
                 className={`${
                   isActive
-                    ? "text-gray-400 dark:text-light-text-secondary font-semibold"
-                    : ""
+                    ? "text-[#8b5cf6] font-semibold"
+                    : "text-gray-400 hover:text-white"
                 }`}
               >
                 {label}
@@ -64,50 +124,46 @@ const SideNavbar = () => {
 
         {/* Admin Section */}
         {user?.role === 'admin' && (
-          <div className="mt-2 border-t border-light-border dark:border-dark-border pt-2">
+          <div className="mt-2 border-t border-[#2d1b54] pt-2">
             <button
               onClick={() => setIsAdminOpen(!isAdminOpen)}
               className="w-full flex items-center justify-between px-3 py-2 text-sm transition-colors cursor-pointer"
             >
               <div className="flex items-center gap-3">
-                <UserSettings isActive={false} />
-                <span className={isAdminOpen ? "text-gray-400 dark:text-light-text-secondary font-semibold" : ""}>Admin</span>
+                <UserSettings isActive={isAdminOpen} />
+                <span className="text-gray-400 hover:text-white font-semibold">Admin Panel</span>
               </div>
               {isAdminOpen ? <AngleDown height="4" width="4" /> : <AngleRight height="4" width="4" />}
             </button>
             
             {isAdminOpen && (
               <div className="flex flex-col gap-2 mt-1 pl-11">
-                <Link
-                  to="/admin/fixtures"
-                  className="py-1 text-sm transition-colors"
-                >
-                  <span className={matchRoute({ to: "/admin/fixtures", fuzzy: true }) ? "text-gray-400 dark:text-light-text-secondary font-semibold" : ""}>Fixtures</span>
-                </Link>
-                <Link
-                  to="/admin/fantasy-teams"
-                  className="py-1 text-sm transition-colors"
-                >
-                  <span className={matchRoute({ to: "/admin/fantasy-teams", fuzzy: true }) ? "text-gray-400 dark:text-light-text-secondary font-semibold" : ""}>Fantasy Teams</span>
-                </Link>
-                <Link
-                  to="/admin/leagues"
-                  className="py-1 text-sm transition-colors"
-                >
-                  <span className={matchRoute({ to: "/admin/leagues", fuzzy: true }) ? "text-gray-400 dark:text-light-text-secondary font-semibold" : ""}>Leagues</span>
-                </Link>
-                <Link
-                  to="/admin/notifications"
-                  className="py-1 text-sm transition-colors"
-                >
-                  <span className={matchRoute({ to: "/admin/notifications", fuzzy: true }) ? "text-gray-400 dark:text-light-text-secondary font-semibold" : ""}>Notifications</span>
-                </Link>
-                <Link
-                  to="/admin/gameweeks"
-                  className="py-1 text-sm transition-colors"
-                >
-                  <span className={matchRoute({ to: "/admin/gameweeks", fuzzy: true }) ? "text-gray-400 dark:text-light-text-secondary font-semibold" : ""}>Gameweeks</span>
-                </Link>
+                {[
+                  { label: "Fixtures", path: "/admin/fixtures" },
+                  { label: "Fantasy Teams", path: "/admin/fantasy-teams" },
+                  { label: "Leagues", path: "/admin/leagues" },
+                  { label: "Notifications", path: "/admin/notifications" },
+                  { label: "Gameweeks", path: "/admin/gameweeks" },
+                ].map((adminItem) => {
+                  const isLinkActive = matchRoute({ to: adminItem.path, fuzzy: true });
+                  return (
+                    <Link
+                      key={adminItem.label}
+                      to={adminItem.path}
+                      className="py-1 text-sm transition-colors"
+                    >
+                      <span
+                        className={`${
+                          isLinkActive
+                            ? "text-[#8b5cf6] font-semibold"
+                            : "text-gray-400 hover:text-white"
+                        }`}
+                      >
+                        {adminItem.label}
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>

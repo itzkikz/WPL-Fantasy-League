@@ -1,4 +1,5 @@
 import { Outlet, useNavigate, useMatchRoute } from "@tanstack/react-router";
+import { Bell } from "lucide-react";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import DarkLogo from "../../assets/wplf1-dark.png";
 import LightLogo from "../../assets/wplf1-light.png";
@@ -34,52 +35,60 @@ export const MainLayout = () => {
             <div className="flex-1 flex">
                 <div className="flex h-screen flex-col mx-auto w-full overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
                     {isBaseRoute && (
-                        <header className="header relative w-full h-15 shrink-0 overflow-hidden lg:hidden">
+                        <header className="header relative w-full h-12 shrink-0 overflow-hidden bg-[#0b0217] text-white lg:hidden">
                             {/* Animated gradient overlay */}
                             {/* Content container */}
-                            <div className="relative z-10 flex items-center justify-between h-full px-4 w-full">
+                            <div className="relative z-10 mx-auto flex h-full w-full items-center justify-between px-3">
                                 {/* Premier League Logo */}
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-sm flex items-center justify-center">
+                                    <div className="w-9 h-9 rounded-full flex items-center justify-center">
                                         <img
                                             src={DarkLogo}
                                             alt="WPL Logo"
-                                            className="hidden dark:block logo-image w-8 h-8"
+                                            className="hidden dark:block logo-image w-8 h-8 rounded-full"
                                         />
                                         <img
                                             src={LightLogo}
                                             alt="WPL Logo"
-                                            className="block dark:hidden logo-image w-8 h-8"
+                                            className="block dark:hidden logo-image w-8 h-8 rounded-full"
                                         />
                                     </div>
 
                                     {/* Fantasy Text */}
-                                    <h1 className="text-2xl font-bold tracking-tight">
+                                    <h1 className="text-[21px] font-bold tracking-tight">
                                         WPL Fantasy
                                     </h1>
                                 </div>
-
-                                {/* User Avatar */}
-                                <div
-                                    onClick={() => navigate({ to: '/settings' })}
-                                    className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors border border-white/30"
-                                >
-                                    <svg
-                                        className="w-6 h-6"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
+                                <div className="flex items-center gap-3">
+                                    <button
+                                        aria-label="Notifications"
+                                        onClick={() => navigate({ to: '/notifications' })}
+                                        className="relative flex h-10 w-8 items-center justify-center text-white"
                                     >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                        />
-                                    </svg>
-                                </div>
-                            </div>
+                                        <Bell className="h-5 w-5" />
+                                        <span className="absolute right-1 top-2 h-2.5 w-2.5 rounded-full bg-[#ff624f]" />
+                                    </button>
+                                    <button
+                                        aria-label="Settings"
+                                        onClick={() => navigate({ to: '/settings' })}
+                                        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/15 text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,.2)]"
+                                    >
+                                        <svg
+                                            className="h-6 w-6"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </div></div>
 
                             {/* Decorative wave pattern */}
                             <div className="absolute bottom-0 right-0 w-64 h-64 opacity-40 pointer-events-none">
@@ -112,7 +121,7 @@ export const MainLayout = () => {
                         )}
 
                         {/* Main content: always visible, grows to fill space */}
-                        <div className={`flex-1 flex flex-col ${!hideNav ? 'lg:px-6 lg:py-6' : ''}`}>
+                        <div className={`flex-1 flex flex-col ${!hideNav ? 'pb-20 lg:pb-0 lg:px-6 lg:py-6' : ''}`}>
                             <Outlet />
                         </div>
                     </div>
@@ -124,4 +133,6 @@ export const MainLayout = () => {
         </main>
     );
 };
+
+
 

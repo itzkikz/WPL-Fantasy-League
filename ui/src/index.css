@@ -17,30 +17,42 @@
   --color-light-border: #E0E0E0;
   --color-light-skeleton: #EBEBEB;
 
-  /* Dark theme colors */
-  --color-dark-bg: #1A001B;
-  --color-dark-surface: #2C0030;
-  --color-dark-primary: #04F5FF;
-  --color-dark-secondary: #00FF85;
-  --color-dark-accent: #E90052;
+  /* Design System colors */
+  --color-dark-bg: #0D021A;
+  --color-dark-surface: #171026;
+  --color-dark-card: #211433;
+  --color-dark-primary: #8B5CF6;
+  --color-dark-primary-dark: #6D28D9;
+  --color-dark-accent: #A855F7;
+  --color-dark-success: #22C55E;
+  --color-dark-warning: #FACC15;
+  --color-dark-danger: #EF4444;
+  --color-dark-info: #38BDF8;
   --color-dark-text-primary: #FFFFFF;
   --color-dark-text-secondary: #C8C8C8;
-  --color-dark-border: #5C1A60;
+  --color-dark-border: #30214D;
   --color-dark-skeleton: #EBEBEB;
 }
 
-/* Default to light theme */
+/* Unified global color scheme based on the dark-purple-green home page design */
 :root,
-[data-theme="light"] {
-  --color-bg: var(--color-light-bg);
-  --color-surface: var(--color-light-surface);
-  --color-primary: var(--color-light-primary);
-  --color-secondary: var(--color-light-secondary);
-  --color-accent: var(--color-light-accent);
-  --color-text-primary: var(--color-light-text-primary);
-  --color-text-secondary: var(--color-light-text-secondary);
-  --color-border: var(--color-light-border);
-  --color-skeleton: var(--color-light-skeleton);
+[data-theme="light"],
+[data-theme="dark"] {
+  --color-bg: var(--color-dark-bg);
+  --color-surface: var(--color-dark-surface);
+  --color-card: var(--color-dark-card);
+  --color-primary: var(--color-dark-primary);
+  --color-primary-dark: var(--color-dark-primary-dark);
+  --color-secondary: #0CD148;
+  --color-accent: var(--color-dark-accent);
+  --color-success: #0CD148;
+  --color-warning: var(--color-dark-warning);
+  --color-danger: var(--color-dark-danger);
+  --color-info: var(--color-dark-info);
+  --color-text-primary: var(--color-dark-text-primary);
+  --color-text-secondary: var(--color-dark-text-secondary);
+  --color-border: var(--color-dark-border);
+  --color-skeleton: var(--color-dark-border);
 
   /* Animation Duration Variables */
   --duration-instant: 0ms;
@@ -48,19 +60,6 @@
   --duration-normal: 200ms;
   --duration-slow: 300ms;
   --duration-slower: 500ms;
-}
-
-/* Only apply dark colors when data-theme="dark" */
-[data-theme="dark"] {
-  --color-bg: var(--color-dark-bg);
-  --color-surface: var(--color-dark-surface);
-  --color-primary: var(--color-dark-primary);
-  --color-secondary: var(--color-dark-secondary);
-  --color-accent: var(--color-dark-accent);
-  --color-text-primary: var(--color-dark-text-primary);
-  --color-text-secondary: var(--color-dark-text-secondary);
-  --color-border: var(--color-dark-border);
-  --color-skeleton: var(--color-dark-skeleton);
 }
 
 body {
@@ -427,11 +426,12 @@ button,
   }
 }
 
-/* iOS-specific fixes for sticky positioning and scrolling */
+/* iOS-specific fixes for bottom fixed positioning and scrolling */
 .mobile-navbar {
-  position: -webkit-sticky;
-  /* For older iOS versions */
-  position: sticky;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   transform: translateZ(0);
   /* Force GPU acceleration on iOS */
   -webkit-transform: translateZ(0);
@@ -605,4 +605,16 @@ select:disabled {
 select[multiple] {
   background-image: none;
   padding-right: 0 !important;
+}
+
+/* Custom color for selected mobile navbar items */
+.mobile-navbar a,
+.mobile-navbar a svg,
+.mobile-navbar a span {
+  color: #585161;
+}
+
+.mobile-navbar .text-gray-400,
+.mobile-navbar .dark\:text-light-text-secondary {
+  color: #6120B5 !important;
 }

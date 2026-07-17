@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../api/endpoints";
-import { getMockHomeData } from "./api";
+import { homeApi } from "./api";
 import { HomePageData } from "./types";
 
 export const homeQueries = {
@@ -8,10 +8,7 @@ export const homeQueries = {
     queryOptions<HomePageData>({
       queryKey: [QUERY_KEYS.MANAGER, "home"],
       queryFn: async () => {
-        // TODO: Replace with actual API call
-        // const response = await axiosInstance.get('/home');
-        // return response.data;
-        return getMockHomeData();
+        return homeApi.getHomePageData();
       },
       staleTime: 1000 * 60 * 5, // 5 minutes
     }),

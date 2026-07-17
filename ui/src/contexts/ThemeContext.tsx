@@ -20,26 +20,19 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) return savedTheme;
-
-    return window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
-  });
+  const [theme] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
     const root = document.documentElement;
 
     // Use data-theme attribute instead of class
-    root.setAttribute('data-theme', theme);
+    root.setAttribute('data-theme', 'dark');
 
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+    localStorage.setItem('theme', 'dark');
+  }, []);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+    // Locked to dark theme
   };
 
   return (

@@ -51,6 +51,7 @@ export default defineConfig({
       // Pass Workbox InjectManifest options here if needed (for precache injection).
       injectManifest: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
       },
       // NOTE: runtimeCaching here is only for generateSW; with injectManifest,
       // implement runtime routes/plugins inside src/sw.ts instead.

@@ -11,6 +11,10 @@ export const useTeamDetails = (teamId: string, gameWeek: number) => {
   return useQuery(standingsQueries.detail(teamId, gameWeek))
 }
 
+export const useStandingsFixtures = () => {
+  return useQuery(standingsQueries.fixtures())
+}
+
 // export const useCreateBook = () => {
 //   const queryClient = useQueryClient()
   

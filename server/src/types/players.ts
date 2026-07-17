@@ -122,6 +122,26 @@ export interface PlayerStats {
   player_id: number;
   current_week?: SofaScoreStats;
   photo?: string;
+  ownership?: number;
+  upcoming_fixtures?: {
+    gw: number;
+    opponent_short_name: string;
+    opponent_logo: string;
+    opponent_color: string;
+    opponent_text_color: string;
+    my_team_short_name: string;
+    my_team_logo: string;
+    is_home: boolean;
+  }[];
+  recent_form?: {
+    gw: number;
+    points: number;
+  }[];
+  points_breakdown?: {
+    label: string;
+    value: string;
+    points: number;
+  }[];
 }
 
 export interface Player {

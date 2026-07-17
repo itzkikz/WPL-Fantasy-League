@@ -1,14 +1,13 @@
-import { axiosInstance } from "../../api/axios";
+import apiClient from "../../api/client";
 import { API_ENDPOINTS } from "../../api/endpoints";
 import { HomePageData } from "./types";
 
-// TODO: Replace with actual API call when backend endpoint is ready
-// export const homeApi = {
-//   getHomePageData: async (): Promise<HomePageData> => {
-//     const response = await axiosInstance.get('/home');
-//     return response.data;
-//   },
-// };
+export const homeApi = {
+  getHomePageData: async (): Promise<HomePageData> => {
+    const response = await apiClient.get(API_ENDPOINTS.MANAGER.DASHBOARD);
+    return response.data.data;
+  },
+};
 
 // Temporary mock data for development
 export const getMockHomeData = (): HomePageData => ({

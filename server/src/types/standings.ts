@@ -7,7 +7,8 @@ export interface StandingsResponse {
     team: string,
     team_id: string,
     total: number,
-    total_point_before_this_gw: number
+    total_point_before_this_gw: number,
+    manager?: string
 }
 
 export interface TeamDetails {

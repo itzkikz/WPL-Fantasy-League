@@ -1,11 +1,11 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import ManagerPage from "../../pages/Manager/ManagerPage";
+import MyTeamPage from "../../pages/Manager/MyTeamPage";
 import ProtectedRoute from "../ProtectedRoute";
 
 export const Route = createLazyFileRoute("/manager/")({
   component: () => (
     <ProtectedRoute>
-      <ManagerPage />
+      <MyTeamPage />
     </ProtectedRoute>
   ),
 });

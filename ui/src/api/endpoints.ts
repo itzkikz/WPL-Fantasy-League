@@ -18,7 +18,8 @@ export const API_ENDPOINTS = {
   },
   MANAGER: {
     BASE: '/manager',
-    SUBSTITUTION: '/manager/sub'
+    SUBSTITUTION: '/manager/sub',
+    DASHBOARD: '/manager/dashboard'
     // BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
   },
   NOTIFICATION: {

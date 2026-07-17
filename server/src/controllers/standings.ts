@@ -15,7 +15,8 @@ import { PlayerStats } from "../models/PlayerStats";
 
 export const getStandingsData = async () => {
     const teams = await FantasyTeam.find({})
-        .select('name history currentSquad updatedAt')
+        .select('name history currentSquad updatedAt managers managerDisplayNames')
+        .populate('managers', 'username displayName')
         .lean();
 
     const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
@@ -87,6 +88,11 @@ export const getStandingsData = async () => {
             totalPoints += gwScore;
         }
 
+        const managers = (team.managers as any[] || []).map(m => m.displayName || m.username).filter(Boolean);
+        const managerString = managers.length > 0 
+            ? managers.slice(0, 3).join(', ') 
+            : (team.managerDisplayNames || '');
+
         return {
             team: team.name,
             team_id: team._id.toString(),
@@ -95,7 +101,8 @@ export const getStandingsData = async () => {
             total: totalPoints,
             total_point_before_this_gw: previousPoints,
             last_update_date: (team as any).updatedAt?.toISOString() || new Date().toISOString(),
-            pos_change: 0
+            pos_change: 0,
+            manager: managerString
         };
     });
 
@@ -385,5 +392,63 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 error: error,
             });
         }
+    }
+};
+
+export const getFixturesForCurrentGameweek = async (req: Request, res: Response) => {
+    try {
+        const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean() as any;
+        const currentGw = currentGwDoc ? currentGwDoc.number : 15;
+        const fixtureIds = currentGwDoc ? (currentGwDoc.fixtures || []) : [];
+
+        const Fixture = (await import("../models/Fixture")).Fixture;
+
+        let fixtures: any[] = [];
+        if (fixtureIds.length > 0) {
+            fixtures = await Fixture.find({ fixtureId: { $in: fixtureIds } }).sort({ startTimestamp: 1 }).lean() as any[];
+        } else {
+            fixtures = await Fixture.find({ 'roundInfo.round': currentGw }).sort({ startTimestamp: 1 }).lean() as any[];
+        }
+
+        const teams = await Team.find({}, 'id name shortName photo teamColors').lean() as any[];
+        const teamMap = new Map(teams.map((t: any) => [t.id, t]));
+
+        const mappedFixtures = fixtures.map((f: any) => {
+            const home = teamMap.get(f.homeTeam?.id);
+            const away = teamMap.get(f.awayTeam?.id);
+            return {
+                fixtureId: f.fixtureId,
+                startTimestamp: f.startTimestamp,
+                status: f.status,
+                homeTeam: {
+                    id: f.homeTeam?.id,
+                    name: home?.name || "Unknown",
+                    shortName: home?.shortName || "UNK",
+                    photo: home?.photo || "",
+                    color: home?.teamColors?.primary || "#003399",
+                },
+                awayTeam: {
+                    id: f.awayTeam?.id,
+                    name: away?.name || "Unknown",
+                    shortName: away?.shortName || "UNK",
+                    photo: away?.photo || "",
+                    color: away?.teamColors?.primary || "#003399",
+                },
+                homeScore: f.homeScore,
+                awayScore: f.awayScore,
+                round: f.roundInfo?.round || currentGw,
+            };
+        });
+
+        res.json({
+            success: true,
+            data: {
+                gameweek: currentGw,
+                fixtures: mappedFixtures
+            }
+        });
+    } catch (error: any) {
+        console.error("Error fetching gameweek fixtures:", error);
+        res.status(500).json({ success: false, error: error.message });
     }
 }

@@ -55,6 +55,7 @@ export interface TopPlayer {
   position: string;
   points: number;
   ownedBy: number;
+  photo?: string;
 }
 
 export interface PlayerSpotlightData {
@@ -92,6 +93,7 @@ export interface BestPerformer {
   team: string;
   position: string;
   points: number;
+  photo?: string;
 }
 
 export interface FixtureDifficultyItem {

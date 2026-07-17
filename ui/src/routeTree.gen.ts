@@ -11,9 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as MyTeamRouteImport } from './routes/my-team'
 import { Route as MaintenanceRouteImport } from './routes/maintenance'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as HomeRouteImport } from './routes/home'
+import { Route as H2hRouteImport } from './routes/h2h'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StatsIndexRouteImport } from './routes/stats/index'
@@ -41,6 +43,11 @@ const NotificationsRoute = NotificationsRouteImport.update({
   path: '/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MyTeamRoute = MyTeamRouteImport.update({
+  id: '/my-team',
+  path: '/my-team',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/my-team.lazy').then((d) => d.Route))
 const MaintenanceRoute = MaintenanceRouteImport.update({
   id: '/maintenance',
   path: '/maintenance',
@@ -56,6 +63,11 @@ const HomeRoute = HomeRouteImport.update({
   path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/home.lazy').then((d) => d.Route))
+const H2hRoute = H2hRouteImport.update({
+  id: '/h2h',
+  path: '/h2h',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/h2h.lazy').then((d) => d.Route))
 const R404Route = R404RouteImport.update({
   id: '/404',
   path: '/404',
@@ -159,9 +171,11 @@ const AdminFantasyTeamsEditTeamIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/h2h': typeof H2hRoute
   '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/maintenance': typeof MaintenanceRoute
+  '/my-team': typeof MyTeamRoute
   '/notifications': typeof NotificationsRoute
   '/settings': typeof SettingsRoute
   '/admin/fantasy-teams': typeof AdminFantasyTeamsRouteWithChildren
@@ -182,9 +196,11 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/h2h': typeof H2hRoute
   '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/maintenance': typeof MaintenanceRoute
+  '/my-team': typeof MyTeamRoute
   '/notifications': typeof NotificationsRoute
   '/settings': typeof SettingsRoute
   '/admin/fixtures': typeof AdminFixturesRouteWithChildren
@@ -205,9 +221,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/h2h': typeof H2hRoute
   '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/maintenance': typeof MaintenanceRoute
+  '/my-team': typeof MyTeamRoute
   '/notifications': typeof NotificationsRoute
   '/settings': typeof SettingsRoute
   '/admin/fantasy-teams': typeof AdminFantasyTeamsRouteWithChildren
@@ -230,9 +248,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/404'
+    | '/h2h'
     | '/home'
     | '/login'
     | '/maintenance'
+    | '/my-team'
     | '/notifications'
     | '/settings'
     | '/admin/fantasy-teams'
@@ -253,9 +273,11 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/404'
+    | '/h2h'
     | '/home'
     | '/login'
     | '/maintenance'
+    | '/my-team'
     | '/notifications'
     | '/settings'
     | '/admin/fixtures'
@@ -275,9 +297,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/404'
+    | '/h2h'
     | '/home'
     | '/login'
     | '/maintenance'
+    | '/my-team'
     | '/notifications'
     | '/settings'
     | '/admin/fantasy-teams'
@@ -299,9 +323,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
+  H2hRoute: typeof H2hRoute
   HomeRoute: typeof HomeRoute
   LoginRoute: typeof LoginRoute
   MaintenanceRoute: typeof MaintenanceRoute
+  MyTeamRoute: typeof MyTeamRoute
   NotificationsRoute: typeof NotificationsRoute
   SettingsRoute: typeof SettingsRoute
   AdminFantasyTeamsRoute: typeof AdminFantasyTeamsRouteWithChildren
@@ -332,6 +358,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/my-team': {
+      id: '/my-team'
+      path: '/my-team'
+      fullPath: '/my-team'
+      preLoaderRoute: typeof MyTeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/maintenance': {
       id: '/maintenance'
       path: '/maintenance'
@@ -351,6 +384,13 @@ declare module '@tanstack/react-router' {
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/h2h': {
+      id: '/h2h'
+      path: '/h2h'
+      fullPath: '/h2h'
+      preLoaderRoute: typeof H2hRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/404': {
@@ -498,9 +538,11 @@ const AdminFixturesRouteWithChildren = AdminFixturesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
+  H2hRoute: H2hRoute,
   HomeRoute: HomeRoute,
   LoginRoute: LoginRoute,
   MaintenanceRoute: MaintenanceRoute,
+  MyTeamRoute: MyTeamRoute,
   NotificationsRoute: NotificationsRoute,
   SettingsRoute: SettingsRoute,
   AdminFantasyTeamsRoute: AdminFantasyTeamsRouteWithChildren,
