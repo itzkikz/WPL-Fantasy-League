@@ -204,7 +204,7 @@ export const MainLayout = () => {
                         )}
 
                         {/* Main content: always visible, grows to fill space */}
-                        <div className={`flex-1 flex flex-col ${!hideNav ? 'pb-20 lg:pb-0 lg:px-6 lg:py-6' : ''}`}>
+                        <div className={`flex-1 flex flex-col ${!hideNav ? 'pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0 lg:px-6 lg:py-6' : ''}`}>
                             <Outlet />
                         </div>
                     </div>

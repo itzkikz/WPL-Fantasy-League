@@ -4,16 +4,16 @@ import Toast from "../../components/common/Toast";
 import { Player } from "../../features/players/types";
 import { Formation } from "../../features/standings/types";
 import { useManageTeamStore } from "../../store/useManageTeamStore";
-import { 
-  useManagerDetails, 
-  useSubstitution 
+import {
+  useManagerDetails,
+  useSubstitution
 } from "../../features/manager/hooks";
-import { 
-  playerSwap, 
-  executeSwap, 
-  clearSwapHighlights, 
-  setCaptain, 
-  setViceCaptain 
+import {
+  playerSwap,
+  executeSwap,
+  clearSwapHighlights,
+  setCaptain,
+  setViceCaptain
 } from "../../libs/helpers/pickMyTeam";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -106,7 +106,7 @@ const MyTeamPage = () => {
         setSubstituteMode(false);
         setSwapSourcePlayer(null);
         setIsSubstitution(false);
-        
+
         // Reset highlights
         const clearResult = clearSwapHighlights({ starting: startingXI, bench });
         setStartingXI(clearResult.starting);
@@ -217,9 +217,9 @@ const MyTeamPage = () => {
     setSubstituteMode(false);
     setSwapSourcePlayer(null);
     if (managerDetails?.managerTeam) {
-      const clearResult = clearSwapHighlights({ 
-        starting: managerDetails.managerTeam.starting, 
-        bench: managerDetails.managerTeam.bench 
+      const clearResult = clearSwapHighlights({
+        starting: managerDetails.managerTeam.starting,
+        bench: managerDetails.managerTeam.bench
       });
       setStartingXI(clearResult.starting);
       setBench(clearResult.bench);
@@ -254,7 +254,7 @@ const MyTeamPage = () => {
 
   const getPlayerLeftOffset = (position: string, index: number, total: number) => {
     if (total === 1) return "50%";
-    
+
     if (position === "DEF") {
       if (total === 2) return index === 0 ? "33%" : "67%";
       if (total === 3) return index === 0 ? "20%" : index === 1 ? "50%" : "80%";
@@ -304,7 +304,7 @@ const MyTeamPage = () => {
       </div>
     );
   }
- 
+
   if (isError) {
     return (
       <div className="flex flex-col items-center justify-center h-full bg-background text-rose-400 p-6 text-center select-none">
@@ -312,8 +312,8 @@ const MyTeamPage = () => {
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
         </svg>
         <p className="text-sm font-extrabold mb-3">Failed to load squad details.</p>
-        <button 
-          onClick={() => window.location.reload()} 
+        <button
+          onClick={() => window.location.reload()}
           className="bg-primary hover:bg-primary-dark text-white rounded-xl px-4 py-2.5 text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-lg shadow-primary/30"
         >
           Retry
@@ -321,17 +321,17 @@ const MyTeamPage = () => {
       </div>
     );
   }
- 
-  const deadlineFormatted = managerDetails?.deadline 
+
+  const deadlineFormatted = managerDetails?.deadline
     ? dayjs(managerDetails.deadline).format("ddd, D MMM YYYY, h:mm A")
     : "No deadline";
- 
+
   const totalPointsFormatted = (managerDetails?.total ?? 0).toLocaleString();
   const hasUnsavedChanges = substitutions?.length > 0 || Object.keys(roles || {}).length > 0;
- 
+
   return (
-    <div className="flex flex-col flex-1 min-h-0 h-screen bg-background text-white font-outfit select-none pb-4 lg:pb-0">
-      
+    <div className="flex flex-col lg:h-screen bg-background text-white font-outfit select-none">
+
       {/* 1. Header Card Panel */}
       <MyTeamHeader
         selectedGW={selectedGW}
@@ -341,7 +341,7 @@ const MyTeamPage = () => {
         totalGWScore={managerDetails?.totalGWScore}
         totalPointsFormatted={totalPointsFormatted}
       />
- 
+
       {/* 3. Navigation Tabs */}
       <div className="mx-4 mt-3.5 flex border-b border-[var(--color-border-divider)] shrink-0">
         <button
@@ -365,9 +365,9 @@ const MyTeamPage = () => {
           )}
         </button>
       </div>
- 
+
       {/* 4. Tab Views Container */}
-      <div className="mx-4 mt-3 flex-1 scrollbar-hide pb-3 space-y-4">
+      <div className="mx-4 mt-3 flex-1 overflow-y-auto scrollbar-hide pb-[calc(5.25rem+env(safe-area-inset-bottom))] space-y-4">
         {activeTab === "pitch" ? (
           <MyTeamPitch
             startingXI={startingXI}
@@ -389,27 +389,28 @@ const MyTeamPage = () => {
             handlePlayerClick={handlePlayerClick}
           />
         )}
+        {/* 5. Clear & Save Action Buttons */}
+        <div className="mx-auto mt-3.5 mb-3 flex items-center justify-center gap-3 max-w-md w-full px-4 shrink-0">
+          <button
+            onClick={handleClearTeam}
+            disabled={!hasUnsavedChanges}
+            className="flex-1 border border-primary/45 text-secondary hover:bg-primary/10 disabled:opacity-40 disabled:cursor-not-allowed font-bold rounded-xl py-2.5 flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer text-xs md:text-sm"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+            Clear Changes
+          </button>
+          <button
+            onClick={handleSaveTeam}
+            disabled={!hasUnsavedChanges || mutation.isPending}
+            className="flex-1 bg-gradient-button disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-xl py-2.5 shadow-fab flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer border-t border-white/20 text-xs md:text-sm"
+          >
+            <Save className="w-3.5 h-3.5" />
+            {mutation.isPending ? "Saving..." : "Save Team"}
+          </button>
+        </div>
       </div>
- 
-      {/* 5. Clear & Save Action Buttons */}
-      <div className="mx-auto mt-3.5 mb-3 flex items-center justify-center gap-3 max-w-md w-full px-4 shrink-0">
-        <button
-          onClick={handleClearTeam}
-          disabled={!hasUnsavedChanges}
-          className="flex-1 border border-primary/45 text-secondary hover:bg-primary/10 disabled:opacity-40 disabled:cursor-not-allowed font-bold rounded-xl py-2.5 flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer text-xs md:text-sm"
-        >
-          <Trash2 className="w-3.5 h-3.5" />
-          Clear Changes
-        </button>
-        <button
-          onClick={handleSaveTeam}
-          disabled={!hasUnsavedChanges || mutation.isPending}
-          className="flex-1 bg-gradient-button disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-xl py-2.5 shadow-fab flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer border-t border-white/20 text-xs md:text-sm"
-        >
-          <Save className="w-3.5 h-3.5" />
-          {mutation.isPending ? "Saving..." : "Save Team"}
-        </button>
-      </div>
+
+
 
       {/* Player Selection Actions Overlay Modal */}
       <PlayerStatsModal
@@ -422,6 +423,7 @@ const MyTeamPage = () => {
         onMakeCaptain={handleMakeCaptain}
         onMakeViceCaptain={handleMakeViceCaptain}
         onSubstitute={handleSubstituteInitiate}
+        pickMyTeam={managerDetails?.pickMyTeam}
       />
 
       {/* Toast Notification */}

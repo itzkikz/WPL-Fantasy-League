@@ -177,7 +177,7 @@ const TeamDetailsPage = () => {
   }
 
   return (
-    <div className="flex flex-col flex-1 min-h-0 h-screen bg-background text-white font-outfit select-none pb-4 lg:pb-0">
+    <div className="flex flex-col h-[calc(100dvh-80px)] lg:h-screen bg-background text-white font-outfit select-none overflow-hidden">
 
       {/* 1. Header Panel */}
       <div className="mx-4 mt-3 bg-gradient-card border border-border rounded-2xl overflow-hidden p-4 shadow-card relative shrink-0">
@@ -273,7 +273,7 @@ const TeamDetailsPage = () => {
       </div>
 
       {/* 3. Tab Views Container */}
-      <div className="mx-4 mt-3 flex-1 scrollbar-hide pb-3 space-y-4">
+      <div className="mx-4 mt-3 flex-1 overflow-y-auto scrollbar-hide pb-[calc(5.25rem+env(safe-area-inset-bottom))] space-y-4">
         {activeTab === "pitch" ? (
           /* Pitch View Container */
           <div className="relative w-full max-w-2xl mx-auto rounded-3xl overflow-hidden border border-border shadow-card bg-background h-[530px] shrink-0 flex flex-col">

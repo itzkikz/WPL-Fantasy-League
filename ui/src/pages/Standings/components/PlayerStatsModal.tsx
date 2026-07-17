@@ -11,6 +11,7 @@ interface PlayerStatsModalProps {
   onMakeCaptain?: (player: Player) => void;
   onMakeViceCaptain?: (player: Player) => void;
   onSubstitute?: (player: Player) => void;
+  pickMyTeam?: boolean;
 }
 
 const PlayerStatsModal = ({
@@ -20,6 +21,7 @@ const PlayerStatsModal = ({
   onMakeCaptain,
   onMakeViceCaptain,
   onSubstitute,
+  pickMyTeam = false,
 }: PlayerStatsModalProps) => {
   const { data: stats, isLoading, isError } = usePlayerDetails(player?.name || "");
 
@@ -548,7 +550,7 @@ const PlayerStatsModal = ({
             </div>
  
             {/* 7. Action Footer Buttons */}
-            {onMakeCaptain || onMakeViceCaptain || onSubstitute ? (
+            {pickMyTeam && (onMakeCaptain || onMakeViceCaptain || onSubstitute) ? (
               <div className="p-5 bg-card border-t border-border flex flex-col sm:flex-row items-center gap-2.5 shrink-0 w-full">
                 {onMakeCaptain && (
                   <button
