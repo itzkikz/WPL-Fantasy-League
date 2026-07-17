@@ -116,7 +116,7 @@ const PickTeamPage = () => {
     isViceCaptain: Player["isViceCaptain"]
   ) => {
     if (isCaptain || isViceCaptain) {
-      setRoleError("Change Captain/Vice before subsitution");
+      setRoleError("Change Captain/Vice before substitution");
     } else {
       if (playerName) {
         handlePlayerOverlay(null);
@@ -225,7 +225,7 @@ const PickTeamPage = () => {
   //const updatedTeam = executeSwap(teamData, 10, 11); // Swap Biereth with Nico Williams
 
   return (
-    <div className="flex flex-col h-[100dvh] bg-light-bg dark:bg-dark-bg animate-in fade-in duration-500 overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-light-bg dark:bg-dark-bg animate-in fade-in duration-500 pb-20">
 
       {user?.teamName && (
         <div className="px-4 pt-4">
@@ -307,7 +307,7 @@ const PickTeamPage = () => {
       </div>
       
       {/* Scrollable Pitch Area */}
-      <div className="flex-1 overflow-y-auto pb-24 lg:pb-0 mt-4">
+      <div className="mt-4 px-4 pb-12">
         <GWPitch
           starting={editedStarting}
           bench={editedBench}

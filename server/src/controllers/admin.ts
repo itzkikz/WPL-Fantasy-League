@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
+import { League } from '../models/League';
+import { Team } from '../models/Team';
 import { Player } from '../models/Player';
 import { Fixture } from '../models/Fixture';
 import { Gameweek } from '../models/Gameweek';
@@ -8,12 +10,17 @@ import { ApiConfig } from '../models/ApiConfig';
 import { MatchDetails } from '../models/MatchDetails';
 import { User } from '../models/User';
 import { FantasyTeam } from '../models/FantasyTeam';
-import { fetchFixturesByDate, fetchFixturePlayers, fetchFixtureEvents } from '../services/apiSports.service';
+import { fetchFixturesByDate } from '../services/apiSports.service';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import { PlayerStats } from '../models/PlayerStats';
+import { H2HLeague } from '../models/H2HLeague';
+import { H2HFixture } from '../models/H2HFixture';
+import { fetchSofascoreJSON } from '../utils/sofascoreScraper';
 import { calculatePlayerPoints } from '../lib/points';
+import { mapSofascoreToPlayerMatchStat } from '../lib/sofascoreMapper';
+import { getLeagueAllGWPoints } from './h2h';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -26,18 +33,33 @@ export const getFixtures = async (req: Request, res: Response) => {
             return res.status(403).json({ error: 'Access denied. Admins only.' });
         }
 
-        const fixtures = await Fixture.find().sort({ 'fixture.date': 1 }).lean();
-        const details = await MatchDetails.find({}, 'fixtureId').lean();
-        const detailFixtureIds = new Set(details.map(d => d.fixtureId));
+        const [fixtures, teams, details, gameweeks] = await Promise.all([
+            Fixture.find().sort({ startTimestamp: 1 }).lean(),
+            Team.find({}, 'id name shortName').lean(),
+            MatchDetails.find({}, 'fixtureId addedtofantasy').lean(),
+            Gameweek.find({}, 'fixtures').lean()
+        ]);
 
-        const gameweeks = await Gameweek.find({}, 'fixtures').lean();
+        const teamMap = new Map(teams.map((t: any) => [t.id, t]));
+        const detailMap = new Map(details.map((d: any) => [d.fixtureId, d]));
         const assignedFixtureIds = new Set(gameweeks.flatMap(gw => gw.fixtures || []));
 
-        const fixturesWithDetailsFlag = fixtures.map(f => ({
-            ...f,
-            hasDetails: detailFixtureIds.has(f.fixture.id),
-            hasGameweek: assignedFixtureIds.has(f.fixture.id)
-        }));
+        const fixturesWithDetailsFlag = fixtures.map(f => {
+            const homeTeam = teamMap.get(f.homeTeam?.id ?? -1);
+            const awayTeam = teamMap.get(f.awayTeam?.id ?? -1);
+            const detail = detailMap.get(f.fixtureId);
+
+            return {
+                ...f,
+                homeTeamName: homeTeam?.name ?? null,
+                homeTeamShortName: homeTeam?.shortName ?? null,
+                awayTeamName: awayTeam?.name ?? null,
+                awayTeamShortName: awayTeam?.shortName ?? null,
+                hasDetails: !!detail,
+                addedtofantasy: detail?.addedtofantasy ?? false,
+                hasGameweek: assignedFixtureIds.has(f.fixtureId)
+            };
+        });
 
         res.status(200).json({ data: fixturesWithDetailsFlag });
     } catch (error) {
@@ -51,7 +73,7 @@ export const getGameweeks = async (req: Request, res: Response) => {
         if (req.user && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Access denied. Admins only.' });
         }
-        
+
         const gameweeks = await Gameweek.find().sort({ number: 1 });
         res.status(200).json({ data: gameweeks });
     } catch (error) {
@@ -65,7 +87,7 @@ export const getSeasons = async (req: Request, res: Response) => {
         if (req.user && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Access denied. Admins only.' });
         }
-        
+
         const seasons = await Season.find().sort({ id: -1 });
         res.status(200).json({ data: seasons });
     } catch (error) {
@@ -122,10 +144,10 @@ export const updateGameweek = async (req: Request, res: Response) => {
             if (removedFixtures.length > 0) {
                 // Remove MatchDetails for removed fixtures
                 await MatchDetails.deleteMany({ fixtureId: { $in: removedFixtures } });
-                
+
                 // Fetch players whose stats might be affected
                 const affectedPlayers = await PlayerStats.find({ 'gameweeks.fixtureId': { $in: removedFixtures } });
-                
+
                 for (const playerStat of affectedPlayers) {
                     // Filter out removed fixtures
                     playerStat.gameweeks = playerStat.gameweeks.filter(gw => !removedFixtures.includes(gw.fixtureId));
@@ -142,7 +164,7 @@ export const updateGameweek = async (req: Request, res: Response) => {
             updateData,
             { new: true, runValidators: true }
         );
-        
+
         // If it was set to current, trigger the pre-save logic manually since findByIdAndUpdate skips pre-save hooks
         // Or better yet, save the document instead of findByIdAndUpdate
         if (updateData.isCurrent) {
@@ -183,9 +205,9 @@ export const updateFixturesFromApi = async (req: Request, res: Response) => {
         // Check if already updated today
         let apiConfig = await ApiConfig.findOne({ key: 'fixtures_update' });
         if (apiConfig && apiConfig.lastUpdatedString === todayStr) {
-            return res.status(200).json({ 
-                success: true, 
-                message: `Already updated today (${todayStr}). API call skipped to save quota.` 
+            return res.status(200).json({
+                success: true,
+                message: `Already updated today (${todayStr}). API call skipped to save quota.`
             });
         }
 
@@ -198,7 +220,7 @@ export const updateFixturesFromApi = async (req: Request, res: Response) => {
 
         let savedCount = 0;
         let assignedCount = 0;
-        
+
         // Get all gameweeks to check for assignments
         const gameweeks = await Gameweek.find();
 
@@ -209,38 +231,33 @@ export const updateFixturesFromApi = async (req: Request, res: Response) => {
             // Filter for World Cup (league id 1) as requested by user
             const worldCupFixtures = apiFixtures.filter((f: any) => f.league && f.league.id === 1);
 
-            for (const apiFixture of worldCupFixtures) {
-                const existing = await Fixture.findOne({ 'fixture.id': apiFixture.fixture.id });
-                
-                // If fixture exists and status was NS, update it.
-                // Or if it didn't exist, we insert it.
+            for (const rawFixture of worldCupFixtures) {
+                const apiFixture: any = rawFixture;
+                const existing = await Fixture.findOne({ fixtureId: apiFixture.id });
+
                 if (existing) {
-                    if (existing.fixture.status.short === 'NS' || existing.fixture.status.short !== apiFixture.fixture.status.short) {
-                        Object.assign(existing, apiFixture);
-                        await existing.save();
-                        savedCount++;
-                    }
+                    Object.assign(existing, apiFixture);
+                    await existing.save();
+                    savedCount++;
                 } else {
                     await Fixture.create(apiFixture);
                     savedCount++;
                 }
 
-                // Check gameweek assignment based on IST date
-                const fixtureIstDate = dayjs(apiFixture.fixture.date).tz('Asia/Kolkata');
-                
+                const fixtureStart = dayjs.unix(apiFixture.startTimestamp || 0);
+
                 for (const gw of gameweeks) {
-                    // Make end date fully inclusive of the day (e.g., end of 28th)
                     const gwStartMs = dayjs(gw.startDate).valueOf();
                     const gwEndMs = dayjs(gw.endDate).endOf('day').valueOf();
-                    const fixtureMs = fixtureIstDate.valueOf();
-                    
+                    const fixtureMs = fixtureStart.valueOf();
+
                     if (fixtureMs >= gwStartMs && fixtureMs <= gwEndMs) {
-                        if (!gw.fixtures.includes(apiFixture.fixture.id)) {
-                            gw.fixtures.push(apiFixture.fixture.id);
+                        if (!gw.fixtures.includes(apiFixture.fixtureId ?? apiFixture.id)) {
+                            gw.fixtures.push(apiFixture.fixtureId ?? apiFixture.id);
                             await gw.save();
                             assignedCount++;
                         }
-                        break; // Fixture falls in one gameweek
+                        break;
                     }
                 }
             }
@@ -254,14 +271,14 @@ export const updateFixturesFromApi = async (req: Request, res: Response) => {
         apiConfig.lastUpdatedString = todayStr;
         await apiConfig.save();
 
-        res.status(200).json({ 
-            success: true, 
-            message: `Updated/Inserted ${savedCount} fixtures and assigned ${assignedCount} fixtures to gameweeks.` 
+        res.status(200).json({
+            success: true,
+            message: `Updated/Inserted ${savedCount} fixtures and assigned ${assignedCount} fixtures to gameweeks.`
         });
 
     } catch (error: any) {
         console.error('Error updating fixtures from API:', error.message || error);
-        res.status(500).json({ error: 'Failed to update fixtures from API' });
+        res.status(500).json({ error: error.message || 'Failed to update fixtures from API' });
     }
 };
 
@@ -276,125 +293,144 @@ export const getMatchDetails = async (req: Request, res: Response) => {
             return res.status(400).json({ error: 'Invalid fixture ID' });
         }
 
-        const [playersData, eventsData] = await Promise.all([
-            fetchFixturePlayers(fixtureId),
-            fetchFixtureEvents(fixtureId)
-        ]);
-
-        const players = playersData.response || [];
-        const events = eventsData.response || [];
-
-        // Save to MatchDetails model
-        await MatchDetails.findOneAndUpdate(
-            { fixtureId },
-            { 
-                fixtureId,
-                players,
-                events
-            },
-            { upsert: true, new: true }
-        );
-
         const gw = await Gameweek.findOne({ fixtures: fixtureId });
         if (!gw) {
-            return res.status(400).json({ error: 'Cannot fetch match details. Fixture is not assigned to any gameweek.' });
+            return res.status(400).json({ error: 'Cannot add to fantasy. Fixture is not assigned to any gameweek.' });
         }
         const gameweekId = gw.number;
 
-        if (players && players.length > 0) {
-            for (const teamData of players) {
-                const teamId = teamData.team.id;
-                for (const item of teamData.players) {
-                    const playerInfo = item.player;
-                    const stats = item.statistics[0]; // Assuming first item in array contains the relevant stats
-
-                    if (!stats) continue;
-
-                    let subOnMinute = 0;
-                    let subOffMinute = 90; // Default if they started and finished
-                    
-                    if (stats.games.substitute) {
-                        const subOnEvent = events.find((e: any) => e.type === 'subst' && e.assist.id === playerInfo.id);
-                        if (subOnEvent) {
-                            subOnMinute = subOnEvent.time.elapsed;
-                        } else {
-                            subOnMinute = 90 - (stats.games.minutes || 0); // rough estimate
-                        }
-                    }
-                    
-                    const subOffEvent = events.find((e: any) => e.type === 'subst' && e.player.id === playerInfo.id);
-                    if (subOffEvent) {
-                        subOffMinute = subOffEvent.time.elapsed;
-                    } else {
-                        const redCardEvent = events.find((e: any) => e.type === 'Card' && e.detail === 'Red Card' && e.player.id === playerInfo.id);
-                        if (redCardEvent) {
-                            subOffMinute = redCardEvent.time.elapsed;
-                        }
-                    }
-
-                    const goalsConceded = events.filter((e: any) => {
-                        if (e.type !== 'Goal') return false;
-                        let isConceded = false;
-                        if (e.team.id !== teamId && e.detail !== 'Own Goal') {
-                            isConceded = true;
-                        } else if (e.team.id === teamId && e.detail === 'Own Goal') {
-                            isConceded = true;
-                        }
-                        if (isConceded) {
-                            const goalMinute = e.time.elapsed;
-                            return goalMinute >= subOnMinute && goalMinute <= subOffMinute;
-                        }
-                        return false;
-                    });
-
-                    const played60Mins = (stats.games.minutes || 0) >= 60;
-                    const cleansheet = played60Mins && goalsConceded.length === 0;
-
-                    stats.games.cleansheet = cleansheet;
-
-                    const dummyPlayer = {
-                        position: stats.games.position
-                    } as any;
-                    
-                    const gwPoints = calculatePlayerPoints(dummyPlayer, stats);
-
-                    // Ensure PlayerStats exists
-                    await PlayerStats.findOneAndUpdate(
-                        { playerId: playerInfo.id },
-                        { $set: { playerId: playerInfo.id } },
-                        { upsert: true, new: true }
-                    );
-
-                    // Pull existing gameweek data and push the new one
-                    await PlayerStats.findOneAndUpdate(
-                        { playerId: playerInfo.id },
-                        { $pull: { gameweeks: { id: gameweekId } } }
-                    );
-                    
-                    const updatedStats = await PlayerStats.findOneAndUpdate(
-                        { playerId: playerInfo.id },
-                        { $push: { gameweeks: { id: gameweekId, stats, points: gwPoints, fixtureId } } },
-                        { new: true }
-                    );
-
-                    if (updatedStats) {
-                        const total = updatedStats.gameweeks.reduce((sum, gw) => sum + (gw.points || 0), 0);
-                        updatedStats.totalPoints = total;
-                        await updatedStats.save();
-                    }
-                }
-            }
+        const matchDetails = await MatchDetails.findOne({ fixtureId });
+        if (!matchDetails || !matchDetails.lineups?.length) {
+            return res.status(400).json({ error: 'No lineup data available. Run seed:fixtures first.' });
         }
 
-        res.status(200).json({ 
-            success: true, 
-            message: `Match details saved successfully for fixture ${fixtureId}`,
-            data: { players, events }
+        const incidents = matchDetails.incidents || [];
+
+        let playersProcessed = 0;
+
+        for (const entry of matchDetails.lineups) {
+            if (!entry.playerId) continue;
+
+            const stats = mapSofascoreToPlayerMatchStat(entry, incidents);
+
+            const dummyPlayer = { position: entry.position } as any;
+            const gwPoints = calculatePlayerPoints(dummyPlayer, stats);
+
+            await PlayerStats.findOneAndUpdate(
+                { playerId: entry.playerId },
+                { $set: { playerId: entry.playerId } },
+                { upsert: true, new: true }
+            );
+
+            await PlayerStats.findOneAndUpdate(
+                { playerId: entry.playerId },
+                { $pull: { gameweeks: { id: gameweekId } } }
+            );
+
+            const updatedStats = await PlayerStats.findOneAndUpdate(
+                { playerId: entry.playerId },
+                { $push: { gameweeks: { id: gameweekId, stats, points: gwPoints, fixtureId } } },
+                { new: true }
+            );
+
+            if (updatedStats) {
+                const total = updatedStats.gameweeks.reduce((sum, gwEntry) => sum + (gwEntry.points || 0), 0);
+                updatedStats.totalPoints = total;
+                await updatedStats.save();
+            }
+
+            playersProcessed++;
+        }
+
+        await MatchDetails.findOneAndUpdate(
+            { fixtureId },
+            { $set: { addedtofantasy: true } }
+        );
+
+        res.status(200).json({
+            success: true,
+            message: `Added to fantasy: ${playersProcessed} players processed for fixture ${fixtureId}`,
         });
 
     } catch (error: any) {
-        console.error('Error fetching/saving match details:', error.message || error);
-        res.status(500).json({ error: 'Failed to fetch match details' });
+        console.error('Error adding to fantasy:', error.message || error);
+        res.status(500).json({ error: error.message || 'Failed to add to fantasy' });
+    }
+};
+
+export const getMatchIncidentsAndStats = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const fixtureId = parseInt(req.params.id);
+        if (isNaN(fixtureId)) {
+            return res.status(400).json({ error: 'Invalid fixture ID' });
+        }
+
+        const [fixture, matchDetails, teams] = await Promise.all([
+            Fixture.findOne({ fixtureId }).lean(),
+            MatchDetails.findOne({ fixtureId }).lean(),
+            Team.find({}, 'id name shortName').lean(),
+        ]);
+
+        if (!fixture) {
+            return res.status(404).json({ error: 'Fixture not found' });
+        }
+
+        const teamMap = new Map(teams.map((t: any) => [t.id, t]));
+        const homeTeam = teamMap.get(fixture.homeTeam?.id ?? -1);
+        const awayTeam = teamMap.get(fixture.awayTeam?.id ?? -1);
+
+        const fixtureInfo = {
+            ...fixture,
+            homeTeamName: homeTeam?.name ?? null,
+            homeTeamShortName: homeTeam?.shortName ?? null,
+            awayTeamName: awayTeam?.name ?? null,
+            awayTeamShortName: awayTeam?.shortName ?? null,
+        };
+
+        const incidents = matchDetails?.incidents || [];
+        const lineups = matchDetails?.lineups || [];
+        const players = matchDetails?.players || [];
+
+        const playerIds = lineups.map((l: any) => l.playerId).filter(Boolean);
+        const playerStatsDocs = await PlayerStats.find({ playerId: { $in: playerIds } }).lean();
+        const playerStatsMap = new Map(playerStatsDocs.map((ps: any) => [ps.playerId, ps]));
+
+        const playerDocs = await Player.find({ id: { $in: playerIds } }, 'id name photo teamId position').lean();
+        const playerDocMap = new Map(playerDocs.map((p: any) => [p.id, p]));
+
+        const playerInfo = lineups.map((entry: any) => {
+            const statsDoc = playerStatsMap.get(entry.playerId);
+            const playerDoc = playerDocMap.get(entry.playerId);
+            const gwStat = statsDoc?.gameweeks?.find((gw: any) => gw.fixtureId === fixtureId);
+
+            return {
+                playerId: entry.playerId,
+                playerName: playerDoc?.name ?? `Player #${entry.playerId}`,
+                playerPhoto: playerDoc?.photo ?? null,
+                teamId: entry.teamId,
+                side: entry.side,
+                position: entry.position || playerDoc?.position || 'Unknown',
+                lineupStatistics: entry.statistics || {},
+                gameweekStats: gwStat?.stats || null,
+                gameweekPoints: gwStat?.points ?? null,
+            };
+        });
+
+        res.status(200).json({
+            data: {
+                fixture: fixtureInfo,
+                incidents,
+                playerInfo,
+                players,
+            },
+        });
+    } catch (error: any) {
+        console.error('Error fetching match incidents and stats:', error.message || error);
+        res.status(500).json({ error: error.message || 'Failed to fetch match data' });
     }
 };
 
@@ -403,7 +439,7 @@ export const getUsers = async (req: Request, res: Response) => {
         if (req.user && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Access denied. Admins only.' });
         }
-        
+
         // Fetch all users
         const users = await User.find().select('-password').sort({ createdAt: -1 });
         res.status(200).json({ data: users });
@@ -418,11 +454,29 @@ export const getAdminPlayers = async (req: Request, res: Response) => {
         if (req.user && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Access denied. Admins only.' });
         }
-        
+
         const search = req.query.search as string;
-        
+        const excludeTeamId = req.query.excludeTeamId as string;
+
         const { Player } = require('../models/Player');
         const { Team } = require('../models/Team');
+        const { FantasyTeam } = require('../models/FantasyTeam');
+
+        // Find all fantasy teams except the one being edited (if excludeTeamId is provided)
+        let ftQuery = {};
+        if (excludeTeamId && mongoose.Types.ObjectId.isValid(excludeTeamId)) {
+            ftQuery = { _id: { $ne: excludeTeamId } };
+        }
+        const fantasyTeams = await FantasyTeam.find(ftQuery).lean();
+
+        const takenPlayerIds = new Set<number>();
+        for (const ft of fantasyTeams) {
+            if (ft.currentSquad && ft.currentSquad.picks) {
+                for (const pick of ft.currentSquad.picks) {
+                    takenPlayerIds.add(pick.playerId);
+                }
+            }
+        }
 
         let query: any = {};
         if (search) {
@@ -430,6 +484,11 @@ export const getAdminPlayers = async (req: Request, res: Response) => {
                 { name: { $regex: new RegExp(search, 'i') } },
                 { webName: { $regex: new RegExp(search, 'i') } }
             ];
+        }
+
+        // Exclude taken players
+        if (takenPlayerIds.size > 0) {
+            query.id = { $nin: Array.from(takenPlayerIds) };
         }
 
         const players = await Player.find(query).lean();
@@ -440,7 +499,8 @@ export const getAdminPlayers = async (req: Request, res: Response) => {
             id: p.id,
             name: p.name || p.webName || 'Unknown',
             position: p.position || 'Unknown',
-            team: teamMap.get(p.teamId) || 'Unknown'
+            team: teamMap.get(p.teamId) || 'Unknown',
+            auctionPrice: p.auctionPrice ?? 0
         }));
 
         res.status(200).json({ data: mappedPlayers });
@@ -491,7 +551,7 @@ export const createFantasyTeam = async (req: Request, res: Response) => {
             return res.status(400).json({ error: 'Exactly 11 players must be selected as starting.' });
         }
 
-        if (startingCounts.GK !== 1 || 
+        if (startingCounts.GK !== 1 ||
             startingCounts.DEF < 3 || startingCounts.DEF > 5 ||
             startingCounts.MID < 2 || startingCounts.MID > 5 ||
             startingCounts.FWD < 1 || startingCounts.FWD > 3) {
@@ -535,6 +595,16 @@ export const createFantasyTeam = async (req: Request, res: Response) => {
 
         await newFantasyTeam.save();
 
+        // Update players' auctionPrices
+        for (const p of squad) {
+            if (p.auctionPrice !== undefined) {
+                await Player.updateOne(
+                    { id: p.element },
+                    { $set: { auctionPrice: Number(p.auctionPrice) } }
+                );
+            }
+        }
+
         // Update User roles to manager (only for regular users)
         await User.updateMany(
             { _id: { $in: managers }, role: 'user' },
@@ -553,13 +623,13 @@ export const getFantasyTeams = async (req: Request, res: Response) => {
         if (req.user && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Access denied. Admins only.' });
         }
-        
+
         // Fetch all fantasy teams, populate managers and createdBy to show names
         const teams = await FantasyTeam.find()
             .populate('managers', 'username email')
             .populate('createdBy', 'username')
             .sort({ createdAt: -1 });
-            
+
         res.status(200).json({ data: teams });
     } catch (error) {
         console.error('Error fetching fantasy teams:', error);
@@ -572,12 +642,12 @@ export const getFantasyTeamById = async (req: Request, res: Response) => {
         if (req.user && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Access denied. Admins only.' });
         }
-        
+
         const team = await FantasyTeam.findById(req.params.id)
             .populate('managers', 'username email')
             .populate('createdBy', 'username')
             .lean();
-            
+
         if (!team) {
             return res.status(404).json({ error: 'Fantasy team not found.' });
         }
@@ -585,7 +655,7 @@ export const getFantasyTeamById = async (req: Request, res: Response) => {
         if (team.currentSquad && team.currentSquad.picks) {
             const playerIds = team.currentSquad.picks.map(p => p.playerId);
             const players = await Player.find({ id: { $in: playerIds } }).lean();
-            
+
             team.currentSquad.picks = team.currentSquad.picks.map((pick: any) => {
                 const player = players.find(p => p.id === pick.playerId);
                 return {
@@ -606,7 +676,7 @@ export const getFantasyTeamById = async (req: Request, res: Response) => {
                 };
             });
         }
-            
+
         res.status(200).json({ data: team });
     } catch (error) {
         console.error('Error fetching fantasy team:', error);
@@ -697,6 +767,16 @@ export const updateFantasyTeam = async (req: Request, res: Response) => {
 
         await team.save();
 
+        // Update players' auctionPrices
+        for (const p of squad) {
+            if (p.auctionPrice !== undefined) {
+                await Player.updateOne(
+                    { id: p.element },
+                    { $set: { auctionPrice: Number(p.auctionPrice) } }
+                );
+            }
+        }
+
         // Update User roles to manager (only for regular users)
         await User.updateMany(
             { _id: { $in: managers }, role: 'user' },
@@ -735,8 +815,8 @@ export const completeGameweek = async (req: Request, res: Response) => {
         const minutesMap = new Map<number, number>();
         for (const ps of allPlayerStats) {
             const gwData = ps.gameweeks.find(gw => gw.id === gameweek.number);
-            if (gwData && gwData.stats && gwData.stats.games) {
-                minutesMap.set(ps.playerId, gwData.stats.games.minutes || 0);
+            if (gwData && gwData.stats) {
+                minutesMap.set(ps.playerId, gwData.stats.minutesPlayed || 0);
             }
         }
 
@@ -744,7 +824,7 @@ export const completeGameweek = async (req: Request, res: Response) => {
         const { Player } = require('../models/Player');
         const players = await Player.find().lean();
         const pMap = new Map<number, any>(players.map((p: any) => [p.id, p]));
-        
+
         const resolvePosition = (posStr: string) => {
             const p = (posStr || '').toUpperCase();
             if (p === 'GK' || p === 'GOALKEEPER' || p === 'G') return 'GK';
@@ -764,19 +844,19 @@ export const completeGameweek = async (req: Request, res: Response) => {
             const rawPicks = team.currentSquad.picks.map(p => (p as any).toObject ? (p as any).toObject() : p);
             const preAutoSubPicks = JSON.parse(JSON.stringify(rawPicks));
             let picks = JSON.parse(JSON.stringify(rawPicks));
-            
+
             // Auto-subs logic
             const starters = picks.filter((p: any) => p.isStarting);
             const bench = picks.filter((p: any) => !p.isStarting).sort((a: any, b: any) => (a.subNumber || 0) - (b.subNumber || 0));
-            
+
             // Helper to get position of a pick
             const getPos = (pick: any) => resolvePosition(pMap.get(pick.playerId)?.position);
-            
+
             for (const starter of starters) {
                 const starterMins = minutesMap.get(starter.playerId) || 0;
                 if (starterMins === 0) {
                     const starterPos = getPos(starter);
-                    
+
                     if (starterPos === 'GK') {
                         // Can only sub with bench GK
                         const benchGk = bench.find((b: any) => getPos(b) === 'GK');
@@ -791,7 +871,7 @@ export const completeGameweek = async (req: Request, res: Response) => {
                         // Outfield player
                         for (const sub of bench) {
                             if (sub.isStarting || getPos(sub) === 'GK') continue; // already subbed in or is GK
-                            
+
                             if ((minutesMap.get(sub.playerId) || 0) > 0) {
                                 // Check if formation remains valid if we swap starter and sub
                                 // Calculate formation WITHOUT the starter, WITH the sub
@@ -802,11 +882,11 @@ export const completeGameweek = async (req: Request, res: Response) => {
                                     }
                                 }
                                 counts[getPos(sub) as keyof typeof counts]++; // Add sub
-                                
+
                                 if (counts.DEF >= 3 && counts.DEF <= 5 &&
                                     counts.MID >= 2 && counts.MID <= 5 &&
                                     counts.FWD >= 1 && counts.FWD <= 3) {
-                                    
+
                                     // Swap
                                     starter.isStarting = false;
                                     starter.subNumber = sub.subNumber;
@@ -822,7 +902,7 @@ export const completeGameweek = async (req: Request, res: Response) => {
 
             // Push to history
             if (!team.history) team.history = [];
-            
+
             // Clean up subNumber for starters (should be 0)
             picks.forEach((p: any) => {
                 if (p.isStarting) p.subNumber = 0;
@@ -883,7 +963,7 @@ export const revertGameweek = async (req: Request, res: Response) => {
 
         const { id } = req.params;
         const Gameweek = (await import("../models/Gameweek")).Gameweek;
-        
+
         const gameweek = await Gameweek.findById(id);
         if (!gameweek) {
             return res.status(404).json({ error: 'Gameweek not found' });
@@ -921,7 +1001,7 @@ export const revertGameweek = async (req: Request, res: Response) => {
         // 3. Remove history entry from all FantasyTeams and restore preAutoSubPicks if available
         const FantasyTeam = (await import("../models/FantasyTeam")).FantasyTeam;
         const teams = await FantasyTeam.find({ 'history.gameweek': gameweek.number });
-        
+
         for (const team of teams) {
             const gwHistory = team.history.find((h: any) => h.gameweek === gameweek.number);
             if (gwHistory && gwHistory.preAutoSubPicks && gwHistory.preAutoSubPicks.length > 0) {
@@ -946,12 +1026,12 @@ export const togglePickTeam = async (req: Request, res: Response) => {
         }
 
         const { enabled, deadlineDate } = req.body; // boolean
-        
+
         let apiConfig = await ApiConfig.findOne({ key: 'pick_team_enabled' });
         if (!apiConfig) {
-            apiConfig = new ApiConfig({ 
-                key: 'pick_team_enabled', 
-                lastUpdatedString: String(enabled), 
+            apiConfig = new ApiConfig({
+                key: 'pick_team_enabled',
+                lastUpdatedString: String(enabled),
                 lastUpdated: new Date(),
                 deadlineDate: deadlineDate ? new Date(deadlineDate) : undefined
             });
@@ -984,5 +1064,332 @@ export const getPickTeamStatus = async (req: Request, res: Response) => {
     } catch (error: any) {
         console.error('Error fetching pick team status:', error);
         res.status(500).json({ error: 'Failed to fetch pick team status' });
+    }
+};
+
+export const getLeagues = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const leagues = await League.find({}).lean();
+        res.status(200).json({ data: leagues });
+    } catch (error) {
+        console.error('Error fetching leagues:', error);
+        res.status(500).json({ error: 'Failed to fetch leagues' });
+    }
+};
+
+export const fetchLeagueRounds = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const league = await League.findById(req.params.id).lean();
+        if (!league) {
+            return res.status(404).json({ error: 'League not found' });
+        }
+
+        const leagueId = (league as any).leagueId;
+        const seasonId = (league as any).leagueSeasonId;
+
+        if (!leagueId || !seasonId) {
+            return res.status(400).json({ error: 'League has no external leagueId or leagueSeasonId configured' });
+        }
+
+        const url = `https://www.sofascore.com/api/v1/unique-tournament/${leagueId}/season/${seasonId}/rounds`;
+        const data = await fetchSofascoreJSON(url);
+
+        const rounds: number[] = data.rounds?.map((r: any) => r.round) || [];
+        const currentRound = data.currentRound?.round ?? null;
+
+        // Save totalRounds to league
+        await League.findByIdAndUpdate(req.params.id, {
+            $set: { totalRounds: rounds.length, currentRound }
+        });
+
+        res.status(200).json({ data: { rounds, currentRound, totalRounds: rounds.length } });
+    } catch (error: any) {
+        console.error('Error fetching league rounds:', error);
+        res.status(500).json({ error: `Failed to fetch rounds: ${error.message}` });
+    }
+};
+
+export const updateLeague = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const { currentRound, totalRounds } = req.body;
+        const updateData: Record<string, any> = {};
+
+        if (currentRound !== undefined) updateData.currentRound = currentRound;
+        if (totalRounds !== undefined) updateData.totalRounds = totalRounds;
+
+        if (Object.keys(updateData).length === 0) {
+            return res.status(400).json({ error: 'No fields to update' });
+        }
+
+        const league = await League.findByIdAndUpdate(
+            req.params.id,
+            { $set: updateData },
+            { new: true }
+        ).lean();
+
+        if (!league) {
+            return res.status(404).json({ error: 'League not found' });
+        }
+
+        res.status(200).json({ data: league });
+    } catch (error: any) {
+        console.error('Error updating league:', error);
+        res.status(500).json({ error: `Failed to update league: ${error.message}` });
+    }
+};
+
+// --- H2H Admin Controllers ---
+
+export const getH2HLeague = async (req: Request, res: Response) => {
+    try {
+        if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+
+        // Get the H2H league for the current season (or first one if no season specified)
+        const { season } = req.query;
+        const query = season ? { season: Number(season) } : {};
+        const league = await H2HLeague.findOne(query)
+            .populate('fantasyTeams', 'name managers')
+            .lean();
+
+        if (!league) {
+            return res.json({ data: null });
+        }
+
+        // Count fixtures
+        const completedGws = await Gameweek.find({ isCompleted: true }).select('number').lean();
+        const completedGwNumbers = completedGws.map(g => g.number);
+
+        const total = await H2HFixture.countDocuments({ league: league._id });
+        const completed = await H2HFixture.countDocuments({ league: league._id, gameweek: { $in: completedGwNumbers } });
+
+        res.json({ data: { ...league, fixtureCount: total, completedFixtures: completed } });
+    } catch (error: any) {
+        console.error('Error getting H2H league:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const upsertH2HLeague = async (req: Request, res: Response) => {
+    try {
+        if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+
+        const { name, fantasyTeamIds, gameweekStart, gameweekEnd, season } = req.body;
+
+        if (!name || !fantasyTeamIds || fantasyTeamIds.length < 2) {
+            return res.status(400).json({ error: 'Name and at least 2 fantasy teams required' });
+        }
+
+        const seasonNum = season || 1;
+        
+        // Find existing league for this season
+        let league = await H2HLeague.findOne({ season: seasonNum });
+        
+        if (league) {
+            // Update existing
+            league.name = name;
+            league.fantasyTeams = fantasyTeamIds;
+            league.gameweekStart = gameweekStart || 1;
+            league.gameweekEnd = gameweekEnd || 38;
+            await league.save();
+        } else {
+            // Create new
+            league = await H2HLeague.create({
+                name,
+                fantasyTeams: fantasyTeamIds,
+                gameweekStart: gameweekStart || 1,
+                gameweekEnd: gameweekEnd || 38,
+                season: seasonNum,
+            });
+        }
+
+        // Populate before returning
+        await league.populate('fantasyTeams', 'name managers');
+        
+        res.json({ data: league });
+    } catch (error: any) {
+        console.error('Error upserting H2H league:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const deleteH2HLeague = async (req: Request, res: Response) => {
+    try {
+        if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+
+        const { id } = req.params;
+        await H2HFixture.deleteMany({ league: id });
+        await H2HLeague.findByIdAndDelete(id);
+
+        res.json({ message: 'H2H league deleted' });
+    } catch (error: any) {
+        console.error('Error deleting H2H league:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const generateH2HFixtures = async (req: Request, res: Response) => {
+    try {
+        if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+
+        const { id } = req.params;
+        const league = await H2HLeague.findById(id);
+        if (!league) return res.status(404).json({ error: 'H2H league not found' });
+
+        // Delete existing fixtures for this league to allow regeneration
+        await H2HFixture.deleteMany({ league: id });
+
+        const teamIds = league.fantasyTeams.map(t => t.toString());
+        const numTeams = teamIds.length;
+        const gwStart = league.gameweekStart;
+        const gwEnd = league.gameweekEnd;
+
+        // Circle method for round-robin
+        // If odd number of teams, add a "bye" placeholder
+        const teams = [...teamIds];
+        if (numTeams % 2 !== 0) {
+            teams.push('bye');
+        }
+
+        const n = teams.length; // always even now
+        const rounds = n - 1;   // number of rounds per leg
+
+        const fixtureDocs: any[] = [];
+
+        // Generate first leg fixtures
+        for (let round = 0; round < rounds; round++) {
+            const gw = gwStart + round;
+            if (gw > gwEnd) break;
+
+            const roundFixtures = getRoundPairings(teams, round, n);
+            for (const [home, away] of roundFixtures) {
+                if (home === 'bye' || away === 'bye') continue;
+                fixtureDocs.push({
+                    league: id,
+                    homeTeam: home,
+                    awayTeam: away,
+                    gameweek: gw,
+                });
+            }
+        }
+
+        // Generate second leg (reversed home/away, offset by first leg rounds)
+        for (let round = 0; round < rounds; round++) {
+            const gw = gwStart + rounds + round;
+            if (gw > gwEnd) break;
+
+            const roundFixtures = getRoundPairings(teams, round, n);
+            for (const [home, away] of roundFixtures) {
+                if (home === 'bye' || away === 'bye') continue;
+                fixtureDocs.push({
+                    league: id,
+                    homeTeam: away, // reversed
+                    awayTeam: home,
+                    gameweek: gw,
+                });
+            }
+        }
+
+const created = await H2HFixture.insertMany(fixtureDocs);
+
+        const gameweeks = Array.from(new Set(created.map((f: any) => f.gameweek))).sort((a: number, b: number) => a - b);
+
+        res.json({
+            data: {
+                leagueId: id,
+                fixturesCreated: created.length,
+                gameweeks,
+            },
+        });
+    } catch (error: any) {
+        console.error('Error generating H2H fixtures:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// Circle method pairings for a given round
+function getRoundPairings(teams: string[], round: number, n: number): [string, string][] {
+    const fixed = teams[0];
+    const rotating = teams.slice(1);
+    const pairings: [string, string][] = [];
+
+    // Rotate the rotating array: move last element to position (round) from end
+    const rotated = [...rotating];
+    for (let i = 0; i < round; i++) {
+        rotated.unshift(rotated.pop()!);
+    }
+
+    // Pair fixed team with first rotating team
+    pairings.push([fixed, rotated[0]]);
+
+    // Pair remaining: second with second-to-last, etc.
+    for (let i = 1; i < n / 2; i++) {
+        pairings.push([rotated[i], rotated[n - 2 - i]]);
+    }
+
+    return pairings;
+}
+
+export const getH2HLeagueFixtures = async (req: Request, res: Response) => {
+    try {
+        if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+
+        const { id } = req.params;
+        const league = await H2HLeague.findById(id).lean();
+        if (!league) return res.status(404).json({ error: 'H2H league not found' });
+
+        const fixtures = await H2HFixture.find({ league: id })
+            .populate('homeTeam', 'name')
+            .populate('awayTeam', 'name')
+            .sort({ gameweek: 1 })
+            .lean();
+
+        // Enrich fixtures with live scores for completed GWs
+        const gwPointsMap = await getLeagueAllGWPoints(league);
+
+        const enrichedFixtures = fixtures.map(fix => {
+            const gwPoints = gwPointsMap.get(fix.gameweek);
+            if (gwPoints) {
+                const homeScore = gwPoints.get(fix.homeTeam._id.toString()) ?? 0;
+                const awayScore = gwPoints.get(fix.awayTeam._id.toString()) ?? 0;
+                let winner: string | 'draw' | null = null;
+                if (homeScore > awayScore) winner = fix.homeTeam._id.toString();
+                else if (awayScore > homeScore) winner = fix.awayTeam._id.toString();
+                else winner = 'draw';
+
+                return {
+                    ...fix,
+                    homeScore,
+                    awayScore,
+                    status: 'completed',
+                    winner,
+                };
+            }
+            return fix;
+        });
+
+        // Group by gameweek
+        const byGameweek: Record<number, any[]> = {};
+        for (const f of enrichedFixtures) {
+            const gw = f.gameweek;
+            if (!byGameweek[gw]) byGameweek[gw] = [];
+            byGameweek[gw].push(f);
+        }
+
+        res.json({ data: { fixtures: enrichedFixtures, byGameweek } });
+    } catch (error: any) {
+        console.error('Error getting H2H fixtures:', error);
+        res.status(500).json({ error: error.message });
     }
 };

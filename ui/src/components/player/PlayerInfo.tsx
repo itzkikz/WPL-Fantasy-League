@@ -9,21 +9,18 @@ export default function PlayerInfo({
   player: Player;
   playerStats: PlayerStats;
 }) {
-  const teamColor = player?.teamColor || "#000000";
-  const teamTextColor = player?.teamTextColor || "#ffffff";
-
   return (
     <div
       className="relative px-6 pt-12 pb-6 rounded-t-3xl overflow-hidden shadow-lg flex-none"
       style={{
-        background: `linear-gradient(135deg, ${teamColor} 0%, ${teamColor}dd 100%)`,
-        color: teamTextColor
+        background: `linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%)`,
+        color: "var(--color-text-primary)"
       }}
     >
       {/* Decorative Background Element */}
       <div
         className="absolute top-0 right-0 w-48 h-48 rounded-full opacity-20 blur-3xl -mr-20 -mt-20 pointer-events-none"
-        style={{ backgroundColor: teamTextColor }}
+        style={{ backgroundColor: "var(--color-text-primary)" }}
       ></div>
 
       <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -80,7 +77,7 @@ export default function PlayerInfo({
             <div className="flex items-center gap-2 bg-black/10 rounded-lg px-3 py-1.5 backdrop-blur-sm">
               <span className="opacity-70 text-xs uppercase font-bold tracking-wider">Avg</span>
               <span className="font-bold text-sm">
-                {((playerStats?.overall?.total_point || 0) / (playerStats?.overall?.games?.appearances || 1)).toFixed(2)}
+                {((playerStats?.overall?.total_point || 0) / (playerStats?.overall?.appearances || 1)).toFixed(2)}
               </span>
             </div>
 

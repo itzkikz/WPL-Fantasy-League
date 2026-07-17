@@ -34,8 +34,9 @@ export const getFixtures = async (req: Request, res: Response) => {
     console.log(`Found ${worldCupFixtures.length} World Cup fixtures for ${targetDate}`);
 
     let savedCount = 0;
-    for (const apiFixture of worldCupFixtures) {
-      const existing = await Fixture.findOne({ 'fixture.id': apiFixture.fixture.id });
+    for (const rawFixture of worldCupFixtures) {
+      const apiFixture: any = rawFixture;
+      const existing = await Fixture.findOne({ fixtureId: apiFixture.id });
       if (existing) {
         Object.assign(existing, apiFixture);
         await existing.save();

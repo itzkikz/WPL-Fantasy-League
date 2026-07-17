@@ -1,5 +1,6 @@
 import Info from "./icons/Info";
 import { Player } from "../features/players/types";
+import { getContrastText } from "../libs/helpers/color";
 
 interface ListPlayerItemProps {
   isSmall?: boolean;
@@ -23,7 +24,7 @@ const ListPlayerItem = ({ isSmall, player, onClick }: ListPlayerItemProps) => {
         className="w-10 h-10 rounded flex items-center justify-center mr-3"
         style={{ backgroundColor: player.teamColor }}
       >
-        <span className="text-xs font-bold" style={{ color: player.teamTextColor || "#ffffff" }}>
+        <span className="text-xs font-bold" style={{ color: getContrastText(player.teamColor, player.teamTextColor || "#ffffff") }}>
           {player.team}
         </span>
       </div>

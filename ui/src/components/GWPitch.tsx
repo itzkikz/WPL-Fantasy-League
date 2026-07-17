@@ -2,9 +2,7 @@ import { Player } from "../features/players/types";
 import { Formation } from "../features/standings/types";
 import { useManageTeamStore } from "../store/useManageTeamStore";
 import { usePlayerStore } from "../store/usePlayerStore";
-import PitchBanner from "./PitchBanner";
 import PitchPlayerCard from "./PitchPlayerCard";
-import Logo from "../assets/wplf1-dark.png";
 
 interface GWPitchProps {
   starting: Formation;
@@ -13,6 +11,60 @@ interface GWPitchProps {
   pickMyTeam?: boolean;
   reset?: () => void;
 }
+
+const getPlayerLeft = (key: string, index: number, total: number) => {
+  if (total === 1) return "50%";
+  
+  if (key === "DEF") {
+    if (total === 2) return index === 0 ? "33%" : "67%";
+    if (total === 3) return index === 0 ? "20%" : index === 1 ? "50%" : "80%";
+    if (total === 4) {
+      const positions = ["15%", "38%", "62%", "85%"];
+      return positions[index];
+    }
+    if (total === 5) return index === 0 ? "10%" : index === 1 ? "30%" : index === 2 ? "50%" : index === 3 ? "70%" : "90%";
+  }
+
+  if (key === "MID") {
+    if (total === 2) return index === 0 ? "33%" : "67%";
+    if (total === 3) return index === 0 ? "20%" : index === 1 ? "50%" : "80%";
+    if (total === 4) {
+      const positions = ["18%", "39%", "61%", "82%"];
+      return positions[index];
+    }
+    if (total === 5) return index === 0 ? "10%" : index === 1 ? "30%" : index === 2 ? "50%" : index === 3 ? "70%" : "90%";
+  }
+
+  if (key === "FWD") {
+    if (total === 2) return index === 0 ? "35%" : "65%";
+    if (total === 3) return index === 0 ? "20%" : index === 1 ? "50%" : "80%";
+  }
+
+  // Fallbacks
+  if (total === 2) return index === 0 ? "30%" : "70%";
+  if (total === 3) return index === 0 ? "20%" : index === 1 ? "50%" : "80%";
+  return "50%";
+};
+
+const getPositionStyle = (key: string, index: number, total: number) => {
+  const topMap: Record<string, string> = {
+    GK: "7%",
+    DEF: "22%",
+    MID: "45%",
+    FWD: "72%",
+  };
+  const scaleMap: Record<string, number> = {
+    GK: 0.75,
+    DEF: 0.85,
+    MID: 0.95,
+    FWD: 1.1,
+  };
+  return {
+    top: topMap[key] || "50%",
+    left: getPlayerLeft(key, index, total),
+    transform: `translateX(-50%) scale(${scaleMap[key] || 1.0})`,
+  };
+};
 
 const GWPitch = ({
   starting,
@@ -42,27 +94,83 @@ const GWPitch = ({
     }
     return glowBorderClass;
   };
+
   return (
     <>
-      <div className="flex flex-col lg:flex-row w-full max-w-6xl mx-auto gap-4 lg:gap-8 lg:h-full lg:overflow-hidden">
+      {/* Custom Styles Injection to support clean 3D perspective pitch parameters */}
+      <style>{`
+        .pitch-container {
+          position: relative;
+          width: 100%;
+          height: 620px;
+          overflow: hidden;
+          background: #080612;
+          border-radius: 16px;
+          border: 1px solid var(--color-border);
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .pitch {
+          position: absolute;
+          inset: 0;
+          perspective: 900px;
+          pointer-events: none;
+          overflow: hidden;
+        }
+        .pitch-image {
+          position: absolute;
+          width: 130%;
+          left: -15%;
+          top: 0;
+          height: 100%;
+          transform-origin: center top;
+          transform: rotateX(58deg) scale(1.2);
+          object-fit: cover;
+          opacity: 0.85;
+          clip-path: polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%);
+        }
+        .pitch::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.35),
+            transparent 20%,
+            transparent 80%,
+            rgba(0, 0, 0, 0.45)
+          );
+          z-index: 2;
+        }
+        .player-absolute {
+          position: absolute;
+          transform: translateX(-50%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          z-index: 10;
+          filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.45));
+        }
+      `}</style>
+ 
+      <div className="flex flex-col lg:flex-row w-full max-w-6xl mx-auto gap-4 lg:gap-8">
+        
         {/* Pitch Container */}
-        <div
-          className="relative flex flex-col flex-1 gap-5 bg-top bg-no-repeat box-border py-6 w-full justify-start min-h-[80vh] lg:min-h-0 lg:h-full lg:bg-center lg:bg-contain lg:py-2"
-          style={{
-            backgroundImage: "url('/pitch.svg')",
-          }}
-        >
-          <div className="hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-sm items-center  justify-center mr-2">
+        <div className="pitch-container flex-1">
+          
+          {/* Pitch background image layer */}
+          <div className="pitch">
             <img
-              src={Logo}
-              alt="PLogo"
-              className="w-80 h-80 opacity-20"
+              src="/pitch.png"
+              className="pitch-image"
+              alt="tactical field"
             />
           </div>
+ 
+          {/* Cancel Substitution Button */}
           {isSubstitution && (
             <div
               onClick={reset}
-              className="absolute top-4 right-4 w-10 h-10 bg-white/80 hover:bg-white dark:bg-black/50 dark:hover:bg-black/70 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg cursor-pointer z-10 transition-all duration-200 border border-gray-200 dark:border-white/10 active:scale-95"
+              className="absolute top-4 right-4 w-10 h-10 bg-white/80 hover:bg-white dark:bg-black/50 dark:hover:bg-black/70 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg cursor-pointer z-20 transition-all duration-200 border border-gray-200 dark:border-white/10 active:scale-95"
               aria-label="Cancel Substitution"
             >
               <svg
@@ -84,43 +192,50 @@ const GWPitch = ({
               </svg>
             </div>
           )}
-
-          <div className="flex flex-col justify-top w-full h-full gap-4 mb-4 lg:mb-0 lg:mt-0 lg:justify-center">
-            {Object.keys(starting).map((key: string) => (
-              <div key={key} className="flex justify-evenly gap-1 md:gap-3 select-none w-full px-2">
-                {starting[key].map((eachPlayer: Player) => (
-                  <div key={eachPlayer.id} className={`flex flex-col items-center`}>
+ 
+          {/* Players Overlay (Z-Indexed above pitch background with pointer events routed to cards) */}
+          <div className="absolute inset-0 z-10 pointer-events-none">
+            {Object.keys(starting).map((key: string) => {
+              const playersInLine = starting[key];
+              return playersInLine.map((eachPlayer: Player, index: number) => {
+                const style = getPositionStyle(key, index, playersInLine.length);
+                return (
+                  <div
+                    key={eachPlayer.id}
+                    style={style}
+                    className="player-absolute pointer-events-auto"
+                  >
                     <div
-                      className={`bg-light-secondary rounded-md relative cursor-pointer transition-all duration-300 ${getCardClass(eachPlayer?.isAvlSub || false, eachPlayer?.name)}`}
+                      className={`bg-transparent rounded-md relative cursor-pointer transition-all duration-300 ${getCardClass(
+                        eachPlayer?.isAvlSub || false,
+                        eachPlayer?.name
+                      )}`}
                     >
                       <PitchPlayerCard
-                        key={eachPlayer.id}
                         player={eachPlayer}
                         pickMyteam={pickMyTeam}
-                        onClick={() => {
-                          onClick(eachPlayer);
-                        }}
+                        onClick={() => onClick(eachPlayer)}
                       />
                     </div>
                   </div>
-                ))}
-              </div>
-            ))}
+                );
+              });
+            })}
           </div>
         </div>
-
-        {/* Bench Container */}
-        <div className="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-[#1a1a1a]/90 backdrop-blur-lg border-t border-gray-200 dark:border-white/10 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] py-3 px-2 z-20 lg:static lg:bg-none lg:bg-transparent lg:border-none lg:shadow-none lg:w-64 lg:flex-none lg:p-0 lg:z-0">
-          <div className="max-w-4xl mx-auto lg:mx-0 lg:h-full lg:flex lg:flex-col lg:justify-center">
-            <h3 className="text-center font-extrabold text-[10px] md:text-xs mb-3 tracking-widest uppercase text-gray-500 dark:text-gray-400 lg:mb-4">Substitutes</h3>
-            <div className="grid grid-cols-4 lg:flex lg:flex-col lg:gap-4">
+ 
+        {/* Bench Container (In-flow block element scrolling naturally with GWPitch) */}
+        <div className="w-full lg:w-64 flex-none bg-surface border border-border rounded-2xl p-4 shadow-card mt-4 lg:mt-0">
+          <div className="max-w-4xl mx-auto lg:mx-0">
+            <h3 className="text-center font-extrabold text-[10px] md:text-xs mb-3 tracking-widest uppercase text-text-muted lg:mb-4">Substitutes</h3>
+            <div className="grid grid-cols-4 lg:flex lg:flex-col lg:gap-3">
               {bench?.map((eachPlayer) => (
-                <div key={eachPlayer.id} className="flex flex-col items-center lg:flex-row lg:gap-3 lg:bg-white lg:dark:bg-gray-800 lg:p-2 lg:rounded-md lg:shadow-sm lg:w-full">
-                  <div className="text-[10px] md:text-xs font-bold text-gray-400 mb-1 lg:mb-0 lg:w-8 lg:text-center">
+                <div key={eachPlayer.id} className="flex flex-col items-center lg:flex-row lg:gap-3 lg:bg-white/5 lg:p-2 lg:rounded-xl lg:w-full">
+                  <div className="text-[10px] md:text-xs font-bold text-text-muted mb-1 lg:mb-0 lg:w-8 lg:text-center">
                     {eachPlayer.position}
                   </div>
                   <div
-                    className={`bg-light-secondary rounded-sm relative cursor-pointer ${getCardClass(eachPlayer?.isAvlSub || false, eachPlayer.name)}`}
+                    className={`bg-transparent rounded-sm relative cursor-pointer ${getCardClass(eachPlayer?.isAvlSub || false, eachPlayer.name)}`}
                   >
                     <PitchPlayerCard
                       player={eachPlayer}
@@ -130,15 +245,16 @@ const GWPitch = ({
                     />
                   </div>
                   {/* Desktop only details */}
-                  <div className="hidden lg:block flex-1">
-                    <p className="text-sm font-bold text-gray-900 dark:text-white truncate">{eachPlayer.name}</p>
-                    <p className="text-xs text-gray-500">{eachPlayer.team}</p>
+                  <div className="hidden lg:block flex-1 min-w-0">
+                    <p className="text-xs font-bold text-white truncate">{eachPlayer.name}</p>
+                    <p className="text-[10px] text-text-muted truncate">{eachPlayer.team}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
+
       </div>
     </>
   );

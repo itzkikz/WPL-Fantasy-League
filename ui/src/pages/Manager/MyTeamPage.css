@@ -1,0 +1,42 @@
+/* MyTeamPage.css */
+
+.pitch-bg {
+  position: absolute;
+  inset: 0;
+  perspective: 1500px;
+  overflow: hidden;
+}
+
+.pitch-image-layer {
+  position: absolute;
+  width: 140%;
+  top: 0%;
+  height: 110%;
+  transform-origin: center top;
+  transform: rotateX(60deg) scale(1.2);
+  object-fit: cover;
+  opacity: 0.85;
+  clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+}
+
+.pitch-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 3, 20, 0.4) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(9, 3, 20, 0.8) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.player-spot {
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 10;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.5));
+}

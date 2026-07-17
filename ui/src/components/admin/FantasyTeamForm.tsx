@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import api from '../../api/client';
+import { Search, Plus, Trash2, Shield, UserCheck, Wallet, Loader2 } from 'lucide-react';
 
 interface AdminPlayer {
   id: number;
   name: string;
   position: string;
   team: string;
+  auctionPrice?: number;
 }
 
 interface FantasyTeamFormProps {
@@ -24,7 +26,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
   const [totalBudget, setTotalBudget] = useState<number>(1000);
   const [utilisation, setUtilisation] = useState<number>(0);
   
-  const [squad, setSquad] = useState<any[]>([]); // { element, position, isStarting, isCaptain, isViceCaptain, positionIndex }
+  const [squad, setSquad] = useState<any[]>([]); // { element, position, isStarting, isCaptain, isViceCaptain, positionIndex, auctionPrice }
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -32,6 +34,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [teamFilter, setTeamFilter] = useState('');
+  const [userSearchTerm, setUserSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
 
@@ -39,14 +42,15 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
     fetchUsers();
     if (teamId) {
       fetchTeam(teamId);
+    } else {
+      fetchPlayers();
     }
   }, [teamId]);
 
   const fetchTeam = async (id: string) => {
     try {
-      setLoading(true);
-      const res = await api.get(`/admin/fantasy-teams/${id}`);
-      const t = res.data.data;
+      const response = await api.get(`/admin/fantasy-teams/${id}`);
+      const t = response.data.data;
       setTeamName(t.name);
       setSelectedUsers(t.managers?.map((m: any) => m._id) || []);
       if (t.finance) {
@@ -65,7 +69,8 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
             isStarting: pick.isStarting ?? false,
             subNumber: pick.subNumber ?? 0,
             isCaptain: pick.isCaptain,
-            isViceCaptain: pick.isViceCaptain
+            isViceCaptain: pick.isViceCaptain,
+            auctionPrice: p.auctionPrice ?? 0
           };
         });
         
@@ -79,34 +84,30 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
 
         setSquad(loadedSquad);
       }
+      
+      // Fetch players with excludeTeamId so current squad remains available
+      fetchPlayers(id);
     } catch (err) {
-      console.error('Failed to fetch team:', err);
-      setError('Failed to load team data');
-    } finally {
-      setLoading(false);
+      console.error('Failed to fetch team details:', err);
     }
   };
 
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      fetchPlayers();
-    }, 300);
-    return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm]);
-
   const fetchUsers = async () => {
     try {
-      const res = await api.get('/admin/users');
-      setUsers(res.data.data);
+      const response = await api.get('/admin/users');
+      setUsers(response.data.data);
     } catch (err) {
       console.error('Failed to fetch users:', err);
     }
   };
 
-  const fetchPlayers = async () => {
+  const fetchPlayers = async (excludeTeamId?: string) => {
     try {
-      const res = await api.get(`/admin/players${searchTerm ? `?search=${encodeURIComponent(searchTerm)}` : ''}`);
-      setPlayers(res.data.data);
+      const endpoint = excludeTeamId 
+        ? `/admin/players?excludeTeamId=${excludeTeamId}`
+        : '/admin/players';
+      const response = await api.get(endpoint);
+      setPlayers(response.data.data);
     } catch (err) {
       console.error('Failed to fetch players:', err);
     }
@@ -163,7 +164,8 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
         isCaptain: false, 
         isViceCaptain: false,
         name: player.name,
-        subNumber: 0
+        subNumber: 0,
+        auctionPrice: player.auctionPrice ?? 0
       }]);
     }
   };
@@ -261,7 +263,6 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
         setSquad([]);
       }
       
-      // Navigate back to list after a short delay
       setTimeout(() => {
         navigate({ to: '/admin/fantasy-teams' });
       }, 1500);
@@ -304,242 +305,350 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
     setCurrentPage(1);
   }, [searchTerm, teamFilter]);
 
+  const remainingBalance = totalBudget - utilisation;
+
   return (
-    <div>
-      {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
-      {success && <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">{success}</div>}
-
-      <form onSubmit={handleSubmit} className="space-y-8 bg-white/5 backdrop-blur-md border border-white/10 p-6 sm:p-8 rounded-3xl shadow-xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <label className="block text-sm font-bold tracking-wide text-text-secondary uppercase mb-2">Team Name</label>
-            <input
-              type="text"
-              value={teamName}
-              onChange={(e) => setTeamName(e.target.value)}
-              className="w-full px-5 py-3 bg-black/10 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-text-primary font-medium shadow-inner"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-bold tracking-wide text-text-secondary uppercase mb-2">Assign to Users</label>
-            <select
-              multiple
-              value={selectedUsers}
-              onChange={(e) => {
-                const options = Array.from(e.target.selectedOptions, option => option.value);
-                setSelectedUsers(options);
-              }}
-              className="w-full px-5 py-3 bg-black/10 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-text-primary font-medium shadow-inner h-32"
-              required
-            >
-              {users.map(u => (
-                <option key={u._id} value={u._id} className="py-1">{u.username} ({u.email})</option>
-              ))}
-            </select>
-            <p className="text-[10px] font-bold text-text-secondary uppercase tracking-widest mt-2">Hold Ctrl/Cmd to select multiple</p>
-          </div>
+    <div className="w-full text-white">
+      {error && (
+        <div className="bg-rose-500/10 border border-rose-500/20 text-rose-400 p-3 rounded-lg text-xs font-semibold mb-4">
+          {error}
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
-          <div>
-            <label className="block text-sm font-bold tracking-wide text-text-secondary uppercase mb-2">Total Budget</label>
-            <input
-              type="number"
-              value={totalBudget}
-              onChange={(e) => setTotalBudget(Number(e.target.value))}
-              className="w-full px-5 py-3 bg-black/10 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-text-primary font-medium shadow-inner"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-bold tracking-wide text-text-secondary uppercase mb-2">Utilisation</label>
-            <input
-              type="number"
-              value={utilisation}
-              onChange={(e) => setUtilisation(Number(e.target.value))}
-              className="w-full px-5 py-3 bg-black/10 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all text-text-primary font-medium shadow-inner"
-              required
-            />
-          </div>
+      )}
+      {success && (
+        <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 p-3 rounded-lg text-xs font-semibold mb-4">
+          {success}
         </div>
+      )}
 
-        <div className="border-t border-white/10 pt-8 mt-4">
-          <h2 className="text-2xl font-black mb-6 text-text-primary tracking-tight">Squad Selection</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        
+        {/* Core Config Card */}
+        <div className="bg-[#1b142d]/80 border border-white/10 p-4 rounded-xl shadow-lg space-y-4">
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Player Pool */}
-            <div className="bg-black/10 dark:bg-black/20 border border-white/5 rounded-2xl p-5 h-[600px] flex flex-col shadow-inner">
-              <div className="flex-none pb-4 border-b border-white/10 mb-4">
-                <h3 className="font-bold text-lg mb-3 text-text-primary">Available Players</h3>
-                <div className="flex gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            {/* Team Name Input */}
+            <div>
+              <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1.5">
+                Team Name
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  value={teamName}
+                  onChange={(e) => setTeamName(e.target.value)}
+                  className="w-full px-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg text-xs font-semibold text-white outline-none focus:ring-1 focus:ring-indigo-500 pl-8"
+                  required
+                />
+                <Shield className="w-4 h-4 text-white/40 absolute left-2.5 top-2" />
+              </div>
+            </div>
+
+            {/* Managers Chip Selector with Search */}
+            <div>
+              <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1.5">
+                Managers
+              </label>
+              <div className="space-y-2 bg-[#150f24] border border-white/10 rounded-lg p-2.5">
+                <div className="relative">
                   <input
                     type="text"
-                    placeholder="Search player..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="flex-1 px-4 py-2 text-sm bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-text-primary"
+                    placeholder="Search users..."
+                    value={userSearchTerm}
+                    onChange={(e) => setUserSearchTerm(e.target.value)}
+                    className="w-full pl-8 pr-3 py-1 bg-[#1b142d] border border-white/10 rounded text-[10px] font-semibold text-white outline-none focus:ring-1 focus:ring-indigo-500"
                   />
-                  <select
-                    value={teamFilter}
-                    onChange={(e) => setTeamFilter(e.target.value)}
-                    className="flex-1 px-4 py-2 text-sm bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-text-primary"
-                  >
-                    <option value="">All Teams</option>
-                    {uniqueTeams.map(team => (
-                      <option key={team} value={team}>{team}</option>
-                    ))}
-                  </select>
+                  <Search className="w-3 h-3 text-white/40 absolute left-2.5 top-2" />
+                </div>
+                <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pr-1">
+                  {users
+                    .filter((u: any) =>
+                      u.username.toLowerCase().includes(userSearchTerm.toLowerCase())
+                    )
+                    .map((u: any) => {
+                      const isSelected = selectedUsers.includes(u._id);
+                      return (
+                        <button
+                          key={u._id}
+                          type="button"
+                          onClick={() => {
+                            if (isSelected) {
+                              setSelectedUsers(selectedUsers.filter((id) => id !== u._id));
+                            } else {
+                              setSelectedUsers([...selectedUsers, u._id]);
+                            }
+                          }}
+                          className={`px-2 py-0.5 rounded text-[10px] font-bold border transition-all flex items-center gap-1 ${
+                            isSelected
+                              ? 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30'
+                              : 'bg-white/5 text-white/60 border-white/10 hover:text-white'
+                          }`}
+                        >
+                          {isSelected && <UserCheck className="w-2.5 h-2.5 text-emerald-400" />}
+                          {u.username}
+                        </button>
+                      );
+                    })}
                 </div>
               </div>
-              <div className="flex-1 overflow-y-auto space-y-2 pr-2 custom-scrollbar">
-                {paginatedPlayers.map(player => (
-                  <div key={player.id} className="flex items-center justify-between p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/5 transition-all mb-2 group">
+            </div>
+
+          </div>
+
+          {/* Finance Section */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-3 border-t border-white/5">
+            <div>
+              <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1">
+                Total Budget (M)
+              </label>
+              <input
+                type="number"
+                value={totalBudget}
+                onChange={(e) => setTotalBudget(Number(e.target.value))}
+                className="w-full px-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg text-xs font-semibold text-white outline-none focus:ring-1 focus:ring-indigo-500"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1">
+                Utilisation (M)
+              </label>
+              <input
+                type="number"
+                value={utilisation}
+                onChange={(e) => setUtilisation(Number(e.target.value))}
+                className="w-full px-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg text-xs font-semibold text-white outline-none focus:ring-1 focus:ring-indigo-500"
+                required
+              />
+            </div>
+            <div className="bg-[#150f24] border border-white/5 p-2 rounded-lg flex items-center justify-between gap-2">
+              <div className="flex flex-col">
+                <span className="text-[9px] font-extrabold uppercase tracking-widest text-white/40 flex items-center gap-1">
+                  <Wallet className="w-2.5 h-2.5" /> Remaining Balance
+                </span>
+                <span className={`text-sm font-black tracking-tight ${remainingBalance < 0 ? 'text-rose-400 animate-pulse' : 'text-emerald-400'}`}>
+                  {remainingBalance.toFixed(1)} M
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Squad Grid Selection */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          
+          {/* Available Players Pool */}
+          <div className="bg-[#1b142d]/80 border border-white/10 rounded-xl p-4 h-[550px] flex flex-col shadow-lg">
+            <div className="flex-none pb-3 border-b border-white/5 mb-3">
+              <h3 className="text-xs font-extrabold text-white/50 uppercase tracking-widest mb-2">Available Players</h3>
+              <div className="flex gap-2">
+                <div className="flex-1 relative">
+                  <input
+                    type="text"
+                    placeholder="Search player name..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-8 pr-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg text-xs font-semibold text-white outline-none focus:ring-1 focus:ring-indigo-500"
+                  />
+                  <Search className="w-3.5 h-3.5 text-white/40 absolute left-2.5 top-2.5" />
+                </div>
+                <select
+                  value={teamFilter}
+                  onChange={(e) => setTeamFilter(e.target.value)}
+                  className="w-1/3 px-2 py-1.5 bg-[#150f24] border border-white/10 rounded-lg text-xs font-semibold text-white outline-none cursor-pointer"
+                >
+                  <option value="" className="bg-[#1b142d] text-white">All Teams</option>
+                  {uniqueTeams.map(team => (
+                    <option key={team} value={team} className="bg-[#1b142d] text-white">{team}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="flex-1 overflow-y-auto space-y-2 pr-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+              {paginatedPlayers.map(player => {
+                const isAdded = squad.some(p => p.element === player.id);
+                return (
+                  <div key={player.id} className="flex items-center justify-between p-2.5 bg-[#150f24]/50 border border-white/5 rounded-xl transition-all">
                     <div>
-                      <div className="font-bold text-text-primary">{player.name}</div>
-                      <div className="text-[10px] font-bold uppercase tracking-widest text-text-secondary mt-1">{player.team} • {player.position}</div>
+                      <div className="font-bold text-xs text-white/95">{player.name}</div>
+                      <div className="text-[9px] font-extrabold uppercase tracking-wider text-white/40 mt-0.5">
+                        {player.team} • <span className="text-indigo-400">{player.position}</span>
+                      </div>
                     </div>
                     <button
                       type="button"
                       onClick={() => handlePlayerToggle(player)}
-                      className={`text-[10px] font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-all shadow-sm ${squad.find(p => p.element === player.id) ? 'bg-red-500/10 text-red-500 hover:bg-red-500/20 border border-red-500/20' : 'bg-indigo-500/10 text-indigo-500 hover:bg-indigo-500/20 border border-indigo-500/20 opacity-0 group-hover:opacity-100 focus:opacity-100'}`}
+                      className={`text-[9px] font-black uppercase tracking-wider px-3.5 py-1.5 rounded-lg border transition-all active:scale-95 flex items-center gap-1 ${
+                        isAdded
+                          ? 'bg-rose-500/10 text-rose-400 border-rose-500/20 hover:bg-rose-500/20'
+                          : 'bg-indigo-600 hover:bg-indigo-500 text-white border-transparent'
+                      }`}
                     >
-                      {squad.find(p => p.element === player.id) ? 'Remove' : 'Add'}
+                      {isAdded ? 'Remove' : <><Plus className="w-3 h-3" /> Add</>}
                     </button>
                   </div>
-                ))}
-                {paginatedPlayers.length === 0 && (
-                  <div className="text-center text-text-secondary py-10 font-medium">No players found</div>
-                )}
-              </div>
-              
-              {totalPages > 1 && (
-                <div className="flex-none flex justify-between items-center pt-4 mt-4 border-t border-white/10">
-                  <button
-                    type="button"
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                    className="px-4 py-2 text-[10px] font-bold uppercase tracking-widest border border-white/10 rounded-full disabled:opacity-50 text-text-secondary hover:bg-white/5 transition-colors"
-                  >
-                    Previous
-                  </button>
-                  <span className="text-[10px] font-bold text-text-secondary uppercase tracking-widest">Page {currentPage} of {totalPages}</span>
-                  <button
-                    type="button"
-                    disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                    className="px-4 py-2 text-[10px] font-bold uppercase tracking-widest border border-white/10 rounded-full disabled:opacity-50 text-text-secondary hover:bg-white/5 transition-colors"
-                  >
-                    Next
-                  </button>
-                </div>
+                );
+              })}
+              {paginatedPlayers.length === 0 && (
+                <div className="text-center text-white/30 py-12 text-xs">No players found</div>
               )}
             </div>
+            
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className="flex-none flex justify-between items-center pt-3 mt-3 border-t border-white/5">
+                <button
+                  type="button"
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  className="px-3 py-1 rounded bg-white/5 border border-white/10 hover:bg-white/10 text-[10px] font-bold uppercase tracking-wider disabled:opacity-40"
+                >
+                  Prev
+                </button>
+                <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Page {currentPage} / {totalPages}</span>
+                <button
+                  type="button"
+                  disabled={currentPage === totalPages}
+                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  className="px-3 py-1 rounded bg-white/5 border border-white/10 hover:bg-white/10 text-[10px] font-bold uppercase tracking-wider disabled:opacity-40"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </div>
 
-            {/* Selected Squad */}
-            <div className="bg-black/10 dark:bg-black/20 border border-white/5 rounded-2xl p-5 h-[600px] overflow-y-auto shadow-inner relative custom-scrollbar">
-              <div className="sticky top-0 bg-bg/95 backdrop-blur-md pb-4 z-10 border-b border-white/10 mb-4 -mx-5 px-5 -mt-5 pt-5">
-                <h3 className="font-bold text-lg text-text-primary">Selected Squad ({squad.length}/15)</h3>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-text-secondary flex gap-3 mt-2">
-                  <span className={positionCounts['GK'] === 2 ? 'text-green-500' : ''}>GK: {positionCounts['GK'] || 0}/2</span>
-                  <span className={positionCounts['DEF'] === 5 ? 'text-green-500' : ''}>DEF: {positionCounts['DEF'] || 0}/5</span>
-                  <span className={positionCounts['MID'] === 5 ? 'text-green-500' : ''}>MID: {positionCounts['MID'] || 0}/5</span>
-                  <span className={positionCounts['FWD'] === 3 ? 'text-green-500' : ''}>FWD: {positionCounts['FWD'] || 0}/3</span>
-                </div>
-                <div className="text-[10px] font-bold uppercase tracking-widest mt-1">
-                  <span className={startingCount === 11 ? 'text-green-500' : 'text-red-500'}>Starting XI: {startingCount}/11</span>
+          {/* Selected Squad List */}
+          <div className="bg-[#1b142d]/80 border border-white/10 rounded-xl p-4 h-[550px] flex flex-col shadow-lg">
+            <div className="flex-none pb-3 border-b border-white/5 mb-3 flex items-center justify-between">
+              <div>
+                <h3 className="text-xs font-extrabold text-white/50 uppercase tracking-widest">Selected Squad ({squad.length}/15)</h3>
+                <div className="text-[9px] font-extrabold uppercase tracking-wider text-white/40 flex gap-2 mt-1">
+                  <span className={positionCounts['GK'] === 2 ? 'text-emerald-400 font-bold' : ''}>GK: {positionCounts['GK'] || 0}/2</span>
+                  <span className={positionCounts['DEF'] === 5 ? 'text-emerald-400 font-bold' : ''}>DEF: {positionCounts['DEF'] || 0}/5</span>
+                  <span className={positionCounts['MID'] === 5 ? 'text-emerald-400 font-bold' : ''}>MID: {positionCounts['MID'] || 0}/5</span>
+                  <span className={positionCounts['FWD'] === 3 ? 'text-emerald-400 font-bold' : ''}>FWD: {positionCounts['FWD'] || 0}/3</span>
                 </div>
               </div>
-
-              <div className="space-y-3 mt-4">
-                {squad.map(p => (
-                  <div key={p.element} className="p-4 bg-white/5 hover:bg-white/10 rounded-xl border border-white/5 transition-all group">
-                    <div className="flex justify-between items-center mb-3">
-                      <div>
-                        <span className="font-bold text-text-primary text-lg">{p.name}</span>
-                        <span className="ml-2 text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-white/10 rounded-full text-text-secondary">{p.position}</span>
-                      </div>
-                      <div className="flex gap-2">
-                        <button
-                          type="button"
-                          onClick={() => setCaptain(p.element, 'captain')}
-                          className={`w-8 h-8 flex items-center justify-center text-xs font-black rounded-full transition-all shadow-sm ${p.isCaptain ? 'bg-yellow-500 text-white shadow-yellow-500/30' : 'bg-white/10 text-text-secondary hover:bg-white/20'}`}
-                        >
-                          C
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setCaptain(p.element, 'vice')}
-                          className={`w-8 h-8 flex items-center justify-center text-xs font-black rounded-full transition-all shadow-sm ${p.isViceCaptain ? 'bg-blue-500 text-white shadow-blue-500/30' : 'bg-white/10 text-text-secondary hover:bg-white/20'}`}
-                        >
-                          V
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setSquad(squad.filter(s => s.element !== p.element))}
-                          className="w-8 h-8 flex items-center justify-center text-xs font-black rounded-full transition-all shadow-sm bg-red-500/10 text-red-500 hover:bg-red-500/20 border border-red-500/20"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-6 mt-3 pt-3 border-t border-white/5">
-                      <label className="flex items-center text-sm font-medium text-text-secondary cursor-pointer hover:text-text-primary transition-colors">
-                        <input
-                          type="checkbox"
-                          checked={p.isStarting}
-                          onChange={() => toggleStarting(p.element)}
-                          className="mr-3 w-4 h-4 rounded border-white/20 text-indigo-500 focus:ring-indigo-500 bg-black/20"
-                        />
-                        Starting XI
-                      </label>
-                      {!p.isStarting && (
-                        <label className="flex items-center text-sm font-medium text-text-secondary gap-3">
-                          Sub Rank:
-                          <select 
-                            value={p.subNumber || 0}
-                            onChange={(e) => updateSubNumber(p.element, parseInt(e.target.value))}
-                            className="text-sm px-3 py-1.5 bg-black/20 border border-white/10 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-text-primary"
-                          >
-                            <option value={0}>Auto</option>
-                            <option value={1}>1 (GK usually)</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                          </select>
-                        </label>
-                      )}
-                    </div>
-                  </div>
-                ))}
-                {squad.length === 0 && (
-                  <div className="text-center text-text-secondary py-10 font-medium">
-                    No players selected
-                  </div>
-                )}
+              <div className="text-right">
+                <span className="text-[9px] font-extrabold uppercase tracking-widest text-white/40">Lineup Starting</span>
+                <div className={`text-xs font-black tracking-tight ${startingCount === 11 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  {startingCount}/11 XI
+                </div>
               </div>
             </div>
+
+            <div className="flex-1 overflow-y-auto space-y-2 pr-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+              {squad.map(p => (
+                <div key={p.element} className="p-3 bg-[#150f24]/50 border border-white/5 rounded-xl transition-all">
+                  <div className="flex justify-between items-center mb-2">
+                    <div>
+                      <span className="font-bold text-xs text-white/95">{p.name}</span>
+                      <span className="ml-2 text-[9px] font-extrabold uppercase tracking-widest px-2 py-0.5 bg-white/5 border border-white/10 rounded text-white/60">{p.position}</span>
+                    </div>
+                    <div className="flex gap-1.5 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setCaptain(p.element, 'captain')}
+                        className={`w-6 h-6 flex items-center justify-center text-[10px] font-black rounded-md transition-all ${p.isCaptain ? 'bg-yellow-500 text-white shadow shadow-yellow-500/40' : 'bg-white/5 text-white/40 hover:bg-white/10 border border-white/10'}`}
+                        title="Captain"
+                      >
+                        C
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setCaptain(p.element, 'vice')}
+                        className={`w-6 h-6 flex items-center justify-center text-[10px] font-black rounded-md transition-all ${p.isViceCaptain ? 'bg-blue-500 text-white shadow shadow-blue-500/40' : 'bg-white/5 text-white/40 hover:bg-white/10 border border-white/10'}`}
+                        title="Vice Captain"
+                      >
+                        V
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSquad(squad.filter(s => s.element !== p.element))}
+                        className="w-6 h-6 flex items-center justify-center rounded-md bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 border border-rose-500/20 transition-all"
+                        title="Remove Player"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div className="flex flex-wrap items-center gap-4 mt-2 pt-2 border-t border-white/5 justify-between">
+                    <label className="flex items-center text-xs font-semibold text-text-secondary cursor-pointer hover:text-text-primary transition-colors shrink-0">
+                      <input
+                        type="checkbox"
+                        checked={p.isStarting}
+                        onChange={() => toggleStarting(p.element)}
+                        className="mr-2 w-4.5 h-4.5 rounded border-white/20 text-indigo-500 focus:ring-indigo-500 bg-black/20"
+                      />
+                      Starting XI
+                    </label>
+
+                    {/* Auction Price Option */}
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] font-extrabold text-text-secondary uppercase">Price:</span>
+                      <input
+                        type="number"
+                        value={p.auctionPrice ?? ""}
+                        onChange={(e) => {
+                          const val = parseFloat(e.target.value);
+                          setSquad(squad.map(sq => sq.element === p.element ? { ...sq, auctionPrice: isNaN(val) ? 0 : val } : sq));
+                        }}
+                        className="w-16 px-2 py-1 bg-black/20 border border-white/10 rounded-lg text-xs font-bold text-text-primary text-center outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="0"
+                        min="0"
+                      />
+                    </div>
+
+                    {!p.isStarting && (
+                      <label className="flex items-center text-xs font-semibold text-text-secondary gap-1.5 shrink-0">
+                        Sub Rank:
+                        <select 
+                          value={p.subNumber || 0}
+                          onChange={(e) => updateSubNumber(p.element, parseInt(e.target.value))}
+                          className="text-xs px-2 py-1 bg-black/20 border border-white/10 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-text-primary cursor-pointer"
+                        >
+                          <option value={0} className="bg-[#1b142d] text-white">Auto</option>
+                          <option value={1} className="bg-[#1b142d] text-white">1 (GK)</option>
+                          <option value={2} className="bg-[#1b142d] text-white">2</option>
+                          <option value={3} className="bg-[#1b142d] text-white">3</option>
+                          <option value={4} className="bg-[#1b142d] text-white">4</option>
+                        </select>
+                      </label>
+                    )}
+                  </div>
+                </div>
+              ))}
+              {squad.length === 0 && (
+                <div className="text-center text-white/30 py-12 text-xs">No players selected</div>
+              )}
+            </div>
           </div>
+
         </div>
 
-        <div className="flex justify-end pt-8 gap-4 border-t border-white/10">
+        {/* Submit Form Controls */}
+        <div className="flex justify-end pt-3 gap-2 border-t border-white/10">
           <button
             type="button"
             onClick={() => navigate({ to: '/admin/fantasy-teams' })}
-            className="px-6 py-2.5 rounded-full font-bold text-text-secondary bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+            className="px-4 py-1.5 rounded-lg text-xs font-bold text-white/70 bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={loading || squad.length !== 15 || startingCount !== 11}
-            className="px-8 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-bold shadow-lg hover:shadow-indigo-500/30 transition-all hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            className="px-5 py-1.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg text-xs font-bold shadow-lg hover:scale-[1.02] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none flex items-center gap-1.5"
           >
-            {loading ? 'Saving...' : teamId ? 'Update Fantasy Team' : 'Create Fantasy Team'}
+            {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+            {loading ? 'Saving...' : teamId ? 'Update Team' : 'Create Team'}
           </button>
         </div>
+
       </form>
     </div>
   );

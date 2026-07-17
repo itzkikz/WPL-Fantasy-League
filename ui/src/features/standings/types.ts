@@ -9,7 +9,8 @@ export interface Standings {
     team: string,
     team_id: string,
     total: string,
-    total_point_before_this_gw: string
+    total_point_before_this_gw: string,
+    manager?: string
 }
 
 export interface Formation {

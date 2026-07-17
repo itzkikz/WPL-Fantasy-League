@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { User } from "../models/User";
+import dayjs from "dayjs";
 import { FantasyTeam } from "../models/FantasyTeam";
 import { TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
@@ -63,8 +64,8 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
 
     const teamIds = [...new Set(playersMap.map(p => p.teamId))];
     const Team = (await import("../models/Team")).Team;
-    const teams = (await Team.find({ 'team.id': { $in: teamIds } }).lean()) as any[];
-    const teamMap = new Map(teams.map(t => [t.team.id, t]));
+    const teams = (await Team.find({ id: { $in: teamIds } }).lean()) as any[];
+    const teamMap = new Map(teams.map(t => [t.id, t]));
 
     // Fetch current Gameweek
     const Gameweek = (await import("../models/Gameweek")).Gameweek;
@@ -77,7 +78,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
     // Fetch PlayerStats for points
     const PlayerStats = (await import("../models/PlayerStats")).PlayerStats;
     const playerStatsList = await PlayerStats.find({ playerId: { $in: playerIds } })
-        .select('playerId gameweeks.id gameweeks.points gameweeks.stats.games.minutes')
+        .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
         .lean();
     const playerStatsMap = new Map(playerStatsList.map(ps => [ps.playerId, ps]));
 
@@ -87,7 +88,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
         const cPs = playerStatsMap.get(captainPick.playerId);
         if (cPs && cPs.gameweeks) {
             const cGw = cPs.gameweeks.find((g: any) => g.id === targetGw);
-            if (cGw && cGw.stats && cGw.stats.games && cGw.stats.games.minutes > 0) {
+            if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
                 captainPlayed = true;
             }
         }
@@ -130,10 +131,10 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
         // Role Construction (Expected by Formatter as 'role', not 'type')
         role: pick.isCaptain ? "CAPTAIN" : pick.isViceCaptain ? "VICE CAPTAIN" : null,
         
-        team_short_name: teamDoc?.team?.code || "UNK",
+        team_short_name: teamDoc?.nameCode || teamDoc?.shortName || "UNK",
         team_color: teamDoc?.teamColors?.primary || "#003399", 
         team_text_color: teamDoc?.teamColors?.text || "#ffffff",
-        shirtNumber: playerDoc?.number || 0,
+        shirtNumber: playerDoc?.shirtNumber || (playerDoc?.jerseyNumber ? Number(playerDoc.jerseyNumber) : 0),
         photo: playerDoc?.photo || ""
       } as any; // Casting to any because TeamDetails structure from Sheets had specific loose fields
     });
@@ -325,4 +326,618 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
     console.error("Error in substitution controller:", error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
-}
+};
+
+export const myFixtures = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const username = req.user.userId;
+
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const fantasyTeam = await FantasyTeam.findOne({
+      managers: user._id
+    });
+
+    if (!fantasyTeam) {
+      return res.status(404).json({ error: 'Fantasy Team not found' });
+    }
+
+    const PlayerModel = (await import("../models/Player")).Player;
+    const TeamModel = (await import("../models/Team")).Team;
+    const GameweekModel = (await import("../models/Gameweek")).Gameweek;
+    const FixtureModel = (await import("../models/Fixture")).Fixture;
+
+    // Get squad player IDs
+    const playerIds = fantasyTeam.currentSquad.picks.map(p => p.playerId);
+    const squadPlayers = (await PlayerModel.find({ id: { $in: playerIds } }).lean()) as any[];
+
+    // Group players by their real-world team
+    const playersByTeam = new Map<number, Array<{ id: number; name: string; position: string; photo?: string }>>();
+    for (const p of squadPlayers) {
+      const teamId = p.teamId;
+      if (!playersByTeam.has(teamId)) {
+        playersByTeam.set(teamId, []);
+      }
+      playersByTeam.get(teamId)!.push({
+        id: p.id,
+        name: p.webName || p.name || "",
+        position: resolvePosition(p.position || ""),
+        photo: p.photo || "",
+      });
+    }
+
+    const squadTeamIds = [...playersByTeam.keys()];
+
+    if (squadTeamIds.length === 0) {
+      return res.json({
+        success: true,
+        data: { gameweek: 0, fixtures: [] }
+      });
+    }
+
+    // Get current gameweek
+    let currentGwDoc = await GameweekModel.findOne({ isCurrent: true });
+    if (!currentGwDoc) {
+      currentGwDoc = await GameweekModel.findOne({ isNext: true });
+    }
+    const currentGw = currentGwDoc ? currentGwDoc.number : 1;
+
+    // Get fixtures for current gameweek involving the user's teams
+    const fixtureIds = currentGwDoc ? (currentGwDoc.fixtures || []) : [];
+    let fixtures: any[] = [];
+
+    if (fixtureIds.length > 0) {
+      fixtures = await FixtureModel.find({
+        fixtureId: { $in: fixtureIds },
+        $or: [
+          { 'homeTeam.id': { $in: squadTeamIds } },
+          { 'awayTeam.id': { $in: squadTeamIds } },
+        ]
+      }).sort({ startTimestamp: 1 }).lean() as any[];
+    } else {
+      fixtures = await FixtureModel.find({
+        'roundInfo.round': currentGw,
+        $or: [
+          { 'homeTeam.id': { $in: squadTeamIds } },
+          { 'awayTeam.id': { $in: squadTeamIds } },
+        ]
+      }).sort({ startTimestamp: 1 }).lean() as any[];
+    }
+
+    // Enrich with team data and attach player badges
+    const allTeamIds = new Set<number>();
+    fixtures.forEach((f: any) => {
+      allTeamIds.add(f.homeTeam?.id);
+      allTeamIds.add(f.awayTeam?.id);
+    });
+    const teamDocs = (await TeamModel.find({ id: { $in: [...allTeamIds] } }).lean()) as any[];
+    const teamMap = new Map(teamDocs.map((t: any) => [t.id, t]));
+
+    const mappedFixtures = fixtures.map((f: any) => {
+      const home = teamMap.get(f.homeTeam?.id);
+      const away = teamMap.get(f.awayTeam?.id);
+      return {
+        fixtureId: f.fixtureId,
+        startTimestamp: f.startTimestamp,
+        status: f.status,
+        homeTeam: {
+          id: f.homeTeam?.id,
+          name: home?.name || "Unknown",
+          shortName: home?.shortName || "UNK",
+          photo: home?.photo || "",
+          color: home?.teamColors?.primary || "#003399",
+        },
+        awayTeam: {
+          id: f.awayTeam?.id,
+          name: away?.name || "Unknown",
+          shortName: away?.shortName || "UNK",
+          photo: away?.photo || "",
+          color: away?.teamColors?.primary || "#003399",
+        },
+        homeScore: f.homeScore,
+        awayScore: f.awayScore,
+        homePlayers: playersByTeam.get(f.homeTeam?.id) || [],
+        awayPlayers: playersByTeam.get(f.awayTeam?.id) || [],
+      };
+    });
+
+    return res.json({
+      success: true,
+      data: {
+        gameweek: currentGw,
+        fixtures: mappedFixtures,
+      }
+    });
+
+  } catch (error) {
+    console.error("Error in myFixtures controller:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const dashboard = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const username = req.user.userId;
+
+    // 1. Find the User
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // 2. Find the FantasyTeam managed by this user
+    const fantasyTeam = await FantasyTeam.findOne({
+      managers: user._id
+    }).populate('managers', 'username');
+
+    if (!fantasyTeam) {
+      return res.status(404).json({ error: 'Fantasy Team not found' });
+    }
+
+    // Fetch models dynamically
+    const PlayerModel = (await import("../models/Player")).Player;
+    const TeamModel = (await import("../models/Team")).Team;
+    const GameweekModel = (await import("../models/Gameweek")).Gameweek;
+    const PlayerStatsModel = (await import("../models/PlayerStats")).PlayerStats;
+    const FixtureModel = (await import("../models/Fixture")).Fixture;
+    const ApiConfigModel = (await import("../models/ApiConfig")).ApiConfig;
+
+    // Fetch current Gameweek
+    let currentGwDoc = await GameweekModel.findOne({ isCurrent: true });
+    if (!currentGwDoc) {
+      currentGwDoc = await GameweekModel.findOne({ isNext: true });
+    }
+    const currentGw = currentGwDoc ? currentGwDoc.number : 1;
+
+    // Fetch ApiConfig details
+    const apiConfig = await ApiConfigModel.findOne({ key: 'pick_team_enabled' });
+    const pickMyTeam = apiConfig ? apiConfig.lastUpdatedString === 'true' : false;
+    const deadlineDate = apiConfig?.deadlineDate || currentGwDoc?.endDate || new Date();
+
+    // 3. Standings & League details
+    const standingsData = await getStandingsData();
+    const myStanding = standingsData.find(s => s.team_id === fantasyTeam._id.toString());
+    const total_point_before_this_gw = myStanding?.total_point_before_this_gw || 0;
+    const rank = (myStanding as any)?.rank || 1;
+    const total = myStanding?.total || 0;
+    const currentGwPoints = myStanding?.current_gw || 0;
+    const pos_change = myStanding?.pos_change || 0;
+    const teamsCount = standingsData.length;
+
+    const currentGwScores = standingsData.map(s => s.current_gw || 0);
+    const avg = currentGwScores.length > 0 ? (currentGwScores.reduce((a, b) => a + b, 0) / currentGwScores.length) : 0;
+    const highest = currentGwScores.length > 0 ? Math.max(...currentGwScores) : 0;
+
+    // 4. Team Overview & League Stats
+    const teamOverview = {
+      teamName: fantasyTeam.name,
+      managers: (fantasyTeam.managers as any[]).map(m => m.username),
+      gameweek: currentGw,
+      gwPoints: currentGwPoints,
+      totalPoints: total,
+      rank: rank,
+      transfers: fantasyTeam.currentSquad.picks.length > 0 ? 1 : 0,
+      rankChange: pos_change,
+    };
+
+    const leagueStats = {
+      totalPoints: total,
+      overallRank: rank,
+      avgPointsPerGW: Number(avg.toFixed(1)),
+      highestGW: highest,
+      teamValue: (fantasyTeam.finance.utilisation || 0) / 10,
+      totalManagers: await User.countDocuments({ role: 'manager' }),
+      totalTeams: await FantasyTeam.countDocuments(),
+    };
+
+    // 5. Gameweek Progress
+    const gameweekProgress = {
+      teamSelected: fantasyTeam.currentSquad.picks.length > 0,
+      transfersMade: false,
+      captainChosen: fantasyTeam.currentSquad.picks.some(p => p.isCaptain),
+      teamConfirmed: true,
+      deadline: dayjs(deadlineDate).format("dddd, h:mm A"),
+      startDate: currentGwDoc?.startDate?.toISOString() || null,
+      endDate: currentGwDoc?.endDate?.toISOString() || null,
+    };
+
+    // 6. Upcoming Match
+    const nextFixture = await FixtureModel.findOne({ 'status.type': 'notstarted' }).sort({ startTimestamp: 1 }).lean();
+    let upcomingMatch = {
+      homeTeam: "Man City",
+      homeTeamShort: "MCI",
+      awayTeam: "Arsenal",
+      awayTeamShort: "ARS",
+      kickoffTime: "Saturday, 8:30 PM",
+      gameweek: currentGw,
+    };
+
+    if (nextFixture) {
+      const homeTeamDoc = await TeamModel.findOne({ id: nextFixture.homeTeam.id }).lean();
+      const awayTeamDoc = await TeamModel.findOne({ id: nextFixture.awayTeam.id }).lean();
+      upcomingMatch = {
+        homeTeam: homeTeamDoc?.name || "Home Team",
+        homeTeamShort: homeTeamDoc?.nameCode || "HOM",
+        awayTeam: awayTeamDoc?.name || "Away Team",
+        awayTeamShort: awayTeamDoc?.nameCode || "AWA",
+        kickoffTime: dayjs(nextFixture.startTimestamp * 1000).format("dddd, h:mm A"),
+        gameweek: nextFixture.roundInfo?.round || currentGw,
+      };
+    }
+
+    // 7. Recent Gameweeks
+    const allHistoryPicks = fantasyTeam.history.flatMap(h => h.picks);
+    const allHistoryPlayerIds = [...new Set(allHistoryPicks.map(p => p.playerId))];
+    const historyPlayerStats = await PlayerStatsModel.find({ playerId: { $in: allHistoryPlayerIds } }).lean();
+    const historyPsMap = new Map(historyPlayerStats.map(ps => [ps.playerId, ps]));
+
+    const computeHistoryScore = (picks: any[], gwId: number) => {
+      let score = 0;
+      let captainPlayed = false;
+
+      const captainPick = picks.find(p => p.isCaptain);
+      if (captainPick) {
+        const cStats = historyPsMap.get(captainPick.playerId);
+        if (cStats && cStats.gameweeks) {
+          const cGw = cStats.gameweeks.find((g: any) => g.id === gwId);
+          if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
+            captainPlayed = true;
+          }
+        }
+      }
+
+      picks.forEach(pick => {
+        if (!pick.isStarting) return;
+
+        const statsDoc = historyPsMap.get(pick.playerId);
+        if (statsDoc && statsDoc.gameweeks) {
+          const gwData = statsDoc.gameweeks.find((g: any) => g.id === gwId);
+          if (gwData) {
+            let pts = gwData.points || 0;
+
+            if (pick.isCaptain && captainPlayed) {
+              pts *= 2;
+            } else if (pick.isViceCaptain && !captainPlayed) {
+              pts *= 2;
+            }
+            score += pts;
+          }
+        }
+      });
+      return score;
+    };
+
+    const recentGameweeks = fantasyTeam.history.map(h => ({
+      gameweek: h.gameweek,
+      points: computeHistoryScore(h.picks, h.gameweek),
+    })).sort((a, b) => a.gameweek - b.gameweek);
+
+    if (!fantasyTeam.history.some(h => h.gameweek === currentGw)) {
+      recentGameweeks.push({
+        gameweek: currentGw,
+        points: currentGwPoints,
+      });
+    }
+
+    // 8. Top Players (This Gameweek) & Best Performers (This Season)
+    const allPlayersWithStats = await PlayerStatsModel.find({}).lean();
+    
+    // Calculate Top Players for the current gameweek
+    const sortedGwStats = [...allPlayersWithStats]
+      .map(stat => {
+        const gw = stat.gameweeks?.find((g: any) => g.id === currentGw);
+        return {
+          playerId: stat.playerId,
+          gwPoints: gw?.points || 0,
+        };
+      })
+      .sort((a, b) => b.gwPoints - a.gwPoints)
+      .slice(0, 5);
+
+    const sortedGwPlayerIds = sortedGwStats.map(s => s.playerId);
+    const gwPlayersDocs = (await PlayerModel.find({ id: { $in: sortedGwPlayerIds } }).lean()) as any[];
+    const gwPDocsMap = new Map(gwPlayersDocs.map(p => [p.id, p]));
+    const gwTeamIds = [...new Set(gwPlayersDocs.map(p => p.teamId))];
+    const gwTeamsDocs = (await TeamModel.find({ id: { $in: gwTeamIds } }).lean()) as any[];
+    const gwTDocsMap = new Map(gwTeamsDocs.map(t => [t.id, t]));
+
+    const topPlayers = sortedGwStats.map((stat, index) => {
+      const playerDoc = gwPDocsMap.get(stat.playerId);
+      const teamDoc = playerDoc ? gwTDocsMap.get(playerDoc.teamId) : null;
+      return {
+        rank: index + 1,
+        name: playerDoc?.webName || playerDoc?.name || "Unknown",
+        team: teamDoc?.name || "Unknown",
+        position: resolvePosition(playerDoc?.position || ""),
+        points: stat.gwPoints,
+        photo: playerDoc?.photo || (playerDoc?.id ? `https://img.sofascore.com/api/v1/player/${playerDoc.id}/image` : ""),
+        ownedBy: 50,
+      };
+    });
+
+    // Calculate Best Performers for the whole season
+    const sortedStats = [...allPlayersWithStats].sort((a, b) => (b.totalPoints || 0) - (a.totalPoints || 0)).slice(0, 5);
+    const sortedPlayerIds = sortedStats.map(s => s.playerId);
+    const playersDocs = (await PlayerModel.find({ id: { $in: sortedPlayerIds } }).lean()) as any[];
+    const pDocsMap = new Map(playersDocs.map(p => [p.id, p]));
+    const teamIdsForPlayers = [...new Set(playersDocs.map(p => p.teamId))];
+    const teamsDocsForPlayers = (await TeamModel.find({ id: { $in: teamIdsForPlayers } }).lean()) as any[];
+    const tDocsMap = new Map(teamsDocsForPlayers.map(t => [t.id, t]));
+
+    const bestPerformers = sortedStats.map((stat, index) => {
+      const playerDoc = pDocsMap.get(stat.playerId);
+      const teamDoc = playerDoc ? tDocsMap.get(playerDoc.teamId) : null;
+      return {
+        rank: index + 1,
+        name: playerDoc?.webName || playerDoc?.name || "Unknown",
+        team: teamDoc?.name || "Unknown",
+        position: resolvePosition(playerDoc?.position || ""),
+        points: stat.totalPoints || 0,
+        photo: playerDoc?.photo || (playerDoc?.id ? `https://img.sofascore.com/api/v1/player/${playerDoc.id}/image` : ""),
+      };
+    });
+
+    // 9. Player Spotlight
+    let playerSpotlight = {
+      player: {
+        id: 1,
+        name: "Erling Haaland",
+        team: "MCI",
+        teamColor: "#6CABDD",
+        point: 16,
+        position: "FWD",
+        isCaptain: false,
+        isViceCaptain: false,
+        isPowerPlayer: false,
+        fullTeamName: "Man City",
+        photo: "",
+      },
+      gameweekPoints: 16,
+      gameweekRank: 1,
+      selectedBy: 68,
+      price: 14.5,
+      formHistory: [] as number[],
+      stats: {
+        minutesPlayed: 90,
+        goals: 3,
+        assists: 1,
+        cleanSheet: 0,
+        yellowCards: 0,
+        redCards: 0,
+        penaltyMissed: 0,
+        penaltySaved: 0,
+        saves: 0,
+        tackles: 5,
+        clearances: 3,
+        blocks: 1,
+        recovery: 4,
+      },
+    };
+
+    if (sortedStats.length > 0) {
+      const topStat = sortedStats[0];
+      const topPlayerDoc = pDocsMap.get(topStat.playerId);
+      const topTeamDoc = topPlayerDoc ? tDocsMap.get(topPlayerDoc.teamId) : null;
+      const currentGwStats = topStat.gameweeks?.find((g: any) => g.id === currentGw);
+
+      const recentGws = (topStat.gameweeks || [])
+        .sort((a: any, b: any) => b.id - a.id)
+        .slice(0, 5)
+        .reverse();
+
+      const gwStats = currentGwStats?.stats || {};
+
+      playerSpotlight = {
+        player: {
+          id: topPlayerDoc?.id || 0,
+          name: topPlayerDoc?.webName || topPlayerDoc?.name || "Unknown",
+          team: topTeamDoc?.nameCode || "UNK",
+          teamColor: topTeamDoc?.teamColors?.primary || "#6CABDD",
+          point: currentGwStats?.points || 0,
+          position: resolvePosition(topPlayerDoc?.position || ""),
+          isCaptain: false,
+          isViceCaptain: false,
+          isPowerPlayer: false,
+          fullTeamName: topTeamDoc?.name || "Unknown",
+          photo: topPlayerDoc?.photo || "",
+        },
+        gameweekPoints: currentGwStats?.points || 0,
+        gameweekRank: 1,
+        selectedBy: 80,
+        price: (topPlayerDoc?.price?.nowCost || 0) / 10,
+        formHistory: recentGws.map((g: any) => g.points || 0),
+        stats: {
+          minutesPlayed: gwStats.minutesPlayed || 0,
+          goals: gwStats.goals || 0,
+          assists: gwStats.goalAssist || 0,
+          cleanSheet: gwStats.cleanSheet || 0,
+          yellowCards: gwStats.yellowCards || 0,
+          redCards: gwStats.redCards || 0,
+          penaltyMissed: gwStats.penaltyMissed || 0,
+          penaltySaved: gwStats.penaltySaved || 0,
+          saves: gwStats.saves || 0,
+          tackles: gwStats.totalTackle || 0,
+          clearances: gwStats.totalClearance || 0,
+          blocks: gwStats.outfielderBlock || 0,
+          recovery: gwStats.ballRecovery || 0,
+        },
+      };
+    }
+
+    // 10. Points Breakdown
+    const startingPicks = fantasyTeam.currentSquad.picks.filter(p => p.isStarting);
+    const startingPlayerIds = startingPicks.map(p => p.playerId);
+    const startingStatsDocs = await PlayerStatsModel.find({ playerId: { $in: startingPlayerIds } }).lean();
+    const startingStatsMap = new Map(startingStatsDocs.map(s => [s.playerId, s]));
+
+    let bdGoals = 0, bdAssists = 0, bdCleanSheet = 0, bdYellow = 0, bdRed = 0;
+    let bdPenMiss = 0, bdPenSave = 0, bdSaves = 0, bdMinutes = 0, bdAppearancePoints = 0;
+    let bdTackles = 0, bdClearances = 0, bdBlocks = 0, bdRecovery = 0;
+
+    for (const pick of startingPicks) {
+      const statsDoc = startingStatsMap.get(pick.playerId);
+      if (!statsDoc || !statsDoc.gameweeks) continue;
+      const gwData = statsDoc.gameweeks.find((g: any) => g.id === currentGw);
+      if (!gwData) continue;
+      const s = gwData.stats || {};
+
+      bdGoals += s.goals || 0;
+      bdAssists += s.goalAssist || 0;
+      bdCleanSheet += s.cleanSheet || 0;
+      bdYellow += s.yellowCards || 0;
+      bdRed += s.redCards || 0;
+      bdPenMiss += s.penaltyMissed || 0;
+      bdPenSave += s.penaltySaved || 0;
+      bdSaves += s.saves || 0;
+      bdMinutes += s.minutesPlayed || 0;
+      if ((s.minutesPlayed || 0) >= 60) bdAppearancePoints += 2;
+      else if ((s.minutesPlayed || 0) > 0) bdAppearancePoints += 1;
+      bdTackles += s.totalTackle || 0;
+      bdClearances += s.totalClearance || 0;
+      bdBlocks += s.outfielderBlock || 0;
+      bdRecovery += s.ballRecovery || 0;
+    }
+
+    const pointsBreakdown = {
+      goals: bdGoals,
+      assists: bdAssists,
+      cleanSheet: bdCleanSheet,
+      yellowCards: bdYellow,
+      redCards: bdRed,
+      penaltyMissed: bdPenMiss,
+      penaltySaved: bdPenSave,
+      saves: bdSaves,
+      tackles: bdTackles,
+      clearances: bdClearances,
+      blocks: bdBlocks,
+      recovery: bdRecovery,
+      minutesPlayed: bdMinutes,
+      appearancePoints: bdAppearancePoints,
+      totalPoints: currentGwPoints,
+    };
+
+    // 11. Season Stats
+    let highestGWScore = 0;
+    fantasyTeam.history.forEach((h: any) => {
+      const score = computeHistoryScore(h.picks, h.gameweek);
+      if (score > highestGWScore) highestGWScore = score;
+    });
+    if (currentGwPoints > highestGWScore) highestGWScore = currentGwPoints;
+
+    const seasonStats = {
+      avgPoints: Number((total / Math.max(currentGw, 1)).toFixed(1)),
+      totalPoints: total,
+      highestPoints: highestGWScore,
+      totalRank: (myStanding as any)?.rank || 1,
+    };
+
+    // 12. Fixture Difficulty
+    const upcomingFixturesList = await FixtureModel.find({ 'status.type': 'notstarted' })
+      .sort({ startTimestamp: 1 })
+      .limit(5)
+      .lean();
+
+    const fixtureDifficulty = [];
+    for (const fix of upcomingFixturesList) {
+      const homeTeamDoc = await TeamModel.findOne({ id: fix.homeTeam.id }).lean();
+      const awayTeamDoc = await TeamModel.findOne({ id: fix.awayTeam.id }).lean();
+      fixtureDifficulty.push({
+        gameweek: fix.roundInfo?.round || currentGw,
+        opponent: awayTeamDoc?.shortName || awayTeamDoc?.name || "OPP",
+        home: true,
+        difficulty: "Medium" as const,
+      });
+    }
+
+    // 13. Squad Info & Composition
+    const squadPlayerIds = fantasyTeam.currentSquad.picks.map(p => p.playerId);
+    const squadPlayerDocs = (await PlayerModel.find({ id: { $in: squadPlayerIds } }).lean()) as any[];
+    const squadTeams = (await TeamModel.find({ id: { $in: [...new Set(squadPlayerDocs.map(p => p.teamId))] } }).lean()) as any[];
+    const squadTeamMap = new Map(squadTeams.map(t => [t.id, t]));
+    const squadPlayerStats = await PlayerStatsModel.find({ playerId: { $in: squadPlayerIds } }).lean();
+    const squadPlayerStatsMap = new Map(squadPlayerStats.map(s => [s.playerId, s]));
+
+    const pDocsWithStats = squadPlayerDocs.map(p => {
+      const teamDoc = squadTeamMap.get(p.teamId);
+      const statDoc = squadPlayerStatsMap.get(p.id);
+      return {
+        name: p.webName || p.name || "",
+        team: teamDoc?.nameCode || "UNK",
+        points: statDoc?.totalPoints || 0,
+        price: (p.price?.nowCost || 0) / 10,
+        position: resolvePosition(p.position || ""),
+      };
+    });
+
+    const goalkeepers = pDocsWithStats.filter(p => p.position === "GK");
+    const defenders = pDocsWithStats.filter(p => p.position === "DEF");
+    const midfielders = pDocsWithStats.filter(p => p.position === "MID");
+    const forwards = pDocsWithStats.filter(p => p.position === "FWD");
+
+    const startingPlayerDocs = await PlayerModel.find({ id: { $in: startingPlayerIds } }).lean();
+    const startingDEF = startingPlayerDocs.filter(p => resolvePosition(p.position || "") === "DEF").length;
+    const startingMID = startingPlayerDocs.filter(p => resolvePosition(p.position || "") === "MID").length;
+    const startingFWD = startingPlayerDocs.filter(p => resolvePosition(p.position || "") === "FWD").length;
+    const formation = startingPlayerDocs.length > 0 ? `${startingDEF}-${startingMID}-${startingFWD}` : "4-4-2";
+
+    const squadComposition = {
+      goalkeepers: goalkeepers.length,
+      defenders: defenders.length,
+      midfielders: midfielders.length,
+      forwards: forwards.length,
+      total: pDocsWithStats.length,
+      formation,
+    };
+
+    const yourPlayers = {
+      goalkeepers,
+      defenders,
+      midfielders,
+      forwards,
+    };
+
+    const squadInfo = {
+      teamValue: (fantasyTeam.finance.utilisation || 0) / 10,
+      inBank: (fantasyTeam.finance.balance || 0) / 10,
+      bank: (fantasyTeam.finance.balance || 0) / 10,
+    };
+
+    const leagueStandings = standingsData.map(s => ({
+      rank: (s as any).rank,
+      team: s.team,
+      team_id: s.team_id,
+      manager: s.manager,
+      gameweekPoints: s.current_gw,
+      totalPoints: s.total,
+      rankChange: s.pos_change,
+    }));
+
+    return res.json({
+      data: {
+        teamOverview,
+        gameweekProgress,
+        upcomingMatch,
+        leagueStats,
+        leagueStandings,
+        recentGameweeks,
+        topPlayers,
+        playerSpotlight,
+        pointsBreakdown,
+        seasonStats,
+        bestPerformers,
+        fixtureDifficulty,
+        squadInfo,
+        squadComposition,
+        yourPlayers,
+        miniLeague: leagueStandings,
+      }
+    });
+
+  } catch (error) {
+    console.error("Error in dashboard controller:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};

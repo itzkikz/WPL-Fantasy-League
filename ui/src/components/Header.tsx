@@ -4,12 +4,13 @@ import Button from "./common/Button";
 interface HeaderProps {
   teamName: string;
   onBack: () => void;
+  style?: React.CSSProperties;
 }
 
-const Header = ({ teamName, onBack }: HeaderProps) => {
+const Header = ({ teamName, onBack, style }: HeaderProps) => {
 
   return (
-    <div className="sticky top-0 z-50 bg-light-bg dark:bg-dark-bg/90 backdrop-blur-md flex-none transition-colors duration-200">
+    <div className="sticky top-0 z-50 bg-light-bg dark:bg-dark-bg/90 backdrop-blur-md flex-none transition-colors duration-200" style={style}>
       <div className="flex items-center justify-between px-2">
         <Button onClick={onBack} type="NoBackground">
           <AngleLeft height="8" width="8" />

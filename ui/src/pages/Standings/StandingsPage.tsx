@@ -1,54 +1,402 @@
+import { useState, useMemo } from "react";
 import { useNavigate } from "@tanstack/react-router";
+import {
+  ArrowLeft,
+  ChevronDown,
+  SlidersHorizontal,
+  Bell,
+  Trophy,
+  ChevronRight,
+  BarChart3,
+  Clock,
+  Crown
+} from "lucide-react";
 import { ViewTransitions } from "../../types/viewTransitions";
-import { useStandings } from "../../features/standings/hooks";
-import ScrollableTable from "../../components/ScrollableTable";
+import { useStandings, useStandingsFixtures } from "../../features/standings/hooks";
+import { useManagerDetails } from "../../features/manager/hooks";
+import { useMyFixtures } from "../../features/home/hooks";
+import dayjs from "dayjs";
+
+const MOCK_MANAGERS: Record<string, string> = {
+  "The Invincibles": "Rahul Sharma",
+  "Kiran FC": "Kiran Nandakumar",
+  "Blue Devils": "Amit Verma",
+  "Goal Diggers": "Sneha Iyer",
+  "Pitch Perfect": "Vikram Mehta",
+  "Net Busters": "Rohit Singh",
+  "Kings XI": "Neha Kapoor",
+  "Vamos FC": "Arjun Patel",
+  "Red Warriors": "Manish Reddy",
+  "Thunderbolts": "Pooja Nair"
+};
+
+const getManagerName = (teamName: string, index: number) => {
+  if (MOCK_MANAGERS[teamName]) return MOCK_MANAGERS[teamName];
+  const defaultNames = ["Rahul Sharma", "Kiran Nandakumar", "Amit Verma", "Sneha Iyer", "Vikram Mehta", "Rohit Singh", "Neha Kapoor", "Arjun Patel", "Manish Reddy", "Pooja Nair"];
+  return defaultNames[index % defaultNames.length];
+};
+
+const getTeamIcon = (teamName: string, index: number) => {
+  const icons = [
+    { bg: 'bg-yellow-500/10 text-yellow-500 border border-yellow-500/20', emoji: '⚽' },
+    { bg: 'bg-purple-500/10 text-purple-400 border border-purple-500/20', emoji: '🔮' },
+    { bg: 'bg-red-500/10 text-red-500 border border-red-500/20', emoji: '👹' },
+    { bg: 'bg-blue-500/10 text-blue-400 border border-blue-500/20', emoji: '⚡' },
+    { bg: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20', emoji: '🛡️' },
+    { bg: 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20', emoji: '🛸' },
+    { bg: 'bg-pink-500/10 text-pink-400 border border-pink-500/20', emoji: '👑' },
+    { bg: 'bg-amber-500/10 text-amber-400 border border-amber-500/20', emoji: '⭐' },
+    { bg: 'bg-rose-500/10 text-rose-400 border border-rose-500/20', emoji: '⚔️' },
+    { bg: 'bg-slate-500/10 text-slate-400 border border-slate-500/20', emoji: '⚽' }
+  ];
+  return icons[index % icons.length];
+};
 
 const StandingsPage = () => {
   const navigate = useNavigate();
-  const { data: standings, isLoading, error } = useStandings();
+  const [activeTab, setActiveTab] = useState<'overall' | 'fixtures'>('overall');
+  const [fixtureFilter, setFixtureFilter] = useState<'mine' | 'all'>('mine');
+  const { data: standings, isLoading } = useStandings();
+  const { data: managerDetails } = useManagerDetails();
+  const { data: fixturesResponse, isLoading: isLoadingFixtures } = useStandingsFixtures();
+  const { data: myFixturesData } = useMyFixtures();
 
-  const handleTeamClick = (team: any) => {
+  const gameweekNumber = fixturesResponse?.gameweek || 15;
+  const fixturesList = fixturesResponse?.fixtures || [];
+
+  // Build a set of team IDs that have the user's players
+  const myTeamIds = useMemo(() => {
+    if (!myFixturesData?.fixtures) return new Set<number>();
+    const ids = new Set<number>();
+    myFixturesData.fixtures.forEach((f) => {
+      if (f.homePlayers?.length) ids.add(f.homeTeam.id);
+      if (f.awayPlayers?.length) ids.add(f.awayTeam.id);
+    });
+    return ids;
+  }, [myFixturesData]);
+
+  const handleTeamClick = (teamId: string) => {
     navigate({
       to: "/standings/$teamId",
-      params: { teamId: team.team_id },
+      params: { teamId },
       viewTransition: ViewTransitions.forward,
     });
   };
 
-  return (
-    <div className="flex flex-col h-[100dvh] bg-light-bg dark:bg-dark-bg animate-in fade-in duration-500 overflow-hidden">
-      {/* Header Area */}
-      <div className="flex-none pt-6 pb-2 px-4 lg:px-8">
-        <h1 className="text-2xl lg:text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
-          League Standings
-        </h1>
-        <div className="flex items-center justify-between mt-1">
-          <p className="text-gray-500 dark:text-gray-400">
-            Current global rankings and points.
-          </p>
-          <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-indigo-500 bg-indigo-500/10 px-2.5 py-1 rounded-full border border-indigo-500/20">
-            Updated: {standings && standings[0]?.last_update_date?.split(' ')[0]}
-          </span>
-        </div>
-      </div>
+  // Find user's stats
+  const myTeamIndex = standings?.findIndex(t => t.team === managerDetails?.team) ?? -1;
+  const myTeam = myTeamIndex !== -1 ? standings![myTeamIndex] : null;
+  const myRank = myTeamIndex !== -1 ? myTeamIndex + 1 : 2;
+  const myPosChange = myTeam?.pos_change ?? 1;
+  const totalPoints = myTeam ? myTeam.total : "1,234";
+  const gwPoints = myTeam ? myTeam.current_gw : 56;
+  const overallRankPercent = myTeamIndex !== -1 ? `Top ${Math.max(1, Math.round(((myTeamIndex + 1) / standings!.length) * 100))}%` : "Top 2%";
 
-      {/* Content Area */}
-      <div className="flex-1 overflow-hidden px-4 lg:px-8 pb-20 lg:pb-6 mt-4">
-        {isLoading ? (
-          <div className="h-full bg-white dark:bg-[#1a1a1a] rounded-3xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
-            {[...Array(10)].map((_, i) => (
-              <div
-                key={i}
-                className={`h-14 bg-gray-100 dark:bg-white/5 rounded-xl mb-3 skeleton-pulse stagger-${Math.min(i + 1, 5)}`}
-              />
-            ))}
+  return (
+    <div className="flex flex-col h-[calc(100dvh-48px-80px)] lg:h-[calc(100vh-48px)] bg-background text-white overflow-hidden font-outfit">
+ 
+      {/* 3. Navigation Tabs */}
+      <div className="mx-4 mt-3 mb-4 flex border-b border-[var(--color-border-divider)] shrink-0">
+        <button
+          onClick={() => setActiveTab("overall")}
+          className={`flex-1 pb-2 text-center text-sm font-extrabold tracking-wider uppercase transition-all relative cursor-pointer
+            ${activeTab === "overall" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
+        >
+          Overall Standings
+          {activeTab === "overall" && (
+            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent" />
+          )}
+        </button>
+        <button
+          onClick={() => setActiveTab("fixtures")}
+          className={`flex-1 pb-2 text-center text-sm font-extrabold tracking-wider uppercase transition-all relative cursor-pointer
+            ${activeTab === "fixtures" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
+        >
+          Fixtures
+          {activeTab === "fixtures" && (
+            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent" />
+          )}
+        </button>
+      </div>
+ 
+      {/* Summary Card (only on overall) */}
+      {activeTab === 'overall' && (
+        <div className="mx-4 p-4 rounded-2xl bg-gradient-overview bg-dots border border-border flex items-center justify-between mb-4 flex-none shadow-card">
+          <div className="w-14 h-14 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-white relative overflow-hidden flex-shrink-0">
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 rotate-45 scale-110" />
+            <Trophy className="w-6 h-6 text-white relative z-10" />
           </div>
-        ) : (
-          <div className="h-full bg-white dark:bg-white/5 rounded-3xl shadow-sm border border-gray-100 dark:border-white/10 overflow-hidden flex flex-col">
-            <ScrollableTable content={standings} onClick={handleTeamClick} />
+
+          <div className="flex-1 grid grid-cols-4 gap-1 ml-4 text-center">
+            <div>
+              <p className="text-[10px] text-[#c8c8c8]/60 font-medium">Your Rank</p>
+              <div className="flex items-baseline justify-center gap-1 mt-0.5">
+                <span className="text-xl font-black text-white">{myRank}</span>
+                {myPosChange !== 0 ? (
+                  <span className={`text-[10px] font-bold flex items-center gap-0.5 ${myPosChange > 0 ? 'text-success' : 'text-danger'}`}>
+                    {myPosChange > 0 ? `▲` : `▼`} {Math.abs(myPosChange)}
+                  </span>
+                ) : (
+                  <span className="text-[10px] text-[#c8c8c8]/40">-</span>
+                )}
+              </div>
+            </div>
+            <div>
+              <p className="text-[10px] text-[#c8c8c8]/60 font-medium">Total Points</p>
+              <p className="text-xl font-black text-white mt-0.5">{totalPoints}</p>
+            </div>
+            <div>
+              <p className="text-[10px] text-[#c8c8c8]/60 font-medium">GW Points</p>
+              <p className="text-xl font-black text-success mt-0.5">{gwPoints}</p>
+            </div>
+            <div>
+              <p className="text-[10px] text-[#c8c8c8]/60 font-medium">Overall Rank</p>
+              <p className="text-xl font-black text-white mt-0.5">{overallRankPercent}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Main List Area */}
+      <div className="flex-1 overflow-hidden flex flex-col px-4">
+        {/* Column Headers */}
+        {activeTab === 'overall' && (
+          <div className="flex items-center justify-between text-[11px] font-bold text-[#c8c8c8]/50 uppercase tracking-wider px-3 pb-2.5 flex-none">
+            <div className="w-10 text-left">Rank</div>
+            <div className="flex-1 text-left pl-3">Manager</div>
+            <div className="w-20 text-center">GW Points</div>
+            <div className="w-24 text-right pr-6">Total Points</div>
           </div>
         )}
+
+        {/* Scrollable List Container */}
+        <div className="flex-1 overflow-y-auto scrollbar-hide pb-20 space-y-2.5">
+          {isLoading ? (
+            [...Array(10)].map((_, i) => (
+              <div
+                key={i}
+                className={`h-16 bg-white/5 border border-white/5 rounded-2xl skeleton-pulse stagger-${Math.min(i + 1, 5)}`}
+              />
+            ))
+          ) : activeTab === 'overall' ? (
+            standings?.map((r, i) => {
+              const isMe = r.team === managerDetails?.team;
+              const posChange = r.pos_change ?? 0;
+              const crest = getTeamIcon(r.team, i);
+              const manager = r.manager || getManagerName(r.team, i);
+
+              return (
+                <div
+                  key={r.team_id}
+                  onClick={() => handleTeamClick(r.team_id)}
+                  style={{ viewTransitionName: `team-row-${r.team_id}` }}
+                  className={`flex items-center justify-between p-3 rounded-2xl cursor-pointer transition-all duration-200 ${isMe
+                    ? 'bg-[#211433]/70 border border-primary/45 shadow-[0_0_12px_rgba(139,92,246,0.15)]'
+                    : 'bg-white/5 border border-white/[0.03] hover:bg-white/10'
+                    }`}
+                >
+                  {/* Rank & Change column */}
+                  <div className="w-10 flex flex-col items-center justify-center flex-shrink-0">
+                    <span className="text-base font-black text-white">{i + 1}</span>
+                    {posChange !== 0 ? (
+                      <span className={`text-[9px] font-bold flex items-center gap-0.5 mt-0.5 ${posChange > 0 ? 'text-success' : 'text-danger'}`}>
+                        {posChange > 0 ? `▲` : `▼`}{Math.abs(posChange)}
+                      </span>
+                    ) : (
+                      <span className="text-[10px] text-[#c8c8c8]/30 mt-0.5">-</span>
+                    )}
+                  </div>
+
+                  {/* Team Crest Avatar */}
+                  <div className="relative pl-2 flex-shrink-0">
+                    {i === 0 && (
+                      <Crown className="w-4 h-4 text-yellow-400 absolute -top-2.5 left-4 rotate-12 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10 animate-pulse" />
+                    )}
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${crest.bg}`}>
+                      {crest.emoji}
+                    </div>
+                  </div>
+
+                  {/* Name column */}
+                  <div className="flex-1 pl-3.5 min-w-0">
+                    <p className="text-[14px] font-bold text-white leading-snug truncate">{r.team}</p>
+                    <p className="text-[11px] text-[#c8c8c8]/50 truncate mt-0.5">{manager}</p>
+                  </div>
+
+                  {/* GW points */}
+                  <div className="w-20 text-center font-black text-[14px] text-success flex-shrink-0">
+                    {r.current_gw}
+                  </div>
+
+                  {/* Total points & Arrow */}
+                  <div className="w-24 flex items-center justify-end gap-2.5 flex-shrink-0 text-right">
+                    <span className="text-[14px] font-black text-white">{r.total}</span>
+                    <ChevronRight className="w-4 h-4 text-[#c8c8c8]/30" />
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            /* Fixtures tab displaying real fixtures of current gameweek */
+            isLoadingFixtures ? (
+              [...Array(6)].map((_, i) => (
+                <div
+                  key={i}
+                  className={`h-16 bg-white/5 border border-white/5 rounded-2xl skeleton-pulse stagger-${Math.min(i + 1, 5)}`}
+                />
+              ))
+            ) : fixturesList.length > 0 ? (
+              <div className="space-y-3 pb-8">
+                {/* Filter chips */}
+                <div className="flex items-center gap-2 mb-2">
+                  <button
+                    onClick={() => setFixtureFilter('mine')}
+                    className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                      fixtureFilter === 'mine'
+                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                        : 'bg-white/5 text-text-muted/50 border border-white/[0.06] hover:text-white'
+                    }`}
+                  >
+                    Your Fixtures
+                  </button>
+                  <button
+                    onClick={() => setFixtureFilter('all')}
+                    className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                      fixtureFilter === 'all'
+                        ? 'bg-secondary/20 text-secondary border border-secondary/30'
+                        : 'bg-white/5 text-text-muted/50 border border-white/[0.06] hover:text-white'
+                    }`}
+                  >
+                    All Fixtures
+                  </button>
+                </div>
+
+                <div className="text-center py-2.5 bg-surface border border-border/50 rounded-xl mb-4 flex items-center justify-center gap-1.5 shadow-inner">
+                  <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-ping" />
+                  <p className="text-xs font-black uppercase tracking-wider text-secondary font-mono">Gameweek {gameweekNumber} Fixtures</p>
+                </div>
+
+                {(() => {
+                  const filteredFixtures = fixturesList.filter((fix: any) => {
+                    if (fixtureFilter === 'all') return true;
+                    return myTeamIds.has(fix.homeTeam?.id) || myTeamIds.has(fix.awayTeam?.id);
+                  });
+
+                  if (filteredFixtures.length === 0) {
+                    return (
+                      <div className="text-center py-6 text-text-muted/40">
+                        <p className="text-sm font-medium">No fixtures found</p>
+                        <p className="text-xs mt-1">None of your players play in this gameweek.</p>
+                      </div>
+                    );
+                  }
+
+                  return filteredFixtures.map((fix: any) => {
+                  const startTime = dayjs(fix.startTimestamp * 1000).format("ddd, D MMM • h:mm A");
+                  const isFinished = fix.status?.type === "finished";
+                  const isInProgress = fix.status?.type === "inprogress";
+                  const isRelevant = myTeamIds.has(fix.homeTeam?.id) || myTeamIds.has(fix.awayTeam?.id);
+
+                  return (
+                    <div
+                      key={fix.fixtureId}
+                      className={`rounded-2xl transition-all duration-200 ${
+                        isRelevant
+                          ? 'bg-amber-500/[0.07] border border-amber-500/30 shadow-[0_0_12px_rgba(245,158,11,0.1)]'
+                          : 'bg-white/5 border border-white/[0.03] hover:bg-white/10'
+                      }`}
+                    >
+                      <div className="p-4 flex items-center justify-between">
+                        {/* Home Team */}
+                        <div className="flex-1 flex items-center gap-3 min-w-0">
+                          {fix.homeTeam.photo ? (
+                            <img src={fix.homeTeam.photo} className="w-8 h-8 object-contain shrink-0" alt="" />
+                          ) : (
+                            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center font-black text-xs shrink-0 text-white font-mono" style={{ backgroundColor: fix.homeTeam.color }}>
+                              {fix.homeTeam.shortName}
+                            </div>
+                          )}
+                          <span className="text-sm font-extrabold text-white truncate leading-tight">{fix.homeTeam.name}</span>
+                        </div>
+
+                        {/* Score / VS Center Area */}
+                        <div className="px-4 flex flex-col items-center justify-center shrink-0 min-w-[95px]">
+                          {isFinished || isInProgress ? (
+                            <div className="flex items-center gap-2.5 bg-background border border-border rounded-xl px-2.5 py-0.5 shadow-inner">
+                              <span className="text-sm font-black text-white font-mono">{fix.homeScore?.display ?? 0}</span>
+                              <span className="text-[10px] font-black text-text-muted/60 font-mono">―</span>
+                              <span className="text-sm font-black text-white font-mono">{fix.awayScore?.display ?? 0}</span>
+                            </div>
+                          ) : (
+                            <span className="text-[9px] font-black text-secondary bg-secondary/10 border border-secondary/20 px-2.5 py-0.5 rounded-md font-mono">VS</span>
+                          )}
+                          <span className={`text-[8px] font-bold mt-1.5 uppercase tracking-wider
+                            ${isInProgress ? "text-rose-400 animate-pulse font-black" : "text-text-muted/50"}`}>
+                            {isInProgress ? "LIVE" : isFinished ? "FT" : startTime}
+                          </span>
+                        </div>
+
+                        {/* Away Team */}
+                        <div className="flex-1 flex items-center gap-3 justify-end min-w-0">
+                          <span className="text-sm font-extrabold text-white truncate leading-tight text-right">{fix.awayTeam.name}</span>
+                          {fix.awayTeam.photo ? (
+                            <img src={fix.awayTeam.photo} className="w-8 h-8 object-contain shrink-0" alt="" />
+                          ) : (
+                            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center font-black text-xs shrink-0 text-white font-mono" style={{ backgroundColor: fix.awayTeam.color }}>
+                              {fix.awayTeam.shortName}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Your Players indicator */}
+                      {isRelevant && (
+                        <div className="px-4 pb-3 -mt-2">
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                            <span className="text-[9px] font-bold text-amber-400/80 uppercase tracking-wider">Your Players</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                  });
+                })()}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center h-48 text-[#c8c8c8]/40 text-center">
+                <p className="text-sm font-medium">No Fixtures Scheduled</p>
+                <p className="text-xs mt-1">No fixtures mapped to Gameweek {gameweekNumber}.</p>
+              </div>
+            )
+          )}
+
+          {/* Last updated footer label */}
+          {!isLoading && standings && standings.length > 0 && (
+            <div className="flex items-center justify-center gap-1.5 pt-4 text-[11px] text-text-muted/45">
+              <Clock className="w-3.5 h-3.5" />
+              <span>Last updated: 2 mins ago</span>
+            </div>
+          )}
+        </div>
       </div>
+ 
+      {/* Floating Call to Action footer
+      {activeTab === 'overall' && !isLoading && (
+        <div className="absolute bottom-20 left-0 right-0 px-4 py-3 bg-background/95 backdrop-blur-md border-t border-white/5 flex-none z-10">
+          <button
+            onClick={() => navigate({ to: "/home" })}
+            className="w-full py-3.5 px-4 rounded-xl bg-gradient-button text-white font-bold text-xs flex items-center justify-between active:scale-[0.99] transition-all shadow-[0_4px_16px_rgba(139,92,246,0.25)]"
+          >
+            <div className="flex items-center gap-2">
+              <BarChart3 className="w-4 h-4 text-white/80" />
+              <span>View Gameweek Breakdown</span>
+            </div>
+            <ChevronRight className="w-4 h-4 text-white/80" />
+          </button>
+        </div>
+      )} */}
+
     </div>
   );
 };

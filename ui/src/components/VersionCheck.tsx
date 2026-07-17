@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 // IMPORTANT: Increment this version number with each major deployment
-const CURRENT_VERSION = '1.1.0'
+const CURRENT_VERSION = '1.1.1'
 const VERSION_KEY = 'app_version'
 
 export function VersionCheck() {

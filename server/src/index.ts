@@ -15,6 +15,7 @@ import connectDB from './config/db';
 import syncRouter from './routes/syncRoutes';
 import footballApiRouter from './routes/footballApi';
 import adminRouter from './routes/admin';
+import h2hRouter from './routes/h2h';
 
 connectDB();
 
@@ -58,6 +59,8 @@ app.get('/api/validate-token', authenticateToken, (req: any, res) => {
 });
 
 app.use('/api', authenticateToken, managerRouter);
+
+app.use('/api', authenticateToken, h2hRouter);
 
 app.use("/api", authenticateToken, notificationRouter);
 app.use("/api/admin", authenticateToken, adminRouter);

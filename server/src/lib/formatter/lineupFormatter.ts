@@ -40,7 +40,9 @@ export function convertToFormation(playersData: TeamDetails[]): FormationResult 
       position: mapPosition(playerData.position),
       fullTeamName: playerData.club,
       gw: playerData.gw,
-      shirtNumber: playerData.shirtNumber
+      shirtNumber: playerData.shirtNumber,
+      photo: playerData.photo,
+      stats: playerData.stats
     };
 
     // Add captain/vice captain flags
