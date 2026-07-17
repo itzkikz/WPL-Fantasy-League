@@ -25,9 +25,81 @@ export default function PlayerOverall({
 
   const renderStats = (data: any) => {
     if (!data) return null;
+    const pos = playerStats?.position || "";
+    const mins = data?.minutesPlayed || 0;
+    const apps = data?.appearances || 0;
+    const apps60 = data?.appearances60 || 0;
+    const appsUnder60 = apps - apps60;
+    const defCont = (data?.totalTackle || 0) + (data?.totalClearance || 0) + (data?.outfielderBlock || 0) + (data?.ballRecovery || 0);
+    const ptsRows: { label: string; pts: number }[] = [];
+    if (apps > 0) ptsRows.push({ label: `Appearance (${apps} apps)`, pts: (apps60 * 2) + (appsUnder60 * 1) });
+    if (mins > 0) ptsRows.push({ label: `Minutes Played (${mins})`, pts: 0 });
+    const g = data?.goals || 0;
+    if (g > 0) {
+      let gp = 0;
+      if (pos === "GK") gp = g * 10; else if (pos === "DEF") gp = g * 6; else if (pos === "MID") gp = g * 5; else gp = g * 4;
+      ptsRows.push({ label: `Goals (${g})`, pts: gp });
+    }
+    const a = data?.goalAssist || 0;
+    if (a > 0) ptsRows.push({ label: `Assists (${a})`, pts: a * 3 });
+    const cs = Number(data?.cleanSheet) || 0;
+    if (cs > 0 && (pos === "GK" || pos === "DEF")) ptsRows.push({ label: `Clean Sheets (${cs})`, pts: cs * 4 });
+    else if (cs > 0 && pos === "MID") ptsRows.push({ label: `Clean Sheets (${cs})`, pts: cs * 1 });
+    const yc = data?.yellowCards || 0;
+    if (yc > 0) ptsRows.push({ label: `Yellow Cards (${yc})`, pts: yc * -1 });
+    const rc = data?.redCards || 0;
+    if (rc > 0) ptsRows.push({ label: `Red Cards (${rc})`, pts: rc * -3 });
+    const pm = data?.penaltyMissed || 0;
+    if (pm > 0) ptsRows.push({ label: `Penalty Missed (${pm})`, pts: pm * -2 });
+    if (pos === "GK") {
+      const ps = data?.penaltySaved || 0;
+      if (ps > 0) ptsRows.push({ label: `Penalty Saved (${ps})`, pts: ps * 5 });
+      const sv = data?.saves || 0;
+      if (sv >= 3) ptsRows.push({ label: `Saves (${sv})`, pts: Math.floor(sv / 3) });
+    }
+    const tackles = data?.totalTackle || 0;
+    const clearances = data?.totalClearance || 0;
+    const blocks = data?.outfielderBlock || 0;
+    const recovery = data?.ballRecovery || 0;
+    if (defCont > 0) {
+      const dp = pos === "DEF" ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
+      if (dp > 0) {
+        ptsRows.push({ label: `Tackles (${tackles})`, pts: 0 });
+        ptsRows.push({ label: `Clearances (${clearances})`, pts: 0 });
+        ptsRows.push({ label: `Blocks (${blocks})`, pts: 0 });
+        ptsRows.push({ label: `Recovery (${recovery})`, pts: 0 });
+        ptsRows.push({ label: `Defensive Bonus (÷${pos === "DEF" ? 10 : 12})`, pts: dp });
+      }
+    }
+
     return (
       <div className="space-y-6 flex-1 overflow-y-auto pb-6 pr-2 scrollbar-hide">
         
+        {/* Points Impact */}
+        {ptsRows.length > 0 && (
+          <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
+            <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Points Impact</h4>
+            <div className="space-y-1.5">
+              {ptsRows.map((r, i) => (
+                <div key={i} className="flex justify-between items-center text-xs">
+                  <span className="text-gray-300 dark:text-gray-400">{r.label}</span>
+                  {r.pts === 0 ? (
+                    <span className="text-gray-500 font-mono text-[10px]">—</span>
+                  ) : (
+                    <span className={`font-mono font-bold ${r.pts >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                      {r.pts >= 0 ? `+${r.pts}` : r.pts}
+                    </span>
+                  )}
+                </div>
+              ))}
+              <div className="border-t border-gray-200 dark:border-white/10 pt-2 mt-2 flex justify-between items-center text-xs font-bold">
+                <span className="text-white">Total</span>
+                <span className="text-emerald-400 font-mono">{ptsRows.reduce((s, r) => s + r.pts, 0)} pts</span>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Playing Time & Overview */}
         <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
           <h4 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Overview</h4>

@@ -10,6 +10,8 @@ export default function Settings() {
   const [cleared, setCleared] = useState(false);
   const navigate = useNavigate();
   const removeUser = useUserStore((state) => state.removeUser);
+  const user = useUserStore((state) => state.user);
+  const isAdmin = user?.role === 'admin';
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -90,18 +92,24 @@ export default function Settings() {
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-5">
               <div className="h-16 w-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-inner">
-                {managerDetails?.team?.charAt(0) || 'U'}
+                {isAdmin ? 'A' : (managerDetails?.team?.charAt(0) || 'U')}
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {managerDetails?.team || 'Loading...'}
+                  {isAdmin ? 'Administrator' : (managerDetails?.team || 'Loading...')}
                 </h2>
                 <div className="flex flex-wrap gap-2 mt-2">
-                  {managerList?.map((manager: string, idx: number) => (
-                    <span key={idx} className="px-2.5 py-0.5 rounded-full bg-gray-100 dark:bg-white/10 text-xs font-medium text-gray-700 dark:text-gray-300">
-                      {manager}
+                  {isAdmin ? (
+                    <span className="px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-500/20 text-xs font-medium text-blue-700 dark:text-blue-400">
+                      System Admin
                     </span>
-                  ))}
+                  ) : (
+                    managerList?.map((manager: string, idx: number) => (
+                      <span key={idx} className="px-2.5 py-0.5 rounded-full bg-gray-100 dark:bg-white/10 text-xs font-medium text-gray-700 dark:text-gray-300">
+                        {manager}
+                      </span>
+                    ))
+                  )}
                 </div>
               </div>
             </div>

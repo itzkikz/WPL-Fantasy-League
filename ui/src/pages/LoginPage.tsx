@@ -13,7 +13,7 @@ const LoginPage = () => {
     if (data?.token) {
       localStorage.setItem("token", data.token);
     }
-    navigate({ to: "/manager" });
+    navigate({ to: "/home" });
   });
 
   const handleGoogleSuccess = (credentialResponse: any) => {

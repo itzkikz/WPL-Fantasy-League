@@ -14,6 +14,7 @@ import {
 import { ViewTransitions } from "../../types/viewTransitions";
 import { useStandings, useStandingsFixtures } from "../../features/standings/hooks";
 import { useManagerDetails } from "../../features/manager/hooks";
+import { useMyFixtures } from "../../features/home/hooks";
 import dayjs from "dayjs";
 
 const MOCK_MANAGERS: Record<string, string> = {
@@ -54,12 +55,25 @@ const getTeamIcon = (teamName: string, index: number) => {
 const StandingsPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'overall' | 'fixtures'>('overall');
+  const [fixtureFilter, setFixtureFilter] = useState<'mine' | 'all'>('mine');
   const { data: standings, isLoading } = useStandings();
   const { data: managerDetails } = useManagerDetails();
   const { data: fixturesResponse, isLoading: isLoadingFixtures } = useStandingsFixtures();
+  const { data: myFixturesData } = useMyFixtures();
 
   const gameweekNumber = fixturesResponse?.gameweek || 15;
   const fixturesList = fixturesResponse?.fixtures || [];
+
+  // Build a set of team IDs that have the user's players
+  const myTeamIds = useMemo(() => {
+    if (!myFixturesData?.fixtures) return new Set<number>();
+    const ids = new Set<number>();
+    myFixturesData.fixtures.forEach((f) => {
+      if (f.homePlayers?.length) ids.add(f.homeTeam.id);
+      if (f.awayPlayers?.length) ids.add(f.awayTeam.id);
+    });
+    return ids;
+  }, [myFixturesData]);
 
   const handleTeamClick = (teamId: string) => {
     navigate({
@@ -233,64 +247,121 @@ const StandingsPage = () => {
               ))
             ) : fixturesList.length > 0 ? (
               <div className="space-y-3 pb-8">
+                {/* Filter chips */}
+                <div className="flex items-center gap-2 mb-2">
+                  <button
+                    onClick={() => setFixtureFilter('mine')}
+                    className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                      fixtureFilter === 'mine'
+                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                        : 'bg-white/5 text-text-muted/50 border border-white/[0.06] hover:text-white'
+                    }`}
+                  >
+                    Your Fixtures
+                  </button>
+                  <button
+                    onClick={() => setFixtureFilter('all')}
+                    className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                      fixtureFilter === 'all'
+                        ? 'bg-secondary/20 text-secondary border border-secondary/30'
+                        : 'bg-white/5 text-text-muted/50 border border-white/[0.06] hover:text-white'
+                    }`}
+                  >
+                    All Fixtures
+                  </button>
+                </div>
+
                 <div className="text-center py-2.5 bg-surface border border-border/50 rounded-xl mb-4 flex items-center justify-center gap-1.5 shadow-inner">
                   <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-ping" />
                   <p className="text-xs font-black uppercase tracking-wider text-secondary font-mono">Gameweek {gameweekNumber} Fixtures</p>
                 </div>
 
-                {fixturesList.map((fix: any) => {
+                {(() => {
+                  const filteredFixtures = fixturesList.filter((fix: any) => {
+                    if (fixtureFilter === 'all') return true;
+                    return myTeamIds.has(fix.homeTeam?.id) || myTeamIds.has(fix.awayTeam?.id);
+                  });
+
+                  if (filteredFixtures.length === 0) {
+                    return (
+                      <div className="text-center py-6 text-text-muted/40">
+                        <p className="text-sm font-medium">No fixtures found</p>
+                        <p className="text-xs mt-1">None of your players play in this gameweek.</p>
+                      </div>
+                    );
+                  }
+
+                  return filteredFixtures.map((fix: any) => {
                   const startTime = dayjs(fix.startTimestamp * 1000).format("ddd, D MMM • h:mm A");
                   const isFinished = fix.status?.type === "finished";
                   const isInProgress = fix.status?.type === "inprogress";
+                  const isRelevant = myTeamIds.has(fix.homeTeam?.id) || myTeamIds.has(fix.awayTeam?.id);
 
                   return (
                     <div
                       key={fix.fixtureId}
-                      className="bg-white/5 border border-white/[0.03] hover:bg-white/10 rounded-2xl p-4 flex items-center justify-between transition-all duration-200"
+                      className={`rounded-2xl transition-all duration-200 ${
+                        isRelevant
+                          ? 'bg-amber-500/[0.07] border border-amber-500/30 shadow-[0_0_12px_rgba(245,158,11,0.1)]'
+                          : 'bg-white/5 border border-white/[0.03] hover:bg-white/10'
+                      }`}
                     >
-                      {/* Home Team */}
-                      <div className="flex-1 flex items-center gap-3 min-w-0">
-                        {fix.homeTeam.photo ? (
-                          <img src={fix.homeTeam.photo} className="w-8 h-8 object-contain shrink-0" alt="" />
-                        ) : (
-                          <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center font-black text-xs shrink-0 text-white font-mono" style={{ backgroundColor: fix.homeTeam.color }}>
-                            {fix.homeTeam.shortName}
-                          </div>
-                        )}
-                        <span className="text-sm font-extrabold text-white truncate leading-tight">{fix.homeTeam.name}</span>
+                      <div className="p-4 flex items-center justify-between">
+                        {/* Home Team */}
+                        <div className="flex-1 flex items-center gap-3 min-w-0">
+                          {fix.homeTeam.photo ? (
+                            <img src={fix.homeTeam.photo} className="w-8 h-8 object-contain shrink-0" alt="" />
+                          ) : (
+                            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center font-black text-xs shrink-0 text-white font-mono" style={{ backgroundColor: fix.homeTeam.color }}>
+                              {fix.homeTeam.shortName}
+                            </div>
+                          )}
+                          <span className="text-sm font-extrabold text-white truncate leading-tight">{fix.homeTeam.name}</span>
+                        </div>
+
+                        {/* Score / VS Center Area */}
+                        <div className="px-4 flex flex-col items-center justify-center shrink-0 min-w-[95px]">
+                          {isFinished || isInProgress ? (
+                            <div className="flex items-center gap-2.5 bg-background border border-border rounded-xl px-2.5 py-0.5 shadow-inner">
+                              <span className="text-sm font-black text-white font-mono">{fix.homeScore?.display ?? 0}</span>
+                              <span className="text-[10px] font-black text-text-muted/60 font-mono">―</span>
+                              <span className="text-sm font-black text-white font-mono">{fix.awayScore?.display ?? 0}</span>
+                            </div>
+                          ) : (
+                            <span className="text-[9px] font-black text-secondary bg-secondary/10 border border-secondary/20 px-2.5 py-0.5 rounded-md font-mono">VS</span>
+                          )}
+                          <span className={`text-[8px] font-bold mt-1.5 uppercase tracking-wider
+                            ${isInProgress ? "text-rose-400 animate-pulse font-black" : "text-text-muted/50"}`}>
+                            {isInProgress ? "LIVE" : isFinished ? "FT" : startTime}
+                          </span>
+                        </div>
+
+                        {/* Away Team */}
+                        <div className="flex-1 flex items-center gap-3 justify-end min-w-0">
+                          <span className="text-sm font-extrabold text-white truncate leading-tight text-right">{fix.awayTeam.name}</span>
+                          {fix.awayTeam.photo ? (
+                            <img src={fix.awayTeam.photo} className="w-8 h-8 object-contain shrink-0" alt="" />
+                          ) : (
+                            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center font-black text-xs shrink-0 text-white font-mono" style={{ backgroundColor: fix.awayTeam.color }}>
+                              {fix.awayTeam.shortName}
+                            </div>
+                          )}
+                        </div>
                       </div>
 
-                      {/* Score / VS Center Area */}
-                      <div className="px-4 flex flex-col items-center justify-center shrink-0 min-w-[95px]">
-                        {isFinished || isInProgress ? (
-                          <div className="flex items-center gap-2.5 bg-background border border-border rounded-xl px-2.5 py-0.5 shadow-inner">
-                            <span className="text-sm font-black text-white font-mono">{fix.homeScore?.display ?? 0}</span>
-                            <span className="text-[10px] font-black text-text-muted/60 font-mono">―</span>
-                            <span className="text-sm font-black text-white font-mono">{fix.awayScore?.display ?? 0}</span>
+                      {/* Your Players indicator */}
+                      {isRelevant && (
+                        <div className="px-4 pb-3 -mt-2">
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                            <span className="text-[9px] font-bold text-amber-400/80 uppercase tracking-wider">Your Players</span>
                           </div>
-                        ) : (
-                          <span className="text-[9px] font-black text-secondary bg-secondary/10 border border-secondary/20 px-2.5 py-0.5 rounded-md font-mono">VS</span>
-                        )}
-                        <span className={`text-[8px] font-bold mt-1.5 uppercase tracking-wider
-                          ${isInProgress ? "text-rose-400 animate-pulse font-black" : "text-text-muted/50"}`}>
-                          {isInProgress ? "LIVE" : isFinished ? "FT" : startTime}
-                        </span>
-                      </div>
-
-                      {/* Away Team */}
-                      <div className="flex-1 flex items-center gap-3 justify-end min-w-0">
-                        <span className="text-sm font-extrabold text-white truncate leading-tight text-right">{fix.awayTeam.name}</span>
-                        {fix.awayTeam.photo ? (
-                          <img src={fix.awayTeam.photo} className="w-8 h-8 object-contain shrink-0" alt="" />
-                        ) : (
-                          <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center font-black text-xs shrink-0 text-white font-mono" style={{ backgroundColor: fix.awayTeam.color }}>
-                            {fix.awayTeam.shortName}
-                          </div>
-                        )}
-                      </div>
+                        </div>
+                      )}
                     </div>
                   );
-                })}
+                  });
+                })()}
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center h-48 text-[#c8c8c8]/40 text-center">

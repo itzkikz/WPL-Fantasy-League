@@ -43,7 +43,7 @@ const aggregateMatchStats = (gameweeks: any[]): SofaScoreStats => {
         dribbleValueNormalized: 0,
         ballCarriesCount: 0, totalBallCarriesDistance: 0, totalProgression: 0,
         statisticsType: { sportSlug: 'football', statisticsType: 'player' },
-        appearances: 0, substitute: false, yellowCards: 0, redCards: 0, goalsConceded: 0,
+        appearances: 0, appearances60: 0, substitute: false, yellowCards: 0, redCards: 0, goalsConceded: 0,
         cleanSheet: 0, penaltyWon: 0, penaltyCommitted: 0,
         penaltyScored: 0, penaltyMissed: 0, penaltySaved: 0, offsides: 0,
     };
@@ -85,6 +85,9 @@ const aggregateMatchStats = (gameweeks: any[]): SofaScoreStats => {
         res.minutesPlayed = sumNumeric(res.minutesPlayed, s.minutesPlayed);
         if ((s.minutesPlayed ?? 0) > 0) {
             res.appearances = (res.appearances ?? 0) + 1;
+            if ((s.minutesPlayed ?? 0) >= 60) {
+                res.appearances60 = (res.appearances60 ?? 0) + 1;
+            }
         }
         res.touches = sumNumeric(res.touches, s.touches);
         res.possessionLostCtrl = sumNumeric(res.possessionLostCtrl, s.possessionLostCtrl);
@@ -181,11 +184,16 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
         const FantasyTeam = (await import("../models/FantasyTeam")).FantasyTeam;
         const totalTeamsCount = await FantasyTeam.countDocuments();
         let ownershipPct = 0;
+        let fantasyTeamName: string | null = null;
         if (totalTeamsCount > 0) {
             const teamPicksCount = await FantasyTeam.countDocuments({
                 "currentSquad.picks.playerId": player.id
             });
             ownershipPct = Number(((teamPicksCount / totalTeamsCount) * 100).toFixed(1));
+            const ownerTeam = await FantasyTeam.findOne({
+                "currentSquad.picks.playerId": player.id
+            }).select("name").lean();
+            if (ownerTeam) fantasyTeamName = ownerTeam.name;
         }
 
         // 2. Fetch upcoming fixtures
@@ -271,7 +279,7 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
                 const minutes = s.minutesPlayed || 0;
                 
                 if (minutes > 0) {
-                    pointsBreakdown.push({ label: "Minutes Played", value: `${minutes} mins`, points: 2 });
+                    pointsBreakdown.push({ label: "Minutes Played", value: `${minutes} mins`, points: minutes >= 60 ? 2 : 1 });
                     
                     const goals = s.goals || 0;
                     if (goals > 0) {
@@ -290,6 +298,8 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
 
                     if (s.cleanSheet === 1 && (position === 'GK' || position === 'DEF')) {
                         pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 4 });
+                    } else if (s.cleanSheet === 1 && position === 'MID') {
+                        pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 1 });
                     }
 
                     const yellow = s.yellowCards || 0;
@@ -354,6 +364,7 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
             current_week: currentWeekStats,
             photo: player.photo || "",
             ownership: ownershipPct,
+            fantasy_team_name: fantasyTeamName,
             upcoming_fixtures: upcomingFixtures,
             recent_form: recentForm,
             points_breakdown: pointsBreakdown

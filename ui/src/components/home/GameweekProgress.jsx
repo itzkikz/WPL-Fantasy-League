@@ -1,22 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardHeader } from "./Primitives";
+
+function calcCountdown(endDate) {
+  const now = Date.now();
+  const diff = Math.max(0, new Date(endDate).getTime() - now);
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hrs = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const mins = Math.floor((diff / (1000 * 60)) % 60);
+  const secs = Math.floor((diff / 1000) % 60);
+  return {
+    days: String(days).padStart(2, "0"),
+    hrs: String(hrs).padStart(2, "0"),
+    mins: String(mins).padStart(2, "0"),
+    secs: String(secs).padStart(2, "0"),
+  };
+}
+
+function calcPercent(startDate, endDate) {
+  if (!startDate || !endDate) return 0;
+  const now = Date.now();
+  const start = new Date(startDate).getTime();
+  const end = new Date(endDate).getTime();
+  if (now <= start) return 0;
+  if (now >= end) return 100;
+  return Math.round(((now - start) / (end - start)) * 100);
+}
 
 /**
  * GameweekProgress - countdown timer blocks + progress bar.
  *
  * Props:
  *  - gameweek, deadlineLabel
- *  - countdown: { days, hrs, mins, secs }
- *  - percent: 0-100 progress bar fill
+ *  - startDate: ISO string for gameweek start
+ *  - endDate: ISO string for gameweek end
  *  - badge: element/icon shown top-right (e.g. league logo)
  */
 export default function GameweekProgress({
   gameweek = 15,
   deadlineLabel = "GW 15 Deadline",
-  countdown = { days: "01", hrs: "04", mins: "32", secs: "15" },
-  percent = 75,
+  startDate = null,
+  endDate = null,
   badge,
 }) {
+  const [countdown, setCountdown] = useState({ days: "00", hrs: "00", mins: "00", secs: "00" });
+  const [percent, setPercent] = useState(0);
+
+  useEffect(() => {
+    if (!endDate) return;
+
+    const tick = () => {
+      setCountdown(calcCountdown(endDate));
+      setPercent(calcPercent(startDate, endDate));
+    };
+
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [startDate, endDate]);
+
   const units = [
     { label: "DAYS", value: countdown.days },
     { label: "HRS", value: countdown.hrs },
@@ -62,4 +103,3 @@ export default function GameweekProgress({
     </Card>
   );
 }
-

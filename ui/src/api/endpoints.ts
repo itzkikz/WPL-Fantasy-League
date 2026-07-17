@@ -19,7 +19,8 @@ export const API_ENDPOINTS = {
   MANAGER: {
     BASE: '/manager',
     SUBSTITUTION: '/manager/sub',
-    DASHBOARD: '/manager/dashboard'
+    DASHBOARD: '/manager/dashboard',
+    MY_FIXTURES: '/manager/my-fixtures',
     // BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
   },
   NOTIFICATION: {
@@ -41,6 +42,10 @@ export const API_ENDPOINTS = {
     FANTASY_TEAMS: '/admin/fantasy-teams',
     LEAGUES: '/admin/leagues',
     UPDATE_LEAGUE: (id: string) => `/admin/leagues/${id}`,
+    H2H_LEAGUES: '/admin/h2h-leagues',
+    H2H_LEAGUE: (id: string) => `/admin/h2h-leagues/${id}`,
+    H2H_LEAGUE_FIXTURES: (id: string) => `/admin/h2h-leagues/${id}/fixtures`,
+    H2H_GENERATE_FIXTURES: (id: string) => `/admin/h2h-leagues/${id}/generate-fixtures`,
   },
 } as const
 

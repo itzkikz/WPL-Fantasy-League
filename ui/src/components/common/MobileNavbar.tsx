@@ -1,5 +1,13 @@
-import { Link, useMatchRoute } from "@tanstack/react-router";
+import { Link, useMatchRoute, useLocation } from "@tanstack/react-router";
 import { ViewTransitions } from "../../types/viewTransitions";
+import { useUserStore } from "../../store/useUserStore";
+import { 
+  Settings as LucideSettings, 
+  Calendar as LucideCalendar, 
+  Users as LucideUsers, 
+  Trophy as LucideTrophy, 
+  Activity as LucideActivity 
+} from "lucide-react";
 
 const HomeIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
@@ -76,20 +84,47 @@ const StatsIcon = ({ isActive }: { isActive: boolean }) => (
   </svg>
 );
 
+const AdminSettingsIcon = ({ isActive }: { isActive: boolean }) => (
+  <LucideSettings className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-[#A855F7] scale-110" : "text-[#8E89A6]"}`} />
+);
+const AdminFixturesIcon = ({ isActive }: { isActive: boolean }) => (
+  <LucideCalendar className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-[#A855F7] scale-110" : "text-[#8E89A6]"}`} />
+);
+const AdminTeamsIcon = ({ isActive }: { isActive: boolean }) => (
+  <LucideUsers className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-[#A855F7] scale-110" : "text-[#8E89A6]"}`} />
+);
+const AdminLeaguesIcon = ({ isActive }: { isActive: boolean }) => (
+  <LucideTrophy className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-[#A855F7] scale-110" : "text-[#8E89A6]"}`} />
+);
+const AdminH2HIcon = ({ isActive }: { isActive: boolean }) => (
+  <LucideActivity className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-[#A855F7] scale-110" : "text-[#8E89A6]"}`} />
+);
+
 const MobileNavbar = () => {
   const matchRoute = useMatchRoute();
+  const location = useLocation();
+  const user = useUserStore((state) => state.user);
+  const isAdmin = user?.role === "admin";
 
-  const navItems = [
-    { label: "Home", path: "/home" },
-    { label: "League", path: "/standings" },
-    { label: "My Team", path: "/my-team" },
-    { label: "H2H", path: "/h2h" },
-    { label: "Stats", path: "/stats" },
-  ];
+  const navItems = isAdmin
+    ? [
+        { label: "Settings", path: "/settings", icon: AdminSettingsIcon },
+        { label: "Fixtures", path: "/admin/fixtures", icon: AdminFixturesIcon },
+        { label: "Teams", path: "/admin/fantasy-teams", icon: AdminTeamsIcon },
+        { label: "Leagues", path: "/admin/leagues", icon: AdminLeaguesIcon },
+        { label: "H2H", path: "/admin/h2h-leagues", icon: AdminH2HIcon },
+      ]
+    : [
+        { label: "Home", path: "/home", icon: HomeIcon },
+        { label: "League", path: "/standings", icon: LeagueIcon },
+        { label: "My Team", path: "/my-team", icon: MyTeamIcon },
+        { label: "H2H", path: "/h2h", icon: H2HIcon },
+        { label: "Stats", path: "/stats", icon: StatsIcon },
+      ];
 
-  const isBaseRoute = navItems.some((item) =>
-    matchRoute({ to: item.path, fuzzy: false })
-  );
+  const isBaseRoute = isAdmin
+    ? (location.pathname.startsWith("/admin") || location.pathname === "/settings")
+    : navItems.some((item) => matchRoute({ to: item.path, fuzzy: false }));
 
   if (!isBaseRoute) {
     return null;
@@ -98,7 +133,7 @@ const MobileNavbar = () => {
   return (
     <nav className="mobile-navbar fixed bottom-0 left-0 right-0 w-full block lg:hidden border-t border-[#221938] z-50 bg-[#120C22] pb-[env(safe-area-inset-bottom)]" style={{ willChange: 'transform' }}>
       <div className="grid h-16 grid-cols-5">
-        {navItems.map(({ label, path }) => {
+        {navItems.map(({ label, path, icon: IconComponent }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });
 
           return (
@@ -108,11 +143,7 @@ const MobileNavbar = () => {
               viewTransition={ViewTransitions.tabSwitch}
               className="inline-flex flex-col items-center justify-center text-[11px] transition-colors"
             >
-              {label === "Home" && <HomeIcon isActive={isActive} />}
-              {label === "League" && <LeagueIcon isActive={isActive} />}
-              {label === "My Team" && <MyTeamIcon isActive={isActive} />}
-              {label === "H2H" && <H2HIcon isActive={isActive} />}
-              {label === "Stats" && <StatsIcon isActive={isActive} />}
+              <IconComponent isActive={isActive} />
 
               <span
                 className={`mt-1 transition-colors duration-300 ${isActive

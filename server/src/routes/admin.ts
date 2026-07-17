@@ -1,5 +1,5 @@
 import express from 'express';
-import { getFixtures, getGameweeks, createGameweek, updateGameweek, getSeasons, updateFixturesFromApi, getMatchDetails, getMatchIncidentsAndStats, getUsers, createFantasyTeam, getAdminPlayers, getFantasyTeams, getFantasyTeamById, updateFantasyTeam, completeGameweek, revertGameweek, togglePickTeam, getPickTeamStatus, getLeagues, fetchLeagueRounds, updateLeague } from '../controllers/admin';
+import { getFixtures, getGameweeks, createGameweek, updateGameweek, getSeasons, updateFixturesFromApi, getMatchDetails, getMatchIncidentsAndStats, getUsers, createFantasyTeam, getAdminPlayers, getFantasyTeams, getFantasyTeamById, updateFantasyTeam, completeGameweek, revertGameweek, togglePickTeam, getPickTeamStatus, getLeagues, fetchLeagueRounds, updateLeague, getH2HLeague, upsertH2HLeague, deleteH2HLeague, generateH2HFixtures, getH2HLeagueFixtures } from '../controllers/admin';
 
 const router = express.Router();
 
@@ -24,5 +24,11 @@ router.post('/leagues/:id/fetch-rounds', fetchLeagueRounds);
 router.put('/leagues/:id', updateLeague);
 router.get('/settings/pick-team', getPickTeamStatus);
 router.post('/settings/pick-team', togglePickTeam);
+
+router.get('/h2h-leagues', getH2HLeague);
+router.post('/h2h-leagues', upsertH2HLeague);
+router.delete('/h2h-leagues/:id', deleteH2HLeague);
+router.post('/h2h-leagues/:id/generate-fixtures', generateH2HFixtures);
+router.get('/h2h-leagues/:id/fixtures', getH2HLeagueFixtures);
 
 export default router;

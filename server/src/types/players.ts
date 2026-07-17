@@ -92,6 +92,7 @@ export interface SofaScoreStats {
 
   // --- Computed fields ---
   appearances?: number;
+  appearances60?: number;
 
   // --- Incident-derived fields (injected by sofascoreMapper) ---
   substitute: boolean;
@@ -123,6 +124,7 @@ export interface PlayerStats {
   current_week?: SofaScoreStats;
   photo?: string;
   ownership?: number;
+  fantasy_team_name?: string | null;
   upcoming_fixtures?: {
     gw: number;
     opponent_short_name: string;
@@ -181,4 +183,5 @@ export interface Player {
     name?: string;
     slug?: string;
   };
+  auctionPrice?: number;
 }

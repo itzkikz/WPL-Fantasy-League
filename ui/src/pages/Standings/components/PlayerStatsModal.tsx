@@ -1,4 +1,4 @@
-import { X, Target, Clock, Star, Trophy, TrendingUp, Calendar, ArrowRightLeft, ExternalLink, Activity } from "lucide-react";
+import { X, Target, Clock, Star, Trophy, TrendingUp, Calendar, ArrowRightLeft, ExternalLink, Activity, ShieldCheck } from "lucide-react";
 import { usePlayerDetails } from "../../../features/players/hooks";
 import { Player } from "../../../features/players/types";
 import { getContrastText } from "../../../libs/helpers/color";
@@ -110,6 +110,11 @@ const PlayerStatsModal = ({
                     <span className="w-2.5 h-2.5 rounded-full border border-white/10" style={{ backgroundColor: getJerseyColor() }} />
                     {stats.team_name || stats.club}
                   </p>
+                  <p className="text-[10px] font-bold mt-0.5">
+                    <span className={stats.fantasy_team_name ? "text-violet-400" : "text-gray-500"}>
+                      {stats.fantasy_team_name ? stats.fantasy_team_name : "Free Agent"}
+                    </span>
+                  </p>
                 </div>
               </div>
  
@@ -126,7 +131,7 @@ const PlayerStatsModal = ({
             <div className="p-6 space-y-6 overflow-y-auto flex-1 min-h-0">
  
               {/* 2. Headline Stats Grid */}
-              <div className="grid grid-cols-5 gap-2 bg-card border border-border rounded-2xl p-3 text-center">
+              <div className="grid grid-cols-4 gap-2 bg-card border border-border rounded-2xl p-3 text-center">
                 <div>
                   <p className="text-[8px] font-extrabold text-text-muted uppercase tracking-wider">Price</p>
                   <p className="text-xs md:text-sm font-extrabold text-white mt-1">
@@ -144,12 +149,6 @@ const PlayerStatsModal = ({
                   <p className="text-[8px] font-extrabold text-text-muted uppercase tracking-wider">Total Points</p>
                   <p className="text-xs md:text-sm font-extrabold text-white mt-1">
                     {stats.overall?.total_point || 0}
-                  </p>
-                </div>
-                <div className="border-l border-border/40">
-                  <p className="text-[8px] font-extrabold text-text-muted uppercase tracking-wider">Ownership</p>
-                  <p className="text-xs md:text-sm font-extrabold text-white mt-1">
-                    {stats.ownership || 0}%
                   </p>
                 </div>
                 <div className="border-l border-border/40 flex flex-col items-center">
@@ -182,39 +181,48 @@ const PlayerStatsModal = ({
                     {stats.current_week?.point || 0} PTS
                   </span>
                 </div>
- 
-                <div className="grid grid-cols-6 gap-2 bg-surface border border-border rounded-2xl p-3 text-center">
-                  <div>
-                    <Trophy className="w-4 h-4 mx-auto text-amber-400 mb-1" />
-                    <p className="text-[7px] text-text-muted font-bold uppercase truncate">Goals</p>
-                    <p className="text-xs font-black text-white mt-0.5">{stats.current_week?.goals || 0}</p>
-                  </div>
-                  <div>
-                    <Trophy className="w-4 h-4 mx-auto text-indigo-400 mb-1" />
-                    <p className="text-[7px] text-text-muted font-bold uppercase truncate">Assists</p>
-                    <p className="text-xs font-black text-white mt-0.5">{stats.current_week?.goalAssist || 0}</p>
-                  </div>
-                  <div>
-                    <Target className="w-4 h-4 mx-auto text-[var(--color-success-bright)] mb-1" />
-                    <p className="text-[7px] text-text-muted font-bold uppercase truncate">Shots</p>
-                    <p className="text-xs font-black text-white mt-0.5">{stats.current_week?.totalShots || 0}</p>
-                  </div>
-                  <div>
-                    <Trophy className="w-4 h-4 mx-auto text-primary mb-1" />
-                    <p className="text-[7px] text-text-muted font-bold uppercase truncate">Passes</p>
-                    <p className="text-xs font-black text-white mt-0.5">{stats.current_week?.totalPass || 0}</p>
-                  </div>
-                  <div>
-                    <Clock className="w-4 h-4 mx-auto text-slate-400 mb-1" />
-                    <p className="text-[7px] text-text-muted font-bold uppercase truncate">Mins</p>
-                    <p className="text-xs font-black text-white mt-0.5">{stats.current_week?.minutesPlayed || 0}</p>
-                  </div>
-                  <div>
-                    <Star className="w-4 h-4 fill-amber-500 text-amber-500 mx-auto mb-1" />
-                    <p className="text-[7px] text-text-muted font-bold uppercase truncate">Bonus</p>
-                    <p className="text-xs font-black text-white mt-0.5">{stats.current_week?.isPom ? 3 : 0}</p>
-                  </div>
-                </div>
+
+                {(() => {
+                  const pos = stats.position || player.position;
+                  const cw = stats.current_week;
+                  const isGK = pos === "GK";
+                  const isDEF = pos === "DEF";
+                  const defCont = (cw?.totalTackle || 0) + (cw?.totalClearance || 0) + (cw?.outfielderBlock || 0) + (cw?.ballRecovery || 0);
+
+                  const items: { icon: any; iconColor: string; label: string; value: number }[] = [];
+                  items.push({ icon: Clock, iconColor: "text-slate-400", label: "Mins", value: cw?.minutesPlayed || 0 });
+                  if (!isGK) items.push({ icon: Trophy, iconColor: "text-amber-400", label: "Goals", value: cw?.goals || 0 });
+                  items.push({ icon: Trophy, iconColor: "text-indigo-400", label: "Assists", value: cw?.goalAssist || 0 });
+                  if (isGK || isDEF) items.push({ icon: Target, iconColor: "text-emerald-400", label: "CS", value: Number(cw?.cleanSheet) || 0 });
+                  items.push({ icon: Target, iconColor: "text-amber-400", label: "YC", value: cw?.yellowCards || 0 });
+                  items.push({ icon: Target, iconColor: "text-rose-400", label: "RC", value: cw?.redCards || 0 });
+                  if (isGK) {
+                    items.push({ icon: Target, iconColor: "text-rose-400", label: "Pen Miss", value: cw?.penaltyMissed || 0 });
+                    items.push({ icon: Target, iconColor: "text-emerald-400", label: "Pen Save", value: cw?.penaltySaved || 0 });
+                    items.push({ icon: Target, iconColor: "text-violet-400", label: "Saves", value: cw?.saves || 0 });
+                  } else {
+                    items.push({ icon: Target, iconColor: "text-rose-400", label: "Pen Miss", value: cw?.penaltyMissed || 0 });
+                  }
+                  items.push({ icon: Target, iconColor: "text-cyan-400", label: "Tackles", value: cw?.totalTackle || 0 });
+                  items.push({ icon: Target, iconColor: "text-teal-400", label: "Clear", value: cw?.totalClearance || 0 });
+                  items.push({ icon: Target, iconColor: "text-blue-400", label: "Blocks", value: cw?.outfielderBlock || 0 });
+                  items.push({ icon: Target, iconColor: "text-green-400", label: "Recovery", value: cw?.ballRecovery || 0 });
+
+                  return (
+                    <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 bg-surface border border-border rounded-2xl p-3 text-center">
+                      {items.map((item, i) => {
+                        const Ic = item.icon;
+                        return (
+                          <div key={i}>
+                            <Ic className={`w-3.5 h-3.5 mx-auto mb-1 ${item.iconColor}`} />
+                            <p className="text-[7px] text-text-muted font-bold uppercase truncate">{item.label}</p>
+                            <p className="text-xs font-black text-white mt-0.5">{item.value}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })()}
               </div>
  
               {/* 4. Points Breakdown & Upcoming Fixtures */}
@@ -224,23 +232,91 @@ const PlayerStatsModal = ({
                   <h4 className="text-[10px] font-black uppercase tracking-wider text-text-muted border-b border-border pb-2 mb-3">
                     Points Breakdown
                   </h4>
-                  <div className="space-y-2 flex-1 overflow-y-auto max-h-[160px] pr-1">
-                    {stats.points_breakdown && stats.points_breakdown.length > 0 ? (
-                      stats.points_breakdown.map((b: any, idx: number) => (
-                        <div key={idx} className="flex justify-between items-center text-xs">
-                          <span className="text-text-muted">{b.label}</span>
-                          <span className={b.points >= 0 ? "text-emerald-400 font-mono" : "text-rose-400 font-mono"}>
-                            {b.points >= 0 ? `+${b.points}` : b.points} pts
-                          </span>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-xs text-text-muted italic text-center py-4">Did not play this gameweek.</p>
-                    )}
-                  </div>
-                  <div className="border-t border-border/50 pt-2.5 mt-3 flex justify-between items-center text-xs font-black">
-                    <span className="text-white">Total</span>
-                    <span className="text-[var(--color-success-bright)] font-mono">{stats.current_week?.point || 0} pts</span>
+                  <div className="space-y-2">
+                    {(() => {
+                      const pos = stats.position || player.position;
+                      const cw = stats.current_week;
+                      const isGK = pos === "GK";
+                      const isDEF = pos === "DEF";
+                      const mins = cw?.minutesPlayed || 0;
+                      if (mins === 0) return <p className="text-xs text-text-muted italic text-center py-4">Did not play this gameweek.</p>;
+
+                      const rows: { label: string; pts: number }[] = [];
+
+                      if (mins > 0) rows.push({ label: "Appearance", pts: mins >= 60 ? 2 : 1 });
+
+                      const goals = cw?.goals || 0;
+                      if (!isGK && goals > 0) {
+                        let gp = 0;
+                        if (isDEF) gp = goals * 6;
+                        else if (pos === "MID") gp = goals * 5;
+                        else gp = goals * 4;
+                        rows.push({ label: `Goals (${goals})`, pts: gp });
+                      }
+
+                      const assists = cw?.goalAssist || 0;
+                      if (assists > 0) rows.push({ label: `Assists (${assists})`, pts: assists * 3 });
+
+                      const cs = Number(cw?.cleanSheet) || 0;
+                      if ((isGK || isDEF) && cs > 0) rows.push({ label: `Clean Sheets (${cs})`, pts: cs * 4 });
+                      else if (pos === "MID" && cs > 0) rows.push({ label: `Clean Sheets (${cs})`, pts: cs * 1 });
+
+                      const yc = cw?.yellowCards || 0;
+                      if (yc > 0) rows.push({ label: `Yellow Cards (${yc})`, pts: yc * -1 });
+
+                      const rc = cw?.redCards || 0;
+                      if (rc > 0) rows.push({ label: `Red Cards (${rc})`, pts: rc * -3 });
+
+                      if (isGK) {
+                        const penMiss = cw?.penaltyMissed || 0;
+                        if (penMiss > 0) rows.push({ label: `Penalty Missed (${penMiss})`, pts: penMiss * -2 });
+
+                        const penSave = cw?.penaltySaved || 0;
+                        if (penSave > 0) rows.push({ label: `Penalty Saved (${penSave})`, pts: penSave * 5 });
+
+                        const saves = cw?.saves || 0;
+                        if (saves >= 3) rows.push({ label: `Saves (${saves})`, pts: Math.floor(saves / 3) });
+                      }
+
+                      const tackles = cw?.totalTackle || 0;
+                      const clearances = cw?.totalClearance || 0;
+                      const blocks = cw?.outfielderBlock || 0;
+                      const recovery = cw?.ballRecovery || 0;
+                      const defCont = tackles + clearances + blocks + recovery;
+                      if (defCont > 0) {
+                        const dp = isDEF ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
+                        if (dp > 0) {
+                          rows.push({ label: `Tackles (${tackles})`, pts: 0 });
+                          rows.push({ label: `Clearances (${clearances})`, pts: 0 });
+                          rows.push({ label: `Blocks (${blocks})`, pts: 0 });
+                          rows.push({ label: `Recovery (${recovery})`, pts: 0 });
+                          rows.push({ label: `Defensive Bonus (÷${isDEF ? 10 : 12})`, pts: dp });
+                        }
+                      }
+
+                      const total = rows.reduce((s, r) => s + r.pts, 0);
+
+                      return (
+                        <>
+                          {rows.map((r, i) => (
+                            <div key={i} className="flex justify-between items-center text-xs">
+                              <span className="text-text-muted">{r.label}</span>
+                              {r.pts === 0 ? (
+                                <span className="text-text-muted font-mono text-[10px]">—</span>
+                              ) : (
+                                <span className={`font-mono font-bold ${r.pts >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                                  {r.pts >= 0 ? `+${r.pts}` : r.pts}
+                                </span>
+                              )}
+                            </div>
+                          ))}
+                          <div className="border-t border-border/50 pt-2.5 mt-3 flex justify-between items-center text-xs font-black">
+                            <span className="text-white">Total</span>
+                            <span className="text-[var(--color-success-bright)] font-mono">{total} pts</span>
+                          </div>
+                        </>
+                      );
+                    })()}
                   </div>
                 </div>
  
@@ -273,36 +349,161 @@ const PlayerStatsModal = ({
               </div>
  
               {/* 5. Overall Season Statistics */}
-              <div className="bg-surface border border-border rounded-2xl p-4 space-y-3.5">
-                <h4 className="text-[10px] font-black uppercase tracking-wider text-text-muted border-b border-border pb-2 mb-1.5">
-                  This Season Stats
+              {(() => {
+                const pos = stats.position || player.position;
+                const o = stats.overall;
+                const isGK = pos === "GK";
+                const isDEF = pos === "DEF";
+
+                const items: { label: string; value: number }[] = [];
+                items.push({ label: "Mins", value: o?.minutesPlayed || 0 });
+                if (!isGK) items.push({ label: "Goals", value: o?.goals || 0 });
+                items.push({ label: "Assists", value: o?.goalAssist || 0 });
+                if (isGK || isDEF) items.push({ label: "CS", value: Number(o?.cleanSheet) || 0 });
+                items.push({ label: "YC", value: o?.yellowCards || 0 });
+                items.push({ label: "RC", value: o?.redCards || 0 });
+                if (isGK) {
+                  items.push({ label: "Pen Miss", value: o?.penaltyMissed || 0 });
+                  items.push({ label: "Pen Save", value: o?.penaltySaved || 0 });
+                  items.push({ label: "Saves", value: o?.saves || 0 });
+                } else {
+                  items.push({ label: "Pen Miss", value: o?.penaltyMissed || 0 });
+                }
+                items.push({ label: "Tackles", value: o?.totalTackle || 0 });
+                items.push({ label: "Clear", value: o?.totalClearance || 0 });
+                items.push({ label: "Blocks", value: o?.outfielderBlock || 0 });
+                items.push({ label: "Recovery", value: o?.ballRecovery || 0 });
+
+                return (
+                  <div className="bg-surface border border-border rounded-2xl p-4 space-y-3.5">
+                    <h4 className="text-[10px] font-black uppercase tracking-wider text-text-muted border-b border-border pb-2 mb-1.5">
+                      This Season Stats
+                    </h4>
+                    <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 text-center">
+                      {items.map((item, i) => (
+                        <div key={i} className="bg-card rounded-xl p-2">
+                          <p className="text-[7px] text-text-muted font-bold uppercase truncate">{item.label}</p>
+                          <p className="text-sm font-black text-white mt-0.5">{item.value}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* 5b. Season Points Impact */}
+              <div className="bg-surface border border-border rounded-2xl p-4">
+                <h4 className="text-[10px] font-black uppercase tracking-wider text-text-muted border-b border-border pb-2 mb-3 flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-secondary" />
+                  Points Impact (Season)
                 </h4>
-                <div className="grid grid-cols-3 md:grid-cols-6 gap-2 text-center">
-                  <div className="bg-card rounded-xl p-2">
-                    <p className="text-[7px] text-text-muted font-bold uppercase truncate">Played</p>
-                    <p className="text-sm font-black text-white mt-0.5">{stats.overall?.appearances || 0}</p>
-                  </div>
-                  <div className="bg-card rounded-xl p-2">
-                    <p className="text-[7px] text-text-muted font-bold uppercase truncate">Goals</p>
-                    <p className="text-sm font-black text-white mt-0.5">{stats.overall?.goals || 0}</p>
-                  </div>
-                  <div className="bg-card rounded-xl p-2">
-                    <p className="text-[7px] text-text-muted font-bold uppercase truncate">Assists</p>
-                    <p className="text-sm font-black text-white mt-0.5">{stats.overall?.goalAssist || 0}</p>
-                  </div>
-                  <div className="bg-card rounded-xl p-2">
-                    <p className="text-[7px] text-text-muted font-bold uppercase truncate">Clean Sheets</p>
-                    <p className="text-sm font-black text-white mt-0.5">{stats.overall?.cleanSheet || 0}</p>
-                  </div>
-                  <div className="bg-card rounded-xl p-2">
-                    <p className="text-[7px] text-text-muted font-bold uppercase truncate">Yellows</p>
-                    <p className="text-sm font-black text-white mt-0.5">{stats.overall?.yellowCards || 0}</p>
-                  </div>
-                  <div className="bg-card rounded-xl p-2">
-                    <p className="text-[7px] text-text-muted font-bold uppercase truncate">Reds</p>
-                    <p className="text-sm font-black text-white mt-0.5">{stats.overall?.redCards || 0}</p>
-                  </div>
-                </div>
+                {(() => {
+                  const o = stats.overall;
+                  const pos = stats.position || player.position;
+                  const mins = o?.minutesPlayed || 0;
+                  if (mins === 0) return <p className="text-xs text-text-muted italic text-center py-3">Did not play this season.</p>;
+
+                  const isGK = pos === "GK";
+                  const isDEF = pos === "DEF";
+                  const isMID = pos === "MID";
+                  const apps = o?.appearances || 0;
+                  const apps60 = o?.appearances60 || 0;
+                  const appsUnder60 = apps - apps60;
+
+                  const rows: { label: string; pts: number }[] = [];
+
+                  // 1. Appearance
+                  if (apps > 0) rows.push({ label: `Appearance (${apps} apps, ${apps60} × 60min+)`, pts: (apps60 * 2) + (appsUnder60 * 1) });
+
+                  // 2. Minutes Played
+                  if (mins > 0) rows.push({ label: `Minutes Played (${mins})`, pts: 0 });
+
+                  // 3. Goals
+                  const goals = o?.goals || 0;
+                  if (goals > 0) {
+                    let gp = 0;
+                    if (isGK) gp = goals * 10;
+                    else if (isDEF) gp = goals * 6;
+                    else if (isMID) gp = goals * 5;
+                    else gp = goals * 4;
+                    rows.push({ label: `Goals (${goals})`, pts: gp });
+                  }
+
+                  // 4. Assists
+                  const assists = o?.goalAssist || 0;
+                  if (assists > 0) rows.push({ label: `Assists (${assists})`, pts: assists * 3 });
+
+                  // 5. Clean Sheet
+                  const cs = Number(o?.cleanSheet) || 0;
+                  if (cs > 0 && (isGK || isDEF)) rows.push({ label: `Clean Sheets (${cs})`, pts: cs * 4 });
+                  else if (cs > 0 && isMID) rows.push({ label: `Clean Sheets (${cs})`, pts: cs * 1 });
+
+                  // 6. Yellow Cards
+                  const yellows = o?.yellowCards || 0;
+                  if (yellows > 0) rows.push({ label: `Yellow Cards (${yellows})`, pts: yellows * -1 });
+
+                  // 7. Red Cards
+                  const reds = o?.redCards || 0;
+                  if (reds > 0) rows.push({ label: `Red Cards (${reds})`, pts: reds * -3 });
+
+                  // 8. Penalty Miss
+                  const penMiss = o?.penaltyMissed || 0;
+                  if (penMiss > 0) rows.push({ label: `Penalty Missed (${penMiss})`, pts: penMiss * -2 });
+
+                  // 9. Penalty Save (GK only)
+                  if (isGK) {
+                    const penSave = o?.penaltySaved || 0;
+                    if (penSave > 0) rows.push({ label: `Penalty Saved (${penSave})`, pts: penSave * 5 });
+                  }
+
+                  // 10. Saves (GK only)
+                  if (isGK) {
+                    const saves = o?.saves || 0;
+                    if (saves >= 3) rows.push({ label: `Saves (${saves})`, pts: Math.floor(saves / 3) });
+                  }
+
+                  // 11-14. Defensive stats shown individually
+                  const tackles = o?.totalTackle || 0;
+                  const clearances = o?.totalClearance || 0;
+                  const blocks = o?.outfielderBlock || 0;
+                  const recovery = o?.ballRecovery || 0;
+                  const defCont = tackles + clearances + blocks + recovery;
+                  if (defCont > 0) {
+                    const dp = isDEF ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
+                    if (dp > 0) {
+                      rows.push({ label: `Tackles (${ tackles})`, pts: 0 });
+                      rows.push({ label: `Clearances (${clearances})`, pts: 0 });
+                      rows.push({ label: `Blocks (${blocks})`, pts: 0 });
+                      rows.push({ label: `Recovery (${recovery})`, pts: 0 });
+                      rows.push({ label: `Defensive Bonus (÷${isDEF ? 10 : 12})`, pts: dp });
+                    }
+                  }
+
+                  const total = rows.reduce((s, r) => s + r.pts, 0);
+
+                  return (
+                    <>
+                      <div className="space-y-2">
+                        {rows.map((r, i) => (
+                          <div key={i} className="flex justify-between items-center text-xs">
+                            <span className="text-text-muted">{r.label}</span>
+                            {r.pts === 0 ? (
+                              <span className="text-text-muted font-mono text-[10px]">—</span>
+                            ) : (
+                              <span className={`font-mono font-bold ${r.pts >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                                {r.pts >= 0 ? `+${r.pts}` : r.pts}
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="border-t border-border/50 pt-2.5 mt-3 flex justify-between items-center text-xs font-black">
+                        <span className="text-white">Total</span>
+                        <span className="text-[var(--color-success-bright)] font-mono">{total} pts</span>
+                      </div>
+                    </>
+                  );
+                })()}
               </div>
  
               {/* 6. Recent Form (Bar Chart) */}

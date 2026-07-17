@@ -485,29 +485,46 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
                         </button>
                       </div>
                     </div>
-                    <div className="flex items-center gap-6 mt-3 pt-3 border-t border-white/5">
-                      <label className="flex items-center text-sm font-medium text-text-secondary cursor-pointer hover:text-text-primary transition-colors">
+                    <div className="flex flex-wrap items-center gap-4 mt-3 pt-3 border-t border-white/5 justify-between">
+                      <label className="flex items-center text-xs font-semibold text-text-secondary cursor-pointer hover:text-text-primary transition-colors">
                         <input
                           type="checkbox"
                           checked={p.isStarting}
                           onChange={() => toggleStarting(p.element)}
-                          className="mr-3 w-4 h-4 rounded border-white/20 text-indigo-500 focus:ring-indigo-500 bg-black/20"
+                          className="mr-2 w-4.5 h-4.5 rounded border-white/20 text-indigo-500 focus:ring-indigo-500 bg-black/20"
                         />
                         Starting XI
                       </label>
+
+                      {/* Auction Price Option */}
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[10px] font-extrabold text-text-secondary uppercase">Price:</span>
+                        <input
+                          type="number"
+                          value={p.auctionPrice ?? ""}
+                          onChange={(e) => {
+                            const val = parseFloat(e.target.value);
+                            setSquad(squad.map(sq => sq.element === p.element ? { ...sq, auctionPrice: isNaN(val) ? 0 : val } : sq));
+                          }}
+                          className="w-16 px-2 py-1 bg-black/20 border border-white/10 rounded-lg text-xs font-bold text-text-primary text-center outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="0"
+                          min="0"
+                        />
+                      </div>
+
                       {!p.isStarting && (
-                        <label className="flex items-center text-sm font-medium text-text-secondary gap-3">
+                        <label className="flex items-center text-xs font-semibold text-text-secondary gap-1.5">
                           Sub Rank:
                           <select 
                             value={p.subNumber || 0}
                             onChange={(e) => updateSubNumber(p.element, parseInt(e.target.value))}
-                            className="text-sm px-3 py-1.5 bg-black/20 border border-white/10 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-text-primary"
+                            className="text-xs px-2 py-1 bg-black/20 border border-white/10 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-text-primary cursor-pointer"
                           >
-                            <option value={0}>Auto</option>
-                            <option value={1}>1 (GK usually)</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
+                            <option value={0} className="bg-[#1b142d] text-white">Auto</option>
+                            <option value={1} className="bg-[#1b142d] text-white">1 (GK)</option>
+                            <option value={2} className="bg-[#1b142d] text-white">2</option>
+                            <option value={3} className="bg-[#1b142d] text-white">3</option>
+                            <option value={4} className="bg-[#1b142d] text-white">4</option>
                           </select>
                         </label>
                       )}

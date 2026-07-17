@@ -32,33 +32,33 @@ function RoundModal({ league, onClose }: RoundModalProps) {
   });
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
       <div className="absolute inset-0" onClick={onClose} />
-      <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-6 sm:p-8 rounded-3xl shadow-2xl space-y-8 relative overflow-hidden w-full max-w-md animate-slide-up z-10">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-secondary)] to-[var(--color-accent)] opacity-80" />
+      <div className="bg-[#1b142d] border border-white/10 p-5 rounded-2xl shadow-2xl space-y-4 relative overflow-hidden w-full max-w-sm animate-slide-up z-10 text-white">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-600 opacity-80" />
 
         <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-black text-[var(--color-text-primary)] tracking-tight">
+          <h2 className="text-base font-black tracking-tight truncate max-w-[200px]">
             {league.name}
           </h2>
-          <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-colors font-bold">✕</button>
+          <button onClick={onClose} className="w-6 h-6 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white hover:border-white/30 transition-colors text-xs font-bold">✕</button>
         </div>
 
         {error && (
-          <div className="p-4 rounded-xl text-sm font-bold bg-[#D0004A]/10 text-[#D0004A] border border-[#D0004A]/20">{error}</div>
+          <div className="p-3 rounded-lg text-[11px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">{error}</div>
         )}
 
-        <div className="space-y-3">
-          <label className="block text-[11px] font-extrabold tracking-widest text-[var(--color-text-secondary)] uppercase">
-            Select Round
+        <div className="space-y-1.5">
+          <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase">
+            Select Current Round
           </label>
           <select
             value={selectedRound}
             onChange={(e) => setSelectedRound(Number(e.target.value))}
-            className="w-full px-5 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent outline-none transition-all text-[var(--color-text-primary)] font-semibold shadow-inner appearance-none cursor-pointer"
+            className="w-full px-3 py-2 bg-[#150f24] border border-white/10 rounded-lg focus:ring-1 focus:ring-indigo-500 outline-none transition-all text-white text-xs font-semibold cursor-pointer"
           >
             {Array.from({ length: totalRounds }, (_, i) => i + 1).map((round) => (
-              <option key={round} value={round}>Round {round}</option>
+              <option key={round} value={round} className="bg-[#1b142d] text-white">Round {round}</option>
             ))}
           </select>
         </div>
@@ -66,7 +66,7 @@ function RoundModal({ league, onClose }: RoundModalProps) {
         <button
           onClick={() => updateMutation.mutate(selectedRound)}
           disabled={updateMutation.isPending}
-          className="w-full bg-[var(--color-primary)] text-[var(--color-bg)] px-8 py-4 rounded-full font-black shadow-lg shadow-[var(--color-primary)]/30 hover:shadow-[var(--color-primary)]/50 transition-all hover:-translate-y-1 active:translate-y-0 disabled:opacity-50 disabled:transform-none"
+          className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-2 rounded-lg text-xs font-black shadow-lg hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:transform-none"
         >
           {updateMutation.isPending ? "Saving..." : `Set Round ${selectedRound}`}
         </button>
@@ -86,48 +86,53 @@ function AdminLeagues() {
   const leagues = data?.data?.data || [];
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto p-4 sm:p-6 lg:p-8 animate-fade-in">
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-4xl font-black text-[var(--color-text-primary)] tracking-tight">
+    <div className="w-full p-2 sm:p-4 space-y-4 animate-fade-in text-white">
+      {/* Dense Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
+        <div>
+          <h1 className="text-xl font-black tracking-tight flex items-center gap-2 text-white">
             Admin Leagues
+            <span className="text-xs font-bold bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 px-2 py-0.5 rounded-full">
+              {leagues.length} Active
+            </span>
           </h1>
-          <p className="text-[var(--color-text-secondary)] font-medium text-lg">
+          <p className="text-[11px] text-white/50 font-medium">
             View all leagues and configure their rounds
           </p>
         </div>
       </div>
 
-      <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-6 sm:p-8 rounded-3xl shadow-lg transition-interactive">
+      {/* Dense Table wrapper */}
+      <div className="bg-[#150f24]/50 border border-white/5 rounded-xl overflow-hidden shadow-lg">
         {isLoading ? (
-          <div className="p-8 text-center text-[var(--color-text-secondary)] font-medium">Loading...</div>
+          <div className="p-8 text-center text-white/40 text-xs font-semibold">Loading...</div>
         ) : leagues.length === 0 ? (
-          <div className="p-8 text-center bg-[var(--color-bg)] rounded-2xl border border-dashed border-[var(--color-border)]">
-            <p className="text-[var(--color-text-secondary)] font-medium">No leagues found.</p>
+          <div className="p-8 text-center bg-[#150f24]/30 rounded-xl border border-white/5">
+            <p className="text-white/40 text-xs">No leagues found.</p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b border-[var(--color-border)] text-[11px] font-extrabold tracking-widest text-[var(--color-text-secondary)] uppercase">
-                  <th className="py-4 px-4">Name</th>
-                  <th className="py-4 px-4">Current Round</th>
-                  <th className="py-4 px-4">Total Rounds</th>
-                  <th className="py-4 px-4">Teams</th>
-                  <th className="py-4 px-4">Rounds</th>
+          <div className="overflow-x-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
+            <table className="w-full text-left border-collapse">
+              <thead className="bg-black/40 border-b border-white/5">
+                <tr className="text-[9px] font-extrabold uppercase tracking-widest text-white/40">
+                  <th className="py-2.5 px-3">Name</th>
+                  <th className="py-2.5 px-3">Current Round</th>
+                  <th className="py-2.5 px-3">Total Rounds</th>
+                  <th className="py-2.5 px-3">Teams</th>
+                  <th className="py-2.5 px-3 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-white/5">
                 {leagues.map((league: any) => (
-                  <tr key={league._id} className="border-b border-[var(--color-border)] hover:bg-[var(--color-bg)]/50 transition-colors">
-                    <td className="py-4 px-4 font-bold text-[var(--color-text-primary)]">{league.name}</td>
-                    <td className="py-4 px-4 text-[var(--color-text-secondary)] font-semibold">{league.currentRound ?? '-'}</td>
-                    <td className="py-4 px-4 text-[var(--color-text-secondary)] font-semibold">{league.totalRounds ?? '-'}</td>
-                    <td className="py-4 px-4 text-[var(--color-text-secondary)] font-semibold">{league.teams?.length ?? 0}</td>
-                    <td className="py-4 px-4">
+                  <tr key={league._id} className="hover:bg-white/5 transition-colors">
+                    <td className="py-2.5 px-3 font-bold text-xs text-white/95">{league.name}</td>
+                    <td className="py-2.5 px-3 text-xs text-white/60 font-semibold">{league.currentRound ?? '-'}</td>
+                    <td className="py-2.5 px-3 text-xs text-white/60 font-semibold">{league.totalRounds ?? '-'}</td>
+                    <td className="py-2.5 px-3 text-xs text-white/60 font-semibold">{league.teams?.length ?? 0}</td>
+                    <td className="py-2.5 px-3 text-right">
                       <button
                         onClick={() => setSelectedLeague(league)}
-                        className="bg-[var(--color-primary)] text-[var(--color-bg)] px-5 py-2 rounded-full font-black text-sm shadow-lg shadow-[var(--color-primary)]/30 hover:shadow-[var(--color-primary)]/50 transition-all hover:-translate-y-0.5 active:translate-y-0"
+                        className="inline-block text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-1.5 rounded bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 transition-all shadow-sm active:scale-95"
                       >
                         Set Round
                       </button>

@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useHomePage } from "../../features/home/hooks";
+import { useHomePage, useMyFixtures } from "../../features/home/hooks";
 import TeamOverview from "../../components/home/TeamOverview";
 import LeagueStatistics from "../../components/home/LeagueStatistics";
 import GameweekProgress from "../../components/home/GameweekProgress";
@@ -7,7 +7,7 @@ import UpcomingFixture from "../../components/home/UpcomingFixture";
 import PlayerSpotlight from "../../components/home/PlayerSpotlight";
 import PointsBreakdown from "../../components/home/PointsBreakdown";
 import RecentGameweeks from "../../components/home/RecentGameweeks";
-import { Crown, Target, Activity, ShieldCheck, Square, Users, Clock, Star, Repeat } from "lucide-react";
+import { Crown, Target, Activity, ShieldCheck, Square, Users, Clock, Star, Shield } from "lucide-react";
 import PlayerListCard from "../../components/home/PlayerListCard";
 import SeasonStats from "../../components/home/SeasonStats";
 import LeagueStandings from "../../components/home/LeagueStandings";
@@ -20,6 +20,7 @@ import FantasyNews from "../../components/home/FantasyNews";
 const HomePage = () => {
   const navigate = useNavigate();
   const { data, isLoading, error } = useHomePage();
+  const { data: myFixturesData } = useMyFixtures();
 
   if (isLoading) {
     return (
@@ -68,6 +69,7 @@ const HomePage = () => {
           <div className="col-span-2 lg:col-span-4">
             <TeamOverview
               teamName={data.teamOverview.teamName}
+              managers={data.teamOverview.managers}
               overallRank={String(data.teamOverview.rank)}
               rankChange={String(Math.abs(data.teamOverview.rankChange))}
               totalPoints={String(data.teamOverview.totalPoints)}
@@ -79,10 +81,10 @@ const HomePage = () => {
           <div className="lg:col-span-2">
             <LeagueStatistics
               stats={[
-                { icon: Users, label: "Total Managers", value: String(data.leagueStandings?.length || 0), iconColor: "text-text", circleClass: "border border-white/10 bg-white/5" },
+                { icon: Users, label: "Total Managers", value: String(data.leagueStats.totalManagers), iconColor: "text-text", circleClass: "border border-white/10 bg-white/5" },
                 { icon: Clock, label: "GW Average", value: String(data.leagueStats.avgPointsPerGW), iconColor: "text-indigo-400", circleClass: "border border-indigo-500/30 bg-indigo-500/5" },
                 { icon: Star, label: "Highest Points", value: String(data.leagueStats.highestGW), iconColor: "text-pink-400", circleClass: "border border-pink-500/30 bg-pink-500/5" },
-                { icon: Repeat, label: "Transfers Made", value: String(data.teamOverview.transfers), iconColor: "text-rose-400", circleClass: "border border-rose-500/30 bg-rose-500/5" },
+                { icon: Shield, label: "Total Teams", value: String(data.leagueStats.totalTeams), iconColor: "text-rose-400", circleClass: "border border-rose-500/30 bg-rose-500/5" },
               ]}
             />
           </div>
@@ -90,17 +92,16 @@ const HomePage = () => {
             <GameweekProgress
               gameweek={data.teamOverview.gameweek}
               deadlineLabel={data.gameweekProgress.deadline}
+              startDate={data.gameweekProgress.startDate}
+              endDate={data.gameweekProgress.endDate}
               badge={<Crown className="w-8 h-8 text-white/20" />}
             />
           </div>
 
           <div className="lg:col-span-2">
             <UpcomingFixture
-              gameweek={data.upcomingMatch?.gameweek}
-              date={data.upcomingMatch?.kickoffTime.split(", ")[0]}
-              time={data.upcomingMatch?.kickoffTime.split(", ")[1] || data.upcomingMatch?.kickoffTime}
-              homeTeam={{ code: data.upcomingMatch?.homeTeamShort, bg: "bg-rose-600" }}
-              awayTeam={{ code: data.upcomingMatch?.awayTeamShort, bg: "bg-blue-600" }}
+              fixtures={myFixturesData?.fixtures || []}
+              gameweek={myFixturesData?.gameweek || data.upcomingMatch?.gameweek}
             />
           </div>
           <div className="lg:col-span-2">
@@ -109,21 +110,33 @@ const HomePage = () => {
               name={data.playerSpotlight?.player.name}
               club={data.playerSpotlight?.player.fullTeamName}
               position={data.playerSpotlight?.player.position}
-              points={String(data.playerSpotlight?.gameweekPoints)}
-              goals={data.playerSpotlight?.stats.goals}
-              assists={data.playerSpotlight?.stats.assists}
+              formHistory={data.playerSpotlight?.formHistory || []}
+              points={data.playerSpotlight?.gameweekPoints}
+              stats={data.playerSpotlight?.stats}
             />
           </div>
 
           <div className="lg:col-span-2">
             <PointsBreakdown
               total={String(data.pointsBreakdown?.totalPoints)}
-              segments={[
-                { label: "Goals", value: data.pointsBreakdown?.goals * 6, percent: data.pointsBreakdown?.totalPoints ? Math.round(((data.pointsBreakdown.goals * 6) / Math.max(data.pointsBreakdown.totalPoints, 1)) * 100) : 0, color: "var(--color-success)" },
-                { label: "Assists", value: data.pointsBreakdown?.assists * 3, percent: data.pointsBreakdown?.totalPoints ? Math.round(((data.pointsBreakdown.assists * 3) / Math.max(data.pointsBreakdown.totalPoints, 1)) * 100) : 0, color: "var(--color-info)" },
-                { label: "Clean Sheets", value: data.pointsBreakdown?.cleanSheet * 4, percent: data.pointsBreakdown?.totalPoints ? Math.round(((data.pointsBreakdown.cleanSheet * 4) / Math.max(data.pointsBreakdown.totalPoints, 1)) * 100) : 0, color: "var(--color-primary)" },
-                { label: "Minutes / Other", value: Math.max(0, data.pointsBreakdown?.totalPoints - (data.pointsBreakdown?.goals * 6 + data.pointsBreakdown?.assists * 3 + data.pointsBreakdown?.cleanSheet * 4)), percent: data.pointsBreakdown?.totalPoints ? Math.max(0, 100 - (Math.round(((data.pointsBreakdown.goals * 6) / Math.max(data.pointsBreakdown.totalPoints, 1)) * 100) + Math.round(((data.pointsBreakdown.assists * 3) / Math.max(data.pointsBreakdown.totalPoints, 1)) * 100) + Math.round(((data.pointsBreakdown.cleanSheet * 4) / Math.max(data.pointsBreakdown.totalPoints, 1)) * 100))) : 0, color: "var(--color-warning)" },
-              ]}
+              segments={(() => {
+                const pb = data.pointsBreakdown;
+                if (!pb) return [];
+                const tp = Math.max(pb.totalPoints || 1, 1);
+                const pct = (pts: number) => Math.round((Math.abs(pts) / tp) * 100);
+                return [
+                  { label: "Goals", value: pb.goals * 5, percent: pct(pb.goals * 5), color: "var(--color-success)" },
+                  { label: "Assists", value: pb.assists * 3, percent: pct(pb.assists * 3), color: "var(--color-info)" },
+                  { label: "Clean Sheets", value: pb.cleanSheet * 4, percent: pct(pb.cleanSheet * 4), color: "#818cf8" },
+                  { label: "Yellow Cards", value: pb.yellowCards * -1, percent: pct(pb.yellowCards * -1), color: "#fbbf24" },
+                  { label: "Red Cards", value: pb.redCards * -3, percent: pct(pb.redCards * -3), color: "#f87171" },
+                  { label: "Penalty Miss", value: pb.penaltyMissed * -2, percent: pct(pb.penaltyMissed * -2), color: "#fb923c" },
+                  { label: "Penalty Save", value: pb.penaltySaved * 5, percent: pct(pb.penaltySaved * 5), color: "#34d399" },
+                  { label: "Saves", value: Math.floor((pb.saves || 0) / 3), percent: pct(Math.floor((pb.saves || 0) / 3)), color: "#a78bfa" },
+                  { label: "Defensive", value: Math.floor(((pb.tackles || 0) + (pb.clearances || 0) + (pb.blocks || 0) + (pb.recovery || 0)) / 10) * 2, percent: pct(Math.floor(((pb.tackles || 0) + (pb.clearances || 0) + (pb.blocks || 0) + (pb.recovery || 0)) / 10) * 2), color: "#2dd4bf" },
+                  { label: "Appearance", value: pb.appearancePoints || 0, percent: pct(pb.appearancePoints || 0), color: "var(--color-warning)" },
+                ];
+              })()}
             />
           </div>
           <div className="lg:col-span-2">
@@ -171,6 +184,7 @@ const HomePage = () => {
           <div>
             <LeagueStandings
               standings={data.leagueStandings}
+              myTeam={data.teamOverview.teamName}
               onViewFull={() => navigate({ to: "/standings" })}
             />
           </div>

@@ -15,9 +15,12 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import { PlayerStats } from '../models/PlayerStats';
+import { H2HLeague } from '../models/H2HLeague';
+import { H2HFixture } from '../models/H2HFixture';
 import { fetchSofascoreJSON } from '../utils/sofascoreScraper';
 import { calculatePlayerPoints } from '../lib/points';
 import { mapSofascoreToPlayerMatchStat } from '../lib/sofascoreMapper';
+import { getLeagueAllGWPoints } from './h2h';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -453,9 +456,27 @@ export const getAdminPlayers = async (req: Request, res: Response) => {
         }
 
         const search = req.query.search as string;
+        const excludeTeamId = req.query.excludeTeamId as string;
 
         const { Player } = require('../models/Player');
         const { Team } = require('../models/Team');
+        const { FantasyTeam } = require('../models/FantasyTeam');
+
+        // Find all fantasy teams except the one being edited (if excludeTeamId is provided)
+        let ftQuery = {};
+        if (excludeTeamId && mongoose.Types.ObjectId.isValid(excludeTeamId)) {
+            ftQuery = { _id: { $ne: excludeTeamId } };
+        }
+        const fantasyTeams = await FantasyTeam.find(ftQuery).lean();
+
+        const takenPlayerIds = new Set<number>();
+        for (const ft of fantasyTeams) {
+            if (ft.currentSquad && ft.currentSquad.picks) {
+                for (const pick of ft.currentSquad.picks) {
+                    takenPlayerIds.add(pick.playerId);
+                }
+            }
+        }
 
         let query: any = {};
         if (search) {
@@ -463,6 +484,11 @@ export const getAdminPlayers = async (req: Request, res: Response) => {
                 { name: { $regex: new RegExp(search, 'i') } },
                 { webName: { $regex: new RegExp(search, 'i') } }
             ];
+        }
+
+        // Exclude taken players
+        if (takenPlayerIds.size > 0) {
+            query.id = { $nin: Array.from(takenPlayerIds) };
         }
 
         const players = await Player.find(query).lean();
@@ -473,7 +499,8 @@ export const getAdminPlayers = async (req: Request, res: Response) => {
             id: p.id,
             name: p.name || p.webName || 'Unknown',
             position: p.position || 'Unknown',
-            team: teamMap.get(p.teamId) || 'Unknown'
+            team: teamMap.get(p.teamId) || 'Unknown',
+            auctionPrice: p.auctionPrice ?? 0
         }));
 
         res.status(200).json({ data: mappedPlayers });
@@ -567,6 +594,16 @@ export const createFantasyTeam = async (req: Request, res: Response) => {
         });
 
         await newFantasyTeam.save();
+
+        // Update players' auctionPrices
+        for (const p of squad) {
+            if (p.auctionPrice !== undefined) {
+                await Player.updateOne(
+                    { id: p.element },
+                    { $set: { auctionPrice: Number(p.auctionPrice) } }
+                );
+            }
+        }
 
         // Update User roles to manager (only for regular users)
         await User.updateMany(
@@ -729,6 +766,16 @@ export const updateFantasyTeam = async (req: Request, res: Response) => {
         }
 
         await team.save();
+
+        // Update players' auctionPrices
+        for (const p of squad) {
+            if (p.auctionPrice !== undefined) {
+                await Player.updateOne(
+                    { id: p.element },
+                    { $set: { auctionPrice: Number(p.auctionPrice) } }
+                );
+            }
+        }
 
         // Update User roles to manager (only for regular users)
         await User.updateMany(
@@ -1100,5 +1147,249 @@ export const updateLeague = async (req: Request, res: Response) => {
     } catch (error: any) {
         console.error('Error updating league:', error);
         res.status(500).json({ error: `Failed to update league: ${error.message}` });
+    }
+};
+
+// --- H2H Admin Controllers ---
+
+export const getH2HLeague = async (req: Request, res: Response) => {
+    try {
+        if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+
+        // Get the H2H league for the current season (or first one if no season specified)
+        const { season } = req.query;
+        const query = season ? { season: Number(season) } : {};
+        const league = await H2HLeague.findOne(query)
+            .populate('fantasyTeams', 'name managers')
+            .lean();
+
+        if (!league) {
+            return res.json({ data: null });
+        }
+
+        // Count fixtures
+        const completedGws = await Gameweek.find({ isCompleted: true }).select('number').lean();
+        const completedGwNumbers = completedGws.map(g => g.number);
+
+        const total = await H2HFixture.countDocuments({ league: league._id });
+        const completed = await H2HFixture.countDocuments({ league: league._id, gameweek: { $in: completedGwNumbers } });
+
+        res.json({ data: { ...league, fixtureCount: total, completedFixtures: completed } });
+    } catch (error: any) {
+        console.error('Error getting H2H league:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const upsertH2HLeague = async (req: Request, res: Response) => {
+    try {
+        if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+
+        const { name, fantasyTeamIds, gameweekStart, gameweekEnd, season } = req.body;
+
+        if (!name || !fantasyTeamIds || fantasyTeamIds.length < 2) {
+            return res.status(400).json({ error: 'Name and at least 2 fantasy teams required' });
+        }
+
+        const seasonNum = season || 1;
+        
+        // Find existing league for this season
+        let league = await H2HLeague.findOne({ season: seasonNum });
+        
+        if (league) {
+            // Update existing
+            league.name = name;
+            league.fantasyTeams = fantasyTeamIds;
+            league.gameweekStart = gameweekStart || 1;
+            league.gameweekEnd = gameweekEnd || 38;
+            await league.save();
+        } else {
+            // Create new
+            league = await H2HLeague.create({
+                name,
+                fantasyTeams: fantasyTeamIds,
+                gameweekStart: gameweekStart || 1,
+                gameweekEnd: gameweekEnd || 38,
+                season: seasonNum,
+            });
+        }
+
+        // Populate before returning
+        await league.populate('fantasyTeams', 'name managers');
+        
+        res.json({ data: league });
+    } catch (error: any) {
+        console.error('Error upserting H2H league:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const deleteH2HLeague = async (req: Request, res: Response) => {
+    try {
+        if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+
+        const { id } = req.params;
+        await H2HFixture.deleteMany({ league: id });
+        await H2HLeague.findByIdAndDelete(id);
+
+        res.json({ message: 'H2H league deleted' });
+    } catch (error: any) {
+        console.error('Error deleting H2H league:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const generateH2HFixtures = async (req: Request, res: Response) => {
+    try {
+        if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+
+        const { id } = req.params;
+        const league = await H2HLeague.findById(id);
+        if (!league) return res.status(404).json({ error: 'H2H league not found' });
+
+        // Delete existing fixtures for this league to allow regeneration
+        await H2HFixture.deleteMany({ league: id });
+
+        const teamIds = league.fantasyTeams.map(t => t.toString());
+        const numTeams = teamIds.length;
+        const gwStart = league.gameweekStart;
+        const gwEnd = league.gameweekEnd;
+
+        // Circle method for round-robin
+        // If odd number of teams, add a "bye" placeholder
+        const teams = [...teamIds];
+        if (numTeams % 2 !== 0) {
+            teams.push('bye');
+        }
+
+        const n = teams.length; // always even now
+        const rounds = n - 1;   // number of rounds per leg
+
+        const fixtureDocs: any[] = [];
+
+        // Generate first leg fixtures
+        for (let round = 0; round < rounds; round++) {
+            const gw = gwStart + round;
+            if (gw > gwEnd) break;
+
+            const roundFixtures = getRoundPairings(teams, round, n);
+            for (const [home, away] of roundFixtures) {
+                if (home === 'bye' || away === 'bye') continue;
+                fixtureDocs.push({
+                    league: id,
+                    homeTeam: home,
+                    awayTeam: away,
+                    gameweek: gw,
+                });
+            }
+        }
+
+        // Generate second leg (reversed home/away, offset by first leg rounds)
+        for (let round = 0; round < rounds; round++) {
+            const gw = gwStart + rounds + round;
+            if (gw > gwEnd) break;
+
+            const roundFixtures = getRoundPairings(teams, round, n);
+            for (const [home, away] of roundFixtures) {
+                if (home === 'bye' || away === 'bye') continue;
+                fixtureDocs.push({
+                    league: id,
+                    homeTeam: away, // reversed
+                    awayTeam: home,
+                    gameweek: gw,
+                });
+            }
+        }
+
+const created = await H2HFixture.insertMany(fixtureDocs);
+
+        const gameweeks = Array.from(new Set(created.map((f: any) => f.gameweek))).sort((a: number, b: number) => a - b);
+
+        res.json({
+            data: {
+                leagueId: id,
+                fixturesCreated: created.length,
+                gameweeks,
+            },
+        });
+    } catch (error: any) {
+        console.error('Error generating H2H fixtures:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// Circle method pairings for a given round
+function getRoundPairings(teams: string[], round: number, n: number): [string, string][] {
+    const fixed = teams[0];
+    const rotating = teams.slice(1);
+    const pairings: [string, string][] = [];
+
+    // Rotate the rotating array: move last element to position (round) from end
+    const rotated = [...rotating];
+    for (let i = 0; i < round; i++) {
+        rotated.unshift(rotated.pop()!);
+    }
+
+    // Pair fixed team with first rotating team
+    pairings.push([fixed, rotated[0]]);
+
+    // Pair remaining: second with second-to-last, etc.
+    for (let i = 1; i < n / 2; i++) {
+        pairings.push([rotated[i], rotated[n - 2 - i]]);
+    }
+
+    return pairings;
+}
+
+export const getH2HLeagueFixtures = async (req: Request, res: Response) => {
+    try {
+        if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+
+        const { id } = req.params;
+        const league = await H2HLeague.findById(id).lean();
+        if (!league) return res.status(404).json({ error: 'H2H league not found' });
+
+        const fixtures = await H2HFixture.find({ league: id })
+            .populate('homeTeam', 'name')
+            .populate('awayTeam', 'name')
+            .sort({ gameweek: 1 })
+            .lean();
+
+        // Enrich fixtures with live scores for completed GWs
+        const gwPointsMap = await getLeagueAllGWPoints(league);
+
+        const enrichedFixtures = fixtures.map(fix => {
+            const gwPoints = gwPointsMap.get(fix.gameweek);
+            if (gwPoints) {
+                const homeScore = gwPoints.get(fix.homeTeam._id.toString()) ?? 0;
+                const awayScore = gwPoints.get(fix.awayTeam._id.toString()) ?? 0;
+                let winner: string | 'draw' | null = null;
+                if (homeScore > awayScore) winner = fix.homeTeam._id.toString();
+                else if (awayScore > homeScore) winner = fix.awayTeam._id.toString();
+                else winner = 'draw';
+
+                return {
+                    ...fix,
+                    homeScore,
+                    awayScore,
+                    status: 'completed',
+                    winner,
+                };
+            }
+            return fix;
+        });
+
+        // Group by gameweek
+        const byGameweek: Record<number, any[]> = {};
+        for (const f of enrichedFixtures) {
+            const gw = f.gameweek;
+            if (!byGameweek[gw]) byGameweek[gw] = [];
+            byGameweek[gw].push(f);
+        }
+
+        res.json({ data: { fixtures: enrichedFixtures, byGameweek } });
+    } catch (error: any) {
+        console.error('Error getting H2H fixtures:', error);
+        res.status(500).json({ error: error.message });
     }
 };

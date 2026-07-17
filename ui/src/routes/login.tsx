@@ -10,7 +10,7 @@ export const Route = createFileRoute('/login')({
 
     
     if (user?.teamName) {
-      throw redirect({ to: "/manager" });
+      throw redirect({ to: "/home" });
     }
   },
 })

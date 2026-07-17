@@ -2,6 +2,7 @@ import { Player } from "../players/types";
 
 export interface TeamOverview {
   teamName: string;
+  managers: string[];
   gameweek: number;
   gwPoints: number;
   totalPoints: number;
@@ -16,6 +17,8 @@ export interface GameweekProgress {
   captainChosen: boolean;
   teamConfirmed: boolean;
   deadline: string;
+  startDate: string | null;
+  endDate: string | null;
 }
 
 export interface UpcomingMatch {
@@ -33,6 +36,8 @@ export interface LeagueStats {
   avgPointsPerGW: number;
   highestGW: number;
   teamValue: number;
+  totalManagers: number;
+  totalTeams: number;
 }
 
 export interface LeagueStanding {
@@ -64,10 +69,21 @@ export interface PlayerSpotlightData {
   gameweekRank: number;
   selectedBy: number;
   price: number;
+  formHistory: number[];
   stats: {
+    minutesPlayed: number;
     goals: number;
     assists: number;
-    shots: number;
+    cleanSheet: number;
+    yellowCards: number;
+    redCards: number;
+    penaltyMissed: number;
+    penaltySaved: number;
+    saves: number;
+    tackles: number;
+    clearances: number;
+    blocks: number;
+    recovery: number;
   };
 }
 
@@ -75,8 +91,17 @@ export interface PointsBreakdown {
   goals: number;
   assists: number;
   cleanSheet: number;
-  bonus: number;
+  yellowCards: number;
+  redCards: number;
+  penaltyMissed: number;
+  penaltySaved: number;
+  saves: number;
+  tackles: number;
+  clearances: number;
+  blocks: number;
+  recovery: number;
   minutesPlayed: number;
+  appearancePoints: number;
   totalPoints: number;
 }
 
@@ -122,6 +147,38 @@ export interface YourPlayer {
   team: string;
   points: number;
   price: number;
+}
+
+export interface FixturePlayer {
+  id: number;
+  name: string;
+  position: string;
+  photo?: string;
+}
+
+export interface MyFixtureTeam {
+  id: number;
+  name: string;
+  shortName: string;
+  photo?: string;
+  color: string;
+}
+
+export interface MyFixture {
+  fixtureId: number;
+  homeTeam: MyFixtureTeam;
+  awayTeam: MyFixtureTeam;
+  startTimestamp: number;
+  status: { type: string };
+  homeScore?: { display: string };
+  awayScore?: { display: string };
+  homePlayers: FixturePlayer[];
+  awayPlayers: FixturePlayer[];
+}
+
+export interface MyFixturesData {
+  gameweek: number;
+  fixtures: MyFixture[];
 }
 
 export interface HomePageData {

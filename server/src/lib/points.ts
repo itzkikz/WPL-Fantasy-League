@@ -13,7 +13,11 @@ export function calculatePlayerPoints(player: Player, stats: SofaScoreStats): nu
     }
 
     // 1. Appearance
-    points += 2;
+    if (minutesPlayed >= 60) {
+        points += 2;
+    } else {
+        points += 1;
+    }
 
     // 2. Goal
     const goals = stats.goals || 0;
@@ -41,6 +45,8 @@ export function calculatePlayerPoints(player: Player, stats: SofaScoreStats): nu
             points += 4;
         } else if (position === 'DEF') {
             points += 4;
+        } else if (position === 'MID') {
+            points += 1;
         }
     }
 

@@ -37,6 +37,7 @@ export interface IPlayer extends Document {
         name?: string;
         slug?: string;
     };
+    auctionPrice?: number;
 }
 
 const PlayerSchema: Schema = new Schema({
@@ -71,7 +72,8 @@ const PlayerSchema: Schema = new Schema({
         alpha3: { type: String },
         name: { type: String },
         slug: { type: String }
-    }
+    },
+    auctionPrice: { type: Number },
 }, { timestamps: true, strict: false });
 
 export const Player = mongoose.model<IPlayer>('Player', PlayerSchema);

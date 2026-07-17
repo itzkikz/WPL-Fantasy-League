@@ -1,5 +1,5 @@
 import React from "react";
-import { Users, Clock, Star, Repeat } from "lucide-react";
+import { Users, Clock, Star, Shield } from "lucide-react";
 import { Card, CardHeader, IconCircle } from "./Primitives";
 
 /**
@@ -33,8 +33,8 @@ export default function LeagueStatistics({
       circleClass: "border border-pink-500/30 bg-pink-500/5",
     },
     {
-      icon: Repeat,
-      label: "Transfers Made",
+      icon: Shield,
+      label: "Total Teams",
       value: "2.4M",
       iconColor: "text-rose-400",
       circleClass: "border border-rose-500/30 bg-rose-500/5",

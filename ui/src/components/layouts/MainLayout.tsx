@@ -1,4 +1,5 @@
-import { Outlet, useNavigate, useMatchRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { Outlet, useNavigate, useMatchRoute, useLocation } from "@tanstack/react-router";
 import { Bell } from "lucide-react";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import DarkLogo from "../../assets/wplf1-dark.png";
@@ -6,10 +7,37 @@ import LightLogo from "../../assets/wplf1-light.png";
 import MobileNavbar from "../common/MobileNavbar";
 import SideNavbar from "../common/SideNavbar";
 import PWAInstallBanner from "../PWAInstallBanner";
+import { useValidateToken } from "../../features/auth/hooks";
+import { useUserStore } from "../../store/useUserStore";
 
 export const MainLayout = () => {
     const navigate = useNavigate();
     const matchRoute = useMatchRoute();
+    const location = useLocation();
+
+    const { data } = useValidateToken();
+    const user = useUserStore((state) => state.user);
+    const setUser = useUserStore((state) => state.setUser);
+
+    useEffect(() => {
+        if (data?.valid) {
+            setUser({ teamName: data?.user?.userId, role: data?.user?.role });
+        }
+    }, [data, setUser]);
+
+    const isAdmin = user?.role === "admin";
+    const currentPath = location.pathname;
+    const isAdminPath = currentPath.startsWith("/admin");
+    const isSettingsPath = currentPath === "/settings";
+    const isPublicOrAuthPath = ["/login", "/maintenance", "/"].includes(currentPath);
+
+    const isRestrictedForAdmin = isAdmin && !isAdminPath && !isSettingsPath && !isPublicOrAuthPath;
+
+    useEffect(() => {
+        if (isRestrictedForAdmin) {
+            navigate({ to: "/settings" });
+        }
+    }, [isRestrictedForAdmin, navigate]);
 
   const baseRoutes = [
     "/home",
@@ -28,6 +56,10 @@ export const MainLayout = () => {
     const hideNav = noNavRoutes.some((route) =>
         matchRoute({ to: route, fuzzy: false })
     );
+
+    if (isRestrictedForAdmin) {
+        return null;
+    }
 
     return (
         <main className="font-outfit min-h-screen shadow-sm text-primary flex flex-col">
@@ -60,14 +92,16 @@ export const MainLayout = () => {
                                     </h1>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <button
-                                        aria-label="Notifications"
-                                        onClick={() => navigate({ to: '/notifications' })}
-                                        className="relative flex h-10 w-8 items-center justify-center text-white"
-                                    >
-                                        <Bell className="h-5 w-5" />
-                                        <span className="absolute right-1 top-2 h-2.5 w-2.5 rounded-full bg-[#ff624f]" />
-                                    </button>
+                                    {!isAdmin && (
+                                        <button
+                                            aria-label="Notifications"
+                                            onClick={() => navigate({ to: '/notifications' })}
+                                            className="relative flex h-10 w-8 items-center justify-center text-white"
+                                        >
+                                            <Bell className="h-5 w-5" />
+                                            <span className="absolute right-1 top-2 h-2.5 w-2.5 rounded-full bg-[#ff624f]" />
+                                        </button>
+                                    )}
                                     <button
                                         aria-label="Settings"
                                         onClick={() => navigate({ to: '/settings' })}

@@ -194,7 +194,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
 
         const allPlayerIds = [...new Set(allPicks.map(p => p.playerId))];
         const allPlayerStats = await PlayerStats.find({ playerId: { $in: allPlayerIds } })
-            .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
+            .select('playerId gameweeks.id gameweeks.points gameweeks.stats')
             .lean();
 
         const allPsMap = new Map();
@@ -280,7 +280,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
         const teamMap = new Map(teams.map((t: any) => [t.id, t]));
 
         const playerStatsList = await PlayerStats.find({ playerId: { $in: playerIds } })
-            .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
+            .select('playerId gameweeks.id gameweeks.points gameweeks.stats')
             .lean();
         const playerStatsMap = new Map(playerStatsList.map(ps => [ps.playerId, ps]));
 
@@ -348,7 +348,8 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 shirtNumber: player.number || 0,
                 photo: player.photo || "",
                 isStarting: pick.isStarting,
-                subNumber: pick.subNumber || 0
+                subNumber: pick.subNumber || 0,
+                stats: gwStats
             } as unknown as TeamDetails;
         }).filter((d): d is TeamDetails => d !== null);
 

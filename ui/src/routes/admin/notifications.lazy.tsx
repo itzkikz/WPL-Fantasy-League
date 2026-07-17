@@ -2,6 +2,7 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import apiClient from "../../api/client";
 import { API_ENDPOINTS } from "../../api/endpoints";
+import { Send, Bell, Loader2, Calendar, Target } from "lucide-react";
 
 export const Route = createLazyFileRoute("/admin/notifications")({
   component: AdminNotifications,
@@ -74,132 +75,141 @@ function AdminNotifications() {
   };
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto p-4 sm:p-6 lg:p-8 animate-fade-in">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-4xl font-black text-[var(--color-text-primary)] tracking-tight">
+    <div className="w-full p-2 sm:p-4 space-y-4 animate-fade-in text-white">
+      
+      {/* Dense Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
+        <div>
+          <h1 className="text-xl font-black tracking-tight flex items-center gap-2 text-white">
+            <Bell className="w-5 h-5 text-indigo-400" />
             Admin Notifications
           </h1>
-          <p className="text-[var(--color-text-secondary)] font-medium text-lg">
+          <p className="text-[11px] text-white/50 font-medium">
             Manage and view push notification history
           </p>
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-[var(--color-primary)] text-[var(--color-bg)] px-8 py-3.5 rounded-full font-black shadow-lg shadow-[var(--color-primary)]/30 hover:shadow-[var(--color-primary)]/50 transition-all hover:-translate-y-1 active:translate-y-0 whitespace-nowrap"
+          className="self-start sm:self-auto px-4 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md active:scale-95 whitespace-nowrap flex items-center gap-1.5"
         >
-          + Send Notification
+          <Send className="w-3.5 h-3.5" /> Send Notification
         </button>
       </div>
       
       {/* Notifications List */}
-      <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-6 sm:p-8 rounded-3xl shadow-lg transition-interactive">
-        <h2 className="text-2xl font-black text-[var(--color-text-primary)] tracking-tight mb-8">
+      <div className="bg-[#150f24]/50 border border-white/5 p-4 rounded-xl shadow-lg space-y-3">
+        <h2 className="text-xs font-extrabold text-white/50 uppercase tracking-widest">
           Recent Notifications
         </h2>
+        
         {notifications.length === 0 ? (
-          <div className="p-8 text-center bg-[var(--color-bg)] rounded-2xl border border-dashed border-[var(--color-border)]">
-            <p className="text-[var(--color-text-secondary)] font-medium">No notifications sent yet.</p>
+          <div className="p-8 text-center bg-[#150f24]/30 rounded-xl border border-white/5">
+            <p className="text-white/40 text-xs">No notifications sent yet.</p>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-2">
             {notifications.map((notif: any, i: number) => (
               <div 
                 key={notif._id} 
-                className="bg-[var(--color-bg)] rounded-2xl p-5 border border-[var(--color-border)] hover:border-[var(--color-primary)]/50 transition-colors group animate-slide-up"
-                style={{ animationDelay: `${i * 50}ms`, animationFillMode: 'both' }}
+                className="bg-[#1b142d]/80 rounded-xl p-3.5 border border-white/5 hover:border-indigo-500/30 transition-all flex flex-col sm:flex-row sm:items-start justify-between gap-3"
               >
-                <div className="flex justify-between items-start mb-3 gap-4">
-                  <h3 className="font-bold text-[var(--color-text-primary)] text-lg group-hover:text-[var(--color-primary)] transition-colors">
+                <div className="space-y-1">
+                  <h3 className="font-bold text-xs text-white/95">
                     {notif.title}
                   </h3>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-secondary)] bg-[var(--color-surface)] px-3 py-1.5 rounded-lg whitespace-nowrap">
+                  <p className="text-[11px] text-white/60 leading-normal whitespace-pre-wrap">
+                    {notif.message}
+                  </p>
+                </div>
+                
+                <div className="flex sm:flex-col items-start sm:items-end gap-1.5 shrink-0">
+                  <span className="text-[9px] font-extrabold uppercase tracking-wider text-white/40 bg-white/5 px-2 py-0.5 rounded border border-white/10 flex items-center gap-1">
+                    <Calendar className="w-2.5 h-2.5" />
                     {new Date(notif.time).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                   </span>
+                  {notif.targetType && (
+                    <span className="text-[9px] font-extrabold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 flex items-center gap-1">
+                      <Target className="w-2.5 h-2.5" />
+                      Target: {notif.targetType}
+                    </span>
+                  )}
                 </div>
-                <p className="text-[var(--color-text-secondary)] leading-relaxed whitespace-pre-wrap font-medium">
-                  {notif.message}
-                </p>
               </div>
             ))}
           </div>
         )}
       </div>
 
-      {/* Modal Overlay */}
+      {/* Send Notification Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-          <div 
-            className="absolute inset-0" 
-            onClick={closeModal}
-          />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in" onClick={closeModal}>
           <form 
             onSubmit={handleSendNotification} 
-            className="bg-[var(--color-surface)] border border-[var(--color-border)] p-6 sm:p-8 rounded-3xl shadow-2xl space-y-8 relative overflow-hidden w-full max-w-2xl animate-slide-up z-10"
+            className="bg-[#1b142d] border border-white/10 p-5 rounded-2xl shadow-2xl space-y-4 relative overflow-hidden w-full max-w-sm animate-slide-up z-10 text-white"
             onClick={e => e.stopPropagation()}
           >
-            {/* Subtle accent gradient decoration */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-secondary)] to-[var(--color-accent)] opacity-80" />
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-600 opacity-80" />
             
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-black text-[var(--color-text-primary)] tracking-tight">
+              <h2 className="text-sm font-black uppercase tracking-wider text-white">
                 New Notification
               </h2>
               <button 
                 type="button" 
                 onClick={closeModal}
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-colors font-bold"
+                className="w-6 h-6 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white hover:border-white/30 transition-colors text-xs font-bold"
               >
                 ✕
               </button>
             </div>
             
             {status.message && (
-              <div className={`p-4 rounded-xl text-sm font-bold shadow-sm transition-all ${status.type === 'success' ? 'bg-[#00CC6B]/10 text-[#00CC6B] border border-[#00CC6B]/20' : 'bg-[#D0004A]/10 text-[#D0004A] border border-[#D0004A]/20'}`}>
+              <div className={`p-2.5 rounded-lg text-[10px] font-bold shadow-sm transition-all ${status.type === 'success' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'}`}>
                 {status.message}
               </div>
             )}
 
-            <div className="grid grid-cols-1 gap-8">
-              <div className="space-y-4">
-                <label className="block text-[11px] font-extrabold tracking-widest text-[var(--color-text-secondary)] uppercase">
+            <div className="space-y-3.5">
+              
+              {/* Target Selector Badges */}
+              <div className="space-y-1.5">
+                <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase">
                   Target Audience
                 </label>
-                <div className="flex flex-wrap gap-4">
-                  {['all', 'user', 'team'].map((type) => (
-                    <label key={type} className="flex items-center gap-3 cursor-pointer group p-2 pr-4 rounded-xl hover:bg-[var(--color-bg)] transition-colors border border-transparent hover:border-[var(--color-border)]">
-                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${targetType === type ? 'border-[var(--color-primary)]' : 'border-[var(--color-border)] group-hover:border-[var(--color-text-secondary)]'}`}>
-                        {targetType === type && <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-primary)]" />}
-                      </div>
-                      <span className={`text-sm font-bold capitalize transition-colors ${targetType === type ? 'text-[var(--color-text-primary)]' : 'text-[var(--color-text-secondary)]'}`}>
-                        {type === 'all' ? 'All Users' : `Specific ${type}`}
-                      </span>
-                      <input
-                        type="radio"
-                        name="targetType"
-                        value={type}
-                        checked={targetType === type}
-                        onChange={(e) => {
-                          setTargetType(e.target.value as any);
+                <div className="flex flex-wrap gap-1.5">
+                  {['all', 'user', 'team'].map((type) => {
+                    const isSelected = targetType === type;
+                    return (
+                      <button
+                        key={type}
+                        type="button"
+                        onClick={() => {
+                          setTargetType(type as any);
                           setTargetId("");
                         }}
-                        className="hidden"
-                      />
-                    </label>
-                  ))}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-all ${
+                          isSelected
+                            ? "bg-indigo-500/20 text-indigo-400 border-indigo-500/30"
+                            : "bg-white/5 text-white/60 border-white/10 hover:text-white"
+                        }`}
+                      >
+                        {type === 'all' ? 'All Users' : `Specific ${type}`}
+                      </button>
+                    );
+                  })}
                 </div>
                 
                 {targetType === 'user' && (
-                  <div className="animate-fade-in mt-2">
+                  <div className="animate-fade-in mt-1.5">
                     <select
                       value={targetId}
                       onChange={(e) => setTargetId(e.target.value)}
-                      className="w-full px-5 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent outline-none transition-all text-[var(--color-text-primary)] font-semibold shadow-inner appearance-none cursor-pointer"
+                      className="w-full px-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg focus:ring-1 focus:ring-indigo-500 outline-none text-white text-xs font-semibold cursor-pointer"
                       required
                     >
-                      <option value="" disabled className="text-[var(--color-text-secondary)]">Select a User</option>
+                      <option value="" disabled className="bg-[#1b142d] text-white/50">Select a User</option>
                       {users.map(user => (
-                        <option key={user._id} value={user._id}>
+                        <option key={user._id} value={user._id} className="bg-[#1b142d] text-white">
                           {user.username} {user.email ? `(${user.email})` : ''}
                         </option>
                       ))}
@@ -208,16 +218,16 @@ function AdminNotifications() {
                 )}
 
                 {targetType === 'team' && (
-                  <div className="animate-fade-in mt-2">
+                  <div className="animate-fade-in mt-1.5">
                     <select
                       value={targetId}
                       onChange={(e) => setTargetId(e.target.value)}
-                      className="w-full px-5 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent outline-none transition-all text-[var(--color-text-primary)] font-semibold shadow-inner appearance-none cursor-pointer"
+                      className="w-full px-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg focus:ring-1 focus:ring-indigo-500 outline-none text-white text-xs font-semibold cursor-pointer"
                       required
                     >
-                      <option value="" disabled className="text-[var(--color-text-secondary)]">Select a Fantasy Team</option>
+                      <option value="" disabled className="bg-[#1b142d] text-white/50">Select a Fantasy Team</option>
                       {teams.map(team => (
-                        <option key={team._id} value={team._id}>
+                        <option key={team._id} value={team._id} className="bg-[#1b142d] text-white">
                           {team.name}
                         </option>
                       ))}
@@ -226,9 +236,10 @@ function AdminNotifications() {
                 )}
               </div>
 
-              <div className="space-y-3">
-                <label htmlFor="title" className="block text-[11px] font-extrabold tracking-widest text-[var(--color-text-secondary)] uppercase">
-                  Title
+              {/* Title Field */}
+              <div className="space-y-1">
+                <label htmlFor="title" className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase">
+                  Notification Title
                 </label>
                 <input
                   id="title"
@@ -236,13 +247,14 @@ function AdminNotifications() {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   required
-                  className="w-full px-5 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent outline-none transition-all text-[var(--color-text-primary)] font-semibold shadow-inner"
+                  className="w-full px-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg focus:ring-1 focus:ring-indigo-500 outline-none text-white text-xs font-semibold"
                   placeholder="e.g. Gameweek 5 is now open!"
                 />
               </div>
               
-              <div className="space-y-3">
-                <label htmlFor="body" className="block text-[11px] font-extrabold tracking-widest text-[var(--color-text-secondary)] uppercase">
+              {/* Message Body Field */}
+              <div className="space-y-1">
+                <label htmlFor="body" className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase">
                   Message Body
                 </label>
                 <textarea
@@ -250,28 +262,30 @@ function AdminNotifications() {
                   value={body}
                   onChange={(e) => setBody(e.target.value)}
                   required
-                  rows={4}
-                  className="w-full px-5 py-4 bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent outline-none transition-all text-[var(--color-text-primary)] font-semibold shadow-inner resize-y"
+                  rows={3}
+                  className="w-full px-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg focus:ring-1 focus:ring-indigo-500 outline-none text-white text-xs font-semibold resize-none"
                   placeholder="Enter the notification message here..."
                 />
               </div>
             </div>
 
-            <div className="pt-4 flex justify-end gap-4">
+            <div className="pt-3 flex justify-end gap-2 border-t border-white/5">
               <button
                 type="button"
                 onClick={closeModal}
                 disabled={status.type === 'loading'}
-                className="bg-[var(--color-bg)] text-[var(--color-text-primary)] border border-[var(--color-border)] px-8 py-3.5 rounded-full font-black shadow-sm hover:border-[var(--color-text-secondary)] transition-all hover:-translate-y-1 active:translate-y-0 disabled:opacity-50 disabled:transform-none"
+                className="px-3.5 py-1.5 rounded-lg border border-white/10 text-white/70 hover:bg-white/10 text-xs font-bold transition-colors disabled:opacity-50"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={status.type === 'loading'}
-                className="bg-[var(--color-primary)] text-[var(--color-bg)] px-10 py-3.5 rounded-full font-black shadow-lg shadow-[var(--color-primary)]/30 hover:shadow-[var(--color-primary)]/50 transition-all hover:-translate-y-1 active:translate-y-0 disabled:opacity-50 disabled:transform-none"
+                className="px-5 py-1.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg text-xs font-black shadow-lg hover:scale-[1.02] active:scale-95 disabled:opacity-50"
               >
-                {status.type === 'loading' ? 'Sending...' : 'Send'}
+                {status.type === 'loading' ? (
+                  <span className="flex items-center gap-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> Sending...</span>
+                ) : 'Send'}
               </button>
             </div>
           </form>

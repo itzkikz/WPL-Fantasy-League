@@ -28,4 +28,5 @@ export interface TeamDetails {
     isStarting?: boolean;
     subNumber?: number;
     photo?: string;
+    stats?: any;
 }

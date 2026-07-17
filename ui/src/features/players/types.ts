@@ -89,6 +89,7 @@ export interface SofaScoreStats {
   totalProgression?: number;
   statisticsType?: { sportSlug: string; statisticsType: string };
   appearances?: number;
+  appearances60?: number;
   substitute: boolean;
   yellowCards: number;
   redCards: number;
@@ -118,6 +119,7 @@ export interface PlayerStats {
     player_id: number;
     photo?: string;
     ownership?: number;
+    fantasy_team_name?: string | null;
     upcoming_fixtures?: {
       gw: number;
       opponent_short_name: string;

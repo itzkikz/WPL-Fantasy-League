@@ -1,10 +1,14 @@
 import apiClient from "../../api/client";
 import { API_ENDPOINTS } from "../../api/endpoints";
-import { HomePageData } from "./types";
+import { HomePageData, MyFixturesData } from "./types";
 
 export const homeApi = {
   getHomePageData: async (): Promise<HomePageData> => {
     const response = await apiClient.get(API_ENDPOINTS.MANAGER.DASHBOARD);
+    return response.data.data;
+  },
+  getMyFixtures: async (): Promise<MyFixturesData> => {
+    const response = await apiClient.get(API_ENDPOINTS.MANAGER.MY_FIXTURES);
     return response.data.data;
   },
 };

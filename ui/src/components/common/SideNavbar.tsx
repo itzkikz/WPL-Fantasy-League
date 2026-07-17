@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link, useMatchRoute } from "@tanstack/react-router";
 import { useUserStore } from "../../store/useUserStore";
 import Home from "../icons/Home";
@@ -71,15 +70,16 @@ const H2HIcon = ({ isActive }: { isActive: boolean }) => (
 
 const SideNavbar = () => {
   const matchRoute = useMatchRoute();
-  const [isAdminOpen, setIsAdminOpen] = useState(true);
   const user = useUserStore((state) => state.user);
+  const isAdmin = user?.role === "admin";
 
-  const navItems = [
-    { label: "Home", path: "/home" },
-    { label: "League", path: "/standings" },
-    { label: "My Team", path: "/my-team" },
-    { label: "H2H", path: "/h2h" },
-    { label: "Stats", path: "/stats" },
+  const adminItems = [
+    { label: "Fixtures", path: "/admin/fixtures" },
+    { label: "Fantasy Teams", path: "/admin/fantasy-teams" },
+    { label: "Leagues", path: "/admin/leagues" },
+    { label: "H2H Leagues", path: "/admin/h2h-leagues" },
+    { label: "Notifications", path: "/admin/notifications" },
+    { label: "Gameweeks", path: "/admin/gameweeks" },
   ];
 
   if (
@@ -89,6 +89,72 @@ const SideNavbar = () => {
   ) {
     return null;
   }
+
+  if (isAdmin) {
+    return (
+      <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-[#221938] lg:h-screen lg:py-4 lg:px-2">
+        <div className="flex flex-col gap-2">
+          {/* Settings Link */}
+          {(() => {
+            const isActive = matchRoute({ to: "/settings", fuzzy: true });
+            return (
+              <Link
+                viewTransition={{ types: ["tab-switch"] }}
+                to="/settings"
+                className="flex items-center gap-3 px-3 py-2 text-sm transition-colors"
+              >
+                <UserSettings isActive={isActive} />
+                <span
+                  className={`${
+                    isActive
+                      ? "text-[#A855F7] font-semibold"
+                      : "text-[#8E89A6] hover:text-white"
+                  }`}
+                >
+                  Settings
+                </span>
+              </Link>
+            );
+          })()}
+
+          {/* Admin Panel Header */}
+          <div className="px-3 py-2 text-xs font-bold text-[#8E89A6] uppercase tracking-wider mt-4 border-t border-[#221938] pt-4">
+            Admin Panel
+          </div>
+
+          {/* Admin Items */}
+          {adminItems.map((adminItem) => {
+            const isLinkActive = matchRoute({ to: adminItem.path, fuzzy: true });
+            return (
+              <Link
+                key={adminItem.label}
+                to={adminItem.path}
+                className="flex items-center gap-3 px-3 py-2 text-sm transition-colors"
+              >
+                <span
+                  className={`${
+                    isLinkActive
+                      ? "text-[#A855F7] font-semibold"
+                      : "text-[#8E89A6] hover:text-white"
+                  }`}
+                >
+                  {adminItem.label}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
+    );
+  }
+
+  const navItems = [
+    { label: "Home", path: "/home" },
+    { label: "League", path: "/standings" },
+    { label: "My Team", path: "/my-team" },
+    { label: "H2H", path: "/h2h" },
+    { label: "Stats", path: "/stats" },
+  ];
 
   return (
     <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-[#221938] lg:h-screen lg:py-4 lg:px-2">
@@ -121,53 +187,6 @@ const SideNavbar = () => {
             </Link>
           );
         })}
-
-        {/* Admin Section */}
-        {user?.role === 'admin' && (
-          <div className="mt-2 border-t border-[#221938] pt-2">
-            <button
-              onClick={() => setIsAdminOpen(!isAdminOpen)}
-              className="w-full flex items-center justify-between px-3 py-2 text-sm transition-colors cursor-pointer"
-            >
-              <div className="flex items-center gap-3">
-                <UserSettings isActive={isAdminOpen} />
-                <span className="text-[#8E89A6] hover:text-white font-semibold">Admin Panel</span>
-              </div>
-              {isAdminOpen ? <AngleDown height="4" width="4" /> : <AngleRight height="4" width="4" />}
-            </button>
-            
-            {isAdminOpen && (
-              <div className="flex flex-col gap-2 mt-1 pl-11">
-                {[
-                  { label: "Fixtures", path: "/admin/fixtures" },
-                  { label: "Fantasy Teams", path: "/admin/fantasy-teams" },
-                  { label: "Leagues", path: "/admin/leagues" },
-                  { label: "Notifications", path: "/admin/notifications" },
-                  { label: "Gameweeks", path: "/admin/gameweeks" },
-                ].map((adminItem) => {
-                  const isLinkActive = matchRoute({ to: adminItem.path, fuzzy: true });
-                  return (
-                    <Link
-                      key={adminItem.label}
-                      to={adminItem.path}
-                      className="py-1 text-sm transition-colors"
-                    >
-                      <span
-                        className={`${
-                          isLinkActive
-                            ? "text-[#A855F7] font-semibold"
-                            : "text-[#8E89A6] hover:text-white"
-                        }`}
-                      >
-                        {adminItem.label}
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        )}
       </div>
     </nav>
   );
