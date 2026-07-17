@@ -121,8 +121,8 @@ export default function Stats() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-48px-80px)] lg:h-[calc(100vh-48px)] bg-[#0d021a] text-white overflow-hidden font-outfit select-none">
-
+    <div className="flex flex-col h-[calc(100dvh-48px-80px)] lg:h-[calc(100vh-48px)] bg-background text-white overflow-hidden font-outfit select-none">
+ 
       {/* 1. Header Toolbar */}
       <div className="pt-5 pb-3 px-4 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
@@ -136,13 +136,13 @@ export default function Stats() {
             <h1 className="text-lg md:text-xl font-black tracking-tight leading-tight">
               Best Performers
             </h1>
-            <button className="flex items-center gap-1 mt-0.5 text-[#a594c9] hover:text-white transition-colors cursor-pointer text-[10px] md:text-xs font-bold">
+            <button className="flex items-center gap-1 mt-0.5 text-text-muted hover:text-white transition-colors cursor-pointer text-[10px] md:text-xs font-bold">
               <span>This Season</span>
               <ChevronDown className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
-
+ 
         <div className="flex items-center gap-2">
           {/* Filter Button */}
           <button
@@ -151,10 +151,10 @@ export default function Stats() {
           >
             <SlidersHorizontal className="w-5 h-5" />
             {(selectedClubs.length > 0 || selectedLeagues.length > 0 || freeAgentSelected) && (
-              <span className="absolute right-2.5 top-2.5 h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
+              <span className="absolute right-2.5 top-2.5 h-1.5 w-1.5 rounded-full bg-secondary animate-pulse" />
             )}
           </button>
-
+ 
           {/* Bell Notification */}
           <button
             onClick={() => navigate({ to: "/notifications" })}
@@ -165,9 +165,9 @@ export default function Stats() {
           </button>
         </div>
       </div>
-
+ 
       {/* 2. Position Tabs Row */}
-      <div className="mx-4 mt-1 border-b border-[#2d1b54] flex gap-2 overflow-x-auto scrollbar-hide shrink-0 pb-1.5">
+      <div className="mx-4 mt-1 border-b border-[var(--color-border-divider)] flex gap-2 overflow-x-auto scrollbar-hide shrink-0 pb-1.5">
         {[
           { label: "All Players", val: "" },
           { label: "Forwards", val: "F" },
@@ -181,41 +181,41 @@ export default function Stats() {
               key={tab.label}
               onClick={() => handlePositionTabChange(tab.val)}
               className={`pb-1 text-xs font-black uppercase tracking-wider transition-all relative whitespace-nowrap cursor-pointer px-2
-                ${isActive ? "text-violet-300" : "text-[#a594c9]/60 hover:text-white"}`}
+                ${isActive ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
             >
               {tab.label}
               {isActive && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent" />
               )}
             </button>
           );
         })}
       </div>
-
+ 
       {/* 3. Featured Card Banner */}
       {!isLoading && topPerformer && (
         <div
-          className="mx-4 mt-3 bg-gradient-to-r from-[#21143c] via-[#160b30] to-[#251545] border border-[#2d1b54] rounded-2xl p-4 shadow-xl relative overflow-hidden shrink-0 flex items-center justify-between min-h-[96px]"
+          className="mx-4 mt-3 bg-gradient-card border border-border rounded-2xl p-4 shadow-card relative overflow-hidden shrink-0 flex items-center justify-between min-h-[96px]"
           style={{ isolation: 'isolate' }}
         >
           {/* Backlight halo logo mockup */}
           <div className="absolute right-0 top-0 bottom-0 w-32 opacity-10 flex items-center justify-center pointer-events-none select-none font-black text-white uppercase text-4xl">
             {topPerformer.team_short_name || "WPL"}
           </div>
-
+ 
           <div className="flex items-center gap-3.5 z-10">
             {/* Crown Icon */}
             <div className="w-11 h-11 rounded-full bg-[#ffb700]/10 border border-[#ffb700]/20 flex items-center justify-center shrink-0">
               <Crown className="w-6 h-6 text-[#ffb700] fill-[#ffb700]/20 animate-pulse" />
             </div>
             <div>
-              <p className="text-[10px] font-extrabold uppercase tracking-widest text-[#a594c9]">
+              <p className="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">
                 {activePosition === "F" ? "Top Scorer" : activePosition === "M" ? "Top Midfielder" : activePosition === "D" ? "Top Defender" : activePosition === "G" ? "Top Goalkeeper" : "Top Performer"}
               </p>
               <h2 className="text-base font-black text-white mt-0.5 tracking-tight">
                 {topPerformer.player_name}
               </h2>
-              <p className="text-[11px] font-black text-violet-300 font-mono mt-0.5">
+              <p className="text-[11px] font-black text-secondary font-mono mt-0.5">
                 {(topPerformer.overall?.total_point || 0).toLocaleString()} Pts
               </p>
             </div>
@@ -297,7 +297,7 @@ export default function Stats() {
                       )}
                     </div>
                     {isFirst && (
-                      <div className="absolute -top-1 right-[-3px] w-4.5 h-4.5 rounded-full bg-amber-500 border border-[#0d021a] flex items-center justify-center z-10 shadow-md">
+                      <div className="absolute -top-1 right-[-3px] w-4.5 h-4.5 rounded-full bg-amber-500 border border-background flex items-center justify-center z-10 shadow-md">
                         <Star className="w-2.5 h-2.5 text-black fill-black" />
                       </div>
                     )}

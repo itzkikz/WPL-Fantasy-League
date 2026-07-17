@@ -18,61 +18,61 @@ const MyTeamHeader = ({
   totalPointsFormatted,
 }: MyTeamHeaderProps) => {
   return (
-    <div className="mx-4 mt-3 bg-gradient-to-br from-[#1b1035] to-[#120924] border border-[#2d1b54] rounded-2xl p-4 shadow-xl relative overflow-hidden shrink-0">
+    <div className="mx-4 mt-3 bg-gradient-card border border-border rounded-2xl p-4 shadow-card relative overflow-hidden shrink-0">
       {/* Animated Gradient Backlight */}
       <div className="absolute -right-24 -top-24 w-48 h-48 rounded-full bg-violet-600/10 blur-3xl pointer-events-none" />
-
+ 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div>
             <h1 className="text-lg md:text-xl font-black tracking-tight flex items-center gap-2">
               My Team
             </h1>
-            <p className="text-[11px] md:text-xs text-[#a594c9] font-medium mt-0.5">
-              Gameweek {selectedGW} Deadline: <span className="text-violet-300 font-semibold">{deadlineFormatted}</span>
+            <p className="text-[11px] md:text-xs text-text-muted font-medium mt-0.5">
+              Gameweek {selectedGW} Deadline: <span className="text-secondary font-semibold">{deadlineFormatted}</span>
             </p>
           </div>
         </div>
-
+ 
         {/* Gameweek Badge */}
-        <div className="flex items-center bg-[#0d021a] border border-[#2d1b54] rounded-xl px-3.5 py-1.5 shadow-inner">
-          <span className="text-xs md:text-sm font-extrabold uppercase tracking-wider text-violet-300 select-none font-mono">
+        <div className="flex items-center bg-background border border-border rounded-xl px-3.5 py-1.5 shadow-inner">
+          <span className="text-xs md:text-sm font-extrabold uppercase tracking-wider text-secondary select-none font-mono">
             GW {selectedGW}
           </span>
         </div>
       </div>
-
+ 
       {/* Stats Summary Panel */}
-      <div className="grid grid-cols-5 gap-1 md:gap-4 mt-3.5 border-t border-[#2d1b54]/50 pt-3">
+      <div className="grid grid-cols-5 gap-1 md:gap-4 mt-3.5 border-t border-border/50 pt-3">
         <div className="flex flex-col items-center justify-center text-center">
-          <span className="text-[9px] md:text-xs font-bold text-[#a594c9] uppercase tracking-wider">Team Value</span>
+          <span className="text-[9px] md:text-xs font-bold text-text-muted uppercase tracking-wider">Team Value</span>
           <span className="text-xs md:text-base lg:text-lg font-extrabold text-white mt-0.5">
             £{total_budget || "100.0"}m
           </span>
         </div>
-
-        <div className="flex flex-col items-center justify-center text-center border-l border-[#2d1b54]/50">
-          <span className="text-[9px] md:text-xs font-bold text-[#a594c9] uppercase tracking-wider">Bank</span>
+ 
+        <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
+          <span className="text-[9px] md:text-xs font-bold text-text-muted uppercase tracking-wider">Bank</span>
           <span className="text-xs md:text-base lg:text-lg font-extrabold text-white mt-0.5">
             £{(balance ?? 0).toFixed(2)}m
           </span>
         </div>
-
-        <div className="flex flex-col items-center justify-center text-center border-l border-[#2d1b54]/50">
-          <span className="text-[9px] md:text-xs font-bold text-[#a594c9] uppercase tracking-wider">Transfers</span>
+ 
+        <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
+          <span className="text-[9px] md:text-xs font-bold text-text-muted uppercase tracking-wider">Transfers</span>
           <span className="text-xs md:text-base lg:text-lg font-extrabold text-emerald-400 mt-0.5">Free</span>
           <span className="text-[8px] md:text-[9px] font-bold text-gray-400 mt-0.5">Unlimited</span>
         </div>
-
-        <div className="flex flex-col items-center justify-center text-center border-l border-[#2d1b54]/50">
-          <span className="text-[9px] md:text-xs font-bold text-[#a594c9] uppercase tracking-wider">GW Score</span>
-          <span className="text-xs md:text-base lg:text-lg font-extrabold text-[#00ffcc] mt-0.5">
+ 
+        <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
+          <span className="text-[9px] md:text-xs font-bold text-text-muted uppercase tracking-wider">GW Score</span>
+          <span className="text-xs md:text-base lg:text-lg font-extrabold text-[var(--color-success-bright)] mt-0.5">
             {totalGWScore ?? 0}
           </span>
         </div>
-
-        <div className="flex flex-col items-center justify-center text-center border-l border-[#2d1b54]/50">
-          <span className="text-[9px] md:text-xs font-bold text-[#a594c9] uppercase tracking-wider">Total</span>
+ 
+        <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
+          <span className="text-[9px] md:text-xs font-bold text-text-muted uppercase tracking-wider">Total</span>
           <span className="text-xs md:text-base lg:text-lg font-extrabold text-white mt-0.5">{totalPointsFormatted}</span>
         </div>
       </div>

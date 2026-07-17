@@ -32,13 +32,12 @@ const PitchPlayerCard = ({
       {/* Captain/Vice Captain Badge */}
       {(player?.isCaptain || player?.isViceCaptain) && (
         <div 
-          className={`absolute top-[-3px] right-[-3px] z-20 flex items-center justify-center w-5 h-5 rounded-full border border-white text-[10px] font-bold text-white shadow-lg
-            ${player?.isCaptain ? "bg-[#3a005c]" : "bg-[#4a4a4a]"}`}
+          className={`absolute top-[-3px] right-[-3px] z-20 flex items-center justify-center w-5 h-5 rounded-full border border-[#A855F7] text-[10px] font-bold text-white shadow-lg bg-[#1D1533]`}
         >
           {player?.isCaptain ? "C" : "V"}
         </div>
       )}
-
+ 
       {/* Star badge (if any) */}
       {player?.isPowerPlayer && (
         <div className="absolute bottom-[28px] right-[-3px] z-20 flex items-center justify-center w-5 h-5 rounded-full bg-[#8b5cf6] border border-white text-white shadow-lg animate-bounce duration-1000">
@@ -47,14 +46,14 @@ const PitchPlayerCard = ({
           </svg>
         </div>
       )}
-
+ 
       {/* Info Icon (only shown if player.showInfo is true or in custom view) */}
       {(player?.showInfo || showPriceAndPoints) && (
         <div className="absolute top-[-3px] left-[-3px] z-20 flex items-center justify-center w-4 h-4 rounded-full bg-black/40 hover:bg-black/60 border border-white/20 text-[9px] font-bold text-white shadow-sm">
           i
         </div>
       )}
-
+ 
       {/* Jersey Image/Placeholder */}
       <div className="relative mb-1.5 z-10 drop-shadow-lg flex items-center justify-center">
         <div
@@ -75,21 +74,21 @@ const PitchPlayerCard = ({
               WebkitMaskPosition: "center",
             }}
           />
-
+ 
           {/* Texture/Shading layer */}
           <img
             src="/jersey-3d.png"
             alt="Jersey"
             className="absolute inset-0 w-full h-full object-contain mix-blend-multiply"
           />
-
+ 
           {/* Highlight layer */}
           <img
             src="/jersey-3d.png"
             alt="Jersey Highlight"
             className="absolute inset-0 w-full h-full object-contain mix-blend-hard-light opacity-40"
           />
-
+ 
           <div className="absolute inset-0 flex flex-col items-center justify-center pt-1.5 pointer-events-none z-20">
             <span
               className="text-[8px] md:text-[9px] font-bold drop-shadow-md leading-none mb-0.5 font-mono"
@@ -106,33 +105,33 @@ const PitchPlayerCard = ({
           </div>
         </div>
       </div>
-
+ 
       {/* Info Box Container */}
       {showPriceAndPoints ? (
-        <div className="flex flex-col w-full bg-[#18113c] rounded-md overflow-hidden shadow-md border border-[#2d1b54] z-10">
+        <div className="flex flex-col w-full bg-card rounded-md overflow-hidden shadow-md border border-border z-10">
           {/* Player Name */}
-          <div className="px-1 py-0.5 text-center bg-[#11092a] border-b border-[#2d1b54]">
+          <div className="px-1 py-0.5 text-center bg-surface border-b border-border">
             <p className="text-[9px] md:text-[10px] font-bold text-white truncate leading-tight">
               {playerLastName}
             </p>
           </div>
           {/* Split Row for Price and Points */}
           <div className="flex text-[9px] font-bold">
-            <div className="flex-1 text-center py-0.5 bg-[#170e30] text-gray-300 border-r border-[#2d1b54] leading-tight">
+            <div className="flex-1 text-center py-0.5 bg-card text-text-secondary border-r border-border leading-tight">
               {player.price || "5.0M"}
             </div>
-            <div className="flex-1 text-center py-0.5 bg-[#0d2e2b] text-[#00ffcc] leading-tight font-mono">
+            <div className="flex-1 text-center py-0.5 bg-[var(--color-success-bg)] text-[var(--color-success-bright)] leading-tight font-mono">
               {player?.point ?? 0}
             </div>
           </div>
         </div>
       ) : (
-        <div className="flex flex-col w-full bg-light-bg dark:bg-dark-surface rounded-sm overflow-hidden shadow-sm z-10">
+        <div className="flex flex-col w-full bg-card rounded-sm overflow-hidden border border-border shadow-sm z-10">
           {/* Player Name */}
-          <div className="px-1 py-0.5 text-center border-b border-gray-100 dark:border-gray-600">
+          <div className="px-1 py-0.5 text-center border-b border-border">
             <p
               className={`${isSmall ? "text-[9px] md:text-[10px]" : "text-[10px] md:text-xs"
-                } font-bold text-gray-900 dark:text-white truncate leading-tight`}
+                } font-bold text-white truncate leading-tight`}
             >
               {player?.name && pickMyteam && playerFirstName !== playerLastName ? (
                 player.name.trim().split(/\s+/).slice(0)[0]
@@ -141,10 +140,10 @@ const PitchPlayerCard = ({
               )}
             </p>
           </div>
-
+ 
           {/* Points / Team Info */}
           <div
-            className={`px-1 py-0.5 text-center truncate bg-light-bg dark:bg-light-bg text-gray-600 dark:text-dark-surface`}
+            className="px-1 py-0.5 text-center truncate bg-surface text-text-secondary"
           >
             <p className={`${isSmall ? "text-[8px] md:text-[9px]" : "text-xl md:text-[10px]"} font-semibold leading-tight`}>
               {pickMyteam ? playerFirstName !== playerLastName ? playerLastName : (<>&nbsp;</>) : (

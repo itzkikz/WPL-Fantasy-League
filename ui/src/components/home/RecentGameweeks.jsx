@@ -38,7 +38,11 @@ export default function RecentGameweeks({
               </span>
               <div
                 style={{ height: `${heightPct}%` }}
-                className="w-full max-w-[22px] sm:max-w-[26px] rounded-t-md bg-[#0CD148]"
+                className={`w-full max-w-[22px] sm:max-w-[26px] rounded-t-md ${
+                  isLast 
+                    ? "bg-gradient-to-t from-success to-success-bright shadow-[0_0_8px_rgba(74,222,128,0.3)]" 
+                    : "bg-gradient-to-t from-primary-dark to-primary"
+                }`}
               />
               <span className="text-text-secondary text-[9px] sm:text-[10px]">{d.label}</span>
             </div>

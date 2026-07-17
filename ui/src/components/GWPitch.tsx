@@ -104,9 +104,9 @@ const GWPitch = ({
           width: 100%;
           height: 620px;
           overflow: hidden;
-          background: #0d021a;
+          background: #080612;
           border-radius: 16px;
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          border: 1px solid var(--color-border);
           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
         .pitch {
@@ -151,7 +151,7 @@ const GWPitch = ({
           filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.45));
         }
       `}</style>
-
+ 
       <div className="flex flex-col lg:flex-row w-full max-w-6xl mx-auto gap-4 lg:gap-8">
         
         {/* Pitch Container */}
@@ -165,7 +165,7 @@ const GWPitch = ({
               alt="tactical field"
             />
           </div>
-
+ 
           {/* Cancel Substitution Button */}
           {isSubstitution && (
             <div
@@ -192,7 +192,7 @@ const GWPitch = ({
               </svg>
             </div>
           )}
-
+ 
           {/* Players Overlay (Z-Indexed above pitch background with pointer events routed to cards) */}
           <div className="absolute inset-0 z-10 pointer-events-none">
             {Object.keys(starting).map((key: string) => {
@@ -206,7 +206,7 @@ const GWPitch = ({
                     className="player-absolute pointer-events-auto"
                   >
                     <div
-                      className={`bg-light-secondary rounded-md relative cursor-pointer transition-all duration-300 ${getCardClass(
+                      className={`bg-transparent rounded-md relative cursor-pointer transition-all duration-300 ${getCardClass(
                         eachPlayer?.isAvlSub || false,
                         eachPlayer?.name
                       )}`}
@@ -223,19 +223,19 @@ const GWPitch = ({
             })}
           </div>
         </div>
-
+ 
         {/* Bench Container (In-flow block element scrolling naturally with GWPitch) */}
-        <div className="w-full lg:w-64 flex-none bg-white/5 border border-white/5 rounded-2xl p-4 shadow-xl mt-4 lg:mt-0">
+        <div className="w-full lg:w-64 flex-none bg-surface border border-border rounded-2xl p-4 shadow-card mt-4 lg:mt-0">
           <div className="max-w-4xl mx-auto lg:mx-0">
-            <h3 className="text-center font-extrabold text-[10px] md:text-xs mb-3 tracking-widest uppercase text-[#c8c8c8]/50 lg:mb-4">Substitutes</h3>
+            <h3 className="text-center font-extrabold text-[10px] md:text-xs mb-3 tracking-widest uppercase text-text-muted lg:mb-4">Substitutes</h3>
             <div className="grid grid-cols-4 lg:flex lg:flex-col lg:gap-3">
               {bench?.map((eachPlayer) => (
                 <div key={eachPlayer.id} className="flex flex-col items-center lg:flex-row lg:gap-3 lg:bg-white/5 lg:p-2 lg:rounded-xl lg:w-full">
-                  <div className="text-[10px] md:text-xs font-bold text-[#c8c8c8]/40 mb-1 lg:mb-0 lg:w-8 lg:text-center">
+                  <div className="text-[10px] md:text-xs font-bold text-text-muted mb-1 lg:mb-0 lg:w-8 lg:text-center">
                     {eachPlayer.position}
                   </div>
                   <div
-                    className={`bg-light-secondary rounded-sm relative cursor-pointer ${getCardClass(eachPlayer?.isAvlSub || false, eachPlayer.name)}`}
+                    className={`bg-transparent rounded-sm relative cursor-pointer ${getCardClass(eachPlayer?.isAvlSub || false, eachPlayer.name)}`}
                   >
                     <PitchPlayerCard
                       player={eachPlayer}
@@ -247,7 +247,7 @@ const GWPitch = ({
                   {/* Desktop only details */}
                   <div className="hidden lg:block flex-1 min-w-0">
                     <p className="text-xs font-bold text-white truncate">{eachPlayer.name}</p>
-                    <p className="text-[10px] text-[#c8c8c8]/50 truncate">{eachPlayer.team}</p>
+                    <p className="text-[10px] text-text-muted truncate">{eachPlayer.team}</p>
                   </div>
                 </div>
               ))}

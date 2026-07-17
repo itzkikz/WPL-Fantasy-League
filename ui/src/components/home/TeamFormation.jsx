@@ -45,16 +45,16 @@ export default function TeamFormation({
               {formation}
             </p>
           </div>
-          <div className="w-fit px-2 py-0.5 rounded bg-[#302151] border border-white/5 text-[9px] text-success font-bold">
+          <div className="w-fit px-2 py-0.5 rounded bg-primary/20 border border-primary/30 text-[9px] text-success font-bold">
             Active
           </div>
         </div>
-
+ 
         {/* Right side: Mini-pitch graphic */}
-        <div className="relative h-24 w-48 sm:w-80 sm:h-32 bg-[#1b1035] border border-white/5 rounded-lg overflow-hidden flex flex-col justify-between p-2 flex-shrink-0">
+        <div className="relative h-24 w-48 sm:w-80 sm:h-32 bg-[#0B5F2B] border border-border rounded-lg overflow-hidden flex flex-col justify-between p-2 flex-shrink-0">
           {/* Pitch lines */}
-          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 border-t border-white/[0.03]" />
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 border border-white/[0.03] rounded-full" />
+          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 border-t border-[#DDEEDB]/15" />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 border border-[#DDEEDB]/15 rounded-full" />
           
           {/* Forwards Line */}
           <div className="flex justify-center gap-2 sm:gap-4 z-10">

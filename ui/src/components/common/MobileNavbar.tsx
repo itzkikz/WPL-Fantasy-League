@@ -3,9 +3,9 @@ import { ViewTransitions } from "../../types/viewTransitions";
 
 const HomeIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
-    className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-violet-400 scale-110" : "text-gray-400"}`}
+    className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-[#A855F7] scale-110" : "text-[#8E89A6]"}`}
     viewBox="0 0 24 24" 
-    fill={isActive ? "rgba(139, 92, 246, 0.15)" : "none"} 
+    fill={isActive ? "rgba(168, 85, 247, 0.15)" : "none"} 
     stroke="currentColor" 
     strokeWidth="2"
     strokeLinecap="round"
@@ -18,9 +18,9 @@ const HomeIcon = ({ isActive }: { isActive: boolean }) => (
 
 const LeagueIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
-    className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-violet-400 scale-110" : "text-gray-400"}`}
+    className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-[#A855F7] scale-110" : "text-[#8E89A6]"}`}
     viewBox="0 0 24 24" 
-    fill={isActive ? "rgba(139, 92, 246, 0.15)" : "none"} 
+    fill={isActive ? "rgba(168, 85, 247, 0.15)" : "none"} 
     stroke="currentColor" 
     strokeWidth="2"
     strokeLinecap="round"
@@ -34,9 +34,9 @@ const LeagueIcon = ({ isActive }: { isActive: boolean }) => (
 
 const MyTeamIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
-    className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-violet-400 scale-110" : "text-gray-400"}`} 
+    className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-[#A855F7] scale-110" : "text-[#8E89A6]"}`} 
     viewBox="0 0 24 24" 
-    fill={isActive ? "rgba(139, 92, 246, 0.15)" : "none"} 
+    fill={isActive ? "rgba(168, 85, 247, 0.15)" : "none"} 
     stroke="currentColor" 
     strokeWidth="2"
     strokeLinecap="round"
@@ -48,9 +48,9 @@ const MyTeamIcon = ({ isActive }: { isActive: boolean }) => (
 
 const H2HIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
-    className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-violet-400 scale-110" : "text-gray-400"}`}
+    className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-[#A855F7] scale-110" : "text-[#8E89A6]"}`}
     viewBox="0 0 24 24" 
-    fill={isActive ? "rgba(139, 92, 246, 0.15)" : "none"} 
+    fill={isActive ? "rgba(168, 85, 247, 0.15)" : "none"} 
     stroke="currentColor" 
     strokeWidth="2"
     strokeLinecap="round"
@@ -62,9 +62,9 @@ const H2HIcon = ({ isActive }: { isActive: boolean }) => (
 
 const StatsIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
-    className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-violet-400 scale-110" : "text-gray-400"}`}
+    className={`w-6 h-6 transition-all duration-300 ${isActive ? "text-[#A855F7] scale-110" : "text-[#8E89A6]"}`}
     viewBox="0 0 24 24" 
-    fill={isActive ? "rgba(139, 92, 246, 0.15)" : "none"} 
+    fill={isActive ? "rgba(168, 85, 247, 0.15)" : "none"} 
     stroke="currentColor" 
     strokeWidth="2"
     strokeLinecap="round"
@@ -96,7 +96,7 @@ const MobileNavbar = () => {
   }
 
   return (
-    <nav className="mobile-navbar fixed bottom-0 left-0 right-0 w-full block lg:hidden border-t border-[#2d1b54] z-50 bg-[#10071E] pb-[env(safe-area-inset-bottom)]" style={{ willChange: 'transform' }}>
+    <nav className="mobile-navbar fixed bottom-0 left-0 right-0 w-full block lg:hidden border-t border-[#221938] z-50 bg-[#120C22] pb-[env(safe-area-inset-bottom)]" style={{ willChange: 'transform' }}>
       <div className="grid h-16 grid-cols-5">
         {navItems.map(({ label, path }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });
@@ -116,8 +116,8 @@ const MobileNavbar = () => {
 
               <span
                 className={`mt-1 transition-colors duration-300 ${isActive
-                  ? "text-violet-400 font-semibold"
-                  : "text-gray-400"
+                  ? "text-[#A855F7] font-semibold"
+                  : "text-[#8E89A6]"
                   }`}
               >
                 {label}

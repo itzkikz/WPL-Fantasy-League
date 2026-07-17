@@ -28,7 +28,7 @@ const MyTeamPitch = ({
   getPlayerTopOffset,
 }: MyTeamPitchProps) => {
   return (
-    <div className="relative w-full max-w-2xl mx-auto rounded-3xl overflow-hidden border border-[#2d1b54] shadow-2xl bg-[#090314] flex-1 min-h-0 h-full flex flex-col">
+    <div className="relative w-full max-w-2xl mx-auto rounded-3xl overflow-hidden border border-border shadow-card bg-background flex-1 min-h-0 h-full flex flex-col">
       {/* Pitch image layer */}
       <div className="pitch-bg">
         <img
@@ -37,7 +37,7 @@ const MyTeamPitch = ({
           alt="Tactical pitch layout"
         />
       </div>
-
+ 
       {/* Substitution Mode Bar */}
       {substituteMode && swapSourcePlayer && (
         <div className="absolute top-3 inset-x-3 bg-amber-500/90 backdrop-blur-md border border-amber-600/30 rounded-xl px-4 py-2 flex items-center justify-between z-30 shadow-lg animate-in fade-in slide-in-from-top-2">
@@ -52,7 +52,7 @@ const MyTeamPitch = ({
           </button>
         </div>
       )}
-
+ 
       {/* Players Overlay */}
       <div className="absolute top-0 inset-x-0 bottom-[110px] z-10 pointer-events-none">
         {Object.entries(startingXI).map(([pos, linePlayers]) => {
@@ -60,13 +60,13 @@ const MyTeamPitch = ({
           return players.map((player, idx) => {
             const left = getPlayerLeftOffset(pos, idx, players.length);
             const top = getPlayerTopOffset(pos);
-
+ 
             // Enrich player with mock price for display
             const enrichedPlayer = {
               ...player,
               price: getPlayerPrice(player),
             };
-
+ 
             return (
               <div
                 key={player.id}
@@ -84,23 +84,23 @@ const MyTeamPitch = ({
           });
         })}
       </div>
-
+ 
       {/* Bench Strip Container inside the Pitch Card */}
-      <div className="absolute bottom-0 inset-x-0 h-[110px] bg-[#0c0520]/95 backdrop-blur-md border-t border-[#2d1b54] flex justify-around items-center px-4 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.5)]">
+      <div className="absolute bottom-0 inset-x-0 h-[110px] bg-surface/95 backdrop-blur-md border-t border-border flex justify-around items-center px-4 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.5)]">
         {bench.map((player, idx) => {
           const label = player.position === "GK" ? "GK" : `${player.subNumber || idx}. ${player.position}`;
           const enrichedPlayer = {
             ...player,
             price: getPlayerPrice(player),
           };
-
+ 
           return (
             <div
               key={player.id}
               className={`flex flex-col items-center relative rounded-xl p-0.5 transition-all ${getPlayerCardClass(player)}`}
             >
               {/* Position Tag on Top */}
-              <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1 select-none">
+              <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">
                 {label}
               </span>
               <PitchPlayerCard

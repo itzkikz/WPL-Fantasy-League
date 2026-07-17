@@ -5,54 +5,68 @@
 
 @theme {
   --font-sans: 'Outfit', sans-serif;
-
-  /* Light theme colors */
-  --color-light-bg: #FAFAFA;
-  --color-light-surface: #fffee1;
-  --color-light-primary: #04CDE0;
-  --color-light-secondary: #00CC6B;
-  --color-light-accent: #D0004A;
-  --color-light-text-primary: #38003C;
-  --color-light-text-secondary: #5E005F;
-  --color-light-border: #E0E0E0;
-  --color-light-skeleton: #EBEBEB;
-
-  /* Design System colors */
-  --color-dark-bg: #0D021A;
-  --color-dark-surface: #171026;
-  --color-dark-card: #211433;
-  --color-dark-primary: #8B5CF6;
-  --color-dark-primary-dark: #6D28D9;
-  --color-dark-accent: #A855F7;
-  --color-dark-success: #22C55E;
-  --color-dark-warning: #FACC15;
-  --color-dark-danger: #EF4444;
-  --color-dark-info: #38BDF8;
-  --color-dark-text-primary: #FFFFFF;
-  --color-dark-text-secondary: #C8C8C8;
-  --color-dark-border: #30214D;
-  --color-dark-skeleton: #EBEBEB;
+ 
+  --color-background: #080612;
+  --color-bg: #080612;
+  --color-surface: #120C22;
+  --color-card: #17112A;
+  --color-elevated: #1D1533;
+ 
+  --color-primary: #8B5CF6;
+  --color-primary-dark: #6D28D9;
+  --color-secondary: #A855F7;
+ 
+  --color-success: #22C55E;
+  --color-warning: #FACC15;
+  --color-danger: #EF4444;
+  --color-info: #38BDF8;
+ 
+  --color-text: #FFFFFF;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #D8D5E8;
+  --color-text-muted: #8B87A6;
+ 
+  --color-border: #2B2145;
 }
 
-/* Unified global color scheme based on the dark-purple-green home page design */
 :root,
 [data-theme="light"],
 [data-theme="dark"] {
-  --color-bg: var(--color-dark-bg);
-  --color-surface: var(--color-dark-surface);
-  --color-card: var(--color-dark-card);
-  --color-primary: var(--color-dark-primary);
-  --color-primary-dark: var(--color-dark-primary-dark);
-  --color-secondary: #0CD148;
-  --color-accent: var(--color-dark-accent);
-  --color-success: #0CD148;
-  --color-warning: var(--color-dark-warning);
-  --color-danger: var(--color-dark-danger);
-  --color-info: var(--color-dark-info);
-  --color-text-primary: var(--color-dark-text-primary);
-  --color-text-secondary: var(--color-dark-text-secondary);
-  --color-border: var(--color-dark-border);
-  --color-skeleton: var(--color-dark-border);
+  --color-bg: #080612;
+  --color-surface: #120C22;
+  --color-card: #17112A;
+  --color-elevated: #1D1533;
+  --color-primary: #8B5CF6;
+  --color-primary-hover: #7C3AED;
+  --color-primary-dark: #6D28D9;
+  --color-secondary: #A855F7;
+  --color-accent: #C084FC;
+  --color-light-purple: #DDD6FE;
+
+  --color-success: #22C55E;
+  --color-success-bright: #4ADE80;
+  --color-success-text: #16E47A;
+  --color-success-bg: #0F2F20;
+
+  --color-warning: #FACC15;
+  --color-warning-orange: #FB923C;
+
+  --color-danger: #EF4444;
+  --color-danger-bright: #F87171;
+
+  --color-info: #38BDF8;
+  --color-info-sky: #0EA5E9;
+
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #D8D5E8;
+  --color-text-tertiary: #A7A2C3;
+  --color-text-disabled: #6E6A89;
+  --color-text-muted: #8B87A6;
+
+  --color-border: #2B2145;
+  --color-border-divider: #221938;
+  --color-border-active: #8B5CF6;
+  --color-skeleton: #2B2145;
 
   /* Animation Duration Variables */
   --duration-instant: 0ms;
@@ -60,6 +74,44 @@
   --duration-normal: 200ms;
   --duration-slow: 300ms;
   --duration-slower: 500ms;
+}
+
+@utility bg-gradient-core {
+  background: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 45%, #A855F7 100%);
+}
+@utility bg-gradient-overview {
+  background: linear-gradient(135deg, #4C1D95 0%, #1E1B4B 60%, #080612 100%);
+}
+@utility bg-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+@utility bg-gradient-card {
+  background: linear-gradient(180deg, #1A1232, #120C22);
+}
+@utility bg-gradient-button {
+  background: linear-gradient(135deg, #6D28D9, #8B5CF6, #A855F7);
+}
+@utility glow-primary {
+  box-shadow: 0 0 20px rgba(139,92,246,.35);
+}
+@utility glow-success {
+  box-shadow: 0 0 15px rgba(34,197,94,.3);
+}
+@utility glow-danger {
+  box-shadow: 0 0 15px rgba(239,68,68,.25);
+}
+@utility shadow-card {
+  box-shadow: 0px 10px 30px rgba(0,0,0,.35);
+}
+@utility shadow-fab {
+  box-shadow: 0px 0px 40px rgba(139,92,246,.45);
+}
+@utility shadow-player-card {
+  box-shadow: 0px 8px 18px rgba(0,0,0,.4);
+}
+@utility shadow-modal {
+  box-shadow: 0px 20px 60px rgba(0,0,0,.55);
 }
 
 body {

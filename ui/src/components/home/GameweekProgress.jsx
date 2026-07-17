@@ -36,7 +36,7 @@ export default function GameweekProgress({
         {units.map((u) => (
           <div
             key={u.label}
-            className="flex-1 bg-[#302151] rounded-lg py-1 sm:py-1.5 text-center"
+            className="flex-1 bg-primary/20 border border-primary/10 rounded-lg py-1 sm:py-1.5 text-center"
           >
             <p className="text-text-primary font-bold text-[10px] sm:text-xs leading-tight">
               {u.value}
@@ -47,15 +47,15 @@ export default function GameweekProgress({
           </div>
         ))}
       </div>
-
+ 
       <div className="flex items-center gap-1.5">
         <div className="flex-1 h-1.5 rounded-full bg-surface overflow-hidden">
           <div
-            className="h-full rounded-full bg-[#0DD940]"
+            className="h-full rounded-full bg-success"
             style={{ width: `${percent}%` }}
           />
         </div>
-        <span className="text-[#0DD940] text-[9px] sm:text-[10px] font-semibold">
+        <span className="text-success text-[9px] sm:text-[10px] font-semibold">
           {percent}%
         </span>
       </div>

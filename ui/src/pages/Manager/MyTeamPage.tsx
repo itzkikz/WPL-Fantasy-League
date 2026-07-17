@@ -297,39 +297,39 @@ const MyTeamPage = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center h-full bg-[#0d021a] text-white select-none">
-        <div className="w-10 h-10 border-4 border-violet-500 border-t-transparent rounded-full animate-spin mb-3"></div>
-        <p className="text-sm font-bold text-violet-300">Loading your squad details...</p>
+      <div className="flex flex-col items-center justify-center h-full bg-background text-white select-none">
+        <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mb-3"></div>
+        <p className="text-sm font-bold text-secondary">Loading your squad details...</p>
       </div>
     );
   }
-
+ 
   if (isError) {
     return (
-      <div className="flex flex-col items-center justify-center h-full bg-[#0d021a] text-rose-400 p-6 text-center select-none">
+      <div className="flex flex-col items-center justify-center h-full bg-background text-rose-400 p-6 text-center select-none">
         <svg className="w-10 h-10 text-rose-500 mb-2" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
         </svg>
         <p className="text-sm font-extrabold mb-3">Failed to load squad details.</p>
         <button 
           onClick={() => window.location.reload()} 
-          className="bg-violet-600 hover:bg-violet-500 text-white rounded-xl px-4 py-2.5 text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-lg shadow-violet-600/30"
+          className="bg-primary hover:bg-primary-dark text-white rounded-xl px-4 py-2.5 text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-lg shadow-primary/30"
         >
           Retry
         </button>
       </div>
     );
   }
-
+ 
   const deadlineFormatted = managerDetails?.deadline 
     ? dayjs(managerDetails.deadline).format("ddd, D MMM YYYY, h:mm A")
     : "No deadline";
-
+ 
   const totalPointsFormatted = (managerDetails?.total ?? 0).toLocaleString();
   const hasUnsavedChanges = substitutions?.length > 0 || Object.keys(roles || {}).length > 0;
-
+ 
   return (
-    <div className="flex flex-col flex-1 min-h-0 h-full bg-[#0d021a] text-white overflow-hidden font-outfit select-none pb-4 lg:pb-0">
+    <div className="flex flex-col flex-1 min-h-0 h-full bg-background text-white overflow-hidden font-outfit select-none pb-4 lg:pb-0">
       
       {/* 1. Header Card Panel */}
       <MyTeamHeader
@@ -340,31 +340,31 @@ const MyTeamPage = () => {
         totalGWScore={managerDetails?.totalGWScore}
         totalPointsFormatted={totalPointsFormatted}
       />
-
+ 
       {/* 3. Navigation Tabs */}
-      <div className="mx-4 mt-3.5 flex border-b border-[#2d1b54] shrink-0">
+      <div className="mx-4 mt-3.5 flex border-b border-[var(--color-border-divider)] shrink-0">
         <button
           onClick={() => setActiveTab("pitch")}
           className={`flex-1 pb-2 text-center text-sm font-extrabold tracking-wider uppercase transition-all relative cursor-pointer
-            ${activeTab === "pitch" ? "text-violet-300" : "text-[#a594c9]/60 hover:text-white"}`}
+            ${activeTab === "pitch" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
         >
           Pitch View
           {activeTab === "pitch" && (
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent" />
           )}
         </button>
         <button
           onClick={() => setActiveTab("list")}
           className={`flex-1 pb-2 text-center text-sm font-extrabold tracking-wider uppercase transition-all relative cursor-pointer
-            ${activeTab === "list" ? "text-violet-300" : "text-[#a594c9]/60 hover:text-white"}`}
+            ${activeTab === "list" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
         >
           List View
           {activeTab === "list" && (
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent" />
           )}
         </button>
       </div>
-
+ 
       {/* 4. Tab Views Container */}
       <div className="mx-4 mt-3 flex-1 min-h-0 relative flex flex-col">
         {activeTab === "pitch" ? (
@@ -389,13 +389,13 @@ const MyTeamPage = () => {
           />
         )}
       </div>
-
+ 
       {/* 5. Clear & Save Action Buttons */}
       <div className="mx-auto mt-3.5 mb-3 flex items-center justify-center gap-3 max-w-md w-full px-4 shrink-0">
         <button
           onClick={handleClearTeam}
           disabled={!hasUnsavedChanges}
-          className="flex-1 border border-violet-500/40 text-violet-300 hover:bg-violet-500/10 disabled:opacity-40 disabled:cursor-not-allowed font-bold rounded-xl py-2.5 flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer text-xs md:text-sm"
+          className="flex-1 border border-primary/45 text-secondary hover:bg-primary/10 disabled:opacity-40 disabled:cursor-not-allowed font-bold rounded-xl py-2.5 flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer text-xs md:text-sm"
         >
           <Trash2 className="w-3.5 h-3.5" />
           Clear Changes
@@ -403,7 +403,7 @@ const MyTeamPage = () => {
         <button
           onClick={handleSaveTeam}
           disabled={!hasUnsavedChanges || mutation.isPending}
-          className="flex-1 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 disabled:from-violet-600/50 disabled:to-indigo-600/50 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-xl py-2.5 shadow-lg shadow-violet-600/30 flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer border-t border-white/20 text-xs md:text-sm"
+          className="flex-1 bg-gradient-button disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-xl py-2.5 shadow-fab flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer border-t border-white/20 text-xs md:text-sm"
         >
           <Save className="w-3.5 h-3.5" />
           {mutation.isPending ? "Saving..." : "Save Team"}

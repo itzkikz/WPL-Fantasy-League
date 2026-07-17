@@ -79,35 +79,35 @@ const StandingsPage = () => {
   const overallRankPercent = myTeamIndex !== -1 ? `Top ${Math.max(1, Math.round(((myTeamIndex + 1) / standings!.length) * 100))}%` : "Top 2%";
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-48px-80px)] lg:h-[calc(100vh-48px)] bg-[#0d021a] text-white overflow-hidden font-outfit">
-
+    <div className="flex flex-col h-[calc(100dvh-48px-80px)] lg:h-[calc(100vh-48px)] bg-background text-white overflow-hidden font-outfit">
+ 
       {/* 3. Navigation Tabs */}
-      <div className="mx-4 mt-3 mb-4 flex border-b border-[#2d1b54] shrink-0">
+      <div className="mx-4 mt-3 mb-4 flex border-b border-[var(--color-border-divider)] shrink-0">
         <button
           onClick={() => setActiveTab("overall")}
           className={`flex-1 pb-2 text-center text-sm font-extrabold tracking-wider uppercase transition-all relative cursor-pointer
-            ${activeTab === "overall" ? "text-violet-300" : "text-[#a594c9]/60 hover:text-white"}`}
+            ${activeTab === "overall" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
         >
           Overall Standings
           {activeTab === "overall" && (
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent" />
           )}
         </button>
         <button
           onClick={() => setActiveTab("fixtures")}
           className={`flex-1 pb-2 text-center text-sm font-extrabold tracking-wider uppercase transition-all relative cursor-pointer
-            ${activeTab === "fixtures" ? "text-violet-300" : "text-[#a594c9]/60 hover:text-white"}`}
+            ${activeTab === "fixtures" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
         >
           Fixtures
           {activeTab === "fixtures" && (
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent" />
           )}
         </button>
       </div>
-
+ 
       {/* Summary Card (only on overall) */}
       {activeTab === 'overall' && (
-        <div className="mx-4 p-4 rounded-2xl bg-[radial-gradient(circle_at_68%_20%,rgba(139,92,246,.35),transparent_32%),linear-gradient(135deg,#6f28a9_0%,#291344_48%,#15102a_100%)] border border-white/10 flex items-center justify-between mb-4 flex-none shadow-xl">
+        <div className="mx-4 p-4 rounded-2xl bg-gradient-overview bg-dots border border-border flex items-center justify-between mb-4 flex-none shadow-card">
           <div className="w-14 h-14 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-white relative overflow-hidden flex-shrink-0">
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 rotate-45 scale-110" />
             <Trophy className="w-6 h-6 text-white relative z-10" />
@@ -233,9 +233,9 @@ const StandingsPage = () => {
               ))
             ) : fixturesList.length > 0 ? (
               <div className="space-y-3 pb-8">
-                <div className="text-center py-2.5 bg-violet-950/20 border border-[#2d1b54]/50 rounded-xl mb-4 flex items-center justify-center gap-1.5 shadow-inner">
-                  <span className="w-2.5 h-2.5 rounded-full bg-violet-500 animate-ping" />
-                  <p className="text-xs font-black uppercase tracking-wider text-violet-300 font-mono">Gameweek {gameweekNumber} Fixtures</p>
+                <div className="text-center py-2.5 bg-surface border border-border/50 rounded-xl mb-4 flex items-center justify-center gap-1.5 shadow-inner">
+                  <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-ping" />
+                  <p className="text-xs font-black uppercase tracking-wider text-secondary font-mono">Gameweek {gameweekNumber} Fixtures</p>
                 </div>
 
                 {fixturesList.map((fix: any) => {
@@ -263,16 +263,16 @@ const StandingsPage = () => {
                       {/* Score / VS Center Area */}
                       <div className="px-4 flex flex-col items-center justify-center shrink-0 min-w-[95px]">
                         {isFinished || isInProgress ? (
-                          <div className="flex items-center gap-2.5 bg-[#0d021a] border border-[#2d1b54] rounded-xl px-2.5 py-0.5 shadow-inner">
+                          <div className="flex items-center gap-2.5 bg-background border border-border rounded-xl px-2.5 py-0.5 shadow-inner">
                             <span className="text-sm font-black text-white font-mono">{fix.homeScore?.display ?? 0}</span>
-                            <span className="text-[10px] font-black text-[#a594c9]/60 font-mono">―</span>
+                            <span className="text-[10px] font-black text-text-muted/60 font-mono">―</span>
                             <span className="text-sm font-black text-white font-mono">{fix.awayScore?.display ?? 0}</span>
                           </div>
                         ) : (
-                          <span className="text-[9px] font-black text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2.5 py-0.5 rounded-md font-mono">VS</span>
+                          <span className="text-[9px] font-black text-secondary bg-secondary/10 border border-secondary/20 px-2.5 py-0.5 rounded-md font-mono">VS</span>
                         )}
                         <span className={`text-[8px] font-bold mt-1.5 uppercase tracking-wider
-                          ${isInProgress ? "text-rose-400 animate-pulse font-black" : "text-[#a594c9]/50"}`}>
+                          ${isInProgress ? "text-rose-400 animate-pulse font-black" : "text-text-muted/50"}`}>
                           {isInProgress ? "LIVE" : isFinished ? "FT" : startTime}
                         </span>
                       </div>
@@ -302,20 +302,20 @@ const StandingsPage = () => {
 
           {/* Last updated footer label */}
           {!isLoading && standings && standings.length > 0 && (
-            <div className="flex items-center justify-center gap-1.5 pt-4 text-[11px] text-[#c8c8c8]/40">
+            <div className="flex items-center justify-center gap-1.5 pt-4 text-[11px] text-text-muted/45">
               <Clock className="w-3.5 h-3.5" />
               <span>Last updated: 2 mins ago</span>
             </div>
           )}
         </div>
       </div>
-
+ 
       {/* Floating Call to Action footer
       {activeTab === 'overall' && !isLoading && (
-        <div className="absolute bottom-20 left-0 right-0 px-4 py-3 bg-[#0d021a]/95 backdrop-blur-md border-t border-white/5 flex-none z-10">
+        <div className="absolute bottom-20 left-0 right-0 px-4 py-3 bg-background/95 backdrop-blur-md border-t border-white/5 flex-none z-10">
           <button
             onClick={() => navigate({ to: "/home" })}
-            className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-primary to-indigo-600 text-white font-bold text-xs flex items-center justify-between active:scale-[0.99] transition-all shadow-[0_4px_16px_rgba(139,92,246,0.25)]"
+            className="w-full py-3.5 px-4 rounded-xl bg-gradient-button text-white font-bold text-xs flex items-center justify-between active:scale-[0.99] transition-all shadow-[0_4px_16px_rgba(139,92,246,0.25)]"
           >
             <div className="flex items-center gap-2">
               <BarChart3 className="w-4 h-4 text-white/80" />

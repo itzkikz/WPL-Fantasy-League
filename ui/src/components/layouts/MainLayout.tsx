@@ -35,7 +35,7 @@ export const MainLayout = () => {
             <div className="flex-1 flex">
                 <div className="flex h-screen flex-col mx-auto w-full overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
                     {isBaseRoute && (
-                        <header className="header relative w-full h-12 shrink-0 overflow-hidden bg-[#0b0217] text-white lg:hidden">
+                        <header className="header relative w-full h-12 shrink-0 overflow-hidden bg-surface border-b border-[var(--color-border-divider)] text-white lg:hidden">
                             {/* Animated gradient overlay */}
                             {/* Content container */}
                             <div className="relative z-10 mx-auto flex h-full w-full items-center justify-between px-3">

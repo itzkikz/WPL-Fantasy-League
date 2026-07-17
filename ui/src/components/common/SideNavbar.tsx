@@ -11,9 +11,9 @@ import AngleRight from "../icons/AngleRight";
 
 const MyTeamIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
-    className={`w-6 h-6 transition-colors ${isActive ? "text-violet-400" : "text-gray-400"}`} 
+    className={`w-6 h-6 transition-colors ${isActive ? "text-[#A855F7]" : "text-[#8E89A6]"}`} 
     viewBox="0 0 24 24" 
-    fill={isActive ? "rgba(139, 92, 246, 0.2)" : "none"} 
+    fill={isActive ? "rgba(168, 85, 247, 0.2)" : "none"} 
     stroke="currentColor" 
     strokeWidth="2"
     strokeLinecap="round"
@@ -25,9 +25,9 @@ const MyTeamIcon = ({ isActive }: { isActive: boolean }) => (
 
 const PickTeamIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
-    className={`w-6 h-6 transition-colors ${isActive ? "text-violet-400" : "text-gray-400"}`} 
+    className={`w-6 h-6 transition-colors ${isActive ? "text-[#A855F7]" : "text-[#8E89A6]"}`} 
     viewBox="0 0 24 24" 
-    fill={isActive ? "rgba(139, 92, 246, 0.2)" : "none"} 
+    fill={isActive ? "rgba(168, 85, 247, 0.2)" : "none"} 
     stroke="currentColor" 
     strokeWidth="2"
     strokeLinecap="round"
@@ -41,9 +41,9 @@ const PickTeamIcon = ({ isActive }: { isActive: boolean }) => (
 
 const LeagueIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
-    className={`w-6 h-6 transition-colors ${isActive ? "text-violet-400" : "text-gray-400"}`}
+    className={`w-6 h-6 transition-colors ${isActive ? "text-[#A855F7]" : "text-[#8E89A6]"}`}
     viewBox="0 0 24 24" 
-    fill={isActive ? "rgba(139, 92, 246, 0.2)" : "none"} 
+    fill={isActive ? "rgba(168, 85, 247, 0.2)" : "none"} 
     stroke="currentColor" 
     strokeWidth="2"
     strokeLinecap="round"
@@ -57,9 +57,9 @@ const LeagueIcon = ({ isActive }: { isActive: boolean }) => (
 
 const H2HIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
-    className={`w-6 h-6 transition-colors ${isActive ? "text-violet-400" : "text-gray-400"}`}
+    className={`w-6 h-6 transition-colors ${isActive ? "text-[#A855F7]" : "text-[#8E89A6]"}`}
     viewBox="0 0 24 24" 
-    fill={isActive ? "rgba(139, 92, 246, 0.2)" : "none"} 
+    fill={isActive ? "rgba(168, 85, 247, 0.2)" : "none"} 
     stroke="currentColor" 
     strokeWidth="2"
     strokeLinecap="round"
@@ -91,7 +91,7 @@ const SideNavbar = () => {
   }
 
   return (
-    <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-light-border dark:border-dark-border lg:h-screen lg:py-4 lg:px-2">
+    <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-[#221938] lg:h-screen lg:py-4 lg:px-2">
       <div className="flex flex-col gap-2">
         {navItems.map(({ label, path }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });
@@ -112,8 +112,8 @@ const SideNavbar = () => {
               <span
                 className={`${
                   isActive
-                    ? "text-[#8b5cf6] font-semibold"
-                    : "text-gray-400 hover:text-white"
+                    ? "text-[#A855F7] font-semibold"
+                    : "text-[#8E89A6] hover:text-white"
                 }`}
               >
                 {label}
@@ -124,14 +124,14 @@ const SideNavbar = () => {
 
         {/* Admin Section */}
         {user?.role === 'admin' && (
-          <div className="mt-2 border-t border-[#2d1b54] pt-2">
+          <div className="mt-2 border-t border-[#221938] pt-2">
             <button
               onClick={() => setIsAdminOpen(!isAdminOpen)}
               className="w-full flex items-center justify-between px-3 py-2 text-sm transition-colors cursor-pointer"
             >
               <div className="flex items-center gap-3">
                 <UserSettings isActive={isAdminOpen} />
-                <span className="text-gray-400 hover:text-white font-semibold">Admin Panel</span>
+                <span className="text-[#8E89A6] hover:text-white font-semibold">Admin Panel</span>
               </div>
               {isAdminOpen ? <AngleDown height="4" width="4" /> : <AngleRight height="4" width="4" />}
             </button>
@@ -155,8 +155,8 @@ const SideNavbar = () => {
                       <span
                         className={`${
                           isLinkActive
-                            ? "text-[#8b5cf6] font-semibold"
-                            : "text-gray-400 hover:text-white"
+                            ? "text-[#A855F7] font-semibold"
+                            : "text-[#8E89A6] hover:text-white"
                         }`}
                       >
                         {adminItem.label}

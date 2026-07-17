@@ -23,7 +23,7 @@ const HomePage = () => {
 
   if (isLoading) {
     return (
-      <div data-theme="dark" className="min-h-screen bg-bg px-3 py-4 space-y-3 lg:px-0 lg:py-0">
+      <div data-theme="dark" className="min-h-screen bg-background px-3 py-4 space-y-3 lg:px-0 lg:py-0">
         {[...Array(7)].map((_, i) => (
           <div
             key={i}
@@ -33,10 +33,10 @@ const HomePage = () => {
       </div>
     );
   }
-
+ 
   if (error) {
     return (
-      <div data-theme="dark" className="min-h-screen bg-bg flex items-center justify-center px-4">
+      <div data-theme="dark" className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="text-center">
           <p className="text-text-secondary mb-4">Failed to load homepage data</p>
           <button
@@ -49,20 +49,20 @@ const HomePage = () => {
       </div>
     );
   }
-
+ 
   if (!data) {
     return (
-      <div data-theme="dark" className="min-h-screen bg-bg flex items-center justify-center px-4">
+      <div data-theme="dark" className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="text-center">
-          <p className="text-text-primary font-semibold mb-1">No Data Available</p>
+          <p className="text-text font-semibold mb-1">No Data Available</p>
           <p className="text-text-secondary text-sm">Your dashboard will appear here once data is ready.</p>
         </div>
       </div>
     );
   }
-
+ 
   return (
-    <div data-theme="dark" className="min-h-screen bg-bg text-text-primary">
+    <div data-theme="dark" className="min-h-screen bg-background text-text">
       <div className="mx-auto w-full px-3 pb-[calc(5.25rem+env(safe-area-inset-bottom))] pt-3 lg:max-w-none lg:px-0 lg:pb-0 lg:pt-0">
         <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-4 lg:gap-5">
           <div className="col-span-2 lg:col-span-4">
@@ -75,11 +75,11 @@ const HomePage = () => {
               onClick={() => navigate({ to: "/manager" })}
             />
           </div>
-
+ 
           <div className="lg:col-span-2">
             <LeagueStatistics
               stats={[
-                { icon: Users, label: "Total Managers", value: String(data.leagueStandings?.length || 0), iconColor: "text-text-primary", circleClass: "border border-white/10 bg-white/5" },
+                { icon: Users, label: "Total Managers", value: String(data.leagueStandings?.length || 0), iconColor: "text-text", circleClass: "border border-white/10 bg-white/5" },
                 { icon: Clock, label: "GW Average", value: String(data.leagueStats.avgPointsPerGW), iconColor: "text-indigo-400", circleClass: "border border-indigo-500/30 bg-indigo-500/5" },
                 { icon: Star, label: "Highest Points", value: String(data.leagueStats.highestGW), iconColor: "text-pink-400", circleClass: "border border-pink-500/30 bg-pink-500/5" },
                 { icon: Repeat, label: "Transfers Made", value: String(data.teamOverview.transfers), iconColor: "text-rose-400", circleClass: "border border-rose-500/30 bg-rose-500/5" },

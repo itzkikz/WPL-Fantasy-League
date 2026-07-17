@@ -13,7 +13,7 @@ export function Card({
 }) {
   return (
     <Tag
-      className={`h-full overflow-hidden bg-[linear-gradient(145deg,rgba(36,22,64,.94),rgba(17,12,35,.98))] border border-white/[0.08] rounded-[10px] shadow-[0_12px_28px_rgba(0,0,0,.28),inset_0_1px_0_rgba(255,255,255,.04)] ${
+      className={`h-full overflow-hidden bg-gradient-card border border-border rounded-[10px] shadow-card ${
         padded ? "p-3.5" : ""
       } ${className}`}
       {...props}
