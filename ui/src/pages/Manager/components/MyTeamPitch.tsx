@@ -28,7 +28,7 @@ const MyTeamPitch = ({
   getPlayerTopOffset,
 }: MyTeamPitchProps) => {
   return (
-    <div className="relative w-full max-w-2xl mx-auto rounded-3xl overflow-hidden border border-border shadow-card bg-background flex-1 min-h-0 h-full flex flex-col">
+    <div className="relative w-full max-w-2xl mx-auto rounded-3xl overflow-hidden border border-border shadow-card bg-background h-[530px] shrink-0 flex flex-col">
       {/* Pitch image layer */}
       <div className="pitch-bg">
         <img

@@ -22,6 +22,7 @@ import timezone from "dayjs/plugin/timezone";
 // Page subcomponents
 import MyTeamHeader from "./components/MyTeamHeader";
 import MyTeamPitch from "./components/MyTeamPitch";
+import { getPlayerDisplayPrice } from "../../libs/helpers/player";
 import MyTeamListView from "./components/MyTeamListView";
 import PlayerStatsModal from "../Standings/components/PlayerStatsModal";
 
@@ -248,7 +249,7 @@ const MyTeamPage = () => {
   };
 
   const getPlayerPrice = (player: Player) => {
-    return ((player.point || 0) * 0.1 + 4.5).toFixed(1) + "M";
+    return getPlayerDisplayPrice(player);
   };
 
   const getPlayerLeftOffset = (position: string, index: number, total: number) => {
@@ -329,7 +330,7 @@ const MyTeamPage = () => {
   const hasUnsavedChanges = substitutions?.length > 0 || Object.keys(roles || {}).length > 0;
  
   return (
-    <div className="flex flex-col flex-1 min-h-0 h-full bg-background text-white overflow-hidden font-outfit select-none pb-4 lg:pb-0">
+    <div className="flex flex-col flex-1 min-h-0 h-screen bg-background text-white font-outfit select-none pb-4 lg:pb-0">
       
       {/* 1. Header Card Panel */}
       <MyTeamHeader
@@ -366,7 +367,7 @@ const MyTeamPage = () => {
       </div>
  
       {/* 4. Tab Views Container */}
-      <div className="mx-4 mt-3 flex-1 min-h-0 relative flex flex-col">
+      <div className="mx-4 mt-3 flex-1 scrollbar-hide pb-3 space-y-4">
         {activeTab === "pitch" ? (
           <MyTeamPitch
             startingXI={startingXI}

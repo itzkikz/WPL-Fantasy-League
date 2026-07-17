@@ -2,6 +2,7 @@ import { X, Target, Clock, Star, Trophy, TrendingUp, Calendar, ArrowRightLeft, E
 import { usePlayerDetails } from "../../../features/players/hooks";
 import { Player } from "../../../features/players/types";
 import { getContrastText } from "../../../libs/helpers/color";
+import { getPlayerDisplayPrice } from "../../../libs/helpers/player";
 
 interface PlayerStatsModalProps {
   isOpen: boolean;
@@ -135,7 +136,7 @@ const PlayerStatsModal = ({
                 <div>
                   <p className="text-[8px] font-extrabold text-text-muted uppercase tracking-wider">Price</p>
                   <p className="text-xs md:text-sm font-extrabold text-white mt-1">
-                    {stats.price ? (stats.price / 10).toFixed(1) + "M" : "5.0M"}
+                    {stats ? getPlayerDisplayPrice(stats) : "10.0M"}
                   </p>
                   <p className="text-[8px] text-[var(--color-success-bright)] font-bold mt-0.5">↑ 0.1M</p>
                 </div>

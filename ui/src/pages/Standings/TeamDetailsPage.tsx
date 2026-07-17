@@ -7,6 +7,7 @@ import PitchPlayerCard from "../../components/PitchPlayerCard";
 import PlayerStatsModal from "./components/PlayerStatsModal";
 import { Player } from "../../features/players/types";
 import { usePlayerStore } from "../../store/usePlayerStore";
+import { getPlayerDisplayPrice } from "../../libs/helpers/player";
 
 // Local CSS styles
 import "../Manager/MyTeamPage.css";
@@ -102,7 +103,7 @@ const TeamDetailsPage = () => {
   };
 
   const getPlayerPrice = (p: Player) => {
-    return ((p.point || 0) * 0.1 + 4.5).toFixed(1) + "M";
+    return getPlayerDisplayPrice(p);
   };
 
   const getPlayerLeftOffset = (position: string, index: number, total: number) => {
@@ -179,7 +180,7 @@ const TeamDetailsPage = () => {
     <div className="flex flex-col flex-1 min-h-0 h-screen bg-background text-white font-outfit select-none pb-4 lg:pb-0">
 
       {/* 1. Header Panel */}
-      <div className="mx-4 mt-3 bg-gradient-card border border-border rounded-2xl p-4 shadow-card relative shrink-0">
+      <div className="mx-4 mt-3 bg-gradient-card border border-border rounded-2xl overflow-hidden p-4 shadow-card relative shrink-0">
         <div className="absolute -right-24 -top-24 w-48 h-48 rounded-full bg-violet-600/10 blur-3xl pointer-events-none" />
 
         <div className="flex items-center justify-between">
@@ -275,7 +276,7 @@ const TeamDetailsPage = () => {
       <div className="mx-4 mt-3 flex-1 scrollbar-hide pb-3 space-y-4">
         {activeTab === "pitch" ? (
           /* Pitch View Container */
-          <div className="relative w-full max-w-2xl mx-auto rounded-3xl border border-border shadow-card bg-background h-[530px] shrink-0 flex flex-col">
+          <div className="relative w-full max-w-2xl mx-auto rounded-3xl overflow-hidden border border-border shadow-card bg-background h-[530px] shrink-0 flex flex-col">
             {/* Pitch image layer */}
             <div className="pitch-bg">
               <img

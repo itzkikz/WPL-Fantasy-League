@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Card, CardHeader, Avatar } from "./Primitives";
 
 function normalizeForm(formHistory) {
-  if (!formHistory || formHistory.length === 0) return [0.3, 0.45, 0.6, 0.8, 1];
+  if (!formHistory || formHistory.length === 0) return [0, 0, 0, 0, 0];
   const max = Math.max(...formHistory, 1);
   return formHistory.map((pts) => pts / max);
 }
@@ -15,14 +15,32 @@ function barColor(normalized) {
 
 export default function PlayerSpotlight({
   photo,
-  name = "E. Haaland",
-  club = "Man City",
-  position = "FWD",
+  name,
+  club,
+  position,
   formHistory = [],
   points = 0,
   stats = {},
 }) {
   const formBars = useMemo(() => normalizeForm(formHistory), [formHistory]);
+
+  if (!name) {
+    return (
+      <Card padded={false} className="h-full p-2.5 sm:p-4 flex flex-col">
+        <CardHeader title="Player Spotlight" className="!mb-3" />
+        <div className="flex-1 flex flex-col items-center justify-center py-8 text-center">
+          <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#8E89A6] mb-3">
+            <svg className="w-6 h-6 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </div>
+          <p className="text-xs font-bold text-white">No Spotlight Available</p>
+          <p className="text-[10px] text-[#8E89A6] mt-1">No spotlight data for this gameweek yet.</p>
+        </div>
+      </Card>
+    );
+  }
+
   const isGK = position === "GK";
 
   const statRows = [

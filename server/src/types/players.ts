@@ -125,6 +125,7 @@ export interface PlayerStats {
   photo?: string;
   ownership?: number;
   fantasy_team_name?: string | null;
+  auctionPrice?: number;
   upcoming_fixtures?: {
     gw: number;
     opponent_short_name: string;

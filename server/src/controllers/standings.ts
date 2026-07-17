@@ -349,7 +349,8 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 photo: player.photo || "",
                 isStarting: pick.isStarting,
                 subNumber: pick.subNumber || 0,
-                stats: gwStats
+                stats: gwStats,
+                auctionPrice: player.auctionPrice
             } as unknown as TeamDetails;
         }).filter((d): d is TeamDetails => d !== null);
 

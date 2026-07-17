@@ -74,7 +74,7 @@ const HomePage = () => {
               rankChange={String(Math.abs(data.teamOverview.rankChange))}
               totalPoints={String(data.teamOverview.totalPoints)}
               gameweekPoints={data.teamOverview.gwPoints}
-              onClick={() => navigate({ to: "/manager" })}
+              onClick={() => navigate({ to: "/my-team" })}
             />
           </div>
 
@@ -106,10 +106,10 @@ const HomePage = () => {
           </div>
           <div className="lg:col-span-2">
             <PlayerSpotlight
-              photo={data.playerSpotlight?.player.photo}
-              name={data.playerSpotlight?.player.name}
-              club={data.playerSpotlight?.player.fullTeamName}
-              position={data.playerSpotlight?.player.position}
+              photo={data.playerSpotlight?.player?.photo}
+              name={data.playerSpotlight?.player?.name}
+              club={data.playerSpotlight?.player?.fullTeamName}
+              position={data.playerSpotlight?.player?.position}
               formHistory={data.playerSpotlight?.formHistory || []}
               points={data.playerSpotlight?.gameweekPoints}
               stats={data.playerSpotlight?.stats}
@@ -185,6 +185,7 @@ const HomePage = () => {
             <LeagueStandings
               standings={data.leagueStandings}
               myTeam={data.teamOverview.teamName}
+              limit={3}
               onViewFull={() => navigate({ to: "/standings" })}
             />
           </div>
@@ -211,7 +212,7 @@ const HomePage = () => {
             <YourPlayersCard
               selected={data.squadComposition.total}
               total={15}
-              onCta={() => navigate({ to: "/manager" })}
+              onCta={() => navigate({ to: "/my-team" })}
             />
           </div>
 

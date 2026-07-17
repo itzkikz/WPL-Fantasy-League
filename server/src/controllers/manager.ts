@@ -78,39 +78,39 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
     // Fetch PlayerStats for points
     const PlayerStats = (await import("../models/PlayerStats")).PlayerStats;
     const playerStatsList = await PlayerStats.find({ playerId: { $in: playerIds } })
-        .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
-        .lean();
+      .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
+      .lean();
     const playerStatsMap = new Map(playerStatsList.map(ps => [ps.playerId, ps]));
 
     let captainPlayed = false;
     const captainPick = currentSquad.picks.find(p => p.isCaptain);
     if (captainPick) {
-        const cPs = playerStatsMap.get(captainPick.playerId);
-        if (cPs && cPs.gameweeks) {
-            const cGw = cPs.gameweeks.find((g: any) => g.id === targetGw);
-            if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
-                captainPlayed = true;
-            }
+      const cPs = playerStatsMap.get(captainPick.playerId);
+      if (cPs && cPs.gameweeks) {
+        const cGw = cPs.gameweeks.find((g: any) => g.id === targetGw);
+        if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
+          captainPlayed = true;
         }
+      }
     }
 
     const squadAsTeamDetails: TeamDetails[] = currentSquad.picks.map((pick, index) => {
       const playerDoc = pMap.get(pick.playerId);
       const teamDoc = playerDoc ? teamMap.get(playerDoc.teamId) : null;
-      
+
       let gwPoints = 0;
       const ps = playerStatsMap.get(pick.playerId);
       if (ps && ps.gameweeks) {
-          const gData = ps.gameweeks.find((g: any) => g.id === targetGw);
-          if (gData) {
-              gwPoints = gData.points || 0;
-          }
+        const gData = ps.gameweeks.find((g: any) => g.id === targetGw);
+        if (gData) {
+          gwPoints = gData.points || 0;
+        }
       }
 
       if (pick.isCaptain && captainPlayed) {
-          gwPoints *= 2;
+        gwPoints *= 2;
       } else if (pick.isViceCaptain && !captainPlayed) {
-          gwPoints *= 2;
+        gwPoints *= 2;
       }
 
       return {
@@ -118,32 +118,33 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
         player_id: pick.playerId,
         player_name: playerDoc?.webName || playerDoc?.name || "Unknown",
         team_name: teamName, // Fantasy Team Name
-        gw: targetGw, 
-        point: gwPoints, 
+        gw: targetGw,
+        point: gwPoints,
 
         position: resolvePosition(playerDoc?.position || ''),
         price: playerDoc?.price?.nowCost || 0,
-        club: teamDoc?.team?.name || "Unknown", 
+        club: teamDoc?.team?.name || "Unknown",
 
         // Lineup Status construction
         lineup: pick.isStarting ? "Starting XI" : `Sub ${pick.subNumber || 0}`,
 
         // Role Construction (Expected by Formatter as 'role', not 'type')
         role: pick.isCaptain ? "CAPTAIN" : pick.isViceCaptain ? "VICE CAPTAIN" : null,
-        
+
         team_short_name: teamDoc?.nameCode || teamDoc?.shortName || "UNK",
-        team_color: teamDoc?.teamColors?.primary || "#003399", 
+        team_color: teamDoc?.teamColors?.primary || "#003399",
         team_text_color: teamDoc?.teamColors?.text || "#ffffff",
         shirtNumber: playerDoc?.shirtNumber || (playerDoc?.jerseyNumber ? Number(playerDoc.jerseyNumber) : 0),
-        photo: playerDoc?.photo || ""
+        photo: playerDoc?.photo || "",
+        auctionPrice: playerDoc?.auctionPrice
       } as any; // Casting to any because TeamDetails structure from Sheets had specific loose fields
     });
 
     const totalGWScore = squadAsTeamDetails.reduce((acc, curr) => {
-        if (curr.lineup === "Starting XI") {
-            return acc + Number(curr.point || 0);
-        }
-        return acc;
+      if (curr.lineup === "Starting XI") {
+        return acc + Number(curr.point || 0);
+      }
+      return acc;
     }, 0);
 
     // Using the existing formatter
@@ -247,12 +248,12 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
         if (!val.swapIn || !val.swapOut) {
           continue;
         }
-        const inId = Number(val.swapIn.id || val.swapIn.player_id || 0); 
+        const inId = Number(val.swapIn.id || val.swapIn.player_id || 0);
         const outId = Number(val.swapOut.id || val.swapOut.player_id || 0);
 
         const result: any = validateAndApplySwap({ starting: swappedData.starting, bench: swappedData.bench }, inId, outId);
         if (!result.ok) {
-          console.error('[Substitution Failed]', result.error, { inId, outId, startOutCat: swappedData.starting, benchInIdx: swappedData.bench.map((p:any) => p.id) });
+          console.error('[Substitution Failed]', result.error, { inId, outId, startOutCat: swappedData.starting, benchInIdx: swappedData.bench.map((p: any) => p.id) });
           return res.status(403).json({ data: { message: result.error || 'Substitution not allowed' } });
         }
         swappedData.starting = result.starting;
@@ -294,7 +295,7 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
 
     const processList = (list: any[], isStarting: boolean) => {
       list.forEach((item, index) => {
-        const realPlayer = pNameMap.get(item.name) || players.find(p => p.name === item.name); 
+        const realPlayer = pNameMap.get(item.name) || players.find(p => p.name === item.name);
 
         if (realPlayer) {
           newPicks.push({
@@ -624,7 +625,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
 
     // 8. Top Players (This Gameweek) & Best Performers (This Season)
     const allPlayersWithStats = await PlayerStatsModel.find({}).lean();
-    
+
     // Calculate Top Players for the current gameweek
     const sortedGwStats = [...allPlayersWithStats]
       .map(stat => {
@@ -681,41 +682,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     });
 
     // 9. Player Spotlight
-    let playerSpotlight = {
-      player: {
-        id: 1,
-        name: "Erling Haaland",
-        team: "MCI",
-        teamColor: "#6CABDD",
-        point: 16,
-        position: "FWD",
-        isCaptain: false,
-        isViceCaptain: false,
-        isPowerPlayer: false,
-        fullTeamName: "Man City",
-        photo: "",
-      },
-      gameweekPoints: 16,
-      gameweekRank: 1,
-      selectedBy: 68,
-      price: 14.5,
-      formHistory: [] as number[],
-      stats: {
-        minutesPlayed: 90,
-        goals: 3,
-        assists: 1,
-        cleanSheet: 0,
-        yellowCards: 0,
-        redCards: 0,
-        penaltyMissed: 0,
-        penaltySaved: 0,
-        saves: 0,
-        tackles: 5,
-        clearances: 3,
-        blocks: 1,
-        recovery: 4,
-      },
-    };
+    let playerSpotlight = {};
 
     if (sortedStats.length > 0) {
       const topStat = sortedStats[0];

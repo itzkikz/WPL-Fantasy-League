@@ -216,7 +216,7 @@ const PickTeamPage = () => {
 
   const handleGoBack = () => {
     navigate({
-      to: "/manager",
+      to: "/my-team",
       viewTransition: ViewTransitions.back,
     });
   };
@@ -260,185 +260,184 @@ const PickTeamPage = () => {
       {!isError && !isLoading && (
         <>
           {/* Gameweek Deadline Bar */}
-      <div className="px-4 mt-4">
-        {pickMyTeam ? (
-          <div className="flex items-center justify-between px-5 py-3.5 bg-indigo-500/10 dark:bg-indigo-500/20 rounded-2xl border border-indigo-500/20 backdrop-blur-sm shadow-sm">
-            <div className="flex flex-col">
-              <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
-                Gameweek {managerDetails?.gw}
-              </span>
-              <span className="text-sm font-semibold text-gray-900 dark:text-white mt-0.5">
-                Deadline: {formatted}
-              </span>
-            </div>
-            <div className="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center">
-              <span className="text-indigo-600 dark:text-indigo-400 text-xl">⏳</span>
-            </div>
-          </div>
-        ) : (
-          <div className="flex items-center justify-center px-5 py-3.5 bg-red-500/10 dark:bg-red-500/20 rounded-2xl border border-red-500/20 backdrop-blur-sm">
-            <h6 className="text-center text-sm font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">
-              Management Not Enabled
-            </h6>
-          </div>
-        )}
-      </div>
-
-      {/* Info & Save Actions */}
-      <div className="px-4 mt-4 flex items-center gap-3">
-        <div className="flex-1 bg-white dark:bg-white/5 rounded-2xl p-3 shadow-sm border border-gray-100 dark:border-white/10 flex items-center">
-          <p className="text-[11px] leading-tight text-gray-500 dark:text-gray-400 font-medium">
-            Tap a player to change Captain or substitute.
-          </p>
-        </div>
-        <button
-          disabled={substitutions?.length === 0 && Object.keys(roles)?.length === 0}
-          onClick={handleSaveOverlay}
-          className={`flex-none px-6 py-3 rounded-2xl font-bold shadow-md transition-all duration-200 active:scale-95 flex items-center gap-2
-            ${
-              substitutions?.length === 0 && Object.keys(roles)?.length === 0
-                ? "bg-gray-100 dark:bg-white/5 text-gray-400 dark:text-gray-600 cursor-not-allowed border border-transparent"
-                : "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-indigo-500/25"
-            }
-          `}
-        >
-          Save
-        </button>
-      </div>
-      
-      {/* Scrollable Pitch Area */}
-      <div className="mt-4 px-4 pb-12">
-        <GWPitch
-          starting={editedStarting}
-          bench={editedBench}
-          onClick={!isSubstitution ? handlePlayerOverlay : handleExecuteSwap}
-          pickMyTeam={true}
-          reset={handleSubReset}
-        />
-      </div>
-      <Overlay
-        isOpen={showOverlay}
-        onClose={() => handlePlayerOverlay(null)}
-        children={
-          player && (
-            <PlayerStatsCard
-              showDetails={true}
-              showStats={false}
-              pickMyTeam={pickMyTeam}
-              handleSub={(
-                playerName: string,
-                location: "starting" | "bench",
-                isCaptain: boolean,
-                isViceCaptain: boolean
-              ) =>
-                handlePlayerSwap(playerName, location, isCaptain, isViceCaptain)
-              }
-              changeRole={handleRoles}
-              error={roleError}
-            />
-          )
-        }
-      />
-      <Overlay
-        isOpen={showSaveOverlay}
-        onClose={() => setShowSaveOverlay(false)}
-        children={
-          <>
-            <div className="flex-none pt-6 pb-4 px-6 border-b border-gray-100 dark:border-white/10">
-              <h2 className="text-2xl text-center font-extrabold tracking-tight text-gray-900 dark:text-white">
-                Confirm Changes
-              </h2>
-              <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-1">
-                Review your squad updates for Gameweek {managerDetails?.gw}.
-              </p>
-            </div>
-            <div className="flex-1 overflow-y-auto p-6 scrollbar-hide min-h-[250px]">
-              {teamError && (
-                <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-2xl p-4 text-center animate-in slide-in-from-top-2">
-                  <span className="text-red-600 dark:text-red-400 font-medium">
-                    {teamError}
+          <div className="px-4 mt-4">
+            {pickMyTeam ? (
+              <div className="flex items-center justify-between px-5 py-3.5 bg-indigo-500/10 dark:bg-indigo-500/20 rounded-2xl border border-indigo-500/20 backdrop-blur-sm shadow-sm">
+                <div className="flex flex-col">
+                  <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+                    Gameweek {managerDetails?.gw}
+                  </span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white mt-0.5">
+                    Deadline: {formatted}
                   </span>
                 </div>
-              )}
-              {!teamError && (
-                <div className="space-y-6">
-                  {Object.keys(roles).length > 0 &&
-                    (() => {
-                      const allPlayers = [...(editedStarting.GK || []), ...(editedStarting.DEF || []), ...(editedStarting.MID || []), ...(editedStarting.FWD || []), ...editedBench];
-                      const getPlayerName = (id?: number) => allPlayers.find(p => p.id === id)?.webName || allPlayers.find(p => p.id === id)?.name || "Unknown";
-                      return (
-                        <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
-                          <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Role Changes</h3>
-                          <div className="space-y-1">
-                            {roles?.captain && (
-                              <StatRow label="New Captain" value={getPlayerName(roles.captain)} border={roles?.vice ? true : false} />
-                            )}
-                            {roles?.vice && (
-                              <StatRow label="New Vice Captain" value={getPlayerName(roles.vice)} border={false} />
-                            )}
-                          </div>
-                        </div>
-                      );
-                    })()}
-                  
-                  {substitutions && substitutions?.length > 0 && (
-                    <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
-                      <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Substitutions ({substitutions.length})</h3>
-                      <div className="space-y-4">
-                        {substitutions?.map((sub, idx) => (
-                          <div key={idx} className="flex flex-col gap-2 relative">
-                            {idx > 0 && <div className="absolute -top-2 left-0 right-0 border-t border-gray-200 dark:border-white/10" />}
-                            <div className="flex items-center justify-between text-sm">
-                              <span className="font-medium text-red-500 flex items-center gap-1">
-                                <span className="text-lg">↓</span> Out
-                              </span>
-                              <span className="font-bold text-gray-900 dark:text-white">{sub?.swapOut?.name}</span>
-                            </div>
-                            <div className="flex items-center justify-between text-sm">
-                              <span className="font-medium text-green-500 flex items-center gap-1">
-                                <span className="text-lg">↑</span> In
-                              </span>
-                              <span className="font-bold text-gray-900 dark:text-white">{sub?.swapIn?.name}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                <div className="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center">
+                  <span className="text-indigo-600 dark:text-indigo-400 text-xl">⏳</span>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center px-5 py-3.5 bg-red-500/10 dark:bg-red-500/20 rounded-2xl border border-red-500/20 backdrop-blur-sm">
+                <h6 className="text-center text-sm font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">
+                  Management Not Enabled
+                </h6>
+              </div>
+            )}
+          </div>
+
+          {/* Info & Save Actions */}
+          <div className="px-4 mt-4 flex items-center gap-3">
+            <div className="flex-1 bg-white dark:bg-white/5 rounded-2xl p-3 shadow-sm border border-gray-100 dark:border-white/10 flex items-center">
+              <p className="text-[11px] leading-tight text-gray-500 dark:text-gray-400 font-medium">
+                Tap a player to change Captain or substitute.
+              </p>
+            </div>
+            <button
+              disabled={substitutions?.length === 0 && Object.keys(roles)?.length === 0}
+              onClick={handleSaveOverlay}
+              className={`flex-none px-6 py-3 rounded-2xl font-bold shadow-md transition-all duration-200 active:scale-95 flex items-center gap-2
+            ${substitutions?.length === 0 && Object.keys(roles)?.length === 0
+                  ? "bg-gray-100 dark:bg-white/5 text-gray-400 dark:text-gray-600 cursor-not-allowed border border-transparent"
+                  : "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-indigo-500/25"
+                }
+          `}
+            >
+              Save
+            </button>
+          </div>
+
+          {/* Scrollable Pitch Area */}
+          <div className="mt-4 px-4 pb-12">
+            <GWPitch
+              starting={editedStarting}
+              bench={editedBench}
+              onClick={!isSubstitution ? handlePlayerOverlay : handleExecuteSwap}
+              pickMyTeam={true}
+              reset={handleSubReset}
+            />
+          </div>
+          <Overlay
+            isOpen={showOverlay}
+            onClose={() => handlePlayerOverlay(null)}
+            children={
+              player && (
+                <PlayerStatsCard
+                  showDetails={true}
+                  showStats={false}
+                  pickMyTeam={pickMyTeam}
+                  handleSub={(
+                    playerName: string,
+                    location: "starting" | "bench",
+                    isCaptain: boolean,
+                    isViceCaptain: boolean
+                  ) =>
+                    handlePlayerSwap(playerName, location, isCaptain, isViceCaptain)
+                  }
+                  changeRole={handleRoles}
+                  error={roleError}
+                />
+              )
+            }
+          />
+          <Overlay
+            isOpen={showSaveOverlay}
+            onClose={() => setShowSaveOverlay(false)}
+            children={
+              <>
+                <div className="flex-none pt-6 pb-4 px-6 border-b border-gray-100 dark:border-white/10">
+                  <h2 className="text-2xl text-center font-extrabold tracking-tight text-gray-900 dark:text-white">
+                    Confirm Changes
+                  </h2>
+                  <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    Review your squad updates for Gameweek {managerDetails?.gw}.
+                  </p>
+                </div>
+                <div className="flex-1 overflow-y-auto p-6 scrollbar-hide min-h-[250px]">
+                  {teamError && (
+                    <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-2xl p-4 text-center animate-in slide-in-from-top-2">
+                      <span className="text-red-600 dark:text-red-400 font-medium">
+                        {teamError}
+                      </span>
                     </div>
                   )}
+                  {!teamError && (
+                    <div className="space-y-6">
+                      {Object.keys(roles).length > 0 &&
+                        (() => {
+                          const allPlayers = [...(editedStarting.GK || []), ...(editedStarting.DEF || []), ...(editedStarting.MID || []), ...(editedStarting.FWD || []), ...editedBench];
+                          const getPlayerName = (id?: number) => allPlayers.find(p => p.id === id)?.webName || allPlayers.find(p => p.id === id)?.name || "Unknown";
+                          return (
+                            <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
+                              <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Role Changes</h3>
+                              <div className="space-y-1">
+                                {roles?.captain && (
+                                  <StatRow label="New Captain" value={getPlayerName(roles.captain)} border={roles?.vice ? true : false} />
+                                )}
+                                {roles?.vice && (
+                                  <StatRow label="New Vice Captain" value={getPlayerName(roles.vice)} border={false} />
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })()}
 
-                  {Object.keys(roles).length === 0 && (!substitutions || substitutions.length === 0) && (
-                    <div className="flex flex-col items-center justify-center py-10 opacity-60">
-                      <span className="text-4xl mb-2">🤷‍♂️</span>
-                      <p className="text-gray-500 dark:text-gray-400 font-medium">No changes made.</p>
+                      {substitutions && substitutions?.length > 0 && (
+                        <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5">
+                          <h3 className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">Substitutions ({substitutions.length})</h3>
+                          <div className="space-y-4">
+                            {substitutions?.map((sub, idx) => (
+                              <div key={idx} className="flex flex-col gap-2 relative">
+                                {idx > 0 && <div className="absolute -top-2 left-0 right-0 border-t border-gray-200 dark:border-white/10" />}
+                                <div className="flex items-center justify-between text-sm">
+                                  <span className="font-medium text-red-500 flex items-center gap-1">
+                                    <span className="text-lg">↓</span> Out
+                                  </span>
+                                  <span className="font-bold text-gray-900 dark:text-white">{sub?.swapOut?.name}</span>
+                                </div>
+                                <div className="flex items-center justify-between text-sm">
+                                  <span className="font-medium text-green-500 flex items-center gap-1">
+                                    <span className="text-lg">↑</span> In
+                                  </span>
+                                  <span className="font-bold text-gray-900 dark:text-white">{sub?.swapIn?.name}</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {Object.keys(roles).length === 0 && (!substitutions || substitutions.length === 0) && (
+                        <div className="flex flex-col items-center justify-center py-10 opacity-60">
+                          <span className="text-4xl mb-2">🤷‍♂️</span>
+                          <p className="text-gray-500 dark:text-gray-400 font-medium">No changes made.</p>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
-              )}
-            </div>
-            
-            <div className="flex-none p-6 pt-2">
-              <button
-                disabled={!!teamError || (Object.keys(roles).length === 0 && (!substitutions || substitutions.length === 0))}
-                onClick={handleSave}
-                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 disabled:from-gray-300 disabled:to-gray-300 dark:disabled:from-white/10 dark:disabled:to-white/10 disabled:text-gray-500 disabled:cursor-not-allowed text-white font-bold rounded-2xl py-4 shadow-md transition-all duration-200 active:scale-95"
-              >
-                Confirm Updates
-              </button>
-            </div>
-          </>
-        }
-      />
 
-      {openToast && toastMessage && toastMessage && (
-        <Toast
-          open={openToast}
-          message={toastMessage}
-          onClose={() => {
-            setOpenToast(false);
-            setToastMessage("");
-          }}
-        />
-      )}
+                <div className="flex-none p-6 pt-2">
+                  <button
+                    disabled={!!teamError || (Object.keys(roles).length === 0 && (!substitutions || substitutions.length === 0))}
+                    onClick={handleSave}
+                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 disabled:from-gray-300 disabled:to-gray-300 dark:disabled:from-white/10 dark:disabled:to-white/10 disabled:text-gray-500 disabled:cursor-not-allowed text-white font-bold rounded-2xl py-4 shadow-md transition-all duration-200 active:scale-95"
+                  >
+                    Confirm Updates
+                  </button>
+                </div>
+              </>
+            }
+          />
+
+          {openToast && toastMessage && toastMessage && (
+            <Toast
+              open={openToast}
+              message={toastMessage}
+              onClose={() => {
+                setOpenToast(false);
+                setToastMessage("");
+              }}
+            />
+          )}
         </>
       )}
     </div>

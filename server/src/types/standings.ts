@@ -29,4 +29,5 @@ export interface TeamDetails {
     subNumber?: number;
     photo?: string;
     stats?: any;
+    auctionPrice?: number;
 }

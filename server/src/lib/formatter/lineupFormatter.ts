@@ -42,7 +42,8 @@ export function convertToFormation(playersData: TeamDetails[]): FormationResult 
       gw: playerData.gw,
       shirtNumber: playerData.shirtNumber,
       photo: playerData.photo,
-      stats: playerData.stats
+      stats: playerData.stats,
+      auctionPrice: playerData.auctionPrice
     };
 
     // Add captain/vice captain flags
@@ -64,7 +65,7 @@ export function convertToFormation(playersData: TeamDetails[]): FormationResult 
     }
 
     const points = Number(playerData.point) || 0;
-    player.isPowerPlayer = points === maxPoints;
+    player.isPowerPlayer = points > 0 && points === maxPoints;
   });
 
   // Sort bench players by sub number

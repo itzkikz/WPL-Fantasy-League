@@ -16,6 +16,7 @@ export interface Player {
     shirtNumber?: number;
     photo?: string;
     stats?: any;
+    auctionPrice?: number;
 }
 export interface Formation {
     GK: Player[];
