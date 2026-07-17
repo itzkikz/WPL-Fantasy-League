@@ -177,7 +177,7 @@ const TeamDetailsPage = () => {
   }
 
   return (
-    <div className="flex flex-col flex-1 min-h-0 h-screen bg-background text-white font-outfit select-none pb-4 lg:pb-0">
+    <div className="flex flex-col h-[calc(100dvh-80px)] lg:h-screen bg-background text-white font-outfit select-none overflow-hidden">
 
       {/* 1. Header Panel */}
       <div className="mx-4 mt-3 bg-gradient-card border border-border rounded-2xl overflow-hidden p-4 shadow-card relative shrink-0">
@@ -273,7 +273,7 @@ const TeamDetailsPage = () => {
       </div>
 
       {/* 3. Tab Views Container */}
-      <div className="mx-4 mt-3 flex-1 scrollbar-hide pb-3 space-y-4">
+      <div className="mx-4 mt-3 flex-1 overflow-y-auto scrollbar-hide pb-[calc(5.25rem+env(safe-area-inset-bottom))] space-y-4">
         {activeTab === "pitch" ? (
           /* Pitch View Container */
           <div className="relative w-full max-w-2xl mx-auto rounded-3xl overflow-hidden border border-border shadow-card bg-background h-[530px] shrink-0 flex flex-col">
@@ -355,26 +355,56 @@ const TeamDetailsPage = () => {
                     <th className="py-3 px-4">Player</th>
                     <th className="py-3 px-4 text-center">Price</th>
                     <th className="py-3 px-4 text-center">Points</th>
-                    <th className="py-3 px-4 text-center">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/30 font-medium text-white">
                   {starting && Object.entries(starting).flatMap(([pos, players]) =>
                     (players || []).map((player) => (
                       <tr key={player.id} className="hover:bg-white/5 transition-colors cursor-pointer" onClick={() => handlePlayerOverlay(player)}>
-                        <td className="py-3.5 px-4 font-bold text-white flex flex-col justify-center gap-0.5">
-                          <div className="flex items-center gap-2">
-                            <span>{player.name}</span>
-                            {player.isCaptain && <span className="bg-secondary text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono">C</span>}
-                            {player.isViceCaptain && <span className="bg-text-muted text-black text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono">V</span>}
+                        <td className="py-2.5 px-4 font-bold text-white">
+                          <div className="flex items-center gap-3">
+                            {/* Player Image Thumbnail */}
+                            <div
+                              className="w-8 h-8 rounded-full border overflow-hidden bg-indigo-950 flex items-center justify-center shrink-0 shadow-sm"
+                              style={{ borderColor: player?.teamColor || "#A855F7" }}
+                            >
+                              {player?.photo ? (
+                                <img
+                                  src={player.photo}
+                                  alt=""
+                                  className="w-full h-full object-cover object-top"
+                                  onError={(e) => {
+                                    (e.target as HTMLImageElement).style.display = "none";
+                                    const fallbackContainer = (e.target as HTMLImageElement).nextSibling as HTMLElement;
+                                    if (fallbackContainer) (fallbackContainer as HTMLElement).style.display = "flex";
+                                  }}
+                                />
+                              ) : null}
+                              <div
+                                className="w-full h-full flex items-center justify-center bg-gradient-to-b from-indigo-950 to-indigo-900"
+                                style={{ display: player?.photo ? "none" : "flex" }}
+                              >
+                                <svg className="w-4.5 h-4.5 text-white/40" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                </svg>
+                              </div>
+                            </div>
+
+                            {/* Name & Metadata */}
+                            <div className="flex flex-col justify-center gap-0.5 min-w-0">
+                              <div className="flex items-center gap-1.5 flex-wrap">
+                                <span className="truncate">{player.name}</span>
+                                {player.isCaptain && <span className="bg-secondary text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono shrink-0">C</span>}
+                                {player.isViceCaptain && <span className="bg-text-muted text-black text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono shrink-0">V</span>}
+                              </div>
+                              <span className="text-[10px] font-semibold text-text-muted/70 uppercase tracking-wider">
+                                {player.position} • {player.team}
+                              </span>
+                            </div>
                           </div>
-                          <span className="text-[10px] font-semibold text-text-muted/70 uppercase tracking-wider">
-                            {player.position} • {player.team}
-                          </span>
                         </td>
                         <td className="py-3.5 px-4 text-center text-white">{getPlayerPrice(player)}</td>
                         <td className="py-3.5 px-4 text-center text-[var(--color-success-bright)] font-mono font-extrabold">{player.point}</td>
-                        <td className="py-3.5 px-4 text-center"><span className="text-[10px] text-[var(--color-success-bright)] font-bold px-2 py-0.5 rounded-full bg-[var(--color-success-bg)] border border-[var(--color-success-bright)]/20">Starting XI</span></td>
                       </tr>
                     ))
                   )}
@@ -382,15 +412,46 @@ const TeamDetailsPage = () => {
                     const label = player.position === "GK" ? "GK" : `${player.subNumber || idx}. ${player.position}`;
                     return (
                       <tr key={player.id} className="hover:bg-white/5 transition-colors bg-black/10 cursor-pointer" onClick={() => handlePlayerOverlay(player)}>
-                        <td className="py-3.5 px-4 font-bold text-text-muted flex flex-col justify-center gap-0.5">
-                          <span>{player.name}</span>
-                          <span className="text-[10px] font-semibold text-text-muted/50 uppercase tracking-wider">
-                            {player.position} • {player.team}
-                          </span>
+                        <td className="py-2.5 px-4 font-bold text-text-muted">
+                          <div className="flex items-center gap-3">
+                            {/* Player Image Thumbnail */}
+                            <div
+                              className="w-8 h-8 rounded-full border overflow-hidden bg-indigo-950 flex items-center justify-center shrink-0 shadow-sm opacity-70"
+                              style={{ borderColor: player?.teamColor || "#94a3b8" }}
+                            >
+                              {player?.photo ? (
+                                <img
+                                  src={player.photo}
+                                  alt=""
+                                  className="w-full h-full object-cover object-top"
+                                  onError={(e) => {
+                                    (e.target as HTMLImageElement).style.display = "none";
+                                    const fallbackContainer = (e.target as HTMLImageElement).nextSibling as HTMLElement;
+                                    if (fallbackContainer) (fallbackContainer as HTMLElement).style.display = "flex";
+                                  }}
+                                />
+                              ) : null}
+                              <div
+                                className="w-full h-full flex items-center justify-center bg-gradient-to-b from-indigo-950 to-indigo-900"
+                                style={{ display: player?.photo ? "none" : "flex" }}
+                              >
+                                <svg className="w-4.5 h-4.5 text-white/40" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                </svg>
+                              </div>
+                            </div>
+
+                            {/* Name & Metadata */}
+                            <div className="flex flex-col justify-center gap-0.5 min-w-0">
+                              <span className="truncate">{player.name}</span>
+                              <span className="text-[10px] font-semibold text-text-muted/50 uppercase tracking-wider">
+                                {player.position} • {player.team}
+                              </span>
+                            </div>
+                          </div>
                         </td>
                         <td className="py-3.5 px-4 text-center text-text-muted">{getPlayerPrice(player)}</td>
                         <td className="py-3.5 px-4 text-center text-[var(--color-success-bright)]/85 font-mono font-extrabold">{player.point}</td>
-                        <td className="py-3.5 px-4 text-center"><span className="text-[10px] text-text-muted font-bold px-2 py-0.5 rounded-full bg-white/5 border border-white/10">Bench ({label})</span></td>
                       </tr>
                     );
                   })}

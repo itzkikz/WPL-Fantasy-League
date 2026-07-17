@@ -32,13 +32,13 @@ const PitchPlayerCard = ({
     >
       {/* Captain/Vice Captain Badge */}
       {(player?.isCaptain || player?.isViceCaptain) && (
-        <div 
+        <div
           className={`absolute top-[-3px] right-[-3px] z-20 flex items-center justify-center w-5 h-5 rounded-full border border-[#A855F7] text-[10px] font-bold text-white shadow-lg bg-[#1D1533]`}
         >
           {player?.isCaptain ? "C" : "V"}
         </div>
       )}
- 
+
       {/* Star badge (if any) */}
       {player?.isPowerPlayer && (Number(player?.point) || 0) > 0 && (
         <div className="absolute bottom-[28px] right-[-3px] z-20 flex items-center justify-center w-5 h-5 rounded-full bg-[#8b5cf6] border border-white text-white shadow-lg animate-bounce duration-1000">
@@ -47,66 +47,52 @@ const PitchPlayerCard = ({
           </svg>
         </div>
       )}
- 
+
       {/* Info Icon (only shown if player.showInfo is true or in custom view) */}
       {(player?.showInfo || showPriceAndPoints) && (
         <div className="absolute top-[-3px] left-[-3px] z-20 flex items-center justify-center w-4 h-4 rounded-full bg-black/40 hover:bg-black/60 border border-white/20 text-[9px] font-bold text-white shadow-sm">
           i
         </div>
       )}
- 
-      {/* Jersey Image/Placeholder */}
+
+      {/* Player Face Photo / Fallback Silhouette */}
       <div className="relative mb-1.5 z-10 drop-shadow-lg flex items-center justify-center">
         <div
-          className="relative w-12 h-10 md:w-14 md:h-12 lg:w-14 lg:h-14"
+          className="relative w-12 h-12 md:w-14 md:h-14 rounded-full border-2 overflow-hidden bg-[#1D1533] flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-105"
+          style={{ borderColor: player?.teamColor || "#A855F7" }}
         >
-          {/* Base color layer */}
+          {player?.photo ? (
+            <img
+              src={player.photo}
+              alt={player.name}
+              className="w-full h-full object-cover object-top"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = "none";
+                const fallbackContainer = (e.target as HTMLImageElement).nextSibling as HTMLElement;
+                if (fallbackContainer) (fallbackContainer as HTMLElement).style.display = "flex";
+              }}
+            />
+          ) : null}
+
+          {/* Fallback Silhouette */}
           <div
-            className="absolute inset-0 w-full h-full"
-            style={{
-              backgroundColor: player?.teamColor || "#ccc",
-              maskImage: "url('/jersey-3d.png')",
-              WebkitMaskImage: "url('/jersey-3d.png')",
-              maskSize: "contain",
-              WebkitMaskSize: "contain",
-              maskRepeat: "no-repeat",
-              WebkitMaskRepeat: "no-repeat",
-              maskPosition: "center",
-              WebkitMaskPosition: "center",
-            }}
-          />
- 
-          {/* Texture/Shading layer */}
-          <img
-            src="/jersey-3d.png"
-            alt="Jersey"
-            className="absolute inset-0 w-full h-full object-contain mix-blend-multiply"
-          />
- 
-          {/* Highlight layer */}
-          <img
-            src="/jersey-3d.png"
-            alt="Jersey Highlight"
-            className="absolute inset-0 w-full h-full object-contain mix-blend-hard-light opacity-40"
-          />
- 
-          <div className="absolute inset-0 flex flex-col items-center justify-center pt-1.5 pointer-events-none z-20">
-            <span
-              className="text-[8px] md:text-[9px] font-bold drop-shadow-md leading-none mb-0.5 font-mono"
-              style={{ color: getContrastText(player?.teamColor || "#ccc", player.teamTextColor || "#ffffff") }}
-            >
-              {player.shirtNumber ? player.shirtNumber : "00"}
-            </span>
-            <span
-              className="text-[5px] md:text-[6px] font-bold drop-shadow-md uppercase tracking-tighter leading-none"
-              style={{ color: getContrastText(player?.teamColor || "#ccc", player.teamTextColor || "#ffffff") }}
-            >
-              {player?.team}
-            </span>
+            className="w-full h-full flex items-center justify-center bg-gradient-to-b from-indigo-950 to-indigo-900"
+            style={{ display: player?.photo ? "none" : "flex" }}
+          >
+            <svg className="w-7 h-7 text-white/40" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+            </svg>
           </div>
+
+          {/* Small Team Badge Overlay */}
+          {/* <div className="absolute bottom-0 left-0 right-0 bg-black/75 py-0.5 text-center leading-none border-t border-white/5">
+            <span className="text-[7px] md:text-[8px] font-black uppercase tracking-wider text-white/95">
+              {player?.team || "UNK"}
+            </span>
+          </div> */}
         </div>
       </div>
- 
+
       {/* Info Box Container */}
       {showPriceAndPoints ? (
         <div className="flex flex-col w-full bg-card rounded-md overflow-hidden shadow-md border border-border z-10">
@@ -141,7 +127,7 @@ const PitchPlayerCard = ({
               )}
             </p>
           </div>
- 
+
           {/* Points / Team Info */}
           <div
             className="px-1 py-0.5 text-center truncate bg-surface text-text-secondary"

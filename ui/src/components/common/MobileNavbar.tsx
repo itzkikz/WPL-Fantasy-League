@@ -130,6 +130,7 @@ const MobileNavbar = () => {
 
   const isBaseRoute =
     location.pathname === "/settings" ||
+    location.pathname.startsWith("/standings/") ||
     (isAdmin
       ? (location.pathname.startsWith("/admin") || location.pathname === "/settings")
       : navItems.some((item) => matchRoute({ to: item.path, fuzzy: false })));
