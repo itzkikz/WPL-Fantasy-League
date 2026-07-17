@@ -116,13 +116,9 @@ const MyTeamPage = () => {
         showToast(errorMsg, "ERROR");
       }
     } else {
-      // Direct click: highlight valid swap targets or open menu
-      if (managerDetails?.pickMyTeam) {
-        setSelectedPlayer(player);
-        setActionOverlayOpen(true);
-      } else {
-        showToast(`Player: ${player.name} (${player.position}) - Points: ${player.point}`, "SUCCESS");
-      }
+      // Direct click: open stats overlay modal
+      setSelectedPlayer(player);
+      setActionOverlayOpen(true);
     }
   };
 
