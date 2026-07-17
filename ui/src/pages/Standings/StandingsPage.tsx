@@ -164,8 +164,8 @@ const StandingsPage = () => {
           <div className="flex items-center justify-between text-[11px] font-bold text-[#c8c8c8]/50 uppercase tracking-wider px-3 pb-2.5 flex-none">
             <div className="w-10 text-left">Rank</div>
             <div className="flex-1 text-left pl-3">Manager</div>
-            <div className="w-20 text-center">GW Points</div>
-            <div className="w-24 text-right pr-6">Total Points</div>
+            <div className="w-14 text-center">GW</div>
+            <div className="w-18 text-right pr-4">Total</div>
           </div>
         )}
 
@@ -219,19 +219,19 @@ const StandingsPage = () => {
 
                   {/* Name column */}
                   <div className="flex-1 pl-3.5 min-w-0">
-                    <p className="text-[14px] font-bold text-white leading-snug truncate">{r.team}</p>
-                    <p className="text-[11px] text-[#c8c8c8]/50 truncate mt-0.5">{manager}</p>
+                    <p className="text-[14px] font-bold text-white leading-snug">{r.team}</p>
+                    <p className="text-[11px] text-[#c8c8c8]/50 mt-0.5">{manager}</p>
                   </div>
 
                   {/* GW points */}
-                  <div className="w-20 text-center font-black text-[14px] text-success flex-shrink-0">
+                  <div className="w-14 text-center font-black text-[14px] text-success flex-shrink-0">
                     {r.current_gw}
                   </div>
 
                   {/* Total points & Arrow */}
-                  <div className="w-24 flex items-center justify-end gap-2.5 flex-shrink-0 text-right">
+                  <div className="w-18 flex items-center justify-end gap-1.5 flex-shrink-0 text-right pr-2">
                     <span className="text-[14px] font-black text-white">{r.total}</span>
-                    <ChevronRight className="w-4 h-4 text-[#c8c8c8]/30" />
+                    <ChevronRight className="w-3.5 h-3.5 text-[#c8c8c8]/30" />
                   </div>
                 </div>
               );

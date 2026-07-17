@@ -128,9 +128,11 @@ const MobileNavbar = () => {
         { label: "Stats", path: "/stats", icon: StatsIcon },
       ];
 
-  const isBaseRoute = isAdmin
-    ? (location.pathname.startsWith("/admin") || location.pathname === "/settings")
-    : navItems.some((item) => matchRoute({ to: item.path, fuzzy: false }));
+  const isBaseRoute =
+    location.pathname === "/settings" ||
+    (isAdmin
+      ? (location.pathname.startsWith("/admin") || location.pathname === "/settings")
+      : navItems.some((item) => matchRoute({ to: item.path, fuzzy: false })));
 
   if (!isBaseRoute) {
     return null;

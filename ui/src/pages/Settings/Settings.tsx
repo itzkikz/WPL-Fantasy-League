@@ -72,7 +72,7 @@ export default function Settings() {
     : managerDetails?.managers?.split(',').map((s: string) => s.trim());
 
   return (
-    <div className="min-h-screen bg-light-bg dark:bg-dark-bg p-4 lg:p-8 animate-in fade-in duration-500">
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg px-4 pt-4 pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:p-8 animate-in fade-in duration-500">
       <div className="max-w-3xl mx-auto space-y-8">
 
         {/* Header Section */}

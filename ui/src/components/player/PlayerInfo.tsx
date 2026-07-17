@@ -1,6 +1,7 @@
 import React from "react";
 import { Player, PlayerStats } from "../../features/players/types";
 import { mapPosition } from "../../libs/helpers/lineupFormatter"
+import { getPlayerNumericPrice } from "../../libs/helpers/player";
 
 export default function PlayerInfo({
   player,
@@ -83,7 +84,7 @@ export default function PlayerInfo({
 
             <div className="flex items-center gap-2 bg-black/10 rounded-lg px-3 py-1.5 backdrop-blur-sm">
               <span className="opacity-70 text-xs uppercase font-bold tracking-wider">Price</span>
-              <span className="font-bold text-sm">£{playerStats?.price}m</span>
+              <span className="font-bold text-sm">£{getPlayerNumericPrice(playerStats || player).toFixed(1)}m</span>
             </div>
           </div>
 

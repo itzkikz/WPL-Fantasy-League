@@ -122,27 +122,21 @@ export default function Stats() {
 
   return (
     <div className="flex flex-col h-[calc(100dvh-48px-80px)] lg:h-[calc(100vh-48px)] bg-background text-white overflow-hidden font-outfit select-none">
- 
+
       {/* 1. Header Toolbar */}
       <div className="pt-5 pb-3 px-4 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => window.history.back()}
-            className="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center cursor-pointer text-white"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
           <div>
             <h1 className="text-lg md:text-xl font-black tracking-tight leading-tight">
               Best Performers
             </h1>
-            <button className="flex items-center gap-1 mt-0.5 text-text-muted hover:text-white transition-colors cursor-pointer text-[10px] md:text-xs font-bold">
+            {/* <button className="flex items-center gap-1 mt-0.5 text-text-muted hover:text-white transition-colors cursor-pointer text-[10px] md:text-xs font-bold">
               <span>This Season</span>
               <ChevronDown className="w-3.5 h-3.5" />
-            </button>
+            </button> */}
           </div>
         </div>
- 
+
         <div className="flex items-center gap-2">
           {/* Filter Button */}
           <button
@@ -154,18 +148,9 @@ export default function Stats() {
               <span className="absolute right-2.5 top-2.5 h-1.5 w-1.5 rounded-full bg-secondary animate-pulse" />
             )}
           </button>
- 
-          {/* Bell Notification */}
-          <button
-            onClick={() => navigate({ to: "/notifications" })}
-            className="relative w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center cursor-pointer text-white"
-          >
-            <Bell className="w-5 h-5" />
-            <span className="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-[#ff624f]" />
-          </button>
         </div>
       </div>
- 
+
       {/* 2. Position Tabs Row */}
       <div className="mx-4 mt-1 border-b border-[var(--color-border-divider)] flex gap-2 overflow-x-auto scrollbar-hide shrink-0 pb-1.5">
         {[
@@ -191,7 +176,7 @@ export default function Stats() {
           );
         })}
       </div>
- 
+
       {/* 3. Featured Card Banner */}
       {!isLoading && topPerformer && (
         <div
@@ -202,7 +187,7 @@ export default function Stats() {
           <div className="absolute right-0 top-0 bottom-0 w-32 opacity-10 flex items-center justify-center pointer-events-none select-none font-black text-white uppercase text-4xl">
             {topPerformer.team_short_name || "WPL"}
           </div>
- 
+
           <div className="flex items-center gap-3.5 z-10">
             {/* Crown Icon */}
             <div className="w-11 h-11 rounded-full bg-[#ffb700]/10 border border-[#ffb700]/20 flex items-center justify-center shrink-0">
@@ -238,10 +223,10 @@ export default function Stats() {
 
       {/* 4. Table Headers */}
       <div className="mx-4 mt-3 flex items-center justify-between text-[10px] font-black text-[#a594c9]/50 uppercase tracking-widest px-3 shrink-0">
-        <div className="w-12 text-left">Rank</div>
+        <div className="w-10 text-left">Rank</div>
         <div className="flex-1 text-left pl-3.5">Player</div>
-        <div className="w-24 text-right pr-2">Total Points</div>
-        <div className="w-20 text-right pr-6">GW Avg</div>
+        <div className="w-18 text-right pr-2">Total</div>
+        <div className="w-14 text-right pr-4">Avg</div>
       </div>
 
       {/* 5. Scrollable Player List */}
@@ -275,7 +260,7 @@ export default function Stats() {
                   className="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/[0.03] hover:bg-white/10 cursor-pointer transition-all duration-200"
                 >
                   {/* Rank Column */}
-                  <div className="w-12 flex flex-col items-center justify-center shrink-0">
+                  <div className="w-10 flex flex-col items-center justify-center shrink-0">
                     <span className="text-base font-black text-white">{i + 1}</span>
                     {isFirst && <span className="w-1.5 h-1.5 rounded-full bg-[#ffb700] mt-0.5" />}
                     {isSecond && <span className="w-1.5 h-1.5 rounded-full bg-white mt-0.5" />}
@@ -305,28 +290,26 @@ export default function Stats() {
 
                   {/* Name, Club and Position */}
                   <div className="flex-1 pl-4 min-w-0">
-                    <p className="text-[13px] font-bold text-white leading-tight truncate">
+                    <p className="text-[13px] font-bold text-white leading-tight">
                       {r.player_name}
                     </p>
-                    <p className="text-[10px] text-[#a594c9]/70 font-semibold mt-0.5 flex items-center gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full border border-white/10" style={{ backgroundColor: r.team_color || "#ccc" }} />
-                      {r.team_short_name || "UNK"} • <span className="uppercase text-[9px] tracking-wider text-violet-400 font-bold">{r.position}</span>
-                    </p>
+                    <div className="text-[10px] text-[#a594c9]/70 font-semibold mt-0.5 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full border border-white/10 shrink-0" style={{ backgroundColor: r.team_color || "#ccc" }} />
+                      <span className="leading-none shrink-0">{r.team_short_name || "UNK"}</span>
+                      <span className="text-[#a594c9]/30 text-[8px] leading-none shrink-0">•</span>
+                      <span className="uppercase text-[9px] tracking-wider text-violet-400 font-bold leading-none shrink-0">{r.position}</span>
+                    </div>
                   </div>
 
                   {/* Points Column */}
-                  <div className="w-24 text-right shrink-0 flex flex-col justify-center pr-2">
+                  <div className="w-18 text-right shrink-0 flex flex-col justify-center pr-2">
                     <span className="text-[13px] font-black text-violet-400 font-mono">{points.toLocaleString()}</span>
-                    <span className="text-[8px] text-[#a594c9]/40 uppercase font-bold tracking-wider mt-0.5">Total Points</span>
                   </div>
 
                   {/* GW Avg & Chevron */}
-                  <div className="w-20 flex items-center justify-end gap-2 shrink-0">
-                    <div className="text-right">
-                      <p className="text-[13px] font-black text-white font-mono">{gwAvg}</p>
-                      <p className="text-[8px] text-[#a594c9]/40 uppercase font-bold tracking-wider mt-0.5">GW Avg</p>
-                    </div>
-                    <ChevronRight className="w-4 h-4 text-[#a594c9]/30 pl-0.5" />
+                  <div className="w-14 flex items-center justify-end gap-1 shrink-0">
+                    <span className="text-[13px] font-black text-white font-mono text-right">{gwAvg}</span>
+                    <ChevronRight className="w-3.5 h-3.5 text-[#a594c9]/30" />
                   </div>
                 </div>
               );
@@ -390,8 +373,8 @@ export default function Stats() {
                       key={lg}
                       onClick={() => toggleSelect(selectedLeagues, "leagues", lg)}
                       className={`py-2 px-3 rounded-xl border text-[11px] font-bold text-left truncate transition-all cursor-pointer
-                        ${isChecked 
-                          ? "bg-violet-500/20 border-violet-500 text-violet-200" 
+                        ${isChecked
+                          ? "bg-violet-500/20 border-violet-500 text-violet-200"
                           : "bg-white/5 border-white/5 text-[#a594c9]/70 hover:bg-white/10 hover:text-white"
                         }`}
                     >
@@ -410,7 +393,7 @@ export default function Stats() {
                   <span className="text-[#a594c9]/70 text-[9px] lowercase font-bold">{selectedClubs.length} selected</span>
                 )}
               </h3>
-              
+
               {/* Search Bar */}
               <div className="relative mb-3">
                 <input
@@ -457,8 +440,8 @@ export default function Stats() {
                         key={cl}
                         onClick={() => toggleSelect(selectedClubs, "clubs", cl)}
                         className={`py-2 px-3 rounded-xl border text-[11px] font-bold text-left truncate transition-all cursor-pointer
-                          ${isChecked 
-                            ? "bg-violet-500/20 border-violet-500 text-violet-200" 
+                          ${isChecked
+                            ? "bg-violet-500/20 border-violet-500 text-violet-200"
                             : "bg-white/5 border-white/5 text-[#a594c9]/70 hover:bg-white/10 hover:text-white"
                           }`}
                       >

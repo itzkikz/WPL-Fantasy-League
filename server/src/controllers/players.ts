@@ -367,7 +367,8 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
             fantasy_team_name: fantasyTeamName,
             upcoming_fixtures: upcomingFixtures,
             recent_form: recentForm,
-            points_breakdown: pointsBreakdown
+            points_breakdown: pointsBreakdown,
+            auctionPrice: player.auctionPrice
         };
 
         res.set('Cache-Control', 'public, max-age=3600, s-maxage=3600');
@@ -529,7 +530,8 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 team_text_color: teamColorText,
                 player_id: player.id,
                 current_week: currentWeekStats,
-                photo: player.photo || ""
+                photo: player.photo || "",
+                auctionPrice: player.auctionPrice
             };
         });
 

@@ -8,13 +8,14 @@ export default function LeagueStandings({
   standings = [],
   myTeam = "",
   onViewFull,
+  limit = 3,
 }) {
   return (
     <Card>
       <CardHeader title={title} subtitle={subtitle} />
 
       <div className="space-y-1.5">
-        {standings.slice(0, 5).map((item, i) => {
+        {standings.slice(0, limit).map((item, i) => {
           const posChange = item.rankChange || 0;
           const isFirst = item.rank === 1;
           const isMe = myTeam && item.team === myTeam;
