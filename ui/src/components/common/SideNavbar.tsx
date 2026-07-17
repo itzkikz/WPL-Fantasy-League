@@ -148,13 +148,19 @@ const SideNavbar = () => {
     );
   }
 
-  const navItems = [
-    { label: "Home", path: "/home" },
-    { label: "League", path: "/standings" },
-    { label: "My Team", path: "/my-team" },
-    { label: "H2H", path: "/h2h" },
-    { label: "Stats", path: "/stats" },
-  ];
+  const isRegularUser = user?.role === "user";
+
+  const navItems = isRegularUser
+    ? [
+        { label: "Stats", path: "/stats" },
+      ]
+    : [
+        { label: "Home", path: "/home" },
+        { label: "League", path: "/standings" },
+        { label: "My Team", path: "/my-team" },
+        { label: "H2H", path: "/h2h" },
+        { label: "Stats", path: "/stats" },
+      ];
 
   return (
     <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-[#221938] lg:h-screen lg:py-4 lg:px-2">

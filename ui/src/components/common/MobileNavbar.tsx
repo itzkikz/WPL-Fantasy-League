@@ -106,6 +106,8 @@ const MobileNavbar = () => {
   const user = useUserStore((state) => state.user);
   const isAdmin = user?.role === "admin";
 
+  const isRegularUser = user?.role === "user";
+
   const navItems = isAdmin
     ? [
         { label: "Settings", path: "/settings", icon: AdminSettingsIcon },
@@ -113,6 +115,10 @@ const MobileNavbar = () => {
         { label: "Teams", path: "/admin/fantasy-teams", icon: AdminTeamsIcon },
         { label: "Leagues", path: "/admin/leagues", icon: AdminLeaguesIcon },
         { label: "H2H", path: "/admin/h2h-leagues", icon: AdminH2HIcon },
+      ]
+    : isRegularUser
+    ? [
+        { label: "Stats", path: "/stats", icon: StatsIcon },
       ]
     : [
         { label: "Home", path: "/home", icon: HomeIcon },
@@ -132,7 +138,10 @@ const MobileNavbar = () => {
 
   return (
     <nav className="mobile-navbar fixed bottom-0 left-0 right-0 w-full block lg:hidden border-t border-[#221938] z-50 bg-[#120C22] pb-[env(safe-area-inset-bottom)]" style={{ willChange: 'transform' }}>
-      <div className="grid h-16 grid-cols-5">
+      <div 
+        className="grid h-16" 
+        style={{ gridTemplateColumns: `repeat(${navItems.length}, minmax(0, 1fr))` }}
+      >
         {navItems.map(({ label, path, icon: IconComponent }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });
 
