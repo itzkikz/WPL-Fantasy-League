@@ -34,7 +34,7 @@ const HomePage = () => {
       </div>
     );
   }
- 
+
   if (error) {
     return (
       <div data-theme="dark" className="min-h-screen bg-background flex items-center justify-center px-4">
@@ -50,7 +50,7 @@ const HomePage = () => {
       </div>
     );
   }
- 
+
   if (!data) {
     return (
       <div data-theme="dark" className="min-h-screen bg-background flex items-center justify-center px-4">
@@ -61,7 +61,7 @@ const HomePage = () => {
       </div>
     );
   }
- 
+
   return (
     <div data-theme="dark" className="min-h-screen bg-background text-text">
       <div className="mx-auto w-full px-3 pb-[calc(5.25rem+env(safe-area-inset-bottom))] pt-3 lg:max-w-none lg:px-0 lg:pb-0 lg:pt-0">
@@ -77,7 +77,7 @@ const HomePage = () => {
               onClick={() => navigate({ to: "/manager" })}
             />
           </div>
- 
+
           <div className="lg:col-span-2">
             <LeagueStatistics
               stats={[
@@ -215,9 +215,9 @@ const HomePage = () => {
             />
           </div>
 
-          <div className="col-span-2 lg:col-span-4">
+          {/* <div className="col-span-2 lg:col-span-4">
             <QuickActionsRow />
-          </div>
+          </div> */}
 
           <div className="col-span-2 lg:col-span-4">
             <FantasyNews />
