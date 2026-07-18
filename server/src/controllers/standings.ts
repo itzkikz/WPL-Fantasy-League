@@ -314,6 +314,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
             const teamShortName = clubData ? clubData.nameCode : "UNK";
             const teamColor = clubData && clubData.teamColors ? clubData.teamColors.primary : "#003399";
             const teamTextColor = clubData && clubData.teamColors ? clubData.teamColors.text : "#ffffff";
+            const teamLogo = clubData ? clubData.logo || "" : "";
 
             let gwStats: any = null;
             let gwPoints = 0;
@@ -345,6 +346,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 team_short_name: teamShortName,
                 team_color: teamColor,
                 team_text_color: teamTextColor,
+                team_logo: teamLogo,
                 shirtNumber: player.number || 0,
                 photo: player.photo || "",
                 isStarting: pick.isStarting,
@@ -412,7 +414,7 @@ export const getFixturesForCurrentGameweek = async (req: Request, res: Response)
             fixtures = await Fixture.find({ 'roundInfo.round': currentGw }).sort({ startTimestamp: 1 }).lean() as any[];
         }
 
-        const teams = await Team.find({}, 'id name shortName photo teamColors').lean() as any[];
+        const teams = await Team.find({}, 'id name nameCode photo logo teamColors').lean() as any[];
         const teamMap = new Map(teams.map((t: any) => [t.id, t]));
 
         const mappedFixtures = fixtures.map((f: any) => {
@@ -425,15 +427,17 @@ export const getFixturesForCurrentGameweek = async (req: Request, res: Response)
                 homeTeam: {
                     id: f.homeTeam?.id,
                     name: home?.name || "Unknown",
-                    shortName: home?.shortName || "UNK",
+                    shortName: home?.nameCode || "UNK",
                     photo: home?.photo || "",
+                    logo: home?.logo || "",
                     color: home?.teamColors?.primary || "#003399",
                 },
                 awayTeam: {
                     id: f.awayTeam?.id,
                     name: away?.name || "Unknown",
-                    shortName: away?.shortName || "UNK",
+                    shortName: away?.nameCode || "UNK",
                     photo: away?.photo || "",
+                    logo: away?.logo || "",
                     color: away?.teamColors?.primary || "#003399",
                 },
                 homeScore: f.homeScore,

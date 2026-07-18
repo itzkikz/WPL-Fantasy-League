@@ -306,14 +306,17 @@ const StandingsPage = () => {
                         <div className="p-4 flex items-center justify-between">
                           {/* Home Team */}
                           <div className="flex-1 flex items-center gap-3 min-w-0">
-                            {fix.homeTeam.photo ? (
-                              <img src={fix.homeTeam.photo} className="w-8 h-8 object-contain shrink-0" alt="" />
+                            {(fix.homeTeam.logo || fix.homeTeam.photo) ? (
+                              <img src={fix.homeTeam.logo || fix.homeTeam.photo} className="w-8 h-8 object-contain shrink-0" alt="" />
                             ) : (
                               <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center font-black text-xs shrink-0 text-white font-mono" style={{ backgroundColor: fix.homeTeam.color }}>
                                 {fix.homeTeam.shortName}
                               </div>
                             )}
-                            <span className="text-sm font-extrabold text-white truncate leading-tight">{fix.homeTeam.name}</span>
+                            <div className="flex flex-col min-w-0">
+                              <span className="hidden sm:block text-sm font-extrabold text-white truncate leading-tight">{fix.homeTeam.name}</span>
+                              <span className="text-xs sm:text-[10px] font-black text-white sm:text-text-muted/50 uppercase tracking-wider">{fix.homeTeam.shortName}</span>
+                            </div>
                           </div>
 
                           {/* Score / VS Center Area */}
@@ -335,9 +338,12 @@ const StandingsPage = () => {
 
                           {/* Away Team */}
                           <div className="flex-1 flex items-center gap-3 justify-end min-w-0">
-                            <span className="text-sm font-extrabold text-white truncate leading-tight text-right">{fix.awayTeam.name}</span>
-                            {fix.awayTeam.photo ? (
-                              <img src={fix.awayTeam.photo} className="w-8 h-8 object-contain shrink-0" alt="" />
+                            <div className="flex flex-col items-end min-w-0">
+                              <span className="hidden sm:block text-sm font-extrabold text-white truncate leading-tight text-right">{fix.awayTeam.name}</span>
+                              <span className="text-xs sm:text-[10px] font-black text-white sm:text-text-muted/50 uppercase tracking-wider">{fix.awayTeam.shortName}</span>
+                            </div>
+                            {(fix.awayTeam.logo || fix.awayTeam.photo) ? (
+                              <img src={fix.awayTeam.logo || fix.awayTeam.photo} className="w-8 h-8 object-contain shrink-0" alt="" />
                             ) : (
                               <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center font-black text-xs shrink-0 text-white font-mono" style={{ backgroundColor: fix.awayTeam.color }}>
                                 {fix.awayTeam.shortName}

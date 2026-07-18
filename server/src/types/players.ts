@@ -120,6 +120,7 @@ export interface PlayerStats {
   team_short_name: string;
   team_color: string;
   team_text_color: string;
+  team_logo: string;
   player_id: number;
   current_week?: SofaScoreStats;
   photo?: string;

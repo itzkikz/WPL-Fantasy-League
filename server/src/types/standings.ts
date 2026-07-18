@@ -24,6 +24,7 @@ export interface TeamDetails {
     team_short_name?: string,
     team_color?: string,
     team_text_color?: string,
+    team_logo?: string,
     shirtNumber?: number;
     isStarting?: boolean;
     subNumber?: number;

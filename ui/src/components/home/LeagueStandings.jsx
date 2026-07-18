@@ -1,6 +1,6 @@
 import React from "react";
 import { ChevronRight, Trophy } from "lucide-react";
-import { Card, CardHeader } from "./Primitives";
+import { Card, CardHeader, LinkText } from "./Primitives";
 
 export default function LeagueStandings({
   title = "League Standings",
@@ -12,7 +12,7 @@ export default function LeagueStandings({
 }) {
   return (
     <Card>
-      <CardHeader title={title} subtitle={subtitle} />
+      <CardHeader title={title} />
 
       <div className="space-y-1.5">
         {standings.slice(0, limit).map((item, i) => {
@@ -59,9 +59,9 @@ export default function LeagueStandings({
                     </span>
                     {isMe && <span className="text-[7px] font-black text-primary/70 bg-primary/10 px-1 py-px rounded uppercase tracking-wider flex-shrink-0">You</span>}
                   </div>
-                  {item.manager && (
+                  {/* {item.manager && (
                     <p className="text-[9px] text-[#c8c8c8]/40 truncate mt-px">{item.manager}</p>
-                  )}
+                  )} */}
                 </div>
 
                 {/* Desktop: GW + Total inline */}
@@ -94,12 +94,13 @@ export default function LeagueStandings({
       </div>
 
       {onViewFull && (
-        <button
-          onClick={onViewFull}
-          className="mt-3 w-full py-2 rounded-xl bg-white/[0.04] border border-white/[0.06] text-[10px] font-bold text-[#c8c8c8]/60 uppercase tracking-wider hover:bg-white/[0.08] hover:text-white transition-all active:scale-[0.98] cursor-pointer"
-        >
-          View Full Standings
-        </button>
+        <div className="pt-2 border-t border-white/[0.04]">
+          <LinkText>
+            <button onClick={onViewFull} className="hover:underline active:opacity-70">
+              View All
+            </button>
+          </LinkText>
+        </div>
       )}
     </Card>
   );

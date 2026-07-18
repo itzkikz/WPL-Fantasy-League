@@ -4,6 +4,7 @@ import { Player } from "../models/Player";
 import { Team } from "../models/Team";
 import { Gameweek } from "../models/Gameweek";
 import { PlayerStats as PlayerStatsModel } from "../models/PlayerStats";
+import { FantasyTeam } from "../models/FantasyTeam";
 import "../models/League";
 import { resolvePosition } from "../utils";
 
@@ -154,6 +155,7 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
         let teamShortName = "UNK";
         let teamColor = "#000000";
         let teamColorText = "#ffffff";
+        let teamLogo = "";
         let leagueName = "Unknown League";
 
         if (team) {
@@ -161,6 +163,7 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
             teamShortName = team.nameCode || team.shortName || "UNK";
             teamColor = team.teamColors?.primary || "#003399";
             teamColorText = team.teamColors?.text || "#ffffff";
+            teamLogo = team.logo || "";
             leagueName = team.league ? (team.league as any).name : "Unknown League";
         }
 
@@ -225,11 +228,11 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
             return {
                 gw: f.roundInfo?.round || 0,
                 opponent_short_name: opponentTeam?.nameCode || opponentTeam?.shortName || "UNK",
-                opponent_logo: opponentTeam?.photo || "",
+                opponent_logo: opponentTeam?.logo || opponentTeam?.photo || "",
                 opponent_color: opponentTeam?.teamColors?.primary || "#003399",
                 opponent_text_color: opponentTeam?.teamColors?.text || "#ffffff",
                 my_team_short_name: myTeam?.nameCode || myTeam?.shortName || "UNK",
-                my_team_logo: myTeam?.photo || "",
+                my_team_logo: myTeam?.logo || myTeam?.photo || "",
                 is_home: isHome
             };
         });
@@ -360,6 +363,7 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
             team_short_name: teamShortName,
             team_color: teamColor,
             team_text_color: teamColorText,
+            team_logo: teamLogo,
             player_id: player.id,
             current_week: currentWeekStats,
             photo: player.photo || "",
@@ -438,21 +442,29 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
 
             teamIdsFromFilter = filteredTeams.map(t => t.id).filter(Boolean);
 
-            if (freeAgents) {
-                const freeAgentTeam = allTeams.find(t => (t.name || t.team?.name) === 'Free Agent');
-                if (freeAgentTeam) {
-                    teamIdsFromFilter = [freeAgentTeam.id];
-                }
-            }
-
-            if (clubs.length > 0 || leagues.length > 0 || freeAgents) {
+            if (clubs.length > 0 || leagues.length > 0) {
                 query.teamId = { $in: teamIdsFromFilter };
             }
+        }
+
+        // Free Agents: find player IDs owned by any fantasy team
+        let ownedPlayerIdsForExclusion: number[] = [];
+        if (freeAgents) {
+            const allFantasyTeamsForFilter = await FantasyTeam.find({}).lean();
+            const ownedSet = new Set<number>();
+            for (const ft of allFantasyTeamsForFilter) {
+                for (const pick of ft.currentSquad?.picks || []) {
+                    ownedSet.add(pick.playerId);
+                }
+            }
+            ownedPlayerIdsForExclusion = [...ownedSet];
         }
 
         const totalPlayers = await Player.countDocuments(query);
         const totalPages = Math.ceil(totalPlayers / limit);
 
+        // When filtering free agents, fetch all matching then filter in JS
+        // because Mongoose's `id` virtual conflicts with the numeric `id` field
         const pipeline: any[] = [
             { $match: query },
             {
@@ -473,8 +485,8 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             {
                 $sort: { total_point_sort: -1, id: 1 }
             },
-            { $skip: skip },
-            { $limit: limit },
+            // Skip pagination in pipeline when freeAgents — filter & paginate in JS
+            ...(!freeAgents ? [{ $skip: skip }, { $limit: limit }] : []),
             {
                 $project: {
                     pStats: 0,
@@ -482,11 +494,105 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 }
             }
         ];
-        const players = await Player.aggregate(pipeline);
+        let players = await Player.aggregate(pipeline);
 
+        // JS-side free agent filtering (Mongoose `id` virtual prevents DB-level filtering)
+        if (freeAgents && ownedPlayerIdsForExclusion.length > 0) {
+            const ownedSet = new Set(ownedPlayerIdsForExclusion);
+            players = players.filter((p: any) => !ownedSet.has(p.id));
+            const totalFreeAgents = players.length;
+            players = players.slice(skip, skip + limit);
+
+            const teamIds = [...new Set(players.map(p => p.teamId))];
+            const teams = (await Team.find({ id: { $in: teamIds } }).populate({ path: 'league', strictPopulate: false }).lean()) as any[];
+            const teamMap = new Map(teams.map(t => [t.id, t]));
+
+            const allFantasyTeams = await FantasyTeam.find({}).lean();
+            const playerToFantasyTeam = new Map<number, string>();
+            for (const ft of allFantasyTeams) {
+                for (const pick of ft.currentSquad?.picks || []) {
+                    if (!playerToFantasyTeam.has(pick.playerId)) {
+                        playerToFantasyTeam.set(pick.playerId, ft.name);
+                    }
+                }
+            }
+
+            const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
+            const currentGw = currentGwDoc ? currentGwDoc.number : 1;
+
+            const pStatsDocs = await PlayerStatsModel.find({ playerId: { $in: players.map(p => p.id) } }).lean();
+            const pStatsMap = new Map(pStatsDocs.map(doc => [doc.playerId, doc]));
+
+            const playerStats: PlayerStats[] = players.map(player => {
+                const team = teamMap.get(player.teamId);
+                const teamName = team ? team.name : "Unknown";
+                const leagueName = team && team.league ? (team.league as any).name : "Unknown League";
+                const teamShortName = team ? (team.nameCode || team.shortName || "UNK") : "UNK";
+                const teamColor = team?.teamColors?.primary || "#003399";
+                const teamColorText = team?.teamColors?.text || "#ffffff";
+                const teamLogo = team?.logo || "";
+
+                let currentWeekStats = undefined;
+                let overallStats = aggregateMatchStats([]);
+                const pStatsDoc = pStatsMap.get(player.id);
+                if (pStatsDoc && pStatsDoc.gameweeks) {
+                    overallStats = aggregateMatchStats(pStatsDoc.gameweeks);
+                    const gwData = pStatsDoc.gameweeks.find((g: any) => g.id === currentGw);
+                    if (gwData && gwData.stats) {
+                        currentWeekStats = { ...gwData.stats, point: gwData.points || 0 };
+                    }
+                }
+                (overallStats as any).total_point = pStatsDoc?.totalPoints || 0;
+
+                return {
+                    player_name: player.name || player.webName || "",
+                    team_name: teamName,
+                    position: resolvePosition(player.position || ""),
+                    overall: overallStats,
+                    price: player.price?.nowCost || 0,
+                    release_value: player.price?.nowCost || 0,
+                    club: teamName,
+                    league: leagueName,
+                    team_short_name: teamShortName,
+                    team_color: teamColor,
+                    team_text_color: teamColorText,
+                    team_logo: teamLogo,
+                    player_id: player.id,
+                    current_week: currentWeekStats,
+                    photo: player.photo || "",
+                    fantasy_team_name: playerToFantasyTeam.get(player.id) || "Free Agent",
+                    auctionPrice: player.auctionPrice
+                };
+            });
+
+            res.set('Cache-Control', 'public, max-age=60, s-maxage=60');
+            return res.json({
+                success: true,
+                data: playerStats,
+                meta: {
+                    page,
+                    limit,
+                    totalPlayers: totalFreeAgents,
+                    totalPages: Math.ceil(totalFreeAgents / limit),
+                    hasNextPage: page < Math.ceil(totalFreeAgents / limit)
+                }
+            });
+        }
+
+        // Non-free-agent path (unchanged)
         const teamIds = [...new Set(players.map(p => p.teamId))];
         const teams = (await Team.find({ id: { $in: teamIds } }).populate({ path: 'league', strictPopulate: false }).lean()) as any[];
         const teamMap = new Map(teams.map(t => [t.id, t]));
+
+        const allFantasyTeams = await FantasyTeam.find({}).lean();
+        const playerToFantasyTeam = new Map<number, string>();
+        for (const ft of allFantasyTeams) {
+            for (const pick of ft.currentSquad?.picks || []) {
+                if (!playerToFantasyTeam.has(pick.playerId)) {
+                    playerToFantasyTeam.set(pick.playerId, ft.name);
+                }
+            }
+        }
 
         const positionMap: Record<number, string> = { 1: 'GK', 2: 'DEF', 3: 'MID', 4: 'FWD' };
 
@@ -503,6 +609,7 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             const teamShortName = team ? (team.nameCode || team.shortName || "UNK") : "UNK";
             const teamColor = team?.teamColors?.primary || "#003399";
             const teamColorText = team?.teamColors?.text || "#ffffff";
+            const teamLogo = team?.logo || "";
 
             let currentWeekStats = undefined;
             let overallStats = aggregateMatchStats([]);
@@ -528,9 +635,11 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 team_short_name: teamShortName,
                 team_color: teamColor,
                 team_text_color: teamColorText,
+                team_logo: teamLogo,
                 player_id: player.id,
                 current_week: currentWeekStats,
                 photo: player.photo || "",
+                fantasy_team_name: playerToFantasyTeam.get(player.id) || "Free Agent",
                 auctionPrice: player.auctionPrice
             };
         });

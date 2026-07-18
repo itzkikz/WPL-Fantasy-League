@@ -78,6 +78,13 @@ const HomePage = () => {
             />
           </div>
 
+          <div className="col-span-2 lg:col-span-4">
+            <UpcomingFixture
+              fixtures={myFixturesData?.fixtures || []}
+              gameweek={myFixturesData?.gameweek || data.upcomingMatch?.gameweek}
+            />
+          </div>
+
           <div className="lg:col-span-2">
             <LeagueStatistics
               stats={[
@@ -97,11 +104,12 @@ const HomePage = () => {
               badge={<Crown className="w-8 h-8 text-white/20" />}
             />
           </div>
-
-          <div className="lg:col-span-2">
-            <UpcomingFixture
-              fixtures={myFixturesData?.fixtures || []}
-              gameweek={myFixturesData?.gameweek || data.upcomingMatch?.gameweek}
+ <div className="lg:col-span-2">
+           <LeagueStandings
+              standings={data.leagueStandings}
+              myTeam={data.teamOverview.teamName}
+              limit={3}
+              onViewFull={() => navigate({ to: "/standings" })}
             />
           </div>
           <div className="lg:col-span-2">
@@ -115,36 +123,6 @@ const HomePage = () => {
               stats={data.playerSpotlight?.stats}
             />
           </div>
-
-          <div className="lg:col-span-2">
-            <PointsBreakdown
-              total={String(data.pointsBreakdown?.totalPoints)}
-              segments={(() => {
-                const pb = data.pointsBreakdown;
-                if (!pb) return [];
-                const tp = Math.max(pb.totalPoints || 1, 1);
-                const pct = (pts: number) => Math.round((Math.abs(pts) / tp) * 100);
-                return [
-                  { label: "Goals", value: pb.goals * 5, percent: pct(pb.goals * 5), color: "var(--color-success)" },
-                  { label: "Assists", value: pb.assists * 3, percent: pct(pb.assists * 3), color: "var(--color-info)" },
-                  { label: "Clean Sheets", value: pb.cleanSheet * 4, percent: pct(pb.cleanSheet * 4), color: "#818cf8" },
-                  { label: "Yellow Cards", value: pb.yellowCards * -1, percent: pct(pb.yellowCards * -1), color: "#fbbf24" },
-                  { label: "Red Cards", value: pb.redCards * -3, percent: pct(pb.redCards * -3), color: "#f87171" },
-                  { label: "Penalty Miss", value: pb.penaltyMissed * -2, percent: pct(pb.penaltyMissed * -2), color: "#fb923c" },
-                  { label: "Penalty Save", value: pb.penaltySaved * 5, percent: pct(pb.penaltySaved * 5), color: "#34d399" },
-                  { label: "Saves", value: Math.floor((pb.saves || 0) / 3), percent: pct(Math.floor((pb.saves || 0) / 3)), color: "#a78bfa" },
-                  { label: "Defensive", value: Math.floor(((pb.tackles || 0) + (pb.clearances || 0) + (pb.blocks || 0) + (pb.recovery || 0)) / 10) * 2, percent: pct(Math.floor(((pb.tackles || 0) + (pb.clearances || 0) + (pb.blocks || 0) + (pb.recovery || 0)) / 10) * 2), color: "#2dd4bf" },
-                  { label: "Appearance", value: pb.appearancePoints || 0, percent: pct(pb.appearancePoints || 0), color: "var(--color-warning)" },
-                ];
-              })()}
-            />
-          </div>
-          <div className="lg:col-span-2">
-            <RecentGameweeks
-              data={data.recentGameweeks.map(rg => ({ label: `GW${rg.gameweek}`, value: rg.points }))}
-            />
-          </div>
-
           <div>
             <PlayerListCard
               title="Top Players"
@@ -171,6 +149,34 @@ const HomePage = () => {
               }))}
             />
           </div>
+          <div >
+            <RecentGameweeks
+              data={data.recentGameweeks.map(rg => ({ label: `GW${rg.gameweek}`, value: rg.points }))}
+            />
+          </div>
+          <div>
+             <PointsBreakdown
+              total={String(data.pointsBreakdown?.totalPoints)}
+              segments={(() => {
+                const pb = data.pointsBreakdown;
+                if (!pb) return [];
+                const tp = Math.max(pb.totalPoints || 1, 1);
+                const pct = (pts: number) => Math.round((Math.abs(pts) / tp) * 100);
+                return [
+                  { label: "Goals", value: pb.goals * 5, percent: pct(pb.goals * 5), color: "var(--color-success)" },
+                  { label: "Assists", value: pb.assists * 3, percent: pct(pb.assists * 3), color: "var(--color-info)" },
+                  { label: "Clean Sheets", value: pb.cleanSheet * 4, percent: pct(pb.cleanSheet * 4), color: "#818cf8" },
+                  { label: "Yellow Cards", value: pb.yellowCards * -1, percent: pct(pb.yellowCards * -1), color: "#fbbf24" },
+                  { label: "Red Cards", value: pb.redCards * -3, percent: pct(pb.redCards * -3), color: "#f87171" },
+                  { label: "Penalty Miss", value: pb.penaltyMissed * -2, percent: pct(pb.penaltyMissed * -2), color: "#fb923c" },
+                  { label: "Penalty Save", value: pb.penaltySaved * 5, percent: pct(pb.penaltySaved * 5), color: "#34d399" },
+                  { label: "Saves", value: Math.floor((pb.saves || 0) / 3), percent: pct(Math.floor((pb.saves || 0) / 3)), color: "#a78bfa" },
+                  { label: "Defensive", value: Math.floor(((pb.tackles || 0) + (pb.clearances || 0) + (pb.blocks || 0) + (pb.recovery || 0)) / 10) * 2, percent: pct(Math.floor(((pb.tackles || 0) + (pb.clearances || 0) + (pb.blocks || 0) + (pb.recovery || 0)) / 10) * 2), color: "#2dd4bf" },
+                  { label: "Appearance", value: pb.appearancePoints || 0, percent: pct(pb.appearancePoints || 0), color: "var(--color-warning)" },
+                ];
+              })()}
+            />
+          </div>
           <div>
             <SeasonStats
               stats={[
@@ -181,14 +187,7 @@ const HomePage = () => {
               ]}
             />
           </div>
-          <div>
-            <LeagueStandings
-              standings={data.leagueStandings}
-              myTeam={data.teamOverview.teamName}
-              limit={3}
-              onViewFull={() => navigate({ to: "/standings" })}
-            />
-          </div>
+          
 
           <div className="col-span-2 lg:col-span-4">
             <TeamFormation

@@ -161,6 +161,7 @@ export interface MyFixtureTeam {
   name: string;
   shortName: string;
   photo?: string;
+  logo?: string;
   color: string;
 }
 

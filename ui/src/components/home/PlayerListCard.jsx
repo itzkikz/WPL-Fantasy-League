@@ -23,9 +23,6 @@ export default function PlayerListCard({
       <ul className="flex flex-col gap-2 sm:gap-2.5 mb-2 sm:mb-3">
         {players.map((p, i) => (
           <li key={p.name} className="flex items-center gap-1.5 sm:gap-3 min-w-0">
-            <span className="w-4 text-text-secondary text-[10px] sm:text-xs font-semibold flex-shrink-0 text-center">
-              {i + 1}
-            </span>
             <Avatar src={p.photo} alt={p.name} size={null} className="w-7 h-7 sm:w-9 sm:h-9 flex-shrink-0" />
             <div className="flex-1 min-w-0">
               <p className="text-text-primary text-xs sm:text-sm font-medium truncate">
