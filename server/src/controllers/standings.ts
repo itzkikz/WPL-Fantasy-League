@@ -6,6 +6,7 @@ import { convertToJSON, resolvePosition } from "../utils";
 import { NextFunction, Request, Response } from "express";
 import { StandingsResponse, TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
+import { aggregateMatchStats } from "./players";
 
 import { FantasyTeam } from "../models/FantasyTeam";
 import { Player } from "../models/Player";
@@ -275,12 +276,11 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
         const players = (await Player.find({ id: { $in: playerIds } }).lean()) as any[];
         const playerMap = new Map(players.map(p => [p.id, p]));
 
-        // Fetch Teams for Club Name lookup
-        const teams = (await Team.find({}).lean()) as any[];
+        // Fetch Teams for Club Name lookup (populate league for full player stats)
+        const teams = (await Team.find({}).populate({ path: 'league', strictPopulate: false }).lean()) as any[];
         const teamMap = new Map(teams.map((t: any) => [t.id, t]));
 
         const playerStatsList = await PlayerStats.find({ playerId: { $in: playerIds } })
-            .select('playerId gameweeks.id gameweeks.points gameweeks.stats')
             .lean();
         const playerStatsMap = new Map(playerStatsList.map(ps => [ps.playerId, ps]));
 
@@ -316,13 +316,11 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
             const teamTextColor = clubData && clubData.teamColors ? clubData.teamColors.text : "#ffffff";
             const teamLogo = clubData ? clubData.logo || "" : "";
 
-            let gwStats: any = null;
             let gwPoints = 0;
             const ps = playerStatsMap.get(pick.playerId);
             if (ps && ps.gameweeks) {
                 const gData = ps.gameweeks.find((g: any) => g.id === targetGw);
                 if (gData) {
-                    gwStats = gData.stats;
                     gwPoints = gData.points || 0;
                 }
             }
@@ -351,10 +349,238 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 photo: player.photo || "",
                 isStarting: pick.isStarting,
                 subNumber: pick.subNumber || 0,
-                stats: gwStats,
                 auctionPrice: player.auctionPrice
             } as unknown as TeamDetails;
         }).filter((d): d is TeamDetails => d !== null);
+
+        // 5. Build full PlayerStats for each player (so modal doesn't need extra API calls)
+        try {
+            const Fixture = (await import("../models/Fixture")).Fixture;
+
+            // Fetch all FantasyTeams for ownership calculation
+            const allFantasyTeams = await FantasyTeam.find({}).select('currentSquad.picks.playerId name').lean();
+            const totalTeamsCount = allFantasyTeams.length;
+
+            const ownershipMap = new Map<number, { pct: number; teamName: string | null }>();
+            for (const pid of playerIds) {
+                let count = 0;
+                let teamName: string | null = null;
+                for (const ft of allFantasyTeams) {
+                    const picks = (ft as any).currentSquad?.picks || [];
+                    if (picks.some((p: any) => p.playerId === pid)) {
+                        count++;
+                        if (!teamName) teamName = (ft as any).name;
+                    }
+                }
+                const pct = totalTeamsCount > 0 ? Number(((count / totalTeamsCount) * 100).toFixed(1)) : 0;
+                ownershipMap.set(pid, { pct, teamName });
+            }
+
+            // Fetch upcoming fixtures for all players' teams
+            const allTeamIds = [...new Set(detailsData.map(d => {
+                const p = playerMap.get(d.player_id!);
+                return p?.teamId;
+            }).filter(Boolean))] as number[];
+
+            const upcomingDocs = await Fixture.find({
+                $and: [
+                    { 'roundInfo.round': { $gte: targetGw } },
+                    { 'status.type': { $ne: 'finished' } },
+                    {
+                        $or: [
+                            { 'homeTeam.id': { $in: allTeamIds } },
+                            { 'awayTeam.id': { $in: allTeamIds } }
+                        ]
+                    }
+                ]
+            }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
+
+            // Group fixtures by team ID
+            const fixturesByTeam = new Map<number, any[]>();
+            for (const f of upcomingDocs) {
+                const homeId = f.homeTeam?.id;
+                const awayId = f.awayTeam?.id;
+                if (homeId && !fixturesByTeam.has(homeId)) fixturesByTeam.set(homeId, []);
+                if (awayId && !fixturesByTeam.has(awayId)) fixturesByTeam.set(awayId, []);
+                if (homeId) fixturesByTeam.get(homeId)!.push({ fixture: f, isHome: true, opponentId: awayId });
+                if (awayId) fixturesByTeam.get(awayId)!.push({ fixture: f, isHome: false, opponentId: homeId });
+            }
+
+            // Build full PlayerStats for each player
+            for (const detail of detailsData) {
+                const pid = detail.player_id;
+                const playerDoc = playerMap.get(pid!);
+                if (!playerDoc) continue;
+
+                const clubData = teamMap.get(playerDoc.teamId);
+                const fullPs = playerStatsMap.get(pid!);
+                const ownership = ownershipMap.get(pid!) || { pct: 0, teamName: null };
+
+                const teamColor = clubData?.teamColors?.primary || detail.team_color || "#003399";
+                const teamTextColor = clubData?.teamColors?.text || detail.team_text_color || "#ffffff";
+                const teamLogo = clubData?.logo || detail.team_logo || "";
+                const teamShortName = clubData?.nameCode || detail.team_short_name || "UNK";
+                const teamNameStr = clubData?.name || detail.club || "Unknown";
+                const leagueName = clubData?.league ? (clubData.league as any).name : "Unknown League";
+
+                // Overall stats
+                let overallStats: any = aggregateMatchStats([]);
+                if (fullPs && (fullPs as any).gameweeks) {
+                    overallStats = aggregateMatchStats((fullPs as any).gameweeks);
+                }
+                (overallStats as any).total_point = (fullPs as any)?.totalPoints || 0;
+
+                // Current week stats
+                let currentWeekStats = undefined;
+                if (fullPs && (fullPs as any).gameweeks) {
+                    const gwData = (fullPs as any).gameweeks.find((g: any) => g.id === targetGw);
+                    if (gwData && gwData.stats) {
+                        currentWeekStats = { ...gwData.stats, point: gwData.points || 0 };
+                    }
+                }
+
+                // Upcoming fixtures
+                const teamFixtures = fixturesByTeam.get(playerDoc.teamId) || [];
+                const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }) => {
+                    const opponentTeam = teamMap.get(opponentId);
+                    const myTeam = clubData;
+                    return {
+                        gw: f.roundInfo?.round || 0,
+                        opponent_short_name: opponentTeam?.nameCode || "UNK",
+                        opponent_logo: opponentTeam?.logo || "",
+                        opponent_color: opponentTeam?.teamColors?.primary || "#003399",
+                        opponent_text_color: opponentTeam?.teamColors?.text || "#ffffff",
+                        my_team_short_name: myTeam?.nameCode || "UNK",
+                        my_team_logo: myTeam?.logo || "",
+                        is_home: isHome
+                    };
+                });
+
+                // Pad to 3
+                while (upcomingFixtures.length < 3) {
+                    const nextGw = targetGw + upcomingFixtures.length;
+                    upcomingFixtures.push({
+                        gw: nextGw,
+                        opponent_short_name: "TBD",
+                        opponent_logo: "",
+                        opponent_color: "#1b1035",
+                        opponent_text_color: "#ffffff",
+                        my_team_short_name: teamShortName,
+                        my_team_logo: "",
+                        is_home: true
+                    });
+                }
+
+                // Recent form
+                const recentForm: any[] = [];
+                if (fullPs && (fullPs as any).gameweeks) {
+                    const sortedGws = [...(fullPs as any).gameweeks].sort((a: any, b: any) => a.id - b.id);
+                    const filteredGws = sortedGws.filter((g: any) => g.id <= targetGw);
+                    const last5 = filteredGws.slice(-5);
+                    last5.forEach((g: any) => {
+                        recentForm.push({ gw: g.id, points: g.points || 0 });
+                    });
+                }
+                if (recentForm.length === 0) {
+                    for (let i = Math.max(1, targetGw - 4); i <= targetGw; i++) {
+                        recentForm.push({ gw: i, points: 0 });
+                    }
+                }
+
+                // Points breakdown
+                const pointsBreakdown: any[] = [];
+                if (fullPs && (fullPs as any).gameweeks) {
+                    const gwData = (fullPs as any).gameweeks.find((g: any) => g.id === targetGw);
+                    if (gwData && gwData.stats) {
+                        const s = gwData.stats;
+                        const position = resolvePosition(playerDoc.position || '');
+                        const minutes = s.minutesPlayed || 0;
+
+                        if (minutes > 0) {
+                            pointsBreakdown.push({ label: "Minutes Played", value: `${minutes} mins`, points: minutes >= 60 ? 2 : 1 });
+
+                            const goals = s.goals || 0;
+                            if (goals > 0) {
+                                let goalPoints = 0;
+                                if (position === 'GK') goalPoints = goals * 10;
+                                else if (position === 'DEF') goalPoints = goals * 6;
+                                else if (position === 'MID') goalPoints = goals * 5;
+                                else if (position === 'FWD') goalPoints = goals * 4;
+                                pointsBreakdown.push({ label: `Goals (${goals})`, value: `${goals}`, points: goalPoints });
+                            }
+
+                            const assists = s.goalAssist || 0;
+                            if (assists > 0) {
+                                pointsBreakdown.push({ label: `Assists (${assists})`, value: `${assists}`, points: assists * 3 });
+                            }
+
+                            if (s.cleanSheet === 1 && (position === 'GK' || position === 'DEF')) {
+                                pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 4 });
+                            } else if (s.cleanSheet === 1 && position === 'MID') {
+                                pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 1 });
+                            }
+
+                            const yellow = s.yellowCards || 0;
+                            if (yellow > 0) pointsBreakdown.push({ label: "Yellow Cards", value: `${yellow}`, points: yellow * -1 });
+
+                            const red = s.redCards || 0;
+                            if (red > 0) pointsBreakdown.push({ label: "Red Card", value: "Yes", points: -3 });
+
+                            const penMiss = s.penaltyMissed || 0;
+                            if (penMiss > 0) pointsBreakdown.push({ label: "Penalty Missed", value: `${penMiss}`, points: penMiss * -2 });
+
+                            if (position === 'GK') {
+                                const penSave = s.penaltySaved || 0;
+                                if (penSave > 0) pointsBreakdown.push({ label: "Penalty Saved", value: `${penSave}`, points: penSave * 5 });
+                                const gkSaves = s.saves || 0;
+                                if (gkSaves >= 3) pointsBreakdown.push({ label: `Saves (${gkSaves})`, value: `${gkSaves}`, points: Math.floor(gkSaves / 3) });
+                            }
+
+                            const tackles = s.totalTackle || 0;
+                            const clearances = s.totalClearance || 0;
+                            const blocks = s.outfielderBlock || 0;
+                            const ballRecovery = s.ballRecovery || 0;
+                            const defCont = tackles + clearances + blocks + ballRecovery;
+                            if (defCont > 0) {
+                                let defPoints = 0;
+                                if (position === 'DEF') defPoints = Math.floor(defCont / 10) * 2;
+                                else defPoints = Math.floor(defCont / 12) * 2;
+                                if (defPoints > 0) {
+                                    pointsBreakdown.push({ label: `Defensive Actions (${defCont})`, value: `${defCont}`, points: defPoints });
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Attach full PlayerStats to the detail
+                (detail as any).playerStats = {
+                    player_name: playerDoc.name || playerDoc.webName || "",
+                    team_name: teamNameStr,
+                    position: resolvePosition(playerDoc.position || ''),
+                    overall: overallStats,
+                    price: playerDoc.price?.nowCost || 0,
+                    release_value: playerDoc.price?.nowCost || 0,
+                    club: teamNameStr,
+                    league: leagueName,
+                    team_short_name: teamShortName,
+                    team_color: teamColor,
+                    team_text_color: teamTextColor,
+                    team_logo: teamLogo,
+                    player_id: pid,
+                    current_week: currentWeekStats,
+                    photo: playerDoc.photo || "",
+                    ownership: ownership.pct,
+                    fantasy_team_name: ownership.teamName,
+                    upcoming_fixtures: upcomingFixtures,
+                    recent_form: recentForm,
+                    points_breakdown: pointsBreakdown,
+                    auctionPrice: playerDoc.auctionPrice
+                };
+            }
+        } catch (statsErr) {
+            console.error("Error building full player stats:", statsErr);
+        }
 
         // 5. Calculate Aggregates
 

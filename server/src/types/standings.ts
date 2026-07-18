@@ -31,4 +31,5 @@ export interface TeamDetails {
     photo?: string;
     stats?: any;
     auctionPrice?: number;
+    playerStats?: any;
 }

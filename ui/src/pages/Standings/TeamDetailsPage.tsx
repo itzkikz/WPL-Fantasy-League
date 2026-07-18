@@ -1,7 +1,7 @@
 import { getRouteApi, useNavigate } from "@tanstack/react-router";
 import { ViewTransitions } from "../../types/viewTransitions";
-import { useTeamDetails } from "../../features/standings/hooks";
-import { useState, useEffect } from "react";
+import { useTeamDetails, useStandings } from "../../features/standings/hooks";
+import { useState } from "react";
 import { ChevronLeft, ChevronRight, ArrowLeft, ChevronDown } from "lucide-react";
 import PitchPlayerCard from "../../components/PitchPlayerCard";
 import PlayerStatsModal from "./components/PlayerStatsModal";
@@ -17,24 +17,19 @@ const TeamDetailsPage = () => {
   const navigate = useNavigate();
   const { teamId } = route.useParams();
 
-  const [gameWeek, setGameWeek] = useState(0);
+  const { data: standings } = useStandings();
+  const currentTeam = standings?.find((s) => s.team_id === teamId);
+  const [gameWeek, setGameWeek] = useState(currentTeam?.gw || 1);
   const [activeTab, setActiveTab] = useState<"pitch" | "list">("pitch");
   const player = usePlayerStore((state) => state.player);
   const setPlayer = usePlayerStore((state) => state.setPlayer);
   const [showOverlay, setShowOverlay] = useState(false);
   const [showStats, setShowStats] = useState(false);
 
-  const { data: teamDetails, isLoading, isSuccess, isError } = useTeamDetails(teamId, gameWeek);
+  const { data: teamDetails, isLoading, isError } = useTeamDetails(teamId, gameWeek);
 
   const { gw, currentGw, avg, highest, totalGWScore, starting, bench, team_name } =
     teamDetails || {};
-
-  // Set local gameweek once data loads for the first time
-  useEffect(() => {
-    if (isSuccess && teamDetails && gameWeek === 0) {
-      setGameWeek(teamDetails.gw || 15);
-    }
-  }, [isSuccess, teamDetails]);
 
   const compileTeamTotals = () => {
     const totals = {
@@ -63,7 +58,7 @@ const TeamDetailsPage = () => {
     ];
 
     starters.forEach((p: any) => {
-      const s = p.stats;
+      const s = p.playerStats?.current_week;
       if (s) {
         totals.minutes += s.minutesPlayed || 0;
         totals.goals += s.goals || 0;
@@ -537,6 +532,7 @@ const TeamDetailsPage = () => {
         isOpen={showOverlay}
         onClose={() => handlePlayerOverlay(null)}
         player={player}
+        playerStats={player?.playerStats}
       />
     </div>
   );

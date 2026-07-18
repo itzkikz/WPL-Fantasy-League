@@ -1,6 +1,6 @@
 import { X, Target, Clock, Star, Trophy, TrendingUp, Calendar, ArrowRightLeft, ExternalLink, Activity, ShieldCheck } from "lucide-react";
 import { usePlayerDetails } from "../../../features/players/hooks";
-import { Player } from "../../../features/players/types";
+import { Player, PlayerStats } from "../../../features/players/types";
 import { getContrastText } from "../../../libs/helpers/color";
 import { getPlayerDisplayPrice } from "../../../libs/helpers/player";
 
@@ -8,6 +8,7 @@ interface PlayerStatsModalProps {
   isOpen: boolean;
   onClose: () => void;
   player: Player | null;
+  playerStats?: PlayerStats | null;
   onMakeCaptain?: (player: Player) => void;
   onMakeViceCaptain?: (player: Player) => void;
   onSubstitute?: (player: Player) => void;
@@ -18,12 +19,19 @@ const PlayerStatsModal = ({
   isOpen,
   onClose,
   player,
+  playerStats: preloadedStats,
   onMakeCaptain,
   onMakeViceCaptain,
   onSubstitute,
   pickMyTeam = false,
 }: PlayerStatsModalProps) => {
-  const { data: stats, isLoading, isError } = usePlayerDetails(player?.name || "");
+  const hasPreloaded = !!preloadedStats;
+  const { data: fetchedStats, isLoading, isError } = usePlayerDetails(
+    hasPreloaded ? "" : (player?.name || "")
+  );
+
+  const stats = preloadedStats || fetchedStats;
+  const loading = !hasPreloaded && isLoading;
 
   if (!isOpen || !player) return null;
 
@@ -47,7 +55,7 @@ const PlayerStatsModal = ({
       <div className="relative w-full max-w-lg bg-elevated border border-border rounded-3xl shadow-modal overflow-hidden z-10 flex flex-col max-h-[90vh] text-white animate-in scale-in duration-300">
  
         {/* Loading State */}
-        {isLoading && (
+        {loading && (
           <div className="p-12 flex flex-col items-center justify-center text-center">
             <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
             <p className="text-sm font-bold text-secondary">Loading player statistics...</p>
@@ -69,7 +77,7 @@ const PlayerStatsModal = ({
         )}
  
         {/* Loaded Content */}
-        {!isLoading && stats && (
+        {!loading && stats && (
           <>
             {/* 1. Modal Top Section: Jersey & Title details */}
             <div className="relative p-6 bg-card border-b border-border flex items-center justify-between shrink-0 overflow-hidden">

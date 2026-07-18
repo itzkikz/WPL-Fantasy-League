@@ -17,7 +17,7 @@ function avgRating(ratings: number[]): number {
     return ratings.reduce((a, b) => a + b, 0) / ratings.length;
 }
 
-const aggregateMatchStats = (gameweeks: any[]): SofaScoreStats => {
+export const aggregateMatchStats = (gameweeks: any[]): SofaScoreStats => {
     const res: SofaScoreStats = {
         totalPass: 0, accuratePass: 0, totalLongBalls: 0, accurateLongBalls: 0,
         accurateOwnHalfPasses: 0, totalOwnHalfPasses: 0,

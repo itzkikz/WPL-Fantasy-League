@@ -79,7 +79,7 @@ const compileTeamTotals = (details: any) => {
   ];
 
   starters.forEach((p: any) => {
-    const s = p.stats;
+    const s = p.playerStats?.current_week;
     if (s) {
       totals.minutes += s.minutesPlayed || 0;
       totals.goals += s.goals || 0;

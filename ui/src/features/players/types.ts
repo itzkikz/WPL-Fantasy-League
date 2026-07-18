@@ -25,6 +25,7 @@ export interface Player {
     shirtNumber?: number;
     photo?: string;
     auctionPrice?: number;
+    playerStats?: PlayerStats;
 }
 
 export interface SofaScoreStats {
