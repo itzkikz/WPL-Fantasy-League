@@ -80,7 +80,7 @@ export default function PlayerSpotlight({
 
       <div className="mb-3">
         <p className="text-text-secondary text-[8px] sm:text-[9px] mb-1">Form (Last 5 GWs)</p>
-        <div className="flex items-end justify-between gap-1 sm:gap-1.5 h-7 sm:h-9">
+        <div className="flex items-end justify-start gap-1 sm:gap-1.5 h-7 sm:h-9">
           {formBars.map((h, i) => (
             <div key={i} className="h-full flex flex-col justify-end items-center">
               <span className="text-[7px] sm:text-[8px] font-mono text-text-secondary mb-0.5">{formHistory[i] ?? ""}</span>

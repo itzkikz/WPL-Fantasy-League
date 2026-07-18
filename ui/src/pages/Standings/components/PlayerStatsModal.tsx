@@ -72,8 +72,15 @@ const PlayerStatsModal = ({
         {!isLoading && stats && (
           <>
             {/* 1. Modal Top Section: Jersey & Title details */}
-            <div className="relative p-6 bg-card border-b border-border flex items-center justify-between shrink-0">
-              <div className="flex items-center gap-4 flex-1 min-w-0">
+            <div className="relative p-6 bg-card border-b border-border flex items-center justify-between shrink-0 overflow-hidden">
+              {stats.team_logo && (
+                <img
+                  src={stats.team_logo}
+                  alt=""
+                  className="absolute right-0 top-1/2 -translate-y-1/2 w-40 h-40 object-contain opacity-[0.08] pointer-events-none select-none"
+                />
+              )}
+              <div className="flex items-center gap-4 flex-1 min-w-0 relative z-10">
                 {/* Player Photo */}
                 <div
                   className="relative w-16 h-16 rounded-2xl overflow-hidden border-2 shadow-lg shrink-0 bg-background flex items-center justify-center"

@@ -134,6 +134,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
         team_short_name: teamDoc?.nameCode || teamDoc?.shortName || "UNK",
         team_color: teamDoc?.teamColors?.primary || "#003399",
         team_text_color: teamDoc?.teamColors?.text || "#ffffff",
+        team_logo: teamDoc?.logo || "",
         shirtNumber: playerDoc?.shirtNumber || (playerDoc?.jerseyNumber ? Number(playerDoc.jerseyNumber) : 0),
         photo: playerDoc?.photo || "",
         auctionPrice: playerDoc?.auctionPrice
@@ -427,15 +428,17 @@ export const myFixtures = async (req: Request, res: Response, next: NextFunction
         homeTeam: {
           id: f.homeTeam?.id,
           name: home?.name || "Unknown",
-          shortName: home?.shortName || "UNK",
+          shortName: home?.nameCode || "UNK",
           photo: home?.photo || "",
+          logo: home?.logo || "",
           color: home?.teamColors?.primary || "#003399",
         },
         awayTeam: {
           id: f.awayTeam?.id,
           name: away?.name || "Unknown",
-          shortName: away?.shortName || "UNK",
+          shortName: away?.nameCode || "UNK",
           photo: away?.photo || "",
+          logo: away?.logo || "",
           color: away?.teamColors?.primary || "#003399",
         },
         homeScore: f.homeScore,
@@ -550,8 +553,10 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     let upcomingMatch = {
       homeTeam: "Man City",
       homeTeamShort: "MCI",
+      homeTeamLogo: "",
       awayTeam: "Arsenal",
       awayTeamShort: "ARS",
+      awayTeamLogo: "",
       kickoffTime: "Saturday, 8:30 PM",
       gameweek: currentGw,
     };
@@ -562,8 +567,10 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       upcomingMatch = {
         homeTeam: homeTeamDoc?.name || "Home Team",
         homeTeamShort: homeTeamDoc?.nameCode || "HOM",
+        homeTeamLogo: homeTeamDoc?.logo || "",
         awayTeam: awayTeamDoc?.name || "Away Team",
         awayTeamShort: awayTeamDoc?.nameCode || "AWA",
+        awayTeamLogo: awayTeamDoc?.logo || "",
         kickoffTime: dayjs(nextFixture.startTimestamp * 1000).format("dddd, h:mm A"),
         gameweek: nextFixture.roundInfo?.round || currentGw,
       };
@@ -626,8 +633,22 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     // 8. Top Players (This Gameweek) & Best Performers (This Season)
     const allPlayersWithStats = await PlayerStatsModel.find({}).lean();
 
+    // Build playerId → fantasy team name mapping & collect all owned player IDs
+    const allFantasyTeams = await FantasyTeam.find({}).lean();
+    const playerToFantasyTeam = new Map<number, string>();
+    const allOwnedPlayerIds = new Set<number>();
+    for (const ft of allFantasyTeams) {
+      for (const pick of ft.currentSquad?.picks || []) {
+        allOwnedPlayerIds.add(pick.playerId);
+        if (!playerToFantasyTeam.has(pick.playerId)) {
+          playerToFantasyTeam.set(pick.playerId, ft.name);
+        }
+      }
+    }
+    const ownedPlayersWithStats = allPlayersWithStats.filter((s: any) => allOwnedPlayerIds.has(s.playerId));
+
     // Calculate Top Players for the current gameweek
-    const sortedGwStats = [...allPlayersWithStats]
+    const sortedGwStats = [...ownedPlayersWithStats]
       .map(stat => {
         const gw = stat.gameweeks?.find((g: any) => g.id === currentGw);
         return {
@@ -651,7 +672,8 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       return {
         rank: index + 1,
         name: playerDoc?.webName || playerDoc?.name || "Unknown",
-        team: teamDoc?.name || "Unknown",
+        team: playerToFantasyTeam.get(stat.playerId) || teamDoc?.nameCode || "UNK",
+        teamLogo: teamDoc?.logo || "",
         position: resolvePosition(playerDoc?.position || ""),
         points: stat.gwPoints,
         photo: playerDoc?.photo || (playerDoc?.id ? `https://img.sofascore.com/api/v1/player/${playerDoc.id}/image` : ""),
@@ -660,7 +682,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     });
 
     // Calculate Best Performers for the whole season
-    const sortedStats = [...allPlayersWithStats].sort((a, b) => (b.totalPoints || 0) - (a.totalPoints || 0)).slice(0, 5);
+    const sortedStats = [...ownedPlayersWithStats].sort((a, b) => (b.totalPoints || 0) - (a.totalPoints || 0)).slice(0, 5);
     const sortedPlayerIds = sortedStats.map(s => s.playerId);
     const playersDocs = (await PlayerModel.find({ id: { $in: sortedPlayerIds } }).lean()) as any[];
     const pDocsMap = new Map(playersDocs.map(p => [p.id, p]));
@@ -674,7 +696,8 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       return {
         rank: index + 1,
         name: playerDoc?.webName || playerDoc?.name || "Unknown",
-        team: teamDoc?.name || "Unknown",
+        team: playerToFantasyTeam.get(stat.playerId) || teamDoc?.nameCode || "UNK",
+        teamLogo: teamDoc?.logo || "",
         position: resolvePosition(playerDoc?.position || ""),
         points: stat.totalPoints || 0,
         photo: playerDoc?.photo || (playerDoc?.id ? `https://img.sofascore.com/api/v1/player/${playerDoc.id}/image` : ""),
@@ -697,18 +720,21 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
 
       const gwStats = currentGwStats?.stats || {};
 
+      const fantasyTeamNameForSpotlight = playerToFantasyTeam.get(topStat.playerId) || "";
+
       playerSpotlight = {
         player: {
           id: topPlayerDoc?.id || 0,
           name: topPlayerDoc?.webName || topPlayerDoc?.name || "Unknown",
-          team: topTeamDoc?.nameCode || "UNK",
+          team: fantasyTeamNameForSpotlight || topTeamDoc?.nameCode || "UNK",
           teamColor: topTeamDoc?.teamColors?.primary || "#6CABDD",
+          teamLogo: topTeamDoc?.logo || "",
           point: currentGwStats?.points || 0,
           position: resolvePosition(topPlayerDoc?.position || ""),
           isCaptain: false,
           isViceCaptain: false,
           isPowerPlayer: false,
-          fullTeamName: topTeamDoc?.name || "Unknown",
+          fullTeamName: fantasyTeamNameForSpotlight || topTeamDoc?.name || "Unknown",
           photo: topPlayerDoc?.photo || "",
         },
         gameweekPoints: currentGwStats?.points || 0,
@@ -832,7 +858,8 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       const statDoc = squadPlayerStatsMap.get(p.id);
       return {
         name: p.webName || p.name || "",
-        team: teamDoc?.nameCode || "UNK",
+        team: fantasyTeam.name || teamDoc?.nameCode || "UNK",
+        teamLogo: teamDoc?.logo || "",
         points: statDoc?.totalPoints || 0,
         price: (p.price?.nowCost || 0) / 10,
         position: resolvePosition(p.position || ""),

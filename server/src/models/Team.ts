@@ -20,6 +20,7 @@ export interface ITeam extends Document {
         secondary: string;
         text: string;
     };
+    logo?: string;
     league?: mongoose.Types.ObjectId;
 }
 
@@ -43,6 +44,7 @@ const TeamSchema: Schema = new Schema({
         secondary: { type: String },
         text: { type: String }
     },
+    logo: { type: String },
     league: { type: Schema.Types.ObjectId, ref: 'League' }
 }, { timestamps: true });
 

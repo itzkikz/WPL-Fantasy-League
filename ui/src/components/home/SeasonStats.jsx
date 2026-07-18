@@ -1,10 +1,7 @@
 import React from "react";
 import { Target, Activity, ShieldCheck, Square } from "lucide-react";
-import { Card, CardHeader, LinkText, IconCircle } from "./Primitives";
+import { Card, CardHeader, IconCircle, LinkText } from "./Primitives";
 
-/**
- * SeasonStats - vertical list of labeled stats with icon + value.
- */
 export default function SeasonStats({
   title = "Season Stats",
   stats = [
@@ -16,27 +13,26 @@ export default function SeasonStats({
   onViewAll,
 }) {
   return (
-    <Card>
-      <CardHeader title={title} />
-      <ul className="flex flex-col gap-2.5 mb-3">
+    <Card padded={false} className="h-full p-1.5 sm:p-4">
+      <CardHeader title={title} className="!mb-2" />
+      <div className="grid grid-cols-4 divide-x divide-white/[0.08] h-24 sm:h-auto items-center">
         {stats.map(({ icon: Icon, label, value }) => (
-          <li key={label} className="flex items-center gap-3">
-            <IconCircle bg="bg-surface" size={32}>
-              <Icon className="w-4 h-4 text-text-secondary" />
+          <div key={label} className="flex flex-col items-center text-center gap-1.5 px-0.5 h-full">
+            <IconCircle bg="bg-surface" className="w-7 h-7 sm:w-8 sm:h-8" size={null}>
+              <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-text-secondary" />
             </IconCircle>
-            <div className="flex-1">
-              <p className="text-text-secondary text-xs">{label}</p>
-              <p className="text-text-primary font-semibold text-xs">{value}</p>
+            <div className="flex flex-col items-center justify-between flex-1">
+              <p className="text-text-secondary text-[8px] sm:text-[10px] leading-tight tracking-tight max-w-[72px]">{label}</p>
+              <p className="text-text-primary font-bold text-[10px] sm:text-xs mt-0.5">{value}</p>
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
-      <LinkText>
-        <button onClick={onViewAll} className="hover:underline active:opacity-70">
-          View All
-        </button>
-      </LinkText>
+      </div>
+      <div className="pt-2 border-t border-white/[0.04]">
+        <LinkText>
+          <button onClick={onViewAll} className="hover:underline active:opacity-70">View All</button>
+        </LinkText>
+      </div>
     </Card>
   );
 }
-

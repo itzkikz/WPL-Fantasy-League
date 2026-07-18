@@ -35,7 +35,7 @@ export const getFixtures = async (req: Request, res: Response) => {
 
         const [fixtures, teams, details, gameweeks] = await Promise.all([
             Fixture.find().sort({ startTimestamp: 1 }).lean(),
-            Team.find({}, 'id name shortName').lean(),
+            Team.find({}, 'id name shortName logo').lean(),
             MatchDetails.find({}, 'fixtureId addedtofantasy').lean(),
             Gameweek.find({}, 'fixtures').lean()
         ]);
@@ -53,8 +53,10 @@ export const getFixtures = async (req: Request, res: Response) => {
                 ...f,
                 homeTeamName: homeTeam?.name ?? null,
                 homeTeamShortName: homeTeam?.shortName ?? null,
+                homeTeamLogo: homeTeam?.logo ?? null,
                 awayTeamName: awayTeam?.name ?? null,
                 awayTeamShortName: awayTeam?.shortName ?? null,
+                awayTeamLogo: awayTeam?.logo ?? null,
                 hasDetails: !!detail,
                 addedtofantasy: detail?.addedtofantasy ?? false,
                 hasGameweek: assignedFixtureIds.has(f.fixtureId)
@@ -372,7 +374,7 @@ export const getMatchIncidentsAndStats = async (req: Request, res: Response) => 
         const [fixture, matchDetails, teams] = await Promise.all([
             Fixture.findOne({ fixtureId }).lean(),
             MatchDetails.findOne({ fixtureId }).lean(),
-            Team.find({}, 'id name shortName').lean(),
+            Team.find({}, 'id name shortName logo').lean(),
         ]);
 
         if (!fixture) {
@@ -387,8 +389,10 @@ export const getMatchIncidentsAndStats = async (req: Request, res: Response) => 
             ...fixture,
             homeTeamName: homeTeam?.name ?? null,
             homeTeamShortName: homeTeam?.shortName ?? null,
+            homeTeamLogo: homeTeam?.logo ?? null,
             awayTeamName: awayTeam?.name ?? null,
             awayTeamShortName: awayTeam?.shortName ?? null,
+            awayTeamLogo: awayTeam?.logo ?? null,
         };
 
         const incidents = matchDetails?.incidents || [];

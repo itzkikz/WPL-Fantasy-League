@@ -13,7 +13,8 @@
     "seed:players": "ts-node src/scripts/seedPlayers.ts",
     "seed:rounds": "ts-node src/scripts/seedRounds.ts",
     "seed:fixtures": "ts-node src/scripts/seedFixtures.ts",
-    "seed:player-images": "ts-node src/scripts/uploadPlayerImages.ts"
+    "seed:player-images": "ts-node src/scripts/uploadPlayerImages.ts",
+    "seed:team-logos": "ts-node src/scripts/uploadTeamLogos.ts"
   },
   "author": "",
   "license": "ISC",

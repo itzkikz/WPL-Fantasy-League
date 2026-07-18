@@ -46,7 +46,7 @@ export default function LeagueStatistics({
   return (
     <Card padded={false} className="!h-fit p-1.5 sm:p-4">
       <CardHeader title={title} className="!mb-2" />
-      <div className="grid grid-cols-4 divide-x divide-white/[0.08]">
+      <div className="grid grid-cols-4 divide-x divide-white/[0.08] items-center">
         {displayStats.map(({ icon: Icon, label, value, iconColor, circleClass }) => (
           <div key={label} className="flex flex-col items-center text-center gap-1.5 px-0.5 h-full">
             <IconCircle

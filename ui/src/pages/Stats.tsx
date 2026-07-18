@@ -183,10 +183,14 @@ export default function Stats() {
           className="mx-4 mt-3 bg-gradient-card border border-border rounded-2xl p-4 shadow-card relative overflow-hidden shrink-0 flex items-center justify-between min-h-[96px]"
           style={{ isolation: 'isolate' }}
         >
-          {/* Backlight halo logo mockup */}
-          <div className="absolute right-0 top-0 bottom-0 w-32 opacity-10 flex items-center justify-center pointer-events-none select-none font-black text-white uppercase text-4xl">
-            {topPerformer.team_short_name || "WPL"}
-          </div>
+          {/* Backlight halo logo */}
+          {topPerformer.team_logo && (
+            <img
+              src={topPerformer.team_logo}
+              alt=""
+              className="absolute right-0 top-1/2 -translate-y-1/2 w-40 h-40 object-contain opacity-[0.08] pointer-events-none select-none"
+            />
+          )}
 
           <div className="flex items-center gap-3.5 z-10">
             {/* Crown Icon */}
@@ -293,11 +297,17 @@ export default function Stats() {
                     <p className="text-[13px] font-bold text-white leading-tight">
                       {r.player_name}
                     </p>
-                    <div className="text-[10px] text-[#a594c9]/70 font-semibold mt-0.5 flex items-center gap-1.5">
+                    <div className="text-[10px] text-[#a594c9]/70 font-semibold mt-0.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
                       <span className="w-2 h-2 rounded-full border border-white/10 shrink-0" style={{ backgroundColor: r.team_color || "#ccc" }} />
                       <span className="leading-none shrink-0">{r.team_short_name || "UNK"}</span>
                       <span className="text-[#a594c9]/30 text-[8px] leading-none shrink-0">•</span>
                       <span className="uppercase text-[9px] tracking-wider text-violet-400 font-bold leading-none shrink-0">{r.position}</span>
+                      {r.fantasy_team_name && (
+                        <>
+                          <span className="text-[#a594c9]/30 text-[8px] leading-none shrink-0">•</span>
+                          <span className={`text-[9px] tracking-wide font-bold leading-none ${r.fantasy_team_name === "Free Agent" ? "text-gray-500" : "text-amber-400/80"}`}>{r.fantasy_team_name}</span>
+                        </>
+                      )}
                     </div>
                   </div>
 
