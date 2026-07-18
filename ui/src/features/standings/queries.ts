@@ -17,7 +17,7 @@ export const standingsQueries = {
     queryOptions({
       queryKey: [QUERY_KEYS.STANDINGS, teamId, gameWeek],
       queryFn: () => standingsApi.getByTeamId(teamId, gameWeek),
-      enabled: !!teamId,
+      enabled: !!teamId && gameWeek > 0,
     }),
 
   fixtures: () =>
