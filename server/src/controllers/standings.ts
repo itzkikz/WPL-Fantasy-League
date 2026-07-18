@@ -246,6 +246,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
 
         // 2. Identify the source of picks (History or Current Squad)
         let picks: any[] = [];
+        let preAutoSubPicks: any[] | null = null;
 
         if (targetGw === currentGw && team.currentSquad && team.currentSquad.picks && team.currentSquad.picks.length > 0) {
             picks = team.currentSquad.picks;
@@ -253,6 +254,9 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
             const historyEntry = team.history.find(h => h.gameweek === targetGw);
             if (historyEntry) {
                 picks = historyEntry.picks;
+                if (historyEntry.preAutoSubPicks && historyEntry.preAutoSubPicks.length > 0) {
+                    preAutoSubPicks = historyEntry.preAutoSubPicks;
+                }
             }
         }
 
@@ -297,6 +301,14 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
         }
 
         // 4. Transform to TeamDetails format
+        // Build pre-auto-sub lookup for substitution indicators
+        const preAutoSubMap = new Map<number, any>();
+        if (preAutoSubPicks) {
+            for (const p of preAutoSubPicks) {
+                preAutoSubMap.set(p.playerId, p);
+            }
+        }
+
         const detailsData = picks.map((pick, index) => {
             const player = playerMap.get(pick.playerId);
             if (!player) return null; // Should not happen if data is synced
@@ -331,6 +343,26 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 gwPoints *= 2;
             }
 
+            // Determine auto-sub in/out by comparing preAutoSubPicks with picks
+            let subIn = false;
+            let subOut = false;
+            if (preAutoSubMap.size > 0) {
+                const prePick = preAutoSubMap.get(pick.playerId);
+                if (prePick) {
+                    // Player existed in pre-auto-sub lineup
+                    if (!prePick.isStarting && pick.isStarting) {
+                        subIn = true; // Was on bench, now starting → subbed IN
+                    } else if (prePick.isStarting && !pick.isStarting) {
+                        subOut = true; // Was starting, now on bench → subbed OUT
+                    }
+                } else {
+                    // Player not in preAutoSubPicks at all → subbed IN from free agent or new pick
+                    if (pick.isStarting) {
+                        subIn = true;
+                    }
+                }
+            }
+
             return {
                 gw: targetGw,
                 team_name: team.name, // The user's team name
@@ -349,7 +381,9 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 photo: player.photo || "",
                 isStarting: pick.isStarting,
                 subNumber: pick.subNumber || 0,
-                auctionPrice: player.auctionPrice
+                auctionPrice: player.auctionPrice,
+                subIn,
+                subOut
             } as unknown as TeamDetails;
         }).filter((d): d is TeamDetails => d !== null);
 

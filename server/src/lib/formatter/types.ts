@@ -18,6 +18,8 @@ export interface Player {
     stats?: any;
     auctionPrice?: number;
     playerStats?: any;
+    subIn?: boolean;
+    subOut?: boolean;
 }
 export interface Formation {
     GK: Player[];

@@ -39,6 +39,24 @@ const PitchPlayerCard = ({
         </div>
       )}
 
+      {/* Auto-Sub IN Badge */}
+      {player?.subIn && (
+        <div className="absolute bottom-[24px] left-[-4px] z-20 flex items-center justify-center w-5 h-5 rounded-full border border-emerald-400 text-[9px] font-black text-emerald-300 shadow-lg bg-emerald-900/90">
+          <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+          </svg>
+        </div>
+      )}
+
+      {/* Auto-Sub OUT Badge */}
+      {player?.subOut && (
+        <div className="absolute bottom-[24px] right-[-4px] z-20 flex items-center justify-center w-5 h-5 rounded-full border border-rose-400 text-[9px] font-black text-rose-300 shadow-lg bg-rose-900/90">
+          <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      )}
+
       {/* Star badge (if any) */}
       {player?.isPowerPlayer && (Number(player?.point) || 0) > 0 && (
         <div className="absolute bottom-[28px] right-[-3px] z-20 flex items-center justify-center w-5 h-5 rounded-full bg-[#8b5cf6] border border-white text-white shadow-lg animate-bounce duration-1000">

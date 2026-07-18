@@ -43,7 +43,9 @@ export function convertToFormation(playersData: TeamDetails[]): FormationResult 
       shirtNumber: playerData.shirtNumber,
       photo: playerData.photo,
       auctionPrice: playerData.auctionPrice,
-      playerStats: playerData.playerStats
+      playerStats: playerData.playerStats,
+      subIn: playerData.subIn,
+      subOut: playerData.subOut
     };
 
     // Add captain/vice captain flags

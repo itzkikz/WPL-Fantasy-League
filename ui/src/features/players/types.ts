@@ -26,6 +26,8 @@ export interface Player {
     photo?: string;
     auctionPrice?: number;
     playerStats?: PlayerStats;
+    subIn?: boolean;
+    subOut?: boolean;
 }
 
 export interface SofaScoreStats {

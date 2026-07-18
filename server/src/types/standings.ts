@@ -32,4 +32,6 @@ export interface TeamDetails {
     stats?: any;
     auctionPrice?: number;
     playerStats?: any;
+    subIn?: boolean;
+    subOut?: boolean;
 }
