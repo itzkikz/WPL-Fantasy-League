@@ -391,6 +391,7 @@ const TeamDetailsPage = () => {
                                 <span className="truncate">{player.name}</span>
                                 {player.isCaptain && <span className="bg-secondary text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono shrink-0">C</span>}
                                 {player.isViceCaptain && <span className="bg-text-muted text-black text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono shrink-0">V</span>}
+                                {player.subIn && <span className="bg-emerald-900/90 border border-emerald-400 text-emerald-300 text-[8px] font-black px-1.5 py-0.5 rounded-full shrink-0">IN</span>}
                               </div>
                               <span className="text-[10px] font-semibold text-text-muted/70 uppercase tracking-wider">
                                 {player.position} • {player.team}
@@ -438,7 +439,10 @@ const TeamDetailsPage = () => {
 
                             {/* Name & Metadata */}
                             <div className="flex flex-col justify-center gap-0.5 min-w-0">
-                              <span className="truncate">{player.name}</span>
+                              <div className="flex items-center gap-1.5 flex-wrap">
+                                <span className="truncate">{player.name}</span>
+                                {player.subOut && <span className="bg-rose-900/90 border border-rose-400 text-rose-300 text-[8px] font-black px-1.5 py-0.5 rounded-full shrink-0">OUT</span>}
+                              </div>
                               <span className="text-[10px] font-semibold text-text-muted/50 uppercase tracking-wider">
                                 {player.position} • {player.team}
                               </span>
