@@ -15,24 +15,7 @@ export const Route = createLazyFileRoute("/h2h")({
   ),
 });
 
-const MOCK_MANAGERS: Record<string, string> = {
-  "The Invincibles": "Rahul Sharma",
-  "Kiran FC": "Kiran Nandakumar",
-  "Blue Devils": "Amit Verma",
-  "Goal Diggers": "Sneha Iyer",
-  "Pitch Perfect": "Vikram Mehta",
-  "Net Busters": "Rohit Singh",
-  "Kings XI": "Neha Kapoor",
-  "Vamos FC": "Arjun Patel",
-  "Red Warriors": "Manish Reddy",
-  "Thunderbolts": "Pooja Nair"
-};
 
-const getManagerName = (teamName: string, index: number) => {
-  if (MOCK_MANAGERS[teamName]) return MOCK_MANAGERS[teamName];
-  const defaultNames = ["Rahul Sharma", "Kiran Nandakumar", "Amit Verma", "Sneha Iyer", "Vikram Mehta", "Rohit Singh", "Neha Kapoor", "Arjun Patel", "Manish Reddy", "Pooja Nair"];
-  return defaultNames[index % defaultNames.length];
-};
 
 const getTeamIcon = (teamName: string, index: number) => {
   const icons = [
@@ -231,8 +214,8 @@ function H2HPage() {
   const [selectedGw, setSelectedGw] = useState<number | null>(null);
   const [expandedFixtureId, setExpandedFixtureId] = useState<string | null>(null);
 
-  const handleFixtureClick = (fixtureId: string, isFinished: boolean) => {
-    if (!isFinished) return;
+  const handleFixtureClick = (fixtureId: string, isFinished: boolean, isLive: boolean) => {
+    if (!isFinished && !isLive) return;
     setExpandedFixtureId(prev => prev === fixtureId ? null : fixtureId);
   };
 
@@ -416,7 +399,7 @@ function H2HPage() {
                   standingsData.standings.map((team: H2HStanding, idx: number) => {
                     const isMe = team.teamId === managerDetails?.managerTeam?._id || team.teamName === managerDetails?.team;
                     const crest = getTeamIcon(team.teamName, idx);
-                    const manager = getManagerName(team.teamName, idx);
+                    const manager = team.managerName || 'Unknown';
                     const diff = team.gf - team.ga;
 
                     return (
@@ -554,14 +537,15 @@ function H2HPage() {
                         const isAwayMe = fixture.awayTeam?._id === managerDetails?.managerTeam?._id;
                         const isRelevant = isHomeMe || isAwayMe;
                         const isFinished = fixture.status === 'completed';
+                        const isLive = fixture.status === 'live';
                         const isExpanded = expandedFixtureId === fixture._id;
 
                         return (
                           <div
                             key={fixture._id}
-                            onClick={() => handleFixtureClick(fixture._id, isFinished)}
+                            onClick={() => handleFixtureClick(fixture._id, isFinished, isLive)}
                             className={`rounded-2xl transition-all duration-200 p-4 ${
-                              isFinished ? 'cursor-pointer font-medium' : 'cursor-default'
+                              isFinished || isLive ? 'cursor-pointer font-medium' : 'cursor-default'
                             } ${
                               isExpanded
                                 ? 'bg-white/[0.06] border border-violet-500/30 shadow-[0_0_16px_rgba(139,92,246,0.2)]'
@@ -582,21 +566,21 @@ function H2HPage() {
 
                               {/* Score/Center Area */}
                               <div className="px-4 flex flex-col items-center justify-center shrink-0 min-w-[95px]">
-                                {isFinished ? (
+                                {isFinished || isLive ? (
                                   <div className="flex items-center gap-2 bg-background border border-border rounded-xl px-2.5 py-0.5 shadow-inner">
-                                    <span className={`text-sm font-black font-mono ${fixture.winner === fixture.homeTeam?._id ? 'text-emerald-400' : 'text-white'}`}>
+                                    <span className={`text-sm font-black font-mono ${isFinished && fixture.winner === fixture.homeTeam?._id ? 'text-emerald-400' : 'text-white'}`}>
                                       {fixture.homeScore ?? 0}
                                     </span>
                                     <span className="text-[10px] font-black text-text-muted/60 font-mono">―</span>
-                                    <span className={`text-sm font-black font-mono ${fixture.winner === fixture.awayTeam?._id ? 'text-emerald-400' : 'text-white'}`}>
+                                    <span className={`text-sm font-black font-mono ${isFinished && fixture.winner === fixture.awayTeam?._id ? 'text-emerald-400' : 'text-white'}`}>
                                       {fixture.awayScore ?? 0}
                                     </span>
                                   </div>
                                 ) : (
                                   <span className="text-[9px] font-black text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2.5 py-0.5 rounded-md font-mono">VS</span>
                                 )}
-                                <span className="text-[8px] font-bold mt-1 text-gray-500 uppercase tracking-wider font-mono">
-                                  {isFinished ? "FT" : `GW ${fixture.gameweek}`}
+                                <span className={`text-[8px] font-bold mt-1 uppercase tracking-wider font-mono ${isLive ? 'text-emerald-400 animate-pulse' : 'text-gray-500'}`}>
+                                  {isLive ? "LIVE" : isFinished ? "FT" : `GW ${fixture.gameweek}`}
                                 </span>
                               </div>
 
@@ -620,7 +604,7 @@ function H2HPage() {
                               ) : (
                                 <div />
                               )}
-                              {isFinished && (
+                              {(isFinished || isLive) && (
                                 <span className="text-[8px] font-bold text-violet-400/60 uppercase tracking-wider hover:text-violet-300">
                                   {isExpanded ? 'Click to collapse' : 'Click to view details'}
                                 </span>

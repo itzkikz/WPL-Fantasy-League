@@ -38,6 +38,7 @@ export default function Stats() {
   const [showOverlay, setShowOverlay] = useState(false);
   const [showFilterOverlay, setShowFilterOverlay] = useState(false);
   const [clubSearch, setClubSearch] = useState("");
+  const [selectedPlayerStats, setSelectedPlayerStats] = useState<PlayerStats | null>(null);
 
   // Fetch filters from API
   const { data: filterData } = usePlayerFilters();
@@ -72,9 +73,11 @@ export default function Stats() {
         current_week: eachPlayer.current_week,
       } as unknown as Player;
       setPlayer(mappedPlayer);
+      setSelectedPlayerStats(eachPlayer);
       setShowOverlay(true);
     } else {
       setShowOverlay(false);
+      setSelectedPlayerStats(null);
     }
   };
 
@@ -353,6 +356,7 @@ export default function Stats() {
         isOpen={showOverlay}
         onClose={() => handlePlayerOverlay(null)}
         player={player}
+        playerStats={selectedPlayerStats}
       />
 
       {/* 6. Filter Overlay Drawer */}

@@ -12,7 +12,7 @@ const SplashScreen = () => {
     const timer = setTimeout(() => {
       setShowSplash(false);
       navigate({
-        to: "/standings",
+        to: "/home",
         viewTransition: {
           types: ["forward"], // custom type name
         },

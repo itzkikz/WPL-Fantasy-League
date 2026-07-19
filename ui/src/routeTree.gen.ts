@@ -14,10 +14,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as MyTeamRouteImport } from './routes/my-team'
+import { Route as ManagerOverviewRouteImport } from './routes/manager-overview'
 import { Route as MaintenanceRouteImport } from './routes/maintenance'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as H2hRouteImport } from './routes/h2h'
+import { Route as GameweekBreakdownRouteImport } from './routes/gameweek-breakdown'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StatsIndexRouteImport } from './routes/stats/index'
@@ -29,7 +31,6 @@ import { Route as AdminLeaguesRouteImport } from './routes/admin/leagues'
 import { Route as AdminGameweeksRouteImport } from './routes/admin/gameweeks'
 import { Route as AdminFixturesRouteImport } from './routes/admin/fixtures'
 import { Route as AdminFantasyTeamsRouteImport } from './routes/admin/fantasy-teams'
-import { Route as ManagerPickTeamIndexRouteImport } from './routes/manager/pick-team/index'
 import { Route as AdminFantasyTeamsIndexRouteImport } from './routes/admin/fantasy-teams/index'
 import { Route as AdminFixturesFixtureIdRouteImport } from './routes/admin/fixtures.$fixtureId'
 import { Route as AdminFantasyTeamsCreateRouteImport } from './routes/admin/fantasy-teams/create'
@@ -52,6 +53,13 @@ const MyTeamRoute = MyTeamRouteImport.update({
   path: '/my-team',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/my-team.lazy').then((d) => d.Route))
+const ManagerOverviewRoute = ManagerOverviewRouteImport.update({
+  id: '/manager-overview',
+  path: '/manager-overview',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/manager-overview.lazy').then((d) => d.Route),
+)
 const MaintenanceRoute = MaintenanceRouteImport.update({
   id: '/maintenance',
   path: '/maintenance',
@@ -72,6 +80,13 @@ const H2hRoute = H2hRouteImport.update({
   path: '/h2h',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/h2h.lazy').then((d) => d.Route))
+const GameweekBreakdownRoute = GameweekBreakdownRouteImport.update({
+  id: '/gameweek-breakdown',
+  path: '/gameweek-breakdown',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/gameweek-breakdown.lazy').then((d) => d.Route),
+)
 const R404Route = R404RouteImport.update({
   id: '/404',
   path: '/404',
@@ -142,11 +157,6 @@ const AdminFantasyTeamsRoute = AdminFantasyTeamsRouteImport.update({
   path: '/admin/fantasy-teams',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ManagerPickTeamIndexRoute = ManagerPickTeamIndexRouteImport.update({
-  id: '/manager/pick-team/',
-  path: '/manager/pick-team/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminFantasyTeamsIndexRoute = AdminFantasyTeamsIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -182,10 +192,12 @@ const AdminFantasyTeamsEditTeamIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/gameweek-breakdown': typeof GameweekBreakdownRoute
   '/h2h': typeof H2hRoute
   '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/maintenance': typeof MaintenanceRoute
+  '/manager-overview': typeof ManagerOverviewRoute
   '/my-team': typeof MyTeamRoute
   '/notifications': typeof NotificationsRoute
   '/settings': typeof SettingsRoute
@@ -202,16 +214,17 @@ export interface FileRoutesByFullPath {
   '/admin/fantasy-teams/create': typeof AdminFantasyTeamsCreateRoute
   '/admin/fixtures/$fixtureId': typeof AdminFixturesFixtureIdRoute
   '/admin/fantasy-teams/': typeof AdminFantasyTeamsIndexRoute
-  '/manager/pick-team': typeof ManagerPickTeamIndexRoute
   '/admin/fantasy-teams/edit/$teamId': typeof AdminFantasyTeamsEditTeamIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/gameweek-breakdown': typeof GameweekBreakdownRoute
   '/h2h': typeof H2hRoute
   '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/maintenance': typeof MaintenanceRoute
+  '/manager-overview': typeof ManagerOverviewRoute
   '/my-team': typeof MyTeamRoute
   '/notifications': typeof NotificationsRoute
   '/settings': typeof SettingsRoute
@@ -227,17 +240,18 @@ export interface FileRoutesByTo {
   '/admin/fantasy-teams/create': typeof AdminFantasyTeamsCreateRoute
   '/admin/fixtures/$fixtureId': typeof AdminFixturesFixtureIdRoute
   '/admin/fantasy-teams': typeof AdminFantasyTeamsIndexRoute
-  '/manager/pick-team': typeof ManagerPickTeamIndexRoute
   '/admin/fantasy-teams/edit/$teamId': typeof AdminFantasyTeamsEditTeamIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/gameweek-breakdown': typeof GameweekBreakdownRoute
   '/h2h': typeof H2hRoute
   '/home': typeof HomeRoute
   '/login': typeof LoginRoute
   '/maintenance': typeof MaintenanceRoute
+  '/manager-overview': typeof ManagerOverviewRoute
   '/my-team': typeof MyTeamRoute
   '/notifications': typeof NotificationsRoute
   '/settings': typeof SettingsRoute
@@ -254,7 +268,6 @@ export interface FileRoutesById {
   '/admin/fantasy-teams/create': typeof AdminFantasyTeamsCreateRoute
   '/admin/fixtures/$fixtureId': typeof AdminFixturesFixtureIdRoute
   '/admin/fantasy-teams/': typeof AdminFantasyTeamsIndexRoute
-  '/manager/pick-team/': typeof ManagerPickTeamIndexRoute
   '/admin/fantasy-teams/edit/$teamId': typeof AdminFantasyTeamsEditTeamIdRoute
 }
 export interface FileRouteTypes {
@@ -262,10 +275,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/404'
+    | '/gameweek-breakdown'
     | '/h2h'
     | '/home'
     | '/login'
     | '/maintenance'
+    | '/manager-overview'
     | '/my-team'
     | '/notifications'
     | '/settings'
@@ -282,16 +297,17 @@ export interface FileRouteTypes {
     | '/admin/fantasy-teams/create'
     | '/admin/fixtures/$fixtureId'
     | '/admin/fantasy-teams/'
-    | '/manager/pick-team'
     | '/admin/fantasy-teams/edit/$teamId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/404'
+    | '/gameweek-breakdown'
     | '/h2h'
     | '/home'
     | '/login'
     | '/maintenance'
+    | '/manager-overview'
     | '/my-team'
     | '/notifications'
     | '/settings'
@@ -307,16 +323,17 @@ export interface FileRouteTypes {
     | '/admin/fantasy-teams/create'
     | '/admin/fixtures/$fixtureId'
     | '/admin/fantasy-teams'
-    | '/manager/pick-team'
     | '/admin/fantasy-teams/edit/$teamId'
   id:
     | '__root__'
     | '/'
     | '/404'
+    | '/gameweek-breakdown'
     | '/h2h'
     | '/home'
     | '/login'
     | '/maintenance'
+    | '/manager-overview'
     | '/my-team'
     | '/notifications'
     | '/settings'
@@ -333,17 +350,18 @@ export interface FileRouteTypes {
     | '/admin/fantasy-teams/create'
     | '/admin/fixtures/$fixtureId'
     | '/admin/fantasy-teams/'
-    | '/manager/pick-team/'
     | '/admin/fantasy-teams/edit/$teamId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
+  GameweekBreakdownRoute: typeof GameweekBreakdownRoute
   H2hRoute: typeof H2hRoute
   HomeRoute: typeof HomeRoute
   LoginRoute: typeof LoginRoute
   MaintenanceRoute: typeof MaintenanceRoute
+  ManagerOverviewRoute: typeof ManagerOverviewRoute
   MyTeamRoute: typeof MyTeamRoute
   NotificationsRoute: typeof NotificationsRoute
   SettingsRoute: typeof SettingsRoute
@@ -357,7 +375,6 @@ export interface RootRouteChildren {
   ManagerIndexRoute: typeof ManagerIndexRoute
   StandingsIndexRoute: typeof StandingsIndexRoute
   StatsIndexRoute: typeof StatsIndexRoute
-  ManagerPickTeamIndexRoute: typeof ManagerPickTeamIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -381,6 +398,13 @@ declare module '@tanstack/react-router' {
       path: '/my-team'
       fullPath: '/my-team'
       preLoaderRoute: typeof MyTeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manager-overview': {
+      id: '/manager-overview'
+      path: '/manager-overview'
+      fullPath: '/manager-overview'
+      preLoaderRoute: typeof ManagerOverviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/maintenance': {
@@ -409,6 +433,13 @@ declare module '@tanstack/react-router' {
       path: '/h2h'
       fullPath: '/h2h'
       preLoaderRoute: typeof H2hRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gameweek-breakdown': {
+      id: '/gameweek-breakdown'
+      path: '/gameweek-breakdown'
+      fullPath: '/gameweek-breakdown'
+      preLoaderRoute: typeof GameweekBreakdownRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/404': {
@@ -495,13 +526,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminFantasyTeamsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/manager/pick-team/': {
-      id: '/manager/pick-team/'
-      path: '/manager/pick-team'
-      fullPath: '/manager/pick-team'
-      preLoaderRoute: typeof ManagerPickTeamIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin/fantasy-teams/': {
       id: '/admin/fantasy-teams/'
       path: '/'
@@ -563,10 +587,12 @@ const AdminFixturesRouteWithChildren = AdminFixturesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
+  GameweekBreakdownRoute: GameweekBreakdownRoute,
   H2hRoute: H2hRoute,
   HomeRoute: HomeRoute,
   LoginRoute: LoginRoute,
   MaintenanceRoute: MaintenanceRoute,
+  ManagerOverviewRoute: ManagerOverviewRoute,
   MyTeamRoute: MyTeamRoute,
   NotificationsRoute: NotificationsRoute,
   SettingsRoute: SettingsRoute,
@@ -580,7 +606,6 @@ const rootRouteChildren: RootRouteChildren = {
   ManagerIndexRoute: ManagerIndexRoute,
   StandingsIndexRoute: StandingsIndexRoute,
   StatsIndexRoute: StatsIndexRoute,
-  ManagerPickTeamIndexRoute: ManagerPickTeamIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

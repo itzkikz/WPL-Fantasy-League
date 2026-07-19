@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Trash2, Save } from "lucide-react";
+import { useNavigate, useSearch } from "@tanstack/react-router";
+import { Trash2, Save, LayoutGrid, List, X, ChevronRight } from "lucide-react";
 import Toast from "../../components/common/Toast";
 import { Player } from "../../features/players/types";
 import { Formation } from "../../features/standings/types";
@@ -18,6 +19,7 @@ import {
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import { useHomePage } from "../../features/home/hooks";
 
 // Page subcomponents
 import MyTeamHeader from "./components/MyTeamHeader";
@@ -35,7 +37,10 @@ dayjs.extend(timezone);
 const MyTeamPage = () => {
   // React query hooks
   const { data: managerDetails, isLoading, isSuccess, isError, dataUpdatedAt } = useManagerDetails();
+  const { data: homePageData, isLoading: isHomeLoading } = useHomePage();
   const mutation = useSubstitution();
+  const navigate = useNavigate();
+  const search = useSearch({ from: "/my-team" });
 
   // Zustand store hooks
   const setIsSubstitution = useManageTeamStore((state) => state.setIsSubstitution);
@@ -47,7 +52,14 @@ const MyTeamPage = () => {
 
   // Local state for interactive screen updates
   const [selectedGW, setSelectedGW] = useState(15);
+  const [headerTab, setHeaderTab] = useState<"current" | "history">(search.tab === "history" ? "history" : "current");
   const [activeTab, setActiveTab] = useState<"pitch" | "list">("pitch");
+
+  useEffect(() => {
+    if (search.tab) {
+      setHeaderTab(search.tab);
+    }
+  }, [search.tab]);
   const [toastOpen, setToastOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<{ message: string; type: "SUCCESS" | "ERROR" }>({ message: "", type: "SUCCESS" });
 
@@ -66,6 +78,10 @@ const MyTeamPage = () => {
       setSelectedGW(managerDetails.gw || 15);
     }
   }, [dataUpdatedAt, isSuccess]);
+
+  const triggerHaptic = () => {
+    try { navigator.vibrate(10); } catch {}
+  };
 
   const showToast = (message: string, type: "SUCCESS" | "ERROR") => {
     setToastMessage({ message, type });
@@ -100,6 +116,7 @@ const MyTeamPage = () => {
         setIsSubstitution(false);
         setSubstituteMode(false);
         setSwapSourcePlayer(null);
+        triggerHaptic();
         showToast(`Substituted: ${result.swappedIn.name} In, ${result.swappedOut.name} Out.`, "SUCCESS");
       } else {
         // Swap failed or cancelled
@@ -128,6 +145,7 @@ const MyTeamPage = () => {
       setStartingXI(result.starting);
       setBench(result.bench);
       setRoles({ ...roles, captain: player.id });
+      triggerHaptic();
       showToast(`${player.name} is now your Captain.`, "SUCCESS");
     } else {
       showToast("Failed to set Captain.", "ERROR");
@@ -142,6 +160,7 @@ const MyTeamPage = () => {
       setStartingXI(result.starting);
       setBench(result.bench);
       setRoles({ ...roles, vice: player.id });
+      triggerHaptic();
       showToast(`${player.name} is now your Vice Captain.`, "SUCCESS");
     } else {
       showToast("Failed to set Vice Captain.", "ERROR");
@@ -248,49 +267,7 @@ const MyTeamPage = () => {
     return getPlayerDisplayPrice(player);
   };
 
-  const getPlayerLeftOffset = (position: string, index: number, total: number) => {
-    if (total === 1) return "50%";
 
-    if (position === "DEF") {
-      if (total === 2) return index === 0 ? "33%" : "67%";
-      if (total === 3) return index === 0 ? "20%" : index === 1 ? "50%" : "80%";
-      if (total === 4) {
-        const positions = ["15%", "38%", "62%", "85%"];
-        return positions[index];
-      }
-      if (total === 5) return index === 0 ? "10%" : index === 1 ? "30%" : index === 2 ? "50%" : index === 3 ? "70%" : "90%";
-    }
-
-    if (position === "MID") {
-      if (total === 2) return index === 0 ? "33%" : "67%";
-      if (total === 3) return index === 0 ? "20%" : index === 1 ? "50%" : "80%";
-      if (total === 4) {
-        const positions = ["18%", "39%", "61%", "82%"];
-        return positions[index];
-      }
-      if (total === 5) return index === 0 ? "10%" : index === 1 ? "30%" : index === 2 ? "50%" : index === 3 ? "70%" : "90%";
-    }
-
-    if (position === "FWD") {
-      if (total === 2) return index === 0 ? "35%" : "65%";
-      if (total === 3) return index === 0 ? "20%" : index === 1 ? "50%" : "80%";
-    }
-
-    // Fallbacks
-    if (total === 2) return index === 0 ? "30%" : "70%";
-    if (total === 3) return index === 0 ? "20%" : index === 1 ? "50%" : "80%";
-    return "50%";
-  };
-
-  const getPlayerTopOffset = (position: string) => {
-    const topMap: Record<string, string> = {
-      GK: "7%",
-      DEF: "28%",
-      MID: "52%",
-      FWD: "76%",
-    };
-    return topMap[position] || "50%";
-  };
 
   if (isLoading) {
     return (
@@ -318,6 +295,7 @@ const MyTeamPage = () => {
     );
   }
 
+
   const deadlineFormatted = managerDetails?.deadline
     ? dayjs(managerDetails.deadline).format("ddd, D MMM YYYY, h:mm A")
     : "No deadline";
@@ -326,7 +304,7 @@ const MyTeamPage = () => {
   const hasUnsavedChanges = substitutions?.length > 0 || Object.keys(roles || {}).length > 0;
 
   return (
-    <div className="flex flex-col lg:h-screen bg-background text-white font-outfit select-none">
+    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-white font-outfit select-none overflow-hidden">
 
       {/* 1. Header Card Panel */}
       <MyTeamHeader
@@ -336,77 +314,153 @@ const MyTeamPage = () => {
         balance={managerDetails?.balance}
         totalGWScore={managerDetails?.totalGWScore}
         totalPointsFormatted={totalPointsFormatted}
+        pickMyTeam={managerDetails?.pickMyTeam}
+        headerTab={headerTab}
+        setHeaderTab={(tab) => {
+          setHeaderTab(tab);
+          navigate({ to: "/my-team", search: { tab }, replace: true });
+        }}
       />
 
-      {/* 3. Navigation Tabs */}
-      <div className="mx-4 mt-3.5 flex border-b border-[var(--color-border-divider)] shrink-0">
-        <button
-          onClick={() => setActiveTab("pitch")}
-          className={`flex-1 pb-2 text-center text-sm font-extrabold tracking-wider uppercase transition-all relative cursor-pointer
-            ${activeTab === "pitch" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
-        >
-          Pitch View
-          {activeTab === "pitch" && (
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent" />
-          )}
-        </button>
-        <button
-          onClick={() => setActiveTab("list")}
-          className={`flex-1 pb-2 text-center text-sm font-extrabold tracking-wider uppercase transition-all relative cursor-pointer
-            ${activeTab === "list" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
-        >
-          List View
-          {activeTab === "list" && (
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-secondary to-transparent" />
-          )}
-        </button>
-      </div>
 
-      {/* 4. Tab Views Container */}
-      <div className="mx-4 mt-3 flex-1 overflow-y-auto scrollbar-hide pb-[calc(5.25rem+env(safe-area-inset-bottom))] space-y-4">
-        {activeTab === "pitch" ? (
-          <MyTeamPitch
-            startingXI={startingXI}
-            bench={bench}
-            substituteMode={substituteMode}
-            swapSourcePlayer={swapSourcePlayer}
-            onCancelSubstitute={handleCancelSubstitute}
-            handlePlayerClick={handlePlayerClick}
-            getPlayerCardClass={getPlayerCardClass}
-            getPlayerPrice={getPlayerPrice}
-            getPlayerLeftOffset={getPlayerLeftOffset}
-            getPlayerTopOffset={getPlayerTopOffset}
-          />
-        ) : (
-          <MyTeamListView
-            startingXI={startingXI}
-            bench={bench}
-            getPlayerPrice={getPlayerPrice}
-            handlePlayerClick={handlePlayerClick}
-          />
-        )}
-        {/* 5. Clear & Save Action Buttons */}
-        <div className="mx-auto mt-3.5 mb-3 flex items-center justify-center gap-3 max-w-md w-full px-4 shrink-0">
-          <button
-            onClick={handleClearTeam}
-            disabled={!hasUnsavedChanges}
-            className="flex-1 border border-primary/45 text-secondary hover:bg-primary/10 disabled:opacity-40 disabled:cursor-not-allowed font-bold rounded-xl py-2.5 flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer text-xs md:text-sm"
-          >
-            <Trash2 className="w-3.5 h-3.5" />
-            Clear Changes
-          </button>
-          <button
-            onClick={handleSaveTeam}
-            disabled={!hasUnsavedChanges || mutation.isPending}
-            className="flex-1 bg-gradient-button disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-xl py-2.5 shadow-fab flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer border-t border-white/20 text-xs md:text-sm"
-          >
-            <Save className="w-3.5 h-3.5" />
-            {mutation.isPending ? "Saving..." : "Save Team"}
-          </button>
+
+      {headerTab === "current" ? (
+        <>
+          {/* 2. Navigation Tabs & Actions Toolbar */}
+          <div className="mx-4 mt-4 flex items-center justify-between border-b border-[var(--color-border-divider)] shrink-0 pb-1.5">
+            {/* Tabs */}
+            <div className="flex gap-2">
+              <button
+                onClick={() => { triggerHaptic(); setActiveTab("pitch"); }}
+                className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex items-center gap-1.5 min-h-[36px] px-2.5
+                  ${activeTab === "pitch" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
+              >
+                <LayoutGrid className="w-3.5 h-3.5" />
+                Pitch
+                {activeTab === "pitch" && (
+                  <div className="absolute bottom-[-7px] left-0 right-0 h-0.5 bg-secondary" />
+                )}
+              </button>
+              <button
+                onClick={() => { triggerHaptic(); setActiveTab("list"); }}
+                className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex items-center gap-1.5 min-h-[36px] px-2.5
+                  ${activeTab === "list" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
+              >
+                <List className="w-3.5 h-3.5" />
+                List
+                {activeTab === "list" && (
+                  <div className="absolute bottom-[-7px] left-0 right-0 h-0.5 bg-secondary" />
+                )}
+              </button>
+            </div>
+
+            {/* Action Buttons */}
+            {managerDetails?.pickMyTeam && (
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={handleClearTeam}
+                  disabled={!hasUnsavedChanges}
+                  className="px-2.5 py-1 border border-primary/45 text-secondary hover:bg-primary/10 disabled:opacity-40 disabled:cursor-not-allowed font-bold rounded-lg min-h-[28px] flex items-center justify-center gap-1 active:scale-95 transition-all cursor-pointer text-[10px] md:text-xs"
+                >
+                  <Trash2 className="w-3 h-3" />
+                  Clear
+                </button>
+                <button
+                  onClick={handleSaveTeam}
+                  disabled={!hasUnsavedChanges || mutation.isPending}
+                  className="px-2.5 py-1 bg-gradient-button disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-lg shadow-fab min-h-[28px] flex items-center justify-center gap-1 active:scale-95 transition-all cursor-pointer border-t border-white/20 text-[10px] md:text-xs"
+                >
+                  <Save className="w-3 h-3" />
+                  {mutation.isPending ? "Saving..." : "Save"}
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* 4. Pitch or List Content */}
+          <div className="mx-4 mt-3 flex flex-1 flex-col min-h-0">
+            {activeTab === "pitch" ? (
+              <MyTeamPitch
+                startingXI={startingXI}
+                bench={bench}
+                substituteMode={substituteMode}
+                swapSourcePlayer={swapSourcePlayer}
+                onCancelSubstitute={handleCancelSubstitute}
+                handlePlayerClick={handlePlayerClick}
+                getPlayerCardClass={getPlayerCardClass}
+                getPlayerPrice={getPlayerPrice}
+              />
+            ) : (
+              <MyTeamListView
+                startingXI={startingXI}
+                bench={bench}
+                getPlayerPrice={getPlayerPrice}
+                handlePlayerClick={handlePlayerClick}
+              />
+            )}
+          </div>
+        </>
+      ) : (
+        /* Gameweek History View */
+        <div className="mx-4 mt-4 bg-surface border border-border rounded-2xl p-4 shadow-card flex-1 min-h-0 flex flex-col animate-in fade-in duration-300 w-full max-w-3xl mx-auto">
+          <h2 className="text-sm font-extrabold uppercase tracking-wider text-text-muted/70 mb-3 px-1">Gameweek History</h2>
+          {isHomeLoading ? (
+            <div className="flex-1 flex items-center justify-center">
+              <span className="text-xs text-text-muted">Loading history...</span>
+            </div>
+          ) : !homePageData?.recentGameweeks || homePageData.recentGameweeks.length === 0 ? (
+            <div className="flex-1 flex items-center justify-center">
+              <span className="text-xs text-text-muted">No history data available.</span>
+            </div>
+          ) : (
+            <div className="overflow-y-auto overflow-x-auto flex-1 pr-1">
+              <table className="w-full text-left border-collapse text-xs md:text-sm">
+                <thead>
+                  <tr className="border-b border-border/50 text-text-muted uppercase tracking-wider font-extrabold text-[10px]">
+                    <th className="py-2.5 px-3">Gameweek</th>
+                    <th className="py-2.5 px-3 text-center">Score</th>
+                    <th className="py-2.5 px-3 text-right"></th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/20 font-semibold text-white">
+                  {[...homePageData.recentGameweeks].sort((a, b) => b.gameweek - a.gameweek).map((item) => (
+                    <tr
+                      key={item.gameweek}
+                      className="hover:bg-white/5 transition-all cursor-pointer group"
+                      onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: item.gameweek } })}
+                    >
+                      <td className="py-3 px-3 font-bold">Gameweek {item.gameweek}</td>
+                      <td className="py-3 px-3 text-center text-[var(--color-success-bright)] font-mono font-extrabold">
+                        {item.points} pts
+                      </td>
+                      <td className="py-3 px-3 text-right pr-4">
+                        <ChevronRight className="w-4 h-4 inline-block text-secondary" />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
-      </div>
+      )}
 
-
+      {substituteMode && swapSourcePlayer && (
+        <div className="fixed bottom-[calc(4rem+env(safe-area-inset-bottom))] left-0 right-0 z-40 border-t border-[var(--color-border-divider)] bg-background/90 backdrop-blur-md shadow-[0_-8px_20px_rgba(0,0,0,0.4)] transition-all animate-in slide-in-from-bottom duration-300">
+          <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
+            <span className="text-xs font-bold text-amber-300 min-w-0 line-clamp-1">
+              Tap a highlighted player to swap with <span className="underline font-extrabold">{swapSourcePlayer.name}</span>
+            </span>
+            <button
+              onClick={handleCancelSubstitute}
+              className="ml-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 cursor-pointer active:scale-95 transition-all"
+              aria-label="Cancel substitution"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Player Selection Actions Overlay Modal */}
       <PlayerStatsModal
@@ -416,6 +470,7 @@ const MyTeamPage = () => {
           setSelectedPlayer(null);
         }}
         player={selectedPlayer}
+        playerStats={selectedPlayer?.playerStats}
         onMakeCaptain={handleMakeCaptain}
         onMakeViceCaptain={handleMakeViceCaptain}
         onSubstitute={handleSubstituteInitiate}

@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/my-team")({
+export const Route = createFileRoute("/gameweek-breakdown")({
   validateSearch: (search: Record<string, unknown>) => {
     return {
-      tab: (search.tab as "current" | "history") || "current",
+      gw: Number(search.gw) || 1,
+      teamId: (search.teamId as string) || "",
     };
   },
 });

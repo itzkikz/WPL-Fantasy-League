@@ -8,15 +8,19 @@ import { Player } from '../models/Player';
 import { Gameweek } from '../models/Gameweek';
 
 // Helper: compute a fantasy team's GW points from its history picks + player stats
-async function computeTeamGWPoints(teamId: string, gameweek: number): Promise<number> {
+async function computeTeamGWPoints(teamId: string, gameweek: number, currentGw: number): Promise<number> {
     const team = await FantasyTeam.findById(teamId).lean();
     if (!team) return 0;
 
-    // Find the history entry for this gameweek
-    const historyEntry = team.history?.find((h: any) => h.gameweek === gameweek);
-    if (!historyEntry || !historyEntry.picks?.length) return 0;
-
-    const picks = historyEntry.picks;
+    // Use currentSquad.picks for the current GW, otherwise use history
+    let picks: any[] = [];
+    if (gameweek === currentGw && team.currentSquad?.picks?.length) {
+        picks = team.currentSquad.picks;
+    } else {
+        const historyEntry = team.history?.find((h: any) => h.gameweek === gameweek);
+        if (!historyEntry || !historyEntry.picks?.length) return 0;
+        picks = historyEntry.picks;
+    }
 
     // Get player stats for this GW
     const playerIds = picks.map((p: any) => p.playerId);
@@ -62,27 +66,30 @@ async function computeTeamGWPoints(teamId: string, gameweek: number): Promise<nu
 }
 
 // Helper: get points for all teams in a league for a specific GW
-async function getLeagueGWPoints(league: any, gameweek: number): Promise<Map<string, number>> {
+async function getLeagueGWPoints(league: any, gameweek: number, currentGw: number): Promise<Map<string, number>> {
     const pointsMap = new Map<string, number>();
     const teamIds = league.fantasyTeams.map((t: any) => t._id.toString());
 
     for (const teamId of teamIds) {
-        const pts = await computeTeamGWPoints(teamId, gameweek);
+        const pts = await computeTeamGWPoints(teamId, gameweek, currentGw);
         pointsMap.set(teamId, pts);
     }
 
     return pointsMap;
 }
 
-// Helper: get points for all GWs in league range
-export async function getLeagueAllGWPoints(league: any): Promise<Map<number, Map<string, number>>> {
+// Helper: get points for all completed GWs in league range
+export async function getLeagueAllGWPoints(league: any, includeCurrentGw: boolean = false): Promise<Map<number, Map<string, number>>> {
     const gwPoints = new Map<number, Map<string, number>>();
     const completedGws = await Gameweek.find({ isCompleted: true }).select('number').lean();
     const completedGwNumbers = new Set(completedGws.map((g: any) => g.number));
 
+    const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
+    const currentGw = currentGwDoc?.number || 0;
+
     for (let gw = league.gameweekStart; gw <= league.gameweekEnd; gw++) {
-        if (!completedGwNumbers.has(gw)) continue;
-        const pointsMap = await getLeagueGWPoints(league, gw);
+        if (!completedGwNumbers.has(gw) && !(includeCurrentGw && gw === currentGw)) continue;
+        const pointsMap = await getLeagueGWPoints(league, gw, currentGw);
         gwPoints.set(gw, pointsMap);
     }
 
@@ -126,7 +133,11 @@ export const getH2HStandings = async (req: Request, res: Response) => {
         const { id } = req.params;
 
         const league = await H2HLeague.findById(id)
-            .populate('fantasyTeams', 'name')
+            .populate({
+                path: 'fantasyTeams',
+                select: 'name managers managerDisplayNames',
+                populate: { path: 'managers', select: 'username displayName' }
+            })
             .lean();
         if (!league) return res.status(404).json({ error: 'H2H league not found' });
 
@@ -137,13 +148,20 @@ export const getH2HStandings = async (req: Request, res: Response) => {
         const gwPointsMap = await getLeagueAllGWPoints(league);
 
         // Build standings
-        const standings: Record<string, { teamId: string; teamName: string; played: number; won: number; drawn: number; lost: number; gf: number; ga: number; pts: number }> = {};
+        const standings: Record<string, { teamId: string; teamName: string; managerName: string; played: number; won: number; drawn: number; lost: number; gf: number; ga: number; pts: number }> = {};
 
         for (const team of league.fantasyTeams) {
             const t = team as any;
+            // Get manager name from populated managers or fallback to managerDisplayNames
+            const managers = (t.managers as any[] || []).map(m => m.displayName || m.username).filter(Boolean);
+            const managerName = managers.length > 0 
+                ? managers.slice(0, 2).join(', ') 
+                : (t.managerDisplayNames || '');
+            
             standings[t._id.toString()] = {
                 teamId: t._id.toString(),
                 teamName: t.name,
+                managerName,
                 played: 0,
                 won: 0,
                 drawn: 0,
@@ -218,8 +236,11 @@ export const getH2HLeagueFixturesPublic = async (req: Request, res: Response) =>
             .sort({ gameweek: 1 })
             .lean();
 
-        // Enrich fixtures with live scores for completed GWs
-        const gwPointsMap = await getLeagueAllGWPoints(league);
+        // Enrich fixtures with live scores for completed and current GWs
+        const gwPointsMap = await getLeagueAllGWPoints(league, true);
+
+        const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
+        const currentGw = currentGwDoc?.number || 0;
 
         const enrichedFixtures = fixtures.map(fix => {
             const gwPoints = gwPointsMap.get(fix.gameweek);
@@ -229,14 +250,15 @@ export const getH2HLeagueFixturesPublic = async (req: Request, res: Response) =>
                 let winner: string | 'draw' | null = null;
                 if (homeScore > awayScore) winner = fix.homeTeam._id.toString();
                 else if (awayScore > homeScore) winner = fix.awayTeam._id.toString();
-                else winner = 'draw';
+                else if (fix.gameweek < currentGw) winner = 'draw';
 
+                const isLive = fix.gameweek === currentGw;
                 return {
                     ...fix,
                     homeScore,
                     awayScore,
-                    status: 'completed',
-                    winner,
+                    status: isLive ? 'live' : 'completed',
+                    winner: isLive ? null : winner,
                 };
             }
             return fix;

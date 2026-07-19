@@ -16,7 +16,7 @@ const MyTeamListView = ({
 }: MyTeamListViewProps) => {
   return (
     <div className="bg-surface border border-border rounded-2xl overflow-hidden shadow-card max-w-3xl mx-auto flex-1 min-h-0 flex flex-col animate-in fade-in duration-300 w-full">
-      <div className="overflow-y-auto overflow-x-auto flex-1 max-h-[calc(100vh-380px)] lg:max-h-[calc(100vh-230px)]">
+      <div className="overflow-y-auto overflow-x-auto flex-1">
         <table className="w-full text-left border-collapse text-xs md:text-sm">
           <thead className="sticky top-0 z-10 bg-card shadow-[0_1px_0_rgba(45,27,84,0.4)]">
             <tr className="bg-card border-b border-border text-text-muted uppercase tracking-wider font-extrabold text-[10px]">
@@ -34,11 +34,11 @@ const MyTeamListView = ({
                   className="hover:bg-white/5 transition-colors cursor-pointer"
                   onClick={() => handlePlayerClick?.(player)}
                 >
-                  <td className="py-2.5 px-4 font-bold text-white">
+                  <td className="py-3 px-4 font-bold text-white">
                     <div className="flex items-center gap-3">
                       {/* Player Image Thumbnail */}
                       <div
-                        className="w-8 h-8 rounded-full border overflow-hidden bg-indigo-950 flex items-center justify-center shrink-0 shadow-sm"
+                        className="w-9 h-9 rounded-full border overflow-hidden bg-indigo-950 flex items-center justify-center shrink-0 shadow-sm"
                         style={{ borderColor: player?.teamColor || "#A855F7" }}
                       >
                         {player?.photo ? (
@@ -90,11 +90,11 @@ const MyTeamListView = ({
                   className="hover:bg-white/5 transition-colors bg-black/10 cursor-pointer"
                   onClick={() => handlePlayerClick?.(player)}
                 >
-                  <td className="py-2.5 px-4 font-bold text-text-muted">
+                  <td className="py-3 px-4 font-bold text-text-muted">
                     <div className="flex items-center gap-3">
                       {/* Player Image Thumbnail */}
                       <div
-                        className="w-8 h-8 rounded-full border overflow-hidden bg-indigo-950 flex items-center justify-center shrink-0 shadow-sm opacity-70"
+                        className="w-9 h-9 rounded-full border overflow-hidden bg-indigo-950 flex items-center justify-center shrink-0 shadow-sm opacity-70"
                         style={{ borderColor: player?.teamColor || "#94a3b8" }}
                       >
                         {player?.photo ? (

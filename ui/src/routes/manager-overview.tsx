@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/my-team")({
+export const Route = createFileRoute("/manager-overview")({
   validateSearch: (search: Record<string, unknown>) => {
     return {
-      tab: (search.tab as "current" | "history") || "current",
+      teamId: (search.teamId as string) || "",
     };
   },
 });

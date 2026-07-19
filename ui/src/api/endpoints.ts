@@ -10,11 +10,11 @@ export const API_ENDPOINTS = {
   STANDINGS: {
     BASE: '/standings',
     BY_TEAM_ID: (teamId: string, gameWeek: number) => `/standings/${teamId}/${gameWeek}`,
+    OVERVIEW: (teamId: string) => `/standings/overview/${teamId}`,
   },
 
   PLAYERS: {
     BASE: '/players',
-    BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
   },
   MANAGER: {
     BASE: '/manager',

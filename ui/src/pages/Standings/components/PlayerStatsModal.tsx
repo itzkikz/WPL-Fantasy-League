@@ -1,5 +1,5 @@
+import { useEffect } from "react";
 import { X, Target, Clock, Star, Trophy, TrendingUp, Calendar, ArrowRightLeft, ExternalLink, Activity, ShieldCheck } from "lucide-react";
-import { usePlayerDetails } from "../../../features/players/hooks";
 import { Player, PlayerStats } from "../../../features/players/types";
 import { getContrastText } from "../../../libs/helpers/color";
 import { getPlayerDisplayPrice } from "../../../libs/helpers/player";
@@ -19,19 +19,17 @@ const PlayerStatsModal = ({
   isOpen,
   onClose,
   player,
-  playerStats: preloadedStats,
+  playerStats: stats,
   onMakeCaptain,
   onMakeViceCaptain,
   onSubstitute,
   pickMyTeam = false,
 }: PlayerStatsModalProps) => {
-  const hasPreloaded = !!preloadedStats;
-  const { data: fetchedStats, isLoading, isError } = usePlayerDetails(
-    hasPreloaded ? "" : (player?.name || "")
-  );
-
-  const stats = preloadedStats || fetchedStats;
-  const loading = !hasPreloaded && isLoading;
+  useEffect(() => {
+    if (!isOpen) return;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, [isOpen]);
 
   if (!isOpen || !player) return null;
 
@@ -54,30 +52,8 @@ const PlayerStatsModal = ({
       {/* Modal Card */}
       <div className="relative w-full max-w-lg bg-elevated border border-border rounded-3xl shadow-modal overflow-hidden z-10 flex flex-col max-h-[90vh] text-white animate-in scale-in duration-300">
  
-        {/* Loading State */}
-        {loading && (
-          <div className="p-12 flex flex-col items-center justify-center text-center">
-            <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
-            <p className="text-sm font-bold text-secondary">Loading player statistics...</p>
-          </div>
-        )}
- 
-        {/* Error State */}
-        {isError && (
-          <div className="p-8 flex flex-col items-center justify-center text-center">
-            <Trophy className="w-10 h-10 text-rose-500 mb-3" />
-            <p className="text-sm font-bold text-rose-300 mb-4">Failed to load statistics.</p>
-            <button
-              onClick={onClose}
-              className="bg-primary hover:bg-primary-dark text-white rounded-xl px-4 py-2 text-xs font-bold transition-all"
-            >
-              Close
-            </button>
-          </div>
-        )}
- 
         {/* Loaded Content */}
-        {!loading && stats && (
+        {stats && (
           <>
             {/* 1. Modal Top Section: Jersey & Title details */}
             <div className="relative p-6 bg-card border-b border-border flex items-center justify-between shrink-0 overflow-hidden">

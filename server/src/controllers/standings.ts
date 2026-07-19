@@ -718,3 +718,184 @@ export const getFixturesForCurrentGameweek = async (req: Request, res: Response)
         res.status(500).json({ success: false, error: error.message });
     }
 }
+
+export const getManagerOverview = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { teamId } = req.params;
+
+        // 1. Find the FantasyTeam
+        const fantasyTeam = await FantasyTeam.findById(teamId)
+            .populate('managers', 'username displayName')
+            .lean();
+
+        if (!fantasyTeam) {
+            return res.status(404).json({ error: "Fantasy Team not found" });
+        }
+
+        const { currentSquad, history, name: teamName, managerDisplayNames } = fantasyTeam;
+
+        // Extract manager names list
+        const managersList = (fantasyTeam.managers as any[]).map(m => m.displayName || m.username || "");
+        const managersString = managersList.length > 0 ? managersList.join(", ") : managerDisplayNames || "Unknown";
+
+        // 2. Fetch current standing (Rank, Total Points, GW Points)
+        const standingsData = await getStandingsData();
+        const myStanding = standingsData.find(s => s.team_id === teamId);
+        
+        const rank = (myStanding as any)?.rank || (standingsData.findIndex(s => s.team_id === teamId) + 1) || 1;
+        const totalPoints = myStanding?.total || 0;
+        const gwPoints = myStanding?.current_gw || 0;
+
+        // 3. Resolve Current Squad to FormationResult
+        const playerIds = currentSquad.picks.map(p => p.playerId);
+        const playersMap = (await Player.find({ id: { $in: playerIds } }).lean()) as any[];
+        const pMap = new Map(playersMap.map(p => [p.id, p]));
+
+        const teamIds = [...new Set(playersMap.map(p => p.teamId))];
+        const teams = (await Team.find({ id: { $in: teamIds } }).lean()) as any[];
+        const teamMap = new Map(teams.map(t => [t.id, t]));
+
+        // Fetch current Gameweek
+        let currentGwDoc = await Gameweek.findOne({ isCurrent: true });
+        if (!currentGwDoc) {
+            currentGwDoc = await Gameweek.findOne({ isNext: true });
+        }
+        const targetGw = currentGwDoc ? currentGwDoc.number : 1;
+
+        // Fetch PlayerStats for points
+        const playerStatsList = await PlayerStats.find({ playerId: { $in: playerIds } })
+            .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
+            .lean();
+        const playerStatsMap = new Map(playerStatsList.map(ps => [ps.playerId, ps]));
+
+        let captainPlayed = false;
+        const captainPick = currentSquad.picks.find(p => p.isCaptain);
+        if (captainPick) {
+            const cPs = playerStatsMap.get(captainPick.playerId);
+            if (cPs && cPs.gameweeks) {
+                const cGw = cPs.gameweeks.find((g: any) => g.id === targetGw);
+                if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
+                    captainPlayed = true;
+                }
+            }
+        }
+
+        const squadAsTeamDetails: TeamDetails[] = currentSquad.picks.map((pick) => {
+            const playerDoc = pMap.get(pick.playerId);
+            const teamDoc = playerDoc ? teamMap.get(playerDoc.teamId) : null;
+
+            let playerPoints = 0;
+            const ps = playerStatsMap.get(pick.playerId);
+            if (ps && ps.gameweeks) {
+                const gData = ps.gameweeks.find((g: any) => g.id === targetGw);
+                if (gData) {
+                    playerPoints = gData.points || 0;
+                }
+            }
+
+            if (pick.isCaptain && captainPlayed) {
+                playerPoints *= 2;
+            } else if (pick.isViceCaptain && !captainPlayed) {
+                playerPoints *= 2;
+            }
+
+            return {
+                player_id: pick.playerId,
+                player_name: playerDoc?.webName || playerDoc?.name || "Unknown",
+                team_name: teamName,
+                gw: targetGw,
+                point: playerPoints,
+                position: resolvePosition(playerDoc?.position || ''),
+                price: playerDoc?.price?.nowCost || 0,
+                club: teamDoc?.team?.name || teamDoc?.name || "Unknown",
+                lineup: pick.isStarting ? "Starting XI" : `Sub ${pick.subNumber || 0}`,
+                role: pick.isCaptain ? "CAPTAIN" : pick.isViceCaptain ? "VICE CAPTAIN" : null,
+                team_short_name: teamDoc?.nameCode || teamDoc?.shortName || "UNK",
+                team_color: teamDoc?.teamColors?.primary || "#003399",
+                team_text_color: teamDoc?.teamColors?.text || "#ffffff",
+                team_logo: teamDoc?.logo || "",
+                shirtNumber: playerDoc?.shirtNumber || 0,
+                photo: playerDoc?.photo || "",
+                auctionPrice: playerDoc?.auctionPrice
+            } as any;
+        });
+
+        const currentSquadFormation = convertToFormation(squadAsTeamDetails);
+
+        // 4. Calculate Historical Points
+        const allHistoryPicks = history.flatMap(h => h.picks);
+        const allHistoryPlayerIds = [...new Set(allHistoryPicks.map(p => p.playerId))];
+        const historyPlayerStats = await PlayerStats.find({ playerId: { $in: allHistoryPlayerIds } }).lean();
+        const historyPsMap = new Map(historyPlayerStats.map(ps => [ps.playerId, ps]));
+
+        const computeHistoryScore = (picks: any[], gwId: number) => {
+            let score = 0;
+            let capPlayed = false;
+
+            const capPick = picks.find(p => p.isCaptain);
+            if (capPick) {
+                const cStats = historyPsMap.get(capPick.playerId);
+                if (cStats && cStats.gameweeks) {
+                    const cGw = cStats.gameweeks.find((g: any) => g.id === gwId);
+                    if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
+                        capPlayed = true;
+                    }
+                }
+            }
+
+            picks.forEach(pick => {
+                if (!pick.isStarting) return;
+
+                const statsDoc = historyPsMap.get(pick.playerId);
+                if (statsDoc && statsDoc.gameweeks) {
+                    const gwData = statsDoc.gameweeks.find((g: any) => g.id === gwId);
+                    if (gwData) {
+                        let pts = gwData.points || 0;
+
+                        if (pick.isCaptain && capPlayed) {
+                            pts *= 2;
+                        } else if (pick.isViceCaptain && !capPlayed) {
+                            pts *= 2;
+                        }
+                        score += pts;
+                    }
+                }
+            });
+            return score;
+        };
+
+        const historyList = history.map(h => ({
+            gameweek: h.gameweek,
+            points: computeHistoryScore(h.picks, h.gameweek),
+        })).sort((a, b) => a.gameweek - b.gameweek);
+
+        // Add current gameweek to history if it has picks and is not already in history list
+        if (!history.some(h => h.gameweek === targetGw)) {
+            const currentGwPointsCalculated = squadAsTeamDetails
+                .filter(p => p.lineup === "Starting XI")
+                .reduce((acc, p) => acc + (p.point || 0), 0);
+            
+            historyList.push({
+                gameweek: targetGw,
+                points: currentGwPointsCalculated,
+            });
+        }
+
+        return res.json({
+            data: {
+                teamId,
+                teamName,
+                managers: managersString,
+                rank,
+                totalPoints,
+                gwPoints,
+                currentSquad: currentSquadFormation,
+                history: historyList
+            }
+        });
+
+    } catch (error) {
+        console.error("Error in getManagerOverview:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+};

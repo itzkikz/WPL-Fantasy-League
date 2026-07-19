@@ -24,13 +24,14 @@ export interface H2HFixture {
   gameweek: number;
   homeScore: number | null;
   awayScore: number | null;
-  status: 'upcoming' | 'completed';
+  status: 'upcoming' | 'live' | 'completed';
   winner: string | 'draw' | null;
 }
 
 export interface H2HStanding {
   teamId: string;
   teamName: string;
+  managerName: string;
   played: number;
   won: number;
   drawn: number;

@@ -1337,9 +1337,9 @@ function getRoundPairings(teams: string[], round: number, n: number): [string, s
     // Pair fixed team with first rotating team
     pairings.push([fixed, rotated[0]]);
 
-    // Pair remaining: second with second-to-last, etc.
-    for (let i = 1; i < n / 2; i++) {
-        pairings.push([rotated[i], rotated[n - 2 - i]]);
+    // Pair remaining: second with last, third with second-to-last, etc.
+    for (let i = 1; i <= (n - 2) / 2; i++) {
+        pairings.push([rotated[i], rotated[n - 1 - i]]);
     }
 
     return pairings;

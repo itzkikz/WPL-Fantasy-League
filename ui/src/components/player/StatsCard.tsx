@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { usePlayerDetails } from "../../features/players/hooks";
+import { useState } from "react";
 import StatRow from "../StatRow";
 import { Player } from "../../features/players/types";
 import Button from "../common/Button";
@@ -31,7 +30,7 @@ const StatsCard = ({
   error?: string;
 }) => {
   const player = usePlayerStore((state) => state.player);
-  const { data: playerStats, isLoading } = usePlayerDetails(player.name);
+  const playerStats = (player as Player)?.playerStats;
 
   const initialRole: "captain" | "vice" | "" = player?.isCaptain
     ? "captain"
