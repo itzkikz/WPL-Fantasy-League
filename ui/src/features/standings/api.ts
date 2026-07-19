@@ -14,6 +14,11 @@ export const standingsApi = {
     return response.data.data
   },
 
+  getOverview: async (teamId: string): Promise<any> => {
+    const response = await apiClient.get(API_ENDPOINTS.STANDINGS.OVERVIEW(teamId))
+    return response.data.data
+  },
+
   getFixtures: async (): Promise<{ gameweek: number; fixtures: any[] }> => {
     const response = await apiClient.get('/standings/fixtures')
     return response.data.data

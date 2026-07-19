@@ -20,6 +20,13 @@ export const standingsQueries = {
       enabled: !!teamId && gameWeek > 0,
     }),
 
+  overview: (teamId: string) =>
+    queryOptions({
+      queryKey: [QUERY_KEYS.STANDINGS, 'overview', teamId],
+      queryFn: () => standingsApi.getOverview(teamId),
+      enabled: !!teamId,
+    }),
+
   fixtures: () =>
     queryOptions({
       queryKey: [QUERY_KEYS.STANDINGS, 'fixtures'],

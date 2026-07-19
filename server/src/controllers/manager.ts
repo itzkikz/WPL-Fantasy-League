@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import { FantasyTeam } from "../models/FantasyTeam";
 import { TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
+import { aggregateMatchStats } from "./players";
 import { validateAndApplySwap } from "../lib/validators/substitution";
 import { Substitution } from "../types/manager";
 import { FormationResult } from "../lib/formatter/types";
@@ -140,6 +141,240 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
         auctionPrice: playerDoc?.auctionPrice
       } as any; // Casting to any because TeamDetails structure from Sheets had specific loose fields
     });
+
+    // 4b. Build full PlayerStats for each player (so modal doesn't need extra API calls)
+    try {
+      const Fixture = (await import("../models/Fixture")).Fixture;
+
+      // Re-fetch teams with league populated for full player stats
+      const TeamWithLeague = (await import("../models/Team")).Team;
+      const teamsWithLeague = (await TeamWithLeague.find({}).populate({ path: 'league', strictPopulate: false }).lean()) as any[];
+      const teamLeagueMap = new Map(teamsWithLeague.map((t: any) => [t.id, t]));
+
+      // Fetch all FantasyTeams for ownership calculation
+      const allFantasyTeams = await FantasyTeam.find({}).select('currentSquad.picks.playerId name').lean();
+      const totalTeamsCount = allFantasyTeams.length;
+
+      const ownershipMap = new Map<number, { pct: number; teamName: string | null }>();
+      for (const pid of playerIds) {
+        let count = 0;
+        let tName: string | null = null;
+        for (const ft of allFantasyTeams) {
+          const picks = (ft as any).currentSquad?.picks || [];
+          if (picks.some((p: any) => p.playerId === pid)) {
+            count++;
+            if (!tName) tName = (ft as any).name;
+          }
+        }
+        const pct = totalTeamsCount > 0 ? Number(((count / totalTeamsCount) * 100).toFixed(1)) : 0;
+        ownershipMap.set(pid, { pct, teamName: tName });
+      }
+
+      // Fetch upcoming fixtures for all players' teams
+      const allTeamIdsForFixtures = [...new Set(squadAsTeamDetails.map(d => {
+        const p = pMap.get(d.player_id!);
+        return p?.teamId;
+      }).filter(Boolean))] as number[];
+
+      const upcomingDocs = await Fixture.find({
+        $and: [
+          { 'roundInfo.round': { $gte: targetGw } },
+          { 'status.type': { $ne: 'finished' } },
+          {
+            $or: [
+              { 'homeTeam.id': { $in: allTeamIdsForFixtures } },
+              { 'awayTeam.id': { $in: allTeamIdsForFixtures } }
+            ]
+          }
+        ]
+      }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
+
+      // Group fixtures by team ID
+      const fixturesByTeam = new Map<number, any[]>();
+      for (const f of upcomingDocs) {
+        const homeId = f.homeTeam?.id;
+        const awayId = f.awayTeam?.id;
+        if (homeId && !fixturesByTeam.has(homeId)) fixturesByTeam.set(homeId, []);
+        if (awayId && !fixturesByTeam.has(awayId)) fixturesByTeam.set(awayId, []);
+        if (homeId) fixturesByTeam.get(homeId)!.push({ fixture: f, isHome: true, opponentId: awayId });
+        if (awayId) fixturesByTeam.get(awayId)!.push({ fixture: f, isHome: false, opponentId: homeId });
+      }
+
+      // Build full PlayerStats for each player
+      for (const detail of squadAsTeamDetails) {
+        const pid = detail.player_id;
+        const playerDoc = pMap.get(pid!);
+        if (!playerDoc) continue;
+
+        const clubData = teamLeagueMap.get(playerDoc.teamId) || teamMap.get(playerDoc.teamId);
+        const fullPs = playerStatsMap.get(pid!);
+        const ownership = ownershipMap.get(pid!) || { pct: 0, teamName: null };
+
+        const teamColor = clubData?.teamColors?.primary || detail.team_color || "#003399";
+        const teamTextColor = clubData?.teamColors?.text || detail.team_text_color || "#ffffff";
+        const teamLogo = clubData?.logo || detail.team_logo || "";
+        const teamShortName = clubData?.nameCode || detail.team_short_name || "UNK";
+        const teamNameStr = clubData?.name || detail.club || "Unknown";
+        const leagueName = clubData?.league ? (clubData.league as any).name : "Unknown League";
+
+        // Overall stats
+        let overallStats: any = aggregateMatchStats([]);
+        if (fullPs && (fullPs as any).gameweeks) {
+          overallStats = aggregateMatchStats((fullPs as any).gameweeks);
+        }
+        (overallStats as any).total_point = (fullPs as any)?.totalPoints || 0;
+
+        // Current week stats
+        let currentWeekStats = undefined;
+        if (fullPs && (fullPs as any).gameweeks) {
+          const gwData = (fullPs as any).gameweeks.find((g: any) => g.id === targetGw);
+          if (gwData && gwData.stats) {
+            currentWeekStats = { ...gwData.stats, point: gwData.points || 0 };
+          }
+        }
+
+        // Upcoming fixtures
+        const teamFixtures = fixturesByTeam.get(playerDoc.teamId) || [];
+        const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }) => {
+          const opponentTeam = teamLeagueMap.get(opponentId) || teamMap.get(opponentId);
+          const myTeam = clubData;
+          return {
+            gw: f.roundInfo?.round || 0,
+            opponent_short_name: opponentTeam?.nameCode || "UNK",
+            opponent_logo: opponentTeam?.logo || "",
+            opponent_color: opponentTeam?.teamColors?.primary || "#003399",
+            opponent_text_color: opponentTeam?.teamColors?.text || "#ffffff",
+            my_team_short_name: myTeam?.nameCode || "UNK",
+            my_team_logo: myTeam?.logo || "",
+            is_home: isHome
+          };
+        });
+
+        // Pad to 3
+        while (upcomingFixtures.length < 3) {
+          const nextGw = targetGw + upcomingFixtures.length;
+          upcomingFixtures.push({
+            gw: nextGw,
+            opponent_short_name: "TBD",
+            opponent_logo: "",
+            opponent_color: "#1b1035",
+            opponent_text_color: "#ffffff",
+            my_team_short_name: teamShortName,
+            my_team_logo: "",
+            is_home: true
+          });
+        }
+
+        // Recent form
+        const recentForm: any[] = [];
+        if (fullPs && (fullPs as any).gameweeks) {
+          const sortedGws = [...(fullPs as any).gameweeks].sort((a: any, b: any) => a.id - b.id);
+          const filteredGws = sortedGws.filter((g: any) => g.id <= targetGw);
+          const last5 = filteredGws.slice(-5);
+          last5.forEach((g: any) => {
+            recentForm.push({ gw: g.id, points: g.points || 0 });
+          });
+        }
+        if (recentForm.length === 0) {
+          for (let i = Math.max(1, targetGw - 4); i <= targetGw; i++) {
+            recentForm.push({ gw: i, points: 0 });
+          }
+        }
+
+        // Points breakdown
+        const pointsBreakdown: any[] = [];
+        if (fullPs && (fullPs as any).gameweeks) {
+          const gwData = (fullPs as any).gameweeks.find((g: any) => g.id === targetGw);
+          if (gwData && gwData.stats) {
+            const s = gwData.stats;
+            const position = resolvePosition(playerDoc.position || '');
+            const minutes = s.minutesPlayed || 0;
+
+            if (minutes > 0) {
+              pointsBreakdown.push({ label: "Minutes Played", value: `${minutes} mins`, points: minutes >= 60 ? 2 : 1 });
+
+              const goals = s.goals || 0;
+              if (goals > 0) {
+                let goalPoints = 0;
+                if (position === 'GK') goalPoints = goals * 10;
+                else if (position === 'DEF') goalPoints = goals * 6;
+                else if (position === 'MID') goalPoints = goals * 5;
+                else if (position === 'FWD') goalPoints = goals * 4;
+                pointsBreakdown.push({ label: `Goals (${goals})`, value: `${goals}`, points: goalPoints });
+              }
+
+              const assists = s.goalAssist || 0;
+              if (assists > 0) {
+                pointsBreakdown.push({ label: `Assists (${assists})`, value: `${assists}`, points: assists * 3 });
+              }
+
+              if (s.cleanSheet === 1 && (position === 'GK' || position === 'DEF')) {
+                pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 4 });
+              } else if (s.cleanSheet === 1 && position === 'MID') {
+                pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 1 });
+              }
+
+              const yellow = s.yellowCards || 0;
+              if (yellow > 0) pointsBreakdown.push({ label: "Yellow Cards", value: `${yellow}`, points: yellow * -1 });
+
+              const red = s.redCards || 0;
+              if (red > 0) pointsBreakdown.push({ label: "Red Card", value: "Yes", points: -3 });
+
+              const penMiss = s.penaltyMissed || 0;
+              if (penMiss > 0) pointsBreakdown.push({ label: "Penalty Missed", value: `${penMiss}`, points: penMiss * -2 });
+
+              if (position === 'GK') {
+                const penSave = s.penaltySaved || 0;
+                if (penSave > 0) pointsBreakdown.push({ label: "Penalty Saved", value: `${penSave}`, points: penSave * 5 });
+                const gkSaves = s.saves || 0;
+                if (gkSaves >= 3) pointsBreakdown.push({ label: `Saves (${gkSaves})`, value: `${gkSaves}`, points: Math.floor(gkSaves / 3) });
+              }
+
+              const tackles = s.totalTackle || 0;
+              const clearances = s.totalClearance || 0;
+              const blocks = s.outfielderBlock || 0;
+              const ballRecovery = s.ballRecovery || 0;
+              const defCont = tackles + clearances + blocks + ballRecovery;
+              if (defCont > 0) {
+                let defPoints = 0;
+                if (position === 'DEF') defPoints = Math.floor(defCont / 10) * 2;
+                else defPoints = Math.floor(defCont / 12) * 2;
+                if (defPoints > 0) {
+                  pointsBreakdown.push({ label: `Defensive Actions (${defCont})`, value: `${defCont}`, points: defPoints });
+                }
+              }
+            }
+          }
+        }
+
+        // Attach full PlayerStats to the detail
+        (detail as any).playerStats = {
+          player_name: playerDoc.name || playerDoc.webName || "",
+          team_name: teamNameStr,
+          position: resolvePosition(playerDoc.position || ''),
+          overall: overallStats,
+          price: playerDoc.price?.nowCost || 0,
+          release_value: playerDoc.price?.nowCost || 0,
+          club: teamNameStr,
+          league: leagueName,
+          team_short_name: teamShortName,
+          team_color: teamColor,
+          team_text_color: teamTextColor,
+          team_logo: teamLogo,
+          player_id: pid,
+          current_week: currentWeekStats,
+          photo: playerDoc.photo || "",
+          ownership: ownership.pct,
+          fantasy_team_name: ownership.teamName,
+          upcoming_fixtures: upcomingFixtures,
+          recent_form: recentForm,
+          points_breakdown: pointsBreakdown,
+          auctionPrice: playerDoc.auctionPrice
+        };
+      }
+    } catch (statsErr) {
+      console.error("Error building full player stats in manager details:", statsErr);
+    }
 
     const totalGWScore = squadAsTeamDetails.reduce((acc, curr) => {
       if (curr.lineup === "Starting XI") {
@@ -765,10 +1000,12 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     const startingPlayerIds = startingPicks.map(p => p.playerId);
     const startingStatsDocs = await PlayerStatsModel.find({ playerId: { $in: startingPlayerIds } }).lean();
     const startingStatsMap = new Map(startingStatsDocs.map(s => [s.playerId, s]));
+    const startingPlayerDocs = await PlayerModel.find({ id: { $in: startingPlayerIds } }).lean();
+    const startingPlayerPositionMap = new Map(startingPlayerDocs.map((p: any) => [p.id, resolvePosition(p.position || '')]));
 
-    let bdGoals = 0, bdAssists = 0, bdCleanSheet = 0, bdYellow = 0, bdRed = 0;
-    let bdPenMiss = 0, bdPenSave = 0, bdSaves = 0, bdMinutes = 0, bdAppearancePoints = 0;
-    let bdTackles = 0, bdClearances = 0, bdBlocks = 0, bdRecovery = 0;
+    let bdGoalsPoints = 0, bdAssistsPoints = 0, bdCleanSheetPoints = 0;
+    let bdYellowPoints = 0, bdRedPoints = 0, bdPenMissPoints = 0, bdPenSavePoints = 0;
+    let bdSavesPoints = 0, bdMinutes = 0, bdAppearancePoints = 0, bdDefensivePoints = 0;
 
     for (const pick of startingPicks) {
       const statsDoc = startingStatsMap.get(pick.playerId);
@@ -776,38 +1013,52 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       const gwData = statsDoc.gameweeks.find((g: any) => g.id === currentGw);
       if (!gwData) continue;
       const s = gwData.stats || {};
+      const position = startingPlayerPositionMap.get(pick.playerId) || 'MID';
+      const minutesPlayed = s.minutesPlayed || 0;
 
-      bdGoals += s.goals || 0;
-      bdAssists += s.goalAssist || 0;
-      bdCleanSheet += s.cleanSheet || 0;
-      bdYellow += s.yellowCards || 0;
-      bdRed += s.redCards || 0;
-      bdPenMiss += s.penaltyMissed || 0;
-      bdPenSave += s.penaltySaved || 0;
-      bdSaves += s.saves || 0;
-      bdMinutes += s.minutesPlayed || 0;
-      if ((s.minutesPlayed || 0) >= 60) bdAppearancePoints += 2;
-      else if ((s.minutesPlayed || 0) > 0) bdAppearancePoints += 1;
-      bdTackles += s.totalTackle || 0;
-      bdClearances += s.totalClearance || 0;
-      bdBlocks += s.outfielderBlock || 0;
-      bdRecovery += s.ballRecovery || 0;
+      bdMinutes += minutesPlayed;
+
+      if (minutesPlayed >= 60) bdAppearancePoints += 2;
+      else if (minutesPlayed > 0) bdAppearancePoints += 1;
+
+      const goals = s.goals || 0;
+      if (position === 'GK') bdGoalsPoints += goals * 10;
+      else if (position === 'DEF') bdGoalsPoints += goals * 6;
+      else if (position === 'MID') bdGoalsPoints += goals * 5;
+      else bdGoalsPoints += goals * 4;
+
+      bdAssistsPoints += (s.goalAssist || 0) * 3;
+
+      if (s.cleanSheet) {
+        if (position === 'GK' || position === 'DEF') bdCleanSheetPoints += 4;
+        else if (position === 'MID') bdCleanSheetPoints += 1;
+      }
+
+      bdYellowPoints += (s.yellowCards || 0) * -1;
+      bdRedPoints += (s.redCards || 0) * -3;
+      bdPenMissPoints += (s.penaltyMissed || 0) * -2;
+
+      if (position === 'GK') {
+        bdPenSavePoints += (s.penaltySaved || 0) * 5;
+        const saves = s.saves || 0;
+        if (saves >= 3) bdSavesPoints += Math.floor(saves / 3);
+      }
+
+      const defContrib = (s.totalTackle || 0) + (s.totalClearance || 0) + (s.outfielderBlock || 0) + (s.ballRecovery || 0);
+      if (position === 'DEF') bdDefensivePoints += Math.floor(defContrib / 10) * 2;
+      else bdDefensivePoints += Math.floor(defContrib / 12) * 2;
     }
 
     const pointsBreakdown = {
-      goals: bdGoals,
-      assists: bdAssists,
-      cleanSheet: bdCleanSheet,
-      yellowCards: bdYellow,
-      redCards: bdRed,
-      penaltyMissed: bdPenMiss,
-      penaltySaved: bdPenSave,
-      saves: bdSaves,
-      tackles: bdTackles,
-      clearances: bdClearances,
-      blocks: bdBlocks,
-      recovery: bdRecovery,
-      minutesPlayed: bdMinutes,
+      goals: bdGoalsPoints,
+      assists: bdAssistsPoints,
+      cleanSheet: bdCleanSheetPoints,
+      yellowCards: bdYellowPoints,
+      redCards: bdRedPoints,
+      penaltyMissed: bdPenMissPoints,
+      penaltySaved: bdPenSavePoints,
+      saves: bdSavesPoints,
+      defensive: bdDefensivePoints,
       appearancePoints: bdAppearancePoints,
       totalPoints: currentGwPoints,
     };
@@ -871,10 +1122,9 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     const midfielders = pDocsWithStats.filter(p => p.position === "MID");
     const forwards = pDocsWithStats.filter(p => p.position === "FWD");
 
-    const startingPlayerDocs = await PlayerModel.find({ id: { $in: startingPlayerIds } }).lean();
-    const startingDEF = startingPlayerDocs.filter(p => resolvePosition(p.position || "") === "DEF").length;
-    const startingMID = startingPlayerDocs.filter(p => resolvePosition(p.position || "") === "MID").length;
-    const startingFWD = startingPlayerDocs.filter(p => resolvePosition(p.position || "") === "FWD").length;
+    const startingDEF = startingPlayerDocs.filter((p: any) => resolvePosition(p.position || "") === "DEF").length;
+    const startingMID = startingPlayerDocs.filter((p: any) => resolvePosition(p.position || "") === "MID").length;
+    const startingFWD = startingPlayerDocs.filter((p: any) => resolvePosition(p.position || "") === "FWD").length;
     const formation = startingPlayerDocs.length > 0 ? `${startingDEF}-${startingMID}-${startingFWD}` : "4-4-2";
 
     const squadComposition = {

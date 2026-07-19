@@ -114,8 +114,8 @@ export const MainLayout = () => {
         <main className="font-outfit min-h-screen shadow-sm text-primary flex flex-col">
             <PWAInstallBanner />
             <div className="flex-1 flex">
-                <div className="flex h-screen flex-col mx-auto w-full overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
-                    {isBaseRoute && (
+                <div className={`flex h-screen flex-col mx-auto w-full ${currentPath === "/my-team" ? "overflow-hidden" : "overflow-y-auto"}`} style={{ WebkitOverflowScrolling: 'touch' }}>
+                    {isBaseRoute && currentPath !== "/my-team" && (
                         <header className="header relative w-full h-12 shrink-0 overflow-hidden bg-surface border-b border-[var(--color-border-divider)] text-white lg:hidden">
                             {/* Animated gradient overlay */}
                             {/* Content container */}
@@ -195,7 +195,7 @@ export const MainLayout = () => {
                         </header>
                     )}
                     {!hideNav && <MobileNavbar />}
-                    <div className="flex flex-col lg:flex-row flex-1">
+                    <div className="flex flex-col lg:flex-row flex-1 min-h-0">
                         {/* Sidebar: hidden on mobile, visible on lg+ */}
                         {!hideNav && (
                             <div className="hidden lg:block lg:w-64">
@@ -204,7 +204,7 @@ export const MainLayout = () => {
                         )}
 
                         {/* Main content: always visible, grows to fill space */}
-                        <div className={`flex-1 flex flex-col ${!hideNav ? 'pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0 lg:px-6 lg:py-6' : ''}`}>
+                        <div className={`flex-1 flex flex-col min-h-0 ${!hideNav ? 'pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0 lg:px-6 lg:py-6' : ''}`}>
                             <Outlet />
                         </div>
                     </div>

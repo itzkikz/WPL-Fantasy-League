@@ -11,6 +11,10 @@ export const useTeamDetails = (teamId: string, gameWeek: number) => {
   return useQuery(standingsQueries.detail(teamId, gameWeek))
 }
 
+export const useManagerOverview = (teamId: string) => {
+  return useQuery(standingsQueries.overview(teamId))
+}
+
 export const useStandingsFixtures = () => {
   return useQuery(standingsQueries.fixtures())
 }

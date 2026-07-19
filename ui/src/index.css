@@ -660,11 +660,6 @@ select[multiple] {
 }
 
 /* Custom color for selected mobile navbar items */
-.mobile-navbar a,
-.mobile-navbar a svg,
-.mobile-navbar a span {
-  color: #585161;
-}
 
 .mobile-navbar .text-gray-400,
 .mobile-navbar .dark\:text-light-text-secondary {

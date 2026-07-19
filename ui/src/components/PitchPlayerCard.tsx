@@ -28,7 +28,7 @@ const PitchPlayerCard = ({
   return (
     <div
       onClick={onClick}
-      className={`relative flex flex-col items-center ${isSmall ? "w-14 md:w-16" : "w-16 md:w-20 lg:w-24"} cursor-pointer transition-transform hover:scale-105 select-none`}
+      className={`relative flex flex-col items-center ${isSmall ? "w-[14vw] min-w-[48px] max-w-[72px] sm:w-16 md:w-18" : "w-[16vw] min-w-[52px] max-w-[80px] sm:w-18 md:w-22 lg:w-26"} cursor-pointer transition-transform hover:scale-105 select-none`}
     >
       {/* Captain/Vice Captain Badge */}
       {(player?.isCaptain || player?.isViceCaptain) && (
@@ -74,9 +74,9 @@ const PitchPlayerCard = ({
       )}
 
       {/* Player Face Photo / Fallback Silhouette */}
-      <div className="relative mb-1.5 z-10 drop-shadow-lg flex items-center justify-center">
+      <div className="relative mb-1 z-10 drop-shadow-lg flex items-center justify-center">
         <div
-          className="relative w-12 h-12 md:w-14 md:h-14 rounded-full border-2 overflow-hidden bg-[#1D1533] flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-105"
+          className="relative w-[10vw] h-[10vw] min-w-[36px] max-w-[64px] sm:w-12 sm:h-12 md:w-15 md:h-15 rounded-full border-2 overflow-hidden bg-[#1D1533] flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-105"
           style={{ borderColor: player?.teamColor || "#A855F7" }}
         >
           {player?.photo ? (
@@ -116,12 +116,12 @@ const PitchPlayerCard = ({
         <div className="flex flex-col w-full bg-card rounded-md overflow-hidden shadow-md border border-border z-10">
           {/* Player Name */}
           <div className="px-1 py-0.5 text-center bg-surface border-b border-border">
-            <p className="text-[9px] md:text-[10px] font-bold text-white truncate leading-tight">
+            <p className="text-[9px] sm:text-[10px] md:text-[11px] font-bold text-white truncate leading-tight">
               {playerLastName}
             </p>
           </div>
           {/* Split Row for Price and Points */}
-          <div className="flex text-[9px] font-bold">
+          <div className="flex text-[9px] sm:text-[10px] md:text-[11px] font-bold">
             <div className="flex-1 text-center py-0.5 bg-card text-text-secondary border-r border-border leading-tight">
               {player.price || getPlayerDisplayPrice(player)}
             </div>

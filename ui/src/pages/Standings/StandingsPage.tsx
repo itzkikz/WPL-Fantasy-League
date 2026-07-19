@@ -77,9 +77,8 @@ const StandingsPage = () => {
 
   const handleTeamClick = (teamId: string) => {
     navigate({
-      to: "/standings/$teamId",
-      params: { teamId },
-      viewTransition: ViewTransitions.forward,
+      to: "/manager-overview",
+      search: { teamId },
     });
   };
 

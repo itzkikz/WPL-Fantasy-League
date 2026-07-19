@@ -28,11 +28,6 @@ export const playersApi = {
     return response.data.data;
   },
 
-  getByPlayerName: async (playerName: string): Promise<PlayerStats> => {
-    const response = await apiClient.get(API_ENDPOINTS.PLAYERS.BY_PLAYERNAME(playerName))
-    return response.data.data
-  },
-
   // create: async (book: Omit<Book, 'id'>): Promise<Book> => {
   //   const response = await apiClient.post('/books', book)
   //   return response.data

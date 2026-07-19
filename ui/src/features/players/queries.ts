@@ -30,11 +30,4 @@ export const playersQueries = {
     },
     staleTime: 5 * 60 * 1000,
   }),
-
-  detail: (playerName: string) =>
-    queryOptions({
-      queryKey: [QUERY_KEYS.PLAYERS, playerName],
-      queryFn: () => playersApi.getByPlayerName(playerName),
-      enabled: !!playerName,
-    }),
 }

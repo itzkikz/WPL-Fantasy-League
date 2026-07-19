@@ -523,6 +523,49 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             const pStatsDocs = await PlayerStatsModel.find({ playerId: { $in: players.map(p => p.id) } }).lean();
             const pStatsMap = new Map(pStatsDocs.map(doc => [doc.playerId, doc]));
 
+            // Fetch upcoming fixtures for all players' teams
+            const Fixture = (await import("../models/Fixture")).Fixture;
+            const allPlayerTeamIds = [...new Set(players.map(p => p.teamId).filter(Boolean))];
+            const upcomingDocs = await Fixture.find({
+                $and: [
+                    { 'roundInfo.round': { $gte: currentGw } },
+                    { 'status.type': { $ne: 'finished' } },
+                    {
+                        $or: [
+                            { 'homeTeam.id': { $in: allPlayerTeamIds } },
+                            { 'awayTeam.id': { $in: allPlayerTeamIds } }
+                        ]
+                    }
+                ]
+            }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
+
+            const fixturesByTeam = new Map<number, any[]>();
+            for (const f of upcomingDocs) {
+                const homeId = f.homeTeam?.id;
+                const awayId = f.awayTeam?.id;
+                if (homeId && !fixturesByTeam.has(homeId)) fixturesByTeam.set(homeId, []);
+                if (awayId && !fixturesByTeam.has(awayId)) fixturesByTeam.set(awayId, []);
+                if (homeId) fixturesByTeam.get(homeId)!.push({ fixture: f, isHome: true, opponentId: awayId });
+                if (awayId) fixturesByTeam.get(awayId)!.push({ fixture: f, isHome: false, opponentId: homeId });
+            }
+
+            // Ownership counts
+            const totalTeamsCount = allFantasyTeams.length;
+            const ownershipMap = new Map<number, { pct: number; teamName: string | null }>();
+            for (const pid of players.map(p => p.id)) {
+                let count = 0;
+                let tName: string | null = null;
+                for (const ft of allFantasyTeams) {
+                    const picks = (ft as any).currentSquad?.picks || [];
+                    if (picks.some((p: any) => p.playerId === pid)) {
+                        count++;
+                        if (!tName) tName = (ft as any).name;
+                    }
+                }
+                const pct = totalTeamsCount > 0 ? Number(((count / totalTeamsCount) * 100).toFixed(1)) : 0;
+                ownershipMap.set(pid, { pct, teamName: tName });
+            }
+
             const playerStats: PlayerStats[] = players.map(player => {
                 const team = teamMap.get(player.teamId);
                 const teamName = team ? team.name : "Unknown";
@@ -544,6 +587,85 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 }
                 (overallStats as any).total_point = pStatsDoc?.totalPoints || 0;
 
+                // Recent form (last 5 gameweeks)
+                const recentForm: any[] = [];
+                if (pStatsDoc && (pStatsDoc as any).gameweeks) {
+                    const sortedGws = [...(pStatsDoc as any).gameweeks].sort((a: any, b: any) => a.id - b.id);
+                    const filteredGws = sortedGws.filter((g: any) => g.id <= currentGw);
+                    const last5 = filteredGws.slice(-5);
+                    last5.forEach((g: any) => { recentForm.push({ gw: g.id, points: g.points || 0 }); });
+                }
+                if (recentForm.length === 0) {
+                    for (let i = Math.max(1, currentGw - 4); i <= currentGw; i++) {
+                        recentForm.push({ gw: i, points: 0 });
+                    }
+                }
+
+                // Upcoming fixtures
+                const teamFixtures = fixturesByTeam.get(player.teamId) || [];
+                const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }) => {
+                    const opponentTeam = teamMap.get(opponentId);
+                    return {
+                        gw: f.roundInfo?.round || 0,
+                        opponent_short_name: opponentTeam?.nameCode || "UNK",
+                        opponent_logo: opponentTeam?.logo || "",
+                        opponent_color: opponentTeam?.teamColors?.primary || "#003399",
+                        opponent_text_color: opponentTeam?.teamColors?.text || "#ffffff",
+                        my_team_short_name: team?.nameCode || "UNK",
+                        my_team_logo: team?.logo || "",
+                        is_home: isHome
+                    };
+                });
+                while (upcomingFixtures.length < 3) {
+                    const nextGw = currentGw + upcomingFixtures.length;
+                    upcomingFixtures.push({ gw: nextGw, opponent_short_name: "TBD", opponent_logo: "", opponent_color: "#1b1035", opponent_text_color: "#ffffff", my_team_short_name: teamShortName, my_team_logo: "", is_home: true });
+                }
+
+                // Points breakdown
+                const ownership = ownershipMap.get(player.id) || { pct: 0, teamName: null };
+                const pointsBreakdown: any[] = [];
+                if (pStatsDoc && (pStatsDoc as any).gameweeks) {
+                    const gwData = (pStatsDoc as any).gameweeks.find((g: any) => g.id === currentGw);
+                    if (gwData && gwData.stats) {
+                        const s = gwData.stats;
+                        const position = resolvePosition(player.position || '');
+                        const minutes = s.minutesPlayed || 0;
+                        if (minutes > 0) {
+                            pointsBreakdown.push({ label: "Minutes Played", value: `${minutes} mins`, points: minutes >= 60 ? 2 : 1 });
+                            const goals = s.goals || 0;
+                            if (goals > 0) {
+                                let gp = position === 'GK' ? goals * 10 : position === 'DEF' ? goals * 6 : position === 'MID' ? goals * 5 : goals * 4;
+                                pointsBreakdown.push({ label: `Goals (${goals})`, value: `${goals}`, points: gp });
+                            }
+                            const assists = s.goalAssist || 0;
+                            if (assists > 0) pointsBreakdown.push({ label: `Assists (${assists})`, value: `${assists}`, points: assists * 3 });
+                            if (s.cleanSheet === 1 && (position === 'GK' || position === 'DEF')) pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 4 });
+                            else if (s.cleanSheet === 1 && position === 'MID') pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 1 });
+                            const yellow = s.yellowCards || 0;
+                            if (yellow > 0) pointsBreakdown.push({ label: "Yellow Cards", value: `${yellow}`, points: yellow * -1 });
+                            const red = s.redCards || 0;
+                            if (red > 0) pointsBreakdown.push({ label: "Red Card", value: "Yes", points: -3 });
+                            const penMiss = s.penaltyMissed || 0;
+                            if (penMiss > 0) pointsBreakdown.push({ label: "Penalty Missed", value: `${penMiss}`, points: penMiss * -2 });
+                            if (position === 'GK') {
+                                const penSave = s.penaltySaved || 0;
+                                if (penSave > 0) pointsBreakdown.push({ label: "Penalty Saved", value: `${penSave}`, points: penSave * 5 });
+                                const gkSaves = s.saves || 0;
+                                if (gkSaves >= 3) pointsBreakdown.push({ label: `Saves (${gkSaves})`, value: `${gkSaves}`, points: Math.floor(gkSaves / 3) });
+                            }
+                            const tackles = s.totalTackle || 0;
+                            const clearances = s.totalClearance || 0;
+                            const blocks = s.outfielderBlock || 0;
+                            const ballRecovery = s.ballRecovery || 0;
+                            const defCont = tackles + clearances + blocks + ballRecovery;
+                            if (defCont > 0) {
+                                const dp = position === 'DEF' ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
+                                if (dp > 0) pointsBreakdown.push({ label: `Defensive Actions (${defCont})`, value: `${defCont}`, points: dp });
+                            }
+                        }
+                    }
+                }
+
                 return {
                     player_name: player.name || player.webName || "",
                     team_name: teamName,
@@ -560,7 +682,11 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                     player_id: player.id,
                     current_week: currentWeekStats,
                     photo: player.photo || "",
-                    fantasy_team_name: playerToFantasyTeam.get(player.id) || "Free Agent",
+                    ownership: ownership.pct,
+                    fantasy_team_name: ownership.teamName || "Free Agent",
+                    upcoming_fixtures: upcomingFixtures,
+                    recent_form: recentForm,
+                    points_breakdown: pointsBreakdown,
                     auctionPrice: player.auctionPrice
                 };
             });
@@ -602,6 +728,49 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
         const pStatsDocs = await PlayerStatsModel.find({ playerId: { $in: players.map(p => p.id) } }).lean();
         const pStatsMap = new Map(pStatsDocs.map(doc => [doc.playerId, doc]));
 
+        // Fetch upcoming fixtures for all players' teams
+        const Fixture = (await import("../models/Fixture")).Fixture;
+        const allPlayerTeamIds2 = [...new Set(players.map(p => p.teamId).filter(Boolean))];
+        const upcomingDocs2 = await Fixture.find({
+            $and: [
+                { 'roundInfo.round': { $gte: currentGw } },
+                { 'status.type': { $ne: 'finished' } },
+                {
+                    $or: [
+                        { 'homeTeam.id': { $in: allPlayerTeamIds2 } },
+                        { 'awayTeam.id': { $in: allPlayerTeamIds2 } }
+                    ]
+                }
+            ]
+        }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
+
+        const fixturesByTeam2 = new Map<number, any[]>();
+        for (const f of upcomingDocs2) {
+            const homeId = f.homeTeam?.id;
+            const awayId = f.awayTeam?.id;
+            if (homeId && !fixturesByTeam2.has(homeId)) fixturesByTeam2.set(homeId, []);
+            if (awayId && !fixturesByTeam2.has(awayId)) fixturesByTeam2.set(awayId, []);
+            if (homeId) fixturesByTeam2.get(homeId)!.push({ fixture: f, isHome: true, opponentId: awayId });
+            if (awayId) fixturesByTeam2.get(awayId)!.push({ fixture: f, isHome: false, opponentId: homeId });
+        }
+
+        // Ownership counts
+        const totalTeamsCount2 = allFantasyTeams.length;
+        const ownershipMap2 = new Map<number, { pct: number; teamName: string | null }>();
+        for (const pid of players.map(p => p.id)) {
+            let count = 0;
+            let tName: string | null = null;
+            for (const ft of allFantasyTeams) {
+                const picks = (ft as any).currentSquad?.picks || [];
+                if (picks.some((p: any) => p.playerId === pid)) {
+                    count++;
+                    if (!tName) tName = (ft as any).name;
+                }
+            }
+            const pct = totalTeamsCount2 > 0 ? Number(((count / totalTeamsCount2) * 100).toFixed(1)) : 0;
+            ownershipMap2.set(pid, { pct, teamName: tName });
+        }
+
         const playerStats: PlayerStats[] = players.map(player => {
             const team = teamMap.get(player.teamId);
             const teamName = team ? team.name : "Unknown";
@@ -623,6 +792,85 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             }
             (overallStats as any).total_point = pStatsDoc?.totalPoints || 0;
 
+            // Recent form (last 5 gameweeks)
+            const recentForm: any[] = [];
+            if (pStatsDoc && (pStatsDoc as any).gameweeks) {
+                const sortedGws = [...(pStatsDoc as any).gameweeks].sort((a: any, b: any) => a.id - b.id);
+                const filteredGws = sortedGws.filter((g: any) => g.id <= currentGw);
+                const last5 = filteredGws.slice(-5);
+                last5.forEach((g: any) => { recentForm.push({ gw: g.id, points: g.points || 0 }); });
+            }
+            if (recentForm.length === 0) {
+                for (let i = Math.max(1, currentGw - 4); i <= currentGw; i++) {
+                    recentForm.push({ gw: i, points: 0 });
+                }
+            }
+
+            // Upcoming fixtures
+            const teamFixtures = fixturesByTeam2.get(player.teamId) || [];
+            const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }) => {
+                const opponentTeam = teamMap.get(opponentId);
+                return {
+                    gw: f.roundInfo?.round || 0,
+                    opponent_short_name: opponentTeam?.nameCode || "UNK",
+                    opponent_logo: opponentTeam?.logo || "",
+                    opponent_color: opponentTeam?.teamColors?.primary || "#003399",
+                    opponent_text_color: opponentTeam?.teamColors?.text || "#ffffff",
+                    my_team_short_name: team?.nameCode || "UNK",
+                    my_team_logo: team?.logo || "",
+                    is_home: isHome
+                };
+            });
+            while (upcomingFixtures.length < 3) {
+                const nextGw = currentGw + upcomingFixtures.length;
+                upcomingFixtures.push({ gw: nextGw, opponent_short_name: "TBD", opponent_logo: "", opponent_color: "#1b1035", opponent_text_color: "#ffffff", my_team_short_name: teamShortName, my_team_logo: "", is_home: true });
+            }
+
+            // Points breakdown
+            const ownership = ownershipMap2.get(player.id) || { pct: 0, teamName: null };
+            const pointsBreakdown: any[] = [];
+            if (pStatsDoc && (pStatsDoc as any).gameweeks) {
+                const gwData = (pStatsDoc as any).gameweeks.find((g: any) => g.id === currentGw);
+                if (gwData && gwData.stats) {
+                    const s = gwData.stats;
+                    const position = resolvePosition(player.position || '');
+                    const minutes = s.minutesPlayed || 0;
+                    if (minutes > 0) {
+                        pointsBreakdown.push({ label: "Minutes Played", value: `${minutes} mins`, points: minutes >= 60 ? 2 : 1 });
+                        const goals = s.goals || 0;
+                        if (goals > 0) {
+                            let gp = position === 'GK' ? goals * 10 : position === 'DEF' ? goals * 6 : position === 'MID' ? goals * 5 : goals * 4;
+                            pointsBreakdown.push({ label: `Goals (${goals})`, value: `${goals}`, points: gp });
+                        }
+                        const assists = s.goalAssist || 0;
+                        if (assists > 0) pointsBreakdown.push({ label: `Assists (${assists})`, value: `${assists}`, points: assists * 3 });
+                        if (s.cleanSheet === 1 && (position === 'GK' || position === 'DEF')) pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 4 });
+                        else if (s.cleanSheet === 1 && position === 'MID') pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 1 });
+                        const yellow = s.yellowCards || 0;
+                        if (yellow > 0) pointsBreakdown.push({ label: "Yellow Cards", value: `${yellow}`, points: yellow * -1 });
+                        const red = s.redCards || 0;
+                        if (red > 0) pointsBreakdown.push({ label: "Red Card", value: "Yes", points: -3 });
+                        const penMiss = s.penaltyMissed || 0;
+                        if (penMiss > 0) pointsBreakdown.push({ label: "Penalty Missed", value: `${penMiss}`, points: penMiss * -2 });
+                        if (position === 'GK') {
+                            const penSave = s.penaltySaved || 0;
+                            if (penSave > 0) pointsBreakdown.push({ label: "Penalty Saved", value: `${penSave}`, points: penSave * 5 });
+                            const gkSaves = s.saves || 0;
+                            if (gkSaves >= 3) pointsBreakdown.push({ label: `Saves (${gkSaves})`, value: `${gkSaves}`, points: Math.floor(gkSaves / 3) });
+                        }
+                        const tackles = s.totalTackle || 0;
+                        const clearances = s.totalClearance || 0;
+                        const blocks = s.outfielderBlock || 0;
+                        const ballRecovery = s.ballRecovery || 0;
+                        const defCont = tackles + clearances + blocks + ballRecovery;
+                        if (defCont > 0) {
+                            const dp = position === 'DEF' ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
+                            if (dp > 0) pointsBreakdown.push({ label: `Defensive Actions (${defCont})`, value: `${defCont}`, points: dp });
+                        }
+                    }
+                }
+            }
+
             return {
                 player_name: player.name || player.webName || "",
                 team_name: teamName,
@@ -639,7 +887,11 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 player_id: player.id,
                 current_week: currentWeekStats,
                 photo: player.photo || "",
-                fantasy_team_name: playerToFantasyTeam.get(player.id) || "Free Agent",
+                ownership: ownership.pct,
+                fantasy_team_name: ownership.teamName || "Free Agent",
+                upcoming_fixtures: upcomingFixtures,
+                recent_form: recentForm,
+                points_breakdown: pointsBreakdown,
                 auctionPrice: player.auctionPrice
             };
         });
