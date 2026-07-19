@@ -92,7 +92,7 @@ const StandingsPage = () => {
   const overallRankPercent = myTeamIndex !== -1 ? `Top ${Math.max(1, Math.round(((myTeamIndex + 1) / standings!.length) * 100))}%` : "Top 2%";
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-48px-80px)] lg:h-[calc(100vh-48px)] bg-background text-white overflow-hidden font-outfit">
+    <div className="flex flex-col flex-1 bg-background text-white overflow-hidden font-outfit">
 
       {/* 3. Navigation Tabs */}
       <div className="mx-4 mt-3 mb-4 flex border-b border-[var(--color-border-divider)] shrink-0">

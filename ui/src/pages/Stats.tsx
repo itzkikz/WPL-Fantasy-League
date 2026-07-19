@@ -124,7 +124,7 @@ export default function Stats() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-48px-80px)] lg:h-[calc(100vh-48px)] bg-background text-white overflow-hidden font-outfit select-none">
+    <div className="flex flex-col flex-1 bg-background text-white overflow-hidden font-outfit select-none">
 
       {/* 1. Header Toolbar */}
       <div className="pt-5 pb-3 px-4 flex items-center justify-between shrink-0">
@@ -239,7 +239,7 @@ export default function Stats() {
       {/* 5. Scrollable Player List */}
       <div
         onScroll={handleScroll}
-        className="flex-1 mx-4 mt-2 mb-3 overflow-y-auto max-h-[calc(100vh-350px)] lg:max-h-[calc(100vh-270px)] scrollbar-hide space-y-2.5"
+        className="flex-1 mx-4 mt-2 mb-3 overflow-y-auto pb-[calc(5.25rem+env(safe-area-inset-bottom))] scrollbar-hide space-y-2.5"
       >
         {isLoading ? (
           [...Array(6)].map((_, i) => (

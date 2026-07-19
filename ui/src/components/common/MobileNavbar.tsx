@@ -68,7 +68,7 @@ const MobileNavbar = () => {
       ]
     : [
         { label: "Home", path: "/home", icon: HomeIcon },
-        { label: "League", path: "/standings", icon: LeagueIcon },
+        { label: "League", path: "/standings/", icon: LeagueIcon },
         { label: "My Team", path: "/my-team", icon: MyTeamIcon },
         { label: "H2H", path: "/h2h", icon: H2HIcon },
         { label: "Stats", path: "/stats", icon: StatsIcon },
@@ -76,17 +76,21 @@ const MobileNavbar = () => {
 
   const isBaseRoute =
     location.pathname === "/settings" ||
-    location.pathname.startsWith("/standings/") ||
+    location.pathname.startsWith("/standings") ||
     (isAdmin
       ? (location.pathname.startsWith("/admin") || location.pathname === "/settings")
-      : navItems.some((item) => matchRoute({ to: item.path, fuzzy: false })));
+      : navItems.some(
+          (item) =>
+            location.pathname === item.path ||
+            location.pathname.startsWith(item.path + "/")
+        ));
 
   if (!isBaseRoute) {
     return null;
   }
 
   return (
-    <nav className="mobile-navbar fixed bottom-0 left-0 right-0 w-full block lg:hidden border-t border-[#221938] z-50 bg-[#120C22] pb-[env(safe-area-inset-bottom)]" style={{ willChange: 'transform' }}>
+    <nav className="mobile-navbar fixed bottom-0 left-0 right-0 w-full block lg:hidden border-t border-[#221938] z-50 bg-[#120C22] pb-[env(safe-area-inset-bottom)]" style={{ willChange: 'transform', viewTransitionName: 'bottom-nav' }}>
       <div 
         className="grid h-16" 
         style={{ gridTemplateColumns: `repeat(${navItems.length}, minmax(0, 1fr))` }}
