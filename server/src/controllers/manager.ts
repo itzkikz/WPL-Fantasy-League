@@ -765,10 +765,12 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     const startingPlayerIds = startingPicks.map(p => p.playerId);
     const startingStatsDocs = await PlayerStatsModel.find({ playerId: { $in: startingPlayerIds } }).lean();
     const startingStatsMap = new Map(startingStatsDocs.map(s => [s.playerId, s]));
+    const startingPlayerDocs = await PlayerModel.find({ id: { $in: startingPlayerIds } }).lean();
+    const startingPlayerPositionMap = new Map(startingPlayerDocs.map((p: any) => [p.id, resolvePosition(p.position || '')]));
 
-    let bdGoals = 0, bdAssists = 0, bdCleanSheet = 0, bdYellow = 0, bdRed = 0;
-    let bdPenMiss = 0, bdPenSave = 0, bdSaves = 0, bdMinutes = 0, bdAppearancePoints = 0;
-    let bdTackles = 0, bdClearances = 0, bdBlocks = 0, bdRecovery = 0;
+    let bdGoalsPoints = 0, bdAssistsPoints = 0, bdCleanSheetPoints = 0;
+    let bdYellowPoints = 0, bdRedPoints = 0, bdPenMissPoints = 0, bdPenSavePoints = 0;
+    let bdSavesPoints = 0, bdMinutes = 0, bdAppearancePoints = 0, bdDefensivePoints = 0;
 
     for (const pick of startingPicks) {
       const statsDoc = startingStatsMap.get(pick.playerId);
@@ -776,38 +778,52 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       const gwData = statsDoc.gameweeks.find((g: any) => g.id === currentGw);
       if (!gwData) continue;
       const s = gwData.stats || {};
+      const position = startingPlayerPositionMap.get(pick.playerId) || 'MID';
+      const minutesPlayed = s.minutesPlayed || 0;
 
-      bdGoals += s.goals || 0;
-      bdAssists += s.goalAssist || 0;
-      bdCleanSheet += s.cleanSheet || 0;
-      bdYellow += s.yellowCards || 0;
-      bdRed += s.redCards || 0;
-      bdPenMiss += s.penaltyMissed || 0;
-      bdPenSave += s.penaltySaved || 0;
-      bdSaves += s.saves || 0;
-      bdMinutes += s.minutesPlayed || 0;
-      if ((s.minutesPlayed || 0) >= 60) bdAppearancePoints += 2;
-      else if ((s.minutesPlayed || 0) > 0) bdAppearancePoints += 1;
-      bdTackles += s.totalTackle || 0;
-      bdClearances += s.totalClearance || 0;
-      bdBlocks += s.outfielderBlock || 0;
-      bdRecovery += s.ballRecovery || 0;
+      bdMinutes += minutesPlayed;
+
+      if (minutesPlayed >= 60) bdAppearancePoints += 2;
+      else if (minutesPlayed > 0) bdAppearancePoints += 1;
+
+      const goals = s.goals || 0;
+      if (position === 'GK') bdGoalsPoints += goals * 10;
+      else if (position === 'DEF') bdGoalsPoints += goals * 6;
+      else if (position === 'MID') bdGoalsPoints += goals * 5;
+      else bdGoalsPoints += goals * 4;
+
+      bdAssistsPoints += (s.goalAssist || 0) * 3;
+
+      if (s.cleanSheet) {
+        if (position === 'GK' || position === 'DEF') bdCleanSheetPoints += 4;
+        else if (position === 'MID') bdCleanSheetPoints += 1;
+      }
+
+      bdYellowPoints += (s.yellowCards || 0) * -1;
+      bdRedPoints += (s.redCards || 0) * -3;
+      bdPenMissPoints += (s.penaltyMissed || 0) * -2;
+
+      if (position === 'GK') {
+        bdPenSavePoints += (s.penaltySaved || 0) * 5;
+        const saves = s.saves || 0;
+        if (saves >= 3) bdSavesPoints += Math.floor(saves / 3);
+      }
+
+      const defContrib = (s.totalTackle || 0) + (s.totalClearance || 0) + (s.outfielderBlock || 0) + (s.ballRecovery || 0);
+      if (position === 'DEF') bdDefensivePoints += Math.floor(defContrib / 10) * 2;
+      else bdDefensivePoints += Math.floor(defContrib / 12) * 2;
     }
 
     const pointsBreakdown = {
-      goals: bdGoals,
-      assists: bdAssists,
-      cleanSheet: bdCleanSheet,
-      yellowCards: bdYellow,
-      redCards: bdRed,
-      penaltyMissed: bdPenMiss,
-      penaltySaved: bdPenSave,
-      saves: bdSaves,
-      tackles: bdTackles,
-      clearances: bdClearances,
-      blocks: bdBlocks,
-      recovery: bdRecovery,
-      minutesPlayed: bdMinutes,
+      goals: bdGoalsPoints,
+      assists: bdAssistsPoints,
+      cleanSheet: bdCleanSheetPoints,
+      yellowCards: bdYellowPoints,
+      redCards: bdRedPoints,
+      penaltyMissed: bdPenMissPoints,
+      penaltySaved: bdPenSavePoints,
+      saves: bdSavesPoints,
+      defensive: bdDefensivePoints,
       appearancePoints: bdAppearancePoints,
       totalPoints: currentGwPoints,
     };
@@ -871,10 +887,9 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     const midfielders = pDocsWithStats.filter(p => p.position === "MID");
     const forwards = pDocsWithStats.filter(p => p.position === "FWD");
 
-    const startingPlayerDocs = await PlayerModel.find({ id: { $in: startingPlayerIds } }).lean();
-    const startingDEF = startingPlayerDocs.filter(p => resolvePosition(p.position || "") === "DEF").length;
-    const startingMID = startingPlayerDocs.filter(p => resolvePosition(p.position || "") === "MID").length;
-    const startingFWD = startingPlayerDocs.filter(p => resolvePosition(p.position || "") === "FWD").length;
+    const startingDEF = startingPlayerDocs.filter((p: any) => resolvePosition(p.position || "") === "DEF").length;
+    const startingMID = startingPlayerDocs.filter((p: any) => resolvePosition(p.position || "") === "MID").length;
+    const startingFWD = startingPlayerDocs.filter((p: any) => resolvePosition(p.position || "") === "FWD").length;
     const formation = startingPlayerDocs.length > 0 ? `${startingDEF}-${startingMID}-${startingFWD}` : "4-4-2";
 
     const squadComposition = {

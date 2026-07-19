@@ -163,17 +163,17 @@ const HomePage = () => {
                 const tp = Math.max(pb.totalPoints || 1, 1);
                 const pct = (pts: number) => Math.round((Math.abs(pts) / tp) * 100);
                 return [
-                  { label: "Goals", value: pb.goals * 5, percent: pct(pb.goals * 5), color: "var(--color-success)" },
-                  { label: "Assists", value: pb.assists * 3, percent: pct(pb.assists * 3), color: "var(--color-info)" },
-                  { label: "Clean Sheets", value: pb.cleanSheet * 4, percent: pct(pb.cleanSheet * 4), color: "#818cf8" },
-                  { label: "Yellow Cards", value: pb.yellowCards * -1, percent: pct(pb.yellowCards * -1), color: "#fbbf24" },
-                  { label: "Red Cards", value: pb.redCards * -3, percent: pct(pb.redCards * -3), color: "#f87171" },
-                  { label: "Penalty Miss", value: pb.penaltyMissed * -2, percent: pct(pb.penaltyMissed * -2), color: "#fb923c" },
-                  { label: "Penalty Save", value: pb.penaltySaved * 5, percent: pct(pb.penaltySaved * 5), color: "#34d399" },
-                  { label: "Saves", value: Math.floor((pb.saves || 0) / 3), percent: pct(Math.floor((pb.saves || 0) / 3)), color: "#a78bfa" },
-                  { label: "Defensive", value: Math.floor(((pb.tackles || 0) + (pb.clearances || 0) + (pb.blocks || 0) + (pb.recovery || 0)) / 10) * 2, percent: pct(Math.floor(((pb.tackles || 0) + (pb.clearances || 0) + (pb.blocks || 0) + (pb.recovery || 0)) / 10) * 2), color: "#2dd4bf" },
-                  { label: "Appearance", value: pb.appearancePoints || 0, percent: pct(pb.appearancePoints || 0), color: "var(--color-warning)" },
-                ];
+                  { label: "Goals", value: pb.goals, percent: pct(pb.goals), color: "var(--color-success)" },
+                  { label: "Assists", value: pb.assists, percent: pct(pb.assists), color: "var(--color-info)" },
+                  { label: "Clean Sheets", value: pb.cleanSheet, percent: pct(pb.cleanSheet), color: "#818cf8" },
+                  { label: "Appearance", value: pb.appearancePoints, percent: pct(pb.appearancePoints), color: "var(--color-warning)" },
+                  { label: "Defensive", value: pb.defensive, percent: pct(pb.defensive), color: "#2dd4bf" },
+                  { label: "Penalty Save", value: pb.penaltySaved, percent: pct(pb.penaltySaved), color: "#34d399" },
+                  { label: "Saves", value: pb.saves, percent: pct(pb.saves), color: "#a78bfa" },
+                  { label: "Yellow Cards", value: pb.yellowCards, percent: pct(pb.yellowCards), color: "#fbbf24" },
+                  { label: "Red Cards", value: pb.redCards, percent: pct(pb.redCards), color: "#f87171" },
+                  { label: "Penalty Miss", value: pb.penaltyMissed, percent: pct(pb.penaltyMissed), color: "#fb923c" },
+                ].filter(s => s.value !== 0);
               })()}
             />
           </div>

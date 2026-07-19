@@ -96,11 +96,7 @@ export interface PointsBreakdown {
   penaltyMissed: number;
   penaltySaved: number;
   saves: number;
-  tackles: number;
-  clearances: number;
-  blocks: number;
-  recovery: number;
-  minutesPlayed: number;
+  defensive: number;
   appearancePoints: number;
   totalPoints: number;
 }
