@@ -11,7 +11,6 @@ import {
   Clock,
   Crown
 } from "lucide-react";
-import { ViewTransitions } from "../../types/viewTransitions";
 import { useStandings, useStandingsFixtures } from "../../features/standings/hooks";
 import { useManagerDetails } from "../../features/manager/hooks";
 import { useMyFixtures } from "../../features/home/hooks";

@@ -5,7 +5,7 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2986 nodes · 4179 edges · 338 communities (157 shown, 181 thin omitted)
+- 2986 nodes · 4179 edges · 339 communities (158 shown, 181 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 188 edges (avg confidence: 0.76)
 - Token cost: 0 input · 0 output
 
@@ -344,6 +344,7 @@
 - Zustand State Management
 - React Vite Template README
 - Vercel Project Linking Documentation
+- axios
 
 ## God Nodes (most connected - your core abstractions)
 1. `TailwindConfigGenerator` - 57 edges
@@ -376,16 +377,10 @@
 - **Brand Guidelines Document Family** — agents_skills_brand_references_brand_guideline_template, agents_skills_brand_references_color_palette_management, agents_skills_brand_references_typography_specifications, agents_skills_brand_references_logo_usage_rules, agents_skills_brand_references_voice_framework, agents_skills_brand_templates_brand_guidelines_starter [EXTRACTED 1.00]
 - **Design System Token Pipeline** — agents_skills_design_system_skill, agents_skills_brand_skill, agents_skills_brand_references_update, agents_skills_design_system_references_tailwind_integration, concept_three_layer_token_architecture [EXTRACTED 0.95]
 - **Accessibility Compliance Framework** — concept_wcag_accessibility, agents_skills_brand_references_color_palette_management, agents_skills_brand_references_typography_specifications, agents_skills_brand_references_approval_checklist, agents_skills_design_system_references_states_and_variants [INFERRED 0.85]
-- **Slides Knowledge Base** — _agents_skills_design_references_slides_create, _agents_skills_design_references_slides_layout_patterns, _agents_skills_design_references_slides_html_template, _agents_skills_design_references_slides_copywriting_formulas, _agents_skills_design_references_slides_strategies [EXTRACTED 1.00]
-- **CIP Reference Documents** — _agents_skills_design_references_cip_deliverable_guide, _agents_skills_design_references_cip_style_guide, _agents_skills_design_references_cip_prompt_engineering [EXTRACTED 1.00]
-- **Logo Reference Documents** — _agents_skills_design_references_logo_style_guide, _agents_skills_design_references_logo_color_psychology, _agents_skills_design_references_logo_prompt_engineering [EXTRACTED 1.00]
-- **Slides Skill System** — .agents_skills_slides_references_create_slides_skill, .agents_skills_slides_references_html_template_slides_html_template, .agents_skills_slides_references_layout_patterns_slide_layouts, .agents_skills_slides_references_slide_strategies_deck_strategies [EXTRACTED 1.00]
-- **UI Styling Reference Stack** — .agents_skills_ui_styling_skill_ui_styling_skill, .agents_skills_ui_styling_references_shadcn_components_shadcn_component_catalog, .agents_skills_ui_styling_references_shadcn_theming_shadcn_theming, .agents_skills_ui_styling_references_shadcn_accessibility_radix_ui_a11y, .agents_skills_ui_styling_references_tailwind_utilities_tailwind_utility_reference, .agents_skills_ui_styling_references_tailwind_responsive_responsive_design, .agents_skills_ui_styling_references_tailwind_customization_tailwind_config [EXTRACTED 1.00]
-- **Canvas Design Movements** — .agents_skills_ui_styling_references_canvas_design_system_canvas_design, .agents_skills_ui_styling_references_canvas_design_system_concrete_poetry, .agents_skills_ui_styling_references_canvas_design_system_chromatic_language, .agents_skills_ui_styling_references_canvas_design_system_geometric_silence [EXTRACTED 1.00]
 - **Responsive grid layout system** — ui_src_pages_home_homepagepng_screenshot, ui_src_pages_home_homepagepng_teamoverview, ui_src_pages_home_homepagepng_upcomingfixture, ui_src_pages_home_homepagepng_leaguestatistics, ui_src_pages_home_homepagepng_gameweekprogress, ui_src_pages_home_homepagepng_leaguestandings, ui_src_pages_home_homepagepng_playerspotlight, ui_src_pages_home_homepagepng_topplayers, ui_src_pages_home_homepagepng_bestperformers, ui_src_pages_home_homepagepng_recentgameweeks, ui_src_pages_home_homepagepng_pointsbreakdown, ui_src_pages_home_homepagepng_seasonstats, ui_src_pages_home_homepagepng_teamformation, ui_src_pages_home_homepagepng_squadvalue, ui_src_pages_home_homepagepng_yourplayerscard, ui_src_pages_home_homepagepng_fantasynews [INFERRED 0.90]
 - **Dark theme design system** — ui_src_pages_home_homepagepng_screenshot, ui_src_pages_home_homepagepng_header, ui_src_pages_home_homepagepng_bottomnavbar [INFERRED 0.90]
 
-## Communities (338 total, 181 thin omitted)
+## Communities (339 total, 181 thin omitted)
 
 ### Community 0 - "UI Navigation & Layout"
 Cohesion: 0.05
@@ -408,8 +403,8 @@ Cohesion: 0.50
 Nodes (4): vite-plugin-pwa, WPL Fantasy Football HTML Entry Point, Dark Mode Theme Detection, iOS PWA Splash Screen Logic
 
 ### Community 5 - "Server Notifications & Points"
-Cohesion: 0.14
-Nodes (18): countCards(), countGoalsConceded(), mapSofascoreToPlayerMatchStat(), ILineupEntry, IMatchDetails, LineupEntrySchema, MatchDetailsSchema, Player (+10 more)
+Cohesion: 0.31
+Nodes (7): countCards(), countGoalsConceded(), mapSofascoreToPlayerMatchStat(), ILineupEntry, IMatchDetails, LineupEntrySchema, MatchDetailsSchema
 
 ### Community 6 - "Slide Search Engine"
 Cohesion: 0.08
@@ -465,7 +460,7 @@ Nodes (21): homeApi, BestPerformer, FixtureDifficultyItem, FixturePlayer, Gamewe
 
 ### Community 20 - "Server Auth & H2H"
 Cohesion: 0.11
-Nodes (20): client, login(), privateKey, Cell, notifications(), Row, send(), subscribe() (+12 more)
+Nodes (24): Cell, notifications(), Row, send(), subscribe(), webpush, INotification, Notification (+16 more)
 
 ### Community 21 - "Server Sync & Fantasy Team"
 Cohesion: 0.14
@@ -516,12 +511,12 @@ Cohesion: 0.11
 Nodes (19): $type, $value, background, foreground, muted-foreground, primary, primary-hover, secondary (+11 more)
 
 ### Community 35 - "Tailwind Config Generator"
-Cohesion: 0.11
-Nodes (10): main(), Add custom font families.          Args:             fonts: Dict of font_type: [, Add custom spacing values.          Args:             spacing: Dict of name: val, Add custom breakpoints.          Args:             breakpoints: Dict of name: wi, Add plugin requirements.          Args:             plugins: List of plugin name, Get plugin recommendations based on configuration.          Returns:, Generate configuration file content.          Returns:             Configuration, Write configuration to file.          Returns:             Tuple of (success, me (+2 more)
+Cohesion: 0.13
+Nodes (8): main(), Add custom font families.          Args:             fonts: Dict of font_type: [, Add custom spacing values.          Args:             spacing: Dict of name: val, Add custom breakpoints.          Args:             breakpoints: Dict of name: wi, Add plugin requirements.          Args:             plugins: List of plugin name, Get plugin recommendations based on configuration.          Returns:, Validate configuration.          Returns:             Tuple of (valid, message), Add custom colors to theme.          Args:             colors: Dict of color_nam
 
 ### Community 36 - "Server Package Dependencies"
 Cohesion: 0.11
-Nodes (19): bcryptjs, body-parser, cors, dotenv, google-auth-library, mongoose, dependencies, axios (+11 more)
+Nodes (19): bcryptjs, body-parser, cors, dotenv, google-auth-library, jsonwebtoken, mongoose, dependencies (+11 more)
 
 ### Community 37 - "Player Stats Feature"
 Cohesion: 0.48
@@ -560,8 +555,8 @@ Cohesion: 0.12
 Nodes (9): Test adding components without shadcn config., Test adding components that are already installed., Test ShadcnInstaller class., Test adding all components in dry run mode., Create temporary project structure., Test successful addition of all components., Test listing installed components when none exist., Test checking for non-existent shadcn config. (+1 more)
 
 ### Community 48 - "Design System Orchestration"
-Cohesion: 0.17
-Nodes (16): ansi_ljust(), format_ascii_box(), format_markdown(), format_master_md(), generate_design_system(), hex_to_ansi(), persist_design_system(), Convert hex color to ANSI True Color swatch (██) with fallback. (+8 more)
+Cohesion: 0.19
+Nodes (14): _detect_page_type(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides(), persist_design_system(), Generate intelligent overrides based on page type using layered search. (+6 more)
 
 ### Community 49 - "Server Dev Dependencies"
 Cohesion: 0.13
@@ -589,7 +584,7 @@ Nodes (12): ThemeToggle(), useManagerDetails(), useStandingsFixtures(), Settings
 
 ### Community 55 - "Design Token Radius & Shadows"
 Cohesion: 0.29
-Nodes (8): $type, $value, $type, $value, radius, default, full, default
+Nodes (8): $type, $value, $type, $value, radius, full, none, none
 
 ### Community 56 - "UI UX Color Sync"
 Cohesion: 0.29
@@ -679,8 +674,8 @@ Cohesion: 0.29
 Nodes (8): padding-x, input, $type, $value, focus-ring, padding-x, $type, $value
 
 ### Community 78 - "Community 78"
-Cohesion: 0.29
-Nodes (4): Generate TypeScript configuration., Generate JavaScript configuration., Format plugins array for config.          Validates each plugin name against a s, Add indentation to JSON string.
+Cohesion: 0.20
+Nodes (6): Generate configuration file content.          Returns:             Configuration, Generate TypeScript configuration., Generate JavaScript configuration., Format plugins array for config.          Validates each plugin name against a s, Add indentation to JSON string., Write configuration to file.          Returns:             Tuple of (success, me
 
 ### Community 79 - "Community 79"
 Cohesion: 0.05
@@ -727,8 +722,8 @@ Cohesion: 0.67
 Nodes (4): xl, xl, $type, $value
 
 ### Community 94 - "Community 94"
-Cohesion: 0.67
-Nodes (4): $type, $value, none, none
+Cohesion: 0.24
+Nodes (7): client, login(), privateKey, IUser, User, UserSchema, router
 
 ### Community 95 - "Community 95"
 Cohesion: 0.50
@@ -789,6 +784,10 @@ Nodes (32): Accessibility, Available Domains, Available Stacks, Common Rules for
 ### Community 144 - "Community 144"
 Cohesion: 0.06
 Nodes (30): Accessibility, Base System, Best Practices, Clean & Modern, Common Font Pairings, Contrast Requirements, CSS Implementation, Editorial (+22 more)
+
+### Community 146 - "Community 146"
+Cohesion: 0.25
+Nodes (8): ansi_ljust(), format_ascii_box(), hex_to_ansi(), Convert hex color to ANSI True Color swatch (██) with fallback., Like str.ljust but accounts for zero-width ANSI escape sequences., Create a Unicode section separator: ├─── NAME ───...┤, Format design system as Unicode box with ANSI color swatches., section_header()
 
 ### Community 150 - "Community 150"
 Cohesion: 0.07
@@ -963,8 +962,8 @@ Cohesion: 0.33
 Nodes (5): References (Knowledge Base), Routing, Slides, Subcommands, When to Use
 
 ### Community 224 - "_generate_intelligent_overrides"
-Cohesion: 0.33
-Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Generate intelligent overrides based on page type using layered search., Detect page type from context and search results., Format a page-specific override file with intelligent AI-generated content.
+Cohesion: 0.67
+Nodes (4): $type, $value, default, default
 
 ### Community 225 - "scripts"
 Cohesion: 0.33
@@ -990,7 +989,7 @@ Nodes (3): Expanding the ESLint configuration, React Compiler, React + Vite
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `error` connect `Server Admin API` to `UI Navigation & Layout`, `Server Database & Seeding`, `Server API Controllers`, `Server Entry & Middleware`, `App Entry & Theme Context`, `Server Auth & H2H`, `Server Sync & Fantasy Team`, `Standings Page`, `Sofascore Scraper Scripts`, `Admin Fantasy Team Routes`?**
+- **Why does `error` connect `Server Admin API` to `UI Navigation & Layout`, `Server Database & Seeding`, `Server API Controllers`, `Server Entry & Middleware`, `App Entry & Theme Context`, `Server Sync & Fantasy Team`, `Standings Page`, `Admin Fantasy Team Routes`, `Sofascore Scraper Scripts`, `Community 94`?**
   _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **Why does `substitution()` connect `Server API Controllers` to `Server Lineup & Substitution`, `Manager Pick Team`, `Server Admin API`?**
   _High betweenness centrality (0.015) - this node is a cross-community bridge._

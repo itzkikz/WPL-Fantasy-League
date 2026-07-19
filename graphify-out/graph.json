@@ -2494,7 +2494,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_radius_none",
-      "community": 55,
+      "community": 166,
       "norm_label": "none"
     },
     {
@@ -2504,7 +2504,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_none_value",
-      "community": 55,
+      "community": 166,
       "norm_label": "$value"
     },
     {
@@ -2514,7 +2514,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_none_type",
-      "community": 55,
+      "community": 166,
       "norm_label": "$type"
     },
     {
@@ -2564,7 +2564,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_radius_md",
-      "community": 227,
+      "community": 55,
       "norm_label": "md"
     },
     {
@@ -2574,7 +2574,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_md_value",
-      "community": 227,
+      "community": 55,
       "norm_label": "$value"
     },
     {
@@ -2584,7 +2584,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_md_type",
-      "community": 227,
+      "community": 55,
       "norm_label": "$type"
     },
     {
@@ -2654,7 +2654,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_shadow_none",
-      "community": 55,
+      "community": 166,
       "norm_label": "none"
     },
     {
@@ -2684,7 +2684,7 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_shadow_md",
-      "community": 227,
+      "community": 55,
       "norm_label": "md"
     },
     {
@@ -7634,7 +7634,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "server_package_dependencies_axios",
-      "community": 338,
+      "community": 36,
       "norm_label": "axios"
     },
     {
@@ -7644,7 +7644,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "server_package_json_axios",
-      "community": 338,
+      "community": 36,
       "norm_label": "axios"
     },
     {
@@ -7814,7 +7814,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "server_package_dependencies_jsonwebtoken",
-      "community": 36,
+      "community": 227,
       "norm_label": "jsonwebtoken"
     },
     {
@@ -7824,7 +7824,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "jsonwebtoken",
-      "community": 36,
+      "community": 227,
       "norm_label": "jsonwebtoken"
     },
     {
@@ -8384,7 +8384,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_controllers_auth",
-      "community": 94,
+      "community": 20,
       "norm_label": "auth.ts"
     },
     {
@@ -8394,7 +8394,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "server_src_controllers_auth_client",
-      "community": 94,
+      "community": 20,
       "norm_label": "client"
     },
     {
@@ -8404,7 +8404,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "server_src_controllers_auth_privatekey",
-      "community": 94,
+      "community": 20,
       "norm_label": "privatekey"
     },
     {
@@ -8414,7 +8414,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "server_src_controllers_auth_login",
-      "community": 94,
+      "community": 20,
       "norm_label": "login()"
     },
     {
@@ -8444,7 +8444,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_controllers_h2h",
-      "community": 10,
+      "community": 17,
       "norm_label": "h2h.ts"
     },
     {
@@ -8454,7 +8454,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "server_src_controllers_h2h_computeteamgwpoints",
-      "community": 10,
+      "community": 17,
       "norm_label": "computeteamgwpoints()"
     },
     {
@@ -8464,7 +8464,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "server_src_controllers_h2h_getleaguegwpoints",
-      "community": 10,
+      "community": 17,
       "norm_label": "getleaguegwpoints()"
     },
     {
@@ -8474,7 +8474,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "server_src_controllers_h2h_getleagueallgwpoints",
-      "community": 10,
+      "community": 17,
       "norm_label": "getleagueallgwpoints()"
     },
     {
@@ -8484,7 +8484,7 @@
       "source_location": "L99",
       "_origin": "ast",
       "id": "server_src_controllers_h2h_getmyh2hleagues",
-      "community": 10,
+      "community": 17,
       "norm_label": "getmyh2hleagues()"
     },
     {
@@ -8494,7 +8494,7 @@
       "source_location": "L131",
       "_origin": "ast",
       "id": "server_src_controllers_h2h_geth2hstandings",
-      "community": 10,
+      "community": 17,
       "norm_label": "geth2hstandings()"
     },
     {
@@ -8504,7 +8504,7 @@
       "source_location": "L220",
       "_origin": "ast",
       "id": "server_src_controllers_h2h_geth2hleaguefixturespublic",
-      "community": 10,
+      "community": 17,
       "norm_label": "geth2hleaguefixturespublic()"
     },
     {
@@ -9154,7 +9154,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution",
-      "community": 24,
+      "community": 94,
       "norm_label": "substitution.ts"
     },
     {
@@ -9164,7 +9164,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_category",
-      "community": 24,
+      "community": 94,
       "norm_label": "category"
     },
     {
@@ -9174,7 +9174,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_enrichedplayer",
-      "community": 24,
+      "community": 94,
       "norm_label": "enrichedplayer"
     },
     {
@@ -9184,7 +9184,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_formation_rules",
-      "community": 24,
+      "community": 94,
       "norm_label": "formation_rules"
     },
     {
@@ -9194,7 +9194,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_getpositioncategory",
-      "community": 24,
+      "community": 94,
       "norm_label": "getpositioncategory()"
     },
     {
@@ -9204,7 +9204,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_countstartingplayers",
-      "community": 24,
+      "community": 94,
       "norm_label": "countstartingplayers()"
     },
     {
@@ -9214,7 +9214,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_canswap",
-      "community": 24,
+      "community": 94,
       "norm_label": "canswap()"
     },
     {
@@ -9224,7 +9224,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_executeswap",
-      "community": 24,
+      "community": 94,
       "norm_label": "executeswap()"
     },
     {
@@ -9234,7 +9234,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_lib_points",
-      "community": 20,
+      "community": 5,
       "norm_label": "points.ts"
     },
     {
@@ -9474,7 +9474,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_apiconfig",
-      "community": 8,
+      "community": 10,
       "norm_label": "apiconfig.ts"
     },
     {
@@ -9484,7 +9484,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_models_apiconfig_iapiconfig",
-      "community": 8,
+      "community": 10,
       "norm_label": "iapiconfig"
     },
     {
@@ -9494,7 +9494,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "server_src_models_apiconfig_apiconfigschema",
-      "community": 8,
+      "community": 10,
       "norm_label": "apiconfigschema"
     },
     {
@@ -9634,7 +9634,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_gameweek",
-      "community": 8,
+      "community": 17,
       "norm_label": "gameweek.ts"
     },
     {
@@ -9644,7 +9644,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_models_gameweek_igameweek",
-      "community": 8,
+      "community": 17,
       "norm_label": "igameweek"
     },
     {
@@ -9654,7 +9654,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "server_src_models_gameweek_gameweekschema",
-      "community": 8,
+      "community": 17,
       "norm_label": "gameweekschema"
     },
     {
@@ -9674,7 +9674,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_h2hfixture",
-      "community": 10,
+      "community": 17,
       "norm_label": "h2hfixture.ts"
     },
     {
@@ -9684,7 +9684,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_models_h2hfixture_ih2hfixture",
-      "community": 10,
+      "community": 17,
       "norm_label": "ih2hfixture"
     },
     {
@@ -9694,7 +9694,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "server_src_models_h2hfixture_h2hfixtureschema",
-      "community": 10,
+      "community": 17,
       "norm_label": "h2hfixtureschema"
     },
     {
@@ -9704,7 +9704,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "server_src_models_h2hfixture_h2hfixture",
-      "community": 10,
+      "community": 17,
       "norm_label": "h2hfixture"
     },
     {
@@ -9714,7 +9714,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_h2hleague",
-      "community": 10,
+      "community": 17,
       "norm_label": "h2hleague.ts"
     },
     {
@@ -9724,7 +9724,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_models_h2hleague_ih2hleague",
-      "community": 10,
+      "community": 17,
       "norm_label": "ih2hleague"
     },
     {
@@ -9734,7 +9734,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "server_src_models_h2hleague_h2hleagueschema",
-      "community": 10,
+      "community": 17,
       "norm_label": "h2hleagueschema"
     },
     {
@@ -9744,7 +9744,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "server_src_models_h2hleague_h2hleague",
-      "community": 10,
+      "community": 17,
       "norm_label": "h2hleague"
     },
     {
@@ -9894,7 +9894,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_player",
-      "community": 8,
+      "community": 21,
       "norm_label": "player.ts"
     },
     {
@@ -9914,7 +9914,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "server_src_models_player_playerschema",
-      "community": 8,
+      "community": 21,
       "norm_label": "playerschema"
     },
     {
@@ -10094,7 +10094,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_user",
-      "community": 94,
+      "community": 20,
       "norm_label": "user.ts"
     },
     {
@@ -10104,7 +10104,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_models_user_iuser",
-      "community": 94,
+      "community": 20,
       "norm_label": "iuser"
     },
     {
@@ -10114,7 +10114,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "server_src_models_user_userschema",
-      "community": 94,
+      "community": 20,
       "norm_label": "userschema"
     },
     {
@@ -10124,7 +10124,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "server_src_models_user_user",
-      "community": 94,
+      "community": 20,
       "norm_label": "user"
     },
     {
@@ -10154,7 +10154,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_routes_auth",
-      "community": 94,
+      "community": 20,
       "norm_label": "auth.ts"
     },
     {
@@ -10164,7 +10164,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_routes_auth_router",
-      "community": 94,
+      "community": 20,
       "norm_label": "router"
     },
     {
@@ -10194,7 +10194,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_routes_h2h",
-      "community": 10,
+      "community": 17,
       "norm_label": "h2h.ts"
     },
     {
@@ -10204,7 +10204,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "server_src_routes_h2h_router",
-      "community": 10,
+      "community": 11,
       "norm_label": "router"
     },
     {
@@ -10254,7 +10254,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_routes_players",
-      "community": 11,
+      "community": 8,
       "norm_label": "players.ts"
     },
     {
@@ -10784,7 +10784,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_scripts_uploadplayerimages",
-      "community": 7,
+      "community": 21,
       "norm_label": "uploadplayerimages.ts"
     },
     {
@@ -10794,7 +10794,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "server_src_scripts_uploadplayerimages_stealthplugin",
-      "community": 7,
+      "community": 21,
       "norm_label": "stealthplugin"
     },
     {
@@ -10804,7 +10804,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "server_src_scripts_uploadplayerimages_keyparts",
-      "community": 7,
+      "community": 21,
       "norm_label": "keyparts"
     },
     {
@@ -10814,7 +10814,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "server_src_scripts_uploadplayerimages_supabase",
-      "community": 7,
+      "community": 21,
       "norm_label": "supabase"
     },
     {
@@ -10824,7 +10824,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "server_src_scripts_uploadplayerimages_extension_map",
-      "community": 7,
+      "community": 21,
       "norm_label": "extension_map"
     },
     {
@@ -10834,7 +10834,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "server_src_scripts_uploadplayerimages_magic_bytes",
-      "community": 7,
+      "community": 21,
       "norm_label": "magic_bytes"
     },
     {
@@ -10844,7 +10844,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "server_src_scripts_uploadplayerimages_detectcontenttype",
-      "community": 7,
+      "community": 21,
       "norm_label": "detectcontenttype()"
     },
     {
@@ -10854,7 +10854,7 @@
       "source_location": "L60",
       "_origin": "ast",
       "id": "server_src_scripts_uploadplayerimages_uploadplayerimages",
-      "community": 7,
+      "community": 21,
       "norm_label": "uploadplayerimages()"
     },
     {
@@ -11024,7 +11024,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_types_players",
-      "community": 20,
+      "community": 5,
       "norm_label": "players.ts"
     },
     {
@@ -11034,7 +11034,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_types_players_sofascorestats",
-      "community": 20,
+      "community": 5,
       "norm_label": "sofascorestats"
     },
     {
@@ -11044,7 +11044,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "server_src_types_players_playerstats",
-      "community": 20,
+      "community": 5,
       "norm_label": "playerstats"
     },
     {
@@ -11054,7 +11054,7 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "server_src_types_players_player",
-      "community": 20,
+      "community": 5,
       "norm_label": "player"
     },
     {
@@ -11064,7 +11064,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_types_standings",
-      "community": 24,
+      "community": 5,
       "norm_label": "standings.ts"
     },
     {
@@ -11074,7 +11074,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "server_src_types_standings_standingsresponse",
-      "community": 20,
+      "community": 5,
       "norm_label": "standingsresponse"
     },
     {
@@ -11084,7 +11084,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "server_src_types_standings_teamdetails",
-      "community": 24,
+      "community": 5,
       "norm_label": "teamdetails"
     },
     {
@@ -11094,7 +11094,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_types_users",
-      "community": 20,
+      "community": 5,
       "norm_label": "users.ts"
     },
     {
@@ -11104,7 +11104,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_types_users_subscribers",
-      "community": 20,
+      "community": 5,
       "norm_label": "subscribers"
     },
     {
@@ -11114,7 +11114,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "server_src_types_users_notifications",
-      "community": 20,
+      "community": 5,
       "norm_label": "notifications"
     },
     {
@@ -11124,7 +11124,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_utils",
-      "community": 20,
+      "community": 5,
       "norm_label": "utils.ts"
     },
     {
@@ -11134,7 +11134,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "server_src_utils_datatypemapping",
-      "community": 20,
+      "community": 5,
       "norm_label": "datatypemapping"
     },
     {
@@ -11144,7 +11144,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "server_src_utils_isnumeric",
-      "community": 20,
+      "community": 5,
       "norm_label": "isnumeric()"
     },
     {
@@ -11154,7 +11154,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "server_src_utils_datatype",
-      "community": 20,
+      "community": 5,
       "norm_label": "datatype"
     },
     {
@@ -11164,7 +11164,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "server_src_utils_returntypemap",
-      "community": 20,
+      "community": 5,
       "norm_label": "returntypemap"
     },
     {
@@ -11174,7 +11174,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "server_src_utils_converttojson",
-      "community": 20,
+      "community": 5,
       "norm_label": "converttojson()"
     },
     {
@@ -12184,7 +12184,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_api_client",
-      "community": 30,
+      "community": 28,
       "norm_label": "client.ts"
     },
     {
@@ -12194,7 +12194,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "ui_src_api_client_apiclient",
-      "community": 30,
+      "community": 28,
       "norm_label": "apiclient"
     },
     {
@@ -12204,7 +12204,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "ui_src_api_client_geterrorpayload",
-      "community": 30,
+      "community": 28,
       "norm_label": "geterrorpayload()"
     },
     {
@@ -12214,7 +12214,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_api_endpoints",
-      "community": 28,
+      "community": 206,
       "norm_label": "endpoints.ts"
     },
     {
@@ -12234,7 +12234,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "ui_src_api_endpoints_query_keys",
-      "community": 28,
+      "community": 206,
       "norm_label": "query_keys"
     },
     {
@@ -12274,7 +12274,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_listplayeritem",
-      "community": 73,
+      "community": 53,
       "norm_label": "listplayeritem.tsx"
     },
     {
@@ -12284,7 +12284,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_components_listplayeritem_listplayeritemprops",
-      "community": 73,
+      "community": 53,
       "norm_label": "listplayeritemprops"
     },
     {
@@ -12294,7 +12294,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "ui_src_components_listplayeritem_listplayeritem",
-      "community": 73,
+      "community": 53,
       "norm_label": "listplayeritem()"
     },
     {
@@ -12324,7 +12324,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_pwainstallbanner",
-      "community": 0,
+      "community": 158,
       "norm_label": "pwainstallbanner.tsx"
     },
     {
@@ -12334,7 +12334,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "ui_src_components_pwainstallbanner_beforeinstallpromptevent",
-      "community": 0,
+      "community": 158,
       "norm_label": "beforeinstallpromptevent"
     },
     {
@@ -12344,7 +12344,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "ui_src_components_pwainstallbanner_beforeinstallpromptevent_prompt",
-      "community": 0,
+      "community": 158,
       "norm_label": ".prompt()"
     },
     {
@@ -12354,7 +12354,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "ui_src_components_pwainstallbanner_windoweventmap",
-      "community": 0,
+      "community": 158,
       "norm_label": "windoweventmap"
     },
     {
@@ -12364,7 +12364,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "ui_src_components_pwainstallbanner_pwainstallbanner",
-      "community": 0,
+      "community": 158,
       "norm_label": "pwainstallbanner()"
     },
     {
@@ -12384,7 +12384,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_components_pitchplayercard_pitchplayercardprops",
-      "community": 17,
+      "community": 53,
       "norm_label": "pitchplayercardprops"
     },
     {
@@ -12444,7 +12444,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_themetoggle",
-      "community": 54,
+      "community": 81,
       "norm_label": "themetoggle.tsx"
     },
     {
@@ -12454,7 +12454,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "ui_src_components_themetoggle_themetoggle",
-      "community": 54,
+      "community": 81,
       "norm_label": "themetoggle()"
     },
     {
@@ -12614,128 +12614,158 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar",
-      "community": 0,
+      "community": 50,
       "norm_label": "mobilenavbar.tsx"
     },
     {
       "label": "iconClass()",
       "file_type": "code",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L15",
+      "source_location": "L14",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar_iconclass",
-      "community": 0,
+      "community": 50,
       "norm_label": "iconclass()"
     },
     {
       "label": "HomeIcon()",
       "file_type": "code",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L18",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar_homeicon",
-      "community": 0,
+      "community": 50,
       "norm_label": "homeicon()"
     },
     {
       "label": "LeagueIcon()",
       "file_type": "code",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L21",
+      "source_location": "L20",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar_leagueicon",
-      "community": 0,
+      "community": 50,
       "norm_label": "leagueicon()"
     },
     {
       "label": "MyTeamIcon()",
       "file_type": "code",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L24",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar_myteamicon",
-      "community": 0,
+      "community": 50,
       "norm_label": "myteamicon()"
     },
     {
       "label": "H2HIcon()",
       "file_type": "code",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L27",
+      "source_location": "L26",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar_h2hicon",
-      "community": 0,
+      "community": 50,
       "norm_label": "h2hicon()"
     },
     {
       "label": "StatsIcon()",
       "file_type": "code",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L30",
+      "source_location": "L29",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar_statsicon",
-      "community": 0,
+      "community": 50,
       "norm_label": "statsicon()"
     },
     {
       "label": "AdminSettingsIcon()",
       "file_type": "code",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L33",
+      "source_location": "L32",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar_adminsettingsicon",
-      "community": 0,
+      "community": 50,
       "norm_label": "adminsettingsicon()"
     },
     {
       "label": "AdminFixturesIcon()",
       "file_type": "code",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L36",
+      "source_location": "L35",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar_adminfixturesicon",
-      "community": 0,
+      "community": 50,
       "norm_label": "adminfixturesicon()"
     },
     {
       "label": "AdminTeamsIcon()",
       "file_type": "code",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L39",
+      "source_location": "L38",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar_adminteamsicon",
-      "community": 0,
+      "community": 50,
       "norm_label": "adminteamsicon()"
     },
     {
       "label": "AdminLeaguesIcon()",
       "file_type": "code",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L42",
+      "source_location": "L41",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar_adminleaguesicon",
-      "community": 0,
+      "community": 50,
       "norm_label": "adminleaguesicon()"
     },
     {
       "label": "AdminH2HIcon()",
       "file_type": "code",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L45",
+      "source_location": "L44",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar_adminh2hicon",
-      "community": 0,
+      "community": 50,
       "norm_label": "adminh2hicon()"
     },
     {
       "label": "MobileNavbar()",
       "file_type": "code",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L49",
+      "source_location": "L48",
       "_origin": "ast",
       "id": "ui_src_components_common_mobilenavbar_mobilenavbar",
-      "community": 0,
+      "community": 50,
       "norm_label": "mobilenavbar()"
+    },
+    {
+      "label": "Modal.tsx",
+      "file_type": "code",
+      "source_file": "ui/src/components/common/Modal.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "ui_src_components_common_modal",
+      "community": 28,
+      "norm_label": "modal.tsx"
+    },
+    {
+      "label": "ModalProps",
+      "file_type": "code",
+      "source_file": "ui/src/components/common/Modal.tsx",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "ui_src_components_common_modal_modalprops",
+      "community": 28,
+      "norm_label": "modalprops"
+    },
+    {
+      "label": "Modal()",
+      "file_type": "code",
+      "source_file": "ui/src/components/common/Modal.tsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "ui_src_components_common_modal_modal",
+      "community": 28,
+      "norm_label": "modal()"
     },
     {
       "label": "Overlay.tsx",
@@ -13614,7 +13644,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_icons_info",
-      "community": 73,
+      "community": 53,
       "norm_label": "info.tsx"
     },
     {
@@ -13624,7 +13654,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "ui_src_components_icons_info_infoprops",
-      "community": 73,
+      "community": 53,
       "norm_label": "infoprops"
     },
     {
@@ -13634,7 +13664,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "ui_src_components_icons_info_info",
-      "community": 73,
+      "community": 53,
       "norm_label": "info()"
     },
     {
@@ -13754,7 +13784,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_layouts_mainlayout",
-      "community": 0,
+      "community": 81,
       "norm_label": "mainlayout.tsx"
     },
     {
@@ -13764,7 +13794,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "ui_src_components_layouts_mainlayout_mainlayout",
-      "community": 0,
+      "community": 81,
       "norm_label": "mainlayout()"
     },
     {
@@ -13774,7 +13804,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_player_playerdetails",
-      "community": 53,
+      "community": 25,
       "norm_label": "playerdetails.tsx"
     },
     {
@@ -13784,7 +13814,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "ui_src_components_player_playerdetails_getpointsimpact",
-      "community": 53,
+      "community": 25,
       "norm_label": "getpointsimpact()"
     },
     {
@@ -13794,7 +13824,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "ui_src_components_player_playerdetails_playerdetails",
-      "community": 53,
+      "community": 25,
       "norm_label": "playerdetails()"
     },
     {
@@ -13804,7 +13834,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_player_playerinfo",
-      "community": 50,
+      "community": 53,
       "norm_label": "playerinfo.tsx"
     },
     {
@@ -13814,7 +13844,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_components_player_playerinfo_playerinfo",
-      "community": 50,
+      "community": 53,
       "norm_label": "playerinfo()"
     },
     {
@@ -13984,7 +14014,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "ui_src_features_auth_hooks_usevalidatetoken",
-      "community": 0,
+      "community": 81,
       "norm_label": "usevalidatetoken()"
     },
     {
@@ -14254,7 +14284,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_home_hooks",
-      "community": 2,
+      "community": 19,
       "norm_label": "hooks.ts"
     },
     {
@@ -14264,7 +14294,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "ui_src_features_home_hooks_usehomepage",
-      "community": 2,
+      "community": 16,
       "norm_label": "usehomepage()"
     },
     {
@@ -14274,7 +14304,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "ui_src_features_home_hooks_usemyfixtures",
-      "community": 2,
+      "community": 54,
       "norm_label": "usemyfixtures()"
     },
     {
@@ -14294,7 +14324,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_features_home_queries_homequeries",
-      "community": 2,
+      "community": 19,
       "norm_label": "homequeries"
     },
     {
@@ -14734,7 +14764,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_players_api",
-      "community": 37,
+      "community": 73,
       "norm_label": "api.ts"
     },
     {
@@ -14744,7 +14774,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_features_players_api_playersapi",
-      "community": 37,
+      "community": 73,
       "norm_label": "playersapi"
     },
     {
@@ -14754,7 +14784,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_players_hooks",
-      "community": 37,
+      "community": 73,
       "norm_label": "hooks.ts"
     },
     {
@@ -14784,7 +14814,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_players_queries",
-      "community": 37,
+      "community": 73,
       "norm_label": "queries.ts"
     },
     {
@@ -14794,7 +14824,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "ui_src_features_players_queries_playersqueries",
-      "community": 37,
+      "community": 73,
       "norm_label": "playersqueries"
     },
     {
@@ -14804,7 +14834,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_players_types",
-      "community": 53,
+      "community": 73,
       "norm_label": "types.ts"
     },
     {
@@ -14814,7 +14844,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_players_types_player",
-      "community": 17,
+      "community": 16,
       "norm_label": "player"
     },
     {
@@ -14824,7 +14854,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "ui_src_features_players_types_sofascorestats",
-      "community": 53,
+      "community": 73,
       "norm_label": "sofascorestats"
     },
     {
@@ -14844,7 +14874,7 @@
       "source_location": "L150",
       "_origin": "ast",
       "id": "ui_src_features_players_types_paginatedresponse",
-      "community": 37,
+      "community": 73,
       "norm_label": "paginatedresponse"
     },
     {
@@ -14854,7 +14884,7 @@
       "source_location": "L161",
       "_origin": "ast",
       "id": "ui_src_features_players_types_playerfilters",
-      "community": 37,
+      "community": 73,
       "norm_label": "playerfilters"
     },
     {
@@ -14864,7 +14894,7 @@
       "source_location": "L168",
       "_origin": "ast",
       "id": "ui_src_features_players_types_playerfilteroptions",
-      "community": 53,
+      "community": 73,
       "norm_label": "playerfilteroptions"
     },
     {
@@ -14874,7 +14904,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_standings_api",
-      "community": 28,
+      "community": 54,
       "norm_label": "api.ts"
     },
     {
@@ -14884,7 +14914,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_features_standings_api_standingsapi",
-      "community": 28,
+      "community": 54,
       "norm_label": "standingsapi"
     },
     {
@@ -14894,7 +14924,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_standings_hooks",
-      "community": 53,
+      "community": 54,
       "norm_label": "hooks.ts"
     },
     {
@@ -14904,7 +14934,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_features_standings_hooks_usestandings",
-      "community": 53,
+      "community": 54,
       "norm_label": "usestandings()"
     },
     {
@@ -14914,7 +14944,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "ui_src_features_standings_hooks_useteamdetails",
-      "community": 53,
+      "community": 54,
       "norm_label": "useteamdetails()"
     },
     {
@@ -14944,7 +14974,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_standings_queries",
-      "community": 28,
+      "community": 54,
       "norm_label": "queries.ts"
     },
     {
@@ -14954,7 +14984,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_features_standings_queries_standingsqueries",
-      "community": 28,
+      "community": 54,
       "norm_label": "standingsqueries"
     },
     {
@@ -14964,7 +14994,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_standings_types",
-      "community": 17,
+      "community": 16,
       "norm_label": "types.ts"
     },
     {
@@ -14974,7 +15004,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "ui_src_features_standings_types_standings",
-      "community": 17,
+      "community": 54,
       "norm_label": "standings"
     },
     {
@@ -14984,7 +15014,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "ui_src_features_standings_types_formation",
-      "community": 17,
+      "community": 16,
       "norm_label": "formation"
     },
     {
@@ -15004,7 +15034,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_color",
-      "community": 73,
+      "community": 53,
       "norm_label": "color.ts"
     },
     {
@@ -15014,7 +15044,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_color_parsehex",
-      "community": 73,
+      "community": 53,
       "norm_label": "parsehex()"
     },
     {
@@ -15024,7 +15054,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_color_luminance",
-      "community": 73,
+      "community": 53,
       "norm_label": "luminance()"
     },
     {
@@ -15034,7 +15064,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_color_getcontrasttext",
-      "community": 73,
+      "community": 53,
       "norm_label": "getcontrasttext()"
     },
     {
@@ -15044,7 +15074,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_lineupformatter",
-      "community": 50,
+      "community": 53,
       "norm_label": "lineupformatter.ts"
     },
     {
@@ -15054,7 +15084,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_lineupformatter_positionmap",
-      "community": 50,
+      "community": 53,
       "norm_label": "positionmap"
     },
     {
@@ -15064,7 +15094,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_lineupformatter_mapposition",
-      "community": 50,
+      "community": 53,
       "norm_label": "mapposition()"
     },
     {
@@ -15234,7 +15264,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_player_getplayernumericprice",
-      "community": 50,
+      "community": 53,
       "norm_label": "getplayernumericprice()"
     },
     {
@@ -15314,7 +15344,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "ui_src_pages_home_homepage_homepage",
-      "community": 2,
+      "community": 54,
       "norm_label": "homepage()"
     },
     {
@@ -15344,7 +15374,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_pages_manager_gameweekbreakdownpage",
-      "community": 53,
+      "community": 54,
       "norm_label": "gameweekbreakdownpage.tsx"
     },
     {
@@ -15354,7 +15384,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "ui_src_pages_manager_gameweekbreakdownpage_getrowjustify",
-      "community": 53,
+      "community": 54,
       "norm_label": "getrowjustify()"
     },
     {
@@ -15364,7 +15394,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "ui_src_pages_manager_gameweekbreakdownpage_gameweekbreakdownpage",
-      "community": 53,
+      "community": 54,
       "norm_label": "gameweekbreakdownpage()"
     },
     {
@@ -15454,7 +15484,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteamlistview",
-      "community": 17,
+      "community": 16,
       "norm_label": "myteamlistview.tsx"
     },
     {
@@ -15464,7 +15494,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteamlistview_myteamlistviewprops",
-      "community": 17,
+      "community": 16,
       "norm_label": "myteamlistviewprops"
     },
     {
@@ -15474,7 +15504,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteamlistview_myteamlistview",
-      "community": 17,
+      "community": 16,
       "norm_label": "myteamlistview()"
     },
     {
@@ -15484,7 +15514,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteampitch",
-      "community": 17,
+      "community": 16,
       "norm_label": "myteampitch.tsx"
     },
     {
@@ -15494,7 +15524,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteampitch_myteampitchprops",
-      "community": 17,
+      "community": 16,
       "norm_label": "myteampitchprops"
     },
     {
@@ -15504,7 +15534,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteampitch_getrowjustify",
-      "community": 17,
+      "community": 16,
       "norm_label": "getrowjustify()"
     },
     {
@@ -15514,7 +15544,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteampitch_myteampitch",
-      "community": 17,
+      "community": 16,
       "norm_label": "myteampitch()"
     },
     {
@@ -15524,27 +15554,27 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_playeractionmodal",
-      "community": 17,
+      "community": 28,
       "norm_label": "playeractionmodal.tsx"
     },
     {
       "label": "PlayerActionModalProps",
       "file_type": "code",
       "source_file": "ui/src/pages/Manager/components/PlayerActionModal.tsx",
-      "source_location": "L4",
+      "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_playeractionmodal_playeractionmodalprops",
-      "community": 17,
+      "community": 28,
       "norm_label": "playeractionmodalprops"
     },
     {
       "label": "PlayerActionModal()",
       "file_type": "code",
       "source_file": "ui/src/pages/Manager/components/PlayerActionModal.tsx",
-      "source_location": "L14",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_playeractionmodal_playeractionmodal",
-      "community": 17,
+      "community": 28,
       "norm_label": "playeractionmodal()"
     },
     {
@@ -15574,7 +15604,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_pages_settings_settings",
-      "community": 54,
+      "community": 81,
       "norm_label": "settings.tsx"
     },
     {
@@ -15584,7 +15614,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "ui_src_pages_settings_settings_settings",
-      "community": 54,
+      "community": 81,
       "norm_label": "settings()"
     },
     {
@@ -15601,7 +15631,7 @@
       "label": "MOCK_MANAGERS",
       "file_type": "code",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L20",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "ui_src_pages_standings_standingspage_mock_managers",
       "community": 54,
@@ -15611,7 +15641,7 @@
       "label": "getManagerName()",
       "file_type": "code",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L33",
+      "source_location": "L32",
       "_origin": "ast",
       "id": "ui_src_pages_standings_standingspage_getmanagername",
       "community": 54,
@@ -15621,7 +15651,7 @@
       "label": "getTeamIcon()",
       "file_type": "code",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L39",
+      "source_location": "L38",
       "_origin": "ast",
       "id": "ui_src_pages_standings_standingspage_getteamicon",
       "community": 54,
@@ -15631,7 +15661,7 @@
       "label": "StandingsPage()",
       "file_type": "code",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L55",
+      "source_location": "L54",
       "_origin": "ast",
       "id": "ui_src_pages_standings_standingspage_standingspage",
       "community": 54,
@@ -15644,17 +15674,17 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_pages_standings_teamdetailspage",
-      "community": 53,
+      "community": 54,
       "norm_label": "teamdetailspage.tsx"
     },
     {
       "label": "TeamDetailsPage()",
       "file_type": "code",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L15",
+      "source_location": "L14",
       "_origin": "ast",
       "id": "ui_src_pages_standings_teamdetailspage_teamdetailspage",
-      "community": 53,
+      "community": 54,
       "norm_label": "teamdetailspage()"
     },
     {
@@ -15671,7 +15701,7 @@
       "label": "PlayerStatsModalProps",
       "file_type": "code",
       "source_file": "ui/src/pages/Standings/components/PlayerStatsModal.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "ui_src_pages_standings_components_playerstatsmodal_playerstatsmodalprops",
       "community": 53,
@@ -15681,7 +15711,7 @@
       "label": "PlayerStatsModal()",
       "file_type": "code",
       "source_file": "ui/src/pages/Standings/components/PlayerStatsModal.tsx",
-      "source_location": "L18",
+      "source_location": "L19",
       "_origin": "ast",
       "id": "ui_src_pages_standings_components_playerstatsmodal_playerstatsmodal",
       "community": 53,
@@ -16144,7 +16174,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_protectedroute",
-      "community": 0,
+      "community": 37,
       "norm_label": "protectedroute.tsx"
     },
     {
@@ -16154,7 +16184,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_routes_protectedroute_protectedroute",
-      "community": 0,
+      "community": 37,
       "norm_label": "protectedroute()"
     },
     {
@@ -16164,7 +16194,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_root",
-      "community": 0,
+      "community": 81,
       "norm_label": "__root.tsx"
     },
     {
@@ -16234,7 +16264,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fantasy_teams_create",
-      "community": 158,
+      "community": 43,
       "norm_label": "create.tsx"
     },
     {
@@ -16244,7 +16274,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fantasy_teams_create_route",
-      "community": 158,
+      "community": 43,
       "norm_label": "route"
     },
     {
@@ -16304,7 +16334,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fantasy_teams_index_lazy",
-      "community": 30,
+      "community": 28,
       "norm_label": "index.lazy.tsx"
     },
     {
@@ -16314,7 +16344,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fantasy_teams_index_lazy_route",
-      "community": 30,
+      "community": 28,
       "norm_label": "route"
     },
     {
@@ -16324,7 +16354,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fantasy_teams_index_lazy_adminfantasyteams",
-      "community": 30,
+      "community": 28,
       "norm_label": "adminfantasyteams()"
     },
     {
@@ -16354,7 +16384,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fixtures_fixtureid_lazy",
-      "community": 81,
+      "community": 28,
       "norm_label": "fixtures.$fixtureid.lazy.tsx"
     },
     {
@@ -16364,7 +16394,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fixtures_fixtureid_lazy_route",
-      "community": 81,
+      "community": 28,
       "norm_label": "route"
     },
     {
@@ -16374,7 +16404,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fixtures_fixtureid_lazy_statusdisplay",
-      "community": 81,
+      "community": 28,
       "norm_label": "statusdisplay()"
     },
     {
@@ -16384,7 +16414,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fixtures_fixtureid_lazy_incidenticon",
-      "community": 81,
+      "community": 28,
       "norm_label": "incidenticon()"
     },
     {
@@ -16394,7 +16424,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fixtures_fixtureid_lazy_incidentlabel",
-      "community": 81,
+      "community": 28,
       "norm_label": "incidentlabel()"
     },
     {
@@ -16404,7 +16434,7 @@
       "source_location": "L60",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fixtures_fixtureid_lazy_fixturedetails",
-      "community": 81,
+      "community": 28,
       "norm_label": "fixturedetails()"
     },
     {
@@ -16414,7 +16444,7 @@
       "source_location": "L236",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fixtures_fixtureid_lazy_playerstatssection",
-      "community": 81,
+      "community": 28,
       "norm_label": "playerstatssection()"
     },
     {
@@ -16424,7 +16454,7 @@
       "source_location": "L300",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fixtures_fixtureid_lazy_playerrow",
-      "community": 81,
+      "community": 28,
       "norm_label": "playerrow()"
     },
     {
@@ -16531,7 +16561,7 @@
       "label": "Route",
       "file_type": "code",
       "source_file": "ui/src/routes/admin/gameweeks.lazy.tsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "_origin": "ast",
       "id": "ui_src_routes_admin_gameweeks_lazy_route",
       "community": 28,
@@ -16541,7 +16571,7 @@
       "label": "AdminGameweeks()",
       "file_type": "code",
       "source_file": "ui/src/routes/admin/gameweeks.lazy.tsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "_origin": "ast",
       "id": "ui_src_routes_admin_gameweeks_lazy_admingameweeks",
       "community": 28,
@@ -16581,7 +16611,7 @@
       "label": "Route",
       "file_type": "code",
       "source_file": "ui/src/routes/admin/h2h-leagues.lazy.tsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "ui_src_routes_admin_h2h_leagues_lazy_route",
       "community": 18,
@@ -16591,7 +16621,7 @@
       "label": "AdminH2HLeagues()",
       "file_type": "code",
       "source_file": "ui/src/routes/admin/h2h-leagues.lazy.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "_origin": "ast",
       "id": "ui_src_routes_admin_h2h_leagues_lazy_adminh2hleagues",
       "community": 18,
@@ -16611,7 +16641,7 @@
       "label": "Route",
       "file_type": "code",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "ui_src_routes_admin_leagues_lazy_route",
       "community": 28,
@@ -16621,7 +16651,7 @@
       "label": "RoundModalProps",
       "file_type": "code",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "ui_src_routes_admin_leagues_lazy_roundmodalprops",
       "community": 28,
@@ -16631,7 +16661,7 @@
       "label": "RoundModal()",
       "file_type": "code",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L16",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "ui_src_routes_admin_leagues_lazy_roundmodal",
       "community": 28,
@@ -16641,7 +16671,7 @@
       "label": "AdminLeagues()",
       "file_type": "code",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L78",
+      "source_location": "L98",
       "_origin": "ast",
       "id": "ui_src_routes_admin_leagues_lazy_adminleagues",
       "community": 28,
@@ -16674,27 +16704,27 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_admin_notifications_lazy",
-      "community": 30,
+      "community": 28,
       "norm_label": "notifications.lazy.tsx"
     },
     {
       "label": "Route",
       "file_type": "code",
       "source_file": "ui/src/routes/admin/notifications.lazy.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "_origin": "ast",
       "id": "ui_src_routes_admin_notifications_lazy_route",
-      "community": 30,
+      "community": 28,
       "norm_label": "route"
     },
     {
       "label": "AdminNotifications()",
       "file_type": "code",
       "source_file": "ui/src/routes/admin/notifications.lazy.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "ui_src_routes_admin_notifications_lazy_adminnotifications",
-      "community": 30,
+      "community": 28,
       "norm_label": "adminnotifications()"
     },
     {
@@ -16724,7 +16754,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_gameweek_breakdown_lazy",
-      "community": 0,
+      "community": 37,
       "norm_label": "gameweek-breakdown.lazy.tsx"
     },
     {
@@ -16734,7 +16764,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_routes_gameweek_breakdown_lazy_route",
-      "community": 0,
+      "community": 37,
       "norm_label": "route"
     },
     {
@@ -16904,7 +16934,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_login",
-      "community": 0,
+      "community": 245,
       "norm_label": "login.tsx"
     },
     {
@@ -16914,7 +16944,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_routes_login_route",
-      "community": 43,
+      "community": 245,
       "norm_label": "route"
     },
     {
@@ -16974,7 +17004,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_manager_overview",
-      "community": 43,
+      "community": 338,
       "norm_label": "manager-overview.tsx"
     },
     {
@@ -16984,7 +17014,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "ui_src_routes_manager_overview_route",
-      "community": 43,
+      "community": 338,
       "norm_label": "route"
     },
     {
@@ -16994,7 +17024,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_manager_index_lazy",
-      "community": 0,
+      "community": 37,
       "norm_label": "index.lazy.tsx"
     },
     {
@@ -17004,7 +17034,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_routes_manager_index_lazy_route",
-      "community": 0,
+      "community": 37,
       "norm_label": "route"
     },
     {
@@ -17014,7 +17044,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_manager_index",
-      "community": 245,
+      "community": 43,
       "norm_label": "index.tsx"
     },
     {
@@ -17024,7 +17054,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "ui_src_routes_manager_index_route",
-      "community": 245,
+      "community": 43,
       "norm_label": "route"
     },
     {
@@ -17034,7 +17064,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_my_team_lazy",
-      "community": 0,
+      "community": 37,
       "norm_label": "my-team.lazy.tsx"
     },
     {
@@ -17044,7 +17074,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_routes_my_team_lazy_route",
-      "community": 0,
+      "community": 37,
       "norm_label": "route"
     },
     {
@@ -17054,7 +17084,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_my_team",
-      "community": 166,
+      "community": 43,
       "norm_label": "my-team.tsx"
     },
     {
@@ -17064,7 +17094,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "ui_src_routes_my_team_route",
-      "community": 166,
+      "community": 43,
       "norm_label": "route"
     },
     {
@@ -17074,7 +17104,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_notifications",
-      "community": 43,
+      "community": 37,
       "norm_label": "notifications.tsx"
     },
     {
@@ -17084,7 +17114,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_routes_notifications_route",
-      "community": 43,
+      "community": 37,
       "norm_label": "route"
     },
     {
@@ -17094,7 +17124,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "ui_src_routes_notifications_routecomponent",
-      "community": 43,
+      "community": 37,
       "norm_label": "routecomponent()"
     },
     {
@@ -17104,7 +17134,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_settings_lazy",
-      "community": 0,
+      "community": 37,
       "norm_label": "settings.lazy.tsx"
     },
     {
@@ -17114,7 +17144,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_routes_settings_lazy_route",
-      "community": 0,
+      "community": 37,
       "norm_label": "route"
     },
     {
@@ -17124,7 +17154,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "ui_src_routes_settings_lazy_routecomponent",
-      "community": 0,
+      "community": 37,
       "norm_label": "routecomponent()"
     },
     {
@@ -17284,7 +17314,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "ui_src_store_types_user",
-      "community": 0,
+      "community": 81,
       "norm_label": "user"
     },
     {
@@ -17374,7 +17404,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_store_useuserstore",
-      "community": 0,
+      "community": 81,
       "norm_label": "useuserstore.tsx"
     },
     {
@@ -17384,7 +17414,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_store_useuserstore_userstorestate",
-      "community": 0,
+      "community": 81,
       "norm_label": "userstorestate"
     },
     {
@@ -17394,7 +17424,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "ui_src_store_useuserstore_useuserstore",
-      "community": 0,
+      "community": 81,
       "norm_label": "useuserstore"
     },
     {
@@ -17436,56 +17466,6 @@
       "id": "ui_src_sw_pushpayload",
       "community": 95,
       "norm_label": "pushpayload"
-    },
-    {
-      "label": "viewTransitions.ts",
-      "file_type": "code",
-      "source_file": "ui/src/types/viewTransitions.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "ui_src_types_viewtransitions",
-      "community": 54,
-      "norm_label": "viewtransitions.ts"
-    },
-    {
-      "label": "ViewTransitionType",
-      "file_type": "code",
-      "source_file": "ui/src/types/viewTransitions.ts",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "ui_src_types_viewtransitions_viewtransitiontype",
-      "community": 54,
-      "norm_label": "viewtransitiontype"
-    },
-    {
-      "label": "ViewTransitionConfig",
-      "file_type": "code",
-      "source_file": "ui/src/types/viewTransitions.ts",
-      "source_location": "L19",
-      "_origin": "ast",
-      "id": "ui_src_types_viewtransitions_viewtransitionconfig",
-      "community": 54,
-      "norm_label": "viewtransitionconfig"
-    },
-    {
-      "label": "createViewTransition()",
-      "file_type": "code",
-      "source_file": "ui/src/types/viewTransitions.ts",
-      "source_location": "L29",
-      "_origin": "ast",
-      "id": "ui_src_types_viewtransitions_createviewtransition",
-      "community": 54,
-      "norm_label": "createviewtransition()"
-    },
-    {
-      "label": "ViewTransitions",
-      "file_type": "code",
-      "source_file": "ui/src/types/viewTransitions.ts",
-      "source_location": "L38",
-      "_origin": "ast",
-      "id": "ui_src_types_viewtransitions_viewtransitions",
-      "community": 54,
-      "norm_label": "viewtransitions"
     },
     {
       "label": "vite-env.d.ts",
@@ -50133,7 +50113,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "ui/src/routes/admin/notifications.lazy.tsx",
-      "source_location": "L66",
+      "source_location": "L67",
       "weight": 1.0,
       "source": "ui_src_routes_admin_notifications_lazy_adminnotifications",
       "target": "server_src_types_error_error"
@@ -51574,7 +51554,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L4",
+      "source_location": "L3",
       "weight": 1.0,
       "source": "ui_src_routes_admin_leagues_lazy",
       "target": "ui_src_api_client",
@@ -51750,7 +51730,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L4",
+      "source_location": "L3",
       "weight": 1.0,
       "source": "ui_src_routes_admin_leagues_lazy",
       "target": "ui_src_api_client_apiclient",
@@ -51979,7 +51959,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L5",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "ui_src_routes_admin_leagues_lazy",
       "target": "ui_src_api_endpoints",
@@ -52111,7 +52091,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L5",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "ui_src_routes_admin_leagues_lazy",
       "target": "ui_src_api_endpoints_api_endpoints",
@@ -52243,7 +52223,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L5",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "ui_src_routes_admin_leagues_lazy",
       "target": "ui_src_api_endpoints_query_keys",
@@ -52628,7 +52608,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L6",
+      "source_location": "L5",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage",
       "target": "ui_src_components_pitchplayercard",
@@ -53021,7 +53001,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L36",
+      "source_location": "L35",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_adminfixturesicon",
@@ -53031,7 +53011,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L45",
+      "source_location": "L44",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_adminh2hicon",
@@ -53041,7 +53021,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L42",
+      "source_location": "L41",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_adminleaguesicon",
@@ -53051,7 +53031,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L33",
+      "source_location": "L32",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_adminsettingsicon",
@@ -53061,7 +53041,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L39",
+      "source_location": "L38",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_adminteamsicon",
@@ -53071,7 +53051,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L27",
+      "source_location": "L26",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_h2hicon",
@@ -53081,7 +53061,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L18",
+      "source_location": "L17",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_homeicon",
@@ -53091,7 +53071,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L15",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_iconclass",
@@ -53101,7 +53081,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L21",
+      "source_location": "L20",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_leagueicon",
@@ -53111,7 +53091,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L49",
+      "source_location": "L48",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_mobilenavbar",
@@ -53121,7 +53101,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L24",
+      "source_location": "L23",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_myteamicon",
@@ -53131,7 +53111,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L30",
+      "source_location": "L29",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_statsicon",
@@ -53142,7 +53122,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L3",
+      "source_location": "L2",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_store_useuserstore",
@@ -53153,32 +53133,10 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L3",
+      "source_location": "L2",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar",
       "target": "ui_src_store_useuserstore_useuserstore",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "ui_src_components_common_mobilenavbar",
-      "target": "ui_src_types_viewtransitions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "ui_src_components_common_mobilenavbar",
-      "target": "ui_src_types_viewtransitions_viewtransitions",
       "confidence_score": 1.0
     },
     {
@@ -53197,7 +53155,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L37",
+      "source_location": "L36",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_adminfixturesicon",
       "target": "ui_src_components_common_mobilenavbar_iconclass",
@@ -53208,7 +53166,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L46",
+      "source_location": "L45",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_adminh2hicon",
       "target": "ui_src_components_common_mobilenavbar_iconclass",
@@ -53219,7 +53177,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L43",
+      "source_location": "L42",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_adminleaguesicon",
       "target": "ui_src_components_common_mobilenavbar_iconclass",
@@ -53230,7 +53188,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L34",
+      "source_location": "L33",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_adminsettingsicon",
       "target": "ui_src_components_common_mobilenavbar_iconclass",
@@ -53241,7 +53199,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L40",
+      "source_location": "L39",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_adminteamsicon",
       "target": "ui_src_components_common_mobilenavbar_iconclass",
@@ -53252,7 +53210,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L28",
+      "source_location": "L27",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_h2hicon",
       "target": "ui_src_components_common_mobilenavbar_iconclass",
@@ -53263,7 +53221,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L19",
+      "source_location": "L18",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_homeicon",
       "target": "ui_src_components_common_mobilenavbar_iconclass",
@@ -53274,7 +53232,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L22",
+      "source_location": "L21",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_leagueicon",
       "target": "ui_src_components_common_mobilenavbar_iconclass",
@@ -53285,7 +53243,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L25",
+      "source_location": "L24",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_myteamicon",
       "target": "ui_src_components_common_mobilenavbar_iconclass",
@@ -53296,7 +53254,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L31",
+      "source_location": "L30",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_statsicon",
       "target": "ui_src_components_common_mobilenavbar_iconclass",
@@ -53307,7 +53265,7 @@
       "context": "collection",
       "confidence": "INFERRED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L70",
+      "source_location": "L69",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_homeicon",
@@ -53318,7 +53276,7 @@
       "context": "collection",
       "confidence": "INFERRED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L71",
+      "source_location": "L70",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_leagueicon",
@@ -53329,7 +53287,7 @@
       "context": "collection",
       "confidence": "INFERRED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L72",
+      "source_location": "L71",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_myteamicon",
@@ -53340,7 +53298,7 @@
       "context": "collection",
       "confidence": "INFERRED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L73",
+      "source_location": "L72",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_h2hicon",
@@ -53351,7 +53309,7 @@
       "context": "collection",
       "confidence": "INFERRED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L67",
+      "source_location": "L66",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_statsicon",
@@ -53362,7 +53320,7 @@
       "context": "collection",
       "confidence": "INFERRED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L59",
+      "source_location": "L58",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_adminsettingsicon",
@@ -53373,7 +53331,7 @@
       "context": "collection",
       "confidence": "INFERRED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L60",
+      "source_location": "L59",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_adminfixturesicon",
@@ -53384,7 +53342,7 @@
       "context": "collection",
       "confidence": "INFERRED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L61",
+      "source_location": "L60",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_adminteamsicon",
@@ -53395,7 +53353,7 @@
       "context": "collection",
       "confidence": "INFERRED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L62",
+      "source_location": "L61",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_adminleaguesicon",
@@ -53406,7 +53364,7 @@
       "context": "collection",
       "confidence": "INFERRED",
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L63",
+      "source_location": "L62",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_mobilenavbar",
       "target": "ui_src_components_common_mobilenavbar_adminh2hicon",
@@ -53418,10 +53376,162 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "ui/src/components/common/MobileNavbar.tsx",
-      "source_location": "L52",
+      "source_location": "L51",
       "weight": 1.0,
       "source": "ui_src_components_common_mobilenavbar_mobilenavbar",
       "target": "ui_src_store_useuserstore_useuserstore"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/components/common/Modal.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "ui_src_components_common_modal",
+      "target": "ui_src_components_common_modal_modal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/components/common/Modal.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "ui_src_components_common_modal",
+      "target": "ui_src_components_common_modal_modalprops",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/pages/Manager/components/PlayerActionModal.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "ui_src_pages_manager_components_playeractionmodal",
+      "target": "ui_src_components_common_modal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/pages/Standings/components/PlayerStatsModal.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "ui_src_pages_standings_components_playerstatsmodal",
+      "target": "ui_src_components_common_modal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/routes/admin/gameweeks.lazy.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "ui_src_routes_admin_gameweeks_lazy",
+      "target": "ui_src_components_common_modal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/routes/admin/h2h-leagues.lazy.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "ui_src_routes_admin_h2h_leagues_lazy",
+      "target": "ui_src_components_common_modal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "ui_src_routes_admin_leagues_lazy",
+      "target": "ui_src_components_common_modal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/routes/admin/notifications.lazy.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "ui_src_routes_admin_notifications_lazy",
+      "target": "ui_src_components_common_modal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/pages/Manager/components/PlayerActionModal.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "ui_src_pages_manager_components_playeractionmodal",
+      "target": "ui_src_components_common_modal_modal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/pages/Standings/components/PlayerStatsModal.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "ui_src_pages_standings_components_playerstatsmodal",
+      "target": "ui_src_components_common_modal_modal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/routes/admin/gameweeks.lazy.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "ui_src_routes_admin_gameweeks_lazy",
+      "target": "ui_src_components_common_modal_modal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/routes/admin/h2h-leagues.lazy.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "ui_src_routes_admin_h2h_leagues_lazy",
+      "target": "ui_src_components_common_modal_modal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "ui_src_routes_admin_leagues_lazy",
+      "target": "ui_src_components_common_modal_modal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ui/src/routes/admin/notifications.lazy.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "ui_src_routes_admin_notifications_lazy",
+      "target": "ui_src_components_common_modal_modal",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -56314,7 +56424,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "ui/src/routes/admin/h2h-leagues.lazy.tsx",
-      "source_location": "L16",
+      "source_location": "L17",
       "weight": 1.0,
       "source": "ui_src_routes_admin_h2h_leagues_lazy_adminh2hleagues",
       "target": "ui_src_features_h2h_hooks_useadminh2hleague"
@@ -56336,7 +56446,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "ui/src/routes/admin/h2h-leagues.lazy.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "source": "ui_src_routes_admin_h2h_leagues_lazy_adminh2hleagues",
       "target": "ui_src_features_h2h_hooks_useadminh2hleaguefixtures"
@@ -56668,7 +56778,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L17",
+      "source_location": "L16",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage",
       "target": "ui_src_features_home_hooks",
@@ -56745,7 +56855,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L17",
+      "source_location": "L16",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage",
       "target": "ui_src_features_home_hooks_usemyfixtures",
@@ -56757,7 +56867,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L62",
+      "source_location": "L61",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage_standingspage",
       "target": "ui_src_features_home_hooks_usemyfixtures"
@@ -57315,7 +57425,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L16",
+      "source_location": "L15",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage",
       "target": "ui_src_features_manager_hooks",
@@ -57425,7 +57535,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L16",
+      "source_location": "L15",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage",
       "target": "ui_src_features_manager_hooks_usemanagerdetails",
@@ -57437,7 +57547,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L60",
+      "source_location": "L59",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage_standingspage",
       "target": "ui_src_features_manager_hooks_usemanagerdetails"
@@ -58196,7 +58306,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Manager/components/PlayerActionModal.tsx",
-      "source_location": "L2",
+      "source_location": "L3",
       "weight": 1.0,
       "source": "ui_src_pages_manager_components_playeractionmodal",
       "target": "ui_src_features_players_types",
@@ -58251,7 +58361,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L8",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage",
       "target": "ui_src_features_players_types",
@@ -58394,7 +58504,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Manager/components/PlayerActionModal.tsx",
-      "source_location": "L2",
+      "source_location": "L3",
       "weight": 1.0,
       "source": "ui_src_pages_manager_components_playeractionmodal",
       "target": "ui_src_features_players_types_player",
@@ -58405,7 +58515,7 @@
       "context": "field",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Manager/components/PlayerActionModal.tsx",
-      "source_location": "L7",
+      "source_location": "L9",
       "weight": 1.0,
       "source": "ui_src_pages_manager_components_playeractionmodal_playeractionmodalprops",
       "target": "ui_src_features_players_types_player",
@@ -58460,7 +58570,7 @@
       "context": "field",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/components/PlayerStatsModal.tsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "source": "ui_src_pages_standings_components_playerstatsmodal_playerstatsmodalprops",
       "target": "ui_src_features_players_types_player",
@@ -58471,7 +58581,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L8",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage",
       "target": "ui_src_features_players_types_player",
@@ -58548,7 +58658,7 @@
       "context": "field",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/components/PlayerStatsModal.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "source": "ui_src_pages_standings_components_playerstatsmodal_playerstatsmodalprops",
       "target": "ui_src_features_players_types_playerstats",
@@ -58741,7 +58851,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L15",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage",
       "target": "ui_src_features_standings_hooks",
@@ -58752,7 +58862,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L3",
+      "source_location": "L2",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage",
       "target": "ui_src_features_standings_hooks",
@@ -58796,7 +58906,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L15",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage",
       "target": "ui_src_features_standings_hooks_usestandings",
@@ -58808,7 +58918,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L59",
+      "source_location": "L58",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage_standingspage",
       "target": "ui_src_features_standings_hooks_usestandings"
@@ -58818,7 +58928,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L3",
+      "source_location": "L2",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage",
       "target": "ui_src_features_standings_hooks_usestandings",
@@ -58830,7 +58940,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L20",
+      "source_location": "L19",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage_teamdetailspage",
       "target": "ui_src_features_standings_hooks_usestandings"
@@ -58862,7 +58972,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L3",
+      "source_location": "L2",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage",
       "target": "ui_src_features_standings_hooks_useteamdetails",
@@ -58874,7 +58984,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L29",
+      "source_location": "L28",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage_teamdetailspage",
       "target": "ui_src_features_standings_hooks_useteamdetails"
@@ -58928,7 +59038,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L15",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage",
       "target": "ui_src_features_standings_hooks_usestandingsfixtures",
@@ -58940,7 +59050,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L61",
+      "source_location": "L60",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage_standingspage",
       "target": "ui_src_features_standings_hooks_usestandingsfixtures"
@@ -59706,7 +59816,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L10",
+      "source_location": "L9",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage",
       "target": "ui_src_libs_helpers_player",
@@ -59806,7 +59916,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "ui/src/pages/Standings/components/PlayerStatsModal.tsx",
-      "source_location": "L132",
+      "source_location": "L137",
       "weight": 1.0,
       "source": "ui_src_pages_standings_components_playerstatsmodal_playerstatsmodal",
       "target": "ui_src_libs_helpers_player_getplayerdisplayprice"
@@ -59816,7 +59926,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L10",
+      "source_location": "L9",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage",
       "target": "ui_src_libs_helpers_player_getplayerdisplayprice",
@@ -59828,7 +59938,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L101",
+      "source_location": "L99",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage_teamdetailspage",
       "target": "ui_src_libs_helpers_player_getplayerdisplayprice"
@@ -60259,7 +60369,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Manager/components/PlayerActionModal.tsx",
-      "source_location": "L14",
+      "source_location": "L16",
       "weight": 1.0,
       "source": "ui_src_pages_manager_components_playeractionmodal",
       "target": "ui_src_pages_manager_components_playeractionmodal_playeractionmodal",
@@ -60269,7 +60379,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Manager/components/PlayerActionModal.tsx",
-      "source_location": "L4",
+      "source_location": "L6",
       "weight": 1.0,
       "source": "ui_src_pages_manager_components_playeractionmodal",
       "target": "ui_src_pages_manager_components_playeractionmodal_playeractionmodalprops",
@@ -60387,7 +60497,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L33",
+      "source_location": "L32",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage",
       "target": "ui_src_pages_standings_standingspage_getmanagername",
@@ -60397,7 +60507,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L39",
+      "source_location": "L38",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage",
       "target": "ui_src_pages_standings_standingspage_getteamicon",
@@ -60407,7 +60517,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L20",
+      "source_location": "L19",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage",
       "target": "ui_src_pages_standings_standingspage_mock_managers",
@@ -60417,32 +60527,10 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L55",
+      "source_location": "L54",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage",
       "target": "ui_src_pages_standings_standingspage_standingspage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "ui_src_pages_standings_standingspage",
-      "target": "ui_src_types_viewtransitions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "ui_src_pages_standings_standingspage",
-      "target": "ui_src_types_viewtransitions_viewtransitions",
       "confidence_score": 1.0
     },
     {
@@ -60461,7 +60549,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L185",
+      "source_location": "L184",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage_standingspage",
       "target": "ui_src_pages_standings_standingspage_getmanagername",
@@ -60472,7 +60560,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/StandingsPage.tsx",
-      "source_location": "L184",
+      "source_location": "L183",
       "weight": 1.0,
       "source": "ui_src_pages_standings_standingspage_standingspage",
       "target": "ui_src_pages_standings_standingspage_getteamicon",
@@ -60483,7 +60571,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L7",
+      "source_location": "L6",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage",
       "target": "ui_src_pages_standings_components_playerstatsmodal",
@@ -60493,7 +60581,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L15",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage",
       "target": "ui_src_pages_standings_teamdetailspage_teamdetailspage",
@@ -60504,7 +60592,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L9",
+      "source_location": "L8",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage",
       "target": "ui_src_store_useplayerstore",
@@ -60515,32 +60603,10 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L9",
+      "source_location": "L8",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage",
       "target": "ui_src_store_useplayerstore_useplayerstore",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "ui_src_pages_standings_teamdetailspage",
-      "target": "ui_src_types_viewtransitions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "ui_src_pages_standings_teamdetailspage",
-      "target": "ui_src_types_viewtransitions_viewtransitions",
       "confidence_score": 1.0
     },
     {
@@ -60560,7 +60626,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "ui/src/pages/Standings/TeamDetailsPage.tsx",
-      "source_location": "L24",
+      "source_location": "L23",
       "weight": 1.0,
       "source": "ui_src_pages_standings_teamdetailspage_teamdetailspage",
       "target": "ui_src_store_useplayerstore_useplayerstore"
@@ -60569,7 +60635,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/components/PlayerStatsModal.tsx",
-      "source_location": "L18",
+      "source_location": "L19",
       "weight": 1.0,
       "source": "ui_src_pages_standings_components_playerstatsmodal",
       "target": "ui_src_pages_standings_components_playerstatsmodal_playerstatsmodal",
@@ -60579,7 +60645,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/pages/Standings/components/PlayerStatsModal.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "source": "ui_src_pages_standings_components_playerstatsmodal",
       "target": "ui_src_pages_standings_components_playerstatsmodal_playerstatsmodalprops",
@@ -62376,7 +62442,7 @@
       "relation": "indirect_call",
       "confidence": "INFERRED",
       "source_file": "ui/src/routes/admin/gameweeks.lazy.tsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "context": "collection",
       "source": "ui_src_routes_admin_gameweeks_lazy",
@@ -62387,7 +62453,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/routes/admin/gameweeks.lazy.tsx",
-      "source_location": "L9",
+      "source_location": "L10",
       "weight": 1.0,
       "source": "ui_src_routes_admin_gameweeks_lazy",
       "target": "ui_src_routes_admin_gameweeks_lazy_route",
@@ -62407,7 +62473,7 @@
       "relation": "indirect_call",
       "confidence": "INFERRED",
       "source_file": "ui/src/routes/admin/h2h-leagues.lazy.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "context": "collection",
       "source": "ui_src_routes_admin_h2h_leagues_lazy",
@@ -62418,7 +62484,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/routes/admin/h2h-leagues.lazy.tsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "source": "ui_src_routes_admin_h2h_leagues_lazy",
       "target": "ui_src_routes_admin_h2h_leagues_lazy_route",
@@ -62428,7 +62494,7 @@
       "relation": "indirect_call",
       "confidence": "INFERRED",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0,
       "context": "collection",
       "source": "ui_src_routes_admin_leagues_lazy",
@@ -62439,7 +62505,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L16",
+      "source_location": "L17",
       "weight": 1.0,
       "source": "ui_src_routes_admin_leagues_lazy",
       "target": "ui_src_routes_admin_leagues_lazy_roundmodal",
@@ -62449,7 +62515,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "source": "ui_src_routes_admin_leagues_lazy",
       "target": "ui_src_routes_admin_leagues_lazy_roundmodalprops",
@@ -62459,7 +62525,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/routes/admin/leagues.lazy.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "source": "ui_src_routes_admin_leagues_lazy",
       "target": "ui_src_routes_admin_leagues_lazy_route",
@@ -62479,7 +62545,7 @@
       "relation": "indirect_call",
       "confidence": "INFERRED",
       "source_file": "ui/src/routes/admin/notifications.lazy.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0,
       "context": "collection",
       "source": "ui_src_routes_admin_notifications_lazy",
@@ -62490,7 +62556,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/routes/admin/notifications.lazy.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "source": "ui_src_routes_admin_notifications_lazy",
       "target": "ui_src_routes_admin_notifications_lazy_route",
@@ -63079,46 +63145,6 @@
       "weight": 1.0,
       "source": "ui_src_sw",
       "target": "ui_src_sw_pushpayload",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "ui/src/types/viewTransitions.ts",
-      "source_location": "L29",
-      "weight": 1.0,
-      "source": "ui_src_types_viewtransitions",
-      "target": "ui_src_types_viewtransitions_createviewtransition",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "ui/src/types/viewTransitions.ts",
-      "source_location": "L19",
-      "weight": 1.0,
-      "source": "ui_src_types_viewtransitions",
-      "target": "ui_src_types_viewtransitions_viewtransitionconfig",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "ui/src/types/viewTransitions.ts",
-      "source_location": "L38",
-      "weight": 1.0,
-      "source": "ui_src_types_viewtransitions",
-      "target": "ui_src_types_viewtransitions_viewtransitions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "ui/src/types/viewTransitions.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "ui_src_types_viewtransitions",
-      "target": "ui_src_types_viewtransitions_viewtransitiontype",
       "confidence_score": 1.0
     },
     {
@@ -74043,5 +74069,5 @@
       ]
     }
   ],
-  "built_at_commit": "326368259bd25028a99a818230b64eca34e4fe4d"
+  "built_at_commit": "71715e6c338678ccb4338f745923acee1584015e"
 }

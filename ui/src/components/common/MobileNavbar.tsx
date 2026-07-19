@@ -1,7 +1,6 @@
 import { Link, useMatchRoute, useLocation } from "@tanstack/react-router";
-import { ViewTransitions } from "../../types/viewTransitions";
 import { useUserStore } from "../../store/useUserStore";
-import { 
+import {
   House,
   Trophy,
   Shirt,
@@ -56,17 +55,17 @@ const MobileNavbar = () => {
 
   const navItems = isAdmin
     ? [
-        { label: "Settings", path: "/settings", icon: AdminSettingsIcon },
-        { label: "Fixtures", path: "/admin/fixtures", icon: AdminFixturesIcon },
-        { label: "Teams", path: "/admin/fantasy-teams", icon: AdminTeamsIcon },
-        { label: "Leagues", path: "/admin/leagues", icon: AdminLeaguesIcon },
-        { label: "H2H", path: "/admin/h2h-leagues", icon: AdminH2HIcon },
-      ]
+      { label: "Settings", path: "/settings", icon: AdminSettingsIcon },
+      { label: "Fixtures", path: "/admin/fixtures", icon: AdminFixturesIcon },
+      { label: "Teams", path: "/admin/fantasy-teams", icon: AdminTeamsIcon },
+      { label: "Leagues", path: "/admin/leagues", icon: AdminLeaguesIcon },
+      { label: "H2H", path: "/admin/h2h-leagues", icon: AdminH2HIcon },
+    ]
     : isRegularUser
-    ? [
+      ? [
         { label: "Stats", path: "/stats", icon: StatsIcon },
       ]
-    : [
+      : [
         { label: "Home", path: "/home", icon: HomeIcon },
         { label: "League", path: "/standings/", icon: LeagueIcon },
         { label: "My Team", path: "/my-team", icon: MyTeamIcon },
@@ -80,10 +79,10 @@ const MobileNavbar = () => {
     (isAdmin
       ? (location.pathname.startsWith("/admin") || location.pathname === "/settings")
       : navItems.some(
-          (item) =>
-            location.pathname === item.path ||
-            location.pathname.startsWith(item.path + "/")
-        ));
+        (item) =>
+          location.pathname === item.path ||
+          location.pathname.startsWith(item.path + "/")
+      ));
 
   if (!isBaseRoute) {
     return null;
@@ -91,8 +90,8 @@ const MobileNavbar = () => {
 
   return (
     <nav className="mobile-navbar fixed bottom-0 left-0 right-0 w-full block lg:hidden border-t border-[#221938] z-50 bg-[#120C22] pb-[env(safe-area-inset-bottom)]" style={{ willChange: 'transform', viewTransitionName: 'bottom-nav' }}>
-      <div 
-        className="grid h-16" 
+      <div
+        className="grid h-16"
         style={{ gridTemplateColumns: `repeat(${navItems.length}, minmax(0, 1fr))` }}
       >
         {navItems.map(({ label, path, icon: IconComponent }) => {
@@ -102,7 +101,6 @@ const MobileNavbar = () => {
             <Link
               key={path}
               to={path}
-              viewTransition={ViewTransitions.tabSwitch}
               className="inline-flex flex-col items-center justify-center text-[11px] transition-colors"
             >
               <IconComponent isActive={isActive} />

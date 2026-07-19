@@ -1,5 +1,4 @@
 import { getRouteApi, useNavigate } from "@tanstack/react-router";
-import { ViewTransitions } from "../../types/viewTransitions";
 import { useTeamDetails, useStandings } from "../../features/standings/hooks";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, ArrowLeft, ChevronDown } from "lucide-react";
@@ -93,7 +92,6 @@ const TeamDetailsPage = () => {
   const handleGoBack = () => {
     navigate({
       to: "/standings",
-      viewTransition: ViewTransitions.back,
     });
   };
 

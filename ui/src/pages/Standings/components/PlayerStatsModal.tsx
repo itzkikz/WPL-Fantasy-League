@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { X, Target, Clock, Star, Trophy, TrendingUp, Calendar, ArrowRightLeft, ExternalLink, Activity, ShieldCheck } from "lucide-react";
 import { Player, PlayerStats } from "../../../features/players/types";
 import { getContrastText } from "../../../libs/helpers/color";
 import { getPlayerDisplayPrice } from "../../../libs/helpers/player";
+import Modal from "../../../components/common/Modal";
 
 interface PlayerStatsModalProps {
   isOpen: boolean;
@@ -18,20 +19,32 @@ interface PlayerStatsModalProps {
 const PlayerStatsModal = ({
   isOpen,
   onClose,
-  player,
-  playerStats: stats,
+  player: propPlayer,
+  playerStats: propStats,
   onMakeCaptain,
   onMakeViceCaptain,
   onSubstitute,
   pickMyTeam = false,
 }: PlayerStatsModalProps) => {
-  useEffect(() => {
-    if (!isOpen) return;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
-  }, [isOpen]);
+  const [localPlayer, setLocalPlayer] = useState<Player | null>(null);
+  const [localStats, setLocalStats] = useState<PlayerStats | null>(null);
 
-  if (!isOpen || !player) return null;
+  useEffect(() => {
+    if (propPlayer) {
+      setLocalPlayer(propPlayer);
+    }
+  }, [propPlayer]);
+
+  useEffect(() => {
+    if (propStats) {
+      setLocalStats(propStats);
+    }
+  }, [propStats]);
+
+  const player = propPlayer || localPlayer;
+  const stats = propStats || localStats;
+
+  if (!player) return null;
 
   const getJerseyColor = () => {
     return stats?.team_color || player?.teamColor || "#ccc";
@@ -42,15 +55,7 @@ const PlayerStatsModal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/75 backdrop-blur-sm"
-        onClick={onClose}
-      />
-
-      {/* Modal Card */}
-      <div className="relative w-full max-w-lg bg-elevated border border-border rounded-3xl shadow-modal overflow-hidden z-10 flex flex-col max-h-[90vh] text-white animate-in scale-in duration-300">
+    <Modal isOpen={isOpen} onClose={onClose} variant="center" maxWidthClass="max-w-lg">
  
         {/* Loaded Content */}
         {stats && (
@@ -586,8 +591,7 @@ const PlayerStatsModal = ({
             )}
           </>
         )}
-      </div>
-    </div>
+    </Modal>
   );
 };
 

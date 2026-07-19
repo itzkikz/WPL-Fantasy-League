@@ -113,7 +113,7 @@ export const MainLayout = () => {
             <PWAInstallBanner />
             <div className="flex-1 flex">
                 <div className={`flex h-screen flex-col mx-auto w-full ${currentPath === "/my-team" ? "overflow-hidden" : "overflow-y-auto"}`} style={{ WebkitOverflowScrolling: 'touch' }}>
-                    {isBaseRoute && currentPath !== "/my-team" && (
+                    {(currentPath === "/home" || currentPath === "/home/") && (
                         <header className="header relative w-full h-12 shrink-0 overflow-hidden bg-surface border-b border-[var(--color-border-divider)] text-white lg:hidden" style={{ viewTransitionName: 'header-static' }}>
                             {/* Animated gradient overlay */}
                             {/* Content container */}

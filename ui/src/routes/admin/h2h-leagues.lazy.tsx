@@ -6,6 +6,7 @@ import { h2hApi } from "../../features/h2h/api";
 import { H2HLeague, H2HFixture } from "../../features/h2h/types";
 import apiClient from "../../api/client";
 import { Users, Plus, Trash2, Zap, Calendar, X, Check, Loader2 } from "lucide-react";
+import Modal from "../../components/common/Modal";
 
 export const Route = createLazyFileRoute("/admin/h2h-leagues")({
   component: AdminH2HLeagues,
@@ -323,10 +324,9 @@ function AdminH2HLeagues() {
       )}
 
       {/* Edit/Create Modal */}
-      {isEditing && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-fade-in" onClick={() => setIsEditing(false)}>
-          <div className="bg-[#1b142d] rounded-2xl shadow-2xl w-full max-w-md border border-white/10 p-5 relative overflow-hidden text-white animate-slide-up" onClick={e => e.stopPropagation()}>
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-600 opacity-80" />
+      <Modal isOpen={isEditing} onClose={() => setIsEditing(false)} variant="responsive" maxWidthClass="max-w-md">
+        <div className="p-5 relative overflow-hidden text-white">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-600 opacity-80" />
 
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-sm font-black uppercase tracking-wider text-white">
@@ -440,8 +440,7 @@ function AdminH2HLeagues() {
               </button>
             </div>
           </div>
-        </div>
-      )}
+      </Modal>
     </div>
   );
 }

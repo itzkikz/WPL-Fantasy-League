@@ -50,92 +50,6 @@
         "source_file": ".agents/skills/brand/references/color-palette-management.md"
       },
       {
-        "id": "hyper_slides_knowledge_base",
-        "label": "Slides Knowledge Base",
-        "nodes": [
-          "_agents_skills_design_references_slides_create",
-          "_agents_skills_design_references_slides_layout_patterns",
-          "_agents_skills_design_references_slides_html_template",
-          "_agents_skills_design_references_slides_copywriting_formulas",
-          "_agents_skills_design_references_slides_strategies"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": ".agents/skills/design/references/slides.md"
-      },
-      {
-        "id": "hyper_cip_references",
-        "label": "CIP Reference Documents",
-        "nodes": [
-          "_agents_skills_design_references_cip_deliverable_guide",
-          "_agents_skills_design_references_cip_style_guide",
-          "_agents_skills_design_references_cip_prompt_engineering"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": ".agents/skills/design/references/cip-design.md"
-      },
-      {
-        "id": "hyper_logo_references",
-        "label": "Logo Reference Documents",
-        "nodes": [
-          "_agents_skills_design_references_logo_style_guide",
-          "_agents_skills_design_references_logo_color_psychology",
-          "_agents_skills_design_references_logo_prompt_engineering"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": ".agents/skills/design/references/logo-design.md"
-      },
-      {
-        "id": "hyperedge_slides_skill_system",
-        "label": "Slides Skill System",
-        "nodes": [
-          ".agents_skills_slides_references_create_slides_skill",
-          ".agents_skills_slides_references_html_template_slides_html_template",
-          ".agents_skills_slides_references_layout_patterns_slide_layouts",
-          ".agents_skills_slides_references_slide_strategies_deck_strategies"
-        ],
-        "relation": "part_of",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": ".agents/skills/slides/references/create.md"
-      },
-      {
-        "id": "hyperedge_ui_styling_reference_stack",
-        "label": "UI Styling Reference Stack",
-        "nodes": [
-          ".agents_skills_ui_styling_skill_ui_styling_skill",
-          ".agents_skills_ui_styling_references_shadcn_components_shadcn_component_catalog",
-          ".agents_skills_ui_styling_references_shadcn_theming_shadcn_theming",
-          ".agents_skills_ui_styling_references_shadcn_accessibility_radix_ui_a11y",
-          ".agents_skills_ui_styling_references_tailwind_utilities_tailwind_utility_reference",
-          ".agents_skills_ui_styling_references_tailwind_responsive_responsive_design",
-          ".agents_skills_ui_styling_references_tailwind_customization_tailwind_config"
-        ],
-        "relation": "references",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": ".agents/skills/ui-styling/SKILL.md"
-      },
-      {
-        "id": "hyperedge_canvas_design_movements",
-        "label": "Canvas Design Movements",
-        "nodes": [
-          ".agents_skills_ui_styling_references_canvas_design_system_canvas_design",
-          ".agents_skills_ui_styling_references_canvas_design_system_concrete_poetry",
-          ".agents_skills_ui_styling_references_canvas_design_system_chromatic_language",
-          ".agents_skills_ui_styling_references_canvas_design_system_geometric_silence"
-        ],
-        "relation": "exemplifies",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": ".agents/skills/ui-styling/references/canvas-design-system.md"
-      },
-      {
         "id": "ui_src_pages_home_homepagepng_gridlayout",
         "label": "Responsive grid layout system",
         "relation": "LAYOUT_GRID",
@@ -2580,7 +2494,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_radius_none",
-      "community": 94,
+      "community": 55,
       "norm_label": "none"
     },
     {
@@ -2590,7 +2504,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_none_value",
-      "community": 94,
+      "community": 55,
       "norm_label": "$value"
     },
     {
@@ -2600,7 +2514,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_none_type",
-      "community": 94,
+      "community": 55,
       "norm_label": "$type"
     },
     {
@@ -2620,7 +2534,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_radius_default",
-      "community": 55,
+      "community": 224,
       "norm_label": "default"
     },
     {
@@ -2630,7 +2544,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_default_value",
-      "community": 55,
+      "community": 224,
       "norm_label": "$value"
     },
     {
@@ -2640,7 +2554,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_default_type",
-      "community": 55,
+      "community": 224,
       "norm_label": "$type"
     },
     {
@@ -2740,7 +2654,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_shadow_none",
-      "community": 94,
+      "community": 55,
       "norm_label": "none"
     },
     {
@@ -2760,7 +2674,7 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_shadow_default",
-      "community": 55,
+      "community": 224,
       "norm_label": "default"
     },
     {
@@ -5160,7 +5074,7 @@
       "source_location": "L191",
       "_origin": "ast",
       "id": "agents_skills_ui_styling_scripts_tailwind_config_gen_tailwindconfiggenerator_generate_config_string",
-      "community": 35,
+      "community": 78,
       "norm_label": ".generate_config_string()"
     },
     {
@@ -5210,7 +5124,7 @@
       "source_location": "L267",
       "_origin": "ast",
       "id": "agents_skills_ui_styling_scripts_tailwind_config_gen_tailwindconfiggenerator_write_config",
-      "community": 35,
+      "community": 78,
       "norm_label": ".write_config()"
     },
     {
@@ -5360,7 +5274,7 @@
       "source_location": "L192",
       "_origin": "ast",
       "id": "agents_skills_ui_styling_scripts_tailwind_config_gen_rationale_192",
-      "community": 35,
+      "community": 78,
       "norm_label": "generate configuration file content.          returns:             configuration"
     },
     {
@@ -5410,7 +5324,7 @@
       "source_location": "L268",
       "_origin": "ast",
       "id": "agents_skills_ui_styling_scripts_tailwind_config_gen_rationale_268",
-      "community": 35,
+      "community": 78,
       "norm_label": "write configuration to file.          returns:             tuple of (success, me"
     },
     {
@@ -7120,7 +7034,7 @@
       "source_location": "L261",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_hex_to_ansi",
-      "community": 48,
+      "community": 146,
       "norm_label": "hex_to_ansi()"
     },
     {
@@ -7130,7 +7044,7 @@
       "source_location": "L275",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_ansi_ljust",
-      "community": 48,
+      "community": 146,
       "norm_label": "ansi_ljust()"
     },
     {
@@ -7140,7 +7054,7 @@
       "source_location": "L283",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_section_header",
-      "community": 48,
+      "community": 146,
       "norm_label": "section_header()"
     },
     {
@@ -7150,7 +7064,7 @@
       "source_location": "L290",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_format_ascii_box",
-      "community": 48,
+      "community": 146,
       "norm_label": "format_ascii_box()"
     },
     {
@@ -7200,7 +7114,7 @@
       "source_location": "L895",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_format_page_override_md",
-      "community": 224,
+      "community": 48,
       "norm_label": "format_page_override_md()"
     },
     {
@@ -7210,7 +7124,7 @@
       "source_location": "L1004",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_generate_intelligent_overrides",
-      "community": 224,
+      "community": 48,
       "norm_label": "_generate_intelligent_overrides()"
     },
     {
@@ -7220,7 +7134,7 @@
       "source_location": "L1110",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_detect_page_type",
-      "community": 224,
+      "community": 48,
       "norm_label": "_detect_page_type()"
     },
     {
@@ -7310,7 +7224,7 @@
       "source_location": "L262",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_262",
-      "community": 48,
+      "community": 146,
       "norm_label": "convert hex color to ansi true color swatch (\u2588\u2588) with fallback."
     },
     {
@@ -7320,7 +7234,7 @@
       "source_location": "L276",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_276",
-      "community": 48,
+      "community": 146,
       "norm_label": "like str.ljust but accounts for zero-width ansi escape sequences."
     },
     {
@@ -7330,7 +7244,7 @@
       "source_location": "L284",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_284",
-      "community": 48,
+      "community": 146,
       "norm_label": "create a unicode section separator: \u251c\u2500\u2500\u2500 name \u2500\u2500\u2500...\u2524"
     },
     {
@@ -7340,7 +7254,7 @@
       "source_location": "L291",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_291",
-      "community": 48,
+      "community": 146,
       "norm_label": "format design system as unicode box with ansi color swatches."
     },
     {
@@ -7390,7 +7304,7 @@
       "source_location": "L896",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_896",
-      "community": 224,
+      "community": 48,
       "norm_label": "format a page-specific override file with intelligent ai-generated content."
     },
     {
@@ -7400,7 +7314,7 @@
       "source_location": "L1005",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_1005",
-      "community": 224,
+      "community": 48,
       "norm_label": "generate intelligent overrides based on page type using layered search."
     },
     {
@@ -7410,7 +7324,7 @@
       "source_location": "L1111",
       "_origin": "ast",
       "id": "agents_skills_ui_ux_pro_max_scripts_design_system_rationale_1111",
-      "community": 224,
+      "community": 48,
       "norm_label": "detect page type from context and search results."
     },
     {
@@ -7720,7 +7634,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "server_package_dependencies_axios",
-      "community": 36,
+      "community": 338,
       "norm_label": "axios"
     },
     {
@@ -7730,7 +7644,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "server_package_json_axios",
-      "community": 36,
+      "community": 338,
       "norm_label": "axios"
     },
     {
@@ -7900,7 +7814,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "server_package_dependencies_jsonwebtoken",
-      "community": 146,
+      "community": 36,
       "norm_label": "jsonwebtoken"
     },
     {
@@ -7910,7 +7824,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "jsonwebtoken",
-      "community": 146,
+      "community": 36,
       "norm_label": "jsonwebtoken"
     },
     {
@@ -8470,7 +8384,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_controllers_auth",
-      "community": 20,
+      "community": 94,
       "norm_label": "auth.ts"
     },
     {
@@ -8480,7 +8394,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "server_src_controllers_auth_client",
-      "community": 20,
+      "community": 94,
       "norm_label": "client"
     },
     {
@@ -8490,7 +8404,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "server_src_controllers_auth_privatekey",
-      "community": 20,
+      "community": 94,
       "norm_label": "privatekey"
     },
     {
@@ -8500,7 +8414,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "server_src_controllers_auth_login",
-      "community": 20,
+      "community": 94,
       "norm_label": "login()"
     },
     {
@@ -9320,7 +9234,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_lib_points",
-      "community": 5,
+      "community": 20,
       "norm_label": "points.ts"
     },
     {
@@ -10180,7 +10094,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_user",
-      "community": 20,
+      "community": 94,
       "norm_label": "user.ts"
     },
     {
@@ -10190,7 +10104,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_models_user_iuser",
-      "community": 20,
+      "community": 94,
       "norm_label": "iuser"
     },
     {
@@ -10200,7 +10114,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "server_src_models_user_userschema",
-      "community": 20,
+      "community": 94,
       "norm_label": "userschema"
     },
     {
@@ -10210,7 +10124,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "server_src_models_user_user",
-      "community": 20,
+      "community": 94,
       "norm_label": "user"
     },
     {
@@ -10240,7 +10154,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_routes_auth",
-      "community": 20,
+      "community": 94,
       "norm_label": "auth.ts"
     },
     {
@@ -10250,7 +10164,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_routes_auth_router",
-      "community": 20,
+      "community": 94,
       "norm_label": "router"
     },
     {
@@ -11110,7 +11024,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_types_players",
-      "community": 5,
+      "community": 20,
       "norm_label": "players.ts"
     },
     {
@@ -11120,7 +11034,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_types_players_sofascorestats",
-      "community": 5,
+      "community": 20,
       "norm_label": "sofascorestats"
     },
     {
@@ -11130,7 +11044,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "server_src_types_players_playerstats",
-      "community": 5,
+      "community": 20,
       "norm_label": "playerstats"
     },
     {
@@ -11140,7 +11054,7 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "server_src_types_players_player",
-      "community": 5,
+      "community": 20,
       "norm_label": "player"
     },
     {
@@ -11160,7 +11074,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "server_src_types_standings_standingsresponse",
-      "community": 5,
+      "community": 20,
       "norm_label": "standingsresponse"
     },
     {
@@ -11180,7 +11094,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_types_users",
-      "community": 5,
+      "community": 20,
       "norm_label": "users.ts"
     },
     {
@@ -11190,7 +11104,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_types_users_subscribers",
-      "community": 5,
+      "community": 20,
       "norm_label": "subscribers"
     },
     {
@@ -11200,7 +11114,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "server_src_types_users_notifications",
-      "community": 5,
+      "community": 20,
       "norm_label": "notifications"
     },
     {
@@ -11210,7 +11124,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_utils",
-      "community": 5,
+      "community": 20,
       "norm_label": "utils.ts"
     },
     {
@@ -11220,7 +11134,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "server_src_utils_datatypemapping",
-      "community": 5,
+      "community": 20,
       "norm_label": "datatypemapping"
     },
     {
@@ -11230,7 +11144,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "server_src_utils_isnumeric",
-      "community": 5,
+      "community": 20,
       "norm_label": "isnumeric()"
     },
     {
@@ -11240,7 +11154,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "server_src_utils_datatype",
-      "community": 5,
+      "community": 20,
       "norm_label": "datatype"
     },
     {
@@ -11250,7 +11164,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "server_src_utils_returntypemap",
-      "community": 5,
+      "community": 20,
       "norm_label": "returntypemap"
     },
     {
@@ -11260,7 +11174,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "server_src_utils_converttojson",
-      "community": 5,
+      "community": 20,
       "norm_label": "converttojson()"
     },
     {
@@ -74082,92 +73996,6 @@
       "confidence": "INFERRED",
       "confidence_score": 0.85,
       "source_file": ".agents/skills/brand/references/color-palette-management.md"
-    },
-    {
-      "id": "hyper_slides_knowledge_base",
-      "label": "Slides Knowledge Base",
-      "nodes": [
-        "_agents_skills_design_references_slides_create",
-        "_agents_skills_design_references_slides_layout_patterns",
-        "_agents_skills_design_references_slides_html_template",
-        "_agents_skills_design_references_slides_copywriting_formulas",
-        "_agents_skills_design_references_slides_strategies"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/design/references/slides.md"
-    },
-    {
-      "id": "hyper_cip_references",
-      "label": "CIP Reference Documents",
-      "nodes": [
-        "_agents_skills_design_references_cip_deliverable_guide",
-        "_agents_skills_design_references_cip_style_guide",
-        "_agents_skills_design_references_cip_prompt_engineering"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/design/references/cip-design.md"
-    },
-    {
-      "id": "hyper_logo_references",
-      "label": "Logo Reference Documents",
-      "nodes": [
-        "_agents_skills_design_references_logo_style_guide",
-        "_agents_skills_design_references_logo_color_psychology",
-        "_agents_skills_design_references_logo_prompt_engineering"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/design/references/logo-design.md"
-    },
-    {
-      "id": "hyperedge_slides_skill_system",
-      "label": "Slides Skill System",
-      "nodes": [
-        ".agents_skills_slides_references_create_slides_skill",
-        ".agents_skills_slides_references_html_template_slides_html_template",
-        ".agents_skills_slides_references_layout_patterns_slide_layouts",
-        ".agents_skills_slides_references_slide_strategies_deck_strategies"
-      ],
-      "relation": "part_of",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/slides/references/create.md"
-    },
-    {
-      "id": "hyperedge_ui_styling_reference_stack",
-      "label": "UI Styling Reference Stack",
-      "nodes": [
-        ".agents_skills_ui_styling_skill_ui_styling_skill",
-        ".agents_skills_ui_styling_references_shadcn_components_shadcn_component_catalog",
-        ".agents_skills_ui_styling_references_shadcn_theming_shadcn_theming",
-        ".agents_skills_ui_styling_references_shadcn_accessibility_radix_ui_a11y",
-        ".agents_skills_ui_styling_references_tailwind_utilities_tailwind_utility_reference",
-        ".agents_skills_ui_styling_references_tailwind_responsive_responsive_design",
-        ".agents_skills_ui_styling_references_tailwind_customization_tailwind_config"
-      ],
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/ui-styling/SKILL.md"
-    },
-    {
-      "id": "hyperedge_canvas_design_movements",
-      "label": "Canvas Design Movements",
-      "nodes": [
-        ".agents_skills_ui_styling_references_canvas_design_system_canvas_design",
-        ".agents_skills_ui_styling_references_canvas_design_system_concrete_poetry",
-        ".agents_skills_ui_styling_references_canvas_design_system_chromatic_language",
-        ".agents_skills_ui_styling_references_canvas_design_system_geometric_silence"
-      ],
-      "relation": "exemplifies",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/ui-styling/references/canvas-design-system.md"
     },
     {
       "id": "ui_src_pages_home_homepagepng_gridlayout",
