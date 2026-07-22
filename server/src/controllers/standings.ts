@@ -14,7 +14,21 @@ import { Team } from "../models/Team";
 import { Gameweek } from "../models/Gameweek";
 import { PlayerStats } from "../models/PlayerStats";
 
+let cachedStandingsData: StandingsResponse[] | null = null;
+let lastStandingsFetchTime = 0;
+const STANDINGS_CACHE_TTL_MS = 30000; // 30 seconds
+
+export const invalidateStandingsCache = () => {
+    cachedStandingsData = null;
+    lastStandingsFetchTime = 0;
+};
+
 export const getStandingsData = async () => {
+    const now = Date.now();
+    if (cachedStandingsData && (now - lastStandingsFetchTime < STANDINGS_CACHE_TTL_MS)) {
+        return cachedStandingsData.map(item => ({ ...item }));
+    }
+
     const teams = await FantasyTeam.find({})
         .select('name history currentSquad updatedAt managers managerDisplayNames')
         .populate('managers', 'username displayName')
@@ -23,7 +37,7 @@ export const getStandingsData = async () => {
     const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
     const globalCurrentGw = currentGwDoc ? currentGwDoc.number : 1;
 
-    const playerStats = await PlayerStats.find({}).lean();
+    const playerStats = await PlayerStats.find({}).select('playerId gameweeks').lean();
     const playerStatsMap = new Map();
     playerStats.forEach(ps => playerStatsMap.set(ps.playerId, ps));
 
@@ -132,7 +146,10 @@ export const getStandingsData = async () => {
         delete (teamData as any)._prevRank; // Cleanup
     });
 
-    return standingsData;
+    cachedStandingsData = standingsData;
+    lastStandingsFetchTime = now;
+
+    return standingsData.map(item => ({ ...item }));
 };
 
 export const getStandings = async (req: Request, res: Response, next: NextFunction) => {

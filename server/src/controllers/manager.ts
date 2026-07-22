@@ -12,6 +12,11 @@ import { setCaptain, setViceCaptain } from "../lib/helpers/roleUpdate";
 import { resolvePosition } from "../utils";
 import { getStandingsData } from "./standings";
 import { ApiConfig } from "../models/ApiConfig";
+import { Player } from "../models/Player";
+import { Team } from "../models/Team";
+import { Gameweek } from "../models/Gameweek";
+import { PlayerStats } from "../models/PlayerStats";
+import { Fixture } from "../models/Fixture";
 
 
 
@@ -707,37 +712,37 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       return res.status(404).json({ error: 'User not found' });
     }
 
-    // 2. Find the FantasyTeam managed by this user
-    const fantasyTeam = await FantasyTeam.findOne({
-      managers: user._id
-    }).populate('managers', 'username');
+    // 2. Parallel fetch for independent data sources
+    const [
+      fantasyTeam,
+      currentGwDocResult,
+      apiConfig,
+      standingsData,
+      totalManagers,
+      totalTeams,
+      nextFixture,
+      upcomingFixturesList
+    ] = await Promise.all([
+      FantasyTeam.findOne({ managers: user._id }).populate('managers', 'username'),
+      Gameweek.findOne({ isCurrent: true }).lean().then(async gw => gw || (await Gameweek.findOne({ isNext: true }).lean())),
+      ApiConfig.findOne({ key: 'pick_team_enabled' }).lean(),
+      getStandingsData(),
+      User.countDocuments({ role: 'manager' }),
+      FantasyTeam.countDocuments(),
+      Fixture.findOne({ 'status.type': 'notstarted' }).sort({ startTimestamp: 1 }).lean(),
+      Fixture.find({ 'status.type': 'notstarted' }).sort({ startTimestamp: 1 }).limit(5).lean()
+    ]);
 
     if (!fantasyTeam) {
       return res.status(404).json({ error: 'Fantasy Team not found' });
     }
 
-    // Fetch models dynamically
-    const PlayerModel = (await import("../models/Player")).Player;
-    const TeamModel = (await import("../models/Team")).Team;
-    const GameweekModel = (await import("../models/Gameweek")).Gameweek;
-    const PlayerStatsModel = (await import("../models/PlayerStats")).PlayerStats;
-    const FixtureModel = (await import("../models/Fixture")).Fixture;
-    const ApiConfigModel = (await import("../models/ApiConfig")).ApiConfig;
-
-    // Fetch current Gameweek
-    let currentGwDoc = await GameweekModel.findOne({ isCurrent: true });
-    if (!currentGwDoc) {
-      currentGwDoc = await GameweekModel.findOne({ isNext: true });
-    }
+    const currentGwDoc = currentGwDocResult;
     const currentGw = currentGwDoc ? currentGwDoc.number : 1;
-
-    // Fetch ApiConfig details
-    const apiConfig = await ApiConfigModel.findOne({ key: 'pick_team_enabled' });
     const pickMyTeam = apiConfig ? apiConfig.lastUpdatedString === 'true' : false;
     const deadlineDate = apiConfig?.deadlineDate || currentGwDoc?.endDate || new Date();
 
     // 3. Standings & League details
-    const standingsData = await getStandingsData();
     const myStanding = standingsData.find(s => s.team_id === fantasyTeam._id.toString());
     const total_point_before_this_gw = myStanding?.total_point_before_this_gw || 0;
     const rank = (myStanding as any)?.rank || 1;
@@ -768,8 +773,8 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       avgPointsPerGW: Number(avg.toFixed(1)),
       highestGW: highest,
       teamValue: (fantasyTeam.finance.utilisation || 0) / 10,
-      totalManagers: await User.countDocuments({ role: 'manager' }),
-      totalTeams: await FantasyTeam.countDocuments(),
+      totalManagers,
+      totalTeams,
     };
 
     // 5. Gameweek Progress
@@ -779,12 +784,24 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       captainChosen: fantasyTeam.currentSquad.picks.some(p => p.isCaptain),
       teamConfirmed: true,
       deadline: dayjs(deadlineDate).format("dddd, h:mm A"),
-      startDate: currentGwDoc?.startDate?.toISOString() || null,
-      endDate: currentGwDoc?.endDate?.toISOString() || null,
+      startDate: currentGwDoc?.startDate ? new Date(currentGwDoc.startDate).toISOString() : null,
+      endDate: currentGwDoc?.endDate ? new Date(currentGwDoc.endDate).toISOString() : null,
     };
 
-    // 6. Upcoming Match
-    const nextFixture = await FixtureModel.findOne({ 'status.type': 'notstarted' }).sort({ startTimestamp: 1 }).lean();
+    // 6. Upcoming Match & 12. Fixture Difficulty (Batched Team Lookups)
+    const fixtureTeamIds = new Set<number>();
+    if (nextFixture) {
+      if (nextFixture.homeTeam?.id) fixtureTeamIds.add(nextFixture.homeTeam.id);
+      if (nextFixture.awayTeam?.id) fixtureTeamIds.add(nextFixture.awayTeam.id);
+    }
+    for (const fix of upcomingFixturesList) {
+      if (fix.homeTeam?.id) fixtureTeamIds.add(fix.homeTeam.id);
+      if (fix.awayTeam?.id) fixtureTeamIds.add(fix.awayTeam.id);
+    }
+
+    const fixtureTeamsDocs = await Team.find({ id: { $in: Array.from(fixtureTeamIds) } }).lean();
+    const fixtureTeamMap = new Map(fixtureTeamsDocs.map(t => [t.id, t]));
+
     let upcomingMatch = {
       homeTeam: "Man City",
       homeTeamShort: "MCI",
@@ -797,8 +814,8 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     };
 
     if (nextFixture) {
-      const homeTeamDoc = await TeamModel.findOne({ id: nextFixture.homeTeam.id }).lean();
-      const awayTeamDoc = await TeamModel.findOne({ id: nextFixture.awayTeam.id }).lean();
+      const homeTeamDoc = fixtureTeamMap.get(nextFixture.homeTeam.id);
+      const awayTeamDoc = fixtureTeamMap.get(nextFixture.awayTeam.id);
       upcomingMatch = {
         homeTeam: homeTeamDoc?.name || "Home Team",
         homeTeamShort: homeTeamDoc?.nameCode || "HOM",
@@ -811,10 +828,20 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       };
     }
 
-    // 7. Recent Gameweeks
+    const fixtureDifficulty = upcomingFixturesList.map(fix => {
+      const awayTeamDoc = fixtureTeamMap.get(fix.awayTeam.id);
+      return {
+        gameweek: fix.roundInfo?.round || currentGw,
+        opponent: awayTeamDoc?.shortName || awayTeamDoc?.name || "OPP",
+        home: true,
+        difficulty: "Medium" as const,
+      };
+    });
+
+    // 7. Recent Gameweeks History Stats
     const allHistoryPicks = fantasyTeam.history.flatMap(h => h.picks);
     const allHistoryPlayerIds = [...new Set(allHistoryPicks.map(p => p.playerId))];
-    const historyPlayerStats = await PlayerStatsModel.find({ playerId: { $in: allHistoryPlayerIds } }).lean();
+    const historyPlayerStats = await PlayerStats.find({ playerId: { $in: allHistoryPlayerIds } }).select('playerId gameweeks').lean();
     const historyPsMap = new Map(historyPlayerStats.map(ps => [ps.playerId, ps]));
 
     const computeHistoryScore = (picks: any[], gwId: number) => {
@@ -865,11 +892,8 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       });
     }
 
-    // 8. Top Players (This Gameweek) & Best Performers (This Season)
-    const allPlayersWithStats = await PlayerStatsModel.find({}).lean();
-
-    // Build playerId → fantasy team name mapping & collect all owned player IDs
-    const allFantasyTeams = await FantasyTeam.find({}).lean();
+    // 8. Top Players & Best Performers
+    const allFantasyTeams = await FantasyTeam.find({}).select('name currentSquad.picks.playerId').lean();
     const playerToFantasyTeam = new Map<number, string>();
     const allOwnedPlayerIds = new Set<number>();
     for (const ft of allFantasyTeams) {
@@ -880,9 +904,9 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
         }
       }
     }
-    const ownedPlayersWithStats = allPlayersWithStats.filter((s: any) => allOwnedPlayerIds.has(s.playerId));
 
-    // Calculate Top Players for the current gameweek
+    const ownedPlayersWithStats = await PlayerStats.find({ playerId: { $in: Array.from(allOwnedPlayerIds) } }).lean();
+
     const sortedGwStats = [...ownedPlayersWithStats]
       .map(stat => {
         const gw = stat.gameweeks?.find((g: any) => g.id === currentGw);
@@ -894,16 +918,29 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       .sort((a, b) => b.gwPoints - a.gwPoints)
       .slice(0, 5);
 
-    const sortedGwPlayerIds = sortedGwStats.map(s => s.playerId);
-    const gwPlayersDocs = (await PlayerModel.find({ id: { $in: sortedGwPlayerIds } }).lean()) as any[];
-    const gwPDocsMap = new Map(gwPlayersDocs.map(p => [p.id, p]));
-    const gwTeamIds = [...new Set(gwPlayersDocs.map(p => p.teamId))];
-    const gwTeamsDocs = (await TeamModel.find({ id: { $in: gwTeamIds } }).lean()) as any[];
-    const gwTDocsMap = new Map(gwTeamsDocs.map(t => [t.id, t]));
+    const sortedStats = [...ownedPlayersWithStats].sort((a, b) => (b.totalPoints || 0) - (a.totalPoints || 0)).slice(0, 5);
+
+    const startingPicks = fantasyTeam.currentSquad.picks.filter(p => p.isStarting);
+    const startingPlayerIds = startingPicks.map(p => p.playerId);
+    const squadPlayerIds = fantasyTeam.currentSquad.picks.map(p => p.playerId);
+
+    const neededPlayerIds = new Set<number>([
+      ...sortedGwStats.map(s => s.playerId),
+      ...sortedStats.map(s => s.playerId),
+      ...startingPlayerIds,
+      ...squadPlayerIds
+    ]);
+
+    const playersDocs = await Player.find({ id: { $in: Array.from(neededPlayerIds) } }).lean() as any[];
+    const pDocsMap = new Map(playersDocs.map(p => [p.id, p]));
+
+    const neededTeamIds = new Set<number>(playersDocs.map(p => p.teamId));
+    const teamsDocs = await Team.find({ id: { $in: Array.from(neededTeamIds) } }).lean() as any[];
+    const tDocsMap = new Map(teamsDocs.map(t => [t.id, t]));
 
     const topPlayers = sortedGwStats.map((stat, index) => {
-      const playerDoc = gwPDocsMap.get(stat.playerId);
-      const teamDoc = playerDoc ? gwTDocsMap.get(playerDoc.teamId) : null;
+      const playerDoc = pDocsMap.get(stat.playerId);
+      const teamDoc = playerDoc ? tDocsMap.get(playerDoc.teamId) : null;
       return {
         rank: index + 1,
         name: playerDoc?.webName || playerDoc?.name || "Unknown",
@@ -915,15 +952,6 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
         ownedBy: 50,
       };
     });
-
-    // Calculate Best Performers for the whole season
-    const sortedStats = [...ownedPlayersWithStats].sort((a, b) => (b.totalPoints || 0) - (a.totalPoints || 0)).slice(0, 5);
-    const sortedPlayerIds = sortedStats.map(s => s.playerId);
-    const playersDocs = (await PlayerModel.find({ id: { $in: sortedPlayerIds } }).lean()) as any[];
-    const pDocsMap = new Map(playersDocs.map(p => [p.id, p]));
-    const teamIdsForPlayers = [...new Set(playersDocs.map(p => p.teamId))];
-    const teamsDocsForPlayers = (await TeamModel.find({ id: { $in: teamIdsForPlayers } }).lean()) as any[];
-    const tDocsMap = new Map(teamsDocsForPlayers.map(t => [t.id, t]));
 
     const bestPerformers = sortedStats.map((stat, index) => {
       const playerDoc = pDocsMap.get(stat.playerId);
@@ -941,7 +969,6 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
 
     // 9. Player Spotlight
     let playerSpotlight = {};
-
     if (sortedStats.length > 0) {
       const topStat = sortedStats[0];
       const topPlayerDoc = pDocsMap.get(topStat.playerId);
@@ -954,7 +981,6 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
         .reverse();
 
       const gwStats = currentGwStats?.stats || {};
-
       const fantasyTeamNameForSpotlight = playerToFantasyTeam.get(topStat.playerId) || "";
 
       playerSpotlight = {
@@ -996,12 +1022,11 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     }
 
     // 10. Points Breakdown
-    const startingPicks = fantasyTeam.currentSquad.picks.filter(p => p.isStarting);
-    const startingPlayerIds = startingPicks.map(p => p.playerId);
-    const startingStatsDocs = await PlayerStatsModel.find({ playerId: { $in: startingPlayerIds } }).lean();
-    const startingStatsMap = new Map(startingStatsDocs.map(s => [s.playerId, s]));
-    const startingPlayerDocs = await PlayerModel.find({ id: { $in: startingPlayerIds } }).lean();
-    const startingPlayerPositionMap = new Map(startingPlayerDocs.map((p: any) => [p.id, resolvePosition(p.position || '')]));
+    const startingStatsMap = new Map(ownedPlayersWithStats.map(s => [s.playerId, s]));
+    const startingPlayerPositionMap = new Map(startingPicks.map(p => {
+      const doc = pDocsMap.get(p.playerId);
+      return [p.playerId, resolvePosition(doc?.position || '')];
+    }));
 
     let bdGoalsPoints = 0, bdAssistsPoints = 0, bdCleanSheetPoints = 0;
     let bdYellowPoints = 0, bdRedPoints = 0, bdPenMissPoints = 0, bdPenSavePoints = 0;
@@ -1078,35 +1103,12 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       totalRank: (myStanding as any)?.rank || 1,
     };
 
-    // 12. Fixture Difficulty
-    const upcomingFixturesList = await FixtureModel.find({ 'status.type': 'notstarted' })
-      .sort({ startTimestamp: 1 })
-      .limit(5)
-      .lean();
-
-    const fixtureDifficulty = [];
-    for (const fix of upcomingFixturesList) {
-      const homeTeamDoc = await TeamModel.findOne({ id: fix.homeTeam.id }).lean();
-      const awayTeamDoc = await TeamModel.findOne({ id: fix.awayTeam.id }).lean();
-      fixtureDifficulty.push({
-        gameweek: fix.roundInfo?.round || currentGw,
-        opponent: awayTeamDoc?.shortName || awayTeamDoc?.name || "OPP",
-        home: true,
-        difficulty: "Medium" as const,
-      });
-    }
-
     // 13. Squad Info & Composition
-    const squadPlayerIds = fantasyTeam.currentSquad.picks.map(p => p.playerId);
-    const squadPlayerDocs = (await PlayerModel.find({ id: { $in: squadPlayerIds } }).lean()) as any[];
-    const squadTeams = (await TeamModel.find({ id: { $in: [...new Set(squadPlayerDocs.map(p => p.teamId))] } }).lean()) as any[];
-    const squadTeamMap = new Map(squadTeams.map(t => [t.id, t]));
-    const squadPlayerStats = await PlayerStatsModel.find({ playerId: { $in: squadPlayerIds } }).lean();
-    const squadPlayerStatsMap = new Map(squadPlayerStats.map(s => [s.playerId, s]));
-
-    const pDocsWithStats = squadPlayerDocs.map(p => {
-      const teamDoc = squadTeamMap.get(p.teamId);
-      const statDoc = squadPlayerStatsMap.get(p.id);
+    const pDocsWithStats = squadPlayerIds.map(id => {
+      const p = pDocsMap.get(id);
+      if (!p) return null;
+      const teamDoc = tDocsMap.get(p.teamId);
+      const statDoc = startingStatsMap.get(p.id);
       return {
         name: p.webName || p.name || "",
         team: fantasyTeam.name || teamDoc?.nameCode || "UNK",
@@ -1115,17 +1117,17 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
         price: (p.price?.nowCost || 0) / 10,
         position: resolvePosition(p.position || ""),
       };
-    });
+    }).filter(Boolean) as any[];
 
     const goalkeepers = pDocsWithStats.filter(p => p.position === "GK");
     const defenders = pDocsWithStats.filter(p => p.position === "DEF");
     const midfielders = pDocsWithStats.filter(p => p.position === "MID");
     const forwards = pDocsWithStats.filter(p => p.position === "FWD");
 
-    const startingDEF = startingPlayerDocs.filter((p: any) => resolvePosition(p.position || "") === "DEF").length;
-    const startingMID = startingPlayerDocs.filter((p: any) => resolvePosition(p.position || "") === "MID").length;
-    const startingFWD = startingPlayerDocs.filter((p: any) => resolvePosition(p.position || "") === "FWD").length;
-    const formation = startingPlayerDocs.length > 0 ? `${startingDEF}-${startingMID}-${startingFWD}` : "4-4-2";
+    const startingDEF = startingPlayerIds.filter(id => resolvePosition(pDocsMap.get(id)?.position || "") === "DEF").length;
+    const startingMID = startingPlayerIds.filter(id => resolvePosition(pDocsMap.get(id)?.position || "") === "MID").length;
+    const startingFWD = startingPlayerIds.filter(id => resolvePosition(pDocsMap.get(id)?.position || "") === "FWD").length;
+    const formation = startingPlayerIds.length > 0 ? `${startingDEF}-${startingMID}-${startingFWD}` : "4-4-2";
 
     const squadComposition = {
       goalkeepers: goalkeepers.length,
