@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import apiClient from "../../api/client";
 import { API_ENDPOINTS } from "../../api/endpoints";
 import { Send, Bell, Loader2, Calendar, Target } from "lucide-react";
+import Modal from "../../components/common/Modal";
 
 export const Route = createLazyFileRoute("/admin/notifications")({
   component: AdminNotifications,
@@ -141,13 +142,11 @@ function AdminNotifications() {
       </div>
 
       {/* Send Notification Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in" onClick={closeModal}>
-          <form 
-            onSubmit={handleSendNotification} 
-            className="bg-[#1b142d] border border-white/10 p-5 rounded-2xl shadow-2xl space-y-4 relative overflow-hidden w-full max-w-sm animate-slide-up z-10 text-white"
-            onClick={e => e.stopPropagation()}
-          >
+      <Modal isOpen={isModalOpen} onClose={closeModal} variant="responsive" maxWidthClass="max-w-sm">
+        <form 
+          onSubmit={handleSendNotification} 
+          className="p-5 space-y-4 relative overflow-hidden text-white"
+        >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-600 opacity-80" />
             
             <div className="flex justify-between items-center">
@@ -288,9 +287,8 @@ function AdminNotifications() {
                 ) : 'Send'}
               </button>
             </div>
-          </form>
-        </div>
-      )}
+        </form>
+      </Modal>
     </div>
   );
 }

@@ -304,7 +304,7 @@ const MyTeamPage = () => {
   const hasUnsavedChanges = substitutions?.length > 0 || Object.keys(roles || {}).length > 0;
 
   return (
-    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-white font-outfit select-none overflow-hidden">
+    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-white font-outfit select-none overflow-hidden pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
 
       {/* 1. Header Card Panel */}
       <MyTeamHeader

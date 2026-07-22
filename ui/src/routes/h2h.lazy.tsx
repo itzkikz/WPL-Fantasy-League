@@ -276,7 +276,7 @@ function H2HPage() {
   }, [fixturesData, selectedGw, fixtureFilter, managerDetails]);
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-48px-80px)] lg:h-[calc(100vh-48px)] bg-background text-white overflow-hidden font-outfit">
+    <div className="flex flex-col flex-1 bg-background text-white overflow-hidden font-outfit">
       
       {/* Header */}
       <div className="px-4 pt-4 pb-2 flex-none flex items-center justify-between">
@@ -386,7 +386,7 @@ function H2HPage() {
             )}
 
             {/* Scrollable Container */}
-            <div className="flex-1 overflow-y-auto scrollbar-hide pb-20 space-y-2.5">
+            <div className="flex-1 overflow-y-auto scrollbar-hide pb-[calc(5.25rem+env(safe-area-inset-bottom))] space-y-2.5">
               {activeTab === 'overall' ? (
                 standingsLoading ? (
                   [...Array(6)].map((_, i) => (

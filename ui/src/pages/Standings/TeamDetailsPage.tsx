@@ -1,5 +1,4 @@
 import { getRouteApi, useNavigate } from "@tanstack/react-router";
-import { ViewTransitions } from "../../types/viewTransitions";
 import { useTeamDetails, useStandings } from "../../features/standings/hooks";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, ArrowLeft, ChevronDown } from "lucide-react";
@@ -93,7 +92,6 @@ const TeamDetailsPage = () => {
   const handleGoBack = () => {
     navigate({
       to: "/standings",
-      viewTransition: ViewTransitions.back,
     });
   };
 
@@ -172,7 +170,7 @@ const TeamDetailsPage = () => {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-80px)] lg:h-screen bg-background text-white font-outfit select-none overflow-hidden">
+    <div className="flex flex-col flex-1 bg-background text-white font-outfit select-none overflow-hidden">
 
       {/* 1. Header Panel */}
       <div className="mx-4 mt-3 bg-gradient-card border border-border rounded-2xl overflow-hidden p-4 shadow-card relative shrink-0">

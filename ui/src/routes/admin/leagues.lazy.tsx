@@ -1,8 +1,9 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import apiClient from "../../api/client";
 import { API_ENDPOINTS, QUERY_KEYS } from "../../api/endpoints";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import Modal from "../../components/common/Modal";
 
 export const Route = createLazyFileRoute("/admin/leagues")({
   component: AdminLeagues,
@@ -13,11 +14,27 @@ interface RoundModalProps {
   onClose: () => void;
 }
 
-function RoundModal({ league, onClose }: RoundModalProps) {
+function RoundModal({ league: propLeague, onClose }: RoundModalProps) {
   const queryClient = useQueryClient();
-  const totalRounds = league.totalRounds ?? 38;
-  const [selectedRound, setSelectedRound] = useState<number>(league.currentRound ?? 1);
+  const [localLeague, setLocalLeague] = useState<any>(null);
+
+  useEffect(() => {
+    if (propLeague) {
+      setLocalLeague(propLeague);
+    }
+  }, [propLeague]);
+
+  const league = propLeague || localLeague;
+
+  const [selectedRound, setSelectedRound] = useState<number>(1);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (propLeague) {
+      setSelectedRound(propLeague.currentRound ?? 1);
+      setError("");
+    }
+  }, [propLeague]);
 
   const updateMutation = useMutation({
     mutationFn: (currentRound: number) =>
@@ -31,10 +48,13 @@ function RoundModal({ league, onClose }: RoundModalProps) {
     },
   });
 
+  if (!league) return null;
+
+  const totalRounds = league.totalRounds ?? 38;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
-      <div className="absolute inset-0" onClick={onClose} />
-      <div className="bg-[#1b142d] border border-white/10 p-5 rounded-2xl shadow-2xl space-y-4 relative overflow-hidden w-full max-w-sm animate-slide-up z-10 text-white">
+    <Modal isOpen={!!propLeague} onClose={onClose} variant="center" maxWidthClass="max-w-sm">
+      <div className="p-5 space-y-4 relative overflow-hidden text-white">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-600 opacity-80" />
 
         <div className="flex justify-between items-center">
@@ -71,7 +91,7 @@ function RoundModal({ league, onClose }: RoundModalProps) {
           {updateMutation.isPending ? "Saving..." : `Set Round ${selectedRound}`}
         </button>
       </div>
-    </div>
+    </Modal>
   );
 }
 
@@ -145,12 +165,10 @@ function AdminLeagues() {
         )}
       </div>
 
-      {selectedLeague && (
-        <RoundModal
-          league={selectedLeague}
-          onClose={() => setSelectedLeague(null)}
-        />
-      )}
+      <RoundModal
+        league={selectedLeague}
+        onClose={() => setSelectedLeague(null)}
+      />
     </div>
   );
 }

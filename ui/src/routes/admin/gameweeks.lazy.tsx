@@ -5,6 +5,7 @@ import apiClient from "../../api/client";
 import { API_ENDPOINTS, QUERY_KEYS } from "../../api/endpoints";
 import dayjs from "dayjs";
 import { Calendar, Settings, AlertCircle, Plus, Zap, Check, Lock, Unlock, Loader2, Edit3, X } from "lucide-react";
+import Modal from "../../components/common/Modal";
 
 export const Route = createLazyFileRoute("/admin/gameweeks")({
   component: AdminGameweeks,
@@ -320,10 +321,9 @@ function AdminGameweeks() {
       </div>
 
       {/* Assign Fixtures Overlay Modal */}
-      {assigningGwId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-fade-in" onClick={() => setAssigningGwId(null)}>
-          <div className="bg-[#1b142d] border border-white/10 rounded-2xl shadow-2xl w-full max-w-lg max-h-[80vh] flex flex-col relative overflow-hidden text-white animate-slide-up" onClick={e => e.stopPropagation()}>
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-600 opacity-80" />
+      <Modal isOpen={!!assigningGwId} onClose={() => setAssigningGwId(null)} variant="responsive" maxWidthClass="max-w-lg">
+        <div className="relative overflow-hidden text-white flex flex-col max-h-[80vh] w-full">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-600 opacity-80" />
             
             <div className="p-4 border-b border-white/10 flex justify-between items-center relative z-10">
               <div>
@@ -384,8 +384,7 @@ function AdminGameweeks() {
               </button>
             </div>
           </div>
-        </div>
-      )}
+      </Modal>
 
       {/* Create Gameweek Form */}
       {isCreating && (

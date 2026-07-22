@@ -51,14 +51,12 @@ export const MainLayout = () => {
         "/settings",
     ];
 
-    const isBaseRoute = baseRoutes.some((route) =>
-        matchRoute({ to: route, fuzzy: false })
+    const isBaseRoute = baseRoutes.includes(
+        currentPath.endsWith("/") && currentPath !== "/" ? currentPath.slice(0, -1) : currentPath
     );
 
     const noNavRoutes = ["/login", "/maintenance", "/"];
-    const hideNav = noNavRoutes.some((route) =>
-        matchRoute({ to: route, fuzzy: false })
-    );
+    const hideNav = noNavRoutes.includes(currentPath);
 
     if (isRestrictedForAdmin) {
         return null;
@@ -115,8 +113,8 @@ export const MainLayout = () => {
             <PWAInstallBanner />
             <div className="flex-1 flex">
                 <div className={`flex h-screen flex-col mx-auto w-full ${currentPath === "/my-team" ? "overflow-hidden" : "overflow-y-auto"}`} style={{ WebkitOverflowScrolling: 'touch' }}>
-                    {isBaseRoute && currentPath !== "/my-team" && (
-                        <header className="header relative w-full h-12 shrink-0 overflow-hidden bg-surface border-b border-[var(--color-border-divider)] text-white lg:hidden">
+                    {(currentPath === "/home" || currentPath === "/home/") && (
+                        <header className="header relative w-full h-12 shrink-0 overflow-hidden bg-surface border-b border-[var(--color-border-divider)] text-white lg:hidden" style={{ viewTransitionName: 'header-static' }}>
                             {/* Animated gradient overlay */}
                             {/* Content container */}
                             <div className="relative z-10 mx-auto flex h-full w-full items-center justify-between px-3">
@@ -204,7 +202,7 @@ export const MainLayout = () => {
                         )}
 
                         {/* Main content: always visible, grows to fill space */}
-                        <div className={`flex-1 flex flex-col min-h-0 ${!hideNav ? 'pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0 lg:px-6 lg:py-6' : ''}`}>
+                        <div className="flex-1 flex flex-col min-h-0 lg:px-6 lg:py-6">
                             <Outlet />
                         </div>
                     </div>

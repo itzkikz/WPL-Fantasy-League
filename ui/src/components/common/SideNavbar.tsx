@@ -156,7 +156,7 @@ const SideNavbar = () => {
       ]
     : [
         { label: "Home", path: "/home" },
-        { label: "League", path: "/standings" },
+        { label: "League", path: "/standings/" },
         { label: "My Team", path: "/my-team" },
         { label: "H2H", path: "/h2h" },
         { label: "Stats", path: "/stats" },

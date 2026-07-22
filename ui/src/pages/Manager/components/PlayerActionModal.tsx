@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { X, Star, Layers } from "lucide-react";
 import { Player } from "../../../features/players/types";
+import Modal from "../../../components/common/Modal";
 
 interface PlayerActionModalProps {
   isOpen: boolean;
@@ -14,24 +16,26 @@ interface PlayerActionModalProps {
 const PlayerActionModal = ({
   isOpen,
   onClose,
-  player,
+  player: propPlayer,
   onMakeCaptain,
   onMakeViceCaptain,
   onSubstitute,
   getPlayerPrice,
 }: PlayerActionModalProps) => {
-  if (!isOpen || !player) return null;
+  const [localPlayer, setLocalPlayer] = useState<(Player & { teamColor?: string; shirtNumber?: number }) | null>(null);
+
+  useEffect(() => {
+    if (propPlayer) {
+      setLocalPlayer(propPlayer);
+    }
+  }, [propPlayer]);
+
+  const player = propPlayer || localPlayer;
+
+  if (!player) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center p-4 animate-in fade-in duration-200">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
-
-      {/* Modal Content */}
-      <div className="relative w-full max-w-sm bg-elevated border border-border rounded-t-3xl sm:rounded-3xl shadow-modal overflow-hidden z-10 animate-in slide-in-from-bottom-5 duration-300">
+    <Modal isOpen={isOpen} onClose={onClose} variant="responsive" maxWidthClass="max-w-sm">
         {/* Modal Header */}
         <div className="bg-card p-5 border-b border-border flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -95,8 +99,7 @@ const PlayerActionModal = ({
             </div>
           </button>
         </div>
-      </div>
-    </div>
+    </Modal>
   );
 };
 
