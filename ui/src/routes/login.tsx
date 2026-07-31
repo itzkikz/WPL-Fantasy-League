@@ -6,10 +6,10 @@ export const Route = createFileRoute('/login')({
   component: LoginPage,
   beforeLoad: () => {
     // Check auth synchronously
-  const {user} = useUserStore.getState()
+    const { user, isGuest } = useUserStore.getState()
+    const token = localStorage.getItem("token")
 
-    
-    if (user?.teamName) {
+    if ((user?.teamName || token) && !isGuest) {
       throw redirect({ to: "/home" });
     }
   },

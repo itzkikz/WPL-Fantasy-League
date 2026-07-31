@@ -71,6 +71,7 @@ const H2HIcon = ({ isActive }: { isActive: boolean }) => (
 const SideNavbar = () => {
   const matchRoute = useMatchRoute();
   const user = useUserStore((state) => state.user);
+  const isGuest = useUserStore((state) => state.isGuest);
   const isAdmin = user?.role === "admin";
 
   const adminItems = [
@@ -152,11 +153,54 @@ const SideNavbar = () => {
     );
   }
 
+  // Guest users - only show Stats and Standings
+  if (isGuest) {
+    const guestItems = [
+      { label: "League", path: "/standings/" },
+      { label: "Stats", path: "/stats" },
+    ];
+
+    return (
+      <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-[#221938] lg:h-screen lg:py-4 lg:px-2">
+        <div className="flex flex-col gap-2">
+          {guestItems.map(({ label, path }) => {
+            const isActive = matchRoute({ to: path, fuzzy: true });
+
+            return (
+              <Link
+                viewTransition={{ types: ["tab-switch"] }}
+                key={label}
+                to={path}
+                className={`flex items-center gap-3 px-3 py-2 text-sm transition-colors`}
+              >
+                {label === "League" && <LeagueIcon isActive={isActive} />}
+                {label === "Stats" && <Graph isActive={isActive} />}
+
+                <span
+                  className={`${
+                    isActive
+                      ? "text-[#A855F7] font-semibold"
+                      : "text-[#8E89A6] hover:text-white"
+                  }`}
+                >
+                  {label}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
+    );
+  }
+
   const isRegularUser = user?.role === "user";
 
   const navItems = isRegularUser
     ? [
+        { label: "Home", path: "/home" },
+        { label: "League", path: "/standings/" },
         { label: "Stats", path: "/stats" },
+        { label: "Settings", path: "/settings" },
       ]
     : [
         { label: "Home", path: "/home" },
@@ -164,6 +208,7 @@ const SideNavbar = () => {
         { label: "My Team", path: "/my-team" },
         { label: "H2H", path: "/h2h" },
         { label: "Stats", path: "/stats" },
+        { label: "Settings", path: "/settings" },
       ];
 
   return (
@@ -184,6 +229,7 @@ const SideNavbar = () => {
               {label === "My Team" && <MyTeamIcon isActive={isActive} />}
               {label === "H2H" && <H2HIcon isActive={isActive} />}
               {label === "Stats" && <Graph isActive={isActive} />}
+              {label === "Settings" && <UserSettings isActive={isActive} />}
 
               <span
                 className={`${

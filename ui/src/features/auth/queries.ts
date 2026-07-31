@@ -9,7 +9,7 @@ export const authQueries = {
       queryKey: [QUERY_KEYS.AUTH],
       queryFn: async () => authApi.validate(),
       retry: false,
-      staleTime: Infinity, // <--- prevents re-fetching
+      staleTime: 1000 * 60 * 5, // 5 minutes
       gcTime: 1000 * 60 * 10, // cache for 10 minutes
     }),
 }

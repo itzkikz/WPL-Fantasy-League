@@ -61,6 +61,7 @@ const MyTeamPage = () => {
       setHeaderTab(search.tab);
     }
   }, [search.tab]);
+
   const [toastOpen, setToastOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<{ message: string; type: "SUCCESS" | "ERROR" }>({ message: "", type: "SUCCESS" });
 
@@ -98,150 +99,102 @@ const MyTeamPage = () => {
 
     if (substituteMode && swapSourcePlayer) {
       // Execute the swap helper
-      const result = executeSwap(
+      const swapResult = executeSwap(
         { starting: startingXI, bench },
-        swapSourcePlayer.name,
-        player.name
+        swapSourcePlayer,
+        player
       );
 
-      if (result && !("error" in result)) {
-        // Clear all highlights
-        const clearResult = clearSwapHighlights({ starting: result.starting, bench: result.bench });
-        setStartingXI(clearResult.starting);
-        setBench(clearResult.bench);
+      if (swapResult.success) {
+        setStartingXI(swapResult.starting);
+        setBench(swapResult.bench);
 
-        // Update the Zustand store substitutions
-        setSubstitutions({
-          swapIn: result.swappedIn,
-          swapOut: result.swappedOut,
-        });
+        // Record the swap in Zustand store
+        const newSubstitutions = [...substitutions, { swapIn: player, swapOut: swapSourcePlayer }];
+        setSubstitutions(newSubstitutions);
 
-        // Set store substitution mode false
-        setIsSubstitution(false);
-        setSubstituteMode(false);
-        setSwapSourcePlayer(null);
-        triggerHaptic();
-        showToast(`Substituted: ${result.swappedIn.name} In, ${result.swappedOut.name} Out.`, "SUCCESS");
+        showToast(`Substituted ${swapSourcePlayer.webName} for ${player.webName}`, "SUCCESS");
       } else {
-        // Swap failed or cancelled
-        setSubstituteMode(false);
-        setSwapSourcePlayer(null);
-        setIsSubstitution(false);
-
-        // Reset highlights
-        const clearResult = clearSwapHighlights({ starting: startingXI, bench });
-        setStartingXI(clearResult.starting);
-        setBench(clearResult.bench);
-
-        const errorMsg = result && "error" in result ? result.error : "Substitution failed.";
-        showToast(errorMsg, "ERROR");
+        showToast(swapResult.error || "Invalid substitution", "ERROR");
       }
-    } else {
-      // Direct click: open stats overlay modal
-      setSelectedPlayer(player);
-      setActionOverlayOpen(true);
-    }
-  };
 
-  const handleMakeCaptain = (player: Player) => {
-    const result = setCaptain({ starting: startingXI, bench }, player.id);
-    if (result && !("error" in result)) {
-      setStartingXI(result.starting);
-      setBench(result.bench);
-      setRoles({ ...roles, captain: player.id });
-      triggerHaptic();
-      showToast(`${player.name} is now your Captain.`, "SUCCESS");
-    } else {
-      showToast("Failed to set Captain.", "ERROR");
-    }
-    setActionOverlayOpen(false);
-    setSelectedPlayer(null);
-  };
-
-  const handleMakeViceCaptain = (player: Player) => {
-    const result = setViceCaptain({ starting: startingXI, bench }, player.id);
-    if (result && !("error" in result)) {
-      setStartingXI(result.starting);
-      setBench(result.bench);
-      setRoles({ ...roles, vice: player.id });
-      triggerHaptic();
-      showToast(`${player.name} is now your Vice Captain.`, "SUCCESS");
-    } else {
-      showToast("Failed to set Vice Captain.", "ERROR");
-    }
-    setActionOverlayOpen(false);
-    setSelectedPlayer(null);
-  };
-
-  const handleSubstituteInitiate = (player: Player) => {
-    const isStarter = Object.values(startingXI).flat().some(p => p.id === player.id);
-    const location = isStarter ? "starting" : "bench";
-
-    // Call WPL helper to highlight targets
-    const result = playerSwap(
-      { starting: startingXI, bench },
-      player.name,
-      location
-    );
-
-    if (result && !("error" in result)) {
-      setStartingXI(result.starting);
-      setBench(result.bench);
-      setSwapSourcePlayer(player);
-      setSubstituteMode(true);
-      setIsSubstitution(true);
-      showToast(`Substitution mode: Select a player to swap with ${player.name}.`, "SUCCESS");
-    } else {
-      showToast("Cannot substitute this player.", "ERROR");
-    }
-    setActionOverlayOpen(false);
-    setSelectedPlayer(null);
-  };
-
-  const handleSaveTeam = () => {
-    // Validate captain/vice captain requirements - must have both in starting XI
-    const allStarting = [...(startingXI.GK || []), ...(startingXI.DEF || []), ...(startingXI.MID || []), ...(startingXI.FWD || [])];
-    const captain = allStarting.find(p => p.isCaptain);
-    const vice = allStarting.find(p => p.isViceCaptain);
-
-    if (!captain || !vice) {
-      const missing = !captain ? "Captain" : "Vice Captain";
-      showToast(`You need to select a ${missing} from Starting XI to save team.`, "ERROR");
+      setSubstituteMode(false);
+      setSwapSourcePlayer(null);
+      setIsSubstitution(false);
       return;
     }
 
-    const allPlayers = [...allStarting, ...bench];
-    const findPlayer = (id?: number) => (id != null ? allPlayers.find(p => p.id === id) || null : null);
-    setPendingCaptain(findPlayer(roles?.captain));
-    setPendingVice(findPlayer(roles?.vice));
+    // Normal click: open player options overlay modal
+    setSelectedPlayer(player);
+    setActionOverlayOpen(true);
+  };
+
+  const handleMakeCaptain = (player: Player) => {
+    const updatedStarting = setCaptain(startingXI, player.id);
+    setStartingXI(updatedStarting);
+    setRoles({ captainId: player.id });
+    showToast(`${player.webName} set as Captain (C)`, "SUCCESS");
+    setActionOverlayOpen(false);
+  };
+
+  const handleMakeViceCaptain = (player: Player) => {
+    const updatedStarting = setViceCaptain(startingXI, player.id);
+    setStartingXI(updatedStarting);
+    setRoles({ viceCaptainId: player.id });
+    showToast(`${player.webName} set as Vice-Captain (VC)`, "SUCCESS");
+    setActionOverlayOpen(false);
+  };
+
+  const handleSubstituteInitiate = (player: Player) => {
+    setActionOverlayOpen(false);
+    setSubstituteMode(true);
+    setSwapSourcePlayer(player);
+    setIsSubstitution(true);
+
+    const isStarter = Object.values(startingXI).flat().some(p => p.id === player.id);
+    const highlightResult = playerSwap(
+      { starting: startingXI, bench },
+      player,
+      isStarter ? "starting" : "bench"
+    );
+
+    setStartingXI(highlightResult.starting);
+    setBench(highlightResult.bench);
+    showToast(`Select a highlighted player to substitute with ${player.webName}`, "SUCCESS");
+  };
+
+  const handleSaveTeam = () => {
+    const allStarters = [...(startingXI.GK || []), ...(startingXI.DEF || []), ...(startingXI.MID || []), ...(startingXI.FWD || [])];
+    const currentCaptain = allStarters.find(p => p.isCaptain) || null;
+    const currentVice = allStarters.find(p => p.isViceCaptain) || null;
+
+    setPendingCaptain(currentCaptain);
+    setPendingVice(currentVice);
     setSaveConfirmOpen(true);
   };
 
   const handleConfirmSave = () => {
-    setSaveConfirmOpen(false);
     mutation.mutate(
-      { substitution: substitutions, roles },
+      { substitutions },
       {
-        onSuccess: (data) => {
-          showToast(data?.message || "Team squad saved successfully!", "SUCCESS");
+        onSuccess: () => {
+          showToast("Lineup saved successfully!", "SUCCESS");
           resetSubstitutions();
-          setIsSubstitution(false);
-          setRoles({});
+          setSaveConfirmOpen(false);
         },
         onError: (err: any) => {
-          const errMsg = err?.response?.data?.message || err?.data?.data?.message || "Failed to save team updates.";
-          showToast(errMsg, "ERROR");
-        },
+          showToast(err?.message || "Failed to save lineup.", "ERROR");
+          setSaveConfirmOpen(false);
+        }
       }
     );
   };
 
   const handleClearTeam = () => {
     resetSubstitutions();
-    setRoles({});
-    setIsSubstitution(false);
     setSubstituteMode(false);
     setSwapSourcePlayer(null);
+    setIsSubstitution(false);
     if (managerDetails?.managerTeam) {
       const clearResult = clearSwapHighlights({
         starting: managerDetails.managerTeam.starting,
@@ -278,8 +231,6 @@ const MyTeamPage = () => {
     return getPlayerDisplayPrice(player);
   };
 
-
-
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center h-full bg-background text-white select-none">
@@ -306,7 +257,6 @@ const MyTeamPage = () => {
     );
   }
 
-
   const deadlineFormatted = managerDetails?.deadline
     ? dayjs(managerDetails.deadline).format("ddd, D MMM YYYY, h:mm A")
     : "No deadline";
@@ -323,147 +273,268 @@ const MyTeamPage = () => {
   return (
     <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-white font-outfit select-none overflow-hidden pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
 
-      {/* 1. Header Card Panel */}
-      <MyTeamHeader
-        selectedGW={selectedGW}
-        deadlineFormatted={deadlineFormatted}
-        total_budget={managerDetails?.total_budget}
-        balance={managerDetails?.balance}
-        totalGWScore={managerDetails?.totalGWScore}
-        totalPointsFormatted={totalPointsFormatted}
-        pickMyTeam={managerDetails?.pickMyTeam}
-        headerTab={headerTab}
-        setHeaderTab={(tab) => {
-          setHeaderTab(tab);
-          navigate({ to: "/my-team", search: { tab }, replace: true });
-        }}
-      />
+      {/* MOBILE HEADER (Visible on mobile screens < lg) */}
+      <div className="lg:hidden shrink-0">
+        <MyTeamHeader
+          selectedGW={selectedGW}
+          deadlineFormatted={deadlineFormatted}
+          total_budget={managerDetails?.total_budget}
+          balance={managerDetails?.balance}
+          totalGWScore={managerDetails?.totalGWScore}
+          totalPointsFormatted={totalPointsFormatted}
+          pickMyTeam={managerDetails?.pickMyTeam}
+          headerTab={headerTab}
+          setHeaderTab={(tab) => {
+            setHeaderTab(tab);
+            navigate({ to: "/my-team", search: { tab }, replace: true });
+          }}
+        />
+      </div>
 
+      {/* MAIN CONTAINER: Responsive Split Layout for Webview / Desktop (lg+) */}
+      <div className="flex-1 flex flex-col lg:flex-row h-full min-h-0 overflow-y-auto lg:overflow-hidden lg:gap-3 lg:p-3">
 
-
-      {headerTab === "current" ? (
-        <>
-          {/* 2. Navigation Tabs & Actions Toolbar */}
-          <div className="mx-4 mt-4 flex items-center justify-between border-b border-[var(--color-border-divider)] shrink-0 pb-1.5">
-            {/* Tabs */}
-            <div className="flex gap-2">
-              <button
-                onClick={() => { triggerHaptic(); setActiveTab("pitch"); }}
-                className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex items-center gap-1.5 min-h-[36px] px-2.5
-                  ${activeTab === "pitch" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
-              >
-                <LayoutGrid className="w-3.5 h-3.5" />
-                Pitch
-                {activeTab === "pitch" && (
-                  <div className="absolute bottom-[-7px] left-0 right-0 h-0.5 bg-secondary" />
-                )}
-              </button>
-              <button
-                onClick={() => { triggerHaptic(); setActiveTab("list"); }}
-                className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex items-center gap-1.5 min-h-[36px] px-2.5
-                  ${activeTab === "list" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
-              >
-                <List className="w-3.5 h-3.5" />
-                List
-                {activeTab === "list" && (
-                  <div className="absolute bottom-[-7px] left-0 right-0 h-0.5 bg-secondary" />
-                )}
-              </button>
+        {/* LEFT COLUMN PANEL (Webview Squad Details - Visible on lg+) */}
+        <div className="hidden lg:flex lg:flex-col lg:w-80 xl:w-96 shrink-0 bg-surface border border-border/80 rounded-3xl p-5 shadow-card overflow-y-auto space-y-5">
+          
+          {/* Team Name & Manager Info Header */}
+          <div className="space-y-3 pb-4 border-b border-border/60">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600/30 to-indigo-600/30 border border-purple-500/30 flex items-center justify-center text-purple-300 font-black text-xl shadow-inner shrink-0">
+                🛡️
+              </div>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-lg font-black text-white tracking-tight truncate">
+                  {managerDetails?.team || "My Squad"}
+                </h2>
+                <p className="text-xs text-text-muted font-medium truncate">
+                  Manager: <span className="text-purple-300 font-semibold">{Array.isArray(managerDetails?.managers) ? managerDetails.managers.join(", ") : managerDetails?.managers || "Team Manager"}</span>
+                </p>
+              </div>
             </div>
 
-            {/* Action Buttons */}
-            {managerDetails?.pickMyTeam && (
-              <div className="flex items-center gap-1.5">
+            {/* Gameweek Badge & Deadline */}
+            <div className="bg-background/70 border border-border/60 rounded-2xl p-3 flex items-center justify-between">
+              <div>
+                <span className="text-[10px] uppercase tracking-wider font-extrabold text-text-muted block">Gameweek {selectedGW}</span>
+                <span className="text-xs font-semibold text-secondary">{deadlineFormatted}</span>
+              </div>
+              {/* GW / History Toggle */}
+              <div className="flex items-center gap-1 bg-surface border border-border/60 rounded-xl p-1 shrink-0">
                 <button
-                  onClick={handleClearTeam}
-                  disabled={!hasUnsavedChanges}
-                  className="px-2.5 py-1 border border-primary/45 text-secondary hover:bg-primary/10 disabled:opacity-40 disabled:cursor-not-allowed font-bold rounded-lg min-h-[28px] flex items-center justify-center gap-1 active:scale-95 transition-all cursor-pointer text-[10px] md:text-xs"
+                  onClick={() => { setHeaderTab("current"); navigate({ to: "/my-team", search: { tab: "current" }, replace: true }); }}
+                  className={`px-2.5 py-1 text-[10px] font-extrabold rounded-lg transition-all cursor-pointer ${headerTab === "current" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"}`}
                 >
-                  <Trash2 className="w-3 h-3" />
-                  Clear
+                  GW {selectedGW}
                 </button>
                 <button
-                  onClick={handleSaveTeam}
-                  disabled={!hasUnsavedChanges || mutation.isPending || !hasValidLeadership}
-                  className="px-2.5 py-1 bg-gradient-button disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-lg shadow-fab min-h-[28px] flex items-center justify-center gap-1 active:scale-95 transition-all cursor-pointer border-t border-white/20 text-[10px] md:text-xs"
+                  onClick={() => { setHeaderTab("history"); navigate({ to: "/my-team", search: { tab: "history" }, replace: true }); }}
+                  className={`px-2.5 py-1 text-[10px] font-extrabold rounded-lg transition-all cursor-pointer ${headerTab === "history" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"}`}
                 >
-                  <Save className="w-3 h-3" />
-                  {mutation.isPending ? "Saving..." : "Save"}
+                  History
                 </button>
-                {!hasValidLeadership && hasUnsavedChanges && (
-                  <span className="text-[10px] text-rose-400 font-bold ml-1">Requires C + VC</span>
+              </div>
+            </div>
+          </div>
+
+          {/* 4-Stat Grid Panel */}
+          <div className="grid grid-cols-2 gap-2.5">
+            <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Team Value</span>
+              <span className="text-base font-extrabold text-white mt-0.5 block">£{managerDetails?.total_budget || "100.0"}m</span>
+            </div>
+            <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Bank</span>
+              <span className="text-base font-extrabold text-white mt-0.5 block">£{(managerDetails?.balance ?? 0).toFixed(2)}m</span>
+            </div>
+            <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">GW Score</span>
+              <span className="text-base font-extrabold text-[var(--color-success-bright)] mt-0.5 block">{managerDetails?.totalGWScore ?? 0} pts</span>
+            </div>
+            <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Total Points</span>
+              <span className="text-base font-extrabold text-white mt-0.5 block">{totalPointsFormatted} pts</span>
+            </div>
+          </div>
+
+          {/* Webview Actions & View Controls */}
+          {headerTab === "current" && (
+            <div className="space-y-4 pt-3 border-t border-border/60">
+              {/* Pitch vs List Toggle */}
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-text-muted uppercase tracking-wider">Layout View</span>
+                <div className="flex gap-1.5 bg-background/50 border border-border/60 rounded-xl p-1">
+                  <button
+                    onClick={() => { triggerHaptic(); setActiveTab("pitch"); }}
+                    className={`px-3 py-1 text-xs font-extrabold rounded-lg flex items-center gap-1.5 transition-all cursor-pointer ${activeTab === "pitch" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"}`}
+                  >
+                    <LayoutGrid className="w-3.5 h-3.5" />
+                    Pitch
+                  </button>
+                  <button
+                    onClick={() => { triggerHaptic(); setActiveTab("list"); }}
+                    className={`px-3 py-1 text-xs font-extrabold rounded-lg flex items-center gap-1.5 transition-all cursor-pointer ${activeTab === "list" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"}`}
+                  >
+                    <List className="w-3.5 h-3.5" />
+                    List
+                  </button>
+                </div>
+              </div>
+
+              {/* Lineup Clear & Save Actions */}
+              {managerDetails?.pickMyTeam && (
+                <div className="space-y-2 pt-1">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleClearTeam}
+                      disabled={!hasUnsavedChanges}
+                      className="flex-1 py-2.5 border border-primary/45 text-secondary hover:bg-primary/10 disabled:opacity-40 disabled:cursor-not-allowed font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      Clear
+                    </button>
+                    <button
+                      onClick={handleSaveTeam}
+                      disabled={!hasUnsavedChanges || mutation.isPending || !hasValidLeadership}
+                      className="flex-1 py-2.5 bg-gradient-button disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-fab transition-all cursor-pointer border-t border-white/20"
+                    >
+                      <Save className="w-4 h-4" />
+                      {mutation.isPending ? "Saving..." : "Save Lineup"}
+                    </button>
+                  </div>
+                  {!hasValidLeadership && hasUnsavedChanges && (
+                    <p className="text-[11px] text-rose-400 font-bold text-center">
+                      ⚠️ Captain (C) & Vice-Captain (VC) required
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* RIGHT COLUMN PANEL (Team View on Webview / Main View on Mobile) */}
+        <div className="flex-1 flex flex-col min-h-0 h-full overflow-hidden">
+
+          {/* Mobile Toolbar (Pitch/List toggle & Save/Clear - visible only on mobile < lg) */}
+          {headerTab === "current" && (
+            <div className="mx-4 mt-2 flex lg:hidden items-center justify-between border-b border-[var(--color-border-divider)] shrink-0 pb-1.5">
+              <div className="flex gap-2">
+                <button
+                  onClick={() => { triggerHaptic(); setActiveTab("pitch"); }}
+                  className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex items-center gap-1.5 min-h-[36px] px-2.5 ${activeTab === "pitch" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
+                >
+                  <LayoutGrid className="w-3.5 h-3.5" />
+                  Pitch
+                  {activeTab === "pitch" && <div className="absolute bottom-[-7px] left-0 right-0 h-0.5 bg-secondary" />}
+                </button>
+                <button
+                  onClick={() => { triggerHaptic(); setActiveTab("list"); }}
+                  className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex items-center gap-1.5 min-h-[36px] px-2.5 ${activeTab === "list" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
+                >
+                  <List className="w-3.5 h-3.5" />
+                  List
+                  {activeTab === "list" && <div className="absolute bottom-[-7px] left-0 right-0 h-0.5 bg-secondary" />}
+                </button>
+              </div>
+
+              {managerDetails?.pickMyTeam && (
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={handleClearTeam}
+                    disabled={!hasUnsavedChanges}
+                    className="px-2.5 py-1 border border-primary/45 text-secondary hover:bg-primary/10 disabled:opacity-40 disabled:cursor-not-allowed font-bold rounded-lg min-h-[28px] flex items-center justify-center gap-1 active:scale-95 transition-all cursor-pointer text-[10px] md:text-xs"
+                  >
+                    <Trash2 className="w-3 h-3" />
+                    Clear
+                  </button>
+                  <button
+                    onClick={handleSaveTeam}
+                    disabled={!hasUnsavedChanges || mutation.isPending || !hasValidLeadership}
+                    className="px-2.5 py-1 bg-gradient-button disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-lg shadow-fab min-h-[28px] flex items-center justify-center gap-1 active:scale-95 transition-all cursor-pointer border-t border-white/20 text-[10px] md:text-xs"
+                  >
+                    <Save className="w-3 h-3" />
+                    {mutation.isPending ? "Saving..." : "Save"}
+                  </button>
+                  {!hasValidLeadership && hasUnsavedChanges && (
+                    <span className="text-[10px] text-rose-400 font-bold ml-1">Requires C + VC</span>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Interactive Pitch, List, or History View */}
+          <div className="flex-1 flex flex-col min-h-0 h-full overflow-hidden mx-4 lg:mx-0 mt-2 lg:mt-0">
+            {headerTab === "current" ? (
+              activeTab === "pitch" ? (
+                <MyTeamPitch
+                  startingXI={startingXI}
+                  bench={bench}
+                  substituteMode={substituteMode}
+                  swapSourcePlayer={swapSourcePlayer}
+                  onCancelSubstitute={handleCancelSubstitute}
+                  handlePlayerClick={handlePlayerClick}
+                  getPlayerCardClass={getPlayerCardClass}
+                  getPlayerPrice={getPlayerPrice}
+                />
+              ) : (
+                <MyTeamListView
+                  startingXI={startingXI}
+                  bench={bench}
+                  getPlayerPrice={getPlayerPrice}
+                  handlePlayerClick={handlePlayerClick}
+                />
+              )
+            ) : (
+              /* Gameweek History View */
+              <div className="bg-surface border border-border rounded-2xl p-4 shadow-card flex-1 min-h-0 flex flex-col animate-in fade-in duration-300 w-full max-w-3xl mx-auto">
+                <h2 className="text-sm font-extrabold uppercase tracking-wider text-text-muted/70 mb-3 px-1">Gameweek History</h2>
+                {isHomeLoading ? (
+                  <div className="flex-1 flex items-center justify-center">
+                    <span className="text-xs text-text-muted">Loading history...</span>
+                  </div>
+                ) : !homePageData?.recentGameweeks || homePageData.recentGameweeks.length === 0 ? (
+                  <div className="flex-1 flex items-center justify-center">
+                    <span className="text-xs text-text-muted">No history data available.</span>
+                  </div>
+                ) : (
+                  <div className="overflow-y-auto overflow-x-auto flex-1 pr-1">
+                    <table className="w-full text-left border-collapse text-xs md:text-sm">
+                      <thead>
+                        <tr className="border-b border-border/50 text-text-muted uppercase tracking-wider font-extrabold text-[10px]">
+                          <th className="py-2.5 px-3">Gameweek</th>
+                          <th className="py-2.5 px-3 text-center">Score</th>
+                          <th className="py-2.5 px-3 text-right"></th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border/20 font-semibold text-white">
+                        {[...homePageData.recentGameweeks].sort((a, b) => b.gameweek - a.gameweek).map((item) => (
+                          <tr
+                            key={item.gameweek}
+                            className="hover:bg-white/5 transition-all cursor-pointer group"
+                            onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: item.gameweek } })}
+                          >
+                            <td className="py-3 px-3 font-bold">Gameweek {item.gameweek}</td>
+                            <td className="py-3 px-3 text-center text-[var(--color-success-bright)] font-mono font-extrabold">
+                              {item.points} pts
+                            </td>
+                            <td className="py-3 px-3 text-right pr-4">
+                              <ChevronRight className="w-4 h-4 inline-block text-secondary" />
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 )}
               </div>
             )}
           </div>
 
-          {/* 4. Pitch or List Content */}
-          <div className="mx-4 mt-3 flex flex-1 flex-col min-h-0">
-            {activeTab === "pitch" ? (
-              <MyTeamPitch
-                startingXI={startingXI}
-                bench={bench}
-                substituteMode={substituteMode}
-                swapSourcePlayer={swapSourcePlayer}
-                onCancelSubstitute={handleCancelSubstitute}
-                handlePlayerClick={handlePlayerClick}
-                getPlayerCardClass={getPlayerCardClass}
-                getPlayerPrice={getPlayerPrice}
-              />
-            ) : (
-              <MyTeamListView
-                startingXI={startingXI}
-                bench={bench}
-                getPlayerPrice={getPlayerPrice}
-                handlePlayerClick={handlePlayerClick}
-              />
-            )}
-          </div>
-        </>
-      ) : (
-        /* Gameweek History View */
-        <div className="mx-4 mt-4 bg-surface border border-border rounded-2xl p-4 shadow-card flex-1 min-h-0 flex flex-col animate-in fade-in duration-300 w-full max-w-3xl mx-auto">
-          <h2 className="text-sm font-extrabold uppercase tracking-wider text-text-muted/70 mb-3 px-1">Gameweek History</h2>
-          {isHomeLoading ? (
-            <div className="flex-1 flex items-center justify-center">
-              <span className="text-xs text-text-muted">Loading history...</span>
-            </div>
-          ) : !homePageData?.recentGameweeks || homePageData.recentGameweeks.length === 0 ? (
-            <div className="flex-1 flex items-center justify-center">
-              <span className="text-xs text-text-muted">No history data available.</span>
-            </div>
-          ) : (
-            <div className="overflow-y-auto overflow-x-auto flex-1 pr-1">
-              <table className="w-full text-left border-collapse text-xs md:text-sm">
-                <thead>
-                  <tr className="border-b border-border/50 text-text-muted uppercase tracking-wider font-extrabold text-[10px]">
-                    <th className="py-2.5 px-3">Gameweek</th>
-                    <th className="py-2.5 px-3 text-center">Score</th>
-                    <th className="py-2.5 px-3 text-right"></th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border/20 font-semibold text-white">
-                  {[...homePageData.recentGameweeks].sort((a, b) => b.gameweek - a.gameweek).map((item) => (
-                    <tr
-                      key={item.gameweek}
-                      className="hover:bg-white/5 transition-all cursor-pointer group"
-                      onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: item.gameweek } })}
-                    >
-                      <td className="py-3 px-3 font-bold">Gameweek {item.gameweek}</td>
-                      <td className="py-3 px-3 text-center text-[var(--color-success-bright)] font-mono font-extrabold">
-                        {item.points} pts
-                      </td>
-                      <td className="py-3 px-3 text-right pr-4">
-                        <ChevronRight className="w-4 h-4 inline-block text-secondary" />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
         </div>
-      )}
+
+      </div>
 
       {/* Player Selection Actions Overlay Modal */}
       <PlayerStatsModal

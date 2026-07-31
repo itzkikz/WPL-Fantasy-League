@@ -218,374 +218,521 @@ const GameweekBreakdownPage = () => {
   }
 
   return (
-    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-white font-outfit select-none overflow-hidden">
-      {/* Header Navigation Bar */}
-      <header className="flex items-center gap-4 px-4 py-3 bg-surface border-b border-[var(--color-border-divider)] sticky top-0 z-30 shrink-0">
-        <button
-          onClick={() => {
-            if (paramTeamId) {
-              navigate({ to: "/manager-overview", search: { teamId: paramTeamId } });
-            } else {
-              navigate({ to: "/my-team", search: { tab: "history" } });
-            }
-          }}
-          className="flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-white active:scale-95 transition-all cursor-pointer"
-          aria-label="Go back"
-        >
-          <ArrowLeft className="w-4 h-4 text-text-muted" />
-        </button>
-        <div>
-          <h1 className="text-base md:text-lg font-black tracking-tight">
-            Gameweek {gw} Breakdown
-          </h1>
-          <p className="text-[10px] md:text-xs text-text-muted font-medium mt-0.5">
-            Viewing points and line-up for Gameweek {gw}
-          </p>
-        </div>
-      </header>
+    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-white font-outfit select-none overflow-hidden pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
 
-      {/* Tabs Selector Bar */}
-      <div className="mx-4 mt-3 flex items-center border-b border-[var(--color-border-divider)] shrink-0 pb-1.5">
-        <div className="flex w-full">
+      {/* MOBILE HEADER (Visible on mobile < lg) */}
+      <div className="lg:hidden shrink-0">
+        <header className="flex items-center gap-4 px-4 py-3 bg-surface border-b border-[var(--color-border-divider)] sticky top-0 z-30">
           <button
-            onClick={() => setActiveTab("squad")}
-            className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex-1 flex items-center justify-center gap-1.5 min-h-[36px]
-              ${activeTab === "squad" ? "text-secondary font-black" : "text-text-muted/60 hover:text-white"}`}
+            onClick={() => {
+              if (paramTeamId) {
+                navigate({ to: "/manager-overview", search: { teamId: paramTeamId } });
+              } else {
+                navigate({ to: "/my-team", search: { tab: "history" } });
+              }
+            }}
+            className="flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-white active:scale-95 transition-all cursor-pointer"
+            aria-label="Go back"
           >
-            <LayoutGrid className="w-3.5 h-3.5" />
-            Squad
-            {activeTab === "squad" && (
-              <div className="absolute bottom-[-7px] left-0 right-0 h-0.5 bg-secondary" />
-            )}
+            <ArrowLeft className="w-4 h-4 text-text-muted" />
           </button>
-          <button
-            onClick={() => setActiveTab("points")}
-            className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex-1 flex items-center justify-center gap-1.5 min-h-[36px]
-              ${activeTab === "points" ? "text-secondary font-black" : "text-text-muted/60 hover:text-white"}`}
-          >
-            <Award className="w-3.5 h-3.5" />
-            Points
-            {activeTab === "points" && (
-              <div className="absolute bottom-[-7px] left-0 right-0 h-0.5 bg-secondary" />
-            )}
-          </button>
+          <div>
+            <h1 className="text-base font-black tracking-tight">
+              Gameweek {gw} Breakdown
+            </h1>
+            <p className="text-[10px] text-text-muted font-medium mt-0.5">
+              Viewing points and line-up for Gameweek {gw}
+            </p>
+          </div>
+        </header>
+
+        {/* Mobile Tabs Selector Bar */}
+        <div className="mx-4 mt-3 flex items-center border-b border-[var(--color-border-divider)] pb-1.5">
+          <div className="flex w-full">
+            <button
+              onClick={() => setActiveTab("squad")}
+              className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex-1 flex items-center justify-center gap-1.5 min-h-[36px]
+                ${activeTab === "squad" ? "text-secondary font-black" : "text-text-muted/60 hover:text-white"}`}
+            >
+              <LayoutGrid className="w-3.5 h-3.5" />
+              Squad
+              {activeTab === "squad" && (
+                <div className="absolute bottom-[-7px] left-0 right-0 h-0.5 bg-secondary" />
+              )}
+            </button>
+            <button
+              onClick={() => setActiveTab("points")}
+              className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex-1 flex items-center justify-center gap-1.5 min-h-[36px]
+                ${activeTab === "points" ? "text-secondary font-black" : "text-text-muted/60 hover:text-white"}`}
+            >
+              <Award className="w-3.5 h-3.5" />
+              Points
+              {activeTab === "points" && (
+                <div className="absolute bottom-[-7px] left-0 right-0 h-0.5 bg-secondary" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Content Area */}
-      <div className={`flex-1 flex flex-col min-h-0 ${(activeTab === "squad" && squadView === "pitch") ? "overflow-hidden" : "overflow-y-auto"} px-4 py-3`}>
-        {activeTab === "squad" && (
-          <div className="flex justify-end mb-2 max-w-2xl mx-auto w-full shrink-0">
-            <div className="flex bg-card border border-border rounded-xl p-0.5 shadow-sm">
+      {/* MAIN CONTAINER: Webview Responsive Split Layout (lg+) */}
+      <div className="flex-1 flex flex-col lg:flex-row h-full min-h-0 overflow-y-auto lg:overflow-hidden lg:gap-3 lg:p-3">
+
+        {/* LEFT COLUMN PANEL (Webview Gameweek Details & Navigation - Visible on lg+) */}
+        <div className="hidden lg:flex lg:flex-col lg:w-80 xl:w-96 shrink-0 bg-surface border border-border/80 rounded-3xl p-5 shadow-card overflow-y-auto space-y-5">
+          
+          {/* Header Info with Back Button */}
+          <div className="flex items-center gap-3.5 pb-4 border-b border-border/60">
+            <button
+              onClick={() => {
+                if (paramTeamId) {
+                  navigate({ to: "/manager-overview", search: { teamId: paramTeamId } });
+                } else {
+                  navigate({ to: "/my-team", search: { tab: "history" } });
+                }
+              }}
+              className="flex items-center justify-center w-10 h-10 rounded-2xl bg-background hover:bg-white/10 border border-border text-white active:scale-95 transition-all cursor-pointer shrink-0 shadow-inner"
+              aria-label="Go back"
+            >
+              <ArrowLeft className="w-5 h-5 text-text-muted" />
+            </button>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-lg font-black text-white tracking-tight truncate">
+                Gameweek {gw} Breakdown
+              </h2>
+              <p className="text-xs text-text-muted font-medium truncate">
+                {myStanding?.team || "Gameweek Lineup & Stats"}
+              </p>
+            </div>
+          </div>
+
+          {/* GW Stats Summary Card */}
+          <div className="grid grid-cols-3 gap-2 bg-background/50 border border-border/60 rounded-2xl p-3.5 text-center">
+            <div>
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">GW Score</span>
+              <span className="text-base font-extrabold text-[var(--color-success-bright)] font-mono mt-0.5 block">{totalGWScore ?? 0}</span>
+            </div>
+            <div className="border-l border-border/50">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Average</span>
+              <span className="text-base font-extrabold text-white font-mono mt-0.5 block">{avg ?? 0}</span>
+            </div>
+            <div className="border-l border-border/50">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Highest</span>
+              <span className="text-base font-extrabold text-white font-mono mt-0.5 block">{highest ?? 0}</span>
+            </div>
+          </div>
+
+          {/* Section Tab Selector */}
+          <div className="space-y-2 pt-2 border-t border-border/60">
+            <span className="text-xs font-bold text-text-muted uppercase tracking-wider block">Breakdown View</span>
+            <div className="flex gap-2 bg-background/50 border border-border/60 rounded-2xl p-1.5">
               <button
-                onClick={() => setSquadView("pitch")}
-                className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  squadView === "pitch"
-                    ? "bg-secondary text-white shadow-sm"
-                    : "text-text-muted hover:text-white"
+                onClick={() => setActiveTab("squad")}
+                className={`flex-1 py-2 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                  activeTab === "squad" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"
                 }`}
               >
-                <LayoutGrid className="w-3.5 h-3.5" />
-                Pitch
+                <LayoutGrid className="w-4 h-4" />
+                Squad
               </button>
               <button
-                onClick={() => setSquadView("list")}
-                className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  squadView === "list"
-                    ? "bg-secondary text-white shadow-sm"
-                    : "text-text-muted hover:text-white"
+                onClick={() => setActiveTab("points")}
+                className={`flex-1 py-2 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                  activeTab === "points" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"
                 }`}
               >
-                <List className="w-3.5 h-3.5" />
-                List
+                <Award className="w-4 h-4" />
+                Points
               </button>
             </div>
           </div>
-        )}
 
-        {activeTab === "squad" ? (
-          squadView === "pitch" ? (
-            /* Pitch View Container */
-            <div className="relative w-full max-w-2xl mx-auto rounded-3xl overflow-hidden border border-border shadow-card bg-background flex-1 min-h-[500px] flex flex-col animate-in fade-in duration-300">
-              {/* Pitch image layer */}
-              <div className="pitch-bg">
-                <img
-                  src="/pitch.png"
-                  className="pitch-image-layer"
-                  alt="Tactical pitch layout"
-                />
+          {/* Display Format Selector (Pitch vs List - visible when Squad tab active) */}
+          {activeTab === "squad" && (
+            <div className="space-y-2 pt-2 border-t border-border/60">
+              <span className="text-xs font-bold text-text-muted uppercase tracking-wider block">Display Format</span>
+              <div className="flex gap-2 bg-background/50 border border-border/60 rounded-2xl p-1.5">
+                <button
+                  onClick={() => setSquadView("pitch")}
+                  className={`flex-1 py-2 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                    squadView === "pitch" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"
+                  }`}
+                >
+                  <LayoutGrid className="w-4 h-4" />
+                  Pitch
+                </button>
+                <button
+                  onClick={() => setSquadView("list")}
+                  className={`flex-1 py-2 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                    squadView === "list" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"
+                  }`}
+                >
+                  <List className="w-4 h-4" />
+                  List
+                </button>
               </div>
+            </div>
+          )}
+        </div>
 
-              {/* Players Overlay */}
-              <div className="absolute top-0 inset-x-0 bottom-[110px] z-10 pointer-events-none flex flex-col justify-evenly py-3 md:py-6 px-2 sm:px-4">
-                {starting && (["GK", "DEF", "MID", "FWD"] as const).map((pos) => {
-                  const players = starting[pos] || [];
-                  return (
-                    <div key={pos} className={`flex w-full ${getRowJustify(players.length)} pointer-events-auto`}>
-                      {players.map((player) => {
+        {/* RIGHT COLUMN PANEL (The Team View / Points Table on Webview) */}
+        <div className="flex-1 flex flex-col min-h-0 h-full overflow-y-auto">
+          
+          {/* Mobile Format Selector (Visible on mobile < lg when Squad active) */}
+          {activeTab === "squad" && (
+            <div className="flex lg:hidden justify-end mb-2 px-4 shrink-0">
+              <div className="flex bg-card border border-border rounded-xl p-0.5 shadow-sm">
+                <button
+                  onClick={() => setSquadView("pitch")}
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    squadView === "pitch"
+                      ? "bg-secondary text-white shadow-sm"
+                      : "text-text-muted hover:text-white"
+                  }`}
+                >
+                  <LayoutGrid className="w-3.5 h-3.5" />
+                  Pitch
+                </button>
+                <button
+                  onClick={() => setSquadView("list")}
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    squadView === "list"
+                      ? "bg-secondary text-white shadow-sm"
+                      : "text-text-muted hover:text-white"
+                  }`}
+                >
+                  <List className="w-3.5 h-3.5" />
+                  List
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Interactive Squad / Pitch / Points Table View */}
+          <div className="flex-1 flex flex-col min-h-0 overflow-hidden px-4 lg:px-0 py-1">
+            {activeTab === "squad" ? (
+              squadView === "pitch" ? (
+                /* Pitch View Container */
+                <div className="flex-1 flex flex-col lg:flex-row gap-3 max-w-3xl mx-auto w-full h-full min-h-0 animate-in fade-in duration-300">
+                  {/* Pitch Card */}
+                  <div className="relative flex-1 rounded-3xl overflow-hidden border border-border shadow-card bg-background h-full flex flex-col">
+                    {/* Pitch image layer */}
+                    <div className="pitch-bg">
+                      <img
+                        src="/pitch.png"
+                        className="pitch-image-layer"
+                        alt="Tactical pitch layout"
+                      />
+                    </div>
+
+                    {/* Players Overlay - Centered on Pitch */}
+                    <div className="absolute inset-0 bottom-[110px] lg:bottom-0 z-10 pointer-events-none flex flex-col justify-evenly py-3 md:py-6 px-2 sm:px-4">
+                      {starting && (["GK", "DEF", "MID", "FWD"] as const).map((pos) => {
+                        const players = starting[pos] || [];
+                        return (
+                          <div key={pos} className={`flex w-full ${getRowJustify(players.length)} pointer-events-auto`}>
+                            {players.map((player) => {
+                              const enrichedPlayer = {
+                                ...player,
+                                price: getPlayerPrice(player),
+                              };
+                              return (
+                                <div
+                                  key={player.id}
+                                  className="rounded-xl p-0.5 transition-all hover:scale-105 duration-300"
+                                >
+                                  <PitchPlayerCard
+                                    player={enrichedPlayer}
+                                    showPriceAndPoints={true}
+                                    isSmall={false}
+                                    onClick={() => handlePlayerClick(player)}
+                                  />
+                                </div>
+                              );
+                            })}
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Mobile Bench Strip (Visible ONLY on mobile < lg) */}
+                    <div className="flex lg:hidden absolute bottom-0 inset-x-0 h-[110px] bg-surface/95 backdrop-blur-md border-t border-border justify-around items-center px-4 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.5)] overflow-x-auto scrollbar-hide">
+                      {(bench || []).map((player, idx) => {
+                        const label = player.position === "GK" ? "GK" : `${player.subNumber || idx}. ${player.position}`;
                         const enrichedPlayer = {
                           ...player,
                           price: getPlayerPrice(player),
                         };
+
                         return (
                           <div
                             key={player.id}
-                            className="rounded-xl p-0.5 transition-all hover:scale-105 duration-300"
+                            className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300 shrink-0 min-w-[64px]"
                           >
+                            <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">
+                              {label}
+                            </span>
                             <PitchPlayerCard
                               player={enrichedPlayer}
                               showPriceAndPoints={true}
-                              isSmall={false}
+                              isSmall={true}
                               onClick={() => handlePlayerClick(player)}
                             />
                           </div>
                         );
                       })}
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
 
-              {/* Bench Strip Container inside the Pitch Card */}
-              <div className="absolute bottom-0 inset-x-0 h-[110px] bg-surface/95 backdrop-blur-md border-t border-border flex justify-around items-center px-4 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.5)] overflow-x-auto scrollbar-hide">
-                {(bench || []).map((player, idx) => {
-                  const label = player.position === "GK" ? "GK" : `${player.subNumber || idx}. ${player.position}`;
-                  const enrichedPlayer = {
-                    ...player,
-                    price: getPlayerPrice(player),
-                  };
-
-                  return (
-                    <div
-                      key={player.id}
-                      className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300 shrink-0 min-w-[64px]"
-                    >
-                      <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">
-                        {label}
+                  {/* Dedicated Webview Bench Side Card (Visible ONLY on webview lg+) */}
+                  {(bench || []).length > 0 && (
+                    <div className="hidden lg:flex lg:flex-col lg:w-28 shrink-0 bg-surface border border-border rounded-3xl p-3 shadow-card justify-around items-center">
+                      <span className="text-[10px] font-black text-text-muted uppercase tracking-wider text-center border-b border-border/60 pb-2 w-full">
+                        Substitutes
                       </span>
-                      <PitchPlayerCard
-                        player={enrichedPlayer}
-                        showPriceAndPoints={true}
-                        isSmall={true}
-                        onClick={() => handlePlayerClick(player)}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ) : (
-            /* List View Table */
-            <div className="bg-surface border border-border rounded-2xl overflow-hidden shadow-card max-w-3xl mx-auto w-full flex flex-col animate-in fade-in duration-300">
-              <div className="overflow-y-auto overflow-x-auto flex-1">
-                <table className="w-full text-left border-collapse text-xs md:text-sm">
-                  <thead className="sticky top-0 z-10 bg-card shadow-[0_1px_0_rgba(45,27,84,0.4)]">
-                    <tr className="bg-card border-b border-border text-text-muted uppercase tracking-wider font-extrabold text-[10px]">
-                      <th className="py-3 px-4">Player</th>
-                      <th className="py-3 px-4 text-center">Price</th>
-                      <th className="py-3 px-4 text-center">Points</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border/30 font-medium text-white">
-                    {starting && Object.entries(starting).flatMap(([pos, players]) =>
-                      (players || []).map((player) => (
-                        <tr key={player.id} className="hover:bg-white/5 transition-colors cursor-pointer" onClick={() => handlePlayerClick(player)}>
-                          <td className="py-2.5 px-4 font-bold text-white">
-                            <div className="flex items-center gap-3">
-                              {/* Player Image Thumbnail */}
-                              <div
-                                className="w-8 h-8 rounded-full border overflow-hidden bg-indigo-950 flex items-center justify-center shrink-0 shadow-sm"
-                                style={{ borderColor: player?.teamColor || "#A855F7" }}
-                              >
-                                {player?.photo ? (
-                                  <img
-                                    src={player.photo}
-                                    alt=""
-                                    className="w-full h-full object-cover object-top"
-                                    onError={(e) => {
-                                      (e.target as HTMLImageElement).style.display = "none";
-                                      const fallbackContainer = (e.target as HTMLImageElement).nextSibling as HTMLElement;
-                                      if (fallbackContainer) (fallbackContainer as HTMLElement).style.display = "flex";
-                                    }}
-                                  />
-                                ) : null}
-                                <div
-                                  className="w-full h-full flex items-center justify-center bg-gradient-to-b from-indigo-950 to-indigo-900"
-                                  style={{ display: player?.photo ? "none" : "flex" }}
-                                >
-                                  <svg className="w-4.5 h-4.5 text-white/40" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                  </svg>
-                                </div>
-                              </div>
-
-                              {/* Name & Metadata */}
-                              <div className="flex flex-col justify-center gap-0.5 min-w-0">
-                                <div className="flex items-center gap-1.5 flex-wrap">
-                                  <span className="truncate">{player.name}</span>
-                                  {player.isCaptain && <span className="bg-secondary text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono shrink-0">C</span>}
-                                  {player.isViceCaptain && <span className="bg-text-muted text-black text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono shrink-0">V</span>}
-                                  {player.subIn && <span className="bg-emerald-900/90 border border-emerald-400 text-emerald-300 text-[8px] font-black px-1.5 py-0.5 rounded-full shrink-0">IN</span>}
-                                </div>
-                                <span className="text-[10px] font-semibold text-text-muted/70 uppercase tracking-wider">
-                                  {player.position} • {player.team}
-                                </span>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-4 text-center text-white">{getPlayerPrice(player)}</td>
-                          <td className="py-3.5 px-4 text-center text-[var(--color-success-bright)] font-mono font-extrabold">{player.point}</td>
-                        </tr>
-                      ))
-                    )}
-                    {(bench || []).map((player, idx) => {
-                      const label = player.position === "GK" ? "GK" : `${player.subNumber || idx}. ${player.position}`;
-                      return (
-                        <tr key={player.id} className="hover:bg-white/5 transition-colors bg-black/10 cursor-pointer" onClick={() => handlePlayerClick(player)}>
-                          <td className="py-2.5 px-4 font-bold text-text-muted">
-                            <div className="flex items-center gap-3">
-                              {/* Player Image Thumbnail */}
-                              <div
-                                className="w-8 h-8 rounded-full border overflow-hidden bg-indigo-950 flex items-center justify-center shrink-0 shadow-sm opacity-70"
-                                style={{ borderColor: player?.teamColor || "#94a3b8" }}
-                              >
-                                {player?.photo ? (
-                                  <img
-                                    src={player.photo}
-                                    alt=""
-                                    className="w-full h-full object-cover object-top"
-                                    onError={(e) => {
-                                      (e.target as HTMLImageElement).style.display = "none";
-                                      const fallbackContainer = (e.target as HTMLImageElement).nextSibling as HTMLElement;
-                                      if (fallbackContainer) (fallbackContainer as HTMLElement).style.display = "flex";
-                                    }}
-                                  />
-                                ) : null}
-                                <div
-                                  className="w-full h-full flex items-center justify-center bg-gradient-to-b from-indigo-950 to-indigo-900"
-                                  style={{ display: player?.photo ? "none" : "flex" }}
-                                >
-                                  <svg className="w-4.5 h-4.5 text-white/40" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                  </svg>
-                                </div>
-                              </div>
-
-                              {/* Name & Metadata */}
-                              <div className="flex flex-col justify-center gap-0.5 min-w-0">
-                                <div className="flex items-center gap-1.5 flex-wrap">
-                                  <span className="truncate">{player.name}</span>
-                                  {player.subOut && <span className="bg-rose-900/90 border border-rose-400 text-rose-300 text-[8px] font-black px-1.5 py-0.5 rounded-full shrink-0">OUT</span>}
-                                </div>
-                                <span className="text-[10px] font-semibold text-text-muted/50 uppercase tracking-wider">
-                                  {label} • {player.team}
-                                </span>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-4 text-center text-text-muted/65">{getPlayerPrice(player)}</td>
-                          <td className="py-3.5 px-4 text-center text-text-muted/65 font-mono font-extrabold">{player.point}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )
-        ) : (
-          /* Points View Content */
-          <div className="flex-1 flex flex-col gap-4 max-w-3xl mx-auto w-full animate-in fade-in duration-300">
-            {/* Stats Summary Panel */}
-            <div className="bg-surface border border-border rounded-2xl p-4 shadow-card grid grid-cols-3 gap-2">
-              <div className="flex flex-col items-center justify-center text-center">
-                <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">GW Score</span>
-                <span className="text-sm md:text-lg font-black text-[var(--color-success-bright)] mt-0.5 font-mono">
-                  {totalGWScore ?? 0} pts
-                </span>
-              </div>
-
-              <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
-                <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">GW Average</span>
-                <span className="text-sm md:text-lg font-black text-white mt-0.5 font-mono">
-                  {avg ?? 0} pts
-                </span>
-              </div>
-
-              <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
-                <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">GW Highest</span>
-                <span className="text-sm md:text-lg font-black text-white mt-0.5 font-mono">
-                  {highest ?? 0} pts
-                </span>
-              </div>
-            </div>
-
-            {/* List View Table */}
-            <div className="bg-surface border border-border rounded-2xl overflow-hidden shadow-card flex flex-col w-full flex-1">
-              <div className="overflow-y-auto overflow-x-auto flex-1">
-                <table className="w-full text-left border-collapse text-xs md:text-sm">
-                  <thead className="sticky top-0 z-10 bg-card shadow-[0_1px_0_rgba(45,27,84,0.4)]">
-                    <tr className="bg-card border-b border-border text-text-muted uppercase tracking-wider font-extrabold text-[10px]">
-                      <th className="py-3 px-4">Stat Type</th>
-                      <th className="py-3 px-4 text-center">Compiled Count</th>
-                      <th className="py-3 px-4 text-center">Points Formed</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border/30 font-medium text-white">
-                    {(() => {
-                      const totals = compileTeamTotals();
-                      const rows = [
-                        { label: "Minutes Played", ...totals.minutes },
-                        { label: "Goals", ...totals.goals },
-                        { label: "Assists", ...totals.assists },
-                        { label: "Clean Sheet", ...totals.cleanSheets },
-                        { label: "Yellow Card", ...totals.yellowCards },
-                        { label: "Red Card", ...totals.redCards },
-                        { label: "Penalty Miss", ...totals.penaltyMissed },
-                        { label: "Penalty Save", ...totals.penaltySaved },
-                        { label: "Saves", ...totals.saves },
-                        { label: "Tackles", ...totals.tackles },
-                        { label: "Clearances", ...totals.clearances },
-                        { label: "Blocks", ...totals.blocks },
-                        { label: "Recovery", ...totals.recoveries },
-                        { label: "Defensive Actions Points", ...totals.defensivePoints, isPointsOnly: true },
-                      ];
-
-                      return rows.map((row) => {
-                        const isDefensiveActionRaw = ["Tackles", "Clearances", "Blocks", "Recovery"].includes(row.label);
-                        const pointsVal = (row as any).isPointsOnly
-                          ? `${row.points > 0 ? "+" : ""}${row.points} pts`
-                          : isDefensiveActionRaw
-                            ? "—"
-                            : `${row.points > 0 ? "+" : ""}${row.points} pts`;
-
-                        const pointsColor = row.points > 0 
-                          ? "text-[var(--color-success-bright)]" 
-                          : row.points < 0 
-                            ? "text-rose-400" 
-                            : "text-text-muted/65";
+                      {bench.map((player, idx) => {
+                        const label = player.position === "GK" ? "GK" : `${player.subNumber || idx}. ${player.position}`;
+                        const enrichedPlayer = {
+                          ...player,
+                          price: getPlayerPrice(player),
+                        };
 
                         return (
-                          <tr key={row.label} className="hover:bg-white/5 transition-colors">
-                            <td className="py-3.5 px-4 font-bold text-white">
-                              {row.label}
-                            </td>
-                            <td className="py-3.5 px-4 text-center text-white font-mono">
-                              {row.count}{(row as any).suffix}
-                            </td>
-                            <td className={`py-3.5 px-4 text-center font-mono font-extrabold ${pointsColor}`}>
-                              {pointsVal}
-                            </td>
-                          </tr>
+                          <div
+                            key={player.id}
+                            className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300"
+                          >
+                            <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">
+                              {label}
+                            </span>
+                            <PitchPlayerCard
+                              player={enrichedPlayer}
+                              showPriceAndPoints={true}
+                              isSmall={true}
+                              onClick={() => handlePlayerClick(player)}
+                            />
+                          </div>
                         );
-                      });
-                    })()}
-                  </tbody>
-                </table>
+                      })}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* List View Table */
+                <div className="bg-surface border border-border rounded-2xl overflow-hidden shadow-card max-w-3xl mx-auto w-full flex flex-col animate-in fade-in duration-300">
+                  <div className="overflow-y-auto overflow-x-auto flex-1">
+                    <table className="w-full text-left border-collapse text-xs md:text-sm">
+                      <thead className="sticky top-0 z-10 bg-card shadow-[0_1px_0_rgba(45,27,84,0.4)]">
+                        <tr className="bg-card border-b border-border text-text-muted uppercase tracking-wider font-extrabold text-[10px]">
+                          <th className="py-3 px-4">Player</th>
+                          <th className="py-3 px-4 text-center">Price</th>
+                          <th className="py-3 px-4 text-center">Points</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border/30 font-medium text-white">
+                        {starting && Object.entries(starting).flatMap(([pos, players]) =>
+                          (players || []).map((player) => (
+                            <tr key={player.id} className="hover:bg-white/5 transition-colors cursor-pointer" onClick={() => handlePlayerClick(player)}>
+                              <td className="py-2.5 px-4 font-bold text-white">
+                                <div className="flex items-center gap-3">
+                                  {/* Player Image Thumbnail */}
+                                  <div
+                                    className="w-8 h-8 rounded-full border overflow-hidden bg-indigo-950 flex items-center justify-center shrink-0 shadow-sm"
+                                    style={{ borderColor: player?.teamColor || "#A855F7" }}
+                                  >
+                                    {player?.photo ? (
+                                      <img
+                                        src={player.photo}
+                                        alt=""
+                                        className="w-full h-full object-cover object-top"
+                                        onError={(e) => {
+                                          (e.target as HTMLImageElement).style.display = "none";
+                                          const fallbackContainer = (e.target as HTMLImageElement).nextSibling as HTMLElement;
+                                          if (fallbackContainer) (fallbackContainer as HTMLElement).style.display = "flex";
+                                        }}
+                                      />
+                                    ) : null}
+                                    <div
+                                      className="w-full h-full flex items-center justify-center bg-gradient-to-b from-indigo-950 to-indigo-900"
+                                      style={{ display: player?.photo ? "none" : "flex" }}
+                                    >
+                                      <svg className="w-4.5 h-4.5 text-white/40" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                      </svg>
+                                    </div>
+                                  </div>
+
+                                  {/* Name & Metadata */}
+                                  <div className="flex flex-col justify-center gap-0.5 min-w-0">
+                                    <div className="flex items-center gap-1.5 flex-wrap">
+                                      <span className="truncate">{player.name}</span>
+                                      {player.isCaptain && <span className="bg-secondary text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono shrink-0">C</span>}
+                                      {player.isViceCaptain && <span className="bg-text-muted text-black text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono shrink-0">V</span>}
+                                      {player.subIn && <span className="bg-emerald-900/90 border border-emerald-400 text-emerald-300 text-[8px] font-black px-1.5 py-0.5 rounded-full shrink-0">IN</span>}
+                                    </div>
+                                    <span className="text-[10px] font-semibold text-text-muted/70 uppercase tracking-wider">
+                                      {player.position} • {player.team}
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="py-3.5 px-4 text-center text-white">{getPlayerPrice(player)}</td>
+                              <td className="py-3.5 px-4 text-center text-[var(--color-success-bright)] font-mono font-extrabold">{player.point}</td>
+                            </tr>
+                          ))
+                        )}
+                        {(bench || []).map((player, idx) => {
+                          const label = player.position === "GK" ? "GK" : `${player.subNumber || idx}. ${player.position}`;
+                          return (
+                            <tr key={player.id} className="hover:bg-white/5 transition-colors bg-black/10 cursor-pointer" onClick={() => handlePlayerClick(player)}>
+                              <td className="py-2.5 px-4 font-bold text-text-muted">
+                                <div className="flex items-center gap-3">
+                                  {/* Player Image Thumbnail */}
+                                  <div
+                                    className="w-8 h-8 rounded-full border overflow-hidden bg-indigo-950 flex items-center justify-center shrink-0 shadow-sm opacity-70"
+                                    style={{ borderColor: player?.teamColor || "#94a3b8" }}
+                                  >
+                                    {player?.photo ? (
+                                      <img
+                                        src={player.photo}
+                                        alt=""
+                                        className="w-full h-full object-cover object-top"
+                                        onError={(e) => {
+                                          (e.target as HTMLImageElement).style.display = "none";
+                                          const fallbackContainer = (e.target as HTMLImageElement).nextSibling as HTMLElement;
+                                          if (fallbackContainer) (fallbackContainer as HTMLElement).style.display = "flex";
+                                        }}
+                                      />
+                                    ) : null}
+                                    <div
+                                      className="w-full h-full flex items-center justify-center bg-gradient-to-b from-indigo-950 to-indigo-900"
+                                      style={{ display: player?.photo ? "none" : "flex" }}
+                                    >
+                                      <svg className="w-4.5 h-4.5 text-white/40" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                      </svg>
+                                    </div>
+                                  </div>
+
+                                  {/* Name & Metadata */}
+                                  <div className="flex flex-col justify-center gap-0.5 min-w-0">
+                                    <div className="flex items-center gap-1.5 flex-wrap">
+                                      <span className="truncate">{player.name}</span>
+                                      {player.subOut && <span className="bg-rose-900/90 border border-rose-400 text-rose-300 text-[8px] font-black px-1.5 py-0.5 rounded-full shrink-0">OUT</span>}
+                                    </div>
+                                    <span className="text-[10px] font-semibold text-text-muted/50 uppercase tracking-wider">
+                                      {label} • {player.team}
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="py-3.5 px-4 text-center text-text-muted/65">{getPlayerPrice(player)}</td>
+                              <td className="py-3.5 px-4 text-center text-text-muted/65 font-mono font-extrabold">{player.point}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )
+            ) : (
+              /* Points View Content */
+              <div className="flex-1 flex flex-col gap-4 max-w-3xl mx-auto w-full animate-in fade-in duration-300">
+                {/* Stats Summary Panel */}
+                <div className="bg-surface border border-border rounded-2xl p-4 shadow-card grid grid-cols-3 gap-2">
+                  <div className="flex flex-col items-center justify-center text-center">
+                    <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">GW Score</span>
+                    <span className="text-sm md:text-lg font-black text-[var(--color-success-bright)] mt-0.5 font-mono">
+                      {totalGWScore ?? 0} pts
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
+                    <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">GW Average</span>
+                    <span className="text-sm md:text-lg font-black text-white mt-0.5 font-mono">
+                      {avg ?? 0} pts
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
+                    <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">GW Highest</span>
+                    <span className="text-sm md:text-lg font-black text-white mt-0.5 font-mono">
+                      {highest ?? 0} pts
+                    </span>
+                  </div>
+                </div>
+
+                {/* List View Table */}
+                <div className="bg-surface border border-border rounded-2xl overflow-hidden shadow-card flex flex-col w-full flex-1">
+                  <div className="overflow-y-auto overflow-x-auto flex-1">
+                    <table className="w-full text-left border-collapse text-xs md:text-sm">
+                      <thead className="sticky top-0 z-10 bg-card shadow-[0_1px_0_rgba(45,27,84,0.4)]">
+                        <tr className="bg-card border-b border-border text-text-muted uppercase tracking-wider font-extrabold text-[10px]">
+                          <th className="py-3 px-4">Stat Type</th>
+                          <th className="py-3 px-4 text-center">Compiled Count</th>
+                          <th className="py-3 px-4 text-center">Points Formed</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border/30 font-medium text-white">
+                        {(() => {
+                          const totals = compileTeamTotals();
+                          const rows = [
+                            { label: "Minutes Played", ...totals.minutes },
+                            { label: "Goals", ...totals.goals },
+                            { label: "Assists", ...totals.assists },
+                            { label: "Clean Sheet", ...totals.cleanSheets },
+                            { label: "Yellow Card", ...totals.yellowCards },
+                            { label: "Red Card", ...totals.redCards },
+                            { label: "Penalty Miss", ...totals.penaltyMissed },
+                            { label: "Penalty Save", ...totals.penaltySaved },
+                            { label: "Saves", ...totals.saves },
+                            { label: "Tackles", ...totals.tackles },
+                            { label: "Clearances", ...totals.clearances },
+                            { label: "Blocks", ...totals.blocks },
+                            { label: "Recovery", ...totals.recoveries },
+                            { label: "Defensive Actions Points", ...totals.defensivePoints, isPointsOnly: true },
+                          ];
+
+                          return rows.map((row) => {
+                            const isDefensiveActionRaw = ["Tackles", "Clearances", "Blocks", "Recovery"].includes(row.label);
+                            const pointsVal = (row as any).isPointsOnly
+                              ? `${row.points > 0 ? "+" : ""}${row.points} pts`
+                              : isDefensiveActionRaw
+                                ? "—"
+                                : `${row.points > 0 ? "+" : ""}${row.points} pts`;
+
+                            const pointsColor = row.points > 0 
+                              ? "text-[var(--color-success-bright)]" 
+                              : row.points < 0 
+                                ? "text-rose-400" 
+                                : "text-text-muted/65";
+
+                            return (
+                              <tr key={row.label} className="hover:bg-white/5 transition-colors">
+                                <td className="py-3.5 px-4 font-bold text-white">
+                                  {row.label}
+                                </td>
+                                <td className="py-3.5 px-4 text-center text-white font-mono">
+                                  {row.count}{(row as any).suffix}
+                                </td>
+                                <td className={`py-3.5 px-4 text-center font-mono font-extrabold ${pointsColor}`}>
+                                  {pointsVal}
+                                </td>
+                              </tr>
+                            );
+                          });
+                        })()}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
-            </div>
+            )}
           </div>
-        )}
+
+        </div>
+
       </div>
 
       {/* Player Selection Actions Overlay Modal */}

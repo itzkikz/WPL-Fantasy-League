@@ -53,9 +53,16 @@ const MobileNavbar = () => {
   const matchRoute = useMatchRoute();
   const location = useLocation();
   const user = useUserStore((state) => state.user);
+  const isGuest = useUserStore((state) => state.isGuest);
   const isAdmin = user?.role === "admin";
 
   const isRegularUser = user?.role === "user";
+
+  // Guest users - only show League and Stats
+  const guestNavItems = [
+    { label: "League", path: "/standings/", icon: LeagueIcon },
+    { label: "Stats", path: "/stats", icon: StatsIcon },
+  ];
 
   const navItems = isAdmin
     ? [
@@ -66,8 +73,12 @@ const MobileNavbar = () => {
       { label: "Leagues", path: "/admin/leagues", icon: AdminLeaguesIcon },
       { label: "H2H", path: "/admin/h2h-leagues", icon: AdminH2HIcon },
     ]
+    : isGuest
+    ? guestNavItems
     : isRegularUser
       ? [
+        { label: "Home", path: "/home", icon: HomeIcon },
+        { label: "League", path: "/standings/", icon: LeagueIcon },
         { label: "Stats", path: "/stats", icon: StatsIcon },
       ]
       : [

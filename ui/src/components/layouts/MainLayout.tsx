@@ -15,9 +15,30 @@ export const MainLayout = () => {
     const matchRoute = useMatchRoute();
     const location = useLocation();
 
-    const { data } = useValidateToken();
     const user = useUserStore((state) => state.user);
+    const isGuest = useUserStore((state) => state.isGuest);
     const setUser = useUserStore((state) => state.setUser);
+
+    const currentPath = location.pathname;
+    const isAdminPath = currentPath.startsWith("/admin");
+    const isSettingsPath = currentPath === "/settings";
+    const isStatsPath = currentPath.startsWith("/stats");
+    const isStandingsPath = currentPath.startsWith("/standings");
+    const isPublicOrAuthPath = ["/login", "/maintenance", "/"].includes(currentPath);
+
+    // Guest mode: only allow /standings and /stats routes
+    const isGuestAllowedPath = isStandingsPath || isStatsPath;
+
+    // Always call the hook, but skip validation for guest users on allowed paths
+    const { data } = useValidateToken({
+      enabled: true,
+      skipValidation: isGuest && isGuestAllowedPath,
+    });
+
+    const isAdmin = user?.role === "admin";
+    const isUser = user?.role === "user";
+
+    const isRestrictedForAdmin = isAdmin && !isAdminPath && !isSettingsPath && !isPublicOrAuthPath;
 
     useEffect(() => {
         if (data?.valid) {
@@ -25,22 +46,42 @@ export const MainLayout = () => {
         }
     }, [data, setUser]);
 
-    const isAdmin = user?.role === "admin";
-    const isUser = user?.role === "user";
-    const currentPath = location.pathname;
-    const isAdminPath = currentPath.startsWith("/admin");
-    const isSettingsPath = currentPath === "/settings";
-    const isStatsPath = currentPath.startsWith("/stats");
-    const isPublicOrAuthPath = ["/login", "/maintenance", "/"].includes(currentPath);
-
-    const isRestrictedForAdmin = isAdmin && !isAdminPath && !isSettingsPath && !isPublicOrAuthPath;
-    const isRestrictedForUser = isUser && !isStatsPath && !isSettingsPath && !isPublicOrAuthPath;
-
     useEffect(() => {
         if (isRestrictedForAdmin) {
             navigate({ to: "/settings" });
         }
     }, [isRestrictedForAdmin, navigate]);
+
+    useEffect(() => {
+        if (isGuest && !isGuestAllowedPath && !isPublicOrAuthPath) {
+            navigate({ to: "/login" });
+        }
+    }, [isGuest, isGuestAllowedPath, isPublicOrAuthPath, navigate]);
+
+    // =========================================================================
+    // ALL HOOKS ARE CALLED UNCONDITIONALLY ABOVE THIS LINE.
+    // Early returns for conditional layouts are placed below to adhere strictly
+    // to the React Rules of Hooks.
+    // =========================================================================
+
+    if (isGuest) {
+        if (!isGuestAllowedPath && !isPublicOrAuthPath) {
+            return null;
+        }
+        
+        // For allowed guest paths, render with mobile navbar but no sidebar
+        return (
+            <main className="font-outfit min-h-screen shadow-sm text-primary flex flex-col">
+                <PWAInstallBanner />
+                <div className="flex-1 flex">
+                    <div className="flex h-screen flex-col mx-auto w-full overflow-y-auto pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
+                        <Outlet />
+                        <MobileNavbar />
+                    </div>
+                </div>
+            </main>
+        );
+    }
 
     const baseRoutes = [
         "/home",
@@ -60,52 +101,6 @@ export const MainLayout = () => {
 
     if (isRestrictedForAdmin) {
         return null;
-    }
-
-    if (isRestrictedForUser) {
-        return (
-            <main className="font-outfit min-h-screen text-primary flex flex-col items-center justify-center p-4 bg-[#120C22] text-white">
-                <PWAInstallBanner />
-                <div className="bg-[#1b142d]/80 border border-white/10 p-6 sm:p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center space-y-4 relative overflow-hidden animate-slide-up">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-rose-500 opacity-80" />
-
-                    <div className="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/20 flex items-center justify-center mx-auto text-rose-400">
-                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                        </svg>
-                    </div>
-
-                    <div className="space-y-1">
-                        <h2 className="text-sm font-black uppercase tracking-wider text-white">Access Restricted</h2>
-                        <p className="text-xs text-white/50 leading-relaxed">
-                            You are not registered as a fantasy manager.
-                        </p>
-                    </div>
-
-                    <div className="p-3 bg-[#150f24] rounded-xl border border-white/5 text-[10px] text-white/60 leading-normal">
-                        Please contact the League Administrator to get assigned to a fantasy team squad roster.
-                    </div>
-
-                    <div className="pt-2 flex justify-center gap-2">
-                        <button
-                            onClick={() => navigate({ to: "/stats" })}
-                            className="px-4 py-1.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg text-xs font-bold shadow-lg hover:scale-[1.02] active:scale-95 transition-all"
-                        >
-                            View League Stats
-                        </button>
-                        <button
-                            onClick={() => {
-                                localStorage.removeItem("token");
-                                navigate({ to: "/login" });
-                            }}
-                            className="px-4 py-1.5 rounded-lg border border-white/10 text-white/70 hover:bg-white/10 text-xs font-bold transition-colors"
-                        >
-                            Log Out
-                        </button>
-                    </div>
-                </div>
-            </main>
-        );
     }
 
     return (
@@ -214,6 +209,3 @@ export const MainLayout = () => {
         </main>
     );
 };
-
-
-
