@@ -1,16 +1,16 @@
 # Graph Report - WPL-Fantasy-League  (2026-07-31)
 
 ## Corpus Check
-- 332 files · ~355,393 words
+- 332 files · ~355,837 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3075 nodes · 4396 edges · 343 communities (162 shown, 181 thin omitted)
+- 3075 nodes · 4396 edges · 344 communities (163 shown, 181 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 200 edges (avg confidence: 0.76)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f024c5dd`
+- Built from commit: `ccb8b5f4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -130,7 +130,6 @@
 - Community 114
 - Community 115
 - Community 116
-- md
 - Community 118
 - Community 119
 - Community 120
@@ -159,7 +158,6 @@
 - Community 143
 - Community 144
 - Community 145
-- secondary-foreground
 - Community 147
 - Community 148
 - Community 149
@@ -348,7 +346,10 @@
 - primary
 - primary
 - postcss
-- primary-hover
+- destructive-foreground
+- muted
+- primary-foreground
+- secondary-foreground
 
 ## God Nodes (most connected - your core abstractions)
 1. `error` - 62 edges
@@ -384,7 +385,7 @@
 - **Responsive grid layout system** — ui_src_pages_home_homepagepng_screenshot, ui_src_pages_home_homepagepng_teamoverview, ui_src_pages_home_homepagepng_upcomingfixture, ui_src_pages_home_homepagepng_leaguestatistics, ui_src_pages_home_homepagepng_gameweekprogress, ui_src_pages_home_homepagepng_leaguestandings, ui_src_pages_home_homepagepng_playerspotlight, ui_src_pages_home_homepagepng_topplayers, ui_src_pages_home_homepagepng_bestperformers, ui_src_pages_home_homepagepng_recentgameweeks, ui_src_pages_home_homepagepng_pointsbreakdown, ui_src_pages_home_homepagepng_seasonstats, ui_src_pages_home_homepagepng_teamformation, ui_src_pages_home_homepagepng_squadvalue, ui_src_pages_home_homepagepng_yourplayerscard, ui_src_pages_home_homepagepng_fantasynews [INFERRED 0.90]
 - **Dark theme design system** — ui_src_pages_home_homepagepng_screenshot, ui_src_pages_home_homepagepng_header, ui_src_pages_home_homepagepng_bottomnavbar [INFERRED 0.90]
 
-## Communities (343 total, 181 thin omitted)
+## Communities (344 total, 181 thin omitted)
 
 ### Community 0 - "UI Navigation & Layout"
 Cohesion: 0.08
@@ -508,7 +509,7 @@ Nodes (11): Generate Tailwind CSS configuration files., Add full color palette (
 
 ### Community 34 - "Design Token Semantic Colors"
 Cohesion: 0.11
-Nodes (19): $type, $value, background, destructive-foreground, muted, primary-foreground, secondary, secondary-foreground (+11 more)
+Nodes (19): $type, $value, background, foreground, muted-foreground, primary, primary-hover, secondary (+11 more)
 
 ### Community 35 - "Tailwind Config Generator"
 Cohesion: 0.13
@@ -555,8 +556,8 @@ Cohesion: 0.12
 Nodes (9): Test adding components without shadcn config., Test adding components that are already installed., Test ShadcnInstaller class., Test adding all components in dry run mode., Create temporary project structure., Test successful addition of all components., Test listing installed components when none exist., Test checking for non-existent shadcn config. (+1 more)
 
 ### Community 48 - "Design System Orchestration"
-Cohesion: 0.17
-Nodes (16): ansi_ljust(), format_ascii_box(), format_markdown(), format_master_md(), generate_design_system(), hex_to_ansi(), persist_design_system(), Convert hex color to ANSI True Color swatch (██) with fallback. (+8 more)
+Cohesion: 0.19
+Nodes (14): _detect_page_type(), format_markdown(), format_master_md(), format_page_override_md(), generate_design_system(), _generate_intelligent_overrides(), persist_design_system(), Generate intelligent overrides based on page type using layered search. (+6 more)
 
 ### Community 49 - "Server Dev Dependencies"
 Cohesion: 0.13
@@ -614,8 +615,8 @@ Cohesion: 0.40
 Nodes (6): authApi, authQueries, LoginRequest, LoginResponse, User, ValidateResponse
 
 ### Community 62 - "Design Token Component Tokens"
-Cohesion: 0.15
-Nodes (17): $type, $value, $type, $value, bg, bg, border, padding (+9 more)
+Cohesion: 0.20
+Nodes (12): $type, $value, bg, bg, padding, shadow, card, bg (+4 more)
 
 ### Community 63 - "Shadcn Installer Edge Cases"
 Cohesion: 0.17
@@ -686,8 +687,8 @@ Cohesion: 0.16
 Nodes (19): useHomePage(), useSubstitution(), benchSwap(), canSwap(), Category, clearSwapHighlights(), countStartingPlayers(), EnrichedPlayer (+11 more)
 
 ### Community 81 - "Community 81"
-Cohesion: 0.67
-Nodes (4): xl, xl, $type, $value
+Cohesion: 0.25
+Nodes (8): ansi_ljust(), format_ascii_box(), hex_to_ansi(), Convert hex color to ANSI True Color swatch (██) with fallback., Like str.ljust but accounts for zero-width ANSI escape sequences., Create a Unicode section separator: ├─── NAME ───...┤, Format design system as Unicode box with ANSI color swatches., section_header()
 
 ### Community 82 - "Community 82"
 Cohesion: 0.29
@@ -722,8 +723,8 @@ Cohesion: 0.25
 Nodes (5): Route, Route, Route, ProtectedRoute(), Route
 
 ### Community 94 - "Community 94"
-Cohesion: 0.33
-Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Generate intelligent overrides based on page type using layered search., Detect page type from context and search results., Format a page-specific override file with intelligent AI-generated content.
+Cohesion: 0.67
+Nodes (4): xl, xl, $type, $value
 
 ### Community 95 - "Community 95"
 Cohesion: 0.50
@@ -747,15 +748,15 @@ Nodes (35): 1. Visual Communication First, 2. Minimal Text Integration, 3. Exper
 
 ### Community 104 - "Community 104"
 Cohesion: 0.67
-Nodes (3): $type, $value, 12
+Nodes (3): $type, $value, 0
 
 ### Community 105 - "Community 105"
 Cohesion: 0.67
-Nodes (3): $type, $value, 4
+Nodes (3): $type, $value, 1
 
 ### Community 106 - "Community 106"
 Cohesion: 0.67
-Nodes (3): $type, $value, 6
+Nodes (3): $type, $value, 3
 
 ### Community 107 - "Community 107"
 Cohesion: 0.67
@@ -777,17 +778,9 @@ Nodes (32): 1. Mobile-First Design, 2. Consistent Breakpoint Usage, 3. Test at B
 Cohesion: 0.06
 Nodes (32): Accessibility, Available Domains, Available Stacks, Common Rules for Professional UI, Common Sticking Points, Example Workflow, How to Use This Skill, Icons & Visual Elements (+24 more)
 
-### Community 117 - "md"
-Cohesion: 0.67
-Nodes (3): foreground, $type, $value
-
 ### Community 144 - "Community 144"
 Cohesion: 0.06
 Nodes (30): Accessibility, Base System, Best Practices, Clean & Modern, Common Font Pairings, Contrast Requirements, CSS Implementation, Editorial (+22 more)
-
-### Community 146 - "secondary-foreground"
-Cohesion: 0.67
-Nodes (3): muted-foreground, $type, $value
 
 ### Community 148 - "Community 148"
 Cohesion: 0.29
@@ -990,16 +983,28 @@ Cohesion: 0.50
 Nodes (3): Expanding the ESLint configuration, React Compiler, React + Vite
 
 ### Community 339 - "primary"
-Cohesion: 0.67
-Nodes (3): primary, $type, $value
+Cohesion: 0.60
+Nodes (5): $type, $value, border, border, border
 
 ### Community 340 - "primary"
 Cohesion: 0.67
 Nodes (3): destructive, $type, $value
 
-### Community 342 - "primary-hover"
+### Community 344 - "destructive-foreground"
 Cohesion: 0.67
-Nodes (3): primary-hover, $type, $value
+Nodes (3): destructive-foreground, $type, $value
+
+### Community 345 - "muted"
+Cohesion: 0.67
+Nodes (3): muted, $type, $value
+
+### Community 346 - "primary-foreground"
+Cohesion: 0.67
+Nodes (3): primary-foreground, $type, $value
+
+### Community 347 - "secondary-foreground"
+Cohesion: 0.67
+Nodes (3): secondary-foreground, $type, $value
 
 ## Knowledge Gaps
 - **1337 isolated node(s):** `$schema`, `$value`, `$type`, `$value`, `$type` (+1332 more)
