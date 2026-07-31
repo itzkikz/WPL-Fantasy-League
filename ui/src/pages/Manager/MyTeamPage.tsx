@@ -199,17 +199,15 @@ const MyTeamPage = () => {
   };
 
   const handleSaveTeam = () => {
-    // Validate captain/vice captain requirements
+    // Validate captain/vice captain requirements - must have both in starting XI
     const allStarting = [...(startingXI.GK || []), ...(startingXI.DEF || []), ...(startingXI.MID || []), ...(startingXI.FWD || [])];
     const captain = allStarting.find(p => p.isCaptain);
     const vice = allStarting.find(p => p.isViceCaptain);
 
-    if (roles?.captain || roles?.vice) {
-      if (!captain || !vice) {
-        const missing = !captain ? "Captain" : "Vice Captain";
-        showToast(`You need to select a ${missing} from Starting XI to save team.`, "ERROR");
-        return;
-      }
+    if (!captain || !vice) {
+      const missing = !captain ? "Captain" : "Vice Captain";
+      showToast(`You need to select a ${missing} from Starting XI to save team.`, "ERROR");
+      return;
     }
 
     const allPlayers = [...allStarting, ...bench];
@@ -316,6 +314,12 @@ const MyTeamPage = () => {
   const totalPointsFormatted = (managerDetails?.total ?? 0).toLocaleString();
   const hasUnsavedChanges = substitutions?.length > 0 || Object.keys(roles || {}).length > 0;
 
+  // Check if starting XI has both captain and vice-captain
+  const allStarting = [...(startingXI.GK || []), ...(startingXI.DEF || []), ...(startingXI.MID || []), ...(startingXI.FWD || [])];
+  const hasCaptain = allStarting.some(p => p.isCaptain);
+  const hasViceCaptain = allStarting.some(p => p.isViceCaptain);
+  const hasValidLeadership = hasCaptain && hasViceCaptain;
+
   return (
     <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-white font-outfit select-none overflow-hidden pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
 
@@ -380,12 +384,15 @@ const MyTeamPage = () => {
                 </button>
                 <button
                   onClick={handleSaveTeam}
-                  disabled={!hasUnsavedChanges || mutation.isPending}
+                  disabled={!hasUnsavedChanges || mutation.isPending || !hasValidLeadership}
                   className="px-2.5 py-1 bg-gradient-button disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-lg shadow-fab min-h-[28px] flex items-center justify-center gap-1 active:scale-95 transition-all cursor-pointer border-t border-white/20 text-[10px] md:text-xs"
                 >
                   <Save className="w-3 h-3" />
                   {mutation.isPending ? "Saving..." : "Save"}
                 </button>
+                {!hasValidLeadership && hasUnsavedChanges && (
+                  <span className="text-[10px] text-rose-400 font-bold ml-1">Requires C + VC</span>
+                )}
               </div>
             )}
           </div>

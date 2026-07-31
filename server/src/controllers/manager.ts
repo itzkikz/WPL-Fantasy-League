@@ -6,7 +6,7 @@ import { TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
 import { aggregateMatchStats } from "./players";
 import { validateAndApplySwap } from "../lib/validators/substitution";
-import { Substitution } from "../types/manager";
+import { Substitution as SubstitutionType } from "../types/manager";
 import { FormationResult } from "../lib/formatter/types";
 import { setCaptain, setViceCaptain } from "../lib/helpers/roleUpdate";
 import { resolvePosition } from "../utils";
@@ -17,6 +17,7 @@ import { Team } from "../models/Team";
 import { Gameweek } from "../models/Gameweek";
 import { PlayerStats } from "../models/PlayerStats";
 import { Fixture } from "../models/Fixture";
+import { Substitution } from "../models/Substitution";
 
 
 
@@ -484,6 +485,35 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
 
     let swappedData: FormationResult = { starting, bench };
 
+    // Track successful swaps for history recording
+    const successfulSwaps: Array<{ swapIn: any; swapOut: any }> = [];
+    
+    // Track captain/vice-captain changes for history
+    let originalCaptain: any = null;
+    let originalViceCaptain: any = null;
+    
+    // Find original captain and vice-captain from current formation
+    const findPlayerInFormation = (formation: FormationResult, playerId: number) => {
+      for (const cat of ['GK', 'DEF', 'MID', 'FWD'] as const) {
+        const found = formation.starting[cat].find((p: any) => p.id === playerId);
+        if (found) return found;
+      }
+      const found = formation.bench.find((p: any) => p.id === playerId);
+      if (found) return found;
+      return null;
+    };
+    
+    // Get original captain/vice from the original squad picks
+    const originalCaptainPick = fantasyTeam.currentSquad.picks.find(p => p.isCaptain);
+    const originalVicePick = fantasyTeam.currentSquad.picks.find(p => p.isViceCaptain);
+    
+    if (originalCaptainPick) {
+      originalCaptain = findPlayerInFormation(currentFormation, originalCaptainPick.playerId);
+    }
+    if (originalVicePick) {
+      originalViceCaptain = findPlayerInFormation(currentFormation, originalVicePick.playerId);
+    }
+
     // 1. Process Substitutions
     if (substitution?.length > 0) {
       for (const val of substitution) {
@@ -498,12 +528,22 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
           console.error('[Substitution Failed]', result.error, { inId, outId, startOutCat: swappedData.starting, benchInIdx: swappedData.bench.map((p: any) => p.id) });
           return res.status(403).json({ data: { message: result.error || 'Substitution not allowed' } });
         }
+        
+        // Store successful swap for history
+        successfulSwaps.push({
+          swapIn: result.swappedIn,
+          swapOut: result.swappedOut
+        });
+
         swappedData.starting = result.starting;
         swappedData.bench = result.bench;
       }
     }
 
     // 2. Process Roles
+    let newCaptain: any = null;
+    let newViceCaptain: any = null;
+    
     if (roles) {
       if (roles.captain) {
         const capId = roles.captain.id || roles.captain.player_id || roles.captain;
@@ -524,6 +564,20 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
         }
       }
     }
+
+    // Find new captain and vice-captain after role changes
+    const findNewPlayer = (formation: FormationResult, isCaptain: boolean, isViceCaptain: boolean) => {
+      for (const cat of ['GK', 'DEF', 'MID', 'FWD'] as const) {
+        const found = formation.starting[cat].find((p: any) => isCaptain ? p.isCaptain : p.isViceCaptain);
+        if (found) return found;
+      }
+      const found = formation.bench.find((p: any) => isCaptain ? p.isCaptain : p.isViceCaptain);
+      if (found) return found;
+      return null;
+    };
+    
+    newCaptain = findNewPlayer(swappedData, true, false);
+    newViceCaptain = findNewPlayer(swappedData, false, true);
 
     // 3. Reconstruct Picks from Swapped Data
     const newPicks: any[] = [];
@@ -558,6 +612,104 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
     fantasyTeam.currentSquad.picks = newPicks;
 
     await fantasyTeam.save();
+
+    // 4. Record substitution history (non-blocking)
+    const hasChanges = successfulSwaps.length > 0 || 
+      (originalCaptain && newCaptain && originalCaptain.id !== newCaptain.id) ||
+      (originalViceCaptain && newViceCaptain && originalViceCaptain.id !== newViceCaptain.id);
+    
+    if (hasChanges) {
+      try {
+        // Determine current gameweek
+        const GameweekModel = (await import("../models/Gameweek")).Gameweek;
+        let currentGwDoc = await GameweekModel.findOne({ isCurrent: true });
+        if (!currentGwDoc) {
+          currentGwDoc = await GameweekModel.findOne({ isNext: true });
+        }
+        const targetGw = currentGwDoc ? currentGwDoc.number : 1;
+
+        const substitutionRecords: any[] = [];
+
+        // Add swap records
+        successfulSwaps.forEach(swap => {
+          substitutionRecords.push({
+            fantasyTeam: fantasyTeam._id,
+            teamName: fantasyTeam.name,
+            type: 'swap',
+            gameweek: targetGw,
+            swapIn: {
+              playerId: swap.swapIn.id || swap.swapIn.player_id,
+              name: swap.swapIn.name,
+              position: swap.swapIn.position,
+              teamId: swap.swapIn.teamId || 0
+            },
+            swapOut: {
+              playerId: swap.swapOut.id || swap.swapOut.player_id,
+              name: swap.swapOut.name,
+              position: swap.swapOut.position,
+              teamId: swap.swapOut.teamId || 0
+            },
+            createdBy: user._id,
+            date: new Date()
+          });
+        });
+
+        // Add captain change record
+        if (originalCaptain && newCaptain && originalCaptain.id !== newCaptain.id) {
+          substitutionRecords.push({
+            fantasyTeam: fantasyTeam._id,
+            teamName: fantasyTeam.name,
+            type: 'captain',
+            gameweek: targetGw,
+            swapIn: {
+              playerId: newCaptain.id,
+              name: newCaptain.name,
+              position: newCaptain.position,
+              teamId: newCaptain.teamId || 0
+            },
+            swapOut: {
+              playerId: originalCaptain.id,
+              name: originalCaptain.name,
+              position: originalCaptain.position,
+              teamId: originalCaptain.teamId || 0
+            },
+            createdBy: user._id,
+            date: new Date()
+          });
+        }
+
+        // Add vice-captain change record
+        if (originalViceCaptain && newViceCaptain && originalViceCaptain.id !== newViceCaptain.id) {
+          substitutionRecords.push({
+            fantasyTeam: fantasyTeam._id,
+            teamName: fantasyTeam.name,
+            type: 'vice-captain',
+            gameweek: targetGw,
+            swapIn: {
+              playerId: newViceCaptain.id,
+              name: newViceCaptain.name,
+              position: newViceCaptain.position,
+              teamId: newViceCaptain.teamId || 0
+            },
+            swapOut: {
+              playerId: originalViceCaptain.id,
+              name: originalViceCaptain.name,
+              position: originalViceCaptain.position,
+              teamId: originalViceCaptain.teamId || 0
+            },
+            createdBy: user._id,
+            date: new Date()
+          });
+        }
+
+        if (substitutionRecords.length > 0) {
+          await Substitution.insertMany(substitutionRecords);
+        }
+      } catch (historyError) {
+        console.error("Failed to record substitution history:", historyError);
+        // Non-blocking: squad update already succeeded
+      }
+    }
 
     res.json({
       data: {
@@ -1195,6 +1347,48 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
 
   } catch (error) {
     console.error("Error in dashboard controller:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const getSubstitutionHistory = async (req: Request, res: Response) => {
+  try {
+    // Admin only
+    if (req.user && req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'Access denied. Admins only.' });
+    }
+
+    const { teamId, gameweek, type } = req.query;
+
+    const query: any = {};
+    if (teamId) query.fantasyTeam = teamId;
+    if (gameweek) query.gameweek = Number(gameweek);
+    if (type) query.type = type;
+
+    const substitutions = await Substitution.find(query)
+      .populate('fantasyTeam', 'name')
+      .populate('createdBy', 'username')
+      .sort({ date: -1 })
+      .lean();
+
+    res.json({
+      data: substitutions.map(s => ({
+        _id: s._id,
+        fantasyTeam: s.fantasyTeam ? (s.fantasyTeam as any)._id : null,
+        teamName: s.fantasyTeam ? (s.fantasyTeam as any).name : s.teamName,
+        type: s.type,
+        gameweek: s.gameweek,
+        swapIn: s.swapIn,
+        swapOut: s.swapOut,
+        date: s.date,
+        note: s.note,
+        createdBy: s.createdBy ? (s.createdBy as any).username : null,
+        createdAt: s.createdAt,
+        updatedAt: s.updatedAt
+      }))
+    });
+  } catch (error) {
+    console.error("Error in getSubstitutionHistory:", error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
