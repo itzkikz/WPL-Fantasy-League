@@ -30,13 +30,16 @@ interface IHistory {
 
 export interface IFantasyTeam extends Document {
     name: string; // Team Name
+    logo?: string; // Base64 encoded logo image
     managers: mongoose.Types.ObjectId[]; // Shared ownership (Users)
     managerDisplayNames: string; // Display names from seed data
     createdBy: mongoose.Types.ObjectId;
     finance: {
         totalBudget: number;
         utilisation: number;
-        balance: number; // Calculated: total - utilisation
+        bonus: number;
+        fine: number;
+        balance: number; // Calculated: total - utilisation + bonus - fine
     };
     currentSquad: {
         picks: IPick[];
@@ -68,6 +71,7 @@ const HistorySchema = new Schema({
 
 const FantasyTeamSchema: Schema = new Schema({
     name: { type: String, required: true, default: "My Team" },
+    logo: { type: String, default: '' },
 
     // OWNERSHIP: Links to User Model
     managers: [{ type: Schema.Types.ObjectId, ref: 'User', index: true }],
@@ -77,6 +81,8 @@ const FantasyTeamSchema: Schema = new Schema({
     finance: {
         totalBudget: { type: Number, default: 1000 }, // e.g. 100.0m
         utilisation: { type: Number, default: 0 },
+        bonus: { type: Number, default: 0 },
+        fine: { type: Number, default: 0 },
         balance: { type: Number, default: 1000 }
     },
     // SQUADS
@@ -90,7 +96,7 @@ const FantasyTeamSchema: Schema = new Schema({
 FantasyTeamSchema.pre('save', function () {
     if (this.isModified('finance')) {
         const self = this as unknown as IFantasyTeam;
-        self.finance.balance = self.finance.totalBudget - self.finance.utilisation;
+        self.finance.balance = self.finance.totalBudget - self.finance.utilisation + (self.finance.bonus || 0) - (self.finance.fine || 0);
     }
 });
 

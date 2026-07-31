@@ -1,7 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import api from '../../api/client';
-import { Search, Plus, Trash2, Shield, UserCheck, Wallet, Loader2 } from 'lucide-react';
+import { Search, Plus, Trash2, Shield, UserCheck, Wallet, Loader2, ImagePlus, X } from 'lucide-react';
+import Modal from '../common/Modal';
+
+function normalizePos(pos: string): string {
+  const p = (pos || '').toUpperCase();
+  if (p === 'GK' || p === 'GOALKEEPER' || p === 'G') return 'GK';
+  if (p === 'DEF' || p === 'DEFENDER' || p === 'D') return 'DEF';
+  if (p === 'MID' || p === 'MIDFIELDER' || p === 'M') return 'MID';
+  if (p === 'FWD' || p === 'FORWARD' || p === 'ATTACKER' || p === 'A' || p === 'F') return 'FWD';
+  return '';
+}
 
 interface AdminPlayer {
   id: number;
@@ -17,45 +27,75 @@ interface FantasyTeamFormProps {
 
 export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
   const navigate = useNavigate();
+  const isEditMode = !!teamId;
 
   const [users, setUsers] = useState<any[]>([]);
   const [players, setPlayers] = useState<AdminPlayer[]>([]);
   
   const [teamName, setTeamName] = useState('My Team');
+  const [logo, setLogo] = useState('');
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [totalBudget, setTotalBudget] = useState<number>(1000);
   const [utilisation, setUtilisation] = useState<number>(0);
+  const [bonus, setBonus] = useState<number>(0);
+  const [fine, setFine] = useState<number>(0);
   
   const [squad, setSquad] = useState<any[]>([]); // { element, position, isStarting, isCaptain, isViceCaptain, positionIndex, auctionPrice }
 
   const [loading, setLoading] = useState(false);
+  const [teamLoading, setTeamLoading] = useState(false);
+  const [usersLoading, setUsersLoading] = useState(false);
+  const [playersLoading, setPlayersLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  const [pendingPlayer, setPendingPlayer] = useState<AdminPlayer | null>(null);
+  const [modalPosition, setModalPosition] = useState('MID');
+  const [modalAuctionPrice, setModalAuctionPrice] = useState('');
+  const [savingPlayer, setSavingPlayer] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [teamFilter, setTeamFilter] = useState('');
   const [userSearchTerm, setUserSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 20;
+  const loadedFor = useRef<string | symbol>(Symbol.for('fantasy-team-not-loaded'));
 
   useEffect(() => {
-    fetchUsers();
+    // Guard against React StrictMode double-invoking effects in dev
+    const key = teamId ?? null;
+    if (loadedFor.current === key) return;
+    loadedFor.current = key;
+
+    fetchUsers(teamId);
     if (teamId) {
       fetchTeam(teamId);
-    } else {
-      fetchPlayers();
     }
   }, [teamId]);
 
+  // Debounced server-side search
+  useEffect(() => {
+    setCurrentPage(1);
+    const t = setTimeout(() => {
+      fetchPlayers(teamId, 1, searchTerm);
+    }, 300);
+    return () => clearTimeout(t);
+  }, [searchTerm, teamId]);
+
   const fetchTeam = async (id: string) => {
+    setTeamLoading(true);
     try {
       const response = await api.get(`/admin/fantasy-teams/${id}`);
       const t = response.data.data;
       setTeamName(t.name);
+      setLogo(t.logo || '');
       setSelectedUsers(t.managers?.map((m: any) => m._id) || []);
       if (t.finance) {
         setTotalBudget(t.finance.totalBudget || 1000);
         setUtilisation(t.finance.utilisation || 0);
+        setBonus(t.finance.bonus || 0);
+        setFine(t.finance.fine || 0);
       }
       
       // Hydrate squad
@@ -85,88 +125,161 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
         setSquad(loadedSquad);
       }
       
-      // Fetch players with excludeTeamId so current squad remains available
-      fetchPlayers(id);
     } catch (err) {
       console.error('Failed to fetch team details:', err);
+    } finally {
+      setTeamLoading(false);
     }
   };
 
-  const fetchUsers = async () => {
+  const fetchUsers = async (excludeTeamId?: string) => {
+    setUsersLoading(true);
     try {
-      const response = await api.get('/admin/users');
+      const endpoint = excludeTeamId
+        ? `/admin/users?excludeTeamId=${excludeTeamId}`
+        : '/admin/users';
+      const response = await api.get(endpoint);
       setUsers(response.data.data);
     } catch (err) {
       console.error('Failed to fetch users:', err);
+    } finally {
+      setUsersLoading(false);
     }
   };
 
-  const fetchPlayers = async (excludeTeamId?: string) => {
+  const fetchPlayers = async (excludeTeamId?: string, page = 1, search = '') => {
+    setPlayersLoading(true);
     try {
-      const endpoint = excludeTeamId 
-        ? `/admin/players?excludeTeamId=${excludeTeamId}`
-        : '/admin/players';
-      const response = await api.get(endpoint);
+      const params = new URLSearchParams({ page: String(page), limit: String(itemsPerPage) });
+      if (excludeTeamId) params.set('excludeTeamId', excludeTeamId);
+      if (search) params.set('search', search);
+      const response = await api.get(`/admin/players?${params.toString()}`);
       setPlayers(response.data.data);
+      setTotalPages(response.data.pagination?.totalPages || 1);
     } catch (err) {
       console.error('Failed to fetch players:', err);
+    } finally {
+      setPlayersLoading(false);
     }
+  };
+
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      setError('Please select an image file.');
+      return;
+    }
+    if (file.size > 500 * 1024) {
+      setError('Logo must be under 500KB.');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const MAX_SIZE = 256;
+        let { width, height } = img;
+        if (width > MAX_SIZE || height > MAX_SIZE) {
+          const scale = Math.min(MAX_SIZE / width, MAX_SIZE / height);
+          width = Math.round(width * scale);
+          height = Math.round(height * scale);
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          setLogo(reader.result as string);
+          setError('');
+          return;
+        }
+        ctx.drawImage(img, 0, 0, width, height);
+        setLogo(canvas.toDataURL('image/png'));
+        setError('');
+      };
+      img.onerror = () => {
+        setError('Could not read the selected image.');
+      };
+      img.src = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  };
+
+  const handleLogoRemove = () => {
+    setLogo('');
+  };
+
+  const removeFromSquad = (player: AdminPlayer) => {
+    setSquad(squad.filter(p => p.element !== player.id));
+    setError('');
+    api.put(`/admin/players/${player.id}`, { auctionPrice: null }).catch((err) => {
+      console.error('Failed to reset player auction price:', err);
+    });
   };
 
   const handlePlayerToggle = (player: AdminPlayer) => {
     const existingIndex = squad.findIndex(p => p.element === player.id);
     if (existingIndex >= 0) {
-      setSquad(squad.filter(p => p.element !== player.id));
-      setError('');
+      removeFromSquad(player);
     } else {
       if (squad.length >= 15) {
         setError('Maximum 15 players allowed.');
         return;
       }
+      const defaultPos = normalizePos(player.position) || 'MID';
+      setModalPosition(defaultPos);
+      setModalAuctionPrice(player.auctionPrice ? String(player.auctionPrice) : '');
+      setPendingPlayer(player);
+    }
+  };
 
-      const normalizedPos = player.position.toUpperCase();
-      const isGK = normalizedPos === 'GK' || normalizedPos === 'GOALKEEPER' || normalizedPos === 'G';
-      const isDEF = normalizedPos === 'DEF' || normalizedPos === 'DEFENDER' || normalizedPos === 'D';
-      const isMID = normalizedPos === 'MID' || normalizedPos === 'MIDFIELDER' || normalizedPos === 'M';
-      const isFWD = normalizedPos === 'FWD' || normalizedPos === 'FORWARD' || normalizedPos === 'ATTACKER' || normalizedPos === 'A' || normalizedPos === 'F';
-      
-      const posCount = squad.filter(p => {
-        const pNorm = p.position.toUpperCase();
-        if (isGK) return pNorm === 'GK' || pNorm === 'GOALKEEPER' || pNorm === 'G';
-        if (isDEF) return pNorm === 'DEF' || pNorm === 'DEFENDER' || pNorm === 'D';
-        if (isMID) return pNorm === 'MID' || pNorm === 'MIDFIELDER' || pNorm === 'M';
-        if (isFWD) return pNorm === 'FWD' || pNorm === 'FORWARD' || pNorm === 'ATTACKER' || pNorm === 'A' || pNorm === 'F';
-        return false;
-      }).length;
+  const confirmAddPlayer = async () => {
+    if (!pendingPlayer) return;
 
-      if (isGK && posCount >= 2) {
-        setError('Maximum 2 Goalkeepers allowed.');
-        return;
-      }
-      if (isDEF && posCount >= 5) {
-        setError('Maximum 5 Defenders allowed.');
-        return;
-      }
-      if (isMID && posCount >= 5) {
-        setError('Maximum 5 Midfielders allowed.');
-        return;
-      }
-      if (isFWD && posCount >= 3) {
-        setError('Maximum 3 Forwards allowed.');
-        return;
-      }
+    const pos = normalizePos(modalPosition);
+    const price = parseFloat(modalAuctionPrice);
 
-      setError('');
-      setSquad([...squad, { 
-        element: player.id, 
-        position: player.position, 
-        isStarting: false, 
-        isCaptain: false, 
+    if (!pos) {
+      setError('Please select a position.');
+      return;
+    }
+    if (isNaN(price) || price < 0) {
+      setError('Please enter a valid auction price.');
+      return;
+    }
+
+    const posCount = squad.filter(p => normalizePos(p.position) === pos).length;
+    const limits: Record<string, number> = { GK: 2, DEF: 5, MID: 5, FWD: 3 };
+    if (posCount >= limits[pos]) {
+      setError(`Maximum ${limits[pos]} ${pos} players allowed.`);
+      return;
+    }
+
+    setSavingPlayer(true);
+    setError('');
+    try {
+      await api.put(`/admin/players/${pendingPlayer.id}`, {
+        position: pos,
+        tm_position: pos,
+        auctionPrice: price,
+      });
+      setSquad([...squad, {
+        element: pendingPlayer.id,
+        position: pos,
+        isStarting: false,
+        isCaptain: false,
         isViceCaptain: false,
-        name: player.name,
+        name: pendingPlayer.name,
         subNumber: 0,
-        auctionPrice: player.auctionPrice ?? 0
+        auctionPrice: price,
       }]);
+      setPendingPlayer(null);
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Failed to update player');
+    } finally {
+      setSavingPlayer(false);
     }
   };
 
@@ -242,11 +355,14 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
 
       const payload = {
         name: teamName,
+        logo,
         managers: selectedUsers,
         squad: finalSquad,
         finance: {
           totalBudget: Number(totalBudget),
-          utilisation: Number(utilisation)
+          utilisation: Number(utilisation),
+          bonus: Number(bonus),
+          fine: Number(fine)
         }
       };
 
@@ -257,9 +373,12 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
         await api.post('/admin/fantasy-teams', payload);
         setSuccess('Fantasy team created successfully!');
         setTeamName('My Team');
+        setLogo('');
         setSelectedUsers([]);
         setTotalBudget(1000);
         setUtilisation(0);
+        setBonus(0);
+        setFine(0);
         setSquad([]);
       }
       
@@ -292,20 +411,9 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
 
   const uniqueTeams = Array.from(new Set(players.map(p => p.team))).filter(Boolean).sort();
 
-  const filteredPlayers = players.filter(p => {
-    const matchesSearch = p.name?.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesTeam = teamFilter ? p.team === teamFilter : true;
-    return matchesSearch && matchesTeam;
-  });
+  const visiblePlayers = players.filter(p => (teamFilter ? p.team === teamFilter : true));
 
-  const totalPages = Math.max(1, Math.ceil(filteredPlayers.length / itemsPerPage));
-  const paginatedPlayers = filteredPlayers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchTerm, teamFilter]);
-
-  const remainingBalance = totalBudget - utilisation;
+  const remainingBalance = totalBudget - utilisation + bonus - fine;
 
   return (
     <div className="w-full text-white">
@@ -321,9 +429,18 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        
+
+        {/* Edit mode: team details (left) + current squad (right) */}
+        <div className={isEditMode ? "grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4" : "space-y-4"}>
+
         {/* Core Config Card */}
-        <div className="bg-[#1b142d]/80 border border-white/10 p-4 rounded-xl shadow-lg space-y-4">
+        <div className="bg-[#1b142d]/80 border border-white/10 p-4 rounded-xl shadow-lg space-y-4 h-full">
+
+          {isEditMode && teamLoading && (
+            <div className="flex items-center gap-2 text-[10px] font-bold text-indigo-400">
+              <Loader2 className="w-3.5 h-3.5 animate-spin" /> Loading team data...
+            </div>
+          )}
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             
@@ -344,6 +461,39 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
               </div>
             </div>
 
+            {/* Team Logo Upload */}
+            <div>
+              <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1.5">
+                Team Logo
+              </label>
+              <div className="flex items-center gap-3 bg-[#150f24] border border-white/10 rounded-lg p-2.5">
+                <div className="w-12 h-12 shrink-0 rounded-lg overflow-hidden bg-black/30 border border-white/10 flex items-center justify-center">
+                  {logo ? (
+                    <img src={logo} alt="Team logo" className="w-full h-full object-cover" />
+                  ) : (
+                    <ImagePlus className="w-5 h-5 text-white/30" />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <label className="inline-block cursor-pointer text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500/20 transition-all">
+                    Upload Logo
+                    <input type="file" accept="image/*" onChange={handleLogoUpload} className="hidden" />
+                  </label>
+                  <p className="text-[9px] text-white/35 mt-1">PNG/JPG up to 500KB, auto-resized & stored as base64</p>
+                </div>
+                {logo && (
+                  <button
+                    type="button"
+                    onClick={handleLogoRemove}
+                    className="shrink-0 w-6 h-6 flex items-center justify-center rounded-md bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 border border-rose-500/20 transition-all"
+                    title="Remove logo"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                )}
+              </div>
+            </div>
+
             {/* Managers Chip Selector with Search */}
             <div>
               <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1.5">
@@ -360,7 +510,12 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
                   />
                   <Search className="w-3 h-3 text-white/40 absolute left-2.5 top-2" />
                 </div>
-                <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pr-1">
+                  <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pr-1">
+                  {usersLoading && (
+                    <div className="w-full flex items-center gap-1.5 text-[10px] font-bold text-indigo-400">
+                      <Loader2 className="w-3 h-3 animate-spin" /> Loading users...
+                    </div>
+                  )}
                   {users
                     .filter((u: any) =>
                       u.username.toLowerCase().includes(userSearchTerm.toLowerCase())
@@ -396,8 +551,8 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
           </div>
 
           {/* Finance Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-3 border-t border-white/5">
-            <div>
+          <div className="flex flex-wrap gap-4 pt-3 border-t border-white/5">
+            <div className="flex-1 min-w-[120px]">
               <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1">
                 Total Budget (M)
               </label>
@@ -409,7 +564,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
                 required
               />
             </div>
-            <div>
+            <div className="flex-1 min-w-[120px]">
               <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1">
                 Utilisation (M)
               </label>
@@ -421,14 +576,36 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
                 required
               />
             </div>
-            <div className="bg-[#150f24] border border-white/5 p-2 rounded-lg flex items-center justify-between gap-2">
-              <div className="flex flex-col">
-                <span className="text-[9px] font-extrabold uppercase tracking-widest text-white/40 flex items-center gap-1">
-                  <Wallet className="w-2.5 h-2.5" /> Remaining Balance
-                </span>
-                <span className={`text-sm font-black tracking-tight ${remainingBalance < 0 ? 'text-rose-400 animate-pulse' : 'text-emerald-400'}`}>
-                  {remainingBalance.toFixed(1)} M
-                </span>
+            <div className="flex-1 min-w-[120px]">
+              <label className="block text-[10px] font-extrabold tracking-widest text-emerald-400/70 uppercase mb-1">
+                Bonus (M)
+              </label>
+              <input
+                type="number"
+                value={bonus}
+                onChange={(e) => setBonus(Number(e.target.value))}
+                className="w-full px-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg text-xs font-semibold text-white outline-none focus:ring-1 focus:ring-emerald-500"
+                min="0"
+              />
+            </div>
+            <div className="flex-1 min-w-[120px]">
+              <label className="block text-[10px] font-extrabold tracking-widest text-rose-400/70 uppercase mb-1">
+                Fine (M)
+              </label>
+              <input
+                type="number"
+                value={fine}
+                onChange={(e) => setFine(Number(e.target.value))}
+                className="w-full px-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg text-xs font-semibold text-white outline-none focus:ring-1 focus:ring-rose-500"
+                min="0"
+              />
+            </div>
+            <div className="flex-1 min-w-[150px]">
+              <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1 flex items-center gap-1">
+                <Wallet className="w-2.5 h-2.5" /> Remaining Balance
+              </label>
+              <div className={`w-full px-3 py-1.5 bg-[#150f24] border rounded-lg text-xs font-bold whitespace-nowrap ${remainingBalance < 0 ? 'text-rose-400 border-rose-500/30 animate-pulse' : 'text-emerald-400 border-white/10'}`}>
+                {remainingBalance.toFixed(1)} M
               </div>
             </div>
           </div>
@@ -436,10 +613,10 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
         </div>
 
         {/* Squad Grid Selection */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className={`grid grid-cols-1 gap-4 ${isEditMode ? "" : "lg:grid-cols-2"}`}>
           
-          {/* Available Players Pool */}
-          <div className="bg-[#1b142d]/80 border border-white/10 rounded-xl p-4 h-[550px] flex flex-col shadow-lg">
+          {/* Available Players Pool (hidden in edit mode — squad is read-only) */}
+          {!isEditMode && <div className="bg-[#1b142d]/80 border border-white/10 rounded-xl p-4 h-[550px] flex flex-col shadow-lg">
             <div className="flex-none pb-3 border-b border-white/5 mb-3">
               <h3 className="text-xs font-extrabold text-white/50 uppercase tracking-widest mb-2">Available Players</h3>
               <div className="flex gap-2">
@@ -467,7 +644,14 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
             </div>
 
             <div className="flex-1 overflow-y-auto space-y-2 pr-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-              {paginatedPlayers.map(player => {
+              {playersLoading ? (
+                <div className="flex justify-center py-12">
+                  <Loader2 className="w-6 h-6 text-indigo-500 animate-spin" />
+                </div>
+              ) : visiblePlayers.length === 0 ? (
+                <div className="text-center text-white/30 py-12 text-xs">No players found</div>
+              ) : (
+              visiblePlayers.map(player => {
                 const isAdded = squad.some(p => p.element === player.id);
                 return (
                   <div key={player.id} className="flex items-center justify-between p-2.5 bg-[#150f24]/50 border border-white/5 rounded-xl transition-all">
@@ -490,19 +674,19 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
                     </button>
                   </div>
                 );
-              })}
-              {paginatedPlayers.length === 0 && (
-                <div className="text-center text-white/30 py-12 text-xs">No players found</div>
+              })
               )}
             </div>
-            
-            {/* Pagination Controls */}
             {totalPages > 1 && (
               <div className="flex-none flex justify-between items-center pt-3 mt-3 border-t border-white/5">
                 <button
                   type="button"
                   disabled={currentPage === 1}
-                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  onClick={() => {
+                    const p = Math.max(1, currentPage - 1);
+                    setCurrentPage(p);
+                    fetchPlayers(teamId, p, searchTerm);
+                  }}
                   className="px-3 py-1 rounded bg-white/5 border border-white/10 hover:bg-white/10 text-[10px] font-bold uppercase tracking-wider disabled:opacity-40"
                 >
                   Prev
@@ -511,20 +695,26 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
                 <button
                   type="button"
                   disabled={currentPage === totalPages}
-                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  onClick={() => {
+                    const p = Math.min(totalPages, currentPage + 1);
+                    setCurrentPage(p);
+                    fetchPlayers(teamId, p, searchTerm);
+                  }}
                   className="px-3 py-1 rounded bg-white/5 border border-white/10 hover:bg-white/10 text-[10px] font-bold uppercase tracking-wider disabled:opacity-40"
                 >
                   Next
                 </button>
               </div>
             )}
-          </div>
+          </div>}
 
           {/* Selected Squad List */}
           <div className="bg-[#1b142d]/80 border border-white/10 rounded-xl p-4 h-[550px] flex flex-col shadow-lg">
             <div className="flex-none pb-3 border-b border-white/5 mb-3 flex items-center justify-between">
               <div>
-                <h3 className="text-xs font-extrabold text-white/50 uppercase tracking-widest">Selected Squad ({squad.length}/15)</h3>
+                <h3 className="text-xs font-extrabold text-white/50 uppercase tracking-widest">
+                  {isEditMode ? `Current Squad (${squad.length}/15)` : `Selected Squad (${squad.length}/15)`}
+                </h3>
                 <div className="text-[9px] font-extrabold uppercase tracking-wider text-white/40 flex gap-2 mt-1">
                   <span className={positionCounts['GK'] === 2 ? 'text-emerald-400 font-bold' : ''}>GK: {positionCounts['GK'] || 0}/2</span>
                   <span className={positionCounts['DEF'] === 5 ? 'text-emerald-400 font-bold' : ''}>DEF: {positionCounts['DEF'] || 0}/5</span>
@@ -547,79 +737,102 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
                     <div>
                       <span className="font-bold text-xs text-white/95">{p.name}</span>
                       <span className="ml-2 text-[9px] font-extrabold uppercase tracking-widest px-2 py-0.5 bg-white/5 border border-white/10 rounded text-white/60">{p.position}</span>
+                      {isEditMode && (
+                        <span className="ml-1 text-[9px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded text-white/70 border border-white/10">
+                          {p.auctionPrice ? `${p.auctionPrice} M` : 'Unpriced'}
+                        </span>
+                      )}
                     </div>
-                    <div className="flex gap-1.5 shrink-0">
-                      <button
-                        type="button"
-                        onClick={() => setCaptain(p.element, 'captain')}
-                        className={`w-6 h-6 flex items-center justify-center text-[10px] font-black rounded-md transition-all ${p.isCaptain ? 'bg-yellow-500 text-white shadow shadow-yellow-500/40' : 'bg-white/5 text-white/40 hover:bg-white/10 border border-white/10'}`}
-                        title="Captain"
-                      >
-                        C
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setCaptain(p.element, 'vice')}
-                        className={`w-6 h-6 flex items-center justify-center text-[10px] font-black rounded-md transition-all ${p.isViceCaptain ? 'bg-blue-500 text-white shadow shadow-blue-500/40' : 'bg-white/5 text-white/40 hover:bg-white/10 border border-white/10'}`}
-                        title="Vice Captain"
-                      >
-                        V
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setSquad(squad.filter(s => s.element !== p.element))}
-                        className="w-6 h-6 flex items-center justify-center rounded-md bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 border border-rose-500/20 transition-all"
-                        title="Remove Player"
-                      >
-                        <Trash2 className="w-3 h-3" />
-                      </button>
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-wrap items-center gap-4 mt-2 pt-2 border-t border-white/5 justify-between">
-                    <label className="flex items-center text-xs font-semibold text-text-secondary cursor-pointer hover:text-text-primary transition-colors shrink-0">
-                      <input
-                        type="checkbox"
-                        checked={p.isStarting}
-                        onChange={() => toggleStarting(p.element)}
-                        className="mr-2 w-4.5 h-4.5 rounded border-white/20 text-indigo-500 focus:ring-indigo-500 bg-black/20"
-                      />
-                      Starting XI
-                    </label>
-
-                    {/* Auction Price Option */}
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[10px] font-extrabold text-text-secondary uppercase">Price:</span>
-                      <input
-                        type="number"
-                        value={p.auctionPrice ?? ""}
-                        onChange={(e) => {
-                          const val = parseFloat(e.target.value);
-                          setSquad(squad.map(sq => sq.element === p.element ? { ...sq, auctionPrice: isNaN(val) ? 0 : val } : sq));
-                        }}
-                        className="w-16 px-2 py-1 bg-black/20 border border-white/10 rounded-lg text-xs font-bold text-text-primary text-center outline-none focus:ring-2 focus:ring-indigo-500"
-                        placeholder="0"
-                        min="0"
-                      />
-                    </div>
-
-                    {!p.isStarting && (
-                      <label className="flex items-center text-xs font-semibold text-text-secondary gap-1.5 shrink-0">
-                        Sub Rank:
-                        <select 
-                          value={p.subNumber || 0}
-                          onChange={(e) => updateSubNumber(p.element, parseInt(e.target.value))}
-                          className="text-xs px-2 py-1 bg-black/20 border border-white/10 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-text-primary cursor-pointer"
+                    {isEditMode ? (
+                      <div className="flex gap-1 shrink-0">
+                        {p.isCaptain && (
+                          <span className="px-1.5 py-0.5 rounded bg-yellow-500/20 text-yellow-400 text-[9px] font-black">C</span>
+                        )}
+                        {p.isViceCaptain && (
+                          <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 text-[9px] font-black">V</span>
+                        )}
+                        {p.isStarting ? (
+                          <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[9px] font-black">XI</span>
+                        ) : (
+                          <span className="px-1.5 py-0.5 rounded bg-white/10 text-white/60 text-[9px] font-black">SUB {p.subNumber || ''}</span>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="flex gap-1.5 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => setCaptain(p.element, 'captain')}
+                          className={`w-6 h-6 flex items-center justify-center text-[10px] font-black rounded-md transition-all ${p.isCaptain ? 'bg-yellow-500 text-white shadow shadow-yellow-500/40' : 'bg-white/5 text-white/40 hover:bg-white/10 border border-white/10'}`}
+                          title="Captain"
                         >
-                          <option value={0} className="bg-[#1b142d] text-white">Auto</option>
-                          <option value={1} className="bg-[#1b142d] text-white">1 (GK)</option>
-                          <option value={2} className="bg-[#1b142d] text-white">2</option>
-                          <option value={3} className="bg-[#1b142d] text-white">3</option>
-                          <option value={4} className="bg-[#1b142d] text-white">4</option>
-                        </select>
-                      </label>
+                          C
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setCaptain(p.element, 'vice')}
+                          className={`w-6 h-6 flex items-center justify-center text-[10px] font-black rounded-md transition-all ${p.isViceCaptain ? 'bg-blue-500 text-white shadow shadow-blue-500/40' : 'bg-white/5 text-white/40 hover:bg-white/10 border border-white/10'}`}
+                          title="Vice Captain"
+                        >
+                          V
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => removeFromSquad({ id: p.element, name: p.name, position: p.position, auctionPrice: p.auctionPrice })}
+                          className="w-6 h-6 flex items-center justify-center rounded-md bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 border border-rose-500/20 transition-all"
+                          title="Remove Player"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                        </button>
+                      </div>
                     )}
                   </div>
+                  
+                  {!isEditMode && (
+                    <div className="flex flex-wrap items-center gap-4 mt-2 pt-2 border-t border-white/5 justify-between">
+                      <label className="flex items-center text-xs font-semibold text-text-secondary cursor-pointer hover:text-text-primary transition-colors shrink-0">
+                        <input
+                          type="checkbox"
+                          checked={p.isStarting}
+                          onChange={() => toggleStarting(p.element)}
+                          className="mr-2 w-4.5 h-4.5 rounded border-white/20 text-indigo-500 focus:ring-indigo-500 bg-black/20"
+                        />
+                        Starting XI
+                      </label>
+
+                      {/* Auction Price Option */}
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[10px] font-extrabold text-text-secondary uppercase">Price:</span>
+                        <input
+                          type="number"
+                          value={p.auctionPrice ?? ""}
+                          onChange={(e) => {
+                            const val = parseFloat(e.target.value);
+                            setSquad(squad.map(sq => sq.element === p.element ? { ...sq, auctionPrice: isNaN(val) ? 0 : val } : sq));
+                          }}
+                          className="w-16 px-2 py-1 bg-black/20 border border-white/10 rounded-lg text-xs font-bold text-text-primary text-center outline-none focus:ring-2 focus:ring-indigo-500"
+                          placeholder="0"
+                          min="0"
+                        />
+                      </div>
+
+                      {!p.isStarting && (
+                        <label className="flex items-center text-xs font-semibold text-text-secondary gap-1.5 shrink-0">
+                          Sub Rank:
+                          <select 
+                            value={p.subNumber || 0}
+                            onChange={(e) => updateSubNumber(p.element, parseInt(e.target.value))}
+                            className="text-xs px-2 py-1 bg-black/20 border border-white/10 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-text-primary cursor-pointer"
+                          >
+                            <option value={0} className="bg-[#1b142d] text-white">Auto</option>
+                            <option value={1} className="bg-[#1b142d] text-white">1 (GK)</option>
+                            <option value={2} className="bg-[#1b142d] text-white">2</option>
+                            <option value={3} className="bg-[#1b142d] text-white">3</option>
+                            <option value={4} className="bg-[#1b142d] text-white">4</option>
+                          </select>
+                        </label>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
               {squad.length === 0 && (
@@ -628,6 +841,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
             </div>
           </div>
 
+        </div>
         </div>
 
         {/* Submit Form Controls */}
@@ -650,6 +864,83 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
         </div>
 
       </form>
+
+      {/* Player Config Modal */}
+      <Modal
+        isOpen={!!pendingPlayer}
+        onClose={() => { if (!savingPlayer) setPendingPlayer(null); }}
+        maxWidthClass="max-w-sm"
+      >
+        <div className="p-5 space-y-4">
+          <div>
+            <h3 className="text-sm font-black tracking-tight text-white">Add Player</h3>
+            <p className="text-[10px] font-bold uppercase tracking-wider text-white/40 mt-0.5">
+              {pendingPlayer?.name}
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1.5">
+              Position <span className="text-rose-400">*</span>
+            </label>
+            <div className="grid grid-cols-4 gap-1.5">
+              {['GK', 'DEF', 'MID', 'FWD'].map((pos) => (
+                <button
+                  key={pos}
+                  type="button"
+                  onClick={() => setModalPosition(pos)}
+                  className={`py-2 rounded-lg text-[11px] font-black border transition-all ${
+                    modalPosition === pos
+                      ? 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30 shadow-[0_0_12px_rgba(99,102,241,0.12)]'
+                      : 'bg-white/5 text-white/60 border-white/10 hover:text-white'
+                  }`}
+                >
+                  {pos}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1.5">
+              Auction Price (M) <span className="text-rose-400">*</span>
+            </label>
+            <input
+              type="number"
+              value={modalAuctionPrice}
+              onChange={(e) => setModalAuctionPrice(e.target.value)}
+              placeholder="e.g. 12.5"
+              min="0"
+              step="0.1"
+              className="w-full px-3 py-2 bg-[#150f24] border border-white/10 rounded-lg text-xs font-semibold text-white outline-none focus:ring-1 focus:ring-indigo-500"
+              autoFocus
+            />
+            <p className="text-[9px] text-white/35 mt-1">
+              Updates the player's auction price, position & tm_position in the players collection.
+            </p>
+          </div>
+
+          <div className="flex gap-2 pt-1">
+            <button
+              type="button"
+              onClick={() => setPendingPlayer(null)}
+              disabled={savingPlayer}
+              className="flex-1 px-4 py-2 rounded-lg text-xs font-bold text-white/70 bg-white/5 border border-white/10 hover:bg-white/10 transition-colors disabled:opacity-40"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={confirmAddPlayer}
+              disabled={savingPlayer}
+              className="flex-1 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg text-xs font-bold shadow-lg hover:scale-[1.02] active:scale-95 disabled:opacity-40 disabled:transform-none flex items-center justify-center gap-1.5"
+            >
+              {savingPlayer && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+              {savingPlayer ? 'Adding...' : 'Add to Squad'}
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

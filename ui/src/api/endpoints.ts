@@ -39,13 +39,17 @@ export const API_ENDPOINTS = {
     SEASONS: '/admin/seasons',
     PICK_TEAM_STATUS: '/admin/settings/pick-team',
     USERS: '/admin/users',
+    TEAMS: '/admin/teams',
+    ADMIN_PLAYERS: '/admin/players',
     FANTASY_TEAMS: '/admin/fantasy-teams',
     LEAGUES: '/admin/leagues',
     UPDATE_LEAGUE: (id: string) => `/admin/leagues/${id}`,
     H2H_LEAGUES: '/admin/h2h-leagues',
     H2H_LEAGUE: (id: string) => `/admin/h2h-leagues/${id}`,
     H2H_LEAGUE_FIXTURES: (id: string) => `/admin/h2h-leagues/${id}/fixtures`,
-    H2H_GENERATE_FIXTURES: (id: string) => `/admin/h2h-leagues/${id}/generate-fixtures`,
+    H2H_FIXTURE: (id: string, fixtureId: string) => `/admin/h2h-leagues/${id}/fixtures/${fixtureId}`,
+    TRANSFERS: '/admin/transfers',
+    TRANSFER: (id: string) => `/admin/transfers/${id}`,
   },
 } as const
 
@@ -63,4 +67,6 @@ export const QUERY_KEYS = {
   ADMIN_SEASONS: 'admin-seasons',
   ADMIN_PICK_TEAM_STATUS: 'admin-pick-team-status',
   ADMIN_LEAGUES: 'admin-leagues',
+  ADMIN_TEAMS: 'admin-teams',
+  ADMIN_PLAYERS: 'admin-players',
 } as const

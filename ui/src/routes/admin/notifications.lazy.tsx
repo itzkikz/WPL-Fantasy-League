@@ -19,8 +19,10 @@ function AdminNotifications() {
   const [notifications, setNotifications] = useState<any[]>([]);
   const [status, setStatus] = useState<{ type: 'idle' | 'loading' | 'success' | 'error', message?: string }>({ type: 'idle' });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
+    setLoading(true);
     try {
       const [usersRes, teamsRes, notifsRes] = await Promise.all([
         apiClient.get(API_ENDPOINTS.ADMIN.USERS),
@@ -32,6 +34,8 @@ function AdminNotifications() {
       setNotifications(notifsRes.data?.data || []);
     } catch (err) {
       console.error("Failed to fetch data:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -103,7 +107,11 @@ function AdminNotifications() {
           Recent Notifications
         </h2>
         
-        {notifications.length === 0 ? (
+        {loading ? (
+          <div className="p-10 flex justify-center bg-[#150f24]/30 rounded-xl border border-white/5">
+            <Loader2 className="w-7 h-7 text-indigo-500 animate-spin" />
+          </div>
+        ) : notifications.length === 0 ? (
           <div className="p-8 text-center bg-[#150f24]/30 rounded-xl border border-white/5">
             <p className="text-white/40 text-xs">No notifications sent yet.</p>
           </div>

@@ -14,7 +14,8 @@
     "seed:rounds": "ts-node src/scripts/seedRounds.ts",
     "seed:fixtures": "ts-node src/scripts/seedFixtures.ts",
     "seed:player-images": "ts-node src/scripts/uploadPlayerImages.ts",
-    "seed:team-logos": "ts-node src/scripts/uploadTeamLogos.ts"
+    "seed:team-logos": "ts-node src/scripts/uploadTeamLogos.ts",
+    "export:players-sheet": "ts-node src/scripts/exportPlayersToGoogleSheet.ts"
   },
   "author": "",
   "license": "ISC",

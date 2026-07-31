@@ -75,7 +75,10 @@ const SideNavbar = () => {
 
   const adminItems = [
     { label: "Fixtures", path: "/admin/fixtures" },
+    { label: "Teams", path: "/admin/teams" },
+    { label: "Players", path: "/admin/players" },
     { label: "Fantasy Teams", path: "/admin/fantasy-teams" },
+    { label: "Transfers", path: "/admin/transfers" },
     { label: "Leagues", path: "/admin/leagues" },
     { label: "H2H Leagues", path: "/admin/h2h-leagues" },
     { label: "Notifications", path: "/admin/notifications" },

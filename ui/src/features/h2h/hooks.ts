@@ -45,20 +45,6 @@ export const useAdminDeleteH2HLeague = () => {
   });
 };
 
-// Admin: Generate fixtures
-export const useAdminGenerateH2HFixtures = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (id: string) => {
-      const response = await apiClient.post(API_ENDPOINTS.ADMIN.H2H_GENERATE_FIXTURES(id));
-      return response.data.data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['admin', 'h2h-fixtures'] });
-    },
-  });
-};
-
 // Admin: Get league fixtures
 export const useAdminH2HLeagueFixtures = (leagueId: string) => {
   return useQuery({

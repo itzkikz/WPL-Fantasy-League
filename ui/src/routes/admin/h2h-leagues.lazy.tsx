@@ -15,10 +15,9 @@ export const Route = createLazyFileRoute("/admin/h2h-leagues")({
 function AdminH2HLeagues() {
   const queryClient = useQueryClient();
   const { data: league, isLoading, refetch } = useAdminH2HLeague();
-  const { data: fixturesData } = useAdminH2HLeagueFixtures(league?._id ?? '');
+  const { data: fixturesData, isLoading: fixturesLoading } = useAdminH2HLeagueFixtures(league?._id ?? '');
 
   const [isEditing, setIsEditing] = useState(false);
-  const [isGenerating, setIsGenerating] = useState(false);
   const [editForm, setEditForm] = useState({
     name: '',
     fantasyTeamIds: [] as string[],
@@ -28,8 +27,11 @@ function AdminH2HLeagues() {
   });
   const [error, setError] = useState<string | null>(null);
   const [selectedGw, setSelectedGw] = useState<number | null>(null);
+  const [isFixtureModalOpen, setIsFixtureModalOpen] = useState(false);
+  const [fixtureForm, setFixtureForm] = useState({ homeTeam: '', awayTeam: '', gameweek: '' });
+  const [fixtureError, setFixtureError] = useState<string | null>(null);
 
-  const { data: fantasyTeamsData } = useQuery({
+  const { data: fantasyTeamsData, isLoading: fantasyTeamsLoading } = useQuery({
     queryKey: ['admin', 'fantasy-teams'],
     queryFn: async () => {
       const response = await apiClient.get('/admin/fantasy-teams');
@@ -56,16 +58,27 @@ function AdminH2HLeagues() {
     },
   });
 
-  const generateMutation = useMutation({
-    mutationFn: () => h2hApi.adminGenerateFixtures(league!._id),
+  const createFixtureMutation = useMutation({
+    mutationFn: (data: { homeTeam: string; awayTeam: string; gameweek: number }) =>
+      h2hApi.adminCreateFixture(league!._id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['admin', 'h2h-league'] });
       queryClient.invalidateQueries({ queryKey: ['admin', 'h2h-fixtures'] });
-      setIsGenerating(false);
+      setIsFixtureModalOpen(false);
+      setFixtureForm({ homeTeam: '', awayTeam: '', gameweek: '' });
+      setFixtureError(null);
     },
     onError: (error: any) => {
-      setIsGenerating(false);
-      setError(error?.response?.data?.error || 'Failed to generate fixtures');
+      setFixtureError(error?.response?.data?.error || 'Failed to create fixture');
+    },
+  });
+
+  const deleteFixtureMutation = useMutation({
+    mutationFn: (fixtureId: string) => h2hApi.adminDeleteFixture(league!._id, fixtureId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin', 'h2h-fixtures'] });
+    },
+    onError: (error: any) => {
+      setError(error?.response?.data?.error || 'Failed to delete fixture');
     },
   });
 
@@ -89,12 +102,15 @@ function AdminH2HLeagues() {
     upsertMutation.mutate(editForm);
   };
 
-  const handleGenerate = async () => {
+  const handleAddFixture = () => {
     if (!league) return;
-    if (!window.confirm('Regenerate all fixtures for this league? This will delete existing fixtures.')) return;
-    setIsGenerating(true);
-    setError(null);
-    generateMutation.mutate();
+    setFixtureForm({
+      homeTeam: league.fantasyTeams?.[0]?._id || '',
+      awayTeam: league.fantasyTeams?.[1]?._id || '',
+      gameweek: String(selectedGw ?? league.gameweekStart ?? 1),
+    });
+    setFixtureError(null);
+    setIsFixtureModalOpen(true);
   };
 
   const handleDelete = async () => {
@@ -113,7 +129,12 @@ function AdminH2HLeagues() {
     );
   }
 
-  const uniqueGameweeks = [...new Set(fixturesData?.fixtures?.map((f: H2HFixture) => f.gameweek) || [])].sort((a, b) => a - b);
+  const leagueGwStart = league?.gameweekStart ?? 1;
+  const leagueGwEnd = league?.gameweekEnd ?? 38;
+  const uniqueGameweeks = Array.from(
+    { length: Math.max(leagueGwEnd - leagueGwStart + 1, 0) },
+    (_, i) => leagueGwStart + i
+  );
   const filteredFixtures = fixturesData?.fixtures?.filter(
     (f: H2HFixture) => selectedGw === null || f.gameweek === selectedGw
   ) || [];
@@ -195,21 +216,11 @@ function AdminH2HLeagues() {
               {/* Action Buttons */}
               <div className="flex items-center gap-2 shrink-0 self-start">
                 <button
-                  onClick={handleGenerate}
-                  disabled={isGenerating || generateMutation.isPending}
-                  className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white text-[10px] font-extrabold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md shadow-indigo-500/10 active:scale-95"
+                  onClick={handleAddFixture}
+                  className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-extrabold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md shadow-indigo-500/10 active:scale-95"
                 >
-                  {isGenerating || generateMutation.isPending ? (
-                    <>
-                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                      Generating...
-                    </>
-                  ) : (
-                    <>
-                      <Zap className="w-3.5 h-3.5" />
-                      Generate Fixtures
-                    </>
-                  )}
+                  <Plus className="w-3.5 h-3.5" />
+                  Add Fixture
                 </button>
                 <button
                   onClick={handleDelete}
@@ -237,11 +248,11 @@ function AdminH2HLeagues() {
           </div>
 
           {/* Fixtures Section */}
-          {fixturesData?.fixtures && fixturesData.fixtures.length > 0 && (
-            <div className="space-y-3">
+          <div className="space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
                 <h2 className="text-xs font-extrabold text-white/50 uppercase tracking-widest">Match Fixtures</h2>
-                
+
+                <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
                 {/* Scrollable Gameweek Navigation */}
                 <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
                   <button
@@ -268,24 +279,55 @@ function AdminH2HLeagues() {
                     </button>
                   ))}
                 </div>
+                <button
+                  onClick={handleAddFixture}
+                  className="px-3 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-extrabold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md shadow-indigo-500/10 active:scale-95 shrink-0"
+                >
+                  <Plus className="w-3.5 h-3.5" /> Add Fixture
+                </button>
+              </div>
               </div>
 
               {/* Fixtures Grid Layout */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-                {filteredFixtures.length === 0 ? (
-                  <div className="col-span-full py-8 text-center text-white/30 text-xs font-semibold">No fixtures found for selected Gameweek.</div>
+                {fixturesLoading ? (
+                  <div className="col-span-full py-8 flex justify-center">
+                    <Loader2 className="w-7 h-7 text-indigo-500 animate-spin" />
+                  </div>
+                ) : filteredFixtures.length === 0 ? (
+                  <div className="col-span-full py-8 text-center text-white/30 text-xs font-semibold">
+                    <p>No fixtures {selectedGw ? `for Gameweek ${selectedGw}` : 'yet'}.</p>
+                    <button
+                      onClick={handleAddFixture}
+                      className="mt-3 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-extrabold uppercase tracking-wider transition-all flex items-center gap-1.5 mx-auto shadow-md shadow-indigo-500/10 active:scale-95"
+                    >
+                      <Plus className="w-3.5 h-3.5" /> Add Fixture
+                    </button>
+                  </div>
                 ) : (
                   filteredFixtures.map((fixture: H2HFixture) => (
                     <div key={fixture._id} className="rounded-xl bg-[#150f24]/40 border border-white/5 p-3 flex flex-col justify-between hover:bg-[#150f24]/60 transition-all">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-[9px] font-black uppercase tracking-widest text-indigo-400">Gameweek {fixture.gameweek}</span>
-                        <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${
-                          fixture.status === 'completed' 
-                            ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
-                            : 'bg-white/5 text-white/40 border border-white/10'
-                        }`}>
-                          {fixture.status === 'completed' ? 'Completed' : 'Upcoming'}
-                        </span>
+                        <div className="flex items-center gap-1.5">
+                          <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${
+                            fixture.status === 'completed' 
+                              ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
+                              : 'bg-white/5 text-white/40 border border-white/10'
+                          }`}>
+                            {fixture.status === 'completed' ? 'Completed' : 'Upcoming'}
+                          </span>
+                          <button
+                            onClick={() => {
+                              if (window.confirm('Delete this fixture?')) deleteFixtureMutation.mutate(fixture._id);
+                            }}
+                            disabled={deleteFixtureMutation.isPending}
+                            title="Delete fixture"
+                            className="text-white/25 hover:text-rose-400 transition-colors p-1 rounded"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                       </div>
                       
                       <div className="flex items-center justify-between py-1">
@@ -319,7 +361,6 @@ function AdminH2HLeagues() {
                 )}
               </div>
             </div>
-          )}
         </div>
       )}
 
@@ -390,7 +431,11 @@ function AdminH2HLeagues() {
                   <span className="text-[9px] font-bold text-indigo-400">{editForm.fantasyTeamIds.length} Selected</span>
                 </div>
                 <div className="max-h-36 overflow-y-auto rounded-lg border border-white/10 bg-[#150f24] p-1.5 space-y-0.5 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-                  {fantasyTeamsData?.length ? fantasyTeamsData.map((team: any) => {
+                  {fantasyTeamsLoading ? (
+                    <div className="py-6 flex justify-center">
+                      <Loader2 className="w-5 h-5 text-indigo-500 animate-spin" />
+                    </div>
+                  ) : fantasyTeamsData?.length ? fantasyTeamsData.map((team: any) => {
                     const isSelected = editForm.fantasyTeamIds.includes(team._id);
                     return (
                       <label
@@ -440,6 +485,92 @@ function AdminH2HLeagues() {
               </button>
             </div>
           </div>
+      </Modal>
+
+      {/* Add Fixture Modal */}
+      <Modal isOpen={isFixtureModalOpen} onClose={() => setIsFixtureModalOpen(false)} variant="responsive" maxWidthClass="max-w-md">
+        <div className="p-5 relative overflow-hidden text-white">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-600 opacity-80" />
+
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-black uppercase tracking-wider text-white">Add Fixture</h2>
+            <button onClick={() => setIsFixtureModalOpen(false)} className="text-white/60 hover:text-white text-xl">✕</button>
+          </div>
+
+          <div className="space-y-3.5">
+            <div>
+              <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1">Home Team</label>
+              <select
+                value={fixtureForm.homeTeam}
+                onChange={e => setFixtureForm(f => ({ ...f, homeTeam: e.target.value }))}
+                className="w-full px-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg text-white text-xs font-semibold outline-none focus:ring-1 focus:ring-indigo-500"
+              >
+                <option value="" disabled>Select home team</option>
+                {league?.fantasyTeams?.map((t: any) => (
+                  <option key={t._id} value={t._id}>{t.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1">Away Team</label>
+              <select
+                value={fixtureForm.awayTeam}
+                onChange={e => setFixtureForm(f => ({ ...f, awayTeam: e.target.value }))}
+                className="w-full px-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg text-white text-xs font-semibold outline-none focus:ring-1 focus:ring-indigo-500"
+              >
+                <option value="" disabled>Select away team</option>
+                {league?.fantasyTeams?.map((t: any) => (
+                  <option key={t._id} value={t._id} disabled={t._id === fixtureForm.homeTeam}>{t.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase mb-1">Gameweek</label>
+              <select
+                value={fixtureForm.gameweek}
+                onChange={e => setFixtureForm(f => ({ ...f, gameweek: e.target.value }))}
+                className="w-full px-3 py-1.5 bg-[#150f24] border border-white/10 rounded-lg text-white text-xs font-semibold outline-none focus:ring-1 focus:ring-indigo-500"
+              >
+                <option value="" disabled>Select gameweek</option>
+                {uniqueGameweeks.map(gw => (
+                  <option key={gw} value={gw}>GW {gw}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {fixtureError && <p className="mt-2 text-[10px] font-bold text-rose-400">{fixtureError}</p>}
+
+          <div className="flex justify-end gap-2 mt-4 pt-3 border-t border-white/5">
+            <button
+              onClick={() => setIsFixtureModalOpen(false)}
+              className="px-3.5 py-1.5 rounded-lg border border-white/10 text-white/70 hover:bg-white/10 text-xs font-bold transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() =>
+                createFixtureMutation.mutate({
+                  homeTeam: fixtureForm.homeTeam,
+                  awayTeam: fixtureForm.awayTeam,
+                  gameweek: Number(fixtureForm.gameweek),
+                })
+              }
+              disabled={
+                !fixtureForm.homeTeam ||
+                !fixtureForm.awayTeam ||
+                fixtureForm.homeTeam === fixtureForm.awayTeam ||
+                !fixtureForm.gameweek ||
+                createFixtureMutation.isPending
+              }
+              className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 text-white disabled:opacity-50 text-xs font-black transition-all shadow-md hover:scale-[1.02] active:scale-95"
+            >
+              {createFixtureMutation.isPending ? 'Adding...' : 'Add Fixture'}
+            </button>
+          </div>
+        </div>
       </Modal>
     </div>
   );
