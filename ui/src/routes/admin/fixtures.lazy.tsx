@@ -191,8 +191,8 @@ function AdminFixtures() {
               <div className="flex-1 h-[1px] bg-white/5"></div>
             </div>
 
-            {/* Dense Rows list */}
-            <div className="grid gap-1">
+            {/* Dense 2-up grid: two matches per row */}
+            <div className="grid gap-1.5 sm:grid-cols-2">
               {groupedFixtures[date].map((f: any) => {
                 const status = statusDisplay(f);
                 const homeScore = f.homeScore?.current ?? null;
@@ -202,10 +202,10 @@ function AdminFixtures() {
                 return (
                   <div
                     key={f.fixtureId}
-                    className="bg-[#150f24]/50 hover:bg-[#1b142d]/80 border border-white/5 hover:border-white/10 rounded-xl px-3 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-all duration-200"
+                    className="bg-[#150f24]/50 hover:bg-[#1b142d]/80 border border-white/5 hover:border-white/10 rounded-xl px-3 py-2 flex flex-col gap-2 transition-all duration-200"
                   >
                     {/* Time & status badge */}
-                    <div className="flex items-center gap-3 sm:min-w-[130px]">
+                    <div className="flex items-center justify-between">
                       <span className="text-xs font-black tracking-tight text-white/90">
                         {dayjs.unix(f.startTimestamp).format("HH:mm")}
                       </span>
@@ -215,7 +215,7 @@ function AdminFixtures() {
                     </div>
 
                     {/* Match matchup */}
-                    <div className="flex-1 flex items-center justify-center gap-2">
+                    <div className="flex items-center justify-center gap-2">
                       <span className="flex-1 text-right text-xs font-bold text-white/80 truncate">
                         {f.homeTeamName ?? `Team #${f.homeTeam?.id}`}
                       </span>
@@ -234,7 +234,7 @@ function AdminFixtures() {
                     </div>
 
                     {/* Actions container */}
-                    <div className="flex items-center justify-end gap-1.5 sm:min-w-[210px] border-t border-white/5 sm:border-0 pt-2 sm:pt-0">
+                    <div className="flex items-center justify-end gap-1.5 border-t border-white/5 pt-2">
                       <Link
                         to="/admin/fixtures/$fixtureId"
                         params={{ fixtureId: String(f.fixtureId) }}

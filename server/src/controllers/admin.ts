@@ -406,10 +406,39 @@ export const getMatchIncidentsAndStats = async (req: Request, res: Response) => 
         const playerDocs = await Player.find({ id: { $in: playerIds } }, 'id name photo teamId position').lean();
         const playerDocMap = new Map(playerDocs.map((p: any) => [p.id, p]));
 
+        const fixtureGw = await Gameweek.findOne({ fixtures: fixtureId }).lean();
+        const fixtureGameweekNumber = fixtureGw?.number ?? null;
+        const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
+        const currentGwNumber = currentGwDoc?.number ?? null;
+
+        const playerToFantasyTeams = new Map<number, string[]>();
+        if (fixtureGameweekNumber != null) {
+            const fantasyTeams = await FantasyTeam.find({}, 'name history currentSquad.picks.playerId').lean();
+            for (const ft of fantasyTeams) {
+                let picks: any[] = [];
+                if (fixtureGameweekNumber === currentGwNumber && ft.currentSquad?.picks?.length > 0) {
+                    picks = ft.currentSquad.picks;
+                } else {
+                    const h = (ft.history || []).find((x: any) => x.gameweek === fixtureGameweekNumber);
+                    if (h) picks = h.picks;
+                }
+                for (const pick of picks) {
+                    const teams = playerToFantasyTeams.get(pick.playerId) || [];
+                    teams.push(ft.name);
+                    playerToFantasyTeams.set(pick.playerId, teams);
+                }
+            }
+        }
+
         const playerInfo = lineups.map((entry: any) => {
             const statsDoc = playerStatsMap.get(entry.playerId);
             const playerDoc = playerDocMap.get(entry.playerId);
             const gwStat = statsDoc?.gameweeks?.find((gw: any) => gw.fixtureId === fixtureId);
+            const gameweekStats = gwStat?.stats || null;
+            const position = entry.position || playerDoc?.position || 'Unknown';
+            const gameweekPoints = gameweekStats
+                ? calculatePlayerPoints({ position } as any, gameweekStats)
+                : null;
 
             return {
                 playerId: entry.playerId,
@@ -417,10 +446,11 @@ export const getMatchIncidentsAndStats = async (req: Request, res: Response) => 
                 playerPhoto: playerDoc?.photo ?? null,
                 teamId: entry.teamId,
                 side: entry.side,
-                position: entry.position || playerDoc?.position || 'Unknown',
+                position,
                 lineupStatistics: entry.statistics || {},
-                gameweekStats: gwStat?.stats || null,
-                gameweekPoints: gwStat?.points ?? null,
+                gameweekStats,
+                gameweekPoints,
+                fantasyTeams: playerToFantasyTeams.get(entry.playerId) || [],
             };
         });
 
@@ -444,12 +474,81 @@ export const getUsers = async (req: Request, res: Response) => {
             return res.status(403).json({ error: 'Access denied. Admins only.' });
         }
 
-        // Fetch all users
-        const users = await User.find().select('-password').sort({ createdAt: -1 });
+        const excludeTeamId = req.query.excludeTeamId as string;
+
+        // Collect user IDs already attached to a fantasy team
+        const teamQuery: any = {};
+        if (excludeTeamId && mongoose.Types.ObjectId.isValid(excludeTeamId)) {
+            teamQuery._id = { $ne: excludeTeamId };
+        }
+        const teams = await FantasyTeam.find(teamQuery, 'managers createdBy').lean();
+        const takenUserIds = new Set<string>();
+        for (const t of teams) {
+            if (t.createdBy) takenUserIds.add(String(t.createdBy));
+            for (const m of t.managers || []) takenUserIds.add(String(m));
+        }
+
+        const userQuery: any = {
+            role: { $ne: 'admin' },
+        };
+        if (takenUserIds.size > 0) {
+            userQuery._id = { $nin: Array.from(takenUserIds) };
+        }
+
+        const users = await User.find(userQuery).select('-password').sort({ createdAt: -1 });
         res.status(200).json({ data: users });
     } catch (error) {
         console.error('Error fetching users:', error);
         res.status(500).json({ error: 'Failed to fetch users' });
+    }
+};
+
+export const getAdminTeams = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const search = (req.query.search as string || '').trim();
+
+        const query: any = {};
+        if (search) {
+            const re = new RegExp(search, 'i');
+            query.$or = [{ name: re }, { shortName: re }, { nameCode: re }];
+        }
+
+        const [teams, playerCounts, fixtureCounts] = await Promise.all([
+            Team.find(query).sort({ name: 1 }).lean(),
+            Player.aggregate([{ $group: { _id: '$teamId', count: { $sum: 1 } } }]),
+            Fixture.aggregate([
+                { $project: { teamIds: ['$homeTeam.id', '$awayTeam.id'] } },
+                { $unwind: '$teamIds' },
+                { $group: { _id: '$teamIds', count: { $sum: 1 } } },
+            ]),
+        ]);
+
+        const playerCountMap = new Map(playerCounts.map((c: any) => [c._id, c.count]));
+        const fixtureCountMap = new Map(fixtureCounts.map((c: any) => [c._id, c.count]));
+
+        const data = teams.map((t: any) => ({
+            id: t.id,
+            name: t.name,
+            shortName: t.shortName || '',
+            nameCode: t.nameCode || '',
+            logo: t.logo || '',
+            country: t.country || null,
+            teamColors: t.teamColors || null,
+            disabled: t.disabled || false,
+            national: t.national || false,
+            league: t.league || null,
+            playerCount: playerCountMap.get(t.id) || 0,
+            fixtureCount: fixtureCountMap.get(t.id) || 0,
+        }));
+
+        res.status(200).json({ data });
+    } catch (error) {
+        console.error('Error fetching admin teams:', error);
+        res.status(500).json({ error: 'Failed to fetch teams' });
     }
 };
 
@@ -461,6 +560,11 @@ export const getAdminPlayers = async (req: Request, res: Response) => {
 
         const search = req.query.search as string;
         const excludeTeamId = req.query.excludeTeamId as string;
+        const includeTaken = ['true', '1'].includes((req.query.includeTaken as string || '').toLowerCase());
+        const position = req.query.position as string;
+        const teamId = req.query.teamId as string;
+        const page = Math.max(1, parseInt(req.query.page as string) || 1);
+        const limit = Math.min(100, Math.max(1, parseInt(req.query.limit as string) || 20));
 
         const { Player } = require('../models/Player');
         const { Team } = require('../models/Team');
@@ -490,27 +594,94 @@ export const getAdminPlayers = async (req: Request, res: Response) => {
             ];
         }
 
-        // Exclude taken players
-        if (takenPlayerIds.size > 0) {
+        // Exclude taken players unless includeTaken is set
+        if (!includeTaken && takenPlayerIds.size > 0) {
             query.id = { $nin: Array.from(takenPlayerIds) };
         }
 
-        const players = await Player.find(query).lean();
+        // Optional filters
+        const positionFilterMap: Record<string, RegExp> = {
+            GK: /^(GK|G|GOALKEEPER)$/i,
+            DEF: /^(DEF|D|DEFENDER)$/i,
+            MID: /^(MID|M|MIDFIELDER)$/i,
+            FWD: /^(FWD|F|A|FORWARD|ATTACKER)$/i,
+        };
+        if (position && positionFilterMap[position]) {
+            query.position = positionFilterMap[position];
+        }
+        if (teamId && !isNaN(Number(teamId))) {
+            query.teamId = Number(teamId);
+        }
+
+        const totalPlayers = await Player.countDocuments(query);
+        const players = await Player.find(query)
+            .sort({ name: 1 })
+            .skip((page - 1) * limit)
+            .limit(limit)
+            .lean();
         const teams = await Team.find({}).lean();
         const teamMap = new Map(teams.map((t: any) => [t.id || (t.team && t.team.id), t.name || (t.team && t.team.name)]));
 
         const mappedPlayers = players.map((p: any) => ({
             id: p.id,
             name: p.name || p.webName || 'Unknown',
+            webName: p.webName || '',
             position: p.position || 'Unknown',
+            tmPosition: p.tm_position || '',
             team: teamMap.get(p.teamId) || 'Unknown',
-            auctionPrice: p.auctionPrice ?? 0
+            teamId: p.teamId,
+            photo: p.photo || '',
+            shirtNumber: p.shirtNumber || null,
+            auctionPrice: p.auctionPrice ?? null
         }));
 
-        res.status(200).json({ data: mappedPlayers });
+        res.status(200).json({
+            data: mappedPlayers,
+            pagination: {
+                total: totalPlayers,
+                page,
+                limit,
+                totalPages: Math.ceil(totalPlayers / limit),
+            },
+        });
     } catch (error) {
         console.error('Error fetching admin players:', error);
         res.status(500).json({ error: 'Failed to fetch admin players' });
+    }
+};
+
+export const updateAdminPlayer = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const playerId = parseInt(req.params.id);
+        if (isNaN(playerId)) {
+            return res.status(400).json({ error: 'Invalid player ID' });
+        }
+
+        const { position, tm_position, auctionPrice } = req.body;
+
+        const updateData: any = {};
+        if (position !== undefined) updateData.position = position;
+        if (tm_position !== undefined) updateData.tm_position = tm_position;
+        if (auctionPrice !== undefined) updateData.auctionPrice = auctionPrice === null ? null : Number(auctionPrice);
+
+        const player = await Player.findOneAndUpdate(
+            { id: playerId },
+            { $set: updateData },
+            { new: true }
+        ).lean();
+
+        if (!player) {
+            return res.status(404).json({ error: 'Player not found.' });
+        }
+
+        res.status(200).json({ data: player });
+    } catch (error) {
+        console.error('Error updating admin player:', error);
+        res.status(500).json({ error: 'Failed to update player' });
     }
 };
 
@@ -520,7 +691,7 @@ export const createFantasyTeam = async (req: Request, res: Response) => {
             return res.status(403).json({ error: 'Access denied. Admins only.' });
         }
 
-        const { name, managers, squad, finance } = req.body;
+        const { name, managers, squad, finance, logo } = req.body;
 
         if (!name || !managers || managers.length === 0 || !squad || squad.length !== 15) {
             return res.status(400).json({ error: 'Invalid input. Need name, at least one manager, and exactly 15 players in squad.' });
@@ -594,7 +765,8 @@ export const createFantasyTeam = async (req: Request, res: Response) => {
             currentSquad: {
                 picks
             },
-            ...(finance && { finance })
+            ...(finance && { finance }),
+            ...(logo && { logo })
         });
 
         await newFantasyTeam.save();
@@ -669,13 +841,15 @@ export const getFantasyTeamById = async (req: Request, res: Response) => {
                         webName: player.webName || player.name,
                         name: player.name,
                         position: player.position,
-                        teamId: player.teamId
+                        teamId: player.teamId,
+                        auctionPrice: player.auctionPrice
                     } : {
                         id: pick.playerId,
                         webName: 'Unknown Player',
                         name: 'Unknown Player',
                         position: 'Unknown',
-                        teamId: 0
+                        teamId: 0,
+                        auctionPrice: null
                     }
                 };
             });
@@ -694,7 +868,7 @@ export const updateFantasyTeam = async (req: Request, res: Response) => {
             return res.status(403).json({ error: 'Access denied. Admins only.' });
         }
 
-        const { name, managers, squad, finance } = req.body;
+        const { name, managers, squad, finance, logo } = req.body;
 
         if (!name || !managers || !squad || !Array.isArray(squad)) {
             return res.status(400).json({ error: 'Missing required fields.' });
@@ -757,16 +931,21 @@ export const updateFantasyTeam = async (req: Request, res: Response) => {
 
         team.name = name;
         team.managers = managers;
+        if (logo !== undefined) {
+            team.logo = logo;
+        }
         if (!team.currentSquad) {
             team.currentSquad = { picks: [] };
         }
         team.currentSquad.picks = picks;
         if (finance) {
             if (!team.finance) {
-                team.finance = { totalBudget: 1000, utilisation: 0, balance: 1000 };
+                team.finance = { totalBudget: 1000, utilisation: 0, bonus: 0, fine: 0, balance: 1000 };
             }
             team.finance.totalBudget = finance.totalBudget;
             team.finance.utilisation = finance.utilisation;
+            if (finance.bonus !== undefined) team.finance.bonus = finance.bonus;
+            if (finance.fine !== undefined) team.finance.fine = finance.fine;
         }
 
         await team.save();
@@ -1243,107 +1422,73 @@ export const deleteH2HLeague = async (req: Request, res: Response) => {
     }
 };
 
-export const generateH2HFixtures = async (req: Request, res: Response) => {
+export const createH2HFixture = async (req: Request, res: Response) => {
     try {
         if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
 
         const { id } = req.params;
+        const { homeTeam, awayTeam, gameweek } = req.body;
+
+        if (!homeTeam || !awayTeam || !gameweek) {
+            return res.status(400).json({ error: 'homeTeam, awayTeam and gameweek are required' });
+        }
+        if (homeTeam === awayTeam) {
+            return res.status(400).json({ error: 'Home and away teams must be different' });
+        }
+
         const league = await H2HLeague.findById(id);
         if (!league) return res.status(404).json({ error: 'H2H league not found' });
 
-        // Delete existing fixtures for this league to allow regeneration
-        await H2HFixture.deleteMany({ league: id });
-
         const teamIds = league.fantasyTeams.map(t => t.toString());
-        const numTeams = teamIds.length;
-        const gwStart = league.gameweekStart;
-        const gwEnd = league.gameweekEnd;
-
-        // Circle method for round-robin
-        // If odd number of teams, add a "bye" placeholder
-        const teams = [...teamIds];
-        if (numTeams % 2 !== 0) {
-            teams.push('bye');
+        if (!teamIds.includes(homeTeam) || !teamIds.includes(awayTeam)) {
+            return res.status(400).json({ error: 'Both teams must be league competitors' });
         }
 
-        const n = teams.length; // always even now
-        const rounds = n - 1;   // number of rounds per leg
-
-        const fixtureDocs: any[] = [];
-
-        // Generate first leg fixtures
-        for (let round = 0; round < rounds; round++) {
-            const gw = gwStart + round;
-            if (gw > gwEnd) break;
-
-            const roundFixtures = getRoundPairings(teams, round, n);
-            for (const [home, away] of roundFixtures) {
-                if (home === 'bye' || away === 'bye') continue;
-                fixtureDocs.push({
-                    league: id,
-                    homeTeam: home,
-                    awayTeam: away,
-                    gameweek: gw,
-                });
-            }
+        const gw = Number(gameweek);
+        if (!Number.isInteger(gw) || gw < league.gameweekStart || gw > league.gameweekEnd) {
+            return res.status(400).json({ error: `Gameweek must be between ${league.gameweekStart} and ${league.gameweekEnd}` });
         }
 
-        // Generate second leg (reversed home/away, offset by first leg rounds)
-        for (let round = 0; round < rounds; round++) {
-            const gw = gwStart + rounds + round;
-            if (gw > gwEnd) break;
-
-            const roundFixtures = getRoundPairings(teams, round, n);
-            for (const [home, away] of roundFixtures) {
-                if (home === 'bye' || away === 'bye') continue;
-                fixtureDocs.push({
-                    league: id,
-                    homeTeam: away, // reversed
-                    awayTeam: home,
-                    gameweek: gw,
-                });
-            }
-        }
-
-const created = await H2HFixture.insertMany(fixtureDocs);
-
-        const gameweeks = Array.from(new Set(created.map((f: any) => f.gameweek))).sort((a: number, b: number) => a - b);
-
-        res.json({
-            data: {
-                leagueId: id,
-                fixturesCreated: created.length,
-                gameweeks,
-            },
+        // A team can only play once per gameweek
+        const conflicting = await H2HFixture.findOne({
+            league: id,
+            gameweek: gw,
+            $or: [
+                { homeTeam: { $in: [homeTeam, awayTeam] } },
+                { awayTeam: { $in: [homeTeam, awayTeam] } },
+            ],
         });
+        if (conflicting) {
+            return res.status(400).json({ error: 'One of the teams already has a fixture this gameweek' });
+        }
+
+        const fixture = await H2HFixture.create({ league: id, homeTeam, awayTeam, gameweek: gw });
+
+        const populated = await H2HFixture.findById(fixture._id)
+            .populate('homeTeam', 'name')
+            .populate('awayTeam', 'name');
+
+        res.status(201).json({ data: populated });
     } catch (error: any) {
-        console.error('Error generating H2H fixtures:', error);
+        console.error('Error creating H2H fixture:', error);
         res.status(500).json({ error: error.message });
     }
 };
 
-// Circle method pairings for a given round
-function getRoundPairings(teams: string[], round: number, n: number): [string, string][] {
-    const fixed = teams[0];
-    const rotating = teams.slice(1);
-    const pairings: [string, string][] = [];
+export const deleteH2HFixture = async (req: Request, res: Response) => {
+    try {
+        if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
 
-    // Rotate the rotating array: move last element to position (round) from end
-    const rotated = [...rotating];
-    for (let i = 0; i < round; i++) {
-        rotated.unshift(rotated.pop()!);
+        const { id, fixtureId } = req.params;
+        const deleted = await H2HFixture.findOneAndDelete({ _id: fixtureId, league: id });
+        if (!deleted) return res.status(404).json({ error: 'Fixture not found' });
+
+        res.json({ message: 'Fixture deleted' });
+    } catch (error: any) {
+        console.error('Error deleting H2H fixture:', error);
+        res.status(500).json({ error: error.message });
     }
-
-    // Pair fixed team with first rotating team
-    pairings.push([fixed, rotated[0]]);
-
-    // Pair remaining: second with last, third with second-to-last, etc.
-    for (let i = 1; i <= (n - 2) / 2; i++) {
-        pairings.push([rotated[i], rotated[n - 1 - i]]);
-    }
-
-    return pairings;
-}
+};
 
 export const getH2HLeagueFixtures = async (req: Request, res: Response) => {
     try {

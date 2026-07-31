@@ -40,6 +40,15 @@ export const h2hApi = {
     return response.data.data;
   },
 
+  adminCreateFixture: async (id: string, data: { homeTeam: string; awayTeam: string; gameweek: number }): Promise<H2HFixture> => {
+    const response = await apiClient.post(`/admin/h2h-leagues/${id}/fixtures`, data);
+    return response.data.data;
+  },
+
+  adminDeleteFixture: async (id: string, fixtureId: string): Promise<void> => {
+    await apiClient.delete(`/admin/h2h-leagues/${id}/fixtures/${fixtureId}`);
+  },
+
   adminGetLeagueFixtures: async (id: string): Promise<{ fixtures: H2HFixture[]; byGameweek: Record<number, H2HFixture[]> }> => {
     const response = await apiClient.get(`/admin/h2h-leagues/${id}/fixtures`);
     return response.data.data;

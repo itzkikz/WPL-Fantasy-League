@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createLazyFileRoute, Link } from '@tanstack/react-router';
 import api from '../../../api/client';
+import { Loader2 } from 'lucide-react';
 
 export const Route = createLazyFileRoute('/admin/fantasy-teams/')({
   component: AdminFantasyTeams
@@ -9,17 +10,21 @@ export const Route = createLazyFileRoute('/admin/fantasy-teams/')({
 function AdminFantasyTeams() {
   const [teams, setTeams] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchTeams();
   }, []);
 
   const fetchTeams = async () => {
+    setLoading(true);
     try {
       const res = await api.get('/admin/fantasy-teams');
       setTeams(res.data.data);
     } catch (err) {
       console.error('Failed to fetch teams:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -75,6 +80,11 @@ function AdminFantasyTeams() {
       </div>
       
       {/* Dense Table wrapper */}
+      {loading ? (
+        <div className="bg-[#150f24]/50 border border-white/5 rounded-xl overflow-hidden shadow-lg py-14 flex items-center justify-center">
+          <Loader2 className="w-8 h-8 text-indigo-500 animate-spin" />
+        </div>
+      ) : (
       <div className="bg-[#150f24]/50 border border-white/5 rounded-xl overflow-hidden shadow-lg">
         <div className="overflow-x-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
           <table className="w-full text-left border-collapse">
@@ -84,6 +94,8 @@ function AdminFantasyTeams() {
                 <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Managers</th>
                 <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Budget</th>
                 <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Utilisation</th>
+                <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-emerald-400/70">Bonus</th>
+                <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-rose-400/70">Fine</th>
                 <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Balance</th>
                 <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Created By</th>
                 <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40 text-right">Actions</th>
@@ -100,16 +112,31 @@ function AdminFantasyTeams() {
                 filteredTeams.map((team) => {
                   const budget = team.finance?.totalBudget ?? 1000;
                   const utilization = team.finance?.utilisation ?? 0;
-                  const balance = budget - utilization;
+                  const bonus = team.finance?.bonus ?? 0;
+                  const fine = team.finance?.fine ?? 0;
+                  const balance = budget - utilization + bonus - fine;
 
                   return (
                     <tr key={team._id} className="hover:bg-white/5 transition-colors">
-                      <td className="py-2.5 px-3 font-bold text-xs text-white/95">{team.name}</td>
+                      <td className="py-2.5 px-3">
+                        <div className="flex items-center gap-2">
+                          {team.logo ? (
+                            <img src={team.logo} alt={team.name} className="w-7 h-7 rounded-md object-cover border border-white/10 bg-black/30" />
+                          ) : (
+                            <div className="w-7 h-7 rounded-md bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-black text-white/30">
+                              {team.name?.charAt(0)?.toUpperCase() || '?'}
+                            </div>
+                          )}
+                          <span className="font-bold text-xs text-white/95">{team.name}</span>
+                        </div>
+                      </td>
                       <td className="py-2.5 px-3 text-xs text-white/60 truncate max-w-[200px]" title={team.managers?.map((m: any) => m.username).join(', ')}>
                         {team.managers?.map((m: any) => m.username).join(', ') || 'None'}
                       </td>
                       <td className="py-2.5 px-3 text-xs text-white/60 font-semibold">{budget}</td>
                       <td className="py-2.5 px-3 text-xs text-white/60 font-semibold">{utilization}</td>
+                      <td className="py-2.5 px-3 text-xs text-emerald-400 font-semibold">+{bonus}</td>
+                      <td className="py-2.5 px-3 text-xs text-rose-400 font-semibold">-{fine}</td>
                       <td className={`py-2.5 px-3 text-xs font-extrabold ${balance >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
                         {balance}
                       </td>
@@ -131,6 +158,7 @@ function AdminFantasyTeams() {
           </table>
         </div>
       </div>
+      )}
     </div>
   );
 }

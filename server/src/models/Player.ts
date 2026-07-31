@@ -11,6 +11,7 @@ export interface IPlayer extends Document {
     photo?: string;
     teamId: number;
     position?: string;
+    tm_position?: string;
     positionsDetailed?: string[];
     weight?: number;
     jerseyNumber?: string;
@@ -47,6 +48,7 @@ const PlayerSchema: Schema = new Schema({
     shortName: { type: String },
     teamId: { type: Number, required: true, index: true },
     position: { type: String },
+    tm_position: { type: String },
     positionsDetailed: { type: [String] },
     weight: { type: Number },
     jerseyNumber: { type: String },

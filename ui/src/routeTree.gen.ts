@@ -26,6 +26,8 @@ import { Route as StatsIndexRouteImport } from './routes/stats/index'
 import { Route as StandingsIndexRouteImport } from './routes/standings/index'
 import { Route as ManagerIndexRouteImport } from './routes/manager/index'
 import { Route as StandingsTeamIdRouteImport } from './routes/standings/$teamId'
+import { Route as AdminTeamsRouteImport } from './routes/admin/teams'
+import { Route as AdminPlayersRouteImport } from './routes/admin/players'
 import { Route as AdminNotificationsRouteImport } from './routes/admin/notifications'
 import { Route as AdminLeaguesRouteImport } from './routes/admin/leagues'
 import { Route as AdminGameweeksRouteImport } from './routes/admin/gameweeks'
@@ -36,6 +38,7 @@ import { Route as AdminFixturesFixtureIdRouteImport } from './routes/admin/fixtu
 import { Route as AdminFantasyTeamsCreateRouteImport } from './routes/admin/fantasy-teams/create'
 import { Route as AdminFantasyTeamsEditTeamIdRouteImport } from './routes/admin/fantasy-teams/edit.$teamId'
 
+const AdminTransfersLazyRouteImport = createFileRoute('/admin/transfers')()
 const AdminH2hLeaguesLazyRouteImport = createFileRoute('/admin/h2h-leagues')()
 
 const SettingsRoute = SettingsRouteImport.update({
@@ -114,6 +117,13 @@ const ManagerIndexRoute = ManagerIndexRouteImport.update({
   path: '/manager/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/manager/index.lazy').then((d) => d.Route))
+const AdminTransfersLazyRoute = AdminTransfersLazyRouteImport.update({
+  id: '/admin/transfers',
+  path: '/admin/transfers',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/admin/transfers.lazy').then((d) => d.Route),
+)
 const AdminH2hLeaguesLazyRoute = AdminH2hLeaguesLazyRouteImport.update({
   id: '/admin/h2h-leagues',
   path: '/admin/h2h-leagues',
@@ -126,6 +136,16 @@ const StandingsTeamIdRoute = StandingsTeamIdRouteImport.update({
   path: '/standings/$teamId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminTeamsRoute = AdminTeamsRouteImport.update({
+  id: '/admin/teams',
+  path: '/admin/teams',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/admin/teams.lazy').then((d) => d.Route))
+const AdminPlayersRoute = AdminPlayersRouteImport.update({
+  id: '/admin/players',
+  path: '/admin/players',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/admin/players.lazy').then((d) => d.Route))
 const AdminNotificationsRoute = AdminNotificationsRouteImport.update({
   id: '/admin/notifications',
   path: '/admin/notifications',
@@ -206,8 +226,11 @@ export interface FileRoutesByFullPath {
   '/admin/gameweeks': typeof AdminGameweeksRoute
   '/admin/leagues': typeof AdminLeaguesRoute
   '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/players': typeof AdminPlayersRoute
+  '/admin/teams': typeof AdminTeamsRoute
   '/standings/$teamId': typeof StandingsTeamIdRoute
   '/admin/h2h-leagues': typeof AdminH2hLeaguesLazyRoute
+  '/admin/transfers': typeof AdminTransfersLazyRoute
   '/manager': typeof ManagerIndexRoute
   '/standings': typeof StandingsIndexRoute
   '/stats': typeof StatsIndexRoute
@@ -232,8 +255,11 @@ export interface FileRoutesByTo {
   '/admin/gameweeks': typeof AdminGameweeksRoute
   '/admin/leagues': typeof AdminLeaguesRoute
   '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/players': typeof AdminPlayersRoute
+  '/admin/teams': typeof AdminTeamsRoute
   '/standings/$teamId': typeof StandingsTeamIdRoute
   '/admin/h2h-leagues': typeof AdminH2hLeaguesLazyRoute
+  '/admin/transfers': typeof AdminTransfersLazyRoute
   '/manager': typeof ManagerIndexRoute
   '/standings': typeof StandingsIndexRoute
   '/stats': typeof StatsIndexRoute
@@ -260,8 +286,11 @@ export interface FileRoutesById {
   '/admin/gameweeks': typeof AdminGameweeksRoute
   '/admin/leagues': typeof AdminLeaguesRoute
   '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/players': typeof AdminPlayersRoute
+  '/admin/teams': typeof AdminTeamsRoute
   '/standings/$teamId': typeof StandingsTeamIdRoute
   '/admin/h2h-leagues': typeof AdminH2hLeaguesLazyRoute
+  '/admin/transfers': typeof AdminTransfersLazyRoute
   '/manager/': typeof ManagerIndexRoute
   '/standings/': typeof StandingsIndexRoute
   '/stats/': typeof StatsIndexRoute
@@ -289,8 +318,11 @@ export interface FileRouteTypes {
     | '/admin/gameweeks'
     | '/admin/leagues'
     | '/admin/notifications'
+    | '/admin/players'
+    | '/admin/teams'
     | '/standings/$teamId'
     | '/admin/h2h-leagues'
+    | '/admin/transfers'
     | '/manager'
     | '/standings'
     | '/stats'
@@ -315,8 +347,11 @@ export interface FileRouteTypes {
     | '/admin/gameweeks'
     | '/admin/leagues'
     | '/admin/notifications'
+    | '/admin/players'
+    | '/admin/teams'
     | '/standings/$teamId'
     | '/admin/h2h-leagues'
+    | '/admin/transfers'
     | '/manager'
     | '/standings'
     | '/stats'
@@ -342,8 +377,11 @@ export interface FileRouteTypes {
     | '/admin/gameweeks'
     | '/admin/leagues'
     | '/admin/notifications'
+    | '/admin/players'
+    | '/admin/teams'
     | '/standings/$teamId'
     | '/admin/h2h-leagues'
+    | '/admin/transfers'
     | '/manager/'
     | '/standings/'
     | '/stats/'
@@ -370,8 +408,11 @@ export interface RootRouteChildren {
   AdminGameweeksRoute: typeof AdminGameweeksRoute
   AdminLeaguesRoute: typeof AdminLeaguesRoute
   AdminNotificationsRoute: typeof AdminNotificationsRoute
+  AdminPlayersRoute: typeof AdminPlayersRoute
+  AdminTeamsRoute: typeof AdminTeamsRoute
   StandingsTeamIdRoute: typeof StandingsTeamIdRoute
   AdminH2hLeaguesLazyRoute: typeof AdminH2hLeaguesLazyRoute
+  AdminTransfersLazyRoute: typeof AdminTransfersLazyRoute
   ManagerIndexRoute: typeof ManagerIndexRoute
   StandingsIndexRoute: typeof StandingsIndexRoute
   StatsIndexRoute: typeof StatsIndexRoute
@@ -477,6 +518,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManagerIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/transfers': {
+      id: '/admin/transfers'
+      path: '/admin/transfers'
+      fullPath: '/admin/transfers'
+      preLoaderRoute: typeof AdminTransfersLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/h2h-leagues': {
       id: '/admin/h2h-leagues'
       path: '/admin/h2h-leagues'
@@ -489,6 +537,20 @@ declare module '@tanstack/react-router' {
       path: '/standings/$teamId'
       fullPath: '/standings/$teamId'
       preLoaderRoute: typeof StandingsTeamIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/teams': {
+      id: '/admin/teams'
+      path: '/admin/teams'
+      fullPath: '/admin/teams'
+      preLoaderRoute: typeof AdminTeamsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/players': {
+      id: '/admin/players'
+      path: '/admin/players'
+      fullPath: '/admin/players'
+      preLoaderRoute: typeof AdminPlayersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/notifications': {
@@ -601,8 +663,11 @@ const rootRouteChildren: RootRouteChildren = {
   AdminGameweeksRoute: AdminGameweeksRoute,
   AdminLeaguesRoute: AdminLeaguesRoute,
   AdminNotificationsRoute: AdminNotificationsRoute,
+  AdminPlayersRoute: AdminPlayersRoute,
+  AdminTeamsRoute: AdminTeamsRoute,
   StandingsTeamIdRoute: StandingsTeamIdRoute,
   AdminH2hLeaguesLazyRoute: AdminH2hLeaguesLazyRoute,
+  AdminTransfersLazyRoute: AdminTransfersLazyRoute,
   ManagerIndexRoute: ManagerIndexRoute,
   StandingsIndexRoute: StandingsIndexRoute,
   StatsIndexRoute: StatsIndexRoute,
