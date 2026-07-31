@@ -1,6 +1,7 @@
 import express from 'express';
 import { getFixtures, getGameweeks, createGameweek, updateGameweek, getSeasons, updateFixturesFromApi, getMatchDetails, getMatchIncidentsAndStats, getUsers, createFantasyTeam, getAdminPlayers, updateAdminPlayer, getAdminTeams, getFantasyTeams, getFantasyTeamById, updateFantasyTeam, completeGameweek, revertGameweek, togglePickTeam, getPickTeamStatus, getLeagues, fetchLeagueRounds, updateLeague, getH2HLeague, upsertH2HLeague, deleteH2HLeague, createH2HFixture, deleteH2HFixture, getH2HLeagueFixtures } from '../controllers/admin';
 import { getTransfers, createTransfer, reverseTransfer } from '../controllers/transfers';
+import { getSubstitutionHistory } from '../controllers/manager';
 
 const router = express.Router();
 
@@ -38,5 +39,7 @@ router.delete('/h2h-leagues/:id', deleteH2HLeague);
 router.post('/h2h-leagues/:id/fixtures', createH2HFixture);
 router.delete('/h2h-leagues/:id/fixtures/:fixtureId', deleteH2HFixture);
 router.get('/h2h-leagues/:id/fixtures', getH2HLeagueFixtures);
+
+router.get('/substitutions', getSubstitutionHistory);
 
 export default router;

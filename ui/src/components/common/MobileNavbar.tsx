@@ -9,6 +9,7 @@ import {
   Settings,
   Calendar,
   Users,
+  ArrowLeftRight,
 } from "lucide-react";
 
 const iconClass = (isActive: boolean) =>
@@ -44,25 +45,40 @@ const AdminLeaguesIcon = ({ isActive }: { isActive: boolean }) => (
 const AdminH2HIcon = ({ isActive }: { isActive: boolean }) => (
   <Swords className={iconClass(isActive)} />
 );
+const AdminSubstitutionsIcon = ({ isActive }: { isActive: boolean }) => (
+  <ArrowLeftRight className={iconClass(isActive)} />
+);
 
 const MobileNavbar = () => {
   const matchRoute = useMatchRoute();
   const location = useLocation();
   const user = useUserStore((state) => state.user);
+  const isGuest = useUserStore((state) => state.isGuest);
   const isAdmin = user?.role === "admin";
 
   const isRegularUser = user?.role === "user";
+
+  // Guest users - only show League and Stats
+  const guestNavItems = [
+    { label: "League", path: "/standings/", icon: LeagueIcon },
+    { label: "Stats", path: "/stats", icon: StatsIcon },
+  ];
 
   const navItems = isAdmin
     ? [
       { label: "Settings", path: "/settings", icon: AdminSettingsIcon },
       { label: "Fixtures", path: "/admin/fixtures", icon: AdminFixturesIcon },
       { label: "Teams", path: "/admin/fantasy-teams", icon: AdminTeamsIcon },
+      { label: "Substitutions", path: "/admin/substitutions", icon: AdminSubstitutionsIcon },
       { label: "Leagues", path: "/admin/leagues", icon: AdminLeaguesIcon },
       { label: "H2H", path: "/admin/h2h-leagues", icon: AdminH2HIcon },
     ]
+    : isGuest
+    ? guestNavItems
     : isRegularUser
       ? [
+        { label: "Home", path: "/home", icon: HomeIcon },
+        { label: "League", path: "/standings/", icon: LeagueIcon },
         { label: "Stats", path: "/stats", icon: StatsIcon },
       ]
       : [

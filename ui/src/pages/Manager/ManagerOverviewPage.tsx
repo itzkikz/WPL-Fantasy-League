@@ -61,7 +61,7 @@ const ManagerOverviewPage = () => {
     );
   }
 
-  // Generate large color/emoji logo crest from team name
+  // Generate large color logo crest from team name
   const getOverviewCrest = (name: string) => {
     const letter = name ? name.trim().charAt(0).toUpperCase() : "M";
     const colors = [
@@ -71,7 +71,6 @@ const ManagerOverviewPage = () => {
       "from-blue-600 to-blue-950",
       "from-fuchsia-600 to-fuchsia-950",
     ];
-    // Hash based on name length or character sum
     const charSum = name ? name.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0) : 0;
     const bgGradient = colors[charSum % colors.length];
     return { letter, bgGradient };
@@ -80,11 +79,10 @@ const ManagerOverviewPage = () => {
   const crest = getOverviewCrest(teamName || "");
 
   return (
-    <div className="flex flex-col w-full h-full min-h-screen bg-background text-white font-outfit select-none pb-4">
-      {/* Header Navigation Bar */}
+    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-white font-outfit select-none overflow-hidden pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
 
-      {/* Main content scroll container */}
-      <div className="flex-1 flex flex-col min-h-0 overflow-y-auto px-4 py-3 gap-5">
+      {/* MOBILE CONTAINER (Visible on mobile < lg) */}
+      <div className="flex-1 flex flex-col min-h-0 overflow-y-auto px-4 py-3 gap-5 lg:hidden">
         {/* Manager Header Profile Panel */}
         <div className="bg-surface border border-border rounded-2xl p-3 md:p-4 shadow-card flex flex-row items-center max-w-2xl mx-auto w-full gap-3 md:gap-4 shrink-0 text-left">
           <button
@@ -130,43 +128,26 @@ const ManagerOverviewPage = () => {
           </div>
         </div>
 
-        {/* Current Squad (Pitch View) Container */}
+        {/* Pitch View */}
         <div className="flex flex-col gap-2 max-w-2xl mx-auto w-full shrink-0">
           <h3 className="text-xs font-black uppercase text-text-muted tracking-wider pl-1.5">
             Current Squad
           </h3>
-          <div className="relative w-full rounded-3xl overflow-hidden border border-border shadow-card bg-background h-[460px] flex flex-col">
-            {/* Pitch image layer */}
+          <div className="relative w-full rounded-3xl overflow-hidden border border-border shadow-card bg-background min-h-[560px] flex flex-col">
             <div className="pitch-bg">
-              <img
-                src="/pitch.png"
-                className="pitch-image-layer"
-                alt="Tactical pitch layout"
-              />
+              <img src="/pitch.png" className="pitch-image-layer" alt="Tactical pitch layout" />
             </div>
 
-            {/* Players Overlay */}
-            <div className="absolute inset-0 z-10 pointer-events-none flex flex-col justify-evenly py-3 md:py-6 px-2 sm:px-4">
+            <div className={`absolute top-0 inset-x-0 ${bench && bench.length > 0 ? "bottom-[110px]" : "bottom-0"} z-10 pointer-events-none flex flex-col justify-evenly py-3 md:py-6 px-2 sm:px-4`}>
               {starting && (["GK", "DEF", "MID", "FWD"] as const).map((pos) => {
                 const players = starting[pos] || [];
                 return (
                   <div key={pos} className={`flex w-full ${getRowJustify(players.length)} pointer-events-auto`}>
                     {players.map((player) => {
-                      const enrichedPlayer = {
-                        ...player,
-                        price: getPlayerPrice(player),
-                      };
+                      const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
                       return (
-                        <div
-                          key={player.id}
-                          className="rounded-xl p-0.5 transition-all hover:scale-105 duration-300"
-                        >
-                          <PitchPlayerCard
-                            player={enrichedPlayer}
-                            showPriceAndPoints={true}
-                            isSmall={false}
-                            onClick={() => handlePlayerClick(player)}
-                          />
+                        <div key={player.id} className="rounded-xl p-0.5 transition-all hover:scale-105 duration-300">
+                          <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={false} onClick={() => handlePlayerClick(player)} />
                         </div>
                       );
                     })}
@@ -174,10 +155,25 @@ const ManagerOverviewPage = () => {
                 );
               })}
             </div>
+
+            {bench && bench.length > 0 && (
+              <div className="absolute bottom-0 inset-x-0 h-[110px] bg-surface/95 backdrop-blur-md border-t border-border flex justify-around items-center px-4 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.5)] overflow-x-auto scrollbar-hide">
+                {bench.map((player, idx) => {
+                  const label = player.position === "GK" ? "GK" : `${player.subNumber || idx + 1}. ${player.position}`;
+                  const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
+                  return (
+                    <div key={player.id} className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300 shrink-0 min-w-[64px]">
+                      <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">{label}</span>
+                      <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={true} onClick={() => handlePlayerClick(player)} />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Gameweek History Slider Container */}
+        {/* Gameweek History */}
         <div className="flex flex-col gap-2.5 max-w-2xl mx-auto w-full shrink-0 mb-6">
           <h3 className="text-xs font-black uppercase text-text-muted tracking-wider pl-1.5">
             Gameweek History
@@ -195,6 +191,147 @@ const ManagerOverviewPage = () => {
             )) : null}
           </div>
         </div>
+      </div>
+
+      {/* WEBVIEW SPLIT CONTAINER (Visible on lg+) */}
+      <div className="hidden lg:flex flex-1 flex-row h-full min-h-0 overflow-hidden gap-3 p-3">
+        
+        {/* LEFT SIDE PANEL (Manager Profile & Stats) */}
+        <div className="w-80 xl:w-96 shrink-0 bg-surface border border-border/80 rounded-3xl p-5 shadow-card overflow-y-auto space-y-5">
+          {/* Header Info */}
+          <div className="flex items-center gap-3.5 pb-4 border-b border-border/60">
+            <button
+              onClick={() => navigate({ to: "/standings" })}
+              className="flex items-center justify-center w-10 h-10 rounded-2xl bg-background hover:bg-white/10 border border-border text-white active:scale-95 transition-all cursor-pointer shrink-0 shadow-inner"
+              aria-label="Go back"
+            >
+              <ArrowLeft className="w-5 h-5 text-text-muted" />
+            </button>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-lg font-black text-white tracking-tight truncate">
+                Manager Overview
+              </h2>
+              <p className="text-xs text-text-muted font-medium truncate">
+                Team details & squad lineup
+              </p>
+            </div>
+          </div>
+
+          {/* Profile Card */}
+          <div className="bg-background/60 border border-border/60 rounded-2xl p-4 flex items-center gap-3.5">
+            <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${crest.bgGradient} flex items-center justify-center text-2xl font-black text-white shadow-lg border border-white/10 shrink-0`}>
+              {crest.letter}
+            </div>
+            <div className="min-w-0 flex-1">
+              <h3 className="text-base font-black text-white truncate">{teamName}</h3>
+              <div className="flex items-center gap-1 text-xs text-text-muted mt-0.5 font-semibold">
+                <Users className="w-3.5 h-3.5 shrink-0" />
+                <span className="truncate">{managers}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* 3-Stat Metric Grid */}
+          <div className="grid grid-cols-3 gap-2 bg-background/50 border border-border/60 rounded-2xl p-3.5 text-center">
+            <div>
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Rank</span>
+              <span className="text-base font-extrabold text-white font-mono mt-0.5 block">#{rank}</span>
+            </div>
+            <div className="border-l border-border/50">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Total</span>
+              <span className="text-base font-extrabold text-white font-mono mt-0.5 block">{totalPoints}</span>
+            </div>
+            <div className="border-l border-border/50">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">GW Score</span>
+              <span className="text-base font-extrabold text-[var(--color-success-bright)] font-mono mt-0.5 block">{gwPoints}</span>
+            </div>
+          </div>
+
+          {/* Gameweek History Section */}
+          <div className="space-y-3 pt-2 border-t border-border/60">
+            <span className="text-xs font-bold text-text-muted uppercase tracking-wider block">Gameweek History</span>
+            <div className="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto pr-1">
+              {history ? [...history].sort((a, b) => b.gameweek - a.gameweek).map((h: any) => (
+                <button
+                  key={h.gameweek}
+                  onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: h.gameweek, teamId } })}
+                  className="flex items-center justify-between bg-background/50 hover:bg-white/5 border border-border/60 hover:border-secondary rounded-xl p-2.5 transition-all cursor-pointer text-left"
+                >
+                  <span className="text-xs font-extrabold text-white">GW {h.gameweek}</span>
+                  <span className="text-xs font-black text-secondary font-mono">{h.points} pts</span>
+                </button>
+              )) : null}
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT SIDE PANEL (Current Squad Pitch View) */}
+        <div className="flex-1 flex flex-col min-h-0 h-full overflow-hidden">
+          <div className="flex-1 flex flex-col lg:flex-row gap-3 max-w-3xl mx-auto w-full h-full min-h-0 animate-in fade-in duration-300">
+            {/* Pitch Card */}
+            <div className="relative flex-1 rounded-3xl overflow-hidden border border-border shadow-card bg-background h-full flex flex-col">
+              {/* Pitch image layer */}
+              <div className="pitch-bg">
+                <img src="/pitch.png" className="pitch-image-layer" alt="Tactical pitch layout" />
+              </div>
+
+              {/* Starting XI Players - Centered on Pitch */}
+              <div className="absolute inset-0 bottom-[110px] lg:bottom-0 z-10 pointer-events-none flex flex-col justify-evenly py-3 md:py-6 px-2 sm:px-4">
+                {starting && (["GK", "DEF", "MID", "FWD"] as const).map((pos) => {
+                  const players = starting[pos] || [];
+                  return (
+                    <div key={pos} className={`flex w-full ${getRowJustify(players.length)} pointer-events-auto`}>
+                      {players.map((player) => {
+                        const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
+                        return (
+                          <div key={player.id} className="rounded-xl p-0.5 transition-all hover:scale-105 duration-300">
+                            <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={false} onClick={() => handlePlayerClick(player)} />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Mobile Bench Strip (Visible ONLY on mobile < lg) */}
+              {bench && bench.length > 0 && (
+                <div className="flex lg:hidden absolute bottom-0 inset-x-0 h-[110px] bg-surface/95 backdrop-blur-md border-t border-border justify-around items-center px-4 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.5)] overflow-x-auto scrollbar-hide">
+                  {bench.map((player, idx) => {
+                    const label = player.position === "GK" ? "GK" : `${player.subNumber || idx + 1}. ${player.position}`;
+                    const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
+                    return (
+                      <div key={player.id} className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300 shrink-0 min-w-[64px]">
+                        <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">{label}</span>
+                        <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={true} onClick={() => handlePlayerClick(player)} />
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Dedicated Webview Bench Side Card (Visible ONLY on webview lg+) */}
+            {bench && bench.length > 0 && (
+              <div className="hidden lg:flex lg:flex-col lg:w-28 shrink-0 bg-surface border border-border rounded-3xl p-3 shadow-card justify-around items-center">
+                <span className="text-[10px] font-black text-text-muted uppercase tracking-wider text-center border-b border-border/60 pb-2 w-full">
+                  Substitutes
+                </span>
+                {bench.map((player, idx) => {
+                  const label = player.position === "GK" ? "GK" : `${player.subNumber || idx + 1}. ${player.position}`;
+                  const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
+                  return (
+                    <div key={player.id} className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300">
+                      <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">{label}</span>
+                      <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={true} onClick={() => handlePlayerClick(player)} />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+
       </div>
 
       {/* Player stats overlay detail modal */}

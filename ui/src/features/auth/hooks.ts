@@ -11,6 +11,15 @@ export const useLogin = (onSuccess?: (data: LoginResponse) => void) => {
   })
 }
 
-export function useValidateToken() {
-  return useQuery(authQueries.validateToken());
+export function useValidateToken(options?: { enabled?: boolean; skipValidation?: boolean }) {
+  return useQuery({
+    ...authQueries.validateToken(),
+    enabled: options?.enabled ?? true,
+    queryFn: async () => {
+      if (options?.skipValidation) {
+        return { valid: false, user: null };
+      }
+      return authApi.validate();
+    },
+  });
 }

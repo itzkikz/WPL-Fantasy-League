@@ -39,6 +39,9 @@ import { Route as AdminFantasyTeamsCreateRouteImport } from './routes/admin/fant
 import { Route as AdminFantasyTeamsEditTeamIdRouteImport } from './routes/admin/fantasy-teams/edit.$teamId'
 
 const AdminTransfersLazyRouteImport = createFileRoute('/admin/transfers')()
+const AdminSubstitutionsLazyRouteImport = createFileRoute(
+  '/admin/substitutions',
+)()
 const AdminH2hLeaguesLazyRouteImport = createFileRoute('/admin/h2h-leagues')()
 
 const SettingsRoute = SettingsRouteImport.update({
@@ -123,6 +126,13 @@ const AdminTransfersLazyRoute = AdminTransfersLazyRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
   import('./routes/admin/transfers.lazy').then((d) => d.Route),
+)
+const AdminSubstitutionsLazyRoute = AdminSubstitutionsLazyRouteImport.update({
+  id: '/admin/substitutions',
+  path: '/admin/substitutions',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/admin/substitutions.lazy').then((d) => d.Route),
 )
 const AdminH2hLeaguesLazyRoute = AdminH2hLeaguesLazyRouteImport.update({
   id: '/admin/h2h-leagues',
@@ -230,6 +240,7 @@ export interface FileRoutesByFullPath {
   '/admin/teams': typeof AdminTeamsRoute
   '/standings/$teamId': typeof StandingsTeamIdRoute
   '/admin/h2h-leagues': typeof AdminH2hLeaguesLazyRoute
+  '/admin/substitutions': typeof AdminSubstitutionsLazyRoute
   '/admin/transfers': typeof AdminTransfersLazyRoute
   '/manager': typeof ManagerIndexRoute
   '/standings': typeof StandingsIndexRoute
@@ -259,6 +270,7 @@ export interface FileRoutesByTo {
   '/admin/teams': typeof AdminTeamsRoute
   '/standings/$teamId': typeof StandingsTeamIdRoute
   '/admin/h2h-leagues': typeof AdminH2hLeaguesLazyRoute
+  '/admin/substitutions': typeof AdminSubstitutionsLazyRoute
   '/admin/transfers': typeof AdminTransfersLazyRoute
   '/manager': typeof ManagerIndexRoute
   '/standings': typeof StandingsIndexRoute
@@ -290,6 +302,7 @@ export interface FileRoutesById {
   '/admin/teams': typeof AdminTeamsRoute
   '/standings/$teamId': typeof StandingsTeamIdRoute
   '/admin/h2h-leagues': typeof AdminH2hLeaguesLazyRoute
+  '/admin/substitutions': typeof AdminSubstitutionsLazyRoute
   '/admin/transfers': typeof AdminTransfersLazyRoute
   '/manager/': typeof ManagerIndexRoute
   '/standings/': typeof StandingsIndexRoute
@@ -322,6 +335,7 @@ export interface FileRouteTypes {
     | '/admin/teams'
     | '/standings/$teamId'
     | '/admin/h2h-leagues'
+    | '/admin/substitutions'
     | '/admin/transfers'
     | '/manager'
     | '/standings'
@@ -351,6 +365,7 @@ export interface FileRouteTypes {
     | '/admin/teams'
     | '/standings/$teamId'
     | '/admin/h2h-leagues'
+    | '/admin/substitutions'
     | '/admin/transfers'
     | '/manager'
     | '/standings'
@@ -381,6 +396,7 @@ export interface FileRouteTypes {
     | '/admin/teams'
     | '/standings/$teamId'
     | '/admin/h2h-leagues'
+    | '/admin/substitutions'
     | '/admin/transfers'
     | '/manager/'
     | '/standings/'
@@ -412,6 +428,7 @@ export interface RootRouteChildren {
   AdminTeamsRoute: typeof AdminTeamsRoute
   StandingsTeamIdRoute: typeof StandingsTeamIdRoute
   AdminH2hLeaguesLazyRoute: typeof AdminH2hLeaguesLazyRoute
+  AdminSubstitutionsLazyRoute: typeof AdminSubstitutionsLazyRoute
   AdminTransfersLazyRoute: typeof AdminTransfersLazyRoute
   ManagerIndexRoute: typeof ManagerIndexRoute
   StandingsIndexRoute: typeof StandingsIndexRoute
@@ -523,6 +540,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/transfers'
       fullPath: '/admin/transfers'
       preLoaderRoute: typeof AdminTransfersLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/substitutions': {
+      id: '/admin/substitutions'
+      path: '/admin/substitutions'
+      fullPath: '/admin/substitutions'
+      preLoaderRoute: typeof AdminSubstitutionsLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/h2h-leagues': {
@@ -667,6 +691,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminTeamsRoute: AdminTeamsRoute,
   StandingsTeamIdRoute: StandingsTeamIdRoute,
   AdminH2hLeaguesLazyRoute: AdminH2hLeaguesLazyRoute,
+  AdminSubstitutionsLazyRoute: AdminSubstitutionsLazyRoute,
   AdminTransfersLazyRoute: AdminTransfersLazyRoute,
   ManagerIndexRoute: ManagerIndexRoute,
   StandingsIndexRoute: StandingsIndexRoute,

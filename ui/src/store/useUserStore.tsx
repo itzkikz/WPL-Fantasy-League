@@ -1,20 +1,30 @@
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 import { User } from "./types.ts";
 
 interface UserStoreState {
   user: User | null;
+  isGuest: boolean;
   setUser: (user: User) => void;
+  setGuest: (isGuest: boolean) => void;
   removeUser: () => void;
 }
 
 export const useUserStore = create<UserStoreState>()(
   devtools(
-    (set) => ({
-      user: null,
-      setUser: (user) => set({ user }),
-      removeUser: () => set({ user: null }),
-    }),
-    { name: "UserStore" } // Optional: give your store a custom name
+    persist(
+      (set) => ({
+        user: null,
+        isGuest: false,
+        setUser: (user) => set({ user, isGuest: false }),
+        setGuest: (isGuest) => set({ isGuest, user: null }),
+        removeUser: () => set({ user: null, isGuest: false }),
+      }),
+      {
+        name: "user-store",
+        partialize: (state) => ({ isGuest: state.isGuest }), // Only persist isGuest
+      }
+    ),
+    { name: "UserStore" }
   )
 );

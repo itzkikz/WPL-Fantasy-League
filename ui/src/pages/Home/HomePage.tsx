@@ -7,7 +7,7 @@ import UpcomingFixture from "../../components/home/UpcomingFixture";
 import PlayerSpotlight from "../../components/home/PlayerSpotlight";
 import PointsBreakdown from "../../components/home/PointsBreakdown";
 import RecentGameweeks from "../../components/home/RecentGameweeks";
-import { Crown, Target, Activity, ShieldCheck, Square, Users, Clock, Star, Shield } from "lucide-react";
+import { Crown, Target, Activity, ShieldCheck, Square, Users, Clock, Star, Shield, Trophy, ArrowRight, Sparkles } from "lucide-react";
 import PlayerListCard from "../../components/home/PlayerListCard";
 import SeasonStats from "../../components/home/SeasonStats";
 import LeagueStandings from "../../components/home/LeagueStandings";
@@ -16,11 +16,82 @@ import SquadValue from "../../components/home/SquadValue";
 import YourPlayersCard from "../../components/home/YourPlayersCard";
 import QuickActionsRow from "../../components/home/QuickActions";
 import FantasyNews from "../../components/home/FantasyNews";
+import { useUserStore } from "../../store/useUserStore";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { data, isLoading, error } = useHomePage();
-  const { data: myFixturesData } = useMyFixtures();
+  const user = useUserStore((state) => state.user);
+  const isRegularUser = user?.role === "user";
+
+  // Disable dashboard & my-fixtures API queries if role is "user"
+  const { data, isLoading, error } = useHomePage({ enabled: !isRegularUser });
+  const { data: myFixturesData } = useMyFixtures({ enabled: !isRegularUser });
+
+  // Dedicated view for regular user role (non-manager account)
+  if (isRegularUser) {
+    return (
+      <div data-theme="dark" className="min-h-screen bg-background text-text p-3 lg:p-6 font-outfit">
+        <div className="max-w-4xl mx-auto space-y-6 pt-2">
+          {/* Spectator Banner */}
+          <div className="bg-gradient-to-r from-purple-900/40 via-indigo-900/40 to-slate-900/40 border border-purple-500/30 rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden backdrop-blur-xl">
+            <div className="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 relative z-10">
+              <div className="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-400/30 flex items-center justify-center shrink-0 text-purple-300 shadow-inner">
+                <ShieldCheck className="w-7 h-7 text-purple-300" />
+              </div>
+              <div className="space-y-1.5 flex-1">
+                <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-purple-500/20 border border-purple-400/30 text-[11px] font-semibold text-purple-300">
+                  <Sparkles className="w-3 h-3 text-purple-400" />
+                  <span>Fan / Spectator Account</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-white">
+                  You are not managing a fantasy team yet
+                </h2>
+                <p className="text-xs sm:text-sm text-purple-200/80 leading-relaxed">
+                  Once the League Administrator assigns you to a fantasy squad, you'll be able to manage your roster, select captains, make transfers, and track your live manager points! In the meantime, feel free to explore overall league standings and player statistics below.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Actions Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <button
+              onClick={() => navigate({ to: "/standings" })}
+              className="group p-6 rounded-2xl bg-surface border border-white/10 hover:border-purple-500/40 transition-all text-left flex flex-col justify-between h-40 shadow-md hover:scale-[1.01] cursor-pointer"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                  <Trophy className="w-5 h-5" />
+                </div>
+                <ArrowRight className="w-5 h-5 text-text-muted group-hover:text-purple-400 group-hover:translate-x-1 transition-all" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-white mb-1">League Standings</h3>
+                <p className="text-xs text-text-secondary">View live leaderboards, manager points, and team rankings.</p>
+              </div>
+            </button>
+
+            <button
+              onClick={() => navigate({ to: "/stats" })}
+              className="group p-6 rounded-2xl bg-surface border border-white/10 hover:border-purple-500/40 transition-all text-left flex flex-col justify-between h-40 shadow-md hover:scale-[1.01] cursor-pointer"
+            >
+              <div className="flex items-center justify-between">
+                <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                  <Activity className="w-5 h-5" />
+                </div>
+                <ArrowRight className="w-5 h-5 text-text-muted group-hover:text-indigo-400 group-hover:translate-x-1 transition-all" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-white mb-1">Player & League Stats</h3>
+                <p className="text-xs text-text-secondary">Explore player form, goals, assists, and match statistics.</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -104,12 +175,10 @@ const HomePage = () => {
               badge={<Crown className="w-8 h-8 text-white/20" />}
             />
           </div>
- <div className="lg:col-span-2">
-           <LeagueStandings
+          <div className="lg:col-span-2">
+            <LeagueStandings
               standings={data.leagueStandings}
               myTeam={data.teamOverview.teamName}
-              limit={3}
-              onViewFull={() => navigate({ to: "/standings" })}
             />
           </div>
           <div className="lg:col-span-2">
@@ -218,7 +287,6 @@ const HomePage = () => {
           {/* <div className="col-span-2 lg:col-span-4">
             <QuickActionsRow />
           </div> */}
-
           <div className="col-span-2 lg:col-span-4">
             <FantasyNews />
           </div>
@@ -229,4 +297,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-

@@ -37,7 +37,9 @@ export const getStandingsData = async () => {
     const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
     const globalCurrentGw = currentGwDoc ? currentGwDoc.number : 1;
 
-    const playerStats = await PlayerStats.find({}).select('playerId gameweeks').lean();
+    const playerStats = await PlayerStats.find({})
+        .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
+        .lean();
     const playerStatsMap = new Map();
     playerStats.forEach(ps => playerStatsMap.set(ps.playerId, ps));
 

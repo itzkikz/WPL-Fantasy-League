@@ -548,7 +548,7 @@ const PlayerStatsModal = ({
             {/* 7. Action Footer Buttons */}
             {pickMyTeam && (onMakeCaptain || onMakeViceCaptain || onSubstitute) ? (
               <div className="p-5 bg-card border-t border-border flex flex-col sm:flex-row items-center gap-2.5 shrink-0 w-full">
-                {onMakeCaptain && (
+                {onMakeCaptain && !player.isCaptain && (
                   <button
                     onClick={() => onMakeCaptain(player)}
                     className="w-full sm:flex-1 bg-amber-500 hover:bg-amber-400 text-black font-extrabold rounded-2xl py-3 flex items-center justify-center gap-2 active:scale-98 transition-all cursor-pointer text-xs shadow-lg shadow-amber-500/10"
@@ -557,7 +557,7 @@ const PlayerStatsModal = ({
                     Make Cap
                   </button>
                 )}
-                {onMakeViceCaptain && (
+                {onMakeViceCaptain && !player.isViceCaptain && (
                   <button
                     onClick={() => onMakeViceCaptain(player)}
                     className="w-full sm:flex-1 bg-slate-400 hover:bg-slate-300 text-black font-extrabold rounded-2xl py-3 flex items-center justify-center gap-2 active:scale-98 transition-all cursor-pointer text-xs shadow-lg shadow-slate-400/10"
