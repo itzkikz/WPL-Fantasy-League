@@ -1,0 +1,372 @@
+{
+  "package.json": {
+    "mtime": 1785475733.468121,
+    "ast_hash": "0cf07ad3cc2c03569d035c5208f38cb8",
+    "semantic_hash": ""
+  },
+  "src/config/db.ts": {
+    "mtime": 1781534997.1195753,
+    "ast_hash": "f2a6b80049b7c649aaf03db1a23148bb",
+    "semantic_hash": ""
+  },
+  "src/controllers/admin.ts": {
+    "mtime": 1785485735.3845582,
+    "ast_hash": "3591f825c4d5192879a9c901db2770a8",
+    "semantic_hash": ""
+  },
+  "src/controllers/auth.ts": {
+    "mtime": 1782410068.6574254,
+    "ast_hash": "562ade0f0a0e0212bd356a52711741d1",
+    "semantic_hash": ""
+  },
+  "src/controllers/footballApi.ts": {
+    "mtime": 1783609665.4719932,
+    "ast_hash": "b4a779c845aa05620f69e7c348b4fe36",
+    "semantic_hash": ""
+  },
+  "src/controllers/h2h.ts": {
+    "mtime": 1784452516.2757714,
+    "ast_hash": "e5450b6020c42e0160110d5369b70731",
+    "semantic_hash": ""
+  },
+  "src/controllers/manager.ts": {
+    "mtime": 1785488417.0136352,
+    "ast_hash": "e15dd5c619a080d4d42b30b132703372",
+    "semantic_hash": ""
+  },
+  "src/controllers/notification.ts": {
+    "mtime": 1782564248.7701888,
+    "ast_hash": "e3941676b5c867b1c4697bfca1c3d101",
+    "semantic_hash": ""
+  },
+  "src/controllers/players.ts": {
+    "mtime": 1784722860.0650773,
+    "ast_hash": "7d4915f7c729f2d3bb0b2e24214cbbbf",
+    "semantic_hash": ""
+  },
+  "src/controllers/sheetController.ts": {
+    "mtime": 1783600556.222481,
+    "ast_hash": "fc924e7cbb34811345ef42ffbc277237",
+    "semantic_hash": ""
+  },
+  "src/controllers/standings.ts": {
+    "mtime": 1785487481.83217,
+    "ast_hash": "bc056fa903b9da39e59e125ca77f63fd",
+    "semantic_hash": ""
+  },
+  "src/controllers/syncController.ts": {
+    "mtime": 1782477932.9974005,
+    "ast_hash": "51d14a1091890d45f950d6931be0c22b",
+    "semantic_hash": ""
+  },
+  "src/controllers/transfers.ts": {
+    "mtime": 1785484013.213248,
+    "ast_hash": "df73774269d4ea80fd79c787c6e0df7a",
+    "semantic_hash": ""
+  },
+  "src/index.ts": {
+    "mtime": 1784279572.2529657,
+    "ast_hash": "5eac332732c911ca86548992003ce617",
+    "semantic_hash": ""
+  },
+  "src/lib/formatter/lineupFormatter.ts": {
+    "mtime": 1784403235.4920187,
+    "ast_hash": "2c28e115a90b9c971d9757bb2599f275",
+    "semantic_hash": ""
+  },
+  "src/lib/formatter/types.ts": {
+    "mtime": 1784403201.0796173,
+    "ast_hash": "9b5195275de8b75ddfde3aa666a7346a",
+    "semantic_hash": ""
+  },
+  "src/lib/helpers/roleUpdate.ts": {
+    "mtime": 1782487866.1504233,
+    "ast_hash": "535c102aa83c12fd8ab3ee0d8c8e753d",
+    "semantic_hash": ""
+  },
+  "src/lib/helpers/subUpdate.ts": {
+    "mtime": 1762114259.802902,
+    "ast_hash": "ee80fa74e2995196a0be0c3c14db2ecd",
+    "semantic_hash": ""
+  },
+  "src/lib/helpers/substitution.ts": {
+    "mtime": 1782487968.9493518,
+    "ast_hash": "40bf1ad768ed65bc048dee7f064084ad",
+    "semantic_hash": ""
+  },
+  "src/lib/points.ts": {
+    "mtime": 1784275380.5638006,
+    "ast_hash": "b0666dfde8e8248ab6cf0ed8608f0c89",
+    "semantic_hash": ""
+  },
+  "src/lib/sofascoreMapper.ts": {
+    "mtime": 1783711057.424808,
+    "ast_hash": "a49ab973f973a29ddf42a23b2397a71a",
+    "semantic_hash": ""
+  },
+  "src/lib/store/globals.ts": {
+    "mtime": 1762114259.8059156,
+    "ast_hash": "303afdcce0be013967f454d3878c5c12",
+    "semantic_hash": ""
+  },
+  "src/lib/validators/substitution.ts": {
+    "mtime": 1782487923.4995759,
+    "ast_hash": "0df45efbb35e156ae9385de7168a7ba2",
+    "semantic_hash": ""
+  },
+  "src/middlewares/authMiddleware.ts": {
+    "mtime": 1762408994.7749856,
+    "ast_hash": "6b1260a407ea871e09c082cbfcf4eee1",
+    "semantic_hash": ""
+  },
+  "src/middlewares/logMiddleware.ts": {
+    "mtime": 1763438447.2854908,
+    "ast_hash": "0349e80b80314aa45943f605a593489b",
+    "semantic_hash": ""
+  },
+  "src/models/ApiConfig.ts": {
+    "mtime": 1782559791.627374,
+    "ast_hash": "6eb134600f0e1d913763f99641cefdd0",
+    "semantic_hash": ""
+  },
+  "src/models/FantasyTeam.ts": {
+    "mtime": 1785478588.6640713,
+    "ast_hash": "20afd5bac12f419fc41e2e75007f61a1",
+    "semantic_hash": ""
+  },
+  "src/models/Fixture.ts": {
+    "mtime": 1783609654.348406,
+    "ast_hash": "d9f855ded10dec783d281be98073784f",
+    "semantic_hash": ""
+  },
+  "src/models/Gameweek.ts": {
+    "mtime": 1782552548.7023952,
+    "ast_hash": "572ee4234023e18620228659f9d88df3",
+    "semantic_hash": ""
+  },
+  "src/models/H2HFixture.ts": {
+    "mtime": 1784279360.3705807,
+    "ast_hash": "6a05d50b86b7e6e9ec892229dca59045",
+    "semantic_hash": ""
+  },
+  "src/models/H2HLeague.ts": {
+    "mtime": 1784280381.4551785,
+    "ast_hash": "aa735e1a49e1665868f6d68bc3ea44d5",
+    "semantic_hash": ""
+  },
+  "src/models/League.ts": {
+    "mtime": 1783605443.6338167,
+    "ast_hash": "02c307d696be08263383586c45a5b79b",
+    "semantic_hash": ""
+  },
+  "src/models/MatchDetails.ts": {
+    "mtime": 1783666101.4928226,
+    "ast_hash": "e59b36f8344113133d19d0d4c1a11465",
+    "semantic_hash": ""
+  },
+  "src/models/Notification.ts": {
+    "mtime": 1782560542.4803164,
+    "ast_hash": "13830168cdc10cb51ec8102ecd009cda",
+    "semantic_hash": ""
+  },
+  "src/models/Player.ts": {
+    "mtime": 1785478893.4670708,
+    "ast_hash": "4fb3e97c86c918504cfa9ef2fbdd3109",
+    "semantic_hash": ""
+  },
+  "src/models/PlayerStats.ts": {
+    "mtime": 1782541646.2267866,
+    "ast_hash": "e7c52bc557013880191c2b63211bd9e0",
+    "semantic_hash": ""
+  },
+  "src/models/Season.ts": {
+    "mtime": 1781534997.2980778,
+    "ast_hash": "22e5355ae098c6405277ebd672b12cf4",
+    "semantic_hash": ""
+  },
+  "src/models/Subscriber.ts": {
+    "mtime": 1782560420.0879655,
+    "ast_hash": "e847533d4d6eaf809075007077a48af0",
+    "semantic_hash": ""
+  },
+  "src/models/Team.ts": {
+    "mtime": 1784391090.6083553,
+    "ast_hash": "4218a640577592ba8a15e9450aa096f4",
+    "semantic_hash": ""
+  },
+  "src/models/Transfer.ts": {
+    "mtime": 1785483979.5505288,
+    "ast_hash": "9b4bcb693c98eedd71ca570d9de689a6",
+    "semantic_hash": ""
+  },
+  "src/models/User.ts": {
+    "mtime": 1782390201.1192133,
+    "ast_hash": "627168fd0d831cea0ddfb76778918368",
+    "semantic_hash": ""
+  },
+  "src/routes/admin.ts": {
+    "mtime": 1785485754.4270487,
+    "ast_hash": "54a2491391e88c60ddc992935650cafa",
+    "semantic_hash": ""
+  },
+  "src/routes/auth.ts": {
+    "mtime": 1762114259.8458998,
+    "ast_hash": "2506050ab43dd3f1e59e687e924d6ae3",
+    "semantic_hash": ""
+  },
+  "src/routes/footballApi.ts": {
+    "mtime": 1782402927.1067443,
+    "ast_hash": "02c866118d68f666ab157e15cfc2834e",
+    "semantic_hash": ""
+  },
+  "src/routes/h2h.ts": {
+    "mtime": 1784279551.592408,
+    "ast_hash": "b8a6e92bcf52ca7c53af676f3768d51d",
+    "semantic_hash": ""
+  },
+  "src/routes/manager.ts": {
+    "mtime": 1784276742.3990812,
+    "ast_hash": "908e89c58c2de4f6b75b80391f3ed858",
+    "semantic_hash": ""
+  },
+  "src/routes/notification.ts": {
+    "mtime": 1763383749.6943703,
+    "ast_hash": "b95af6710e49620d8be4b220fabed4b5",
+    "semantic_hash": ""
+  },
+  "src/routes/players.ts": {
+    "mtime": 1784722860.1030016,
+    "ast_hash": "3af22de623f1e2c308af675f5ca739ba",
+    "semantic_hash": ""
+  },
+  "src/routes/sheetRoutes.ts": {
+    "mtime": 1782316366.6962154,
+    "ast_hash": "1956822d7c9cb11746788b54cbfe0442",
+    "semantic_hash": ""
+  },
+  "src/routes/sofascore.ts": {
+    "mtime": 1782561535.837027,
+    "ast_hash": "e1f3acbf18406d1982e9a7cf0e4a670b",
+    "semantic_hash": ""
+  },
+  "src/routes/standings.ts": {
+    "mtime": 1784461820.415018,
+    "ast_hash": "b0a3ae11b41e2fb973903e807034a5c4",
+    "semantic_hash": ""
+  },
+  "src/routes/syncRoutes.ts": {
+    "mtime": 1781534997.3517299,
+    "ast_hash": "e7ca10edc432e2e8a3ef479d40936f26",
+    "semantic_hash": ""
+  },
+  "src/scripts/exportPlayersToGoogleSheet.ts": {
+    "mtime": 1785476149.9018593,
+    "ast_hash": "cd9f2c91e878396c66660ba2c8c9ae50",
+    "semantic_hash": ""
+  },
+  "src/scripts/fetchSofascoreData.js": {
+    "mtime": 1782561535.8387077,
+    "ast_hash": "c48aff0ece43f5308b7b70afd66710ec",
+    "semantic_hash": ""
+  },
+  "src/scripts/fetchSofascoreData.ts": {
+    "mtime": 1782561535.8541105,
+    "ast_hash": "a7529ffe3e881987601c46cae4609bef",
+    "semantic_hash": ""
+  },
+  "src/scripts/seedFixtures.ts": {
+    "mtime": 1783666126.5615613,
+    "ast_hash": "1097e2eb58532102e921ff1d4784b14b",
+    "semantic_hash": ""
+  },
+  "src/scripts/seedLeagues.ts": {
+    "mtime": 1783538386.379699,
+    "ast_hash": "3371c84dd8d80ed27fed41d106a6bb00",
+    "semantic_hash": ""
+  },
+  "src/scripts/seedPlayers.ts": {
+    "mtime": 1783599977.123235,
+    "ast_hash": "7e0f68934a9d9f00e012e3ab1f477955",
+    "semantic_hash": ""
+  },
+  "src/scripts/seedRounds.ts": {
+    "mtime": 1783605454.4010136,
+    "ast_hash": "425b443bbd6161b70703545c601cf220",
+    "semantic_hash": ""
+  },
+  "src/scripts/seedTeamsFromSofascore.ts": {
+    "mtime": 1783538791.5912225,
+    "ast_hash": "991f936ae2b6a14a6bbe6a0e3e5c8ca4",
+    "semantic_hash": ""
+  },
+  "src/scripts/sofascoreScraper.js": {
+    "mtime": 1782561535.8551311,
+    "ast_hash": "a0e39ae0b68e7527f04d921746854c40",
+    "semantic_hash": ""
+  },
+  "src/scripts/uploadPlayerImages.ts": {
+    "mtime": 1784132270.0697732,
+    "ast_hash": "f27300bb49143632479e52c131343240",
+    "semantic_hash": ""
+  },
+  "src/scripts/uploadTeamLogos.ts": {
+    "mtime": 1784391135.4636512,
+    "ast_hash": "98ada66502b44c4f4ab36dd1abdddb88",
+    "semantic_hash": ""
+  },
+  "src/services/apiSports.service.ts": {
+    "mtime": 1782573961.9840517,
+    "ast_hash": "38ca13e9510eb9f3ad4546fcbe2a7510",
+    "semantic_hash": ""
+  },
+  "src/types/error.ts": {
+    "mtime": 1761568614.562949,
+    "ast_hash": "f09daed893a1010014120b7c38edf0c0",
+    "semantic_hash": ""
+  },
+  "src/types/manager.ts": {
+    "mtime": 1762114259.849907,
+    "ast_hash": "040f6434e372e9b3e436c82b87f47a8c",
+    "semantic_hash": ""
+  },
+  "src/types/players.ts": {
+    "mtime": 1784391888.495538,
+    "ast_hash": "7b0020b8cbcdab7a490c1e397fd38e28",
+    "semantic_hash": ""
+  },
+  "src/types/standings.ts": {
+    "mtime": 1784403100.2846398,
+    "ast_hash": "e896df0b548dc4a0e4033350b87b2504",
+    "semantic_hash": ""
+  },
+  "src/types/users.ts": {
+    "mtime": 1781534997.3868988,
+    "ast_hash": "4f87c501934b9e5964bec360982cd2d2",
+    "semantic_hash": ""
+  },
+  "src/utils.ts": {
+    "mtime": 1782485236.4079711,
+    "ast_hash": "3abe7253599f76840af0090632328122",
+    "semantic_hash": ""
+  },
+  "src/utils/sofascoreScraper.ts": {
+    "mtime": 1782562106.3262088,
+    "ast_hash": "b454c7ca44dde23898eac9927ffebb96",
+    "semantic_hash": ""
+  },
+  "tsconfig.json": {
+    "mtime": 1761568614.5799692,
+    "ast_hash": "bf70af00db2ed0e522014d1c2fe9090b",
+    "semantic_hash": ""
+  },
+  "verify_output.txt": {
+    "mtime": 1781534997.4070742,
+    "ast_hash": "5c67135d81602025788efe5c62f72622",
+    "semantic_hash": ""
+  },
+  "verify_output_final.txt": {
+    "mtime": 1781534997.4154515,
+    "ast_hash": "a6d9ee0a7a042a35b8250f45710387e3",
+    "semantic_hash": ""
+  }
+}

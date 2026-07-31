@@ -84,7 +84,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
     // Fetch PlayerStats for points
     const PlayerStats = (await import("../models/PlayerStats")).PlayerStats;
     const playerStatsList = await PlayerStats.find({ playerId: { $in: playerIds } })
-      .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
+      .select('playerId totalPoints gameweeks')
       .lean();
     const playerStatsMap = new Map(playerStatsList.map(ps => [ps.playerId, ps]));
 
@@ -464,10 +464,11 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
       return {
         player_name: p?.webName || p?.name || "Unknown",
         lineup: pick.isStarting ? "Starting XI" : `Sub ${pick.subNumber || posIndex - 11}`,
-        type: pick.isCaptain ? "Captain" : pick.isViceCaptain ? "Vice Captain" : "Player",
+        type: pick.isCaptain ? "CAPTAIN" : pick.isViceCaptain ? "VICE CAPTAIN" : null,
         position: resolvePosition(p?.position || ''),
         // Add other mock fields if validators need them
         player_id: pick.playerId,
+        role: pick.isCaptain ? "CAPTAIN" : pick.isViceCaptain ? "VICE CAPTAIN" : null,
 
         team_short_name: teamDoc?.nameCode || teamDoc?.shortName || "UNK",
         team_color: teamDoc?.teamColors?.primary || "#003399",
@@ -841,7 +842,9 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     // 7. Recent Gameweeks History Stats
     const allHistoryPicks = fantasyTeam.history.flatMap(h => h.picks);
     const allHistoryPlayerIds = [...new Set(allHistoryPicks.map(p => p.playerId))];
-    const historyPlayerStats = await PlayerStats.find({ playerId: { $in: allHistoryPlayerIds } }).select('playerId gameweeks').lean();
+    const historyPlayerStats = await PlayerStats.find({ playerId: { $in: allHistoryPlayerIds } })
+        .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
+        .lean();
     const historyPsMap = new Map(historyPlayerStats.map(ps => [ps.playerId, ps]));
 
     const computeHistoryScore = (picks: any[], gwId: number) => {
@@ -905,7 +908,15 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       }
     }
 
-    const ownedPlayersWithStats = await PlayerStats.find({ playerId: { $in: Array.from(allOwnedPlayerIds) } }).lean();
+    const ownedPlayersWithStats = await PlayerStats.find({ playerId: { $in: Array.from(allOwnedPlayerIds) } })
+        .select(
+            'playerId totalPoints ' +
+            'gameweeks.id gameweeks.points ' +
+            'gameweeks.stats.minutesPlayed gameweeks.stats.goals gameweeks.stats.goalAssist gameweeks.stats.cleanSheet ' +
+            'gameweeks.stats.yellowCards gameweeks.stats.redCards gameweeks.stats.penaltyMissed gameweeks.stats.penaltySaved ' +
+            'gameweeks.stats.saves gameweeks.stats.totalTackle gameweeks.stats.totalClearance gameweeks.stats.outfielderBlock gameweeks.stats.ballRecovery'
+        )
+        .lean();
 
     const sortedGwStats = [...ownedPlayersWithStats]
       .map(stat => {

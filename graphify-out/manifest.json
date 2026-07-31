@@ -170,8 +170,8 @@
     "semantic_hash": ""
   },
   "server/src/controllers/manager.ts": {
-    "mtime": 1784723240.402207,
-    "ast_hash": "db8cb9426e63f5d34eac9caf4387e52a",
+    "mtime": 1785489522.8322306,
+    "ast_hash": "6b43e93d93242edee341c84d9421bf3a",
     "semantic_hash": ""
   },
   "server/src/controllers/notification.ts": {
@@ -190,8 +190,8 @@
     "semantic_hash": "fc924e7cbb34811345ef42ffbc277237"
   },
   "server/src/controllers/standings.ts": {
-    "mtime": 1784723078.4712305,
-    "ast_hash": "bdc70eb59d88376e6012bf148b498896",
+    "mtime": 1785487481.83217,
+    "ast_hash": "bc056fa903b9da39e59e125ca77f63fd",
     "semantic_hash": ""
   },
   "server/src/controllers/syncController.ts": {
@@ -965,8 +965,8 @@
     "semantic_hash": "2c60b41f89dbfd82c8b184a794560d1a"
   },
   "ui/src/pages/Manager/MyTeamPage.tsx": {
-    "mtime": 1784478850.5786548,
-    "ast_hash": "024252e71be92f5c3c555c5ab91cbda9",
+    "mtime": 1785489849.867814,
+    "ast_hash": "c22300fd3efaa3642321a54cb6a749d5",
     "semantic_hash": ""
   },
   "ui/src/pages/Manager/components/MyTeamHeader.tsx": {
@@ -1010,8 +1010,8 @@
     "semantic_hash": ""
   },
   "ui/src/pages/Standings/components/PlayerStatsModal.tsx": {
-    "mtime": 1784479941.0021763,
-    "ast_hash": "afb5c4350d448473b27f2d7df51e045e",
+    "mtime": 1785489186.9048312,
+    "ast_hash": "4b61c0d1e045999f5cdfa23bd93a969a",
     "semantic_hash": ""
   },
   "ui/src/pages/Stats.tsx": {
@@ -1747,6 +1747,11 @@
   "ui/src/routes/admin/teams.tsx": {
     "mtime": 1785485788.6021717,
     "ast_hash": "67d63e4f1afd70272907968da2e91a4e",
+    "semantic_hash": ""
+  },
+  "ui/src/pages/Manager/components/SaveTeamModal.tsx": {
+    "mtime": 1785489819.3965666,
+    "ast_hash": "afd930960da36e25ff4c06eac1cab3c2",
     "semantic_hash": ""
   }
 }

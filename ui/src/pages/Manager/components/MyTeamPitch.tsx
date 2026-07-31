@@ -1,6 +1,7 @@
 import PitchPlayerCard from "../../../components/PitchPlayerCard";
 import { Player } from "../../../features/players/types";
 import { Formation } from "../../../features/standings/types";
+import { X } from "lucide-react";
 
 interface MyTeamPitchProps {
   startingXI: Formation;
@@ -38,6 +39,18 @@ const MyTeamPitch = ({
           alt="Tactical pitch layout"
         />
       </div>
+
+      {/* Cancel Sub Button - top right of pitch */}
+      {substituteMode && swapSourcePlayer && (
+        <button
+          onClick={onCancelSubstitute}
+          className="absolute top-3 right-3 z-30 flex items-center gap-1.5 min-h-[40px] px-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold cursor-pointer active:scale-95 transition-all shadow-lg text-[11px] md:text-xs"
+          aria-label="Cancel substitution"
+        >
+          <X className="w-4 h-4" />
+          Cancel Sub
+        </button>
+      )}
 
       {/* Players Area - flex column with equal row spacing */}
       <div className="relative flex-1 flex flex-col justify-evenly z-10 pointer-events-none px-2 sm:px-4 md:px-8 py-3 md:py-6">

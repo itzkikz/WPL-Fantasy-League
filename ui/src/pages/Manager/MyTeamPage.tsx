@@ -27,6 +27,7 @@ import MyTeamPitch from "./components/MyTeamPitch";
 import { getPlayerDisplayPrice } from "../../libs/helpers/player";
 import MyTeamListView from "./components/MyTeamListView";
 import PlayerStatsModal from "../Standings/components/PlayerStatsModal";
+import SaveTeamModal from "./components/SaveTeamModal";
 
 // Local CSS styles
 import "./MyTeamPage.css";
@@ -69,6 +70,9 @@ const MyTeamPage = () => {
   const [actionOverlayOpen, setActionOverlayOpen] = useState(false);
   const [substituteMode, setSubstituteMode] = useState(false);
   const [swapSourcePlayer, setSwapSourcePlayer] = useState<Player | null>(null);
+  const [saveConfirmOpen, setSaveConfirmOpen] = useState(false);
+  const [pendingCaptain, setPendingCaptain] = useState<Player | null>(null);
+  const [pendingVice, setPendingVice] = useState<Player | null>(null);
 
   // Synchronize state with query details
   useEffect(() => {
@@ -208,6 +212,15 @@ const MyTeamPage = () => {
       }
     }
 
+    const allPlayers = [...allStarting, ...bench];
+    const findPlayer = (id?: number) => (id != null ? allPlayers.find(p => p.id === id) || null : null);
+    setPendingCaptain(findPlayer(roles?.captain));
+    setPendingVice(findPlayer(roles?.vice));
+    setSaveConfirmOpen(true);
+  };
+
+  const handleConfirmSave = () => {
+    setSaveConfirmOpen(false);
     mutation.mutate(
       { substitution: substitutions, roles },
       {
@@ -445,23 +458,6 @@ const MyTeamPage = () => {
         </div>
       )}
 
-      {substituteMode && swapSourcePlayer && (
-        <div className="fixed bottom-[calc(4rem+env(safe-area-inset-bottom))] left-0 right-0 z-40 border-t border-[var(--color-border-divider)] bg-background/90 backdrop-blur-md shadow-[0_-8px_20px_rgba(0,0,0,0.4)] transition-all animate-in slide-in-from-bottom duration-300">
-          <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
-            <span className="text-xs font-bold text-amber-300 min-w-0 line-clamp-1">
-              Tap a highlighted player to swap with <span className="underline font-extrabold">{swapSourcePlayer.name}</span>
-            </span>
-            <button
-              onClick={handleCancelSubstitute}
-              className="ml-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 cursor-pointer active:scale-95 transition-all"
-              aria-label="Cancel substitution"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* Player Selection Actions Overlay Modal */}
       <PlayerStatsModal
         isOpen={actionOverlayOpen}
@@ -475,6 +471,17 @@ const MyTeamPage = () => {
         onMakeViceCaptain={handleMakeViceCaptain}
         onSubstitute={handleSubstituteInitiate}
         pickMyTeam={managerDetails?.pickMyTeam}
+      />
+
+      {/* Save Confirmation Modal */}
+      <SaveTeamModal
+        isOpen={saveConfirmOpen}
+        onClose={() => setSaveConfirmOpen(false)}
+        onConfirm={handleConfirmSave}
+        substitutions={substitutions}
+        captain={pendingCaptain}
+        viceCaptain={pendingVice}
+        isSaving={mutation.isPending}
       />
 
       {/* Toast Notification */}
