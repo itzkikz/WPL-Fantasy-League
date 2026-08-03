@@ -54,6 +54,15 @@ const PlayerStatsModal = ({
     return stats?.team_text_color || player?.teamTextColor || "#ffffff";
   };
 
+  const formatMatchDate = (kickoff?: number | null) => {
+    if (!kickoff) return "";
+    try {
+      return new Date(kickoff * 1000).toLocaleDateString(undefined, { day: "numeric", month: "short" });
+    } catch {
+      return "";
+    }
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} variant="center" maxWidthClass="max-w-lg">
  
@@ -233,64 +242,29 @@ const PlayerStatsModal = ({
                   </h4>
                   <div className="space-y-2">
                     {(() => {
-                      const pos = stats.position || player.position;
                       const cw = stats.current_week;
-                      const isGK = pos === "GK";
-                      const isDEF = pos === "DEF";
-                      const mins = cw?.minutesPlayed || 0;
-                      if (mins === 0) return <p className="text-xs text-text-muted italic text-center py-4">Did not play this gameweek.</p>;
+                      const bd = stats.points_breakdown || [];
 
-                      const rows: { label: string; pts: number }[] = [];
-
-                      if (mins > 0) rows.push({ label: "Appearance", pts: mins >= 60 ? 2 : 1 });
-
-                      const goals = cw?.goals || 0;
-                      if (!isGK && goals > 0) {
-                        let gp = 0;
-                        if (isDEF) gp = goals * 6;
-                        else if (pos === "MID") gp = goals * 5;
-                        else gp = goals * 4;
-                        rows.push({ label: `Goals (${goals})`, pts: gp });
+                      if (bd.length === 0 && !(cw?.minutesPlayed > 0)) {
+                        return <p className="text-xs text-text-muted italic text-center py-4">Did not play this gameweek.</p>;
                       }
 
-                      const assists = cw?.goalAssist || 0;
-                      if (assists > 0) rows.push({ label: `Assists (${assists})`, pts: assists * 3 });
+                      // Points come from the server per-match breakdown (per-match rules, summed)
+                      const rows: { label: string; pts: number }[] = bd.map((it: any) => ({
+                        label: it.label,
+                        pts: it.points,
+                      }));
 
-                      const cs = Number(cw?.cleanSheet) || 0;
-                      if ((isGK || isDEF) && cs > 0) rows.push({ label: `Clean Sheets (${cs})`, pts: cs * 4 });
-                      else if (pos === "MID" && cs > 0) rows.push({ label: `Clean Sheets (${cs})`, pts: cs * 1 });
-
-                      const yc = cw?.yellowCards || 0;
-                      if (yc > 0) rows.push({ label: `Yellow Cards (${yc})`, pts: yc * -1 });
-
-                      const rc = cw?.redCards || 0;
-                      if (rc > 0) rows.push({ label: `Red Cards (${rc})`, pts: rc * -3 });
-
-                      if (isGK) {
-                        const penMiss = cw?.penaltyMissed || 0;
-                        if (penMiss > 0) rows.push({ label: `Penalty Missed (${penMiss})`, pts: penMiss * -2 });
-
-                        const penSave = cw?.penaltySaved || 0;
-                        if (penSave > 0) rows.push({ label: `Penalty Saved (${penSave})`, pts: penSave * 5 });
-
-                        const saves = cw?.saves || 0;
-                        if (saves >= 3) rows.push({ label: `Saves (${saves})`, pts: Math.floor(saves / 3) });
-                      }
-
+                      // Raw defensive counts (merged stats) shown as informational rows
                       const tackles = cw?.totalTackle || 0;
                       const clearances = cw?.totalClearance || 0;
                       const blocks = cw?.outfielderBlock || 0;
                       const recovery = cw?.ballRecovery || 0;
-                      const defCont = tackles + clearances + blocks + recovery;
-                      if (defCont > 0) {
-                        const dp = isDEF ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
-                        if (dp > 0) {
-                          rows.push({ label: `Tackles (${tackles})`, pts: 0 });
-                          rows.push({ label: `Clearances (${clearances})`, pts: 0 });
-                          rows.push({ label: `Blocks (${blocks})`, pts: 0 });
-                          rows.push({ label: `Recovery (${recovery})`, pts: 0 });
-                          rows.push({ label: `Defensive Bonus (÷${isDEF ? 10 : 12})`, pts: dp });
-                        }
+                      if (tackles || clearances || blocks || recovery) {
+                        rows.push({ label: `Tackles (${tackles})`, pts: 0 });
+                        rows.push({ label: `Clearances (${clearances})`, pts: 0 });
+                        rows.push({ label: `Blocks (${blocks})`, pts: 0 });
+                        rows.push({ label: `Recovery (${recovery})`, pts: 0 });
                       }
 
                       const total = rows.reduce((s, r) => s + r.pts, 0);
@@ -346,7 +320,70 @@ const PlayerStatsModal = ({
                   </div>
                 </div>
               </div>
- 
+
+              {/* Match-by-Match Split (multi-match gameweeks) */}
+              {(() => {
+                const matches = stats.current_week?.matches;
+                if (!matches || matches.length <= 1) return null;
+                return (
+                  <div className="bg-surface border border-border rounded-2xl p-4 flex flex-col">
+                    <h4 className="text-[10px] font-black uppercase tracking-wider text-text-muted border-b border-border pb-2 mb-3 flex items-center gap-1">
+                      <Target className="w-3.5 h-3.5 text-secondary" />
+                      Matches This Gameweek
+                    </h4>
+                    <div className="space-y-3">
+                      {matches.map((m: any, idx: number) => (
+                        <div key={`${m.fixtureId}-${idx}`} className="bg-card border border-border/40 rounded-xl p-3">
+                          <div className="flex items-center justify-between text-xs mb-2">
+                            <span className="text-[9px] font-black uppercase tracking-wider text-secondary">
+                              Match {idx + 1}
+                            </span>
+                            <span className="font-mono font-black text-[var(--color-success-bright)]">{m.points ?? 0} pts</span>
+                          </div>
+                          <div className="flex items-center justify-between text-[11px] text-text-muted mb-2">
+                            <span className="font-bold text-white">
+                              {m.opponent || m.opponent_short_name || "Unknown opponent"}
+                            </span>
+                            <span>
+                              {m.isHome === null || m.isHome === undefined
+                                ? ""
+                                : `${m.isHome ? "Home" : "Away"}`}{" "}
+                              {m.kickoff ? `• ${formatMatchDate(m.kickoff)}` : ""}
+                            </span>
+                          </div>
+                          <div className="grid grid-cols-5 gap-1.5 text-center">
+                            {[
+                              { label: "Mins", v: m.stats?.minutesPlayed ?? 0 },
+                              { label: "Goals", v: m.stats?.goals ?? 0 },
+                              { label: "Assists", v: m.stats?.goalAssist ?? 0 },
+                              { label: "CS", v: m.stats?.cleanSheet ?? 0 },
+                              { label: "Saves", v: m.stats?.saves ?? 0 },
+                            ].map((cell) => (
+                              <div key={cell.label} className="bg-background/60 rounded-lg py-1.5">
+                                <p className="text-[7px] text-text-muted font-bold uppercase">{cell.label}</p>
+                                <p className="text-xs font-black text-white">{cell.v}</p>
+                              </div>
+                            ))}
+                          </div>
+                          {(m.breakdown || []).length > 0 && (
+                            <div className="mt-2 pt-2 border-t border-border/40 space-y-1">
+                              {(m.breakdown as any[]).map((b: any, bi: number) => (
+                                <div key={bi} className="flex justify-between items-center text-[10px]">
+                                  <span className="text-text-muted">{b.label}</span>
+                                  <span className={`font-mono font-bold ${b.points >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                                    {b.points >= 0 ? `+${b.points}` : b.points}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
+
               {/* 5. Overall Season Statistics */}
               {(() => {
                 const pos = stats.position || player.position;

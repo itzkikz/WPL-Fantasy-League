@@ -67,9 +67,13 @@ const GameweekBreakdownPage = () => {
     const captainPlayer = starters.find((p) => p.isCaptain);
     const captainPlayed = !!(captainPlayer?.playerStats?.current_week?.minutesPlayed > 0);
 
+    const findBreakdown = (breakdown: any[], label: string) =>
+      breakdown.find((i) => i.label === label || i.label.startsWith(`${label} (`));
+
     starters.forEach((p: any) => {
-      const s = p.playerStats?.current_week;
-      if (!s) return;
+      const cw = p.playerStats?.current_week;
+      const breakdown = p.playerStats?.points_breakdown || [];
+      if (!cw && breakdown.length === 0) return;
 
       let multiplier = 1;
       if (p.isCaptain && captainPlayed) {
@@ -78,108 +82,65 @@ const GameweekBreakdownPage = () => {
         multiplier = 2;
       }
 
-      const position = p.position;
+      // Raw counts from merged current_week stats (sums are correct for display)
+      const s = cw || {};
+      totals.minutes.count += s.minutesPlayed || 0;
+      totals.goals.count += s.goals || 0;
+      totals.assists.count += s.goalAssist || 0;
+      totals.cleanSheets.count += s.cleanSheet || 0;
+      totals.yellowCards.count += s.yellowCards || 0;
+      totals.redCards.count += s.redCards || 0;
+      totals.penaltyMissed.count += s.penaltyMissed || 0;
+      totals.penaltySaved.count += s.penaltySaved || 0;
+      totals.saves.count += s.saves || 0;
+      totals.tackles.count += s.totalTackle || 0;
+      totals.clearances.count += s.totalClearance || 0;
+      totals.blocks.count += s.outfielderBlock || 0;
+      totals.recoveries.count += s.ballRecovery || 0;
 
-      // Minutes Played
-      const minutes = s.minutesPlayed || 0;
-      if (minutes > 0) {
-        totals.minutes.count += minutes;
-        totals.minutes.points += (minutes >= 60 ? 2 : 1) * multiplier;
-      }
+      // Points come from the server per-match breakdown (per-match rules, summed)
+      const ptsFor = (label: string): number => {
+        const it = findBreakdown(breakdown, label);
+        return it ? it.points * multiplier : 0;
+      };
 
-      // Goals
-      const goals = s.goals || 0;
-      if (goals > 0) {
-        let goalPts = 0;
-        if (position === "GK") goalPts = goals * 10;
-        else if (position === "DEF") goalPts = goals * 6;
-        else if (position === "MID") goalPts = goals * 5;
-        else if (position === "FWD") goalPts = goals * 4;
-        
-        totals.goals.count += goals;
-        totals.goals.points += goalPts * multiplier;
-      }
-
-      // Assists
-      const assists = s.goalAssist || 0;
-      if (assists > 0) {
-        totals.assists.count += assists;
-        totals.assists.points += (assists * 3) * multiplier;
-      }
-
-      // Clean Sheets
-      const cleanSheet = s.cleanSheet || 0;
-      if (cleanSheet > 0) {
-        let csPts = 0;
-        if (position === "GK" || position === "DEF") csPts = 4;
-        else if (position === "MID") csPts = 1;
-
-        if (csPts > 0) {
-          totals.cleanSheets.count += cleanSheet;
-          totals.cleanSheets.points += csPts * multiplier;
-        }
-      }
-
-      // Yellow Cards
-      const yellow = s.yellowCards || 0;
-      if (yellow > 0) {
-        totals.yellowCards.count += yellow;
-        totals.yellowCards.points += (yellow * -1) * multiplier;
-      }
-
-      // Red Cards
-      const red = s.redCards || 0;
-      if (red > 0) {
-        totals.redCards.count += red;
-        totals.redCards.points += (red * -3) * multiplier;
-      }
-
-      // Penalty Missed
-      const penMissed = s.penaltyMissed || 0;
-      if (penMissed > 0) {
-        totals.penaltyMissed.count += penMissed;
-        totals.penaltyMissed.points += (penMissed * -2) * multiplier;
-      }
-
-      // Penalty Saved
-      const penSaved = s.penaltySaved || 0;
-      if (penSaved > 0) {
-        totals.penaltySaved.count += penSaved;
-        totals.penaltySaved.points += (penSaved * 5) * multiplier;
-      }
-
-      // Saves
-      const saves = s.saves || 0;
-      if (saves > 0) {
-        totals.saves.count += saves;
-        totals.saves.points += Math.floor(saves / 3) * multiplier;
-      }
-
-      // Defensive counts
-      const tck = s.totalTackle || 0;
-      const clr = s.totalClearance || 0;
-      const blk = s.outfielderBlock || 0;
-      const rec = s.ballRecovery || 0;
-
-      totals.tackles.count += tck;
-      totals.clearances.count += clr;
-      totals.blocks.count += blk;
-      totals.recoveries.count += rec;
-
-      // Defensive points contribution
-      const defCont = tck + clr + blk + rec;
-      if (defCont > 0) {
-        let defPts = 0;
-        if (position === "DEF") {
-          defPts = Math.floor(defCont / 10) * 2;
-        } else {
-          defPts = Math.floor(defCont / 12) * 2;
-        }
-        totals.defensivePoints.points += defPts * multiplier;
-      }
+      const minIt = findBreakdown(breakdown, "Minutes Played");
+      if (minIt) totals.minutes.points += minIt.points * multiplier;
+      totals.goals.points += ptsFor("Goals");
+      totals.assists.points += ptsFor("Assists");
+      totals.cleanSheets.points += ptsFor("Clean Sheet");
+      totals.yellowCards.points += ptsFor("Yellow Cards");
+      totals.redCards.points += ptsFor("Red Card");
+      totals.penaltyMissed.points += ptsFor("Penalty Missed");
+      totals.penaltySaved.points += ptsFor("Penalty Saved");
+      totals.saves.points += ptsFor("Saves");
+      totals.defensivePoints.points += ptsFor("Defensive Actions");
     });
 
     return totals;
+  };
+
+  const getMultiMatchPlayers = () => {
+    const all = [
+      ...(starting ? (Object.values(starting).flat() as any[]) : []),
+      ...(bench || []),
+    ];
+    return all
+      .filter((p: any) => (p.playerStats?.current_week?.matches || []).length > 1)
+      .map((p: any) => ({
+        name: p.name,
+        position: p.position,
+        matches: p.playerStats.current_week.matches,
+      }));
+  };
+
+  const formatKickoff = (kickoff?: number | null) => {
+    if (!kickoff) return "";
+    try {
+      return new Date(kickoff * 1000).toLocaleDateString(undefined, { day: "numeric", month: "short" });
+    } catch {
+      return "";
+    }
   };
 
   const getPlayerPrice = (p: Player) => {
@@ -639,6 +600,67 @@ const GameweekBreakdownPage = () => {
             ) : (
               /* Points View Content */
               <div className="flex-1 flex flex-col gap-4 max-w-3xl mx-auto w-full animate-in fade-in duration-300">
+                {/* Match-by-Match Split (multi-match gameweeks) */}
+                {/* {(() => {
+                  const splits = getMultiMatchPlayers();
+                  if (splits.length === 0) return null;
+                  return (
+                    <div className="bg-surface border border-border rounded-2xl overflow-hidden shadow-card">
+                      <div className="px-4 py-3 border-b border-border flex items-center justify-between">
+                        <span className="text-xs font-extrabold text-text-muted uppercase tracking-wider">
+                          Match-by-Match ({splits.length} player{splits.length > 1 ? "s" : ""} with multiple matches)
+                        </span>
+                      </div>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse text-[11px]">
+                          <thead className="bg-card text-text-muted uppercase tracking-wider font-extrabold text-[9px]">
+                            <tr className="border-b border-border">
+                              <th className="py-2.5 px-4">Player</th>
+                              <th className="py-2.5 px-3 text-center">Match</th>
+                              <th className="py-2.5 px-3 text-center">Opponent</th>
+                              <th className="py-2.5 px-3 text-center">H/A</th>
+                              <th className="py-2.5 px-3 text-center">Mins</th>
+                              <th className="py-2.5 px-3 text-center">G</th>
+                              <th className="py-2.5 px-3 text-center">A</th>
+                              <th className="py-2.5 px-3 text-center">CS</th>
+                              <th className="py-2.5 px-3 text-center">Svs</th>
+                              <th className="py-2.5 px-3 text-center">Pts</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-border/30">
+                            {splits.map((sp) =>
+                              sp.matches.map((m: any, idx: number) => (
+                                <tr key={`${sp.name}-${m.fixtureId}`} className="hover:bg-white/5">
+                                  <td className="py-2.5 px-4 font-bold text-white whitespace-nowrap">
+                                    {idx === 0 ? (
+                                      <span>{sp.name} <span className="text-[9px] text-text-muted">({sp.position})</span></span>
+                                    ) : null}
+                                  </td>
+                                  <td className="py-2.5 px-3 text-center text-text-muted">M{idx + 1}</td>
+                                  <td className="py-2.5 px-3 text-center">
+                                    {m.opponent || m.opponent_short_name || "—"}
+                                  </td>
+                                  <td className="py-2.5 px-3 text-center text-text-muted">
+                                    {m.isHome === null || m.isHome === undefined ? "—" : m.isHome ? "H" : "A"}
+                                  </td>
+                                  <td className="py-2.5 px-3 text-center">{m.stats?.minutesPlayed ?? 0}</td>
+                                  <td className="py-2.5 px-3 text-center">{m.stats?.goals ?? 0}</td>
+                                  <td className="py-2.5 px-3 text-center">{m.stats?.goalAssist ?? 0}</td>
+                                  <td className="py-2.5 px-3 text-center">{m.stats?.cleanSheet ?? 0}</td>
+                                  <td className="py-2.5 px-3 text-center">{m.stats?.saves ?? 0}</td>
+                                  <td className="py-2.5 px-3 text-center font-mono font-extrabold text-[var(--color-success-bright)]">
+                                    {m.points ?? 0}
+                                  </td>
+                                </tr>
+                              ))
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  );
+                })()} */}
+
                 {/* Stats Summary Panel */}
                 <div className="bg-surface border border-border rounded-2xl p-4 shadow-card grid grid-cols-3 gap-2">
                   <div className="flex flex-col items-center justify-center text-center">

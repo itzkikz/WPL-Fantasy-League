@@ -6,6 +6,7 @@ import { H2HFixture } from '../models/H2HFixture';
 import { PlayerStats } from '../models/PlayerStats';
 import { Player } from '../models/Player';
 import { Gameweek } from '../models/Gameweek';
+import { getGameweekPoints, getGameweekMinutes } from './players';
 
 // Helper: compute a fantasy team's GW points from its history picks + player stats
 async function computeTeamGWPoints(teamId: string, gameweek: number, currentGw: number): Promise<number> {
@@ -32,10 +33,7 @@ async function computeTeamGWPoints(teamId: string, gameweek: number, currentGw: 
     // Build minutes map for captain check
     const minutesMap = new Map<number, number>();
     for (const ps of allPlayerStats) {
-        const gwData = ps.gameweeks?.find((g: any) => g.id === gameweek);
-        if (gwData && gwData.stats) {
-            minutesMap.set(ps.playerId, gwData.stats.minutesPlayed || 0);
-        }
+        minutesMap.set(ps.playerId, getGameweekMinutes(ps.gameweeks, gameweek));
     }
 
     // Check if captain played
@@ -50,10 +48,10 @@ async function computeTeamGWPoints(teamId: string, gameweek: number, currentGw: 
         if (!pick.isStarting) continue;
         const ps = allPlayerStats.find((s: any) => s.playerId === pick.playerId);
         if (!ps) continue;
-        const gwData = ps.gameweeks?.find((g: any) => g.id === gameweek);
-        if (!gwData) continue;
 
-        let pts = gwData.points || 0;
+        let pts = getGameweekPoints(ps.gameweeks, gameweek);
+        if (pts === 0) continue;
+
         if (pick.isCaptain && captainPlayed) {
             pts *= 2;
         } else if (pick.isViceCaptain && !captainPlayed) {
@@ -135,7 +133,7 @@ export const getH2HStandings = async (req: Request, res: Response) => {
         const league = await H2HLeague.findById(id)
             .populate({
                 path: 'fantasyTeams',
-                select: 'name managers managerDisplayNames',
+                select: 'name managers managerDisplayNames logo',
                 populate: { path: 'managers', select: 'username displayName' }
             })
             .lean();
@@ -148,7 +146,7 @@ export const getH2HStandings = async (req: Request, res: Response) => {
         const gwPointsMap = await getLeagueAllGWPoints(league);
 
         // Build standings
-        const standings: Record<string, { teamId: string; teamName: string; managerName: string; played: number; won: number; drawn: number; lost: number; gf: number; ga: number; pts: number }> = {};
+        const standings: Record<string, { teamId: string; teamName: string; managerName: string; logo: string; played: number; won: number; drawn: number; lost: number; gf: number; ga: number; pts: number }> = {};
 
         for (const team of league.fantasyTeams) {
             const t = team as any;
@@ -162,6 +160,7 @@ export const getH2HStandings = async (req: Request, res: Response) => {
                 teamId: t._id.toString(),
                 teamName: t.name,
                 managerName,
+                logo: t.logo || "",
                 played: 0,
                 won: 0,
                 drawn: 0,
@@ -223,7 +222,7 @@ export const getH2HLeagueFixturesPublic = async (req: Request, res: Response) =>
         const { gameweek } = req.query;
 
         const league = await H2HLeague.findById(id)
-            .populate('fantasyTeams', 'name')
+            .populate('fantasyTeams', 'name logo')
             .lean();
         if (!league) return res.status(404).json({ error: 'H2H league not found' });
 
@@ -231,8 +230,8 @@ export const getH2HLeagueFixturesPublic = async (req: Request, res: Response) =>
         if (gameweek) query.gameweek = Number(gameweek);
 
         const fixtures = await H2HFixture.find(query)
-            .populate('homeTeam', 'name')
-            .populate('awayTeam', 'name')
+            .populate('homeTeam', 'name logo')
+            .populate('awayTeam', 'name logo')
             .sort({ gameweek: 1 })
             .lean();
 

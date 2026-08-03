@@ -15,6 +15,7 @@
     "seed:fixtures": "ts-node src/scripts/seedFixtures.ts",
     "seed:player-images": "ts-node src/scripts/uploadPlayerImages.ts",
     "seed:team-logos": "ts-node src/scripts/uploadTeamLogos.ts",
+    "recompute:stats": "ts-node src/scripts/recomputeMatchStats.ts",
     "export:players-sheet": "ts-node src/scripts/exportPlayersToGoogleSheet.ts"
   },
   "author": "",

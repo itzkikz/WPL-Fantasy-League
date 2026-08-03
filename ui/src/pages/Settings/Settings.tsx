@@ -92,7 +92,13 @@ export default function Settings() {
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-5">
               <div className="h-16 w-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-inner">
-                {isAdmin ? 'A' : (managerDetails?.team?.charAt(0) || 'U')}
+                {isAdmin ? (
+                  'A'
+                ) : managerDetails?.logo ? (
+                  <img src={managerDetails.logo} alt={`${managerDetails.team} logo`} className="h-13 w-13 object-contain" />
+                ) : (
+                  (managerDetails?.team?.charAt(0) || 'U')
+                )}
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">

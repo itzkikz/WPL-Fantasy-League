@@ -190,8 +190,8 @@
     "semantic_hash": "fc924e7cbb34811345ef42ffbc277237"
   },
   "server/src/controllers/standings.ts": {
-    "mtime": 1785766977.7114177,
-    "ast_hash": "2ba9ea38fc228263bae0d14044a51cb3",
+    "mtime": 1785765199.933416,
+    "ast_hash": "9f56f485719436a48939b561ec826cb5",
     "semantic_hash": ""
   },
   "server/src/controllers/syncController.ts": {
@@ -380,8 +380,8 @@
     "semantic_hash": "e1f3acbf18406d1982e9a7cf0e4a670b"
   },
   "server/src/routes/standings.ts": {
-    "mtime": 1785766939.050532,
-    "ast_hash": "db6875889220920c3b3feea3b67f2104",
+    "mtime": 1784461820.415018,
+    "ast_hash": "b0a3ae11b41e2fb973903e807034a5c4",
     "semantic_hash": ""
   },
   "server/src/routes/syncRoutes.ts": {
@@ -910,23 +910,23 @@
     "semantic_hash": "6d9acb31255f9e3fb0132b28c19212e4"
   },
   "ui/src/features/standings/api.ts": {
-    "mtime": 1785767024.4540617,
-    "ast_hash": "457f9939507fef4451f404a5f5a9f43d",
+    "mtime": 1784461837.3112578,
+    "ast_hash": "6466374f23d47aa6d2939bd9ae44397d",
     "semantic_hash": ""
   },
   "ui/src/features/standings/hooks.ts": {
-    "mtime": 1785767050.6635523,
-    "ast_hash": "a4888eb699fc517ff4a92a0643e411fd",
+    "mtime": 1784461849.3384216,
+    "ast_hash": "9340883f11b6f3a246afdd4282c7f7d0",
     "semantic_hash": ""
   },
   "ui/src/features/standings/queries.ts": {
-    "mtime": 1785767031.6464572,
-    "ast_hash": "288130d116a717732e005650f481dc68",
+    "mtime": 1784461842.0576482,
+    "ast_hash": "14732a65fac3b320a7621eef491a5c9a",
     "semantic_hash": ""
   },
   "ui/src/features/standings/types.ts": {
-    "mtime": 1785767057.0828066,
-    "ast_hash": "93f63c5c08638d1073d8d0b0de55f7c8",
+    "mtime": 1785765094.2675486,
+    "ast_hash": "571db3f8f7decb89b7056fc583c8b9bf",
     "semantic_hash": ""
   },
   "ui/src/libs/helpers/color.ts": {
@@ -1000,8 +1000,8 @@
     "semantic_hash": ""
   },
   "ui/src/pages/Standings/StandingsPage.tsx": {
-    "mtime": 1785767231.0237916,
-    "ast_hash": "1c700e52d131403e5db0de730e20bef3",
+    "mtime": 1785765103.3377378,
+    "ast_hash": "368e4e4830fb1849870640a1f4e3b90b",
     "semantic_hash": ""
   },
   "ui/src/pages/Standings/TeamDetailsPage.tsx": {
@@ -1777,11 +1777,6 @@
   "server/src/scripts/recomputeMatchStats.ts": {
     "mtime": 1785763948.376279,
     "ast_hash": "474717e0b17af7eb7c9668552bf926b2",
-    "semantic_hash": ""
-  },
-  "ui/src/pages/Standings/components/FixturePlayersModal.tsx": {
-    "mtime": 1785767142.8162122,
-    "ast_hash": "a7bdfdaee49f2397a54a224f3754491c",
     "semantic_hash": ""
   }
 }

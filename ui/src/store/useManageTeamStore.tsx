@@ -23,7 +23,7 @@ export const useManageTeamStore = create<useManageTeamStoreState>()(
       substitutions: [],
       setSubstitutions: (value: Substitutions) =>
         set((state) => ({ substitutions: [...state.substitutions, value] })),
-      resetSubstitutions: () => set({ substitutions: [] }),
+      resetSubstitutions: () => set({ substitutions: [], roles: {} }),
       teamDetails: {},
       setTeamDetails: (value: TeamDetails) => set({ teamDetails: value }),
       roles: {},

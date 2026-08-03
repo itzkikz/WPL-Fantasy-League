@@ -19,6 +19,10 @@ export const useStandingsFixtures = () => {
   return useQuery(standingsQueries.fixtures())
 }
 
+export const useFixturePlayers = (fixtureId: number | null) => {
+  return useQuery(standingsQueries.fixturePlayers(fixtureId || 0))
+}
+
 // export const useCreateBook = () => {
 //   const queryClient = useQueryClient()
   

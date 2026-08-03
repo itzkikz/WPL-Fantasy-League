@@ -10,6 +10,7 @@ interface MyTeamHeaderProps {
   pickMyTeam?: boolean;
   headerTab: "current" | "history";
   setHeaderTab: (tab: "current" | "history") => void;
+  logo?: string;
 }
 
 const MyTeamHeader = ({
@@ -22,6 +23,7 @@ const MyTeamHeader = ({
   pickMyTeam = false,
   headerTab,
   setHeaderTab,
+  logo,
 }: MyTeamHeaderProps) => {
   return (
     <div className="mx-4 mt-3 bg-gradient-card border border-border rounded-2xl p-4 shadow-card relative overflow-hidden shrink-0">
@@ -30,6 +32,11 @@ const MyTeamHeader = ({
  
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3 min-w-0">
+          {logo && (
+            <div className="w-11 h-11 rounded-xl bg-background/60 border border-border/80 flex items-center justify-center overflow-hidden shrink-0">
+              <img src={logo} alt="Team logo" className="w-10 h-10 object-contain" />
+            </div>
+          )}
           <div className="min-w-0">
             <h1 className="text-lg md:text-xl font-black tracking-tight flex items-center gap-2">
               My Team

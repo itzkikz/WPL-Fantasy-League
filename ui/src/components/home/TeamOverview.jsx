@@ -20,6 +20,7 @@ function LogoPlaceholder() {
  */
 export default function TeamOverview({
   teamName = "Kiran FC",
+  logo,
   managers = [],
   crestEmoji = <Shield className="w-5 h-5" />,
   overallRank = "12,345",
@@ -30,10 +31,18 @@ export default function TeamOverview({
 }) {
   return (
     <div className="relative overflow-hidden rounded-[10px] bg-gradient-overview bg-dots shadow-card min-h-[115px]">
-      {/* right side visual containing the pitch color and the logo placeholder */}
+      {/* right side visual containing the pitch color and the logo */}
       <div className="absolute right-0 top-0 h-full w-[48%] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1D8D44] to-[#0B5F2B] [clip-path:polygon(42%_0,100%_0,100%_100%,0_100%)] flex items-center justify-center pl-6">
-          <LogoPlaceholder />
+          {logo ? (
+            <img
+              src={logo}
+              alt={`${teamName} logo`}
+              className="relative w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md"
+            />
+          ) : (
+            <LogoPlaceholder />
+          )}
         </div>
       </div>
 

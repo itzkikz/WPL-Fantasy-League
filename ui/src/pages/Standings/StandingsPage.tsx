@@ -9,12 +9,14 @@ import {
   ChevronRight,
   BarChart3,
   Clock,
-  Crown
+  Crown,
+  Activity
 } from "lucide-react";
 import { useStandings, useStandingsFixtures } from "../../features/standings/hooks";
 import { useManagerDetails } from "../../features/manager/hooks";
 import { useMyFixtures } from "../../features/home/hooks";
 import dayjs from "dayjs";
+import FixturePlayersModal from "./components/FixturePlayersModal";
 
 const MOCK_MANAGERS: Record<string, string> = {
   "The Invincibles": "Rahul Sharma",
@@ -55,6 +57,7 @@ const StandingsPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'overall' | 'fixtures'>('overall');
   const [fixtureFilter, setFixtureFilter] = useState<'mine' | 'all'>('mine');
+  const [selectedFixture, setSelectedFixture] = useState<any | null>(null);
   const { data: standings, isLoading } = useStandings();
   const { data: managerDetails } = useManagerDetails();
   const { data: fixturesResponse, isLoading: isLoadingFixtures } = useStandingsFixtures();
@@ -210,9 +213,15 @@ const StandingsPage = () => {
                     {i === 0 && (
                       <Crown className="w-4 h-4 text-yellow-400 absolute -top-2.5 left-4 rotate-12 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10 animate-pulse" />
                     )}
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${crest.bg}`}>
-                      {crest.emoji}
-                    </div>
+                    {r.logo ? (
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden border border-white/10 bg-white/5">
+                        <img src={r.logo} alt={`${r.team} logo`} className="w-9 h-9 object-contain" />
+                      </div>
+                    ) : (
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${crest.bg}`}>
+                        {crest.emoji}
+                      </div>
+                    )}
                   </div>
 
                   {/* Name column */}
@@ -296,7 +305,8 @@ const StandingsPage = () => {
                     return (
                       <div
                         key={fix.fixtureId}
-                        className={`rounded-2xl transition-all duration-200 ${isRelevant
+                        onClick={() => setSelectedFixture(fix)}
+                        className={`rounded-2xl transition-all duration-200 cursor-pointer active:scale-[0.99] ${isRelevant
                           ? 'bg-amber-500/[0.07] border border-amber-500/30 shadow-[0_0_12px_rgba(245,158,11,0.1)]'
                           : 'bg-white/5 border border-white/[0.03] hover:bg-white/10'
                           }`}
@@ -359,6 +369,15 @@ const StandingsPage = () => {
                             </div>
                           </div>
                         )}
+
+                        {/* View Player Stats */}
+                        <div className="px-4 pb-3 -mt-1 flex items-center justify-between">
+                          <span className="text-[9px] font-bold text-secondary/90 uppercase tracking-wider flex items-center gap-1">
+                            <Activity className="w-3 h-3" />
+                            View Player Stats
+                          </span>
+                          <ChevronRight className="w-3.5 h-3.5 text-[#c8c8c8]/30" />
+                        </div>
                       </div>
                     );
                   });
@@ -397,6 +416,13 @@ const StandingsPage = () => {
           </button>
         </div>
       )} */}
+
+      {/* Fixture Player Stats Modal */}
+      <FixturePlayersModal
+        isOpen={!!selectedFixture}
+        onClose={() => setSelectedFixture(null)}
+        fixture={selectedFixture}
+      />
 
     </div>
   );

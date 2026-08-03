@@ -24,6 +24,11 @@ export const standingsApi = {
     return response.data.data
   },
 
+  getFixturePlayers: async (fixtureId: number): Promise<any> => {
+    const response = await apiClient.get(`/standings/fixtures/${fixtureId}/players`)
+    return response.data.data
+  },
+
   // create: async (book: Omit<Book, 'id'>): Promise<Book> => {
   //   const response = await apiClient.post('/books', book)
   //   return response.data

@@ -9,6 +9,7 @@ import SideNavbar from "../common/SideNavbar";
 import PWAInstallBanner from "../PWAInstallBanner";
 import { useValidateToken } from "../../features/auth/hooks";
 import { useUserStore } from "../../store/useUserStore";
+import { useManagerDetails } from "../../features/manager/hooks";
 
 export const MainLayout = () => {
     const navigate = useNavigate();
@@ -18,6 +19,8 @@ export const MainLayout = () => {
     const user = useUserStore((state) => state.user);
     const isGuest = useUserStore((state) => state.isGuest);
     const setUser = useUserStore((state) => state.setUser);
+
+    const { data: managerDetails } = useManagerDetails();
 
     const currentPath = location.pathname;
     const isAdminPath = currentPath.startsWith("/admin");
@@ -149,20 +152,28 @@ export const MainLayout = () => {
                                         onClick={() => navigate({ to: '/settings' })}
                                         className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/15 text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,.2)]"
                                     >
-                                        <svg
-                                            className="h-6 w-6"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                        {!isAdmin && managerDetails?.logo ? (
+                                            <img
+                                                src={managerDetails.logo}
+                                                alt="Team logo"
+                                                className="h-8 w-8 rounded-full object-contain"
                                             />
-                                        </svg>
+                                        ) : (
+                                            <svg
+                                                className="h-6 w-6"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                                />
+                                            </svg>
+                                        )}
                                     </button>
                                 </div></div>
 

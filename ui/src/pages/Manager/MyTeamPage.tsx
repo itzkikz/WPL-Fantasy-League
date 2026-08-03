@@ -101,19 +101,17 @@ const MyTeamPage = () => {
       // Execute the swap helper
       const swapResult = executeSwap(
         { starting: startingXI, bench },
-        swapSourcePlayer,
-        player
+        swapSourcePlayer.name,
+        player.name
       );
-
-      if (swapResult.success) {
+      if (swapResult && !("error" in swapResult)) {
         setStartingXI(swapResult.starting);
         setBench(swapResult.bench);
 
         // Record the swap in Zustand store
-        const newSubstitutions = [...substitutions, { swapIn: player, swapOut: swapSourcePlayer }];
-        setSubstitutions(newSubstitutions);
+        setSubstitutions({ swapIn: swapResult.swappedIn, swapOut: swapResult.swappedOut });
 
-        showToast(`Substituted ${swapSourcePlayer.webName} for ${player.webName}`, "SUCCESS");
+        showToast(`Substituted ${swapSourcePlayer.name} for ${player.name}`, "SUCCESS");
       } else {
         showToast(swapResult.error || "Invalid substitution", "ERROR");
       }
@@ -130,18 +128,28 @@ const MyTeamPage = () => {
   };
 
   const handleMakeCaptain = (player: Player) => {
-    const updatedStarting = setCaptain(startingXI, player.id);
-    setStartingXI(updatedStarting);
-    setRoles({ captainId: player.id });
-    showToast(`${player.webName} set as Captain (C)`, "SUCCESS");
+    const result = setCaptain({ starting: startingXI, bench }, player.id);
+    if (result && !("error" in result)) {
+      setStartingXI(result.starting);
+      setBench(result.bench);
+      setRoles({ ...roles, captain: player.id });
+      showToast(`${player.name} set as Captain (C)`, "SUCCESS");
+    } else {
+      showToast("error" in result ? result.error : "Failed to set captain", "ERROR");
+    }
     setActionOverlayOpen(false);
   };
 
   const handleMakeViceCaptain = (player: Player) => {
-    const updatedStarting = setViceCaptain(startingXI, player.id);
-    setStartingXI(updatedStarting);
-    setRoles({ viceCaptainId: player.id });
-    showToast(`${player.webName} set as Vice-Captain (VC)`, "SUCCESS");
+    const result = setViceCaptain({ starting: startingXI, bench }, player.id);
+    if (result && !("error" in result)) {
+      setStartingXI(result.starting);
+      setBench(result.bench);
+      setRoles({ ...roles, vice: player.id });
+      showToast(`${player.name} set as Vice-Captain (VC)`, "SUCCESS");
+    } else {
+      showToast("error" in result ? result.error : "Failed to set vice-captain", "ERROR");
+    }
     setActionOverlayOpen(false);
   };
 
@@ -154,13 +162,13 @@ const MyTeamPage = () => {
     const isStarter = Object.values(startingXI).flat().some(p => p.id === player.id);
     const highlightResult = playerSwap(
       { starting: startingXI, bench },
-      player,
+      player?.name,
       isStarter ? "starting" : "bench"
     );
 
     setStartingXI(highlightResult.starting);
     setBench(highlightResult.bench);
-    showToast(`Select a highlighted player to substitute with ${player.webName}`, "SUCCESS");
+    showToast(`Select a highlighted player to substitute with ${player.name}`, "SUCCESS");
   };
 
   const handleSaveTeam = () => {
@@ -175,11 +183,12 @@ const MyTeamPage = () => {
 
   const handleConfirmSave = () => {
     mutation.mutate(
-      { substitutions },
+      { substitution: substitutions, roles },
       {
         onSuccess: () => {
           showToast("Lineup saved successfully!", "SUCCESS");
           resetSubstitutions();
+          setRoles({});
           setSaveConfirmOpen(false);
         },
         onError: (err: any) => {
@@ -283,6 +292,7 @@ const MyTeamPage = () => {
           totalGWScore={managerDetails?.totalGWScore}
           totalPointsFormatted={totalPointsFormatted}
           pickMyTeam={managerDetails?.pickMyTeam}
+          logo={managerDetails?.logo}
           headerTab={headerTab}
           setHeaderTab={(tab) => {
             setHeaderTab(tab);
@@ -300,9 +310,15 @@ const MyTeamPage = () => {
           {/* Team Name & Manager Info Header */}
           <div className="space-y-3 pb-4 border-b border-border/60">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600/30 to-indigo-600/30 border border-purple-500/30 flex items-center justify-center text-purple-300 font-black text-xl shadow-inner shrink-0">
-                🛡️
-              </div>
+              {managerDetails?.logo ? (
+                <div className="w-12 h-12 rounded-2xl bg-background/60 border border-border/60 flex items-center justify-center overflow-hidden shrink-0">
+                  <img src={managerDetails.logo} alt={`${managerDetails.team} logo`} className="w-11 h-11 object-contain" />
+                </div>
+              ) : (
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600/30 to-indigo-600/30 border border-purple-500/30 flex items-center justify-center text-purple-300 font-black text-xl shadow-inner shrink-0">
+                  🛡️
+                </div>
+              )}
               <div className="min-w-0 flex-1">
                 <h2 className="text-lg font-black text-white tracking-tight truncate">
                   {managerDetails?.team || "My Squad"}
