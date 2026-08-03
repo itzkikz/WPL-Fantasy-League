@@ -601,7 +601,7 @@ const GameweekBreakdownPage = () => {
               /* Points View Content */
               <div className="flex-1 flex flex-col gap-4 max-w-3xl mx-auto w-full animate-in fade-in duration-300">
                 {/* Match-by-Match Split (multi-match gameweeks) */}
-                {(() => {
+                {/* {(() => {
                   const splits = getMultiMatchPlayers();
                   if (splits.length === 0) return null;
                   return (
@@ -659,7 +659,7 @@ const GameweekBreakdownPage = () => {
                       </div>
                     </div>
                   );
-                })()}
+                })()} */}
 
                 {/* Stats Summary Panel */}
                 <div className="bg-surface border border-border rounded-2xl p-4 shadow-card grid grid-cols-3 gap-2">
