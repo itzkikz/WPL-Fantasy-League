@@ -29,8 +29,21 @@ export interface TeamDetails {
     avg: number,
     highest: number,
     gw: number,
-    gw: number,
     currentGw: number,
     team_name: string,
     team_id: string
+}
+
+export interface FixturePlayerStats {
+    playerId: number;
+    name: string;
+    photo?: string;
+    position: string;
+    teamId?: number;
+    fantasyTeams: string[];
+    points: number;
+    minutes?: number;
+    goals?: number;
+    assists?: number;
+    cleanSheet?: number;
 }

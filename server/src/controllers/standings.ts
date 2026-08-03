@@ -667,6 +667,133 @@ export const getFixturesForCurrentGameweek = async (req: Request, res: Response)
     }
 }
 
+export const getFixturePlayers = async (req: Request, res: Response) => {
+    try {
+        const fixtureId = parseInt(req.params.fixtureId, 10);
+        if (isNaN(fixtureId)) {
+            return res.status(400).json({ success: false, error: "Invalid fixture ID" });
+        }
+
+        const Fixture = (await import("../models/Fixture")).Fixture;
+        const fixture = (await Fixture.findOne({ fixtureId }).lean()) as any;
+        if (!fixture) {
+            return res.status(404).json({ success: false, error: "Fixture not found" });
+        }
+
+        const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean() as any;
+        const currentGw = currentGwDoc ? currentGwDoc.number : null;
+        const fixtureGw = fixture.roundInfo?.round ?? currentGw;
+
+        const teams = await Team.find({}, 'id name nameCode photo logo teamColors').lean() as any[];
+        const teamMap = new Map(teams.map((t: any) => [t.id, t]));
+        const homeInfo = teamMap.get(fixture.homeTeam?.id);
+        const awayInfo = teamMap.get(fixture.awayTeam?.id);
+
+        // Build owned players (playerId -> fantasy team names[]) for the fixture's gameweek
+        const allFantasyTeams = await FantasyTeam.find({}, 'name history currentSquad.picks.playerId').lean() as any[];
+        const playerToFantasyTeams = new Map<number, string[]>();
+        for (const ft of allFantasyTeams) {
+            let picks: any[] = [];
+            if (fixtureGw === currentGw && ft.currentSquad?.picks?.length > 0) {
+                picks = ft.currentSquad.picks;
+            } else {
+                const h = (ft.history || []).find((x: any) => x.gameweek === fixtureGw);
+                if (h) picks = h.picks;
+            }
+            for (const pick of picks) {
+                const pId = pick?.playerId;
+                if (pId == null) continue;
+                const list = playerToFantasyTeams.get(pId) || [];
+                if (!list.includes(ft.name)) list.push(ft.name);
+                playerToFantasyTeams.set(pId, list);
+            }
+        }
+
+        const ownedIds = [...playerToFantasyTeams.keys()];
+        if (ownedIds.length === 0) {
+            return res.json({
+                success: true,
+                data: { fixture: null, homePlayers: [], awayPlayers: [] },
+            });
+        }
+
+        const playerDocs = (await Player.find({ id: { $in: ownedIds } }, 'id name webName photo teamId position').lean()) as any[];
+        const playerMap = new Map(playerDocs.map((p: any) => [p.id, p]));
+
+        const psDocs = (await PlayerStats.find({ playerId: { $in: ownedIds } }).lean()) as any[];
+        const psMap = new Map(psDocs.map((ps: any) => [ps.playerId, ps]));
+
+        const statsForGw = (pid: number) => {
+            const ps = psMap.get(pid);
+            if (!ps?.gameweeks) return null;
+            const entries = getGameweekEntries(ps.gameweeks, fixtureGw);
+            if (entries.length === 0) return null;
+            const merged = getGameweekStats(ps.gameweeks, fixtureGw);
+            return {
+                points: getGameweekPoints(ps.gameweeks, fixtureGw),
+                minutes: merged.minutesPlayed || 0,
+                goals: merged.goals || 0,
+                assists: merged.goalAssist || 0,
+                cleanSheet: merged.cleanSheet || 0,
+            };
+        };
+
+        const buildPlayer = (teamId: number): any[] => {
+            const out: any[] = [];
+            for (const pId of ownedIds) {
+                const pd = playerMap.get(pId);
+                if (!pd || pd.teamId !== teamId) continue;
+                out.push({
+                    playerId: pId,
+                    name: pd.webName || pd.name || "",
+                    photo: pd.photo || "",
+                    position: resolvePosition(pd.position || ''),
+                    teamId: pd.teamId,
+                    fantasyTeams: playerToFantasyTeams.get(pId) || [],
+                    ...(statsForGw(pId) || { points: 0 }),
+                });
+            }
+            return out;
+        };
+
+        res.set('Cache-Control', 'public, max-age=60, s-maxage=60');
+        res.json({
+            success: true,
+            data: {
+                fixture: {
+                    fixtureId: fixture.fixtureId,
+                    startTimestamp: fixture.startTimestamp,
+                    status: fixture.status,
+                    homeScore: fixture.homeScore,
+                    awayScore: fixture.awayScore,
+                    homeTeam: {
+                        id: fixture.homeTeam?.id,
+                        name: homeInfo?.name || "Unknown",
+                        shortName: homeInfo?.nameCode || homeInfo?.shortName || "UNK",
+                        photo: homeInfo?.photo || "",
+                        logo: homeInfo?.logo || "",
+                        color: homeInfo?.teamColors?.primary || "#003399",
+                    },
+                    awayTeam: {
+                        id: fixture.awayTeam?.id,
+                        name: awayInfo?.name || "Unknown",
+                        shortName: awayInfo?.nameCode || awayInfo?.shortName || "UNK",
+                        photo: awayInfo?.photo || "",
+                        logo: awayInfo?.logo || "",
+                        color: awayInfo?.teamColors?.primary || "#003399",
+                    },
+                    gameweek: fixtureGw,
+                },
+                homePlayers: buildPlayer(fixture.homeTeam?.id),
+                awayPlayers: buildPlayer(fixture.awayTeam?.id),
+            },
+        });
+    } catch (error: any) {
+        console.error("Error fetching fixture players:", error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
+
 export const getManagerOverview = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { teamId } = req.params;

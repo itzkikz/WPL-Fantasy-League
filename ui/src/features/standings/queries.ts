@@ -33,4 +33,12 @@ export const standingsQueries = {
       queryFn: standingsApi.getFixtures,
       staleTime: 60 * 1000,
     }),
+
+  fixturePlayers: (fixtureId: number) =>
+    queryOptions({
+      queryKey: [QUERY_KEYS.STANDINGS, 'fixtures', fixtureId, 'players'],
+      queryFn: () => standingsApi.getFixturePlayers(fixtureId),
+      enabled: !!fixtureId,
+      staleTime: 60 * 1000,
+    }),
 }

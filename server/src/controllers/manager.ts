@@ -1258,8 +1258,19 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       forwards,
     };
 
+    const squadPlayerPrices = squadPlayerIds.map(id => {
+      const p = pDocsMap.get(id);
+      if (!p) return 0;
+      if (p.auctionPrice != null && p.auctionPrice > 0) return Number(p.auctionPrice);
+      const rawPos = (p.position || "").toUpperCase();
+      if (rawPos === "GK" || rawPos === "GOALKEEPER" || rawPos === "G" || rawPos === "DEF" || rawPos === "DEFENDER" || rawPos === "D") return 10;
+      if (rawPos === "MID" || rawPos === "MIDFIELDER" || rawPos === "M") return 15;
+      if (rawPos === "FWD" || rawPos === "FORWARD" || rawPos === "F") return 20;
+      return 10;
+    });
+
     const squadInfo = {
-      teamValue: (fantasyTeam.finance.utilisation || 0) / 10,
+      teamValue: squadPlayerPrices.reduce((sum, v) => sum + v, 0),
       inBank: (fantasyTeam.finance.balance || 0) / 10,
       bank: (fantasyTeam.finance.balance || 0) / 10,
     };
