@@ -1,6 +1,7 @@
 export interface H2HLeagueTeam {
   _id: string;
   name: string;
+  logo?: string;
 }
 
 export interface H2HLeague {
@@ -32,6 +33,7 @@ export interface H2HStanding {
   teamId: string;
   teamName: string;
   managerName: string;
+  logo?: string;
   played: number;
   won: number;
   drawn: number;

@@ -6,7 +6,7 @@ import { convertToJSON, resolvePosition } from "../utils";
 import { NextFunction, Request, Response } from "express";
 import { StandingsResponse, TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
-import { aggregateMatchStats } from "./players";
+import { aggregateMatchStats, getGameweekPoints, getGameweekMinutes, getGameweekStats, getGameweekForm, getGameweekEntries, getGameweekBreakdown, buildCurrentWeek } from "./players";
 
 import { FantasyTeam } from "../models/FantasyTeam";
 import { Player } from "../models/Player";
@@ -30,7 +30,7 @@ export const getStandingsData = async () => {
     }
 
     const teams = await FantasyTeam.find({})
-        .select('name history currentSquad updatedAt managers managerDisplayNames')
+        .select('name history currentSquad updatedAt managers managerDisplayNames logo')
         .populate('managers', 'username displayName')
         .lean();
 
@@ -51,8 +51,7 @@ export const getStandingsData = async () => {
         if (captainPick) {
             const cStats = playerStatsMap.get(captainPick.playerId);
             if (cStats && cStats.gameweeks) {
-                const cGw = cStats.gameweeks.find((g: any) => g.id === gwId);
-                if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
+                if (getGameweekMinutes(cStats.gameweeks, gwId) > 0) {
                     captainPlayed = true;
                 }
             }
@@ -63,16 +62,11 @@ export const getStandingsData = async () => {
 
             const statsDoc = playerStatsMap.get(pick.playerId);
             if (statsDoc && statsDoc.gameweeks) {
-                const gwData = statsDoc.gameweeks.find((g: any) => g.id === gwId);
-                if (gwData) {
-                    let pts = gwData.points || 0;
-
-                    if (pick.isCaptain && captainPlayed) {
-                        pts *= 2;
-                    } else if (pick.isViceCaptain && !captainPlayed) {
-                        pts *= 2;
-                    }
-                    score += pts;
+                const pts = getGameweekPoints(statsDoc.gameweeks, gwId);
+                if (pts > 0) {
+                    score += pick.isCaptain && captainPlayed
+                        ? pts * 2
+                        : (pick.isViceCaptain && !captainPlayed ? pts * 2 : pts);
                 }
             }
         });
@@ -113,6 +107,7 @@ export const getStandingsData = async () => {
         return {
             team: team.name,
             team_id: team._id.toString(),
+            logo: team.logo || "",
             gw: globalCurrentGw,
             current_gw: currentGwPoints,
             total: totalPoints,
@@ -228,8 +223,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
             if (captainPick) {
                 const cStats = psMap.get(captainPick.playerId);
                 if (cStats && cStats.gameweeks) {
-                    const cGw = cStats.gameweeks.find((g: any) => g.id === gwId);
-                    if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
+                    if (getGameweekMinutes(cStats.gameweeks, gwId) > 0) {
                         captainPlayed = true;
                     }
                 }
@@ -240,15 +234,11 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
 
                 const statsDoc = psMap.get(pick.playerId);
                 if (statsDoc && statsDoc.gameweeks) {
-                    const gwData = statsDoc.gameweeks.find((g: any) => g.id === gwId);
-                    if (gwData) {
-                        let pts = gwData.points || 0;
-                        if (pick.isCaptain && captainPlayed) {
-                            pts *= 2;
-                        } else if (pick.isViceCaptain && !captainPlayed) {
-                            pts *= 2;
-                        }
-                        score += pts;
+                    const pts = getGameweekPoints(statsDoc.gameweeks, gwId);
+                    if (pts > 0) {
+                        score += pick.isCaptain && captainPlayed
+                            ? pts * 2
+                            : (pick.isViceCaptain && !captainPlayed ? pts * 2 : pts);
                     }
                 }
             });
@@ -270,7 +260,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
         if (targetGw === currentGw && team.currentSquad && team.currentSquad.picks && team.currentSquad.picks.length > 0) {
             picks = team.currentSquad.picks;
         } else {
-            const historyEntry = team.history.find(h => h.gameweek === targetGw);
+            const historyEntry = (team.history || []).find(h => h.gameweek === targetGw);
             if (historyEntry) {
                 picks = historyEntry.picks;
                 if (historyEntry.preAutoSubPicks && historyEntry.preAutoSubPicks.length > 0) {
@@ -312,8 +302,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
         if (captainPick) {
             const cPs = playerStatsMap.get(captainPick.playerId);
             if (cPs && cPs.gameweeks) {
-                const cGw = cPs.gameweeks.find((g: any) => g.id === targetGw);
-                if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
+                if (getGameweekMinutes(cPs.gameweeks, targetGw) > 0) {
                     captainPlayed = true;
                 }
             }
@@ -350,10 +339,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
             let gwPoints = 0;
             const ps = playerStatsMap.get(pick.playerId);
             if (ps && ps.gameweeks) {
-                const gData = ps.gameweeks.find((g: any) => g.id === targetGw);
-                if (gData) {
-                    gwPoints = gData.points || 0;
-                }
+                gwPoints = getGameweekPoints(ps.gameweeks, targetGw);
             }
 
             if (pick.isCaptain && captainPlayed) {
@@ -448,6 +434,16 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 ]
             }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
 
+            // Fetch the target gameweek's fixtures for per-match labels
+            const currentGwDocs = await Fixture.find({
+                'roundInfo.round': targetGw,
+                $or: [
+                    { 'homeTeam.id': { $in: allTeamIds } },
+                    { 'awayTeam.id': { $in: allTeamIds } }
+                ]
+            }).sort({ startTimestamp: 1 }).lean() as any[];
+            const currentGwFixtureMap = new Map(currentGwDocs.map((f: any) => [f.fixtureId ?? f.id, { home: f.homeTeam, away: f.awayTeam, kickoff: f.startTimestamp }]));
+
             // Group fixtures by team ID
             const fixturesByTeam = new Map<number, any[]>();
             for (const f of upcomingDocs) {
@@ -486,9 +482,9 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 // Current week stats
                 let currentWeekStats = undefined;
                 if (fullPs && (fullPs as any).gameweeks) {
-                    const gwData = (fullPs as any).gameweeks.find((g: any) => g.id === targetGw);
-                    if (gwData && gwData.stats) {
-                        currentWeekStats = { ...gwData.stats, point: gwData.points || 0 };
+                    const gwEntries = getGameweekEntries((fullPs as any).gameweeks, targetGw);
+                    if (gwEntries.length > 0) {
+                        currentWeekStats = buildCurrentWeek(fullPs, targetGw, playerDoc.position, playerDoc.teamId, currentGwFixtureMap);
                     }
                 }
 
@@ -525,86 +521,19 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 }
 
                 // Recent form
-                const recentForm: any[] = [];
-                if (fullPs && (fullPs as any).gameweeks) {
-                    const sortedGws = [...(fullPs as any).gameweeks].sort((a: any, b: any) => a.id - b.id);
-                    const filteredGws = sortedGws.filter((g: any) => g.id <= targetGw);
-                    const last5 = filteredGws.slice(-5);
-                    last5.forEach((g: any) => {
-                        recentForm.push({ gw: g.id, points: g.points || 0 });
-                    });
-                }
+                const recentForm: any[] = (fullPs && (fullPs as any).gameweeks)
+                    ? getGameweekForm((fullPs as any).gameweeks, targetGw).slice(-5)
+                    : [];
                 if (recentForm.length === 0) {
                     for (let i = Math.max(1, targetGw - 4); i <= targetGw; i++) {
                         recentForm.push({ gw: i, points: 0 });
                     }
                 }
 
-                // Points breakdown
-                const pointsBreakdown: any[] = [];
-                if (fullPs && (fullPs as any).gameweeks) {
-                    const gwData = (fullPs as any).gameweeks.find((g: any) => g.id === targetGw);
-                    if (gwData && gwData.stats) {
-                        const s = gwData.stats;
-                        const position = resolvePosition(playerDoc.position || '');
-                        const minutes = s.minutesPlayed || 0;
-
-                        if (minutes > 0) {
-                            pointsBreakdown.push({ label: "Minutes Played", value: `${minutes} mins`, points: minutes >= 60 ? 2 : 1 });
-
-                            const goals = s.goals || 0;
-                            if (goals > 0) {
-                                let goalPoints = 0;
-                                if (position === 'GK') goalPoints = goals * 10;
-                                else if (position === 'DEF') goalPoints = goals * 6;
-                                else if (position === 'MID') goalPoints = goals * 5;
-                                else if (position === 'FWD') goalPoints = goals * 4;
-                                pointsBreakdown.push({ label: `Goals (${goals})`, value: `${goals}`, points: goalPoints });
-                            }
-
-                            const assists = s.goalAssist || 0;
-                            if (assists > 0) {
-                                pointsBreakdown.push({ label: `Assists (${assists})`, value: `${assists}`, points: assists * 3 });
-                            }
-
-                            if (s.cleanSheet === 1 && (position === 'GK' || position === 'DEF')) {
-                                pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 4 });
-                            } else if (s.cleanSheet === 1 && position === 'MID') {
-                                pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 1 });
-                            }
-
-                            const yellow = s.yellowCards || 0;
-                            if (yellow > 0) pointsBreakdown.push({ label: "Yellow Cards", value: `${yellow}`, points: yellow * -1 });
-
-                            const red = s.redCards || 0;
-                            if (red > 0) pointsBreakdown.push({ label: "Red Card", value: "Yes", points: -3 });
-
-                            const penMiss = s.penaltyMissed || 0;
-                            if (penMiss > 0) pointsBreakdown.push({ label: "Penalty Missed", value: `${penMiss}`, points: penMiss * -2 });
-
-                            if (position === 'GK') {
-                                const penSave = s.penaltySaved || 0;
-                                if (penSave > 0) pointsBreakdown.push({ label: "Penalty Saved", value: `${penSave}`, points: penSave * 5 });
-                                const gkSaves = s.saves || 0;
-                                if (gkSaves >= 3) pointsBreakdown.push({ label: `Saves (${gkSaves})`, value: `${gkSaves}`, points: Math.floor(gkSaves / 3) });
-                            }
-
-                            const tackles = s.totalTackle || 0;
-                            const clearances = s.totalClearance || 0;
-                            const blocks = s.outfielderBlock || 0;
-                            const ballRecovery = s.ballRecovery || 0;
-                            const defCont = tackles + clearances + blocks + ballRecovery;
-                            if (defCont > 0) {
-                                let defPoints = 0;
-                                if (position === 'DEF') defPoints = Math.floor(defCont / 10) * 2;
-                                else defPoints = Math.floor(defCont / 12) * 2;
-                                if (defPoints > 0) {
-                                    pointsBreakdown.push({ label: `Defensive Actions (${defCont})`, value: `${defCont}`, points: defPoints });
-                                }
-                            }
-                        }
-                    }
-                }
+                // Points breakdown (per-match, summed across a multi-match gameweek)
+                const pointsBreakdown: any[] = (fullPs && (fullPs as any).gameweeks)
+                    ? getGameweekBreakdown((fullPs as any).gameweeks, targetGw, playerDoc.position)
+                    : [];
 
                 // Attach full PlayerStats to the detail
                 (detail as any).playerStats = {
@@ -751,7 +680,8 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
             return res.status(404).json({ error: "Fantasy Team not found" });
         }
 
-        const { currentSquad, history, name: teamName, managerDisplayNames } = fantasyTeam;
+        const { currentSquad, name: teamName, managerDisplayNames } = fantasyTeam;
+        const history = fantasyTeam.history || [];
 
         // Extract manager names list
         const managersList = (fantasyTeam.managers as any[]).map(m => m.displayName || m.username || "");
@@ -792,8 +722,7 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
         if (captainPick) {
             const cPs = playerStatsMap.get(captainPick.playerId);
             if (cPs && cPs.gameweeks) {
-                const cGw = cPs.gameweeks.find((g: any) => g.id === targetGw);
-                if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
+                if (getGameweekMinutes(cPs.gameweeks, targetGw) > 0) {
                     captainPlayed = true;
                 }
             }
@@ -806,10 +735,7 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
             let playerPoints = 0;
             const ps = playerStatsMap.get(pick.playerId);
             if (ps && ps.gameweeks) {
-                const gData = ps.gameweeks.find((g: any) => g.id === targetGw);
-                if (gData) {
-                    playerPoints = gData.points || 0;
-                }
+                playerPoints = getGameweekPoints(ps.gameweeks, targetGw);
             }
 
             if (pick.isCaptain && captainPlayed) {
@@ -855,8 +781,7 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
             if (capPick) {
                 const cStats = historyPsMap.get(capPick.playerId);
                 if (cStats && cStats.gameweeks) {
-                    const cGw = cStats.gameweeks.find((g: any) => g.id === gwId);
-                    if (cGw && cGw.stats && cGw.stats.minutesPlayed > 0) {
+                    if (getGameweekMinutes(cStats.gameweeks, gwId) > 0) {
                         capPlayed = true;
                     }
                 }
@@ -867,16 +792,11 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
 
                 const statsDoc = historyPsMap.get(pick.playerId);
                 if (statsDoc && statsDoc.gameweeks) {
-                    const gwData = statsDoc.gameweeks.find((g: any) => g.id === gwId);
-                    if (gwData) {
-                        let pts = gwData.points || 0;
-
-                        if (pick.isCaptain && capPlayed) {
-                            pts *= 2;
-                        } else if (pick.isViceCaptain && !capPlayed) {
-                            pts *= 2;
-                        }
-                        score += pts;
+                    const pts = getGameweekPoints(statsDoc.gameweeks, gwId);
+                    if (pts > 0) {
+                        score += pick.isCaptain && capPlayed
+                            ? pts * 2
+                            : (pick.isViceCaptain && !capPlayed ? pts * 2 : pts);
                     }
                 }
             });
@@ -904,6 +824,7 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
             data: {
                 teamId,
                 teamName,
+                logo: fantasyTeam.logo || "",
                 managers: managersString,
                 rank,
                 totalPoints,

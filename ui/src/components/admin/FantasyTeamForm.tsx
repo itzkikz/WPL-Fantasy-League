@@ -31,6 +31,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
 
   const [users, setUsers] = useState<any[]>([]);
   const [players, setPlayers] = useState<AdminPlayer[]>([]);
+  const [adminTeams, setAdminTeams] = useState<{ id: number; name: string }[]>([]);
   
   const [teamName, setTeamName] = useState('My Team');
   const [logo, setLogo] = useState('');
@@ -69,19 +70,35 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
     loadedFor.current = key;
 
     fetchUsers(teamId);
+    fetchTeams();
     if (teamId) {
       fetchTeam(teamId);
     }
   }, [teamId]);
 
+  const fetchTeams = async () => {
+    try {
+      const response = await api.get('/admin/teams');
+      const teams = (response.data.data || [])
+        .filter((t: any) => !t.national && !t.disabled && (t.playerCount || 0) > 0)
+        .map((t: any) => ({ id: t.id, name: t.name }))
+        .sort((a: any, b: any) => a.name.localeCompare(b.name));
+      setAdminTeams(teams);
+    } catch (err) {
+      console.error('Failed to fetch teams:', err);
+    }
+  };
+
   // Debounced server-side search
   useEffect(() => {
     setCurrentPage(1);
+    const tid = adminTeams.find(t => t.name === teamFilter)?.id;
     const t = setTimeout(() => {
-      fetchPlayers(teamId, 1, searchTerm);
+      fetchPlayers(teamId, 1, searchTerm, tid);
     }, 300);
     return () => clearTimeout(t);
-  }, [searchTerm, teamId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm, teamId, teamFilter, adminTeams]);
 
   const fetchTeam = async (id: string) => {
     setTeamLoading(true);
@@ -147,12 +164,13 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
     }
   };
 
-  const fetchPlayers = async (excludeTeamId?: string, page = 1, search = '') => {
+  const fetchPlayers = async (excludeTeamId?: string, page = 1, search = '', teamFilterId?: number) => {
     setPlayersLoading(true);
     try {
       const params = new URLSearchParams({ page: String(page), limit: String(itemsPerPage) });
       if (excludeTeamId) params.set('excludeTeamId', excludeTeamId);
       if (search) params.set('search', search);
+      if (teamFilterId) params.set('teamId', String(teamFilterId));
       const response = await api.get(`/admin/players?${params.toString()}`);
       setPlayers(response.data.data);
       setTotalPages(response.data.pagination?.totalPages || 1);
@@ -409,7 +427,8 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
 
   const startingCount = squad.filter(p => p.isStarting).length;
 
-  const uniqueTeams = Array.from(new Set(players.map(p => p.team))).filter(Boolean).sort();
+  const teamIdNumber = adminTeams.find(t => t.name === teamFilter)?.id;
+  const uniqueTeams = adminTeams.map(t => t.name).filter(Boolean).sort();
 
   const visiblePlayers = players.filter(p => (teamFilter ? p.team === teamFilter : true));
 
@@ -685,7 +704,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
                   onClick={() => {
                     const p = Math.max(1, currentPage - 1);
                     setCurrentPage(p);
-                    fetchPlayers(teamId, p, searchTerm);
+                    fetchPlayers(teamId, p, searchTerm, teamIdNumber);
                   }}
                   className="px-3 py-1 rounded bg-white/5 border border-white/10 hover:bg-white/10 text-[10px] font-bold uppercase tracking-wider disabled:opacity-40"
                 >
@@ -698,7 +717,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
                   onClick={() => {
                     const p = Math.min(totalPages, currentPage + 1);
                     setCurrentPage(p);
-                    fetchPlayers(teamId, p, searchTerm);
+                    fetchPlayers(teamId, p, searchTerm, teamIdNumber);
                   }}
                   className="px-3 py-1 rounded bg-white/5 border border-white/10 hover:bg-white/10 text-[10px] font-bold uppercase tracking-wider disabled:opacity-40"
                 >

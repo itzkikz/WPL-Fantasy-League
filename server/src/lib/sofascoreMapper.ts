@@ -57,29 +57,34 @@ export function mapSofascoreToPlayerMatchStat(
     const subOnEvent = incidents.find(
         (inc) => inc.incidentType === 'substitution' && inc.playerIn?.id === pid
     );
-    if (subOnEvent) {
-        subOn = subOnEvent.time;
-    } else {
-        const minutesPlayed = s.minutesPlayed || 0;
-        if (minutesPlayed > 0 && minutesPlayed < 90) {
-            subOn = 90 - minutesPlayed;
-        }
-    }
-
     const subOffEvent = incidents.find(
         (inc) => inc.incidentType === 'substitution' && inc.playerOut?.id === pid
     );
+    const redCard = incidents.find(
+        (inc) =>
+            inc.incidentType === 'card' &&
+            inc.incidentClass === 'red' &&
+            inc.player?.id === pid
+    );
+
     if (subOffEvent) {
+        // Player started (or came on earlier) and was later subbed off.
+        subOn = subOnEvent ? subOnEvent.time : 0;
         subOff = subOffEvent.time;
+    } else if (subOnEvent) {
+        // Player came on as a substitute and stayed on the pitch.
+        subOn = subOnEvent.time;
+        subOff = redCard ? redCard.time : 90;
+    } else if (redCard) {
+        // Started and got sent off; on the pitch from kick-off until the red card.
+        subOn = 0;
+        subOff = redCard.time;
     } else {
-        const redCard = incidents.find(
-            (inc) =>
-                inc.incidentType === 'card' &&
-                inc.incidentClass === 'red' &&
-                inc.player?.id === pid
-        );
-        if (redCard) {
-            subOff = redCard.time;
+        // No substitution/red-card incidents recorded. Infer a bench appearance
+        // from minutes played (came on late and played until the end).
+        const minutesPlayed = s.minutesPlayed || 0;
+        if (minutesPlayed > 0 && minutesPlayed < 90) {
+            subOn = 90 - minutesPlayed;
         }
     }
 

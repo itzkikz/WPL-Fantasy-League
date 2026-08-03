@@ -21,6 +21,7 @@ import { fetchSofascoreJSON } from '../utils/sofascoreScraper';
 import { calculatePlayerPoints } from '../lib/points';
 import { mapSofascoreToPlayerMatchStat } from '../lib/sofascoreMapper';
 import { getLeagueAllGWPoints } from './h2h';
+import { getGameweekMinutes } from './players';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -326,7 +327,7 @@ export const getMatchDetails = async (req: Request, res: Response) => {
 
             await PlayerStats.findOneAndUpdate(
                 { playerId: entry.playerId },
-                { $pull: { gameweeks: { id: gameweekId } } }
+                { $pull: { gameweeks: { fixtureId } } }
             );
 
             const updatedStats = await PlayerStats.findOneAndUpdate(
@@ -997,10 +998,7 @@ export const completeGameweek = async (req: Request, res: Response) => {
         // Create a map for quick lookup of minutes played
         const minutesMap = new Map<number, number>();
         for (const ps of allPlayerStats) {
-            const gwData = ps.gameweeks.find(gw => gw.id === gameweek.number);
-            if (gwData && gwData.stats) {
-                minutesMap.set(ps.playerId, gwData.stats.minutesPlayed || 0);
-            }
+            minutesMap.set(ps.playerId, getGameweekMinutes(ps.gameweeks, gameweek.number));
         }
 
         // Fetch all players for position info

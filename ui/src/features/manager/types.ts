@@ -23,6 +23,7 @@ export interface ManagerDetailsResponse {
   rank: number,
   managerTeam: TeamDetails,
   team: string
+  logo?: string
   pickMyTeam: boolean,
   total_budget: number,
   balance: number,

@@ -292,6 +292,7 @@ const MyTeamPage = () => {
           totalGWScore={managerDetails?.totalGWScore}
           totalPointsFormatted={totalPointsFormatted}
           pickMyTeam={managerDetails?.pickMyTeam}
+          logo={managerDetails?.logo}
           headerTab={headerTab}
           setHeaderTab={(tab) => {
             setHeaderTab(tab);
@@ -309,9 +310,15 @@ const MyTeamPage = () => {
           {/* Team Name & Manager Info Header */}
           <div className="space-y-3 pb-4 border-b border-border/60">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600/30 to-indigo-600/30 border border-purple-500/30 flex items-center justify-center text-purple-300 font-black text-xl shadow-inner shrink-0">
-                🛡️
-              </div>
+              {managerDetails?.logo ? (
+                <div className="w-12 h-12 rounded-2xl bg-background/60 border border-border/60 flex items-center justify-center overflow-hidden shrink-0">
+                  <img src={managerDetails.logo} alt={`${managerDetails.team} logo`} className="w-11 h-11 object-contain" />
+                </div>
+              ) : (
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600/30 to-indigo-600/30 border border-purple-500/30 flex items-center justify-center text-purple-300 font-black text-xl shadow-inner shrink-0">
+                  🛡️
+                </div>
+              )}
               <div className="min-w-0 flex-1">
                 <h2 className="text-lg font-black text-white tracking-tight truncate">
                   {managerDetails?.team || "My Squad"}

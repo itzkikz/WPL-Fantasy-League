@@ -7,6 +7,7 @@ import { PlayerStats as PlayerStatsModel } from "../models/PlayerStats";
 import { FantasyTeam } from "../models/FantasyTeam";
 import "../models/League";
 import { resolvePosition } from "../utils";
+import { getMatchPointsBreakdown, PointsBreakdownItem } from "../lib/points";
 
 function sumNumeric(...nums: (number | undefined | null)[]): number {
     return nums.reduce<number>((acc, n) => acc + (n ?? 0), 0);
@@ -120,8 +121,7 @@ export const aggregateMatchStats = (gameweeks: any[]): SofaScoreStats => {
         res.yellowCards = sumNumeric(res.yellowCards, s.yellowCards);
         res.redCards = sumNumeric(res.redCards, s.redCards);
         res.goalsConceded = sumNumeric(res.goalsConceded, s.goalsConceded);
-        res.cleanSheet = res.cleanSheet ?? 0;
-        if (s.cleanSheet === 1) res.cleanSheet = 1;
+        res.cleanSheet = sumNumeric(res.cleanSheet, s.cleanSheet);
         res.penaltyWon = sumNumeric(res.penaltyWon, s.penaltyWon);
         res.penaltyCommitted = sumNumeric(res.penaltyCommitted, s.penaltyCommitted);
         res.penaltyScored = sumNumeric(res.penaltyScored, s.penaltyScored);
@@ -131,6 +131,142 @@ export const aggregateMatchStats = (gameweeks: any[]): SofaScoreStats => {
     });
     res.rating = ratings.length > 0 ? ratings.reduce((a, b) => a + b, 0) / ratings.length : 0;
     return res;
+};
+
+// A player can appear in multiple fixtures within a single gameweek.
+// These helpers aggregate all per-match entries that share the same gameweek id.
+
+export const getGameweekEntries = (gameweeks: any[], gwId: number): any[] => {
+    if (!Array.isArray(gameweeks)) return [];
+    return gameweeks.filter((e) => e && e.id === gwId);
+};
+
+export const getGameweekPoints = (gameweeks: any[], gwId: number): number => {
+    return getGameweekEntries(gameweeks, gwId).reduce((sum, e) => sum + (e.points || 0), 0);
+};
+
+export const getGameweekMinutes = (gameweeks: any[], gwId: number): number => {
+    return getGameweekEntries(gameweeks, gwId).reduce((sum, e) => sum + (e.stats?.minutesPlayed || 0), 0);
+};
+
+export const getGameweekStats = (gameweeks: any[], gwId: number): SofaScoreStats => {
+    return aggregateMatchStats(getGameweekEntries(gameweeks, gwId));
+};
+
+export const getGameweekForm = (gameweeks: any[], upToGw: number): { gw: number; points: number }[] => {
+    if (!Array.isArray(gameweeks)) return [];
+    const gwIds = [...new Set(gameweeks.filter((e) => e && e.id <= upToGw).map((e) => e.id))];
+    gwIds.sort((a, b) => a - b);
+    return gwIds.map((gwId) => ({ gw: gwId, points: getGameweekPoints(gameweeks, gwId) }));
+};
+
+const BREAKDOWN_ORDER = [
+    'Minutes Played', 'Goals', 'Assists', 'Clean Sheet', 'Yellow Cards', 'Red Card',
+    'Penalty Missed', 'Penalty Saved', 'Saves', 'Defensive Actions',
+];
+
+function breakdownLabel(key: string, count: number): string {
+    if (key === 'Minutes Played') return key;
+    if (key === 'Clean Sheet') return count > 1 ? `Clean Sheets (${count})` : 'Clean Sheet';
+    if (key === 'Red Card') return count > 1 ? `Red Cards (${count})` : 'Red Card';
+    return `${key} (${count})`;
+}
+
+function breakdownValue(key: string, count: number): string {
+    if (key === 'Minutes Played') return `${count} mins`;
+    if (key === 'Clean Sheet' || key === 'Red Card') return 'Yes';
+    return `${count}`;
+}
+
+/**
+ * Gameweek points breakdown where a player may appear in MULTIPLE matches in a
+ * single gameweek. Each match's points are computed separately (per-match rules:
+ * appearance from that match's minutes, per-match saves round-down, etc.) and
+ * then merged component-by-component. The summed total is identical to
+ * `getGameweekPoints` (which already sums the stored per-match points).
+ */
+export const getGameweekBreakdown = (
+    gameweeks: any[],
+    gwId: number,
+    positionOr: string | undefined
+): PointsBreakdownItem[] => {
+    const entries = getGameweekEntries(gameweeks, gwId);
+    const acc = new Map<string, { count: number; points: number }>();
+    let totalMinutes = 0;
+    for (const e of entries) {
+        if (!e || !e.stats || !e.stats.minutesPlayed) continue;
+        totalMinutes += e.stats.minutesPlayed;
+        const pos = e.position || positionOr;
+        const items = getMatchPointsBreakdown(e.stats, pos);
+        for (const item of items) {
+            const key = item.label.replace(/\s*\(.*\)$/, '').trim();
+            const numMatch = item.label.match(/\((\d+)\)/);
+            const cur = acc.get(key) || { count: 0, points: 0 };
+            cur.count += numMatch ? parseInt(numMatch[1], 10) : 1;
+            cur.points += item.points;
+            acc.set(key, cur);
+        }
+    }
+    const hasMinutes = acc.has('Minutes Played');
+    if (hasMinutes) {
+        acc.set('Minutes Played', { count: totalMinutes, points: acc.get('Minutes Played')!.points });
+    }
+    return [...acc.entries()]
+        .sort((a, b) => {
+            const ia = BREAKDOWN_ORDER.indexOf(a[0]);
+            const ib = BREAKDOWN_ORDER.indexOf(b[0]);
+            return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+        })
+        .filter(([key, v]) => v.points !== 0 || key === 'Minutes Played')
+        .map(([key, v]) => ({ label: breakdownLabel(key, v.count), value: breakdownValue(key, v.count), points: v.points }));
+};
+
+/**
+ * Build the `current_week` object used across manager/standings/players views.
+ * Includes merged stats for raw-count display, the total gameweek `point`
+ * (summed per match) and a `matches[]` array with one entry per fixture in the
+ * gameweek (per-match stats, points and breakdown) so the UI can show matches
+ * separately.
+ */
+export const buildCurrentWeek = (
+    psDoc: any,
+    gwId: number,
+    positionOr: string | undefined,
+    playerTeamId?: number | null,
+    fixtureMap?: Map<number, { home: any; away: any; kickoff?: number }>
+): any => {
+    const merged = getGameweekStats(psDoc.gameweeks, gwId);
+    const entries = getGameweekEntries(psDoc.gameweeks, gwId);
+    const matches = entries.map((e) => {
+        const info = fixtureMap?.get(e.fixtureId);
+        let opponent: string | null = null;
+        let opponentShort: string | null = null;
+        let isHome: boolean | null = null;
+        if (info) {
+            const homeIsPlayer = playerTeamId != null && info.home?.id === playerTeamId;
+            const side = homeIsPlayer ? info.home : info.away;
+            const other = homeIsPlayer ? info.away : info.home;
+            opponent = other?.name || null;
+            opponentShort = other?.nameCode || other?.shortName || null;
+            isHome = playerTeamId != null ? homeIsPlayer : null;
+            void side;
+        }
+        return {
+            fixtureId: e.fixtureId,
+            opponent,
+            opponent_short_name: opponentShort,
+            isHome,
+            kickoff: info?.kickoff ?? null,
+            points: e.points || 0,
+            stats: e.stats || null,
+            breakdown: e.stats ? getMatchPointsBreakdown(e.stats, e.position || positionOr) : [],
+        };
+    });
+    return {
+        ...merged,
+        point: getGameweekPoints(psDoc.gameweeks, gwId),
+        matches,
+    };
 };
 
 export const getPlayerStats = async (req: Request, res: Response, next: NextFunction) => {
@@ -176,9 +312,17 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
         let overallStats = aggregateMatchStats([]);
         if (pStatsDoc && pStatsDoc.gameweeks) {
             overallStats = aggregateMatchStats(pStatsDoc.gameweeks);
-            const gwData = pStatsDoc.gameweeks.find((g: any) => g.id === currentGw);
-            if (gwData && gwData.stats) {
-                currentWeekStats = { ...gwData.stats, point: gwData.points || 0 };
+            const gwEntries = getGameweekEntries(pStatsDoc.gameweeks, currentGw);
+            if (gwEntries.length > 0) {
+                const Fixture = (await import("../models/Fixture")).Fixture;
+                const gwFixtures = (await Fixture.find({
+                    $and: [
+                        { 'roundInfo.round': currentGw },
+                        { $or: [{ 'homeTeam.id': player.teamId }, { 'awayTeam.id': player.teamId }] }
+                    ]
+                }).lean()) as any[];
+                const gwFixtureMap = new Map(gwFixtures.map((f: any) => [f.fixtureId ?? f.id, { home: f.homeTeam, away: f.awayTeam, kickoff: f.startTimestamp }]));
+                currentWeekStats = buildCurrentWeek(pStatsDoc, currentGw, player.position, player.teamId, gwFixtureMap);
             }
         }
         (overallStats as any).total_point = pStatsDoc?.totalPoints || 0;
@@ -252,17 +396,9 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
         }
 
         // 3. Extract recent form history
-        const recentForm: any[] = [];
+        let recentForm: any[] = [];
         if (pStatsDoc && pStatsDoc.gameweeks) {
-            const sortedGws = [...pStatsDoc.gameweeks].sort((a, b) => a.id - b.id);
-            const filteredGws = sortedGws.filter((g: any) => g.id <= currentGw);
-            const last5 = filteredGws.slice(-5);
-            last5.forEach((g: any) => {
-                recentForm.push({
-                    gw: g.id,
-                    points: g.points || 0
-                });
-            });
+            recentForm = getGameweekForm(pStatsDoc.gameweeks, currentGw).slice(-5);
         }
 
         // If form is empty, fill with default placeholders up to current gameweek
@@ -272,84 +408,10 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
             }
         }
 
-        // 4. Calculate points breakdown details
-        const pointsBreakdown: { label: string; value: string; points: number }[] = [];
-        if (pStatsDoc && pStatsDoc.gameweeks) {
-            const gwData = pStatsDoc.gameweeks.find((g: any) => g.id === currentGw);
-            if (gwData && gwData.stats) {
-                const s = gwData.stats;
-                const position = resolvePosition(player.position || '');
-                const minutes = s.minutesPlayed || 0;
-                
-                if (minutes > 0) {
-                    pointsBreakdown.push({ label: "Minutes Played", value: `${minutes} mins`, points: minutes >= 60 ? 2 : 1 });
-                    
-                    const goals = s.goals || 0;
-                    if (goals > 0) {
-                        let goalPoints = 0;
-                        if (position === 'GK') goalPoints = goals * 10;
-                        else if (position === 'DEF') goalPoints = goals * 6;
-                        else if (position === 'MID') goalPoints = goals * 5;
-                        else if (position === 'FWD') goalPoints = goals * 4;
-                        pointsBreakdown.push({ label: `Goals (${goals})`, value: `${goals}`, points: goalPoints });
-                    }
-
-                    const assists = s.goalAssist || 0;
-                    if (assists > 0) {
-                        pointsBreakdown.push({ label: `Assists (${assists})`, value: `${assists}`, points: assists * 3 });
-                    }
-
-                    if (s.cleanSheet === 1 && (position === 'GK' || position === 'DEF')) {
-                        pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 4 });
-                    } else if (s.cleanSheet === 1 && position === 'MID') {
-                        pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 1 });
-                    }
-
-                    const yellow = s.yellowCards || 0;
-                    if (yellow > 0) {
-                        pointsBreakdown.push({ label: "Yellow Cards", value: `${yellow}`, points: yellow * -1 });
-                    }
-
-                    const red = s.redCards || 0;
-                    if (red > 0) {
-                        pointsBreakdown.push({ label: "Red Card", value: "Yes", points: -3 });
-                    }
-
-                    const penMiss = s.penaltyMissed || 0;
-                    if (penMiss > 0) {
-                        pointsBreakdown.push({ label: "Penalty Missed", value: `${penMiss}`, points: penMiss * -2 });
-                    }
-
-                    if (position === 'GK') {
-                        const penSave = s.penaltySaved || 0;
-                        if (penSave > 0) {
-                            pointsBreakdown.push({ label: "Penalty Saved", value: `${penSave}`, points: penSave * 5 });
-                        }
-                        const gkSaves = s.saves || 0;
-                        if (gkSaves >= 3) {
-                            pointsBreakdown.push({ label: `Saves (${gkSaves})`, value: `${gkSaves}`, points: Math.floor(gkSaves / 3) });
-                        }
-                    }
-
-                    const tackles = s.totalTackle || 0;
-                    const clearances = s.totalClearance || 0;
-                    const blocks = s.outfielderBlock || 0;
-                    const ballRecovery = s.ballRecovery || 0;
-                    const defCont = tackles + clearances + blocks + ballRecovery;
-                    if (defCont > 0) {
-                        let defPoints = 0;
-                        if (position === 'DEF') {
-                            defPoints = Math.floor(defCont / 10) * 2;
-                        } else {
-                            defPoints = Math.floor(defCont / 12) * 2;
-                        }
-                        if (defPoints > 0) {
-                            pointsBreakdown.push({ label: `Defensive Actions (${defCont})`, value: `${defCont}`, points: defPoints });
-                        }
-                    }
-                }
-            }
-        }
+        // 4. Calculate points breakdown details (per-match, summed across a multi-match gameweek)
+        const pointsBreakdown = (pStatsDoc && pStatsDoc.gameweeks)
+            ? getGameweekBreakdown(pStatsDoc.gameweeks, currentGw, player.position)
+            : [];
 
         const data: PlayerStats = {
             player_name: player.name || player.webName || "",
@@ -539,6 +601,16 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 ]
             }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
 
+            // Fetch current gameweek fixtures (for per-match labels in current_week)
+            const currentGwDocs = await Fixture.find({
+                'roundInfo.round': currentGw,
+                $or: [
+                    { 'homeTeam.id': { $in: allPlayerTeamIds } },
+                    { 'awayTeam.id': { $in: allPlayerTeamIds } }
+                ]
+            }).sort({ startTimestamp: 1 }).lean() as any[];
+            const currentGwFixtureMap = new Map(currentGwDocs.map((f: any) => [f.fixtureId ?? f.id, { home: f.homeTeam, away: f.awayTeam, kickoff: f.startTimestamp }]));
+
             const fixturesByTeam = new Map<number, any[]>();
             for (const f of upcomingDocs) {
                 const homeId = f.homeTeam?.id;
@@ -580,21 +652,17 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 const pStatsDoc = pStatsMap.get(player.id);
                 if (pStatsDoc && pStatsDoc.gameweeks) {
                     overallStats = aggregateMatchStats(pStatsDoc.gameweeks);
-                    const gwData = pStatsDoc.gameweeks.find((g: any) => g.id === currentGw);
-                    if (gwData && gwData.stats) {
-                        currentWeekStats = { ...gwData.stats, point: gwData.points || 0 };
+                    const gwEntries = getGameweekEntries(pStatsDoc.gameweeks, currentGw);
+                    if (gwEntries.length > 0) {
+                        currentWeekStats = buildCurrentWeek(pStatsDoc, currentGw, player.position, player.teamId, currentGwFixtureMap);
                     }
                 }
                 (overallStats as any).total_point = pStatsDoc?.totalPoints || 0;
 
                 // Recent form (last 5 gameweeks)
-                const recentForm: any[] = [];
-                if (pStatsDoc && (pStatsDoc as any).gameweeks) {
-                    const sortedGws = [...(pStatsDoc as any).gameweeks].sort((a: any, b: any) => a.id - b.id);
-                    const filteredGws = sortedGws.filter((g: any) => g.id <= currentGw);
-                    const last5 = filteredGws.slice(-5);
-                    last5.forEach((g: any) => { recentForm.push({ gw: g.id, points: g.points || 0 }); });
-                }
+                const recentForm: any[] = (pStatsDoc && (pStatsDoc as any).gameweeks)
+                    ? getGameweekForm((pStatsDoc as any).gameweeks, currentGw).slice(-5)
+                    : [];
                 if (recentForm.length === 0) {
                     for (let i = Math.max(1, currentGw - 4); i <= currentGw; i++) {
                         recentForm.push({ gw: i, points: 0 });
@@ -623,48 +691,9 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
 
                 // Points breakdown
                 const ownership = ownershipMap.get(player.id) || { pct: 0, teamName: null };
-                const pointsBreakdown: any[] = [];
-                if (pStatsDoc && (pStatsDoc as any).gameweeks) {
-                    const gwData = (pStatsDoc as any).gameweeks.find((g: any) => g.id === currentGw);
-                    if (gwData && gwData.stats) {
-                        const s = gwData.stats;
-                        const position = resolvePosition(player.position || '');
-                        const minutes = s.minutesPlayed || 0;
-                        if (minutes > 0) {
-                            pointsBreakdown.push({ label: "Minutes Played", value: `${minutes} mins`, points: minutes >= 60 ? 2 : 1 });
-                            const goals = s.goals || 0;
-                            if (goals > 0) {
-                                let gp = position === 'GK' ? goals * 10 : position === 'DEF' ? goals * 6 : position === 'MID' ? goals * 5 : goals * 4;
-                                pointsBreakdown.push({ label: `Goals (${goals})`, value: `${goals}`, points: gp });
-                            }
-                            const assists = s.goalAssist || 0;
-                            if (assists > 0) pointsBreakdown.push({ label: `Assists (${assists})`, value: `${assists}`, points: assists * 3 });
-                            if (s.cleanSheet === 1 && (position === 'GK' || position === 'DEF')) pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 4 });
-                            else if (s.cleanSheet === 1 && position === 'MID') pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 1 });
-                            const yellow = s.yellowCards || 0;
-                            if (yellow > 0) pointsBreakdown.push({ label: "Yellow Cards", value: `${yellow}`, points: yellow * -1 });
-                            const red = s.redCards || 0;
-                            if (red > 0) pointsBreakdown.push({ label: "Red Card", value: "Yes", points: -3 });
-                            const penMiss = s.penaltyMissed || 0;
-                            if (penMiss > 0) pointsBreakdown.push({ label: "Penalty Missed", value: `${penMiss}`, points: penMiss * -2 });
-                            if (position === 'GK') {
-                                const penSave = s.penaltySaved || 0;
-                                if (penSave > 0) pointsBreakdown.push({ label: "Penalty Saved", value: `${penSave}`, points: penSave * 5 });
-                                const gkSaves = s.saves || 0;
-                                if (gkSaves >= 3) pointsBreakdown.push({ label: `Saves (${gkSaves})`, value: `${gkSaves}`, points: Math.floor(gkSaves / 3) });
-                            }
-                            const tackles = s.totalTackle || 0;
-                            const clearances = s.totalClearance || 0;
-                            const blocks = s.outfielderBlock || 0;
-                            const ballRecovery = s.ballRecovery || 0;
-                            const defCont = tackles + clearances + blocks + ballRecovery;
-                            if (defCont > 0) {
-                                const dp = position === 'DEF' ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
-                                if (dp > 0) pointsBreakdown.push({ label: `Defensive Actions (${defCont})`, value: `${defCont}`, points: dp });
-                            }
-                        }
-                    }
-                }
+                const pointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
+                    ? getGameweekBreakdown((pStatsDoc as any).gameweeks, currentGw, player.position)
+                    : [];
 
                 return {
                     player_name: player.name || player.webName || "",
@@ -744,6 +773,16 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             ]
         }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
 
+        // Fetch current gameweek fixtures (for per-match labels in current_week)
+        const currentGwDocs2 = await Fixture.find({
+            'roundInfo.round': currentGw,
+            $or: [
+                { 'homeTeam.id': { $in: allPlayerTeamIds2 } },
+                { 'awayTeam.id': { $in: allPlayerTeamIds2 } }
+            ]
+        }).sort({ startTimestamp: 1 }).lean() as any[];
+        const currentGwFixtureMap2 = new Map(currentGwDocs2.map((f: any) => [f.fixtureId ?? f.id, { home: f.homeTeam, away: f.awayTeam, kickoff: f.startTimestamp }]));
+
         const fixturesByTeam2 = new Map<number, any[]>();
         for (const f of upcomingDocs2) {
             const homeId = f.homeTeam?.id;
@@ -785,21 +824,17 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             const pStatsDoc = pStatsMap.get(player.id);
             if (pStatsDoc && pStatsDoc.gameweeks) {
                 overallStats = aggregateMatchStats(pStatsDoc.gameweeks);
-                const gwData = pStatsDoc.gameweeks.find((g: any) => g.id === currentGw);
-                if (gwData && gwData.stats) {
-                    currentWeekStats = { ...gwData.stats, point: gwData.points || 0 };
+                const gwEntries = getGameweekEntries(pStatsDoc.gameweeks, currentGw);
+                if (gwEntries.length > 0) {
+                    currentWeekStats = buildCurrentWeek(pStatsDoc, currentGw, player.position, player.teamId, currentGwFixtureMap2);
                 }
             }
             (overallStats as any).total_point = pStatsDoc?.totalPoints || 0;
 
             // Recent form (last 5 gameweeks)
-            const recentForm: any[] = [];
-            if (pStatsDoc && (pStatsDoc as any).gameweeks) {
-                const sortedGws = [...(pStatsDoc as any).gameweeks].sort((a: any, b: any) => a.id - b.id);
-                const filteredGws = sortedGws.filter((g: any) => g.id <= currentGw);
-                const last5 = filteredGws.slice(-5);
-                last5.forEach((g: any) => { recentForm.push({ gw: g.id, points: g.points || 0 }); });
-            }
+            const recentForm: any[] = (pStatsDoc && (pStatsDoc as any).gameweeks)
+                ? getGameweekForm((pStatsDoc as any).gameweeks, currentGw).slice(-5)
+                : [];
             if (recentForm.length === 0) {
                 for (let i = Math.max(1, currentGw - 4); i <= currentGw; i++) {
                     recentForm.push({ gw: i, points: 0 });
@@ -828,48 +863,9 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
 
             // Points breakdown
             const ownership = ownershipMap2.get(player.id) || { pct: 0, teamName: null };
-            const pointsBreakdown: any[] = [];
-            if (pStatsDoc && (pStatsDoc as any).gameweeks) {
-                const gwData = (pStatsDoc as any).gameweeks.find((g: any) => g.id === currentGw);
-                if (gwData && gwData.stats) {
-                    const s = gwData.stats;
-                    const position = resolvePosition(player.position || '');
-                    const minutes = s.minutesPlayed || 0;
-                    if (minutes > 0) {
-                        pointsBreakdown.push({ label: "Minutes Played", value: `${minutes} mins`, points: minutes >= 60 ? 2 : 1 });
-                        const goals = s.goals || 0;
-                        if (goals > 0) {
-                            let gp = position === 'GK' ? goals * 10 : position === 'DEF' ? goals * 6 : position === 'MID' ? goals * 5 : goals * 4;
-                            pointsBreakdown.push({ label: `Goals (${goals})`, value: `${goals}`, points: gp });
-                        }
-                        const assists = s.goalAssist || 0;
-                        if (assists > 0) pointsBreakdown.push({ label: `Assists (${assists})`, value: `${assists}`, points: assists * 3 });
-                        if (s.cleanSheet === 1 && (position === 'GK' || position === 'DEF')) pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 4 });
-                        else if (s.cleanSheet === 1 && position === 'MID') pointsBreakdown.push({ label: "Clean Sheet", value: "Yes", points: 1 });
-                        const yellow = s.yellowCards || 0;
-                        if (yellow > 0) pointsBreakdown.push({ label: "Yellow Cards", value: `${yellow}`, points: yellow * -1 });
-                        const red = s.redCards || 0;
-                        if (red > 0) pointsBreakdown.push({ label: "Red Card", value: "Yes", points: -3 });
-                        const penMiss = s.penaltyMissed || 0;
-                        if (penMiss > 0) pointsBreakdown.push({ label: "Penalty Missed", value: `${penMiss}`, points: penMiss * -2 });
-                        if (position === 'GK') {
-                            const penSave = s.penaltySaved || 0;
-                            if (penSave > 0) pointsBreakdown.push({ label: "Penalty Saved", value: `${penSave}`, points: penSave * 5 });
-                            const gkSaves = s.saves || 0;
-                            if (gkSaves >= 3) pointsBreakdown.push({ label: `Saves (${gkSaves})`, value: `${gkSaves}`, points: Math.floor(gkSaves / 3) });
-                        }
-                        const tackles = s.totalTackle || 0;
-                        const clearances = s.totalClearance || 0;
-                        const blocks = s.outfielderBlock || 0;
-                        const ballRecovery = s.ballRecovery || 0;
-                        const defCont = tackles + clearances + blocks + ballRecovery;
-                        if (defCont > 0) {
-                            const dp = position === 'DEF' ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
-                            if (dp > 0) pointsBreakdown.push({ label: `Defensive Actions (${defCont})`, value: `${defCont}`, points: dp });
-                        }
-                    }
-                }
-            }
+            const pointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
+                ? getGameweekBreakdown((pStatsDoc as any).gameweeks, currentGw, player.position)
+                : [];
 
             return {
                 player_name: player.name || player.webName || "",

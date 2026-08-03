@@ -25,7 +25,7 @@ const ManagerOverviewPage = () => {
   // Query overview details
   const { data, isLoading, isError } = useManagerOverview(teamId);
 
-  const { teamName, managers, rank, totalPoints, gwPoints, currentSquad, history } = data || {};
+  const { teamName, logo, managers, rank, totalPoints, gwPoints, currentSquad, history } = data || {};
   const { starting, bench } = currentSquad || {};
 
   const getPlayerPrice = (p: Player) => {
@@ -92,9 +92,15 @@ const ManagerOverviewPage = () => {
           >
             <ArrowLeft className="w-4 h-4 text-text-muted" />
           </button>
-          <div className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${crest.bgGradient} flex items-center justify-center text-xl md:text-2xl font-black text-white shadow-lg border border-white/10 shrink-0`}>
-            {crest.letter}
-          </div>
+          {logo ? (
+            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center overflow-hidden bg-white/5 border border-white/10 shrink-0">
+              <img src={logo} alt={`${teamName} logo`} className="w-11 h-11 md:w-14 md:h-14 object-contain" />
+            </div>
+          ) : (
+            <div className={`w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br ${crest.bgGradient} flex items-center justify-center text-xl md:text-2xl font-black text-white shadow-lg border border-white/10 shrink-0`}>
+              {crest.letter}
+            </div>
+          )}
           <div className="min-w-0 flex-1">
             <h2 className="text-sm md:text-base font-black tracking-tight text-white truncate">{teamName}</h2>
             <div className="flex items-center gap-1.5 text-[10px] md:text-xs text-text-muted mt-0.5 font-semibold">
@@ -219,9 +225,15 @@ const ManagerOverviewPage = () => {
 
           {/* Profile Card */}
           <div className="bg-background/60 border border-border/60 rounded-2xl p-4 flex items-center gap-3.5">
-            <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${crest.bgGradient} flex items-center justify-center text-2xl font-black text-white shadow-lg border border-white/10 shrink-0`}>
-              {crest.letter}
-            </div>
+            {logo ? (
+              <div className="w-14 h-14 rounded-full flex items-center justify-center overflow-hidden bg-white/5 border border-white/10 shrink-0">
+                <img src={logo} alt={`${teamName} logo`} className="w-13 h-13 object-contain" />
+              </div>
+            ) : (
+              <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${crest.bgGradient} flex items-center justify-center text-2xl font-black text-white shadow-lg border border-white/10 shrink-0`}>
+                {crest.letter}
+              </div>
+            )}
             <div className="min-w-0 flex-1">
               <h3 className="text-base font-black text-white truncate">{teamName}</h3>
               <div className="flex items-center gap-1 text-xs text-text-muted mt-0.5 font-semibold">

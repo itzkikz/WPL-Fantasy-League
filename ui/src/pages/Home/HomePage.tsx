@@ -140,6 +140,7 @@ const HomePage = () => {
           <div className="col-span-2 lg:col-span-4">
             <TeamOverview
               teamName={data.teamOverview.teamName}
+              logo={data.teamOverview.logo}
               managers={data.teamOverview.managers}
               overallRank={String(data.teamOverview.rank)}
               rankChange={String(Math.abs(data.teamOverview.rankChange))}

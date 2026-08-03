@@ -7,6 +7,7 @@ export interface IPlayerStats extends Document {
         stats: any;
         points: number;
         fixtureId: number;
+        position?: string;
     }[];
     totalPoints: number;
 }
@@ -19,6 +20,7 @@ const PlayerStatsSchema: Schema = new Schema({
             stats: { type: Schema.Types.Mixed, required: true },
             points: { type: Number, default: 0 },
             fixtureId: { type: Number, required: true },
+            position: { type: String },
         }
     ],
     totalPoints: { type: Number, default: 0 }

@@ -2,6 +2,7 @@ import { Player } from "../players/types";
 
 export interface TeamOverview {
   teamName: string;
+  logo?: string;
   managers: string[];
   gameweek: number;
   gwPoints: number;

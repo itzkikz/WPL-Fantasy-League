@@ -210,9 +210,15 @@ const StandingsPage = () => {
                     {i === 0 && (
                       <Crown className="w-4 h-4 text-yellow-400 absolute -top-2.5 left-4 rotate-12 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10 animate-pulse" />
                     )}
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${crest.bg}`}>
-                      {crest.emoji}
-                    </div>
+                    {r.logo ? (
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden border border-white/10 bg-white/5">
+                        <img src={r.logo} alt={`${r.team} logo`} className="w-9 h-9 object-contain" />
+                      </div>
+                    ) : (
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${crest.bg}`}>
+                        {crest.emoji}
+                      </div>
+                    )}
                   </div>
 
                   {/* Name column */}

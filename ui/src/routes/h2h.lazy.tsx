@@ -421,9 +421,15 @@ function H2HPage() {
                           {idx === 0 && (
                             <Crown className="w-3.5 h-3.5 text-yellow-400 absolute -top-2.5 left-3 rotate-12 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10 animate-pulse" />
                           )}
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm ${crest.bg}`}>
-                            {crest.emoji}
-                          </div>
+                          {team.logo ? (
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center overflow-hidden border border-white/10 bg-white/5">
+                              <img src={team.logo} alt={`${team.teamName} logo`} className="w-7 h-7 object-contain" />
+                            </div>
+                          ) : (
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm ${crest.bg}`}>
+                              {crest.emoji}
+                            </div>
+                          )}
                         </div>
 
                         {/* Name and Manager */}
@@ -557,6 +563,9 @@ function H2HPage() {
                             <div className="flex items-center justify-between">
                               {/* Home Team */}
                               <div className="flex-1 flex items-center gap-2.5 min-w-0">
+                                {fixture.homeTeam?.logo ? (
+                                  <img src={fixture.homeTeam.logo} alt={`${fixture.homeTeam?.name} logo`} className="w-7 h-7 object-contain shrink-0" />
+                                ) : null}
                                 <span className={`text-sm font-extrabold truncate leading-tight ${
                                   isFinished && fixture.winner === fixture.homeTeam?._id ? 'text-emerald-400' : 'text-white'
                                 }`}>
@@ -591,6 +600,9 @@ function H2HPage() {
                                 }`}>
                                   {fixture.awayTeam?.name || 'TBD'}
                                 </span>
+                                {fixture.awayTeam?.logo ? (
+                                  <img src={fixture.awayTeam.logo} alt={`${fixture.awayTeam?.name} logo`} className="w-7 h-7 object-contain shrink-0" />
+                                ) : null}
                               </div>
                             </div>
 

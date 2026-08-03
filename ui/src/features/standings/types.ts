@@ -8,6 +8,7 @@ export interface Standings {
     pos_change: number,
     team: string,
     team_id: string,
+    logo?: string,
     total: string,
     total_point_before_this_gw: string,
     manager?: string
