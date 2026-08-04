@@ -197,6 +197,16 @@ export interface MyFixturesData {
   fixtures: MyFixture[];
 }
 
+export interface FantasyArticle {
+  id?: string;
+  headline: string;
+  content?: string;
+  category?: string;
+  thumbnail?: string | null;
+  time: string;
+  createdAt?: string;
+}
+
 export interface HomePageData {
   teamOverview: TeamOverview;
   gameweekProgress: GameweekProgress;
@@ -219,4 +229,5 @@ export interface HomePageData {
     forwards: YourPlayer[];
   };
   miniLeague: LeagueStanding[];
+  fantasyNews?: FantasyArticle[];
 }

@@ -84,6 +84,7 @@ const SideNavbar = () => {
     { label: "Leagues", path: "/admin/leagues" },
     { label: "H2H Leagues", path: "/admin/h2h-leagues" },
     { label: "Notifications", path: "/admin/notifications" },
+    { label: "Facts & News", path: "/admin/facts" },
     { label: "Gameweeks", path: "/admin/gameweeks" },
   ];
 
@@ -198,12 +199,14 @@ const SideNavbar = () => {
   const navItems = isRegularUser
     ? [
         { label: "Home", path: "/home" },
+        { label: "Facts & News", path: "/facts" },
         { label: "League", path: "/standings/" },
         { label: "Stats", path: "/stats" },
         { label: "Settings", path: "/settings" },
       ]
     : [
         { label: "Home", path: "/home" },
+        { label: "Facts & News", path: "/facts" },
         { label: "League", path: "/standings/" },
         { label: "My Team", path: "/my-team" },
         { label: "H2H", path: "/h2h" },
