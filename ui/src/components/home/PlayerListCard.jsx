@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, CardHeader, Avatar, LinkText } from "./Primitives";
+import { Link } from "@tanstack/react-router";
+import { Card, CardHeader, Avatar } from "./Primitives";
 
 /**
  * PlayerListCard - reusable list of players (used for "Top Players"
@@ -8,20 +9,18 @@ import { Card, CardHeader, Avatar, LinkText } from "./Primitives";
  * Props:
  *  - title, subtitle
  *  - players: [{ name, meta, position, value, photo }]
- *  - onViewAll
  */
 export default function PlayerListCard({
   title = "Top Players",
   subtitle = "This Gameweek",
   players = [],
   viewAllLabel = "View All",
-  onViewAll,
 }) {
   return (
     <Card padded={false} className="h-full p-2.5 sm:p-4">
       <CardHeader title={title} subtitle={subtitle} className="!mb-2" />
       <ul className="flex flex-col gap-2 sm:gap-2.5 mb-2 sm:mb-3">
-        {players.map((p, i) => (
+        {players.map((p) => (
           <li key={p.name} className="flex items-center gap-1.5 sm:gap-3 min-w-0">
             <Avatar src={p.photo} alt={p.name} size={null} className="w-7 h-7 sm:w-9 sm:h-9 flex-shrink-0" />
             <div className="flex-1 min-w-0">
@@ -38,11 +37,12 @@ export default function PlayerListCard({
           </li>
         ))}
       </ul>
-      <LinkText href="#" className="block" >
-        <button onClick={onViewAll} className="hover:underline active:opacity-70 text-[10px] sm:text-xs">
-          {viewAllLabel}
-        </button>
-      </LinkText>
+      <Link
+        to="/stats"
+        className="block text-primary text-xs font-medium hover:text-primary/80 transition-colors hover:underline active:opacity-70 text-[10px] sm:text-xs"
+      >
+        {viewAllLabel}
+      </Link>
     </Card>
   );
 }

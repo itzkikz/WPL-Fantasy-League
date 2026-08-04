@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 const iconClass = (isActive: boolean) =>
-  `w-6 h-6 transition-all duration-300 ${isActive ? "text-secondary scale-110" : "text-gray-400 dark:text-[#8E89A6]"}`;
+  `w-6 h-6 transition-all duration-300 ${isActive ? "text-secondary scale-110" : "text-gray-400 dark:text-gray-500"}`;
 
 const HomeIcon = ({ isActive }: { isActive: boolean }) => (
   <House className={iconClass(isActive)} />

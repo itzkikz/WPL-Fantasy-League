@@ -44,6 +44,7 @@ export interface LeagueStats {
 export interface LeagueStanding {
   rank: number;
   team: string;
+  team_id?: string;
   gameweekPoints: number;
   totalPoints: number;
   rankChange: number;
