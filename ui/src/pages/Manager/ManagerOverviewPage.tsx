@@ -79,7 +79,7 @@ const ManagerOverviewPage = () => {
   const crest = getOverviewCrest(teamName || "");
 
   return (
-    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-white font-outfit select-none overflow-hidden pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
+    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-text-primary font-outfit select-none overflow-hidden pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
 
       {/* MOBILE CONTAINER (Visible on mobile < lg) */}
       <div className="flex-1 flex flex-col min-h-0 overflow-y-auto px-4 py-3 gap-5 lg:hidden">
@@ -87,7 +87,7 @@ const ManagerOverviewPage = () => {
         <div className="bg-surface border border-border rounded-2xl p-3 md:p-4 shadow-card flex flex-row items-center max-w-2xl mx-auto w-full gap-3 md:gap-4 shrink-0 text-left">
           <button
             onClick={() => navigate({ to: "/standings" })}
-            className="flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-white active:scale-95 transition-all cursor-pointer shrink-0"
+            className="flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-text-primary active:scale-95 transition-all cursor-pointer shrink-0"
             aria-label="Go back"
           >
             <ArrowLeft className="w-4 h-4 text-text-muted" />
@@ -102,7 +102,7 @@ const ManagerOverviewPage = () => {
             </div>
           )}
           <div className="min-w-0 flex-1">
-            <h2 className="text-sm md:text-base font-black tracking-tight text-white truncate">{teamName}</h2>
+            <h2 className="text-sm md:text-base font-black tracking-tight text-text-primary truncate">{teamName}</h2>
             <div className="flex items-center gap-1.5 text-[10px] md:text-xs text-text-muted mt-0.5 font-semibold">
               <Users className="w-3.5 h-3.5 shrink-0" />
               <span className="truncate">Managed By : {managers}</span>
@@ -114,14 +114,14 @@ const ManagerOverviewPage = () => {
         <div className="grid grid-cols-3 gap-2 max-w-2xl mx-auto w-full shrink-0">
           <div className="bg-surface border border-border rounded-2xl p-4 shadow-card flex flex-col items-center justify-center text-center">
             <span className="text-[9px] md:text-xs font-bold text-text-muted uppercase tracking-wider">Overall Rank</span>
-            <span className="text-sm md:text-lg font-black text-white mt-1 font-mono">
+            <span className="text-sm md:text-lg font-black text-text-primary mt-1 font-mono">
               #{rank}
             </span>
           </div>
 
           <div className="bg-surface border border-border rounded-2xl p-4 shadow-card flex flex-col items-center justify-center text-center border-l border-border/50">
             <span className="text-[9px] md:text-xs font-bold text-text-muted uppercase tracking-wider">Total Points</span>
-            <span className="text-sm md:text-lg font-black text-white mt-1 font-mono">
+            <span className="text-sm md:text-lg font-black text-text-primary mt-1 font-mono">
               {totalPoints} pts
             </span>
           </div>
@@ -208,13 +208,13 @@ const ManagerOverviewPage = () => {
           <div className="flex items-center gap-3.5 pb-4 border-b border-border/60">
             <button
               onClick={() => navigate({ to: "/standings" })}
-              className="flex items-center justify-center w-10 h-10 rounded-2xl bg-background hover:bg-white/10 border border-border text-white active:scale-95 transition-all cursor-pointer shrink-0 shadow-inner"
+              className="flex items-center justify-center w-10 h-10 rounded-2xl bg-background hover:bg-elevated border border-border text-text-primary active:scale-95 transition-all cursor-pointer shrink-0 shadow-inner"
               aria-label="Go back"
             >
               <ArrowLeft className="w-5 h-5 text-text-muted" />
             </button>
             <div className="min-w-0 flex-1">
-              <h2 className="text-lg font-black text-white tracking-tight truncate">
+              <h2 className="text-lg font-black text-text-primary tracking-tight truncate">
                 Manager Overview
               </h2>
               <p className="text-xs text-text-muted font-medium truncate">
@@ -235,7 +235,7 @@ const ManagerOverviewPage = () => {
               </div>
             )}
             <div className="min-w-0 flex-1">
-              <h3 className="text-base font-black text-white truncate">{teamName}</h3>
+              <h3 className="text-base font-black text-text-primary truncate">{teamName}</h3>
               <div className="flex items-center gap-1 text-xs text-text-muted mt-0.5 font-semibold">
                 <Users className="w-3.5 h-3.5 shrink-0" />
                 <span className="truncate">{managers}</span>
@@ -247,11 +247,11 @@ const ManagerOverviewPage = () => {
           <div className="grid grid-cols-3 gap-2 bg-background/50 border border-border/60 rounded-2xl p-3.5 text-center">
             <div>
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Rank</span>
-              <span className="text-base font-extrabold text-white font-mono mt-0.5 block">#{rank}</span>
+              <span className="text-base font-extrabold text-text-primary font-mono mt-0.5 block">#{rank}</span>
             </div>
             <div className="border-l border-border/50">
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Total</span>
-              <span className="text-base font-extrabold text-white font-mono mt-0.5 block">{totalPoints}</span>
+              <span className="text-base font-extrabold text-text-primary font-mono mt-0.5 block">{totalPoints}</span>
             </div>
             <div className="border-l border-border/50">
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">GW Score</span>
@@ -267,9 +267,9 @@ const ManagerOverviewPage = () => {
                 <button
                   key={h.gameweek}
                   onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: h.gameweek, teamId } })}
-                  className="flex items-center justify-between bg-background/50 hover:bg-white/5 border border-border/60 hover:border-secondary rounded-xl p-2.5 transition-all cursor-pointer text-left"
+                  className="flex items-center justify-between bg-background/50 hover:bg-elevated border border-border/60 hover:border-secondary rounded-xl p-2.5 transition-all cursor-pointer text-left"
                 >
-                  <span className="text-xs font-extrabold text-white">GW {h.gameweek}</span>
+                  <span className="text-xs font-extrabold text-text-primary">GW {h.gameweek}</span>
                   <span className="text-xs font-black text-secondary font-mono">{h.points} pts</span>
                 </button>
               )) : null}

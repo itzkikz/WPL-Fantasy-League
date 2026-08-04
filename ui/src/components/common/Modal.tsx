@@ -98,7 +98,7 @@ export const Modal = ({
 
       {/* Modal Content Card */}
       <div
-        className={`relative w-full ${maxWidthClass} bg-elevated border border-border ${roundedClass} shadow-modal overflow-hidden z-10 flex flex-col max-h-[90vh] text-white ${cardAnimClass}`}
+        className={`relative w-full ${maxWidthClass} bg-elevated border border-border ${roundedClass} shadow-modal overflow-hidden z-10 flex flex-col max-h-[90vh] text-text-primary ${cardAnimClass}`}
       >
         {children}
       </div>

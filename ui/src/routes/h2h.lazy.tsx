@@ -123,18 +123,18 @@ function H2HFixtureDetails({ homeTeamId, awayTeamId, gameweek }: { homeTeamId: s
 
   return (
     <div 
-      className="border-t border-white/5 pt-4 mt-3 animate-in fade-in slide-in-from-top-1 duration-200"
+      className="border-t border-border/60 pt-4 mt-3 animate-in fade-in slide-in-from-top-1 duration-200"
       onClick={(e) => e.stopPropagation()}
     >
       {/* Header with Team names */}
-      <div className="grid grid-cols-3 text-center mb-3 pb-2 border-b border-white/5">
-        <div className="text-xs font-black text-violet-400 truncate px-1">
+      <div className="grid grid-cols-3 text-center mb-3 pb-2 border-b border-border/60">
+        <div className="text-xs font-black text-secondary truncate px-1">
           {homeDetails?.team_name || 'Home Team'}
         </div>
-        <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest self-center">
+        <div className="text-[10px] font-bold text-text-muted uppercase tracking-widest self-center">
           TEAM STATS
         </div>
-        <div className="text-xs font-black text-violet-400 truncate px-1">
+        <div className="text-xs font-black text-secondary truncate px-1">
           {awayDetails?.team_name || 'Away Team'}
         </div>
       </div>
@@ -152,30 +152,30 @@ function H2HFixtureDetails({ homeTeamId, awayTeamId, gameweek }: { homeTeamId: s
           const isDraw = valHome === valAway;
 
           const homeColor = isDraw 
-            ? 'text-gray-300' 
+            ? 'text-text-secondary' 
             : isHomeWinner 
               ? 'text-emerald-400 font-extrabold' 
-              : 'text-gray-500';
+              : 'text-text-muted';
 
           const awayColor = isDraw 
-            ? 'text-gray-300' 
+            ? 'text-text-secondary' 
             : isAwayWinner 
               ? 'text-emerald-400 font-extrabold' 
-              : 'text-gray-500';
+              : 'text-text-muted';
 
           if (row.highlight) {
             return (
               <div 
                 key={row.key} 
-                className="grid grid-cols-3 items-center py-2.5 px-3 rounded-xl bg-violet-500/10 border border-violet-500/20 text-center font-black mt-2"
+                className="grid grid-cols-3 items-center py-2.5 px-3 rounded-xl bg-secondary/15 border border-secondary/30 text-center font-black mt-2"
               >
-                <div className="text-sm text-violet-300 font-mono">
+                <div className="text-sm text-secondary font-mono">
                   {valHome}
                 </div>
-                <div className="text-xs text-white uppercase tracking-wider">
+                <div className="text-xs text-text-primary uppercase tracking-wider">
                   {row.label}
                 </div>
-                <div className="text-sm text-violet-300 font-mono">
+                <div className="text-sm text-secondary font-mono">
                   {valAway}
                 </div>
               </div>
@@ -185,12 +185,12 @@ function H2HFixtureDetails({ homeTeamId, awayTeamId, gameweek }: { homeTeamId: s
           return (
             <div 
               key={row.key} 
-              className="grid grid-cols-3 items-center py-1.5 px-3 hover:bg-white/[0.02] rounded-lg transition-colors text-center text-xs"
+              className="grid grid-cols-3 items-center py-1.5 px-3 hover:bg-elevated/40 rounded-lg transition-colors text-center text-xs"
             >
               <div className={`font-mono ${homeColor}`}>
                 {valHome}
               </div>
-              <div className="text-[10px] text-gray-400 font-medium">
+              <div className="text-[10px] text-text-muted font-medium">
                 {row.label}
               </div>
               <div className={`font-mono ${awayColor}`}>
@@ -276,16 +276,16 @@ function H2HPage() {
   }, [fixturesData, selectedGw, fixtureFilter, managerDetails]);
 
   return (
-    <div className="flex flex-col flex-1 bg-background text-white overflow-hidden font-outfit">
+    <div className="flex flex-col flex-1 bg-background text-text-primary overflow-hidden font-outfit">
       
       {/* Header */}
       <div className="px-4 pt-4 pb-2 flex-none flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-black text-white tracking-tight flex items-center gap-2.5">
+          <h1 className="text-2xl font-black text-text-primary tracking-tight flex items-center gap-2.5">
             <Swords className="w-6 h-6 text-violet-400" />
             Head to Head
           </h1>
-          <p className="text-xs text-gray-400 mt-0.5">Challenge other managers in your H2H league.</p>
+          <p className="text-xs text-text-muted mt-0.5">Challenge other managers in your H2H league.</p>
         </div>
       </div>
 
@@ -298,8 +298,8 @@ function H2HPage() {
           <div className="w-16 h-16 bg-violet-500/10 border border-violet-500/25 rounded-2xl flex items-center justify-center mb-4">
             <Shield className="w-8 h-8 text-violet-400" />
           </div>
-          <p className="text-lg text-gray-300 font-semibold">No H2H League</p>
-          <p className="text-sm text-gray-500 mt-2 max-w-xs mx-auto">
+          <p className="text-lg text-text-primary font-semibold">No H2H League</p>
+          <p className="text-sm text-text-muted mt-2 max-w-xs mx-auto">
             You haven't been added to any H2H league yet. Ask an admin to create one and add your team.
           </p>
         </div>
@@ -312,15 +312,15 @@ function H2HPage() {
                 <select
                   value={selectedLeagueId ?? ''}
                   onChange={(e) => setSelectedLeagueId(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-white/[0.03] border border-white/10 rounded-xl text-sm font-semibold text-white focus:outline-none focus:border-violet-500 appearance-none cursor-pointer"
+                  className="w-full px-4 py-2.5 bg-card border border-border rounded-xl text-sm font-semibold text-text-primary focus:outline-none focus:border-secondary appearance-none cursor-pointer"
                 >
                   {leagues.map((l: H2HLeague) => (
-                    <option key={l._id} value={l._id} className="bg-[#1b142d] text-white">
+                    <option key={l._id} value={l._id} className="bg-card text-text-primary">
                       {l.name}
                     </option>
                   ))}
                 </select>
-                <ChevronDown className="w-4 h-4 text-gray-400 absolute right-3 top-3.5 pointer-events-none" />
+                <ChevronDown className="w-4 h-4 text-text-muted absolute right-3 top-3.5 pointer-events-none" />
               </div>
             </div>
           )}
@@ -330,37 +330,37 @@ function H2HPage() {
             <button
               onClick={() => setActiveTab("overall")}
               className={`flex-1 pb-2 text-center text-sm font-extrabold tracking-wider uppercase transition-all relative cursor-pointer
-                ${activeTab === "overall" ? "text-violet-400" : "text-text-muted/60 hover:text-white"}`}
+                ${activeTab === "overall" ? "text-secondary" : "text-text-muted hover:text-text-primary"}`}
             >
               Standings Table
               {activeTab === "overall" && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
               )}
             </button>
             <button
               onClick={() => setActiveTab("fixtures")}
               className={`flex-1 pb-2 text-center text-sm font-extrabold tracking-wider uppercase transition-all relative cursor-pointer
-                ${activeTab === "fixtures" ? "text-violet-400" : "text-text-muted/60 hover:text-white"}`}
+                ${activeTab === "fixtures" ? "text-secondary" : "text-text-muted hover:text-text-primary"}`}
             >
               Fixtures & Results
               {activeTab === "fixtures" && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />
               )}
             </button>
           </div>
 
           {/* Summary / Info Bar */}
           {selectedLeague && (
-            <div className="mx-4 px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] flex items-center justify-between mb-3 text-[11px] text-gray-400 flex-none">
+            <div className="mx-4 px-4 py-2.5 rounded-xl bg-card border border-border flex items-center justify-between mb-3 text-[11px] text-text-muted flex-none">
               <span className="flex items-center gap-1.5 font-medium">
-                <Calendar className="w-3.5 h-3.5 text-violet-400" />
+                <Calendar className="w-3.5 h-3.5 text-secondary" />
                 GW {selectedLeague.gameweekStart} – {selectedLeague.gameweekEnd}
               </span>
-              <span className="font-semibold text-white uppercase text-[10px] tracking-wider px-2 py-0.5 rounded bg-violet-500/10 border border-violet-500/20">
+              <span className="font-semibold text-text-primary uppercase text-[10px] tracking-wider px-2 py-0.5 rounded bg-secondary/15 border border-secondary/30">
                 {selectedLeague.name}
               </span>
               <span className="flex items-center gap-1.5 font-medium">
-                <Shield className="w-3.5 h-3.5 text-violet-400" />
+                <Shield className="w-3.5 h-3.5 text-secondary" />
                 {selectedLeague.fantasyTeams?.length || 0} teams
               </span>
             </div>
@@ -371,7 +371,7 @@ function H2HPage() {
             
             {/* Headers for standings tab */}
             {activeTab === 'overall' && !standingsLoading && standingsData?.standings && (
-              <div className="flex items-center justify-between text-[10px] font-bold text-[#c8c8c8]/50 uppercase tracking-wider px-2 pb-2 flex-none">
+              <div className="flex items-center justify-between text-[10px] font-bold text-text-muted uppercase tracking-wider px-2 pb-2 flex-none">
                 <div className="w-8 text-center">Rank</div>
                 <div className="flex-1 text-left pl-3">Team</div>
                 <div className="w-6 text-center">P</div>
@@ -392,7 +392,7 @@ function H2HPage() {
                   [...Array(6)].map((_, i) => (
                     <div
                       key={i}
-                      className="h-14 bg-white/5 border border-white/5 rounded-2xl animate-pulse"
+                      className="h-14 bg-surface border border-border rounded-2xl animate-pulse"
                     />
                   ))
                 ) : standingsData?.standings && standingsData.standings.length > 0 ? (
@@ -407,13 +407,13 @@ function H2HPage() {
                         key={team.teamId}
                         className={`flex items-center justify-between p-2.5 rounded-2xl transition-all duration-200 ${
                           isMe
-                            ? 'bg-[#211433]/70 border border-violet-500/45 shadow-[0_0_12px_rgba(139,92,246,0.15)]'
-                            : 'bg-white/5 border border-white/[0.03] hover:bg-white/10'
+                            ? 'bg-secondary/15 border border-secondary/40 shadow-sm'
+                            : 'bg-surface border border-border hover:bg-elevated/50'
                         }`}
                       >
                         {/* Rank */}
                         <div className="w-8 flex flex-col items-center justify-center flex-shrink-0">
-                          <span className="text-xs font-black text-white">{idx + 1}</span>
+                          <span className="text-xs font-black text-text-primary">{idx + 1}</span>
                         </div>
 
                         {/* Avatar */}
@@ -422,7 +422,7 @@ function H2HPage() {
                             <Crown className="w-3.5 h-3.5 text-yellow-400 absolute -top-2.5 left-3 rotate-12 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10 animate-pulse" />
                           )}
                           {team.logo ? (
-                            <div className="w-8 h-8 rounded-full flex items-center justify-center overflow-hidden border border-white/10 bg-white/5">
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center overflow-hidden border border-border bg-background">
                               <img src={team.logo} alt={`${team.teamName} logo`} className="w-7 h-7 object-contain" />
                             </div>
                           ) : (
@@ -434,46 +434,46 @@ function H2HPage() {
 
                         {/* Name and Manager */}
                         <div className="flex-1 pl-2.5 min-w-0">
-                          <p className="text-[12px] font-bold text-white leading-snug truncate">{team.teamName}</p>
-                          <p className="text-[9px] text-[#c8c8c8]/50 truncate mt-0.5">{manager}</p>
+                          <p className="text-[12px] font-bold text-text-primary leading-snug truncate">{team.teamName}</p>
+                          <p className="text-[9px] text-text-muted truncate mt-0.5">{manager}</p>
                         </div>
 
                         {/* Stats */}
-                        <div className="w-6 text-center text-xs text-gray-300 font-medium flex-shrink-0">
+                        <div className="w-6 text-center text-xs text-text-secondary font-medium flex-shrink-0">
                           {team.played}
                         </div>
-                        <div className="w-6 text-center text-xs text-gray-400 font-medium flex-shrink-0">
+                        <div className="w-6 text-center text-xs text-text-muted font-medium flex-shrink-0">
                           {team.won}
                         </div>
-                        <div className="w-6 text-center text-xs text-gray-400 font-medium flex-shrink-0">
+                        <div className="w-6 text-center text-xs text-text-muted font-medium flex-shrink-0">
                           {team.drawn}
                         </div>
-                        <div className="w-6 text-center text-xs text-gray-400 font-medium flex-shrink-0">
+                        <div className="w-6 text-center text-xs text-text-muted font-medium flex-shrink-0">
                           {team.lost}
                         </div>
-                        <div className="w-12 text-center text-xs text-gray-300 font-medium hidden md:block flex-shrink-0">
+                        <div className="w-12 text-center text-xs text-text-secondary font-medium hidden md:block flex-shrink-0">
                           {team.gf}
                         </div>
-                        <div className="w-12 text-center text-xs text-gray-400 font-medium hidden md:block flex-shrink-0">
+                        <div className="w-12 text-center text-xs text-text-muted font-medium hidden md:block flex-shrink-0">
                           {team.ga}
                         </div>
 
                         {/* Diff */}
                         <div className={`w-8 text-center text-xs font-semibold flex-shrink-0 ${
-                          diff > 0 ? 'text-emerald-400' : diff < 0 ? 'text-rose-400' : 'text-gray-400'
+                          diff > 0 ? 'text-emerald-400' : diff < 0 ? 'text-rose-400' : 'text-text-muted'
                         }`}>
                           {diff > 0 ? `+${diff}` : diff}
                         </div>
 
                         {/* Points */}
-                        <div className="w-12 text-right pr-2 font-black text-[12px] text-violet-400 flex-shrink-0">
+                        <div className="w-12 text-right pr-2 font-black text-[12px] text-secondary flex-shrink-0">
                           {team.pts}
                         </div>
                       </div>
                     );
                   })
                 ) : (
-                  <div className="text-center py-12 text-gray-500 text-sm">
+                  <div className="text-center py-12 text-text-muted text-sm">
                     No standings calculated yet.
                   </div>
                 )
@@ -495,8 +495,8 @@ function H2HPage() {
                           onClick={() => setFixtureFilter('mine')}
                           className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
                             fixtureFilter === 'mine'
-                              ? 'bg-violet-500/20 text-violet-300 border border-violet-500/30'
-                              : 'bg-white/5 text-text-muted/50 border border-white/[0.06] hover:text-white'
+                              ? 'bg-secondary/20 text-secondary border border-secondary/30'
+                              : 'bg-surface text-text-muted border border-border hover:text-text-primary'
                           }`}
                         >
                           Your Matchups
@@ -505,8 +505,8 @@ function H2HPage() {
                           onClick={() => setFixtureFilter('all')}
                           className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
                             fixtureFilter === 'all'
-                              ? 'bg-violet-500/20 text-violet-300 border border-violet-500/30'
-                              : 'bg-white/5 text-text-muted/50 border border-white/[0.06] hover:text-white'
+                              ? 'bg-secondary/20 text-secondary border border-secondary/30'
+                              : 'bg-surface text-text-muted border border-border hover:text-text-primary'
                           }`}
                         >
                           All Matchups
@@ -515,14 +515,14 @@ function H2HPage() {
 
                       {uniqueGameweeks.length > 0 && (
                         <div className="flex items-center gap-1.5">
-                          <span className="text-[10px] text-gray-500 font-bold uppercase">GW:</span>
+                          <span className="text-[10px] text-text-muted font-bold uppercase">GW:</span>
                           <select
                             value={selectedGw ?? ''}
                             onChange={(e) => setSelectedGw(e.target.value ? Number(e.target.value) : null)}
-                            className="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-xs font-semibold text-white focus:outline-none focus:border-violet-500 cursor-pointer"
+                            className="px-2 py-1 bg-card border border-border rounded-lg text-xs font-semibold text-text-primary focus:outline-none focus:border-secondary cursor-pointer"
                           >
                             {uniqueGameweeks.map((gw) => (
-                              <option key={gw} value={gw} className="bg-[#1b142d] text-white">
+                              <option key={gw} value={gw} className="bg-card text-text-primary">
                                 GW {gw}
                               </option>
                             ))}
@@ -533,7 +533,7 @@ function H2HPage() {
 
                     {/* Fixtures List */}
                     {filteredFixtures.length === 0 ? (
-                      <div className="text-center py-12 text-[#c8c8c8]/40">
+                      <div className="text-center py-12 text-text-muted">
                         <p className="text-sm font-medium">No matchups found</p>
                         <p className="text-xs mt-1">Select another gameweek or filter option.</p>
                       </div>
@@ -554,10 +554,10 @@ function H2HPage() {
                               isFinished || isLive ? 'cursor-pointer font-medium' : 'cursor-default'
                             } ${
                               isExpanded
-                                ? 'bg-white/[0.06] border border-violet-500/30 shadow-[0_0_16px_rgba(139,92,246,0.2)]'
+                                ? 'bg-elevated border border-secondary/40 shadow-card'
                                 : isRelevant
-                                ? 'bg-violet-500/[0.06] border border-violet-500/30 shadow-[0_0_12px_rgba(139,92,246,0.1)] hover:bg-violet-500/[0.08]'
-                                : 'bg-white/5 border border-white/[0.03] hover:bg-white/10'
+                                ? 'bg-secondary/10 border border-secondary/30 shadow-card hover:bg-secondary/15'
+                                : 'bg-surface border border-border hover:bg-elevated/50'
                             }`}
                           >
                             <div className="flex items-center justify-between">
@@ -567,7 +567,7 @@ function H2HPage() {
                                   <img src={fixture.homeTeam.logo} alt={`${fixture.homeTeam?.name} logo`} className="w-7 h-7 object-contain shrink-0" />
                                 ) : null}
                                 <span className={`text-sm font-extrabold truncate leading-tight ${
-                                  isFinished && fixture.winner === fixture.homeTeam?._id ? 'text-emerald-400' : 'text-white'
+                                  isFinished && fixture.winner === fixture.homeTeam?._id ? 'text-emerald-400' : 'text-text-primary'
                                 }`}>
                                   {fixture.homeTeam?.name || 'TBD'}
                                 </span>
@@ -577,18 +577,18 @@ function H2HPage() {
                               <div className="px-4 flex flex-col items-center justify-center shrink-0 min-w-[95px]">
                                 {isFinished || isLive ? (
                                   <div className="flex items-center gap-2 bg-background border border-border rounded-xl px-2.5 py-0.5 shadow-inner">
-                                    <span className={`text-sm font-black font-mono ${isFinished && fixture.winner === fixture.homeTeam?._id ? 'text-emerald-400' : 'text-white'}`}>
+                                    <span className={`text-sm font-black font-mono ${isFinished && fixture.winner === fixture.homeTeam?._id ? 'text-emerald-400' : 'text-text-primary'}`}>
                                       {fixture.homeScore ?? 0}
                                     </span>
-                                    <span className="text-[10px] font-black text-text-muted/60 font-mono">―</span>
-                                    <span className={`text-sm font-black font-mono ${isFinished && fixture.winner === fixture.awayTeam?._id ? 'text-emerald-400' : 'text-white'}`}>
+                                    <span className="text-[10px] font-black text-text-muted font-mono">―</span>
+                                    <span className={`text-sm font-black font-mono ${isFinished && fixture.winner === fixture.awayTeam?._id ? 'text-emerald-400' : 'text-text-primary'}`}>
                                       {fixture.awayScore ?? 0}
                                     </span>
                                   </div>
                                 ) : (
-                                  <span className="text-[9px] font-black text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2.5 py-0.5 rounded-md font-mono">VS</span>
+                                  <span className="text-[9px] font-black text-secondary bg-secondary/15 border border-secondary/30 px-2.5 py-0.5 rounded-md font-mono">VS</span>
                                 )}
-                                <span className={`text-[8px] font-bold mt-1 uppercase tracking-wider font-mono ${isLive ? 'text-emerald-400 animate-pulse' : 'text-gray-500'}`}>
+                                <span className={`text-[8px] font-bold mt-1 uppercase tracking-wider font-mono ${isLive ? 'text-emerald-400 animate-pulse' : 'text-text-muted'}`}>
                                   {isLive ? "LIVE" : isFinished ? "FT" : `GW ${fixture.gameweek}`}
                                 </span>
                               </div>
@@ -596,7 +596,7 @@ function H2HPage() {
                               {/* Away Team */}
                               <div className="flex-1 flex items-center gap-2.5 justify-end min-w-0">
                                 <span className={`text-sm font-extrabold truncate leading-tight text-right ${
-                                  isFinished && fixture.winner === fixture.awayTeam?._id ? 'text-emerald-400' : 'text-white'
+                                  isFinished && fixture.winner === fixture.awayTeam?._id ? 'text-emerald-400' : 'text-text-primary'
                                 }`}>
                                   {fixture.awayTeam?.name || 'TBD'}
                                 </span>
@@ -607,17 +607,17 @@ function H2HPage() {
                             </div>
 
                             {/* Label and Click Instructions */}
-                            <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/5">
+                            <div className="flex items-center justify-between mt-2 pt-2 border-t border-border/50">
                               {isRelevant ? (
                                 <div className="flex items-center gap-1.5">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
-                                  <span className="text-[9px] font-bold text-violet-400/80 uppercase tracking-wider">Your Matchup</span>
+                                  <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
+                                  <span className="text-[9px] font-bold text-secondary uppercase tracking-wider">Your Matchup</span>
                                 </div>
                               ) : (
                                 <div />
                               )}
                               {(isFinished || isLive) && (
-                                <span className="text-[8px] font-bold text-violet-400/60 uppercase tracking-wider hover:text-violet-300">
+                                <span className="text-[8px] font-bold text-secondary uppercase tracking-wider hover:underline">
                                   {isExpanded ? 'Click to collapse' : 'Click to view details'}
                                 </span>
                               )}

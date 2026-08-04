@@ -170,7 +170,7 @@ const TeamDetailsPage = () => {
   }
 
   return (
-    <div className="flex flex-col flex-1 bg-background text-white font-outfit select-none overflow-hidden">
+    <div className="flex flex-col flex-1 bg-background text-text-primary font-outfit select-none overflow-hidden">
 
       {/* 1. Header Panel */}
       <div className="mx-4 mt-3 bg-gradient-card border border-border rounded-2xl overflow-hidden p-4 shadow-card relative shrink-0">
@@ -180,12 +180,12 @@ const TeamDetailsPage = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={handleGoBack}
-              className="p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 active:scale-95 transition-all text-text-muted hover:text-white cursor-pointer"
+              className="p-2 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:bg-gray-200 dark:hover:bg-white/10 active:scale-95 transition-all text-text-muted hover:text-text-primary cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
             <div>
-              <h1 className="text-base md:text-lg font-black tracking-tight text-white">
+              <h1 className="text-base md:text-lg font-black tracking-tight text-text-primary">
                 {team_name || "Team Details"}
               </h1>
               <p className="text-[10px] md:text-xs text-text-muted font-medium mt-0.5">

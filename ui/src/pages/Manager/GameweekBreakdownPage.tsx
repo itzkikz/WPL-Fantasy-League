@@ -30,7 +30,7 @@ const GameweekSwitcher = ({
       <button
         onClick={() => onChange(Math.max(1, gw - 1))}
         disabled={gw <= 1}
-        className="w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-white active:scale-95 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center"
+        className="w-8 h-8 rounded-lg bg-background hover:bg-elevated border border-border text-text-primary active:scale-95 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center"
         aria-label="Previous gameweek"
       >
         <ChevronLeft className="w-4 h-4 text-text-muted" />
@@ -42,10 +42,10 @@ const GameweekSwitcher = ({
           onChange={(e) => onChange(Number(e.target.value))}
           aria-label="Select gameweek"
           style={{ backgroundImage: "none" }}
-          className="appearance-none bg-card border border-border rounded-lg text-xs font-black text-white pl-3 py-1.5 font-mono cursor-pointer focus:outline-none focus:border-primary/50"
+          className="appearance-none bg-card border border-border rounded-lg text-xs font-black text-text-primary pl-3 py-1.5 font-mono cursor-pointer focus:outline-none focus:border-primary/50"
         >
           {gameweeks.map((n) => (
-            <option key={n} value={n} className="bg-card text-white">
+            <option key={n} value={n} className="bg-card text-text-primary">
               GW {n}
             </option>
           ))}
@@ -56,7 +56,7 @@ const GameweekSwitcher = ({
       <button
         onClick={() => onChange(Math.min(maxGw, gw + 1))}
         disabled={gw >= maxGw}
-        className="w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-white active:scale-95 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center"
+        className="w-8 h-8 rounded-lg bg-background hover:bg-elevated border border-border text-text-primary active:scale-95 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center"
         aria-label="Next gameweek"
       >
         <ChevronRight className="w-4 h-4 text-text-muted" />
@@ -214,7 +214,7 @@ const GameweekBreakdownPage = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[70dvh] bg-background text-white select-none">
+      <div className="flex flex-col items-center justify-center min-h-[70dvh] bg-background text-text-primary select-none">
         <div className="w-10 h-10 border-4 border-secondary border-t-transparent rounded-full animate-spin mb-3"></div>
         <p className="text-sm font-bold text-secondary">Loading breakdown...</p>
       </div>
@@ -237,7 +237,7 @@ const GameweekBreakdownPage = () => {
   }
 
   return (
-    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-white font-outfit select-none overflow-hidden pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
+    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-text-primary font-outfit select-none overflow-hidden pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
 
       {/* MOBILE HEADER (Visible on mobile < lg) */}
       <div className="lg:hidden shrink-0">
@@ -250,7 +250,7 @@ const GameweekBreakdownPage = () => {
                 navigate({ to: "/my-team", search: { tab: "history" } });
               }
             }}
-            className="flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-white active:scale-95 transition-all cursor-pointer"
+            className="flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-text-primary active:scale-95 transition-all cursor-pointer"
             aria-label="Go back"
           >
             <ArrowLeft className="w-4 h-4 text-text-muted" />
@@ -272,7 +272,7 @@ const GameweekBreakdownPage = () => {
             <button
               onClick={() => setActiveTab("squad")}
               className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex-1 flex items-center justify-center gap-1.5 min-h-[36px]
-                ${activeTab === "squad" ? "text-secondary font-black" : "text-text-muted/60 hover:text-white"}`}
+                ${activeTab === "squad" ? "text-secondary font-black" : "text-text-muted hover:text-text-primary"}`}
             >
               <LayoutGrid className="w-3.5 h-3.5" />
               Squad
@@ -283,7 +283,7 @@ const GameweekBreakdownPage = () => {
             <button
               onClick={() => setActiveTab("points")}
               className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex-1 flex items-center justify-center gap-1.5 min-h-[36px]
-                ${activeTab === "points" ? "text-secondary font-black" : "text-text-muted/60 hover:text-white"}`}
+                ${activeTab === "points" ? "text-secondary font-black" : "text-text-muted hover:text-text-primary"}`}
             >
               <Award className="w-3.5 h-3.5" />
               Points
@@ -311,13 +311,13 @@ const GameweekBreakdownPage = () => {
                   navigate({ to: "/my-team", search: { tab: "history" } });
                 }
               }}
-              className="flex items-center justify-center w-10 h-10 rounded-2xl bg-background hover:bg-white/10 border border-border text-white active:scale-95 transition-all cursor-pointer shrink-0 shadow-inner"
+              className="flex items-center justify-center w-10 h-10 rounded-2xl bg-background hover:bg-elevated border border-border text-text-primary active:scale-95 transition-all cursor-pointer shrink-0 shadow-inner"
               aria-label="Go back"
             >
               <ArrowLeft className="w-5 h-5 text-text-muted" />
             </button>
             <div className="min-w-0 flex-1">
-              <h2 className="text-lg font-black text-white tracking-tight truncate">
+              <h2 className="text-lg font-black text-text-primary tracking-tight truncate">
                 Gameweek {gw} Breakdown
               </h2>
               <p className="text-xs text-text-muted font-medium truncate">
@@ -335,11 +335,11 @@ const GameweekBreakdownPage = () => {
             </div>
             <div className="border-l border-border/50">
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Average</span>
-              <span className="text-base font-extrabold text-white font-mono mt-0.5 block">{avg ?? 0}</span>
+              <span className="text-base font-extrabold text-text-primary font-mono mt-0.5 block">{avg ?? 0}</span>
             </div>
             <div className="border-l border-border/50">
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Highest</span>
-              <span className="text-base font-extrabold text-white font-mono mt-0.5 block">{highest ?? 0}</span>
+              <span className="text-base font-extrabold text-text-primary font-mono mt-0.5 block">{highest ?? 0}</span>
             </div>
           </div>
 
@@ -350,7 +350,7 @@ const GameweekBreakdownPage = () => {
               <button
                 onClick={() => setActiveTab("squad")}
                 className={`flex-1 py-2 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                  activeTab === "squad" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"
+                  activeTab === "squad" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-text-primary"
                 }`}
               >
                 <LayoutGrid className="w-4 h-4" />
@@ -359,7 +359,7 @@ const GameweekBreakdownPage = () => {
               <button
                 onClick={() => setActiveTab("points")}
                 className={`flex-1 py-2 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                  activeTab === "points" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"
+                  activeTab === "points" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-text-primary"
                 }`}
               >
                 <Award className="w-4 h-4" />
@@ -376,7 +376,7 @@ const GameweekBreakdownPage = () => {
                 <button
                   onClick={() => setSquadView("pitch")}
                   className={`flex-1 py-2 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                    squadView === "pitch" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"
+                    squadView === "pitch" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-text-primary"
                   }`}
                 >
                   <LayoutGrid className="w-4 h-4" />
@@ -385,7 +385,7 @@ const GameweekBreakdownPage = () => {
                 <button
                   onClick={() => setSquadView("list")}
                   className={`flex-1 py-2 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                    squadView === "list" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"
+                    squadView === "list" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-text-primary"
                   }`}
                 >
                   <List className="w-4 h-4" />
@@ -550,11 +550,11 @@ const GameweekBreakdownPage = () => {
                           <th className="py-3 px-4 text-center">Points</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-border/30 font-medium text-white">
+                      <tbody className="divide-y divide-border/30 font-medium text-text-primary">
                         {starting && Object.entries(starting).flatMap(([pos, players]) =>
                           (players || []).map((player) => (
-                            <tr key={player.id} className="hover:bg-white/5 transition-colors cursor-pointer" onClick={() => handlePlayerClick(player)}>
-                              <td className="py-2.5 px-4 font-bold text-white">
+                            <tr key={player.id} className="hover:bg-elevated/50 transition-colors cursor-pointer" onClick={() => handlePlayerClick(player)}>
+                              <td className="py-2.5 px-4 font-bold text-text-primary">
                                 <div className="flex items-center gap-3">
                                   {/* Player Image Thumbnail */}
                                   <div
@@ -591,13 +591,13 @@ const GameweekBreakdownPage = () => {
                                       {player.isViceCaptain && <span className="bg-text-muted text-black text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono shrink-0">V</span>}
                                       {player.subIn && <span className="bg-emerald-900/90 border border-emerald-400 text-emerald-300 text-[8px] font-black px-1.5 py-0.5 rounded-full shrink-0">IN</span>}
                                     </div>
-                                    <span className="text-[10px] font-semibold text-text-muted/70 uppercase tracking-wider">
+                                    <span className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">
                                       {player.position} • {player.team}
                                     </span>
                                   </div>
                                 </div>
                               </td>
-                              <td className="py-3.5 px-4 text-center text-white">{getPlayerPrice(player)}</td>
+                              <td className="py-3.5 px-4 text-center text-text-primary">{getPlayerPrice(player)}</td>
                               <td className="py-3.5 px-4 text-center text-[var(--color-success-bright)] font-mono font-extrabold">{player.point}</td>
                             </tr>
                           ))
@@ -732,14 +732,14 @@ const GameweekBreakdownPage = () => {
 
                   <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
                     <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">GW Average</span>
-                    <span className="text-sm md:text-lg font-black text-white mt-0.5 font-mono">
+                    <span className="text-sm md:text-lg font-black text-text-primary mt-0.5 font-mono">
                       {avg ?? 0} pts
                     </span>
                   </div>
 
                   <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
                     <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">GW Highest</span>
-                    <span className="text-sm md:text-lg font-black text-white mt-0.5 font-mono">
+                    <span className="text-sm md:text-lg font-black text-text-primary mt-0.5 font-mono">
                       {highest ?? 0} pts
                     </span>
                   </div>
@@ -756,7 +756,7 @@ const GameweekBreakdownPage = () => {
                           <th className="py-3 px-4 text-center">Points Formed</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-border/30 font-medium text-white">
+                      <tbody className="divide-y divide-border/30 font-medium text-text-primary">
                         {(() => {
                           const totals = compileTeamTotals();
                           const rows = [
@@ -791,11 +791,11 @@ const GameweekBreakdownPage = () => {
                                 : "text-text-muted/65";
 
                             return (
-                              <tr key={row.label} className="hover:bg-white/5 transition-colors">
-                                <td className="py-3.5 px-4 font-bold text-white">
+                              <tr key={row.label} className="hover:bg-elevated/50 transition-colors">
+                                <td className="py-3.5 px-4 font-bold text-text-primary">
                                   {row.label}
                                 </td>
-                                <td className="py-3.5 px-4 text-center text-white font-mono">
+                                <td className="py-3.5 px-4 text-center text-text-primary font-mono">
                                   {row.count}{(row as any).suffix}
                                 </td>
                                 <td className={`py-3.5 px-4 text-center font-mono font-extrabold ${pointsColor}`}>

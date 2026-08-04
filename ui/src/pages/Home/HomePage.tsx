@@ -30,7 +30,7 @@ const HomePage = () => {
   // Dedicated view for regular user role (non-manager account)
   if (isRegularUser) {
     return (
-      <div data-theme="dark" className="min-h-screen bg-background text-text p-3 lg:p-6 font-outfit">
+      <div className="min-h-screen bg-background text-text-primary p-3 lg:p-6 font-outfit">
         <div className="max-w-4xl mx-auto space-y-6 pt-2">
           {/* Spectator Banner */}
           <div className="bg-gradient-to-r from-purple-900/40 via-indigo-900/40 to-slate-900/40 border border-purple-500/30 rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden backdrop-blur-xl">
@@ -44,10 +44,10 @@ const HomePage = () => {
                   <Sparkles className="w-3 h-3 text-purple-400" />
                   <span>Fan / Spectator Account</span>
                 </div>
-                <h2 className="text-xl sm:text-2xl font-extrabold text-white">
+                <h2 className="text-xl sm:text-2xl font-extrabold text-text-primary">
                   You are not managing a fantasy team yet
                 </h2>
-                <p className="text-xs sm:text-sm text-purple-200/80 leading-relaxed">
+                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
                   Once the League Administrator assigns you to a fantasy squad, you'll be able to manage your roster, select captains, make transfers, and track your live manager points! In the meantime, feel free to explore overall league standings and player statistics below.
                 </p>
               </div>
@@ -58,7 +58,7 @@ const HomePage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <button
               onClick={() => navigate({ to: "/standings" })}
-              className="group p-6 rounded-2xl bg-surface border border-white/10 hover:border-purple-500/40 transition-all text-left flex flex-col justify-between h-40 shadow-md hover:scale-[1.01] cursor-pointer"
+              className="group p-6 rounded-2xl bg-surface border border-border hover:border-purple-500/40 transition-all text-left flex flex-col justify-between h-40 shadow-md hover:scale-[1.01] cursor-pointer"
             >
               <div className="flex items-center justify-between">
                 <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
@@ -67,14 +67,14 @@ const HomePage = () => {
                 <ArrowRight className="w-5 h-5 text-text-muted group-hover:text-purple-400 group-hover:translate-x-1 transition-all" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white mb-1">League Standings</h3>
+                <h3 className="text-base font-bold text-text-primary mb-1">League Standings</h3>
                 <p className="text-xs text-text-secondary">View live leaderboards, manager points, and team rankings.</p>
               </div>
             </button>
 
             <button
               onClick={() => navigate({ to: "/stats" })}
-              className="group p-6 rounded-2xl bg-surface border border-white/10 hover:border-purple-500/40 transition-all text-left flex flex-col justify-between h-40 shadow-md hover:scale-[1.01] cursor-pointer"
+              className="group p-6 rounded-2xl bg-surface border border-border hover:border-purple-500/40 transition-all text-left flex flex-col justify-between h-40 shadow-md hover:scale-[1.01] cursor-pointer"
             >
               <div className="flex items-center justify-between">
                 <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
@@ -83,7 +83,7 @@ const HomePage = () => {
                 <ArrowRight className="w-5 h-5 text-text-muted group-hover:text-indigo-400 group-hover:translate-x-1 transition-all" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white mb-1">Player & League Stats</h3>
+                <h3 className="text-base font-bold text-text-primary mb-1">Player & League Stats</h3>
                 <p className="text-xs text-text-secondary">Explore player form, goals, assists, and match statistics.</p>
               </div>
             </button>
@@ -95,7 +95,7 @@ const HomePage = () => {
 
   if (isLoading) {
     return (
-      <div data-theme="dark" className="min-h-screen bg-background px-3 py-4 space-y-3 lg:px-0 lg:py-0">
+      <div className="min-h-screen bg-background px-3 py-4 space-y-3 lg:px-0 lg:py-0">
         {[...Array(7)].map((_, i) => (
           <div
             key={i}
@@ -108,7 +108,7 @@ const HomePage = () => {
 
   if (error) {
     return (
-      <div data-theme="dark" className="min-h-screen bg-background flex items-center justify-center px-4">
+      <div className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="text-center">
           <p className="text-text-secondary mb-4">Failed to load homepage data</p>
           <button
@@ -124,9 +124,9 @@ const HomePage = () => {
 
   if (!data) {
     return (
-      <div data-theme="dark" className="min-h-screen bg-background flex items-center justify-center px-4">
+      <div className="min-h-screen bg-background flex items-center justify-center px-4">
         <div className="text-center">
-          <p className="text-text font-semibold mb-1">No Data Available</p>
+          <p className="text-text-primary font-semibold mb-1">No Data Available</p>
           <p className="text-text-secondary text-sm">Your dashboard will appear here once data is ready.</p>
         </div>
       </div>
@@ -134,7 +134,7 @@ const HomePage = () => {
   }
 
   return (
-    <div data-theme="dark" className="min-h-screen bg-background text-text">
+    <div className="min-h-screen bg-background text-text-primary">
       <div className="mx-auto w-full px-3 pb-[calc(5.25rem+env(safe-area-inset-bottom))] pt-3 lg:max-w-none lg:px-0 lg:pb-0 lg:pt-0">
         <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-4 lg:gap-5">
           <div className="col-span-2 lg:col-span-4">

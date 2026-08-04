@@ -161,12 +161,12 @@ export default function Notifications() {
             <button
               onClick={() => router.history.back()}
               aria-label="Go back"
-              className="p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 active:scale-95 transition-all text-text-muted hover:text-white cursor-pointer flex-shrink-0 self-start"
+              className="p-2 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:bg-gray-200 dark:hover:bg-white/10 active:scale-95 transition-all text-text-muted hover:text-text-primary cursor-pointer flex-shrink-0 self-start"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
             <div className="flex-1 min-w-0">
-              <h1 className="text-xl font-black text-white tracking-tight">Notifications</h1>
+              <h1 className="text-xl font-black text-text-primary tracking-tight">Notifications</h1>
               <p className="text-xs text-[#c8c8c8]/70 mt-0.5">Stay updated with league activity</p>
             </div>
             <div className="flex flex-col items-end gap-2 flex-shrink-0">

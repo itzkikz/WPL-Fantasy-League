@@ -67,31 +67,31 @@ export default function UpcomingFixture({ fixtures = [], gameweek }) {
         {/* Home */}
         <div className="flex items-center gap-2.5 flex-1 min-w-0">
           <TeamCrest team={homeTeam} />
-          <span className="text-sm font-bold text-white truncate">{homeTeam.shortName}</span>
+          <span className="text-sm font-bold text-text-primary truncate">{homeTeam.shortName}</span>
         </div>
 
         {/* Center */}
         <div className="flex flex-col items-center shrink-0 min-w-[80px]">
           {isNotStarted ? (
             <div className="flex flex-col items-center">
-              <span className="text-[11px] font-bold text-white/40">{kickoff.format("ddd, D MMM")}</span>
+              <span className="text-[11px] font-bold text-text-muted">{kickoff.format("ddd, D MMM")}</span>
               <span className="text-[10px] font-bold text-secondary bg-secondary/10 px-2 py-0.5 rounded mt-0.5">{kickoff.format("h:mm A")}</span>
             </div>
           ) : (
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-black text-white font-mono tabular-nums">{upcomingFixture.homeScore?.display ?? 0}</span>
-              <span className="text-xs font-bold text-text-muted/40">-</span>
-              <span className="text-2xl font-black text-white font-mono tabular-nums">{upcomingFixture.awayScore?.display ?? 0}</span>
+              <span className="text-2xl font-black text-text-primary font-mono tabular-nums">{upcomingFixture.homeScore?.display ?? 0}</span>
+              <span className="text-xs font-bold text-text-muted">-</span>
+              <span className="text-2xl font-black text-text-primary font-mono tabular-nums">{upcomingFixture.awayScore?.display ?? 0}</span>
             </div>
           )}
-          <span className={`text-[9px] font-bold uppercase tracking-wider mt-1 ${isInProgress ? "text-rose-400 animate-pulse" : isFinished ? "text-text-muted/40" : "text-text-secondary"}`}>
+          <span className={`text-[9px] font-bold uppercase tracking-wider mt-1 ${isInProgress ? "text-rose-400 animate-pulse" : isFinished ? "text-text-muted" : "text-text-secondary"}`}>
             {isInProgress ? "LIVE" : isFinished ? "FT" : `GW${gameweek}`}
           </span>
         </div>
 
         {/* Away */}
         <div className="flex items-center gap-2.5 flex-1 min-w-0 justify-end">
-          <span className="text-sm font-bold text-white truncate text-right">{awayTeam.shortName}</span>
+          <span className="text-sm font-bold text-text-primary truncate text-right">{awayTeam.shortName}</span>
           <TeamCrest team={awayTeam} />
         </div>
       </div>

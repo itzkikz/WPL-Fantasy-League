@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { X, Target, Clock, Star, Calendar, ArrowRightLeft, Activity, ShieldCheck, Goal, Footprints, Shield, TriangleAlert, Octagon, Ban, Sparkles, Hand, Zap, Send, Blocks, Magnet } from "lucide-react";
 import { Player, PlayerStats } from "../../../features/players/types";
-import { getContrastText } from "../../../libs/helpers/color";
+import { getContrastText, luminance } from "../../../libs/helpers/color";
 import { getPlayerDisplayPrice } from "../../../libs/helpers/player";
 import Modal from "../../../components/common/Modal";
+import { useTheme } from "../../../contexts/ThemeContext";
 
 interface PlayerStatsModalProps {
   isOpen: boolean;
@@ -26,6 +27,7 @@ const PlayerStatsModal = ({
   onSubstitute,
   pickMyTeam = false,
 }: PlayerStatsModalProps) => {
+  const { theme } = useTheme();
   const [localPlayer, setLocalPlayer] = useState<Player | null>(null);
   const [localStats, setLocalStats] = useState<PlayerStats | null>(null);
 
@@ -52,6 +54,23 @@ const PlayerStatsModal = ({
 
   const getJerseyTextColor = () => {
     return stats?.team_text_color || player?.teamTextColor || "#ffffff";
+  };
+
+  const getReadableTeamColor = (color?: string) => {
+    if (!color) return theme === "light" ? "#0F172A" : "#FFFFFF";
+    const c = color.trim().toLowerCase();
+    let isLight = c === "#ffffff" || c === "#fff" || c === "white";
+    let isDark = c === "#000000" || c === "#000" || c === "black";
+    if (c.startsWith("#") && (c.length === 4 || c.length === 7)) {
+      try {
+        const lum = luminance(c);
+        if (lum > 0.75) isLight = true;
+        if (lum < 0.15) isDark = true;
+      } catch {}
+    }
+    if (theme === "light" && isLight) return "#0F172A";
+    if (theme === "dark" && isDark) return "#FFFFFF";
+    return color;
   };
 
   const formatMatchDate = (kickoff?: number | null) => {
@@ -111,7 +130,7 @@ const PlayerStatsModal = ({
                   <span className="inline-block bg-surface border border-border rounded-md px-2 py-0.5 text-[9px] uppercase font-black tracking-widest text-text-muted mb-1.5">
                     {stats.position || player.position}
                   </span>
-                  <h2 className="text-lg md:text-xl font-black tracking-tight text-white leading-tight truncate">
+                  <h2 className="text-lg md:text-xl font-black tracking-tight text-text-primary leading-tight truncate">
                     {stats.player_name || player.name}
                   </h2>
                   <p className="text-[11px] text-text-muted font-bold mt-0.5 flex items-center gap-1.5">
@@ -119,30 +138,30 @@ const PlayerStatsModal = ({
                     {stats.team_name || stats.club}
                   </p>
                   <p className="text-[10px] font-bold mt-0.5">
-                    <span className={stats.fantasy_team_name ? "text-violet-400" : "text-gray-500"}>
+                    <span className={stats.fantasy_team_name ? "text-violet-400" : "text-text-muted"}>
                       {stats.fantasy_team_name ? stats.fantasy_team_name : "Free Agent"}
                     </span>
                   </p>
                 </div>
               </div>
- 
+
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center cursor-pointer text-gray-400 hover:text-white"
+                className="w-8 h-8 rounded-full bg-surface hover:bg-elevated flex items-center justify-center cursor-pointer text-text-muted hover:text-text-primary"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
- 
+
             {/* Scrollable Stats Wrapper */}
             <div className="p-4 sm:p-6 space-y-5 sm:space-y-6 overflow-y-auto flex-1 min-h-0">
- 
+
               {/* 2. Headline Stats Grid */}
               <div className="grid grid-cols-4 gap-2 bg-card border border-border rounded-2xl p-3 text-center">
                 <div>
                   <p className="text-[8px] font-extrabold text-text-muted uppercase tracking-wider">Price</p>
-                  <p className="text-xs md:text-sm font-extrabold text-white mt-1">
+                  <p className="text-xs md:text-sm font-extrabold text-text-primary mt-1">
                     {stats ? getPlayerDisplayPrice(stats) : "10.0M"}
                   </p>
                   <p className="text-[8px] text-[var(--color-success-bright)] font-bold mt-0.5">↑ 0.1M</p>
@@ -155,7 +174,7 @@ const PlayerStatsModal = ({
                 </div>
                 <div className="border-l border-border/40">
                   <p className="text-[8px] font-extrabold text-text-muted uppercase tracking-wider">Total Points</p>
-                  <p className="text-xs md:text-sm font-extrabold text-white mt-1">
+                  <p className="text-xs md:text-sm font-extrabold text-text-primary mt-1">
                     {stats.overall?.total_point || 0}
                   </p>
                 </div>
@@ -168,7 +187,7 @@ const PlayerStatsModal = ({
                         <span
                           key={idx}
                           className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[7px] font-mono font-bold
-                            ${isCurrentGW ? "bg-green-500 text-black ring-1 ring-green-300" : "bg-violet-950 text-violet-300"}`}
+                            ${isCurrentGW ? "bg-emerald-500 text-white shadow-sm" : "bg-primary/20 text-primary"}`}
                         >
                           {f.points}
                         </span>
@@ -234,7 +253,7 @@ const PlayerStatsModal = ({
                           <div key={i}>
                             <Ic className={`w-3.5 h-3.5 mx-auto mb-1 ${item.iconColor}`} />
                             <p className="text-[7px] text-text-muted font-bold uppercase truncate">{item.label}</p>
-                            <p className="text-xs font-black text-white mt-0.5">{item.value}</p>
+                            <p className="text-xs font-black text-text-primary mt-0.5">{item.value}</p>
                           </div>
                         );
                       })}
@@ -294,7 +313,7 @@ const PlayerStatsModal = ({
                             </div>
                           ))}
                           <div className="border-t border-border/50 pt-2.5 mt-3 flex justify-between items-center text-xs font-black">
-                            <span className="text-white">Total</span>
+                            <span className="text-text-primary">Total</span>
                             <span className="text-[var(--color-success-bright)] font-mono">{total} pts</span>
                           </div>
                         </>
@@ -315,14 +334,16 @@ const PlayerStatsModal = ({
                         <span className="font-extrabold text-secondary font-mono text-[10px]">GW{fix.gw}</span>
  
                         <div className="flex items-center gap-1.5 flex-1 justify-center px-1">
-                          <span className="text-white font-extrabold">{fix.my_team_short_name}</span>
+                          <span className="font-extrabold" style={{ color: getReadableTeamColor(getJerseyColor()) }}>
+                            {fix.my_team_short_name}
+                          </span>
                           <span className="text-text-muted text-[10px]">vs</span>
-                          <span className="text-gray-300 font-extrabold truncate" style={{ color: fix.opponent_color }}>
+                          <span className="font-extrabold truncate" style={{ color: getReadableTeamColor(fix.opponent_color) }}>
                             {fix.opponent_short_name}
                           </span>
                         </div>
  
-                        <span className="text-[9px] font-black text-gray-400 uppercase tracking-wide">
+                        <span className="text-[9px] font-black text-text-muted uppercase tracking-wide">
                           {fix.is_home ? "Home" : "Away"}
                         </span>
                       </div>
@@ -351,7 +372,7 @@ const PlayerStatsModal = ({
                             <span className="font-mono font-black text-[var(--color-success-bright)]">{m.points ?? 0} pts</span>
                           </div>
                           <div className="flex items-center justify-between text-[11px] text-text-muted mb-2">
-                            <span className="font-bold text-white">
+                            <span className="font-bold text-text-primary">
                               {m.opponent || m.opponent_short_name || "Unknown opponent"}
                             </span>
                             <span>
@@ -371,7 +392,7 @@ const PlayerStatsModal = ({
                             ].map((cell) => (
                               <div key={cell.label} className="bg-background/60 rounded-lg py-1.5">
                                 <p className="text-[7px] text-text-muted font-bold uppercase">{cell.label}</p>
-                                <p className="text-xs font-black text-white">{cell.v}</p>
+                                <p className="text-xs font-black text-text-primary">{cell.v}</p>
                               </div>
                             ))}
                           </div>
@@ -429,7 +450,7 @@ const PlayerStatsModal = ({
                       {items.map((item, i) => (
                         <div key={i} className="bg-card rounded-xl p-2">
                           <p className="text-[7px] text-text-muted font-bold uppercase truncate">{item.label}</p>
-                          <p className="text-sm font-black text-white mt-0.5">{item.value}</p>
+                          <p className="text-sm font-black text-text-primary mt-0.5">{item.value}</p>
                         </div>
                       ))}
                     </div>
@@ -555,7 +576,7 @@ const PlayerStatsModal = ({
                         ))}
                       </div>
                       <div className="border-t border-border/50 pt-2.5 mt-3 flex justify-between items-center text-xs font-black">
-                        <span className="text-white">Total</span>
+                        <span className="text-text-primary">Total</span>
                         <span className="text-[var(--color-success-bright)] font-mono">{total} pts</span>
                       </div>
                     </>
@@ -579,7 +600,7 @@ const PlayerStatsModal = ({
                        <div key={idx} className="flex flex-col items-center gap-2 flex-1 group">
                         {/* Point value tooltip */}
                         <span className={`text-[10px] font-extrabold font-mono transition-all duration-300 opacity-80 group-hover:scale-110
-                          ${isMax ? "text-[var(--color-success-bright)]" : "text-violet-300"}`}>
+                          ${isMax ? "text-[var(--color-success-bright)]" : "text-text-secondary"}`}>
                           {f.points}
                         </span>
  
@@ -589,11 +610,11 @@ const PlayerStatsModal = ({
                           className={`w-8 rounded-t-lg transition-all duration-500 scale-y-100 origin-bottom shadow-lg
                             ${isMax
                               ? "bg-gradient-to-t from-emerald-600 to-green-400 shadow-green-500/20"
-                              : "bg-gradient-to-t from-violet-700 to-violet-500 shadow-violet-500/10 hover:from-violet-600"}`}
+                              : "bg-gradient-to-t from-secondary to-primary shadow-primary/10"}`}
                         />
  
                         {/* Gameweek tag */}
-                        <span className="text-[8px] font-bold text-gray-500 uppercase font-mono">
+                        <span className="text-[8px] font-bold text-text-muted uppercase font-mono">
                           GW{f.gw}
                         </span>
                       </div>

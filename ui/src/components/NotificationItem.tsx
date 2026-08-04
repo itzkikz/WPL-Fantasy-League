@@ -107,7 +107,7 @@ const NotificationItem = ({
 
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-2">
-          <h3 className={`text-sm font-bold leading-snug ${unread ? "text-white" : "text-text-secondary"}`}>
+          <h3 className={`text-sm font-bold leading-snug ${unread ? "text-text-primary" : "text-text-secondary"}`}>
             {title}
           </h3>
           {unread && <span className="w-2 h-2 rounded-full bg-secondary flex-shrink-0 mt-1.5" />}

@@ -47,44 +47,44 @@ export default function TeamOverview({
       </div>
 
       <div className="relative z-10 p-3.5 pr-[40%] sm:pr-[45%]">
-        <button onClick={onClick} className="flex min-h-7 items-center gap-1 text-[12px] text-text-secondary/65 hover:text-white active:text-white transition-colors">
-          <span>Team</span><span className="font-semibold text-white">Overview</span>
+        <button onClick={onClick} className="flex min-h-7 items-center gap-1 text-[12px] text-text-secondary hover:text-text-primary active:text-text-primary transition-colors cursor-pointer">
+          <span>Team</span><span className="font-semibold text-text-primary">Overview</span>
         </button>
 
         <div className="mb-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-lg bg-rose-600/90 flex items-center justify-center text-lg shadow-lg">
+            <div className="w-9 h-9 rounded-lg bg-rose-600/90 text-white flex items-center justify-center text-lg shadow-lg">
               {crestEmoji}
             </div>
-            <h1 className="text-text-primary text-[21px] font-bold flex items-center gap-1 cursor-pointer hover:text-white transition-colors" onClick={onClick}>
+            <h1 className="text-text-primary text-[21px] font-bold flex items-center gap-1 cursor-pointer hover:text-text-primary transition-colors" onClick={onClick}>
               <span>{teamName}</span> <ChevronRight className="w-4 h-4 text-text-primary/70 shrink-0" />
             </h1>
           </div>
           {managers.length > 0 && (
-            <p className="text-text-secondary/60 text-[11px] leading-tight mt-1 ml-[46px] line-clamp-2">{managers.join(" · ")}</p>
+            <p className="text-text-secondary text-[11px] leading-tight mt-1 ml-[46px] line-clamp-2">{managers.join(" · ")}</p>
           )}
         </div>
 
-        <div className="flex items-start gap-4 mt-2 pt-2 border-t border-white/5">
+        <div className="flex items-start gap-4 mt-2 pt-2 border-t border-border">
           <div className="flex-1 min-w-0">
-            <p className="text-text-secondary/60 text-[10px] leading-tight mb-0.5 line-clamp-2">Overall Rank</p>
-            <p className="text-[18px] leading-tight font-bold text-white truncate">{overallRank}</p>
+            <p className="text-text-secondary text-[10px] leading-tight mb-0.5 line-clamp-2 font-medium">Overall Rank</p>
+            <p className="text-[18px] leading-tight font-bold text-text-primary truncate">{overallRank}</p>
             <span className="flex items-center gap-0.5 text-success text-[10px] font-semibold mt-0.5 truncate">
               <TrendingUp className="w-3.5 h-3.5" /> {rankChange}
             </span>
           </div>
 
-          <div className="w-px h-8 bg-white/10 shrink-0" />
+          <div className="w-px h-8 bg-border shrink-0" />
 
           <div className="flex-1 min-w-0">
-            <p className="text-text-secondary/60 text-[10px] leading-tight mb-0.5 line-clamp-2">Total Points</p>
-            <p className="text-[18px] leading-tight font-bold text-white truncate">{totalPoints}</p>
+            <p className="text-text-secondary text-[10px] leading-tight mb-0.5 line-clamp-2 font-medium">Total Points</p>
+            <p className="text-[18px] leading-tight font-bold text-text-primary truncate">{totalPoints}</p>
           </div>
 
-          <div className="w-px h-8 bg-white/10 shrink-0" />
+          <div className="w-px h-8 bg-border shrink-0" />
 
           <div className="flex-1 min-w-0">
-            <p className="text-text-secondary/60 text-[10px] leading-tight mb-0.5 line-clamp-2">Gameweek Points</p>
+            <p className="text-text-secondary text-[10px] leading-tight mb-0.5 line-clamp-2 font-medium">Gameweek Points</p>
             <p className="text-[18px] leading-tight font-bold text-success truncate">{gameweekPoints}</p>
           </div>
         </div>

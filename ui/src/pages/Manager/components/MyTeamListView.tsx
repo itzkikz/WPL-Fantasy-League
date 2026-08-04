@@ -25,16 +25,16 @@ const MyTeamListView = ({
               <th className="py-3 px-4 text-center">Points</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-border/30 font-medium text-white">
+          <tbody className="divide-y divide-border/30 font-medium text-text-primary">
             {/* Starting XI Flattened */}
             {Object.entries(startingXI).flatMap(([pos, players]) =>
               (players || []).map((player) => (
                 <tr
                   key={player.id}
-                  className="hover:bg-white/5 transition-colors cursor-pointer"
+                  className="hover:bg-elevated/50 transition-colors cursor-pointer"
                   onClick={() => handlePlayerClick?.(player)}
                 >
-                  <td className="py-3 px-4 font-bold text-white">
+                  <td className="py-3 px-4 font-bold text-text-primary">
                     <div className="flex items-center gap-3">
                       {/* Player Image Thumbnail */}
                       <div
@@ -70,7 +70,7 @@ const MyTeamListView = ({
                           {player.isCaptain && <span className="bg-amber-500 text-black text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono shrink-0">C</span>}
                           {player.isViceCaptain && <span className="bg-text-muted text-black text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center font-mono shrink-0">V</span>}
                         </div>
-                        <span className="text-[10px] font-semibold text-text-muted/70 uppercase tracking-wider">
+                        <span className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">
                           {player.position} • {player.team}
                         </span>
                       </div>
@@ -87,7 +87,7 @@ const MyTeamListView = ({
               return (
                 <tr
                   key={player.id}
-                  className="hover:bg-white/5 transition-colors bg-black/10 cursor-pointer"
+                  className="hover:bg-elevated/50 transition-colors bg-background/30 cursor-pointer"
                   onClick={() => handlePlayerClick?.(player)}
                 >
                   <td className="py-3 px-4 font-bold text-text-muted">
@@ -122,13 +122,13 @@ const MyTeamListView = ({
                       {/* Name & Metadata */}
                       <div className="flex flex-col justify-center gap-0.5 min-w-0">
                         <span className="truncate">{player.name}</span>
-                        <span className="text-[10px] font-semibold text-text-muted/50 uppercase tracking-wider">
+                        <span className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">
                           {player.position} • {player.team}
                         </span>
                       </div>
                     </div>
                   </td>
-                  <td className="py-3.5 px-4 text-center text-gray-400">{getPlayerPrice(player)}</td>
+                  <td className="py-3.5 px-4 text-center text-text-muted">{getPlayerPrice(player)}</td>
                   <td className="py-3.5 px-4 text-center text-[var(--color-success-bright)]/85 font-mono font-extrabold">{player.point}</td>
                 </tr>
               );

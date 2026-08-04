@@ -26,10 +26,10 @@ export default function LeagueStandings({
               className={`
                 rounded-xl transition-all duration-200 active:scale-[0.97]
                 ${isFirst
-                  ? 'bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-500/20 shadow-[0_0_12px_rgba(245,158,11,0.08)]'
+                  ? 'bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-500/20 shadow-sm'
                   : isMe
-                    ? 'bg-[#211433]/70 border border-primary/30 shadow-[0_0_10px_rgba(139,92,246,0.1)]'
-                    : 'bg-white/[0.03] border border-white/[0.04] hover:bg-white/[0.06]'
+                    ? 'bg-primary/10 border border-primary/30 shadow-sm'
+                    : 'bg-elevated/40 border border-border hover:bg-elevated'
                 }
               `}
             >
@@ -40,28 +40,25 @@ export default function LeagueStandings({
                   {isFirst ? (
                     <Trophy className="w-4 h-4 text-amber-400" />
                   ) : (
-                    <span className={`text-xs font-black ${isMe ? 'text-primary' : 'text-white'}`}>{item.rank}</span>
+                    <span className={`text-xs font-black ${isMe ? 'text-primary' : 'text-text-primary'}`}>{item.rank}</span>
                   )}
                   {posChange !== 0 ? (
                     <span className={`text-[7px] font-bold flex items-center gap-0.5 ${posChange > 0 ? 'text-success' : 'text-danger'}`}>
                       {posChange > 0 ? '▲' : '▼'}{Math.abs(posChange)}
                     </span>
                   ) : (
-                    <span className="text-[8px] text-[#c8c8c8]/20">-</span>
+                    <span className="text-[8px] text-text-muted/40">-</span>
                   )}
                 </div>
 
                 {/* Name - desktop shows stats inline, mobile just name */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-1.5 min-w-0">
-                    <span className={`text-xs font-bold leading-snug truncate ${isMe ? 'text-primary' : 'text-white'}`}>
+                    <span className={`text-xs font-bold leading-snug truncate ${isMe ? 'text-primary' : 'text-text-primary'}`}>
                       {item.team}
                     </span>
                     {isMe && <span className="text-[7px] font-black text-primary/70 bg-primary/10 px-1 py-px rounded uppercase tracking-wider flex-shrink-0">You</span>}
                   </div>
-                  {/* {item.manager && (
-                    <p className="text-[9px] text-[#c8c8c8]/40 truncate mt-px">{item.manager}</p>
-                  )} */}
                 </div>
 
                 {/* Desktop: GW + Total inline */}
@@ -70,8 +67,8 @@ export default function LeagueStandings({
                     {item.gameweekPoints}
                   </div>
                   <div className="flex items-center gap-1">
-                    <span className={`text-xs font-black ${isMe ? 'text-primary' : 'text-white'}`}>{item.totalPoints}</span>
-                    <ChevronRight className="w-3 h-3 text-[#c8c8c8]/20" />
+                    <span className={`text-xs font-black ${isMe ? 'text-primary' : 'text-text-primary'}`}>{item.totalPoints}</span>
+                    <ChevronRight className="w-3 h-3 text-text-muted/40" />
                   </div>
                 </div>
               </div>
@@ -79,13 +76,13 @@ export default function LeagueStandings({
               {/* Row 2 (mobile only): GW + Total */}
               <div className="flex sm:hidden items-center justify-between px-2 pb-2 pt-0 gap-2">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[9px] font-bold text-[#c8c8c8]/40 uppercase">GW</span>
+                  <span className="text-[9px] font-bold text-text-muted uppercase">GW</span>
                   <span className={`text-xs font-black ${isMe ? 'text-primary' : 'text-success'}`}>{item.gameweekPoints}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[9px] font-bold text-[#c8c8c8]/40 uppercase">Total</span>
-                  <span className={`text-xs font-black ${isMe ? 'text-primary' : 'text-white'}`}>{item.totalPoints}</span>
-                  <ChevronRight className="w-3 h-3 text-[#c8c8c8]/20" />
+                  <span className="text-[9px] font-bold text-text-muted uppercase">Total</span>
+                  <span className={`text-xs font-black ${isMe ? 'text-primary' : 'text-text-primary'}`}>{item.totalPoints}</span>
+                  <ChevronRight className="w-3 h-3 text-text-muted/40" />
                 </div>
               </div>
             </div>
