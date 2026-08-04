@@ -6,6 +6,7 @@ import { TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
 import { aggregateMatchStats, getGameweekPoints, getGameweekMinutes, getGameweekStats, getGameweekForm, getGameweekEntries, getGameweekBreakdown, buildCurrentWeek } from "./players";
 import { validateAndApplySwap } from "../lib/validators/substitution";
+import { getSeasonPointsBreakdown } from "../lib/points";
 import { Substitution as SubstitutionType } from "../types/manager";
 import { FormationResult } from "../lib/formatter/types";
 import { setCaptain, setViceCaptain } from "../lib/helpers/roleUpdate";
@@ -293,6 +294,11 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
           ? getGameweekBreakdown((fullPs as any).gameweeks, targetGw, playerDoc.position)
           : [];
 
+        // Season points breakdown (per-match flooring applied and summed across all gameweeks)
+        const seasonPointsBreakdown = (fullPs && (fullPs as any).gameweeks)
+          ? getSeasonPointsBreakdown((fullPs as any).gameweeks, playerDoc.position)
+          : [];
+
         // Attach full PlayerStats to the detail
         (detail as any).playerStats = {
           player_name: playerDoc.name || playerDoc.webName || "",
@@ -315,6 +321,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
           upcoming_fixtures: upcomingFixtures,
           recent_form: recentForm,
           points_breakdown: pointsBreakdown,
+          season_points_breakdown: seasonPointsBreakdown,
           auctionPrice: playerDoc.auctionPrice
         };
       }

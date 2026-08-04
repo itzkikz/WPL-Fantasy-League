@@ -145,6 +145,11 @@ export interface PlayerStats {
       value: string;
       points: number;
     }[];
+    season_points_breakdown?: {
+      label: string;
+      value: string;
+      points: number;
+    }[];
 }
 
 export interface PaginatedResponse<T> {

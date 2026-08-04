@@ -7,7 +7,7 @@ import { PlayerStats as PlayerStatsModel } from "../models/PlayerStats";
 import { FantasyTeam } from "../models/FantasyTeam";
 import "../models/League";
 import { resolvePosition } from "../utils";
-import { getMatchPointsBreakdown, PointsBreakdownItem } from "../lib/points";
+import { getMatchPointsBreakdown, getSeasonPointsBreakdown, PointsBreakdownItem } from "../lib/points";
 
 function sumNumeric(...nums: (number | undefined | null)[]): number {
     return nums.reduce<number>((acc, n) => acc + (n ?? 0), 0);
@@ -413,6 +413,11 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
             ? getGameweekBreakdown(pStatsDoc.gameweeks, currentGw, player.position)
             : [];
 
+        // Season points breakdown (per-match flooring applied and summed across all gameweeks)
+        const seasonPointsBreakdown = (pStatsDoc && pStatsDoc.gameweeks)
+            ? getSeasonPointsBreakdown(pStatsDoc.gameweeks, player.position)
+            : [];
+
         const data: PlayerStats = {
             player_name: player.name || player.webName || "",
             team_name: teamName,
@@ -434,6 +439,7 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
             upcoming_fixtures: upcomingFixtures,
             recent_form: recentForm,
             points_breakdown: pointsBreakdown,
+            season_points_breakdown: seasonPointsBreakdown,
             auctionPrice: player.auctionPrice
         };
 
@@ -695,6 +701,11 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                     ? getGameweekBreakdown((pStatsDoc as any).gameweeks, currentGw, player.position)
                     : [];
 
+                // Season points breakdown (per-match flooring applied and summed across all gameweeks)
+                const seasonPointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
+                    ? getSeasonPointsBreakdown((pStatsDoc as any).gameweeks, player.position)
+                    : [];
+
                 return {
                     player_name: player.name || player.webName || "",
                     team_name: teamName,
@@ -716,6 +727,7 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                     upcoming_fixtures: upcomingFixtures,
                     recent_form: recentForm,
                     points_breakdown: pointsBreakdown,
+                    season_points_breakdown: seasonPointsBreakdown,
                     auctionPrice: player.auctionPrice
                 };
             });
@@ -867,6 +879,11 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 ? getGameweekBreakdown((pStatsDoc as any).gameweeks, currentGw, player.position)
                 : [];
 
+            // Season points breakdown (per-match flooring applied and summed across all gameweeks)
+            const seasonPointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
+                ? getSeasonPointsBreakdown((pStatsDoc as any).gameweeks, player.position)
+                : [];
+
             return {
                 player_name: player.name || player.webName || "",
                 team_name: teamName,
@@ -888,6 +905,7 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 upcoming_fixtures: upcomingFixtures,
                 recent_form: recentForm,
                 points_breakdown: pointsBreakdown,
+                season_points_breakdown: seasonPointsBreakdown,
                 auctionPrice: player.auctionPrice
             };
         });

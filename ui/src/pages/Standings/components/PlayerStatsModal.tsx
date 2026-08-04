@@ -458,71 +458,82 @@ const PlayerStatsModal = ({
 
                   const rows: { label: string; pts: number }[] = [];
 
-                  // 1. Appearance
-                  if (apps > 0) rows.push({ label: `Appearance (${apps} apps, ${apps60} × 60min+)`, pts: (apps60 * 2) + (appsUnder60 * 1) });
-
-                  // 2. Minutes Played
-                  if (mins > 0) rows.push({ label: `Minutes Played (${mins})`, pts: 0 });
-
-                  // 3. Goals
-                  const goals = o?.goals || 0;
-                  if (goals > 0) {
-                    let gp = 0;
-                    if (isGK) gp = goals * 10;
-                    else if (isDEF) gp = goals * 6;
-                    else if (isMID) gp = goals * 5;
-                    else gp = goals * 4;
-                    rows.push({ label: `Goals (${goals})`, pts: gp });
-                  }
-
-                  // 4. Assists
-                  const assists = o?.goalAssist || 0;
-                  if (assists > 0) rows.push({ label: `Assists (${assists})`, pts: assists * 3 });
-
-                  // 5. Clean Sheet
-                  const cs = Number(o?.cleanSheet) || 0;
-                  if (cs > 0 && (isGK || isDEF)) rows.push({ label: `Clean Sheets (${cs})`, pts: cs * 4 });
-                  else if (cs > 0 && isMID) rows.push({ label: `Clean Sheets (${cs})`, pts: cs * 1 });
-
-                  // 6. Yellow Cards
-                  const yellows = o?.yellowCards || 0;
-                  if (yellows > 0) rows.push({ label: `Yellow Cards (${yellows})`, pts: yellows * -1 });
-
-                  // 7. Red Cards
-                  const reds = o?.redCards || 0;
-                  if (reds > 0) rows.push({ label: `Red Cards (${reds})`, pts: reds * -3 });
-
-                  // 8. Penalty Miss
-                  const penMiss = o?.penaltyMissed || 0;
-                  if (penMiss > 0) rows.push({ label: `Penalty Missed (${penMiss})`, pts: penMiss * -2 });
-
-                  // 9. Penalty Save (GK only)
-                  if (isGK) {
-                    const penSave = o?.penaltySaved || 0;
-                    if (penSave > 0) rows.push({ label: `Penalty Saved (${penSave})`, pts: penSave * 5 });
-                  }
-
-                  // 10. Saves (GK only)
-                  if (isGK) {
-                    const saves = o?.saves || 0;
-                    if (saves >= 3) rows.push({ label: `Saves (${saves})`, pts: Math.floor(saves / 3) });
-                  }
-
-                  // 11-14. Defensive stats shown individually
-                  const tackles = o?.totalTackle || 0;
-                  const clearances = o?.totalClearance || 0;
-                  const blocks = o?.outfielderBlock || 0;
-                  const recovery = o?.ballRecovery || 0;
-                  const defCont = tackles + clearances + blocks + recovery;
-                  if (defCont > 0) {
-                    const dp = isDEF ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
-                    if (dp > 0) {
-                      rows.push({ label: `Tackles (${ tackles})`, pts: 0 });
-                      rows.push({ label: `Clearances (${clearances})`, pts: 0 });
-                      rows.push({ label: `Blocks (${blocks})`, pts: 0 });
-                      rows.push({ label: `Recovery (${recovery})`, pts: 0 });
-                      rows.push({ label: `Defensive Bonus (÷${isDEF ? 10 : 12})`, pts: dp });
+                  // Preferred: server-computed season breakdown (per-match flooring applied)
+                  const seasonBreakdown = stats.season_points_breakdown;
+                  if (seasonBreakdown && seasonBreakdown.length > 0) {
+                    for (const item of seasonBreakdown) {
+                      rows.push({ label: item.label, pts: item.points });
                     }
+                  } else {
+                    // Fallback for stale/legacy responses: re-derive from season aggregates
+                    // 1. Appearance
+                    if (apps > 0) rows.push({ label: `Appearance (${apps} apps, ${apps60} × 60min+)`, pts: (apps60 * 2) + (appsUnder60 * 1) });
+
+                    // 2. Goals
+                    const goals = o?.goals || 0;
+                    if (goals > 0) {
+                      let gp = 0;
+                      if (isGK) gp = goals * 10;
+                      else if (isDEF) gp = goals * 6;
+                      else if (isMID) gp = goals * 5;
+                      else gp = goals * 4;
+                      rows.push({ label: `Goals (${goals})`, pts: gp });
+                    }
+
+                    // 3. Assists
+                    const assists = o?.goalAssist || 0;
+                    if (assists > 0) rows.push({ label: `Assists (${assists})`, pts: assists * 3 });
+
+                    // 4. Clean Sheet
+                    const cs = Number(o?.cleanSheet) || 0;
+                    if (cs > 0 && (isGK || isDEF)) rows.push({ label: `Clean Sheets (${cs})`, pts: cs * 4 });
+                    else if (cs > 0 && isMID) rows.push({ label: `Clean Sheets (${cs})`, pts: cs * 1 });
+
+                    // 5. Yellow Cards
+                    const yellows = o?.yellowCards || 0;
+                    if (yellows > 0) rows.push({ label: `Yellow Cards (${yellows})`, pts: yellows * -1 });
+
+                    // 6. Red Cards
+                    const reds = o?.redCards || 0;
+                    if (reds > 0) rows.push({ label: `Red Cards (${reds})`, pts: reds * -3 });
+
+                    // 7. Penalty Miss
+                    const penMiss = o?.penaltyMissed || 0;
+                    if (penMiss > 0) rows.push({ label: `Penalty Missed (${penMiss})`, pts: penMiss * -2 });
+
+                    // 8. Penalty Save (GK only)
+                    if (isGK) {
+                      const penSave = o?.penaltySaved || 0;
+                      if (penSave > 0) rows.push({ label: `Penalty Saved (${penSave})`, pts: penSave * 5 });
+                    }
+
+                    // 9. Saves (GK only)
+                    if (isGK) {
+                      const saves = o?.saves || 0;
+                      if (saves >= 3) rows.push({ label: `Saves (${saves})`, pts: Math.floor(saves / 3) });
+                    }
+
+                    // 10. Defensive stats shown individually
+                    const tackles = o?.totalTackle || 0;
+                    const clearances = o?.totalClearance || 0;
+                    const blocks = o?.outfielderBlock || 0;
+                    const recovery = o?.ballRecovery || 0;
+                    const defCont = tackles + clearances + blocks + recovery;
+                    if (defCont > 0) {
+                      const dp = isDEF ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
+                      if (dp > 0) {
+                        rows.push({ label: `Tackles (${tackles})`, pts: 0 });
+                        rows.push({ label: `Clearances (${clearances})`, pts: 0 });
+                        rows.push({ label: `Blocks (${blocks})`, pts: 0 });
+                        rows.push({ label: `Recovery (${recovery})`, pts: 0 });
+                        rows.push({ label: `Defensive Bonus (÷${isDEF ? 10 : 12})`, pts: dp });
+                      }
+                    }
+                  }
+
+                  // Informational rows (0 pts) from season aggregates
+                  if (mins > 0 && !(seasonBreakdown && seasonBreakdown.length > 0)) {
+                    rows.push({ label: `Minutes Played (${mins})`, pts: 0 });
                   }
 
                   const total = rows.reduce((s, r) => s + r.pts, 0);

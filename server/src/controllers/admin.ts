@@ -316,7 +316,10 @@ export const getMatchDetails = async (req: Request, res: Response) => {
 
             const stats = mapSofascoreToPlayerMatchStat(entry, incidents);
 
-            const dummyPlayer = { position: entry.position } as any;
+            // Use the canonical player position (from the players collection) for scoring,
+            // falling back to the lineup's position when the player is unknown.
+            const playerDoc = await Player.findOne({ id: entry.playerId }).lean();
+            const dummyPlayer = { position: playerDoc?.position || entry.position } as any;
             const gwPoints = calculatePlayerPoints(dummyPlayer, stats);
 
             await PlayerStats.findOneAndUpdate(
