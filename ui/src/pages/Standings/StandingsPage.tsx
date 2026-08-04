@@ -259,7 +259,7 @@ const StandingsPage = () => {
                   <button
                     onClick={() => setFixtureFilter('mine')}
                     className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${fixtureFilter === 'mine'
-                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                      ? 'bg-primary/20 text-primary border border-primary/40'
                       : 'bg-white/5 text-text-muted/50 border border-white/[0.06] hover:text-white'
                       }`}
                   >
@@ -307,7 +307,7 @@ const StandingsPage = () => {
                         key={fix.fixtureId}
                         onClick={() => setSelectedFixture(fix)}
                         className={`rounded-2xl transition-all duration-200 cursor-pointer active:scale-[0.99] ${isRelevant
-                          ? 'bg-amber-500/[0.07] border border-amber-500/30 shadow-[0_0_12px_rgba(245,158,11,0.1)]'
+                          ? 'bg-primary/10 border border-primary/40 shadow-[0_0_12px_rgba(139,92,246,0.15)]'
                           : 'bg-white/5 border border-white/[0.03] hover:bg-white/10'
                           }`}
                       >
@@ -364,8 +364,8 @@ const StandingsPage = () => {
                         {isRelevant && (
                           <div className="px-4 pb-3 -mt-2">
                             <div className="flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                              <span className="text-[9px] font-bold text-amber-400/80 uppercase tracking-wider">Your Players</span>
+                              <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
+                              <span className="text-[9px] font-bold text-secondary/80 uppercase tracking-wider">Your Players</span>
                             </div>
                           </div>
                         )}

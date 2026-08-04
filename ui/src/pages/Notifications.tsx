@@ -1,18 +1,30 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, useRouter } from "@tanstack/react-router";
 import { useUserStore } from "../store/useUserStore";
 import {
   useNotifications,
   useSubscribe,
 } from "../features/notifications/hooks";
-import { Notifications, SubscribeRequest } from "../features/notifications/types";
-import Button from "../components/common/Button";
+import { Notifications as NotificationType } from "../features/notifications/types";
 import NotificationItem from "../components/NotificationItem";
+import {
+  BellRing,
+  CheckCheck,
+  Inbox,
+  LogIn,
+  RefreshCw,
+  ShieldAlert,
+  ArrowLeft,
+} from "lucide-react";
 
 export default function Notifications() {
+  const navigate = useNavigate();
+  const router = useRouter();
   const mutation = useSubscribe();
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [isSubLoading, setIsSubLoading] = useState(true);
-  const [notificationsList, setNotificationsList] = useState<Notifications>()
+  const [isSubLoading, setIsSubLoading] = useState(false);
+  const [visibleNotifications, setVisibleNotifications] = useState<NotificationType[]>([]);
+  const [readTimes, setReadTimes] = useState<Set<number>>(new Set());
 
   const publicKey =
     "BMIl52TuxsGMqPfiY0vKqyW_sXETc34YrkSTrEqrQEUQsLhMtIwBR1h_Hlmks5EFtY3u7Rz8M17Qy4Dwmv9v-A0";
@@ -46,7 +58,6 @@ export default function Notifications() {
         const subscribed = await registration.pushManager.getSubscription();
 
         if (subscribed) {
-          console.info("User is already subscribed.");
           setIsSubscribed(true);
           return;
         }
@@ -55,9 +66,7 @@ export default function Notifications() {
           userVisibleOnly: true,
           applicationServerKey: urlB64ToUint8Array(publicKey),
         });
-        console.log("User is subscribed:", subscription);
 
-        // Send subscription to server
         mutation.mutate({ subscription });
         setIsSubscribed(true);
       } catch (error) {
@@ -76,63 +85,175 @@ export default function Notifications() {
   }
 
   const user = useUserStore((state) => state.user);
-
   const { data: notifications, isLoading, error } = useNotifications();
 
   useEffect(() => {
-    console.log("Notifications:", notifications);
+    if (notifications && notifications.length > 0) {
+      setVisibleNotifications((prev) => {
+        const merged = new Map(prev.map((n) => [n.time, n]));
+        notifications.forEach((n) => merged.set(n.time, n));
+        return [...merged.values()].sort((a, b) => b.time - a.time);
+      });
+    }
   }, [notifications]);
 
-  if (isSubLoading) {
-    return <div>Loading...</div>;
-  }
+  const unreadCount = visibleNotifications.filter((n) => !readTimes.has(n.time)).length;
 
-  const handleDismiss = (id) => {
-    setNotificationsList(notificationsList.filter(notif => notif.id !== id));
+  const markAllAsRead = () => {
+    setReadTimes(new Set(visibleNotifications.map((n) => n.time)));
   };
 
+  const handleOpen = (time: number) => {
+    setReadTimes((prev) => {
+      const next = new Set(prev);
+      next.add(time);
+      return next;
+    });
+  };
+
+  const handleDismiss = (time: number) => {
+    setVisibleNotifications((prev) => prev.filter((n) => n.time !== time));
+  };
+
+  if (isSubLoading) {
+    return (
+      <div className="w-full p-4 space-y-3">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className={`h-24 bg-surface border border-white/5 rounded-2xl skeleton-pulse stagger-${Math.min(i + 1, 5)}`}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (!user || !user?.teamName) {
+    return (
+      <div className="flex flex-1 items-center justify-center p-6">
+        <div className="max-w-sm w-full text-center bg-surface border border-border rounded-3xl p-8 shadow-card">
+          <div className="w-16 h-16 mx-auto rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center mb-4">
+            <BellRing className="w-8 h-8 text-secondary" />
+          </div>
+          <h2 className="text-lg font-black text-white">Get notified</h2>
+          <p className="text-sm text-text-secondary mt-2 leading-relaxed">
+            Log in to stay updated with the latest league activity, gameweek results, and your
+            team's performance.
+          </p>
+          <button
+            onClick={() => navigate({ to: "/login" })}
+            className="mt-5 w-full py-3 rounded-xl bg-gradient-button text-white text-sm font-bold flex items-center justify-center gap-2 active:scale-[0.99] transition-all shadow-[0_4px_16px_rgba(139,92,246,0.25)] cursor-pointer"
+          >
+            <LogIn className="w-4 h-4" /> Login
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <>
-      {user && user?.teamName ? (
-        <>
-          <div className="p-6 w-full">
-            <div className="max-w-2xl mx-auto">
-              <h1 className="text-2xl font-bold mb-6">
-                Notifications
-              </h1>
-              {!isSubscribed && (
-                <Button
-                  label="Allow Notifications"
-                  onClick={() => subscribeUser()}
-                />
-              )}
-              {isSubscribed && notifications && notifications.length > 0 ? (
-                notifications.map((notif) => (
-                  <NotificationItem
-                    key={notif.time}
-                    title={notif.title}
-                    message={notif.message}
-                    time={notif.time}
-                    onDismiss={() => handleDismiss(notif.id)}
-                  />
-                ))
-              ) : (
-                <div className="flex flex-col items-center justify-center py-20 bg-white dark:bg-white/5 rounded-3xl shadow-sm border border-gray-100 dark:border-white/10 mt-6">
-                  <svg className="w-16 h-16 text-gray-300 dark:text-gray-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                  </svg>
-                  <p className="text-lg font-semibold text-gray-900 dark:text-white">No notifications yet</p>
-                  <p className="text-sm text-gray-500 mt-1 text-center">When you get notifications, they'll show up here.</p>
-                </div>
+    <div className="w-full p-4 lg:p-0 animate-fade-in">
+      <div className="max-w-2xl mx-auto space-y-4">
+        {/* Header */}
+        <div className="relative rounded-2xl bg-gradient-overview bg-dots border border-border overflow-hidden shadow-card">
+          <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative p-5 flex items-center gap-4">
+            <button
+              onClick={() => router.history.back()}
+              aria-label="Go back"
+              className="p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 active:scale-95 transition-all text-text-muted hover:text-white cursor-pointer flex-shrink-0 self-start"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+            <div className="flex-1 min-w-0">
+              <h1 className="text-xl font-black text-white tracking-tight">Notifications</h1>
+              <p className="text-xs text-[#c8c8c8]/70 mt-0.5">Stay updated with league activity</p>
+            </div>
+            <div className="flex flex-col items-end gap-2 flex-shrink-0">
+              <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-primary/15 border border-primary/40 text-secondary font-mono">
+                {unreadCount > 0 ? `${unreadCount} new` : "All caught up"}
+              </span>
+              {unreadCount > 0 && (
+                <button
+                  onClick={markAllAsRead}
+                  className="text-[10px] font-bold text-text-muted hover:text-secondary flex items-center gap-1 transition-colors cursor-pointer"
+                >
+                  <CheckCheck className="w-3.5 h-3.5" /> Mark all read
+                </button>
               )}
             </div>
           </div>
+        </div>
 
-
-        </>
-      ) : (
-        <>Login to get notifications</>
-      )}
-    </>
+        {/* List */}
+        {isLoading ? (
+          <div className="space-y-3">
+            {[...Array(5)].map((_, i) => (
+              <div
+                key={i}
+                className={`h-24 bg-surface border border-white/5 rounded-2xl skeleton-pulse stagger-${Math.min(i + 1, 5)}`}
+              />
+            ))}
+          </div>
+        ) : error ? (
+          <div className="flex flex-col items-center justify-center py-16 bg-surface border border-border rounded-2xl text-center">
+            <div className="w-14 h-14 rounded-full bg-danger/10 border border-danger/20 flex items-center justify-center mb-3">
+              <ShieldAlert className="w-7 h-7 text-danger-bright" />
+            </div>
+            <p className="text-sm font-bold text-white">Couldn't load notifications</p>
+            <p className="text-xs text-text-muted mt-1 mb-4">
+              Something went wrong while fetching your notifications.
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 rounded-lg bg-primary/15 border border-primary/40 text-primary text-xs font-bold flex items-center gap-1.5 cursor-pointer hover:bg-primary/25 transition-colors"
+            >
+              <RefreshCw className="w-3.5 h-3.5" /> Retry
+            </button>
+          </div>
+        ) : visibleNotifications.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-16 bg-surface border border-border rounded-2xl text-center">
+            <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4">
+              <Inbox className="w-8 h-8 text-text-muted/50" />
+            </div>
+            <p className="text-base font-bold text-white">No notifications yet</p>
+            <p className="text-sm text-text-muted mt-1">When you get notifications, they'll show up here.</p>
+          </div>
+        ) : (
+          <div className="space-y-2.5">
+            {!isSubscribed && (
+              <button
+                onClick={() => subscribeUser()}
+                className="w-full p-3 rounded-xl bg-white/5 border border-dashed border-primary/40 flex items-center justify-between gap-3 cursor-pointer hover:bg-primary/10 transition-all"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="w-9 h-9 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center">
+                    <BellRing className="w-4 h-4 text-secondary" />
+                  </span>
+                  <div className="text-left">
+                    <p className="text-xs font-bold text-white">Enable push notifications</p>
+                    <p className="text-[10px] text-text-muted">Get alerted instantly, even when the app is closed</p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-wider text-primary border border-primary/40 bg-primary/10 px-2.5 py-1 rounded-full">
+                  Enable
+                </span>
+              </button>
+            )}
+            {visibleNotifications.map((notif) => (
+              <NotificationItem
+                key={notif.time}
+                title={notif.title}
+                message={notif.message}
+                time={notif.time}
+                unread={!readTimes.has(notif.time)}
+                onOpen={() => handleOpen(notif.time)}
+                onDismiss={() => handleDismiss(notif.time)}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

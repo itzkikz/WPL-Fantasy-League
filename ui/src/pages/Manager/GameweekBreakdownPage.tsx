@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
-import { ArrowLeft, LayoutGrid, Award, ShieldAlert, List } from "lucide-react";
+import { ArrowLeft, LayoutGrid, Award, ShieldAlert, List, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { useManagerDetails } from "../../features/manager/hooks";
 import { useTeamDetails, useStandings } from "../../features/standings/hooks";
 import PitchPlayerCard from "../../components/PitchPlayerCard";
@@ -12,6 +12,57 @@ import "../Manager/MyTeamPage.css";
 const getRowJustify = (count: number) => {
   if (count <= 1) return "justify-center";
   return "justify-evenly";
+};
+
+const GameweekSwitcher = ({
+  gw,
+  maxGw,
+  onChange,
+}: {
+  gw: number;
+  maxGw: number;
+  onChange: (gw: number) => void;
+}) => {
+  const gameweeks = Array.from({ length: Math.max(maxGw, gw, 1) }, (_, i) => i + 1);
+
+  return (
+    <div className="flex items-center gap-1.5">
+      <button
+        onClick={() => onChange(Math.max(1, gw - 1))}
+        disabled={gw <= 1}
+        className="w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-white active:scale-95 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center"
+        aria-label="Previous gameweek"
+      >
+        <ChevronLeft className="w-4 h-4 text-text-muted" />
+      </button>
+
+      <div className="relative">
+        <select
+          value={gw}
+          onChange={(e) => onChange(Number(e.target.value))}
+          aria-label="Select gameweek"
+          style={{ backgroundImage: "none" }}
+          className="appearance-none bg-card border border-border rounded-lg text-xs font-black text-white pl-3 py-1.5 font-mono cursor-pointer focus:outline-none focus:border-primary/50"
+        >
+          {gameweeks.map((n) => (
+            <option key={n} value={n} className="bg-card text-white">
+              GW {n}
+            </option>
+          ))}
+        </select>
+        <ChevronDown className="w-3.5 h-3.5 text-text-muted absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+      </div>
+
+      <button
+        onClick={() => onChange(Math.min(maxGw, gw + 1))}
+        disabled={gw >= maxGw}
+        className="w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-white active:scale-95 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center"
+        aria-label="Next gameweek"
+      >
+        <ChevronRight className="w-4 h-4 text-text-muted" />
+      </button>
+    </div>
+  );
 };
 
 const GameweekBreakdownPage = () => {
@@ -34,6 +85,12 @@ const GameweekBreakdownPage = () => {
   const teamId = paramTeamId || myStanding?.team_id || "";
 
   const { data: teamDetails, isLoading: isDetailsLoading, isError } = useTeamDetails(teamId, gw);
+
+  const maxGw = standings?.[0]?.gw || Math.max(gw, 1);
+
+  const switchGameweek = (nextGw: number) => {
+    navigate({ to: "/gameweek-breakdown", search: { gw: nextGw, teamId } });
+  };
 
   const { avg, highest, totalGWScore, starting, bench } = teamDetails || {};
 
@@ -97,6 +154,7 @@ const GameweekBreakdownPage = () => {
       totals.clearances.count += s.totalClearance || 0;
       totals.blocks.count += s.outfielderBlock || 0;
       totals.recoveries.count += s.ballRecovery || 0;
+      totals.defensivePoints.count += (s.totalTackle || 0) + (s.totalClearance || 0) + (s.outfielderBlock || 0) + (s.ballRecovery || 0);
 
       // Points come from the server per-match breakdown (per-match rules, summed)
       const ptsFor = (label: string): number => {
@@ -197,7 +255,7 @@ const GameweekBreakdownPage = () => {
           >
             <ArrowLeft className="w-4 h-4 text-text-muted" />
           </button>
-          <div>
+          <div className="flex-1 min-w-0">
             <h1 className="text-base font-black tracking-tight">
               Gameweek {gw} Breakdown
             </h1>
@@ -205,6 +263,7 @@ const GameweekBreakdownPage = () => {
               Viewing points and line-up for Gameweek {gw}
             </p>
           </div>
+          <GameweekSwitcher gw={gw} maxGw={maxGw} onChange={switchGameweek} />
         </header>
 
         {/* Mobile Tabs Selector Bar */}
@@ -265,6 +324,7 @@ const GameweekBreakdownPage = () => {
                 {myStanding?.team || "Gameweek Lineup & Stats"}
               </p>
             </div>
+            <GameweekSwitcher gw={gw} maxGw={maxGw} onChange={switchGameweek} />
           </div>
 
           {/* GW Stats Summary Card */}
@@ -599,7 +659,7 @@ const GameweekBreakdownPage = () => {
               )
             ) : (
               /* Points View Content */
-              <div className="flex-1 flex flex-col gap-4 max-w-3xl mx-auto w-full animate-in fade-in duration-300">
+              <div className="flex-1 flex flex-col gap-4 max-w-3xl mx-auto w-full min-h-0 animate-in fade-in duration-300">
                 {/* Match-by-Match Split (multi-match gameweeks) */}
                 {/* {(() => {
                   const splits = getMultiMatchPlayers();
@@ -686,8 +746,8 @@ const GameweekBreakdownPage = () => {
                 </div>
 
                 {/* List View Table */}
-                <div className="bg-surface border border-border rounded-2xl overflow-hidden shadow-card flex flex-col w-full flex-1">
-                  <div className="overflow-y-auto overflow-x-auto flex-1">
+                <div className="bg-surface border border-border rounded-2xl overflow-hidden shadow-card flex flex-col w-full flex-1 min-h-0">
+                  <div className="overflow-y-auto overflow-x-auto flex-1 min-h-0">
                     <table className="w-full text-left border-collapse text-xs md:text-sm">
                       <thead className="sticky top-0 z-10 bg-card shadow-[0_1px_0_rgba(45,27,84,0.4)]">
                         <tr className="bg-card border-b border-border text-text-muted uppercase tracking-wider font-extrabold text-[10px]">
@@ -713,7 +773,7 @@ const GameweekBreakdownPage = () => {
                             { label: "Clearances", ...totals.clearances },
                             { label: "Blocks", ...totals.blocks },
                             { label: "Recovery", ...totals.recoveries },
-                            { label: "Defensive Actions Points", ...totals.defensivePoints, isPointsOnly: true },
+                            { label: "Defensive Actions Points", ...totals.defensivePoints },
                           ];
 
                           return rows.map((row) => {

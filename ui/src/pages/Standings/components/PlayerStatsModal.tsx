@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { X, Target, Clock, Star, Trophy, TrendingUp, Calendar, ArrowRightLeft, ExternalLink, Activity, ShieldCheck } from "lucide-react";
+import { X, Target, Clock, Star, Calendar, ArrowRightLeft, Activity, ShieldCheck, Goal, Footprints, Shield, TriangleAlert, Octagon, Ban, Sparkles, Hand, Zap, Send, Blocks, Magnet } from "lucide-react";
 import { Player, PlayerStats } from "../../../features/players/types";
 import { getContrastText } from "../../../libs/helpers/color";
 import { getPlayerDisplayPrice } from "../../../libs/helpers/player";
@@ -70,7 +70,7 @@ const PlayerStatsModal = ({
         {stats && (
           <>
             {/* 1. Modal Top Section: Jersey & Title details */}
-            <div className="relative p-6 bg-card border-b border-border flex items-center justify-between shrink-0 overflow-hidden">
+            <div className="relative p-4 sm:p-6 bg-card border-b border-border flex items-center justify-between shrink-0 overflow-hidden">
               {stats.team_logo && (
                 <img
                   src={stats.team_logo}
@@ -136,7 +136,7 @@ const PlayerStatsModal = ({
             </div>
  
             {/* Scrollable Stats Wrapper */}
-            <div className="p-6 space-y-6 overflow-y-auto flex-1 min-h-0">
+            <div className="p-4 sm:p-6 space-y-5 sm:space-y-6 overflow-y-auto flex-1 min-h-0">
  
               {/* 2. Headline Stats Grid */}
               <div className="grid grid-cols-4 gap-2 bg-card border border-border rounded-2xl p-3 text-center">
@@ -199,26 +199,36 @@ const PlayerStatsModal = ({
 
                   const items: { icon: any; iconColor: string; label: string; value: number }[] = [];
                   items.push({ icon: Clock, iconColor: "text-slate-400", label: "Mins", value: cw?.minutesPlayed || 0 });
-                  if (!isGK) items.push({ icon: Trophy, iconColor: "text-amber-400", label: "Goals", value: cw?.goals || 0 });
-                  items.push({ icon: Trophy, iconColor: "text-indigo-400", label: "Assists", value: cw?.goalAssist || 0 });
-                  if (isGK || isDEF) items.push({ icon: Target, iconColor: "text-emerald-400", label: "CS", value: Number(cw?.cleanSheet) || 0 });
-                  items.push({ icon: Target, iconColor: "text-amber-400", label: "YC", value: cw?.yellowCards || 0 });
-                  items.push({ icon: Target, iconColor: "text-rose-400", label: "RC", value: cw?.redCards || 0 });
+                  if (!isGK) items.push({ icon: Goal, iconColor: "text-amber-400", label: "Goals", value: cw?.goals || 0 });
+                  items.push({ icon: Footprints, iconColor: "text-indigo-400", label: "Assists", value: cw?.goalAssist || 0 });
+                  if (isGK || isDEF) items.push({ icon: Shield, iconColor: "text-emerald-400", label: "CS", value: Number(cw?.cleanSheet) || 0 });
+                  items.push({ icon: TriangleAlert, iconColor: "text-amber-400", label: "YC", value: cw?.yellowCards || 0 });
+                  items.push({ icon: Octagon, iconColor: "text-rose-400", label: "RC", value: cw?.redCards || 0 });
                   if (isGK) {
-                    items.push({ icon: Target, iconColor: "text-rose-400", label: "Pen Miss", value: cw?.penaltyMissed || 0 });
-                    items.push({ icon: Target, iconColor: "text-emerald-400", label: "Pen Save", value: cw?.penaltySaved || 0 });
-                    items.push({ icon: Target, iconColor: "text-violet-400", label: "Saves", value: cw?.saves || 0 });
+                    items.push({ icon: Ban, iconColor: "text-rose-400", label: "Pen Miss", value: cw?.penaltyMissed || 0 });
+                    items.push({ icon: Sparkles, iconColor: "text-emerald-400", label: "Pen Save", value: cw?.penaltySaved || 0 });
+                    items.push({ icon: Hand, iconColor: "text-violet-400", label: "Saves", value: cw?.saves || 0 });
                   } else {
-                    items.push({ icon: Target, iconColor: "text-rose-400", label: "Pen Miss", value: cw?.penaltyMissed || 0 });
+                    items.push({ icon: Ban, iconColor: "text-rose-400", label: "Pen Miss", value: cw?.penaltyMissed || 0 });
                   }
-                  items.push({ icon: Target, iconColor: "text-cyan-400", label: "Tackles", value: cw?.totalTackle || 0 });
-                  items.push({ icon: Target, iconColor: "text-teal-400", label: "Clear", value: cw?.totalClearance || 0 });
-                  items.push({ icon: Target, iconColor: "text-blue-400", label: "Blocks", value: cw?.outfielderBlock || 0 });
-                  items.push({ icon: Target, iconColor: "text-green-400", label: "Recovery", value: cw?.ballRecovery || 0 });
+                  items.push({ icon: Zap, iconColor: "text-cyan-400", label: "Tackles", value: cw?.totalTackle || 0 });
+                  items.push({ icon: Send, iconColor: "text-teal-400", label: "Clear", value: cw?.totalClearance || 0 });
+                  items.push({ icon: Blocks, iconColor: "text-blue-400", label: "Blocks", value: cw?.outfielderBlock || 0 });
+                  items.push({ icon: Magnet, iconColor: "text-green-400", label: "Recovery", value: cw?.ballRecovery || 0 });
+
+                  const visibleItems = items.filter((item) => item.value > 0);
+
+                  if (visibleItems.length === 0) {
+                    return (
+                      <div className="bg-surface border border-border rounded-2xl p-3 text-center">
+                        <p className="text-xs text-text-muted italic py-2">No stats recorded for this gameweek.</p>
+                      </div>
+                    );
+                  }
 
                   return (
                     <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 bg-surface border border-border rounded-2xl p-3 text-center">
-                      {items.map((item, i) => {
+                      {visibleItems.map((item, i) => {
                         const Ic = item.icon;
                         return (
                           <div key={i}>

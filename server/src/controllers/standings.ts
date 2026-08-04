@@ -682,7 +682,11 @@ export const getFixturePlayers = async (req: Request, res: Response) => {
 
         const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean() as any;
         const currentGw = currentGwDoc ? currentGwDoc.number : null;
-        const fixtureGw = fixture.roundInfo?.round ?? currentGw;
+        // The app's gameweek number may differ from the fixture's source round
+        // (roundInfo.round). Resolve the gameweek this fixture is assigned to so
+        // picks and player stats are looked up under the correct gameweek id.
+        const assignedGwDoc = await Gameweek.findOne({ fixtures: fixtureId }).lean() as any;
+        const fixtureGw = assignedGwDoc ? assignedGwDoc.number : (fixture.roundInfo?.round ?? currentGw);
 
         const teams = await Team.find({}, 'id name nameCode photo logo teamColors').lean() as any[];
         const teamMap = new Map(teams.map((t: any) => [t.id, t]));
