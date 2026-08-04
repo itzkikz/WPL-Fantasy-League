@@ -90,10 +90,9 @@ const MobileNavbar = () => {
       ];
 
   const isBaseRoute =
-    location.pathname === "/settings" ||
     location.pathname.startsWith("/standings") ||
     (isAdmin
-      ? (location.pathname.startsWith("/admin") || location.pathname === "/settings")
+      ? location.pathname.startsWith("/admin")
       : navItems.some(
         (item) =>
           location.pathname === item.path ||

@@ -1121,17 +1121,7 @@ export const completeGameweek = async (req: Request, res: Response) => {
             }
         }
 
-        // Enable pick team
-        let apiConfig = await ApiConfig.findOne({ key: 'pick_team_enabled' });
-        if (!apiConfig) {
-            apiConfig = new ApiConfig({ key: 'pick_team_enabled', lastUpdatedString: 'true', lastUpdated: new Date() });
-        } else {
-            apiConfig.lastUpdatedString = 'true';
-            apiConfig.lastUpdated = new Date();
-        }
-        await apiConfig.save();
-
-        res.status(200).json({ success: true, message: 'Gameweek completed successfully. Pick team enabled.' });
+        res.status(200).json({ success: true, message: 'Gameweek completed successfully.' });
 
     } catch (error: any) {
         console.error('Error completing gameweek:', error);
@@ -1209,18 +1199,20 @@ export const togglePickTeam = async (req: Request, res: Response) => {
             return res.status(403).json({ error: 'Access denied. Admins only.' });
         }
 
-        const { enabled, deadlineDate } = req.body; // boolean
+        const { enabled, deadlineDate } = req.body;
 
         let apiConfig = await ApiConfig.findOne({ key: 'pick_team_enabled' });
         if (!apiConfig) {
             apiConfig = new ApiConfig({
                 key: 'pick_team_enabled',
-                lastUpdatedString: String(enabled),
+                lastUpdatedString: String(enabled !== undefined ? enabled : true),
                 lastUpdated: new Date(),
                 deadlineDate: deadlineDate ? new Date(deadlineDate) : undefined
             });
         } else {
-            apiConfig.lastUpdatedString = String(enabled);
+            if (enabled !== undefined) {
+                apiConfig.lastUpdatedString = String(enabled);
+            }
             apiConfig.lastUpdated = new Date();
             if (deadlineDate !== undefined) {
                 apiConfig.deadlineDate = deadlineDate ? new Date(deadlineDate) : undefined;

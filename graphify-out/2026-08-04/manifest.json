@@ -150,8 +150,8 @@
     "semantic_hash": "f2a6b80049b7c649aaf03db1a23148bb"
   },
   "server/src/controllers/admin.ts": {
-    "mtime": 1785828313.6941378,
-    "ast_hash": "a164761c5cb107db3e820c9173d68964",
+    "mtime": 1785846434.5076358,
+    "ast_hash": "af7546ca90cde0690e5c1cb5c522d3f5",
     "semantic_hash": ""
   },
   "server/src/controllers/auth.ts": {
@@ -175,9 +175,9 @@
     "semantic_hash": ""
   },
   "server/src/controllers/notification.ts": {
-    "mtime": 1782564248.7701888,
-    "ast_hash": "e3941676b5c867b1c4697bfca1c3d101",
-    "semantic_hash": "e3941676b5c867b1c4697bfca1c3d101"
+    "mtime": 1785845025.9850924,
+    "ast_hash": "ac2bbb55f2064feecb901e2607ab734e",
+    "semantic_hash": ""
   },
   "server/src/controllers/players.ts": {
     "mtime": 1785831357.7569416,
@@ -190,8 +190,8 @@
     "semantic_hash": "fc924e7cbb34811345ef42ffbc277237"
   },
   "server/src/controllers/standings.ts": {
-    "mtime": 1785829853.4474626,
-    "ast_hash": "e8b157e670ffc82fee456992cdae24c8",
+    "mtime": 1785844454.1166837,
+    "ast_hash": "8c1cf1306030b29d57547f368447be85",
     "semantic_hash": ""
   },
   "server/src/controllers/syncController.ts": {
@@ -300,9 +300,9 @@
     "semantic_hash": "e59b36f8344113133d19d0d4c1a11465"
   },
   "server/src/models/Notification.ts": {
-    "mtime": 1782560542.4803164,
-    "ast_hash": "13830168cdc10cb51ec8102ecd009cda",
-    "semantic_hash": "13830168cdc10cb51ec8102ecd009cda"
+    "mtime": 1785844812.630738,
+    "ast_hash": "6c61252bcce50b0fe00c874b61499211",
+    "semantic_hash": ""
   },
   "server/src/models/Player.ts": {
     "mtime": 1785478893.4670708,
@@ -360,9 +360,9 @@
     "semantic_hash": "908e89c58c2de4f6b75b80391f3ed858"
   },
   "server/src/routes/notification.ts": {
-    "mtime": 1763383749.6943703,
-    "ast_hash": "b95af6710e49620d8be4b220fabed4b5",
-    "semantic_hash": "b95af6710e49620d8be4b220fabed4b5"
+    "mtime": 1785844828.5318782,
+    "ast_hash": "56f0a9f1f5d42abc2e70867836096a9a",
+    "semantic_hash": ""
   },
   "server/src/routes/players.ts": {
     "mtime": 1784722860.1030016,
@@ -515,8 +515,8 @@
     "semantic_hash": "09ee68c5413688c10c71deb2c6c441cd"
   },
   "ui/src/api/endpoints.ts": {
-    "mtime": 1785485778.4515474,
-    "ast_hash": "882c99b32e497c4142be76eecdfde948",
+    "mtime": 1785844834.8690555,
+    "ast_hash": "debb2875427b15e6f0cc5b57a655689f",
     "semantic_hash": ""
   },
   "ui/src/components/Header.tsx": {
@@ -530,8 +530,8 @@
     "semantic_hash": "e6d7e2fd9e737239b4d3020f00f0c947"
   },
   "ui/src/components/NotificationItem.tsx": {
-    "mtime": 1785824092.5947993,
-    "ast_hash": "e7505ce1bc5e79178e989809f4a88862",
+    "mtime": 1785837279.9691415,
+    "ast_hash": "9bf3045dd12540f22622a13fe5555840",
     "semantic_hash": ""
   },
   "ui/src/components/PWAInstallBanner.tsx": {
@@ -540,8 +540,8 @@
     "semantic_hash": "28f379be4ab60793ec472a5c94fa7507"
   },
   "ui/src/components/PitchPlayerCard.tsx": {
-    "mtime": 1785501101.491634,
-    "ast_hash": "e6e15f6f55abf6167310d28ee08913d9",
+    "mtime": 1785843921.6359358,
+    "ast_hash": "a3617c9865bffc1b1487fe1ca9f2c2cd",
     "semantic_hash": ""
   },
   "ui/src/components/SplashScreen.tsx": {
@@ -555,9 +555,9 @@
     "semantic_hash": "c253cf64bc1f4c4b88316d3e0c1ffb6a"
   },
   "ui/src/components/ThemeToggle.tsx": {
-    "mtime": 1784198153.4202096,
-    "ast_hash": "d02fae8a66e19cc2c20cf77ac75091d0",
-    "semantic_hash": "d02fae8a66e19cc2c20cf77ac75091d0"
+    "mtime": 1785837075.589154,
+    "ast_hash": "04ae4d9a1f135269d5f1cd38c5c5207c",
+    "semantic_hash": ""
   },
   "ui/src/components/UpdatePrompt.tsx": {
     "mtime": 1784140079.8346944,
@@ -585,8 +585,8 @@
     "semantic_hash": "16c6c0a3c9cff04f2f9f93f46ce0d708"
   },
   "ui/src/components/common/MobileNavbar.tsx": {
-    "mtime": 1785498593.6626475,
-    "ast_hash": "81b0e2387facfea11c05b425da4573dd",
+    "mtime": 1785845861.3727822,
+    "ast_hash": "299d5d2e6d982d2cf1ee9294a71b8e89",
     "semantic_hash": ""
   },
   "ui/src/components/common/Overlay.tsx": {
@@ -595,8 +595,8 @@
     "semantic_hash": "8c072f1f8ea749521f4facbe9049d548"
   },
   "ui/src/components/common/SideNavbar.tsx": {
-    "mtime": 1785498836.07717,
-    "ast_hash": "71d69adf709b1a77e052cef6fb70b339",
+    "mtime": 1785837091.3709078,
+    "ast_hash": "856aedc31c55cb3dc0b46ea4f1739492",
     "semantic_hash": ""
   },
   "ui/src/components/common/Toast.tsx": {
@@ -615,9 +615,9 @@
     "semantic_hash": "bb6e002918a43215bf030b6888cbec26"
   },
   "ui/src/components/home/LeagueStandings.jsx": {
-    "mtime": 1784396894.5452015,
-    "ast_hash": "27ed9bc534ba134908f2b65a3be90416",
-    "semantic_hash": "27ed9bc534ba134908f2b65a3be90416"
+    "mtime": 1785837454.586476,
+    "ast_hash": "a11264585c4c6cd959b1cb279c169e73",
+    "semantic_hash": ""
   },
   "ui/src/components/home/LeagueStatistics.jsx": {
     "mtime": 1784400029.5491302,
@@ -630,9 +630,9 @@
     "semantic_hash": "eb1743d7a761d2b5546afb385164929a"
   },
   "ui/src/components/home/PlayerSpotlight.jsx": {
-    "mtime": 1784400110.4593258,
-    "ast_hash": "ae73ac4e5e6627608c8d4e059a3139bc",
-    "semantic_hash": "ae73ac4e5e6627608c8d4e059a3139bc"
+    "mtime": 1785837459.6607056,
+    "ast_hash": "8928f97624e08f0d0e49b929d8a5b776",
+    "semantic_hash": ""
   },
   "ui/src/components/home/PointsBreakdown.jsx": {
     "mtime": 1784272776.4903324,
@@ -675,14 +675,14 @@
     "semantic_hash": "5da593c0a2927f10fe774a0c2f678b01"
   },
   "ui/src/components/home/TeamOverview.jsx": {
-    "mtime": 1785764959.3244019,
-    "ast_hash": "5e2fd0c702d0a1567122ddfda89955aa",
+    "mtime": 1785837442.6186397,
+    "ast_hash": "ab91fe43cc14940b8a82f06d9d0e60e2",
     "semantic_hash": ""
   },
   "ui/src/components/home/UpcomingFixture.jsx": {
-    "mtime": 1784396028.4198756,
-    "ast_hash": "d18a74ef367915b7e325046aab29d35b",
-    "semantic_hash": "d18a74ef367915b7e325046aab29d35b"
+    "mtime": 1785837448.3978074,
+    "ast_hash": "3dd4c00aa46512bd909b9b0853422af8",
+    "semantic_hash": ""
   },
   "ui/src/components/home/YourPlayersCard.jsx": {
     "mtime": 1784197333.640528,
@@ -760,8 +760,8 @@
     "semantic_hash": "490f85162e3fcc21c0c1505280717fb9"
   },
   "ui/src/components/layouts/MainLayout.tsx": {
-    "mtime": 1785824568.3746436,
-    "ast_hash": "8c863ba6a484b8bec732fbcf555c2039",
+    "mtime": 1785837108.3226516,
+    "ast_hash": "c11737ec02c42aecb20f79ff66ebda2a",
     "semantic_hash": ""
   },
   "ui/src/components/player/PlayerDetails.tsx": {
@@ -790,9 +790,9 @@
     "semantic_hash": ""
   },
   "ui/src/contexts/ThemeContext.tsx": {
-    "mtime": 1784198143.8172622,
-    "ast_hash": "952a6707cc853af18c74be910d71691a",
-    "semantic_hash": "952a6707cc853af18c74be910d71691a"
+    "mtime": 1785837071.061714,
+    "ast_hash": "ae3819a75297f0d36736eb2ccb7e8448",
+    "semantic_hash": ""
   },
   "ui/src/features/auth/api.ts": {
     "mtime": 1782389794.6867507,
@@ -870,14 +870,14 @@
     "semantic_hash": ""
   },
   "ui/src/features/notifications/api.ts": {
-    "mtime": 1763383679.5488417,
-    "ast_hash": "1552cc9a8c1e4d4bef08e83323495b2b",
-    "semantic_hash": "1552cc9a8c1e4d4bef08e83323495b2b"
+    "mtime": 1785844845.153018,
+    "ast_hash": "d7265d37cd8371edd2e5a5531d149d98",
+    "semantic_hash": ""
   },
   "ui/src/features/notifications/hooks.ts": {
-    "mtime": 1763382678.5554388,
-    "ast_hash": "b80b1b3eb37a865d3c5e94aa36831c26",
-    "semantic_hash": "b80b1b3eb37a865d3c5e94aa36831c26"
+    "mtime": 1785844850.838718,
+    "ast_hash": "ef5b107a0a640c559d33dc99821c68a4",
+    "semantic_hash": ""
   },
   "ui/src/features/notifications/queries.ts": {
     "mtime": 1763382687.138639,
@@ -885,9 +885,9 @@
     "semantic_hash": "6ca31fb0410a0701e5546899159774d4"
   },
   "ui/src/features/notifications/types.ts": {
-    "mtime": 1763385031.0206888,
-    "ast_hash": "6969ebc72c0f0ac8c2cdf4714f9a0413",
-    "semantic_hash": "6969ebc72c0f0ac8c2cdf4714f9a0413"
+    "mtime": 1785844839.3291683,
+    "ast_hash": "3ab6c1e8d7d1cfed4dfe091f994451fe",
+    "semantic_hash": ""
   },
   "ui/src/features/players/api.ts": {
     "mtime": 1784722860.136477,
@@ -955,28 +955,28 @@
     "semantic_hash": "55cf2e8b0f90d61bedb5e7ba16460ace"
   },
   "ui/src/pages/Home/HomePage.tsx": {
-    "mtime": 1785764946.3680687,
-    "ast_hash": "dfd671a42191002c8833a03c1169aa59",
+    "mtime": 1785837478.9193113,
+    "ast_hash": "8ff32e86bd1ce8f3e45e0b8e92bbffb1",
     "semantic_hash": ""
   },
   "ui/src/pages/LoginPage.tsx": {
-    "mtime": 1785498352.310535,
-    "ast_hash": "553229451657f0380dfa7eab036dab34",
+    "mtime": 1785845412.056216,
+    "ast_hash": "2b10ea7e228ef475f35f0fcdc4ec7dbc",
     "semantic_hash": ""
   },
   "ui/src/pages/Manager/MyTeamPage.tsx": {
-    "mtime": 1785765639.316193,
-    "ast_hash": "45074527475674d42bfa59fd68fc6261",
+    "mtime": 1785846666.3965495,
+    "ast_hash": "481d5f455c0986360ecfaf1a8547c46a",
     "semantic_hash": ""
   },
   "ui/src/pages/Manager/components/MyTeamHeader.tsx": {
-    "mtime": 1785765631.356317,
-    "ast_hash": "3edada91e2a5ebe20f16b4e4098e6ce2",
+    "mtime": 1785839450.6584296,
+    "ast_hash": "26d3f5561f4d2c1157119fc8e5ca0c02",
     "semantic_hash": ""
   },
   "ui/src/pages/Manager/components/MyTeamListView.tsx": {
-    "mtime": 1784453855.2728791,
-    "ast_hash": "08ef722d038d5ba88d7d4f65e45d9c66",
+    "mtime": 1785839455.2349305,
+    "ast_hash": "ec4c4516ca01f2324081c9921dfc204f",
     "semantic_hash": ""
   },
   "ui/src/pages/Manager/components/MyTeamPitch.tsx": {
@@ -990,33 +990,33 @@
     "semantic_hash": ""
   },
   "ui/src/pages/Notifications.tsx": {
-    "mtime": 1785824656.1928022,
-    "ast_hash": "a6c2980054b8173f6ad7ab9cf67df829",
+    "mtime": 1785845600.0311995,
+    "ast_hash": "2fc47a3fe5ccf888daf3249ff30c9b0c",
     "semantic_hash": ""
   },
   "ui/src/pages/Settings/Settings.tsx": {
-    "mtime": 1785765390.8611572,
-    "ast_hash": "48aea92bf68fa3b3c332c8af36f03a81",
+    "mtime": 1785845869.2876446,
+    "ast_hash": "ec305194911a59b0ba17bf62341d9449",
     "semantic_hash": ""
   },
   "ui/src/pages/Standings/StandingsPage.tsx": {
-    "mtime": 1785823821.9565303,
-    "ast_hash": "a7cbe26bdf6a33ac59a835db997b9588",
+    "mtime": 1785837566.1534245,
+    "ast_hash": "fbef41168da9477b2561d21ba8356c1b",
     "semantic_hash": ""
   },
   "ui/src/pages/Standings/TeamDetailsPage.tsx": {
-    "mtime": 1784479169.2631137,
-    "ast_hash": "2a55bad26bb962d081280402a4217d2a",
+    "mtime": 1785837335.8558667,
+    "ast_hash": "69b976252674eda15bb804eae3bbbbde",
     "semantic_hash": ""
   },
   "ui/src/pages/Standings/components/PlayerStatsModal.tsx": {
-    "mtime": 1785828288.8458662,
-    "ast_hash": "def4297beb4550ab862a7dae056c44bf",
+    "mtime": 1785839327.0597756,
+    "ast_hash": "e0686a40431a5c646b56bac446b9e05f",
     "semantic_hash": ""
   },
   "ui/src/pages/Stats.tsx": {
-    "mtime": 1784477297.4771688,
-    "ast_hash": "93e86a8c112fdbe0dafaf90af1c91597",
+    "mtime": 1785842557.6053803,
+    "ast_hash": "f928d3b6c5657423774dc0d64151597f",
     "semantic_hash": ""
   },
   "ui/src/routeTree.gen.ts": {
@@ -1095,8 +1095,8 @@
     "semantic_hash": "f2f130e6630f013f1c68cfed1c9256d7"
   },
   "ui/src/routes/admin/gameweeks.lazy.tsx": {
-    "mtime": 1784479404.843437,
-    "ast_hash": "a9301e9c0fe6c9e2bf2cfdde4f3685ba",
+    "mtime": 1785846251.280309,
+    "ast_hash": "888bdba42014df752763dc4e099dbd25",
     "semantic_hash": ""
   },
   "ui/src/routes/admin/gameweeks.tsx": {
@@ -1120,8 +1120,8 @@
     "semantic_hash": "ea6c1b0f8fbe3f1201e48ba0492aa396"
   },
   "ui/src/routes/admin/notifications.lazy.tsx": {
-    "mtime": 1785483428.095724,
-    "ast_hash": "c6666241663308a3c3048f20efe9bf0f",
+    "mtime": 1785844874.4434628,
+    "ast_hash": "dc7ccabf54a90d67a03b4763d314ad9a",
     "semantic_hash": ""
   },
   "ui/src/routes/admin/notifications.tsx": {
@@ -1130,8 +1130,8 @@
     "semantic_hash": "484b943a07f97e57d04b22b5cf45e27d"
   },
   "ui/src/routes/h2h.lazy.tsx": {
-    "mtime": 1785765810.5146425,
-    "ast_hash": "fd4da6807427d47d268ab36574251f3d",
+    "mtime": 1785842391.6318605,
+    "ast_hash": "c76a2744e030cce59ba08a239d781bf7",
     "semantic_hash": ""
   },
   "ui/src/routes/h2h.tsx": {
@@ -1665,13 +1665,13 @@
     "semantic_hash": "6de375bf31dac135c3499243eaed46ae"
   },
   "ui/src/pages/Manager/GameweekBreakdownPage.tsx": {
-    "mtime": 1785825316.4710639,
-    "ast_hash": "1ae49ffd9be82fa7291a91e243b779a3",
+    "mtime": 1785844228.4781933,
+    "ast_hash": "c52a0fdceb314350e3563178fb5b432b",
     "semantic_hash": ""
   },
   "ui/src/pages/Manager/ManagerOverviewPage.tsx": {
-    "mtime": 1785765229.8923051,
-    "ast_hash": "f73064449a0e36fe3e9a4b70d78167d6",
+    "mtime": 1785844231.2338946,
+    "ast_hash": "26e160e5f7c11bbc3f150841baf6fe9e",
     "semantic_hash": ""
   },
   "ui/src/routes/gameweek-breakdown.lazy.tsx": {
@@ -1695,8 +1695,8 @@
     "semantic_hash": ""
   },
   "ui/src/components/common/Modal.tsx": {
-    "mtime": 1784479251.9238918,
-    "ast_hash": "330645e514bbfc3fa71cef648345af86",
+    "mtime": 1785837355.5056505,
+    "ast_hash": "508bbc044a094f80e60122d51a7ecfb3",
     "semantic_hash": ""
   },
   "server/src/scripts/exportPlayersToGoogleSheet.ts": {
@@ -1750,8 +1750,8 @@
     "semantic_hash": ""
   },
   "ui/src/pages/Manager/components/SaveTeamModal.tsx": {
-    "mtime": 1785504107.6801236,
-    "ast_hash": "9aff86041d35ac8b2ab3fbf9bbb29ce4",
+    "mtime": 1785839459.8017642,
+    "ast_hash": "bc7c71643048f256c4b79ef003b7880b",
     "semantic_hash": ""
   },
   "server/src/models/Substitution.ts": {
@@ -1780,8 +1780,8 @@
     "semantic_hash": ""
   },
   "ui/src/pages/Standings/components/FixturePlayersModal.tsx": {
-    "mtime": 1785767142.8162122,
-    "ast_hash": "a7bdfdaee49f2397a54a224f3754491c",
+    "mtime": 1785837574.412241,
+    "ast_hash": "d44154a465a06ffae50f58b70eaed826",
     "semantic_hash": ""
   },
   "server/tmp-inspect-fix.js": {

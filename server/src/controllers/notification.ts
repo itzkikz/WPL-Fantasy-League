@@ -66,24 +66,39 @@ export const send = async (req: Request, res: Response, next: NextFunction) => {
     const { payload, targetType = 'all', targetId } = req.body;
     
     try {
-        await Notification.create({
-            title: payload?.title || 'Notification',
-            message: payload?.body || payload?.message || JSON.stringify(payload),
-            time: Date.now()
-        });
-
         let query = {};
+        let recipientUserIds: string[] = [];
+        let targetName = 'All Users';
         
         if (targetType === 'user' && targetId) {
             query = { userId: targetId };
+            recipientUserIds = [targetId];
+            const targetUser = await User.findById(targetId);
+            if (targetUser) {
+                targetName = (targetUser as any).displayName || targetUser.username;
+            }
         } else if (targetType === 'team' && targetId) {
             const team = await FantasyTeam.findById(targetId);
-            if (team && team.managers) {
+            if (team && team.managers && team.managers.length > 0) {
                 query = { userId: { $in: team.managers } };
+                recipientUserIds = team.managers.map((m: any) => m.toString());
+                targetName = team.name;
             } else {
                 return res.status(404).json({ data: { message: "Team not found or has no managers" } });
             }
         }
+
+        await Notification.create({
+            title: payload?.title || 'Notification',
+            message: payload?.body || payload?.message || JSON.stringify(payload),
+            time: Date.now(),
+            targetType,
+            targetId: targetId || undefined,
+            targetName,
+            recipientUserIds,
+            readBy: [],
+            deletedBy: []
+        });
 
         const subscribers = await Subscriber.find(query);
 
@@ -103,12 +118,116 @@ export const send = async (req: Request, res: Response, next: NextFunction) => {
 
 export const notifications = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const notifications = await Notification.find({}).sort({ time: -1 });
+        let userIdStr: string | null = null;
+        if (req.user?.userId) {
+            const user = await User.findOne({ username: req.user.userId });
+            if (user) {
+                userIdStr = user._id.toString();
+            }
+        }
 
-        res.json({ data: notifications })
+        let query: any = {};
+        if (userIdStr) {
+            query = {
+                deletedBy: { $ne: userIdStr },
+                $or: [
+                    { targetType: 'all' },
+                    { recipientUserIds: userIdStr },
+                    { targetId: userIdStr }
+                ]
+            };
+        }
+
+        const rawNotifications = await Notification.find(query).sort({ time: -1 });
+
+        const mappedNotifications = rawNotifications.map((notif: any) => {
+            const isRead = userIdStr ? (notif.readBy || []).includes(userIdStr) : false;
+            return {
+                id: notif._id.toString(),
+                _id: notif._id.toString(),
+                title: notif.title,
+                message: notif.message,
+                time: notif.time,
+                targetType: notif.targetType || 'all',
+                targetId: notif.targetId,
+                targetName: notif.targetName,
+                read: isRead,
+            };
+        });
+
+        res.json({ data: mappedNotifications });
 
     } catch (e) {
-        console.log(e)
-        res.status(500).json({ data: { message: "Error fetching notifications" } })
+        console.log(e);
+        res.status(500).json({ data: { message: "Error fetching notifications" } });
+    }
+}
+
+export const markAsRead = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findOne({ username: req.user.userId });
+        if (!user) {
+            return res.status(404).json({ data: { message: "User not found" } });
+        }
+        const userIdStr = user._id.toString();
+
+        await Notification.findByIdAndUpdate(id, {
+            $addToSet: { readBy: userIdStr }
+        });
+
+        res.json({ data: { message: "Notification marked as read" } });
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ data: { message: "Error marking notification as read" } });
+    }
+}
+
+export const markAllAsRead = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = await User.findOne({ username: req.user.userId });
+        if (!user) {
+            return res.status(404).json({ data: { message: "User not found" } });
+        }
+        const userIdStr = user._id.toString();
+
+        await Notification.updateMany(
+            {
+                deletedBy: { $ne: userIdStr },
+                $or: [
+                    { targetType: 'all' },
+                    { recipientUserIds: userIdStr },
+                    { targetId: userIdStr }
+                ]
+            },
+            {
+                $addToSet: { readBy: userIdStr }
+            }
+        );
+
+        res.json({ data: { message: "All notifications marked as read" } });
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ data: { message: "Error marking all notifications as read" } });
+    }
+}
+
+export const deleteNotification = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findOne({ username: req.user.userId });
+        if (!user) {
+            return res.status(404).json({ data: { message: "User not found" } });
+        }
+        const userIdStr = user._id.toString();
+
+        await Notification.findByIdAndUpdate(id, {
+            $addToSet: { deletedBy: userIdStr }
+        });
+
+        res.json({ data: { message: "Notification deleted successfully" } });
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ data: { message: "Error deleting notification" } });
     }
 }

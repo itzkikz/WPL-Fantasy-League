@@ -743,15 +743,43 @@ export const getFixturePlayers = async (req: Request, res: Response) => {
         const statsForGw = (pid: number) => {
             const ps = psMap.get(pid);
             if (!ps?.gameweeks) return null;
+
+            // 1. Try finding exact entry for this specific fixtureId
+            const fixtureEntry = ps.gameweeks.find((e: any) => e && e.fixtureId === fixtureId);
+            if (fixtureEntry) {
+                const s = fixtureEntry.stats || {};
+                return {
+                    points: fixtureEntry.points || 0,
+                    minutes: s.minutesPlayed || 0,
+                    goals: s.goals || 0,
+                    assists: s.goalAssist || 0,
+                    cleanSheet: s.cleanSheet || 0,
+                };
+            }
+
+            // 2. Fallback to gameweek entries if fixtureId is not present (e.g. legacy data)
             const entries = getGameweekEntries(ps.gameweeks, fixtureGw);
             if (entries.length === 0) return null;
-            const merged = getGameweekStats(ps.gameweeks, fixtureGw);
+
+            if (entries.length === 1) {
+                const e = entries[0];
+                const s = e.stats || {};
+                return {
+                    points: e.points || 0,
+                    minutes: s.minutesPlayed || 0,
+                    goals: s.goals || 0,
+                    assists: s.goalAssist || 0,
+                    cleanSheet: s.cleanSheet || 0,
+                };
+            }
+
+            // If multiple entries exist in this GW but none matched fixtureId, player had no stats in this specific fixture
             return {
-                points: getGameweekPoints(ps.gameweeks, fixtureGw),
-                minutes: merged.minutesPlayed || 0,
-                goals: merged.goals || 0,
-                assists: merged.goalAssist || 0,
-                cleanSheet: merged.cleanSheet || 0,
+                points: 0,
+                minutes: 0,
+                goals: 0,
+                assists: 0,
+                cleanSheet: 0,
             };
         };
 
