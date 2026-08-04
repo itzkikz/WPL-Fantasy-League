@@ -2564,7 +2564,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_radius_md",
-      "community": 93,
+      "community": 347,
       "norm_label": "md"
     },
     {
@@ -2574,7 +2574,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_md_value",
-      "community": 93,
+      "community": 347,
       "norm_label": "$value"
     },
     {
@@ -2584,7 +2584,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_md_type",
-      "community": 93,
+      "community": 347,
       "norm_label": "$type"
     },
     {
@@ -2684,7 +2684,7 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_shadow_md",
-      "community": 93,
+      "community": 347,
       "norm_label": "md"
     },
     {
@@ -2884,7 +2884,7 @@
       "source_location": "L88",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_color_primary",
-      "community": 94,
+      "community": 34,
       "norm_label": "primary"
     },
     {
@@ -2894,7 +2894,7 @@
       "source_location": "L88",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_primary_value",
-      "community": 94,
+      "community": 34,
       "norm_label": "$value"
     },
     {
@@ -2904,7 +2904,7 @@
       "source_location": "L88",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_primary_type",
-      "community": 94,
+      "community": 34,
       "norm_label": "$type"
     },
     {
@@ -3094,7 +3094,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_color_destructive",
-      "community": 34,
+      "community": 343,
       "norm_label": "destructive"
     },
     {
@@ -3104,7 +3104,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_destructive_value",
-      "community": 34,
+      "community": 343,
       "norm_label": "$value"
     },
     {
@@ -3114,7 +3114,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_destructive_type",
-      "community": 34,
+      "community": 343,
       "norm_label": "$type"
     },
     {
@@ -3424,7 +3424,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_button_padding_y",
-      "community": 54,
+      "community": 93,
       "norm_label": "padding-y"
     },
     {
@@ -3434,7 +3434,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_padding_y_value",
-      "community": 54,
+      "community": 93,
       "norm_label": "$value"
     },
     {
@@ -3444,7 +3444,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_padding_y_type",
-      "community": 54,
+      "community": 93,
       "norm_label": "$type"
     },
     {
@@ -3584,7 +3584,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "agents_skills_design_system_templates_design_tokens_starter_input_padding_y",
-      "community": 54,
+      "community": 93,
       "norm_label": "padding-y"
     },
     {
@@ -5074,7 +5074,7 @@
       "source_location": "L191",
       "_origin": "ast",
       "id": "agents_skills_ui_styling_scripts_tailwind_config_gen_tailwindconfiggenerator_generate_config_string",
-      "community": 35,
+      "community": 78,
       "norm_label": ".generate_config_string()"
     },
     {
@@ -5124,7 +5124,7 @@
       "source_location": "L267",
       "_origin": "ast",
       "id": "agents_skills_ui_styling_scripts_tailwind_config_gen_tailwindconfiggenerator_write_config",
-      "community": 35,
+      "community": 78,
       "norm_label": ".write_config()"
     },
     {
@@ -5274,7 +5274,7 @@
       "source_location": "L192",
       "_origin": "ast",
       "id": "agents_skills_ui_styling_scripts_tailwind_config_gen_rationale_192",
-      "community": 35,
+      "community": 78,
       "norm_label": "generate configuration file content.          returns:             configuration"
     },
     {
@@ -5324,7 +5324,7 @@
       "source_location": "L268",
       "_origin": "ast",
       "id": "agents_skills_ui_styling_scripts_tailwind_config_gen_rationale_268",
-      "community": 35,
+      "community": 78,
       "norm_label": "write configuration to file.          returns:             tuple of (success, me"
     },
     {
@@ -7674,7 +7674,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "server_package_dependencies_bcryptjs",
-      "community": 347,
+      "community": 348,
       "norm_label": "bcryptjs"
     },
     {
@@ -7684,7 +7684,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "bcryptjs",
-      "community": 347,
+      "community": 348,
       "norm_label": "bcryptjs"
     },
     {
@@ -8194,14 +8194,14 @@
       "source_location": "L288",
       "_origin": "ast",
       "id": "server_src_controllers_admin_getmatchdetails",
-      "community": 81,
+      "community": 10,
       "norm_label": "getmatchdetails()"
     },
     {
       "label": "getMatchIncidentsAndStats()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L364",
+      "source_location": "L367",
       "_origin": "ast",
       "id": "server_src_controllers_admin_getmatchincidentsandstats",
       "community": 10,
@@ -8211,7 +8211,7 @@
       "label": "getUsers()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L472",
+      "source_location": "L475",
       "_origin": "ast",
       "id": "server_src_controllers_admin_getusers",
       "community": 10,
@@ -8221,7 +8221,7 @@
       "label": "getAdminTeams()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L507",
+      "source_location": "L510",
       "_origin": "ast",
       "id": "server_src_controllers_admin_getadminteams",
       "community": 10,
@@ -8231,7 +8231,7 @@
       "label": "getAdminPlayers()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L556",
+      "source_location": "L559",
       "_origin": "ast",
       "id": "server_src_controllers_admin_getadminplayers",
       "community": 10,
@@ -8241,7 +8241,7 @@
       "label": "updateAdminPlayer()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L654",
+      "source_location": "L657",
       "_origin": "ast",
       "id": "server_src_controllers_admin_updateadminplayer",
       "community": 10,
@@ -8251,7 +8251,7 @@
       "label": "createFantasyTeam()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L689",
+      "source_location": "L692",
       "_origin": "ast",
       "id": "server_src_controllers_admin_createfantasyteam",
       "community": 10,
@@ -8261,7 +8261,7 @@
       "label": "getFantasyTeams()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L798",
+      "source_location": "L801",
       "_origin": "ast",
       "id": "server_src_controllers_admin_getfantasyteams",
       "community": 10,
@@ -8271,7 +8271,7 @@
       "label": "getFantasyTeamById()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L817",
+      "source_location": "L820",
       "_origin": "ast",
       "id": "server_src_controllers_admin_getfantasyteambyid",
       "community": 10,
@@ -8281,7 +8281,7 @@
       "label": "updateFantasyTeam()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L866",
+      "source_location": "L869",
       "_origin": "ast",
       "id": "server_src_controllers_admin_updatefantasyteam",
       "community": 10,
@@ -8291,7 +8291,7 @@
       "label": "completeGameweek()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L977",
+      "source_location": "L980",
       "_origin": "ast",
       "id": "server_src_controllers_admin_completegameweek",
       "community": 10,
@@ -8301,7 +8301,7 @@
       "label": "revertGameweek()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1139",
+      "source_location": "L1142",
       "_origin": "ast",
       "id": "server_src_controllers_admin_revertgameweek",
       "community": 10,
@@ -8311,7 +8311,7 @@
       "label": "togglePickTeam()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1203",
+      "source_location": "L1206",
       "_origin": "ast",
       "id": "server_src_controllers_admin_togglepickteam",
       "community": 10,
@@ -8321,7 +8321,7 @@
       "label": "getPickTeamStatus()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1235",
+      "source_location": "L1238",
       "_origin": "ast",
       "id": "server_src_controllers_admin_getpickteamstatus",
       "community": 10,
@@ -8331,7 +8331,7 @@
       "label": "getLeagues()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1251",
+      "source_location": "L1254",
       "_origin": "ast",
       "id": "server_src_controllers_admin_getleagues",
       "community": 10,
@@ -8341,7 +8341,7 @@
       "label": "fetchLeagueRounds()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1265",
+      "source_location": "L1268",
       "_origin": "ast",
       "id": "server_src_controllers_admin_fetchleaguerounds",
       "community": 10,
@@ -8351,7 +8351,7 @@
       "label": "updateLeague()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1301",
+      "source_location": "L1304",
       "_origin": "ast",
       "id": "server_src_controllers_admin_updateleague",
       "community": 10,
@@ -8361,7 +8361,7 @@
       "label": "getH2HLeague()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1336",
+      "source_location": "L1339",
       "_origin": "ast",
       "id": "server_src_controllers_admin_geth2hleague",
       "community": 10,
@@ -8371,7 +8371,7 @@
       "label": "upsertH2HLeague()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1365",
+      "source_location": "L1368",
       "_origin": "ast",
       "id": "server_src_controllers_admin_upserth2hleague",
       "community": 10,
@@ -8381,7 +8381,7 @@
       "label": "deleteH2HLeague()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1408",
+      "source_location": "L1411",
       "_origin": "ast",
       "id": "server_src_controllers_admin_deleteh2hleague",
       "community": 10,
@@ -8391,7 +8391,7 @@
       "label": "createH2HFixture()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1423",
+      "source_location": "L1426",
       "_origin": "ast",
       "id": "server_src_controllers_admin_createh2hfixture",
       "community": 10,
@@ -8401,7 +8401,7 @@
       "label": "deleteH2HFixture()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1476",
+      "source_location": "L1479",
       "_origin": "ast",
       "id": "server_src_controllers_admin_deleteh2hfixture",
       "community": 10,
@@ -8411,7 +8411,7 @@
       "label": "getH2HLeagueFixtures()",
       "file_type": "code",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1491",
+      "source_location": "L1494",
       "_origin": "ast",
       "id": "server_src_controllers_admin_geth2hleaguefixtures",
       "community": 10,
@@ -8454,7 +8454,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "server_src_controllers_auth_login",
-      "community": 11,
+      "community": 24,
       "norm_label": "login()"
     },
     {
@@ -8464,7 +8464,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_controllers_footballapi",
-      "community": 11,
+      "community": 28,
       "norm_label": "footballapi.ts"
     },
     {
@@ -8474,7 +8474,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "server_src_controllers_footballapi_getfixtures",
-      "community": 11,
+      "community": 28,
       "norm_label": "getfixtures()"
     },
     {
@@ -8524,7 +8524,7 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "server_src_controllers_h2h_getmyh2hleagues",
-      "community": 10,
+      "community": 17,
       "norm_label": "getmyh2hleagues()"
     },
     {
@@ -8554,14 +8554,14 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_controllers_manager",
-      "community": 25,
+      "community": 8,
       "norm_label": "manager.ts"
     },
     {
       "label": "details()",
       "file_type": "code",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L24",
+      "source_location": "L25",
       "_origin": "ast",
       "id": "server_src_controllers_manager_details",
       "community": 8,
@@ -8571,27 +8571,27 @@
       "label": "substitution()",
       "file_type": "code",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L366",
+      "source_location": "L382",
       "_origin": "ast",
       "id": "server_src_controllers_manager_substitution",
-      "community": 25,
+      "community": 8,
       "norm_label": "substitution()"
     },
     {
       "label": "myFixtures()",
       "file_type": "code",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L667",
+      "source_location": "L683",
       "_origin": "ast",
       "id": "server_src_controllers_manager_myfixtures",
-      "community": 25,
+      "community": 8,
       "norm_label": "myfixtures()"
     },
     {
       "label": "dashboard()",
       "file_type": "code",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L801",
+      "source_location": "L817",
       "_origin": "ast",
       "id": "server_src_controllers_manager_dashboard",
       "community": 8,
@@ -8601,7 +8601,7 @@
       "label": "getSubstitutionHistory()",
       "file_type": "code",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L1315",
+      "source_location": "L1331",
       "_origin": "ast",
       "id": "server_src_controllers_manager_getsubstitutionhistory",
       "community": 10,
@@ -8831,7 +8831,7 @@
       "label": "getFullPlayerStats()",
       "file_type": "code",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L461",
+      "source_location": "L473",
       "_origin": "ast",
       "id": "server_src_controllers_players_getfullplayerstats",
       "community": 8,
@@ -8841,10 +8841,10 @@
       "label": "getFilters()",
       "file_type": "code",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L923",
+      "source_location": "L963",
       "_origin": "ast",
       "id": "server_src_controllers_players_getfilters",
-      "community": 8,
+      "community": 11,
       "norm_label": "getfilters()"
     },
     {
@@ -8854,7 +8854,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_controllers_sheetcontroller",
-      "community": 81,
+      "community": 11,
       "norm_label": "sheetcontroller.ts"
     },
     {
@@ -8864,7 +8864,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "server_src_controllers_sheetcontroller_sheetcontroller",
-      "community": 81,
+      "community": 11,
       "norm_label": "sheetcontroller"
     },
     {
@@ -8874,7 +8874,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "server_src_controllers_sheetcontroller_sheetcontroller_updateplayerslatest",
-      "community": 81,
+      "community": 11,
       "norm_label": ".updateplayerslatest()"
     },
     {
@@ -8884,7 +8884,7 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "server_src_controllers_sheetcontroller_sheetcontroller_updatematchplayerstats",
-      "community": 81,
+      "community": 11,
       "norm_label": ".updatematchplayerstats()"
     },
     {
@@ -8894,7 +8894,7 @@
       "source_location": "L219",
       "_origin": "ast",
       "id": "server_src_controllers_sheetcontroller_sheetcontroller_updatematchevents",
-      "community": 81,
+      "community": 11,
       "norm_label": ".updatematchevents()"
     },
     {
@@ -8911,7 +8911,7 @@
       "label": "invalidateStandingsCache()",
       "file_type": "code",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L21",
+      "source_location": "L22",
       "_origin": "ast",
       "id": "server_src_controllers_standings_invalidatestandingscache",
       "community": 8,
@@ -8921,7 +8921,7 @@
       "label": "getStandingsData()",
       "file_type": "code",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L26",
+      "source_location": "L27",
       "_origin": "ast",
       "id": "server_src_controllers_standings_getstandingsdata",
       "community": 8,
@@ -8931,7 +8931,7 @@
       "label": "getStandings()",
       "file_type": "code",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L152",
+      "source_location": "L153",
       "_origin": "ast",
       "id": "server_src_controllers_standings_getstandings",
       "community": 8,
@@ -8941,7 +8941,7 @@
       "label": "getTeamDetails()",
       "file_type": "code",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L176",
+      "source_location": "L177",
       "_origin": "ast",
       "id": "server_src_controllers_standings_getteamdetails",
       "community": 8,
@@ -8951,7 +8951,7 @@
       "label": "getFixturesForCurrentGameweek()",
       "file_type": "code",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L610",
+      "source_location": "L623",
       "_origin": "ast",
       "id": "server_src_controllers_standings_getfixturesforcurrentgameweek",
       "community": 8,
@@ -8961,7 +8961,7 @@
       "label": "getFixturePlayers()",
       "file_type": "code",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L670",
+      "source_location": "L683",
       "_origin": "ast",
       "id": "server_src_controllers_standings_getfixtureplayers",
       "community": 8,
@@ -8971,7 +8971,7 @@
       "label": "getManagerOverview()",
       "file_type": "code",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L801",
+      "source_location": "L814",
       "_origin": "ast",
       "id": "server_src_controllers_standings_getmanageroverview",
       "community": 8,
@@ -9254,7 +9254,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "server_src_lib_formatter_lineupformatter_converttoformation",
-      "community": 25,
+      "community": 8,
       "norm_label": "converttoformation()"
     },
     {
@@ -9454,7 +9454,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution",
-      "community": 146,
+      "community": 25,
       "norm_label": "substitution.ts"
     },
     {
@@ -9464,7 +9464,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_category",
-      "community": 146,
+      "community": 25,
       "norm_label": "category"
     },
     {
@@ -9474,7 +9474,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_enrichedplayer",
-      "community": 146,
+      "community": 25,
       "norm_label": "enrichedplayer"
     },
     {
@@ -9484,7 +9484,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_formation_rules",
-      "community": 146,
+      "community": 25,
       "norm_label": "formation_rules"
     },
     {
@@ -9494,7 +9494,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_getpositioncategory",
-      "community": 146,
+      "community": 25,
       "norm_label": "getpositioncategory()"
     },
     {
@@ -9504,7 +9504,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_countstartingplayers",
-      "community": 146,
+      "community": 25,
       "norm_label": "countstartingplayers()"
     },
     {
@@ -9514,7 +9514,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_canswap",
-      "community": 146,
+      "community": 25,
       "norm_label": "canswap()"
     },
     {
@@ -9524,7 +9524,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "server_src_lib_helpers_substitution_executeswap",
-      "community": 146,
+      "community": 25,
       "norm_label": "executeswap()"
     },
     {
@@ -9534,7 +9534,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_lib_points",
-      "community": 5,
+      "community": 81,
       "norm_label": "points.ts"
     },
     {
@@ -9544,7 +9544,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "server_src_lib_points_pointsbreakdownitem",
-      "community": 5,
+      "community": 81,
       "norm_label": "pointsbreakdownitem"
     },
     {
@@ -9564,8 +9564,18 @@
       "source_location": "L116",
       "_origin": "ast",
       "id": "server_src_lib_points_calculateplayerpoints",
-      "community": 81,
+      "community": 10,
       "norm_label": "calculateplayerpoints()"
+    },
+    {
+      "label": "getSeasonPointsBreakdown()",
+      "file_type": "code",
+      "source_file": "server/src/lib/points.ts",
+      "source_location": "L127",
+      "_origin": "ast",
+      "id": "server_src_lib_points_getseasonpointsbreakdown",
+      "community": 8,
+      "norm_label": "getseasonpointsbreakdown()"
     },
     {
       "label": "sofascoreMapper.ts",
@@ -9614,7 +9624,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_lib_store_globals",
-      "community": 81,
+      "community": 11,
       "norm_label": "globals.ts"
     },
     {
@@ -9624,7 +9634,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "server_src_lib_store_globals_setsheets",
-      "community": 81,
+      "community": 11,
       "norm_label": "setsheets()"
     },
     {
@@ -9634,7 +9644,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "server_src_lib_store_globals_getsheets",
-      "community": 81,
+      "community": 11,
       "norm_label": "getsheets()"
     },
     {
@@ -9954,7 +9964,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_gameweek",
-      "community": 25,
+      "community": 8,
       "norm_label": "gameweek.ts"
     },
     {
@@ -9964,7 +9974,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_models_gameweek_igameweek",
-      "community": 25,
+      "community": 8,
       "norm_label": "igameweek"
     },
     {
@@ -9974,7 +9984,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "server_src_models_gameweek_gameweekschema",
-      "community": 25,
+      "community": 8,
       "norm_label": "gameweekschema"
     },
     {
@@ -10074,7 +10084,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_league",
-      "community": 7,
+      "community": 10,
       "norm_label": "league.ts"
     },
     {
@@ -10084,7 +10094,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_models_league_ileague",
-      "community": 7,
+      "community": 10,
       "norm_label": "ileague"
     },
     {
@@ -10094,7 +10104,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "server_src_models_league_leagueschema",
-      "community": 7,
+      "community": 10,
       "norm_label": "leagueschema"
     },
     {
@@ -10164,7 +10174,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "server_src_models_matchdetails_matchdetails",
-      "community": 81,
+      "community": 10,
       "norm_label": "matchdetails"
     },
     {
@@ -10254,7 +10264,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_playerstats",
-      "community": 17,
+      "community": 81,
       "norm_label": "playerstats.ts"
     },
     {
@@ -10264,7 +10274,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_models_playerstats_iplayerstats",
-      "community": 17,
+      "community": 81,
       "norm_label": "iplayerstats"
     },
     {
@@ -10274,7 +10284,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "server_src_models_playerstats_playerstatsschema",
-      "community": 17,
+      "community": 81,
       "norm_label": "playerstatsschema"
     },
     {
@@ -10284,7 +10294,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "server_src_models_playerstats_playerstats",
-      "community": 17,
+      "community": 81,
       "norm_label": "playerstats"
     },
     {
@@ -10294,7 +10304,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_season",
-      "community": 7,
+      "community": 10,
       "norm_label": "season.ts"
     },
     {
@@ -10304,7 +10314,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_models_season_iseason",
-      "community": 7,
+      "community": 10,
       "norm_label": "iseason"
     },
     {
@@ -10314,7 +10324,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "server_src_models_season_seasonschema",
-      "community": 7,
+      "community": 10,
       "norm_label": "seasonschema"
     },
     {
@@ -10324,7 +10334,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "server_src_models_season_season",
-      "community": 7,
+      "community": 10,
       "norm_label": "season"
     },
     {
@@ -10444,7 +10454,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_team",
-      "community": 25,
+      "community": 8,
       "norm_label": "team.ts"
     },
     {
@@ -10454,7 +10464,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_models_team_iteam",
-      "community": 25,
+      "community": 8,
       "norm_label": "iteam"
     },
     {
@@ -10464,7 +10474,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "server_src_models_team_teamschema",
-      "community": 25,
+      "community": 8,
       "norm_label": "teamschema"
     },
     {
@@ -10484,7 +10494,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_models_transfer",
-      "community": 71,
+      "community": 94,
       "norm_label": "transfer.ts"
     },
     {
@@ -10494,7 +10504,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_models_transfer_itransferplayer",
-      "community": 71,
+      "community": 94,
       "norm_label": "itransferplayer"
     },
     {
@@ -10504,7 +10514,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "server_src_models_transfer_itransfer",
-      "community": 71,
+      "community": 94,
       "norm_label": "itransfer"
     },
     {
@@ -10514,7 +10524,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "server_src_models_transfer_transferplayerschema",
-      "community": 71,
+      "community": 94,
       "norm_label": "transferplayerschema"
     },
     {
@@ -10524,7 +10534,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "server_src_models_transfer_transferschema",
-      "community": 71,
+      "community": 94,
       "norm_label": "transferschema"
     },
     {
@@ -10534,7 +10544,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "server_src_models_transfer_transfer",
-      "community": 71,
+      "community": 94,
       "norm_label": "transfer"
     },
     {
@@ -10604,7 +10614,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_routes_auth",
-      "community": 11,
+      "community": 24,
       "norm_label": "auth.ts"
     },
     {
@@ -10614,7 +10624,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_routes_auth_router",
-      "community": 11,
+      "community": 24,
       "norm_label": "router"
     },
     {
@@ -10624,7 +10634,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_routes_footballapi",
-      "community": 11,
+      "community": 28,
       "norm_label": "footballapi.ts"
     },
     {
@@ -10634,7 +10644,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "server_src_routes_footballapi_router",
-      "community": 11,
+      "community": 28,
       "norm_label": "router"
     },
     {
@@ -10664,7 +10674,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_routes_manager",
-      "community": 25,
+      "community": 8,
       "norm_label": "manager.ts"
     },
     {
@@ -10674,7 +10684,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_routes_manager_router",
-      "community": 25,
+      "community": 11,
       "norm_label": "router"
     },
     {
@@ -10694,7 +10704,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "server_src_routes_notification_router",
-      "community": 5,
+      "community": 11,
       "norm_label": "router"
     },
     {
@@ -10724,7 +10734,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_routes_sheetroutes",
-      "community": 81,
+      "community": 11,
       "norm_label": "sheetroutes.ts"
     },
     {
@@ -11084,7 +11094,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "server_src_scripts_recomputematchstats_recomputematchstats",
-      "community": 81,
+      "community": 10,
       "norm_label": "recomputematchstats()"
     },
     {
@@ -11174,7 +11184,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_scripts_seedleagues",
-      "community": 7,
+      "community": 10,
       "norm_label": "seedleagues.ts"
     },
     {
@@ -11184,7 +11194,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "server_src_scripts_seedleagues_seedleagues",
-      "community": 7,
+      "community": 10,
       "norm_label": "seedleagues()"
     },
     {
@@ -11504,7 +11514,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_services_apisports_service",
-      "community": 11,
+      "community": 28,
       "norm_label": "apisports.service.ts"
     },
     {
@@ -11514,7 +11524,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "server_src_services_apisports_service_fetchfixturesbydate",
-      "community": 11,
+      "community": 28,
       "norm_label": "fetchfixturesbydate()"
     },
     {
@@ -11524,7 +11534,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "server_src_services_apisports_service_fetchfixtureplayers",
-      "community": 11,
+      "community": 28,
       "norm_label": "fetchfixtureplayers()"
     },
     {
@@ -11534,7 +11544,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "server_src_services_apisports_service_fetchfixtureevents",
-      "community": 11,
+      "community": 28,
       "norm_label": "fetchfixtureevents()"
     },
     {
@@ -11584,7 +11594,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_types_players",
-      "community": 5,
+      "community": 81,
       "norm_label": "players.ts"
     },
     {
@@ -11594,7 +11604,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_types_players_sofascorestats",
-      "community": 5,
+      "community": 81,
       "norm_label": "sofascorestats"
     },
     {
@@ -11611,10 +11621,10 @@
       "label": "Player",
       "file_type": "code",
       "source_file": "server/src/types/players.ts",
-      "source_location": "L151",
+      "source_location": "L156",
       "_origin": "ast",
       "id": "server_src_types_players_player",
-      "community": 5,
+      "community": 81,
       "norm_label": "player"
     },
     {
@@ -11624,7 +11634,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_src_types_standings",
-      "community": 25,
+      "community": 5,
       "norm_label": "standings.ts"
     },
     {
@@ -11644,7 +11654,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "server_src_types_standings_teamdetails",
-      "community": 25,
+      "community": 5,
       "norm_label": "teamdetails"
     },
     {
@@ -11786,6 +11796,26 @@
       "id": "server_src_utils_sofascorescraper_launchwarmsession",
       "community": 7,
       "norm_label": "launchwarmsession()"
+    },
+    {
+      "label": "tmp-inspect-fix.js",
+      "file_type": "code",
+      "source_file": "server/tmp-inspect-fix.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "server_tmp_inspect_fix",
+      "community": 338,
+      "norm_label": "tmp-inspect-fix.js"
+    },
+    {
+      "label": "mongoose",
+      "file_type": "code",
+      "source_file": "server/tmp-inspect-fix.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "server_tmp_inspect_fix_mongoose",
+      "community": 338,
+      "norm_label": "mongoose"
     },
     {
       "label": "tsconfig.json",
@@ -12834,7 +12864,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_listplayeritem",
-      "community": 21,
+      "community": 146,
       "norm_label": "listplayeritem.tsx"
     },
     {
@@ -12844,7 +12874,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_components_listplayeritem_listplayeritemprops",
-      "community": 21,
+      "community": 146,
       "norm_label": "listplayeritemprops"
     },
     {
@@ -12854,7 +12884,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "ui_src_components_listplayeritem_listplayeritem",
-      "community": 21,
+      "community": 146,
       "norm_label": "listplayeritem()"
     },
     {
@@ -12974,7 +13004,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_components_pitchplayercard_pitchplayercardprops",
-      "community": 21,
+      "community": 20,
       "norm_label": "pitchplayercardprops"
     },
     {
@@ -13104,7 +13134,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_admin_fantasyteamform",
-      "community": 30,
+      "community": 71,
       "norm_label": "fantasyteamform.tsx"
     },
     {
@@ -13114,7 +13144,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "ui_src_components_admin_fantasyteamform_normalizepos",
-      "community": 30,
+      "community": 71,
       "norm_label": "normalizepos()"
     },
     {
@@ -13124,7 +13154,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "ui_src_components_admin_fantasyteamform_adminplayer",
-      "community": 30,
+      "community": 71,
       "norm_label": "adminplayer"
     },
     {
@@ -13134,7 +13164,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "ui_src_components_admin_fantasyteamform_fantasyteamformprops",
-      "community": 30,
+      "community": 71,
       "norm_label": "fantasyteamformprops"
     },
     {
@@ -13144,7 +13174,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "ui_src_components_admin_fantasyteamform_fantasyteamform",
-      "community": 30,
+      "community": 71,
       "norm_label": "fantasyteamform()"
     },
     {
@@ -13354,7 +13384,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_common_modal",
-      "community": 30,
+      "community": 20,
       "norm_label": "modal.tsx"
     },
     {
@@ -13364,7 +13394,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "ui_src_components_common_modal_modalprops",
-      "community": 30,
+      "community": 20,
       "norm_label": "modalprops"
     },
     {
@@ -13374,7 +13404,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "ui_src_components_common_modal_modal",
-      "community": 30,
+      "community": 20,
       "norm_label": "modal()"
     },
     {
@@ -14254,7 +14284,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_icons_info",
-      "community": 21,
+      "community": 146,
       "norm_label": "info.tsx"
     },
     {
@@ -14264,7 +14294,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "ui_src_components_icons_info_infoprops",
-      "community": 21,
+      "community": 146,
       "norm_label": "infoprops"
     },
     {
@@ -14274,7 +14304,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "ui_src_components_icons_info_info",
-      "community": 21,
+      "community": 146,
       "norm_label": "info()"
     },
     {
@@ -14414,7 +14444,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_player_playerdetails",
-      "community": 77,
+      "community": 73,
       "norm_label": "playerdetails.tsx"
     },
     {
@@ -14424,7 +14454,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "ui_src_components_player_playerdetails_getpointsimpact",
-      "community": 77,
+      "community": 73,
       "norm_label": "getpointsimpact()"
     },
     {
@@ -14434,7 +14464,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "ui_src_components_player_playerdetails_playerdetails",
-      "community": 77,
+      "community": 73,
       "norm_label": "playerdetails()"
     },
     {
@@ -14444,7 +14474,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_components_player_playerinfo",
-      "community": 21,
+      "community": 77,
       "norm_label": "playerinfo.tsx"
     },
     {
@@ -14454,7 +14484,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_components_player_playerinfo_playerinfo",
-      "community": 21,
+      "community": 77,
       "norm_label": "playerinfo()"
     },
     {
@@ -14914,7 +14944,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_home_api",
-      "community": 16,
+      "community": 19,
       "norm_label": "api.ts"
     },
     {
@@ -14924,7 +14954,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_features_home_api_homeapi",
-      "community": 16,
+      "community": 19,
       "norm_label": "homeapi"
     },
     {
@@ -14934,7 +14964,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "ui_src_features_home_api_getmockhomedata",
-      "community": 16,
+      "community": 19,
       "norm_label": "getmockhomedata()"
     },
     {
@@ -14944,7 +14974,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_home_hooks",
-      "community": 80,
+      "community": 2,
       "norm_label": "hooks.ts"
     },
     {
@@ -14954,7 +14984,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "ui_src_features_home_hooks_usehomepage",
-      "community": 80,
+      "community": 2,
       "norm_label": "usehomepage()"
     },
     {
@@ -14964,7 +14994,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "ui_src_features_home_hooks_usemyfixtures",
-      "community": 28,
+      "community": 2,
       "norm_label": "usemyfixtures()"
     },
     {
@@ -14974,7 +15004,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_home_queries",
-      "community": 16,
+      "community": 19,
       "norm_label": "queries.ts"
     },
     {
@@ -14984,7 +15014,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_features_home_queries_homequeries",
-      "community": 80,
+      "community": 2,
       "norm_label": "homequeries"
     },
     {
@@ -15184,7 +15214,7 @@
       "source_location": "L177",
       "_origin": "ast",
       "id": "ui_src_features_home_types_myfixturesdata",
-      "community": 16,
+      "community": 19,
       "norm_label": "myfixturesdata"
     },
     {
@@ -15194,7 +15224,7 @@
       "source_location": "L182",
       "_origin": "ast",
       "id": "ui_src_features_home_types_homepagedata",
-      "community": 16,
+      "community": 19,
       "norm_label": "homepagedata"
     },
     {
@@ -15524,14 +15554,14 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "ui_src_features_players_types_playerstats",
-      "community": 21,
+      "community": 73,
       "norm_label": "playerstats"
     },
     {
       "label": "PaginatedResponse",
       "file_type": "code",
       "source_file": "ui/src/features/players/types.ts",
-      "source_location": "L150",
+      "source_location": "L155",
       "_origin": "ast",
       "id": "ui_src_features_players_types_paginatedresponse",
       "community": 73,
@@ -15541,7 +15571,7 @@
       "label": "PlayerFilters",
       "file_type": "code",
       "source_file": "ui/src/features/players/types.ts",
-      "source_location": "L161",
+      "source_location": "L166",
       "_origin": "ast",
       "id": "ui_src_features_players_types_playerfilters",
       "community": 73,
@@ -15551,7 +15581,7 @@
       "label": "PlayerFilterOptions",
       "file_type": "code",
       "source_file": "ui/src/features/players/types.ts",
-      "source_location": "L168",
+      "source_location": "L173",
       "_origin": "ast",
       "id": "ui_src_features_players_types_playerfilteroptions",
       "community": 73,
@@ -15564,7 +15594,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_standings_api",
-      "community": 28,
+      "community": 21,
       "norm_label": "api.ts"
     },
     {
@@ -15574,7 +15604,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_features_standings_api_standingsapi",
-      "community": 28,
+      "community": 21,
       "norm_label": "standingsapi"
     },
     {
@@ -15584,7 +15614,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_standings_hooks",
-      "community": 28,
+      "community": 21,
       "norm_label": "hooks.ts"
     },
     {
@@ -15594,7 +15624,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_features_standings_hooks_usestandings",
-      "community": 28,
+      "community": 21,
       "norm_label": "usestandings()"
     },
     {
@@ -15604,7 +15634,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "ui_src_features_standings_hooks_useteamdetails",
-      "community": 28,
+      "community": 21,
       "norm_label": "useteamdetails()"
     },
     {
@@ -15624,7 +15654,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "ui_src_features_standings_hooks_usestandingsfixtures",
-      "community": 28,
+      "community": 2,
       "norm_label": "usestandingsfixtures()"
     },
     {
@@ -15644,7 +15674,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_standings_queries",
-      "community": 28,
+      "community": 21,
       "norm_label": "queries.ts"
     },
     {
@@ -15654,7 +15684,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_features_standings_queries_standingsqueries",
-      "community": 28,
+      "community": 21,
       "norm_label": "standingsqueries"
     },
     {
@@ -15664,7 +15694,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_features_standings_types",
-      "community": 20,
+      "community": 80,
       "norm_label": "types.ts"
     },
     {
@@ -15674,7 +15704,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "ui_src_features_standings_types_standings",
-      "community": 28,
+      "community": 21,
       "norm_label": "standings"
     },
     {
@@ -15684,7 +15714,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "ui_src_features_standings_types_formation",
-      "community": 20,
+      "community": 80,
       "norm_label": "formation"
     },
     {
@@ -15694,7 +15724,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "ui_src_features_standings_types_teamdetails",
-      "community": 20,
+      "community": 80,
       "norm_label": "teamdetails"
     },
     {
@@ -15794,7 +15824,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_color",
-      "community": 21,
+      "community": 146,
       "norm_label": "color.ts"
     },
     {
@@ -15804,7 +15834,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_color_parsehex",
-      "community": 21,
+      "community": 146,
       "norm_label": "parsehex()"
     },
     {
@@ -15814,7 +15844,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_color_luminance",
-      "community": 21,
+      "community": 146,
       "norm_label": "luminance()"
     },
     {
@@ -15824,7 +15854,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_color_getcontrasttext",
-      "community": 21,
+      "community": 146,
       "norm_label": "getcontrasttext()"
     },
     {
@@ -15834,7 +15864,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_lineupformatter",
-      "community": 21,
+      "community": 77,
       "norm_label": "lineupformatter.ts"
     },
     {
@@ -15844,7 +15874,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_lineupformatter_positionmap",
-      "community": 21,
+      "community": 77,
       "norm_label": "positionmap"
     },
     {
@@ -15854,7 +15884,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_lineupformatter_mapposition",
-      "community": 21,
+      "community": 77,
       "norm_label": "mapposition()"
     },
     {
@@ -16024,7 +16054,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "ui_src_libs_helpers_player_getplayernumericprice",
-      "community": 21,
+      "community": 77,
       "norm_label": "getplayernumericprice()"
     },
     {
@@ -16104,7 +16134,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "ui_src_pages_home_homepage_homepage",
-      "community": 28,
+      "community": 2,
       "norm_label": "homepage()"
     },
     {
@@ -16134,7 +16164,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_pages_manager_gameweekbreakdownpage",
-      "community": 28,
+      "community": 21,
       "norm_label": "gameweekbreakdownpage.tsx"
     },
     {
@@ -16144,7 +16174,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "ui_src_pages_manager_gameweekbreakdownpage_getrowjustify",
-      "community": 28,
+      "community": 21,
       "norm_label": "getrowjustify()"
     },
     {
@@ -16154,7 +16184,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "ui_src_pages_manager_gameweekbreakdownpage_gameweekswitcher",
-      "community": 28,
+      "community": 21,
       "norm_label": "gameweekswitcher()"
     },
     {
@@ -16164,7 +16194,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "ui_src_pages_manager_gameweekbreakdownpage_gameweekbreakdownpage",
-      "community": 28,
+      "community": 21,
       "norm_label": "gameweekbreakdownpage()"
     },
     {
@@ -16254,7 +16284,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteamlistview",
-      "community": 20,
+      "community": 80,
       "norm_label": "myteamlistview.tsx"
     },
     {
@@ -16264,7 +16294,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteamlistview_myteamlistviewprops",
-      "community": 20,
+      "community": 80,
       "norm_label": "myteamlistviewprops"
     },
     {
@@ -16274,7 +16304,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteamlistview_myteamlistview",
-      "community": 20,
+      "community": 80,
       "norm_label": "myteamlistview()"
     },
     {
@@ -16284,7 +16314,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteampitch",
-      "community": 20,
+      "community": 80,
       "norm_label": "myteampitch.tsx"
     },
     {
@@ -16294,7 +16324,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteampitch_myteampitchprops",
-      "community": 20,
+      "community": 80,
       "norm_label": "myteampitchprops"
     },
     {
@@ -16304,7 +16334,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteampitch_getrowjustify",
-      "community": 20,
+      "community": 80,
       "norm_label": "getrowjustify()"
     },
     {
@@ -16314,7 +16344,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_myteampitch_myteampitch",
-      "community": 20,
+      "community": 80,
       "norm_label": "myteampitch()"
     },
     {
@@ -16324,7 +16354,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_playeractionmodal",
-      "community": 30,
+      "community": 20,
       "norm_label": "playeractionmodal.tsx"
     },
     {
@@ -16334,7 +16364,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_playeractionmodal_playeractionmodalprops",
-      "community": 30,
+      "community": 20,
       "norm_label": "playeractionmodalprops"
     },
     {
@@ -16344,7 +16374,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "ui_src_pages_manager_components_playeractionmodal_playeractionmodal",
-      "community": 30,
+      "community": 20,
       "norm_label": "playeractionmodal()"
     },
     {
@@ -16424,7 +16454,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_pages_standings_standingspage",
-      "community": 28,
+      "community": 2,
       "norm_label": "standingspage.tsx"
     },
     {
@@ -16434,7 +16464,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "ui_src_pages_standings_standingspage_mock_managers",
-      "community": 28,
+      "community": 2,
       "norm_label": "mock_managers"
     },
     {
@@ -16444,7 +16474,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "ui_src_pages_standings_standingspage_getmanagername",
-      "community": 28,
+      "community": 2,
       "norm_label": "getmanagername()"
     },
     {
@@ -16454,7 +16484,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "ui_src_pages_standings_standingspage_getteamicon",
-      "community": 28,
+      "community": 2,
       "norm_label": "getteamicon()"
     },
     {
@@ -16464,7 +16494,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "ui_src_pages_standings_standingspage_standingspage",
-      "community": 28,
+      "community": 2,
       "norm_label": "standingspage()"
     },
     {
@@ -16474,7 +16504,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_pages_standings_teamdetailspage",
-      "community": 28,
+      "community": 21,
       "norm_label": "teamdetailspage.tsx"
     },
     {
@@ -16484,7 +16514,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "ui_src_pages_standings_teamdetailspage_teamdetailspage",
-      "community": 28,
+      "community": 21,
       "norm_label": "teamdetailspage()"
     },
     {
@@ -16574,7 +16604,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "ui_src_pages_standings_components_playerstatsmodal_playerstatsmodalprops",
-      "community": 21,
+      "community": 20,
       "norm_label": "playerstatsmodalprops"
     },
     {
@@ -17164,7 +17194,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fantasy_teams_create_lazy",
-      "community": 30,
+      "community": 71,
       "norm_label": "create.lazy.tsx"
     },
     {
@@ -17174,7 +17204,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fantasy_teams_create_lazy_route",
-      "community": 30,
+      "community": 71,
       "norm_label": "route"
     },
     {
@@ -17184,7 +17214,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fantasy_teams_create_lazy_createfantasyteam",
-      "community": 30,
+      "community": 71,
       "norm_label": "createfantasyteam()"
     },
     {
@@ -17214,7 +17244,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fantasy_teams_edit_teamid_lazy",
-      "community": 30,
+      "community": 71,
       "norm_label": "edit.$teamid.lazy.tsx"
     },
     {
@@ -17224,7 +17254,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fantasy_teams_edit_teamid_lazy_route",
-      "community": 30,
+      "community": 71,
       "norm_label": "route"
     },
     {
@@ -17234,7 +17264,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "ui_src_routes_admin_fantasy_teams_edit_teamid_lazy_editfantasyteam",
-      "community": 30,
+      "community": 71,
       "norm_label": "editfantasyteam()"
     },
     {
@@ -18404,7 +18434,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_routes_standings_index_lazy",
-      "community": 28,
+      "community": 2,
       "norm_label": "index.lazy.tsx"
     },
     {
@@ -18414,7 +18444,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "ui_src_routes_standings_index_lazy_route",
-      "community": 28,
+      "community": 2,
       "norm_label": "route"
     },
     {
@@ -18534,7 +18564,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "ui_src_store_types_roles",
-      "community": 20,
+      "community": 16,
       "norm_label": "roles"
     },
     {
@@ -18544,7 +18574,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ui_src_store_usemanageteamstore",
-      "community": 20,
+      "community": 80,
       "norm_label": "usemanageteamstore.tsx"
     },
     {
@@ -18554,7 +18584,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "ui_src_store_usemanageteamstore_usemanageteamstorestate",
-      "community": 20,
+      "community": 80,
       "norm_label": "usemanageteamstorestate"
     },
     {
@@ -43120,7 +43150,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L977",
+      "source_location": "L980",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_completegameweek",
@@ -43130,7 +43160,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L689",
+      "source_location": "L692",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_createfantasyteam",
@@ -43150,7 +43180,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1423",
+      "source_location": "L1426",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_createh2hfixture",
@@ -43160,7 +43190,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1476",
+      "source_location": "L1479",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_deleteh2hfixture",
@@ -43170,7 +43200,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1408",
+      "source_location": "L1411",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_deleteh2hleague",
@@ -43180,7 +43210,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1265",
+      "source_location": "L1268",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_fetchleaguerounds",
@@ -43190,7 +43220,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L556",
+      "source_location": "L559",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_getadminplayers",
@@ -43200,7 +43230,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L507",
+      "source_location": "L510",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_getadminteams",
@@ -43210,7 +43240,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L817",
+      "source_location": "L820",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_getfantasyteambyid",
@@ -43220,7 +43250,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L798",
+      "source_location": "L801",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_getfantasyteams",
@@ -43250,7 +43280,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1336",
+      "source_location": "L1339",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_geth2hleague",
@@ -43260,7 +43290,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1491",
+      "source_location": "L1494",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_geth2hleaguefixtures",
@@ -43270,7 +43300,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1251",
+      "source_location": "L1254",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_getleagues",
@@ -43290,7 +43320,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L364",
+      "source_location": "L367",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_getmatchincidentsandstats",
@@ -43300,7 +43330,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1235",
+      "source_location": "L1238",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_getpickteamstatus",
@@ -43320,7 +43350,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L472",
+      "source_location": "L475",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_getusers",
@@ -43330,7 +43360,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1139",
+      "source_location": "L1142",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_revertgameweek",
@@ -43340,7 +43370,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1203",
+      "source_location": "L1206",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_togglepickteam",
@@ -43350,7 +43380,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L654",
+      "source_location": "L657",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_updateadminplayer",
@@ -43360,7 +43390,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L866",
+      "source_location": "L869",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_updatefantasyteam",
@@ -43390,7 +43420,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1301",
+      "source_location": "L1304",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_updateleague",
@@ -43400,7 +43430,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1365",
+      "source_location": "L1368",
       "weight": 1.0,
       "source": "server_src_controllers_admin",
       "target": "server_src_controllers_admin_upserth2hleague",
@@ -44105,7 +44135,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L320",
+      "source_location": "L323",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getmatchdetails",
       "target": "server_src_lib_points_calculateplayerpoints"
@@ -44160,7 +44190,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L441",
+      "source_location": "L444",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getmatchincidentsandstats",
       "target": "server_src_lib_points_calculateplayerpoints"
@@ -44171,7 +44201,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L417",
+      "source_location": "L420",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getmatchincidentsandstats",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -44182,7 +44212,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L376",
+      "source_location": "L379",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getmatchincidentsandstats",
       "target": "server_src_models_fixture_fixture"
@@ -44193,7 +44223,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L410",
+      "source_location": "L413",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getmatchincidentsandstats",
       "target": "server_src_models_gameweek_gameweek"
@@ -44204,7 +44234,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L377",
+      "source_location": "L380",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getmatchincidentsandstats",
       "target": "server_src_models_matchdetails_matchdetails"
@@ -44215,7 +44245,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L378",
+      "source_location": "L381",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getmatchincidentsandstats",
       "target": "server_src_models_team_team"
@@ -44237,7 +44267,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L485",
+      "source_location": "L488",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getusers",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -44248,7 +44278,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L502",
+      "source_location": "L505",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getusers",
       "target": "server_src_types_error_error"
@@ -44270,7 +44300,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L524",
+      "source_location": "L527",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getadminteams",
       "target": "server_src_models_fixture_fixture"
@@ -44281,7 +44311,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L522",
+      "source_location": "L525",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getadminteams",
       "target": "server_src_models_team_team"
@@ -44292,7 +44322,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L551",
+      "source_location": "L554",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getadminteams",
       "target": "server_src_types_error_error"
@@ -44314,7 +44344,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L579",
+      "source_location": "L582",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getadminplayers",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -44325,7 +44355,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L623",
+      "source_location": "L626",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getadminplayers",
       "target": "server_src_models_team_team"
@@ -44336,7 +44366,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L649",
+      "source_location": "L652",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getadminplayers",
       "target": "server_src_types_error_error"
@@ -44358,7 +44388,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L684",
+      "source_location": "L687",
       "weight": 1.0,
       "source": "server_src_controllers_admin_updateadminplayer",
       "target": "server_src_types_error_error"
@@ -44380,7 +44410,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L773",
+      "source_location": "L776",
       "weight": 1.0,
       "source": "server_src_controllers_admin_createfantasyteam",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -44391,7 +44421,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L793",
+      "source_location": "L796",
       "weight": 1.0,
       "source": "server_src_controllers_admin_createfantasyteam",
       "target": "server_src_types_error_error"
@@ -44413,7 +44443,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L805",
+      "source_location": "L808",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getfantasyteams",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -44424,7 +44454,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L812",
+      "source_location": "L815",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getfantasyteams",
       "target": "server_src_types_error_error"
@@ -44446,7 +44476,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L823",
+      "source_location": "L826",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getfantasyteambyid",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -44457,7 +44487,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L861",
+      "source_location": "L864",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getfantasyteambyid",
       "target": "server_src_types_error_error"
@@ -44479,7 +44509,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L928",
+      "source_location": "L931",
       "weight": 1.0,
       "source": "server_src_controllers_admin_updatefantasyteam",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -44490,7 +44520,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L972",
+      "source_location": "L975",
       "weight": 1.0,
       "source": "server_src_controllers_admin_updatefantasyteam",
       "target": "server_src_types_error_error"
@@ -44512,7 +44542,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1001",
+      "source_location": "L1004",
       "weight": 1.0,
       "source": "server_src_controllers_admin_completegameweek",
       "target": "server_src_controllers_players_getgameweekminutes"
@@ -44523,7 +44553,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1122",
+      "source_location": "L1125",
       "weight": 1.0,
       "source": "server_src_controllers_admin_completegameweek",
       "target": "server_src_models_apiconfig_apiconfig"
@@ -44534,7 +44564,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1018",
+      "source_location": "L1021",
       "weight": 1.0,
       "source": "server_src_controllers_admin_completegameweek",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -44545,7 +44575,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L984",
+      "source_location": "L987",
       "weight": 1.0,
       "source": "server_src_controllers_admin_completegameweek",
       "target": "server_src_models_gameweek_gameweek"
@@ -44556,7 +44586,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1134",
+      "source_location": "L1137",
       "weight": 1.0,
       "source": "server_src_controllers_admin_completegameweek",
       "target": "server_src_types_error_error"
@@ -44578,7 +44608,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1183",
+      "source_location": "L1186",
       "weight": 1.0,
       "source": "server_src_controllers_admin_revertgameweek",
       "target": "server_src_models_fantasyteam",
@@ -44590,7 +44620,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1184",
+      "source_location": "L1187",
       "weight": 1.0,
       "source": "server_src_controllers_admin_revertgameweek",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -44601,7 +44631,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1146",
+      "source_location": "L1149",
       "weight": 1.0,
       "source": "server_src_controllers_admin_revertgameweek",
       "target": "server_src_models_gameweek",
@@ -44613,7 +44643,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1148",
+      "source_location": "L1151",
       "weight": 1.0,
       "source": "server_src_controllers_admin_revertgameweek",
       "target": "server_src_models_gameweek_gameweek"
@@ -44624,7 +44654,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1198",
+      "source_location": "L1201",
       "weight": 1.0,
       "source": "server_src_controllers_admin_revertgameweek",
       "target": "server_src_types_error_error"
@@ -44646,7 +44676,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1211",
+      "source_location": "L1214",
       "weight": 1.0,
       "source": "server_src_controllers_admin_togglepickteam",
       "target": "server_src_models_apiconfig_apiconfig"
@@ -44657,7 +44687,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1230",
+      "source_location": "L1233",
       "weight": 1.0,
       "source": "server_src_controllers_admin_togglepickteam",
       "target": "server_src_types_error_error"
@@ -44679,7 +44709,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1241",
+      "source_location": "L1244",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getpickteamstatus",
       "target": "server_src_models_apiconfig_apiconfig"
@@ -44690,7 +44720,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1246",
+      "source_location": "L1249",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getpickteamstatus",
       "target": "server_src_types_error_error"
@@ -44712,7 +44742,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1257",
+      "source_location": "L1260",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getleagues",
       "target": "server_src_models_league_league"
@@ -44723,7 +44753,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1260",
+      "source_location": "L1263",
       "weight": 1.0,
       "source": "server_src_controllers_admin_getleagues",
       "target": "server_src_types_error_error"
@@ -44745,7 +44775,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1271",
+      "source_location": "L1274",
       "weight": 1.0,
       "source": "server_src_controllers_admin_fetchleaguerounds",
       "target": "server_src_models_league_league"
@@ -44756,7 +44786,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1296",
+      "source_location": "L1299",
       "weight": 1.0,
       "source": "server_src_controllers_admin_fetchleaguerounds",
       "target": "server_src_types_error_error"
@@ -44767,7 +44797,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1284",
+      "source_location": "L1287",
       "weight": 1.0,
       "source": "server_src_controllers_admin_fetchleaguerounds",
       "target": "server_src_utils_sofascorescraper_fetchsofascorejson"
@@ -44789,7 +44819,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1317",
+      "source_location": "L1320",
       "weight": 1.0,
       "source": "server_src_controllers_admin_updateleague",
       "target": "server_src_models_league_league"
@@ -44800,7 +44830,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1329",
+      "source_location": "L1332",
       "weight": 1.0,
       "source": "server_src_controllers_admin_updateleague",
       "target": "server_src_types_error_error"
@@ -44822,7 +44852,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1352",
+      "source_location": "L1355",
       "weight": 1.0,
       "source": "server_src_controllers_admin_geth2hleague",
       "target": "server_src_models_gameweek_gameweek"
@@ -44833,7 +44863,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1360",
+      "source_location": "L1363",
       "weight": 1.0,
       "source": "server_src_controllers_admin_geth2hleague",
       "target": "server_src_types_error_error"
@@ -44855,7 +44885,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1403",
+      "source_location": "L1406",
       "weight": 1.0,
       "source": "server_src_controllers_admin_upserth2hleague",
       "target": "server_src_types_error_error"
@@ -44877,7 +44907,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1418",
+      "source_location": "L1421",
       "weight": 1.0,
       "source": "server_src_controllers_admin_deleteh2hleague",
       "target": "server_src_types_error_error"
@@ -44899,7 +44929,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1471",
+      "source_location": "L1474",
       "weight": 1.0,
       "source": "server_src_controllers_admin_createh2hfixture",
       "target": "server_src_types_error_error"
@@ -44921,7 +44951,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1486",
+      "source_location": "L1489",
       "weight": 1.0,
       "source": "server_src_controllers_admin_deleteh2hfixture",
       "target": "server_src_types_error_error"
@@ -44943,7 +44973,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1506",
+      "source_location": "L1509",
       "weight": 1.0,
       "source": "server_src_controllers_admin_geth2hleaguefixtures",
       "target": "server_src_controllers_h2h_getleagueallgwpoints"
@@ -44954,7 +44984,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/admin.ts",
-      "source_location": "L1539",
+      "source_location": "L1542",
       "weight": 1.0,
       "source": "server_src_controllers_admin_geth2hleaguefixtures",
       "target": "server_src_types_error_error"
@@ -45602,7 +45632,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L801",
+      "source_location": "L817",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_controllers_manager_dashboard",
@@ -45612,7 +45642,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L24",
+      "source_location": "L25",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_controllers_manager_details",
@@ -45622,7 +45652,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L1315",
+      "source_location": "L1331",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_controllers_manager_getsubstitutionhistory",
@@ -45632,7 +45662,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L667",
+      "source_location": "L683",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_controllers_manager_myfixtures",
@@ -45642,7 +45672,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L366",
+      "source_location": "L382",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_controllers_manager_substitution",
@@ -45752,7 +45782,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_controllers_standings",
@@ -45763,7 +45793,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_controllers_standings_getstandingsdata",
@@ -45796,7 +45826,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_lib_formatter_types",
@@ -45807,7 +45837,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_lib_formatter_types_formationresult",
@@ -45818,7 +45848,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_lib_helpers_roleupdate",
@@ -45829,7 +45859,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_lib_helpers_roleupdate_setcaptain",
@@ -45840,10 +45870,32 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_lib_helpers_roleupdate_setvicecaptain",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/controllers/manager.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "server_src_controllers_manager",
+      "target": "server_src_lib_points",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/controllers/manager.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "server_src_controllers_manager",
+      "target": "server_src_lib_points_getseasonpointsbreakdown",
       "confidence_score": 1.0
     },
     {
@@ -45873,7 +45925,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_apiconfig",
@@ -45884,7 +45936,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_apiconfig_apiconfig",
@@ -45917,7 +45969,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_fixture",
@@ -45928,7 +45980,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_fixture_fixture",
@@ -45939,7 +45991,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_gameweek",
@@ -45950,7 +46002,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_gameweek_gameweek",
@@ -45961,7 +46013,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_player",
@@ -45972,7 +46024,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_player_player",
@@ -45983,7 +46035,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L18",
+      "source_location": "L19",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_playerstats",
@@ -45994,7 +46046,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L18",
+      "source_location": "L19",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_playerstats_playerstats",
@@ -46005,7 +46057,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L20",
+      "source_location": "L21",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_substitution",
@@ -46016,7 +46068,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L20",
+      "source_location": "L21",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_substitution_substitution",
@@ -46027,7 +46079,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L16",
+      "source_location": "L17",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_team",
@@ -46038,7 +46090,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L16",
+      "source_location": "L17",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_models_team_team",
@@ -46071,7 +46123,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L9",
+      "source_location": "L10",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_types_manager",
@@ -46082,7 +46134,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L9",
+      "source_location": "L10",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_types_manager_substitution",
@@ -46115,7 +46167,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_utils",
@@ -46126,7 +46178,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "source": "server_src_controllers_manager",
       "target": "server_src_utils_resolveposition",
@@ -46160,7 +46212,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L234",
+      "source_location": "L244",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_controllers_players_aggregatematchstats"
@@ -46171,7 +46223,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L245",
+      "source_location": "L255",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_controllers_players_buildcurrentweek"
@@ -46182,7 +46234,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L293",
+      "source_location": "L303",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_controllers_players_getgameweekbreakdown"
@@ -46193,7 +46245,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L243",
+      "source_location": "L253",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_controllers_players_getgameweekentries"
@@ -46204,7 +46256,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L283",
+      "source_location": "L293",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_controllers_players_getgameweekform"
@@ -46215,7 +46267,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L98",
+      "source_location": "L99",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_controllers_players_getgameweekminutes"
@@ -46226,7 +46278,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L111",
+      "source_location": "L112",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_controllers_players_getgameweekpoints"
@@ -46237,7 +46289,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L52",
+      "source_location": "L53",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_controllers_standings_getstandingsdata"
@@ -46248,10 +46300,21 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L333",
+      "source_location": "L349",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_lib_formatter_lineupformatter_converttoformation"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/controllers/manager.ts",
+      "source_location": "L308",
+      "weight": 1.0,
+      "source": "server_src_controllers_manager_details",
+      "target": "server_src_lib_points_getseasonpointsbreakdown"
     },
     {
       "relation": "references",
@@ -46259,7 +46322,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L335",
+      "source_location": "L351",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_models_apiconfig_apiconfig"
@@ -46270,7 +46333,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L36",
+      "source_location": "L37",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -46281,7 +46344,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L150",
+      "source_location": "L151",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_models_fixture",
@@ -46293,7 +46356,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L182",
+      "source_location": "L189",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_models_fixture_fixture"
@@ -46304,7 +46367,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L79",
+      "source_location": "L80",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_models_gameweek",
@@ -46316,7 +46379,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L80",
+      "source_location": "L81",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_models_gameweek_gameweek"
@@ -46327,7 +46390,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L68",
+      "source_location": "L69",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_models_player",
@@ -46339,7 +46402,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L87",
+      "source_location": "L88",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_models_playerstats",
@@ -46351,7 +46414,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L74",
+      "source_location": "L75",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_models_team",
@@ -46363,7 +46426,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L75",
+      "source_location": "L76",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_models_team_team"
@@ -46374,7 +46437,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L361",
+      "source_location": "L377",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_types_error_error"
@@ -46385,7 +46448,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L128",
+      "source_location": "L129",
       "weight": 1.0,
       "source": "server_src_controllers_manager_details",
       "target": "server_src_utils_resolveposition"
@@ -46407,7 +46470,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L424",
+      "source_location": "L440",
       "weight": 1.0,
       "source": "server_src_controllers_manager_substitution",
       "target": "server_src_lib_formatter_lineupformatter_converttoformation"
@@ -46418,7 +46481,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L493",
+      "source_location": "L509",
       "weight": 1.0,
       "source": "server_src_controllers_manager_substitution",
       "target": "server_src_lib_helpers_roleupdate_setcaptain"
@@ -46429,7 +46492,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L502",
+      "source_location": "L518",
       "weight": 1.0,
       "source": "server_src_controllers_manager_substitution",
       "target": "server_src_lib_helpers_roleupdate_setvicecaptain"
@@ -46440,7 +46503,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L467",
+      "source_location": "L483",
       "weight": 1.0,
       "source": "server_src_controllers_manager_substitution",
       "target": "server_src_lib_validators_substitution_validateandapplyswap"
@@ -46451,7 +46514,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L376",
+      "source_location": "L392",
       "weight": 1.0,
       "source": "server_src_controllers_manager_substitution",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -46462,7 +46525,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L565",
+      "source_location": "L581",
       "weight": 1.0,
       "source": "server_src_controllers_manager_substitution",
       "target": "server_src_models_gameweek",
@@ -46474,7 +46537,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L387",
+      "source_location": "L403",
       "weight": 1.0,
       "source": "server_src_controllers_manager_substitution",
       "target": "server_src_models_player",
@@ -46486,7 +46549,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L388",
+      "source_location": "L404",
       "weight": 1.0,
       "source": "server_src_controllers_manager_substitution",
       "target": "server_src_models_team",
@@ -46498,7 +46561,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L396",
+      "source_location": "L412",
       "weight": 1.0,
       "source": "server_src_controllers_manager_substitution",
       "target": "server_src_models_team_team"
@@ -46509,7 +46572,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L662",
+      "source_location": "L678",
       "weight": 1.0,
       "source": "server_src_controllers_manager_substitution",
       "target": "server_src_types_error_error"
@@ -46520,7 +46583,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L410",
+      "source_location": "L426",
       "weight": 1.0,
       "source": "server_src_controllers_manager_substitution",
       "target": "server_src_utils_resolveposition"
@@ -46553,7 +46616,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L676",
+      "source_location": "L692",
       "weight": 1.0,
       "source": "server_src_controllers_manager_myfixtures",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -46564,7 +46627,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L689",
+      "source_location": "L705",
       "weight": 1.0,
       "source": "server_src_controllers_manager_myfixtures",
       "target": "server_src_models_fixture",
@@ -46576,7 +46639,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L688",
+      "source_location": "L704",
       "weight": 1.0,
       "source": "server_src_controllers_manager_myfixtures",
       "target": "server_src_models_gameweek",
@@ -46588,7 +46651,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L686",
+      "source_location": "L702",
       "weight": 1.0,
       "source": "server_src_controllers_manager_myfixtures",
       "target": "server_src_models_player",
@@ -46600,7 +46663,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L687",
+      "source_location": "L703",
       "weight": 1.0,
       "source": "server_src_controllers_manager_myfixtures",
       "target": "server_src_models_team",
@@ -46612,7 +46675,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L796",
+      "source_location": "L812",
       "weight": 1.0,
       "source": "server_src_controllers_manager_myfixtures",
       "target": "server_src_types_error_error"
@@ -46623,7 +46686,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L705",
+      "source_location": "L721",
       "weight": 1.0,
       "source": "server_src_controllers_manager_myfixtures",
       "target": "server_src_utils_resolveposition"
@@ -46645,7 +46708,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L1085",
+      "source_location": "L1101",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_controllers_players_getgameweekentries"
@@ -46656,7 +46719,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L1081",
+      "source_location": "L1097",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_controllers_players_getgameweekform"
@@ -46667,7 +46730,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L956",
+      "source_location": "L972",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_controllers_players_getgameweekminutes"
@@ -46678,7 +46741,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L967",
+      "source_location": "L983",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_controllers_players_getgameweekpoints"
@@ -46689,7 +46752,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L1087",
+      "source_location": "L1103",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_controllers_players_getgameweekstats"
@@ -46700,7 +46763,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L825",
+      "source_location": "L841",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_controllers_standings_getstandingsdata"
@@ -46711,7 +46774,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L824",
+      "source_location": "L840",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_models_apiconfig_apiconfig"
@@ -46722,7 +46785,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L822",
+      "source_location": "L838",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -46733,7 +46796,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L828",
+      "source_location": "L844",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_models_fixture_fixture"
@@ -46744,7 +46807,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L823",
+      "source_location": "L839",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_models_gameweek_gameweek"
@@ -46755,7 +46818,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L901",
+      "source_location": "L917",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_models_team_team"
@@ -46766,7 +46829,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L1310",
+      "source_location": "L1326",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_types_error_error"
@@ -46777,7 +46840,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L1051",
+      "source_location": "L1067",
       "weight": 1.0,
       "source": "server_src_controllers_manager_dashboard",
       "target": "server_src_utils_resolveposition"
@@ -46799,7 +46862,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/manager.ts",
-      "source_location": "L1352",
+      "source_location": "L1368",
       "weight": 1.0,
       "source": "server_src_controllers_manager_getsubstitutionhistory",
       "target": "server_src_types_error_error"
@@ -47192,7 +47255,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L923",
+      "source_location": "L963",
       "weight": 1.0,
       "source": "server_src_controllers_players",
       "target": "server_src_controllers_players_getfilters",
@@ -47202,7 +47265,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L461",
+      "source_location": "L473",
       "weight": 1.0,
       "source": "server_src_controllers_players",
       "target": "server_src_controllers_players_getfullplayerstats",
@@ -47308,6 +47371,17 @@
       "weight": 1.0,
       "source": "server_src_controllers_players",
       "target": "server_src_lib_points_getmatchpointsbreakdown",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/controllers/players.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "server_src_controllers_players",
+      "target": "server_src_lib_points_getseasonpointsbreakdown",
       "confidence_score": 1.0
     },
     {
@@ -47535,7 +47609,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L651",
+      "source_location": "L671",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfullplayerstats",
       "target": "server_src_controllers_players_aggregatematchstats",
@@ -47580,7 +47654,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L476",
+      "source_location": "L483",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_controllers_players_aggregatematchstats"
@@ -47601,7 +47675,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L655",
+      "source_location": "L675",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfullplayerstats",
       "target": "server_src_controllers_players_getgameweekentries",
@@ -47679,7 +47753,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L733",
+      "source_location": "L746",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixtureplayers",
       "target": "server_src_controllers_players_getgameweekentries"
@@ -47690,7 +47764,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L485",
+      "source_location": "L492",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_controllers_players_getgameweekentries"
@@ -47734,7 +47808,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L737",
+      "source_location": "L750",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixtureplayers",
       "target": "server_src_controllers_players_getgameweekpoints"
@@ -47745,7 +47819,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L869",
+      "source_location": "L882",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getmanageroverview",
       "target": "server_src_controllers_players_getgameweekpoints"
@@ -47756,7 +47830,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L65",
+      "source_location": "L66",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getstandingsdata",
       "target": "server_src_controllers_players_getgameweekpoints"
@@ -47767,7 +47841,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L237",
+      "source_location": "L238",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_controllers_players_getgameweekpoints"
@@ -47789,7 +47863,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L856",
+      "source_location": "L869",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getmanageroverview",
       "target": "server_src_controllers_players_getgameweekminutes"
@@ -47800,7 +47874,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L54",
+      "source_location": "L55",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getstandingsdata",
       "target": "server_src_controllers_players_getgameweekminutes"
@@ -47811,7 +47885,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L226",
+      "source_location": "L227",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_controllers_players_getgameweekminutes"
@@ -47844,7 +47918,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L735",
+      "source_location": "L748",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixtureplayers",
       "target": "server_src_controllers_players_getgameweekstats"
@@ -47854,7 +47928,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L664",
+      "source_location": "L684",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfullplayerstats",
       "target": "server_src_controllers_players_getgameweekform",
@@ -47865,7 +47939,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L401",
+      "source_location": "L407",
       "weight": 1.0,
       "source": "server_src_controllers_players_getplayerstats",
       "target": "server_src_controllers_players_getgameweekform",
@@ -47888,7 +47962,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L525",
+      "source_location": "L532",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_controllers_players_getgameweekform"
@@ -47931,7 +48005,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L695",
+      "source_location": "L715",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfullplayerstats",
       "target": "server_src_controllers_players_getgameweekbreakdown",
@@ -47953,7 +48027,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L413",
+      "source_location": "L419",
       "weight": 1.0,
       "source": "server_src_controllers_players_getplayerstats",
       "target": "server_src_controllers_players_getgameweekbreakdown",
@@ -47976,7 +48050,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L535",
+      "source_location": "L542",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_controllers_players_getgameweekbreakdown"
@@ -47997,7 +48071,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L657",
+      "source_location": "L677",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfullplayerstats",
       "target": "server_src_controllers_players_buildcurrentweek",
@@ -48008,7 +48082,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L325",
+      "source_location": "L331",
       "weight": 1.0,
       "source": "server_src_controllers_players_getplayerstats",
       "target": "server_src_controllers_players_buildcurrentweek",
@@ -48031,10 +48105,21 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L487",
+      "source_location": "L494",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_controllers_players_buildcurrentweek"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/controllers/players.ts",
+      "source_location": "L424",
+      "weight": 1.0,
+      "source": "server_src_controllers_players_getplayerstats",
+      "target": "server_src_lib_points_getseasonpointsbreakdown"
     },
     {
       "relation": "imports_from",
@@ -48042,7 +48127,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L331",
+      "source_location": "L337",
       "weight": 1.0,
       "source": "server_src_controllers_players_getplayerstats",
       "target": "server_src_models_fantasyteam",
@@ -48054,7 +48139,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L332",
+      "source_location": "L338",
       "weight": 1.0,
       "source": "server_src_controllers_players_getplayerstats",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -48077,7 +48162,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L318",
+      "source_location": "L321",
       "weight": 1.0,
       "source": "server_src_controllers_players_getplayerstats",
       "target": "server_src_models_fixture_fixture"
@@ -48110,7 +48195,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L446",
+      "source_location": "L458",
       "weight": 1.0,
       "source": "server_src_controllers_players_getplayerstats",
       "target": "server_src_types_error_error"
@@ -48127,12 +48212,23 @@
       "target": "server_src_utils_resolveposition"
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/controllers/players.ts",
+      "source_location": "L720",
+      "weight": 1.0,
+      "source": "server_src_controllers_players_getfullplayerstats",
+      "target": "server_src_lib_points_getseasonpointsbreakdown"
+    },
+    {
       "relation": "references",
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L515",
+      "source_location": "L527",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfullplayerstats",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -48143,7 +48239,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L589",
+      "source_location": "L601",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfullplayerstats",
       "target": "server_src_models_fixture",
@@ -48155,7 +48251,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L591",
+      "source_location": "L608",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfullplayerstats",
       "target": "server_src_models_fixture_fixture"
@@ -48166,7 +48262,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L582",
+      "source_location": "L594",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfullplayerstats",
       "target": "server_src_models_gameweek_gameweek"
@@ -48177,7 +48273,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L496",
+      "source_location": "L508",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfullplayerstats",
       "target": "server_src_models_team_team"
@@ -48188,7 +48284,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L908",
+      "source_location": "L948",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfullplayerstats",
       "target": "server_src_types_error_error"
@@ -48199,7 +48295,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L701",
+      "source_location": "L726",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfullplayerstats",
       "target": "server_src_utils_resolveposition"
@@ -48221,7 +48317,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L925",
+      "source_location": "L965",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfilters",
       "target": "server_src_models_team_team"
@@ -48232,7 +48328,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/players.ts",
-      "source_location": "L939",
+      "source_location": "L979",
       "weight": 1.0,
       "source": "server_src_controllers_players_getfilters",
       "target": "server_src_types_error_error"
@@ -48512,7 +48608,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L670",
+      "source_location": "L683",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_controllers_standings_getfixtureplayers",
@@ -48522,7 +48618,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L610",
+      "source_location": "L623",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_controllers_standings_getfixturesforcurrentgameweek",
@@ -48532,7 +48628,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L801",
+      "source_location": "L814",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_controllers_standings_getmanageroverview",
@@ -48542,7 +48638,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L152",
+      "source_location": "L153",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_controllers_standings_getstandings",
@@ -48552,7 +48648,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L26",
+      "source_location": "L27",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_controllers_standings_getstandingsdata",
@@ -48562,7 +48658,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L176",
+      "source_location": "L177",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_controllers_standings_getteamdetails",
@@ -48572,7 +48668,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L21",
+      "source_location": "L22",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_controllers_standings_invalidatestandingscache",
@@ -48605,7 +48701,29 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L11",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "server_src_controllers_standings",
+      "target": "server_src_lib_points",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/controllers/standings.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "server_src_controllers_standings",
+      "target": "server_src_lib_points_getseasonpointsbreakdown",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/controllers/standings.ts",
+      "source_location": "L12",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_models_fantasyteam",
@@ -48616,7 +48734,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_models_fantasyteam_fantasyteam",
@@ -48627,7 +48745,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_models_gameweek",
@@ -48638,7 +48756,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_models_gameweek_gameweek",
@@ -48649,7 +48767,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_models_player",
@@ -48660,7 +48778,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_models_player_player",
@@ -48671,7 +48789,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_models_playerstats",
@@ -48682,7 +48800,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_models_playerstats_playerstats",
@@ -48693,7 +48811,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_models_team",
@@ -48704,7 +48822,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "server_src_controllers_standings",
       "target": "server_src_models_team_team",
@@ -48792,7 +48910,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L822",
+      "source_location": "L835",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getmanageroverview",
       "target": "server_src_controllers_standings_getstandingsdata",
@@ -48803,7 +48921,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L154",
+      "source_location": "L155",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getstandings",
       "target": "server_src_controllers_standings_getstandingsdata",
@@ -48815,7 +48933,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L32",
+      "source_location": "L33",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getstandingsdata",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -48826,7 +48944,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L37",
+      "source_location": "L38",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getstandingsdata",
       "target": "server_src_models_gameweek_gameweek"
@@ -48837,7 +48955,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L161",
+      "source_location": "L162",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getstandings",
       "target": "server_src_types_error_error"
@@ -48859,10 +48977,21 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L576",
+      "source_location": "L589",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_lib_formatter_lineupformatter_converttoformation"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/controllers/standings.ts",
+      "source_location": "L547",
+      "weight": 1.0,
+      "source": "server_src_controllers_standings_getteamdetails",
+      "target": "server_src_lib_points_getseasonpointsbreakdown"
     },
     {
       "relation": "references",
@@ -48870,7 +48999,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L182",
+      "source_location": "L183",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -48881,7 +49010,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L397",
+      "source_location": "L398",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_models_fixture",
@@ -48893,7 +49022,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L424",
+      "source_location": "L431",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_models_fixture_fixture"
@@ -48904,7 +49033,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L188",
+      "source_location": "L189",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_models_gameweek_gameweek"
@@ -48915,7 +49044,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L293",
+      "source_location": "L294",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_models_team_team"
@@ -48926,7 +49055,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L595",
+      "source_location": "L608",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_types_error_error"
@@ -48937,7 +49066,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L376",
+      "source_location": "L377",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getteamdetails",
       "target": "server_src_utils_resolveposition"
@@ -48959,7 +49088,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L616",
+      "source_location": "L629",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixturesforcurrentgameweek",
       "target": "server_src_models_fixture",
@@ -48971,7 +49100,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L620",
+      "source_location": "L633",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixturesforcurrentgameweek",
       "target": "server_src_models_fixture_fixture"
@@ -48982,7 +49111,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L612",
+      "source_location": "L625",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixturesforcurrentgameweek",
       "target": "server_src_models_gameweek_gameweek"
@@ -48993,7 +49122,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L625",
+      "source_location": "L638",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixturesforcurrentgameweek",
       "target": "server_src_models_team_team"
@@ -49004,7 +49133,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L665",
+      "source_location": "L678",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixturesforcurrentgameweek",
       "target": "server_src_types_error_error"
@@ -49026,7 +49155,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L697",
+      "source_location": "L710",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixtureplayers",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -49037,7 +49166,7 @@
       "deferred": true,
       "confidence": "EXTRACTED",
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L677",
+      "source_location": "L690",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixtureplayers",
       "target": "server_src_models_fixture",
@@ -49049,7 +49178,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L678",
+      "source_location": "L691",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixtureplayers",
       "target": "server_src_models_fixture_fixture"
@@ -49060,7 +49189,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L683",
+      "source_location": "L696",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixtureplayers",
       "target": "server_src_models_gameweek_gameweek"
@@ -49071,7 +49200,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L691",
+      "source_location": "L704",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixtureplayers",
       "target": "server_src_models_team_team"
@@ -49082,7 +49211,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L796",
+      "source_location": "L809",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixtureplayers",
       "target": "server_src_types_error_error"
@@ -49093,7 +49222,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L754",
+      "source_location": "L767",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getfixtureplayers",
       "target": "server_src_utils_resolveposition"
@@ -49115,7 +49244,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L899",
+      "source_location": "L912",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getmanageroverview",
       "target": "server_src_lib_formatter_lineupformatter_converttoformation"
@@ -49126,7 +49255,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L806",
+      "source_location": "L819",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getmanageroverview",
       "target": "server_src_models_fantasyteam_fantasyteam"
@@ -49137,7 +49266,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L839",
+      "source_location": "L852",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getmanageroverview",
       "target": "server_src_models_gameweek_gameweek"
@@ -49148,7 +49277,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L835",
+      "source_location": "L848",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getmanageroverview",
       "target": "server_src_models_team_team"
@@ -49159,7 +49288,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L969",
+      "source_location": "L982",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getmanageroverview",
       "target": "server_src_types_error_error"
@@ -49170,7 +49299,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/src/controllers/standings.ts",
-      "source_location": "L884",
+      "source_location": "L897",
       "weight": 1.0,
       "source": "server_src_controllers_standings_getmanageroverview",
       "target": "server_src_utils_resolveposition"
@@ -50758,6 +50887,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/lib/points.ts",
+      "source_location": "L127",
+      "weight": 1.0,
+      "source": "server_src_lib_points",
+      "target": "server_src_lib_points_getseasonpointsbreakdown",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/src/lib/points.ts",
       "source_location": "L4",
       "weight": 1.0,
       "source": "server_src_lib_points",
@@ -50873,6 +51012,17 @@
       "source": "server_src_scripts_recomputematchstats_recomputematchstats",
       "target": "server_src_lib_points_calculateplayerpoints",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/src/lib/points.ts",
+      "source_location": "L128",
+      "weight": 1.0,
+      "source": "server_src_lib_points_getseasonpointsbreakdown",
+      "target": "server_src_utils_resolveposition"
     },
     {
       "relation": "contains",
@@ -53686,7 +53836,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "server/src/types/players.ts",
-      "source_location": "L151",
+      "source_location": "L156",
       "weight": 1.0,
       "source": "server_src_types_players",
       "target": "server_src_types_players_player",
@@ -53994,6 +54144,16 @@
       "weight": 1.0,
       "source": "server_src_utils_sofascorescraper",
       "target": "server_src_utils_sofascorescraper_stealthplugin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/tmp-inspect-fix.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "server_tmp_inspect_fix",
+      "target": "server_tmp_inspect_fix_mongoose",
       "confidence_score": 1.0
     },
     {
@@ -62231,7 +62391,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/features/players/types.ts",
-      "source_location": "L150",
+      "source_location": "L155",
       "weight": 1.0,
       "source": "ui_src_features_players_types",
       "target": "ui_src_features_players_types_paginatedresponse",
@@ -62251,7 +62411,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/features/players/types.ts",
-      "source_location": "L168",
+      "source_location": "L173",
       "weight": 1.0,
       "source": "ui_src_features_players_types",
       "target": "ui_src_features_players_types_playerfilteroptions",
@@ -62261,7 +62421,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "ui/src/features/players/types.ts",
-      "source_location": "L161",
+      "source_location": "L166",
       "weight": 1.0,
       "source": "ui_src_features_players_types",
       "target": "ui_src_features_players_types_playerfilters",
@@ -79005,5 +79165,5 @@
       ]
     }
   ],
-  "built_at_commit": "1e73ab8f2182bc7c9faa97a1408db492c25b3f40"
+  "built_at_commit": "45606015c796e402d0eb30fe20ab08227312ca60"
 }
