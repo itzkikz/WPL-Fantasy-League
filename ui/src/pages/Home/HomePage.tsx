@@ -7,7 +7,7 @@ import UpcomingFixture from "../../components/home/UpcomingFixture";
 import PlayerSpotlight from "../../components/home/PlayerSpotlight";
 import PointsBreakdown from "../../components/home/PointsBreakdown";
 import RecentGameweeks from "../../components/home/RecentGameweeks";
-import { Crown, Target, Activity, ShieldCheck, Square, Users, Clock, Star, Shield, Trophy, ArrowRight, Sparkles } from "lucide-react";
+import { Crown, Target, Activity, ShieldCheck, Square, Users, Clock, Star, Shield, Trophy, ArrowRight, Sparkles, Goal } from "lucide-react";
 import PlayerListCard from "../../components/home/PlayerListCard";
 import SeasonStats from "../../components/home/SeasonStats";
 import LeagueStandings from "../../components/home/LeagueStandings";
@@ -247,13 +247,15 @@ const HomePage = () => {
               })()}
             />
           </div>
-          <div>
+          <div className="col-span-2 lg:col-span-4">
             <SeasonStats
               stats={[
-                { icon: Target, label: "Total Points", value: String(data.seasonStats.totalPoints) },
-                { icon: Activity, label: "Avg. Points / GW", value: String(data.seasonStats.avgPoints) },
-                { icon: ShieldCheck, label: "Highest GW", value: String(data.seasonStats.highestPoints) },
-                { icon: Square, label: "Overall Rank", value: String(data.seasonStats.totalRank) },
+                { icon: Target, label: "Total Points", value: `${data.seasonStats.totalPoints} pts`, colorClass: "text-emerald-400", bgClass: "bg-emerald-500/10 border-emerald-500/20" },
+                { icon: Activity, label: "Avg / GW", value: `${data.seasonStats.avgPoints} pts`, colorClass: "text-indigo-400", bgClass: "bg-indigo-500/10 border-indigo-500/20" },
+                { icon: ShieldCheck, label: "Highest GW", value: `${data.seasonStats.highestPoints} pts`, colorClass: "text-amber-400", bgClass: "bg-amber-500/10 border-amber-500/20" },
+                { icon: Trophy, label: "Overall Rank", value: `#${data.seasonStats.totalRank}`, colorClass: "text-purple-400", bgClass: "bg-purple-500/10 border-purple-500/20" },
+                { icon: Goal, label: "Goals Scored", value: `${data.seasonStats.totalGoals ?? 0}`, colorClass: "text-rose-400", bgClass: "bg-rose-500/10 border-rose-500/20" },
+                { icon: Shield, label: "Clean Sheets", value: `${data.seasonStats.cleanSheets ?? 0}`, colorClass: "text-teal-400", bgClass: "bg-teal-500/10 border-teal-500/20" },
               ]}
             />
           </div>
@@ -270,17 +272,22 @@ const HomePage = () => {
               }}
             />
           </div>
-          <div className="col-span-1 lg:col-span-2">
+          <div className="col-span-2 sm:col-span-1 lg:col-span-2">
             <SquadValue
-              totalValue={`£${(data.squadInfo.teamValue + data.squadInfo.bank).toFixed(1)}M`}
+              totalValue={`£${(data.squadInfo.totalValue ?? (data.squadInfo.teamValue + data.squadInfo.bank)).toFixed(1)}M`}
               bank={`£${data.squadInfo.bank.toFixed(1)}M`}
               teamValue={`£${data.squadInfo.teamValue.toFixed(1)}M`}
+              totalBudget={data.squadInfo.totalBudget}
+              utilisation={data.squadInfo.utilisation}
+              bonus={data.squadInfo.bonus}
+              fine={data.squadInfo.fine}
             />
           </div>
-          <div className="col-span-1 lg:col-span-2">
+          <div className="col-span-2 sm:col-span-1 lg:col-span-2">
             <YourPlayersCard
               selected={data.squadComposition.total}
               total={15}
+              yourPlayers={data.yourPlayers}
               onCta={() => navigate({ to: "/my-team" })}
             />
           </div>

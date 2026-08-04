@@ -108,6 +108,10 @@ export interface SeasonStats {
   totalPoints: number;
   highestPoints: number;
   totalRank: number;
+  rankChange?: number;
+  totalGoals?: number;
+  totalAssists?: number;
+  cleanSheets?: number;
 }
 
 export interface BestPerformer {
@@ -130,6 +134,12 @@ export interface SquadInfo {
   teamValue: number;
   inBank: number;
   bank: number;
+  totalBudget?: number;
+  utilisation?: number;
+  bonus?: number;
+  fine?: number;
+  balance?: number;
+  totalValue?: number;
 }
 
 export interface SquadComposition {
@@ -141,10 +151,17 @@ export interface SquadComposition {
 }
 
 export interface YourPlayer {
+  id?: number;
   name: string;
   team: string;
+  teamLogo?: string;
+  photo?: string;
   points: number;
-  price: number;
+  price?: number;
+  position?: string;
+  isCaptain?: boolean;
+  isViceCaptain?: boolean;
+  isStarting?: boolean;
 }
 
 export interface FixturePlayer {
