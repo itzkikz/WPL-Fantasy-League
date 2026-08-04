@@ -18,25 +18,6 @@ import { useMyFixtures } from "../../features/home/hooks";
 import dayjs from "dayjs";
 import FixturePlayersModal from "./components/FixturePlayersModal";
 
-const MOCK_MANAGERS: Record<string, string> = {
-  "The Invincibles": "Rahul Sharma",
-  "Kiran FC": "Kiran Nandakumar",
-  "Blue Devils": "Amit Verma",
-  "Goal Diggers": "Sneha Iyer",
-  "Pitch Perfect": "Vikram Mehta",
-  "Net Busters": "Rohit Singh",
-  "Kings XI": "Neha Kapoor",
-  "Vamos FC": "Arjun Patel",
-  "Red Warriors": "Manish Reddy",
-  "Thunderbolts": "Pooja Nair"
-};
-
-const getManagerName = (teamName: string, index: number) => {
-  if (MOCK_MANAGERS[teamName]) return MOCK_MANAGERS[teamName];
-  const defaultNames = ["Rahul Sharma", "Kiran Nandakumar", "Amit Verma", "Sneha Iyer", "Vikram Mehta", "Rohit Singh", "Neha Kapoor", "Arjun Patel", "Manish Reddy", "Pooja Nair"];
-  return defaultNames[index % defaultNames.length];
-};
-
 const getTeamIcon = (teamName: string, index: number) => {
   const icons = [
     { bg: 'bg-yellow-500/10 text-yellow-500 border border-yellow-500/20', emoji: '⚽' },
@@ -152,7 +133,7 @@ const StandingsPage = () => {
             </div>
             <div>
               <p className="text-[10px] text-text-secondary font-medium">Overall Rank</p>
-              <p className="text-xl font-black text-text-primary mt-0.5">{overallRankPercent}</p>
+              <p className="text-lg sm:text-xl font-black text-text-primary mt-0.5 whitespace-nowrap tracking-tight">{overallRankPercent}</p>
             </div>
           </div>
         </div>
@@ -164,14 +145,14 @@ const StandingsPage = () => {
         {activeTab === 'overall' && (
           <div className="flex items-center justify-between text-[11px] font-bold text-text-muted uppercase tracking-wider px-3 pb-2.5 flex-none">
             <div className="w-10 text-left">Rank</div>
-            <div className="flex-1 text-left pl-3">Manager</div>
-            <div className="w-14 text-center">GW</div>
-            <div className="w-18 text-right pr-4">Total</div>
+            <div className="flex-1 text-left pl-2 sm:pl-3">Team</div>
+            <div className="w-12 sm:w-14 text-center">GW</div>
+            <div className="w-16 sm:w-18 text-right pr-2 sm:pr-4">Total</div>
           </div>
         )}
 
         {/* Scrollable List Container */}
-        <div className="flex-1 overflow-y-auto scrollbar-hide pb-[calc(5.25rem+env(safe-area-inset-bottom))] space-y-2.5">
+        <div className="flex-1 overflow-y-auto scrollbar-hide pb-[calc(5.25rem+env(safe-area-inset-bottom))] space-y-1.5 sm:space-y-2.5">
           {isLoading ? (
             [...Array(10)].map((_, i) => (
               <div
@@ -184,61 +165,58 @@ const StandingsPage = () => {
               const isMe = r.team === managerDetails?.team;
               const posChange = r.pos_change ?? 0;
               const crest = getTeamIcon(r.team, i);
-              const manager = r.manager || getManagerName(r.team, i);
-
               return (
                 <div
                   key={r.team_id}
                   onClick={() => handleTeamClick(r.team_id)}
                   style={{ viewTransitionName: `team-row-${r.team_id}` }}
-                  className={`flex items-center justify-between p-3 rounded-2xl cursor-pointer transition-all duration-200 ${isMe
+                  className={`flex items-center justify-between p-2 sm:p-3 rounded-xl sm:rounded-2xl cursor-pointer transition-all duration-200 ${isMe
                     ? 'bg-primary/10 border border-primary/45 shadow-sm'
                     : 'bg-surface border border-border hover:bg-elevated'
                     }`}
                 >
                   {/* Rank & Change column */}
-                  <div className="w-10 flex flex-col items-center justify-center flex-shrink-0">
-                    <span className="text-base font-black text-text-primary">{i + 1}</span>
+                  <div className="w-8 sm:w-10 flex flex-col items-center justify-center flex-shrink-0">
+                    <span className="text-sm sm:text-base font-black text-text-primary">{i + 1}</span>
                     {posChange !== 0 ? (
-                      <span className={`text-[9px] font-bold flex items-center gap-0.5 mt-0.5 ${posChange > 0 ? 'text-success' : 'text-danger'}`}>
+                      <span className={`text-[8px] sm:text-[9px] font-bold flex items-center gap-0.5 mt-0.5 ${posChange > 0 ? 'text-success' : 'text-danger'}`}>
                         {posChange > 0 ? `▲` : `▼`}{Math.abs(posChange)}
                       </span>
                     ) : (
-                      <span className="text-[10px] text-text-muted/30 mt-0.5">-</span>
+                      <span className="text-[9px] sm:text-[10px] text-text-muted/30 mt-0.5">-</span>
                     )}
                   </div>
 
                   {/* Team Crest Avatar */}
-                  <div className="relative pl-2 flex-shrink-0">
+                  <div className="relative pl-1 sm:pl-2 flex-shrink-0">
                     {i === 0 && (
                       <Crown className="w-4 h-4 text-yellow-400 absolute -top-2.5 left-4 rotate-12 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10 animate-pulse" />
                     )}
                     {r.logo ? (
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden border border-border bg-surface">
-                        <img src={r.logo} alt={`${r.team} logo`} className="w-9 h-9 object-contain" />
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center overflow-hidden border border-border bg-surface">
+                        <img src={r.logo} alt={`${r.team} logo`} className="w-7 h-7 sm:w-9 sm:h-9 object-contain" />
                       </div>
                     ) : (
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${crest.bg}`}>
+                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-base sm:text-lg ${crest.bg}`}>
                         {crest.emoji}
                       </div>
                     )}
                   </div>
 
                   {/* Name column */}
-                  <div className="flex-1 pl-3.5 min-w-0">
-                    <p className="text-[14px] font-bold text-text-primary leading-snug">{r.team}</p>
-                    <p className="text-[11px] text-text-secondary mt-0.5">{manager}</p>
+                  <div className="flex-1 pl-2 sm:pl-3.5 min-w-0">
+                    <p className="text-xs sm:text-[14px] font-bold text-text-primary leading-snug">{r.team}</p>
                   </div>
 
                   {/* GW points */}
-                  <div className="w-14 text-center font-black text-[14px] text-success flex-shrink-0">
+                  <div className="w-12 sm:w-14 text-center font-black text-xs sm:text-[14px] text-success flex-shrink-0">
                     {r.current_gw}
                   </div>
 
                   {/* Total points & Arrow */}
-                  <div className="w-18 flex items-center justify-end gap-1.5 flex-shrink-0 text-right pr-2">
-                    <span className="text-[14px] font-black text-text-primary">{r.total}</span>
-                    <ChevronRight className="w-3.5 h-3.5 text-text-muted" />
+                  <div className="w-16 sm:w-18 flex items-center justify-end gap-1 sm:gap-1.5 flex-shrink-0 text-right pr-1 sm:pr-2">
+                    <span className="text-xs sm:text-[14px] font-black text-text-primary">{r.total}</span>
+                    <ChevronRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-text-muted" />
                   </div>
                 </div>
               );

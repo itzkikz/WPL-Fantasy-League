@@ -94,9 +94,16 @@ const FantasyTeamSchema: Schema = new Schema({
 
 // Pre-save hook to calculate balance automatically
 FantasyTeamSchema.pre('save', function () {
-    if (this.isModified('finance')) {
+    if (this.isModified('finance') || this.isNew) {
         const self = this as unknown as IFantasyTeam;
-        self.finance.balance = self.finance.totalBudget - self.finance.utilisation + (self.finance.bonus || 0) - (self.finance.fine || 0);
+        if (!self.finance) {
+            self.finance = { totalBudget: 1000, utilisation: 0, bonus: 0, fine: 0, balance: 1000 };
+        }
+        const total = self.finance.totalBudget ?? 1000;
+        const util = self.finance.utilisation ?? 0;
+        const bonus = self.finance.bonus ?? 0;
+        const fine = self.finance.fine ?? 0;
+        self.finance.balance = total - util + bonus - fine;
     }
 });
 

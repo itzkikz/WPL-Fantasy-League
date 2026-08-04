@@ -919,7 +919,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       overallRank: rank,
       avgPointsPerGW: Number(avg.toFixed(1)),
       highestGW: highest,
-      teamValue: (fantasyTeam.finance.utilisation || 0) / 10,
+      teamValue: (fantasyTeam.finance?.utilisation || 0) / 10,
       totalManagers,
       totalTeams,
     };
@@ -1262,6 +1262,10 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       totalPoints: total,
       highestPoints: highestGWScore,
       totalRank: (myStanding as any)?.rank || 1,
+      rankChange: pos_change,
+      totalGoals: pointsBreakdown?.goals || 0,
+      totalAssists: pointsBreakdown?.assists || 0,
+      cleanSheets: pointsBreakdown?.cleanSheet || 0,
     };
 
     // 13. Squad Info & Composition
@@ -1270,13 +1274,19 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       if (!p) return null;
       const teamDoc = tDocsMap.get(p.teamId);
       const statDoc = startingStatsMap.get(p.id);
+      const pick = fantasyTeam.currentSquad?.picks?.find(pk => pk.playerId === p.id);
       return {
+        id: p.id,
         name: p.webName || p.name || "",
-        team: fantasyTeam.name || teamDoc?.nameCode || "UNK",
+        team: teamDoc?.nameCode || teamDoc?.name || "UNK",
         teamLogo: teamDoc?.logo || "",
+        photo: p.photo || (p.id ? `https://img.sofascore.com/api/v1/player/${p.id}/image` : ""),
         points: statDoc?.totalPoints || 0,
         price: (p.price?.nowCost || 0) / 10,
         position: resolvePosition(p.position || ""),
+        isCaptain: pick?.isCaptain || false,
+        isViceCaptain: pick?.isViceCaptain || false,
+        isStarting: pick?.isStarting || false,
       };
     }).filter(Boolean) as any[];
 
@@ -1306,21 +1316,32 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       forwards,
     };
 
-    const squadPlayerPrices = squadPlayerIds.map(id => {
+    const totalBudget = (fantasyTeam.finance?.totalBudget ?? 1000) / 10;
+    const utilisation = (fantasyTeam.finance?.utilisation ?? 0) / 10;
+    const bonus = (fantasyTeam.finance?.bonus ?? 0) / 10;
+    const fine = (fantasyTeam.finance?.fine ?? 0) / 10;
+    const bank = (fantasyTeam.finance?.balance ?? (fantasyTeam.finance?.totalBudget ?? 1000) - (fantasyTeam.finance?.utilisation ?? 0) + (fantasyTeam.finance?.bonus ?? 0) - (fantasyTeam.finance?.fine ?? 0)) / 10;
+
+    const fallbackPlayerPriceSum = squadPlayerIds.map(id => {
       const p = pDocsMap.get(id);
       if (!p) return 0;
       if (p.auctionPrice != null && p.auctionPrice > 0) return Number(p.auctionPrice);
-      const rawPos = (p.position || "").toUpperCase();
-      if (rawPos === "GK" || rawPos === "GOALKEEPER" || rawPos === "G" || rawPos === "DEF" || rawPos === "DEFENDER" || rawPos === "D") return 10;
-      if (rawPos === "MID" || rawPos === "MIDFIELDER" || rawPos === "M") return 15;
-      if (rawPos === "FWD" || rawPos === "FORWARD" || rawPos === "F") return 20;
-      return 10;
-    });
+      return 0;
+    }).reduce((sum, v) => sum + v, 0);
+
+    const teamValue = utilisation > 0 ? utilisation : fallbackPlayerPriceSum;
+    const totalValue = teamValue + bank;
 
     const squadInfo = {
-      teamValue: squadPlayerPrices.reduce((sum, v) => sum + v, 0),
-      inBank: (fantasyTeam.finance.balance || 0) / 10,
-      bank: (fantasyTeam.finance.balance || 0) / 10,
+      teamValue,
+      inBank: bank,
+      bank,
+      totalBudget,
+      utilisation,
+      bonus,
+      fine,
+      balance: bank,
+      totalValue,
     };
 
     const leagueStandings = standingsData.map(s => ({

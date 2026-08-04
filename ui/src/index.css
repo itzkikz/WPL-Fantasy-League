@@ -638,9 +638,3 @@ select[multiple] {
   padding-right: 0 !important;
 }
 
-/* Custom color for selected mobile navbar items */
-
-.mobile-navbar .text-gray-400,
-.mobile-navbar .dark\:text-light-text-secondary {
-  color: #6120B5 !important;
-}
