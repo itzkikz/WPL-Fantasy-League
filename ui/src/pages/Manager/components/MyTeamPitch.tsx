@@ -32,7 +32,7 @@ const MyTeamPitch = ({
   return (
     <div className="flex-1 flex flex-col lg:flex-row gap-3 max-w-3xl mx-auto w-full h-full min-h-0">
       {/* 1. Main Pitch Card (Centered Starting XI) */}
-      <div className="relative flex-1 rounded-3xl overflow-hidden border border-border shadow-card bg-background h-full flex flex-col">
+      <div className="relative flex-1 rounded-3xl overflow-hidden border border-border bg-background h-full flex flex-col">
         {/* Pitch image layer */}
         <div className="pitch-bg">
           <img

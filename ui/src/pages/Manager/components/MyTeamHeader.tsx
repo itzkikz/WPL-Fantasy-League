@@ -30,22 +30,17 @@ const MyTeamHeader = ({
       {/* Animated Gradient Backlight */}
       <div className="absolute -right-24 -top-24 w-48 h-48 rounded-full bg-violet-600/10 blur-3xl pointer-events-none" />
  
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-3 min-w-0">
           {logo && (
-            <div className="w-11 h-11 rounded-xl bg-background/60 border border-border/80 flex items-center justify-center overflow-hidden shrink-0">
-              <img src={logo} alt="Team logo" className="w-10 h-10 object-contain" />
+            <div className="w-10 h-10 rounded-xl bg-background/60 border border-border/80 flex items-center justify-center overflow-hidden shrink-0 shadow-sm">
+              <img src={logo} alt="Team logo" className="w-9 h-9 object-contain" />
             </div>
           )}
           <div className="min-w-0">
-            <h1 className="text-lg md:text-xl font-black tracking-tight flex items-center gap-2">
+            <h1 className="text-lg md:text-xl font-black tracking-tight text-text-primary">
               My Team
             </h1>
-            {pickMyTeam && (
-              <p className="text-[11px] md:text-xs text-text-muted font-medium mt-0.5 line-clamp-1">
-                Gameweek {selectedGW} Deadline: <span className="text-secondary font-semibold">{deadlineFormatted}</span>
-              </p>
-            )}
           </div>
         </div>
 
@@ -73,6 +68,18 @@ const MyTeamHeader = ({
           </button>
         </div>
       </div>
+
+      {/* High-Visibility Deadline Banner */}
+      {pickMyTeam && (
+        <div className="mt-2.5 bg-background/60 border border-border/70 rounded-xl px-3 py-1.5 flex items-center justify-between gap-2 text-xs">
+          <span className="text-[10px] sm:text-xs uppercase tracking-wider font-extrabold text-text-muted shrink-0 flex items-center gap-1">
+            <span>⏰</span> GW{selectedGW} Deadline:
+          </span>
+          <span className="font-extrabold text-secondary text-xs sm:text-sm truncate">
+            {deadlineFormatted}
+          </span>
+        </div>
+      )}
 
       {/* 4-Column Stats Row (Mobile + Desktop) */}
       <div className="mt-3.5 border-t border-border/50 pt-3">
