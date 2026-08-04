@@ -125,7 +125,7 @@ const PitchPlayerCard = ({
             <div className="flex-1 text-center py-0.5 bg-card text-text-secondary border-r border-border leading-tight">
               {player.price || getPlayerDisplayPrice(player)}
             </div>
-            <div className="flex-1 text-center py-0.5 bg-[var(--color-success-bg)] text-[var(--color-success-bright)] leading-tight font-mono">
+            <div className="flex-1 text-center py-0.5 bg-[var(--color-success-bg)] text-[var(--color-success-bright)] leading-tight font-mono font-black">
               {player?.point ?? 0}
             </div>
           </div>
@@ -150,7 +150,7 @@ const PitchPlayerCard = ({
           <div
             className="px-1 py-0.5 text-center truncate bg-surface text-text-secondary"
           >
-            <p className={`${isSmall ? "text-[8px] md:text-[9px]" : "text-xl md:text-[10px]"} font-semibold leading-tight`}>
+            <p className={`${isSmall ? "text-[8px] md:text-[9px]" : "text-xl md:text-[10px]"} font-extrabold leading-tight`}>
               {pickMyteam ? playerFirstName !== playerLastName ? playerLastName : (<>&nbsp;</>) : (
                 <>
                   {player?.point}

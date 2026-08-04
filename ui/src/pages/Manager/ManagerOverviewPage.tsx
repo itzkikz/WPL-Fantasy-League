@@ -79,7 +79,7 @@ const ManagerOverviewPage = () => {
   const crest = getOverviewCrest(teamName || "");
 
   return (
-    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-text-primary font-outfit select-none overflow-hidden pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
+    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-text-primary font-outfit select-none overflow-hidden pb-[env(safe-area-inset-bottom)] lg:pb-0">
 
       {/* MOBILE CONTAINER (Visible on mobile < lg) */}
       <div className="flex-1 flex flex-col min-h-0 overflow-y-auto px-4 py-3 gap-5 lg:hidden">
