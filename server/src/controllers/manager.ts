@@ -19,6 +19,7 @@ import { Gameweek } from "../models/Gameweek";
 import { PlayerStats } from "../models/PlayerStats";
 import { Fixture } from "../models/Fixture";
 import { Substitution } from "../models/Substitution";
+import { Fact } from "../models/Fact";
 
 
 
@@ -1320,7 +1321,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     const utilisation = (fantasyTeam.finance?.utilisation ?? 0) / 10;
     const bonus = (fantasyTeam.finance?.bonus ?? 0) / 10;
     const fine = (fantasyTeam.finance?.fine ?? 0) / 10;
-    const bank = (fantasyTeam.finance?.balance ?? (fantasyTeam.finance?.totalBudget ?? 1000) - (fantasyTeam.finance?.utilisation ?? 0) + (fantasyTeam.finance?.bonus ?? 0) - (fantasyTeam.finance?.fine ?? 0)) / 10;
+    const bank = (fantasyTeam.finance?.balance ?? ((fantasyTeam.finance?.totalBudget ?? 1000) - (fantasyTeam.finance?.utilisation ?? 0) + (fantasyTeam.finance?.bonus ?? 0) - (fantasyTeam.finance?.fine ?? 0))) / 10;
 
     const fallbackPlayerPriceSum = squadPlayerIds.map(id => {
       const p = pDocsMap.get(id);
@@ -1354,6 +1355,30 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       rankChange: s.pos_change,
     }));
 
+    // 14. Facts / Fantasy News
+    const publishedFacts = await Fact.find({ isPublished: true }).sort({ order: 1, createdAt: -1 }).limit(10);
+    const fantasyNews = publishedFacts.map(fact => {
+      const diffInHours = dayjs().diff(dayjs(fact.createdAt), 'hour');
+      let timeText = `${diffInHours}h ago`;
+      if (diffInHours < 1) {
+        const diffInMins = Math.max(1, dayjs().diff(dayjs(fact.createdAt), 'minute'));
+        timeText = `${diffInMins}m ago`;
+      } else if (diffInHours >= 24) {
+        const diffInDays = Math.floor(diffInHours / 24);
+        timeText = `${diffInDays}d ago`;
+      }
+
+      return {
+        id: fact._id.toString(),
+        headline: fact.headline,
+        content: fact.content || '',
+        category: fact.category || 'Trivia',
+        thumbnail: fact.imageUrl || null,
+        time: timeText,
+        createdAt: fact.createdAt,
+      };
+    });
+
     return res.json({
       data: {
         teamOverview,
@@ -1372,12 +1397,44 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
         squadComposition,
         yourPlayers,
         miniLeague: leagueStandings,
+        fantasyNews,
       }
     });
 
   } catch (error) {
     console.error("Error in dashboard controller:", error);
     return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const getPublicFacts = async (req: Request, res: Response) => {
+  try {
+    const publishedFacts = await Fact.find({ isPublished: true }).sort({ order: 1, createdAt: -1 });
+    const facts = publishedFacts.map(fact => {
+      const diffInHours = dayjs().diff(dayjs(fact.createdAt), 'hour');
+      let timeText = `${diffInHours}h ago`;
+      if (diffInHours < 1) {
+        const diffInMins = Math.max(1, dayjs().diff(dayjs(fact.createdAt), 'minute'));
+        timeText = `${diffInMins}m ago`;
+      } else if (diffInHours >= 24) {
+        const diffInDays = Math.floor(diffInHours / 24);
+        timeText = `${diffInDays}d ago`;
+      }
+
+      return {
+        id: fact._id.toString(),
+        headline: fact.headline,
+        content: fact.content || '',
+        category: fact.category || 'Trivia',
+        thumbnail: fact.imageUrl || null,
+        time: timeText,
+        createdAt: fact.createdAt,
+      };
+    });
+    res.json({ data: facts });
+  } catch (error: any) {
+    console.error("Error fetching public facts:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 

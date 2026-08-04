@@ -17,6 +17,7 @@ import timezone from 'dayjs/plugin/timezone';
 import { PlayerStats } from '../models/PlayerStats';
 import { H2HLeague } from '../models/H2HLeague';
 import { H2HFixture } from '../models/H2HFixture';
+import { Fact } from '../models/Fact';
 import { fetchSofascoreJSON } from '../utils/sofascoreScraper';
 import { calculatePlayerPoints } from '../lib/points';
 import { mapSofascoreToPlayerMatchStat } from '../lib/sofascoreMapper';
@@ -1532,6 +1533,79 @@ export const getH2HLeagueFixtures = async (req: Request, res: Response) => {
         res.json({ data: { fixtures: enrichedFixtures, byGameweek } });
     } catch (error: any) {
         console.error('Error getting H2H fixtures:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// --- FACTS CONTROLLERS ---
+
+export const getAdminFacts = async (req: Request, res: Response) => {
+    try {
+        const facts = await Fact.find().sort({ createdAt: -1 });
+        res.json({ data: facts });
+    } catch (error: any) {
+        console.error('Error fetching facts:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const createAdminFact = async (req: Request, res: Response) => {
+    try {
+        const { headline, content, category, imageUrl, isPublished, order } = req.body;
+        if (!headline) {
+            return res.status(400).json({ error: 'Headline is required' });
+        }
+        const fact = await Fact.create({
+            headline,
+            content: content || '',
+            category: category || 'Trivia',
+            imageUrl: imageUrl || '',
+            isPublished: isPublished !== undefined ? isPublished : true,
+            order: order || 0,
+        });
+        res.status(201).json({ data: fact });
+    } catch (error: any) {
+        console.error('Error creating fact:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const updateAdminFact = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { headline, content, category, imageUrl, isPublished, order } = req.body;
+        const fact = await Fact.findByIdAndUpdate(
+            id,
+            {
+                ...(headline && { headline }),
+                ...(content !== undefined && { content }),
+                ...(category && { category }),
+                ...(imageUrl !== undefined && { imageUrl }),
+                ...(isPublished !== undefined && { isPublished }),
+                ...(order !== undefined && { order }),
+            },
+            { new: true }
+        );
+        if (!fact) {
+            return res.status(404).json({ error: 'Fact not found' });
+        }
+        res.json({ data: fact });
+    } catch (error: any) {
+        console.error('Error updating fact:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const deleteAdminFact = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const fact = await Fact.findByIdAndDelete(id);
+        if (!fact) {
+            return res.status(404).json({ error: 'Fact not found' });
+        }
+        res.json({ message: 'Fact deleted successfully' });
+    } catch (error: any) {
+        console.error('Error deleting fact:', error);
         res.status(500).json({ error: error.message });
     }
 };

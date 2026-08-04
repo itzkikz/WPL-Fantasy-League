@@ -1,5 +1,5 @@
 import express from 'express';
-import { getFixtures, getGameweeks, createGameweek, updateGameweek, getSeasons, updateFixturesFromApi, getMatchDetails, getMatchIncidentsAndStats, getUsers, createFantasyTeam, getAdminPlayers, updateAdminPlayer, getAdminTeams, getFantasyTeams, getFantasyTeamById, updateFantasyTeam, completeGameweek, revertGameweek, togglePickTeam, getPickTeamStatus, getLeagues, fetchLeagueRounds, updateLeague, getH2HLeague, upsertH2HLeague, deleteH2HLeague, createH2HFixture, deleteH2HFixture, getH2HLeagueFixtures } from '../controllers/admin';
+import { getFixtures, getGameweeks, createGameweek, updateGameweek, getSeasons, updateFixturesFromApi, getMatchDetails, getMatchIncidentsAndStats, getUsers, createFantasyTeam, getAdminPlayers, updateAdminPlayer, getAdminTeams, getFantasyTeams, getFantasyTeamById, updateFantasyTeam, completeGameweek, revertGameweek, togglePickTeam, getPickTeamStatus, getLeagues, fetchLeagueRounds, updateLeague, getH2HLeague, upsertH2HLeague, deleteH2HLeague, createH2HFixture, deleteH2HFixture, getH2HLeagueFixtures, getAdminFacts, createAdminFact, updateAdminFact, deleteAdminFact } from '../controllers/admin';
 import { getTransfers, createTransfer, reverseTransfer } from '../controllers/transfers';
 import { getSubstitutionHistory } from '../controllers/manager';
 
@@ -41,5 +41,10 @@ router.delete('/h2h-leagues/:id/fixtures/:fixtureId', deleteH2HFixture);
 router.get('/h2h-leagues/:id/fixtures', getH2HLeagueFixtures);
 
 router.get('/substitutions', getSubstitutionHistory);
+
+router.get('/facts', getAdminFacts);
+router.post('/facts', createAdminFact);
+router.put('/facts/:id', updateAdminFact);
+router.delete('/facts/:id', deleteAdminFact);
 
 export default router;

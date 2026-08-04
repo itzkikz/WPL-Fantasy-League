@@ -26,6 +26,16 @@ export default function SquadValue({
     })
     .join(" ");
 
+  const formatMoney = (val) => {
+    if (val === null || val === undefined) return "£0.0M";
+    if (typeof val === "number") return `£${val.toFixed(1)}M`;
+    const str = String(val);
+    if (str.startsWith("£")) return str;
+    const num = parseFloat(str.replace(/[^0-9.]/g, ""));
+    if (!isNaN(num)) return `£${num.toFixed(1)}M`;
+    return str;
+  };
+
   const numericTeamVal = typeof teamValue === "number" ? teamValue : parseFloat(String(teamValue).replace(/[^0-9.]/g, "")) || utilisation || 0;
   const numericBankVal = typeof bank === "number" ? bank : parseFloat(String(bank).replace(/[^0-9.]/g, "")) || 0;
   const calcTotal = numericTeamVal + numericBankVal || totalBudget || 100;
@@ -48,7 +58,9 @@ export default function SquadValue({
               Total Squad Value
             </span>
             <div className="flex flex-wrap items-baseline gap-1.5 sm:gap-2 mt-0.5">
-              <h2 className="text-xl sm:text-2xl font-black tracking-tight text-text-primary truncate">{totalValue}</h2>
+              <h2 className="text-xl sm:text-2xl font-black tracking-tight text-text-primary truncate">
+                {formatMoney(totalValue)}
+              </h2>
               {(hasBonus || hasFine) && (
                 <div className="flex flex-wrap items-center gap-1">
                   {hasBonus && (
@@ -117,7 +129,7 @@ export default function SquadValue({
         <div className="p-2 sm:p-2.5 rounded-xl bg-background/50 border border-border/50 flex items-center justify-between min-w-0">
           <div className="min-w-0 flex-1 pr-1">
             <p className="text-text-muted text-[9px] sm:text-[10px] font-bold uppercase tracking-wider truncate">In Bank</p>
-            <p className="text-emerald-400 font-extrabold text-xs sm:text-sm mt-0.5 truncate">{bank}</p>
+            <p className="text-emerald-400 font-extrabold text-xs sm:text-sm mt-0.5 truncate">{formatMoney(bank)}</p>
           </div>
           <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
             <Wallet className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -127,7 +139,7 @@ export default function SquadValue({
         <div className="p-2 sm:p-2.5 rounded-xl bg-background/50 border border-border/50 flex items-center justify-between min-w-0">
           <div className="min-w-0 flex-1 pr-1">
             <p className="text-text-muted text-[9px] sm:text-[10px] font-bold uppercase tracking-wider truncate">Team Value</p>
-            <p className="text-indigo-400 font-extrabold text-xs sm:text-sm mt-0.5 truncate">{teamValue}</p>
+            <p className="text-indigo-400 font-extrabold text-xs sm:text-sm mt-0.5 truncate">{formatMoney(teamValue)}</p>
           </div>
           <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
             <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4" />

@@ -296,7 +296,7 @@ const HomePage = () => {
             <QuickActionsRow />
           </div> */}
           <div className="col-span-2 lg:col-span-4">
-            <FantasyNews />
+            <FantasyNews articles={data.fantasyNews} />
           </div>
         </div>
       </div>

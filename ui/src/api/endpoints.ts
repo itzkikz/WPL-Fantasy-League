@@ -21,7 +21,7 @@ export const API_ENDPOINTS = {
     SUBSTITUTION: '/manager/sub',
     DASHBOARD: '/manager/dashboard',
     MY_FIXTURES: '/manager/my-fixtures',
-    // BY_PLAYERNAME: (playerName: string) => `/players/${playerName}`,
+    FACTS: '/manager/facts',
   },
   NOTIFICATION: {
     BASE: '/notify/notifications',
@@ -52,6 +52,8 @@ export const API_ENDPOINTS = {
     H2H_FIXTURE: (id: string, fixtureId: string) => `/admin/h2h-leagues/${id}/fixtures/${fixtureId}`,
     TRANSFERS: '/admin/transfers',
     TRANSFER: (id: string) => `/admin/transfers/${id}`,
+    FACTS: '/admin/facts',
+    FACT: (id: string) => `/admin/facts/${id}`,
   },
 } as const
 
