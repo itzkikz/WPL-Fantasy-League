@@ -15,3 +15,33 @@ export const useSubscribe = (onSuccess?: (data: {message: string;}) => void) => 
     onSuccess,
   })
 }
+
+export const useMarkAsRead = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (id: string) => notificationApi.markAsRead(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [notificationsQueries.all().queryKey[0]] })
+    },
+  })
+}
+
+export const useMarkAllAsRead = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: () => notificationApi.markAllAsRead(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [notificationsQueries.all().queryKey[0]] })
+    },
+  })
+}
+
+export const useDeleteNotification = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (id: string) => notificationApi.deleteNotification(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [notificationsQueries.all().queryKey[0]] })
+    },
+  })
+}

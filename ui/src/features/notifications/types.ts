@@ -10,7 +10,13 @@ export interface Keys {
 }
 
 export interface Notifications {
+  id?: string;
+  _id?: string;
   title: string;
   message: string;
   time: number;
+  targetType?: 'all' | 'user' | 'team';
+  targetId?: string;
+  targetName?: string;
+  read?: boolean;
 }

@@ -391,6 +391,31 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
     const { substitution, roles } = req.body;
     const username = req.user.userId;
 
+    // --- Check global pick team status & deadline ---
+    const ApiConfig = (await import("../models/ApiConfig")).ApiConfig;
+    const Gameweek = (await import("../models/Gameweek")).Gameweek;
+    
+    const apiConfig = await ApiConfig.findOne({ key: 'pick_team_enabled' });
+    const isPickTeamEnabled = apiConfig ? apiConfig.lastUpdatedString === 'true' : false;
+
+    let deadlineDate: Date | undefined = apiConfig?.deadlineDate;
+    if (!deadlineDate) {
+      const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
+      if (currentGwDoc?.endDate) {
+        deadlineDate = new Date(currentGwDoc.endDate);
+      }
+    }
+
+    const isDeadlinePassed = deadlineDate ? new Date() > new Date(deadlineDate) : false;
+
+    if (!isPickTeamEnabled) {
+      return res.status(403).json({ error: 'Squad edits are currently disabled by administrator.' });
+    }
+
+    if (isDeadlinePassed) {
+      return res.status(403).json({ error: 'Squad edits are locked because the Gameweek deadline has passed.' });
+    }
+
     const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });

@@ -139,7 +139,7 @@ function AdminNotifications() {
                   {notif.targetType && (
                     <span className="text-[9px] font-extrabold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 flex items-center gap-1">
                       <Target className="w-2.5 h-2.5" />
-                      Target: {notif.targetType}
+                      Target: {notif.targetType}{notif.targetName ? ` (${notif.targetName})` : ''}
                     </span>
                   )}
                 </div>

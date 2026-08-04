@@ -270,6 +270,12 @@ const MyTeamPage = () => {
     ? dayjs(managerDetails.deadline).format("ddd, D MMM YYYY, h:mm A")
     : "No deadline";
 
+  const isDeadlinePassed = managerDetails?.deadline
+    ? dayjs().isAfter(dayjs(managerDetails.deadline))
+    : false;
+
+  const isPickingAllowed = Boolean(managerDetails?.pickMyTeam && !isDeadlinePassed);
+
   const totalPointsFormatted = (managerDetails?.total ?? 0).toLocaleString();
   const hasUnsavedChanges = substitutions?.length > 0 || Object.keys(roles || {}).length > 0;
 
@@ -291,7 +297,7 @@ const MyTeamPage = () => {
           balance={managerDetails?.balance}
           totalGWScore={managerDetails?.totalGWScore}
           totalPointsFormatted={totalPointsFormatted}
-          pickMyTeam={managerDetails?.pickMyTeam}
+          pickMyTeam={isPickingAllowed}
           logo={managerDetails?.logo}
           headerTab={headerTab}
           setHeaderTab={(tab) => {
@@ -398,7 +404,7 @@ const MyTeamPage = () => {
               </div>
 
               {/* Lineup Clear & Save Actions */}
-              {managerDetails?.pickMyTeam && (
+              {isPickingAllowed ? (
                 <div className="space-y-2 pt-1">
                   <div className="flex items-center gap-2">
                     <button
@@ -423,6 +429,12 @@ const MyTeamPage = () => {
                       ⚠️ Captain (C) & Vice-Captain (VC) required
                     </p>
                   )}
+                </div>
+              ) : (
+                <div className="p-3 bg-background/60 border border-border/60 rounded-2xl text-center">
+                  <p className="text-[11px] text-text-muted font-bold">
+                    🔒 Squad changes locked {!managerDetails?.pickMyTeam ? "(Picking disabled)" : "(Deadline passed)"}
+                  </p>
                 </div>
               )}
             </div>
@@ -454,7 +466,7 @@ const MyTeamPage = () => {
                 </button>
               </div>
 
-              {managerDetails?.pickMyTeam && (
+              {isPickingAllowed ? (
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={handleClearTeam}
@@ -475,6 +487,10 @@ const MyTeamPage = () => {
                   {!hasValidLeadership && hasUnsavedChanges && (
                     <span className="text-[10px] text-rose-400 font-bold ml-1">Requires C + VC</span>
                   )}
+                </div>
+              ) : (
+                <div className="text-[10px] text-text-muted font-bold">
+                  🔒 Squad locked
                 </div>
               )}
             </div>
@@ -564,7 +580,7 @@ const MyTeamPage = () => {
         onMakeCaptain={handleMakeCaptain}
         onMakeViceCaptain={handleMakeViceCaptain}
         onSubstitute={handleSubstituteInitiate}
-        pickMyTeam={managerDetails?.pickMyTeam}
+        pickMyTeam={isPickingAllowed}
       />
 
       {/* Save Confirmation Modal */}

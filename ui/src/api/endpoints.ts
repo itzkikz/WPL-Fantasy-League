@@ -27,7 +27,9 @@ export const API_ENDPOINTS = {
     BASE: '/notify/notifications',
     SUBSCRIBE: '/notify/subscribe',
     SEND: '/notify/send',
-    // SUBSTITUTION: '/manager/sub'
+    READ: (id: string) => `/notify/notifications/${id}/read`,
+    READ_ALL: '/notify/notifications/read-all',
+    DELETE: (id: string) => `/notify/notifications/${id}`,
   },
   ADMIN: {
     FIXTURES: '/admin/fixtures',
