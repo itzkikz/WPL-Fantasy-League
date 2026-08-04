@@ -97,7 +97,7 @@ const SideNavbar = () => {
 
   if (isAdmin) {
     return (
-      <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-[#221938] lg:h-screen lg:py-4 lg:px-2">
+      <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-gray-200 dark:border-[#221938] bg-surface lg:h-screen lg:py-4 lg:px-2">
         <div className="flex flex-col gap-2">
           {/* Settings Link */}
           {(() => {
@@ -113,7 +113,7 @@ const SideNavbar = () => {
                   className={`${
                     isActive
                       ? "text-[#A855F7] font-semibold"
-                      : "text-[#8E89A6] hover:text-white"
+                      : "text-gray-500 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white"
                   }`}
                 >
                   Settings
@@ -123,7 +123,7 @@ const SideNavbar = () => {
           })()}
 
           {/* Admin Panel Header */}
-          <div className="px-3 py-2 text-xs font-bold text-[#8E89A6] uppercase tracking-wider mt-4 border-t border-[#221938] pt-4">
+          <div className="px-3 py-2 text-xs font-bold text-gray-500 dark:text-[#8E89A6] uppercase tracking-wider mt-4 border-t border-gray-200 dark:border-[#221938] pt-4">
             Admin Panel
           </div>
 
@@ -140,7 +140,7 @@ const SideNavbar = () => {
                   className={`${
                     isLinkActive
                       ? "text-[#A855F7] font-semibold"
-                      : "text-[#8E89A6] hover:text-white"
+                      : "text-gray-500 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white"
                   }`}
                 >
                   {adminItem.label}
@@ -161,7 +161,7 @@ const SideNavbar = () => {
     ];
 
     return (
-      <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-[#221938] lg:h-screen lg:py-4 lg:px-2">
+      <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-gray-200 dark:border-[#221938] bg-surface lg:h-screen lg:py-4 lg:px-2">
         <div className="flex flex-col gap-2">
           {guestItems.map(({ label, path }) => {
             const isActive = matchRoute({ to: path, fuzzy: true });
@@ -180,7 +180,7 @@ const SideNavbar = () => {
                   className={`${
                     isActive
                       ? "text-[#A855F7] font-semibold"
-                      : "text-[#8E89A6] hover:text-white"
+                      : "text-gray-500 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white"
                   }`}
                 >
                   {label}
@@ -212,7 +212,7 @@ const SideNavbar = () => {
       ];
 
   return (
-    <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-[#221938] lg:h-screen lg:py-4 lg:px-2">
+    <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-gray-200 dark:border-[#221938] bg-surface lg:h-screen lg:py-4 lg:px-2">
       <div className="flex flex-col gap-2">
         {navItems.map(({ label, path }) => {
           const isActive = matchRoute({ to: path, fuzzy: true });
@@ -235,7 +235,7 @@ const SideNavbar = () => {
                 className={`${
                   isActive
                     ? "text-[#A855F7] font-semibold"
-                    : "text-[#8E89A6] hover:text-white"
+                    : "text-gray-500 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white"
                 }`}
               >
                 {label}

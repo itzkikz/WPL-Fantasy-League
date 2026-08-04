@@ -116,7 +116,7 @@ const PitchPlayerCard = ({
         <div className="flex flex-col w-full bg-card rounded-md overflow-hidden shadow-md border border-border z-10">
           {/* Player Name */}
           <div className="px-1 py-0.5 text-center bg-surface border-b border-border">
-            <p className="text-[9px] sm:text-[10px] md:text-[11px] font-bold text-white truncate leading-tight">
+            <p className="text-[9px] sm:text-[10px] md:text-[11px] font-bold text-text-primary truncate leading-tight">
               {playerLastName}
             </p>
           </div>
@@ -136,7 +136,7 @@ const PitchPlayerCard = ({
           <div className="px-1 py-0.5 text-center border-b border-border">
             <p
               className={`${isSmall ? "text-[9px] md:text-[10px]" : "text-[10px] md:text-xs"
-                } font-bold text-white truncate leading-tight`}
+                } font-bold text-text-primary truncate leading-tight`}
             >
               {player?.name && pickMyteam && playerFirstName !== playerLastName ? (
                 player.name.trim().split(/\s+/).slice(0)[0]

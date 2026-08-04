@@ -6,31 +6,77 @@
 @theme {
   --font-sans: 'Outfit', sans-serif;
 
-  --color-background: #080612;
-  --color-bg: #080612;
-  --color-surface: #120C22;
-  --color-card: #17112A;
-  --color-elevated: #1D1533;
+  --color-background: var(--color-bg);
+  --color-bg: var(--color-bg);
+  --color-light-bg: #F8FAFC;
+  --color-dark-bg: #080612;
+  --color-surface: var(--color-surface);
+  --color-card: var(--color-card);
+  --color-elevated: var(--color-elevated);
 
-  --color-primary: #8B5CF6;
-  --color-primary-dark: #6D28D9;
-  --color-secondary: #A855F7;
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-secondary: var(--color-secondary);
 
-  --color-success: #22C55E;
-  --color-warning: #FACC15;
-  --color-danger: #EF4444;
-  --color-info: #38BDF8;
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+  --color-info: var(--color-info);
 
-  --color-text: #FFFFFF;
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #D8D5E8;
-  --color-text-muted: #8B87A6;
+  --color-text: var(--color-text-primary);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
 
-  --color-border: #2B2145;
+  --color-border: var(--color-border);
 }
 
 :root,
-[data-theme="light"],
+[data-theme="light"] {
+  --color-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-card: #FFFFFF;
+  --color-elevated: #F1F5F9;
+  --color-primary: #7C3AED;
+  --color-primary-hover: #6D28D9;
+  --color-primary-dark: #5B21B6;
+  --color-secondary: #9333EA;
+  --color-accent: #A855F7;
+  --color-light-purple: #DDD6FE;
+
+  --color-success: #16A34A;
+  --color-success-bright: #22C55E;
+  --color-success-text: #15803D;
+  --color-success-bg: #DCFCE7;
+
+  --color-warning: #D97706;
+  --color-warning-orange: #EA580C;
+
+  --color-danger: #DC2626;
+  --color-danger-bright: #EF4444;
+
+  --color-info: #0284C7;
+  --color-info-sky: #0EA5E9;
+
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #64748B;
+  --color-text-disabled: #94A3B8;
+  --color-text-muted: #64748B;
+
+  --color-border: #E2E8F0;
+  --color-border-divider: #F1F5F9;
+  --color-border-active: #7C3AED;
+  --color-skeleton: #E2E8F0;
+
+  /* Animation Duration Variables */
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 500ms;
+}
+
 [data-theme="dark"] {
   --color-bg: #080612;
   --color-surface: #120C22;
@@ -67,13 +113,6 @@
   --color-border-divider: #221938;
   --color-border-active: #8B5CF6;
   --color-skeleton: #2B2145;
-
-  /* Animation Duration Variables */
-  --duration-instant: 0ms;
-  --duration-fast: 150ms;
-  --duration-normal: 200ms;
-  --duration-slow: 300ms;
-  --duration-slower: 500ms;
 }
 
 @utility bg-gradient-core {
@@ -81,16 +120,16 @@
 }
 
 @utility bg-gradient-overview {
-  background: linear-gradient(135deg, #4C1D95 0%, #1E1B4B 60%, #080612 100%);
+  background: linear-gradient(135deg, var(--color-elevated) 0%, var(--color-surface) 60%, var(--color-bg) 100%);
 }
 
 @utility bg-dots {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
   background-size: 10px 10px;
 }
 
 @utility bg-gradient-card {
-  background: linear-gradient(180deg, #1A1232, #120C22);
+  background: linear-gradient(180deg, var(--color-elevated), var(--color-surface));
 }
 
 @utility bg-gradient-button {

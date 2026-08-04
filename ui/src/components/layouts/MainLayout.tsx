@@ -112,7 +112,7 @@ export const MainLayout = () => {
             <div className="flex-1 flex">
                 <div className={`flex h-screen flex-col mx-auto w-full ${currentPath === "/my-team" ? "overflow-hidden" : "overflow-y-auto"}`} style={{ WebkitOverflowScrolling: 'touch' }}>
                     {(currentPath === "/home" || currentPath === "/home/") && (
-                        <header className="header relative w-full h-12 shrink-0 overflow-hidden bg-surface border-b border-[var(--color-border-divider)] text-white lg:hidden" style={{ viewTransitionName: 'header-static' }}>
+                        <header className="header relative w-full h-12 shrink-0 overflow-hidden bg-surface border-b border-[var(--color-border-divider)] text-text-primary lg:hidden" style={{ viewTransitionName: 'header-static' }}>
                             {/* Animated gradient overlay */}
                             {/* Content container */}
                             <div className="relative z-10 mx-auto flex h-full w-full items-center justify-between px-3">
@@ -141,7 +141,7 @@ export const MainLayout = () => {
                                         <button
                                             aria-label="Notifications"
                                             onClick={() => navigate({ to: '/notifications' })}
-                                            className="relative flex h-10 w-8 items-center justify-center text-white"
+                                            className="relative flex h-10 w-8 items-center justify-center text-gray-700 dark:text-white"
                                         >
                                             <Bell className="h-5 w-5" />
                                             <span className="absolute right-1 top-2 h-2.5 w-2.5 rounded-full bg-[#ff624f]" />
@@ -150,7 +150,7 @@ export const MainLayout = () => {
                                     <button
                                         aria-label="Settings"
                                         onClick={() => navigate({ to: '/settings' })}
-                                        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/15 text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,.2)]"
+                                        className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 dark:border-white/20 bg-gray-100 dark:bg-white/15 text-gray-700 dark:text-white/90 shadow-sm"
                                     >
                                         {!isAdmin && managerDetails?.logo ? (
                                             <img

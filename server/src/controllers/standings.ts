@@ -7,6 +7,7 @@ import { NextFunction, Request, Response } from "express";
 import { StandingsResponse, TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
 import { aggregateMatchStats, getGameweekPoints, getGameweekMinutes, getGameweekStats, getGameweekForm, getGameweekEntries, getGameweekBreakdown, buildCurrentWeek } from "./players";
+import { getSeasonPointsBreakdown } from "../lib/points";
 
 import { FantasyTeam } from "../models/FantasyTeam";
 import { Player } from "../models/Player";
@@ -421,28 +422,34 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 return p?.teamId;
             }).filter(Boolean))] as number[];
 
-            const upcomingDocs = await Fixture.find({
-                $and: [
-                    { 'roundInfo.round': { $gte: targetGw } },
-                    { 'status.type': { $ne: 'finished' } },
-                    {
-                        $or: [
-                            { 'homeTeam.id': { $in: allTeamIds } },
-                            { 'awayTeam.id': { $in: allTeamIds } }
-                        ]
-                    }
-                ]
-            }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
+            // Determine upcoming rounds from the gameweek lifecycle. The fixture
+            // `status` field is unreliable (stale/always "finished"), so it cannot
+            // be used to decide which fixtures are upcoming.
+            const upcomingGwDocs = (await Gameweek.find({ isCompleted: { $ne: true }, number: { $gte: targetGw } }).select('number').lean()) as any[];
+            const upcomingRounds = upcomingGwDocs.map((g) => g.number);
 
-            // Fetch the target gameweek's fixtures for per-match labels
-            const currentGwDocs = await Fixture.find({
-                'roundInfo.round': targetGw,
+            const upcomingDocs = await Fixture.find({
+                'roundInfo.round': { $in: upcomingRounds },
                 $or: [
                     { 'homeTeam.id': { $in: allTeamIds } },
                     { 'awayTeam.id': { $in: allTeamIds } }
                 ]
-            }).sort({ startTimestamp: 1 }).lean() as any[];
-            const currentGwFixtureMap = new Map(currentGwDocs.map((f: any) => [f.fixtureId ?? f.id, { home: f.homeTeam, away: f.awayTeam, kickoff: f.startTimestamp }]));
+            }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
+
+            // Fetch the target gameweek's fixtures for per-match labels.
+            // Use the gameweek's assigned fixture list (fixture `roundInfo.round`
+            // can differ from the app gameweek number) and attach full team docs
+            // (fixtures only store team ids) so opponent names resolve.
+            const tgwDoc = (await Gameweek.findOne({ number: targetGw }).select('fixtures').lean()) as any;
+            const tgwFixtureIds = (tgwDoc?.fixtures || []) as number[];
+            const currentGwDocs = tgwFixtureIds.length > 0
+                ? (await Fixture.find({ fixtureId: { $in: tgwFixtureIds } }).sort({ startTimestamp: 1 }).lean() as any[])
+                : [];
+            const currentGwFixtureMap = new Map(currentGwDocs.map((f: any) => {
+                const home = f.homeTeam?.id != null ? teamMap.get(f.homeTeam.id) : null;
+                const away = f.awayTeam?.id != null ? teamMap.get(f.awayTeam.id) : null;
+                return [f.fixtureId ?? f.id, { home: home || f.homeTeam, away: away || f.awayTeam, kickoff: f.startTimestamp }];
+            }));
 
             // Group fixtures by team ID
             const fixturesByTeam = new Map<number, any[]>();
@@ -535,6 +542,11 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                     ? getGameweekBreakdown((fullPs as any).gameweeks, targetGw, playerDoc.position)
                     : [];
 
+                // Season points breakdown (per-match flooring applied and summed across all gameweeks)
+                const seasonPointsBreakdown = (fullPs && (fullPs as any).gameweeks)
+                    ? getSeasonPointsBreakdown((fullPs as any).gameweeks, playerDoc.position)
+                    : [];
+
                 // Attach full PlayerStats to the detail
                 (detail as any).playerStats = {
                     player_name: playerDoc.name || playerDoc.webName || "",
@@ -557,6 +569,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                     upcoming_fixtures: upcomingFixtures,
                     recent_form: recentForm,
                     points_breakdown: pointsBreakdown,
+                    season_points_breakdown: seasonPointsBreakdown,
                     auctionPrice: playerDoc.auctionPrice
                 };
             }
@@ -682,7 +695,11 @@ export const getFixturePlayers = async (req: Request, res: Response) => {
 
         const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean() as any;
         const currentGw = currentGwDoc ? currentGwDoc.number : null;
-        const fixtureGw = fixture.roundInfo?.round ?? currentGw;
+        // The app's gameweek number may differ from the fixture's source round
+        // (roundInfo.round). Resolve the gameweek this fixture is assigned to so
+        // picks and player stats are looked up under the correct gameweek id.
+        const assignedGwDoc = await Gameweek.findOne({ fixtures: fixtureId }).lean() as any;
+        const fixtureGw = assignedGwDoc ? assignedGwDoc.number : (fixture.roundInfo?.round ?? currentGw);
 
         const teams = await Team.find({}, 'id name nameCode photo logo teamColors').lean() as any[];
         const teamMap = new Map(teams.map((t: any) => [t.id, t]));

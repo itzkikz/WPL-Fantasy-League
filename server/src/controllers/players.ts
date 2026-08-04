@@ -7,7 +7,7 @@ import { PlayerStats as PlayerStatsModel } from "../models/PlayerStats";
 import { FantasyTeam } from "../models/FantasyTeam";
 import "../models/League";
 import { resolvePosition } from "../utils";
-import { getMatchPointsBreakdown, PointsBreakdownItem } from "../lib/points";
+import { getMatchPointsBreakdown, getSeasonPointsBreakdown, PointsBreakdownItem } from "../lib/points";
 
 function sumNumeric(...nums: (number | undefined | null)[]): number {
     return nums.reduce<number>((acc, n) => acc + (n ?? 0), 0);
@@ -315,13 +315,19 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
             const gwEntries = getGameweekEntries(pStatsDoc.gameweeks, currentGw);
             if (gwEntries.length > 0) {
                 const Fixture = (await import("../models/Fixture")).Fixture;
-                const gwFixtures = (await Fixture.find({
-                    $and: [
-                        { 'roundInfo.round': currentGw },
-                        { $or: [{ 'homeTeam.id': player.teamId }, { 'awayTeam.id': player.teamId }] }
-                    ]
-                }).lean()) as any[];
-                const gwFixtureMap = new Map(gwFixtures.map((f: any) => [f.fixtureId ?? f.id, { home: f.homeTeam, away: f.awayTeam, kickoff: f.startTimestamp }]));
+                const gwDoc = (await Gameweek.findOne({ number: currentGw }).select('fixtures').lean()) as any;
+                const gwFixtureIds = (gwDoc?.fixtures || []) as number[];
+                const gwFixtures = gwFixtureIds.length > 0
+                    ? (await Fixture.find({ fixtureId: { $in: gwFixtureIds } }).lean() as any[])
+                    : [];
+                const fixtureTeamIds = [...new Set(gwFixtures.flatMap((f: any) => [f.homeTeam?.id, f.awayTeam?.id]).filter(Boolean))];
+                const fixtureTeams = (await Team.find({ id: { $in: fixtureTeamIds } }).lean()) as any[];
+                const fixtureTeamMap = new Map(fixtureTeams.map((t: any) => [t.id, t]));
+                const gwFixtureMap = new Map(gwFixtures.map((f: any) => {
+                    const home = f.homeTeam?.id != null ? fixtureTeamMap.get(f.homeTeam.id) : null;
+                    const away = f.awayTeam?.id != null ? fixtureTeamMap.get(f.awayTeam.id) : null;
+                    return [f.fixtureId ?? f.id, { home: home || f.homeTeam, away: away || f.awayTeam, kickoff: f.startTimestamp }];
+                }));
                 currentWeekStats = buildCurrentWeek(pStatsDoc, currentGw, player.position, player.teamId, gwFixtureMap);
             }
         }
@@ -345,16 +351,16 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
 
         // 2. Fetch upcoming fixtures
         const Fixture = (await import("../models/Fixture")).Fixture;
+        // Determine upcoming rounds from the gameweek lifecycle. The fixture
+        // `status` field is unreliable (stale/always "finished"), so it cannot
+        // be used to decide which fixtures are upcoming.
+        const upcomingGwDocs = (await Gameweek.find({ isCompleted: { $ne: true }, number: { $gte: currentGw } }).select('number').lean()) as any[];
+        const upcomingRounds = upcomingGwDocs.map((g) => g.number);
         const upcomingDocs = await Fixture.find({
-            $and: [
-                { 'roundInfo.round': { $gte: currentGw } },
-                { 'status.type': { $ne: 'finished' } },
-                {
-                    $or: [
-                        { 'homeTeam.id': player.teamId },
-                        { 'awayTeam.id': player.teamId }
-                    ]
-                }
+            'roundInfo.round': { $in: upcomingRounds },
+            $or: [
+                { 'homeTeam.id': player.teamId },
+                { 'awayTeam.id': player.teamId }
             ]
         })
         .sort({ 'roundInfo.round': 1, startTimestamp: 1 })
@@ -413,6 +419,11 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
             ? getGameweekBreakdown(pStatsDoc.gameweeks, currentGw, player.position)
             : [];
 
+        // Season points breakdown (per-match flooring applied and summed across all gameweeks)
+        const seasonPointsBreakdown = (pStatsDoc && pStatsDoc.gameweeks)
+            ? getSeasonPointsBreakdown(pStatsDoc.gameweeks, player.position)
+            : [];
+
         const data: PlayerStats = {
             player_name: player.name || player.webName || "",
             team_name: teamName,
@@ -434,6 +445,7 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
             upcoming_fixtures: upcomingFixtures,
             recent_form: recentForm,
             points_breakdown: pointsBreakdown,
+            season_points_breakdown: seasonPointsBreakdown,
             auctionPrice: player.auctionPrice
         };
 
@@ -588,28 +600,43 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             // Fetch upcoming fixtures for all players' teams
             const Fixture = (await import("../models/Fixture")).Fixture;
             const allPlayerTeamIds = [...new Set(players.map(p => p.teamId).filter(Boolean))];
+            // Determine upcoming rounds from the gameweek lifecycle. The fixture
+            // `status` field is unreliable (stale/always "finished"), so it cannot
+            // be used to decide which fixtures are upcoming.
+            const upcomingGwDocs = (await Gameweek.find({ isCompleted: { $ne: true }, number: { $gte: currentGw } }).select('number').lean()) as any[];
+            const upcomingRounds = upcomingGwDocs.map((g) => g.number);
             const upcomingDocs = await Fixture.find({
-                $and: [
-                    { 'roundInfo.round': { $gte: currentGw } },
-                    { 'status.type': { $ne: 'finished' } },
-                    {
-                        $or: [
-                            { 'homeTeam.id': { $in: allPlayerTeamIds } },
-                            { 'awayTeam.id': { $in: allPlayerTeamIds } }
-                        ]
-                    }
-                ]
-            }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
-
-            // Fetch current gameweek fixtures (for per-match labels in current_week)
-            const currentGwDocs = await Fixture.find({
-                'roundInfo.round': currentGw,
+                'roundInfo.round': { $in: upcomingRounds },
                 $or: [
                     { 'homeTeam.id': { $in: allPlayerTeamIds } },
                     { 'awayTeam.id': { $in: allPlayerTeamIds } }
                 ]
-            }).sort({ startTimestamp: 1 }).lean() as any[];
-            const currentGwFixtureMap = new Map(currentGwDocs.map((f: any) => [f.fixtureId ?? f.id, { home: f.homeTeam, away: f.awayTeam, kickoff: f.startTimestamp }]));
+            }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
+
+            // Build a team lookup from all teams appearing in the upcoming
+            // fixtures (the page-scoped `teamMap` is too small to resolve every
+            // opponent), so upcoming opponent names resolve.
+            const upcomingTeamIds = [...new Set(upcomingDocs.flatMap((f: any) => [f.homeTeam?.id, f.awayTeam?.id]).filter(Boolean))];
+            const upcomingTeamDocs = (await Team.find({ id: { $in: upcomingTeamIds } }).lean()) as any[];
+            const upcomingTeamMap = new Map(upcomingTeamDocs.map((t: any) => [t.id, t]));
+
+            // Fetch current gameweek fixtures (for per-match labels in current_week).
+            // Use the gameweek's assigned fixture list (fixture `roundInfo.round`
+            // can differ from the app gameweek number) and attach full team docs
+            // (fixtures only store team ids) so opponent names resolve.
+            const tgwDoc = (await Gameweek.findOne({ number: currentGw }).select('fixtures').lean()) as any;
+            const tgwFixtureIds = (tgwDoc?.fixtures || []) as number[];
+            const currentGwDocs = tgwFixtureIds.length > 0
+                ? (await Fixture.find({ fixtureId: { $in: tgwFixtureIds } }).sort({ startTimestamp: 1 }).lean() as any[])
+                : [];
+            const cgTeamIds = [...new Set(currentGwDocs.flatMap((f: any) => [f.homeTeam?.id, f.awayTeam?.id]).filter(Boolean))];
+            const cgTeams = (await Team.find({ id: { $in: cgTeamIds } }).lean()) as any[];
+            const fixtureTeamMap = new Map(cgTeams.map((t: any) => [t.id, t]));
+            const currentGwFixtureMap = new Map(currentGwDocs.map((f: any) => {
+                const home = f.homeTeam?.id != null ? fixtureTeamMap.get(f.homeTeam.id) : null;
+                const away = f.awayTeam?.id != null ? fixtureTeamMap.get(f.awayTeam.id) : null;
+                return [f.fixtureId ?? f.id, { home: home || f.homeTeam, away: away || f.awayTeam, kickoff: f.startTimestamp }];
+            }));
 
             const fixturesByTeam = new Map<number, any[]>();
             for (const f of upcomingDocs) {
@@ -672,7 +699,7 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 // Upcoming fixtures
                 const teamFixtures = fixturesByTeam.get(player.teamId) || [];
                 const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }) => {
-                    const opponentTeam = teamMap.get(opponentId);
+                    const opponentTeam = upcomingTeamMap.get(opponentId);
                     return {
                         gw: f.roundInfo?.round || 0,
                         opponent_short_name: opponentTeam?.nameCode || "UNK",
@@ -693,6 +720,11 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 const ownership = ownershipMap.get(player.id) || { pct: 0, teamName: null };
                 const pointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
                     ? getGameweekBreakdown((pStatsDoc as any).gameweeks, currentGw, player.position)
+                    : [];
+
+                // Season points breakdown (per-match flooring applied and summed across all gameweeks)
+                const seasonPointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
+                    ? getSeasonPointsBreakdown((pStatsDoc as any).gameweeks, player.position)
                     : [];
 
                 return {
@@ -716,6 +748,7 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                     upcoming_fixtures: upcomingFixtures,
                     recent_form: recentForm,
                     points_breakdown: pointsBreakdown,
+                    season_points_breakdown: seasonPointsBreakdown,
                     auctionPrice: player.auctionPrice
                 };
             });
@@ -760,28 +793,43 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
         // Fetch upcoming fixtures for all players' teams
         const Fixture = (await import("../models/Fixture")).Fixture;
         const allPlayerTeamIds2 = [...new Set(players.map(p => p.teamId).filter(Boolean))];
+        // Determine upcoming rounds from the gameweek lifecycle. The fixture
+        // `status` field is unreliable (stale/always "finished"), so it cannot
+        // be used to decide which fixtures are upcoming.
+        const upcomingGwDocs2 = (await Gameweek.find({ isCompleted: { $ne: true }, number: { $gte: currentGw } }).select('number').lean()) as any[];
+        const upcomingRounds2 = upcomingGwDocs2.map((g) => g.number);
         const upcomingDocs2 = await Fixture.find({
-            $and: [
-                { 'roundInfo.round': { $gte: currentGw } },
-                { 'status.type': { $ne: 'finished' } },
-                {
-                    $or: [
-                        { 'homeTeam.id': { $in: allPlayerTeamIds2 } },
-                        { 'awayTeam.id': { $in: allPlayerTeamIds2 } }
-                    ]
-                }
-            ]
-        }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
-
-        // Fetch current gameweek fixtures (for per-match labels in current_week)
-        const currentGwDocs2 = await Fixture.find({
-            'roundInfo.round': currentGw,
+            'roundInfo.round': { $in: upcomingRounds2 },
             $or: [
                 { 'homeTeam.id': { $in: allPlayerTeamIds2 } },
                 { 'awayTeam.id': { $in: allPlayerTeamIds2 } }
             ]
-        }).sort({ startTimestamp: 1 }).lean() as any[];
-        const currentGwFixtureMap2 = new Map(currentGwDocs2.map((f: any) => [f.fixtureId ?? f.id, { home: f.homeTeam, away: f.awayTeam, kickoff: f.startTimestamp }]));
+        }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
+
+        // Build a team lookup from all teams appearing in the upcoming
+        // fixtures (the page-scoped `teamMap` is too small to resolve every
+        // opponent), so upcoming opponent names resolve.
+        const upcomingTeamIds2 = [...new Set(upcomingDocs2.flatMap((f: any) => [f.homeTeam?.id, f.awayTeam?.id]).filter(Boolean))];
+        const upcomingTeamDocs2 = (await Team.find({ id: { $in: upcomingTeamIds2 } }).lean()) as any[];
+        const upcomingTeamMap2 = new Map(upcomingTeamDocs2.map((t: any) => [t.id, t]));
+
+        // Fetch current gameweek fixtures (for per-match labels in current_week).
+        // Use the gameweek's assigned fixture list (fixture `roundInfo.round`
+        // can differ from the app gameweek number) and attach full team docs
+        // (fixtures only store team ids) so opponent names resolve.
+        const tgwDoc2 = (await Gameweek.findOne({ number: currentGw }).select('fixtures').lean()) as any;
+        const tgwFixtureIds2 = (tgwDoc2?.fixtures || []) as number[];
+        const currentGwDocs2 = tgwFixtureIds2.length > 0
+            ? (await Fixture.find({ fixtureId: { $in: tgwFixtureIds2 } }).sort({ startTimestamp: 1 }).lean() as any[])
+            : [];
+        const cgTeamIds2 = [...new Set(currentGwDocs2.flatMap((f: any) => [f.homeTeam?.id, f.awayTeam?.id]).filter(Boolean))];
+        const cgTeams2 = (await Team.find({ id: { $in: cgTeamIds2 } }).lean()) as any[];
+        const fixtureTeamMap2 = new Map(cgTeams2.map((t: any) => [t.id, t]));
+        const currentGwFixtureMap2 = new Map(currentGwDocs2.map((f: any) => {
+            const home = f.homeTeam?.id != null ? fixtureTeamMap2.get(f.homeTeam.id) : null;
+            const away = f.awayTeam?.id != null ? fixtureTeamMap2.get(f.awayTeam.id) : null;
+            return [f.fixtureId ?? f.id, { home: home || f.homeTeam, away: away || f.awayTeam, kickoff: f.startTimestamp }];
+        }));
 
         const fixturesByTeam2 = new Map<number, any[]>();
         for (const f of upcomingDocs2) {
@@ -844,7 +892,7 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             // Upcoming fixtures
             const teamFixtures = fixturesByTeam2.get(player.teamId) || [];
             const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }) => {
-                const opponentTeam = teamMap.get(opponentId);
+                const opponentTeam = upcomingTeamMap2.get(opponentId);
                 return {
                     gw: f.roundInfo?.round || 0,
                     opponent_short_name: opponentTeam?.nameCode || "UNK",
@@ -865,6 +913,11 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             const ownership = ownershipMap2.get(player.id) || { pct: 0, teamName: null };
             const pointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
                 ? getGameweekBreakdown((pStatsDoc as any).gameweeks, currentGw, player.position)
+                : [];
+
+            // Season points breakdown (per-match flooring applied and summed across all gameweeks)
+            const seasonPointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
+                ? getSeasonPointsBreakdown((pStatsDoc as any).gameweeks, player.position)
                 : [];
 
             return {
@@ -888,6 +941,7 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 upcoming_fixtures: upcomingFixtures,
                 recent_form: recentForm,
                 points_breakdown: pointsBreakdown,
+                season_points_breakdown: seasonPointsBreakdown,
                 auctionPrice: player.auctionPrice
             };
         });

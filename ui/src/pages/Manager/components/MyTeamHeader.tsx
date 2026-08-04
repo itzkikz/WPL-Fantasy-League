@@ -56,7 +56,7 @@ const MyTeamHeader = ({
             className={`px-2.5 py-1.5 text-[10px] md:text-xs font-bold rounded-lg transition-all cursor-pointer ${
               headerTab === "current"
                 ? "bg-secondary text-white font-extrabold shadow-sm"
-                : "text-text-muted hover:text-white"
+                : "text-text-muted hover:text-text-primary"
             }`}
           >
             GW {selectedGW}
@@ -66,7 +66,7 @@ const MyTeamHeader = ({
             className={`px-2.5 py-1.5 text-[10px] md:text-xs font-bold rounded-lg transition-all cursor-pointer ${
               headerTab === "history"
                 ? "bg-secondary text-white font-extrabold shadow-sm"
-                : "text-text-muted hover:text-white"
+                : "text-text-muted hover:text-text-primary"
             }`}
           >
             History
@@ -80,7 +80,7 @@ const MyTeamHeader = ({
           {/* Team Value */}
           <div className="flex flex-col items-center justify-center text-center">
             <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">Team Value</span>
-            <span className="text-sm md:text-base lg:text-lg font-extrabold text-white mt-0.5">
+            <span className="text-sm md:text-base lg:text-lg font-extrabold text-text-primary mt-0.5">
               £{total_budget || "100.0"}m
             </span>
           </div>
@@ -88,7 +88,7 @@ const MyTeamHeader = ({
           {/* Bank */}
           <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
             <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">Bank</span>
-            <span className="text-sm md:text-base lg:text-lg font-extrabold text-white mt-0.5">
+            <span className="text-sm md:text-base lg:text-lg font-extrabold text-text-primary mt-0.5">
               £{(balance ?? 0).toFixed(2)}m
             </span>
           </div>
@@ -104,7 +104,7 @@ const MyTeamHeader = ({
           {/* Total Points */}
           <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
             <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">Total</span>
-            <span className="text-sm md:text-base lg:text-lg font-extrabold text-white mt-0.5">
+            <span className="text-sm md:text-base lg:text-lg font-extrabold text-text-primary mt-0.5">
               {totalPointsFormatted}
             </span>
           </div>

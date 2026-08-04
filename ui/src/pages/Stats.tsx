@@ -124,7 +124,7 @@ export default function Stats() {
   };
 
   return (
-    <div className="flex flex-col flex-1 bg-background text-white overflow-hidden font-outfit select-none">
+    <div className="flex flex-col flex-1 bg-background text-text-primary overflow-hidden font-outfit select-none">
 
       {/* 1. Header Toolbar */}
       <div className="pt-5 pb-3 px-4 flex items-center justify-between shrink-0">
@@ -133,7 +133,7 @@ export default function Stats() {
             <h1 className="text-lg md:text-xl font-black tracking-tight leading-tight">
               Best Performers
             </h1>
-            {/* <button className="flex items-center gap-1 mt-0.5 text-text-muted hover:text-white transition-colors cursor-pointer text-[10px] md:text-xs font-bold">
+            {/* <button className="flex items-center gap-1 mt-0.5 text-text-muted hover:text-text-primary transition-colors cursor-pointer text-[10px] md:text-xs font-bold">
               <span>This Season</span>
               <ChevronDown className="w-3.5 h-3.5" />
             </button> */}
@@ -144,7 +144,7 @@ export default function Stats() {
           {/* Filter Button */}
           <button
             onClick={() => setShowFilterOverlay(true)}
-            className="relative w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center cursor-pointer text-white"
+            className="relative w-9 h-9 rounded-xl bg-card hover:bg-elevated flex items-center justify-center cursor-pointer text-text-primary border border-border"
           >
             <SlidersHorizontal className="w-5 h-5" />
             {(selectedClubs.length > 0 || selectedLeagues.length > 0 || freeAgentSelected) && (
@@ -169,7 +169,7 @@ export default function Stats() {
               key={tab.label}
               onClick={() => handlePositionTabChange(tab.val)}
               className={`pb-1 text-xs font-black uppercase tracking-wider transition-all relative whitespace-nowrap cursor-pointer px-2
-                ${isActive ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
+                ${isActive ? "text-secondary" : "text-text-muted hover:text-text-primary"}`}
             >
               {tab.label}
               {isActive && (
@@ -204,7 +204,7 @@ export default function Stats() {
               <p className="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">
                 {activePosition === "F" ? "Top Scorer" : activePosition === "M" ? "Top Midfielder" : activePosition === "D" ? "Top Defender" : activePosition === "G" ? "Top Goalkeeper" : "Top Performer"}
               </p>
-              <h2 className="text-base font-black text-white mt-0.5 tracking-tight">
+              <h2 className="text-base font-black text-text-primary mt-0.5 tracking-tight">
                 {topPerformer.player_name}
               </h2>
               <p className="text-[11px] font-black text-secondary font-mono mt-0.5">
@@ -216,7 +216,7 @@ export default function Stats() {
           {/* Featured Player Circular Badge */}
           {topPerformer.photo && (
             <div className="shrink-0 flex items-center justify-center pr-1.5 z-10">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-violet-500/55 shadow-[0_0_15px_rgba(139,92,246,0.35)] overflow-hidden bg-white">
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-secondary/55 shadow-card overflow-hidden bg-surface">
                 <img
                   src={topPerformer.photo}
                   alt=""
@@ -229,7 +229,7 @@ export default function Stats() {
       )}
 
       {/* 4. Table Headers */}
-      <div className="mx-4 mt-3 flex items-center justify-between text-[10px] font-black text-[#a594c9]/50 uppercase tracking-widest px-3 shrink-0">
+      <div className="mx-4 mt-3 flex items-center justify-between text-[10px] font-black text-text-muted uppercase tracking-widest px-3 shrink-0">
         <div className="w-10 text-left">Rank</div>
         <div className="flex-1 text-left pl-3.5">Player</div>
         <div className="w-18 text-right pr-2">Total</div>
@@ -245,7 +245,7 @@ export default function Stats() {
           [...Array(6)].map((_, i) => (
             <div
               key={i}
-              className={`h-16 bg-white/5 border border-white/5 rounded-2xl skeleton-pulse stagger-${Math.min(i + 1, 5)}`}
+              className={`h-16 bg-surface border border-border rounded-2xl skeleton-pulse stagger-${Math.min(i + 1, 5)}`}
             />
           ))
         ) : players.length > 0 ? (
@@ -264,26 +264,26 @@ export default function Stats() {
                 <div
                   key={r.player_id}
                   onClick={() => handlePlayerOverlay(r)}
-                  className="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/[0.03] hover:bg-white/10 cursor-pointer transition-all duration-200"
+                  className="flex items-center justify-between p-3 rounded-2xl bg-surface border border-border hover:bg-elevated/50 cursor-pointer transition-all duration-200"
                 >
                   {/* Rank Column */}
                   <div className="w-10 flex flex-col items-center justify-center shrink-0">
-                    <span className="text-base font-black text-white">{i + 1}</span>
+                    <span className="text-base font-black text-text-primary">{i + 1}</span>
                     {isFirst && <span className="w-1.5 h-1.5 rounded-full bg-[#ffb700] mt-0.5" />}
-                    {isSecond && <span className="w-1.5 h-1.5 rounded-full bg-white mt-0.5" />}
+                    {isSecond && <span className="w-1.5 h-1.5 rounded-full bg-text-muted mt-0.5" />}
                     {isThird && <span className="w-1.5 h-1.5 rounded-full bg-orange-400 mt-0.5" />}
                   </div>
 
                   {/* Player Image with color border */}
                   <div className="relative shrink-0 pl-1.5">
                     <div
-                      className="w-11 h-11 rounded-full overflow-hidden border-2 flex items-center justify-center bg-white"
-                      style={{ borderColor: r.team_color || "#ccc" }}
+                      className="w-11 h-11 rounded-full overflow-hidden border-2 flex items-center justify-center bg-surface"
+                      style={{ borderColor: r.team_color || "var(--color-border)" }}
                     >
                       {r.photo ? (
                         <img src={r.photo} className="w-full h-full object-cover" alt="" />
                       ) : (
-                        <span className="text-xs font-bold text-[#a594c9] uppercase font-mono">
+                        <span className="text-xs font-bold text-text-muted uppercase font-mono">
                           {r.player_name.substring(0, 2)}
                         </span>
                       )}
@@ -297,18 +297,18 @@ export default function Stats() {
 
                   {/* Name, Club and Position */}
                   <div className="flex-1 pl-4 min-w-0">
-                    <p className="text-[13px] font-bold text-white leading-tight">
+                    <p className="text-[13px] font-bold text-text-primary leading-tight">
                       {r.player_name}
                     </p>
-                    <div className="text-[10px] text-[#a594c9]/70 font-semibold mt-0.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
-                      <span className="w-2 h-2 rounded-full border border-white/10 shrink-0" style={{ backgroundColor: r.team_color || "#ccc" }} />
+                    <div className="text-[10px] text-text-muted font-semibold mt-0.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
+                      <span className="w-2 h-2 rounded-full border border-border shrink-0" style={{ backgroundColor: r.team_color || "var(--color-border)" }} />
                       <span className="leading-none shrink-0">{r.team_short_name || "UNK"}</span>
-                      <span className="text-[#a594c9]/30 text-[8px] leading-none shrink-0">•</span>
-                      <span className="uppercase text-[9px] tracking-wider text-violet-400 font-bold leading-none shrink-0">{r.position}</span>
+                      <span className="text-text-muted/40 text-[8px] leading-none shrink-0">•</span>
+                      <span className="uppercase text-[9px] tracking-wider text-secondary font-bold leading-none shrink-0">{r.position}</span>
                       {r.fantasy_team_name && (
                         <>
-                          <span className="text-[#a594c9]/30 text-[8px] leading-none shrink-0">•</span>
-                          <span className={`text-[9px] tracking-wide font-bold leading-none ${r.fantasy_team_name === "Free Agent" ? "text-gray-500" : "text-amber-400/80"}`}>{r.fantasy_team_name}</span>
+                          <span className="text-text-muted/40 text-[8px] leading-none shrink-0">•</span>
+                          <span className={`text-[9px] tracking-wide font-bold leading-none ${r.fantasy_team_name === "Free Agent" ? "text-text-muted" : "text-amber-500/85"}`}>{r.fantasy_team_name}</span>
                         </>
                       )}
                     </div>
@@ -316,20 +316,20 @@ export default function Stats() {
 
                   {/* Points Column */}
                   <div className="w-18 text-right shrink-0 flex flex-col justify-center pr-2">
-                    <span className="text-[13px] font-black text-violet-400 font-mono">{points.toLocaleString()}</span>
+                    <span className="text-[13px] font-black text-secondary font-mono">{points.toLocaleString()}</span>
                   </div>
 
                   {/* GW Avg & Chevron */}
                   <div className="w-14 flex items-center justify-end gap-1 shrink-0">
-                    <span className="text-[13px] font-black text-white font-mono text-right">{gwAvg}</span>
-                    <ChevronRight className="w-3.5 h-3.5 text-[#a594c9]/30" />
+                    <span className="text-[13px] font-black text-text-primary font-mono text-right">{gwAvg}</span>
+                    <ChevronRight className="w-3.5 h-3.5 text-text-muted/40" />
                   </div>
                 </div>
               );
             })}
           </>
         ) : (
-          <div className="flex flex-col items-center justify-center h-48 text-[#c8c8c8]/40 text-center">
+          <div className="flex flex-col items-center justify-center h-48 text-text-muted text-center">
             <p className="text-sm font-medium">No Players Found</p>
             <p className="text-xs mt-1">Try resetting the filter search options.</p>
           </div>
@@ -338,14 +338,14 @@ export default function Stats() {
         {/* Loading Indicator */}
         {isFetchingNextPage && (
           <div className="flex justify-center items-center py-4 shrink-0">
-            <span className="w-2 h-2 rounded-full bg-violet-400 animate-ping mr-2" />
-            <p className="text-[10px] font-black uppercase tracking-widest text-[#a594c9]/50 font-mono">Loading more...</p>
+            <span className="w-2 h-2 rounded-full bg-secondary animate-ping mr-2" />
+            <p className="text-[10px] font-black uppercase tracking-widest text-text-muted font-mono">Loading more...</p>
           </div>
         )}
 
         {/* Last updated footer label */}
         {!isLoading && players.length > 0 && (
-          <div className="flex items-center justify-center pt-2 pb-6 text-[10px] text-[#a594c9]/30 tracking-wider">
+          <div className="flex items-center justify-center pt-2 pb-6 text-[10px] text-text-muted tracking-wider">
             <span>© Last updated: 5 mins ago</span>
           </div>
         )}
@@ -361,10 +361,10 @@ export default function Stats() {
 
       {/* 6. Filter Overlay Drawer */}
       <Overlay isOpen={showFilterOverlay} onClose={() => setShowFilterOverlay(false)}>
-        <div className="px-6 py-6 bg-[#1a0f2e] border-t border-violet-500/20 rounded-t-3xl max-w-md mx-auto w-full max-h-[85vh] flex flex-col font-outfit text-white">
+        <div className="px-6 py-6 bg-card border-t border-border rounded-t-3xl max-w-md mx-auto w-full max-h-[85vh] flex flex-col font-outfit text-text-primary">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-lg font-black tracking-tight text-white flex items-center gap-2">
-              <SlidersHorizontal className="w-5 h-5 text-violet-400" />
+            <h2 className="text-lg font-black tracking-tight text-text-primary flex items-center gap-2">
+              <SlidersHorizontal className="w-5 h-5 text-secondary" />
               <span>Filter Players</span>
             </h2>
             <button
@@ -378,7 +378,7 @@ export default function Stats() {
           <div className="overflow-y-auto flex-1 space-y-6 pr-1 scrollbar-hide">
             {/* Leagues section */}
             <div>
-              <h3 className="text-[10px] font-black uppercase tracking-widest text-[#a594c9]/50 mb-2.5">Leagues</h3>
+              <h3 className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-2.5">Leagues</h3>
               <div className="grid grid-cols-2 gap-2">
                 {leagues.map((lg) => {
                   const isChecked = selectedLeagues.includes(lg);
@@ -388,8 +388,8 @@ export default function Stats() {
                       onClick={() => toggleSelect(selectedLeagues, "leagues", lg)}
                       className={`py-2 px-3 rounded-xl border text-[11px] font-bold text-left truncate transition-all cursor-pointer
                         ${isChecked
-                          ? "bg-violet-500/20 border-violet-500 text-violet-200"
-                          : "bg-white/5 border-white/5 text-[#a594c9]/70 hover:bg-white/10 hover:text-white"
+                          ? "bg-secondary/20 border-secondary text-secondary"
+                          : "bg-surface border-border text-text-muted hover:bg-elevated hover:text-text-primary"
                         }`}
                     >
                       {lg}
@@ -401,10 +401,10 @@ export default function Stats() {
 
             {/* Clubs section */}
             <div>
-              <h3 className="text-[10px] font-black uppercase tracking-widest text-[#a594c9]/50 mb-2 flex items-center justify-between">
+              <h3 className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-2 flex items-center justify-between">
                 <span>Clubs</span>
                 {selectedClubs.length > 0 && (
-                  <span className="text-[#a594c9]/70 text-[9px] lowercase font-bold">{selectedClubs.length} selected</span>
+                  <span className="text-text-muted text-[9px] lowercase font-bold">{selectedClubs.length} selected</span>
                 )}
               </h3>
 
@@ -415,12 +415,12 @@ export default function Stats() {
                   placeholder="Search clubs..."
                   value={clubSearch}
                   onChange={(e) => setClubSearch(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-white/30 focus:outline-none focus:border-violet-500/50"
+                  className="w-full bg-surface border border-border rounded-xl px-3 py-2 text-xs text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-secondary"
                 />
                 {clubSearch && (
                   <button
                     onClick={() => setClubSearch("")}
-                    className="absolute right-3 top-2.5 text-xs text-[#a594c9]/60 hover:text-white cursor-pointer font-bold"
+                    className="absolute right-3 top-2.5 text-xs text-text-muted hover:text-text-primary cursor-pointer font-bold"
                   >
                     clear
                   </button>
@@ -434,7 +434,7 @@ export default function Stats() {
                     <span
                       key={cl}
                       onClick={() => toggleSelect(selectedClubs, "clubs", cl)}
-                      className="inline-flex items-center gap-1 py-1 px-2 rounded-lg bg-violet-500/20 border border-violet-500/50 text-[10px] font-black text-violet-200 cursor-pointer hover:bg-rose-500/20 hover:border-rose-500 hover:text-rose-200 transition-colors"
+                      className="inline-flex items-center gap-1 py-1 px-2 rounded-lg bg-secondary/20 border border-secondary/50 text-[10px] font-black text-secondary cursor-pointer hover:bg-rose-500/20 hover:border-rose-500 hover:text-rose-400 transition-colors"
                     >
                       <span>{cl}</span>
                       <span className="font-sans font-medium text-[9px] opacity-60">×</span>
@@ -455,8 +455,8 @@ export default function Stats() {
                         onClick={() => toggleSelect(selectedClubs, "clubs", cl)}
                         className={`py-2 px-3 rounded-xl border text-[11px] font-bold text-left truncate transition-all cursor-pointer
                           ${isChecked
-                            ? "bg-violet-500/20 border-violet-500 text-violet-200"
-                            : "bg-white/5 border-white/5 text-[#a594c9]/70 hover:bg-white/10 hover:text-white"
+                            ? "bg-secondary/20 border-secondary text-secondary"
+                            : "bg-surface border-border text-text-muted hover:bg-elevated hover:text-text-primary"
                           }`}
                       >
                         {cl}
@@ -464,21 +464,21 @@ export default function Stats() {
                     );
                   })}
                 {clubs.filter((cl) => cl.toLowerCase().includes(clubSearch.toLowerCase())).length === 0 && (
-                  <p className="col-span-2 text-center text-[10px] text-[#a594c9]/40 py-4 font-medium">No matching clubs found</p>
+                  <p className="col-span-2 text-center text-[10px] text-text-muted py-4 font-medium">No matching clubs found</p>
                 )}
               </div>
             </div>
 
             {/* Free Agent switch */}
-            <div className="flex items-center justify-between py-2 border-t border-violet-500/10">
+            <div className="flex items-center justify-between py-2 border-t border-border/50">
               <div>
-                <h4 className="text-xs font-black text-white">Free Agents Only</h4>
-                <p className="text-[10px] text-[#a594c9]/50 font-medium">Show players without active teams</p>
+                <h4 className="text-xs font-black text-text-primary">Free Agents Only</h4>
+                <p className="text-[10px] text-text-muted font-medium">Show players without active teams</p>
               </div>
               <button
                 onClick={() => updateSearch({ freeAgents: !freeAgentSelected })}
                 className={`w-11 h-6 rounded-full p-1 transition-colors cursor-pointer duration-200 focus:outline-none flex items-center
-                  ${freeAgentSelected ? "bg-violet-500" : "bg-white/10"}`}
+                  ${freeAgentSelected ? "bg-secondary" : "bg-surface border border-border"}`}
               >
                 <div
                   className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-200
@@ -490,7 +490,7 @@ export default function Stats() {
 
           <button
             onClick={() => setShowFilterOverlay(false)}
-            className="mt-6 w-full py-3.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold text-xs active:scale-[0.98] transition-all shadow-[0_4px_16px_rgba(139,92,246,0.25)] cursor-pointer"
+            className="mt-6 w-full py-3.5 bg-gradient-button text-white rounded-xl font-bold text-xs active:scale-[0.98] transition-all shadow-md cursor-pointer border-t border-white/20"
           >
             Apply Filters
           </button>

@@ -280,7 +280,7 @@ const MyTeamPage = () => {
   const hasValidLeadership = hasCaptain && hasViceCaptain;
 
   return (
-    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-white font-outfit select-none overflow-hidden pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
+    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-text-primary font-outfit select-none overflow-hidden pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
 
       {/* MOBILE HEADER (Visible on mobile screens < lg) */}
       <div className="lg:hidden shrink-0">
@@ -320,11 +320,11 @@ const MyTeamPage = () => {
                 </div>
               )}
               <div className="min-w-0 flex-1">
-                <h2 className="text-lg font-black text-white tracking-tight truncate">
+                <h2 className="text-lg font-black text-text-primary tracking-tight truncate">
                   {managerDetails?.team || "My Squad"}
                 </h2>
                 <p className="text-xs text-text-muted font-medium truncate">
-                  Manager: <span className="text-purple-300 font-semibold">{Array.isArray(managerDetails?.managers) ? managerDetails.managers.join(", ") : managerDetails?.managers || "Team Manager"}</span>
+                  Manager: <span className="text-purple-400 font-semibold">{Array.isArray(managerDetails?.managers) ? managerDetails.managers.join(", ") : managerDetails?.managers || "Team Manager"}</span>
                 </p>
               </div>
             </div>
@@ -339,13 +339,13 @@ const MyTeamPage = () => {
               <div className="flex items-center gap-1 bg-surface border border-border/60 rounded-xl p-1 shrink-0">
                 <button
                   onClick={() => { setHeaderTab("current"); navigate({ to: "/my-team", search: { tab: "current" }, replace: true }); }}
-                  className={`px-2.5 py-1 text-[10px] font-extrabold rounded-lg transition-all cursor-pointer ${headerTab === "current" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"}`}
+                  className={`px-2.5 py-1 text-[10px] font-extrabold rounded-lg transition-all cursor-pointer ${headerTab === "current" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-text-primary"}`}
                 >
                   GW {selectedGW}
                 </button>
                 <button
                   onClick={() => { setHeaderTab("history"); navigate({ to: "/my-team", search: { tab: "history" }, replace: true }); }}
-                  className={`px-2.5 py-1 text-[10px] font-extrabold rounded-lg transition-all cursor-pointer ${headerTab === "history" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-white"}`}
+                  className={`px-2.5 py-1 text-[10px] font-extrabold rounded-lg transition-all cursor-pointer ${headerTab === "history" ? "bg-secondary text-white shadow-sm" : "text-text-muted hover:text-text-primary"}`}
                 >
                   History
                 </button>
@@ -357,11 +357,11 @@ const MyTeamPage = () => {
           <div className="grid grid-cols-2 gap-2.5">
             <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Team Value</span>
-              <span className="text-base font-extrabold text-white mt-0.5 block">£{managerDetails?.total_budget || "100.0"}m</span>
+              <span className="text-base font-extrabold text-text-primary mt-0.5 block">£{managerDetails?.total_budget || "100.0"}m</span>
             </div>
             <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Bank</span>
-              <span className="text-base font-extrabold text-white mt-0.5 block">£{(managerDetails?.balance ?? 0).toFixed(2)}m</span>
+              <span className="text-base font-extrabold text-text-primary mt-0.5 block">£{(managerDetails?.balance ?? 0).toFixed(2)}m</span>
             </div>
             <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">GW Score</span>
@@ -369,7 +369,7 @@ const MyTeamPage = () => {
             </div>
             <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
               <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Total Points</span>
-              <span className="text-base font-extrabold text-white mt-0.5 block">{totalPointsFormatted} pts</span>
+              <span className="text-base font-extrabold text-text-primary mt-0.5 block">{totalPointsFormatted} pts</span>
             </div>
           </div>
 
@@ -438,7 +438,7 @@ const MyTeamPage = () => {
               <div className="flex gap-2">
                 <button
                   onClick={() => { triggerHaptic(); setActiveTab("pitch"); }}
-                  className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex items-center gap-1.5 min-h-[36px] px-2.5 ${activeTab === "pitch" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
+                  className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex items-center gap-1.5 min-h-[36px] px-2.5 ${activeTab === "pitch" ? "text-secondary" : "text-text-muted hover:text-text-primary"}`}
                 >
                   <LayoutGrid className="w-3.5 h-3.5" />
                   Pitch
@@ -446,7 +446,7 @@ const MyTeamPage = () => {
                 </button>
                 <button
                   onClick={() => { triggerHaptic(); setActiveTab("list"); }}
-                  className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex items-center gap-1.5 min-h-[36px] px-2.5 ${activeTab === "list" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
+                  className={`pb-1 text-xs font-extrabold tracking-wider uppercase transition-all relative cursor-pointer flex items-center gap-1.5 min-h-[36px] px-2.5 ${activeTab === "list" ? "text-secondary" : "text-text-muted hover:text-text-primary"}`}
                 >
                   <List className="w-3.5 h-3.5" />
                   List
@@ -505,7 +505,7 @@ const MyTeamPage = () => {
             ) : (
               /* Gameweek History View */
               <div className="bg-surface border border-border rounded-2xl p-4 shadow-card flex-1 min-h-0 flex flex-col animate-in fade-in duration-300 w-full max-w-3xl mx-auto">
-                <h2 className="text-sm font-extrabold uppercase tracking-wider text-text-muted/70 mb-3 px-1">Gameweek History</h2>
+                <h2 className="text-sm font-extrabold uppercase tracking-wider text-text-muted mb-3 px-1">Gameweek History</h2>
                 {isHomeLoading ? (
                   <div className="flex-1 flex items-center justify-center">
                     <span className="text-xs text-text-muted">Loading history...</span>
@@ -524,14 +524,14 @@ const MyTeamPage = () => {
                           <th className="py-2.5 px-3 text-right"></th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-border/20 font-semibold text-white">
+                      <tbody className="divide-y divide-border/20 font-semibold text-text-primary">
                         {[...homePageData.recentGameweeks].sort((a, b) => b.gameweek - a.gameweek).map((item) => (
                           <tr
                             key={item.gameweek}
-                            className="hover:bg-white/5 transition-all cursor-pointer group"
+                            className="hover:bg-elevated/50 transition-all cursor-pointer group"
                             onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: item.gameweek } })}
                           >
-                            <td className="py-3 px-3 font-bold">Gameweek {item.gameweek}</td>
+                            <td className="py-3 px-3 font-bold text-text-primary">Gameweek {item.gameweek}</td>
                             <td className="py-3 px-3 text-center text-[var(--color-success-bright)] font-mono font-extrabold">
                               {item.points} pts
                             </td>

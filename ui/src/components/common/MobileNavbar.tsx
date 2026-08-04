@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 const iconClass = (isActive: boolean) =>
-  `w-6 h-6 transition-all duration-300 ${isActive ? "text-secondary scale-110" : "text-[#8E89A6]"}`;
+  `w-6 h-6 transition-all duration-300 ${isActive ? "text-secondary scale-110" : "text-gray-400 dark:text-[#8E89A6]"}`;
 
 const HomeIcon = ({ isActive }: { isActive: boolean }) => (
   <House className={iconClass(isActive)} />
@@ -105,7 +105,7 @@ const MobileNavbar = () => {
   }
 
   return (
-    <nav className="mobile-navbar fixed bottom-0 left-0 right-0 w-full block lg:hidden border-t border-[#221938] z-50 bg-[#120C22] pb-[env(safe-area-inset-bottom)]" style={{ willChange: 'transform', viewTransitionName: 'bottom-nav' }}>
+    <nav className="mobile-navbar fixed bottom-0 left-0 right-0 w-full block lg:hidden border-t border-gray-200 dark:border-[#221938] z-50 bg-white dark:bg-[#120C22] pb-[env(safe-area-inset-bottom)] shadow-lg" style={{ willChange: 'transform', viewTransitionName: 'bottom-nav' }}>
       <div
         className="grid h-16"
         style={{ gridTemplateColumns: `repeat(${navItems.length}, minmax(0, 1fr))` }}
@@ -124,7 +124,7 @@ const MobileNavbar = () => {
               <span
                 className={`mt-1 transition-colors duration-300 ${isActive
                   ? "text-secondary font-semibold"
-                  : "text-[#8E89A6]"
+                  : "text-gray-500 dark:text-[#8E89A6]"
                   }`}
               >
                 {label}

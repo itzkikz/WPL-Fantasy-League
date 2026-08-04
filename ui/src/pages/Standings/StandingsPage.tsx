@@ -94,14 +94,14 @@ const StandingsPage = () => {
   const overallRankPercent = myTeamIndex !== -1 ? `Top ${Math.max(1, Math.round(((myTeamIndex + 1) / standings!.length) * 100))}%` : "Top 2%";
 
   return (
-    <div className="flex flex-col flex-1 bg-background text-white overflow-hidden font-outfit">
+    <div className="flex flex-col flex-1 bg-background text-text-primary overflow-hidden font-outfit">
 
       {/* 3. Navigation Tabs */}
       <div className="mx-4 mt-3 mb-4 flex border-b border-[var(--color-border-divider)] shrink-0">
         <button
           onClick={() => setActiveTab("overall")}
           className={`flex-1 pb-2 text-center text-sm font-extrabold tracking-wider uppercase transition-all relative cursor-pointer
-            ${activeTab === "overall" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
+            ${activeTab === "overall" ? "text-secondary" : "text-text-muted hover:text-text-primary"}`}
         >
           Overall Standings
           {activeTab === "overall" && (
@@ -111,7 +111,7 @@ const StandingsPage = () => {
         <button
           onClick={() => setActiveTab("fixtures")}
           className={`flex-1 pb-2 text-center text-sm font-extrabold tracking-wider uppercase transition-all relative cursor-pointer
-            ${activeTab === "fixtures" ? "text-secondary" : "text-text-muted/60 hover:text-white"}`}
+            ${activeTab === "fixtures" ? "text-secondary" : "text-text-muted hover:text-text-primary"}`}
         >
           Fixtures
           {activeTab === "fixtures" && (
@@ -123,36 +123,36 @@ const StandingsPage = () => {
       {/* Summary Card (only on overall) */}
       {activeTab === 'overall' && (
         <div className="mx-4 p-4 rounded-2xl bg-gradient-overview bg-dots border border-border flex items-center justify-between mb-4 flex-none shadow-card">
-          <div className="w-14 h-14 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-white relative overflow-hidden flex-shrink-0">
+          <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary relative overflow-hidden flex-shrink-0">
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 rotate-45 scale-110" />
-            <Trophy className="w-6 h-6 text-white relative z-10" />
+            <Trophy className="w-6 h-6 text-primary relative z-10" />
           </div>
 
           <div className="flex-1 grid grid-cols-4 gap-1 ml-4 text-center">
             <div>
-              <p className="text-[10px] text-[#c8c8c8]/60 font-medium">Your Rank</p>
+              <p className="text-[10px] text-text-secondary font-medium">Your Rank</p>
               <div className="flex items-baseline justify-center gap-1 mt-0.5">
-                <span className="text-xl font-black text-white">{myRank}</span>
+                <span className="text-xl font-black text-text-primary">{myRank}</span>
                 {myPosChange !== 0 ? (
                   <span className={`text-[10px] font-bold flex items-center gap-0.5 ${myPosChange > 0 ? 'text-success' : 'text-danger'}`}>
                     {myPosChange > 0 ? `▲` : `▼`} {Math.abs(myPosChange)}
                   </span>
                 ) : (
-                  <span className="text-[10px] text-[#c8c8c8]/40">-</span>
+                  <span className="text-[10px] text-text-muted/40">-</span>
                 )}
               </div>
             </div>
             <div>
-              <p className="text-[10px] text-[#c8c8c8]/60 font-medium">Total Points</p>
-              <p className="text-xl font-black text-white mt-0.5">{totalPoints}</p>
+              <p className="text-[10px] text-text-secondary font-medium">Total Points</p>
+              <p className="text-xl font-black text-text-primary mt-0.5">{totalPoints}</p>
             </div>
             <div>
-              <p className="text-[10px] text-[#c8c8c8]/60 font-medium">GW Points</p>
+              <p className="text-[10px] text-text-secondary font-medium">GW Points</p>
               <p className="text-xl font-black text-success mt-0.5">{gwPoints}</p>
             </div>
             <div>
-              <p className="text-[10px] text-[#c8c8c8]/60 font-medium">Overall Rank</p>
-              <p className="text-xl font-black text-white mt-0.5">{overallRankPercent}</p>
+              <p className="text-[10px] text-text-secondary font-medium">Overall Rank</p>
+              <p className="text-xl font-black text-text-primary mt-0.5">{overallRankPercent}</p>
             </div>
           </div>
         </div>
@@ -162,7 +162,7 @@ const StandingsPage = () => {
       <div className="flex-1 overflow-hidden flex flex-col px-4">
         {/* Column Headers */}
         {activeTab === 'overall' && (
-          <div className="flex items-center justify-between text-[11px] font-bold text-[#c8c8c8]/50 uppercase tracking-wider px-3 pb-2.5 flex-none">
+          <div className="flex items-center justify-between text-[11px] font-bold text-text-muted uppercase tracking-wider px-3 pb-2.5 flex-none">
             <div className="w-10 text-left">Rank</div>
             <div className="flex-1 text-left pl-3">Manager</div>
             <div className="w-14 text-center">GW</div>
@@ -176,7 +176,7 @@ const StandingsPage = () => {
             [...Array(10)].map((_, i) => (
               <div
                 key={i}
-                className={`h-16 bg-white/5 border border-white/5 rounded-2xl skeleton-pulse stagger-${Math.min(i + 1, 5)}`}
+                className={`h-16 bg-surface border border-border rounded-2xl skeleton-pulse stagger-${Math.min(i + 1, 5)}`}
               />
             ))
           ) : activeTab === 'overall' ? (
@@ -192,19 +192,19 @@ const StandingsPage = () => {
                   onClick={() => handleTeamClick(r.team_id)}
                   style={{ viewTransitionName: `team-row-${r.team_id}` }}
                   className={`flex items-center justify-between p-3 rounded-2xl cursor-pointer transition-all duration-200 ${isMe
-                    ? 'bg-[#211433]/70 border border-primary/45 shadow-[0_0_12px_rgba(139,92,246,0.15)]'
-                    : 'bg-white/5 border border-white/[0.03] hover:bg-white/10'
+                    ? 'bg-primary/10 border border-primary/45 shadow-sm'
+                    : 'bg-surface border border-border hover:bg-elevated'
                     }`}
                 >
                   {/* Rank & Change column */}
                   <div className="w-10 flex flex-col items-center justify-center flex-shrink-0">
-                    <span className="text-base font-black text-white">{i + 1}</span>
+                    <span className="text-base font-black text-text-primary">{i + 1}</span>
                     {posChange !== 0 ? (
                       <span className={`text-[9px] font-bold flex items-center gap-0.5 mt-0.5 ${posChange > 0 ? 'text-success' : 'text-danger'}`}>
                         {posChange > 0 ? `▲` : `▼`}{Math.abs(posChange)}
                       </span>
                     ) : (
-                      <span className="text-[10px] text-[#c8c8c8]/30 mt-0.5">-</span>
+                      <span className="text-[10px] text-text-muted/30 mt-0.5">-</span>
                     )}
                   </div>
 
@@ -214,7 +214,7 @@ const StandingsPage = () => {
                       <Crown className="w-4 h-4 text-yellow-400 absolute -top-2.5 left-4 rotate-12 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10 animate-pulse" />
                     )}
                     {r.logo ? (
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden border border-white/10 bg-white/5">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden border border-border bg-surface">
                         <img src={r.logo} alt={`${r.team} logo`} className="w-9 h-9 object-contain" />
                       </div>
                     ) : (
@@ -226,8 +226,8 @@ const StandingsPage = () => {
 
                   {/* Name column */}
                   <div className="flex-1 pl-3.5 min-w-0">
-                    <p className="text-[14px] font-bold text-white leading-snug">{r.team}</p>
-                    <p className="text-[11px] text-[#c8c8c8]/50 mt-0.5">{manager}</p>
+                    <p className="text-[14px] font-bold text-text-primary leading-snug">{r.team}</p>
+                    <p className="text-[11px] text-text-secondary mt-0.5">{manager}</p>
                   </div>
 
                   {/* GW points */}
@@ -237,8 +237,8 @@ const StandingsPage = () => {
 
                   {/* Total points & Arrow */}
                   <div className="w-18 flex items-center justify-end gap-1.5 flex-shrink-0 text-right pr-2">
-                    <span className="text-[14px] font-black text-white">{r.total}</span>
-                    <ChevronRight className="w-3.5 h-3.5 text-[#c8c8c8]/30" />
+                    <span className="text-[14px] font-black text-text-primary">{r.total}</span>
+                    <ChevronRight className="w-3.5 h-3.5 text-text-muted" />
                   </div>
                 </div>
               );
@@ -259,8 +259,8 @@ const StandingsPage = () => {
                   <button
                     onClick={() => setFixtureFilter('mine')}
                     className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${fixtureFilter === 'mine'
-                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                      : 'bg-white/5 text-text-muted/50 border border-white/[0.06] hover:text-white'
+                      ? 'bg-primary/20 text-primary border border-primary/40'
+                      : 'bg-elevated text-text-muted border border-border hover:text-text-primary'
                       }`}
                   >
                     Your Fixtures
@@ -269,14 +269,14 @@ const StandingsPage = () => {
                     onClick={() => setFixtureFilter('all')}
                     className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${fixtureFilter === 'all'
                       ? 'bg-secondary/20 text-secondary border border-secondary/30'
-                      : 'bg-white/5 text-text-muted/50 border border-white/[0.06] hover:text-white'
+                      : 'bg-elevated text-text-muted border border-border hover:text-text-primary'
                       }`}
                   >
                     All Fixtures
                   </button>
                 </div>
 
-                <div className="text-center py-2.5 bg-surface border border-border/50 rounded-xl mb-4 flex items-center justify-center gap-1.5 shadow-inner">
+                <div className="text-center py-2.5 bg-surface border border-border rounded-xl mb-4 flex items-center justify-center gap-1.5 shadow-inner">
                   <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-ping" />
                   <p className="text-xs font-black uppercase tracking-wider text-secondary font-mono">Gameweek {gameweekNumber} Fixtures</p>
                 </div>
@@ -289,7 +289,7 @@ const StandingsPage = () => {
 
                   if (filteredFixtures.length === 0) {
                     return (
-                      <div className="text-center py-6 text-text-muted/40">
+                      <div className="text-center py-6 text-text-muted">
                         <p className="text-sm font-medium">No fixtures found</p>
                         <p className="text-xs mt-1">None of your players play in this gameweek.</p>
                       </div>
@@ -307,8 +307,8 @@ const StandingsPage = () => {
                         key={fix.fixtureId}
                         onClick={() => setSelectedFixture(fix)}
                         className={`rounded-2xl transition-all duration-200 cursor-pointer active:scale-[0.99] ${isRelevant
-                          ? 'bg-amber-500/[0.07] border border-amber-500/30 shadow-[0_0_12px_rgba(245,158,11,0.1)]'
-                          : 'bg-white/5 border border-white/[0.03] hover:bg-white/10'
+                          ? 'bg-primary/10 border border-primary/40 shadow-sm'
+                          : 'bg-surface border border-border hover:bg-elevated'
                           }`}
                       >
                         <div className="p-4 flex items-center justify-between">
@@ -317,13 +317,13 @@ const StandingsPage = () => {
                             {(fix.homeTeam.logo || fix.homeTeam.photo) ? (
                               <img src={fix.homeTeam.logo || fix.homeTeam.photo} className="w-8 h-8 object-contain shrink-0" alt="" />
                             ) : (
-                              <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center font-black text-xs shrink-0 text-white font-mono" style={{ backgroundColor: fix.homeTeam.color }}>
+                              <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center font-black text-xs shrink-0 text-white font-mono" style={{ backgroundColor: fix.homeTeam.color }}>
                                 {fix.homeTeam.shortName}
                               </div>
                             )}
                             <div className="flex flex-col min-w-0">
-                              <span className="hidden sm:block text-sm font-extrabold text-white truncate leading-tight">{fix.homeTeam.name}</span>
-                              <span className="text-xs sm:text-[10px] font-black text-white sm:text-text-muted/50 uppercase tracking-wider">{fix.homeTeam.shortName}</span>
+                              <span className="hidden sm:block text-sm font-extrabold text-text-primary truncate leading-tight">{fix.homeTeam.name}</span>
+                              <span className="text-xs sm:text-[10px] font-black text-text-primary sm:text-text-muted uppercase tracking-wider">{fix.homeTeam.shortName}</span>
                             </div>
                           </div>
 
@@ -331,15 +331,15 @@ const StandingsPage = () => {
                           <div className="px-4 flex flex-col items-center justify-center shrink-0 min-w-[95px]">
                             {isFinished || isInProgress ? (
                               <div className="flex items-center gap-2.5 bg-background border border-border rounded-xl px-2.5 py-0.5 shadow-inner">
-                                <span className="text-sm font-black text-white font-mono">{fix.homeScore?.display ?? 0}</span>
-                                <span className="text-[10px] font-black text-text-muted/60 font-mono">―</span>
-                                <span className="text-sm font-black text-white font-mono">{fix.awayScore?.display ?? 0}</span>
+                                <span className="text-sm font-black text-text-primary font-mono">{fix.homeScore?.display ?? 0}</span>
+                                <span className="text-[10px] font-black text-text-muted font-mono">―</span>
+                                <span className="text-sm font-black text-text-primary font-mono">{fix.awayScore?.display ?? 0}</span>
                               </div>
                             ) : (
                               <span className="text-[9px] font-black text-secondary bg-secondary/10 border border-secondary/20 px-2.5 py-0.5 rounded-md font-mono">VS</span>
                             )}
                             <span className={`text-[8px] font-bold mt-1.5 uppercase tracking-wider
-                            ${isInProgress ? "text-rose-400 animate-pulse font-black" : "text-text-muted/50"}`}>
+                            ${isInProgress ? "text-rose-400 animate-pulse font-black" : "text-text-muted"}`}>
                               {isInProgress ? "LIVE" : isFinished ? "FT" : startTime}
                             </span>
                           </div>
@@ -347,13 +347,13 @@ const StandingsPage = () => {
                           {/* Away Team */}
                           <div className="flex-1 flex items-center gap-3 justify-end min-w-0">
                             <div className="flex flex-col items-end min-w-0">
-                              <span className="hidden sm:block text-sm font-extrabold text-white truncate leading-tight text-right">{fix.awayTeam.name}</span>
-                              <span className="text-xs sm:text-[10px] font-black text-white sm:text-text-muted/50 uppercase tracking-wider">{fix.awayTeam.shortName}</span>
+                              <span className="hidden sm:block text-sm font-extrabold text-text-primary truncate leading-tight text-right">{fix.awayTeam.name}</span>
+                              <span className="text-xs sm:text-[10px] font-black text-text-primary sm:text-text-muted uppercase tracking-wider">{fix.awayTeam.shortName}</span>
                             </div>
                             {(fix.awayTeam.logo || fix.awayTeam.photo) ? (
                               <img src={fix.awayTeam.logo || fix.awayTeam.photo} className="w-8 h-8 object-contain shrink-0" alt="" />
                             ) : (
-                              <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center font-black text-xs shrink-0 text-white font-mono" style={{ backgroundColor: fix.awayTeam.color }}>
+                              <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center font-black text-xs shrink-0 text-white font-mono" style={{ backgroundColor: fix.awayTeam.color }}>
                                 {fix.awayTeam.shortName}
                               </div>
                             )}
@@ -364,8 +364,8 @@ const StandingsPage = () => {
                         {isRelevant && (
                           <div className="px-4 pb-3 -mt-2">
                             <div className="flex items-center gap-1.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                              <span className="text-[9px] font-bold text-amber-400/80 uppercase tracking-wider">Your Players</span>
+                              <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
+                              <span className="text-[9px] font-bold text-secondary/80 uppercase tracking-wider">Your Players</span>
                             </div>
                           </div>
                         )}
