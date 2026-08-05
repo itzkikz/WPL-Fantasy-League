@@ -521,75 +521,48 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             }
         }
 
-        // Free Agents: find player IDs owned by any fantasy team
-        let ownedPlayerIdsForExclusion: number[] = [];
-        if (freeAgents) {
-            const allFantasyTeamsForFilter = await FantasyTeam.find({}).lean();
-            const ownedSet = new Set<number>();
-            for (const ft of allFantasyTeamsForFilter) {
-                for (const pick of ft.currentSquad?.picks || []) {
-                    ownedSet.add(pick.playerId);
-                }
+        // Ownership data: load once (projected) for free-agent exclusion + ownership %
+        const allFantasyTeams = await FantasyTeam.find({})
+            .select('name currentSquad.picks.playerId')
+            .lean();
+        const teamNameByPlayer = new Map<number, string[]>();
+        for (const ft of allFantasyTeams) {
+            for (const pick of ft.currentSquad?.picks || []) {
+                if (!teamNameByPlayer.has(pick.playerId)) teamNameByPlayer.set(pick.playerId, []);
+                teamNameByPlayer.get(pick.playerId)!.push(ft.name);
             }
-            ownedPlayerIdsForExclusion = [...ownedSet];
         }
+        const ownedPlayerIdsForExclusion: number[] = [...teamNameByPlayer.keys()];
 
         const totalPlayers = await Player.countDocuments(query);
         const totalPages = Math.ceil(totalPlayers / limit);
 
-        // When filtering free agents, fetch all matching then filter in JS
-        // because Mongoose's `id` virtual conflicts with the numeric `id` field
-        const pipeline: any[] = [
-            { $match: query },
-            {
-                $lookup: {
-                    from: "playerstats",
-                    localField: "id",
-                    foreignField: "playerId",
-                    as: "pStats"
-                }
-            },
-            {
-                $addFields: {
-                    total_point_sort: {
-                        $ifNull: [{ $arrayElemAt: ["$pStats.totalPoints", 0] }, 0]
-                    }
-                }
-            },
-            {
-                $sort: { total_point_sort: -1, id: 1 }
-            },
-            // Skip pagination in pipeline when freeAgents — filter & paginate in JS
-            ...(!freeAgents ? [{ $skip: skip }, { $limit: limit }] : []),
-            {
-                $project: {
-                    pStats: 0,
-                    total_point_sort: 0
-                }
-            }
-        ];
-        let players = await Player.aggregate(pipeline);
+        // Sort key: total fantasy points. Load only projected sort keys (playerId + totalPoints)
+        // and sort the small id/teamId list in JS, avoiding the full-collection $lookup + Mongo sort
+        // that previously streamed every player's stats payload on each request.
+        const totalPointsDocs = await PlayerStatsModel.find({}, { playerId: 1, totalPoints: 1 }).lean();
+        const totalPointsMap = new Map(totalPointsDocs.map(d => [d.playerId, d.totalPoints || 0]));
+
+        const pageCandidates = await Player.find(query).select('id teamId').lean();
+        pageCandidates.sort((a: any, b: any) =>
+            (totalPointsMap.get(b.id) || 0) - (totalPointsMap.get(a.id) || 0) || a.id - b.id
+        );
 
         // JS-side free agent filtering (Mongoose `id` virtual prevents DB-level filtering)
-        if (freeAgents && ownedPlayerIdsForExclusion.length > 0) {
+        if (freeAgents) {
             const ownedSet = new Set(ownedPlayerIdsForExclusion);
-            players = players.filter((p: any) => !ownedSet.has(p.id));
-            const totalFreeAgents = players.length;
-            players = players.slice(skip, skip + limit);
+            const freeCandidates = pageCandidates.filter((p: any) => !ownedSet.has(p.id));
+            const totalFreeAgents = freeCandidates.length;
+            const pageIds = freeCandidates.slice(skip, skip + limit).map((p: any) => p.id);
+            let players: any[] = pageIds.length > 0
+                ? await Player.find({ id: { $in: pageIds } }).lean()
+                : [];
+            const playersById = new Map(players.map(p => [p.id, p]));
+            players = pageIds.map(id => playersById.get(id)).filter(Boolean);
 
             const teamIds = [...new Set(players.map(p => p.teamId))];
             const teams = (await Team.find({ id: { $in: teamIds } }).populate({ path: 'league', strictPopulate: false }).lean()) as any[];
             const teamMap = new Map(teams.map(t => [t.id, t]));
-
-            const allFantasyTeams = await FantasyTeam.find({}).lean();
-            const playerToFantasyTeam = new Map<number, string>();
-            for (const ft of allFantasyTeams) {
-                for (const pick of ft.currentSquad?.picks || []) {
-                    if (!playerToFantasyTeam.has(pick.playerId)) {
-                        playerToFantasyTeam.set(pick.playerId, ft.name);
-                    }
-                }
-            }
 
             const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
             const currentGw = currentGwDoc ? currentGwDoc.number : 1;
@@ -648,21 +621,13 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 if (awayId) fixturesByTeam.get(awayId)!.push({ fixture: f, isHome: false, opponentId: homeId });
             }
 
-            // Ownership counts
+            // Ownership counts (single-pass map built above)
             const totalTeamsCount = allFantasyTeams.length;
             const ownershipMap = new Map<number, { pct: number; teamName: string | null }>();
             for (const pid of players.map(p => p.id)) {
-                let count = 0;
-                let tName: string | null = null;
-                for (const ft of allFantasyTeams) {
-                    const picks = (ft as any).currentSquad?.picks || [];
-                    if (picks.some((p: any) => p.playerId === pid)) {
-                        count++;
-                        if (!tName) tName = (ft as any).name;
-                    }
-                }
-                const pct = totalTeamsCount > 0 ? Number(((count / totalTeamsCount) * 100).toFixed(1)) : 0;
-                ownershipMap.set(pid, { pct, teamName: tName });
+                const owners = teamNameByPlayer.get(pid) || [];
+                const pct = totalTeamsCount > 0 ? Number(((owners.length / totalTeamsCount) * 100).toFixed(1)) : 0;
+                ownershipMap.set(pid, { pct, teamName: owners[0] || null });
             }
 
             const playerStats: PlayerStats[] = players.map(player => {
@@ -767,20 +732,17 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             });
         }
 
-        // Non-free-agent path (unchanged)
+        // Non-free-agent path
+        const pageIds = pageCandidates.slice(skip, skip + limit).map((p: any) => p.id);
+        let players: any[] = pageIds.length > 0
+            ? await Player.find({ id: { $in: pageIds } }).lean()
+            : [];
+        const playersById = new Map(players.map(p => [p.id, p]));
+        players = pageIds.map(id => playersById.get(id)).filter(Boolean);
+
         const teamIds = [...new Set(players.map(p => p.teamId))];
         const teams = (await Team.find({ id: { $in: teamIds } }).populate({ path: 'league', strictPopulate: false }).lean()) as any[];
         const teamMap = new Map(teams.map(t => [t.id, t]));
-
-        const allFantasyTeams = await FantasyTeam.find({}).lean();
-        const playerToFantasyTeam = new Map<number, string>();
-        for (const ft of allFantasyTeams) {
-            for (const pick of ft.currentSquad?.picks || []) {
-                if (!playerToFantasyTeam.has(pick.playerId)) {
-                    playerToFantasyTeam.set(pick.playerId, ft.name);
-                }
-            }
-        }
 
         const positionMap: Record<number, string> = { 1: 'GK', 2: 'DEF', 3: 'MID', 4: 'FWD' };
 
@@ -845,17 +807,9 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
         const totalTeamsCount2 = allFantasyTeams.length;
         const ownershipMap2 = new Map<number, { pct: number; teamName: string | null }>();
         for (const pid of players.map(p => p.id)) {
-            let count = 0;
-            let tName: string | null = null;
-            for (const ft of allFantasyTeams) {
-                const picks = (ft as any).currentSquad?.picks || [];
-                if (picks.some((p: any) => p.playerId === pid)) {
-                    count++;
-                    if (!tName) tName = (ft as any).name;
-                }
-            }
-            const pct = totalTeamsCount2 > 0 ? Number(((count / totalTeamsCount2) * 100).toFixed(1)) : 0;
-            ownershipMap2.set(pid, { pct, teamName: tName });
+            const owners = teamNameByPlayer.get(pid) || [];
+            const pct = totalTeamsCount2 > 0 ? Number(((owners.length / totalTeamsCount2) * 100).toFixed(1)) : 0;
+            ownershipMap2.set(pid, { pct, teamName: owners[0] || null });
         }
 
         const playerStats: PlayerStats[] = players.map(player => {
