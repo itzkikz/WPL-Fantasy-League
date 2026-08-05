@@ -180,10 +180,12 @@ const HomePage = () => {
             <LeagueStandings
               standings={data.leagueStandings}
               myTeam={data.teamOverview.teamName}
+              limit={5}
             />
           </div>
           <div className="lg:col-span-2">
             <PlayerSpotlight
+              spotlightPlayers={data.spotlightPlayers}
               photo={data.playerSpotlight?.player?.photo}
               name={data.playerSpotlight?.player?.name}
               club={data.playerSpotlight?.player?.fullTeamName}

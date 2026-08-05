@@ -47,14 +47,19 @@ registerRoute(
   })
 )
 
-// Images: CacheFirst with expiration
+// Images: CacheFirst with expiration (covers local & external player photos / club logos)
 registerRoute(
-  ({ request }) => request.destination === 'image',
+  ({ request, url }) =>
+    request.destination === 'image' ||
+    /\.(?:png|jpg|jpeg|svg|webp|gif|avif)$/i.test(url.pathname),
   new CacheFirst({
     cacheName: `${CACHE_NAME}-images`,
     plugins: [
-      new CacheableResponsePlugin({ statuses: [200] }),
-      new ExpirationPlugin({ maxEntries: 60, maxAgeSeconds: 60 * 60 * 24 * 30 }),
+      new CacheableResponsePlugin({ statuses: [0, 200] }),
+      new ExpirationPlugin({
+        maxEntries: 300,
+        maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+      }),
     ],
   })
 )

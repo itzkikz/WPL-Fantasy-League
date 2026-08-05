@@ -703,13 +703,13 @@ const GameweekBreakdownPage = () => {
                                   <td className="py-2.5 px-3 text-center text-text-muted">
                                     {m.isHome === null || m.isHome === undefined ? "—" : m.isHome ? "H" : "A"}
                                   </td>
-                                  <td className="py-2.5 px-3 text-center">{m.stats?.minutesPlayed ?? 0}</td>
+                                  <td className="py-2.5 px-3 text-center">{(m.stats?.minutesPlayed ?? 0) === 0 ? "DNP" : m.stats?.minutesPlayed}</td>
                                   <td className="py-2.5 px-3 text-center">{m.stats?.goals ?? 0}</td>
                                   <td className="py-2.5 px-3 text-center">{m.stats?.goalAssist ?? 0}</td>
                                   <td className="py-2.5 px-3 text-center">{m.stats?.cleanSheet ?? 0}</td>
                                   <td className="py-2.5 px-3 text-center">{m.stats?.saves ?? 0}</td>
                                   <td className="py-2.5 px-3 text-center font-mono font-extrabold text-[var(--color-success-bright)]">
-                                    {m.points ?? 0}
+                                    {(m.stats?.minutesPlayed ?? 0) === 0 ? "DNP" : (m.points ?? 0)}
                                   </td>
                                 </tr>
                               ))

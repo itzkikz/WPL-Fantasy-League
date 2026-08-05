@@ -34,4 +34,6 @@ export interface TeamDetails {
     playerStats?: any;
     subIn?: boolean;
     subOut?: boolean;
+    minutesPlayed?: number;
+    app?: number;
 }

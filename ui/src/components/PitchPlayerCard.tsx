@@ -25,6 +25,24 @@ const PitchPlayerCard = ({
     ? player.name.trim().split(/\s+/).slice(-1)[0]
     : "";
 
+  const mins =
+    player?.minutesPlayed ??
+    (player as any)?.minutes ??
+    (player as any)?.stats?.minutesPlayed ??
+    player?.playerStats?.current_week?.minutesPlayed ??
+    (player as any)?.current_week?.minutesPlayed;
+
+  const app = player?.app ?? player?.playerStats?.current_week?.app;
+  const hasPlayedMins = typeof mins === "number" && mins > 0;
+  const isZeroOrNoPoints = player?.point === 0 || player?.point === undefined || Number(player?.point) === 0;
+
+  const didNotPlay =
+    mins === 0 ||
+    app === 0 ||
+    (player as any)?.hasPlayed === false ||
+    (player?.playerStats?.current_week && (player.playerStats.current_week.minutesPlayed ?? 0) === 0) ||
+    (!hasPlayedMins && isZeroOrNoPoints);
+
   return (
     <div
       onClick={onClick}
@@ -101,13 +119,6 @@ const PitchPlayerCard = ({
               <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
             </svg>
           </div>
-
-          {/* Small Team Badge Overlay */}
-          {/* <div className="absolute bottom-0 left-0 right-0 bg-black/75 py-0.5 text-center leading-none border-t border-white/5">
-            <span className="text-[7px] md:text-[8px] font-black uppercase tracking-wider text-white/95">
-              {player?.team || "UNK"}
-            </span>
-          </div> */}
         </div>
       </div>
 
@@ -125,8 +136,12 @@ const PitchPlayerCard = ({
             <div className="flex-1 text-center py-0.5 bg-card text-text-secondary border-r border-border leading-tight">
               {player.price || getPlayerDisplayPrice(player)}
             </div>
-            <div className="flex-1 text-center py-0.5 bg-[var(--color-success-bg)] text-[var(--color-success-bright)] leading-tight font-mono font-black">
-              {player?.point ?? 0}
+            <div className={`flex-1 text-center py-0.5 leading-tight font-mono font-black ${
+              didNotPlay
+                ? "bg-slate-800/80 text-amber-400 text-[8px] sm:text-[9px]"
+                : "bg-[var(--color-success-bg)] text-[var(--color-success-bright)]"
+            }`}>
+              {didNotPlay ? "DNP" : (player?.point ?? 0)}
             </div>
           </div>
         </div>
@@ -150,11 +165,9 @@ const PitchPlayerCard = ({
           <div
             className="px-1 py-0.5 text-center truncate bg-surface text-text-secondary"
           >
-            <p className={`${isSmall ? "text-[8px] md:text-[9px]" : "text-xl md:text-[10px]"} font-extrabold leading-tight`}>
+            <p className={`${isSmall ? "text-[8px] md:text-[9px]" : "text-xl md:text-[10px]"} font-extrabold leading-tight ${didNotPlay ? "text-amber-400/90" : ""}`}>
               {pickMyteam ? playerFirstName !== playerLastName ? playerLastName : (<>&nbsp;</>) : (
-                <>
-                  {player?.point}
-                </>
+                didNotPlay ? "DNP" : player?.point
               )}
             </p>
           </div>

@@ -216,6 +216,7 @@ export interface HomePageData {
   recentGameweeks: GameweekHistory[];
   topPlayers: TopPlayer[];
   playerSpotlight: PlayerSpotlightData;
+  spotlightPlayers?: PlayerSpotlightData[];
   pointsBreakdown: PointsBreakdown;
   seasonStats: SeasonStats;
   bestPerformers: BestPerformer[];

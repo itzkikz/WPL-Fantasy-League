@@ -37,6 +37,8 @@ export function convertToFormation(playersData: TeamDetails[]): FormationResult 
       teamColor: (playerData.team_color && playerData.team_color !== "#000000") ? playerData.team_color : "#003399", // Default blue fallback instead of black? Or keep black.
       teamTextColor: playerData.team_text_color || "#ffffff",
       point: playerData.point || 0,
+      minutesPlayed: playerData.minutesPlayed ?? playerData.playerStats?.current_week?.minutesPlayed ?? ((playerData as any).app === 0 ? 0 : undefined),
+      app: playerData.app,
       position: mapPosition(playerData.position),
       fullTeamName: playerData.club,
       gw: playerData.gw,

@@ -216,8 +216,8 @@ const PlayerStatsModal = ({
                   const isDEF = pos === "DEF";
                   const defCont = (cw?.totalTackle || 0) + (cw?.totalClearance || 0) + (cw?.outfielderBlock || 0) + (cw?.ballRecovery || 0);
 
-                  const items: { icon: any; iconColor: string; label: string; value: number }[] = [];
-                  items.push({ icon: Clock, iconColor: "text-slate-400", label: "Mins", value: cw?.minutesPlayed || 0 });
+                  const items: { icon: any; iconColor: string; label: string; value: any }[] = [];
+                  items.push({ icon: Clock, iconColor: "text-slate-400", label: "Mins", value: cw?.minutesPlayed === 0 ? "DNP" : cw?.minutesPlayed || 0 });
                   if (!isGK) items.push({ icon: Goal, iconColor: "text-amber-400", label: "Goals", value: cw?.goals || 0 });
                   items.push({ icon: Footprints, iconColor: "text-indigo-400", label: "Assists", value: cw?.goalAssist || 0 });
                   if (isGK || isDEF) items.push({ icon: Shield, iconColor: "text-emerald-400", label: "CS", value: Number(cw?.cleanSheet) || 0 });
@@ -384,7 +384,7 @@ const PlayerStatsModal = ({
                           </div>
                           <div className="grid grid-cols-5 gap-1.5 text-center">
                             {[
-                              { label: "Mins", v: m.stats?.minutesPlayed ?? 0 },
+                              { label: "Mins", v: (m.stats?.minutesPlayed === 0 ? "DNP" : m.stats?.minutesPlayed ?? 0) },
                               { label: "Goals", v: m.stats?.goals ?? 0 },
                               { label: "Assists", v: m.stats?.goalAssist ?? 0 },
                               { label: "CS", v: m.stats?.cleanSheet ?? 0 },
