@@ -37,20 +37,24 @@ const ManagerOverviewPage = () => {
   );
   const myTeamId = myStanding?.team_id || (managerDetails as any)?.team_id || (managerDetails as any)?.teamId || "";
 
+  // When no teamId is supplied in the URL (e.g. navigating from Settings),
+  // fall back to the logged-in user's own team
+  const resolvedTeamId = teamId || myTeamId;
+
   // Target team for comparison:
   // If user is viewing their own team or myTeamId is missing, compare against #1 team (or #2 if user IS #1)
   const topStanding = standings?.[0];
   const secondStanding = standings?.[1];
 
   let compareAgainstTeamId = myTeamId;
-  if (!myTeamId || teamId === myTeamId) {
-    compareAgainstTeamId = (topStanding?.team_id === teamId)
+  if (!myTeamId || resolvedTeamId === myTeamId) {
+    compareAgainstTeamId = (topStanding?.team_id === resolvedTeamId)
       ? (secondStanding?.team_id || "")
       : (topStanding?.team_id || "");
   }
 
   // Query overview details for target team & comparison team
-  const { data, isLoading, isError } = useManagerOverview(teamId);
+  const { data, isLoading, isError } = useManagerOverview(resolvedTeamId);
   const { data: compareOverviewData } = useManagerOverview(compareAgainstTeamId);
 
   const { teamName, logo, managers, rank, totalPoints, gwPoints, currentSquad, history } = data || {};
@@ -197,14 +201,16 @@ const ManagerOverviewPage = () => {
             </p>
           </div>
 
-          <button
-            onClick={() => setShowCompareModal(true)}
-            className="flex items-center gap-1 bg-secondary/15 hover:bg-secondary/25 border border-secondary/30 text-secondary rounded-lg px-2 py-1 text-[10px] font-bold transition-all active:scale-95 cursor-pointer shrink-0"
-            title="Compare with My Team"
-          >
-            <Swords className="w-3 h-3" />
-            <span>Compare</span>
-          </button>
+          {resolvedTeamId !== myTeamId && (
+            <button
+              onClick={() => setShowCompareModal(true)}
+              className="flex items-center gap-1 bg-secondary/15 hover:bg-secondary/25 border border-secondary/30 text-secondary rounded-lg px-2 py-1 text-[10px] font-bold transition-all active:scale-95 cursor-pointer shrink-0"
+              title="Compare with My Team"
+            >
+              <Swords className="w-3 h-3" />
+              <span>Compare</span>
+            </button>
+          )}
         </header>
       </div>
 
@@ -319,7 +325,7 @@ const ManagerOverviewPage = () => {
               return (
                 <button
                   key={h.gameweek}
-                  onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: h.gameweek, teamId } })}
+                  onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: h.gameweek, teamId: resolvedTeamId } })}
                   className="flex flex-col items-center justify-center min-w-[80px] rounded-xl py-2.5 px-3 border bg-surface hover:bg-white/5 border-border/40 hover:border-secondary/50 transition-all cursor-pointer"
                 >
                   <span className="text-[9px] text-text-muted font-black uppercase tracking-wider">GW {h.gameweek}</span>
@@ -361,14 +367,16 @@ const ManagerOverviewPage = () => {
               </div>
             </div>
 
-            <button
-              onClick={() => setShowCompareModal(true)}
-              className="flex items-center gap-1 bg-secondary/15 hover:bg-secondary/25 border border-secondary/30 text-secondary rounded-xl px-2.5 py-1.5 text-xs font-bold transition-all active:scale-95 cursor-pointer shrink-0"
-              title="Compare with My Team"
-            >
-              <Swords className="w-3.5 h-3.5" />
-              <span>Compare</span>
-            </button>
+            {resolvedTeamId !== myTeamId && (
+              <button
+                onClick={() => setShowCompareModal(true)}
+                className="flex items-center gap-1 bg-secondary/15 hover:bg-secondary/25 border border-secondary/30 text-secondary rounded-xl px-2.5 py-1.5 text-xs font-bold transition-all active:scale-95 cursor-pointer shrink-0"
+                title="Compare with My Team"
+              >
+                <Swords className="w-3.5 h-3.5" />
+                <span>Compare</span>
+              </button>
+            )}
           </div>
 
           {/* Profile Card */}
@@ -432,7 +440,7 @@ const ManagerOverviewPage = () => {
                 return (
                   <button
                     key={h.gameweek}
-                    onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: h.gameweek, teamId } })}
+                  onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: h.gameweek, teamId: resolvedTeamId } })}
                     className="flex items-center justify-between border rounded-xl p-2 bg-background/50 hover:bg-elevated border-border/60 hover:border-secondary transition-all cursor-pointer text-left"
                   >
                     <span className="text-xs font-extrabold text-text-primary">GW {h.gameweek}</span>
