@@ -100,18 +100,35 @@ export const getMyH2HLeagues = async (req: Request, res: Response) => {
         const user = await User.findOne({ username });
         if (!user) return res.status(404).json({ error: 'User not found' });
 
+        const { Gameweek } = require('../models/Gameweek');
+        const currentGw = await Gameweek.findOne({ isCurrent: true }).lean();
+
         const fantasyTeam = await FantasyTeam.findOne({ managers: user._id });
-        if (!fantasyTeam) return res.status(404).json({ error: 'Fantasy team not found' });
 
         // Find the H2H league for current season (or first one if season not tracked)
         // For now, find the first league containing this team
-        const leagues = await H2HLeague.find({ fantasyTeams: fantasyTeam._id })
-            .populate('fantasyTeams', 'name')
-            .lean();
+        let leagues = fantasyTeam
+            ? await H2HLeague.find({ fantasyTeams: fantasyTeam._id })
+                .populate('fantasyTeams', 'name')
+                .lean()
+            : [];
 
-        // Get the current gameweek to determine "active" league
-        const { Gameweek } = require('../models/Gameweek');
-        const currentGw = await Gameweek.findOne({ isCurrent: true }).lean();
+        // No team or not in any league -> fall back to the current season's league
+        // so users without a fantasy team can still browse H2H
+        if (leagues.length === 0) {
+            const allLeagues = await H2HLeague.find({})
+                .populate('fantasyTeams', 'name')
+                .sort({ season: -1, createdAt: -1 })
+                .lean();
+
+            let activeLeague = allLeagues[0];
+            if (allLeagues.length > 1 && currentGw) {
+                activeLeague = allLeagues.find(l => l.gameweekStart <= currentGw.number && l.gameweekEnd >= currentGw.number) || allLeagues[0];
+            }
+
+            res.json({ data: activeLeague ? [activeLeague] : [] });
+            return;
+        }
 
         let activeLeague = leagues[0];
         if (leagues.length > 1 && currentGw) {

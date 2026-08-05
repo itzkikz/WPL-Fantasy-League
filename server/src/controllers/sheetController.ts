@@ -5,6 +5,9 @@ import '../models/League';
 import mongoose from 'mongoose';
 import { getSheets } from '../lib/store/globals';
 import { MatchDetails } from '../models/MatchDetails';
+import { ApiConfig } from '../models/ApiConfig';
+import { buildFantasyTeamGamewiseRows, fantasyGamewiseRowsToValues, FANTASY_GAMEWISE_HEADERS } from '../lib/fantasyScore';
+import { buildPlayerStatsRows, PLAYER_STATS_SHEET_HEADERS } from '../lib/playerStatsSheet';
 
 export class SheetController {
     static async updatePlayersLatest(req: Request, res: Response) {
@@ -295,6 +298,178 @@ export class SheetController {
 
         } catch (error) {
             console.error('Error updating match events sheet:', error);
+            res.status(500).json({ message: 'Update failed', error: (error as Error).message });
+        }
+    }
+
+    static async ensureSheetTab(sheets: any, spreadsheetId: string, sheetTitle: string): Promise<void> {
+        const meta = await sheets.spreadsheets.get({ spreadsheetId });
+        const sheetExists = meta.data.sheets?.some(
+            (s: any) => s.properties?.title?.toLowerCase() === sheetTitle.toLowerCase()
+        );
+
+        if (!sheetExists) {
+            await sheets.spreadsheets.batchUpdate({
+                spreadsheetId,
+                requestBody: {
+                    requests: [
+                        {
+                            addSheet: {
+                                properties: { title: sheetTitle }
+                            }
+                        }
+                    ]
+                }
+            });
+        }
+    }
+
+    static async getFantasyTeamsGamewise(req: Request, res: Response) {
+        try {
+            if (req.user && req.user.role !== 'admin') {
+                return res.status(403).json({ error: 'Access denied. Admins only.' });
+            }
+
+            const config = await ApiConfig.findOne({ key: 'fantasy_teams_gamewise_push' }).lean();
+            res.status(200).json({
+                success: true,
+                lastPushedAt: config?.lastUpdated ?? null,
+            });
+        } catch (error) {
+            console.error('Error reading fantasy teams gamewise push status:', error);
+            res.status(500).json({ message: 'Build failed', error: (error as Error).message });
+        }
+    }
+
+    static async updateFantasyTeamsGamewise(req: Request, res: Response) {
+        try {
+            if (req.user && req.user.role !== 'admin') {
+                return res.status(403).json({ error: 'Access denied. Admins only.' });
+            }
+
+            const sheets: any = getSheets();
+            if (!sheets) {
+                return res.status(500).json({ message: 'Google Sheets API not initialized.' });
+            }
+
+            const spreadsheetId = process.env.API_DATA_SHEET_ID;
+            if (!spreadsheetId) {
+                return res.status(500).json({ message: 'API_DATA_SHEET_ID is not defined in environment.' });
+            }
+
+            const sheetTitle = 'FantasyTeamsGamewise';
+
+            const rows = await buildFantasyTeamGamewiseRows();
+
+            await SheetController.ensureSheetTab(sheets, spreadsheetId, sheetTitle);
+
+            const sheetData = [FANTASY_GAMEWISE_HEADERS, ...fantasyGamewiseRowsToValues(rows)];
+
+            // Clear the existing sheet data first
+            await sheets.spreadsheets.values.clear({
+                spreadsheetId,
+                range: `'${sheetTitle}'!A:Z`,
+            });
+
+            await sheets.spreadsheets.values.update({
+                spreadsheetId,
+                range: `'${sheetTitle}'!A1`,
+                valueInputOption: 'USER_ENTERED',
+                requestBody: {
+                    values: sheetData,
+                },
+            });
+
+            await ApiConfig.findOneAndUpdate(
+                { key: 'fantasy_teams_gamewise_push' },
+                { $set: { key: 'fantasy_teams_gamewise_push', lastUpdated: new Date(), lastUpdatedString: new Date().toISOString() } },
+                { upsert: true, new: true }
+            );
+
+            res.status(200).json({
+                success: true,
+                message: `Fantasy Teams Gamewise sheet updated successfully (${rows.length} rows)`,
+                sheet: sheetTitle,
+                count: rows.length,
+                lastPushedAt: new Date().toISOString(),
+            });
+        } catch (error) {
+            console.error('Error updating fantasy teams gamewise sheet:', error);
+            res.status(500).json({ message: 'Update failed', error: (error as Error).message });
+        }
+    }
+
+    static async getPlayerStatsStatus(req: Request, res: Response) {
+        try {
+            if (req.user && req.user.role !== 'admin') {
+                return res.status(403).json({ error: 'Access denied. Admins only.' });
+            }
+
+            const config = await ApiConfig.findOne({ key: 'player_stats_push' }).lean();
+            res.status(200).json({
+                success: true,
+                lastPushedAt: config?.lastUpdated ?? null,
+            });
+        } catch (error) {
+            console.error('Error reading player stats push status:', error);
+            res.status(500).json({ message: 'Build failed', error: (error as Error).message });
+        }
+    }
+
+    static async updatePlayerStatsSheet(req: Request, res: Response) {
+        try {
+            if (req.user && req.user.role !== 'admin') {
+                return res.status(403).json({ error: 'Access denied. Admins only.' });
+            }
+
+            const sheets: any = getSheets();
+            if (!sheets) {
+                return res.status(500).json({ message: 'Google Sheets API not initialized.' });
+            }
+
+            const spreadsheetId = process.env.API_DATA_SHEET_ID;
+            if (!spreadsheetId) {
+                return res.status(500).json({ message: 'API_DATA_SHEET_ID is not defined in environment.' });
+            }
+
+            const sheetTitle = 'PlayerStats';
+
+            const rows = await buildPlayerStatsRows();
+
+            await SheetController.ensureSheetTab(sheets, spreadsheetId, sheetTitle);
+
+            const sheetData = [PLAYER_STATS_SHEET_HEADERS, ...rows];
+
+            // Clear the existing sheet data first
+            await sheets.spreadsheets.values.clear({
+                spreadsheetId,
+                range: `'${sheetTitle}'!A:Z`,
+            });
+
+            await sheets.spreadsheets.values.update({
+                spreadsheetId,
+                range: `'${sheetTitle}'!A1`,
+                valueInputOption: 'USER_ENTERED',
+                requestBody: {
+                    values: sheetData,
+                },
+            });
+
+            await ApiConfig.findOneAndUpdate(
+                { key: 'player_stats_push' },
+                { $set: { key: 'player_stats_push', lastUpdated: new Date(), lastUpdatedString: new Date().toISOString() } },
+                { upsert: true, new: true }
+            );
+
+            res.status(200).json({
+                success: true,
+                message: `Player Stats sheet updated successfully (${rows.length} rows)`,
+                sheet: sheetTitle,
+                count: rows.length,
+                lastPushedAt: new Date().toISOString(),
+            });
+        } catch (error) {
+            console.error('Error updating player stats sheet:', error);
             res.status(500).json({ message: 'Update failed', error: (error as Error).message });
         }
     }

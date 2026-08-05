@@ -150,14 +150,14 @@ function FixtureDetails() {
           { k: "Min", v: "Minutes" },
           { k: "G", v: "Goals" },
           { k: "A", v: "Assists" },
-          { k: "S", v: "Total Shots" },
-          { k: "T", v: "Total Tackles" },
-          { k: "FC", v: "Fouls Committed" },
-          { k: "FK", v: "Fouls Won" },
+          { k: "CS", v: "Clean Sheet" },
           { k: "YC", v: "Yellow Cards" },
           { k: "RC", v: "Red Cards" },
-          { k: "CS", v: "Clean Sheet" },
           { k: "SV", v: "Saves" },
+          { k: "Tck", v: "Tackles" },
+          { k: "Clr", v: "Clearances" },
+          { k: "Blk", v: "Blocks" },
+          { k: "Rec", v: "Ball Recoveries" },
           { k: "Pts", v: "Fantasy Points" },
         ].map((item) => (
           <span key={item.k} className="inline-flex items-center gap-1 text-[9px] font-semibold text-white/50 whitespace-nowrap">
@@ -290,14 +290,14 @@ function PlayerStatsSection({ teamName, players, side }: { teamName: string; pla
               <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">Min</th>
               <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">G</th>
               <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">A</th>
-              <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">S</th>
-              <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">T</th>
-              <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">FC</th>
-              <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">FK</th>
+              <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">CS</th>
               <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">YC</th>
               <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">RC</th>
-              <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">CS</th>
               <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">SV</th>
+              <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">Tck</th>
+              <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">Clr</th>
+              <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">Blk</th>
+              <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">Rec</th>
               <th className="px-2 py-2 text-[9px] font-extrabold uppercase tracking-wider text-indigo-400/80 text-center">Pts</th>
             </tr>
           </thead>
@@ -356,10 +356,9 @@ function PlayerRow({ player }: { player: any }) {
       <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.minutesPlayed ?? "-"}</td>
       <td className="px-1.5 py-1.5 text-center text-xs text-white font-bold tabular-nums">{s.goals || 0}</td>
       <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.goalAssist || 0}</td>
-      <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.totalShots || 0}</td>
-      <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.totalTackle || 0}</td>
-      <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.fouls || 0}</td>
-      <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.wasFouled || 0}</td>
+      <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">
+        {s.cleanSheet ? "✓" : "-"}
+      </td>
       <td className="px-1.5 py-1.5 text-center">
         {s.yellowCards > 0 ? (
           <span className="inline-flex items-center justify-center w-4 h-4 rounded bg-yellow-400/20 text-yellow-400 text-[10px] font-bold">{s.yellowCards}</span>
@@ -374,10 +373,11 @@ function PlayerRow({ player }: { player: any }) {
           <span className="text-white/30 text-xs">-</span>
         )}
       </td>
-      <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">
-        {s.cleanSheet ? "✓" : "-"}
-      </td>
       <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.saves || 0}</td>
+      <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.totalTackle || 0}</td>
+      <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.totalClearance || 0}</td>
+      <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.outfielderBlock || 0}</td>
+      <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.ballRecovery || 0}</td>
       <td className="px-2 py-1.5 text-center text-xs font-black text-indigo-400 tabular-nums">
         {player.gameweekPoints ?? "-"}
       </td>

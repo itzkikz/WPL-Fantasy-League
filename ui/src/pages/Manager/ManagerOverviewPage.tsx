@@ -8,6 +8,7 @@ import PlayerStatsModal from "../Standings/components/PlayerStatsModal";
 import { ManagerRankTrendChart } from "./components/ManagerRankTrendChart";
 import { SquadPositionBreakdown } from "./components/SquadPositionBreakdown";
 import { SquadValueStatsCard } from "./components/SquadValueStatsCard";
+import { TeamTransfersCard } from "./components/TeamTransfersCard";
 import { TeamComparisonModal } from "./components/TeamComparisonModal";
 import { Player } from "../../features/players/types";
 import { getPlayerDisplayPrice } from "../../libs/helpers/player";
@@ -57,7 +58,7 @@ const ManagerOverviewPage = () => {
   const { data, isLoading, isError } = useManagerOverview(resolvedTeamId);
   const { data: compareOverviewData } = useManagerOverview(compareAgainstTeamId);
 
-  const { teamName, logo, managers, rank, totalPoints, gwPoints, currentSquad, history } = data || {};
+  const { teamName, logo, managers, rank, totalPoints, gwPoints, currentSquad, history, transfers } = data || {};
 
   // Always use overall current squad
   const activeStarting = currentSquad?.starting;
@@ -336,6 +337,11 @@ const ManagerOverviewPage = () => {
           </div>
         </div>
 
+        {/* Transfers */}
+        <div className="max-w-2xl mx-auto w-full shrink-0">
+          <TeamTransfersCard transfers={transfers} />
+        </div>
+
         {/* Player Values & Squad Valuation Card */}
         <div className="max-w-2xl mx-auto w-full shrink-0 mb-6">
           <SquadValueStatsCard starting={activeStarting} bench={activeBench} />
@@ -450,6 +456,9 @@ const ManagerOverviewPage = () => {
               }) : null}
             </div>
           </div>
+
+          {/* Transfers */}
+          <TeamTransfersCard transfers={transfers} />
 
           {/* Player Values & Squad Valuation Card */}
           <SquadValueStatsCard starting={activeStarting} bench={activeBench} />

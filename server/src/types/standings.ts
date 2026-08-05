@@ -21,6 +21,7 @@ export interface TeamDetails {
     role: 'CAPTAIN' | 'VICE CAPTAIN' | null,
     club: string,
     point: number,
+    gwPoint?: number,
     team_short_name?: string,
     team_color?: string,
     team_text_color?: string,

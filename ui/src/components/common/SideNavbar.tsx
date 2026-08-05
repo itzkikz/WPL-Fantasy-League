@@ -86,6 +86,7 @@ const SideNavbar = () => {
     { label: "Notifications", path: "/admin/notifications" },
     { label: "Facts & News", path: "/admin/facts" },
     { label: "Gameweeks", path: "/admin/gameweeks" },
+    { label: "Sheets", path: "/admin/sheets" },
   ];
 
   if (

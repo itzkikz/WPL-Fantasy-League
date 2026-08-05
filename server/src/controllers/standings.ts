@@ -8,12 +8,14 @@ import { StandingsResponse, TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
 import { aggregateMatchStats, getGameweekPoints, getGameweekMinutes, getGameweekStats, getGameweekForm, getGameweekEntries, getGameweekBreakdown, buildCurrentWeek } from "./players";
 import { getSeasonPointsBreakdown } from "../lib/points";
+import { computeTeamGwScore } from "../lib/fantasyScore";
 
 import { FantasyTeam } from "../models/FantasyTeam";
 import { Player } from "../models/Player";
 import { Team } from "../models/Team";
 import { Gameweek } from "../models/Gameweek";
 import { PlayerStats } from "../models/PlayerStats";
+import { Transfer } from "../models/Transfer";
 
 let cachedStandingsData: StandingsResponse[] | null = null;
 let lastStandingsFetchTime = 0;
@@ -44,36 +46,6 @@ export const getStandingsData = async () => {
     const playerStatsMap = new Map();
     playerStats.forEach(ps => playerStatsMap.set(ps.playerId, ps));
 
-    const computeScore = (picks: any[], gwId: number) => {
-        let score = 0;
-        let captainPlayed = false;
-
-        const captainPick = picks.find(p => p.isCaptain);
-        if (captainPick) {
-            const cStats = playerStatsMap.get(captainPick.playerId);
-            if (cStats && cStats.gameweeks) {
-                if (getGameweekMinutes(cStats.gameweeks, gwId) > 0) {
-                    captainPlayed = true;
-                }
-            }
-        }
-
-        picks.forEach(pick => {
-            if (!pick.isStarting) return;
-
-            const statsDoc = playerStatsMap.get(pick.playerId);
-            if (statsDoc && statsDoc.gameweeks) {
-                const pts = getGameweekPoints(statsDoc.gameweeks, gwId);
-                if (pts > 0) {
-                    score += pick.isCaptain && captainPlayed
-                        ? pts * 2
-                        : (pick.isViceCaptain && !captainPlayed ? pts * 2 : pts);
-                }
-            }
-        });
-        return score;
-    };
-
     const standingsData: StandingsResponse[] = teams.map(team => {
         const history = team.history || [];
 
@@ -83,7 +55,7 @@ export const getStandingsData = async () => {
 
         if (history.length > 0) {
             history.forEach((h: any) => {
-                const gwScore = computeScore(h.picks, h.gameweek);
+                const gwScore = computeTeamGwScore(h.picks, h.gameweek, playerStatsMap);
                 totalPoints += gwScore;
                 if (h.gameweek === globalCurrentGw) {
                     currentGwPoints = gwScore;
@@ -95,7 +67,7 @@ export const getStandingsData = async () => {
 
         const hasCurrentGwHistory = history.some((h: any) => h.gameweek === globalCurrentGw);
         if (!hasCurrentGwHistory && team.currentSquad && team.currentSquad.picks) {
-            const gwScore = computeScore(team.currentSquad.picks, globalCurrentGw);
+            const gwScore = computeTeamGwScore(team.currentSquad.picks, globalCurrentGw, playerStatsMap);
             currentGwPoints = gwScore;
             totalPoints += gwScore;
         }
@@ -1013,13 +985,18 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
         if (!history.some(h => h.gameweek === targetGw)) {
             const currentGwPointsCalculated = squadAsTeamDetails
                 .filter(p => p.lineup === "Starting XI")
-                .reduce((acc, p) => acc + (p.point || 0), 0);
+                .reduce((acc, p) => acc + (p.gwPoint || 0), 0);
             
             historyList.push({
                 gameweek: targetGw,
                 points: currentGwPointsCalculated,
             });
         }
+
+        // 5. Fetch the team's transfer history
+        const transfers = await Transfer.find({ fantasyTeam: fantasyTeam._id })
+            .sort({ date: -1, createdAt: -1 })
+            .lean();
 
         return res.json({
             data: {
@@ -1031,7 +1008,8 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
                 totalPoints,
                 gwPoints,
                 currentSquad: currentSquadFormation,
-                history: historyList
+                history: historyList,
+                transfers
             }
         });
 

@@ -217,31 +217,35 @@ export default function Settings() {
               </div>
             </button>
 
-            <button
-              onClick={() => navigate({ to: "/manager-overview" })}
-              className="flex items-center gap-2.5 p-3 rounded-xl bg-surface hover:bg-white/5 border border-border/60 hover:border-secondary/40 transition-all text-left group cursor-pointer"
-            >
-              <div className="p-2 rounded-lg bg-indigo-500/15 text-indigo-400 border border-indigo-500/30 shrink-0">
-                <UserCheck className="w-4 h-4" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-xs font-bold text-text-primary group-hover:text-secondary leading-tight break-words">Manager Overview</p>
-                <p className="text-[9px] text-text-muted leading-tight break-words mt-0.5">Team command center</p>
-              </div>
-            </button>
+            {isAdmin && (
+              <button
+                onClick={() => navigate({ to: "/manager-overview" })}
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-surface hover:bg-white/5 border border-border/60 hover:border-secondary/40 transition-all text-left group cursor-pointer"
+              >
+                <div className="p-2 rounded-lg bg-indigo-500/15 text-indigo-400 border border-indigo-500/30 shrink-0">
+                  <UserCheck className="w-4 h-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-bold text-text-primary group-hover:text-secondary leading-tight break-words">Manager Overview</p>
+                  <p className="text-[9px] text-text-muted leading-tight break-words mt-0.5">Team command center</p>
+                </div>
+              </button>
+            )}
 
-            <button
-              onClick={() => navigate({ to: "/gameweek-breakdown" })}
-              className="flex items-center gap-2.5 p-3 rounded-xl bg-surface hover:bg-white/5 border border-border/60 hover:border-secondary/40 transition-all text-left group cursor-pointer"
-            >
-              <div className="p-2 rounded-lg bg-blue-500/15 text-blue-400 border border-blue-500/30 shrink-0">
-                <Calendar className="w-4 h-4" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-xs font-bold text-text-primary group-hover:text-secondary leading-tight break-words">GW Breakdown</p>
-                <p className="text-[9px] text-text-muted leading-tight break-words mt-0.5">Gameweek stats</p>
-              </div>
-            </button>
+            {isAdmin && (
+              <button
+                onClick={() => navigate({ to: "/gameweek-breakdown" })}
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-surface hover:bg-white/5 border border-border/60 hover:border-secondary/40 transition-all text-left group cursor-pointer"
+              >
+                <div className="p-2 rounded-lg bg-blue-500/15 text-blue-400 border border-blue-500/30 shrink-0">
+                  <Calendar className="w-4 h-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-bold text-text-primary group-hover:text-secondary leading-tight break-words">GW Breakdown</p>
+                  <p className="text-[9px] text-text-muted leading-tight break-words mt-0.5">Gameweek stats</p>
+                </div>
+              </button>
+            )}
           </div>
 
           {/* Admin Navigation Quick Section (Only if Admin) */}

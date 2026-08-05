@@ -7,7 +7,7 @@ import UpcomingFixture from "../../components/home/UpcomingFixture";
 import PlayerSpotlight from "../../components/home/PlayerSpotlight";
 import PointsBreakdown from "../../components/home/PointsBreakdown";
 import RecentGameweeks from "../../components/home/RecentGameweeks";
-import { Crown, Target, Activity, ShieldCheck, Square, Users, Clock, Star, Shield, Trophy, ArrowRight, Sparkles, Goal } from "lucide-react";
+import { Crown, Target, Activity, ShieldCheck, Square, Users, Clock, Star, Shield, Trophy, Sparkles, Goal } from "lucide-react";
 import PlayerListCard from "../../components/home/PlayerListCard";
 import SeasonStats from "../../components/home/SeasonStats";
 import LeagueStandings from "../../components/home/LeagueStandings";
@@ -23,25 +23,25 @@ const HomePage = () => {
   const user = useUserStore((state) => state.user);
   const isRegularUser = user?.role === "user";
 
-  // Disable dashboard & my-fixtures API queries if role is "user"
-  const { data, isLoading, error } = useHomePage({ enabled: !isRegularUser });
+  // Dashboard data is shared by both manager and spectator ("user") accounts
+  const { data, isLoading, error } = useHomePage();
   const { data: myFixturesData } = useMyFixtures({ enabled: !isRegularUser });
 
   // Dedicated view for regular user role (non-manager account)
   if (isRegularUser) {
     return (
       <div className="min-h-screen bg-background text-text-primary p-3 lg:p-6 font-outfit">
-        <div className="max-w-4xl mx-auto space-y-6 pt-2">
+        <div className="mx-auto w-full max-w-4xl space-y-6 pt-2 pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-6">
           {/* Spectator Banner */}
-          <div className="bg-gradient-to-r from-purple-900/40 via-indigo-900/40 to-slate-900/40 border border-purple-500/30 rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden backdrop-blur-xl">
-            <div className="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="bg-gradient-to-r from-primary/10 via-indigo-500/5 to-slate-500/5 dark:from-purple-900/40 dark:via-indigo-900/40 dark:to-slate-900/40 border border-primary/20 dark:border-purple-500/30 rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden backdrop-blur-xl">
+            <div className="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-primary/10 dark:bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 relative z-10">
-              <div className="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-400/30 flex items-center justify-center shrink-0 text-purple-300 shadow-inner">
-                <ShieldCheck className="w-7 h-7 text-purple-300" />
+              <div className="w-14 h-14 rounded-2xl bg-primary/15 border border-primary/25 flex items-center justify-center shrink-0 text-primary shadow-inner dark:bg-purple-500/20 dark:border-purple-400/30 dark:text-purple-300">
+                <ShieldCheck className="w-7 h-7 text-primary dark:text-purple-300" />
               </div>
               <div className="space-y-1.5 flex-1">
-                <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-purple-500/20 border border-purple-400/30 text-[11px] font-semibold text-purple-300">
-                  <Sparkles className="w-3 h-3 text-purple-400" />
+                <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-primary/15 border border-primary/25 text-[11px] font-semibold text-primary dark:bg-purple-500/20 dark:border-purple-400/30 dark:text-purple-300">
+                  <Sparkles className="w-3 h-3 text-primary dark:text-purple-400" />
                   <span>Fan / Spectator Account</span>
                 </div>
                 <h2 className="text-xl sm:text-2xl font-extrabold text-text-primary">
@@ -54,40 +54,75 @@ const HomePage = () => {
             </div>
           </div>
 
-          {/* Quick Actions Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <button
-              onClick={() => navigate({ to: "/standings" })}
-              className="group p-6 rounded-2xl bg-surface border border-border hover:border-purple-500/40 transition-all text-left flex flex-col justify-between h-40 shadow-sm hover:scale-[1.01] cursor-pointer"
-            >
-              <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
-                  <Trophy className="w-5 h-5" />
-                </div>
-                <ArrowRight className="w-5 h-5 text-text-muted group-hover:text-purple-400 group-hover:translate-x-1 transition-all" />
+          {/* Spectator League & Player Data */}
+          {isLoading ? (
+            <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-4 lg:gap-5">
+              {[...Array(6)].map((_, i) => (
+                <div
+                  key={i}
+                  className={`h-40 bg-surface rounded-[10px] skeleton-pulse stagger-${Math.min(i + 1, 5)} ${i < 2 ? "lg:col-span-2" : ""}`}
+                />
+              ))}
+            </div>
+          ) : error ? (
+            <div className="bg-surface rounded-3xl border border-border p-6 text-center">
+              <p className="text-text-secondary mb-4">Failed to load league data</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold active:opacity-70 transition-opacity"
+              >
+                Retry
+              </button>
+            </div>
+          ) : data ? (
+            <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-4 lg:gap-5">
+              <div className="col-span-2 lg:col-span-2">
+                <LeagueStatistics
+                  stats={[
+                    { icon: Users, label: "Total Managers", value: String(data.leagueStats?.totalManagers ?? 0), iconColor: "text-text", circleClass: "border border-white/10 bg-white/5" },
+                    { icon: Clock, label: "GW Average", value: String(data.leagueStats?.avgPointsPerGW ?? 0), iconColor: "text-indigo-400", circleClass: "border border-indigo-500/30 bg-indigo-500/5" },
+                    { icon: Star, label: "Highest Points", value: String(data.leagueStats?.highestGW ?? 0), iconColor: "text-pink-400", circleClass: "border border-pink-500/30 bg-pink-500/5" },
+                    { icon: Shield, label: "Total Teams", value: String(data.leagueStats?.totalTeams ?? 0), iconColor: "text-rose-400", circleClass: "border border-rose-500/30 bg-rose-500/5" },
+                  ]}
+                />
+              </div>
+              <div className="lg:col-span-2">
+                <LeagueStandings standings={data.leagueStandings || []} limit={5} />
+              </div>
+              <div className="lg:col-span-2">
+                <PlayerSpotlight spotlightPlayers={data.spotlightPlayers} />
               </div>
               <div>
-                <h3 className="text-base font-bold text-text-primary mb-1">League Standings</h3>
-                <p className="text-xs text-text-secondary">View live leaderboards, manager points, and team rankings.</p>
-              </div>
-            </button>
-
-            <button
-              onClick={() => navigate({ to: "/stats" })}
-              className="group p-6 rounded-2xl bg-surface border border-border hover:border-purple-500/40 transition-all text-left flex flex-col justify-between h-40 shadow-sm hover:scale-[1.01] cursor-pointer"
-            >
-              <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-                  <Activity className="w-5 h-5" />
-                </div>
-                <ArrowRight className="w-5 h-5 text-text-muted group-hover:text-indigo-400 group-hover:translate-x-1 transition-all" />
+                <PlayerListCard
+                  title="Top Players"
+                  subtitle="This Gameweek"
+                  players={(data.topPlayers || []).map(p => ({
+                    name: p.name,
+                    meta: p.team,
+                    position: p.position,
+                    value: `${p.points} pts`,
+                    photo: p.photo
+                  }))}
+                />
               </div>
               <div>
-                <h3 className="text-base font-bold text-text-primary mb-1">Player & League Stats</h3>
-                <p className="text-xs text-text-secondary">Explore player form, goals, assists, and match statistics.</p>
+                <PlayerListCard
+                  title="Best Performers"
+                  subtitle="This Season"
+                  players={(data.bestPerformers || []).map(p => ({
+                    name: p.name,
+                    meta: p.team,
+                    position: p.position,
+                    value: `${p.points} pts`,
+                    photo: p.photo
+                  }))}
+                />
               </div>
-            </button>
-          </div>
+              <div className="col-span-2 lg:col-span-4">
+                <FantasyNews articles={data.fantasyNews} />
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
     );

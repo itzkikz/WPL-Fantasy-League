@@ -879,11 +879,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       Fixture.find({ 'status.type': 'notstarted' }).sort({ startTimestamp: 1 }).limit(5).lean()
     ]);
 
-    if (!fantasyTeam) {
-      return res.status(404).json({ error: 'Fantasy Team not found' });
-    }
-
-    const history: any[] = fantasyTeam.history || [];
+    const history: any[] = fantasyTeam?.history || [];
 
     const currentGwDoc = currentGwDocResult;
     const currentGw = currentGwDoc ? currentGwDoc.number : 1;
@@ -891,7 +887,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     const deadlineDate = apiConfig?.deadlineDate || currentGwDoc?.endDate || new Date();
 
     // 3. Standings & League details
-    const myStanding = standingsData.find(s => s.team_id === fantasyTeam._id.toString());
+    const myStanding = fantasyTeam ? standingsData.find(s => s.team_id === fantasyTeam._id.toString()) : undefined;
     const total_point_before_this_gw = myStanding?.total_point_before_this_gw || 0;
     const rank = (myStanding as any)?.rank || 1;
     const total = myStanding?.total || 0;
@@ -904,38 +900,42 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     const highest = currentGwScores.length > 0 ? Math.max(...currentGwScores) : 0;
 
     // 4. Team Overview & League Stats
-    const teamOverview = {
-      teamName: fantasyTeam.name,
-      logo: fantasyTeam.logo || "",
-      managers: (fantasyTeam.managers as any[]).map(m => m.username),
-      gameweek: currentGw,
-      gwPoints: currentGwPoints,
-      totalPoints: total,
-      rank: rank,
-      transfers: fantasyTeam.currentSquad.picks.length > 0 ? 1 : 0,
-      rankChange: pos_change,
-    };
+    const teamOverview = fantasyTeam
+      ? {
+          teamName: fantasyTeam.name,
+          logo: fantasyTeam.logo || "",
+          managers: (fantasyTeam.managers as any[]).map(m => m.username),
+          gameweek: currentGw,
+          gwPoints: currentGwPoints,
+          totalPoints: total,
+          rank: rank,
+          transfers: fantasyTeam.currentSquad.picks.length > 0 ? 1 : 0,
+          rankChange: pos_change,
+        }
+      : null;
 
     const leagueStats = {
       totalPoints: total,
       overallRank: rank,
       avgPointsPerGW: Number(avg.toFixed(1)),
       highestGW: highest,
-      teamValue: (fantasyTeam.finance?.utilisation || 0) / 10,
+      teamValue: (fantasyTeam?.finance?.utilisation || 0) / 10,
       totalManagers,
       totalTeams,
     };
 
     // 5. Gameweek Progress
-    const gameweekProgress = {
-      teamSelected: fantasyTeam.currentSquad.picks.length > 0,
-      transfersMade: false,
-      captainChosen: fantasyTeam.currentSquad.picks.some(p => p.isCaptain),
-      teamConfirmed: true,
-      deadline: dayjs(deadlineDate).format("dddd, h:mm A"),
-      startDate: currentGwDoc?.startDate ? new Date(currentGwDoc.startDate).toISOString() : null,
-      endDate: currentGwDoc?.endDate ? new Date(currentGwDoc.endDate).toISOString() : null,
-    };
+    const gameweekProgress = fantasyTeam
+      ? {
+          teamSelected: fantasyTeam.currentSquad.picks.length > 0,
+          transfersMade: false,
+          captainChosen: fantasyTeam.currentSquad.picks.some(p => p.isCaptain),
+          teamConfirmed: true,
+          deadline: dayjs(deadlineDate).format("dddd, h:mm A"),
+          startDate: currentGwDoc?.startDate ? new Date(currentGwDoc.startDate).toISOString() : null,
+          endDate: currentGwDoc?.endDate ? new Date(currentGwDoc.endDate).toISOString() : null,
+        }
+      : null;
 
     // 6. Upcoming Match & 12. Fixture Difficulty (Batched Team Lookups)
     const fixtureTeamIds = new Set<number>();
@@ -1025,12 +1025,14 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       return score;
     };
 
-    const recentGameweeks = history.map(h => ({
-      gameweek: h.gameweek,
-      points: computeHistoryScore(h.picks, h.gameweek),
-    })).sort((a, b) => a.gameweek - b.gameweek);
+    const recentGameweeks = fantasyTeam
+      ? history.map(h => ({
+          gameweek: h.gameweek,
+          points: computeHistoryScore(h.picks, h.gameweek),
+        })).sort((a, b) => a.gameweek - b.gameweek)
+      : [];
 
-    if (!history.some(h => h.gameweek === currentGw)) {
+    if (fantasyTeam && !history.some(h => h.gameweek === currentGw)) {
       recentGameweeks.push({
         gameweek: currentGw,
         points: currentGwPoints,
@@ -1072,9 +1074,9 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
 
     const sortedStats = [...ownedPlayersWithStats].sort((a, b) => (b.totalPoints || 0) - (a.totalPoints || 0)).slice(0, 5);
 
-    const startingPicks = fantasyTeam.currentSquad.picks.filter(p => p.isStarting);
+    const startingPicks = fantasyTeam ? fantasyTeam.currentSquad.picks.filter(p => p.isStarting) : [];
     const startingPlayerIds = startingPicks.map(p => p.playerId);
-    const squadPlayerIds = fantasyTeam.currentSquad.picks.map(p => p.playerId);
+    const squadPlayerIds = fantasyTeam ? fantasyTeam.currentSquad.picks.map(p => p.playerId) : [];
 
     const neededPlayerIds = new Set<number>([
       ...sortedGwStats.map(s => s.playerId),
@@ -1248,19 +1250,21 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       }
     }
 
-    const pointsBreakdown = {
-      goals: bdGoalsPoints,
-      assists: bdAssistsPoints,
-      cleanSheet: bdCleanSheetPoints,
-      yellowCards: bdYellowPoints,
-      redCards: bdRedPoints,
-      penaltyMissed: bdPenMissPoints,
-      penaltySaved: bdPenSavePoints,
-      saves: bdSavesPoints,
-      defensive: bdDefensivePoints,
-      appearancePoints: bdAppearancePoints,
-      totalPoints: currentGwPoints,
-    };
+    const pointsBreakdown = fantasyTeam
+      ? {
+          goals: bdGoalsPoints,
+          assists: bdAssistsPoints,
+          cleanSheet: bdCleanSheetPoints,
+          yellowCards: bdYellowPoints,
+          redCards: bdRedPoints,
+          penaltyMissed: bdPenMissPoints,
+          penaltySaved: bdPenSavePoints,
+          saves: bdSavesPoints,
+          defensive: bdDefensivePoints,
+          appearancePoints: bdAppearancePoints,
+          totalPoints: currentGwPoints,
+        }
+      : null;
 
     // 11. Season Stats
     let highestGWScore = 0;
@@ -1270,92 +1274,100 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     });
     if (currentGwPoints > highestGWScore) highestGWScore = currentGwPoints;
 
-    const seasonStats = {
-      avgPoints: Number((total / Math.max(currentGw, 1)).toFixed(1)),
-      totalPoints: total,
-      highestPoints: highestGWScore,
-      totalRank: (myStanding as any)?.rank || 1,
-      rankChange: pos_change,
-      totalGoals: pointsBreakdown?.goals || 0,
-      totalAssists: pointsBreakdown?.assists || 0,
-      cleanSheets: pointsBreakdown?.cleanSheet || 0,
-    };
+    const seasonStats = fantasyTeam
+      ? {
+          avgPoints: Number((total / Math.max(currentGw, 1)).toFixed(1)),
+          totalPoints: total,
+          highestPoints: highestGWScore,
+          totalRank: (myStanding as any)?.rank || 1,
+          rankChange: pos_change,
+          totalGoals: pointsBreakdown?.goals || 0,
+          totalAssists: pointsBreakdown?.assists || 0,
+          cleanSheets: pointsBreakdown?.cleanSheet || 0,
+        }
+      : null;
 
     // 13. Squad Info & Composition
-    const pDocsWithStats = squadPlayerIds.map(id => {
-      const p = pDocsMap.get(id);
-      if (!p) return null;
-      const teamDoc = tDocsMap.get(p.teamId);
-      const statDoc = startingStatsMap.get(p.id);
-      const pick = fantasyTeam.currentSquad?.picks?.find(pk => pk.playerId === p.id);
-      return {
-        id: p.id,
-        name: p.webName || p.name || "",
-        team: teamDoc?.nameCode || teamDoc?.name || "UNK",
-        teamLogo: teamDoc?.logo || "",
-        photo: p.photo || (p.id ? `https://img.sofascore.com/api/v1/player/${p.id}/image` : ""),
-        points: statDoc?.totalPoints || 0,
-        price: (p.price?.nowCost || 0) / 10,
-        position: resolvePosition(p.position || ""),
-        isCaptain: pick?.isCaptain || false,
-        isViceCaptain: pick?.isViceCaptain || false,
-        isStarting: pick?.isStarting || false,
+    let squadComposition: any = null;
+    let yourPlayers: any = null;
+    let squadInfo: any = null;
+
+    if (fantasyTeam) {
+      const pDocsWithStats = squadPlayerIds.map(id => {
+        const p = pDocsMap.get(id);
+        if (!p) return null;
+        const teamDoc = tDocsMap.get(p.teamId);
+        const statDoc = startingStatsMap.get(p.id);
+        const pick = fantasyTeam.currentSquad?.picks?.find(pk => pk.playerId === p.id);
+        return {
+          id: p.id,
+          name: p.webName || p.name || "",
+          team: teamDoc?.nameCode || teamDoc?.name || "UNK",
+          teamLogo: teamDoc?.logo || "",
+          photo: p.photo || (p.id ? `https://img.sofascore.com/api/v1/player/${p.id}/image` : ""),
+          points: statDoc?.totalPoints || 0,
+          price: (p.price?.nowCost || 0) / 10,
+          position: resolvePosition(p.position || ""),
+          isCaptain: pick?.isCaptain || false,
+          isViceCaptain: pick?.isViceCaptain || false,
+          isStarting: pick?.isStarting || false,
+        };
+      }).filter(Boolean) as any[];
+
+      const goalkeepers = pDocsWithStats.filter(p => p.position === "GK");
+      const defenders = pDocsWithStats.filter(p => p.position === "DEF");
+      const midfielders = pDocsWithStats.filter(p => p.position === "MID");
+      const forwards = pDocsWithStats.filter(p => p.position === "FWD");
+
+      const startingDEF = startingPlayerIds.filter(id => resolvePosition(pDocsMap.get(id)?.position || "") === "DEF").length;
+      const startingMID = startingPlayerIds.filter(id => resolvePosition(pDocsMap.get(id)?.position || "") === "MID").length;
+      const startingFWD = startingPlayerIds.filter(id => resolvePosition(pDocsMap.get(id)?.position || "") === "FWD").length;
+      const formation = startingPlayerIds.length > 0 ? `${startingDEF}-${startingMID}-${startingFWD}` : "4-4-2";
+
+      squadComposition = {
+        goalkeepers: goalkeepers.length,
+        defenders: defenders.length,
+        midfielders: midfielders.length,
+        forwards: forwards.length,
+        total: pDocsWithStats.length,
+        formation,
       };
-    }).filter(Boolean) as any[];
 
-    const goalkeepers = pDocsWithStats.filter(p => p.position === "GK");
-    const defenders = pDocsWithStats.filter(p => p.position === "DEF");
-    const midfielders = pDocsWithStats.filter(p => p.position === "MID");
-    const forwards = pDocsWithStats.filter(p => p.position === "FWD");
+      yourPlayers = {
+        goalkeepers,
+        defenders,
+        midfielders,
+        forwards,
+      };
 
-    const startingDEF = startingPlayerIds.filter(id => resolvePosition(pDocsMap.get(id)?.position || "") === "DEF").length;
-    const startingMID = startingPlayerIds.filter(id => resolvePosition(pDocsMap.get(id)?.position || "") === "MID").length;
-    const startingFWD = startingPlayerIds.filter(id => resolvePosition(pDocsMap.get(id)?.position || "") === "FWD").length;
-    const formation = startingPlayerIds.length > 0 ? `${startingDEF}-${startingMID}-${startingFWD}` : "4-4-2";
+      const totalBudget = (fantasyTeam.finance?.totalBudget ?? 1000) / 10;
+      const utilisation = (fantasyTeam.finance?.utilisation ?? 0) / 10;
+      const bonus = (fantasyTeam.finance?.bonus ?? 0) / 10;
+      const fine = (fantasyTeam.finance?.fine ?? 0) / 10;
+      const bank = (fantasyTeam.finance?.balance ?? ((fantasyTeam.finance?.totalBudget ?? 1000) - (fantasyTeam.finance?.utilisation ?? 0) + (fantasyTeam.finance?.bonus ?? 0) - (fantasyTeam.finance?.fine ?? 0))) / 10;
 
-    const squadComposition = {
-      goalkeepers: goalkeepers.length,
-      defenders: defenders.length,
-      midfielders: midfielders.length,
-      forwards: forwards.length,
-      total: pDocsWithStats.length,
-      formation,
-    };
+      const fallbackPlayerPriceSum = squadPlayerIds.map(id => {
+        const p = pDocsMap.get(id);
+        if (!p) return 0;
+        if (p.auctionPrice != null && p.auctionPrice > 0) return Number(p.auctionPrice);
+        return 0;
+      }).reduce((sum, v) => sum + v, 0);
 
-    const yourPlayers = {
-      goalkeepers,
-      defenders,
-      midfielders,
-      forwards,
-    };
+      const teamValue = utilisation > 0 ? utilisation : fallbackPlayerPriceSum;
+      const totalValue = teamValue + bank;
 
-    const totalBudget = (fantasyTeam.finance?.totalBudget ?? 1000) / 10;
-    const utilisation = (fantasyTeam.finance?.utilisation ?? 0) / 10;
-    const bonus = (fantasyTeam.finance?.bonus ?? 0) / 10;
-    const fine = (fantasyTeam.finance?.fine ?? 0) / 10;
-    const bank = (fantasyTeam.finance?.balance ?? ((fantasyTeam.finance?.totalBudget ?? 1000) - (fantasyTeam.finance?.utilisation ?? 0) + (fantasyTeam.finance?.bonus ?? 0) - (fantasyTeam.finance?.fine ?? 0))) / 10;
-
-    const fallbackPlayerPriceSum = squadPlayerIds.map(id => {
-      const p = pDocsMap.get(id);
-      if (!p) return 0;
-      if (p.auctionPrice != null && p.auctionPrice > 0) return Number(p.auctionPrice);
-      return 0;
-    }).reduce((sum, v) => sum + v, 0);
-
-    const teamValue = utilisation > 0 ? utilisation : fallbackPlayerPriceSum;
-    const totalValue = teamValue + bank;
-
-    const squadInfo = {
-      teamValue,
-      inBank: bank,
-      bank,
-      totalBudget,
-      utilisation,
-      bonus,
-      fine,
-      balance: bank,
-      totalValue,
-    };
+      squadInfo = {
+        teamValue,
+        inBank: bank,
+        bank,
+        totalBudget,
+        utilisation,
+        bonus,
+        fine,
+        balance: bank,
+        totalValue,
+      };
+    }
 
     const leagueStandings = standingsData.map(s => ({
       rank: (s as any).rank,

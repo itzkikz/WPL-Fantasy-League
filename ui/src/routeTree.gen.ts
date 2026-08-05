@@ -28,6 +28,7 @@ import { Route as StandingsIndexRouteImport } from './routes/standings/index'
 import { Route as ManagerIndexRouteImport } from './routes/manager/index'
 import { Route as StandingsTeamIdRouteImport } from './routes/standings/$teamId'
 import { Route as AdminTeamsRouteImport } from './routes/admin/teams'
+import { Route as AdminSheetsRouteImport } from './routes/admin/sheets'
 import { Route as AdminPlayersRouteImport } from './routes/admin/players'
 import { Route as AdminNotificationsRouteImport } from './routes/admin/notifications'
 import { Route as AdminLeaguesRouteImport } from './routes/admin/leagues'
@@ -158,6 +159,11 @@ const AdminTeamsRoute = AdminTeamsRouteImport.update({
   path: '/admin/teams',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/admin/teams.lazy').then((d) => d.Route))
+const AdminSheetsRoute = AdminSheetsRouteImport.update({
+  id: '/admin/sheets',
+  path: '/admin/sheets',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/admin/sheets.lazy').then((d) => d.Route))
 const AdminPlayersRoute = AdminPlayersRouteImport.update({
   id: '/admin/players',
   path: '/admin/players',
@@ -251,6 +257,7 @@ export interface FileRoutesByFullPath {
   '/admin/leagues': typeof AdminLeaguesRoute
   '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/players': typeof AdminPlayersRoute
+  '/admin/sheets': typeof AdminSheetsRoute
   '/admin/teams': typeof AdminTeamsRoute
   '/standings/$teamId': typeof StandingsTeamIdRoute
   '/admin/h2h-leagues': typeof AdminH2hLeaguesLazyRoute
@@ -283,6 +290,7 @@ export interface FileRoutesByTo {
   '/admin/leagues': typeof AdminLeaguesRoute
   '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/players': typeof AdminPlayersRoute
+  '/admin/sheets': typeof AdminSheetsRoute
   '/admin/teams': typeof AdminTeamsRoute
   '/standings/$teamId': typeof StandingsTeamIdRoute
   '/admin/h2h-leagues': typeof AdminH2hLeaguesLazyRoute
@@ -317,6 +325,7 @@ export interface FileRoutesById {
   '/admin/leagues': typeof AdminLeaguesRoute
   '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/players': typeof AdminPlayersRoute
+  '/admin/sheets': typeof AdminSheetsRoute
   '/admin/teams': typeof AdminTeamsRoute
   '/standings/$teamId': typeof StandingsTeamIdRoute
   '/admin/h2h-leagues': typeof AdminH2hLeaguesLazyRoute
@@ -352,6 +361,7 @@ export interface FileRouteTypes {
     | '/admin/leagues'
     | '/admin/notifications'
     | '/admin/players'
+    | '/admin/sheets'
     | '/admin/teams'
     | '/standings/$teamId'
     | '/admin/h2h-leagues'
@@ -384,6 +394,7 @@ export interface FileRouteTypes {
     | '/admin/leagues'
     | '/admin/notifications'
     | '/admin/players'
+    | '/admin/sheets'
     | '/admin/teams'
     | '/standings/$teamId'
     | '/admin/h2h-leagues'
@@ -417,6 +428,7 @@ export interface FileRouteTypes {
     | '/admin/leagues'
     | '/admin/notifications'
     | '/admin/players'
+    | '/admin/sheets'
     | '/admin/teams'
     | '/standings/$teamId'
     | '/admin/h2h-leagues'
@@ -451,6 +463,7 @@ export interface RootRouteChildren {
   AdminLeaguesRoute: typeof AdminLeaguesRoute
   AdminNotificationsRoute: typeof AdminNotificationsRoute
   AdminPlayersRoute: typeof AdminPlayersRoute
+  AdminSheetsRoute: typeof AdminSheetsRoute
   AdminTeamsRoute: typeof AdminTeamsRoute
   StandingsTeamIdRoute: typeof StandingsTeamIdRoute
   AdminH2hLeaguesLazyRoute: typeof AdminH2hLeaguesLazyRoute
@@ -603,6 +616,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminTeamsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/sheets': {
+      id: '/admin/sheets'
+      path: '/admin/sheets'
+      fullPath: '/admin/sheets'
+      preLoaderRoute: typeof AdminSheetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/players': {
       id: '/admin/players'
       path: '/admin/players'
@@ -730,6 +750,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminLeaguesRoute: AdminLeaguesRoute,
   AdminNotificationsRoute: AdminNotificationsRoute,
   AdminPlayersRoute: AdminPlayersRoute,
+  AdminSheetsRoute: AdminSheetsRoute,
   AdminTeamsRoute: AdminTeamsRoute,
   StandingsTeamIdRoute: StandingsTeamIdRoute,
   AdminH2hLeaguesLazyRoute: AdminH2hLeaguesLazyRoute,
