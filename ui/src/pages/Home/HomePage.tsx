@@ -180,7 +180,7 @@ const HomePage = () => {
             <LeagueStandings
               standings={data.leagueStandings}
               myTeam={data.teamOverview.teamName}
-              limit={5}
+              limit={4}
             />
           </div>
           <div className="lg:col-span-2">
