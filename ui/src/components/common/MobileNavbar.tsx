@@ -79,6 +79,7 @@ const MobileNavbar = () => {
       ? [
         { label: "Home", path: "/home", icon: HomeIcon },
         { label: "League", path: "/standings/", icon: LeagueIcon },
+        { label: "H2H", path: "/h2h", icon: H2HIcon },
         { label: "Stats", path: "/stats", icon: StatsIcon },
       ]
       : [

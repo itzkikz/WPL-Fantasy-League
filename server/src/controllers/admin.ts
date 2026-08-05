@@ -39,12 +39,21 @@ export const getFixtures = async (req: Request, res: Response) => {
             Fixture.find().sort({ startTimestamp: 1 }).lean(),
             Team.find({}, 'id name shortName logo').lean(),
             MatchDetails.find({}, 'fixtureId addedtofantasy').lean(),
-            Gameweek.find({}, 'fixtures').lean()
+            Gameweek.find({}, 'fixtures isCurrent isCompleted number').lean()
         ]);
 
         const teamMap = new Map(teams.map((t: any) => [t.id, t]));
         const detailMap = new Map(details.map((d: any) => [d.fixtureId, d]));
         const assignedFixtureIds = new Set(gameweeks.flatMap(gw => gw.fixtures || []));
+        const fixtureToGwNumber = new Map<number, number>();
+        for (const gw of gameweeks) {
+            for (const fid of (gw.fixtures || [])) {
+                fixtureToGwNumber.set(fid, gw.number);
+            }
+        }
+        const currentGw = gameweeks.find(gw => gw.isCurrent);
+        const undoAllowed = currentGw && !currentGw.isCompleted;
+        const currentGwFixtureIds = new Set(currentGw?.fixtures || []);
 
         const fixturesWithDetailsFlag = fixtures.map(f => {
             const homeTeam = teamMap.get(f.homeTeam?.id ?? -1);
@@ -61,7 +70,9 @@ export const getFixtures = async (req: Request, res: Response) => {
                 awayTeamLogo: awayTeam?.logo ?? null,
                 hasDetails: !!detail,
                 addedtofantasy: detail?.addedtofantasy ?? false,
-                hasGameweek: assignedFixtureIds.has(f.fixtureId)
+                hasGameweek: assignedFixtureIds.has(f.fixtureId),
+                gameweekNumber: fixtureToGwNumber.get(f.fixtureId) ?? null,
+                canUndo: !!detail?.addedtofantasy && currentGwFixtureIds.has(f.fixtureId) && !!undoAllowed
             };
         });
 
@@ -365,6 +376,56 @@ export const getMatchDetails = async (req: Request, res: Response) => {
     }
 };
 
+export const undoAddToFantasy = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const fixtureId = parseInt(req.params.id);
+        if (isNaN(fixtureId)) {
+            return res.status(400).json({ error: 'Invalid fixture ID' });
+        }
+
+        const gw = await Gameweek.findOne({ fixtures: fixtureId });
+        if (!gw) {
+            return res.status(400).json({ error: 'Cannot undo. Fixture is not assigned to any gameweek.' });
+        }
+
+        if (!gw.isCurrent || gw.isCompleted) {
+            return res.status(400).json({ error: 'Cannot undo. Only fixtures in the current, non-completed gameweek can be undone.' });
+        }
+
+        const matchDetails = await MatchDetails.findOne({ fixtureId });
+        if (!matchDetails?.addedtofantasy) {
+            return res.status(400).json({ error: 'Cannot undo. This fixture has not been added to fantasy.' });
+        }
+
+        const affectedPlayers = await PlayerStats.find({ 'gameweeks.fixtureId': fixtureId });
+
+        for (const playerStat of affectedPlayers) {
+            playerStat.gameweeks = playerStat.gameweeks.filter((gwEntry) => gwEntry.fixtureId !== fixtureId);
+            const total = playerStat.gameweeks.reduce((sum, gwEntry) => sum + (gwEntry.points || 0), 0);
+            playerStat.totalPoints = total;
+            await playerStat.save();
+        }
+
+        await MatchDetails.findOneAndUpdate(
+            { fixtureId },
+            { $set: { addedtofantasy: false } }
+        );
+
+        res.status(200).json({
+            success: true,
+            message: `Undone added to fantasy: ${affectedPlayers.length} players updated for fixture ${fixtureId}`,
+        });
+
+    } catch (error: any) {
+        console.error('Error undoing added to fantasy:', error.message || error);
+        res.status(500).json({ error: error.message || 'Failed to undo added to fantasy' });
+    }
+};
+
 export const getMatchIncidentsAndStats = async (req: Request, res: Response) => {
     try {
         if (req.user && req.user.role !== 'admin') {
@@ -405,9 +466,6 @@ export const getMatchIncidentsAndStats = async (req: Request, res: Response) => 
         const players = matchDetails?.players || [];
 
         const playerIds = lineups.map((l: any) => l.playerId).filter(Boolean);
-        const playerStatsDocs = await PlayerStats.find({ playerId: { $in: playerIds } }).lean();
-        const playerStatsMap = new Map(playerStatsDocs.map((ps: any) => [ps.playerId, ps]));
-
         const playerDocs = await Player.find({ id: { $in: playerIds } }, 'id name photo teamId position').lean();
         const playerDocMap = new Map(playerDocs.map((p: any) => [p.id, p]));
 
@@ -436,14 +494,10 @@ export const getMatchIncidentsAndStats = async (req: Request, res: Response) => 
         }
 
         const playerInfo = lineups.map((entry: any) => {
-            const statsDoc = playerStatsMap.get(entry.playerId);
             const playerDoc = playerDocMap.get(entry.playerId);
-            const gwStat = statsDoc?.gameweeks?.find((gw: any) => gw.fixtureId === fixtureId);
-            const gameweekStats = gwStat?.stats || null;
             const position = entry.position || playerDoc?.position || 'Unknown';
-            const gameweekPoints = gameweekStats
-                ? calculatePlayerPoints({ position } as any, gameweekStats)
-                : null;
+            const gameweekStats = mapSofascoreToPlayerMatchStat(entry, incidents);
+            const gameweekPoints = calculatePlayerPoints({ position } as any, gameweekStats);
 
             return {
                 playerId: entry.playerId,

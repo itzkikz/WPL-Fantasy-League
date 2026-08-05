@@ -78,4 +78,6 @@ const PlayerSchema: Schema = new Schema({
     auctionPrice: { type: Number },
 }, { timestamps: true, strict: false });
 
+PlayerSchema.index({ position: 1 });
+
 export const Player = mongoose.model<IPlayer>('Player', PlayerSchema);

@@ -164,7 +164,22 @@ const PlayerStatsModal = ({
                   <p className="text-xs md:text-sm font-extrabold text-text-primary mt-1">
                     {stats ? getPlayerDisplayPrice(stats) : "10.0M"}
                   </p>
-                  <p className="text-[8px] text-[var(--color-success-bright)] font-bold mt-0.5">↑ 0.1M</p>
+                  {(() => {
+                    const auctionPrice = stats?.auctionPrice;
+                    if (auctionPrice == null || auctionPrice === 0) {
+                      return <p className="text-[8px] text-text-muted font-bold mt-0.5">—</p>;
+                    }
+                    const basePrice = (stats?.price || 0) / 10;
+                    const diff = Number(auctionPrice) - basePrice;
+                    const arrow = diff > 0 ? "↑" : diff < 0 ? "↓" : "=";
+                    const color =
+                      diff > 0
+                        ? "text-[var(--color-success-bright)]"
+                        : diff < 0
+                          ? "text-[var(--color-danger-bright)]"
+                          : "text-text-muted";
+                    return <p className={`text-[8px] font-bold mt-0.5 ${color}`}>{`${arrow} ${Math.abs(diff).toFixed(1)}M`}</p>;
+                  })()}
                 </div>
                 <div className="border-l border-border/40">
                   <p className="text-[8px] font-extrabold text-text-muted uppercase tracking-wider">Points (GW)</p>

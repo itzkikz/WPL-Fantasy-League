@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { useMyH2HLeagues, useH2HStandings, useH2HLeagueFixtures } from "../features/h2h/hooks";
 import { useManagerDetails } from "../features/manager/hooks";
 import { H2HLeague, H2HStanding, H2HFixture } from "../features/h2h/types";
-import { Shield, Swords, ChevronDown, Calendar, Crown, Clock } from "lucide-react";
+import { Shield, Swords, ChevronDown, Calendar, Crown, Clock, Eye } from "lucide-react";
 import { useTeamDetails } from "../features/standings/hooks";
 
 export const Route = createLazyFileRoute("/h2h")({
@@ -249,6 +249,8 @@ function H2HPage() {
   const { data: fixturesData, isLoading: fixturesLoading } = useH2HLeagueFixtures(selectedLeagueId ?? '');
   const { data: managerDetails } = useManagerDetails();
 
+  const isSpectator = !managerDetails;
+
   const uniqueGameweeks = useMemo(() => {
     return [...new Set(fixturesData?.fixtures?.map((f: H2HFixture) => f.gameweek) || [])].sort((a, b) => a - b);
   }, [fixturesData]);
@@ -284,15 +286,16 @@ function H2HPage() {
       list = list.filter((f: H2HFixture) => f.gameweek === selectedGw);
     }
     
-    // Filter by user's team
-    if (fixtureFilter === 'mine') {
+    // Filter by user's team (spectators see all matchups)
+    const effectiveFilter = isSpectator ? 'all' : fixtureFilter;
+    if (effectiveFilter === 'mine') {
       list = list.filter((f: H2HFixture) => 
         isMyTeam(f.homeTeam, managerDetails) || isMyTeam(f.awayTeam, managerDetails)
       );
     }
     
     return list;
-  }, [fixturesData, selectedGw, fixtureFilter, managerDetails]);
+  }, [fixturesData, selectedGw, fixtureFilter, isSpectator, managerDetails]);
 
   return (
     <div className="flex flex-col flex-1 bg-background text-text-primary overflow-hidden font-outfit">
@@ -305,6 +308,12 @@ function H2HPage() {
             Head to Head
           </h1>
           <p className="text-xs text-text-muted mt-0.5">Challenge other managers in your H2H league.</p>
+          {isSpectator && (
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider mt-2 px-2.5 py-1 rounded-full bg-secondary/15 border border-secondary/30 text-secondary">
+              <Eye className="w-3.5 h-3.5" />
+              Spectator Mode
+            </span>
+          )}
         </div>
       </div>
 
@@ -508,20 +517,22 @@ function H2HPage() {
                     {/* Fixture Filter & Gameweek selector */}
                     <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
                       <div className="flex gap-2">
-                        <button
-                          onClick={() => setFixtureFilter('mine')}
-                          className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                            fixtureFilter === 'mine'
-                              ? 'bg-secondary/20 text-secondary border border-secondary/30'
-                              : 'bg-surface text-text-muted border border-border hover:text-text-primary'
-                          }`}
-                        >
-                          Your Matchups
-                        </button>
+                        {!isSpectator && (
+                          <button
+                            onClick={() => setFixtureFilter('mine')}
+                            className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                              fixtureFilter === 'mine'
+                                ? 'bg-secondary/20 text-secondary border border-secondary/30'
+                                : 'bg-surface text-text-muted border border-border hover:text-text-primary'
+                            }`}
+                          >
+                            Your Matchups
+                          </button>
+                        )}
                         <button
                           onClick={() => setFixtureFilter('all')}
                           className={`px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                            fixtureFilter === 'all'
+                            isSpectator || fixtureFilter === 'all'
                               ? 'bg-secondary/20 text-secondary border border-secondary/30'
                               : 'bg-surface text-text-muted border border-border hover:text-text-primary'
                           }`}

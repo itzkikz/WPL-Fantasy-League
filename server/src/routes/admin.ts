@@ -1,13 +1,15 @@
 import express from 'express';
-import { getFixtures, getGameweeks, createGameweek, updateGameweek, getSeasons, updateFixturesFromApi, getMatchDetails, getMatchIncidentsAndStats, getUsers, createFantasyTeam, getAdminPlayers, updateAdminPlayer, getAdminTeams, getFantasyTeams, getFantasyTeamById, updateFantasyTeam, completeGameweek, revertGameweek, togglePickTeam, getPickTeamStatus, getLeagues, fetchLeagueRounds, updateLeague, getH2HLeague, upsertH2HLeague, deleteH2HLeague, createH2HFixture, deleteH2HFixture, getH2HLeagueFixtures, getAdminFacts, createAdminFact, updateAdminFact, deleteAdminFact } from '../controllers/admin';
+import { getFixtures, getGameweeks, createGameweek, updateGameweek, getSeasons, updateFixturesFromApi, getMatchDetails, undoAddToFantasy, getMatchIncidentsAndStats, getUsers, createFantasyTeam, getAdminPlayers, updateAdminPlayer, getAdminTeams, getFantasyTeams, getFantasyTeamById, updateFantasyTeam, completeGameweek, revertGameweek, togglePickTeam, getPickTeamStatus, getLeagues, fetchLeagueRounds, updateLeague, getH2HLeague, upsertH2HLeague, deleteH2HLeague, createH2HFixture, deleteH2HFixture, getH2HLeagueFixtures, getAdminFacts, createAdminFact, updateAdminFact, deleteAdminFact } from '../controllers/admin';
 import { getTransfers, createTransfer, reverseTransfer } from '../controllers/transfers';
 import { getSubstitutionHistory } from '../controllers/manager';
+import { SheetController } from '../controllers/sheetController';
 
 const router = express.Router();
 
 router.get('/fixtures', getFixtures);
 router.post('/fixtures/update', updateFixturesFromApi);
 router.post('/fixtures/:id/details', getMatchDetails);
+router.delete('/fixtures/:id/fantasy', undoAddToFantasy);
 router.get('/fixtures/:id/stats', getMatchIncidentsAndStats);
 router.get('/gameweeks', getGameweeks);
 router.post('/gameweeks', createGameweek);
@@ -46,5 +48,10 @@ router.get('/facts', getAdminFacts);
 router.post('/facts', createAdminFact);
 router.put('/facts/:id', updateAdminFact);
 router.delete('/facts/:id', deleteAdminFact);
+
+router.get('/sheets/fantasy-teams-gamewise', SheetController.getFantasyTeamsGamewise);
+router.post('/sheets/fantasy-teams-gamewise', SheetController.updateFantasyTeamsGamewise);
+router.get('/sheets/player-stats', SheetController.getPlayerStatsStatus);
+router.post('/sheets/player-stats', SheetController.updatePlayerStatsSheet);
 
 export default router;

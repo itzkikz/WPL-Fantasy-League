@@ -8,32 +8,15 @@ import { Player } from '../models/Player';
 import { Gameweek } from '../models/Gameweek';
 import { getGameweekPoints, getGameweekMinutes } from './players';
 
-// Helper: compute a fantasy team's GW points from its history picks + player stats
-async function computeTeamGWPoints(teamId: string, gameweek: number, currentGw: number): Promise<number> {
-    const team = await FantasyTeam.findById(teamId).lean();
-    if (!team) return 0;
-
-    // Use currentSquad.picks for the current GW, otherwise use history
-    let picks: any[] = [];
-    if (gameweek === currentGw && team.currentSquad?.picks?.length) {
-        picks = team.currentSquad.picks;
-    } else {
-        const historyEntry = team.history?.find((h: any) => h.gameweek === gameweek);
-        if (!historyEntry || !historyEntry.picks?.length) return 0;
-        picks = historyEntry.picks;
-    }
-
-    // Get player stats for this GW
-    const playerIds = picks.map((p: any) => p.playerId);
-    const allPlayerStats = await PlayerStats.find({
-        playerId: { $in: playerIds },
-        'gameweeks.id': gameweek,
-    }).lean();
+// Helper: compute a single team's GW points from picks + a player-stats lookup map
+function computePicksPoints(picks: any[], gameweek: number, statsByPlayerId: Map<number, any>): number {
+    if (!picks || !picks.length) return 0;
 
     // Build minutes map for captain check
     const minutesMap = new Map<number, number>();
-    for (const ps of allPlayerStats) {
-        minutesMap.set(ps.playerId, getGameweekMinutes(ps.gameweeks, gameweek));
+    for (const pick of picks) {
+        const ps = statsByPlayerId.get(pick.playerId);
+        if (ps) minutesMap.set(pick.playerId, getGameweekMinutes(ps.gameweeks, gameweek));
     }
 
     // Check if captain played
@@ -46,7 +29,7 @@ async function computeTeamGWPoints(teamId: string, gameweek: number, currentGw: 
     let gwScore = 0;
     for (const pick of picks) {
         if (!pick.isStarting) continue;
-        const ps = allPlayerStats.find((s: any) => s.playerId === pick.playerId);
+        const ps = statsByPlayerId.get(pick.playerId);
         if (!ps) continue;
 
         let pts = getGameweekPoints(ps.gameweeks, gameweek);
@@ -63,20 +46,9 @@ async function computeTeamGWPoints(teamId: string, gameweek: number, currentGw: 
     return gwScore;
 }
 
-// Helper: get points for all teams in a league for a specific GW
-async function getLeagueGWPoints(league: any, gameweek: number, currentGw: number): Promise<Map<string, number>> {
-    const pointsMap = new Map<string, number>();
-    const teamIds = league.fantasyTeams.map((t: any) => t._id.toString());
-
-    for (const teamId of teamIds) {
-        const pts = await computeTeamGWPoints(teamId, gameweek, currentGw);
-        pointsMap.set(teamId, pts);
-    }
-
-    return pointsMap;
-}
-
-// Helper: get points for all completed GWs in league range
+// Helper: get points for all completed GWs in league range.
+// Batched: loads all league teams + all player stats up front (4 queries total)
+// instead of 2 queries per team per gameweek.
 export async function getLeagueAllGWPoints(league: any, includeCurrentGw: boolean = false): Promise<Map<number, Map<string, number>>> {
     const gwPoints = new Map<number, Map<string, number>>();
     const completedGws = await Gameweek.find({ isCompleted: true }).select('number').lean();
@@ -85,10 +57,64 @@ export async function getLeagueAllGWPoints(league: any, includeCurrentGw: boolea
     const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
     const currentGw = currentGwDoc?.number || 0;
 
+    const gwsToCompute: number[] = [];
     for (let gw = league.gameweekStart; gw <= league.gameweekEnd; gw++) {
-        if (!completedGwNumbers.has(gw) && !(includeCurrentGw && gw === currentGw)) continue;
-        const pointsMap = await getLeagueGWPoints(league, gw, currentGw);
-        gwPoints.set(gw, pointsMap);
+        if (completedGwNumbers.has(gw) || (includeCurrentGw && gw === currentGw)) {
+            gwsToCompute.push(gw);
+        }
+    }
+    if (gwsToCompute.length === 0) return gwPoints;
+
+    const teamIds = league.fantasyTeams.map((t: any) => t._id.toString());
+
+    // Load all league teams in one query (only picks/history fields needed)
+    const teams = await FantasyTeam.find({ _id: { $in: teamIds } })
+        .select('currentSquad.picks history.gameweek history.picks')
+        .lean();
+
+    // Build picks map: gw -> teamId -> picks (currentSquad wins for the current GW)
+    const picksByGwByTeam = new Map<number, Map<string, any[]>>();
+    for (const team of teams) {
+        const teamId = team._id.toString();
+        const history = team.history || [];
+        for (const h of history) {
+            if (!h.picks?.length) continue;
+            if (!picksByGwByTeam.has(h.gameweek)) picksByGwByTeam.set(h.gameweek, new Map());
+            picksByGwByTeam.get(h.gameweek)!.set(teamId, h.picks);
+        }
+        if (team.currentSquad?.picks?.length) {
+            if (!picksByGwByTeam.has(currentGw)) picksByGwByTeam.set(currentGw, new Map());
+            picksByGwByTeam.get(currentGw)!.set(teamId, team.currentSquad.picks);
+        }
+    }
+
+    // Collect all player ids referenced by any pick
+    const allPlayerIds = new Set<number>();
+    for (const picksMap of picksByGwByTeam.values()) {
+        for (const picks of picksMap.values()) {
+            for (const p of picks) allPlayerIds.add(p.playerId);
+        }
+    }
+
+    // Load all needed player stats in one query
+    const allPlayerStats = await PlayerStats.find({
+        playerId: { $in: [...allPlayerIds] },
+        'gameweeks.id': { $in: gwsToCompute },
+    }).lean();
+
+    const statsByPlayerId = new Map<number, any>();
+    for (const ps of allPlayerStats) {
+        if (!statsByPlayerId.has(ps.playerId)) statsByPlayerId.set(ps.playerId, ps);
+    }
+
+    // Compute points per team per GW in memory
+    for (const gw of gwsToCompute) {
+        const teamPoints = new Map<string, number>();
+        const picksMap = picksByGwByTeam.get(gw) || new Map<string, any[]>();
+        for (const teamId of teamIds) {
+            teamPoints.set(teamId, computePicksPoints(picksMap.get(teamId) || [], gw, statsByPlayerId));
+        }
+        gwPoints.set(gw, teamPoints);
     }
 
     return gwPoints;
@@ -100,18 +126,35 @@ export const getMyH2HLeagues = async (req: Request, res: Response) => {
         const user = await User.findOne({ username });
         if (!user) return res.status(404).json({ error: 'User not found' });
 
+        const { Gameweek } = require('../models/Gameweek');
+        const currentGw = await Gameweek.findOne({ isCurrent: true }).lean();
+
         const fantasyTeam = await FantasyTeam.findOne({ managers: user._id });
-        if (!fantasyTeam) return res.status(404).json({ error: 'Fantasy team not found' });
 
         // Find the H2H league for current season (or first one if season not tracked)
         // For now, find the first league containing this team
-        const leagues = await H2HLeague.find({ fantasyTeams: fantasyTeam._id })
-            .populate('fantasyTeams', 'name')
-            .lean();
+        let leagues = fantasyTeam
+            ? await H2HLeague.find({ fantasyTeams: fantasyTeam._id })
+                .populate('fantasyTeams', 'name')
+                .lean()
+            : [];
 
-        // Get the current gameweek to determine "active" league
-        const { Gameweek } = require('../models/Gameweek');
-        const currentGw = await Gameweek.findOne({ isCurrent: true }).lean();
+        // No team or not in any league -> fall back to the current season's league
+        // so users without a fantasy team can still browse H2H
+        if (leagues.length === 0) {
+            const allLeagues = await H2HLeague.find({})
+                .populate('fantasyTeams', 'name')
+                .sort({ season: -1, createdAt: -1 })
+                .lean();
+
+            let activeLeague = allLeagues[0];
+            if (allLeagues.length > 1 && currentGw) {
+                activeLeague = allLeagues.find(l => l.gameweekStart <= currentGw.number && l.gameweekEnd >= currentGw.number) || allLeagues[0];
+            }
+
+            res.json({ data: activeLeague ? [activeLeague] : [] });
+            return;
+        }
 
         let activeLeague = leagues[0];
         if (leagues.length > 1 && currentGw) {

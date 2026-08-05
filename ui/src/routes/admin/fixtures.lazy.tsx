@@ -37,11 +37,20 @@ function AdminFixtures() {
   const [dateEnd, setDateEnd] = useState(weekRange.end);
   const [showAll, setShowAll] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [gameweekFilter, setGameweekFilter] = useState<number | null>(null);
 
   const { data, isLoading, error } = useQuery({
     queryKey: [QUERY_KEYS.ADMIN_FIXTURES],
     queryFn: async () => {
       const response = await apiClient.get(API_ENDPOINTS.ADMIN.FIXTURES);
+      return response.data;
+    },
+  });
+
+  const { data: gameweeksData } = useQuery({
+    queryKey: [QUERY_KEYS.ADMIN_GAMEWEEKS],
+    queryFn: async () => {
+      const response = await apiClient.get(API_ENDPOINTS.ADMIN.GAMEWEEKS);
       return response.data;
     },
   });
@@ -57,6 +66,19 @@ function AdminFixtures() {
     },
     onError: () => {
       alert("Failed to fetch match details. Check logs.");
+    }
+  });
+
+  const undoMutation = useMutation({
+    mutationFn: async (id: number) => {
+      return await apiClient.delete(API_ENDPOINTS.ADMIN.UNDO_FANTASY(id));
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ADMIN_FIXTURES] });
+      alert("Removed from fantasy successfully!");
+    },
+    onError: () => {
+      alert("Failed to remove from fantasy. Check logs.");
     }
   });
 
@@ -81,10 +103,15 @@ function AdminFixtures() {
   }
 
   const allFixtures = data?.data || [];
+  const gameweeks = [...(gameweeksData?.data || [])].sort((a: any, b: any) => a.number - b.number);
+
+  const gwFiltered = gameweekFilter == null ? allFixtures : allFixtures.filter((f: any) => f.gameweekNumber === gameweekFilter);
 
   const startTs = dayjs(dateStart).startOf("day").unix();
   const endTs = dayjs(dateEnd).endOf("day").unix();
-  const dateFiltered = showAll ? allFixtures : allFixtures.filter((f: any) => f.startTimestamp >= startTs && f.startTimestamp <= endTs);
+  const dateFiltered = showAll || gameweekFilter != null
+    ? gwFiltered
+    : gwFiltered.filter((f: any) => f.startTimestamp >= startTs && f.startTimestamp <= endTs);
 
   const filteredFixtures = dateFiltered.filter((f: any) => {
     const homeTeam = (f.homeTeamName || `Team #${f.homeTeam?.id || ''}`).toLowerCase();
@@ -176,6 +203,23 @@ function AdminFixtures() {
             />
           </div>
         </div>
+
+        {/* Gameweek Filter */}
+        <div className="flex items-center gap-1.5 bg-white/5 border border-white/10 px-2 py-1 rounded-lg">
+          <span className="text-[9px] font-extrabold uppercase tracking-wider text-white/40">GW</span>
+          <select
+            value={gameweekFilter ?? ""}
+            onChange={(e) => setGameweekFilter(e.target.value === "" ? null : Number(e.target.value))}
+            className="bg-transparent text-white text-xs font-semibold focus:outline-none max-w-[120px] cursor-pointer"
+          >
+            <option value="" className="bg-[#1b142d] text-white">All</option>
+            {gameweeks.map((gw: any) => (
+              <option key={gw.number} value={gw.number} className="bg-[#1b142d] text-white">
+                GW {gw.number}{gw.isCurrent ? " • Current" : ""}{gw.isCompleted ? " • Done" : ""}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Fixtures Data Density Grid */}
@@ -206,9 +250,22 @@ function AdminFixtures() {
                   >
                     {/* Time & status badge */}
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-black tracking-tight text-white/90">
-                        {dayjs.unix(f.startTimestamp).format("HH:mm")}
-                      </span>
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <span className="text-xs font-black tracking-tight text-white/90">
+                          {dayjs.unix(f.startTimestamp).format("HH:mm")}
+                        </span>
+                        {f.gameweekNumber != null && (
+                          <span
+                            className={`text-[8px] font-extrabold uppercase tracking-widest px-1.5 py-0.5 rounded whitespace-nowrap ${
+                              f.gameweekNumber === gameweekFilter
+                                ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30'
+                                : 'bg-white/5 text-white/40 border border-white/10'
+                            }`}
+                          >
+                            GW {f.gameweekNumber}
+                          </span>
+                        )}
+                      </div>
                       <span className={`text-[8px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded ${status.class}`}>
                         {status.label}
                       </span>
@@ -243,30 +300,50 @@ function AdminFixtures() {
                         Stats
                       </Link>
 
-                      <button
-                        onClick={(e) => { e.stopPropagation(); detailsMutation.mutate(f.fixtureId); }}
-                        disabled={!isFinished || f.addedtofantasy || !f.hasDetails || !f.hasGameweek || (detailsMutation.isPending && detailsMutation.variables === f.fixtureId)}
-                        className={`text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-1.5 rounded transition-all whitespace-nowrap shadow-sm ${
-                          f.addedtofantasy
-                            ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 cursor-not-allowed'
-                            : !f.hasGameweek
-                            ? 'bg-white/5 text-white/30 border border-white/5 cursor-not-allowed opacity-60'
-                            : !f.hasDetails
-                            ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20'
-                            : 'bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 disabled:opacity-50'
-                        }`}
-                        title={!f.hasGameweek ? "Assign this fixture to a gameweek first" : !f.hasDetails ? "Fetch match details first" : ""}
-                      >
-                        {detailsMutation.isPending && detailsMutation.variables === f.fixtureId
-                          ? 'Loading...'
-                          : f.addedtofantasy
-                            ? 'Added to Fantasy'
+                      {f.addedtofantasy ? (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (window.confirm("Remove this fixture from fantasy scoring? This will subtract its points.")) {
+                              undoMutation.mutate(f.fixtureId);
+                            }
+                          }}
+                          disabled={!f.canUndo || (undoMutation.isPending && undoMutation.variables === f.fixtureId)}
+                          className={`text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-1.5 rounded transition-all whitespace-nowrap shadow-sm ${
+                            f.canUndo
+                              ? 'bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 border border-rose-500/20'
+                              : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 cursor-not-allowed'
+                          }`}
+                          title={!f.canUndo ? "Only fixtures in the current, non-completed gameweek can be undone" : ""}
+                        >
+                          {undoMutation.isPending && undoMutation.variables === f.fixtureId
+                            ? 'Loading...'
+                            : f.canUndo
+                            ? 'Undo Added to Fantasy'
+                            : 'Added to Fantasy'}
+                        </button>
+                      ) : (
+                        <button
+                          onClick={(e) => { e.stopPropagation(); detailsMutation.mutate(f.fixtureId); }}
+                          disabled={!isFinished || !f.hasDetails || !f.hasGameweek || (detailsMutation.isPending && detailsMutation.variables === f.fixtureId)}
+                          className={`text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-1.5 rounded transition-all whitespace-nowrap shadow-sm ${
+                            !f.hasGameweek
+                              ? 'bg-white/5 text-white/30 border border-white/5 cursor-not-allowed opacity-60'
+                              : !f.hasDetails
+                              ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20'
+                              : 'bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 disabled:opacity-50'
+                          }`}
+                          title={!f.hasGameweek ? "Assign this fixture to a gameweek first" : !f.hasDetails ? "Fetch match details first" : ""}
+                        >
+                          {detailsMutation.isPending && detailsMutation.variables === f.fixtureId
+                            ? 'Loading...'
                             : !f.hasGameweek
                             ? 'No Gameweek'
                             : !f.hasDetails
                             ? 'No Details'
                             : 'Add to Fantasy'}
-                      </button>
+                        </button>
+                      )}
                     </div>
                   </div>
                 );

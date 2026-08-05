@@ -1,11 +1,11 @@
 # Graph Report - WPL-Fantasy-League  (2026-08-05)
 
 ## Corpus Check
-- 349 files · ~374,553 words
+- 349 files · ~374,631 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3185 nodes · 4783 edges · 355 communities (167 shown, 188 thin omitted)
+- 3185 nodes · 4783 edges · 357 communities (169 shown, 188 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 214 edges (avg confidence: 0.76)
 - Token cost: 0 input · 0 output
 
@@ -351,7 +351,9 @@
 - notifications.tsx
 - secondary-foreground
 - index.tsx
+- bcryptjs
 - destructive
+- Route
 - Route
 - Route
 - Route
@@ -396,7 +398,7 @@
 - **Responsive grid layout system** — ui_src_pages_home_homepagepng_screenshot, ui_src_pages_home_homepagepng_teamoverview, ui_src_pages_home_homepagepng_upcomingfixture, ui_src_pages_home_homepagepng_leaguestatistics, ui_src_pages_home_homepagepng_gameweekprogress, ui_src_pages_home_homepagepng_leaguestandings, ui_src_pages_home_homepagepng_playerspotlight, ui_src_pages_home_homepagepng_topplayers, ui_src_pages_home_homepagepng_bestperformers, ui_src_pages_home_homepagepng_recentgameweeks, ui_src_pages_home_homepagepng_pointsbreakdown, ui_src_pages_home_homepagepng_seasonstats, ui_src_pages_home_homepagepng_teamformation, ui_src_pages_home_homepagepng_squadvalue, ui_src_pages_home_homepagepng_yourplayerscard, ui_src_pages_home_homepagepng_fantasynews [INFERRED 0.90]
 - **Dark theme design system** — ui_src_pages_home_homepagepng_screenshot, ui_src_pages_home_homepagepng_header, ui_src_pages_home_homepagepng_bottomnavbar [INFERRED 0.90]
 
-## Communities (355 total, 188 thin omitted)
+## Communities (357 total, 188 thin omitted)
 
 ### Community 0 - "UI Navigation & Layout"
 Cohesion: 0.05
@@ -500,7 +502,7 @@ Nodes (18): Formation, FormationResult, Player, RoleKey, canSwap(), Category, co
 
 ### Community 26 - "UI Dev Dependencies"
 Cohesion: 0.08
-Nodes (25): autoprefixer, eslint, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals, postcss, @tailwindcss/vite, @types/react-dom (+17 more)
+Nodes (25): autoprefixer, eslint, @eslint/js, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals, @tailwindcss/vite, @types/react-dom (+17 more)
 
 ### Community 27 - "Design Token Spacing"
 Cohesion: 0.09
@@ -524,15 +526,15 @@ Nodes (11): Generate Tailwind CSS configuration files., Add full color palette (
 
 ### Community 34 - "Design Token Semantic Colors"
 Cohesion: 0.11
-Nodes (19): $type, $value, background, destructive-foreground, primary, primary-foreground, secondary, secondary-foreground (+11 more)
+Nodes (19): $type, $value, background, foreground, muted-foreground, primary, primary-hover, secondary (+11 more)
 
 ### Community 35 - "Tailwind Config Generator"
-Cohesion: 0.13
-Nodes (8): main(), Add custom font families.          Args:             fonts: Dict of font_type: [, Add custom spacing values.          Args:             spacing: Dict of name: val, Add custom breakpoints.          Args:             breakpoints: Dict of name: wi, Add plugin requirements.          Args:             plugins: List of plugin name, Get plugin recommendations based on configuration.          Returns:, Validate configuration.          Returns:             Tuple of (valid, message), Add custom colors to theme.          Args:             colors: Dict of color_nam
+Cohesion: 0.11
+Nodes (10): main(), Add custom font families.          Args:             fonts: Dict of font_type: [, Add custom spacing values.          Args:             spacing: Dict of name: val, Add custom breakpoints.          Args:             breakpoints: Dict of name: wi, Add plugin requirements.          Args:             plugins: List of plugin name, Get plugin recommendations based on configuration.          Returns:, Generate configuration file content.          Returns:             Configuration, Write configuration to file.          Returns:             Tuple of (success, me (+2 more)
 
 ### Community 36 - "Server Package Dependencies"
 Cohesion: 0.10
-Nodes (21): bcryptjs, body-parser, cors, dotenv, google-auth-library, jsonwebtoken, mongoose, dependencies (+13 more)
+Nodes (21): body-parser, cors, dotenv, google-auth-library, jsonwebtoken, mongoose, puppeteer-extra, dependencies (+13 more)
 
 ### Community 37 - "Player Stats Feature"
 Cohesion: 0.20
@@ -595,12 +597,12 @@ Cohesion: 0.36
 Nodes (3): getFixtures(), router, fetchFixturesByDate()
 
 ### Community 54 - "Standings Page"
-Cohesion: 0.20
-Nodes (12): padding-x, padding-y, input, $type, $value, focus-ring, padding-x, padding-y (+4 more)
+Cohesion: 0.29
+Nodes (8): padding-x, input, $type, $value, focus-ring, padding-x, $type, $value
 
 ### Community 55 - "Design Token Radius & Shadows"
-Cohesion: 0.18
-Nodes (15): $type, $value, sm, $type, $value, primitive, radius, shadow (+7 more)
+Cohesion: 0.19
+Nodes (14): $type, $value, $type, $value, $type, $value, primitive, radius (+6 more)
 
 ### Community 56 - "UI UX Color Sync"
 Cohesion: 0.29
@@ -630,8 +632,8 @@ Cohesion: 0.40
 Nodes (6): authApi, authQueries, LoginRequest, LoginResponse, User, ValidateResponse
 
 ### Community 62 - "Design Token Component Tokens"
-Cohesion: 0.15
-Nodes (17): $type, $value, $type, $value, bg, bg, border, padding (+9 more)
+Cohesion: 0.20
+Nodes (12): $type, $value, bg, bg, padding, shadow, card, bg (+4 more)
 
 ### Community 63 - "Shadcn Installer Edge Cases"
 Cohesion: 0.17
@@ -690,8 +692,8 @@ Cohesion: 0.13
 Nodes (11): Button(), ButtonProps, CheckboxProps, HeaderProps, AngleLeftProps, getPointsImpact(), PlayerDetails(), PlayerOverall() (+3 more)
 
 ### Community 78 - "Community 78"
-Cohesion: 0.20
-Nodes (6): Generate configuration file content.          Returns:             Configuration, Generate TypeScript configuration., Generate JavaScript configuration., Format plugins array for config.          Validates each plugin name against a s, Add indentation to JSON string., Write configuration to file.          Returns:             Tuple of (success, me
+Cohesion: 0.29
+Nodes (4): Generate TypeScript configuration., Generate JavaScript configuration., Format plugins array for config.          Validates each plugin name against a s, Add indentation to JSON string.
 
 ### Community 79 - "Community 79"
 Cohesion: 0.05
@@ -766,8 +768,8 @@ Cohesion: 0.36
 Nodes (5): FixtureDetails(), incidentIcon(), incidentLabel(), Route, statusDisplay()
 
 ### Community 105 - "Community 105"
-Cohesion: 0.67
-Nodes (4): $type, $value, md, md
+Cohesion: 0.60
+Nodes (5): $type, $value, border, border, border
 
 ### Community 106 - "Community 106"
 Cohesion: 0.67
@@ -782,8 +784,8 @@ Cohesion: 0.67
 Nodes (3): ring, $type, $value
 
 ### Community 109 - "Community 109"
-Cohesion: 0.67
-Nodes (3): $type, $value, 1
+Cohesion: 0.60
+Nodes (5): sm, sm, sm, $type, $value
 
 ### Community 113 - "Community 113"
 Cohesion: 0.06
@@ -803,7 +805,7 @@ Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent
 
 ### Community 117 - "md"
 Cohesion: 0.67
-Nodes (3): foreground, $type, $value
+Nodes (4): padding-y, padding-y, $type, $value
 
 ### Community 119 - "Community 119"
 Cohesion: 0.67
@@ -847,7 +849,7 @@ Nodes (24): Accessibility Requirements, Brand Compliance Validation, Checking Co
 
 ### Community 158 - "Community 158"
 Cohesion: 0.67
-Nodes (3): muted-foreground, $type, $value
+Nodes (3): $type, $value, 3
 
 ### Community 159 - "Community 159"
 Cohesion: 0.08
@@ -863,7 +865,7 @@ Nodes (24): Accessibility, Accessibility Requirements, ARIA States, Color Contra
 
 ### Community 163 - "Community 163"
 Cohesion: 0.67
-Nodes (3): primary-hover, $type, $value
+Nodes (3): destructive-foreground, $type, $value
 
 ### Community 164 - "Community 164"
 Cohesion: 0.67
@@ -1029,9 +1031,17 @@ Nodes (3): Expanding the ESLint configuration, React Compiler, React + Vite
 Cohesion: 0.29
 Nodes (6): Commands, Gotchas, graphify, Repo layout (what actually runs), Setup / env, WPL Fantasy League
 
+### Community 244 - "Route"
+Cohesion: 0.67
+Nodes (3): primary-foreground, $type, $value
+
 ### Community 347 - "destructive"
 Cohesion: 0.67
 Nodes (3): destructive, $type, $value
+
+### Community 352 - "Route"
+Cohesion: 0.67
+Nodes (3): secondary-foreground, $type, $value
 
 ## Knowledge Gaps
 - **1361 isolated node(s):** `$schema`, `$value`, `$type`, `$value`, `$type` (+1356 more)
