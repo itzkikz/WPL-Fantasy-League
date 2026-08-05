@@ -22,7 +22,7 @@ export default function SeasonStats({
   const displayStats = stats && stats.length > 0 ? stats : defaultStats;
 
   return (
-    <Card className="p-3 sm:p-4 bg-surface/90 border border-border/70 shadow-xl backdrop-blur-md rounded-2xl">
+    <Card padded={false} className="h-full p-2.5 sm:p-4">
       <CardHeader title={title} subtitle="Comprehensive Campaign Metrics" className="!mb-3" />
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3">
         {displayStats.map(({ icon: Icon = Target, label, value, colorClass = "text-purple-400", bgClass = "bg-purple-500/10 border-purple-500/20" }) => (

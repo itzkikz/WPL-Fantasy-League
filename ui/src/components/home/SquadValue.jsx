@@ -47,7 +47,7 @@ export default function SquadValue({
   const hasFine = fine && fine > 0;
 
   return (
-    <Card className="h-full flex flex-col justify-between p-3 sm:p-4 bg-surface/90 border border-border/70 shadow-xl backdrop-blur-md rounded-2xl">
+    <Card padded={false} className="h-full flex flex-col justify-between p-2.5 sm:p-4">
       <div>
         <CardHeader title="Squad Value" subtitle="Financial Roster Overview" className="mb-2 sm:mb-3" />
 

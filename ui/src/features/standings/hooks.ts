@@ -15,8 +15,8 @@ export const useManagerOverview = (teamId: string) => {
   return useQuery(standingsQueries.overview(teamId))
 }
 
-export const useStandingsFixtures = () => {
-  return useQuery(standingsQueries.fixtures())
+export const useStandingsFixtures = (gameweek?: number) => {
+  return useQuery(standingsQueries.fixtures(gameweek))
 }
 
 export const useFixturePlayers = (fixtureId: number | null) => {

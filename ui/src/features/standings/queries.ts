@@ -27,10 +27,10 @@ export const standingsQueries = {
       enabled: !!teamId,
     }),
 
-  fixtures: () =>
+  fixtures: (gameweek?: number) =>
     queryOptions({
-      queryKey: [QUERY_KEYS.STANDINGS, 'fixtures'],
-      queryFn: standingsApi.getFixtures,
+      queryKey: [QUERY_KEYS.STANDINGS, 'fixtures', gameweek],
+      queryFn: () => standingsApi.getFixtures(gameweek),
       staleTime: 60 * 1000,
     }),
 

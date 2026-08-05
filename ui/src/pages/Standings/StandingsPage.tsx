@@ -1,13 +1,8 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import {
-  ArrowLeft,
-  ChevronDown,
-  SlidersHorizontal,
-  Bell,
   Trophy,
   ChevronRight,
-  BarChart3,
   Clock,
   Crown,
   Activity
@@ -39,12 +34,14 @@ const StandingsPage = () => {
   const [activeTab, setActiveTab] = useState<'overall' | 'fixtures'>('overall');
   const [fixtureFilter, setFixtureFilter] = useState<'mine' | 'all'>('mine');
   const [selectedFixture, setSelectedFixture] = useState<any | null>(null);
+  const [selectedGw, setSelectedGw] = useState<number | undefined>(undefined);
+
   const { data: standings, isLoading } = useStandings();
   const { data: managerDetails } = useManagerDetails();
-  const { data: fixturesResponse, isLoading: isLoadingFixtures } = useStandingsFixtures();
+  const { data: fixturesResponse, isLoading: isLoadingFixtures } = useStandingsFixtures(selectedGw);
   const { data: myFixturesData } = useMyFixtures();
 
-  const gameweekNumber = fixturesResponse?.gameweek || 15;
+  const gameweekNumber = fixturesResponse?.gameweek || selectedGw || 15;
   const fixturesList = fixturesResponse?.fixtures || [];
 
   // Build a set of team IDs that have the user's players
@@ -77,7 +74,7 @@ const StandingsPage = () => {
   return (
     <div className="flex flex-col flex-1 bg-background text-text-primary overflow-hidden font-outfit">
 
-      {/* 3. Navigation Tabs */}
+      {/* Navigation Tabs */}
       <div className="mx-4 mt-3 mb-4 flex border-b border-[var(--color-border-divider)] shrink-0">
         <button
           onClick={() => setActiveTab("overall")}
@@ -222,7 +219,7 @@ const StandingsPage = () => {
               );
             })
           ) : (
-            /* Fixtures tab displaying real fixtures of current gameweek */
+            /* Fixtures tab displaying real fixtures of selected gameweek */
             isLoadingFixtures ? (
               [...Array(6)].map((_, i) => (
                 <div
@@ -232,26 +229,46 @@ const StandingsPage = () => {
               ))
             ) : fixturesList.length > 0 ? (
               <div className="space-y-3 pb-8">
-                {/* Filter chips */}
-                <div className="flex items-center gap-2 mb-2">
-                  <button
-                    onClick={() => setFixtureFilter('mine')}
-                    className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${fixtureFilter === 'mine'
-                      ? 'bg-primary/20 text-primary border border-primary/40'
-                      : 'bg-elevated text-text-muted border border-border hover:text-text-primary'
-                      }`}
-                  >
-                    Your Fixtures
-                  </button>
-                  <button
-                    onClick={() => setFixtureFilter('all')}
-                    className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${fixtureFilter === 'all'
-                      ? 'bg-secondary/20 text-secondary border border-secondary/30'
-                      : 'bg-elevated text-text-muted border border-border hover:text-text-primary'
-                      }`}
-                  >
-                    All Fixtures
-                  </button>
+                {/* Filter chips & Gameweek selector */}
+                <div className="flex items-center justify-between gap-2 mb-2 flex-wrap">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setFixtureFilter('mine')}
+                      className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${fixtureFilter === 'mine'
+                        ? 'bg-primary/20 text-primary border border-primary/40'
+                        : 'bg-elevated text-text-muted border border-border hover:text-text-primary'
+                        }`}
+                    >
+                      Your Fixtures
+                    </button>
+                    <button
+                      onClick={() => setFixtureFilter('all')}
+                      className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer ${fixtureFilter === 'all'
+                        ? 'bg-secondary/20 text-secondary border border-secondary/30'
+                        : 'bg-elevated text-text-muted border border-border hover:text-text-primary'
+                        }`}
+                    >
+                      All Fixtures
+                    </button>
+                  </div>
+
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] text-text-muted font-bold uppercase">GW:</span>
+                    <select
+                      value={selectedGw ?? gameweekNumber}
+                      onChange={(e) => setSelectedGw(Number(e.target.value))}
+                      className="px-2.5 py-1 bg-card border border-border rounded-xl text-xs font-semibold text-text-primary focus:outline-none focus:border-secondary cursor-pointer"
+                    >
+                      {[...Array(38)].map((_, idx) => {
+                        const gw = idx + 1;
+                        return (
+                          <option key={gw} value={gw} className="bg-card text-text-primary">
+                            GW {gw}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
                 </div>
 
                 <div className="text-center py-2.5 bg-surface border border-border rounded-xl mb-4 flex items-center justify-center gap-1.5 shadow-inner">
@@ -378,22 +395,6 @@ const StandingsPage = () => {
           )}
         </div>
       </div>
-
-      {/* Floating Call to Action footer
-      {activeTab === 'overall' && !isLoading && (
-        <div className="absolute bottom-20 left-0 right-0 px-4 py-3 bg-background/95 backdrop-blur-md border-t border-white/5 flex-none z-10">
-          <button
-            onClick={() => navigate({ to: "/home" })}
-            className="w-full py-3.5 px-4 rounded-xl bg-gradient-button text-white font-bold text-xs flex items-center justify-between active:scale-[0.99] transition-all shadow-[0_4px_16px_rgba(139,92,246,0.25)]"
-          >
-            <div className="flex items-center gap-2">
-              <BarChart3 className="w-4 h-4 text-white/80" />
-              <span>View Gameweek Breakdown</span>
-            </div>
-            <ChevronRight className="w-4 h-4 text-white/80" />
-          </button>
-        </div>
-      )} */}
 
       {/* Fixture Player Stats Modal */}
       <FixturePlayersModal

@@ -373,6 +373,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
         rank,
         managerTeam,
         team: teamName,
+        teamId: fantasyTeam._id?.toString() || "",
         logo: fantasyTeam.logo || "",
         utlisation: utilisation,
         total_budget: totalBudget,

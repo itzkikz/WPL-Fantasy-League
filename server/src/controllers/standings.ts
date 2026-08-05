@@ -624,7 +624,12 @@ export const getFixturesForCurrentGameweek = async (req: Request, res: Response)
     try {
         const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean() as any;
         const currentGw = currentGwDoc ? currentGwDoc.number : 15;
-        const fixtureIds = currentGwDoc ? (currentGwDoc.fixtures || []) : [];
+
+        const reqGw = req.query.gameweek ? parseInt(req.query.gameweek as string, 10) : (req.query.gw ? parseInt(req.query.gw as string, 10) : NaN);
+        const targetGw = !isNaN(reqGw) && reqGw > 0 ? reqGw : currentGw;
+
+        const targetGwDoc = (targetGw === currentGw) ? currentGwDoc : (await Gameweek.findOne({ number: targetGw }).lean() as any);
+        const fixtureIds = targetGwDoc ? (targetGwDoc.fixtures || []) : [];
 
         const Fixture = (await import("../models/Fixture")).Fixture;
 
@@ -632,7 +637,7 @@ export const getFixturesForCurrentGameweek = async (req: Request, res: Response)
         if (fixtureIds.length > 0) {
             fixtures = await Fixture.find({ fixtureId: { $in: fixtureIds } }).sort({ startTimestamp: 1 }).lean() as any[];
         } else {
-            fixtures = await Fixture.find({ 'roundInfo.round': currentGw }).sort({ startTimestamp: 1 }).lean() as any[];
+            fixtures = await Fixture.find({ 'roundInfo.round': targetGw }).sort({ startTimestamp: 1 }).lean() as any[];
         }
 
         const teams = await Team.find({}, 'id name nameCode photo logo teamColors').lean() as any[];
@@ -663,14 +668,14 @@ export const getFixturesForCurrentGameweek = async (req: Request, res: Response)
                 },
                 homeScore: f.homeScore,
                 awayScore: f.awayScore,
-                round: f.roundInfo?.round || currentGw,
+                round: f.roundInfo?.round || targetGw,
             };
         });
 
         res.json({
             success: true,
             data: {
-                gameweek: currentGw,
+                gameweek: targetGw,
                 fixtures: mappedFixtures
             }
         });
