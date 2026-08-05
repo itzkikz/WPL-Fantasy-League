@@ -33,6 +33,26 @@ const getTeamIcon = (teamName: string, index: number) => {
   return icons[index % icons.length];
 };
 
+function isMyTeam(team: any, managerDetails: any) {
+  if (!team || !managerDetails) return false;
+  const myName = (managerDetails.team || "").trim().toLowerCase();
+  const myId = (
+    managerDetails.teamId ||
+    managerDetails.managerTeam?._id ||
+    managerDetails.managerTeam?.team_id ||
+    managerDetails._id ||
+    ""
+  ).toString();
+
+  const teamName = (team.name || team.teamName || "").trim().toLowerCase();
+  const teamId = (team._id || team.id || team.teamId || "").toString();
+
+  const matchId = Boolean(myId) && Boolean(teamId) && myId === teamId;
+  const matchName = Boolean(myName) && Boolean(teamName) && myName === teamName;
+
+  return matchId || matchName;
+}
+
 const compileTeamTotals = (details: any) => {
   const totals = {
     minutes: 0,
@@ -266,10 +286,9 @@ function H2HPage() {
     
     // Filter by user's team
     if (fixtureFilter === 'mine') {
-      const myTeamId = managerDetails?.managerTeam?._id;
-      if (myTeamId) {
-        list = list.filter((f: H2HFixture) => f.homeTeam?._id === myTeamId || f.awayTeam?._id === myTeamId);
-      }
+      list = list.filter((f: H2HFixture) => 
+        isMyTeam(f.homeTeam, managerDetails) || isMyTeam(f.awayTeam, managerDetails)
+      );
     }
     
     return list;
@@ -397,9 +416,8 @@ function H2HPage() {
                   ))
                 ) : standingsData?.standings && standingsData.standings.length > 0 ? (
                   standingsData.standings.map((team: H2HStanding, idx: number) => {
-                    const isMe = team.teamId === managerDetails?.managerTeam?._id || team.teamName === managerDetails?.team;
+                    const isMe = isMyTeam(team, managerDetails);
                     const crest = getTeamIcon(team.teamName, idx);
-                    const manager = team.managerName || 'Unknown';
                     const diff = team.gf - team.ga;
 
                     return (
@@ -432,10 +450,9 @@ function H2HPage() {
                           )}
                         </div>
 
-                        {/* Name and Manager */}
+                        {/* Team Name */}
                         <div className="flex-1 pl-2.5 min-w-0">
                           <p className="text-[12px] font-bold text-text-primary leading-snug truncate">{team.teamName}</p>
-                          <p className="text-[9px] text-text-muted truncate mt-0.5">{manager}</p>
                         </div>
 
                         {/* Stats */}
@@ -539,8 +556,8 @@ function H2HPage() {
                       </div>
                     ) : (
                       filteredFixtures.map((fixture: H2HFixture) => {
-                        const isHomeMe = fixture.homeTeam?._id === managerDetails?.managerTeam?._id;
-                        const isAwayMe = fixture.awayTeam?._id === managerDetails?.managerTeam?._id;
+                        const isHomeMe = isMyTeam(fixture.homeTeam, managerDetails);
+                        const isAwayMe = isMyTeam(fixture.awayTeam, managerDetails);
                         const isRelevant = isHomeMe || isAwayMe;
                         const isFinished = fixture.status === 'completed';
                         const isLive = fixture.status === 'live';

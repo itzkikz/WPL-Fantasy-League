@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Users, ArrowRight, ShieldCheck, Star } from "lucide-react";
-import { Card, CardHeader, Avatar } from "./Primitives";
+import React from "react";
+import { Users, ArrowRight } from "lucide-react";
+import { Card, Avatar } from "./Primitives";
 
 /**
- * YourPlayersCard - Renders squad player face images, position badges,
- * captain indicators, and acquired points badges.
+ * YourPlayersCard - Renders squad player face images spread out,
+ * with sizes dynamically scaled based on total points.
  */
 export default function YourPlayersCard({
   selected = 15,
@@ -24,10 +24,35 @@ export default function YourPlayersCard({
     ].slice(0, 15);
   }, [yourPlayers]);
 
+  const { minPts, maxPts, spreadPlayers } = React.useMemo(() => {
+    if (allPlayers.length === 0) return { minPts: 0, maxPts: 0, spreadPlayers: [] };
+    const ptsList = allPlayers.map((p) => p.points ?? p.totalPoints ?? 0);
+    const min = Math.min(...ptsList);
+    const max = Math.max(...ptsList);
+
+    const sorted = [...allPlayers].sort(
+      (a, b) => (b.points ?? b.totalPoints ?? 0) - (a.points ?? a.totalPoints ?? 0)
+    );
+    const result = [];
+    let l = 0,
+      r = sorted.length - 1;
+    while (l <= r) {
+      if (l === r) {
+        result.push(sorted[l]);
+      } else {
+        result.push(sorted[l]);
+        result.push(sorted[r]);
+      }
+      l++;
+      r--;
+    }
+    return { minPts: min, maxPts: max, spreadPlayers: result };
+  }, [allPlayers]);
+
   return (
     <Card padded={false} className="h-full flex flex-col justify-between p-2.5 sm:p-4">
       <div>
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-2">
           <div>
             <h3 className="text-text-primary font-bold text-base sm:text-lg leading-tight flex items-center gap-2">
               <Users className="w-4.5 h-4.5 text-purple-400" />
@@ -40,58 +65,42 @@ export default function YourPlayersCard({
 
           <button
             onClick={onCta}
-            className="inline-flex items-center gap-1 text-xs font-bold text-purple-400 hover:text-purple-300 transition-colors"
+            className="inline-flex items-center gap-1 text-xs font-bold text-purple-400 hover:text-purple-300 transition-colors cursor-pointer"
           >
             <span>{ctaLabel}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
-        {/* 5 Columns x 3 Rows Player Grid */}
-        <div className="grid grid-cols-5 gap-2 sm:gap-3 py-1">
-          {allPlayers.length === 0 ? (
-            <div className="col-span-5 py-8 text-center text-text-muted text-xs">
+        {/* Spread Out Player Face Bubbles (Sized dynamically by total points) */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 py-3 sm:py-5 min-h-[190px]">
+          {spreadPlayers.length === 0 ? (
+            <div className="py-8 text-center text-text-muted text-xs">
               No players currently in your squad.
             </div>
           ) : (
-            allPlayers.map((player, idx) => (
-              <div
-                key={player.id || `${player.name}-${idx}`}
-                className="flex flex-col items-center text-center group cursor-pointer"
-                title={`${player.name} (${player.position || ''} - ${player.team || ''}): ${player.points || 0} pts`}
-              >
-                {/* Face Image Container */}
-                <div className="relative mb-1">
+            spreadPlayers.map((player, idx) => {
+              const pts = player.points ?? player.totalPoints ?? 0;
+              const range = maxPts - minPts || 1;
+              const ratio = (pts - minPts) / range;
+              // Size ranges from 34px (lowest points) to 74px (highest points)
+              const sizePx = Math.round(34 + ratio * 40);
+
+              return (
+                <div
+                  key={player.id || `${player.name}-${idx}`}
+                  className="relative group cursor-pointer transition-all duration-300 hover:scale-115 hover:z-20"
+                  title={`${player.name} (${player.position || ''}) • ${pts} pts`}
+                >
                   <Avatar
                     src={player.photo}
                     alt={player.name}
-                    size={42}
-                    className="border-2 border-purple-500/30 group-hover:border-purple-400 transition-all shadow-md group-hover:scale-105"
+                    size={sizePx}
+                    className="border-2 border-purple-500/30 group-hover:border-purple-400 transition-all shadow-md"
                   />
-                  {player.isCaptain && (
-                    <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-400 text-black font-extrabold text-[9px] flex items-center justify-center shadow-md border border-amber-200" title="Captain">
-                      C
-                    </span>
-                  )}
-                  {player.isViceCaptain && !player.isCaptain && (
-                    <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-slate-300 text-black font-extrabold text-[9px] flex items-center justify-center shadow-md border border-white" title="Vice Captain">
-                      V
-                    </span>
-                  )}
                 </div>
-
-                {/* Player Web Name */}
-                <p className="text-[10px] sm:text-11px font-bold text-text-primary truncate w-full group-hover:text-purple-300 transition-colors">
-                  {player.name}
-                </p>
-
-                {/* Acquired Points Pill */}
-                <div className="mt-0.5 inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-[9px] sm:text-[10px] font-black shadow-sm">
-                  <Star className="w-2.5 h-2.5 text-amber-400 fill-amber-400 shrink-0" />
-                  <span>{player.points ?? 0}</span>
-                </div>
-              </div>
-            ))
+              );
+            })
           )}
         </div>
       </div>
