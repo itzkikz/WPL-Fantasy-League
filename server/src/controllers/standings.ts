@@ -484,7 +484,12 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 if (fullPs && (fullPs as any).gameweeks) {
                     overallStats = aggregateMatchStats((fullPs as any).gameweeks);
                 }
-                (overallStats as any).total_point = (fullPs as any)?.totalPoints || 0;
+                const sumGwPoints = (fullPs && (fullPs as any).gameweeks)
+                    ? (fullPs as any).gameweeks.reduce((acc: number, gw: any) => acc + (Number(gw.points) || 0), 0)
+                    : 0;
+                (overallStats as any).total_point = ((fullPs as any)?.totalPoints && (fullPs as any).totalPoints > 0)
+                    ? (fullPs as any).totalPoints
+                    : sumGwPoints;
 
                 // Current week stats
                 let currentWeekStats = undefined;
@@ -889,15 +894,21 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
         const targetGw = currentGwDoc ? currentGwDoc.number : 1;
 
         // Fetch PlayerStats for points
-        const playerStatsList = await PlayerStats.find({ playerId: { $in: playerIds } })
-            .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
-            .lean();
-        const playerStatsMap = new Map(playerStatsList.map(ps => [ps.playerId, ps]));
+        const playerStatsList = await PlayerStats.find({
+            playerId: { $in: [...playerIds, ...playerIds.map(id => Number(id)).filter(n => !isNaN(n))] }
+        }).select('playerId totalPoints gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed').lean();
+
+        const playerStatsMap = new Map();
+        playerStatsList.forEach(ps => {
+            playerStatsMap.set(ps.playerId, ps);
+            playerStatsMap.set(String(ps.playerId), ps);
+            playerStatsMap.set(Number(ps.playerId), ps);
+        });
 
         let captainPlayed = false;
         const captainPick = currentSquad.picks.find(p => p.isCaptain);
         if (captainPick) {
-            const cPs = playerStatsMap.get(captainPick.playerId);
+            const cPs = playerStatsMap.get(captainPick.playerId) || playerStatsMap.get(Number(captainPick.playerId));
             if (cPs && cPs.gameweeks) {
                 if (getGameweekMinutes(cPs.gameweeks, targetGw) > 0) {
                     captainPlayed = true;
@@ -909,16 +920,23 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
             const playerDoc = pMap.get(pick.playerId);
             const teamDoc = playerDoc ? teamMap.get(playerDoc.teamId) : null;
 
-            let playerPoints = 0;
-            const ps = playerStatsMap.get(pick.playerId);
+            const ps = playerStatsMap.get(pick.playerId) || playerStatsMap.get(Number(pick.playerId));
+            const sumGwPts = (ps && Array.isArray(ps.gameweeks))
+                ? ps.gameweeks.reduce((acc: number, gw: any) => acc + (Number(gw.points) || 0), 0)
+                : 0;
+            const totalSeasonPoints = (ps && typeof ps.totalPoints === "number" && ps.totalPoints > 0)
+                ? ps.totalPoints
+                : sumGwPts;
+
+            let gwPoints = 0;
             if (ps && ps.gameweeks) {
-                playerPoints = getGameweekPoints(ps.gameweeks, targetGw);
+                gwPoints = getGameweekPoints(ps.gameweeks, targetGw);
             }
 
             if (pick.isCaptain && captainPlayed) {
-                playerPoints *= 2;
+                gwPoints *= 2;
             } else if (pick.isViceCaptain && !captainPlayed) {
-                playerPoints *= 2;
+                gwPoints *= 2;
             }
 
             return {
@@ -926,7 +944,13 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
                 player_name: playerDoc?.webName || playerDoc?.name || "Unknown",
                 team_name: teamName,
                 gw: targetGw,
-                point: playerPoints,
+                point: totalSeasonPoints,
+                gwPoint: gwPoints,
+                playerStats: {
+                    overall: {
+                        total_point: totalSeasonPoints
+                    }
+                },
                 position: resolvePosition(playerDoc?.position || ''),
                 price: playerDoc?.price?.nowCost || 0,
                 club: teamDoc?.team?.name || teamDoc?.name || "Unknown",

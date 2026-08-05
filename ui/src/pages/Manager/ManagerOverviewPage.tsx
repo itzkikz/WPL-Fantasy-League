@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
-import { ArrowLeft, ShieldAlert, Users, Swords, Coins, LayoutGrid, Calendar } from "lucide-react";
-import { useManagerOverview, useTeamDetails, useStandings } from "../../features/standings/hooks";
+import { ArrowLeft, ShieldAlert, Users, Swords, LayoutGrid, Calendar } from "lucide-react";
+import { useManagerOverview, useStandings } from "../../features/standings/hooks";
 import { useManagerDetails } from "../../features/manager/hooks";
 import PitchPlayerCard from "../../components/PitchPlayerCard";
 import PlayerStatsModal from "../Standings/components/PlayerStatsModal";
@@ -26,55 +26,87 @@ const ManagerOverviewPage = () => {
   // State
   const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(null);
   const [showOverlay, setShowOverlay] = useState(false);
-  const [selectedGw, setSelectedGw] = useState<number | null>(null);
   const [showCompareModal, setShowCompareModal] = useState(false);
 
   // Queries for resolving logged-in user's team ID
   const { data: standings } = useStandings();
   const { data: managerDetails } = useManagerDetails();
 
-  const myStanding = standings?.find((s) => s.team === managerDetails?.team);
-  const myTeamId = myStanding?.team_id || "";
+  const myStanding = standings?.find(
+    (s) => s.team?.trim().toLowerCase() === managerDetails?.team?.trim().toLowerCase()
+  );
+  const myTeamId = myStanding?.team_id || (managerDetails as any)?.team_id || (managerDetails as any)?.teamId || "";
 
-  // If user is viewing their own team, allow comparing against #1 team as fallback comparison target
+  // Target team for comparison:
+  // If user is viewing their own team or myTeamId is missing, compare against #1 team (or #2 if user IS #1)
   const topStanding = standings?.[0];
-  const compareAgainstTeamId = (teamId && teamId === myTeamId) ? (topStanding?.team_id || "") : myTeamId;
+  const secondStanding = standings?.[1];
+
+  let compareAgainstTeamId = myTeamId;
+  if (!myTeamId || teamId === myTeamId) {
+    compareAgainstTeamId = (topStanding?.team_id === teamId)
+      ? (secondStanding?.team_id || "")
+      : (topStanding?.team_id || "");
+  }
 
   // Query overview details for target team & comparison team
   const { data, isLoading, isError } = useManagerOverview(teamId);
   const { data: compareOverviewData } = useManagerOverview(compareAgainstTeamId);
 
-  // Query specific historical GW if selected
-  const { data: historicalDetails } = useTeamDetails(teamId, selectedGw || 0);
-
   const { teamName, logo, managers, rank, totalPoints, gwPoints, currentSquad, history } = data || {};
 
-  // Active squad to display (historical selected GW or current squad)
-  const activeStarting = historicalDetails?.data?.starting || currentSquad?.starting;
-  const activeBench = historicalDetails?.data?.bench || currentSquad?.bench;
-  const activeGwScore = historicalDetails?.data?.totalGWScore ?? gwPoints;
+  // Always use overall current squad
+  const activeStarting = currentSquad?.starting;
+  const activeBench = currentSquad?.bench;
+
+  // Season-wide Statistics Calculations
+  const historyList = history || [];
+  const gwCount = historyList.length;
+  const avgGwScore = gwCount > 0 ? (historyList.reduce((acc: number, h: any) => acc + h.points, 0) / gwCount).toFixed(1) : "0.0";
+  const highestGwObj = historyList.reduce(
+    (max: any, h: any) => (h.points > max.points ? h : max),
+    historyList[0] || { gameweek: 1, points: 0 }
+  );
+
+  // Map active starting/bench to ALWAYS display Season Total Points and strip Captain/Vice Captain flags
+  const mapSquadForOverall = (squadObj?: { GK?: Player[]; DEF?: Player[]; MID?: Player[]; FWD?: Player[] }) => {
+    if (!squadObj) return {};
+    const res: any = {};
+    for (const pos of ["GK", "DEF", "MID", "FWD"] as const) {
+      res[pos] = (squadObj[pos] || []).map((p) => {
+        const seasonPts = p.playerStats?.overall?.total_point !== undefined ? Number(p.playerStats.overall.total_point) : Number(p.point) || 0;
+        const hasPlayedSeason = seasonPts > 0 || (p as any).app > 0;
+        return {
+          ...p,
+          point: seasonPts,
+          isCaptain: false,
+          isViceCaptain: false,
+          hasPlayed: hasPlayedSeason,
+          minutesPlayed: hasPlayedSeason ? 90 : 0,
+        };
+      });
+    }
+    return res;
+  };
+
+  const displayStarting = mapSquadForOverall(activeStarting);
+  const displayBench = (activeBench || []).map((p) => {
+    const seasonPts = p.playerStats?.overall?.total_point !== undefined ? Number(p.playerStats.overall.total_point) : Number(p.point) || 0;
+    const hasPlayedSeason = seasonPts > 0 || (p as any).app > 0;
+    return {
+      ...p,
+      point: seasonPts,
+      isCaptain: false,
+      isViceCaptain: false,
+      hasPlayed: hasPlayedSeason,
+      minutesPlayed: hasPlayedSeason ? 90 : 0,
+    };
+  });
 
   // Formation calculation (e.g. 4-3-3)
   const formation = activeStarting
     ? `${activeStarting.DEF?.length || 0}-${activeStarting.MID?.length || 0}-${activeStarting.FWD?.length || 0}`
     : "4-4-2";
-
-  // Calculate Total Squad Value
-  const getSquadValue = () => {
-    if (!activeStarting) return "0.0";
-    const startingList = [
-      ...(activeStarting.GK || []),
-      ...(activeStarting.DEF || []),
-      ...(activeStarting.MID || []),
-      ...(activeStarting.FWD || []),
-    ];
-    const benchList = activeBench || [];
-    const totalVal = [...startingList, ...benchList].reduce((acc, p) => {
-      const priceVal = p.auctionPrice ? p.auctionPrice : parseFloat(getPlayerDisplayPrice(p).replace("£", "").replace("m", "")) || 0;
-      return acc + priceVal;
-    }, 0);
-    return totalVal > 0 ? `£${totalVal.toFixed(1)}m` : "N/A";
-  };
 
   const getPlayerPrice = (p: Player) => {
     return getPlayerDisplayPrice(p);
@@ -109,7 +141,7 @@ const ManagerOverviewPage = () => {
     );
   }
 
-  // Generate large color logo crest from team name
+  // Generate color logo crest from team name
   const getOverviewCrest = (name: string) => {
     const letter = name ? name.trim().charAt(0).toUpperCase() : "M";
     const colors = [
@@ -178,45 +210,49 @@ const ManagerOverviewPage = () => {
 
       {/* MOBILE SCROLLABLE CONTENT BODY (Visible on mobile < lg) */}
       <div className="flex-1 flex flex-col min-h-0 overflow-y-auto px-3 sm:px-4 py-3 gap-4 lg:hidden">
-        {/* Statistics Metric Card Grid */}
-        <div className="grid grid-cols-3 gap-2 max-w-2xl mx-auto w-full shrink-0">
-          <div className="bg-surface border border-border rounded-2xl p-3 shadow-card flex flex-col items-center justify-center text-center">
+
+        {/* Overall Season Performance Hero Metric Grid */}
+        <div className="grid grid-cols-2 gap-2 max-w-2xl mx-auto w-full shrink-0">
+          {/* Rank */}
+          <div className="bg-surface border border-border rounded-2xl p-2.5 shadow-card flex flex-col items-center justify-center text-center">
             <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Overall Rank</span>
-            <span className="text-sm font-black text-text-primary mt-0.5 font-mono">
+            <span className="text-base font-black text-text-primary mt-0.5 font-mono">
               #{rank}
             </span>
           </div>
 
-          <div className="bg-surface border border-border rounded-2xl p-3 shadow-card flex flex-col items-center justify-center text-center border-l border-border/50">
-            <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Total Points</span>
-            <span className="text-sm font-black text-text-primary mt-0.5 font-mono">
+          {/* Total Season Points */}
+          <div className="bg-surface border border-border rounded-2xl p-2.5 shadow-card flex flex-col items-center justify-center text-center">
+            <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Season Total</span>
+            <span className="text-base font-black text-secondary mt-0.5 font-mono">
               {totalPoints} pts
             </span>
           </div>
 
-          <div className="bg-surface border border-border rounded-2xl p-3 shadow-card flex flex-col items-center justify-center text-center border-l border-border/50">
-            <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">GW Score</span>
-            <span className="text-sm font-black text-emerald-400 mt-0.5 font-mono">
-              {activeGwScore} pts
+          {/* Average Score */}
+          <div className="bg-surface border border-border rounded-2xl p-2.5 shadow-card flex flex-col items-center justify-center text-center">
+            <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Season Average</span>
+            <span className="text-xs font-black text-indigo-400 mt-0.5 font-mono">
+              {avgGwScore} pts/GW
+            </span>
+          </div>
+
+          {/* Best GW */}
+          <div className="bg-surface border border-border rounded-2xl p-2.5 shadow-card flex flex-col items-center justify-center text-center">
+            <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Best GW Score</span>
+            <span className="text-xs font-black text-emerald-400 mt-0.5 font-mono">
+              {highestGwObj.points} pts <span className="text-[9px] text-text-muted font-normal">(GW{highestGwObj.gameweek})</span>
             </span>
           </div>
         </div>
 
-        {/* Tactical Pitch View */}
+        {/* Tactical Pitch View (Fixed to Overall Season Squad) */}
         <div className="flex flex-col gap-2 max-w-2xl mx-auto w-full shrink-0">
           <div className="flex items-center justify-between pl-1">
             <h3 className="text-xs font-black uppercase text-text-muted tracking-wider flex items-center gap-1.5">
               <LayoutGrid className="w-3.5 h-3.5 text-secondary" />
-              <span>{selectedGw ? `GW ${selectedGw} Lineup` : "Current Squad"}</span>
+              <span>Overall Season Squad (Season Total Pts)</span>
             </h3>
-            {selectedGw && (
-              <button
-                onClick={() => setSelectedGw(null)}
-                className="text-[9px] font-bold text-secondary hover:underline cursor-pointer"
-              >
-                Reset to Current
-              </button>
-            )}
           </div>
 
           <div className="relative w-full rounded-3xl overflow-hidden border border-border shadow-card bg-background min-h-[560px] flex flex-col">
@@ -224,12 +260,12 @@ const ManagerOverviewPage = () => {
               <img src="/pitch.png" className="pitch-image-layer" alt="Tactical pitch layout" />
             </div>
 
-            <div className={`absolute top-0 inset-x-0 ${activeBench && activeBench.length > 0 ? "bottom-[110px]" : "bottom-0"} z-10 pointer-events-none flex flex-col justify-evenly py-3 md:py-6 px-2 sm:px-4`}>
-              {activeStarting && (["GK", "DEF", "MID", "FWD"] as const).map((pos) => {
-                const players = activeStarting[pos] || [];
+            <div className={`absolute top-0 inset-x-0 ${displayBench && displayBench.length > 0 ? "bottom-[110px]" : "bottom-0"} z-10 pointer-events-none flex flex-col justify-evenly py-3 md:py-6 px-2 sm:px-4`}>
+              {displayStarting && (["GK", "DEF", "MID", "FWD"] as const).map((pos) => {
+                const players = displayStarting[pos] || [];
                 return (
                   <div key={pos} className={`flex w-full ${getRowJustify(players.length)} pointer-events-auto`}>
-                    {players.map((player) => {
+                    {players.map((player: Player) => {
                       const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
                       return (
                         <div key={player.id} className="rounded-xl p-0.5 transition-all hover:scale-105 duration-300">
@@ -242,9 +278,9 @@ const ManagerOverviewPage = () => {
               })}
             </div>
 
-            {activeBench && activeBench.length > 0 && (
+            {displayBench && displayBench.length > 0 && (
               <div className="absolute bottom-0 inset-x-0 h-[110px] bg-surface/95 backdrop-blur-md border-t border-border flex justify-around items-center px-4 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.5)] overflow-x-auto scrollbar-hide">
-                {activeBench.map((player, idx) => {
+                {displayBench.map((player: Player, idx: number) => {
                   const label = player.position === "GK" ? "GK" : `${player.subNumber || idx + 1}. ${player.position}`;
                   const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
                   return (
@@ -261,7 +297,7 @@ const ManagerOverviewPage = () => {
 
         {/* Squad Position Contribution Breakdown */}
         <div className="max-w-2xl mx-auto w-full shrink-0">
-          <SquadPositionBreakdown starting={activeStarting} />
+          <SquadPositionBreakdown starting={activeStarting} isOverallMode={true} />
         </div>
 
         {/* Performance Trend Chart */}
@@ -276,20 +312,15 @@ const ManagerOverviewPage = () => {
               <Calendar className="w-3.5 h-3.5 text-secondary" />
               <span>Gameweek History</span>
             </h3>
-            <span className="text-[9px] font-bold text-text-muted">Tap GW to view pitch</span>
+            <span className="text-[9px] font-bold text-text-muted">Tap GW for Breakdown</span>
           </div>
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide px-0.5">
             {history ? [...history].sort((a, b) => b.gameweek - a.gameweek).map((h: any) => {
-              const isSelected = selectedGw === h.gameweek;
               return (
                 <button
                   key={h.gameweek}
-                  onClick={() => setSelectedGw(isSelected ? null : h.gameweek)}
-                  className={`flex flex-col items-center justify-center min-w-[80px] rounded-xl py-2.5 px-3 border transition-all cursor-pointer ${
-                    isSelected
-                      ? "bg-secondary/20 border-secondary text-white shadow-md shadow-secondary/20 scale-105"
-                      : "bg-surface hover:bg-white/5 border border-border/40 hover:border-secondary/50"
-                  }`}
+                  onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: h.gameweek, teamId } })}
+                  className="flex flex-col items-center justify-center min-w-[80px] rounded-xl py-2.5 px-3 border bg-surface hover:bg-white/5 border-border/40 hover:border-secondary/50 transition-all cursor-pointer"
                 >
                   <span className="text-[9px] text-text-muted font-black uppercase tracking-wider">GW {h.gameweek}</span>
                   <span className="text-xs font-black text-secondary mt-0.5 font-mono">{h.points} pts</span>
@@ -325,7 +356,7 @@ const ManagerOverviewPage = () => {
                   Manager Overview
                 </h2>
                 <p className="text-[11px] text-text-muted font-medium truncate">
-                  Team details & squad lineup
+                  Season-wide performance command center
                 </p>
               </div>
             </div>
@@ -365,24 +396,28 @@ const ManagerOverviewPage = () => {
             </div>
           </div>
 
-          {/* 3-Stat Metric Grid */}
-          <div className="grid grid-cols-3 gap-1.5 bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
+          {/* 4 Season-Long Metric Card Grid */}
+          <div className="grid grid-cols-2 gap-2 bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
             <div>
               <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider block">Rank</span>
               <span className="text-sm font-black text-text-primary font-mono mt-0.5 block">#{rank}</span>
             </div>
             <div className="border-l border-border/50">
-              <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider block">Total</span>
-              <span className="text-sm font-black text-text-primary font-mono mt-0.5 block">{totalPoints}</span>
+              <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider block">Season Total</span>
+              <span className="text-sm font-black text-secondary font-mono mt-0.5 block">{totalPoints} pts</span>
             </div>
-            <div className="border-l border-border/50">
-              <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider block">GW Score</span>
-              <span className="text-sm font-black text-emerald-400 font-mono mt-0.5 block">{activeGwScore}</span>
+            <div className="pt-2 border-t border-border/50">
+              <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider block">Average</span>
+              <span className="text-xs font-black text-indigo-400 font-mono mt-0.5 block">{avgGwScore} pts/GW</span>
+            </div>
+            <div className="pt-2 border-t border-l border-border/50">
+              <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider block">Best GW</span>
+              <span className="text-xs font-black text-emerald-400 font-mono mt-0.5 block">{highestGwObj.points} pts</span>
             </div>
           </div>
 
           {/* Squad Position Contribution Breakdown */}
-          <SquadPositionBreakdown starting={activeStarting} />
+          <SquadPositionBreakdown starting={activeStarting} isOverallMode={true} />
 
           {/* Performance Trend Chart */}
           <ManagerRankTrendChart history={history || []} currentGwPoints={gwPoints} totalPoints={totalPoints} />
@@ -391,27 +426,14 @@ const ManagerOverviewPage = () => {
           <div className="space-y-2 pt-2 border-t border-border/60">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-text-muted uppercase tracking-wider block">Gameweek History</span>
-              {selectedGw && (
-                <button
-                  onClick={() => setSelectedGw(null)}
-                  className="text-[10px] font-bold text-secondary hover:underline cursor-pointer"
-                >
-                  Reset Pitch
-                </button>
-              )}
             </div>
             <div className="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1">
               {history ? [...history].sort((a, b) => b.gameweek - a.gameweek).map((h: any) => {
-                const isSelected = selectedGw === h.gameweek;
                 return (
                   <button
                     key={h.gameweek}
-                    onClick={() => setSelectedGw(isSelected ? null : h.gameweek)}
-                    className={`flex items-center justify-between border rounded-xl p-2 transition-all cursor-pointer text-left ${
-                      isSelected
-                        ? "bg-secondary/20 border-secondary text-white shadow-sm"
-                        : "bg-background/50 hover:bg-elevated border-border/60 hover:border-secondary"
-                    }`}
+                    onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: h.gameweek, teamId } })}
+                    className="flex items-center justify-between border rounded-xl p-2 bg-background/50 hover:bg-elevated border-border/60 hover:border-secondary transition-all cursor-pointer text-left"
                   >
                     <span className="text-xs font-extrabold text-text-primary">GW {h.gameweek}</span>
                     <span className="text-xs font-black text-secondary font-mono">{h.points} pts</span>
@@ -437,11 +459,11 @@ const ManagerOverviewPage = () => {
 
               {/* Starting XI Players - Centered on Pitch */}
               <div className="absolute inset-0 bottom-[110px] lg:bottom-0 z-10 pointer-events-none flex flex-col justify-evenly py-3 md:py-6 px-2 sm:px-4">
-                {activeStarting && (["GK", "DEF", "MID", "FWD"] as const).map((pos) => {
-                  const players = activeStarting[pos] || [];
+                {displayStarting && (["GK", "DEF", "MID", "FWD"] as const).map((pos) => {
+                  const players = displayStarting[pos] || [];
                   return (
                     <div key={pos} className={`flex w-full ${getRowJustify(players.length)} pointer-events-auto`}>
-                      {players.map((player) => {
+                      {players.map((player: Player) => {
                         const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
                         return (
                           <div key={player.id} className="rounded-xl p-0.5 transition-all hover:scale-105 duration-300">
@@ -455,9 +477,9 @@ const ManagerOverviewPage = () => {
               </div>
 
               {/* Mobile Bench Strip (Visible ONLY on mobile < lg) */}
-              {activeBench && activeBench.length > 0 && (
+              {displayBench && displayBench.length > 0 && (
                 <div className="flex lg:hidden absolute bottom-0 inset-x-0 h-[110px] bg-surface/95 backdrop-blur-md border-t border-border justify-around items-center px-4 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.5)] overflow-x-auto scrollbar-hide">
-                  {activeBench.map((player, idx) => {
+                  {displayBench.map((player: Player, idx: number) => {
                     const label = player.position === "GK" ? "GK" : `${player.subNumber || idx + 1}. ${player.position}`;
                     const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
                     return (
@@ -472,12 +494,12 @@ const ManagerOverviewPage = () => {
             </div>
 
             {/* Dedicated Webview Bench Side Card (Visible ONLY on webview lg+) */}
-            {activeBench && activeBench.length > 0 && (
+            {displayBench && displayBench.length > 0 && (
               <div className="hidden lg:flex lg:flex-col lg:w-28 shrink-0 bg-surface border border-border rounded-3xl p-3 shadow-card justify-around items-center">
                 <span className="text-[10px] font-black text-text-muted uppercase tracking-wider text-center border-b border-border/60 pb-2 w-full">
                   Substitutes
                 </span>
-                {activeBench.map((player, idx) => {
+                {displayBench.map((player: Player, idx: number) => {
                   const label = player.position === "GK" ? "GK" : `${player.subNumber || idx + 1}. ${player.position}`;
                   const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
                   return (

@@ -36,12 +36,13 @@ const PitchPlayerCard = ({
   const hasPlayedMins = typeof mins === "number" && mins > 0;
   const isZeroOrNoPoints = player?.point === 0 || player?.point === undefined || Number(player?.point) === 0;
 
-  const didNotPlay =
+  const didNotPlay = isZeroOrNoPoints && (
     mins === 0 ||
     app === 0 ||
     (player as any)?.hasPlayed === false ||
     (player?.playerStats?.current_week && (player.playerStats.current_week.minutesPlayed ?? 0) === 0) ||
-    (!hasPlayedMins && isZeroOrNoPoints);
+    !hasPlayedMins
+  );
 
   return (
     <div

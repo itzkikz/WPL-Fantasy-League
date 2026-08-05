@@ -9,13 +9,24 @@ interface SquadPositionBreakdownProps {
     MID?: Player[];
     FWD?: Player[];
   };
+  isOverallMode?: boolean;
 }
 
-export const SquadPositionBreakdown: React.FC<SquadPositionBreakdownProps> = ({ starting }) => {
+export const SquadPositionBreakdown: React.FC<SquadPositionBreakdownProps> = ({
+  starting,
+  isOverallMode = true,
+}) => {
   if (!starting) return null;
 
+  const getPlayerPoints = (p: Player) => {
+    if (isOverallMode && p.playerStats?.overall?.total_point !== undefined) {
+      return Number(p.playerStats.overall.total_point) || 0;
+    }
+    return Number(p.point) || 0;
+  };
+
   const sumPoints = (players: Player[] = []) =>
-    players.reduce((acc, p) => acc + (Number(p.point) || 0), 0);
+    players.reduce((acc, p) => acc + getPlayerPoints(p), 0);
 
   const gkPts = sumPoints(starting.GK);
   const defPts = sumPoints(starting.DEF);
@@ -42,7 +53,7 @@ export const SquadPositionBreakdown: React.FC<SquadPositionBreakdownProps> = ({ 
         <div className="flex items-center gap-1.5">
           <PieChart className="w-3.5 h-3.5 text-secondary" />
           <span className="text-xs font-bold text-text-primary uppercase tracking-wider">
-            Points Contribution
+            {isOverallMode ? "Season Position Points" : "GW Position Points"}
           </span>
         </div>
         <span className="text-[10px] font-mono font-bold text-secondary">
