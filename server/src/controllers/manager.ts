@@ -1080,7 +1080,8 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       ...sortedGwStats.map(s => s.playerId),
       ...sortedStats.map(s => s.playerId),
       ...startingPlayerIds,
-      ...squadPlayerIds
+      ...squadPlayerIds,
+      ...Array.from(allOwnedPlayerIds)
     ]);
 
     const playersDocs = await Player.find({ id: { $in: Array.from(neededPlayerIds) } }).lean() as any[];
@@ -1119,15 +1120,23 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       };
     });
 
-    // 9. Player Spotlight
-    let playerSpotlight = {};
-    if (sortedStats.length > 0) {
-      const topStat = sortedStats[0];
+    // 9. Player Spotlight (Best player of each team)
+    const teamTopStatsMap = new Map<string, any>();
+    for (const stat of ownedPlayersWithStats) {
+      const teamName = playerToFantasyTeam.get(stat.playerId);
+      if (!teamName) continue;
+      const currentTop = teamTopStatsMap.get(teamName);
+      if (!currentTop || (stat.totalPoints || 0) > (currentTop.totalPoints || 0)) {
+        teamTopStatsMap.set(teamName, stat);
+      }
+    }
+
+    const spotlightPlayers: any[] = [];
+    for (const [teamName, topStat] of teamTopStatsMap.entries()) {
       const topPlayerDoc = pDocsMap.get(topStat.playerId);
       const topTeamDoc = topPlayerDoc ? tDocsMap.get(topPlayerDoc.teamId) : null;
       const currentGwStats = topStat.gameweeks?.find((g: any) => g.id === currentGw);
       const currentGwPoints = topStat.gameweeks ? getGameweekPoints(topStat.gameweeks, currentGw) : 0;
-
       const recentGws = getGameweekForm(topStat.gameweeks || [], currentGw).slice(-5);
 
       let gwStats: any = {};
@@ -1139,13 +1148,12 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
           gwStats = currentGwStats.stats;
         }
       }
-      const fantasyTeamNameForSpotlight = playerToFantasyTeam.get(topStat.playerId) || "";
 
-      playerSpotlight = {
+      spotlightPlayers.push({
         player: {
           id: topPlayerDoc?.id || 0,
           name: topPlayerDoc?.webName || topPlayerDoc?.name || "Unknown",
-          team: fantasyTeamNameForSpotlight || topTeamDoc?.nameCode || "UNK",
+          team: teamName || topTeamDoc?.nameCode || "UNK",
           teamColor: topTeamDoc?.teamColors?.primary || "#6CABDD",
           teamLogo: topTeamDoc?.logo || "",
           point: currentGwPoints,
@@ -1153,10 +1161,11 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
           isCaptain: false,
           isViceCaptain: false,
           isPowerPlayer: false,
-          fullTeamName: fantasyTeamNameForSpotlight || topTeamDoc?.name || "Unknown",
-          photo: topPlayerDoc?.photo || "",
+          fullTeamName: teamName || topTeamDoc?.name || "Unknown",
+          photo: topPlayerDoc?.photo || (topPlayerDoc?.id ? `https://img.sofascore.com/api/v1/player/${topPlayerDoc.id}/image` : ""),
         },
         gameweekPoints: currentGwPoints,
+        totalPoints: topStat.totalPoints || 0,
         gameweekRank: 1,
         selectedBy: 80,
         price: (topPlayerDoc?.price?.nowCost || 0) / 10,
@@ -1176,8 +1185,10 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
           blocks: gwStats.outfielderBlock || 0,
           recovery: gwStats.ballRecovery || 0,
         },
-      };
+      });
     }
+
+    const playerSpotlight = spotlightPlayers.length > 0 ? spotlightPlayers[0] : {};
 
     // 10. Points Breakdown
     const startingStatsMap = new Map(ownedPlayersWithStats.map(s => [s.playerId, s]));
@@ -1390,6 +1401,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
         recentGameweeks,
         topPlayers,
         playerSpotlight,
+        spotlightPlayers,
         pointsBreakdown,
         seasonStats,
         bestPerformers,

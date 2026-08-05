@@ -8,7 +8,7 @@ export default function LeagueStandings({
   subtitle = "Overall Leaderboard",
   standings = [],
   myTeam = "",
-  limit = 3,
+  limit = 5,
 }) {
   return (
     <Card padded={false} className="h-full p-2.5 sm:p-4">
@@ -59,7 +59,6 @@ export default function LeagueStandings({
                     <span className={`text-xs font-bold leading-snug whitespace-normal break-words ${isMe ? 'text-primary' : 'text-text-primary'}`}>
                       {item.team}
                     </span>
-                    {isMe && <span className="text-[7px] font-black text-primary/70 bg-primary/10 px-1 py-px rounded uppercase tracking-wider flex-shrink-0">You</span>}
                   </div>
                 </div>
 
