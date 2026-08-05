@@ -44,34 +44,41 @@ function PublicFactsPage() {
   }, []);
 
   return (
-    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-text-primary font-outfit select-none overflow-hidden animate-fade-in p-4 lg:p-6">
-      <div className="max-w-2xl mx-auto w-full flex flex-col h-full min-h-0 space-y-4">
-        {/* Fixed Header - Matching Notifications.tsx Header */}
-        <div className="relative rounded-2xl bg-gradient-overview bg-dots border border-border overflow-hidden shadow-card shrink-0">
-          <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
-          <div className="relative p-4 sm:p-5 flex items-center gap-4">
-            <button
-              onClick={() => router.history.back()}
-              aria-label="Go back"
-              className="p-2 rounded-xl bg-surface border border-border hover:bg-elevated active:scale-95 transition-all text-text-muted hover:text-text-primary cursor-pointer flex-shrink-0 self-start"
-            >
-              <ArrowLeft className="w-4 h-4" />
-            </button>
-            <div className="flex-1 min-w-0">
-              <h1 className="text-xl font-black text-text-primary tracking-tight flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-secondary shrink-0" /> Facts & News
-              </h1>
-              <p className="text-xs text-text-muted mt-0.5">Stay updated with official league trivia and insights</p>
-            </div>
-            <div className="flex flex-col items-end gap-2 flex-shrink-0">
-              <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-primary/15 border border-primary/40 text-secondary font-mono">
-                {articles.length} total
-              </span>
-            </div>
-          </div>
-        </div>
+    <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-text-primary font-outfit select-none overflow-hidden animate-fade-in pb-[env(safe-area-inset-bottom)]">
+      {/* STICKY FULL-WIDTH FIXED HEADER */}
+      <div className="shrink-0 border-b border-border bg-surface shadow-sm sticky top-0 z-30 w-full">
+        <header className="flex items-center gap-2.5 px-3 sm:px-4 py-2.5 max-w-2xl mx-auto w-full">
+          <button
+            onClick={() => router.history.back()}
+            className="flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-text-primary active:scale-95 transition-all cursor-pointer shrink-0"
+            aria-label="Go back"
+          >
+            <ArrowLeft className="w-4 h-4 text-text-muted" />
+          </button>
 
-        {/* Scrollable Articles List - Matching Notifications.tsx Content Area */}
+          <div className="w-9 h-9 rounded-full bg-secondary/15 border border-secondary/30 flex items-center justify-center text-secondary shrink-0">
+            <Sparkles className="w-4 h-4" />
+          </div>
+
+          <div className="flex-1 min-w-0">
+            <h1 className="text-xs sm:text-sm font-black tracking-tight text-text-primary truncate">
+              Facts & News
+            </h1>
+            <p className="text-[10px] text-text-muted font-medium mt-0.5 truncate">
+              Official league trivia and insights
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/15 border border-primary/40 text-secondary font-mono">
+              {articles.length} total
+            </span>
+          </div>
+        </header>
+      </div>
+
+      <div className="max-w-2xl mx-auto w-full flex flex-col flex-1 min-h-0 px-3 sm:px-4 py-3">
+        {/* Scrollable Articles List */}
         <div className="flex-1 min-h-0 overflow-y-auto scrollbar-hide space-y-3 pb-6">
           {isLoading ? (
             <div className="space-y-3">
