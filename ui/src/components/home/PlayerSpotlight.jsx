@@ -45,7 +45,7 @@ export default function PlayerSpotlight({
 
   const statRows = [
     { value: points, label: "Pts (GW)" },
-    { value: stats.minutesPlayed, label: "Mins" },
+    { value: stats.minutesPlayed === 0 ? "DNP" : stats.minutesPlayed, label: "Mins" },
     ...(!isGK ? [{ value: stats.goals, label: "Goals" }] : []),
     { value: stats.assists, label: "Assists" },
     ...(position === "GK" || position === "DEF" ? [{ value: stats.cleanSheet, label: "CS" }] : []),

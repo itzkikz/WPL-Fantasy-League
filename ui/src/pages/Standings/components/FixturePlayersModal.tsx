@@ -63,11 +63,13 @@ function PlayerRow({ p, teamColor }: { p: FixturePlayerStats; teamColor: string 
       </div>
 
       <div className="flex items-center gap-3 shrink-0">
-        <StatCell value={p.minutes} label="Min" />
+        <StatCell value={p.minutes === 0 ? "DNP" : p.minutes} label="Min" />
         <StatCell value={p.goals} label="G" />
         <StatCell value={p.assists} label="A" />
         <div className="flex flex-col items-center min-w-[24px]">
-          <span className="text-[12px] font-black text-[var(--color-success-bright)] tabular-nums">{p.points ?? 0}</span>
+          <span className={`text-[12px] font-black tabular-nums ${p.minutes === 0 ? "text-amber-400" : "text-[var(--color-success-bright)]"}`}>
+            {p.minutes === 0 ? "DNP" : (p.points ?? 0)}
+          </span>
           <span className="text-[8px] font-bold text-text-muted uppercase tracking-wider mt-0.5">Pts</span>
         </div>
       </div>

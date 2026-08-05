@@ -6,6 +6,8 @@ export interface Player {
     teamColor: string;
     teamTextColor?: string;
     point: number;
+    minutesPlayed?: number;
+    app?: number;
     position: "GK" | "DEF" | "MID" | "FWD";
     isCaptain?: boolean;
     isViceCaptain?: boolean;

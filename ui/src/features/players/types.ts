@@ -5,6 +5,8 @@ export interface Player {
     teamColor: string;
     teamTextColor?: string;
     point: number;
+    minutesPlayed?: number;
+    app?: number;
     position: string;
     isCaptain?: boolean;
     isViceCaptain?: boolean;
