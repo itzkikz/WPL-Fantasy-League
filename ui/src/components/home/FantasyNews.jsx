@@ -17,7 +17,7 @@ export default function FantasyNews({
 
   return (
     <>
-      <Card className="p-3 sm:p-4 bg-surface/90 border border-border/70 shadow-xl backdrop-blur-md rounded-2xl">
+      <Card padded={false} className="h-full p-2.5 sm:p-4">
         <CardHeader
           title={title}
           subtitle="Latest Insights & Trivia"

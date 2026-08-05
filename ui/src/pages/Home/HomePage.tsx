@@ -33,7 +33,7 @@ const HomePage = () => {
       <div className="min-h-screen bg-background text-text-primary p-3 lg:p-6 font-outfit">
         <div className="max-w-4xl mx-auto space-y-6 pt-2">
           {/* Spectator Banner */}
-          <div className="bg-gradient-to-r from-purple-900/40 via-indigo-900/40 to-slate-900/40 border border-purple-500/30 rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden backdrop-blur-xl">
+          <div className="bg-gradient-to-r from-purple-900/40 via-indigo-900/40 to-slate-900/40 border border-purple-500/30 rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden backdrop-blur-xl">
             <div className="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 relative z-10">
               <div className="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-400/30 flex items-center justify-center shrink-0 text-purple-300 shadow-inner">
@@ -58,7 +58,7 @@ const HomePage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <button
               onClick={() => navigate({ to: "/standings" })}
-              className="group p-6 rounded-2xl bg-surface border border-border hover:border-purple-500/40 transition-all text-left flex flex-col justify-between h-40 shadow-md hover:scale-[1.01] cursor-pointer"
+              className="group p-6 rounded-2xl bg-surface border border-border hover:border-purple-500/40 transition-all text-left flex flex-col justify-between h-40 shadow-sm hover:scale-[1.01] cursor-pointer"
             >
               <div className="flex items-center justify-between">
                 <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
@@ -74,7 +74,7 @@ const HomePage = () => {
 
             <button
               onClick={() => navigate({ to: "/stats" })}
-              className="group p-6 rounded-2xl bg-surface border border-border hover:border-purple-500/40 transition-all text-left flex flex-col justify-between h-40 shadow-md hover:scale-[1.01] cursor-pointer"
+              className="group p-6 rounded-2xl bg-surface border border-border hover:border-purple-500/40 transition-all text-left flex flex-col justify-between h-40 shadow-sm hover:scale-[1.01] cursor-pointer"
             >
               <div className="flex items-center justify-between">
                 <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
