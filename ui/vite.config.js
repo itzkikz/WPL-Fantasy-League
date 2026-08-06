@@ -1,30 +1,22 @@
 // vite.config.ts
-import { execSync } from "node:child_process";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
-// Resolve the app version at build time. Priority:
-//   1. VITE_APP_VERSION env (explicit override / release label)
-//   2. VERCEL_GIT_COMMIT_SHA / GITHUB_SHA (7 chars) on hosted builds
-//   3. git rev-parse --short HEAD locally
-//   4. package.json version as last resort
-function resolveAppVersion() {
-  if (process.env.VITE_APP_VERSION) return process.env.VITE_APP_VERSION;
-
-  const sha = process.env.VERCEL_GIT_COMMIT_SHA || process.env.GITHUB_SHA;
-  if (sha) return sha.slice(0, 7);
-
-  try {
-    return execSync("git rev-parse --short HEAD").toString().trim();
-  } catch {
-    return "0.0.0";
-  }
+// App version comes straight from package.json; bump it before each release.
+let appVersion = "0.0.0";
+try {
+  const pkg = JSON.parse(
+    readFileSync(fileURLToPath(new URL("./package.json", import.meta.url)), "utf-8")
+  );
+  appVersion = pkg.version || "0.0.0";
+} catch {
+  // fall back to the default above
 }
-
-const appVersion = resolveAppVersion();
 
 export default defineConfig({
   define: {
