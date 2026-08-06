@@ -485,9 +485,9 @@
     "semantic_hash": "bf70af00db2ed0e522014d1c2fe9090b"
   },
   "ui/.vercel/project.json": {
-    "mtime": 1782567999.6027062,
-    "ast_hash": "8c66226f1e2e6eb0b7157265e65f666d",
-    "semantic_hash": "8c66226f1e2e6eb0b7157265e65f666d"
+    "mtime": 1786008917.1304955,
+    "ast_hash": "e214909ae3f444ac74644becc4b28480",
+    "semantic_hash": ""
   },
   "ui/dev-dist/registerSW.js": {
     "mtime": 1785906409.5834765,
@@ -495,14 +495,14 @@
     "semantic_hash": "3ca0b8505b4bec776b69afdba2768812"
   },
   "ui/eslint.config.js": {
-    "mtime": 1786006521.6668544,
-    "ast_hash": "8d72842a26a69ee539e6f49e42027fbc",
+    "mtime": 1786010504.344514,
+    "ast_hash": "c842791e6eaafe0e31f3d951cfd52edf",
     "semantic_hash": ""
   },
   "ui/package.json": {
-    "mtime": 1784141432.0018573,
-    "ast_hash": "3853b759619b11e68794b95322b856b4",
-    "semantic_hash": "3853b759619b11e68794b95322b856b4"
+    "mtime": 1786010490.779037,
+    "ast_hash": "9b646eb71b7f5732005b8529f458722f",
+    "semantic_hash": ""
   },
   "ui/pwa-assets.config.ts": {
     "mtime": 1762414988.3323188,
@@ -560,8 +560,8 @@
     "semantic_hash": ""
   },
   "ui/src/components/UpdatePrompt.tsx": {
-    "mtime": 1786005034.8541954,
-    "ast_hash": "f6a3e179238018f0f93abd228b5b900a",
+    "mtime": 1786010101.6787176,
+    "ast_hash": "573faee64fa002e59a04b3acb67efbfc",
     "semantic_hash": ""
   },
   "ui/src/components/admin/FantasyTeamForm.tsx": {
@@ -990,8 +990,8 @@
     "semantic_hash": ""
   },
   "ui/src/pages/Settings/Settings.tsx": {
-    "mtime": 1786006398.1936886,
-    "ast_hash": "360bb418963400351827911d935aeb8c",
+    "mtime": 1786010168.8311567,
+    "ast_hash": "51dc1a933fb3b643eec32d7701944965",
     "semantic_hash": ""
   },
   "ui/src/pages/Standings/StandingsPage.tsx": {
@@ -1255,8 +1255,8 @@
     "semantic_hash": "7708fbf29b99cd92c2a778d60001c5ba"
   },
   "ui/vite.config.js": {
-    "mtime": 1786006348.7398849,
-    "ast_hash": "e73f4d991ca51a0becfd7a3fb3e8ef70",
+    "mtime": 1786010476.716474,
+    "ast_hash": "9f2635eff8e11a677913fe22123427d8",
     "semantic_hash": ""
   },
   ".agents/skills/banner-design/SKILL.md": {
@@ -1857,6 +1857,526 @@
   "ui/src/lib/version.ts": {
     "mtime": 1786006365.258255,
     "ast_hash": "c6a72e20c58420236a35457da28285c2",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/node/package-manifest.json": {
+    "mtime": 1786009168.127128,
+    "ast_hash": "5299f22c0bb8c6533372858c232cbe02",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/builds.json": {
+    "mtime": 1786009175.5441782,
+    "ast_hash": "a7a893b8b818151a5c41f5a50534bca4",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/config.json": {
+    "mtime": 1786009175.613182,
+    "ast_hash": "dd46bdc7ceb9b61175b482adaf84f455",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/diagnostics/cli_traces.json": {
+    "mtime": 1786009175.6371787,
+    "ast_hash": "b9572fb19891605eff22ce67125a47e0",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/diagnostics/deploy-manifest.json": {
+    "mtime": 1786009175.5421712,
+    "ast_hash": "a6e3bf62092c5b98779e52abaf6f6f5e",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/diagnostics/project-manifest.json": {
+    "mtime": 1786009175.540173,
+    "ast_hash": "203353a661afb188bff27e340c2ec014",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/404-BcZYAsRq.js": {
+    "mtime": 1786009173.1421328,
+    "ast_hash": "9dae550fb09f042bf151e31170feecf0",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/FantasyTeamForm-_nIhRa1_.js": {
+    "mtime": 1786009173.143137,
+    "ast_hash": "874577eeee56b3cd89c0be3469a07901",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/Modal-ByUoBXg6.js": {
+    "mtime": 1786009173.1441326,
+    "ast_hash": "09b9ba2746b6c91d63b5c612d057dce8",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/MyTeamPage-B9QcG1xx.js": {
+    "mtime": 1786009173.1451347,
+    "ast_hash": "041be0c9ea609de3ff547e4c64d8b6c6",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/MyTeamPage-CL9kIzsl.js": {
+    "mtime": 1786009173.147132,
+    "ast_hash": "a72252bc5a8309bcb81189f62761b9f2",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/PlayerStatsModal-CocW4VyR.js": {
+    "mtime": 1786009173.1481352,
+    "ast_hash": "a1ae8e7e7ab7def3291856856a5d752f",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/ProtectedRoute-DaqcO1UM.js": {
+    "mtime": 1786009173.1491306,
+    "ast_hash": "ec782678dc4e828d4b157efcceface56",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/ThemeToggle-DPuhg77J.js": {
+    "mtime": 1786009173.1491306,
+    "ast_hash": "b02e4efaf8228f81e9244e49e7985563",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/_teamId-DcTe12Hs.js": {
+    "mtime": 1786009173.150134,
+    "ast_hash": "b7d96cb1175f127840ff341a285f8c0a",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/activity-m3LD9ABy.js": {
+    "mtime": 1786009173.1511357,
+    "ast_hash": "b6dfbdcb7567878149f23f4ef2fe64fb",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/arrow-left-DJSrs8RS.js": {
+    "mtime": 1786009173.1521323,
+    "ast_hash": "27eb3fbc9c354ade928ef8975196f49b",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/arrow-right-FhpLC4Jz.js": {
+    "mtime": 1786009173.1531336,
+    "ast_hash": "d058aa22224db524d93f27037f466ee6",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/award-DR63xszZ.js": {
+    "mtime": 1786009173.1541348,
+    "ast_hash": "d41578be7c0156a76a770a9c79ad7ce6",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/bell-ring-BY1TGiVa.js": {
+    "mtime": 1786009173.1551287,
+    "ast_hash": "6522366a375b493228ba99bd73ac98f8",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/book-open-C8qqn6xi.js": {
+    "mtime": 1786009173.1561315,
+    "ast_hash": "38ee5abcf8d28781677e9ab76f422a5b",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/check-CdcZwXwd.js": {
+    "mtime": 1786009173.1561315,
+    "ast_hash": "155977dd604bedc98e570b343e6333bd",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/chevron-down-CQ4g2pqj.js": {
+    "mtime": 1786009173.1571348,
+    "ast_hash": "888271813494ecfb9e54d3daeca781fc",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/chevron-left-E2eaQVsf.js": {
+    "mtime": 1786009173.1581314,
+    "ast_hash": "454303dcfa1b582985ac6ac3038054ef",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/chevron-right-lKEb9qQ4.js": {
+    "mtime": 1786009173.1581314,
+    "ast_hash": "dd8a85624bf896077381608a99114f6b",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/circle-alert-ChDR_A2r.js": {
+    "mtime": 1786009173.1591313,
+    "ast_hash": "f9c775523613a5ccd31b6ba5a394372e",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/clock-DKPntNYX.js": {
+    "mtime": 1786009173.1601427,
+    "ast_hash": "e0a6bc9e6bb91bf6e6fa9922a8deb0c5",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/create.lazy-fwNIQWV4.js": {
+    "mtime": 1786009173.1601427,
+    "ast_hash": "27d13b547258ab4f23f02f39a13932b6",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/crown-C1XoNsRc.js": {
+    "mtime": 1786009173.1611295,
+    "ast_hash": "2408e56d6b0bfd1af3fc96d5347a7139",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/dayjs.min-B_oraR3K.js": {
+    "mtime": 1786009173.1621337,
+    "ast_hash": "271067846ff27ac6c0e09afb5e3519ee",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/edit._teamId.lazy-DMWi-Lam.js": {
+    "mtime": 1786009173.1621337,
+    "ast_hash": "9e5234c6c1f121400a5b233c5eab9920",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/eye-CNOK4pTO.js": {
+    "mtime": 1786009173.1631324,
+    "ast_hash": "6078125273165109a707286f90f33d81",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/facts.lazy-CsQuzuLJ.js": {
+    "mtime": 1786009173.1641302,
+    "ast_hash": "3f64298b5df67fe2298c7d047c8531a6",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/facts.lazy-Cu8Og49W.js": {
+    "mtime": 1786009173.1641302,
+    "ast_hash": "d7686ec61a459cb468789a70d3050488",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/fantasy-teams-BIaRMFA2.js": {
+    "mtime": 1786009173.1651323,
+    "ast_hash": "a5da9a69a284479f98de7d0dfca19642",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/fixtures._fixtureId.lazy-C06QjDyC.js": {
+    "mtime": 1786009173.1661322,
+    "ast_hash": "f0e86d913da15b38e6c56eaf5a56d8d9",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/fixtures.lazy-7ulbBh7m.js": {
+    "mtime": 1786009173.1661322,
+    "ast_hash": "40fa1ec65f621e56b861d3cc0372f398",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/funnel-BxBegqnZ.js": {
+    "mtime": 1786009173.16713,
+    "ast_hash": "16e0739989ccf75ce2a69afa81da04ba",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/gameweek-breakdown.lazy-CymJDgH4.js": {
+    "mtime": 1786009173.1681347,
+    "ast_hash": "7f9d4dc06eedeb156b4837f8112842dc",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/gameweeks.lazy-Dp361tGb.js": {
+    "mtime": 1786009173.1681347,
+    "ast_hash": "27270f78e1186355a508015831d1d1cc",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/h2h-leagues.lazy-C5m_b4v1.js": {
+    "mtime": 1786009173.1691346,
+    "ast_hash": "f644599e0448685830d60fd89ad20541",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/h2h.lazy-CuELd-z4.js": {
+    "mtime": 1786009173.1701374,
+    "ast_hash": "e7f84e929234c9483006dda964220ab4",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/home.lazy-Dyy3m34E.js": {
+    "mtime": 1786009173.171137,
+    "ast_hash": "6e38bdb5d8af4873bcc5f19ea0f75ab0",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/hooks-5YihtsIz.js": {
+    "mtime": 1786009173.171137,
+    "ast_hash": "8070bbd3f57a840f28e41836e9de0b97",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/hooks-CbWYLdx1.js": {
+    "mtime": 1786009173.1721323,
+    "ast_hash": "99949e6e36bbcf4f3792c11221adf210",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/hooks-Di03K3Pd.js": {
+    "mtime": 1786009173.1721323,
+    "ast_hash": "82d871bbc3215269f9e4474200c40e10",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/index-D6bAIqfo.js": {
+    "mtime": 1786009173.1411276,
+    "ast_hash": "733f0cef054788f8b30207c9d8075f4f",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/index.lazy-B3NViYng.js": {
+    "mtime": 1786009173.1731346,
+    "ast_hash": "1f8dcbdcef0086cc8655f36801e0e365",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/index.lazy-BPpb0lqa.js": {
+    "mtime": 1786009173.1741278,
+    "ast_hash": "a3b254a7e3e32b8bdd023ac89c4f7c90",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/index.lazy-C_xZAqV-.js": {
+    "mtime": 1786009173.1751325,
+    "ast_hash": "16f43cb704059c5f1166c001a281da18",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/index.lazy-DyIlocEp.js": {
+    "mtime": 1786009173.1751325,
+    "ast_hash": "c09447f322904e0768ee7038ec5b9744",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/layout-grid-BISIg7ua.js": {
+    "mtime": 1786009173.176131,
+    "ast_hash": "87fbaae681c1181e66ae4c020ee8a48b",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/leagues.lazy-BhbW6Jlt.js": {
+    "mtime": 1786009173.177135,
+    "ast_hash": "f96a2c934390a315909af4ed4d5a9dcd",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/list-Diq1kja7.js": {
+    "mtime": 1786009173.1781356,
+    "ast_hash": "514b158fab36d863670069cfe46e9d0b",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/loader-circle-BxcoyWq2.js": {
+    "mtime": 1786009173.1781356,
+    "ast_hash": "b6b4087d9a53c6f7da253c9b314b1f4d",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/login-LUWxJtEa.js": {
+    "mtime": 1786009173.1791315,
+    "ast_hash": "7385664a25a1f50db4389016cfe6d43c",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/maintenance-B6LcbvAY.js": {
+    "mtime": 1786009173.1791315,
+    "ast_hash": "7101419cbd119d7dd9a7739d11433dfb",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/manager-overview.lazy-mZiipBXM.js": {
+    "mtime": 1786009173.1801362,
+    "ast_hash": "2d3800718472a4a950acce9528be6362",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/my-team.lazy-wGRBm7Y7.js": {
+    "mtime": 1786009173.1801362,
+    "ast_hash": "891ddee1106a68aecf8681ab1678e155",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/notifications-CvYRxiXI.js": {
+    "mtime": 1786009173.1811345,
+    "ast_hash": "00cacf358b498efd0fbf9db59f32a8a9",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/notifications.lazy-46vjOzbB.js": {
+    "mtime": 1786009173.1821363,
+    "ast_hash": "b9e9dc09f965799b238805c34392a136",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/pen-line-BamqAjR5.js": {
+    "mtime": 1786009173.1821363,
+    "ast_hash": "c5f1645a6f37ed6ab51884645d47140f",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/players.lazy-CZY1Yd7b.js": {
+    "mtime": 1786009173.1831384,
+    "ast_hash": "d39ef536edcd96917253647d1cdf13cc",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/plus-shA-L8jn.js": {
+    "mtime": 1786009173.1841304,
+    "ast_hash": "e6ceda7a73dcbb8595b7a136163752bb",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/refresh-cw-CjZotYlE.js": {
+    "mtime": 1786009173.1841304,
+    "ast_hash": "b7f78e520e3979c5940ce1df4b60a408",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/routes-zBxJ-8kt.js": {
+    "mtime": 1786009173.1851356,
+    "ast_hash": "7da9d63c307520d84c035ba024d3fc13",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/save-nDTgoN9P.js": {
+    "mtime": 1786009173.1861339,
+    "ast_hash": "433a0e4cfdf87bb15bb888f48cb2b7f5",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/search-BeafNgO_.js": {
+    "mtime": 1786009173.1861339,
+    "ast_hash": "7ea5ec654867a3fbc866ab5cff2a287f",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/send-TXyryOW8.js": {
+    "mtime": 1786009173.1871314,
+    "ast_hash": "23d03584dadcc43ac5fcf27bd7001934",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/settings.lazy-DCGXxSlD.js": {
+    "mtime": 1786009173.1881294,
+    "ast_hash": "dd39ca8ea81ffd2a3330d71ba11f8788",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/sheets.lazy-Bg71p3ib.js": {
+    "mtime": 1786009173.1891325,
+    "ast_hash": "a7e35e3a8e28ddd5b386ba389376ce11",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/shield-Dmgj6-xP.js": {
+    "mtime": 1786009173.1891325,
+    "ast_hash": "da9882d4dd2b4b79ade0993850927fb9",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/shield-alert-CPs6rT0H.js": {
+    "mtime": 1786009173.1901326,
+    "ast_hash": "cd935f983afc3ca279ddfb24908c992a",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/shield-check-OTQsFbtt.js": {
+    "mtime": 1786009173.1911347,
+    "ast_hash": "92f0f7ff74e015e0065dc536ff33c6f7",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/sparkles-DLCdJAti.js": {
+    "mtime": 1786009173.1911347,
+    "ast_hash": "b873dbfa341d6a4891cb26cc707f5155",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/substitutions.lazy-8nTqf1zt.js": {
+    "mtime": 1786009173.1921322,
+    "ast_hash": "3e4e58e249310c007cd8c1723a9a6f47",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/target-DjCf-FAj.js": {
+    "mtime": 1786009173.1931367,
+    "ast_hash": "60e55e44d67eafc04d7cac7c1242c098",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/teams.lazy-DH6_nXZl.js": {
+    "mtime": 1786009173.1931367,
+    "ast_hash": "ce5e437d3fd2b9fcd2d0dba953723aa7",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/transfers.lazy-CvagGtYk.js": {
+    "mtime": 1786009173.194134,
+    "ast_hash": "e14a56bfa607f77faa677779da152c18",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/trash-2-q0yIqNYD.js": {
+    "mtime": 1786009173.195136,
+    "ast_hash": "6c81d2889295368e1cebb316437b075f",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/trending-up-DE-FR6i9.js": {
+    "mtime": 1786009173.1961305,
+    "ast_hash": "d10debcf43decec7e7dd394c60b5938d",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/triangle-alert-FEKBvyLu.js": {
+    "mtime": 1786009173.1961305,
+    "ast_hash": "81f3bf391d0bdd63c1e574753e602bf7",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/usePlayerStore-BnoKxise.js": {
+    "mtime": 1786009173.1971302,
+    "ast_hash": "1efdd108442bb18f2dec45228e9ae8d4",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/user-check-kSyDF07n.js": {
+    "mtime": 1786009173.1971302,
+    "ast_hash": "0f16c9a624ba53b5bbef2f5de90f9f77",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/user-plus-CqS_hf_o.js": {
+    "mtime": 1786009173.1981306,
+    "ast_hash": "a938718005e8166bcfa73111d2c4ecba",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/wallet-DEZ1hw2h.js": {
+    "mtime": 1786009173.1991313,
+    "ast_hash": "39ac9bd9732fa5faa5fca3e26b054478",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/workbox-window.prod.es5-CDS4_C70.js": {
+    "mtime": 1786009173.1991313,
+    "ast_hash": "b44f16e76ed103a5dd9d145eb8cc7195",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/x-BXmSJeci.js": {
+    "mtime": 1786009173.200137,
+    "ast_hash": "e65e1d7984594ef8a923694e01f1b706",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/zap-DGMy9T3K.js": {
+    "mtime": 1786009173.2011352,
+    "ast_hash": "71989435cab1088ea43c23b356f69190",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/sw.js": {
+    "mtime": 1786009175.2641742,
+    "ast_hash": "70fdaee2fcf6599c75a889c56f346f54",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/index.html": {
+    "mtime": 1786009173.2051303,
+    "ast_hash": "d67a521b577c11cbcdbdff3b530210a3",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/apple-touch-icon.png": {
+    "mtime": 1762414995.3017936,
+    "ast_hash": "2e9674a55c360c713b8bf4e60f485a1b",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/wplf1-dark-CXHjzweH.png": {
+    "mtime": 1786009173.2011352,
+    "ast_hash": "c1404f693021522b40528e8ce499d702",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/assets/wplf1-light-CuZX2LfL.png": {
+    "mtime": 1786009173.2021334,
+    "ast_hash": "6de375bf31dac135c3499243eaed46ae",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/jersey-3d.png": {
+    "mtime": 1765449657.2018557,
+    "ast_hash": "7a572afc3d71c62f30be8b158a6ddbda",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/maskable-icon-512x512.png": {
+    "mtime": 1762414995.2798016,
+    "ast_hash": "073a361d9b2edbc960f920aa4ac70a4c",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/pitch.png": {
+    "mtime": 1784195088.7755413,
+    "ast_hash": "c82149398ef9d81aae868a45280eed32",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/pitch.svg": {
+    "mtime": 1766690993.4718475,
+    "ast_hash": "41f38cb4d520c45d347558bf597248f3",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/pwa-192x192.png": {
+    "mtime": 1762414995.2122085,
+    "ast_hash": "c38e47abf5de0cf40a915138b75a500d",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/pwa-512x512.png": {
+    "mtime": 1762414995.2352026,
+    "ast_hash": "113583aed8cf7e0101f5ad1b3682a763",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/pwa-64x64.png": {
+    "mtime": 1762414995.2032044,
+    "ast_hash": "ab28502f9eee897f6d55cbc994233cae",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/wplf-dark.png": {
+    "mtime": 1762262550.0595644,
+    "ast_hash": "c1404f693021522b40528e8ce499d702",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/wplf-light.png": {
+    "mtime": 1762262600.6706579,
+    "ast_hash": "6de375bf31dac135c3499243eaed46ae",
+    "semantic_hash": ""
+  },
+  "ui/.vercel/output/static/wplf.png": {
+    "mtime": 1762262600.6706579,
+    "ast_hash": "6de375bf31dac135c3499243eaed46ae",
     "semantic_hash": ""
   }
 }
