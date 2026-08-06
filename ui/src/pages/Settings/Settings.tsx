@@ -118,7 +118,7 @@ export default function Settings() {
               Settings
             </h1>
             <p className="text-[10px] text-text-muted font-medium mt-0.5 leading-tight break-words">
-              App preferences & account settings
+              App preferences & settings
             </p>
           </div>
 
