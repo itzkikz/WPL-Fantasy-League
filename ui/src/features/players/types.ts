@@ -60,6 +60,7 @@ export interface SofaScoreStats {
   clearanceOffLine?: number;
   outfielderBlock?: number;
   ballRecovery?: number;
+  interceptionWon?: number;
   totalTackle: number;
   wonTackle?: number;
   wasFouled: number;

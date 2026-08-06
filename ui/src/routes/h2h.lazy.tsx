@@ -67,6 +67,7 @@ const compileTeamTotals = (details: any) => {
     tackles: 0,
     clearances: 0,
     blocks: 0,
+    interceptions: 0,
     recoveries: 0,
     captainPoints: 0,
     totalPoints: details?.totalGWScore || 0,
@@ -98,6 +99,7 @@ const compileTeamTotals = (details: any) => {
       totals.tackles += s.totalTackle || 0;
       totals.clearances += s.totalClearance || 0;
       totals.blocks += s.outfielderBlock || 0;
+      totals.interceptions += s.interceptionWon || 0;
       totals.recoveries += s.ballRecovery || 0;
     }
     if (p.isCaptain || p.isViceCaptain) {
@@ -136,6 +138,7 @@ function H2HFixtureDetails({ homeTeamId, awayTeamId, gameweek }: { homeTeamId: s
     { key: 'tackles', label: 'Tackles' },
     { key: 'clearances', label: 'Clearances' },
     { key: 'blocks', label: 'Blocks' },
+    { key: 'interceptions', label: 'Interceptions' },
     { key: 'recoveries', label: 'Recoveries' },
     { key: 'captainPoints', label: 'Captain/VC Points' },
     { key: 'totalPoints', label: 'Total Points', highlight: true },

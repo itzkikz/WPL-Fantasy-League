@@ -44,6 +44,7 @@ const TeamDetailsPage = () => {
       tackles: 0,
       clearances: 0,
       blocks: 0,
+      interceptions: 0,
       recoveries: 0,
     };
 
@@ -73,6 +74,7 @@ const TeamDetailsPage = () => {
         totals.tackles += s.totalTackle || 0;
         totals.clearances += s.totalClearance || 0;
         totals.blocks += s.outfielderBlock || 0;
+        totals.interceptions += s.interceptionWon || 0;
         totals.recoveries += s.ballRecovery || 0;
       }
     });
@@ -474,6 +476,7 @@ const TeamDetailsPage = () => {
             { label: "Tackles", value: totals.tackles, icon: "⚔️" },
             { label: "Clearances", value: totals.clearances, icon: "🗑️" },
             { label: "Blocks", value: totals.blocks, icon: "🛡️" },
+            { label: "Interceptions", value: totals.interceptions, icon: "🕸️" },
             { label: "Recoveries", value: totals.recoveries, icon: "🔄" },
           ];
 
@@ -497,6 +500,8 @@ const TeamDetailsPage = () => {
                   <span className="flex items-center gap-0.5 shrink-0">🧤 <strong className="text-white">{totals.saves}Sv</strong></span>
                   <span className="text-gray-700">|</span>
                   <span className="flex items-center gap-0.5 shrink-0">⚔️ <strong className="text-white">{totals.tackles}T</strong></span>
+                  <span className="text-gray-700">|</span>
+                  <span className="flex items-center gap-0.5 shrink-0">🕸️ <strong className="text-white">{totals.interceptions}I</strong></span>
                   <span className="text-gray-700">|</span>
                   <span className="flex items-center gap-0.5 shrink-0">🔄 <strong className="text-white">{totals.recoveries}R</strong></span>
                 </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { X, Target, Clock, Star, Calendar, ArrowRightLeft, Activity, ShieldCheck, Goal, Footprints, Shield, TriangleAlert, Octagon, Ban, Sparkles, Hand, Zap, Send, Blocks, Magnet } from "lucide-react";
+import { X, Target, Clock, Star, Calendar, ArrowRightLeft, Activity, ShieldCheck, Goal, Footprints, Shield, TriangleAlert, Octagon, Ban, Sparkles, Hand, Zap, Send, Blocks, Magnet, Filter } from "lucide-react";
 import { Player, PlayerStats } from "../../../features/players/types";
 import { getContrastText, luminance } from "../../../libs/helpers/color";
 import { getPlayerDisplayPrice } from "../../../libs/helpers/player";
@@ -229,7 +229,7 @@ const PlayerStatsModal = ({
                   const cw = stats.current_week;
                   const isGK = pos === "GK";
                   const isDEF = pos === "DEF";
-                  const defCont = (cw?.totalTackle || 0) + (cw?.totalClearance || 0) + (cw?.outfielderBlock || 0) + (cw?.ballRecovery || 0);
+                  const defCont = (cw?.totalTackle || 0) + (cw?.totalClearance || 0) + (cw?.outfielderBlock || 0) + (cw?.ballRecovery || 0) + (cw?.interceptionWon || 0);
 
                   const items: { icon: any; iconColor: string; label: string; value: any }[] = [];
                   items.push({ icon: Clock, iconColor: "text-slate-400", label: "Mins", value: cw?.minutesPlayed === 0 ? "DNP" : cw?.minutesPlayed || 0 });
@@ -248,6 +248,7 @@ const PlayerStatsModal = ({
                   items.push({ icon: Zap, iconColor: "text-cyan-400", label: "Tackles", value: cw?.totalTackle || 0 });
                   items.push({ icon: Send, iconColor: "text-teal-400", label: "Clear", value: cw?.totalClearance || 0 });
                   items.push({ icon: Blocks, iconColor: "text-blue-400", label: "Blocks", value: cw?.outfielderBlock || 0 });
+                  items.push({ icon: Filter, iconColor: "text-violet-400", label: "Intercpt", value: cw?.interceptionWon || 0 });
                   items.push({ icon: Magnet, iconColor: "text-green-400", label: "Recovery", value: cw?.ballRecovery || 0 });
 
                   const visibleItems = items.filter((item) => item.value > 0);
@@ -304,10 +305,12 @@ const PlayerStatsModal = ({
                       const clearances = cw?.totalClearance || 0;
                       const blocks = cw?.outfielderBlock || 0;
                       const recovery = cw?.ballRecovery || 0;
-                      if (tackles || clearances || blocks || recovery) {
+                      const interceptions = cw?.interceptionWon || 0;
+                      if (tackles || clearances || blocks || recovery || interceptions) {
                         rows.push({ label: `Tackles (${tackles})`, pts: 0 });
                         rows.push({ label: `Clearances (${clearances})`, pts: 0 });
                         rows.push({ label: `Blocks (${blocks})`, pts: 0 });
+                        rows.push({ label: `Interceptions (${interceptions})`, pts: 0 });
                         rows.push({ label: `Recovery (${recovery})`, pts: 0 });
                       }
 
@@ -454,6 +457,7 @@ const PlayerStatsModal = ({
                 items.push({ label: "Tackles", value: o?.totalTackle || 0 });
                 items.push({ label: "Clear", value: o?.totalClearance || 0 });
                 items.push({ label: "Blocks", value: o?.outfielderBlock || 0 });
+                items.push({ label: "Intercpt", value: o?.interceptionWon || 0 });
                 items.push({ label: "Recovery", value: o?.ballRecovery || 0 });
 
                 return (
@@ -554,13 +558,15 @@ const PlayerStatsModal = ({
                     const clearances = o?.totalClearance || 0;
                     const blocks = o?.outfielderBlock || 0;
                     const recovery = o?.ballRecovery || 0;
-                    const defCont = tackles + clearances + blocks + recovery;
+                    const interceptions = o?.interceptionWon || 0;
+                    const defCont = tackles + clearances + blocks + recovery + interceptions;
                     if (defCont > 0) {
                       const dp = isDEF ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
                       if (dp > 0) {
                         rows.push({ label: `Tackles (${tackles})`, pts: 0 });
                         rows.push({ label: `Clearances (${clearances})`, pts: 0 });
                         rows.push({ label: `Blocks (${blocks})`, pts: 0 });
+                        rows.push({ label: `Interceptions (${interceptions})`, pts: 0 });
                         rows.push({ label: `Recovery (${recovery})`, pts: 0 });
                         rows.push({ label: `Defensive Bonus (÷${isDEF ? 10 : 12})`, pts: dp });
                       }
