@@ -1,11 +1,35 @@
 // vite.config.ts
+import { execSync } from "node:child_process";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
+// Resolve the app version at build time. Priority:
+//   1. VITE_APP_VERSION env (explicit override / release label)
+//   2. VERCEL_GIT_COMMIT_SHA / GITHUB_SHA (7 chars) on hosted builds
+//   3. git rev-parse --short HEAD locally
+//   4. package.json version as last resort
+function resolveAppVersion() {
+  if (process.env.VITE_APP_VERSION) return process.env.VITE_APP_VERSION;
+
+  const sha = process.env.VERCEL_GIT_COMMIT_SHA || process.env.GITHUB_SHA;
+  if (sha) return sha.slice(0, 7);
+
+  try {
+    return execSync("git rev-parse --short HEAD").toString().trim();
+  } catch {
+    return "0.0.0";
+  }
+}
+
+const appVersion = resolveAppVersion();
+
 export default defineConfig({
+  define: {
+    __APP_VERSION__: JSON.stringify(appVersion),
+  },
   plugins: [
     // Please make sure that '@tanstack/router-plugin' is passed before '@vitejs/plugin-react'
     tanstackRouter({
@@ -20,7 +44,7 @@ export default defineConfig({
       strategies: "injectManifest", // enable custom SW for push [docs]
       srcDir: "src", // where the SW file lives
       filename: "sw.ts", // custom SW entry
-      registerType: "autoUpdate",
+      registerType: "prompt",
       devOptions: { enabled: true }, // SW+manifest in dev (localhost is secure)
       includeAssets: [
         "favicon.ico",

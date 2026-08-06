@@ -495,9 +495,9 @@
     "semantic_hash": "3ca0b8505b4bec776b69afdba2768812"
   },
   "ui/eslint.config.js": {
-    "mtime": 1761459782.932273,
-    "ast_hash": "ea5fa9590bc5a8caf28851562aaa0b09",
-    "semantic_hash": "ea5fa9590bc5a8caf28851562aaa0b09"
+    "mtime": 1786006521.6668544,
+    "ast_hash": "8d72842a26a69ee539e6f49e42027fbc",
+    "semantic_hash": ""
   },
   "ui/package.json": {
     "mtime": 1784141432.0018573,
@@ -560,14 +560,9 @@
     "semantic_hash": ""
   },
   "ui/src/components/UpdatePrompt.tsx": {
-    "mtime": 1784140079.8346944,
-    "ast_hash": "c85e61ff6ec2ae7b1e6fe75a187851f3",
-    "semantic_hash": "c85e61ff6ec2ae7b1e6fe75a187851f3"
-  },
-  "ui/src/components/VersionCheck.tsx": {
-    "mtime": 1784140079.8356936,
-    "ast_hash": "a7ed5dee5dd5a205714683b2c4bdd023",
-    "semantic_hash": "a7ed5dee5dd5a205714683b2c4bdd023"
+    "mtime": 1786005034.8541954,
+    "ast_hash": "f6a3e179238018f0f93abd228b5b900a",
+    "semantic_hash": ""
   },
   "ui/src/components/admin/FantasyTeamForm.tsx": {
     "mtime": 1785760066.0384798,
@@ -950,9 +945,9 @@
     "semantic_hash": "26b52b12fa2fcbab003d3f2f7214b0b1"
   },
   "ui/src/main.tsx": {
-    "mtime": 1784478850.548648,
-    "ast_hash": "55cf2e8b0f90d61bedb5e7ba16460ace",
-    "semantic_hash": "55cf2e8b0f90d61bedb5e7ba16460ace"
+    "mtime": 1786005057.7459898,
+    "ast_hash": "68acde2856d025d43443d8fcf19547cb",
+    "semantic_hash": ""
   },
   "ui/src/pages/Home/HomePage.tsx": {
     "mtime": 1785928731.3337727,
@@ -995,8 +990,8 @@
     "semantic_hash": ""
   },
   "ui/src/pages/Settings/Settings.tsx": {
-    "mtime": 1785929381.5322971,
-    "ast_hash": "2ae4d71bfccc854c2d30765dd6cbeeb1",
+    "mtime": 1786006398.1936886,
+    "ast_hash": "360bb418963400351827911d935aeb8c",
     "semantic_hash": ""
   },
   "ui/src/pages/Standings/StandingsPage.tsx": {
@@ -1035,9 +1030,9 @@
     "semantic_hash": "23159d804be57d38ffea7519dc9f1a0d"
   },
   "ui/src/routes/__root.tsx": {
-    "mtime": 1765449657.554858,
-    "ast_hash": "4d7ff69d4c530f940e8138fefcbb5084",
-    "semantic_hash": "4d7ff69d4c530f940e8138fefcbb5084"
+    "mtime": 1786005044.138428,
+    "ast_hash": "f00cc490126833b2807d26d230f66de3",
+    "semantic_hash": ""
   },
   "ui/src/routes/admin/fantasy-teams.tsx": {
     "mtime": 1782476964.316858,
@@ -1245,14 +1240,14 @@
     "semantic_hash": ""
   },
   "ui/src/sw.ts": {
-    "mtime": 1785908030.2211068,
-    "ast_hash": "73ec6f225dcee1c90b744daf4ee176eb",
+    "mtime": 1786006415.6749563,
+    "ast_hash": "bd0df1cfa1d1e8c1c67122558e8f721d",
     "semantic_hash": ""
   },
   "ui/src/vite-env.d.ts": {
-    "mtime": 1765449657.6588442,
-    "ast_hash": "0f66b836165705f473b4c4d019c2a781",
-    "semantic_hash": "0f66b836165705f473b4c4d019c2a781"
+    "mtime": 1786006355.6893177,
+    "ast_hash": "3a98aa459413dc5dc287bf382ab89bb7",
+    "semantic_hash": ""
   },
   "ui/vercel.json": {
     "mtime": 1761501280.8467839,
@@ -1260,9 +1255,9 @@
     "semantic_hash": "7708fbf29b99cd92c2a778d60001c5ba"
   },
   "ui/vite.config.js": {
-    "mtime": 1784199619.2496622,
-    "ast_hash": "3cbd6883445b2ad90d81181309095654",
-    "semantic_hash": "3cbd6883445b2ad90d81181309095654"
+    "mtime": 1786006348.7398849,
+    "ast_hash": "e73f4d991ca51a0becfd7a3fb3e8ef70",
+    "semantic_hash": ""
   },
   ".agents/skills/banner-design/SKILL.md": {
     "mtime": 1783020386.3019476,
@@ -1857,6 +1852,11 @@
   "ui/src/pages/Manager/components/TeamTransfersCard.tsx": {
     "mtime": 1785927152.7332413,
     "ast_hash": "d68df5e037b6154a43c90dd241d970b0",
+    "semantic_hash": ""
+  },
+  "ui/src/lib/version.ts": {
+    "mtime": 1786006365.258255,
+    "ast_hash": "c6a72e20c58420236a35457da28285c2",
     "semantic_hash": ""
   }
 }
