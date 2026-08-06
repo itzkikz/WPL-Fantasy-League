@@ -1340,11 +1340,11 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
         forwards,
       };
 
-      const totalBudget = (fantasyTeam.finance?.totalBudget ?? 1000) / 10;
-      const utilisation = (fantasyTeam.finance?.utilisation ?? 0) / 10;
-      const bonus = (fantasyTeam.finance?.bonus ?? 0) / 10;
-      const fine = (fantasyTeam.finance?.fine ?? 0) / 10;
-      const bank = (fantasyTeam.finance?.balance ?? ((fantasyTeam.finance?.totalBudget ?? 1000) - (fantasyTeam.finance?.utilisation ?? 0) + (fantasyTeam.finance?.bonus ?? 0) - (fantasyTeam.finance?.fine ?? 0))) / 10;
+      const totalBudget = (fantasyTeam.finance?.totalBudget ?? 1000);
+      const utilisation = (fantasyTeam.finance?.utilisation ?? 0);
+      const bonus = (fantasyTeam.finance?.bonus ?? 0);
+      const fine = (fantasyTeam.finance?.fine ?? 0);
+      const bank = (fantasyTeam.finance?.balance ?? ((fantasyTeam.finance?.totalBudget ?? 1000) - (fantasyTeam.finance?.utilisation ?? 0) + (fantasyTeam.finance?.bonus ?? 0) - (fantasyTeam.finance?.fine ?? 0)));
 
       const fallbackPlayerPriceSum = squadPlayerIds.map(id => {
         const p = pDocsMap.get(id);
