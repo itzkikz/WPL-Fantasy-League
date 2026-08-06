@@ -95,8 +95,9 @@ export function getMatchPointsBreakdown(stats: SofaScoreStats, positionOr: strin
     const clearances = stats.totalClearance || 0;
     const blocks = stats.outfielderBlock || 0;
     const ballRecovery = stats.ballRecovery || 0;
+    const interceptions = stats.interceptionWon || 0;
 
-    const defensiveContributions = tackles + clearances + blocks + ballRecovery;
+    const defensiveContributions = tackles + clearances + blocks + ballRecovery + interceptions;
     if (defensiveContributions > 0) {
         const defPoints = position === 'DEF'
             ? Math.floor(defensiveContributions / 10) * 2
@@ -200,7 +201,7 @@ export function getSeasonPointsBreakdown(gameweeks: any[], positionOr: string | 
             if (sv >= 3) savesPts += Math.floor(sv / 3);
         }
 
-        const dc = (s.totalTackle || 0) + (s.totalClearance || 0) + (s.outfielderBlock || 0) + (s.ballRecovery || 0);
+        const dc = (s.totalTackle || 0) + (s.totalClearance || 0) + (s.outfielderBlock || 0) + (s.ballRecovery || 0) + (s.interceptionWon || 0);
         if (dc > 0) {
             defCont += dc;
             defPts += (position === 'DEF' ? Math.floor(dc / 10) : Math.floor(dc / 12)) * 2;

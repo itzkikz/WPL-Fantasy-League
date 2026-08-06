@@ -108,6 +108,7 @@ const GameweekBreakdownPage = () => {
       tackles: { count: 0, points: 0, suffix: "" },
       clearances: { count: 0, points: 0, suffix: "" },
       blocks: { count: 0, points: 0, suffix: "" },
+      interceptions: { count: 0, points: 0, suffix: "" },
       recoveries: { count: 0, points: 0, suffix: "" },
       defensivePoints: { count: 0, points: 0, suffix: "" },
     };
@@ -153,8 +154,9 @@ const GameweekBreakdownPage = () => {
       totals.tackles.count += s.totalTackle || 0;
       totals.clearances.count += s.totalClearance || 0;
       totals.blocks.count += s.outfielderBlock || 0;
+      totals.interceptions.count += s.interceptionWon || 0;
       totals.recoveries.count += s.ballRecovery || 0;
-      totals.defensivePoints.count += (s.totalTackle || 0) + (s.totalClearance || 0) + (s.outfielderBlock || 0) + (s.ballRecovery || 0);
+      totals.defensivePoints.count += (s.totalTackle || 0) + (s.totalClearance || 0) + (s.outfielderBlock || 0) + (s.ballRecovery || 0) + (s.interceptionWon || 0);
 
       // Points come from the server per-match breakdown (per-match rules, summed)
       const ptsFor = (label: string): number => {
@@ -772,12 +774,13 @@ const GameweekBreakdownPage = () => {
                             { label: "Tackles", ...totals.tackles },
                             { label: "Clearances", ...totals.clearances },
                             { label: "Blocks", ...totals.blocks },
+                            { label: "Interceptions", ...totals.interceptions },
                             { label: "Recovery", ...totals.recoveries },
                             { label: "Defensive Actions Points", ...totals.defensivePoints },
                           ];
 
                           return rows.map((row) => {
-                            const isDefensiveActionRaw = ["Tackles", "Clearances", "Blocks", "Recovery"].includes(row.label);
+                            const isDefensiveActionRaw = ["Tackles", "Clearances", "Blocks", "Interceptions", "Recovery"].includes(row.label);
                             const pointsVal = (row as any).isPointsOnly
                               ? `${row.points > 0 ? "+" : ""}${row.points} pts`
                               : isDefensiveActionRaw

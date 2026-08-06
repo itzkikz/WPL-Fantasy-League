@@ -30,7 +30,7 @@ export default function PlayerOverall({
     const apps = data?.appearances || 0;
     const apps60 = data?.appearances60 || 0;
     const appsUnder60 = apps - apps60;
-    const defCont = (data?.totalTackle || 0) + (data?.totalClearance || 0) + (data?.outfielderBlock || 0) + (data?.ballRecovery || 0);
+    const defCont = (data?.totalTackle || 0) + (data?.totalClearance || 0) + (data?.outfielderBlock || 0) + (data?.ballRecovery || 0) + (data?.interceptionWon || 0);
     const ptsRows: { label: string; pts: number }[] = [];
     if (apps > 0) ptsRows.push({ label: `Appearance (${apps} apps)`, pts: (apps60 * 2) + (appsUnder60 * 1) });
     if (mins > 0) ptsRows.push({ label: `Minutes Played (${mins})`, pts: 0 });
@@ -61,6 +61,7 @@ export default function PlayerOverall({
     const clearances = data?.totalClearance || 0;
     const blocks = data?.outfielderBlock || 0;
     const recovery = data?.ballRecovery || 0;
+    const interceptions = data?.interceptionWon || 0;
     if (defCont > 0) {
       const dp = pos === "DEF" ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
       if (dp > 0) {
@@ -68,6 +69,7 @@ export default function PlayerOverall({
         ptsRows.push({ label: `Clearances (${clearances})`, pts: 0 });
         ptsRows.push({ label: `Blocks (${blocks})`, pts: 0 });
         ptsRows.push({ label: `Recovery (${recovery})`, pts: 0 });
+        ptsRows.push({ label: `Interceptions (${interceptions})`, pts: 0 });
         ptsRows.push({ label: `Defensive Bonus (÷${pos === "DEF" ? 10 : 12})`, pts: dp });
       }
     }
@@ -149,6 +151,7 @@ export default function PlayerOverall({
             <StatRow label="Tackles Won" value={data?.wonTackle} border={true} />
             <StatRow label="Clearances" value={data?.totalClearance} border={true} />
             <StatRow label="Blocks" value={data?.outfielderBlock} border={true} />
+            <StatRow label="Interceptions" value={data?.interceptionWon} border={true} />
             <StatRow label="Ball Recoveries" value={data?.ballRecovery} border={false} />
           </div>
         </div>

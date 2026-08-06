@@ -123,6 +123,7 @@ export function mapSofascoreToPlayerMatchStat(
         clearanceOffLine: s.clearanceOffLine ?? 0,
         outfielderBlock: s.outfielderBlock ?? 0,
         ballRecovery: s.ballRecovery ?? 0,
+        interceptionWon: s.interceptionWon ?? 0,
         totalTackle: s.totalTackle ?? 0,
         wonTackle: s.wonTackle ?? 0,
         wasFouled: s.wasFouled ?? 0,

@@ -157,6 +157,7 @@ function FixtureDetails() {
           { k: "Tck", v: "Tackles" },
           { k: "Clr", v: "Clearances" },
           { k: "Blk", v: "Blocks" },
+          { k: "Int", v: "Interceptions" },
           { k: "Rec", v: "Ball Recoveries" },
           { k: "Pts", v: "Fantasy Points" },
         ].map((item) => (
@@ -297,6 +298,7 @@ function PlayerStatsSection({ teamName, players, side }: { teamName: string; pla
               <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">Tck</th>
               <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">Clr</th>
               <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">Blk</th>
+              <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">Int</th>
               <th className="px-1.5 py-2 text-[9px] font-extrabold uppercase tracking-wider text-white/40 text-center">Rec</th>
               <th className="px-2 py-2 text-[9px] font-extrabold uppercase tracking-wider text-indigo-400/80 text-center">Pts</th>
             </tr>
@@ -308,7 +310,7 @@ function PlayerStatsSection({ teamName, players, side }: { teamName: string; pla
             {subs.length > 0 && (
               <>
                 <tr>
-                  <td colSpan={13} className="px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-wider text-white/40 border-t border-white/10 bg-white/5">
+                  <td colSpan={14} className="px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-wider text-white/40 border-t border-white/10 bg-white/5">
                     Substitutes
                   </td>
                 </tr>
@@ -377,6 +379,7 @@ function PlayerRow({ player }: { player: any }) {
       <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.totalTackle || 0}</td>
       <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.totalClearance || 0}</td>
       <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.outfielderBlock || 0}</td>
+      <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.interceptionWon || 0}</td>
       <td className="px-1.5 py-1.5 text-center text-xs text-white/80 tabular-nums">{s.ballRecovery || 0}</td>
       <td className="px-2 py-1.5 text-center text-xs font-black text-indigo-400 tabular-nums">
         {player.gameweekPoints ?? "-"}

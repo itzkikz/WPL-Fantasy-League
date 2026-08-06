@@ -1,16 +1,16 @@
-# Graph Report - WPL-Fantasy-League  (2026-08-06)
+# Graph Report - WPL-Fantasy-League  (2026-08-05)
 
 ## Corpus Check
-- 349 files · ~374,829 words
+- 349 files · ~374,553 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3185 nodes · 4783 edges · 357 communities (169 shown, 188 thin omitted)
+- 3185 nodes · 4783 edges · 355 communities (167 shown, 188 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 214 edges (avg confidence: 0.76)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `431a178c`
+- Built from commit: `052e329f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -346,13 +346,11 @@
 - Vercel Project Linking Documentation
 - exportPlayersToGoogleSheet.ts
 - puppeteer-extra-plugin-stealth
-- primary-foreground
 - Route
 - Route
 - notifications.tsx
 - secondary-foreground
 - index.tsx
-- secondary-foreground
 - destructive
 - Route
 - Route
@@ -398,7 +396,7 @@
 - **Responsive grid layout system** — ui_src_pages_home_homepagepng_screenshot, ui_src_pages_home_homepagepng_teamoverview, ui_src_pages_home_homepagepng_upcomingfixture, ui_src_pages_home_homepagepng_leaguestatistics, ui_src_pages_home_homepagepng_gameweekprogress, ui_src_pages_home_homepagepng_leaguestandings, ui_src_pages_home_homepagepng_playerspotlight, ui_src_pages_home_homepagepng_topplayers, ui_src_pages_home_homepagepng_bestperformers, ui_src_pages_home_homepagepng_recentgameweeks, ui_src_pages_home_homepagepng_pointsbreakdown, ui_src_pages_home_homepagepng_seasonstats, ui_src_pages_home_homepagepng_teamformation, ui_src_pages_home_homepagepng_squadvalue, ui_src_pages_home_homepagepng_yourplayerscard, ui_src_pages_home_homepagepng_fantasynews [INFERRED 0.90]
 - **Dark theme design system** — ui_src_pages_home_homepagepng_screenshot, ui_src_pages_home_homepagepng_header, ui_src_pages_home_homepagepng_bottomnavbar [INFERRED 0.90]
 
-## Communities (357 total, 188 thin omitted)
+## Communities (355 total, 188 thin omitted)
 
 ### Community 0 - "UI Navigation & Layout"
 Cohesion: 0.05
@@ -526,7 +524,7 @@ Nodes (11): Generate Tailwind CSS configuration files., Add full color palette (
 
 ### Community 34 - "Design Token Semantic Colors"
 Cohesion: 0.11
-Nodes (19): $type, $value, background, destructive, foreground, muted-foreground, primary-hover, secondary (+11 more)
+Nodes (19): $type, $value, background, destructive-foreground, primary, primary-foreground, secondary, secondary-foreground (+11 more)
 
 ### Community 35 - "Tailwind Config Generator"
 Cohesion: 0.13
@@ -534,7 +532,7 @@ Nodes (8): main(), Add custom font families.          Args:             fonts: D
 
 ### Community 36 - "Server Package Dependencies"
 Cohesion: 0.10
-Nodes (21): body-parser, cors, dotenv, google-auth-library, jsonwebtoken, mongoose, dependencies, axios (+13 more)
+Nodes (21): bcryptjs, body-parser, cors, dotenv, google-auth-library, jsonwebtoken, mongoose, dependencies (+13 more)
 
 ### Community 37 - "Player Stats Feature"
 Cohesion: 0.20
@@ -597,12 +595,12 @@ Cohesion: 0.36
 Nodes (3): getFixtures(), router, fetchFixturesByDate()
 
 ### Community 54 - "Standings Page"
-Cohesion: 0.29
-Nodes (8): padding-y, input, $type, $value, focus-ring, padding-y, $type, $value
+Cohesion: 0.20
+Nodes (12): padding-x, padding-y, input, $type, $value, focus-ring, padding-x, padding-y (+4 more)
 
 ### Community 55 - "Design Token Radius & Shadows"
-Cohesion: 0.19
-Nodes (14): $type, $value, $type, $value, $type, $value, primitive, radius (+6 more)
+Cohesion: 0.18
+Nodes (15): $type, $value, sm, $type, $value, primitive, radius, shadow (+7 more)
 
 ### Community 56 - "UI UX Color Sync"
 Cohesion: 0.29
@@ -632,8 +630,8 @@ Cohesion: 0.40
 Nodes (6): authApi, authQueries, LoginRequest, LoginResponse, User, ValidateResponse
 
 ### Community 62 - "Design Token Component Tokens"
-Cohesion: 0.20
-Nodes (12): $type, $value, bg, bg, padding, shadow, card, bg (+4 more)
+Cohesion: 0.15
+Nodes (17): $type, $value, $type, $value, bg, bg, border, padding (+9 more)
 
 ### Community 63 - "Shadcn Installer Edge Cases"
 Cohesion: 0.17
@@ -768,8 +766,8 @@ Cohesion: 0.36
 Nodes (5): FixtureDetails(), incidentIcon(), incidentLabel(), Route, statusDisplay()
 
 ### Community 105 - "Community 105"
-Cohesion: 0.60
-Nodes (5): $type, $value, border, border, border
+Cohesion: 0.67
+Nodes (4): $type, $value, md, md
 
 ### Community 106 - "Community 106"
 Cohesion: 0.67
@@ -804,8 +802,8 @@ Cohesion: 0.33
 Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Generate intelligent overrides based on page type using layered search., Detect page type from context and search results., Format a page-specific override file with intelligent AI-generated content.
 
 ### Community 117 - "md"
-Cohesion: 0.60
-Nodes (5): sm, sm, sm, $type, $value
+Cohesion: 0.67
+Nodes (3): foreground, $type, $value
 
 ### Community 119 - "Community 119"
 Cohesion: 0.67
@@ -818,10 +816,6 @@ Nodes (3): $type, $value, 16
 ### Community 144 - "Community 144"
 Cohesion: 0.06
 Nodes (30): Accessibility, Base System, Best Practices, Clean & Modern, Common Font Pairings, Contrast Requirements, CSS Implementation, Editorial (+22 more)
-
-### Community 145 - "Community 145"
-Cohesion: 0.67
-Nodes (4): padding-x, padding-x, $type, $value
 
 ### Community 148 - "Community 148"
 Cohesion: 0.29
@@ -853,7 +847,7 @@ Nodes (24): Accessibility Requirements, Brand Compliance Validation, Checking Co
 
 ### Community 158 - "Community 158"
 Cohesion: 0.67
-Nodes (3): $type, $value, 3
+Nodes (3): muted-foreground, $type, $value
 
 ### Community 159 - "Community 159"
 Cohesion: 0.08
@@ -869,7 +863,7 @@ Nodes (24): Accessibility, Accessibility Requirements, ARIA States, Color Contra
 
 ### Community 163 - "Community 163"
 Cohesion: 0.67
-Nodes (3): destructive-foreground, $type, $value
+Nodes (3): primary-hover, $type, $value
 
 ### Community 164 - "Community 164"
 Cohesion: 0.67
@@ -1017,7 +1011,7 @@ Nodes (5): References (Knowledge Base), Routing, Slides, Subcommands, When to Us
 
 ### Community 224 - "postcss"
 Cohesion: 0.67
-Nodes (3): primary, $type, $value
+Nodes (3): $type, $value, 0
 
 ### Community 225 - "destructive-foreground"
 Cohesion: 0.67
@@ -1035,13 +1029,9 @@ Nodes (3): Expanding the ESLint configuration, React Compiler, React + Vite
 Cohesion: 0.29
 Nodes (6): Commands, Gotchas, graphify, Repo layout (what actually runs), Setup / env, WPL Fantasy League
 
-### Community 340 - "primary-foreground"
+### Community 347 - "destructive"
 Cohesion: 0.67
-Nodes (3): primary-foreground, $type, $value
-
-### Community 346 - "secondary-foreground"
-Cohesion: 0.67
-Nodes (3): secondary-foreground, $type, $value
+Nodes (3): destructive, $type, $value
 
 ## Knowledge Gaps
 - **1361 isolated node(s):** `$schema`, `$value`, `$type`, `$value`, `$type` (+1356 more)

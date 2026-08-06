@@ -69,7 +69,8 @@ function getPointsImpact(stats: any, position: string) {
   const clearances = stats.totalClearance || 0;
   const blocks = stats.outfielderBlock || 0;
   const recovery = stats.ballRecovery || 0;
-  const defTotal = tackles + clearances + blocks + recovery;
+  const interceptions = stats.interceptionWon || 0;
+  const defTotal = tackles + clearances + blocks + recovery + interceptions;
   if (defTotal > 0) {
     const pts = position === "DEF" ? Math.floor(defTotal / 10) * 2 : Math.floor(defTotal / 12) * 2;
     if (pts > 0) {
@@ -77,6 +78,7 @@ function getPointsImpact(stats: any, position: string) {
       items.push({ label: `Clearances (${clearances})`, value: clearances, points: 0 });
       items.push({ label: `Blocks (${blocks})`, value: blocks, points: 0 });
       items.push({ label: `Recovery (${recovery})`, value: recovery, points: 0 });
+      items.push({ label: `Interceptions (${interceptions})`, value: interceptions, points: 0 });
       items.push({ label: `Defensive Bonus`, value: `÷${position === "DEF" ? 10 : 12}`, points: pts });
     }
   }

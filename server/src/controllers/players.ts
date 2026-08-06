@@ -29,7 +29,7 @@ export const aggregateMatchStats = (gameweeks: any[]): SofaScoreStats => {
         onTargetScoringAttempt: 0, totalShots: 0, goals: 0, goalAssist: 0,
         shotValueNormalized: 0,
         totalClearance: 0, clearanceOffLine: 0, outfielderBlock: 0,
-        ballRecovery: 0, totalTackle: 0, wonTackle: 0,
+        ballRecovery: 0, interceptionWon: 0, totalTackle: 0, wonTackle: 0,
         wasFouled: 0, fouls: 0,
         minutesPlayed: 0, touches: 0, possessionLostCtrl: 0,
         rating: 0, ratingVersions: { original: 0, alternative: 0 },
@@ -80,6 +80,7 @@ export const aggregateMatchStats = (gameweeks: any[]): SofaScoreStats => {
         res.clearanceOffLine = sumNumeric(res.clearanceOffLine, s.clearanceOffLine);
         res.outfielderBlock = sumNumeric(res.outfielderBlock, s.outfielderBlock);
         res.ballRecovery = sumNumeric(res.ballRecovery, s.ballRecovery);
+        res.interceptionWon = sumNumeric(res.interceptionWon, s.interceptionWon);
         res.totalTackle = sumNumeric(res.totalTackle, s.totalTackle);
         res.wonTackle = sumNumeric(res.wonTackle, s.wonTackle);
         res.wasFouled = sumNumeric(res.wasFouled, s.wasFouled);
