@@ -10,7 +10,6 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { injectSpeedInsights } from '@vercel/speed-insights';
 import { Analytics } from "@vercel/analytics/react"
 import { UpdatePrompt } from "./components/UpdatePrompt";
-import { VersionCheck } from "./components/VersionCheck";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -43,7 +42,6 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <VersionCheck />
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || ''}>
         <ThemeProvider>
           <QueryClientProvider client={queryClient}>

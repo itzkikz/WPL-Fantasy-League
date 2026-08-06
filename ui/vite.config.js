@@ -1,11 +1,27 @@
 // vite.config.ts
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
+// App version comes straight from package.json; bump it before each release.
+let appVersion = "0.0.0";
+try {
+  const pkg = JSON.parse(
+    readFileSync(fileURLToPath(new URL("./package.json", import.meta.url)), "utf-8")
+  );
+  appVersion = pkg.version || "0.0.0";
+} catch {
+  // fall back to the default above
+}
+
 export default defineConfig({
+  define: {
+    __APP_VERSION__: JSON.stringify(appVersion),
+  },
   plugins: [
     // Please make sure that '@tanstack/router-plugin' is passed before '@vitejs/plugin-react'
     tanstackRouter({
@@ -20,7 +36,7 @@ export default defineConfig({
       strategies: "injectManifest", // enable custom SW for push [docs]
       srcDir: "src", // where the SW file lives
       filename: "sw.ts", // custom SW entry
-      registerType: "autoUpdate",
+      registerType: "prompt",
       devOptions: { enabled: true }, // SW+manifest in dev (localhost is secure)
       includeAssets: [
         "favicon.ico",

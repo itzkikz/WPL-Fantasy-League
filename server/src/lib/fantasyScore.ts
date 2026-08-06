@@ -72,6 +72,7 @@ export interface FantasyTeamGamewiseRow {
     totalClearance: number;
     outfielderBlock: number;
     ballRecovery: number;
+    interceptions: number;
     points: number;
 }
 
@@ -79,7 +80,7 @@ export const FANTASY_GAMEWISE_HEADERS = [
     'FantasyTeamId', 'Team Name', 'Managers', 'Gameweek', 'Player ID', 'Player Name', 'Position',
     'Lineup', 'Role', 'Minutes', 'Goals', 'Assists', 'Clean Sheet', 'Yellow Cards', 'Red Cards',
     'Penalty Missed', 'Penalty Saved', 'Saves', 'Tackles', 'Clearances', 'Blocks', 'Ball Recoveries',
-    'Points',
+    'Interceptions', 'Points',
 ];
 
 const roleLabel = (pick: any): string => {
@@ -165,6 +166,7 @@ export const buildFantasyTeamGamewiseRows = async (): Promise<FantasyTeamGamewis
                     totalClearance: stats.totalClearance || 0,
                     outfielderBlock: stats.outfielderBlock || 0,
                     ballRecovery: stats.ballRecovery || 0,
+                    interceptions: stats.interceptionWon || 0,
                     points: pick.isCaptain && captainPlayed
                         ? basePoints * 2
                         : pick.isViceCaptain && !captainPlayed
@@ -202,6 +204,7 @@ export const fantasyGamewiseRowsToValues = (rows: FantasyTeamGamewiseRow[]): any
         row.totalClearance,
         row.outfielderBlock,
         row.ballRecovery,
+        row.interceptions,
         row.points,
     ]);
 };

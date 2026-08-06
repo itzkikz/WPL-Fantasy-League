@@ -6,15 +6,17 @@ import { registerRoute, NavigationRoute, setDefaultHandler, setCatchHandler } fr
 import { CacheFirst, NetworkFirst, StaleWhileRevalidate, NetworkOnly } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { CacheableResponsePlugin } from 'workbox-cacheable-response'
+import { CACHE_VERSION } from './lib/version'
 
 declare const self: ServiceWorkerGlobalScope
 
-// VERSION - INCREMENT THIS ON EACH DEPLOYMENT TO FORCE CACHE REFRESH
-const CACHE_VERSION = 'v3'
+// Cache namespace derived from the build version (git SHA) so each deploy
+// gets fresh runtime caches; the activate handler clears the previous one.
 const CACHE_NAME = `wpl-fantasy-${CACHE_VERSION}`
 
-// Take control ASAP
-self.skipWaiting()
+// Take control of the page once activated (does NOT skip waiting; the app
+// activates a waiting worker on demand via the SKIP_WAITING message so the
+// reload happens with fresh assets).
 clientsClaim()
 
 // Required: injection point for Workbox precache
@@ -124,10 +126,6 @@ interface PushPayload {
 }
 
 // Install/activate lifecycle (kept from your file)
-self.addEventListener('install', (_event: ExtendableEvent) => {
-  self.skipWaiting()
-})
-
 self.addEventListener('activate', (event: ExtendableEvent) => {
   event.waitUntil(
     (async () => {

@@ -4,6 +4,7 @@ import { ThemeToggle } from "../../components/ThemeToggle";
 import { useManagerDetails } from "../../features/manager/hooks";
 import { useStandings } from "../../features/standings/hooks";
 import { useUserStore } from "../../store/useUserStore";
+import { APP_VERSION } from "../../lib/version";
 import {
   Settings as SettingsIcon,
   Palette,
@@ -91,7 +92,6 @@ export default function Settings() {
     }
   };
 
-  const appVersion = localStorage.getItem("app_version") || "1.0.0";
   const managerList = Array.isArray(managerDetails?.managers)
     ? managerDetails?.managers
     : managerDetails?.managers?.split(",").map((s: string) => s.trim());
@@ -123,7 +123,7 @@ export default function Settings() {
           </div>
 
           <span className="text-[9px] font-black uppercase font-mono tracking-wider px-2 py-0.5 rounded-full bg-surface border border-border text-text-muted shrink-0">
-            v{appVersion}
+            v{APP_VERSION}
           </span>
         </header>
       </div>
