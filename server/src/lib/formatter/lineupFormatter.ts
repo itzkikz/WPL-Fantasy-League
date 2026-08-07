@@ -30,9 +30,11 @@ export function convertToFormation(playersData: TeamDetails[]): FormationResult 
 
   playersData.forEach((playerData, index) => {
 
-    const player: Player = {
+    const player: Player & { fantasy_team_name?: string; team_name?: string } = {
       id: playerData.player_id || index + 1,
       name: playerData.player_name,
+      team_name: playerData.team_name,
+      fantasy_team_name: playerData.fantasy_team_name || playerData.team_name,
       team: playerData.team_short_name || playerData.club?.substring(0, 3).toUpperCase() || "UNK",
       teamColor: (playerData.team_color && playerData.team_color !== "#000000") ? playerData.team_color : "#003399", // Default blue fallback instead of black? Or keep black.
       teamTextColor: playerData.team_text_color || "#ffffff",
@@ -45,7 +47,10 @@ export function convertToFormation(playersData: TeamDetails[]): FormationResult 
       shirtNumber: playerData.shirtNumber,
       photo: playerData.photo,
       auctionPrice: playerData.auctionPrice,
-      playerStats: playerData.playerStats,
+      playerStats: playerData.playerStats ? {
+        ...playerData.playerStats,
+        fantasy_team_name: playerData.fantasy_team_name || playerData.team_name
+      } : undefined,
       subIn: playerData.subIn,
       subOut: playerData.subOut
     };

@@ -278,6 +278,9 @@ const MyTeamPage = () => {
 
   const totalPointsFormatted = (managerDetails?.total ?? 0).toLocaleString();
   const hasUnsavedChanges = substitutions?.length > 0 || Object.keys(roles || {}).length > 0;
+  const squadValue = managerDetails?.utlisation !== undefined
+    ? managerDetails.utlisation
+    : ((managerDetails?.total_budget ?? 100) - (managerDetails?.balance ?? 0));
 
   // Check if starting XI has both captain and vice-captain
   const allStarting = [...(startingXI.GK || []), ...(startingXI.DEF || []), ...(startingXI.MID || []), ...(startingXI.FWD || [])];
@@ -293,6 +296,7 @@ const MyTeamPage = () => {
         <MyTeamHeader
           selectedGW={selectedGW}
           deadlineFormatted={deadlineFormatted}
+          squadValue={squadValue}
           total_budget={managerDetails?.total_budget}
           balance={managerDetails?.balance}
           totalGWScore={managerDetails?.totalGWScore}
@@ -362,11 +366,11 @@ const MyTeamPage = () => {
           {/* 4-Stat Grid Panel */}
           <div className="grid grid-cols-2 gap-2.5">
             <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
-              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Team Value</span>
-              <span className="text-base font-extrabold text-text-primary mt-0.5 block">£{managerDetails?.total_budget || "100.0"}m</span>
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Squad Value</span>
+              <span className="text-base font-extrabold text-text-primary mt-0.5 block">£{squadValue.toFixed(1)}m</span>
             </div>
             <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
-              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Bank</span>
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Bank Balance</span>
               <span className="text-base font-extrabold text-text-primary mt-0.5 block">£{(managerDetails?.balance ?? 0).toFixed(2)}m</span>
             </div>
             <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
