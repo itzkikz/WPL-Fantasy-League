@@ -379,7 +379,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 let teamName: string | null = null;
                 for (const ft of allFantasyTeams) {
                     const picks = (ft as any).currentSquad?.picks || [];
-                    if (picks.some((p: any) => p.playerId === pid)) {
+                    if (picks.some((p: any) => Number(p.playerId) === Number(pid))) {
                         count++;
                         if (!teamName) teamName = (ft as any).name;
                     }
@@ -919,6 +919,10 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
                 point: totalSeasonPoints,
                 gwPoint: gwPoints,
                 playerStats: {
+                    player_name: playerDoc?.webName || playerDoc?.name || "Unknown",
+                    club: teamDoc?.team?.name || teamDoc?.name || "Unknown",
+                    fantasy_team_name: teamName,
+                    auctionPrice: playerDoc?.auctionPrice,
                     overall: {
                         total_point: totalSeasonPoints
                     }

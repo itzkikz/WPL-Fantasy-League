@@ -3,6 +3,7 @@ import React from "react";
 interface MyTeamHeaderProps {
   selectedGW: number;
   deadlineFormatted: string;
+  squadValue?: number;
   total_budget?: number;
   balance?: number;
   totalGWScore?: number;
@@ -16,6 +17,7 @@ interface MyTeamHeaderProps {
 const MyTeamHeader = ({
   selectedGW,
   deadlineFormatted,
+  squadValue = 0,
   total_budget = 100,
   balance = 0,
   totalGWScore = 0,
@@ -84,15 +86,15 @@ const MyTeamHeader = ({
       {/* 4-Column Stats Row (Mobile + Desktop) */}
       <div className="mt-3.5 border-t border-border/50 pt-3">
         <div className="grid grid-cols-4 gap-2">
-          {/* Team Value */}
+          {/* Squad Value */}
           <div className="flex flex-col items-center justify-center text-center">
-            <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">Team Value</span>
+            <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">Squad Value</span>
             <span className="text-sm md:text-base lg:text-lg font-extrabold text-text-primary mt-0.5">
-              £{total_budget || "100.0"}m
+              £{squadValue.toFixed(1)}m
             </span>
           </div>
 
-          {/* Bank */}
+          {/* Bank Balance */}
           <div className="flex flex-col items-center justify-center text-center border-l border-border/50">
             <span className="text-[10px] md:text-xs font-bold text-text-muted uppercase tracking-wider">Bank</span>
             <span className="text-sm md:text-base lg:text-lg font-extrabold text-text-primary mt-0.5">

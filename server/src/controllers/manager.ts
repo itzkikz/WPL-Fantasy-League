@@ -166,7 +166,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
         let tName: string | null = null;
         for (const ft of allFantasyTeams) {
           const picks = (ft as any).currentSquad?.picks || [];
-          if (picks.some((p: any) => p.playerId === pid)) {
+          if (picks.some((p: any) => Number(p.playerId) === Number(pid))) {
             count++;
             if (!tName) tName = (ft as any).name;
           }

@@ -533,12 +533,23 @@ const ManagerOverviewPage = () => {
 
       </div>
 
-      {/* Player stats overlay detail modal */}
+      {/* Player stats overlay detail modal (Season-only statistics for Manager Overview) */}
       {selectedPlayer && (
         <PlayerStatsModal
-          open={showOverlay}
-          onOpenChange={setShowOverlay}
-          player={selectedPlayer}
+          isOpen={showOverlay}
+          onClose={() => {
+            setShowOverlay(false);
+            setSelectedPlayer(null);
+          }}
+          player={{
+            ...selectedPlayer,
+            fantasy_team_name: selectedPlayer.fantasy_team_name || (selectedPlayer as any).team_name || teamName,
+          }}
+          playerStats={{
+            ...(selectedPlayer?.playerStats || {}),
+            fantasy_team_name: selectedPlayer?.playerStats?.fantasy_team_name || selectedPlayer?.fantasy_team_name || (selectedPlayer as any)?.team_name || teamName,
+          } as any}
+          showGameweekStats={false}
         />
       )}
 

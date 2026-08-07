@@ -1,16 +1,14 @@
-import { Link, useMatchRoute } from "@tanstack/react-router";
+import { Link, useMatchRoute, useLocation } from "@tanstack/react-router";
 import { useUserStore } from "../../store/useUserStore";
 import Home from "../icons/Home";
-import User from "../icons/User";
 import UserSettings from "../icons/UserSettings";
 import Graph from "../icons/Graph";
 import Notification from "../icons/Notification";
-import AngleDown from "../icons/AngleDown";
-import AngleRight from "../icons/AngleRight";
+import { Sparkles } from "lucide-react";
 
 const MyTeamIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
-    className={`w-6 h-6 transition-colors ${isActive ? "text-[#A855F7]" : "text-[#8E89A6]"}`} 
+    className={`w-5 h-5 transition-colors ${isActive ? "text-[#A855F7]" : "text-gray-500 dark:text-[#8E89A6]"}`} 
     viewBox="0 0 24 24" 
     fill={isActive ? "rgba(168, 85, 247, 0.2)" : "none"} 
     stroke="currentColor" 
@@ -19,28 +17,12 @@ const MyTeamIcon = ({ isActive }: { isActive: boolean }) => (
     strokeLinejoin="round"
   >
     <path d="M20.38 3.46L16 6.14V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3.14L3.62 3.46a1 1 0 0 0-1.42.34l-1.5 2.5a1 1 0 0 0 .34 1.42L4 9.59V21a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9.59l2.96-1.87a1 1 0 0 0 .34-1.42l-1.5-2.5a1 1 0 0 0-1.42-.34z" />
-  </svg>
-);
-
-const PickTeamIcon = ({ isActive }: { isActive: boolean }) => (
-  <svg 
-    className={`w-6 h-6 transition-colors ${isActive ? "text-[#A855F7]" : "text-[#8E89A6]"}`} 
-    viewBox="0 0 24 24" 
-    fill={isActive ? "rgba(168, 85, 247, 0.2)" : "none"} 
-    stroke="currentColor" 
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M20.38 3.46L16 6.14V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3.14L3.62 3.46a1 1 0 0 0-1.42.34l-1.5 2.5a1 1 0 0 0 .34 1.42L4 9.59V21a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9.59l2.96-1.87a1 1 0 0 0 .34-1.42l-1.5-2.5a1 1 0 0 0-1.42-.34z" />
-    <circle cx="12" cy="14" r="2.5" stroke="currentColor" strokeWidth="1.5" />
-    <path d="M12 13v2M11 14h2" stroke="currentColor" strokeWidth="1.2" />
   </svg>
 );
 
 const LeagueIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
-    className={`w-6 h-6 transition-colors ${isActive ? "text-[#A855F7]" : "text-[#8E89A6]"}`}
+    className={`w-5 h-5 transition-colors ${isActive ? "text-[#A855F7]" : "text-gray-500 dark:text-[#8E89A6]"}`}
     viewBox="0 0 24 24" 
     fill={isActive ? "rgba(168, 85, 247, 0.2)" : "none"} 
     stroke="currentColor" 
@@ -56,7 +38,7 @@ const LeagueIcon = ({ isActive }: { isActive: boolean }) => (
 
 const H2HIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
-    className={`w-6 h-6 transition-colors ${isActive ? "text-[#A855F7]" : "text-[#8E89A6]"}`}
+    className={`w-5 h-5 transition-colors ${isActive ? "text-[#A855F7]" : "text-gray-500 dark:text-[#8E89A6]"}`}
     viewBox="0 0 24 24" 
     fill={isActive ? "rgba(168, 85, 247, 0.2)" : "none"} 
     stroke="currentColor" 
@@ -68,11 +50,34 @@ const H2HIcon = ({ isActive }: { isActive: boolean }) => (
   </svg>
 );
 
+const FactsIcon = ({ isActive }: { isActive: boolean }) => (
+  <Sparkles
+    className={`w-5 h-5 transition-colors ${isActive ? "text-[#A855F7]" : "text-gray-500 dark:text-[#8E89A6]"}`}
+  />
+);
+
 const SideNavbar = () => {
   const matchRoute = useMatchRoute();
+  const location = useLocation();
   const user = useUserStore((state) => state.user);
   const isGuest = useUserStore((state) => state.isGuest);
   const isAdmin = user?.role === "admin";
+
+  const isPathActive = (path: string) => {
+    const currentPath = location.pathname;
+    const normTarget = path === "/" ? "/" : path.replace(/\/$/, "");
+    const normCurrent = currentPath === "/" ? "/" : currentPath.replace(/\/$/, "");
+
+    if (normTarget === "/home") {
+      return normCurrent === "/home" || normCurrent === "";
+    }
+
+    return (
+      Boolean(matchRoute({ to: path, fuzzy: true })) ||
+      normCurrent === normTarget ||
+      (normTarget !== "" && normCurrent.startsWith(normTarget + "/"))
+    );
+  };
 
   const adminItems = [
     { label: "Fixtures", path: "/admin/fixtures" },
@@ -99,54 +104,46 @@ const SideNavbar = () => {
 
   if (isAdmin) {
     return (
-      <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-gray-200 dark:border-[#221938] bg-surface lg:h-screen lg:py-4 lg:px-2">
-        <div className="flex flex-col gap-2">
+      <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-gray-200 dark:border-[#221938] bg-surface lg:h-screen lg:py-4 lg:px-3">
+        <div className="flex flex-col gap-1.5">
           {/* Settings Link */}
           {(() => {
-            const isActive = matchRoute({ to: "/settings", fuzzy: true });
+            const isActive = isPathActive("/settings");
             return (
               <Link
                 viewTransition={{ types: ["tab-switch"] }}
                 to="/settings"
-                className="flex items-center gap-3 px-3 py-2 text-sm transition-colors"
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  isActive
+                    ? "bg-primary/15 text-[#A855F7] font-semibold border border-primary/25 shadow-sm"
+                    : "text-gray-600 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 border border-transparent"
+                }`}
               >
                 <UserSettings isActive={isActive} />
-                <span
-                  className={`${
-                    isActive
-                      ? "text-[#A855F7] font-semibold"
-                      : "text-gray-500 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white"
-                  }`}
-                >
-                  Settings
-                </span>
+                <span>Settings</span>
               </Link>
             );
           })()}
 
           {/* Admin Panel Header */}
-          <div className="px-3 py-2 text-xs font-bold text-gray-500 dark:text-[#8E89A6] uppercase tracking-wider mt-4 border-t border-gray-200 dark:border-[#221938] pt-4">
+          <div className="px-3 py-2 text-xs font-bold text-gray-500 dark:text-[#8E89A6] uppercase tracking-wider mt-3 border-t border-gray-200 dark:border-[#221938] pt-3">
             Admin Panel
           </div>
 
           {/* Admin Items */}
           {adminItems.map((adminItem) => {
-            const isLinkActive = matchRoute({ to: adminItem.path, fuzzy: true });
+            const isLinkActive = isPathActive(adminItem.path);
             return (
               <Link
                 key={adminItem.label}
                 to={adminItem.path}
-                className="flex items-center gap-3 px-3 py-2 text-sm transition-colors"
+                className={`flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+                  isLinkActive
+                    ? "bg-primary/15 text-[#A855F7] font-semibold border border-primary/25 shadow-sm"
+                    : "text-gray-600 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 border border-transparent"
+                }`}
               >
-                <span
-                  className={`${
-                    isLinkActive
-                      ? "text-[#A855F7] font-semibold"
-                      : "text-gray-500 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white"
-                  }`}
-                >
-                  {adminItem.label}
-                </span>
+                <span>{adminItem.label}</span>
               </Link>
             );
           })}
@@ -163,30 +160,25 @@ const SideNavbar = () => {
     ];
 
     return (
-      <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-gray-200 dark:border-[#221938] bg-surface lg:h-screen lg:py-4 lg:px-2">
-        <div className="flex flex-col gap-2">
+      <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-gray-200 dark:border-[#221938] bg-surface lg:h-screen lg:py-4 lg:px-3">
+        <div className="flex flex-col gap-1.5">
           {guestItems.map(({ label, path }) => {
-            const isActive = matchRoute({ to: path, fuzzy: true });
+            const isActive = isPathActive(path);
 
             return (
               <Link
                 viewTransition={{ types: ["tab-switch"] }}
                 key={label}
                 to={path}
-                className={`flex items-center gap-3 px-3 py-2 text-sm transition-colors`}
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  isActive
+                    ? "bg-primary/15 text-[#A855F7] font-semibold border border-primary/25 shadow-sm"
+                    : "text-gray-600 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 border border-transparent"
+                }`}
               >
                 {label === "League" && <LeagueIcon isActive={isActive} />}
                 {label === "Stats" && <Graph isActive={isActive} />}
-
-                <span
-                  className={`${
-                    isActive
-                      ? "text-[#A855F7] font-semibold"
-                      : "text-gray-500 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white"
-                  }`}
-                >
-                  {label}
-                </span>
+                <span>{label}</span>
               </Link>
             );
           })}
@@ -200,50 +192,50 @@ const SideNavbar = () => {
   const navItems = isRegularUser
     ? [
         { label: "Home", path: "/home" },
-        { label: "Facts & News", path: "/facts" },
         { label: "League", path: "/standings/" },
         { label: "Stats", path: "/stats" },
+        { label: "Facts & News", path: "/facts" },
+        { label: "Notifications", path: "/notifications" },
         { label: "Settings", path: "/settings" },
       ]
     : [
         { label: "Home", path: "/home" },
-        { label: "Facts & News", path: "/facts" },
         { label: "League", path: "/standings/" },
         { label: "My Team", path: "/my-team" },
         { label: "H2H", path: "/h2h" },
         { label: "Stats", path: "/stats" },
+        { label: "Facts & News", path: "/facts" },
+        { label: "Notifications", path: "/notifications" },
         { label: "Settings", path: "/settings" },
       ];
 
   return (
-    <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-gray-200 dark:border-[#221938] bg-surface lg:h-screen lg:py-4 lg:px-2">
-      <div className="flex flex-col gap-2">
+    <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-gray-200 dark:border-[#221938] bg-surface lg:h-screen lg:py-4 lg:px-3">
+      <div className="flex flex-col gap-1.5">
         {navItems.map(({ label, path }) => {
-          const isActive = matchRoute({ to: path, fuzzy: true });
+          const isActive = isPathActive(path);
 
           return (
             <Link
               viewTransition={{ types: ["tab-switch"] }}
               key={label}
               to={path}
-              className={`flex items-center gap-3 px-3 py-2 text-sm transition-colors`}
+              className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                isActive
+                  ? "bg-primary/15 text-[#A855F7] font-semibold border border-primary/25 shadow-sm"
+                  : "text-gray-600 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 border border-transparent"
+              }`}
             >
               {label === "Home" && <Home isActive={isActive} />}
+              {label === "Facts & News" && <FactsIcon isActive={isActive} />}
+              {label === "Notifications" && <Notification isActive={isActive} />}
               {label === "League" && <LeagueIcon isActive={isActive} />}
               {label === "My Team" && <MyTeamIcon isActive={isActive} />}
               {label === "H2H" && <H2HIcon isActive={isActive} />}
               {label === "Stats" && <Graph isActive={isActive} />}
               {label === "Settings" && <UserSettings isActive={isActive} />}
 
-              <span
-                className={`${
-                  isActive
-                    ? "text-[#A855F7] font-semibold"
-                    : "text-gray-500 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white"
-                }`}
-              >
-                {label}
-              </span>
+              <span>{label}</span>
             </Link>
           );
         })}

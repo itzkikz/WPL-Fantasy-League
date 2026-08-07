@@ -7,29 +7,41 @@ import Modal from "../../../components/common/Modal";
 import { useTheme } from "../../../contexts/ThemeContext";
 
 interface PlayerStatsModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  open?: boolean;
+  onClose?: () => void;
+  onOpenChange?: (open: boolean) => void;
   player: Player | null;
   playerStats?: PlayerStats | null;
   onMakeCaptain?: (player: Player) => void;
   onMakeViceCaptain?: (player: Player) => void;
   onSubstitute?: (player: Player) => void;
   pickMyTeam?: boolean;
+  showGameweekStats?: boolean;
 }
 
 const PlayerStatsModal = ({
-  isOpen,
+  isOpen: propIsOpen,
+  open: propOpen,
   onClose,
+  onOpenChange,
   player: propPlayer,
   playerStats: propStats,
   onMakeCaptain,
   onMakeViceCaptain,
   onSubstitute,
   pickMyTeam = false,
+  showGameweekStats = true,
 }: PlayerStatsModalProps) => {
   const { theme } = useTheme();
   const [localPlayer, setLocalPlayer] = useState<Player | null>(null);
   const [localStats, setLocalStats] = useState<PlayerStats | null>(null);
+
+  const isModalOpen = propIsOpen !== undefined ? propIsOpen : propOpen ?? false;
+  const handleClose = () => {
+    if (onClose) onClose();
+    if (onOpenChange) onOpenChange(false);
+  };
 
   useEffect(() => {
     if (propPlayer) {
@@ -44,7 +56,21 @@ const PlayerStatsModal = ({
   }, [propStats]);
 
   const player = propPlayer || localPlayer;
-  const stats = propStats || localStats;
+  const stats = propStats || localStats || propPlayer?.playerStats || localPlayer?.playerStats;
+
+  const auctionPrice =
+    stats?.auctionPrice ??
+    player?.auctionPrice ??
+    propPlayer?.auctionPrice ??
+    localPlayer?.auctionPrice ??
+    propStats?.auctionPrice ??
+    localStats?.auctionPrice;
+
+  const combinedPlayerStats = {
+    ...player,
+    ...stats,
+    auctionPrice,
+  };
 
   if (!player) return null;
 
@@ -83,7 +109,7 @@ const PlayerStatsModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} variant="center" maxWidthClass="max-w-lg">
+    <Modal isOpen={isModalOpen} onClose={handleClose} variant="center" maxWidthClass="max-w-lg">
  
         {/* Loaded Content */}
         {stats && (
@@ -135,19 +161,32 @@ const PlayerStatsModal = ({
                   </h2>
                   <p className="text-[11px] text-text-muted font-bold mt-0.5 flex items-center gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full border border-white/10" style={{ backgroundColor: getJerseyColor() }} />
-                    {stats.team_name || stats.club}
+                    {stats.club || (stats.team_name && stats.team_name !== stats.fantasy_team_name ? stats.team_name : null) || player.team || "Unknown"}
                   </p>
                   <p className="text-[10px] font-bold mt-0.5">
-                    <span className={stats.fantasy_team_name ? "text-violet-400" : "text-text-muted"}>
-                      {stats.fantasy_team_name ? stats.fantasy_team_name : "Free Agent"}
-                    </span>
+                    {(() => {
+                      const ftName =
+                        stats?.fantasy_team_name ??
+                        player?.fantasy_team_name ??
+                        (player as any)?.fantasyTeamName ??
+                        (player as any)?.fantasy_team ??
+                        (player as any)?.team_name ??
+                        (player as any)?.teamName ??
+                        (stats as any)?.team_name;
+                      const isAssigned = ftName && ftName !== "Free Agent";
+                      return (
+                        <span className={isAssigned ? "text-violet-400" : "text-text-muted"}>
+                          {isAssigned ? ftName : "Free Agent"}
+                        </span>
+                      );
+                    })()}
                   </p>
                 </div>
               </div>
 
               {/* Close Button */}
               <button
-                onClick={onClose}
+                onClick={handleClose}
                 className="w-8 h-8 rounded-full bg-surface hover:bg-elevated flex items-center justify-center cursor-pointer text-text-muted hover:text-text-primary"
               >
                 <X className="w-4 h-4" />
@@ -158,18 +197,28 @@ const PlayerStatsModal = ({
             <div className="p-4 sm:p-6 space-y-5 sm:space-y-6 overflow-y-auto flex-1 min-h-0">
 
               {/* 2. Headline Stats Grid */}
-              <div className="grid grid-cols-4 gap-2 bg-card border border-border rounded-2xl p-3 text-center">
+              <div className={`grid ${showGameweekStats ? "grid-cols-4" : "grid-cols-3"} gap-2 bg-card border border-border rounded-2xl p-3 text-center`}>
                 <div>
-                  <p className="text-[8px] font-extrabold text-text-muted uppercase tracking-wider">Price</p>
+                  <p className="text-[8px] font-extrabold text-text-muted uppercase tracking-wider">
+                    {auctionPrice != null && auctionPrice > 0 ? "Auction Price" : "Price"}
+                  </p>
                   <p className="text-xs md:text-sm font-extrabold text-text-primary mt-1">
-                    {stats ? getPlayerDisplayPrice(stats) : "10.0M"}
+                    {getPlayerDisplayPrice(combinedPlayerStats)}
                   </p>
                   {(() => {
-                    const auctionPrice = stats?.auctionPrice;
                     if (auctionPrice == null || auctionPrice === 0) {
                       return <p className="text-[8px] text-text-muted font-bold mt-0.5">—</p>;
                     }
-                    const basePrice = (stats?.price || 0) / 10;
+                    let basePrice = 0;
+                    if (stats?.price && stats.price > 0) {
+                      basePrice = stats.price / 10;
+                    } else {
+                      const pos = (stats?.position || player?.position || "").toUpperCase();
+                      if (["GK", "GOALKEEPER", "G", "DEF", "DEFENDER", "D"].includes(pos)) basePrice = 10;
+                      else if (["MID", "MIDFIELDER", "M"].includes(pos)) basePrice = 15;
+                      else if (["FWD", "FORWARD", "F"].includes(pos)) basePrice = 20;
+                      else basePrice = 10;
+                    }
                     const diff = Number(auctionPrice) - basePrice;
                     const arrow = diff > 0 ? "↑" : diff < 0 ? "↓" : "=";
                     const color =
@@ -181,12 +230,14 @@ const PlayerStatsModal = ({
                     return <p className={`text-[8px] font-bold mt-0.5 ${color}`}>{`${arrow} ${Math.abs(diff).toFixed(1)}M`}</p>;
                   })()}
                 </div>
-                <div className="border-l border-border/40">
-                  <p className="text-[8px] font-extrabold text-text-muted uppercase tracking-wider">Points (GW)</p>
-                  <p className="text-xs md:text-sm font-black text-[var(--color-success-bright)] mt-1">
-                    {stats.current_week?.point || 0}
-                  </p>
-                </div>
+                {showGameweekStats && (
+                  <div className="border-l border-border/40">
+                    <p className="text-[8px] font-extrabold text-text-muted uppercase tracking-wider">Points (GW)</p>
+                    <p className="text-xs md:text-sm font-black text-[var(--color-success-bright)] mt-1">
+                      {stats.current_week?.point || 0}
+                    </p>
+                  </div>
+                )}
                 <div className="border-l border-border/40">
                   <p className="text-[8px] font-extrabold text-text-muted uppercase tracking-wider">Total Points</p>
                   <p className="text-xs md:text-sm font-extrabold text-text-primary mt-1">
@@ -213,165 +264,199 @@ const PlayerStatsModal = ({
               </div>
  
               {/* 3. Gameweek Performance Header & Grid */}
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-black uppercase tracking-wider text-text-muted flex items-center gap-1.5">
-                    <Activity className="w-3.5 h-3.5 text-secondary" />
-                    Gameweek Performance
-                  </h3>
-                  <span className="text-xs font-black text-[var(--color-success-bright)] bg-[var(--color-success-bg)] border border-[var(--color-success-bright)]/20 px-2 py-0.5 rounded-md font-mono">
-                    {stats.current_week?.point || 0} PTS
-                  </span>
-                </div>
+              {showGameweekStats && (
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xs font-black uppercase tracking-wider text-text-muted flex items-center gap-1.5">
+                      <Activity className="w-3.5 h-3.5 text-secondary" />
+                      Gameweek Performance
+                    </h3>
+                    <span className="text-xs font-black text-[var(--color-success-bright)] bg-[var(--color-success-bg)] border border-[var(--color-success-bright)]/20 px-2 py-0.5 rounded-md font-mono">
+                      {stats.current_week?.point || 0} PTS
+                    </span>
+                  </div>
 
-                {(() => {
-                  const pos = stats.position || player.position;
-                  const cw = stats.current_week;
-                  const isGK = pos === "GK";
-                  const isDEF = pos === "DEF";
-                  const defCont = (cw?.totalTackle || 0) + (cw?.totalClearance || 0) + (cw?.outfielderBlock || 0) + (cw?.ballRecovery || 0) + (cw?.interceptionWon || 0);
+                  {(() => {
+                    const pos = stats.position || player.position;
+                    const cw = stats.current_week;
+                    const isGK = pos === "GK";
+                    const isDEF = pos === "DEF";
+                    const defCont = (cw?.totalTackle || 0) + (cw?.totalClearance || 0) + (cw?.outfielderBlock || 0) + (cw?.ballRecovery || 0) + (cw?.interceptionWon || 0);
 
-                  const items: { icon: any; iconColor: string; label: string; value: any }[] = [];
-                  items.push({ icon: Clock, iconColor: "text-slate-400", label: "Mins", value: cw?.minutesPlayed === 0 ? "DNP" : cw?.minutesPlayed || 0 });
-                  if (!isGK) items.push({ icon: Goal, iconColor: "text-amber-400", label: "Goals", value: cw?.goals || 0 });
-                  items.push({ icon: Footprints, iconColor: "text-indigo-400", label: "Assists", value: cw?.goalAssist || 0 });
-                  if (isGK || isDEF) items.push({ icon: Shield, iconColor: "text-emerald-400", label: "CS", value: Number(cw?.cleanSheet) || 0 });
-                  items.push({ icon: TriangleAlert, iconColor: "text-amber-400", label: "YC", value: cw?.yellowCards || 0 });
-                  items.push({ icon: Octagon, iconColor: "text-rose-400", label: "RC", value: cw?.redCards || 0 });
-                  if (isGK) {
-                    items.push({ icon: Ban, iconColor: "text-rose-400", label: "Pen Miss", value: cw?.penaltyMissed || 0 });
-                    items.push({ icon: Sparkles, iconColor: "text-emerald-400", label: "Pen Save", value: cw?.penaltySaved || 0 });
-                    items.push({ icon: Hand, iconColor: "text-violet-400", label: "Saves", value: cw?.saves || 0 });
-                  } else {
-                    items.push({ icon: Ban, iconColor: "text-rose-400", label: "Pen Miss", value: cw?.penaltyMissed || 0 });
-                  }
-                  items.push({ icon: Zap, iconColor: "text-cyan-400", label: "Tackles", value: cw?.totalTackle || 0 });
-                  items.push({ icon: Send, iconColor: "text-teal-400", label: "Clear", value: cw?.totalClearance || 0 });
-                  items.push({ icon: Blocks, iconColor: "text-blue-400", label: "Blocks", value: cw?.outfielderBlock || 0 });
-                  items.push({ icon: Filter, iconColor: "text-violet-400", label: "Intercpt", value: cw?.interceptionWon || 0 });
-                  items.push({ icon: Magnet, iconColor: "text-green-400", label: "Recovery", value: cw?.ballRecovery || 0 });
+                    const items: { icon: any; iconColor: string; label: string; value: any }[] = [];
+                    items.push({ icon: Clock, iconColor: "text-slate-400", label: "Mins", value: cw?.minutesPlayed === 0 ? "DNP" : cw?.minutesPlayed || 0 });
+                    if (!isGK) items.push({ icon: Goal, iconColor: "text-amber-400", label: "Goals", value: cw?.goals || 0 });
+                    items.push({ icon: Footprints, iconColor: "text-indigo-400", label: "Assists", value: cw?.goalAssist || 0 });
+                    if (isGK || isDEF) items.push({ icon: Shield, iconColor: "text-emerald-400", label: "CS", value: Number(cw?.cleanSheet) || 0 });
+                    items.push({ icon: TriangleAlert, iconColor: "text-amber-400", label: "YC", value: cw?.yellowCards || 0 });
+                    items.push({ icon: Octagon, iconColor: "text-rose-400", label: "RC", value: cw?.redCards || 0 });
+                    if (isGK) {
+                      items.push({ icon: Ban, iconColor: "text-rose-400", label: "Pen Miss", value: cw?.penaltyMissed || 0 });
+                      items.push({ icon: Sparkles, iconColor: "text-emerald-400", label: "Pen Save", value: cw?.penaltySaved || 0 });
+                      items.push({ icon: Hand, iconColor: "text-violet-400", label: "Saves", value: cw?.saves || 0 });
+                    } else {
+                      items.push({ icon: Ban, iconColor: "text-rose-400", label: "Pen Miss", value: cw?.penaltyMissed || 0 });
+                    }
+                    items.push({ icon: Zap, iconColor: "text-cyan-400", label: "Tackles", value: cw?.totalTackle || 0 });
+                    items.push({ icon: Send, iconColor: "text-teal-400", label: "Clear", value: cw?.totalClearance || 0 });
+                    items.push({ icon: Blocks, iconColor: "text-blue-400", label: "Blocks", value: cw?.outfielderBlock || 0 });
+                    items.push({ icon: Filter, iconColor: "text-violet-400", label: "Intercpt", value: cw?.interceptionWon || 0 });
+                    items.push({ icon: Magnet, iconColor: "text-green-400", label: "Recovery", value: cw?.ballRecovery || 0 });
 
-                  const visibleItems = items.filter((item) => item.value > 0);
+                    const visibleItems = items.filter((item) => item.value > 0);
 
-                  if (visibleItems.length === 0) {
+                    if (visibleItems.length === 0) {
+                      return (
+                        <div className="bg-surface border border-border rounded-2xl p-3 text-center">
+                          <p className="text-xs text-text-muted italic py-2">No stats recorded for this gameweek.</p>
+                        </div>
+                      );
+                    }
+
                     return (
-                      <div className="bg-surface border border-border rounded-2xl p-3 text-center">
-                        <p className="text-xs text-text-muted italic py-2">No stats recorded for this gameweek.</p>
+                      <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 bg-surface border border-border rounded-2xl p-3 text-center">
+                        {visibleItems.map((item, i) => {
+                          const Ic = item.icon;
+                          return (
+                            <div key={i}>
+                              <Ic className={`w-3.5 h-3.5 mx-auto mb-1 ${item.iconColor}`} />
+                              <p className="text-[7px] text-text-muted font-bold uppercase truncate">{item.label}</p>
+                              <p className="text-xs font-black text-text-primary mt-0.5">{item.value}</p>
+                            </div>
+                          );
+                        })}
                       </div>
                     );
-                  }
-
-                  return (
-                    <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 bg-surface border border-border rounded-2xl p-3 text-center">
-                      {visibleItems.map((item, i) => {
-                        const Ic = item.icon;
-                        return (
-                          <div key={i}>
-                            <Ic className={`w-3.5 h-3.5 mx-auto mb-1 ${item.iconColor}`} />
-                            <p className="text-[7px] text-text-muted font-bold uppercase truncate">{item.label}</p>
-                            <p className="text-xs font-black text-text-primary mt-0.5">{item.value}</p>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  );
-                })()}
-              </div>
+                  })()}
+                </div>
+              )}
  
               {/* 4. Points Breakdown & Upcoming Fixtures */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Points Breakdown List */}
-                <div className="bg-surface border border-border rounded-2xl p-4 flex flex-col h-full">
-                  <h4 className="text-[10px] font-black uppercase tracking-wider text-text-muted border-b border-border pb-2 mb-3">
-                    Points Breakdown
-                  </h4>
-                  <div className="space-y-2">
-                    {(() => {
-                      const cw = stats.current_week;
-                      const bd = stats.points_breakdown || [];
+              {showGameweekStats ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Points Breakdown List */}
+                  <div className="bg-surface border border-border rounded-2xl p-4 flex flex-col h-full">
+                    <h4 className="text-[10px] font-black uppercase tracking-wider text-text-muted border-b border-border pb-2 mb-3">
+                      Points Breakdown
+                    </h4>
+                    <div className="space-y-2">
+                      {(() => {
+                        const cw = stats.current_week;
+                        const bd = stats.points_breakdown || [];
 
-                      if (bd.length === 0 && !(cw?.minutesPlayed > 0)) {
-                        return <p className="text-xs text-text-muted italic text-center py-4">Did not play this gameweek.</p>;
-                      }
+                        if (bd.length === 0 && !(cw?.minutesPlayed > 0)) {
+                          return <p className="text-xs text-text-muted italic text-center py-4">Did not play this gameweek.</p>;
+                        }
 
-                      // Points come from the server per-match breakdown (per-match rules, summed)
-                      const rows: { label: string; pts: number }[] = bd.map((it: any) => ({
-                        label: it.label,
-                        pts: it.points,
-                      }));
+                        // Points come from the server per-match breakdown (per-match rules, summed)
+                        const rows: { label: string; pts: number }[] = bd.map((it: any) => ({
+                          label: it.label,
+                          pts: it.points,
+                        }));
 
-                      // Raw defensive counts (merged stats) shown as informational rows
-                      const tackles = cw?.totalTackle || 0;
-                      const clearances = cw?.totalClearance || 0;
-                      const blocks = cw?.outfielderBlock || 0;
-                      const recovery = cw?.ballRecovery || 0;
-                      const interceptions = cw?.interceptionWon || 0;
-                      if (tackles || clearances || blocks || recovery || interceptions) {
-                        rows.push({ label: `Tackles (${tackles})`, pts: 0 });
-                        rows.push({ label: `Clearances (${clearances})`, pts: 0 });
-                        rows.push({ label: `Blocks (${blocks})`, pts: 0 });
-                        rows.push({ label: `Interceptions (${interceptions})`, pts: 0 });
-                        rows.push({ label: `Recovery (${recovery})`, pts: 0 });
-                      }
+                        // Raw defensive counts (merged stats) shown as informational rows
+                        const tackles = cw?.totalTackle || 0;
+                        const clearances = cw?.totalClearance || 0;
+                        const blocks = cw?.outfielderBlock || 0;
+                        const recovery = cw?.ballRecovery || 0;
+                        const interceptions = cw?.interceptionWon || 0;
+                        if (tackles || clearances || blocks || recovery || interceptions) {
+                          rows.push({ label: `Tackles (${tackles})`, pts: 0 });
+                          rows.push({ label: `Clearances (${clearances})`, pts: 0 });
+                          rows.push({ label: `Blocks (${blocks})`, pts: 0 });
+                          rows.push({ label: `Interceptions (${interceptions})`, pts: 0 });
+                          rows.push({ label: `Recovery (${recovery})`, pts: 0 });
+                        }
 
-                      const total = rows.reduce((s, r) => s + r.pts, 0);
+                        const total = rows.reduce((s, r) => s + r.pts, 0);
 
-                      return (
-                        <>
-                          {rows.map((r, i) => (
-                            <div key={i} className="flex justify-between items-center text-xs">
-                              <span className="text-text-muted">{r.label}</span>
-                              {r.pts === 0 ? (
-                                <span className="text-text-muted font-mono text-[10px]">—</span>
-                              ) : (
-                                <span className={`font-mono font-bold ${r.pts >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                                  {r.pts >= 0 ? `+${r.pts}` : r.pts}
-                                </span>
-                              )}
+                        return (
+                          <>
+                            {rows.map((r, i) => (
+                              <div key={i} className="flex justify-between items-center text-xs">
+                                <span className="text-text-muted">{r.label}</span>
+                                {r.pts === 0 ? (
+                                  <span className="text-text-muted font-mono text-[10px]">—</span>
+                                ) : (
+                                  <span className={`font-mono font-bold ${r.pts >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                                    {r.pts >= 0 ? `+${r.pts}` : r.pts}
+                                  </span>
+                                )}
+                              </div>
+                            ))}
+                            <div className="border-t border-border/50 pt-2.5 mt-3 flex justify-between items-center text-xs font-black">
+                              <span className="text-text-primary">Total</span>
+                              <span className="text-[var(--color-success-bright)] font-mono">{total} pts</span>
                             </div>
-                          ))}
-                          <div className="border-t border-border/50 pt-2.5 mt-3 flex justify-between items-center text-xs font-black">
-                            <span className="text-text-primary">Total</span>
-                            <span className="text-[var(--color-success-bright)] font-mono">{total} pts</span>
-                          </div>
-                        </>
-                      );
-                    })()}
+                          </>
+                        );
+                      })()}
+                    </div>
                   </div>
-                </div>
- 
-                {/* Upcoming Fixtures List */}
-                <div className="bg-surface border border-border rounded-2xl p-4 flex flex-col h-full">
-                  <h4 className="text-[10px] font-black uppercase tracking-wider text-text-muted border-b border-border pb-2 mb-3 flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-secondary" />
-                    Upcoming Fixtures
-                  </h4>
-                  <div className="space-y-3 flex-1">
-                    {stats.upcoming_fixtures?.map((fix: any, idx: number) => (
-                      <div key={idx} className="flex items-center justify-between text-xs bg-card border border-border/40 rounded-xl p-2">
-                        <span className="font-extrabold text-secondary font-mono text-[10px]">GW{fix.gw}</span>
- 
-                        <div className="flex items-center gap-1.5 flex-1 justify-center px-1">
-                          <span className="font-extrabold" style={{ color: getReadableTeamColor(getJerseyColor()) }}>
-                            {fix.my_team_short_name}
-                          </span>
-                          <span className="text-text-muted text-[10px]">vs</span>
-                          <span className="font-extrabold truncate" style={{ color: getReadableTeamColor(fix.opponent_color) }}>
-                            {fix.opponent_short_name}
+   
+                  {/* Upcoming Fixtures List */}
+                  <div className="bg-surface border border-border rounded-2xl p-4 flex flex-col h-full">
+                    <h4 className="text-[10px] font-black uppercase tracking-wider text-text-muted border-b border-border pb-2 mb-3 flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5 text-secondary" />
+                      Upcoming Fixtures
+                    </h4>
+                    <div className="space-y-3 flex-1">
+                      {stats.upcoming_fixtures?.map((fix: any, idx: number) => (
+                        <div key={idx} className="flex items-center justify-between text-xs bg-card border border-border/40 rounded-xl p-2">
+                          <span className="font-extrabold text-secondary font-mono text-[10px]">GW{fix.gw}</span>
+   
+                          <div className="flex items-center gap-1.5 flex-1 justify-center px-1">
+                            <span className="font-extrabold" style={{ color: getReadableTeamColor(getJerseyColor()) }}>
+                              {fix.my_team_short_name}
+                            </span>
+                            <span className="text-text-muted text-[10px]">vs</span>
+                            <span className="font-extrabold truncate" style={{ color: getReadableTeamColor(fix.opponent_color) }}>
+                              {fix.opponent_short_name}
+                            </span>
+                          </div>
+   
+                          <span className="text-[9px] font-black text-text-muted uppercase tracking-wide">
+                            {fix.is_home ? "Home" : "Away"}
                           </span>
                         </div>
- 
-                        <span className="text-[9px] font-black text-text-muted uppercase tracking-wide">
-                          {fix.is_home ? "Home" : "Away"}
-                        </span>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                (stats.upcoming_fixtures && stats.upcoming_fixtures.length > 0) && (
+                  <div className="bg-surface border border-border rounded-2xl p-4 flex flex-col">
+                    <h4 className="text-[10px] font-black uppercase tracking-wider text-text-muted border-b border-border pb-2 mb-3 flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5 text-secondary" />
+                      Upcoming Fixtures
+                    </h4>
+                    <div className="space-y-3 flex-1">
+                      {stats.upcoming_fixtures?.map((fix: any, idx: number) => (
+                        <div key={idx} className="flex items-center justify-between text-xs bg-card border border-border/40 rounded-xl p-2">
+                          <span className="font-extrabold text-secondary font-mono text-[10px]">GW{fix.gw}</span>
+   
+                          <div className="flex items-center gap-1.5 flex-1 justify-center px-1">
+                            <span className="font-extrabold" style={{ color: getReadableTeamColor(getJerseyColor()) }}>
+                              {fix.my_team_short_name}
+                            </span>
+                            <span className="text-text-muted text-[10px]">vs</span>
+                            <span className="font-extrabold truncate" style={{ color: getReadableTeamColor(fix.opponent_color) }}>
+                              {fix.opponent_short_name}
+                            </span>
+                          </div>
+   
+                          <span className="text-[9px] font-black text-text-muted uppercase tracking-wide">
+                            {fix.is_home ? "Home" : "Away"}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )
+              )}
 
               {/* Match-by-Match Split (multi-match gameweeks) */}
-              {(() => {
+              {showGameweekStats && (() => {
                 const matches = stats.current_week?.matches;
                 if (!matches || matches.length <= 1) return null;
                 return (
