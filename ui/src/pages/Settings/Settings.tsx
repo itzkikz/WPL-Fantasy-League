@@ -99,11 +99,11 @@ export default function Settings() {
   return (
     <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-text-primary font-outfit select-none overflow-hidden animate-fade-in pb-[env(safe-area-inset-bottom)]">
       {/* STICKY FULL-WIDTH FIXED HEADER */}
-      <div className="shrink-0 border-b border-border bg-surface shadow-sm sticky top-0 z-30 w-full text-left">
-        <header className="flex items-center gap-2.5 px-3 sm:px-4 py-2.5 max-w-2xl mx-auto w-full">
+      <div className="shrink-0 border-b border-border lg:border-b-0 bg-surface lg:bg-transparent shadow-sm lg:shadow-none sticky top-0 z-30 w-full text-left">
+        <header className="flex items-center gap-2.5 px-3 sm:px-4 py-2.5 lg:py-4 max-w-3xl mx-auto w-full">
           <button
             onClick={() => router.history.back()}
-            className="flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-text-primary active:scale-95 transition-all cursor-pointer shrink-0"
+            className="lg:hidden flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-text-primary active:scale-95 transition-all cursor-pointer shrink-0"
             aria-label="Go back"
           >
             <ArrowLeft className="w-4 h-4 text-text-muted" />
@@ -122,13 +122,13 @@ export default function Settings() {
             </p>
           </div>
 
-          <span className="text-[9px] font-black uppercase font-mono tracking-wider px-2 py-0.5 rounded-full bg-surface border border-border text-text-muted shrink-0">
+          <span className="text-[9px] font-black uppercase font-mono tracking-wider px-2.5 py-1 rounded-full bg-surface border border-border text-text-muted shrink-0">
             v{APP_VERSION}
           </span>
         </header>
       </div>
 
-      <div className="max-w-2xl mx-auto w-full flex-1 overflow-y-auto px-3 sm:px-4 py-3 space-y-3.5 text-left pb-10">
+      <div className="max-w-3xl mx-auto w-full flex-1 overflow-y-auto px-3 sm:px-4 py-3.5 space-y-3.5 text-left pb-10">
 
         {/* Profile Card */}
         <div className="p-4 sm:p-5 rounded-2xl bg-card border border-border shadow-card relative overflow-hidden group">
@@ -175,7 +175,7 @@ export default function Settings() {
         </div>
 
         {/* Quick Navigation / All App Routes Grid */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-card border border-border shadow-card space-y-3">
+        <div className="lg:hidden p-4 sm:p-5 rounded-2xl bg-card border border-border shadow-card space-y-3">
           <div className="flex items-center gap-2.5">
             <div className="p-2 rounded-xl bg-secondary/10 border border-secondary/20 text-secondary shrink-0">
               <Compass className="w-4 h-4" />
@@ -190,7 +190,7 @@ export default function Settings() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 pt-1">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 pt-1">
             <button
               onClick={() => navigate({ to: "/notifications" })}
               className="flex items-center gap-2.5 p-3 rounded-xl bg-surface hover:bg-white/5 border border-border/60 hover:border-secondary/40 transition-all text-left group cursor-pointer"

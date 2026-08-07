@@ -46,11 +46,11 @@ function PublicFactsPage() {
   return (
     <div className="flex flex-col w-full flex-1 h-full min-h-0 bg-background text-text-primary font-outfit select-none overflow-hidden animate-fade-in pb-[env(safe-area-inset-bottom)]">
       {/* STICKY FULL-WIDTH FIXED HEADER */}
-      <div className="shrink-0 border-b border-border bg-surface shadow-sm sticky top-0 z-30 w-full">
-        <header className="flex items-center gap-2.5 px-3 sm:px-4 py-2.5 max-w-2xl mx-auto w-full">
+      <div className="shrink-0 border-b border-border lg:border-b-0 bg-surface lg:bg-transparent shadow-sm lg:shadow-none sticky top-0 z-30 w-full">
+        <header className="flex items-center gap-2.5 px-3 sm:px-4 py-2.5 lg:py-4 max-w-3xl mx-auto w-full">
           <button
             onClick={() => router.history.back()}
-            className="flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-text-primary active:scale-95 transition-all cursor-pointer shrink-0"
+            className="lg:hidden flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-text-primary active:scale-95 transition-all cursor-pointer shrink-0"
             aria-label="Go back"
           >
             <ArrowLeft className="w-4 h-4 text-text-muted" />
@@ -77,7 +77,7 @@ function PublicFactsPage() {
         </header>
       </div>
 
-      <div className="max-w-2xl mx-auto w-full flex flex-col flex-1 min-h-0 px-3 sm:px-4 py-3">
+      <div className="max-w-3xl mx-auto w-full flex flex-col flex-1 min-h-0 px-3 sm:px-4 py-3">
         {/* Scrollable Articles List */}
         <div className="flex-1 min-h-0 overflow-y-auto scrollbar-hide space-y-3 pb-6">
           {isLoading ? (

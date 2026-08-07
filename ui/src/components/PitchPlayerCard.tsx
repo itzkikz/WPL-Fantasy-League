@@ -127,17 +127,17 @@ const PitchPlayerCard = ({
       {showPriceAndPoints ? (
         <div className="flex flex-col w-full bg-card rounded-md overflow-hidden shadow-md border border-border z-10">
           {/* Player Name */}
-          <div className="px-1 py-0.5 text-center bg-surface border-b border-border">
+          <div className="px-1.5 py-1 text-center bg-surface border-b border-border">
             <p className="text-[9px] sm:text-[10px] md:text-[11px] font-bold text-text-primary truncate leading-tight">
               {playerLastName}
             </p>
           </div>
           {/* Split Row for Price and Points */}
           <div className="flex text-[9px] sm:text-[10px] md:text-[11px] font-bold">
-            <div className="flex-1 text-center py-0.5 bg-card text-text-secondary border-r border-border leading-tight">
+            <div className="flex-1 text-center py-1 bg-card text-text-secondary border-r border-border leading-tight">
               {player.price || getPlayerDisplayPrice(player)}
             </div>
-            <div className={`flex-1 text-center py-0.5 leading-tight font-mono font-black ${
+            <div className={`flex-1 text-center py-1 leading-tight font-mono font-black ${
               didNotPlay
                 ? "bg-slate-800/80 text-amber-400 text-[8px] sm:text-[9px]"
                 : "bg-[var(--color-success-bg)] text-[var(--color-success-bright)]"

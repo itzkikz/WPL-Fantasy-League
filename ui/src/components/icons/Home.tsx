@@ -1,10 +1,9 @@
 const Home = ({ isActive }: { isActive: boolean }) => {
   return (
     <svg
-      className={`w-6 h-6 ${isActive
-          ? "text-gray-400 dark:text-light-text-secondary font-semibold "
-          : ""
-        }`}
+      className={`w-5 h-5 transition-colors ${
+        isActive ? "text-[#A855F7]" : "text-gray-500 dark:text-[#8E89A6]"
+      }`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
