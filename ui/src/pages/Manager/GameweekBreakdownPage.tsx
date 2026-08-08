@@ -399,7 +399,8 @@ const GameweekBreakdownPage = () => {
         </div>
 
         {/* RIGHT COLUMN PANEL (The Team View / Points Table on Webview) */}
-        <div className="flex-1 flex flex-col min-h-0 h-full overflow-y-auto">
+        {/* Mobile: no height clamp so the full pitch scrolls with the page */}
+        <div className="flex-1 flex flex-col min-h-0 lg:h-full lg:overflow-y-auto">
           
           {/* Mobile Format Selector (Visible on mobile < lg when Squad active) */}
           {activeTab === "squad" && (
@@ -432,13 +433,14 @@ const GameweekBreakdownPage = () => {
           )}
 
           {/* Interactive Squad / Pitch / Points Table View */}
-          <div className="flex-1 flex flex-col min-h-0 overflow-hidden px-4 lg:px-0 py-1">
+          <div className="flex-1 flex flex-col min-h-0 lg:overflow-hidden px-4 lg:px-0 py-1">
             {activeTab === "squad" ? (
               squadView === "pitch" ? (
                 /* Pitch View Container */
-                <div className="flex-1 flex flex-col lg:flex-row gap-3 max-w-3xl mx-auto w-full h-full min-h-0 animate-in fade-in duration-300">
+                <div className="flex-1 flex flex-col lg:flex-row gap-3 max-w-3xl mx-auto w-full lg:h-full min-h-0 animate-in fade-in duration-300">
                   {/* Pitch Card */}
-                  <div className="relative flex-1 rounded-3xl overflow-hidden border border-border shadow-card bg-background h-full flex flex-col">
+                  {/* Mobile: min-height keeps the full pitch + bench visible so the page scrolls instead of clipping */}
+                  <div className="relative flex-1 rounded-3xl overflow-hidden border border-border shadow-card bg-background flex flex-col min-h-[560px] sm:min-h-[600px] lg:min-h-0 lg:h-full">
                     {/* Pitch image layer */}
                     <div className="pitch-bg">
                       <img

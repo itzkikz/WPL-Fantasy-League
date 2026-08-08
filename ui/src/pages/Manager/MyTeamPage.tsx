@@ -446,7 +446,8 @@ const MyTeamPage = () => {
         </div>
 
         {/* RIGHT COLUMN PANEL (Team View on Webview / Main View on Mobile) */}
-        <div className="flex-1 flex flex-col min-h-0 h-full overflow-hidden">
+        {/* Mobile: no height clamp so the full pitch scrolls with the page */}
+        <div className="flex-1 flex flex-col min-h-0 lg:h-full lg:overflow-hidden">
 
           {/* Mobile Toolbar (Pitch/List toggle & Save/Clear - visible only on mobile < lg) */}
           {headerTab === "current" && (
@@ -501,7 +502,7 @@ const MyTeamPage = () => {
           )}
 
           {/* Interactive Pitch, List, or History View */}
-          <div className="flex-1 flex flex-col min-h-0 h-full overflow-hidden mx-4 lg:mx-0 mt-2 lg:mt-0">
+          <div className="flex-1 flex flex-col min-h-0 lg:h-full lg:overflow-hidden mx-4 lg:mx-0 mt-2 lg:mt-0">
             {headerTab === "current" ? (
               activeTab === "pitch" ? (
                 <MyTeamPitch

@@ -30,9 +30,10 @@ const MyTeamPitch = ({
   getPlayerPrice,
 }: MyTeamPitchProps) => {
   return (
-    <div className="flex-1 flex flex-col lg:flex-row gap-3 max-w-3xl mx-auto w-full h-full min-h-0">
+    <div className="flex-1 flex flex-col lg:flex-row gap-3 max-w-3xl mx-auto w-full lg:h-full min-h-0">
       {/* 1. Main Pitch Card (Centered Starting XI) */}
-      <div className="relative flex-1 rounded-3xl overflow-hidden border border-border bg-background h-full flex flex-col">
+      {/* Mobile: min-height keeps the full pitch + bench visible so the page scrolls instead of clipping */}
+      <div className="relative flex-1 rounded-3xl overflow-hidden border border-border bg-background flex flex-col min-h-[560px] sm:min-h-[600px] lg:min-h-0 lg:h-full">
         {/* Pitch image layer */}
         <div className="pitch-bg">
           <img
