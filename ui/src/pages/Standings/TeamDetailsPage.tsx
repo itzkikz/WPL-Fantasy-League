@@ -332,7 +332,7 @@ const TeamDetailsPage = () => {
                     <PitchPlayerCard
                       player={enrichedPlayer}
                       showPriceAndPoints={true}
-                      isSmall={true}
+                      isSmall={false}
                       onClick={() => handlePlayerOverlay(player)}
                     />
                   </div>

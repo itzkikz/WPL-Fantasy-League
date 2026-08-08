@@ -15,6 +15,7 @@ export interface TeamDetails {
     gw: number,
     player_id?: number, // Added for ID tracking
     team_name: string,
+    fantasy_team_name?: string,
     player_name: string,
     position: string,
     lineup: 'Starting XI' | 'SUB 1' | 'SUB 2' | 'SUB 3' | 'SUB 4',

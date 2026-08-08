@@ -49,7 +49,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
     res.json({
       data: {
         token,
-        user: { username: user.username }
+        user: { username: user.username, role: user.role }
       }
     });
   } catch (error) {

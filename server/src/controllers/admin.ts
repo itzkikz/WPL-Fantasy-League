@@ -1523,6 +1523,84 @@ export const createH2HFixture = async (req: Request, res: Response) => {
     }
 };
 
+export const bulkCreateH2HFixtures = async (req: Request, res: Response) => {
+    try {
+        if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
+
+        const { id } = req.params;
+        const { gameweek, matchups } = req.body;
+
+        if (!gameweek) {
+            return res.status(400).json({ error: 'gameweek is required' });
+        }
+        if (!Array.isArray(matchups) || matchups.length === 0) {
+            return res.status(400).json({ error: 'At least one matchup is required' });
+        }
+        if (matchups.length > 50) {
+            return res.status(400).json({ error: 'Too many matchups in one request' });
+        }
+
+        const league = await H2HLeague.findById(id);
+        if (!league) return res.status(404).json({ error: 'H2H league not found' });
+
+        const gw = Number(gameweek);
+        if (!Number.isInteger(gw) || gw < league.gameweekStart || gw > league.gameweekEnd) {
+            return res.status(400).json({ error: `Gameweek must be between ${league.gameweekStart} and ${league.gameweekEnd}` });
+        }
+
+        const teamIds = league.fantasyTeams.map((t: any) => t.toString());
+        const teamIdSet = new Set(teamIds);
+
+        // Collect the teams already scheduled this gameweek
+        const scheduled = new Set<string>();
+        const existing = await H2HFixture.find({ league: id, gameweek: gw }).select('homeTeam awayTeam').lean();
+        for (const fix of existing) {
+            scheduled.add(fix.homeTeam.toString());
+            scheduled.add(fix.awayTeam.toString());
+        }
+
+        // Validate every matchup before inserting anything
+        const docs: any[] = [];
+        const errors: string[] = [];
+        for (let i = 0; i < matchups.length; i++) {
+            const m = matchups[i];
+            const home = m?.homeTeam;
+            const away = m?.awayTeam;
+
+            if (!home || !away) {
+                errors.push(`Matchup ${i + 1}: both teams are required`);
+                continue;
+            }
+            if (!teamIdSet.has(home) || !teamIdSet.has(away)) {
+                errors.push(`Matchup ${i + 1}: both teams must be league competitors`);
+                continue;
+            }
+            if (home === away) {
+                errors.push(`Matchup ${i + 1}: home and away teams must be different`);
+                continue;
+            }
+            if (scheduled.has(home) || scheduled.has(away)) {
+                errors.push(`Matchup ${i + 1}: one of the teams already has a fixture this gameweek`);
+                continue;
+            }
+
+            scheduled.add(home).add(away);
+            docs.push({ league: id, homeTeam: home, awayTeam: away, gameweek: gw });
+        }
+
+        const inserted = docs.length ? await H2HFixture.insertMany(docs) : [];
+
+        const populated = await H2HFixture.find({ _id: { $in: inserted.map((d: any) => d._id) } })
+            .populate('homeTeam', 'name')
+            .populate('awayTeam', 'name');
+
+        res.status(201).json({ data: { created: inserted.length, fixtures: populated, errors } });
+    } catch (error: any) {
+        console.error('Error bulk creating H2H fixtures:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
 export const deleteH2HFixture = async (req: Request, res: Response) => {
     try {
         if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Admin only' });
