@@ -168,6 +168,58 @@ const HomePage = () => {
     );
   }
 
+  // Manager account with no fantasy team assigned yet (server returns
+  // teamOverview: null) — show a friendly empty state instead of crashing.
+  if (!data.teamOverview) {
+    return (
+      <div className="min-h-screen bg-background text-text-primary p-3 lg:p-6 font-outfit">
+        <div className="mx-auto w-full max-w-4xl space-y-6 pt-2 pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-6">
+          {/* No Team Banner */}
+          <div className="bg-gradient-to-r from-primary/10 via-indigo-500/5 to-slate-500/5 dark:from-purple-900/40 dark:via-indigo-900/40 dark:to-slate-900/40 border border-primary/20 dark:border-purple-500/30 rounded-3xl p-6 sm:p-8 shadow-sm relative overflow-hidden backdrop-blur-xl">
+            <div className="absolute top-0 right-0 -mt-8 -mr-8 w-48 h-48 bg-primary/10 dark:bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 relative z-10">
+              <div className="w-14 h-14 rounded-2xl bg-primary/15 border border-primary/25 flex items-center justify-center shrink-0 text-primary shadow-inner dark:bg-purple-500/20 dark:border-purple-400/30 dark:text-purple-300">
+                <ShieldCheck className="w-7 h-7 text-primary dark:text-purple-300" />
+              </div>
+              <div className="space-y-1.5 flex-1">
+                <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-primary/15 border border-primary/25 text-[11px] font-semibold text-primary dark:bg-purple-500/20 dark:border-purple-400/30 dark:text-purple-300">
+                  <Sparkles className="w-3 h-3 text-primary dark:text-purple-400" />
+                  <span>Manager Account</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-text-primary">
+                  No fantasy team assigned yet
+                </h2>
+                <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                  Your account has manager access, but you haven't been linked to a fantasy squad yet. Once the League Administrator assigns you to a team, your full dashboard will appear here.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* League data that doesn't depend on your team */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2.5 lg:gap-5">
+            <div>
+              <LeagueStandings standings={data.leagueStandings || []} limit={5} />
+            </div>
+            <div>
+              <PlayerListCard
+                title="Top Players"
+                subtitle="This Gameweek"
+                players={(data.topPlayers || []).map(p => ({
+                  name: p.name,
+                  meta: p.team,
+                  position: p.position,
+                  value: `${p.points} pts`,
+                  photo: p.photo
+                }))}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background text-text-primary">
       <div className="mx-auto w-full px-3 pb-[calc(5.25rem+env(safe-area-inset-bottom))] pt-3 lg:max-w-none lg:px-0 lg:pb-0 lg:pt-0">

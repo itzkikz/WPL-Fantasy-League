@@ -1,16 +1,16 @@
-# Graph Report - WPL-Fantasy-League  (2026-08-07)
+# Graph Report - WPL-Fantasy-League  (2026-08-08)
 
 ## Corpus Check
-- 439 files · ~499,437 words
+- 439 files · ~501,318 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 4121 nodes · 9141 edges · 352 communities (183 shown, 169 thin omitted)
-- Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 1054 edges (avg confidence: 0.61)
+- 4122 nodes · 9144 edges · 359 communities (171 shown, 188 thin omitted)
+- Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 1055 edges (avg confidence: 0.61)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `78e451b5`
+- Built from commit: `94617613`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -174,12 +174,12 @@
 - Community 158
 - Community 159
 - Community 160
-- Community 161
+- 404.tsx
 - Community 162
 - Community 163
 - Community 164
 - Community 165
-- muted-foreground
+- index.tsx
 - Player.ts
 - Community 168
 - Community 169
@@ -232,7 +232,7 @@
 - HTML Slide Template
 - HTML Slide Template
 - Slides
-- postcss
+- express
 - destructive-foreground
 - Brand Guidelines Template
 - Route
@@ -247,7 +247,7 @@
 - 8
 - GW Data Sync Verification Output
 - Route
-- @tanstack/react-router
+- Route
 - @tanstack/router-plugin
 - zustand
 - Route
@@ -356,7 +356,14 @@
 - destructive
 - Route
 - Route
+- Route
+- Route
+- Route
+- Route
+- Route
 - puppeteer
+- Route
+- Route
 
 ## God Nodes (most connected - your core abstractions)
 1. `n()` - 155 edges
@@ -368,7 +375,7 @@
 7. `o()` - 82 edges
 8. `x()` - 76 edges
 9. `s()` - 74 edges
-10. `error` - 71 edges
+10. `error` - 72 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `AdminNotifications()` --indirect_call--> `error`  [INFERRED]
@@ -379,8 +386,8 @@
   server/src/controllers/h2h.ts → ui/.vercel/output/static/assets/index-D6bAIqfo.js
 - `useSubstitution()` --indirect_call--> `substitution()`  [INFERRED]
   ui/src/features/manager/hooks.ts → server/src/controllers/manager.ts
-- `getPlayerStatsMap()` --indirect_call--> `ps()`  [INFERRED]
-  server/src/lib/fantasyScore.ts → ui/.vercel/output/static/assets/index-D6bAIqfo.js
+- `PWAInstallBanner()` --indirect_call--> `error`  [INFERRED]
+  ui/src/components/PWAInstallBanner.tsx → server/src/types/error.ts
 
 ## Import Cycles
 - None detected.
@@ -392,19 +399,19 @@
 - **Responsive grid layout system** — ui_src_pages_home_homepagepng_screenshot, ui_src_pages_home_homepagepng_teamoverview, ui_src_pages_home_homepagepng_upcomingfixture, ui_src_pages_home_homepagepng_leaguestatistics, ui_src_pages_home_homepagepng_gameweekprogress, ui_src_pages_home_homepagepng_leaguestandings, ui_src_pages_home_homepagepng_playerspotlight, ui_src_pages_home_homepagepng_topplayers, ui_src_pages_home_homepagepng_bestperformers, ui_src_pages_home_homepagepng_recentgameweeks, ui_src_pages_home_homepagepng_pointsbreakdown, ui_src_pages_home_homepagepng_seasonstats, ui_src_pages_home_homepagepng_teamformation, ui_src_pages_home_homepagepng_squadvalue, ui_src_pages_home_homepagepng_yourplayerscard, ui_src_pages_home_homepagepng_fantasynews [INFERRED 0.90]
 - **Dark theme design system** — ui_src_pages_home_homepagepng_screenshot, ui_src_pages_home_homepagepng_header, ui_src_pages_home_homepagepng_bottomnavbar [INFERRED 0.90]
 
-## Communities (352 total, 169 thin omitted)
+## Communities (359 total, 188 thin omitted)
 
 ### Community 0 - "UI Navigation & Layout"
-Cohesion: 0.11
-Nodes (5): SideNavbar(), Props, NotificationProps, UserSettingsProps, path()
+Cohesion: 0.12
+Nodes (3): Props, NotificationProps, UserSettingsProps
 
 ### Community 1 - "Design Token Primitives"
 Cohesion: 0.05
 Nodes (53): $type, $value, $type, $value, $type, $value, $type, $value (+45 more)
 
 ### Community 2 - "Home Dashboard Components"
-Cohesion: 0.09
-Nodes (25): FantasyNews(), calcCountdown(), calcPercent(), GameweekProgress(), LeagueStandings(), LeagueStatistics(), PlayerListCard(), barColor() (+17 more)
+Cohesion: 0.08
+Nodes (32): FantasyNews(), calcCountdown(), calcPercent(), GameweekProgress(), LeagueStandings(), LeagueStatistics(), PlayerListCard(), barColor() (+24 more)
 
 ### Community 3 - "CIP Design Scripts"
 Cohesion: 0.06
@@ -416,7 +423,7 @@ Nodes (4): vite-plugin-pwa, WPL Fantasy Football HTML Entry Point, Dark Mode The
 
 ### Community 5 - "Server Notifications & Points"
 Cohesion: 0.05
-Nodes (43): apiClient, API_ENDPOINTS, QUERY_KEYS, AdminPlayer, FantasyTeamForm(), FantasyTeamFormProps, normalizePos(), Modal() (+35 more)
+Nodes (46): apiClient, API_ENDPOINTS, QUERY_KEYS, AdminPlayer, FantasyTeamForm(), FantasyTeamFormProps, normalizePos(), Modal() (+38 more)
 
 ### Community 6 - "Slide Search Engine"
 Cohesion: 0.08
@@ -428,19 +435,19 @@ Nodes (50): connectDB(), ILeague, League, LeagueSchema, ISeason, Season, SeasonS
 
 ### Community 8 - "Server API Controllers"
 Cohesion: 0.13
-Nodes (46): dashboard(), details(), myFixtures(), aggregateMatchStats(), BREAKDOWN_ORDER, breakdownLabel(), breakdownValue(), buildCurrentWeek() (+38 more)
+Nodes (45): dashboard(), details(), aggregateMatchStats(), BREAKDOWN_ORDER, breakdownLabel(), breakdownValue(), buildCurrentWeek(), getFilters() (+37 more)
 
 ### Community 9 - "Route Tree Generation"
-Cohesion: 0.03
-Nodes (74): Route, Route, Route, Route, Route, Route, Route, Route (+66 more)
+Cohesion: 0.04
+Nodes (44): AdminFactsRoute, AdminFantasyTeamsCreateRoute, AdminFantasyTeamsEditTeamIdRoute, AdminFantasyTeamsIndexRoute, AdminFantasyTeamsRoute, AdminFantasyTeamsRouteChildren, AdminFantasyTeamsRouteWithChildren, AdminFixturesFixtureIdRoute (+36 more)
 
 ### Community 10 - "Server Admin API"
 Cohesion: 0.09
-Nodes (54): completeGameweek(), createAdminFact(), createFantasyTeam(), createGameweek(), createH2HFixture(), deleteAdminFact(), deleteH2HFixture(), deleteH2HLeague() (+46 more)
+Nodes (52): bulkCreateH2HFixtures(), completeGameweek(), createAdminFact(), createFantasyTeam(), createGameweek(), createH2HFixture(), deleteAdminFact(), deleteH2HFixture() (+44 more)
 
 ### Community 11 - "Server Entry & Middleware"
 Cohesion: 0.07
-Nodes (25): getFixtures(), getFilters(), app, auth, cors, credentials, fs, { google } (+17 more)
+Nodes (26): getFixtures(), SyncController, app, auth, cors, credentials, fs, { google } (+18 more)
 
 ### Community 12 - "Brand & Design Skills"
 Cohesion: 0.05
@@ -455,12 +462,12 @@ Cohesion: 0.14
 Nodes (24): get_context(), is_allowed_exception(), is_allowed_rgba(), is_inside_block(), load_css_variables(), main(), print_result(), print_summary() (+16 more)
 
 ### Community 16 - "Manager Pick Team"
-Cohesion: 0.05
-Nodes (84): T, addObserver(), ae(), build(), cancel(), cancelQueries(), canRun(), catch() (+76 more)
+Cohesion: 0.12
+Nodes (22): Overlay(), Info(), InfoProps, ListPlayerItem(), ListPlayerItemProps, playersApi, usePlayerFilters(), usePlayers() (+14 more)
 
 ### Community 17 - "Gameweek Pitch View"
 Cohesion: 0.02
-Nodes (106): aa(), af(), am, ar(), Bg(), bh, bm, ch (+98 more)
+Nodes (119): am, an(), ar(), As(), bh, bm, bs(), Bt() (+111 more)
 
 ### Community 18 - "Head-to-Head Feature"
 Cohesion: 0.17
@@ -471,12 +478,12 @@ Cohesion: 0.09
 Nodes (23): homeApi, homeQueries, BestPerformer, FantasyArticle, FixtureDifficultyItem, FixturePlayer, GameweekHistory, GameweekProgress (+15 more)
 
 ### Community 20 - "Server Auth & H2H"
-Cohesion: 0.17
-Nodes (17): managerApi, managerQueries, ManagerDetailsResponse, SubstitutionRequest, SubstitutionResponse, Player, Formation, TeamDetails (+9 more)
+Cohesion: 0.05
+Nodes (91): aa(), Ac(), ad(), add(), af(), ao(), ap(), ba() (+83 more)
 
 ### Community 21 - "Server Sync & Fantasy Team"
-Cohesion: 0.09
-Nodes (29): Info(), InfoProps, ListPlayerItem(), ListPlayerItemProps, PitchPlayerCard(), PitchPlayerCardProps, PlayerInfo(), useManagerOverview() (+21 more)
+Cohesion: 0.11
+Nodes (26): PitchPlayerCard(), PitchPlayerCardProps, PlayerInfo(), Player, useManagerOverview(), Formation, mapPosition(), positionMap (+18 more)
 
 ### Community 22 - "Logo Search Engine"
 Cohesion: 0.11
@@ -487,12 +494,12 @@ Cohesion: 0.08
 Nodes (25): react, react-dom, @react-oauth/google, @tanstack/react-query, @tanstack/react-query-devtools, @tanstack/react-router-devtools, @tanstack/react-virtual, dependencies (+17 more)
 
 ### Community 24 - "Server Lineup & Substitution"
-Cohesion: 0.14
-Nodes (29): v, y(), m(), p(), E(), S(), Ai(), b() (+21 more)
+Cohesion: 0.26
+Nodes (12): getMatchDetails(), getMatchIncidentsAndStats(), calculatePlayerPoints(), countCards(), countGoalsConceded(), mapSofascoreToPlayerMatchStat(), ILineupEntry, IMatchDetails (+4 more)
 
 ### Community 25 - "Player Detail Components"
-Cohesion: 0.13
-Nodes (21): Formation, FormationResult, Player, RoleKey, setCaptain(), setCaptaincyRole(), setViceCaptain(), canSwap() (+13 more)
+Cohesion: 0.09
+Nodes (32): getPublicFacts(), substitution(), Formation, FormationResult, Player, RoleKey, setCaptain(), setCaptaincyRole() (+24 more)
 
 ### Community 26 - "UI Dev Dependencies"
 Cohesion: 0.08
@@ -503,12 +510,12 @@ Cohesion: 0.09
 Nodes (22): $type, $value, $type, $value, $type, $value, $type, $value (+14 more)
 
 ### Community 28 - "Manager API & Admin Routes"
-Cohesion: 0.10
-Nodes (27): substitution(), SheetController, buildFantasyTeamGamewiseRows(), FANTASY_GAMEWISE_HEADERS, fantasyGamewiseRowsToValues(), FantasyTeamGamewiseRow, getPlayerStatsMap(), lineupLabel() (+19 more)
+Cohesion: 0.30
+Nodes (4): SheetController, fantasyGamewiseRowsToValues(), getSheets(), ApiConfig
 
 ### Community 30 - "Admin Fantasy Team Routes"
-Cohesion: 0.19
-Nodes (15): Cell, deleteNotification(), markAllAsRead(), markAsRead(), notifications(), Row, send(), subscribe() (+7 more)
+Cohesion: 0.12
+Nodes (24): Cell, deleteNotification(), markAllAsRead(), markAsRead(), notifications(), Row, send(), subscribe() (+16 more)
 
 ### Community 32 - "Slide Generator Scripts"
 Cohesion: 0.15
@@ -520,7 +527,7 @@ Nodes (11): Generate Tailwind CSS configuration files., Add full color palette (
 
 ### Community 34 - "Design Token Semantic Colors"
 Cohesion: 0.11
-Nodes (19): $type, $value, background, foreground, muted-foreground, primary, primary-hover, secondary (+11 more)
+Nodes (19): $type, $value, background, destructive-foreground, muted, primary-foreground, secondary, secondary-foreground (+11 more)
 
 ### Community 35 - "Tailwind Config Generator"
 Cohesion: 0.11
@@ -551,8 +558,8 @@ Cohesion: 0.05
 Nodes (86): A(), activate(), addCacheListener(), addFetchListener(), addToCacheList(), Ae(), _awaitComplete(), c() (+78 more)
 
 ### Community 44 - "App Entry & Theme Context"
-Cohesion: 0.15
-Nodes (15): ThemeToggle(), UpdatePrompt(), Theme, ThemeContext, ThemeContextType, ThemeProvider(), ThemeProviderProps, useTheme() (+7 more)
+Cohesion: 0.40
+Nodes (6): authApi, authQueries, LoginRequest, LoginResponse, User, ValidateResponse
 
 ### Community 45 - "Icon Generator Scripts"
 Cohesion: 0.20
@@ -575,20 +582,20 @@ Cohesion: 0.13
 Nodes (15): nodemon, devDependencies, nodemon, ts-node, ts-node-dev, @types/express, @types/jsonwebtoken, @types/node (+7 more)
 
 ### Community 50 - "Player Info Components"
-Cohesion: 0.14
-Nodes (33): $(), ae(), B(), F(), G(), I(), ie(), J() (+25 more)
+Cohesion: 0.05
+Nodes (62): $(), l, l, p(), E, ae(), B(), F() (+54 more)
 
 ### Community 51 - "Server TypeScript Config"
 Cohesion: 0.13
 Nodes (14): node_modules, src/**/*, compilerOptions, allowJs, esModuleInterop, forceConsistentCasingInFileNames, module, outDir (+6 more)
 
 ### Community 52 - "Notifications Feature"
-Cohesion: 0.29
-Nodes (11): notificationApi, useDeleteNotification(), useMarkAllAsRead(), useMarkAsRead(), useNotifications(), useSubscribe(), notificationsQueries, Keys (+3 more)
+Cohesion: 0.20
+Nodes (15): detectKind(), KindConfig, KINDS, NotificationItem(), notificationApi, useDeleteNotification(), useMarkAllAsRead(), useMarkAsRead() (+7 more)
 
 ### Community 53 - "Team Details Page"
-Cohesion: 0.10
-Nodes (77): u(), u(), W(), Au(), Bu(), cd(), Ci(), co() (+69 more)
+Cohesion: 0.06
+Nodes (116): u(), W(), a(), at(), Au(), bc(), bp(), Bu() (+108 more)
 
 ### Community 54 - "Standings Page"
 Cohesion: 0.29
@@ -622,12 +629,12 @@ Cohesion: 0.29
 Nodes (6): name, overrides, vite, private, type, version
 
 ### Community 61 - "Auth Feature (Login)"
-Cohesion: 0.16
-Nodes (22): _, g(), b(), v(), y(), ct(), Df(), H (+14 more)
+Cohesion: 0.18
+Nodes (14): Bg(), Fg(), Gg(), Hg(), jg(), Kg(), Mg(), Ng() (+6 more)
 
 ### Community 62 - "Design Token Component Tokens"
-Cohesion: 0.20
-Nodes (12): $type, $value, bg, bg, padding, shadow, card, bg (+4 more)
+Cohesion: 0.15
+Nodes (17): $type, $value, $type, $value, bg, bg, border, padding (+9 more)
 
 ### Community 63 - "Shadcn Installer Edge Cases"
 Cohesion: 0.17
@@ -670,8 +677,8 @@ Cohesion: 0.22
 Nodes (9): buildSquadRows(), InputData, OutputRow, Player, Position, PosLetter, posToLetter, roleOf() (+1 more)
 
 ### Community 73 - "Color Utility Helpers"
-Cohesion: 0.08
-Nodes (62): a(), Ac(), ap(), ba(), bo(), ca(), clearTimeout(), dc() (+54 more)
+Cohesion: 0.05
+Nodes (77): m(), T, addObserver(), ae(), cancel(), cancelQueries(), canRun(), catch() (+69 more)
 
 ### Community 74 - "Token Validation Tests"
 Cohesion: 0.28
@@ -682,8 +689,8 @@ Cohesion: 0.28
 Nodes (5): BM25, BM25 ranking algorithm for text search, Lowercase, split, remove punctuation, filter short words, Build BM25 index from documents, Score all documents against query
 
 ### Community 77 - "Community 77"
-Cohesion: 0.08
-Nodes (25): Button(), ButtonProps, CheckboxProps, Overlay(), HeaderProps, AngleLeftProps, getPointsImpact(), PlayerDetails() (+17 more)
+Cohesion: 0.10
+Nodes (16): Button(), ButtonProps, CheckboxProps, HeaderProps, AngleLeftProps, getPointsImpact(), PlayerDetails(), PlayerOverall() (+8 more)
 
 ### Community 78 - "Community 78"
 Cohesion: 0.29
@@ -699,47 +706,47 @@ Nodes (18): useSubstitution(), benchSwap(), canSwap(), Category, clearSwapHighli
 
 ### Community 81 - "Community 81"
 Cohesion: 0.11
-Nodes (29): E, a, l(), o, s(), x(), o, ee() (+21 more)
+Nodes (10): Route, Route, Route, Route, Route, Route, Route, Route (+2 more)
 
 ### Community 82 - "Community 82"
 Cohesion: 0.29
 Nodes (6): author, description, license, main, name, version
 
 ### Community 85 - "Community 85"
-Cohesion: 0.07
-Nodes (56): $(), ad(), add(), an(), ao(), bc(), bf(), bi() (+48 more)
+Cohesion: 0.29
+Nodes (6): UpdatePrompt(), queryClient, Register, router, @tanstack/react-router, routeTree
 
 ### Community 86 - "Community 86"
 Cohesion: 0.60
 Nodes (5): radius, radius, radius, $type, $value
 
 ### Community 87 - "Community 87"
-Cohesion: 0.14
-Nodes (16): useHomePage(), useMyFixtures(), useManagerDetails(), useStandings(), useStandingsFixtures(), useTeamDetails(), HomePage(), GameweekBreakdownPage() (+8 more)
+Cohesion: 0.09
+Nodes (20): MainLayout(), useValidateToken(), useManagerDetails(), standingsApi, useStandings(), useTeamDetails(), standingsQueries, Standings (+12 more)
 
 ### Community 88 - "Community 88"
-Cohesion: 0.13
-Nodes (25): _(), l, l, g, x, y, C(), f() (+17 more)
+Cohesion: 0.06
+Nodes (104): _(), _(), _, g(), v, y(), g, f (+96 more)
 
 ### Community 89 - "Community 89"
 Cohesion: 0.40
 Nodes (4): ..\\..\\..\\..\\..\\src\\index.ts, ..\\..\\..\\..\\..\\tsconfig.json, extends, include
 
 ### Community 92 - "Community 92"
-Cohesion: 0.33
-Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Generate intelligent overrides based on page type using layered search., Detect page type from context and search results., Format a page-specific override file with intelligent AI-generated content.
+Cohesion: 0.12
+Nodes (20): myFixtures(), CREDENTIALS_PATH, SCOPES, buildPlayerStatsRows(), fixtureDate(), passAccuracy(), PLAYER_STATS_SHEET_HEADERS, FantasyTeamSchema (+12 more)
 
 ### Community 93 - "Community 93"
-Cohesion: 0.12
-Nodes (18): client, login(), privateKey, computePicksPoints(), getH2HLeagueFixturesPublic(), getH2HStandings(), getLeagueAllGWPoints(), getMyH2HLeagues() (+10 more)
+Cohesion: 0.28
+Nodes (7): useFixturePlayers(), FixturePlayerStats, FixturePlayersModal(), FixturePlayersModalProps, getPositionStyle(), PlayerRow(), POSITION_STYLES
 
 ### Community 94 - "Community 94"
-Cohesion: 0.09
-Nodes (41): accessor(), bd(), bindMethods(), bn(), br(), cf(), constructor(), Dp() (+33 more)
+Cohesion: 0.08
+Nodes (65): $(), u(), d(), accessor(), bd(), bindMethods(), bn(), br() (+57 more)
 
 ### Community 95 - "Community 95"
-Cohesion: 0.11
-Nodes (37): al(), be(), cl(), componentDidUpdate(), Da(), dl(), el(), eu() (+29 more)
+Cohesion: 0.12
+Nodes (36): al(), be(), Bl(), cl(), Da(), dl(), el(), eu() (+28 more)
 
 ### Community 100 - "Community 100"
 Cohesion: 0.05
@@ -758,28 +765,28 @@ Cohesion: 0.06
 Nodes (35): 1. Visual Communication First, 2. Minimal Text Integration, 3. Expert Craftsmanship, 4. Systematic Patterns, Analog Meditation, Approach, Canvas Boundaries, Canvas Design System (+27 more)
 
 ### Community 104 - "Community 104"
-Cohesion: 0.19
-Nodes (15): C(), w(), x(), y, c(), u(), a(), i() (+7 more)
+Cohesion: 0.67
+Nodes (4): $type, $value, none, none
 
 ### Community 105 - "Community 105"
-Cohesion: 0.60
-Nodes (5): $type, $value, border, border, border
+Cohesion: 0.33
+Nodes (6): _detect_page_type(), format_page_override_md(), _generate_intelligent_overrides(), Generate intelligent overrides based on page type using layered search., Detect page type from context and search results., Format a page-specific override file with intelligent AI-generated content.
 
 ### Community 106 - "Community 106"
-Cohesion: 0.15
-Nodes (19): As(), bs(), concat(), cs(), ds(), es(), fs(), ls() (+11 more)
+Cohesion: 0.67
+Nodes (4): padding-y, padding-y, $type, $value
 
 ### Community 107 - "Community 107"
-Cohesion: 0.38
-Nodes (13): AdminFixturesIcon(), AdminH2HIcon(), AdminLeaguesIcon(), AdminSettingsIcon(), AdminSubstitutionsIcon(), AdminTeamsIcon(), H2HIcon(), HomeIcon() (+5 more)
+Cohesion: 0.13
+Nodes (27): AdminFixturesIcon(), AdminH2HIcon(), AdminLeaguesIcon(), AdminSettingsIcon(), AdminSubstitutionsIcon(), AdminTeamsIcon(), H2HIcon(), HomeIcon() (+19 more)
 
 ### Community 108 - "Community 108"
 Cohesion: 0.67
 Nodes (3): ring, $type, $value
 
 ### Community 109 - "Community 109"
-Cohesion: 0.14
-Nodes (17): bp(), Du(), ep(), et(), ft(), gf(), Jf(), ks() (+9 more)
+Cohesion: 0.67
+Nodes (3): $type, $value, 6
 
 ### Community 113 - "Community 113"
 Cohesion: 0.06
@@ -794,24 +801,20 @@ Cohesion: 0.06
 Nodes (32): Accessibility, Available Domains, Available Stacks, Common Rules for Professional UI, Common Sticking Points, Example Workflow, How to Use This Skill, Icons & Visual Elements (+24 more)
 
 ### Community 116 - "notifications.tsx"
-Cohesion: 0.17
-Nodes (10): j(), C(), createResult(), D, E, k(), N(), O() (+2 more)
+Cohesion: 0.67
+Nodes (3): destructive, $type, $value
 
 ### Community 117 - "md"
 Cohesion: 0.60
 Nodes (5): sm, sm, sm, $type, $value
 
 ### Community 118 - "Community 118"
-Cohesion: 0.15
-Nodes (11): CREDENTIALS_PATH, SCOPES, SyncController, FantasyTeamSchema, HistorySchema, IFantasyTeam, IHistory, IPick (+3 more)
+Cohesion: 0.67
+Nodes (3): foreground, $type, $value
 
 ### Community 119 - "Community 119"
-Cohesion: 0.22
-Nodes (15): at(), Bt(), cc(), Ht(), jt(), Kt(), pn(), qt() (+7 more)
-
-### Community 143 - "Community 143"
-Cohesion: 0.15
-Nodes (11): MainLayout(), useValidateToken(), Route, Route, Route, Route, ProtectedRoute(), Route (+3 more)
+Cohesion: 0.67
+Nodes (3): $type, $value, 12
 
 ### Community 144 - "Community 144"
 Cohesion: 0.06
@@ -821,9 +824,13 @@ Nodes (30): Accessibility, Base System, Best Practices, Clean & Modern, Common F
 Cohesion: 0.28
 Nodes (10): adminApi, SubstitutionHistoryRecord, SubstitutionPlayer, SubstitutionType, AdminSubstitutions(), posColor(), Route, typeColor() (+2 more)
 
+### Community 147 - "Community 147"
+Cohesion: 0.67
+Nodes (3): primary, $type, $value
+
 ### Community 148 - "Community 148"
-Cohesion: 0.29
-Nodes (6): ISubstitution, ISubstitutionPlayer, Substitution, SubstitutionPlayerSchema, SubstitutionSchema, SubstitutionType
+Cohesion: 0.67
+Nodes (3): muted-foreground, $type, $value
 
 ### Community 150 - "Community 150"
 Cohesion: 0.07
@@ -857,33 +864,21 @@ Nodes (3): BeforeInstallPromptEvent, PWAInstallBanner(), WindowEventMap
 Cohesion: 0.08
 Nodes (24): Apparel, Business Card, Car/Sedan, CIP Deliverable Guide, Core Identity, Digital Assets, Email Signature, Envelope (+16 more)
 
-### Community 161 - "Community 161"
-Cohesion: 0.60
-Nodes (5): lg, $type, $value, lg, lg
+### Community 160 - "Community 160"
+Cohesion: 0.67
+Nodes (3): primary-hover, $type, $value
 
 ### Community 162 - "Community 162"
 Cohesion: 0.08
 Nodes (24): Accessibility, Accessibility Requirements, ARIA States, Color Contrast, Color Variants, Disabled States, Error Messages, Error States (+16 more)
 
-### Community 163 - "Community 163"
-Cohesion: 0.67
-Nodes (3): destructive-foreground, $type, $value
-
-### Community 164 - "Community 164"
-Cohesion: 0.67
-Nodes (3): muted, $type, $value
-
 ### Community 165 - "Community 165"
 Cohesion: 0.08
 Nodes (24): Accessibility Patterns, Alternative: Tailwind-Only Setup, Best Practices, Common Patterns, Component Layer: shadcn/ui, Component Library Guide, Component + Styling Setup, Core Stack (+16 more)
 
-### Community 166 - "muted-foreground"
-Cohesion: 0.40
-Nodes (6): authApi, authQueries, LoginRequest, LoginResponse, User, ValidateResponse
-
 ### Community 167 - "Player.ts"
-Cohesion: 0.22
-Nodes (16): clonePicks(), createTransfer(), getPositionCounts(), getTakenPlayerIds(), healLineup(), normalizeCaptaincy(), normalizePosition(), playerSnapshot() (+8 more)
+Cohesion: 0.11
+Nodes (25): client, login(), privateKey, clonePicks(), createTransfer(), getPositionCounts(), getTakenPlayerIds(), healLineup() (+17 more)
 
 ### Community 171 - "Community 171"
 Cohesion: 0.08
@@ -1017,14 +1012,6 @@ Nodes (6): Animation Classes, Background Images, Base Structure, Chart.js Integr
 Cohesion: 0.33
 Nodes (5): References (Knowledge Base), Routing, Slides, Subcommands, When to Use
 
-### Community 224 - "postcss"
-Cohesion: 0.28
-Nodes (7): useFixturePlayers(), FixturePlayerStats, FixturePlayersModal(), FixturePlayersModalProps, getPositionStyle(), PlayerRow(), POSITION_STYLES
-
-### Community 225 - "destructive-foreground"
-Cohesion: 0.43
-Nodes (7): _(), f, g(), h(), m(), p(), v()
-
 ### Community 226 - "Brand Guidelines Template"
 Cohesion: 0.40
 Nodes (4): Brand Guidelines Template, Document Structure, Extractable Fields, Usage
@@ -1037,10 +1024,6 @@ Nodes (8): a(), f(), i(), l(), n(), s(), t(), u()
 Cohesion: 0.50
 Nodes (3): Expanding the ESLint configuration, React Compiler, React + Vite
 
-### Community 229 - "index.tsx"
-Cohesion: 0.60
-Nodes (4): detectKind(), KindConfig, KINDS, NotificationItem()
-
 ### Community 231 - "AGENTS.md"
 Cohesion: 0.29
 Nodes (6): Commands, Gotchas, graphify, Repo layout (what actually runs), Setup / env, WPL Fantasy League
@@ -1051,29 +1034,13 @@ Nodes (6): dependencies, framework, runtime, runtimeVersion, resolved, version
 
 ### Community 235 - "lucide-react"
 Cohesion: 0.67
-Nodes (4): padding-y, padding-y, $type, $value
+Nodes (4): $type, $value, md, md
 
 ### Community 236 - "8"
-Cohesion: 0.19
-Nodes (14): $type, $value, $type, $value, $type, $value, primitive, radius (+6 more)
+Cohesion: 0.18
+Nodes (15): $type, $value, lg, $type, $value, $type, $value, primitive (+7 more)
 
 ### Community 238 - "Route"
-Cohesion: 0.67
-Nodes (4): $type, $value, none, none
-
-### Community 239 - "@tanstack/react-router"
-Cohesion: 0.67
-Nodes (3): $type, $value, 0
-
-### Community 340 - "primary-foreground"
-Cohesion: 0.67
-Nodes (3): primary-foreground, $type, $value
-
-### Community 341 - "Route"
-Cohesion: 0.67
-Nodes (3): $type, $value, 12
-
-### Community 342 - "Route"
 Cohesion: 0.67
 Nodes (3): $type, $value, 2
 
@@ -1081,27 +1048,19 @@ Nodes (3): $type, $value, 2
 Cohesion: 0.67
 Nodes (3): $type, $value, 8
 
-### Community 346 - "secondary-foreground"
-Cohesion: 0.67
-Nodes (3): secondary-foreground, $type, $value
-
-### Community 353 - "Route"
-Cohesion: 0.67
-Nodes (3): destructive, $type, $value
-
 ## Knowledge Gaps
 - **1432 isolated node(s):** `$schema`, `$value`, `$type`, `$value`, `$type` (+1427 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **169 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **188 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ps()` connect `Server API Controllers` to `Color Utility Helpers`, `Community 106`, `Gameweek Pitch View`, `Team Details Page`, `Manager API & Admin Routes`, `Community 93`?**
-  _High betweenness centrality (0.047) - this node is a cross-community bridge._
-- **Why does `useUserStore` connect `Community 143` to `UI Navigation & Layout`, `Home Dashboard Components`, `Community 107`, `App Entry & Theme Context`, `Notifications Feature`, `Community 87`?**
-  _High betweenness centrality (0.045) - this node is a cross-community bridge._
-- **Why does `error` connect `Server Admin API` to `Server Notifications & Points`, `Player.ts`, `Server API Controllers`, `Server Database & Seeding`, `Server Entry & Middleware`, `Community 118`, `Community 87`, `Sofascore Scraper Scripts`, `Manager API & Admin Routes`, `Community 93`, `Community 158`?**
+- **Why does `ps()` connect `Server API Controllers` to `Gameweek Pitch View`, `Server Admin API`, `Team Details Page`, `Community 94`?**
+  _High betweenness centrality (0.048) - this node is a cross-community bridge._
+- **Why does `useUserStore` connect `Community 107` to `UI Navigation & Layout`, `Home Dashboard Components`, `Notifications Feature`, `Community 87`?**
+  _High betweenness centrality (0.044) - this node is a cross-community bridge._
+- **Why does `error` connect `Server Admin API` to `Server Notifications & Points`, `Player.ts`, `Server API Controllers`, `Server Database & Seeding`, `Manager API & Admin Routes`, `Community 87`, `Server Lineup & Substitution`, `Player Detail Components`, `Community 92`, `Community 158`, `Sofascore Scraper Scripts`?**
   _High betweenness centrality (0.038) - this node is a cross-community bridge._
 - **Are the 112 inferred relationships involving `n()` (e.g. with `_()` and `$()`) actually correct?**
   _`n()` has 112 INFERRED edges - model-reasoned connections that need verification._

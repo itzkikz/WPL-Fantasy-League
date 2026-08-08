@@ -24,7 +24,7 @@ const LoginPage = () => {
       localStorage.setItem("token", data.token);
     }
     if (data?.user?.username) {
-      setUser({ teamName: data.user.username });
+      setUser({ teamName: data.user.username, role: data.user?.role });
     } else {
       setGuest(false);
     }

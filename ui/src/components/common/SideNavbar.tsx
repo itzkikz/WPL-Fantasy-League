@@ -105,7 +105,7 @@ const SideNavbar = () => {
   if (isAdmin) {
     return (
       <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-gray-200 dark:border-[#221938] bg-surface lg:h-screen lg:py-4 lg:px-3">
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1.5 flex-1 min-h-0 overflow-y-auto pr-1 -mr-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
           {/* Settings Link */}
           {(() => {
             const isActive = isPathActive("/settings");
@@ -161,7 +161,7 @@ const SideNavbar = () => {
 
     return (
       <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-gray-200 dark:border-[#221938] bg-surface lg:h-screen lg:py-4 lg:px-3">
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1.5 flex-1 min-h-0 overflow-y-auto pr-1 -mr-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
           {guestItems.map(({ label, path }) => {
             const isActive = isPathActive(path);
 
@@ -211,7 +211,7 @@ const SideNavbar = () => {
 
   return (
     <nav className="side-navbar hidden lg:flex lg:flex-col fixed inset-y-0 left-0 w-64 lg:border-r border-gray-200 dark:border-[#221938] bg-surface lg:h-screen lg:py-4 lg:px-3">
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-1.5 flex-1 min-h-0 overflow-y-auto pr-1 -mr-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
         {navItems.map(({ label, path }) => {
           const isActive = isPathActive(path);
 
