@@ -291,9 +291,9 @@ const ManagerOverviewPage = () => {
                   const label = player.position === "GK" ? "GK" : `${player.subNumber || idx + 1}. ${player.position}`;
                   const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
                   return (
-                    <div key={player.id} className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300 shrink-0 min-w-[64px]">
+                    <div key={player.id} className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300 shrink-0 min-w-[76px]">
                       <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">{label}</span>
-                      <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={true} onClick={() => handlePlayerClick(player)} />
+                      <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={false} onClick={() => handlePlayerClick(player)} />
                     </div>
                   );
                 })}
@@ -500,9 +500,9 @@ const ManagerOverviewPage = () => {
                     const label = player.position === "GK" ? "GK" : `${player.subNumber || idx + 1}. ${player.position}`;
                     const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
                     return (
-                      <div key={player.id} className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300 shrink-0 min-w-[64px]">
+                      <div key={player.id} className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300 shrink-0 min-w-[76px]">
                         <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">{label}</span>
-                        <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={true} onClick={() => handlePlayerClick(player)} />
+                        <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={false} onClick={() => handlePlayerClick(player)} />
                       </div>
                     );
                   })}
@@ -512,7 +512,7 @@ const ManagerOverviewPage = () => {
 
             {/* Dedicated Webview Bench Side Card (Visible ONLY on webview lg+) */}
             {displayBench && displayBench.length > 0 && (
-              <div className="hidden lg:flex lg:flex-col lg:w-28 shrink-0 bg-surface border border-border rounded-3xl p-3 shadow-card justify-around items-center">
+              <div className="hidden lg:flex lg:flex-col lg:w-32 shrink-0 bg-surface border border-border rounded-3xl p-3 shadow-card justify-around items-center">
                 <span className="text-[10px] font-black text-text-muted uppercase tracking-wider text-center border-b border-border/60 pb-2 w-full">
                   Substitutes
                 </span>
@@ -522,7 +522,7 @@ const ManagerOverviewPage = () => {
                   return (
                     <div key={player.id} className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300">
                       <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">{label}</span>
-                      <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={true} onClick={() => handlePlayerClick(player)} />
+                      <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={false} onClick={() => handlePlayerClick(player)} />
                     </div>
                   );
                 })}

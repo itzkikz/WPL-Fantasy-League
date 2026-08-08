@@ -5,7 +5,7 @@ import { useAdminH2HLeague, useAdminH2HLeagueFixtures } from "../../features/h2h
 import { h2hApi } from "../../features/h2h/api";
 import { H2HLeague, H2HFixture } from "../../features/h2h/types";
 import apiClient from "../../api/client";
-import { Users, Plus, Trash2, Zap, Calendar, X, Check, Loader2 } from "lucide-react";
+import { Users, Plus, Trash2, Zap, Calendar, X, Check, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import Modal from "../../components/common/Modal";
 
 export const Route = createLazyFileRoute("/admin/h2h-leagues")({
@@ -139,6 +139,40 @@ function AdminH2HLeagues() {
     (f: H2HFixture) => selectedGw === null || f.gameweek === selectedGw
   ) || [];
 
+  // Fixture count per gameweek (from the API's byGameweek grouping)
+  const gwFixtureCounts: Record<number, number> = {};
+  if (fixturesData?.byGameweek) {
+    for (const [gw, list] of Object.entries(fixturesData.byGameweek)) {
+      if (Array.isArray(list)) gwFixtureCounts[Number(gw)] = list.length;
+    }
+  }
+
+  // Window of gameweeks centered on the active selection, so long seasons
+  // (up to 38 GWs) stay compact instead of rendering one button per GW.
+  const GW_WINDOW = 7;
+  const gwCount = uniqueGameweeks.length;
+  const windowSize = Math.min(GW_WINDOW, gwCount);
+  const activeGw = selectedGw ?? leagueGwStart;
+  const halfWindow = Math.floor(windowSize / 2);
+  let gwWindowStart = activeGw - halfWindow;
+  gwWindowStart = Math.min(Math.max(gwWindowStart, leagueGwStart), leagueGwEnd - windowSize + 1);
+  gwWindowStart = Math.max(gwWindowStart, leagueGwStart);
+  const windowedGameweeks = Array.from({ length: windowSize }, (_, i) => gwWindowStart + i);
+
+  const goPrevGw = () => {
+    setSelectedGw((prev) => {
+      const cur = prev ?? leagueGwStart;
+      return cur > leagueGwStart ? cur - 1 : cur;
+    });
+  };
+
+  const goNextGw = () => {
+    setSelectedGw((prev) => {
+      const cur = prev ?? leagueGwStart;
+      return cur < leagueGwEnd ? cur + 1 : cur;
+    });
+  };
+
   return (
     <div className="w-full p-2 sm:p-4 space-y-4 animate-fade-in text-white">
       
@@ -252,40 +286,105 @@ function AdminH2HLeagues() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
                 <h2 className="text-xs font-extrabold text-white/50 uppercase tracking-widest">Match Fixtures</h2>
 
-                <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
-                {/* Scrollable Gameweek Navigation */}
-                <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-                  <button
-                    onClick={() => setSelectedGw(null)}
-                    className={`px-3 py-1 rounded-lg text-[10px] font-extrabold uppercase tracking-wider transition-all border shrink-0 ${
-                      selectedGw === null 
-                        ? 'bg-indigo-600 text-white border-indigo-500' 
-                        : 'bg-white/5 text-white/60 border-white/10 hover:text-white hover:bg-white/10'
-                    }`}
-                  >
-                    All GWs
-                  </button>
-                  {uniqueGameweeks.map((gw: number) => (
+                <div className="flex flex-col gap-2.5">
+                  {/* Row 1: core controls */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    {/* Reset to all gameweeks */}
                     <button
-                      key={gw}
-                      onClick={() => setSelectedGw(gw)}
-                      className={`px-3 py-1 rounded-lg text-[10px] font-extrabold uppercase tracking-wider transition-all border shrink-0 ${
-                        selectedGw === gw 
-                          ? 'bg-indigo-600 text-white border-indigo-500' 
+                      onClick={() => setSelectedGw(null)}
+                      className={`px-3 py-1.5 rounded-lg text-[10px] font-extrabold uppercase tracking-wider transition-all border shrink-0 ${
+                        selectedGw === null
+                          ? 'bg-indigo-600 text-white border-indigo-500'
                           : 'bg-white/5 text-white/60 border-white/10 hover:text-white hover:bg-white/10'
                       }`}
                     >
-                      GW {gw}
+                      All
                     </button>
-                  ))}
+
+                    {/* Prev / current / next stepper */}
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <button
+                        onClick={goPrevGw}
+                        disabled={selectedGw !== null && selectedGw <= leagueGwStart}
+                        title="Previous gameweek"
+                        className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all disabled:opacity-30 disabled:pointer-events-none"
+                      >
+                        <ChevronLeft className="w-3.5 h-3.5" />
+                      </button>
+                      <div className="px-2.5 py-1.5 rounded-lg bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 text-[10px] font-black uppercase tracking-wider min-w-[74px] text-center tabular-nums">
+                        {selectedGw === null ? 'All GWs' : `GW ${selectedGw}`}
+                      </div>
+                      <button
+                        onClick={goNextGw}
+                        disabled={selectedGw !== null && selectedGw >= leagueGwEnd}
+                        title="Next gameweek"
+                        className="p-1.5 rounded-lg bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all disabled:opacity-30 disabled:pointer-events-none"
+                      >
+                        <ChevronRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+
+                    {/* Jump-to dropdown appears once there are more gameweeks than the window */}
+                    {gwCount > GW_WINDOW && (
+                      <select
+                        value={selectedGw ?? 'all'}
+                        onChange={(e) => setSelectedGw(e.target.value === 'all' ? null : Number(e.target.value))}
+                        title="Jump to gameweek"
+                        className="px-2 py-1.5 rounded-lg bg-[#150f24] border border-white/10 text-white text-[10px] font-bold outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer shrink-0"
+                      >
+                        <option value="all">Jump to GW…</option>
+                        {uniqueGameweeks.map((gw) => (
+                          <option key={gw} value={gw}>
+                            GW {gw}
+                            {gwFixtureCounts[gw] > 0
+                              ? ` · ${gwFixtureCounts[gw]} fixture${gwFixtureCounts[gw] > 1 ? 's' : ''}`
+                              : ''}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+
+                    <div className="flex-1" />
+
+                    <button
+                      onClick={handleAddFixture}
+                      className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-extrabold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md shadow-indigo-500/10 active:scale-95 shrink-0"
+                    >
+                      <Plus className="w-3.5 h-3.5" /> Add Fixture
+                    </button>
+                  </div>
+
+                  {/* Row 2: windowed gameweek chips with fixture-count badges */}
+                  {windowedGameweeks.length > 0 && (
+                    <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+                      {windowedGameweeks.map((gw) => {
+                        const count = gwFixtureCounts[gw] || 0;
+                        return (
+                          <button
+                            key={gw}
+                            onClick={() => setSelectedGw(gw)}
+                            className={`relative px-3 py-1 rounded-lg text-[10px] font-extrabold uppercase tracking-wider transition-all border shrink-0 tabular-nums ${
+                              selectedGw === gw
+                                ? 'bg-indigo-600 text-white border-indigo-500'
+                                : 'bg-white/5 text-white/60 border-white/10 hover:text-white hover:bg-white/10'
+                            }`}
+                          >
+                            GW {gw}
+                            {count > 0 && (
+                              <span
+                                className={`absolute -top-1.5 -right-1.5 min-w-[14px] h-3.5 px-0.5 rounded-full text-[8px] font-black flex items-center justify-center ${
+                                  selectedGw === gw ? 'bg-emerald-400 text-emerald-950' : 'bg-indigo-500/90 text-white'
+                                }`}
+                              >
+                                {count}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
-                <button
-                  onClick={handleAddFixture}
-                  className="px-3 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-extrabold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md shadow-indigo-500/10 active:scale-95 shrink-0"
-                >
-                  <Plus className="w-3.5 h-3.5" /> Add Fixture
-                </button>
-              </div>
               </div>
 
               {/* Fixtures Grid Layout */}

@@ -96,7 +96,7 @@ const MyTeamPitch = ({
             return (
               <div
                 key={player.id}
-                className={`flex flex-col items-center relative rounded-xl p-0.5 transition-all shrink-0 min-w-[64px] ${getPlayerCardClass(player)}`}
+                className={`flex flex-col items-center relative rounded-xl p-0.5 transition-all shrink-0 min-w-[76px] ${getPlayerCardClass(player)}`}
               >
                 <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">
                   {label}
@@ -104,7 +104,7 @@ const MyTeamPitch = ({
                 <PitchPlayerCard
                   player={enrichedPlayer}
                   showPriceAndPoints={true}
-                  isSmall={true}
+                  isSmall={false}
                   onClick={() => handlePlayerClick(player)}
                 />
               </div>
@@ -115,7 +115,7 @@ const MyTeamPitch = ({
 
       {/* 2. Dedicated Webview Bench Side Card (Visible ONLY on desktop lg+) */}
       {bench && bench.length > 0 && (
-        <div className="hidden lg:flex lg:flex-col lg:w-28 shrink-0 bg-surface border border-border rounded-3xl p-3 shadow-card justify-around items-center">
+        <div className="hidden lg:flex lg:flex-col lg:w-32 shrink-0 bg-surface border border-border rounded-3xl p-3 shadow-card justify-around items-center">
           <span className="text-[10px] font-black text-text-muted uppercase tracking-wider text-center border-b border-border/60 pb-2 w-full">
             Substitutes
           </span>
@@ -137,7 +137,7 @@ const MyTeamPitch = ({
                 <PitchPlayerCard
                   player={enrichedPlayer}
                   showPriceAndPoints={true}
-                  isSmall={true}
+                  isSmall={false}
                   onClick={() => handlePlayerClick(player)}
                 />
               </div>
