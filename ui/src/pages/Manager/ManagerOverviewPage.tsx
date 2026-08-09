@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useSearch, useRouter } from "@tanstack/react-router";
-import { ArrowLeft, ShieldAlert, Users, Swords, LayoutGrid, Calendar, ChevronLeft, ChevronRight, Award } from "lucide-react";
+import { ArrowLeft, ShieldAlert, ShieldUser, Swords, LayoutGrid, Calendar, ChevronLeft, ChevronRight, Award } from "lucide-react";
 import { useManagerOverview, useStandings, useTeamDetails } from "../../features/standings/hooks";
 import { useManagerDetails } from "../../features/manager/hooks";
 import PitchPlayerCard from "../../components/PitchPlayerCard";
@@ -282,7 +282,7 @@ const ManagerOverviewPage = () => {
               </span>
             </div>
             <p className="text-[10px] text-text-muted font-medium mt-0.5 truncate flex items-center gap-1">
-              <Users className="w-3 h-3 shrink-0" />
+              <ShieldUser className="w-3 h-3 shrink-0" />
               <span className="truncate">{managers}</span>
             </p>
           </div>
@@ -334,9 +334,9 @@ const ManagerOverviewPage = () => {
         <div className="max-w-5xl mx-auto w-full space-y-4">
 
           {/* HERO / PROFILE CARD: large logo + team name + detailed managers */}
-          <div className="bg-surface border border-border rounded-3xl p-4 sm:p-6 shadow-card flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+          <div className="bg-surface border border-border rounded-3xl p-4 sm:p-6 shadow-card flex flex-row items-center gap-4 sm:gap-6">
             {logo ? (
-              <div className="relative shrink-0 self-center sm:self-auto">
+              <div className="relative shrink-0">
                 <div className="absolute inset-0 rounded-full bg-gradient-core blur-md opacity-40" />
                 <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-core p-1 shadow-lg">
                   <div className="w-full h-full rounded-full bg-card overflow-hidden flex items-center justify-center border border-white/20">
@@ -345,13 +345,13 @@ const ManagerOverviewPage = () => {
                 </div>
               </div>
             ) : (
-              <div className={`shrink-0 self-center sm:self-auto w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br ${crest.bgGradient} flex items-center justify-center text-4xl sm:text-5xl font-black text-white shadow-lg border border-white/10`}>
+              <div className={`shrink-0 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br ${crest.bgGradient} flex items-center justify-center text-4xl sm:text-5xl font-black text-white shadow-lg border border-white/10`}>
                 {crest.letter}
               </div>
             )}
 
-            <div className="flex-1 min-w-0 text-center sm:text-left">
-              <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap">
+            <div className="flex-1 min-w-0 text-left">
+              <div className="flex items-center gap-2 flex-wrap">
                 <h1 className="text-xl sm:text-2xl font-black tracking-tight text-text-primary">
                   {teamName}
                 </h1>
@@ -364,11 +364,11 @@ const ManagerOverviewPage = () => {
                 Managers
               </p>
 
-              <div className="flex flex-col items-center sm:items-start gap-2">
+              <div className="flex flex-col items-start gap-2">
                 {(managersList.length > 0 ? managersList : [managers || "Unknown"]).map((m, idx) => (
                   <div key={`${m}-${idx}`} className="flex items-center gap-2 text-sm font-medium text-text-secondary min-w-0">
                     <span className="w-7 h-7 rounded-full bg-primary/10 border border-primary/20 text-primary flex items-center justify-center shrink-0">
-                      <Users className="w-3.5 h-3.5" />
+                      <ShieldUser className="w-3.5 h-3.5" />
                     </span>
                     <span className="truncate">{m}</span>
                   </div>
