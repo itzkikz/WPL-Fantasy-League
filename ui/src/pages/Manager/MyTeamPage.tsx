@@ -705,6 +705,8 @@ const MyTeamPage = () => {
       </div>
 
       {/* Player Selection Actions Overlay Modal */}
+      {/* Action callbacks (Make Cap / Make VC / Substitute) are only wired up on the current-tab view —
+          past gameweeks in the History tab are read-only, so those buttons must not appear. */}
       <PlayerStatsModal
         isOpen={actionOverlayOpen}
         onClose={() => {
@@ -713,10 +715,10 @@ const MyTeamPage = () => {
         }}
         player={selectedPlayer}
         playerStats={selectedPlayer?.playerStats}
-        onMakeCaptain={handleMakeCaptain}
-        onMakeViceCaptain={handleMakeViceCaptain}
-        onSubstitute={handleSubstituteInitiate}
-        pickMyTeam={isPickingAllowed}
+        onMakeCaptain={headerTab === "current" ? handleMakeCaptain : undefined}
+        onMakeViceCaptain={headerTab === "current" ? handleMakeViceCaptain : undefined}
+        onSubstitute={headerTab === "current" ? handleSubstituteInitiate : undefined}
+        pickMyTeam={headerTab === "current" && isPickingAllowed}
       />
 
       {/* Save Confirmation Modal */}

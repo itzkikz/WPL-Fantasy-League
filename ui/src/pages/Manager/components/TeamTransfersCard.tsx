@@ -1,6 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
-import { UserMinus, UserPlus, RotateCcw } from "lucide-react";
+import { UserMinus, UserPlus, RotateCcw, ArrowLeftRight } from "lucide-react";
 import { Transfer } from "../../../features/transfers/types";
 
 interface TeamTransfersCardProps {
@@ -14,7 +14,7 @@ const formatValue = (v: number | null | undefined): string => {
 
 export const TeamTransfersCard: React.FC<TeamTransfersCardProps> = ({ transfers = [] }) => {
   const entries = transfers
-    .filter((t) => t.type === "release" || t.type === "sign")
+    .filter((t) => t.type === "swap" || t.type === "release" || t.type === "sign")
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   if (entries.length === 0) return null;
@@ -36,7 +36,36 @@ export const TeamTransfersCard: React.FC<TeamTransfersCardProps> = ({ transfers 
       <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1">
         {entries.map((t) => {
           const isRelease = t.type === "release";
+          const isSwap = t.type === "swap";
           const player = isRelease ? t.playerOut : t.playerIn;
+
+          if (isSwap) {
+            return (
+              <div
+                key={t._id}
+                className="flex items-center gap-2 rounded-lg border border-indigo-500/20 bg-indigo-500/5 px-2.5 py-2"
+              >
+                <ArrowLeftRight className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5 text-xs font-extrabold min-w-0">
+                    <span className="text-emerald-400 truncate">{t.playerIn?.name || "?"}</span>
+                    <span className="text-[10px] text-text-muted shrink-0">→</span>
+                    <span className="text-rose-400 truncate">{t.playerOut?.name || "?"}</span>
+                  </div>
+                  <p className="text-[9px] font-bold text-text-muted flex items-center gap-1 mt-0.5">
+                    Swapped
+                    <span className="text-text-muted">•</span>
+                    {dayjs(t.date).format("DD MMM YYYY")}
+                  </p>
+                </div>
+                <div className="flex flex-col items-end shrink-0 text-[10px] font-mono font-black leading-tight">
+                  <span className="text-emerald-400">{formatValue(t.playerIn?.auctionPrice)}</span>
+                  <span className="text-rose-400">{formatValue(t.playerOut?.auctionPrice)}</span>
+                </div>
+              </div>
+            );
+          }
+
           return (
             <div
               key={t._id}

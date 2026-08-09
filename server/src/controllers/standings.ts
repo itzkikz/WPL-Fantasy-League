@@ -16,6 +16,7 @@ import { Team } from "../models/Team";
 import { Gameweek } from "../models/Gameweek";
 import { PlayerStats } from "../models/PlayerStats";
 import { Transfer } from "../models/Transfer";
+import { Fixture } from "../models/Fixture";
 
 let cachedStandingsData: StandingsResponse[] | null = null;
 let lastStandingsFetchTime = 0;
@@ -865,6 +866,32 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
         }
         const targetGw = currentGwDoc ? currentGwDoc.number : 1;
 
+        // Upcoming fixtures for the squad's clubs (next non-completed gameweeks)
+        const squadTeamIds = [...new Set(playersMap.map(p => p.teamId).filter(Boolean))];
+        const upcomingGwDocs = (await Gameweek.find({ isCompleted: { $ne: true }, number: { $gte: targetGw } }).select('number').lean()) as any[];
+        const upcomingRounds = upcomingGwDocs.map((g) => g.number);
+        const upcomingDocs = (await Fixture.find({
+            'roundInfo.round': { $in: upcomingRounds },
+            $or: [
+                { 'homeTeam.id': { $in: squadTeamIds } },
+                { 'awayTeam.id': { $in: squadTeamIds } }
+            ]
+        }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean()) as any[];
+
+        const upcomingTeamIds = [...new Set(upcomingDocs.flatMap((f: any) => [f.homeTeam?.id, f.awayTeam?.id]).filter(Boolean))];
+        const upcomingTeamDocs = (await Team.find({ id: { $in: upcomingTeamIds } }).lean()) as any[];
+        const upcomingTeamMap = new Map(upcomingTeamDocs.map((t: any) => [t.id, t]));
+
+        const fixturesByTeam = new Map<number, any[]>();
+        for (const f of upcomingDocs) {
+            const homeId = f.homeTeam?.id;
+            const awayId = f.awayTeam?.id;
+            if (homeId && !fixturesByTeam.has(homeId)) fixturesByTeam.set(homeId, []);
+            if (awayId && !fixturesByTeam.has(awayId)) fixturesByTeam.set(awayId, []);
+            if (homeId) fixturesByTeam.get(homeId)!.push({ fixture: f, isHome: true, opponentId: awayId });
+            if (awayId) fixturesByTeam.get(awayId)!.push({ fixture: f, isHome: false, opponentId: homeId });
+        }
+
         // Fetch PlayerStats for points
         const playerStatsList = await PlayerStats.find({
             playerId: { $in: [...playerIds, ...playerIds.map(id => Number(id)).filter(n => !isNaN(n))] }
@@ -892,7 +919,40 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
             const playerDoc = pMap.get(pick.playerId);
             const teamDoc = playerDoc ? teamMap.get(playerDoc.teamId) : null;
 
+            // Next 3 fixtures for this player's club
+            const teamFixtures = playerDoc ? (fixturesByTeam.get(playerDoc.teamId) || []) : [];
+            const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }) => {
+                const opponentTeam = upcomingTeamMap.get(opponentId);
+                return {
+                    gw: f.roundInfo?.round || 0,
+                    opponent_short_name: opponentTeam?.nameCode || opponentTeam?.shortName || "UNK",
+                    opponent_logo: opponentTeam?.logo || "",
+                    opponent_color: opponentTeam?.teamColors?.primary || "#003399",
+                    opponent_text_color: opponentTeam?.teamColors?.text || "#ffffff",
+                    my_team_short_name: teamDoc?.nameCode || "UNK",
+                    my_team_logo: teamDoc?.logo || "",
+                    is_home: isHome
+                };
+            });
+            while (upcomingFixtures.length < 3) {
+                const nextGw = targetGw + upcomingFixtures.length;
+                upcomingFixtures.push({
+                    gw: nextGw,
+                    opponent_short_name: "TBD",
+                    opponent_logo: "",
+                    opponent_color: "#1b1035",
+                    opponent_text_color: "#ffffff",
+                    my_team_short_name: teamDoc?.nameCode || "UNK",
+                    my_team_logo: teamDoc?.logo || "",
+                    is_home: true
+                });
+            }
+
             const ps = playerStatsMap.get(pick.playerId) || playerStatsMap.get(Number(pick.playerId));
+            // Recent form (last 5 gameweeks)
+            const recentForm = (ps && Array.isArray(ps.gameweeks))
+                ? getGameweekForm(ps.gameweeks, targetGw).slice(-5)
+                : [];
             const sumGwPts = (ps && Array.isArray(ps.gameweeks))
                 ? ps.gameweeks.reduce((acc: number, gw: any) => acc + (Number(gw.points) || 0), 0)
                 : 0;
@@ -925,7 +985,9 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
                     auctionPrice: playerDoc?.auctionPrice,
                     overall: {
                         total_point: totalSeasonPoints
-                    }
+                    },
+                    recent_form: recentForm,
+                    upcoming_fixtures: upcomingFixtures
                 },
                 position: resolvePosition(playerDoc?.position || ''),
                 price: playerDoc?.price?.nowCost || 0,
@@ -1011,6 +1073,7 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
                 rank,
                 totalPoints,
                 gwPoints,
+                finance: fantasyTeam.finance || null,
                 currentSquad: currentSquadFormation,
                 history: historyList,
                 transfers
