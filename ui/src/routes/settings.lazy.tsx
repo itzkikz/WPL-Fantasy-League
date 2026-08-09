@@ -9,7 +9,7 @@ export const Route = createLazyFileRoute("/settings")({
 function RouteComponent() {
   return (
     <ProtectedRoute>
-      <div className="flex flex-col h-screen text-center">
+      <div className="flex flex-col h-dvh text-center">
         <Settings />
       </div>
     </ProtectedRoute>
