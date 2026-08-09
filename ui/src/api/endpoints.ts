@@ -22,6 +22,7 @@ export const API_ENDPOINTS = {
     DASHBOARD: '/manager/dashboard',
     MY_FIXTURES: '/manager/my-fixtures',
     FACTS: '/manager/facts',
+    DEVICE_REPORT: '/manager/device-report',
   },
   NOTIFICATION: {
     BASE: '/notify/notifications',

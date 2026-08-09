@@ -10,6 +10,7 @@ import { ApiConfig } from '../models/ApiConfig';
 import { MatchDetails } from '../models/MatchDetails';
 import { User } from '../models/User';
 import { FantasyTeam } from '../models/FantasyTeam';
+import { Subscriber } from '../models/Subscriber';
 import { fetchFixturesByDate } from '../services/apiSports.service';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -533,29 +534,73 @@ export const getUsers = async (req: Request, res: Response) => {
             return res.status(403).json({ error: 'Access denied. Admins only.' });
         }
 
+        // all=true -> full user directory (admins + team managers included, with their fantasy team attached)
+        // default  -> manager-picker mode: non-admins not yet attached to any fantasy team
+        const all = req.query.all === 'true' || req.query.all === '1';
         const excludeTeamId = req.query.excludeTeamId as string;
 
         // Collect user IDs already attached to a fantasy team
         const teamQuery: any = {};
-        if (excludeTeamId && mongoose.Types.ObjectId.isValid(excludeTeamId)) {
+        if (!all && excludeTeamId && mongoose.Types.ObjectId.isValid(excludeTeamId)) {
             teamQuery._id = { $ne: excludeTeamId };
         }
-        const teams = await FantasyTeam.find(teamQuery, 'managers createdBy').lean();
+        const teams = await FantasyTeam.find(teamQuery, 'name managers createdBy').lean();
         const takenUserIds = new Set<string>();
+        const teamByUser = new Map<string, { id: string; name: string }>();
         for (const t of teams) {
-            if (t.createdBy) takenUserIds.add(String(t.createdBy));
-            for (const m of t.managers || []) takenUserIds.add(String(m));
+            if (t.createdBy) {
+                takenUserIds.add(String(t.createdBy));
+                teamByUser.set(String(t.createdBy), { id: String(t._id), name: t.name });
+            }
+            for (const m of t.managers || []) {
+                takenUserIds.add(String(m));
+                if (!teamByUser.has(String(m))) {
+                    teamByUser.set(String(m), { id: String(t._id), name: t.name });
+                }
+            }
         }
 
-        const userQuery: any = {
-            role: { $ne: 'admin' },
-        };
-        if (takenUserIds.size > 0) {
-            userQuery._id = { $nin: Array.from(takenUserIds) };
+        const userQuery: any = {};
+        if (!all) {
+            userQuery.role = { $ne: 'admin' };
+            if (takenUserIds.size > 0) {
+                userQuery._id = { $nin: Array.from(takenUserIds) };
+            }
         }
 
         const users = await User.find(userQuery).select('-password').sort({ createdAt: -1 });
-        res.status(200).json({ data: users });
+        let payload: any = users;
+        if (all) {
+            // Push subscription status derived from the Subscriber collection (source of truth)
+            const subAgg = await Subscriber.aggregate([
+                { $group: { _id: '$userId', count: { $sum: 1 }, firstAt: { $min: '$createdAt' } } },
+            ]);
+            const subMap = new Map<string, { count: number; firstAt: Date | null }>();
+            for (const s of subAgg) {
+                subMap.set(String(s._id), { count: s.count, firstAt: s.firstAt || null });
+            }
+
+            payload = users.map((u) => {
+                const doc = u as any; // timestamps added by schema { timestamps: true } not on IUser
+                const team = teamByUser.get(String(u._id));
+                const sub = subMap.get(String(u._id));
+                return {
+                    _id: u._id,
+                    username: u.username,
+                    email: u.email,
+                    info: u.info,
+                    role: u.role,
+                    createdAt: doc.createdAt,
+                    updatedAt: doc.updatedAt,
+                    fantasyTeam: team ? { id: team.id, name: team.name } : null,
+                    device: u.device || null,
+                    pushSubscribed: sub ? sub.count > 0 : false,
+                    pushSubscribedCount: sub ? sub.count : 0,
+                    firstSubscribedAt: sub ? sub.firstAt : null,
+                };
+            });
+        }
+        res.status(200).json({ data: payload });
     } catch (error) {
         console.error('Error fetching users:', error);
         res.status(500).json({ error: 'Failed to fetch users' });

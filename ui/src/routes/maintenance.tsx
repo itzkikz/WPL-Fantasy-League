@@ -5,7 +5,7 @@ export const Route = createFileRoute('/maintenance')({
 })
 
 function RouteComponent() {
-  return <div className="flex flex-col items-center justify-center h-screen text-center">
+  return <div className="flex flex-col items-center justify-center h-dvh text-center">
       <h1 className="text-2xl font-semibold mb-2 animate-pulse">
         App Under Maintenance
       </h1>

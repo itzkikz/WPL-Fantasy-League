@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useNavigate, useSearch, useRouter } from "@tanstack/react-router";
 import { ArrowLeft, LayoutGrid, Award, ShieldAlert, List, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { useManagerDetails } from "../../features/manager/hooks";
 import { useTeamDetails, useStandings } from "../../features/standings/hooks";
@@ -67,6 +67,7 @@ const GameweekSwitcher = ({
 
 const GameweekBreakdownPage = () => {
   const navigate = useNavigate();
+  const router = useRouter();
   const search = useSearch({ from: "/gameweek-breakdown" });
   const gw = search.gw;
 
@@ -212,6 +213,17 @@ const GameweekBreakdownPage = () => {
     setShowOverlay(true);
   };
 
+  const handleGoBack = () => {
+    // Go back to where the user came from, falling back to the previous page
+    if (router.history.canGoBack()) {
+      router.history.back();
+    } else if (paramTeamId) {
+      navigate({ to: "/manager-overview", search: { teamId: paramTeamId } });
+    } else {
+      navigate({ to: "/my-team", search: { tab: "history" } });
+    }
+  };
+
   const isLoading = isManagerLoading || isStandingsLoading || (!!teamId && isDetailsLoading);
 
   if (isLoading) {
@@ -229,7 +241,7 @@ const GameweekBreakdownPage = () => {
         <ShieldAlert className="w-10 h-10 text-rose-500 mb-2" />
         <p className="text-sm font-extrabold mb-3">Failed to load gameweek details.</p>
         <button
-          onClick={() => navigate({ to: "/my-team" })}
+          onClick={handleGoBack}
           className="bg-primary hover:bg-primary-dark text-white rounded-xl px-4 py-2 text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-lg shadow-primary/30"
         >
           Go Back
@@ -245,13 +257,7 @@ const GameweekBreakdownPage = () => {
       <div className="lg:hidden shrink-0">
         <header className="flex items-center gap-4 px-4 py-3 bg-surface border-b border-[var(--color-border-divider)] sticky top-0 z-30">
           <button
-            onClick={() => {
-              if (paramTeamId) {
-                navigate({ to: "/manager-overview", search: { teamId: paramTeamId } });
-              } else {
-                navigate({ to: "/my-team", search: { tab: "history" } });
-              }
-            }}
+            onClick={handleGoBack}
             className="flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-text-primary active:scale-95 transition-all cursor-pointer"
             aria-label="Go back"
           >
@@ -399,7 +405,8 @@ const GameweekBreakdownPage = () => {
         </div>
 
         {/* RIGHT COLUMN PANEL (The Team View / Points Table on Webview) */}
-        <div className="flex-1 flex flex-col min-h-0 h-full overflow-y-auto">
+        {/* Mobile: no height clamp so the full pitch scrolls with the page */}
+        <div className="flex-1 flex flex-col min-h-0 lg:h-full lg:overflow-y-auto">
           
           {/* Mobile Format Selector (Visible on mobile < lg when Squad active) */}
           {activeTab === "squad" && (
@@ -432,13 +439,14 @@ const GameweekBreakdownPage = () => {
           )}
 
           {/* Interactive Squad / Pitch / Points Table View */}
-          <div className="flex-1 flex flex-col min-h-0 overflow-hidden px-4 lg:px-0 py-1">
+          <div className="flex-1 flex flex-col min-h-0 lg:overflow-hidden px-4 lg:px-0 py-1">
             {activeTab === "squad" ? (
               squadView === "pitch" ? (
                 /* Pitch View Container */
-                <div className="flex-1 flex flex-col lg:flex-row gap-3 max-w-3xl mx-auto w-full h-full min-h-0 animate-in fade-in duration-300">
+                <div className="flex-1 flex flex-col lg:flex-row gap-3 max-w-3xl mx-auto w-full lg:h-full min-h-0 animate-in fade-in duration-300">
                   {/* Pitch Card */}
-                  <div className="relative flex-1 rounded-3xl overflow-hidden border border-border shadow-card bg-background h-full flex flex-col">
+                  {/* Mobile: min-height keeps the full pitch + bench visible so the page scrolls instead of clipping */}
+                  <div className="relative flex-1 rounded-3xl overflow-hidden border border-border shadow-card bg-background flex flex-col min-h-[560px] sm:min-h-[600px] lg:min-h-0 lg:h-full">
                     {/* Pitch image layer */}
                     <div className="pitch-bg">
                       <img

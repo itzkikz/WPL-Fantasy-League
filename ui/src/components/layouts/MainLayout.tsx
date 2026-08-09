@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Outlet, useNavigate, useMatchRoute, useLocation } from "@tanstack/react-router";
 import { Bell } from "lucide-react";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
@@ -10,6 +10,7 @@ import PWAInstallBanner from "../PWAInstallBanner";
 import { useValidateToken } from "../../features/auth/hooks";
 import { useUserStore } from "../../store/useUserStore";
 import { useManagerDetails } from "../../features/manager/hooks";
+import { reportDevice } from "../../features/device/reportDevice";
 
 export const MainLayout = () => {
     const navigate = useNavigate();
@@ -38,6 +39,9 @@ export const MainLayout = () => {
       skipValidation: isGuest && isGuestAllowedPath,
     });
 
+    // Report device + PWA install status once per visit, after auth is confirmed
+    const deviceReported = useRef(false);
+
     const isAdmin = user?.role === "admin";
     const isUser = user?.role === "user";
 
@@ -46,6 +50,10 @@ export const MainLayout = () => {
     useEffect(() => {
         if (data?.valid) {
             setUser({ teamName: data?.user?.userId, role: data?.user?.role });
+            if (!deviceReported.current) {
+                deviceReported.current = true;
+                reportDevice();
+            }
         }
     }, [data, setUser]);
 
@@ -77,7 +85,7 @@ export const MainLayout = () => {
             <main className="font-outfit min-h-screen shadow-sm text-primary flex flex-col">
                 <PWAInstallBanner />
                 <div className="flex-1 flex">
-                    <div className="flex h-screen flex-col mx-auto w-full overflow-y-auto pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
+                    <div className="flex h-dvh flex-col mx-auto w-full overflow-y-auto pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0">
                         <Outlet />
                         <MobileNavbar />
                     </div>
@@ -110,7 +118,7 @@ export const MainLayout = () => {
         <main className="font-outfit min-h-screen shadow-sm text-primary flex flex-col">
             <PWAInstallBanner />
             <div className="flex-1 flex">
-                <div className={`flex h-screen flex-col mx-auto w-full ${currentPath === "/my-team" ? "overflow-hidden" : "overflow-y-auto"}`} style={{ WebkitOverflowScrolling: 'touch' }}>
+                <div className={`flex h-dvh flex-col mx-auto w-full ${currentPath === "/my-team" ? "overflow-hidden" : "overflow-y-auto"}`} style={{ WebkitOverflowScrolling: 'touch' }}>
                     {(currentPath === "/home" || currentPath === "/home/") && (
                         <header className="header relative w-full h-12 shrink-0 overflow-hidden bg-surface border-b border-[var(--color-border-divider)] text-text-primary lg:hidden" style={{ viewTransitionName: 'header-static' }}>
                             {/* Animated gradient overlay */}

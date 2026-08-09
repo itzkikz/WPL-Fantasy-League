@@ -1,4 +1,4 @@
-import { getRouteApi, useNavigate } from "@tanstack/react-router";
+import { getRouteApi, useNavigate, useRouter } from "@tanstack/react-router";
 import { useTeamDetails, useStandings } from "../../features/standings/hooks";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, ArrowLeft, ChevronDown } from "lucide-react";
@@ -14,6 +14,7 @@ import "../Manager/MyTeamPage.css";
 const TeamDetailsPage = () => {
   const route = getRouteApi("/standings/$teamId");
   const navigate = useNavigate();
+  const router = useRouter();
   const { teamId } = route.useParams();
 
   const { data: standings } = useStandings();
@@ -92,9 +93,12 @@ const TeamDetailsPage = () => {
   };
 
   const handleGoBack = () => {
-    navigate({
-      to: "/standings",
-    });
+    // Go back to where the user came from, falling back to standings
+    if (router.history.canGoBack()) {
+      router.history.back();
+    } else {
+      navigate({ to: "/standings" });
+    }
   };
 
   const getPlayerPrice = (p: Player) => {
@@ -147,7 +151,7 @@ const TeamDetailsPage = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen bg-background text-white select-none">
+      <div className="flex flex-col items-center justify-center h-dvh bg-background text-white select-none">
         <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mb-3"></div>
         <p className="text-sm font-bold text-secondary">Loading team details...</p>
       </div>
@@ -156,7 +160,7 @@ const TeamDetailsPage = () => {
 
   if (isError) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen bg-background text-rose-400 p-6 text-center select-none">
+      <div className="flex flex-col items-center justify-center h-dvh bg-background text-rose-400 p-6 text-center select-none">
         <svg className="w-10 h-10 text-rose-500 mb-2" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
         </svg>

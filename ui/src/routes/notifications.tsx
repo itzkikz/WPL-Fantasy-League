@@ -9,7 +9,7 @@ export const Route = createFileRoute("/notifications")({
 function RouteComponent() {
   return (
     <ProtectedRoute>
-      <div className="flex h-screen">
+      <div className="flex h-dvh">
         <Notifications />
       </div>
     </ProtectedRoute>

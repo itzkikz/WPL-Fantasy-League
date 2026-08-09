@@ -22,7 +22,7 @@ export default function ProtectedRoute({
     }
   }, [data, isError, navigate]);
 
-  if (isLoading) return <div className="h-screen flex text-center justify-center items-center">Checking authentication...</div>;
+  if (isLoading) return <div className="h-dvh flex text-center justify-center items-center">Checking authentication...</div>;
 
   // Only render children if token is valid
   if (!data?.valid) return null;

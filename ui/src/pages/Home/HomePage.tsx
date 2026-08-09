@@ -233,7 +233,7 @@ const HomePage = () => {
               rankChange={String(Math.abs(data.teamOverview.rankChange))}
               totalPoints={String(data.teamOverview.totalPoints)}
               gameweekPoints={data.teamOverview.gwPoints}
-              onClick={() => navigate({ to: "/my-team" })}
+              onClick={() => navigate({ to: "/manager-overview" })}
             />
           </div>
 

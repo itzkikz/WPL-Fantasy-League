@@ -9,6 +9,7 @@ import {
   useDeleteNotification,
 } from "../features/notifications/hooks";
 import { Notifications as NotificationType } from "../features/notifications/types";
+import { reportDevice } from "../features/device/reportDevice";
 import NotificationItem from "../components/NotificationItem";
 import {
   BellRing,
@@ -75,6 +76,8 @@ export default function Notifications() {
 
         mutation.mutate({ subscription });
         setIsSubscribed(true);
+        // Fresh device report so push status + last-seen reflect immediately
+        reportDevice();
       } catch (error) {
         console.error("Failed to subscribe the user:", error);
       }
