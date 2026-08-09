@@ -44,6 +44,16 @@ const PitchPlayerCard = ({
     !hasPlayedMins
   );
 
+  // Recent form dots (last 5 GWs) — rendered when the payload includes recent_form
+  const recentForm = player?.playerStats?.recent_form;
+  const showFormDots = Array.isArray(recentForm) && recentForm.length > 0;
+  const formDotColor = (pts: number) => {
+    if (pts >= 6) return "bg-emerald-400";
+    if (pts >= 3) return "bg-amber-400";
+    if (pts > 0) return "bg-orange-500";
+    return "bg-slate-600";
+  };
+
   return (
     <div
       onClick={onClick}
@@ -172,6 +182,19 @@ const PitchPlayerCard = ({
               )}
             </p>
           </div>
+        </div>
+      )}
+
+      {/* Recent Form Dots (last 5 gameweeks) */}
+      {showFormDots && (
+        <div className="flex items-center justify-center gap-[3px] mt-1 w-full">
+          {recentForm.slice(-5).map((f: any, idx: number) => (
+            <span
+              key={idx}
+              title={`GW ${f.gw}: ${f.points} pts`}
+              className={`w-[7px] h-[7px] rounded-full ${formDotColor(Number(f.points) || 0)} shadow-sm ${idx === recentForm.slice(-5).length - 1 ? "ring-2 ring-secondary/60" : ""}`}
+            />
+          ))}
         </div>
       )}
     </div>
