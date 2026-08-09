@@ -4,8 +4,9 @@ import { useState, useMemo } from "react";
 import { useMyH2HLeagues, useH2HStandings, useH2HLeagueFixtures } from "../features/h2h/hooks";
 import { useManagerDetails } from "../features/manager/hooks";
 import { H2HLeague, H2HStanding, H2HFixture } from "../features/h2h/types";
-import { Shield, Swords, ChevronDown, Calendar, Crown, Clock, Eye } from "lucide-react";
+import { Shield, Swords, ChevronDown, Calendar, Crown, Clock, Eye, X, LayoutGrid, BarChart3 } from "lucide-react";
 import { useTeamDetails } from "../features/standings/hooks";
+import { Modal } from "../components/common/Modal";
 
 export const Route = createLazyFileRoute("/h2h")({
   component: () => (
@@ -110,20 +111,54 @@ const compileTeamTotals = (details: any) => {
   return totals;
 };
 
-function H2HFixtureDetails({ homeTeamId, awayTeamId, gameweek }: { homeTeamId: string; awayTeamId: string; gameweek: number }) {
+const POSITION_GROUPS: { key: 'GK' | 'DEF' | 'MID' | 'FWD'; label: string }[] = [
+  { key: 'GK', label: 'Goalkeeper' },
+  { key: 'DEF', label: 'Defenders' },
+  { key: 'MID', label: 'Midfielders' },
+  { key: 'FWD', label: 'Forwards' },
+];
+
+const PlayerRow = ({ player, accent }: { player: any; accent: 'secondary' | 'primary' }) => (
+  <div className="flex items-center justify-between gap-1.5 py-1.5 px-2 rounded-lg bg-background/40 border border-border/40 min-w-0">
+    <div className="flex items-center gap-1.5 min-w-0">
+      {(player.isCaptain || player.isViceCaptain) && (
+        <span
+          className={`text-[8px] font-black w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${
+            player.isCaptain
+              ? 'bg-amber-400/20 text-amber-400 border border-amber-400/40'
+              : 'bg-secondary/20 text-secondary border border-secondary/40'
+          }`}
+        >
+          {player.isCaptain ? 'C' : 'V'}
+        </span>
+      )}
+      <span className="text-[11px] font-bold text-text-primary truncate">
+        {player.name || 'Unknown'}
+      </span>
+    </div>
+    <span className={`text-[11px] font-mono font-black shrink-0 ${accent === 'secondary' ? 'text-secondary' : 'text-primary'}`}>
+      {player.point ?? 0}
+    </span>
+  </div>
+);
+
+function H2HFixtureModal({ fixture, isOpen, onClose }: { fixture: H2HFixture | null; isOpen: boolean; onClose: () => void }) {
+  const [activeTab, setActiveTab] = useState<'lineup' | 'stats'>('lineup');
+  const homeTeamId = fixture?.homeTeam?._id ?? '';
+  const awayTeamId = fixture?.awayTeam?._id ?? '';
+  const gameweek = fixture?.gameweek ?? 0;
+
   const { data: homeDetails, isLoading: homeLoading } = useTeamDetails(homeTeamId, gameweek);
   const { data: awayDetails, isLoading: awayLoading } = useTeamDetails(awayTeamId, gameweek);
 
-  if (homeLoading || awayLoading) {
-    return (
-      <div className="py-8 flex justify-center items-center">
-        <div className="w-6 h-6 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
-
+  const isLoading = homeLoading || awayLoading;
   const homeTotals = compileTeamTotals(homeDetails);
   const awayTotals = compileTeamTotals(awayDetails);
+
+  const homeTeamName = fixture?.homeTeam?.name || homeDetails?.team_name || 'Home Team';
+  const awayTeamName = fixture?.awayTeam?.name || awayDetails?.team_name || 'Away Team';
+
+  const getStarters = (details: any, pos: 'GK' | 'DEF' | 'MID' | 'FWD') => details?.starting?.[pos] || [];
 
   const statRows = [
     { key: 'minutes', label: 'Minutes Played' },
@@ -145,85 +180,181 @@ function H2HFixtureDetails({ homeTeamId, awayTeamId, gameweek }: { homeTeamId: s
   ];
 
   return (
-    <div 
-      className="border-t border-border/60 pt-4 mt-3 animate-in fade-in slide-in-from-top-1 duration-200"
-      onClick={(e) => e.stopPropagation()}
-    >
-      {/* Header with Team names */}
-      <div className="grid grid-cols-3 text-center mb-3 pb-2 border-b border-border/60">
-        <div className="text-xs font-black text-secondary truncate px-1">
-          {homeDetails?.team_name || 'Home Team'}
+    <Modal isOpen={isOpen} onClose={onClose} maxWidthClass="max-w-2xl">
+      {/* Header */}
+      <div className="flex items-center justify-between p-4 border-b border-border/60 bg-background/50 flex-none">
+        <div className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-xl bg-secondary/15 border border-secondary/30 flex items-center justify-center text-secondary">
+            <Swords className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="text-sm font-black text-text-primary">Fixture Details</h3>
+            <p className="text-[10px] text-text-muted font-medium">GW {gameweek} · Player vs Player</p>
+          </div>
         </div>
-        <div className="text-[10px] font-bold text-text-muted uppercase tracking-widest self-center">
-          TEAM STATS
+        <button
+          onClick={onClose}
+          className="p-1.5 rounded-xl bg-background border border-border text-text-muted hover:text-text-primary active:scale-95 transition-all cursor-pointer"
+        >
+          <X className="w-4 h-4" />
+        </button>
+      </div>
+
+      {/* Score strip */}
+      <div className="px-4 py-3 flex items-center justify-between gap-3 border-b border-border/40 bg-elevated/40 flex-none">
+        <div className="flex-1 min-w-0 flex items-center gap-2">
+          {fixture?.homeTeam?.logo && (
+            <img src={fixture.homeTeam.logo} alt={`${homeTeamName} logo`} className="w-7 h-7 object-contain shrink-0" />
+          )}
+          <span className="text-xs font-extrabold text-text-primary truncate">{homeTeamName}</span>
         </div>
-        <div className="text-xs font-black text-secondary truncate px-1">
-          {awayDetails?.team_name || 'Away Team'}
+        <div className="flex items-center gap-2 bg-background border border-border rounded-xl px-2.5 py-1 shadow-inner shrink-0">
+          <span className="text-base font-black font-mono text-text-primary">{fixture?.homeScore ?? 0}</span>
+          <span className="text-[10px] font-black text-text-muted font-mono">—</span>
+          <span className="text-base font-black font-mono text-text-primary">{fixture?.awayScore ?? 0}</span>
+        </div>
+        <div className="flex-1 min-w-0 flex items-center justify-end gap-2 text-right">
+          <span className="text-xs font-extrabold text-text-primary truncate">{awayTeamName}</span>
+          {fixture?.awayTeam?.logo && (
+            <img src={fixture.awayTeam.logo} alt={`${awayTeamName} logo`} className="w-7 h-7 object-contain shrink-0" />
+          )}
         </div>
       </div>
 
-      {/* Stats list */}
-      <div className="space-y-1">
-        {statRows.map((row) => {
-          const valHome = homeTotals[row.key as keyof typeof homeTotals] ?? 0;
-          const valAway = awayTotals[row.key as keyof typeof awayTotals] ?? 0;
+      {/* Tabs */}
+      <div className="flex gap-1 px-4 pt-3 flex-none">
+        <button
+          onClick={() => setActiveTab('lineup')}
+          className={`flex-1 flex items-center justify-center gap-1.5 pb-2.5 text-[11px] font-extrabold uppercase tracking-wider transition-all relative cursor-pointer ${
+            activeTab === 'lineup' ? 'text-secondary' : 'text-text-muted hover:text-text-primary'
+          }`}
+        >
+          <LayoutGrid className="w-3.5 h-3.5" />
+          Starting Lineup
+          {activeTab === 'lineup' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />}
+        </button>
+        <button
+          onClick={() => setActiveTab('stats')}
+          className={`flex-1 flex items-center justify-center gap-1.5 pb-2.5 text-[11px] font-extrabold uppercase tracking-wider transition-all relative cursor-pointer ${
+            activeTab === 'stats' ? 'text-secondary' : 'text-text-muted hover:text-text-primary'
+          }`}
+        >
+          <BarChart3 className="w-3.5 h-3.5" />
+          Team Stats
+          {activeTab === 'stats' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary" />}
+        </button>
+      </div>
 
-          // Determine colors based on higher value (except for cards and penalty misses where lower is better)
-          const isLowerBetter = ['yellowCards', 'redCards', 'penaltyMissed'].includes(row.key);
-          const isHomeWinner = isLowerBetter ? valHome < valAway : valHome > valAway;
-          const isAwayWinner = isLowerBetter ? valAway < valHome : valAway > valHome;
-          const isDraw = valHome === valAway;
-
-          const homeColor = isDraw 
-            ? 'text-text-secondary' 
-            : isHomeWinner 
-              ? 'text-emerald-400 font-extrabold' 
-              : 'text-text-muted';
-
-          const awayColor = isDraw 
-            ? 'text-text-secondary' 
-            : isAwayWinner 
-              ? 'text-emerald-400 font-extrabold' 
-              : 'text-text-muted';
-
-          if (row.highlight) {
-            return (
-              <div 
-                key={row.key} 
-                className="grid grid-cols-3 items-center py-2.5 px-3 rounded-xl bg-secondary/15 border border-secondary/30 text-center font-black mt-2"
-              >
-                <div className="text-sm text-secondary font-mono">
-                  {valHome}
-                </div>
-                <div className="text-xs text-text-primary uppercase tracking-wider">
-                  {row.label}
-                </div>
-                <div className="text-sm text-secondary font-mono">
-                  {valAway}
-                </div>
+      {/* Body */}
+      <div className="p-4 overflow-y-auto flex-1">
+        {isLoading ? (
+          <div className="py-10 flex justify-center items-center">
+            <div className="w-6 h-6 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : activeTab === 'lineup' ? (
+          <div className="space-y-4">
+            {/* Team labels */}
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-secondary/10 border border-secondary/30 rounded-xl px-3 py-2 text-center">
+                <p className="text-[10px] font-black text-secondary truncate">{homeTeamName}</p>
               </div>
-            );
-          }
-
-          return (
-            <div 
-              key={row.key} 
-              className="grid grid-cols-3 items-center py-1.5 px-3 hover:bg-elevated/40 rounded-lg transition-colors text-center text-xs"
-            >
-              <div className={`font-mono ${homeColor}`}>
-                {valHome}
-              </div>
-              <div className="text-[10px] text-text-muted font-medium">
-                {row.label}
-              </div>
-              <div className={`font-mono ${awayColor}`}>
-                {valAway}
+              <div className="bg-primary/10 border border-primary/30 rounded-xl px-3 py-2 text-center">
+                <p className="text-[10px] font-black text-primary truncate">{awayTeamName}</p>
               </div>
             </div>
-          );
-        })}
+
+            {POSITION_GROUPS.map((group) => {
+              const homePlayers = getStarters(homeDetails, group.key);
+              const awayPlayers = getStarters(awayDetails, group.key);
+              if (homePlayers.length === 0 && awayPlayers.length === 0) return null;
+
+              return (
+                <div key={group.key} className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[9px] font-black uppercase tracking-widest text-text-muted">{group.label}</span>
+                    <span className="text-[8px] font-black text-secondary bg-secondary/10 px-1.5 py-0.5 rounded font-mono">{group.key}</span>
+                    <div className="flex-1 h-px bg-border/60" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="space-y-1">
+                      {homePlayers.length > 0 ? (
+                        homePlayers.map((p: any, i: number) => <PlayerRow key={i} player={p} accent="secondary" />)
+                      ) : (
+                        <div className="h-8 rounded-lg bg-background/30 border border-dashed border-border/50 flex items-center justify-center text-[9px] text-text-muted">No lineup</div>
+                      )}
+                    </div>
+                    <div className="space-y-1">
+                      {awayPlayers.length > 0 ? (
+                        awayPlayers.map((p: any, i: number) => <PlayerRow key={i} player={p} accent="primary" />)
+                      ) : (
+                        <div className="h-8 rounded-lg bg-background/30 border border-dashed border-border/50 flex items-center justify-center text-[9px] text-text-muted">No lineup</div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="space-y-1">
+            {/* Header with Team names */}
+            <div className="grid grid-cols-3 text-center mb-3 pb-2 border-b border-border/60">
+              <div className="text-[11px] font-black text-secondary truncate px-1">{homeTeamName}</div>
+              <div className="text-[9px] font-bold text-text-muted uppercase tracking-widest self-center">TEAM STATS</div>
+              <div className="text-[11px] font-black text-primary truncate px-1">{awayTeamName}</div>
+            </div>
+
+            {/* Stats list */}
+            {statRows.map((row) => {
+              const valHome = homeTotals[row.key as keyof typeof homeTotals] ?? 0;
+              const valAway = awayTotals[row.key as keyof typeof awayTotals] ?? 0;
+
+              // Determine colors based on higher value (except for cards and penalty misses where lower is better)
+              const isLowerBetter = ['yellowCards', 'redCards', 'penaltyMissed'].includes(row.key);
+              const isHomeWinner = isLowerBetter ? valHome < valAway : valHome > valAway;
+              const isAwayWinner = isLowerBetter ? valAway < valHome : valAway > valHome;
+              const isDraw = valHome === valAway;
+
+              const homeColor = isDraw
+                ? 'text-text-secondary'
+                : isHomeWinner
+                  ? 'text-emerald-400 font-extrabold'
+                  : 'text-text-muted';
+
+              const awayColor = isDraw
+                ? 'text-text-secondary'
+                : isAwayWinner
+                  ? 'text-emerald-400 font-extrabold'
+                  : 'text-text-muted';
+
+              if (row.highlight) {
+                return (
+                  <div
+                    key={row.key}
+                    className="grid grid-cols-3 items-center py-2.5 px-3 rounded-xl bg-secondary/15 border border-secondary/30 text-center font-black mt-2"
+                  >
+                    <div className="text-sm text-secondary font-mono">{valHome}</div>
+                    <div className="text-xs text-text-primary uppercase tracking-wider">{row.label}</div>
+                    <div className="text-sm text-primary font-mono">{valAway}</div>
+                  </div>
+                );
+              }
+
+              return (
+                <div
+                  key={row.key}
+                  className="grid grid-cols-3 items-center py-1.5 px-3 hover:bg-elevated/40 rounded-lg transition-colors text-center text-xs"
+                >
+                  <div className={`font-mono ${homeColor}`}>{valHome}</div>
+                  <div className="text-[10px] text-text-muted font-medium">{row.label}</div>
+                  <div className={`font-mono ${awayColor}`}>{valAway}</div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
-    </div>
+    </Modal>
   );
 }
 
@@ -235,11 +366,11 @@ function H2HPage() {
   const [activeTab, setActiveTab] = useState<'overall' | 'fixtures'>('overall');
   const [fixtureFilter, setFixtureFilter] = useState<'mine' | 'all'>('mine');
   const [selectedGw, setSelectedGw] = useState<number | null>(null);
-  const [expandedFixtureId, setExpandedFixtureId] = useState<string | null>(null);
+  const [selectedFixture, setSelectedFixture] = useState<H2HFixture | null>(null);
 
-  const handleFixtureClick = (fixtureId: string, isFinished: boolean, isLive: boolean) => {
+  const handleFixtureClick = (fixture: H2HFixture, isFinished: boolean, isLive: boolean) => {
     if (!isFinished && !isLive) return;
-    setExpandedFixtureId(prev => prev === fixtureId ? null : fixtureId);
+    setSelectedFixture(fixture);
   };
 
   // Auto-select the first league if none selected
@@ -575,18 +706,15 @@ function H2HPage() {
                         const isRelevant = isHomeMe || isAwayMe;
                         const isFinished = fixture.status === 'completed';
                         const isLive = fixture.status === 'live';
-                        const isExpanded = expandedFixtureId === fixture._id;
 
                         return (
                           <div
                             key={fixture._id}
-                            onClick={() => handleFixtureClick(fixture._id, isFinished, isLive)}
+                            onClick={() => handleFixtureClick(fixture, isFinished, isLive)}
                             className={`rounded-2xl transition-all duration-200 p-4 ${
                               isFinished || isLive ? 'cursor-pointer font-medium' : 'cursor-default'
                             } ${
-                              isExpanded
-                                ? 'bg-elevated border border-secondary/40 shadow-card'
-                                : isRelevant
+                              isRelevant
                                 ? 'bg-secondary/10 border border-secondary/30 shadow-card hover:bg-secondary/15'
                                 : 'bg-surface border border-border hover:bg-elevated/50'
                             }`}
@@ -648,20 +776,12 @@ function H2HPage() {
                                 <div />
                               )}
                               {(isFinished || isLive) && (
-                                <span className="text-[8px] font-bold text-secondary uppercase tracking-wider hover:underline">
-                                  {isExpanded ? 'Click to collapse' : 'Click to view details'}
+                                <span className="inline-flex items-center gap-1 text-[8px] font-bold text-secondary uppercase tracking-wider">
+                                  <Eye className="w-3 h-3" />
+                                  Click to view details
                                 </span>
                               )}
                             </div>
-
-                            {/* Expanded details */}
-                            {isExpanded && (
-                              <H2HFixtureDetails
-                                homeTeamId={fixture.homeTeam._id}
-                                awayTeamId={fixture.awayTeam._id}
-                                gameweek={fixture.gameweek}
-                              />
-                            )}
                           </div>
                         );
                       })
@@ -679,6 +799,13 @@ function H2HPage() {
               )}
             </div>
           </div>
+
+          {/* Fixture details modal */}
+          <H2HFixtureModal
+            fixture={selectedFixture}
+            isOpen={!!selectedFixture}
+            onClose={() => setSelectedFixture(null)}
+          />
         </>
       )}
     </div>

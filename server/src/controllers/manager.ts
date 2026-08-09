@@ -22,6 +22,40 @@ import { Substitution } from "../models/Substitution";
 import { Fact } from "../models/Fact";
 
 
+// Fire-and-forget report from the client: PWA install status + device info.
+export const reportDevice = async (req: Request, res: Response) => {
+  try {
+    const username = req.user.userId;
+    const { pwaInstalled, standalone, os, browser, deviceType } = req.body || {};
+
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const current = user.device || {};
+    const device: any = {};
+    if (typeof pwaInstalled === 'boolean') device.pwaInstalled = pwaInstalled;
+    if (typeof standalone === 'boolean') device.standalone = standalone;
+    if (typeof os === 'string' && os) device.os = os;
+    if (typeof browser === 'string' && browser) device.browser = browser;
+    if (['mobile', 'tablet', 'desktop'].includes(deviceType)) device.deviceType = deviceType;
+    device.lastSeenAt = new Date();
+
+    // pushSubscribed is a mirror maintained by the subscribe flow — never overwrite here
+    if (current.pushSubscribed !== undefined) device.pushSubscribed = current.pushSubscribed;
+    if (current.firstSubscribedAt !== undefined) device.firstSubscribedAt = current.firstSubscribedAt;
+
+    user.device = { ...current, ...device };
+    await user.save();
+
+    res.json({ data: { message: 'Device reported' } });
+  } catch (error) {
+    console.error('Error reporting device:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 
 export const details = async (req: Request, res: Response, next: NextFunction) => {
   try {

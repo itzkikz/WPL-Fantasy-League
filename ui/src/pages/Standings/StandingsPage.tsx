@@ -102,8 +102,18 @@ const StandingsPage = () => {
       {activeTab === 'overall' && (
         <div className="mx-4 p-4 rounded-2xl bg-gradient-overview bg-dots border border-border flex items-center justify-between mb-4 flex-none shadow-card">
           <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary relative overflow-hidden flex-shrink-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 rotate-45 scale-110" />
-            <Trophy className="w-6 h-6 text-primary relative z-10" />
+            {managerDetails?.logo ? (
+              <img
+                src={managerDetails.logo}
+                alt={`${managerDetails.team || "My team"} logo`}
+                className="w-11 h-11 object-contain relative z-10"
+              />
+            ) : (
+              <>
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 rotate-45 scale-110" />
+                <Trophy className="w-6 h-6 text-primary relative z-10" />
+              </>
+            )}
           </div>
 
           <div className="flex-1 grid grid-cols-4 gap-1 ml-4 text-center">

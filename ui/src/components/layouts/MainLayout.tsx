@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Outlet, useNavigate, useMatchRoute, useLocation } from "@tanstack/react-router";
 import { Bell } from "lucide-react";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
@@ -10,6 +10,7 @@ import PWAInstallBanner from "../PWAInstallBanner";
 import { useValidateToken } from "../../features/auth/hooks";
 import { useUserStore } from "../../store/useUserStore";
 import { useManagerDetails } from "../../features/manager/hooks";
+import { reportDevice } from "../../features/device/reportDevice";
 
 export const MainLayout = () => {
     const navigate = useNavigate();
@@ -38,6 +39,9 @@ export const MainLayout = () => {
       skipValidation: isGuest && isGuestAllowedPath,
     });
 
+    // Report device + PWA install status once per visit, after auth is confirmed
+    const deviceReported = useRef(false);
+
     const isAdmin = user?.role === "admin";
     const isUser = user?.role === "user";
 
@@ -46,6 +50,10 @@ export const MainLayout = () => {
     useEffect(() => {
         if (data?.valid) {
             setUser({ teamName: data?.user?.userId, role: data?.user?.role });
+            if (!deviceReported.current) {
+                deviceReported.current = true;
+                reportDevice();
+            }
         }
     }, [data, setUser]);
 

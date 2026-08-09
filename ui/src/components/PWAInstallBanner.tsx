@@ -1,5 +1,6 @@
 // components/PWAInstallBanner.tsx
 import { useState, useEffect } from 'react';
+import { reportDevice } from '../features/device/reportDevice';
 
 interface BeforeInstallPromptEvent extends Event {
   readonly platforms: ReadonlyArray<string>;
@@ -122,6 +123,8 @@ const PWAInstallBanner: React.FC = () => {
       localStorage.setItem('pwa-installed', 'true');
       setShowBanner(false);
       setDeferredPrompt(null);
+      // Tell the server immediately so install status doesn't wait for the next visit
+      reportDevice();
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
@@ -143,6 +146,8 @@ const PWAInstallBanner: React.FC = () => {
       if (outcome === 'accepted') {
         localStorage.setItem('pwa-installed', 'true');
         setShowBanner(false);
+        // Tell the server immediately so install status doesn't wait for the next visit
+        reportDevice();
       }
     } catch (error) {
       console.error('Error during installation:', error);

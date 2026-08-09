@@ -53,7 +53,17 @@ export const subscribe = async (req: Request, res: Response, next: NextFunction)
             expirationTime: subscription.expirationTime,
             keys: subscription.keys
         });
-        
+
+        // Mirror subscription status onto the user's device info
+        await User.updateOne(
+            { _id: userId },
+            { $set: { 'device.pushSubscribed': true } }
+        );
+        await User.updateOne(
+            { _id: userId, 'device.firstSubscribedAt': { $exists: false } },
+            { $set: { 'device.firstSubscribedAt': new Date() } }
+        );
+
         res.json({ data: { message: "User Subscribed" } })
 
     } catch (e) {
@@ -107,6 +117,14 @@ export const send = async (req: Request, res: Response, next: NextFunction) => {
             webpush.sendNotification(subscription, JSON.stringify(payload)).catch(async (err: Error) => {
                 console.error("Error sending notification, removing subscription", err);
                 await Subscriber.deleteOne({ endpoint: sub.endpoint });
+                // Clear the mirror flag if the user has no remaining subscriptions
+                const remaining = await Subscriber.countDocuments({ userId: sub.userId });
+                if (remaining === 0) {
+                    await User.updateOne(
+                        { _id: sub.userId },
+                        { $set: { 'device.pushSubscribed': false } }
+                    );
+                }
             });
         });
         res.status(200).json({ message: "Notifications sent.." });

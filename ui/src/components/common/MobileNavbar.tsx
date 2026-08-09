@@ -9,6 +9,7 @@ import {
   Settings,
   Calendar,
   Users,
+  UserCog,
   ArrowLeftRight,
 } from "lucide-react";
 
@@ -38,6 +39,9 @@ const AdminFixturesIcon = ({ isActive }: { isActive: boolean }) => (
 );
 const AdminTeamsIcon = ({ isActive }: { isActive: boolean }) => (
   <Users className={iconClass(isActive)} />
+);
+const AdminUsersIcon = ({ isActive }: { isActive: boolean }) => (
+  <UserCog className={iconClass(isActive)} />
 );
 const AdminLeaguesIcon = ({ isActive }: { isActive: boolean }) => (
   <Trophy className={iconClass(isActive)} />
@@ -69,6 +73,7 @@ const MobileNavbar = () => {
       { label: "Settings", path: "/settings", icon: AdminSettingsIcon },
       { label: "Fixtures", path: "/admin/fixtures", icon: AdminFixturesIcon },
       { label: "Teams", path: "/admin/fantasy-teams", icon: AdminTeamsIcon },
+      { label: "Users", path: "/admin/users", icon: AdminUsersIcon },
       { label: "Substitutions", path: "/admin/substitutions", icon: AdminSubstitutionsIcon },
       { label: "Leagues", path: "/admin/leagues", icon: AdminLeaguesIcon },
       { label: "H2H", path: "/admin/h2h-leagues", icon: AdminH2HIcon },

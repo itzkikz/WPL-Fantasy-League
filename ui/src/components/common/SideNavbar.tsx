@@ -83,6 +83,7 @@ const SideNavbar = () => {
     { label: "Fixtures", path: "/admin/fixtures" },
     { label: "Teams", path: "/admin/teams" },
     { label: "Players", path: "/admin/players" },
+    { label: "Users", path: "/admin/users" },
     { label: "Fantasy Teams", path: "/admin/fantasy-teams" },
     { label: "Transfers", path: "/admin/transfers" },
     { label: "Substitutions", path: "/admin/substitutions" },
