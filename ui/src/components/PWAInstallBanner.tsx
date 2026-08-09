@@ -23,11 +23,17 @@ const PWAInstallBanner: React.FC = () => {
   const [isIOS, setIsIOS] = useState<boolean>(false);
   const [isAndroid, setIsAndroid] = useState<boolean>(false);
 
+  // Chrome on iOS has its Share button in a different spot than Safari,
+  // so the install steps differ per browser
+  const isIOSChrome = isIOS && /CriOS/i.test(navigator.userAgent);
+
   useEffect(() => {
     // Detect iOS
+    // Every iOS browser (Safari, Chrome, Firefox, Opera) supports manual
+    // "Add to Home Screen" via the share sheet, and none of them fire
+    // beforeinstallprompt — so treat all of them as "iOS" for the banner.
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
-    const isIOSSafari = iOS && !navigator.userAgent.match(/CriOS|FxiOS|OPiOS|mercury/i);
-    setIsIOS(isIOSSafari);
+    setIsIOS(iOS);
 
     // Detect Android
     const android = /Android/.test(navigator.userAgent);
@@ -40,22 +46,9 @@ const PWAInstallBanner: React.FC = () => {
 
       // Check localStorage
       const isInstalledFromStorage = localStorage.getItem('pwa-installed') === 'true';
-      const dismissedTimestamp = localStorage.getItem('pwa-install-dismissed-timestamp');
 
-      // Clear dismissed state after 7 days
-      const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
-      let isDismissed = false;
-
-      if (dismissedTimestamp) {
-        const dismissedTime = parseInt(dismissedTimestamp, 10);
-        if (Date.now() - dismissedTime < SEVEN_DAYS) {
-          isDismissed = true;
-        } else {
-          // Clear old dismissal
-          localStorage.removeItem('pwa-install-dismissed');
-          localStorage.removeItem('pwa-install-dismissed-timestamp');
-        }
-      }
+      // Check if dismissed earlier in this session (sessionStorage clears on the next visit)
+      const isDismissed = sessionStorage.getItem('pwa-install-dismissed') === 'true';
 
       // If already installed, don't show banner
       if (isStandalone || isIOSStandalone || isInstalledFromStorage) {
@@ -72,7 +65,7 @@ const PWAInstallBanner: React.FC = () => {
       }
 
       // For iOS, show manual instructions banner
-      if (isIOSSafari) {
+      if (iOS) {
         console.log('iOS detected, showing manual install instructions');
         setShowBanner(true);
         return;
@@ -106,17 +99,9 @@ const PWAInstallBanner: React.FC = () => {
       setDeferredPrompt(e);
 
       const isInstalled = localStorage.getItem('pwa-installed') === 'true';
-      const dismissedTimestamp = localStorage.getItem('pwa-install-dismissed-timestamp');
 
-      // Check if recently dismissed
-      let isDismissed = false;
-      if (dismissedTimestamp) {
-        const dismissedTime = parseInt(dismissedTimestamp, 10);
-        const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
-        if (Date.now() - dismissedTime < SEVEN_DAYS) {
-          isDismissed = true;
-        }
-      }
+      // Check if dismissed earlier in this session (sessionStorage clears on the next visit)
+      const isDismissed = sessionStorage.getItem('pwa-install-dismissed') === 'true';
 
       if (!isInstalled && !isDismissed) {
         console.log('Showing install banner');
@@ -163,60 +148,107 @@ const PWAInstallBanner: React.FC = () => {
   const handleDismiss = (): void => {
     console.log('Banner dismissed');
     setShowBanner(false);
-    localStorage.setItem('pwa-install-dismissed', 'true');
-    localStorage.setItem('pwa-install-dismissed-timestamp', Date.now().toString());
+    // Only hide for this session — the prompt returns on the next visit
+    sessionStorage.setItem('pwa-install-dismissed', 'true');
   };
 
   if (!showBanner) return null;
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white shadow-lg">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-surface/95 dark:bg-[#120C22]/95 backdrop-blur-xl border-b border-border shadow-card animate-fade-in">
       <div className="max-w-md mx-auto px-4 py-3">
         {/* iOS Instructions */}
         {isIOS && !deferredPrompt && (
-          <div className="flex flex-col gap-2">
-            <div className="flex items-start justify-between">
-              <div className="flex-1 pr-2">
-                <p className="text-sm font-medium mb-1">Install WPL Fantasy Football</p>
-                <p className="text-xs opacity-90">
-                  Tap <span className="inline-flex items-center mx-1">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.11 0-2-.9-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .89 2 2z" />
-                    </svg>
-                  </span> then "Add to Home Screen"
-                </p>
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-start gap-3 min-w-0">
+              <div className="shrink-0 w-9 h-9 rounded-full bg-gradient-core flex items-center justify-center">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.11 0-2-.9-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .89 2 2z" />
+                </svg>
               </div>
-              <button
-                onClick={handleDismiss}
-                className="px-3 py-2 text-white hover:bg-white/20 rounded-lg transition shrink-0"
-                aria-label="Dismiss"
-              >
-                ✕
-              </button>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-text-primary mb-1">Install WPL Fantasy Football</p>
+                {isIOSChrome ? (
+                  <ol className="text-xs text-text-muted list-decimal list-inside space-y-0.5 leading-relaxed">
+                    <li>
+                      Tap the{" "}
+                      <span className="inline-flex items-center align-middle mx-0.5 text-primary">
+                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.11 0-2-.9-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .89 2 2z" />
+                        </svg>
+                      </span>{" "}
+                      Share icon in the toolbar
+                    </li>
+                    <li>
+                      Tap <span className="font-semibold text-text-secondary">"Add to Home Screen"</span>
+                    </li>
+                    <li>
+                      Tap <span className="font-semibold text-text-secondary">Add</span> to confirm
+                    </li>
+                  </ol>
+                ) : (
+                  <ol className="text-xs text-text-muted list-decimal list-inside space-y-0.5 leading-relaxed">
+                    <li>
+                      Tap the{" "}
+                      <span className="inline-flex items-center align-middle mx-0.5 text-primary">
+                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.11 0-2-.9-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .89 2 2z" />
+                        </svg>
+                      </span>{" "}
+                      Share button in the bottom toolbar
+                    </li>
+                    <li>
+                      Scroll down and tap{" "}
+                      <span className="font-semibold text-text-secondary">"Add to Home Screen"</span>
+                    </li>
+                    <li>
+                      Tap <span className="font-semibold text-text-secondary">Add</span> to confirm
+                    </li>
+                  </ol>
+                )}
+              </div>
             </div>
+            <button
+              onClick={handleDismiss}
+              className="shrink-0 p-1.5 rounded-lg text-text-muted hover:text-text-primary hover:bg-elevated transition-colors"
+              aria-label="Dismiss"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
         )}
 
         {/* Android/Chrome Install Button */}
         {!isIOS && deferredPrompt && (
-          <div className="flex items-center justify-between">
-            <div className="flex-1">
-              <p className="text-sm font-medium">Install WPL Fantasy Football</p>
-              <p className="text-xs opacity-90">Get the full app experience</p>
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="shrink-0 w-9 h-9 rounded-full bg-gradient-core flex items-center justify-center">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M16 5l-1.42 1.42-1.59-1.59V16h-1.98V4.83L9.42 6.42 8 5l4-4 4 4zm4 5v11c0 1.1-.9 2-2 2H6c-1.11 0-2-.9-2-2V10c0-1.11.89-2 2-2h3v2H6v11h12V10h-3V8h3c1.1 0 2 .89 2 2z" />
+                </svg>
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-text-primary truncate">Install WPL Fantasy Football</p>
+                <p className="text-xs text-text-muted truncate">Get the full app experience</p>
+              </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex items-center gap-1.5 shrink-0">
               <button
                 onClick={handleInstallClick}
-                className="px-4 py-2 bg-white text-blue-600 rounded-lg text-sm font-semibold hover:bg-gray-100 transition"
+                className="px-4 py-2 bg-gradient-button text-white rounded-full text-sm font-semibold hover:opacity-95 transition shadow-sm"
               >
                 Install
               </button>
               <button
                 onClick={handleDismiss}
-                className="px-3 py-2 text-white hover:bg-white/20 rounded-lg transition"
+                className="p-1.5 rounded-lg text-text-muted hover:text-text-primary hover:bg-elevated transition-colors"
                 aria-label="Dismiss"
               >
-                ✕
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </button>
             </div>
           </div>
