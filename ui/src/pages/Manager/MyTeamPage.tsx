@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
-import { Trash2, Save, LayoutGrid, List, X, ChevronRight } from "lucide-react";
+import { Trash2, Save, LayoutGrid, List, X, ChevronRight, Calendar, ChevronLeft } from "lucide-react";
 import Toast from "../../components/common/Toast";
 import { Player } from "../../features/players/types";
 import { Formation } from "../../features/standings/types";
@@ -20,6 +20,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { useHomePage } from "../../features/home/hooks";
+import { useStandings, useTeamDetails } from "../../features/standings/hooks";
 
 // Page subcomponents
 import MyTeamHeader from "./components/MyTeamHeader";
@@ -27,6 +28,7 @@ import MyTeamPitch from "./components/MyTeamPitch";
 import { getPlayerDisplayPrice } from "../../libs/helpers/player";
 import MyTeamListView from "./components/MyTeamListView";
 import PlayerStatsModal from "../Standings/components/PlayerStatsModal";
+import PitchPlayerCard from "../../components/PitchPlayerCard";
 import SaveTeamModal from "./components/SaveTeamModal";
 
 // Local CSS styles
@@ -34,6 +36,11 @@ import "./MyTeamPage.css";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
+
+const getRowJustify = (count: number) => {
+  if (count <= 1) return "justify-center";
+  return "justify-evenly";
+};
 
 const MyTeamPage = () => {
   // React query hooks
@@ -53,6 +60,7 @@ const MyTeamPage = () => {
 
   // Local state for interactive screen updates
   const [selectedGW, setSelectedGW] = useState(15);
+  const [historyGw, setHistoryGw] = useState<number>(0);
   const [headerTab, setHeaderTab] = useState<"current" | "history">(search.tab === "history" ? "history" : "current");
   const [activeTab, setActiveTab] = useState<"pitch" | "list">("pitch");
 
@@ -74,6 +82,28 @@ const MyTeamPage = () => {
   const [saveConfirmOpen, setSaveConfirmOpen] = useState(false);
   const [pendingCaptain, setPendingCaptain] = useState<Player | null>(null);
   const [pendingVice, setPendingVice] = useState<Player | null>(null);
+
+  // Per-gameweek squad data for the History tab
+  const { data: standings } = useStandings();
+  const myStanding = standings?.find(
+    (s) => s.team?.trim().toLowerCase() === managerDetails?.team?.trim().toLowerCase()
+  );
+  const teamId = myStanding?.team_id || (managerDetails as any)?.team_id || (managerDetails as any)?.teamId || "";
+  const { data: gwDetails } = useTeamDetails(teamId, historyGw);
+
+  // Gameweek list for the History tab selector
+  const gwList = [...(homePageData?.recentGameweeks || [])].sort((a: any, b: any) => a.gameweek - b.gameweek);
+  const latestGw = gwList.length > 0 ? gwList[gwList.length - 1].gameweek : 1;
+  const minGw = gwList.length > 0 ? gwList[0].gameweek : 1;
+  const maxGw = gwList.length > 0 ? gwList[gwList.length - 1].gameweek : 1;
+  const activeGw = historyGw || latestGw;
+
+  // When the History tab opens, default the selector to the latest gameweek
+  useEffect(() => {
+    if (headerTab === "history" && !historyGw && gwList.length > 0) {
+      setHistoryGw(latestGw);
+    }
+  }, [headerTab, historyGw, gwList.length, latestGw]);
 
   // Synchronize state with query details
   useEffect(() => {
@@ -525,45 +555,146 @@ const MyTeamPage = () => {
               )
             ) : (
               /* Gameweek History View */
-              <div className="bg-surface border border-border rounded-2xl p-4 shadow-card flex-1 min-h-0 flex flex-col animate-in fade-in duration-300 w-full max-w-3xl mx-auto">
-                <h2 className="text-sm font-extrabold uppercase tracking-wider text-text-muted mb-3 px-1">Gameweek History</h2>
+              <div className="flex-1 flex flex-col gap-4 min-h-0 w-full max-w-3xl mx-auto animate-in fade-in duration-300 pb-6 lg:overflow-y-auto lg:pr-1">
                 {isHomeLoading ? (
-                  <div className="flex-1 flex items-center justify-center">
+                  <div className="flex-1 flex items-center justify-center min-h-[300px]">
                     <span className="text-xs text-text-muted">Loading history...</span>
                   </div>
-                ) : !homePageData?.recentGameweeks || homePageData.recentGameweeks.length === 0 ? (
-                  <div className="flex-1 flex items-center justify-center">
+                ) : gwList.length === 0 ? (
+                  <div className="flex-1 flex items-center justify-center min-h-[300px]">
                     <span className="text-xs text-text-muted">No history data available.</span>
                   </div>
                 ) : (
-                  <div className="overflow-y-auto overflow-x-auto flex-1 pr-1">
-                    <table className="w-full text-left border-collapse text-xs md:text-sm">
-                      <thead>
-                        <tr className="border-b border-border/50 text-text-muted uppercase tracking-wider font-extrabold text-[10px]">
-                          <th className="py-2.5 px-3">Gameweek</th>
-                          <th className="py-2.5 px-3 text-center">Score</th>
-                          <th className="py-2.5 px-3 text-right"></th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-border/20 font-semibold text-text-primary">
-                        {[...homePageData.recentGameweeks].sort((a, b) => b.gameweek - a.gameweek).map((item) => (
-                          <tr
-                            key={item.gameweek}
-                            className="hover:bg-elevated/50 transition-all cursor-pointer group"
-                            onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: item.gameweek } })}
-                          >
-                            <td className="py-3 px-3 font-bold text-text-primary">Gameweek {item.gameweek}</td>
-                            <td className="py-3 px-3 text-center text-[var(--color-success-bright)] font-mono font-extrabold">
-                              {item.points} pts
-                            </td>
-                            <td className="py-3 px-3 text-right pr-4">
-                              <ChevronRight className="w-4 h-4 inline-block text-secondary" />
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                  <>
+                    {/* Select Gameweek */}
+                    <div className="flex flex-col gap-2 w-full">
+                      <div className="flex items-center justify-between pl-1">
+                        <h3 className="text-xs font-black uppercase text-text-muted tracking-wider flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 text-secondary" />
+                          <span>Select Gameweek</span>
+                        </h3>
+                      </div>
+                      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide px-0.5">
+                        <button
+                          onClick={() => setHistoryGw(Math.max(minGw, activeGw - 1))}
+                          disabled={activeGw <= minGw}
+                          className="w-8 h-8 rounded-lg bg-surface hover:bg-elevated border border-border text-text-primary active:scale-95 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center shrink-0"
+                          aria-label="Previous gameweek"
+                        >
+                          <ChevronLeft className="w-4 h-4 text-text-muted" />
+                        </button>
+
+                        {gwList.map((h: any) => {
+                          const isActive = activeGw === h.gameweek;
+                          return (
+                            <button
+                              key={h.gameweek}
+                              onClick={() => setHistoryGw(h.gameweek)}
+                              className={`flex flex-col items-center justify-center min-w-[80px] rounded-xl py-2.5 px-3 border transition-all cursor-pointer shrink-0 ${
+                                isActive
+                                  ? "bg-secondary border-secondary shadow-sm"
+                                  : "bg-surface hover:bg-elevated border-border/40 hover:border-secondary/50"
+                              }`}
+                            >
+                              <span className={`text-[9px] font-black uppercase tracking-wider ${isActive ? "text-white/80" : "text-text-muted"}`}>
+                                GW {h.gameweek}
+                              </span>
+                              <span className={`text-xs font-black mt-0.5 font-mono ${isActive ? "text-white" : "text-secondary"}`}>
+                                {h.points} pts
+                              </span>
+                            </button>
+                          );
+                        })}
+
+                        <button
+                          onClick={() => setHistoryGw(Math.min(maxGw, activeGw + 1))}
+                          disabled={activeGw >= maxGw}
+                          className="w-8 h-8 rounded-lg bg-surface hover:bg-elevated border border-border text-text-primary active:scale-95 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center shrink-0"
+                          aria-label="Next gameweek"
+                        >
+                          <ChevronRight className="w-4 h-4 text-text-muted" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* GW Stats Summary */}
+                    <div className="grid grid-cols-3 gap-2 w-full">
+                      <div className="bg-surface border border-border rounded-2xl p-3 shadow-card flex flex-col items-center justify-center text-center">
+                        <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">GW {activeGw} Score</span>
+                        <span className="text-base font-black text-[var(--color-success-bright)] mt-0.5 font-mono">
+                          {gwDetails?.totalGWScore ?? 0} pts
+                        </span>
+                      </div>
+                      <div className="bg-surface border border-border rounded-2xl p-3 shadow-card flex flex-col items-center justify-center text-center">
+                        <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">GW Average</span>
+                        <span className="text-base font-black text-text-primary mt-0.5 font-mono">{gwDetails?.avg ?? 0} pts</span>
+                      </div>
+                      <div className="bg-surface border border-border rounded-2xl p-3 shadow-card flex flex-col items-center justify-center text-center">
+                        <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">GW Highest</span>
+                        <span className="text-base font-black text-text-primary mt-0.5 font-mono">{gwDetails?.highest ?? 0} pts</span>
+                      </div>
+                    </div>
+
+                    {/* Gameweek Squad Pitch */}
+                    <div className="flex flex-col gap-2 w-full">
+                      <div className="flex items-center justify-between pl-1">
+                        <h3 className="text-xs font-black uppercase text-text-muted tracking-wider flex items-center gap-1.5">
+                          <LayoutGrid className="w-3.5 h-3.5 text-secondary" />
+                          <span>Gameweek {activeGw} Squad</span>
+                        </h3>
+                      </div>
+
+                      <div className="relative w-full rounded-3xl overflow-hidden border border-border shadow-card bg-background min-h-[560px] sm:min-h-[600px] flex flex-col">
+                        <div className="pitch-bg">
+                          <img src="/pitch.png" className="pitch-image-layer" alt="Tactical pitch layout" />
+                        </div>
+
+                        <div className="absolute top-0 inset-x-0 bottom-[110px] z-10 pointer-events-none flex flex-col justify-evenly py-3 md:py-6 px-2 sm:px-4">
+                          {gwDetails?.starting && (["GK", "DEF", "MID", "FWD"] as const).map((pos) => {
+                            const players = gwDetails.starting[pos] || [];
+                            return (
+                              <div key={pos} className={`flex w-full ${getRowJustify(players.length)} pointer-events-auto`}>
+                                {players.map((player: Player) => {
+                                  const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
+                                  return (
+                                    <div key={player.id} className="rounded-xl p-0.5 transition-all hover:scale-105 duration-300">
+                                      <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={false} onClick={() => handlePlayerClick(player)} />
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        {(gwDetails?.bench || []).length > 0 && (
+                          <div className="absolute bottom-0 inset-x-0 h-[110px] bg-surface/95 backdrop-blur-md border-t border-border flex justify-around items-center px-4 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.5)] overflow-x-auto scrollbar-hide">
+                            {gwDetails.bench.map((player: Player, idx: number) => {
+                              const label = player.position === "GK" ? "GK" : `${player.subNumber || idx + 1}. ${player.position}`;
+                              const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
+                              return (
+                                <div key={player.id} className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300 shrink-0 min-w-[76px]">
+                                  <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">{label}</span>
+                                  <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={false} onClick={() => handlePlayerClick(player)} />
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* View Full GW Breakdown */}
+                    <div className="flex justify-center w-full">
+                      <button
+                        onClick={() => navigate({ to: "/gameweek-breakdown", search: { gw: activeGw, teamId } })}
+                        className="flex items-center gap-1.5 bg-primary/10 hover:bg-primary/20 border border-primary/30 text-primary dark:text-purple-300 rounded-full px-5 py-2.5 text-xs font-bold transition-all active:scale-95 cursor-pointer"
+                      >
+                        View Full GW {activeGw} Breakdown
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </>
                 )}
               </div>
             )}

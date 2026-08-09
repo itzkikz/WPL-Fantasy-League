@@ -1,4 +1,4 @@
-import { getRouteApi, useNavigate } from "@tanstack/react-router";
+import { getRouteApi, useNavigate, useRouter } from "@tanstack/react-router";
 import { useTeamDetails, useStandings } from "../../features/standings/hooks";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, ArrowLeft, ChevronDown } from "lucide-react";
@@ -14,6 +14,7 @@ import "../Manager/MyTeamPage.css";
 const TeamDetailsPage = () => {
   const route = getRouteApi("/standings/$teamId");
   const navigate = useNavigate();
+  const router = useRouter();
   const { teamId } = route.useParams();
 
   const { data: standings } = useStandings();
@@ -92,9 +93,12 @@ const TeamDetailsPage = () => {
   };
 
   const handleGoBack = () => {
-    navigate({
-      to: "/standings",
-    });
+    // Go back to where the user came from, falling back to standings
+    if (router.history.canGoBack()) {
+      router.history.back();
+    } else {
+      navigate({ to: "/standings" });
+    }
   };
 
   const getPlayerPrice = (p: Player) => {

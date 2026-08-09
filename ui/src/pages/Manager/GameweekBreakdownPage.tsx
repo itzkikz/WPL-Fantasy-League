@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useNavigate, useSearch, useRouter } from "@tanstack/react-router";
 import { ArrowLeft, LayoutGrid, Award, ShieldAlert, List, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { useManagerDetails } from "../../features/manager/hooks";
 import { useTeamDetails, useStandings } from "../../features/standings/hooks";
@@ -67,6 +67,7 @@ const GameweekSwitcher = ({
 
 const GameweekBreakdownPage = () => {
   const navigate = useNavigate();
+  const router = useRouter();
   const search = useSearch({ from: "/gameweek-breakdown" });
   const gw = search.gw;
 
@@ -212,6 +213,17 @@ const GameweekBreakdownPage = () => {
     setShowOverlay(true);
   };
 
+  const handleGoBack = () => {
+    // Go back to where the user came from, falling back to the previous page
+    if (router.history.canGoBack()) {
+      router.history.back();
+    } else if (paramTeamId) {
+      navigate({ to: "/manager-overview", search: { teamId: paramTeamId } });
+    } else {
+      navigate({ to: "/my-team", search: { tab: "history" } });
+    }
+  };
+
   const isLoading = isManagerLoading || isStandingsLoading || (!!teamId && isDetailsLoading);
 
   if (isLoading) {
@@ -229,7 +241,7 @@ const GameweekBreakdownPage = () => {
         <ShieldAlert className="w-10 h-10 text-rose-500 mb-2" />
         <p className="text-sm font-extrabold mb-3">Failed to load gameweek details.</p>
         <button
-          onClick={() => navigate({ to: "/my-team" })}
+          onClick={handleGoBack}
           className="bg-primary hover:bg-primary-dark text-white rounded-xl px-4 py-2 text-xs font-bold transition-all active:scale-95 cursor-pointer shadow-lg shadow-primary/30"
         >
           Go Back
@@ -245,13 +257,7 @@ const GameweekBreakdownPage = () => {
       <div className="lg:hidden shrink-0">
         <header className="flex items-center gap-4 px-4 py-3 bg-surface border-b border-[var(--color-border-divider)] sticky top-0 z-30">
           <button
-            onClick={() => {
-              if (paramTeamId) {
-                navigate({ to: "/manager-overview", search: { teamId: paramTeamId } });
-              } else {
-                navigate({ to: "/my-team", search: { tab: "history" } });
-              }
-            }}
+            onClick={handleGoBack}
             className="flex items-center justify-center w-8 h-8 rounded-lg bg-background hover:bg-white/5 border border-border text-text-primary active:scale-95 transition-all cursor-pointer"
             aria-label="Go back"
           >
