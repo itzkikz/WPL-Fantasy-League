@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useSearch, useRouter } from "@tanstack/react-router";
-import { ArrowLeft, ShieldAlert, ShieldUser, Swords, LayoutGrid, Calendar, ChevronLeft, ChevronRight, Award } from "lucide-react";
+import { ArrowLeft, ShieldAlert, ShieldUser, Swords, LayoutGrid, Calendar, ChevronLeft, ChevronRight, Award, Trophy } from "lucide-react";
 import { useManagerOverview, useStandings, useTeamDetails } from "../../features/standings/hooks";
 import { useManagerDetails } from "../../features/manager/hooks";
 import PitchPlayerCard from "../../components/PitchPlayerCard";
@@ -281,9 +281,11 @@ const ManagerOverviewPage = () => {
                 {formation}
               </span>
             </div>
-            <p className="text-[10px] text-text-muted font-medium mt-0.5 truncate flex items-center gap-1">
-              <ShieldUser className="w-3 h-3 shrink-0" />
-              <span className="truncate">{managers}</span>
+            <p className="text-[10px] text-text-muted font-bold mt-0.5 truncate flex items-center gap-1">
+              <Trophy className="w-3 h-3 shrink-0 text-amber-400" />
+              <span className="truncate">Rank #{rank}</span>
+              <span className="text-text-muted/60">·</span>
+              <span>{totalPoints} pts</span>
             </p>
           </div>
 
@@ -330,22 +332,22 @@ const ManagerOverviewPage = () => {
       </div>
 
       {/* SCROLLABLE CONTENT BODY */}
-      <div className="flex-1 flex flex-col min-h-0 overflow-y-auto px-3 sm:px-4 py-3 lg:py-4">
+      <div className="flex-1 flex flex-col min-h-0 overflow-y-auto px-3 sm:px-4 pb-3 lg:pb-4">
         <div className="max-w-5xl mx-auto w-full space-y-4">
 
           {/* HERO / PROFILE CARD: large logo + team name + detailed managers */}
-          <div className="bg-surface border border-border rounded-3xl p-4 sm:p-6 shadow-card flex flex-row items-center gap-4 sm:gap-6">
+          <div className="mt-3 lg:mt-4 bg-surface border border-border rounded-3xl p-4 sm:p-6 shadow-card flex flex-row items-center gap-3 sm:gap-6">
             {logo ? (
               <div className="relative shrink-0">
                 <div className="absolute inset-0 rounded-full bg-gradient-core blur-md opacity-40" />
-                <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-core p-1 shadow-lg">
+                <div className="relative w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-gradient-core p-1 shadow-lg">
                   <div className="w-full h-full rounded-full bg-card overflow-hidden flex items-center justify-center border border-white/20">
                     <img src={logo} alt={`${teamName} logo`} className="w-[88%] h-[88%] object-contain" />
                   </div>
                 </div>
               </div>
             ) : (
-              <div className={`shrink-0 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br ${crest.bgGradient} flex items-center justify-center text-4xl sm:text-5xl font-black text-white shadow-lg border border-white/10`}>
+              <div className={`shrink-0 w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br ${crest.bgGradient} flex items-center justify-center text-3xl sm:text-5xl font-black text-white shadow-lg border border-white/10`}>
                 {crest.letter}
               </div>
             )}
@@ -370,15 +372,15 @@ const ManagerOverviewPage = () => {
                     <span className="w-7 h-7 rounded-full bg-primary/10 border border-primary/20 text-primary flex items-center justify-center shrink-0">
                       <ShieldUser className="w-3.5 h-3.5" />
                     </span>
-                    <span className="truncate">{m}</span>
+                    <span className="break-words">{m}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* TABS: Overall | GW Breakdown */}
-          <div className="flex items-center border-b border-border gap-1 sm:gap-2">
+          {/* TABS: Overall | GW Breakdown (sticky on mobile + desktop so they stay reachable while scrolling) */}
+          <div className="sticky top-0 z-40 -mx-3 sm:-mx-4 lg:mx-0 px-3 sm:px-4 lg:px-0 flex items-center border-b border-border gap-1 sm:gap-2 bg-surface/95 backdrop-blur-xl shadow-sm">
             <button
               onClick={() => setActiveTab("overall")}
               className={`pb-2.5 pt-1 px-3 sm:px-5 text-xs sm:text-sm font-extrabold tracking-wide uppercase transition-all relative cursor-pointer flex items-center gap-2 min-h-[42px] ${activeTab === "overall" ? "text-secondary" : "text-text-muted hover:text-text-primary"}`}
@@ -470,14 +472,14 @@ const ManagerOverviewPage = () => {
                         <span>Select Gameweek</span>
                       </h3>
                     </div>
-                    <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide px-0.5">
+                    <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide px-0.5 snap-x snap-mandatory">
                       <button
                         onClick={() => setSelectedGw(Math.max(minGw, activeGw - 1))}
                         disabled={activeGw <= minGw}
-                        className="w-8 h-8 rounded-lg bg-background hover:bg-elevated border border-border text-text-primary active:scale-95 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center shrink-0"
+                        className="w-10 h-10 rounded-lg bg-background hover:bg-elevated border border-border text-text-primary active:scale-95 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center shrink-0"
                         aria-label="Previous gameweek"
                       >
-                        <ChevronLeft className="w-4 h-4 text-text-muted" />
+                        <ChevronLeft className="w-5 h-5 text-text-muted" />
                       </button>
 
                       {gwList.map((h: any) => {
@@ -486,7 +488,7 @@ const ManagerOverviewPage = () => {
                           <button
                             key={h.gameweek}
                             onClick={() => setSelectedGw(h.gameweek)}
-                            className={`flex flex-col items-center justify-center min-w-[80px] rounded-xl py-2.5 px-3 border transition-all cursor-pointer shrink-0 ${
+                            className={`flex flex-col items-center justify-center min-w-[88px] rounded-xl py-2.5 px-3 border transition-all cursor-pointer shrink-0 snap-start ${
                               isActive
                                 ? "bg-secondary border-secondary shadow-sm"
                                 : "bg-surface hover:bg-elevated border-border/40 hover:border-secondary/50"
@@ -505,10 +507,10 @@ const ManagerOverviewPage = () => {
                       <button
                         onClick={() => setSelectedGw(Math.min(maxGw, activeGw + 1))}
                         disabled={activeGw >= maxGw}
-                        className="w-8 h-8 rounded-lg bg-background hover:bg-elevated border border-border text-text-primary active:scale-95 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center shrink-0"
+                        className="w-10 h-10 rounded-lg bg-background hover:bg-elevated border border-border text-text-primary active:scale-95 transition-all cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center shrink-0"
                         aria-label="Next gameweek"
                       >
-                        <ChevronRight className="w-4 h-4 text-text-muted" />
+                        <ChevronRight className="w-5 h-5 text-text-muted" />
                       </button>
                     </div>
                   </div>
@@ -522,11 +524,11 @@ const ManagerOverviewPage = () => {
                       </span>
                     </div>
                     <div className="bg-surface border border-border rounded-2xl p-3 shadow-card flex flex-col items-center justify-center text-center">
-                      <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">GW Average</span>
+                      <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Average</span>
                       <span className="text-base font-black text-text-primary mt-0.5 font-mono">{gwDetails?.avg ?? 0} pts</span>
                     </div>
                     <div className="bg-surface border border-border rounded-2xl p-3 shadow-card flex flex-col items-center justify-center text-center">
-                      <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">GW Highest</span>
+                      <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Highest</span>
                       <span className="text-base font-black text-text-primary mt-0.5 font-mono">{gwDetails?.highest ?? 0} pts</span>
                     </div>
                   </div>
