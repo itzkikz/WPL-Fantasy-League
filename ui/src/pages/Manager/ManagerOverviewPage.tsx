@@ -724,7 +724,10 @@ const ManagerOverviewPage = () => {
         </div>
       </div>
 
-      {/* Player stats overlay detail modal (Season-only statistics for Manager Overview) */}
+      {/* Player stats overlay detail modal.
+          Overall tab: season-only statistics (season totals for the whole campaign).
+          GW Breakdown tab: also show Gameweek Performance for the selected gameweek
+          (the GW squad's playerStats carry current_week for that gameweek). */}
       {selectedPlayer && (
         <PlayerStatsModal
           isOpen={showOverlay}
@@ -740,7 +743,7 @@ const ManagerOverviewPage = () => {
             ...(selectedPlayer?.playerStats || {}),
             fantasy_team_name: selectedPlayer?.playerStats?.fantasy_team_name || selectedPlayer?.fantasy_team_name || (selectedPlayer as any)?.team_name || teamName,
           } as any}
-          showGameweekStats={false}
+          showGameweekStats={activeTab === "gw"}
         />
       )}
 
