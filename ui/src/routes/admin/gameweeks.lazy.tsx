@@ -92,8 +92,16 @@ function AdminGameweeks() {
     }
   }, [pickTeamData]);
 
+  // datetime-local produces a timezone-naive "YYYY-MM-DDTHH:mm" string.
+  // Resolve it against the admin's local timezone into an absolute UTC instant
+  // BEFORE it reaches the server. Otherwise the server parses it in ITS own
+  // timezone, and the stored deadline (and the value shown after a refetch)
+  // silently shifts by the browser/server offset every time it is saved.
+  const deadlineToIso = (value: string): string | undefined =>
+    value ? new Date(value).toISOString() : undefined;
+
   const togglePickTeamMutation = useMutation({
-    mutationFn: async (payload: { enabled: boolean, deadlineDate?: string }) => {
+    mutationFn: async (payload: { enabled?: boolean; deadlineDate?: string }) => {
       return await apiClient.post(API_ENDPOINTS.ADMIN.PICK_TEAM_STATUS, payload);
     },
     onSuccess: () => {
@@ -311,7 +319,7 @@ function AdminGameweeks() {
             onClick={() =>
               togglePickTeamMutation.mutate({
                 enabled: !pickTeamData?.data?.enabled,
-                deadlineDate,
+                deadlineDate: deadlineToIso(deadlineDate),
               })
             }
             disabled={togglePickTeamMutation.isPending}
@@ -358,7 +366,7 @@ function AdminGameweeks() {
                   if (activeGw?.startDate) {
                     const formatted = dayjs(activeGw.startDate).format("YYYY-MM-DDTHH:mm");
                     setDeadlineDate(formatted);
-                    togglePickTeamMutation.mutate({ deadlineDate: formatted });
+                    togglePickTeamMutation.mutate({ deadlineDate: new Date(activeGw.startDate).toISOString() });
                   }
                 }}
                 disabled={togglePickTeamMutation.isPending}
@@ -371,7 +379,7 @@ function AdminGameweeks() {
 
             <button
               type="button"
-              onClick={() => togglePickTeamMutation.mutate({ deadlineDate })}
+              onClick={() => togglePickTeamMutation.mutate({ deadlineDate: deadlineToIso(deadlineDate) })}
               disabled={togglePickTeamMutation.isPending}
               className="px-4 py-1.5 rounded-lg text-xs font-black bg-indigo-600 hover:bg-indigo-500 text-white shadow-md active:scale-95 transition-all cursor-pointer flex items-center gap-1.5"
             >
