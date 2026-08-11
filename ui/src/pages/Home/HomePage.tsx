@@ -16,6 +16,8 @@ import SquadValue from "../../components/home/SquadValue";
 import YourPlayersCard from "../../components/home/YourPlayersCard";
 import QuickActionsRow from "../../components/home/QuickActions";
 import FantasyNews from "../../components/home/FantasyNews";
+import H2HRecordCard from "../../components/home/H2HRecordCard";
+import { useMyH2HLeagues, useH2HStandings } from "../../features/h2h/hooks";
 import { useUserStore } from "../../store/useUserStore";
 
 const HomePage = () => {
@@ -26,6 +28,11 @@ const HomePage = () => {
   // Dashboard data is shared by both manager and spectator ("user") accounts
   const { data, isLoading, error } = useHomePage();
   const { data: myFixturesData } = useMyFixtures({ enabled: !isRegularUser });
+
+  // Head-to-head record for the manager dashboard
+  const { data: myH2HLeagues, isLoading: h2hLeaguesLoading } = useMyH2HLeagues();
+  const myH2HLeague = myH2HLeagues?.[0] || null;
+  const { data: h2hStandingsData, isLoading: h2hStandingsLoading } = useH2HStandings(myH2HLeague?._id || "");
 
   // Dedicated view for regular user role (non-manager account)
   if (isRegularUser) {
@@ -261,6 +268,15 @@ const HomePage = () => {
               startDate={data.gameweekProgress.startDate}
               endDate={data.gameweekProgress.endDate}
               badge={<Crown className="w-8 h-8 text-white/20" />}
+            />
+          </div>
+          <div className="col-span-2 sm:col-span-1 lg:col-span-2">
+            <H2HRecordCard
+              league={myH2HLeague}
+              standings={h2hStandingsData?.standings}
+              myTeamName={data.teamOverview.teamName}
+              loading={h2hLeaguesLoading || h2hStandingsLoading}
+              onView={() => navigate({ to: "/h2h" })}
             />
           </div>
           <div className="lg:col-span-2">
