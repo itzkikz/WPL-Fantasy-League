@@ -395,19 +395,34 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 return p?.teamId;
             }).filter(Boolean))] as number[];
 
-            // Determine upcoming rounds from the gameweek lifecycle. The fixture
-            // `status` field is unreliable (stale/always "finished"), so it cannot
-            // be used to decide which fixtures are upcoming.
-            const upcomingGwDocs = (await Gameweek.find({ isCompleted: { $ne: true }, number: { $gte: targetGw } }).select('number').lean()) as any[];
+            // Upcoming fixtures come from two overlapping sources so rescheduled /
+            // double-gameweek fixtures are never dropped:
+            //   1. fixtures ASSIGNED to upcoming app gameweeks (by fixtureId);
+            //   2. fixtures whose roundInfo.round matches an upcoming gameweek
+            //      number (gameweek fixture lists can be empty/unseeded).
+            const upcomingGwDocs = (await Gameweek.find({ isCompleted: { $ne: true }, number: { $gte: targetGw } }).select('number fixtures').lean()) as any[];
             const upcomingRounds = upcomingGwDocs.map((g) => g.number);
+            const upcomingFixtureIds = [...new Set(upcomingGwDocs.flatMap((g: any) => (g.fixtures || []).map(Number)))];
+            const fixtureGwMap = new Map<number, number>();
+            for (const g of upcomingGwDocs) {
+                for (const fid of (g.fixtures || [])) fixtureGwMap.set(Number(fid), g.number);
+            }
+
+            const teamFilter = [
+                { 'homeTeam.id': { $in: allTeamIds } },
+                { 'awayTeam.id': { $in: allTeamIds } }
+            ];
+            const roundMatch = { 'roundInfo.round': { $in: upcomingRounds } };
+            const assignedMatch = upcomingFixtureIds.length > 0
+                ? { fixtureId: { $in: upcomingFixtureIds } }
+                : null;
 
             const upcomingDocs = await Fixture.find({
-                'roundInfo.round': { $in: upcomingRounds },
-                $or: [
-                    { 'homeTeam.id': { $in: allTeamIds } },
-                    { 'awayTeam.id': { $in: allTeamIds } }
+                $and: [
+                    { $or: teamFilter },
+                    assignedMatch ? { $or: [roundMatch, assignedMatch] } : roundMatch
                 ]
-            }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean() as any[];
+            }).sort({ startTimestamp: 1 }).lean() as any[];
 
             // Fetch the target gameweek's fixtures for per-match labels.
             // Use the gameweek's assigned fixture list (fixture `roundInfo.round`
@@ -475,11 +490,19 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
 
                 // Upcoming fixtures
                 const teamFixtures = fixturesByTeam.get(playerDoc.teamId) || [];
-                const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }) => {
+                const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }, idx) => {
                     const opponentTeam = teamMap.get(opponentId);
                     const myTeam = clubData;
                     return {
-                        gw: f.roundInfo?.round || 0,
+                        // Label by the app gameweek the fixture is assigned to when
+                        // one exists; otherwise by the fixture's chronological
+                        // position (next match = current gameweek). Round numbers
+                        // are unreliable here: rescheduled leagues can kick off
+                        // rounds out of order (e.g. a postponed round 1 after
+                        // round 2), which made one gameweek mix two match weeks.
+                        gw: fixtureGwMap.get(Number(f.fixtureId ?? f.id)) || (targetGw + idx) || 0,
+                        fixture_id: f.fixtureId ?? f.id,
+                        kickoff: f.startTimestamp || 0,
                         opponent_short_name: opponentTeam?.nameCode || "UNK",
                         opponent_logo: opponentTeam?.logo || "",
                         opponent_color: opponentTeam?.teamColors?.primary || "#003399",
@@ -495,6 +518,8 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                     const nextGw = targetGw + upcomingFixtures.length;
                     upcomingFixtures.push({
                         gw: nextGw,
+                        fixture_id: 0,
+                        kickoff: 0,
                         opponent_short_name: "TBD",
                         opponent_logo: "",
                         opponent_color: "#1b1035",
@@ -868,15 +893,27 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
 
         // Upcoming fixtures for the squad's clubs (next non-completed gameweeks)
         const squadTeamIds = [...new Set(playersMap.map(p => p.teamId).filter(Boolean))];
-        const upcomingGwDocs = (await Gameweek.find({ isCompleted: { $ne: true }, number: { $gte: targetGw } }).select('number').lean()) as any[];
+        const upcomingGwDocs = (await Gameweek.find({ isCompleted: { $ne: true }, number: { $gte: targetGw } }).select('number fixtures').lean()) as any[];
         const upcomingRounds = upcomingGwDocs.map((g) => g.number);
+        const upcomingFixtureIds = [...new Set(upcomingGwDocs.flatMap((g: any) => (g.fixtures || []).map(Number)))];
+        const fixtureGwMap = new Map<number, number>();
+        for (const g of upcomingGwDocs) {
+            for (const fid of (g.fixtures || [])) fixtureGwMap.set(Number(fid), g.number);
+        }
         const upcomingDocs = (await Fixture.find({
-            'roundInfo.round': { $in: upcomingRounds },
-            $or: [
-                { 'homeTeam.id': { $in: squadTeamIds } },
-                { 'awayTeam.id': { $in: squadTeamIds } }
+            $and: [
+                { $or: [
+                    { 'homeTeam.id': { $in: squadTeamIds } },
+                    { 'awayTeam.id': { $in: squadTeamIds } }
+                ] },
+                upcomingFixtureIds.length > 0
+                    ? { $or: [
+                        { 'roundInfo.round': { $in: upcomingRounds } },
+                        { fixtureId: { $in: upcomingFixtureIds } }
+                    ] }
+                    : { 'roundInfo.round': { $in: upcomingRounds } }
             ]
-        }).sort({ 'roundInfo.round': 1, startTimestamp: 1 }).lean()) as any[];
+        }).sort({ startTimestamp: 1 }).lean()) as any[];
 
         const upcomingTeamIds = [...new Set(upcomingDocs.flatMap((f: any) => [f.homeTeam?.id, f.awayTeam?.id]).filter(Boolean))];
         const upcomingTeamDocs = (await Team.find({ id: { $in: upcomingTeamIds } }).lean()) as any[];
@@ -921,10 +958,18 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
 
             // Next 3 fixtures for this player's club
             const teamFixtures = playerDoc ? (fixturesByTeam.get(playerDoc.teamId) || []) : [];
-            const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }) => {
+            const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }, idx) => {
                 const opponentTeam = upcomingTeamMap.get(opponentId);
                 return {
-                    gw: f.roundInfo?.round || 0,
+                    // Label by the app gameweek the fixture is assigned to when one
+                    // exists; otherwise by chronological position (next match =
+                    // current gameweek). Round numbers are not chronological for
+                    // rescheduled leagues (a postponed round 1 can kick off after
+                    // round 2), which previously mixed two match weeks into one
+                    // label and showed gameweeks out of kickoff order.
+                    gw: fixtureGwMap.get(Number(f.fixtureId ?? f.id)) || (targetGw + idx) || 0,
+                    fixture_id: f.fixtureId ?? f.id,
+                    kickoff: f.startTimestamp || 0,
                     opponent_short_name: opponentTeam?.nameCode || opponentTeam?.shortName || "UNK",
                     opponent_logo: opponentTeam?.logo || "",
                     opponent_color: opponentTeam?.teamColors?.primary || "#003399",
@@ -938,6 +983,8 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
                 const nextGw = targetGw + upcomingFixtures.length;
                 upcomingFixtures.push({
                     gw: nextGw,
+                    fixture_id: 0,
+                    kickoff: 0,
                     opponent_short_name: "TBD",
                     opponent_logo: "",
                     opponent_color: "#1b1035",

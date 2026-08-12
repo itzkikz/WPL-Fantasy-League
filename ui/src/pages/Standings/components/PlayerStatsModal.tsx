@@ -57,6 +57,16 @@ const PlayerStatsModal = ({
   const player = propPlayer || localPlayer;
   const stats = propStats || localStats || propPlayer?.playerStats || localPlayer?.playerStats;
 
+  // Upcoming fixtures in kickoff order (a club can have several matches across
+  // the next gameweeks — rescheduled fixtures included — so each fixture keeps
+  // its own row with its own kickoff date). Padded "TBD" placeholders are dropped.
+  const upcomingFixtures = [...(stats?.upcoming_fixtures || [])]
+    .filter((fix: any) => fix.opponent_short_name && fix.opponent_short_name !== "TBD")
+    .sort(
+      (a: any, b: any) =>
+        (a.kickoff || Number.MAX_SAFE_INTEGER) - (b.kickoff || Number.MAX_SAFE_INTEGER)
+    );
+
   const auctionPrice =
     stats?.auctionPrice ??
     player?.auctionPrice ??
@@ -383,8 +393,8 @@ const PlayerStatsModal = ({
                       Upcoming Fixtures
                     </h4>
                     <div className="space-y-3 flex-1">
-                      {stats.upcoming_fixtures?.map((fix: any, idx: number) => (
-                        <div key={idx} className="flex items-center justify-between text-xs bg-card border border-border/40 rounded-xl p-2">
+                      {upcomingFixtures.map((fix: any, idx: number) => (
+                        <div key={fix.fixture_id || idx} className="flex items-center justify-between text-xs bg-card border border-border/40 rounded-xl p-2">
                           <span className="font-extrabold text-secondary font-mono text-[10px]">GW{fix.gw}</span>
    
                           <div className="flex items-center gap-1.5 flex-1 justify-center px-1">
@@ -397,9 +407,16 @@ const PlayerStatsModal = ({
                             </span>
                           </div>
    
-                          <span className="text-[9px] font-black text-text-muted uppercase tracking-wide">
-                            {fix.is_home ? "Home" : "Away"}
-                          </span>
+                          <div className="flex flex-col items-end gap-0.5">
+                            <span className="text-[9px] font-black text-text-muted uppercase tracking-wide">
+                              {fix.is_home ? "Home" : "Away"}
+                            </span>
+                            {fix.kickoff ? (
+                              <span className="text-[8px] font-bold text-text-muted font-mono">
+                                {formatMatchDate(fix.kickoff)}
+                              </span>
+                            ) : null}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -413,8 +430,8 @@ const PlayerStatsModal = ({
                       Upcoming Fixtures
                     </h4>
                     <div className="space-y-3 flex-1">
-                      {stats.upcoming_fixtures?.map((fix: any, idx: number) => (
-                        <div key={idx} className="flex items-center justify-between text-xs bg-card border border-border/40 rounded-xl p-2">
+                      {upcomingFixtures.map((fix: any, idx: number) => (
+                        <div key={fix.fixture_id || idx} className="flex items-center justify-between text-xs bg-card border border-border/40 rounded-xl p-2">
                           <span className="font-extrabold text-secondary font-mono text-[10px]">GW{fix.gw}</span>
    
                           <div className="flex items-center gap-1.5 flex-1 justify-center px-1">
@@ -427,9 +444,16 @@ const PlayerStatsModal = ({
                             </span>
                           </div>
    
-                          <span className="text-[9px] font-black text-text-muted uppercase tracking-wide">
-                            {fix.is_home ? "Home" : "Away"}
-                          </span>
+                          <div className="flex flex-col items-end gap-0.5">
+                            <span className="text-[9px] font-black text-text-muted uppercase tracking-wide">
+                              {fix.is_home ? "Home" : "Away"}
+                            </span>
+                            {fix.kickoff ? (
+                              <span className="text-[8px] font-bold text-text-muted font-mono">
+                                {formatMatchDate(fix.kickoff)}
+                              </span>
+                            ) : null}
+                          </div>
                         </div>
                       ))}
                     </div>
