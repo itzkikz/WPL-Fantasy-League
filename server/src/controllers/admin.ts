@@ -1301,13 +1301,23 @@ export const togglePickTeam = async (req: Request, res: Response) => {
 
         const { enabled, deadlineDate } = req.body;
 
+        // datetime-local inputs send naive "YYYY-MM-DDTHH:mm" strings with no timezone.
+        // Assume UTC so the deadline means the same instant for admins in any timezone.
+        const parseDeadline = (value: any): Date | undefined => {
+            if (!value) return undefined;
+            if (typeof value === 'string' && !/z|Z|[+-]\d{2}:?\d{2}$/.test(value)) {
+                return new Date(value.replace(/(:\d{2})$/, '') + ':00Z');
+            }
+            return new Date(value);
+        };
+
         let apiConfig = await ApiConfig.findOne({ key: 'pick_team_enabled' });
         if (!apiConfig) {
             apiConfig = new ApiConfig({
                 key: 'pick_team_enabled',
                 lastUpdatedString: String(enabled !== undefined ? enabled : true),
                 lastUpdated: new Date(),
-                deadlineDate: deadlineDate ? new Date(deadlineDate) : undefined
+                deadlineDate: parseDeadline(deadlineDate)
             });
         } else {
             if (enabled !== undefined) {
@@ -1315,7 +1325,7 @@ export const togglePickTeam = async (req: Request, res: Response) => {
             }
             apiConfig.lastUpdated = new Date();
             if (deadlineDate !== undefined) {
-                apiConfig.deadlineDate = deadlineDate ? new Date(deadlineDate) : undefined;
+                apiConfig.deadlineDate = parseDeadline(deadlineDate);
             }
         }
         await apiConfig.save();
