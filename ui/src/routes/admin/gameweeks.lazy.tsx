@@ -4,8 +4,11 @@ import { useState, useEffect } from "react";
 import apiClient from "../../api/client";
 import { API_ENDPOINTS, QUERY_KEYS } from "../../api/endpoints";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import { Calendar, Settings, AlertCircle, Plus, Zap, Check, Lock, Unlock, Loader2, Edit3, X, Clock, Save } from "lucide-react";
 import Modal from "../../components/common/Modal";
+
+dayjs.extend(utc);
 
 export const Route = createLazyFileRoute("/admin/gameweeks")({
   component: AdminGameweeks,
@@ -86,19 +89,18 @@ function AdminGameweeks() {
     },
   });
 
+  // datetime-local inputs yield a naive "YYYY-MM-DDTHH:mm" string with no timezone,
+  // and their rendering (24h vs AM/PM) follows each admin's browser locale. To keep
+  // deadlines identical for every admin, work in UTC: show stored deadlines as UTC and
+  // send the picked value as an explicit UTC instant.
+  const toUtcIso = (naive: string) =>
+    naive ? dayjs.utc(naive, "YYYY-MM-DDTHH:mm").toISOString() : naive;
+
   useEffect(() => {
     if (pickTeamData?.data?.deadlineDate) {
-      setDeadlineDate(dayjs(pickTeamData.data.deadlineDate).format("YYYY-MM-DDTHH:mm"));
+      setDeadlineDate(dayjs.utc(pickTeamData.data.deadlineDate).format("YYYY-MM-DDTHH:mm"));
     }
   }, [pickTeamData]);
-
-  // datetime-local produces a timezone-naive "YYYY-MM-DDTHH:mm" string.
-  // Resolve it against the admin's local timezone into an absolute UTC instant
-  // BEFORE it reaches the server. Otherwise the server parses it in ITS own
-  // timezone, and the stored deadline (and the value shown after a refetch)
-  // silently shifts by the browser/server offset every time it is saved.
-  const deadlineToIso = (value: string): string | undefined =>
-    value ? new Date(value).toISOString() : undefined;
 
   const togglePickTeamMutation = useMutation({
     mutationFn: async (payload: { enabled?: boolean; deadlineDate?: string }) => {
@@ -164,6 +166,8 @@ function AdminGameweeks() {
     e.preventDefault();
     const payload = {
       ...formData,
+      startDate: toUtcIso(formData.startDate),
+      endDate: toUtcIso(formData.endDate),
       number: Number(formData.number),
       season: Number(formData.season),
       fixtures: formData.fixtures
@@ -179,6 +183,8 @@ function AdminGameweeks() {
     if (!editingGwId) return;
     const payload = {
       ...editFormData,
+      startDate: toUtcIso(editFormData.startDate),
+      endDate: toUtcIso(editFormData.endDate),
       number: Number(editFormData.number),
       season: Number(editFormData.season),
       fixtures: editFormData.fixtures
@@ -198,8 +204,8 @@ function AdminGameweeks() {
     setEditFormData({
       number: gw.number?.toString() || "",
       season: gw.season?.toString() || "",
-      startDate: dayjs(gw.startDate).format("YYYY-MM-DDTHH:mm"),
-      endDate: dayjs(gw.endDate).format("YYYY-MM-DDTHH:mm"),
+      startDate: dayjs.utc(gw.startDate).format("YYYY-MM-DDTHH:mm"),
+      endDate: dayjs.utc(gw.endDate).format("YYYY-MM-DDTHH:mm"),
       isCurrent: !!gw.isCurrent,
       fixtures: (gw.fixtures || []).join(", "),
     });
@@ -319,7 +325,7 @@ function AdminGameweeks() {
             onClick={() =>
               togglePickTeamMutation.mutate({
                 enabled: !pickTeamData?.data?.enabled,
-                deadlineDate: deadlineToIso(deadlineDate),
+                deadlineDate: toUtcIso(deadlineDate),
               })
             }
             disabled={togglePickTeamMutation.isPending}
@@ -347,7 +353,7 @@ function AdminGameweeks() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#150f24]/70 border border-white/5 p-3 rounded-xl">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 flex-1">
             <label className="text-xs font-bold text-white/80 shrink-0">
-              Automatic Lock Deadline:
+              Automatic Lock Deadline (UTC):
             </label>
             <input
               type="datetime-local"
@@ -355,6 +361,9 @@ function AdminGameweeks() {
               onChange={(e) => setDeadlineDate(e.target.value)}
               className="px-3 py-1.5 bg-[#1b142d] border border-white/15 rounded-lg outline-none text-xs font-semibold text-white/90 focus:border-indigo-500 transition-colors w-full sm:w-auto"
             />
+            <p className="text-[10px] text-white/40 sm:ml-1">
+              24-hour UTC time — identical for every admin regardless of locale.
+            </p>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
@@ -364,9 +373,9 @@ function AdminGameweeks() {
                 onClick={() => {
                   const activeGw = gameweeks.find((gw: any) => gw.isCurrent);
                   if (activeGw?.startDate) {
-                    const formatted = dayjs(activeGw.startDate).format("YYYY-MM-DDTHH:mm");
+                    const formatted = dayjs.utc(activeGw.startDate).format("YYYY-MM-DDTHH:mm");
                     setDeadlineDate(formatted);
-                    togglePickTeamMutation.mutate({ deadlineDate: new Date(activeGw.startDate).toISOString() });
+                    togglePickTeamMutation.mutate({ deadlineDate: toUtcIso(formatted) });
                   }
                 }}
                 disabled={togglePickTeamMutation.isPending}
@@ -379,7 +388,7 @@ function AdminGameweeks() {
 
             <button
               type="button"
-              onClick={() => togglePickTeamMutation.mutate({ deadlineDate: deadlineToIso(deadlineDate) })}
+              onClick={() => togglePickTeamMutation.mutate({ deadlineDate: toUtcIso(deadlineDate) })}
               disabled={togglePickTeamMutation.isPending}
               className="px-4 py-1.5 rounded-lg text-xs font-black bg-indigo-600 hover:bg-indigo-500 text-white shadow-md active:scale-95 transition-all cursor-pointer flex items-center gap-1.5"
             >
