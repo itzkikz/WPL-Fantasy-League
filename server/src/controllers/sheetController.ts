@@ -8,6 +8,7 @@ import { MatchDetails } from '../models/MatchDetails';
 import { ApiConfig } from '../models/ApiConfig';
 import { buildFantasyTeamGamewiseRows, fantasyGamewiseRowsToValues, FANTASY_GAMEWISE_HEADERS } from '../lib/fantasyScore';
 import { buildPlayerStatsRows, PLAYER_STATS_SHEET_HEADERS } from '../lib/playerStatsSheet';
+import { buildCurrentFixturesRows, FIXTURES_SHEET_HEADERS } from '../lib/fixturesSheet';
 
 export class SheetController {
     static async updatePlayersLatest(req: Request, res: Response) {
@@ -470,6 +471,81 @@ export class SheetController {
             });
         } catch (error) {
             console.error('Error updating player stats sheet:', error);
+            res.status(500).json({ message: 'Update failed', error: (error as Error).message });
+        }
+    }
+
+    static async getCurrentFixturesStatus(req: Request, res: Response) {
+        try {
+            if (req.user && req.user.role !== 'admin') {
+                return res.status(403).json({ error: 'Access denied. Admins only.' });
+            }
+
+            const config = await ApiConfig.findOne({ key: 'current_fixtures_push' }).lean();
+            res.status(200).json({
+                success: true,
+                lastPushedAt: config?.lastUpdated ?? null,
+            });
+        } catch (error) {
+            console.error('Error reading current fixtures push status:', error);
+            res.status(500).json({ message: 'Build failed', error: (error as Error).message });
+        }
+    }
+
+    static async updateCurrentFixturesSheet(req: Request, res: Response) {
+        try {
+            if (req.user && req.user.role !== 'admin') {
+                return res.status(403).json({ error: 'Access denied. Admins only.' });
+            }
+
+            const sheets: any = getSheets();
+            if (!sheets) {
+                return res.status(500).json({ message: 'Google Sheets API not initialized.' });
+            }
+
+            const spreadsheetId = process.env.API_DATA_SHEET_ID;
+            if (!spreadsheetId) {
+                return res.status(500).json({ message: 'API_DATA_SHEET_ID is not defined in environment.' });
+            }
+
+            const sheetTitle = 'Fixtures';
+
+            const rows = await buildCurrentFixturesRows();
+
+            await SheetController.ensureSheetTab(sheets, spreadsheetId, sheetTitle);
+
+            const sheetData = [FIXTURES_SHEET_HEADERS, ...rows];
+
+            // Clear the existing sheet data first
+            await sheets.spreadsheets.values.clear({
+                spreadsheetId,
+                range: `'${sheetTitle}'!A:L`,
+            });
+
+            await sheets.spreadsheets.values.update({
+                spreadsheetId,
+                range: `'${sheetTitle}'!A1`,
+                valueInputOption: 'USER_ENTERED',
+                requestBody: {
+                    values: sheetData,
+                },
+            });
+
+            await ApiConfig.findOneAndUpdate(
+                { key: 'current_fixtures_push' },
+                { $set: { key: 'current_fixtures_push', lastUpdated: new Date(), lastUpdatedString: new Date().toISOString() } },
+                { upsert: true, new: true }
+            );
+
+            res.status(200).json({
+                success: true,
+                message: `Fixtures sheet updated successfully (${rows.length} rows)`,
+                sheet: sheetTitle,
+                count: rows.length,
+                lastPushedAt: new Date().toISOString(),
+            });
+        } catch (error) {
+            console.error('Error updating fixtures sheet:', error);
             res.status(500).json({ message: 'Update failed', error: (error as Error).message });
         }
     }
