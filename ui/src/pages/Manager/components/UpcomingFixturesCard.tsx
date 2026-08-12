@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import dayjs from "dayjs";
 import { Calendar, MapPin } from "lucide-react";
 import { Player } from "../../../features/players/types";
 
@@ -8,13 +9,12 @@ interface UpcomingFixturesCardProps {
 
 interface FixtureRow {
   gw: number;
+  kickoff?: number;
   club: string;
   clubLogo: string;
   count: number;
   opponent: string;
   opponentLogo: string;
-  opponentColor: string;
-  opponentTextColor: string;
   isHome: boolean;
 }
 
@@ -37,21 +37,26 @@ const UpcomingFixturesCard = ({ players }: UpcomingFixturesCardProps) => {
         if (!opponent || opponent === "TBD" || !club || club === "UNK") continue;
 
         const rows = map.get(f.gw) || [];
+        // kickoff gives each fixture a stable identity, so two fixtures in the
+        // same gameweek against the same opponent never collapse into one row.
         const existing = rows.find(
-          (r) => r.club === club && r.opponent === opponent && r.isHome === f.is_home
+          (r) =>
+            r.club === club &&
+            r.opponent === opponent &&
+            r.isHome === f.is_home &&
+            r.kickoff === f.kickoff
         );
         if (existing) {
           existing.count += 1;
         } else {
           rows.push({
             gw: f.gw,
+            kickoff: f.kickoff,
             club,
             clubLogo: f.my_team_logo || "",
             count: 1,
             opponent,
             opponentLogo: f.opponent_logo || "",
-            opponentColor: f.opponent_color || "#003399",
-            opponentTextColor: f.opponent_text_color || "#ffffff",
             isHome: f.is_home,
           });
         }
@@ -59,7 +64,17 @@ const UpcomingFixturesCard = ({ players }: UpcomingFixturesCardProps) => {
       }
     }
 
-    return [...map.entries()].sort((a, b) => a[0] - b[0]);
+    return [...map.entries()]
+      .map(([gw, rows]) => [
+        gw,
+        // Render each gameweek's matches in kickoff order so the section
+        // reads chronologically (squad player order can differ).
+        rows.sort(
+          (a, b) =>
+            (a.kickoff || Number.MAX_SAFE_INTEGER) - (b.kickoff || Number.MAX_SAFE_INTEGER)
+        ),
+      ] as [number, FixtureRow[]])
+      .sort((a, b) => a[0] - b[0]);
   }, [players]);
 
   const totalFixtures = byGw.reduce((acc, [, rows]) => acc + rows.length, 0);
@@ -125,12 +140,16 @@ const UpcomingFixturesCard = ({ players }: UpcomingFixturesCardProps) => {
 
                     {/* Opponent */}
                     <div className="flex items-center gap-1.5 min-w-0 flex-1 justify-end">
-                      <span
-                        className="text-[11px] font-extrabold truncate"
-                        style={{ color: r.opponentColor && r.opponentColor !== "#1b1035" ? r.opponentColor : undefined }}
-                      >
-                        {r.opponent}
-                      </span>
+                      <div className="flex flex-col items-end min-w-0">
+                        <span className="text-[11px] font-extrabold text-text-primary truncate">
+                          {r.opponent}
+                        </span>
+                        {r.kickoff ? (
+                          <span className="text-[8px] font-bold text-text-muted font-mono truncate">
+                            {dayjs.unix(r.kickoff).format("ddd D MMM, h:mm A")}
+                          </span>
+                        ) : null}
+                      </div>
                       {r.opponentLogo ? (
                         <img src={r.opponentLogo} alt={r.opponent} className="w-5 h-5 object-contain shrink-0" />
                       ) : null}

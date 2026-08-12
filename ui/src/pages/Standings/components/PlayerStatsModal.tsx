@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { X, Target, Clock, Star, Calendar, ArrowRightLeft, Activity, ShieldCheck, Goal, Footprints, Shield, TriangleAlert, Octagon, Ban, Sparkles, Hand, Zap, Send, Blocks, Magnet, Filter } from "lucide-react";
 import { Player, PlayerStats } from "../../../features/players/types";
-import { getContrastText, luminance } from "../../../libs/helpers/color";
 import { getPlayerDisplayPrice } from "../../../libs/helpers/player";
 import Modal from "../../../components/common/Modal";
 import { useTheme } from "../../../contexts/ThemeContext";
@@ -58,6 +57,16 @@ const PlayerStatsModal = ({
   const player = propPlayer || localPlayer;
   const stats = propStats || localStats || propPlayer?.playerStats || localPlayer?.playerStats;
 
+  // Upcoming fixtures in kickoff order (a club can have several matches across
+  // the next gameweeks — rescheduled fixtures included — so each fixture keeps
+  // its own row with its own kickoff date). Padded "TBD" placeholders are dropped.
+  const upcomingFixtures = [...(stats?.upcoming_fixtures || [])]
+    .filter((fix: any) => fix.opponent_short_name && fix.opponent_short_name !== "TBD")
+    .sort(
+      (a: any, b: any) =>
+        (a.kickoff || Number.MAX_SAFE_INTEGER) - (b.kickoff || Number.MAX_SAFE_INTEGER)
+    );
+
   const auctionPrice =
     stats?.auctionPrice ??
     player?.auctionPrice ??
@@ -80,23 +89,6 @@ const PlayerStatsModal = ({
 
   const getJerseyTextColor = () => {
     return stats?.team_text_color || player?.teamTextColor || "#ffffff";
-  };
-
-  const getReadableTeamColor = (color?: string) => {
-    if (!color) return theme === "light" ? "#0F172A" : "#FFFFFF";
-    const c = color.trim().toLowerCase();
-    let isLight = c === "#ffffff" || c === "#fff" || c === "white";
-    let isDark = c === "#000000" || c === "#000" || c === "black";
-    if (c.startsWith("#") && (c.length === 4 || c.length === 7)) {
-      try {
-        const lum = luminance(c);
-        if (lum > 0.75) isLight = true;
-        if (lum < 0.15) isDark = true;
-      } catch {}
-    }
-    if (theme === "light" && isLight) return "#0F172A";
-    if (theme === "dark" && isDark) return "#FFFFFF";
-    return color;
   };
 
   const formatMatchDate = (kickoff?: number | null) => {
@@ -401,23 +393,30 @@ const PlayerStatsModal = ({
                       Upcoming Fixtures
                     </h4>
                     <div className="space-y-3 flex-1">
-                      {stats.upcoming_fixtures?.map((fix: any, idx: number) => (
-                        <div key={idx} className="flex items-center justify-between text-xs bg-card border border-border/40 rounded-xl p-2">
+                      {upcomingFixtures.map((fix: any, idx: number) => (
+                        <div key={fix.fixture_id || idx} className="flex items-center justify-between text-xs bg-card border border-border/40 rounded-xl p-2">
                           <span className="font-extrabold text-secondary font-mono text-[10px]">GW{fix.gw}</span>
    
                           <div className="flex items-center gap-1.5 flex-1 justify-center px-1">
-                            <span className="font-extrabold" style={{ color: getReadableTeamColor(getJerseyColor()) }}>
+                            <span className="font-extrabold text-text-primary">
                               {fix.my_team_short_name}
                             </span>
                             <span className="text-text-muted text-[10px]">vs</span>
-                            <span className="font-extrabold truncate" style={{ color: getReadableTeamColor(fix.opponent_color) }}>
+                            <span className="font-extrabold truncate text-text-primary">
                               {fix.opponent_short_name}
                             </span>
                           </div>
    
-                          <span className="text-[9px] font-black text-text-muted uppercase tracking-wide">
-                            {fix.is_home ? "Home" : "Away"}
-                          </span>
+                          <div className="flex flex-col items-end gap-0.5">
+                            <span className="text-[9px] font-black text-text-muted uppercase tracking-wide">
+                              {fix.is_home ? "Home" : "Away"}
+                            </span>
+                            {fix.kickoff ? (
+                              <span className="text-[8px] font-bold text-text-muted font-mono">
+                                {formatMatchDate(fix.kickoff)}
+                              </span>
+                            ) : null}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -431,23 +430,30 @@ const PlayerStatsModal = ({
                       Upcoming Fixtures
                     </h4>
                     <div className="space-y-3 flex-1">
-                      {stats.upcoming_fixtures?.map((fix: any, idx: number) => (
-                        <div key={idx} className="flex items-center justify-between text-xs bg-card border border-border/40 rounded-xl p-2">
+                      {upcomingFixtures.map((fix: any, idx: number) => (
+                        <div key={fix.fixture_id || idx} className="flex items-center justify-between text-xs bg-card border border-border/40 rounded-xl p-2">
                           <span className="font-extrabold text-secondary font-mono text-[10px]">GW{fix.gw}</span>
    
                           <div className="flex items-center gap-1.5 flex-1 justify-center px-1">
-                            <span className="font-extrabold" style={{ color: getReadableTeamColor(getJerseyColor()) }}>
+                            <span className="font-extrabold text-text-primary">
                               {fix.my_team_short_name}
                             </span>
                             <span className="text-text-muted text-[10px]">vs</span>
-                            <span className="font-extrabold truncate" style={{ color: getReadableTeamColor(fix.opponent_color) }}>
+                            <span className="font-extrabold truncate text-text-primary">
                               {fix.opponent_short_name}
                             </span>
                           </div>
    
-                          <span className="text-[9px] font-black text-text-muted uppercase tracking-wide">
-                            {fix.is_home ? "Home" : "Away"}
-                          </span>
+                          <div className="flex flex-col items-end gap-0.5">
+                            <span className="text-[9px] font-black text-text-muted uppercase tracking-wide">
+                              {fix.is_home ? "Home" : "Away"}
+                            </span>
+                            {fix.kickoff ? (
+                              <span className="text-[8px] font-bold text-text-muted font-mono">
+                                {formatMatchDate(fix.kickoff)}
+                              </span>
+                            ) : null}
+                          </div>
                         </div>
                       ))}
                     </div>

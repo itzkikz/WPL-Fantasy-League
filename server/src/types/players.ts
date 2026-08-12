@@ -130,6 +130,8 @@ export interface PlayerStats {
   auctionPrice?: number;
   upcoming_fixtures?: {
     gw: number;
+    fixture_id?: number;
+    kickoff?: number;
     opponent_short_name: string;
     opponent_logo: string;
     opponent_color: string;

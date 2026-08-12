@@ -14,6 +14,49 @@ export const Route = createLazyFileRoute("/admin/gameweeks")({
   component: AdminGameweeks,
 });
 
+/**
+ * Live clock strip for the admin panel: shows the current time in UTC,
+ * IST (UTC+5:30), and the admin's own browser timezone so deadlines and
+ * gameweek dates entered in UTC are easy to reason about.
+ */
+function AdminClockStrip() {
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const utc = dayjs.utc(now);
+  const ist = utc.add(5, "hour").add(30, "minute");
+  const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "Your time";
+
+  const clockItem = (label: string, time: string, highlight = false, title = "") => (
+    <div
+      title={title}
+      className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border font-mono text-[10px] sm:text-[11px] font-bold ${
+        highlight
+          ? "bg-indigo-500/10 text-indigo-300 border-indigo-500/25"
+          : "bg-[#150f24]/70 text-white/80 border-white/10"
+      }`}
+    >
+      <Clock className="w-3 h-3 text-white/40 shrink-0" />
+      <span className="font-sans font-black uppercase tracking-wider text-white/50 text-[8px] sm:text-[9px]">
+        {label}
+      </span>
+      <span>{time}</span>
+    </div>
+  );
+
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      {clockItem("UTC", utc.format("HH:mm:ss"), false, "Coordinated Universal Time")}
+      {clockItem("IST", ist.format("HH:mm:ss"), true, "Indian Standard Time (UTC+5:30)")}
+      {clockItem(localTz, dayjs(now).format("HH:mm:ss"), false, "Your local timezone")}
+    </div>
+  );
+}
+
 function AdminGameweeks() {
   const queryClient = useQueryClient();
   const [isCreating, setIsCreating] = useState(false);
@@ -290,6 +333,9 @@ function AdminGameweeks() {
           <Plus className="w-3.5 h-3.5" /> {isCreating ? "Cancel" : "Create Gameweek"}
         </button>
       </div>
+
+      {/* Current time strip — UTC, IST, and the admin's local timezone */}
+      <AdminClockStrip />
 
       {/* Pick Team Deadline & Squad Lock Control Card */}
       <div className="bg-[#1b142d]/80 border border-white/10 p-4 sm:p-5 rounded-2xl shadow-xl space-y-4">
