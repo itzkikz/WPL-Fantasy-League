@@ -103,7 +103,7 @@ function AdminGameweeks() {
   }, [pickTeamData]);
 
   const togglePickTeamMutation = useMutation({
-    mutationFn: async (payload: { enabled: boolean, deadlineDate?: string }) => {
+    mutationFn: async (payload: { enabled?: boolean; deadlineDate?: string }) => {
       return await apiClient.post(API_ENDPOINTS.ADMIN.PICK_TEAM_STATUS, payload);
     },
     onSuccess: () => {
