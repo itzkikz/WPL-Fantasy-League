@@ -39,6 +39,7 @@ export const API_ENDPOINTS = {
     UNDO_FANTASY: (id: string | number) => `/admin/fixtures/${id}/fantasy`,
     SHEETS_FANTASY_TEAMS_GAMEWISE: '/admin/sheets/fantasy-teams-gamewise',
     SHEETS_PLAYER_STATS: '/admin/sheets/player-stats',
+    SHEETS_FIXTURES: '/admin/sheets/fixtures',
     FIXTURE_STATS: (id: string | number) => `/admin/fixtures/${id}/stats`,
     GAMEWEEKS: '/admin/gameweeks',
     COMPLETE_GAMEWEEK: (id: string | number) => `/admin/gameweeks/${id}/complete`,

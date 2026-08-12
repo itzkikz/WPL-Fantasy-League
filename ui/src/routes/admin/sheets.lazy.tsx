@@ -25,6 +25,14 @@ const SHEETS = [
     tab: "PlayerStats",
     endpoint: API_ENDPOINTS.ADMIN.SHEETS_PLAYER_STATS,
   },
+  {
+    key: "fixtures",
+    title: "Current Fixtures Export",
+    description:
+      "One row per fixture assigned to the current and next gameweeks (mirrors the gameweeks collection): gameweek, league, round, kickoff (UTC), both teams, live status and score. Rescheduled/double-gameweek fixtures are included.",
+    tab: "Fixtures",
+    endpoint: API_ENDPOINTS.ADMIN.SHEETS_FIXTURES,
+  },
 ];
 
 function SheetCard({ sheet }: { sheet: (typeof SHEETS)[number] }) {

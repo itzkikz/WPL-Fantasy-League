@@ -54,5 +54,7 @@ router.get('/sheets/fantasy-teams-gamewise', SheetController.getFantasyTeamsGame
 router.post('/sheets/fantasy-teams-gamewise', SheetController.updateFantasyTeamsGamewise);
 router.get('/sheets/player-stats', SheetController.getPlayerStatsStatus);
 router.post('/sheets/player-stats', SheetController.updatePlayerStatsSheet);
+router.get('/sheets/fixtures', SheetController.getCurrentFixturesStatus);
+router.post('/sheets/fixtures', SheetController.updateCurrentFixturesSheet);
 
 export default router;
