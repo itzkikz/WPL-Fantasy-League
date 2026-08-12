@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { X, Target, Clock, Star, Calendar, ArrowRightLeft, Activity, ShieldCheck, Goal, Footprints, Shield, TriangleAlert, Octagon, Ban, Sparkles, Hand, Zap, Send, Blocks, Magnet, Filter } from "lucide-react";
 import { Player, PlayerStats } from "../../../features/players/types";
-import { getContrastText, luminance } from "../../../libs/helpers/color";
 import { getPlayerDisplayPrice } from "../../../libs/helpers/player";
 import Modal from "../../../components/common/Modal";
 import { useTheme } from "../../../contexts/ThemeContext";
@@ -80,23 +79,6 @@ const PlayerStatsModal = ({
 
   const getJerseyTextColor = () => {
     return stats?.team_text_color || player?.teamTextColor || "#ffffff";
-  };
-
-  const getReadableTeamColor = (color?: string) => {
-    if (!color) return theme === "light" ? "#0F172A" : "#FFFFFF";
-    const c = color.trim().toLowerCase();
-    let isLight = c === "#ffffff" || c === "#fff" || c === "white";
-    let isDark = c === "#000000" || c === "#000" || c === "black";
-    if (c.startsWith("#") && (c.length === 4 || c.length === 7)) {
-      try {
-        const lum = luminance(c);
-        if (lum > 0.75) isLight = true;
-        if (lum < 0.15) isDark = true;
-      } catch {}
-    }
-    if (theme === "light" && isLight) return "#0F172A";
-    if (theme === "dark" && isDark) return "#FFFFFF";
-    return color;
   };
 
   const formatMatchDate = (kickoff?: number | null) => {
@@ -406,11 +388,11 @@ const PlayerStatsModal = ({
                           <span className="font-extrabold text-secondary font-mono text-[10px]">GW{fix.gw}</span>
    
                           <div className="flex items-center gap-1.5 flex-1 justify-center px-1">
-                            <span className="font-extrabold" style={{ color: getReadableTeamColor(getJerseyColor()) }}>
+                            <span className="font-extrabold text-text-primary">
                               {fix.my_team_short_name}
                             </span>
                             <span className="text-text-muted text-[10px]">vs</span>
-                            <span className="font-extrabold truncate" style={{ color: getReadableTeamColor(fix.opponent_color) }}>
+                            <span className="font-extrabold truncate text-text-primary">
                               {fix.opponent_short_name}
                             </span>
                           </div>
@@ -436,11 +418,11 @@ const PlayerStatsModal = ({
                           <span className="font-extrabold text-secondary font-mono text-[10px]">GW{fix.gw}</span>
    
                           <div className="flex items-center gap-1.5 flex-1 justify-center px-1">
-                            <span className="font-extrabold" style={{ color: getReadableTeamColor(getJerseyColor()) }}>
+                            <span className="font-extrabold text-text-primary">
                               {fix.my_team_short_name}
                             </span>
                             <span className="text-text-muted text-[10px]">vs</span>
-                            <span className="font-extrabold truncate" style={{ color: getReadableTeamColor(fix.opponent_color) }}>
+                            <span className="font-extrabold truncate text-text-primary">
                               {fix.opponent_short_name}
                             </span>
                           </div>

@@ -13,8 +13,6 @@ interface FixtureRow {
   count: number;
   opponent: string;
   opponentLogo: string;
-  opponentColor: string;
-  opponentTextColor: string;
   isHome: boolean;
 }
 
@@ -50,8 +48,6 @@ const UpcomingFixturesCard = ({ players }: UpcomingFixturesCardProps) => {
             count: 1,
             opponent,
             opponentLogo: f.opponent_logo || "",
-            opponentColor: f.opponent_color || "#003399",
-            opponentTextColor: f.opponent_text_color || "#ffffff",
             isHome: f.is_home,
           });
         }
@@ -125,10 +121,7 @@ const UpcomingFixturesCard = ({ players }: UpcomingFixturesCardProps) => {
 
                     {/* Opponent */}
                     <div className="flex items-center gap-1.5 min-w-0 flex-1 justify-end">
-                      <span
-                        className="text-[11px] font-extrabold truncate"
-                        style={{ color: r.opponentColor && r.opponentColor !== "#1b1035" ? r.opponentColor : undefined }}
-                      >
+                      <span className="text-[11px] font-extrabold text-text-primary truncate">
                         {r.opponent}
                       </span>
                       {r.opponentLogo ? (
