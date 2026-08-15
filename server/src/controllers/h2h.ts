@@ -273,10 +273,19 @@ export const getH2HLeagueFixturesPublic = async (req: Request, res: Response) =>
         if (gameweek) query.gameweek = Number(gameweek);
 
         const fixtures = await H2HFixture.find(query)
-            .populate('homeTeam', 'name logo')
-            .populate('awayTeam', 'name logo')
+            .populate('homeTeam', 'name')
+            .populate('awayTeam', 'name')
             .sort({ gameweek: 1 })
             .lean();
+
+        // Team logos are large base64 strings; embedding them on every fixture
+        // (2 per fixture × 220+ fixtures, duplicated again in `byGameweek`)
+        // made this endpoint return ~100MB. Send each logo exactly once, keyed
+        // by team id, and let the client look it up.
+        const teamLogos: Record<string, string> = {};
+        for (const t of league.fantasyTeams as any[]) {
+            if (t?._id) teamLogos[t._id.toString()] = t.logo || '';
+        }
 
         // Enrich fixtures with live scores for completed and current GWs
         const gwPointsMap = await getLeagueAllGWPoints(league, true);
@@ -314,7 +323,7 @@ export const getH2HLeagueFixturesPublic = async (req: Request, res: Response) =>
             byGameweek[gw].push(f);
         }
 
-        res.json({ data: { fixtures: enrichedFixtures, byGameweek } });
+        res.json({ data: { fixtures: enrichedFixtures, byGameweek, teamLogos } });
     } catch (error: any) {
         console.error('Error getting H2H fixtures:', error);
         res.status(500).json({ error: error.message });

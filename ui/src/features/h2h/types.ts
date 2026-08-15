@@ -29,6 +29,14 @@ export interface H2HFixture {
   winner: string | 'draw' | null;
 }
 
+export interface H2HFixturesResponse {
+  fixtures: H2HFixture[];
+  byGameweek: Record<number, H2HFixture[]>;
+  // Team logos are large base64 strings, so the API sends them once keyed by
+  // team id instead of embedding them on every fixture.
+  teamLogos?: Record<string, string>;
+}
+
 export interface H2HStanding {
   teamId: string;
   teamName: string;

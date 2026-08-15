@@ -1,5 +1,5 @@
 import apiClient from "../../api/client";
-import { H2HLeague, H2HFixture, H2HStanding } from "./types";
+import { H2HLeague, H2HFixture, H2HStanding, H2HFixturesResponse } from "./types";
 
 export const h2hApi = {
   // Public (authenticated user) endpoints
@@ -13,7 +13,7 @@ export const h2hApi = {
     return response.data.data;
   },
 
-  getLeagueFixtures: async (leagueId: string, gameweek?: number): Promise<{ fixtures: H2HFixture[]; byGameweek: Record<number, H2HFixture[]> }> => {
+  getLeagueFixtures: async (leagueId: string, gameweek?: number): Promise<H2HFixturesResponse> => {
     const params = gameweek ? { gameweek } : {};
     const response = await apiClient.get(`/h2h/leagues/${leagueId}/fixtures`, { params });
     return response.data.data;

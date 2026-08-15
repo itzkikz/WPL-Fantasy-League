@@ -142,7 +142,7 @@ const PlayerRow = ({ player, accent }: { player: any; accent: 'secondary' | 'pri
   </div>
 );
 
-function H2HFixtureModal({ fixture, isOpen, onClose }: { fixture: H2HFixture | null; isOpen: boolean; onClose: () => void }) {
+function H2HFixtureModal({ fixture, isOpen, onClose, teamLogos }: { fixture: H2HFixture | null; isOpen: boolean; onClose: () => void; teamLogos?: Record<string, string> }) {
   const [activeTab, setActiveTab] = useState<'lineup' | 'stats'>('lineup');
   const homeTeamId = fixture?.homeTeam?._id ?? '';
   const awayTeamId = fixture?.awayTeam?._id ?? '';
@@ -157,6 +157,8 @@ function H2HFixtureModal({ fixture, isOpen, onClose }: { fixture: H2HFixture | n
 
   const homeTeamName = fixture?.homeTeam?.name || homeDetails?.team_name || 'Home Team';
   const awayTeamName = fixture?.awayTeam?.name || awayDetails?.team_name || 'Away Team';
+  const homeLogo = fixture?.homeTeam?._id ? teamLogos?.[fixture.homeTeam._id] : undefined;
+  const awayLogo = fixture?.awayTeam?._id ? teamLogos?.[fixture.awayTeam._id] : undefined;
 
   const getStarters = (details: any, pos: 'GK' | 'DEF' | 'MID' | 'FWD') => details?.starting?.[pos] || [];
 
@@ -203,8 +205,8 @@ function H2HFixtureModal({ fixture, isOpen, onClose }: { fixture: H2HFixture | n
       {/* Score strip */}
       <div className="px-4 py-3 flex items-center justify-between gap-3 border-b border-border/40 bg-elevated/40 flex-none">
         <div className="flex-1 min-w-0 flex items-center gap-2">
-          {fixture?.homeTeam?.logo && (
-            <img src={fixture.homeTeam.logo} alt={`${homeTeamName} logo`} className="w-7 h-7 object-contain shrink-0" />
+          {homeLogo && (
+            <img src={homeLogo} alt={`${homeTeamName} logo`} className="w-7 h-7 object-contain shrink-0" />
           )}
           <span className="text-xs font-extrabold text-text-primary truncate">{homeTeamName}</span>
         </div>
@@ -215,8 +217,8 @@ function H2HFixtureModal({ fixture, isOpen, onClose }: { fixture: H2HFixture | n
         </div>
         <div className="flex-1 min-w-0 flex items-center justify-end gap-2 text-right">
           <span className="text-xs font-extrabold text-text-primary truncate">{awayTeamName}</span>
-          {fixture?.awayTeam?.logo && (
-            <img src={fixture.awayTeam.logo} alt={`${awayTeamName} logo`} className="w-7 h-7 object-contain shrink-0" />
+          {awayLogo && (
+            <img src={awayLogo} alt={`${awayTeamName} logo`} className="w-7 h-7 object-contain shrink-0" />
           )}
         </div>
       </div>
@@ -706,6 +708,8 @@ function H2HPage() {
                         const isRelevant = isHomeMe || isAwayMe;
                         const isFinished = fixture.status === 'completed';
                         const isLive = fixture.status === 'live';
+                        const homeLogo = fixturesData?.teamLogos?.[fixture.homeTeam?._id || ''];
+                        const awayLogo = fixturesData?.teamLogos?.[fixture.awayTeam?._id || ''];
 
                         return (
                           <div
@@ -722,8 +726,8 @@ function H2HPage() {
                             <div className="flex items-center justify-between">
                               {/* Home Team */}
                               <div className="flex-1 flex items-center gap-2.5 min-w-0">
-                                {fixture.homeTeam?.logo ? (
-                                  <img src={fixture.homeTeam.logo} alt={`${fixture.homeTeam?.name} logo`} className="w-7 h-7 object-contain shrink-0" />
+                                {homeLogo ? (
+                                  <img src={homeLogo} alt={`${fixture.homeTeam?.name} logo`} className="w-7 h-7 object-contain shrink-0" />
                                 ) : null}
                                 <span className={`text-sm font-extrabold truncate leading-tight ${
                                   isFinished && fixture.winner === fixture.homeTeam?._id ? 'text-emerald-400' : 'text-text-primary'
@@ -759,8 +763,8 @@ function H2HPage() {
                                 }`}>
                                   {fixture.awayTeam?.name || 'TBD'}
                                 </span>
-                                {fixture.awayTeam?.logo ? (
-                                  <img src={fixture.awayTeam.logo} alt={`${fixture.awayTeam?.name} logo`} className="w-7 h-7 object-contain shrink-0" />
+                                {awayLogo ? (
+                                  <img src={awayLogo} alt={`${fixture.awayTeam?.name} logo`} className="w-7 h-7 object-contain shrink-0" />
                                 ) : null}
                               </div>
                             </div>
@@ -805,6 +809,7 @@ function H2HPage() {
             fixture={selectedFixture}
             isOpen={!!selectedFixture}
             onClose={() => setSelectedFixture(null)}
+            teamLogos={fixturesData?.teamLogos}
           />
         </>
       )}
