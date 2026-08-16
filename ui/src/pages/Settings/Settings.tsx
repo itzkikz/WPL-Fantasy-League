@@ -21,7 +21,9 @@ import {
   UserCheck,
   Users,
   Calendar,
+  Trophy,
 } from "lucide-react";
+import PointsSystemModal from "./components/PointsSystemModal";
 
 export default function Settings() {
   const { data: managerDetails } = useManagerDetails();
@@ -33,6 +35,7 @@ export default function Settings() {
   const myTeamId = myStanding?.team_id || (managerDetails as any)?.team_id || (managerDetails as any)?.teamId || "";
   const [clearing, setClearing] = useState(false);
   const [cleared, setCleared] = useState(false);
+  const [showPointsSystem, setShowPointsSystem] = useState(false);
   const navigate = useNavigate();
   const router = useRouter();
   const removeUser = useUserStore((state) => state.removeUser);
@@ -316,6 +319,36 @@ export default function Settings() {
             </div>
           </div>
 
+          {/* Points System Section */}
+          <button
+            onClick={() => setShowPointsSystem(true)}
+            className="p-4 sm:p-5 rounded-2xl bg-card border border-border shadow-card flex flex-col justify-between gap-4 text-left group cursor-pointer hover:border-amber-500/40 transition-all"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 shrink-0">
+                <Trophy className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-xs sm:text-sm font-extrabold text-text-primary uppercase tracking-wider">
+                  Points System
+                </h3>
+                <p className="text-[10px] sm:text-xs text-text-muted mt-0.5">
+                  How player points are scored
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-3 border-t border-[var(--color-border-divider)]">
+              <div>
+                <p className="text-xs font-bold text-text-primary">Current Scoring Rules</p>
+                <p className="text-[10px] text-text-muted">Goals, assists, clean sheets & more</p>
+              </div>
+              <span className="px-3 py-1.5 rounded-xl text-xs font-bold bg-surface border border-border text-text-primary group-hover:bg-elevated group-hover:border-amber-500/30 transition-all">
+                View
+              </span>
+            </div>
+          </button>
+
           {/* System & Cache Section */}
           <div className="p-4 sm:p-5 rounded-2xl bg-card border border-border shadow-card flex flex-col justify-between gap-4">
             <div className="flex items-center gap-2.5">
@@ -388,6 +421,11 @@ export default function Settings() {
         </div>
 
       </div>
+
+      <PointsSystemModal
+        isOpen={showPointsSystem}
+        onClose={() => setShowPointsSystem(false)}
+      />
     </div>
   );
 }

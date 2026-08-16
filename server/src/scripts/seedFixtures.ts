@@ -148,9 +148,12 @@ const seedFixtures = async () => {
                                 try {
                                     const incidentsData = await fetchIncidents(page, event.id);
                                     if (incidentsData?.incidents) {
+                                        // $set + $setOnInsert only: never reset addedtofantasy on an
+                                        // existing doc (that flag is owned by the admin add/undo flow),
+                                        // and never replace the whole doc (that would wipe lineups).
                                         await MatchDetails.findOneAndUpdate(
                                             { fixtureId: event.id },
-                                            { incidents: incidentsData.incidents, addedtofantasy: false },
+                                            { $set: { incidents: incidentsData.incidents }, $setOnInsert: { addedtofantasy: false } },
                                             { upsert: true }
                                         );
                                         console.log(`    Saved ${incidentsData.incidents.length} incidents`);
@@ -183,7 +186,7 @@ const seedFixtures = async () => {
                                         }
                                         await MatchDetails.findOneAndUpdate(
                                             { fixtureId: event.id },
-                                            { $set: { lineups, addedtofantasy: false } },
+                                            { $set: { lineups }, $setOnInsert: { addedtofantasy: false } },
                                             { upsert: true }
                                         );
                                         console.log(`    Saved ${lineups.length} lineup players`);
