@@ -640,7 +640,7 @@ const ManagerOverviewPage = () => {
         </div>
 
           {/* TABS: Overall | GW Breakdown (sticky on mobile + desktop so they stay reachable while scrolling) */}
-          <div className="sticky top-0 z-40 -mx-3 sm:-mx-4 lg:mx-0 px-3 sm:px-4 lg:px-0 flex items-center border-b border-border gap-1 sm:gap-2 bg-surface/95 backdrop-blur-xl shadow-sm">
+          <div className="sticky top-0 z-40 px-3 sm:px-4 lg:px-0 flex items-center border-b border-border gap-1 sm:gap-2 bg-surface/95 backdrop-blur-xl shadow-sm">
             <button
               onClick={() => setActiveTab("overall")}
               className={`pb-2.5 pt-1 px-3 sm:px-5 text-xs sm:text-sm font-extrabold tracking-wide uppercase transition-all relative cursor-pointer flex items-center gap-2 min-h-[42px] ${activeTab === "overall" ? "text-secondary" : "text-text-muted hover:text-text-primary"}`}

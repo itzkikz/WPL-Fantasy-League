@@ -72,14 +72,15 @@ function getPointsImpact(stats: any, position: string) {
   const interceptions = stats.interceptionWon || 0;
   const defTotal = tackles + clearances + blocks + recovery + interceptions;
   if (defTotal > 0) {
-    const pts = position === "DEF" ? Math.floor(defTotal / 10) * 2 : Math.floor(defTotal / 12) * 2;
+    const threshold = position === "DEF" ? 10 : 12;
+    const pts = defTotal >= threshold ? 2 : 0;
     if (pts > 0) {
       items.push({ label: `Tackles (${tackles})`, value: tackles, points: 0 });
       items.push({ label: `Clearances (${clearances})`, value: clearances, points: 0 });
       items.push({ label: `Blocks (${blocks})`, value: blocks, points: 0 });
       items.push({ label: `Recovery (${recovery})`, value: recovery, points: 0 });
       items.push({ label: `Interceptions (${interceptions})`, value: interceptions, points: 0 });
-      items.push({ label: `Defensive Bonus`, value: `÷${position === "DEF" ? 10 : 12}`, points: pts });
+      items.push({ label: `Defensive Bonus`, value: `${threshold}+ actions`, points: pts });
     }
   }
 

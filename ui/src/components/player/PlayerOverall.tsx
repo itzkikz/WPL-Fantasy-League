@@ -63,14 +63,15 @@ export default function PlayerOverall({
     const recovery = data?.ballRecovery || 0;
     const interceptions = data?.interceptionWon || 0;
     if (defCont > 0) {
-      const dp = pos === "DEF" ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
+      const threshold = pos === "DEF" ? 10 : 12;
+      const dp = defCont >= threshold ? 2 : 0;
       if (dp > 0) {
         ptsRows.push({ label: `Tackles (${tackles})`, pts: 0 });
         ptsRows.push({ label: `Clearances (${clearances})`, pts: 0 });
         ptsRows.push({ label: `Blocks (${blocks})`, pts: 0 });
         ptsRows.push({ label: `Recovery (${recovery})`, pts: 0 });
         ptsRows.push({ label: `Interceptions (${interceptions})`, pts: 0 });
-        ptsRows.push({ label: `Defensive Bonus (÷${pos === "DEF" ? 10 : 12})`, pts: dp });
+        ptsRows.push({ label: `Defensive Bonus (${threshold}+ actions)`, pts: dp });
       }
     }
 
