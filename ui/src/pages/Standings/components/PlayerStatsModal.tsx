@@ -652,14 +652,15 @@ const PlayerStatsModal = ({
                     const interceptions = o?.interceptionWon || 0;
                     const defCont = tackles + clearances + blocks + recovery + interceptions;
                     if (defCont > 0) {
-                      const dp = isDEF ? Math.floor(defCont / 10) * 2 : Math.floor(defCont / 12) * 2;
+                      const threshold = isDEF ? 10 : 12;
+                      const dp = defCont >= threshold ? 2 : 0;
                       if (dp > 0) {
                         rows.push({ label: `Tackles (${tackles})`, pts: 0 });
                         rows.push({ label: `Clearances (${clearances})`, pts: 0 });
                         rows.push({ label: `Blocks (${blocks})`, pts: 0 });
                         rows.push({ label: `Interceptions (${interceptions})`, pts: 0 });
                         rows.push({ label: `Recovery (${recovery})`, pts: 0 });
-                        rows.push({ label: `Defensive Bonus (÷${isDEF ? 10 : 12})`, pts: dp });
+                        rows.push({ label: `Defensive Bonus (${threshold}+ actions)`, pts: dp });
                       }
                     }
                   }

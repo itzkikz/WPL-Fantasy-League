@@ -8,6 +8,18 @@ export interface PointsBreakdownItem {
 }
 
 /**
+ * Defensive contributions are a THRESHOLD bonus, not a scaled award: reaching
+ * the threshold (10 actions for DEF, 12 for all other positions) earns a flat
+ * 2 points per match. Extra contributions beyond the threshold earn nothing
+ * more — the bonus is never multiplied per threshold crossed.
+ */
+export function getDefensiveContributionPoints(defensiveContributions: number, positionOr: string | undefined): number {
+    const position = resolvePosition(positionOr || '');
+    const threshold = position === 'DEF' ? 10 : 12;
+    return defensiveContributions >= threshold ? 2 : 0;
+}
+
+/**
  * Compute the points breakdown for a SINGLE match. All point rules are applied
  * to one match's stats only (appearance from that match's minutes, saves &
  * defensive actions floored within that match, etc.). This is the canonical
@@ -98,17 +110,13 @@ export function getMatchPointsBreakdown(stats: SofaScoreStats, positionOr: strin
     const interceptions = stats.interceptionWon || 0;
 
     const defensiveContributions = tackles + clearances + blocks + ballRecovery + interceptions;
-    if (defensiveContributions > 0) {
-        const defPoints = position === 'DEF'
-            ? Math.floor(defensiveContributions / 10) * 2
-            : Math.floor(defensiveContributions / 12) * 2;
-        if (defPoints > 0) {
-            items.push({
-                label: `Defensive Actions (${defensiveContributions})`,
-                value: `${defensiveContributions}`,
-                points: defPoints,
-            });
-        }
+    const defPoints = getDefensiveContributionPoints(defensiveContributions, position);
+    if (defPoints > 0) {
+        items.push({
+            label: `Defensive Actions (${defensiveContributions})`,
+            value: `${defensiveContributions}`, // threshold bonus: ≥${position === 'DEF' ? 10 : 12} actions → +2
+            points: defPoints,
+        });
     }
 
     return items;
@@ -204,7 +212,7 @@ export function getSeasonPointsBreakdown(gameweeks: any[], positionOr: string | 
         const dc = (s.totalTackle || 0) + (s.totalClearance || 0) + (s.outfielderBlock || 0) + (s.ballRecovery || 0) + (s.interceptionWon || 0);
         if (dc > 0) {
             defCont += dc;
-            defPts += (position === 'DEF' ? Math.floor(dc / 10) : Math.floor(dc / 12)) * 2;
+            defPts += getDefensiveContributionPoints(dc, position);
         }
     });
 
@@ -224,7 +232,7 @@ export function getSeasonPointsBreakdown(gameweeks: any[], positionOr: string | 
     if (penMiss > 0) items.push({ label: `Penalty Missed (${penMiss})`, value: `${penMiss}`, points: penMissPts });
     if (position === 'GK' && penSave > 0) items.push({ label: `Penalty Saved (${penSave})`, value: `${penSave}`, points: penSavePts });
     if (position === 'GK' && savesPts > 0) items.push({ label: `Saves (${saves})`, value: `${saves}`, points: savesPts });
-    if (defPts > 0) items.push({ label: `Defensive Bonus (÷${position === 'DEF' ? 10 : 12})`, value: `${defCont}`, points: defPts });
+    if (defPts > 0) items.push({ label: `Defensive Bonus (${position === 'DEF' ? 10 : 12}+ actions)`, value: `${defCont}`, points: defPts });
 
     return items;
 }

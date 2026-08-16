@@ -6,7 +6,7 @@ import { TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
 import { aggregateMatchStats, getGameweekPoints, getGameweekMinutes, getGameweekStats, getGameweekForm, getGameweekEntries, getGameweekBreakdown, buildCurrentWeek } from "./players";
 import { validateAndApplySwap } from "../lib/validators/substitution";
-import { getSeasonPointsBreakdown } from "../lib/points";
+import { getSeasonPointsBreakdown, getDefensiveContributionPoints } from "../lib/points";
 import { Substitution as SubstitutionType } from "../types/manager";
 import { FormationResult } from "../lib/formatter/types";
 import { setCaptain, setViceCaptain } from "../lib/helpers/roleUpdate";
@@ -1306,9 +1306,8 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
           if (saves >= 3) bdSavesPoints += Math.floor(saves / 3);
         }
 
-        const defContrib = (s.totalTackle || 0) + (s.totalClearance || 0) + (s.outfielderBlock || 0) + (s.ballRecovery || 0);
-        if (position === 'DEF') bdDefensivePoints += Math.floor(defContrib / 10) * 2;
-        else bdDefensivePoints += Math.floor(defContrib / 12) * 2;
+        const defContrib = (s.totalTackle || 0) + (s.totalClearance || 0) + (s.outfielderBlock || 0) + (s.ballRecovery || 0) + (s.interceptionWon || 0);
+        bdDefensivePoints += getDefensiveContributionPoints(defContrib, position);
       }
     }
 
