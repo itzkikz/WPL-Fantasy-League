@@ -80,7 +80,7 @@ const SECTIONS: RuleSection[] = [
         note: "Flat bonus when the threshold is reached",
       },
       {
-        label: "12+ actions (Mid / Fwd)",
+        label: "12+ actions (GK / Mid / Fwd)",
         value: "+2",
         positive: true,
         note: "Flat bonus when the threshold is reached",

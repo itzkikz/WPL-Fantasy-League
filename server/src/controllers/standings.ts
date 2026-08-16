@@ -944,7 +944,7 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
         // Fetch PlayerStats for points
         const playerStatsList = await PlayerStats.find({
             playerId: { $in: [...playerIds, ...playerIds.map(id => Number(id)).filter(n => !isNaN(n))] }
-        }).select('playerId totalPoints gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed').lean();
+        }).select('playerId totalPoints gameweeks').lean();
 
         const playerStatsMap = new Map();
         playerStatsList.forEach(ps => {
@@ -1019,6 +1019,17 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
                 ? ps.totalPoints
                 : sumGwPts;
 
+            // Full season aggregates + canonical season breakdown so the player
+            // stats modal shows real "This Season" values (same data manager/details provides).
+            let overallStats: any = aggregateMatchStats([]);
+            if (ps && Array.isArray(ps.gameweeks)) {
+                overallStats = aggregateMatchStats(ps.gameweeks);
+            }
+            (overallStats as any).total_point = totalSeasonPoints;
+            const seasonPointsBreakdown = (ps && Array.isArray(ps.gameweeks))
+                ? getSeasonPointsBreakdown(ps.gameweeks, playerDoc?.position)
+                : [];
+
             let gwPoints = 0;
             if (ps && ps.gameweeks) {
                 gwPoints = getGameweekPoints(ps.gameweeks, targetGw);
@@ -1041,12 +1052,12 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
                     player_name: playerDoc?.webName || playerDoc?.name || "Unknown",
                     club: teamDoc?.team?.name || teamDoc?.name || "Unknown",
                     fantasy_team_name: teamName,
+                    position: resolvePosition(playerDoc?.position || ''),
                     auctionPrice: playerDoc?.auctionPrice,
-                    overall: {
-                        total_point: totalSeasonPoints
-                    },
+                    overall: overallStats,
                     recent_form: recentForm,
-                    upcoming_fixtures: upcomingFixtures
+                    upcoming_fixtures: upcomingFixtures,
+                    season_points_breakdown: seasonPointsBreakdown
                 },
                 position: resolvePosition(playerDoc?.position || ''),
                 price: playerDoc?.price?.nowCost || 0,
