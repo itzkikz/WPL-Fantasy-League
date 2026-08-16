@@ -48,7 +48,7 @@ export const SquadPositionBreakdown: React.FC<SquadPositionBreakdownProps> = ({
   ];
 
   return (
-    <div className="bg-background/60 border border-border/60 rounded-2xl p-3 space-y-2.5">
+    <div className="bg-surface border border-border rounded-2xl p-3 space-y-2.5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
           <PieChart className="w-3.5 h-3.5 text-secondary" />
@@ -62,7 +62,7 @@ export const SquadPositionBreakdown: React.FC<SquadPositionBreakdownProps> = ({
       </div>
 
       {/* Multi-segment Segmented Bar */}
-      <div className="h-2 w-full bg-surface rounded-full overflow-hidden flex gap-0.5 p-0.5 border border-white/5">
+      <div className="h-2 w-full bg-background/60 rounded-full overflow-hidden flex gap-0.5 p-0.5 border border-border/40">
         {positions.map((pos) =>
           pos.pct > 0 ? (
             <div
@@ -77,7 +77,7 @@ export const SquadPositionBreakdown: React.FC<SquadPositionBreakdownProps> = ({
       {/* Legend & Breakdown */}
       <div className="grid grid-cols-4 gap-1 pt-0.5">
         {positions.map((pos) => (
-          <div key={pos.label} className="text-center bg-surface/40 rounded-lg py-1 px-0.5 border border-border/30">
+          <div key={pos.label} className="text-center bg-background/60 rounded-lg py-1 px-0.5 border border-border/40">
             <div className="flex items-center justify-center gap-1">
               <span className={`w-1.5 h-1.5 rounded-full ${pos.color}`} />
               <span className="text-[9px] font-bold text-text-muted">{pos.label}</span>

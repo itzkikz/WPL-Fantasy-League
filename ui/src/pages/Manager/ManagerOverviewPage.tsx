@@ -253,38 +253,61 @@ const ManagerOverviewPage = () => {
         </h3>
       </div>
 
-      <div className="relative w-full rounded-3xl overflow-hidden border border-border shadow-card bg-background min-h-[560px] flex flex-col">
-        <div className="pitch-bg">
-          <img src="/pitch.png" className="pitch-image-layer" alt="Tactical pitch layout" />
+      <div className="flex flex-col lg:flex-row gap-3 w-full">
+        {/* Pitch Card */}
+        <div className="relative flex-1 rounded-3xl overflow-hidden border border-border shadow-card bg-background min-h-[560px] flex flex-col">
+          <div className="pitch-bg">
+            <img src="/pitch.png" className="pitch-image-layer" alt="Tactical pitch layout" />
+          </div>
+
+          <div className={`absolute top-0 inset-x-0 ${squad.bench && squad.bench.length > 0 ? "bottom-[122px] lg:bottom-0" : "bottom-0"} z-10 pointer-events-none flex flex-col justify-evenly py-3 md:py-6 px-2 sm:px-4`}>
+            {squad.starting && (["GK", "DEF", "MID", "FWD"] as const).map((pos) => {
+              const players = squad.starting[pos] || [];
+              return (
+                <div key={pos} className={`flex w-full ${getRowJustify(players.length)} pointer-events-auto`}>
+                  {players.map((player: Player) => {
+                    const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
+                    return (
+                      <div key={player.id} className="rounded-xl p-0.5 transition-all hover:scale-105 duration-300">
+                        <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={false} onClick={() => handlePlayerClick(player)} />
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Mobile Bench Strip (Visible ONLY on mobile < lg) */}
+          {squad.bench && squad.bench.length > 0 && (
+            <div className="absolute lg:hidden bottom-0 inset-x-0 h-[122px] bg-surface/95 backdrop-blur-md border-t border-border flex justify-around items-center px-4 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.5)] overflow-x-auto scrollbar-hide">
+              {squad.bench.map((player: Player, idx: number) => {
+                const label = player.position === "GK" ? "GK" : `${player.subNumber || idx + 1}. ${player.position}`;
+                const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
+                return (
+                  <div key={player.id} className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300 shrink-0 min-w-[76px]">
+                    <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">{label}</span>
+                    <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={false} onClick={() => handlePlayerClick(player)} />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
-        <div className={`absolute top-0 inset-x-0 ${squad.bench && squad.bench.length > 0 ? "bottom-[122px]" : "bottom-0"} z-10 pointer-events-none flex flex-col justify-evenly py-3 md:py-6 px-2 sm:px-4`}>
-          {squad.starting && (["GK", "DEF", "MID", "FWD"] as const).map((pos) => {
-            const players = squad.starting[pos] || [];
-            return (
-              <div key={pos} className={`flex w-full ${getRowJustify(players.length)} pointer-events-auto`}>
-                {players.map((player: Player) => {
-                  const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
-                  return (
-                    <div key={player.id} className="rounded-xl p-0.5 transition-all hover:scale-105 duration-300">
-                      <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={false} onClick={() => handlePlayerClick(player)} />
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-
+        {/* Dedicated Webview Bench Side Card (Visible ONLY on webview lg+) */}
         {squad.bench && squad.bench.length > 0 && (
-          <div className="absolute bottom-0 inset-x-0 h-[122px] bg-surface/95 backdrop-blur-md border-t border-border flex justify-around items-center px-4 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.5)] overflow-x-auto scrollbar-hide">
+          <div className="hidden lg:flex lg:flex-col lg:w-28 shrink-0 bg-surface border border-border rounded-3xl p-3 shadow-card justify-around items-center">
+            <span className="text-[10px] font-black text-text-muted uppercase tracking-wider text-center border-b border-border/60 pb-2 w-full">
+              Substitutes
+            </span>
             {squad.bench.map((player: Player, idx: number) => {
               const label = player.position === "GK" ? "GK" : `${player.subNumber || idx + 1}. ${player.position}`;
               const enrichedPlayer = { ...player, price: getPlayerPrice(player) };
               return (
-                <div key={player.id} className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300 shrink-0 min-w-[76px]">
+                <div key={player.id} className="flex flex-col items-center relative rounded-xl p-0.5 transition-all hover:scale-105 duration-300">
                   <span className="text-[9px] font-black text-text-muted uppercase tracking-widest mb-1 select-none">{label}</span>
-                  <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={false} onClick={() => handlePlayerClick(player)} />
+                  <PitchPlayerCard player={enrichedPlayer} showPriceAndPoints={true} isSmall={true} onClick={() => handlePlayerClick(player)} />
                 </div>
               );
             })}
@@ -354,41 +377,211 @@ const ManagerOverviewPage = () => {
         </header>
       </div>
 
-      {/* DESKTOP HEADER (Visible on lg+) */}
-      <div className="hidden lg:flex shrink-0 items-center gap-3 px-6 pt-4 pb-0 max-w-5xl mx-auto w-full">
-        <button
-          onClick={handleGoBack}
-          className="flex items-center justify-center w-10 h-10 rounded-xl bg-surface hover:bg-elevated border border-border text-text-primary active:scale-95 transition-all cursor-pointer shrink-0 shadow-sm"
-          aria-label="Go back"
-        >
-          <ArrowLeft className="w-5 h-5 text-text-muted" />
-        </button>
-        <div className="flex-1 min-w-0">
-          <h1 className="text-lg font-black text-text-primary tracking-tight truncate">
-            Manager Overview
-          </h1>
-          <p className="text-xs text-text-muted font-medium truncate">
-            Season-wide performance command center
-          </p>
+      {/* MAIN CONTAINER: Webview Responsive Split Layout (lg+) */}
+      <div className="flex-1 flex flex-col lg:flex-row h-full min-h-0 overflow-y-auto lg:overflow-hidden lg:gap-3 lg:p-3">
+
+        {/* LEFT COLUMN PANEL (Webview Overview Details & Navigation - Visible on lg+) */}
+        <div className="hidden lg:flex lg:flex-col lg:w-80 xl:w-96 shrink-0 bg-surface border border-border/80 rounded-3xl p-5 shadow-card overflow-y-auto space-y-5">
+
+          {/* Header Info with Back Button */}
+          <div className="flex items-center gap-3.5 pb-4 border-b border-border/60">
+            <button
+              onClick={handleGoBack}
+              className="flex items-center justify-center w-10 h-10 rounded-2xl bg-background hover:bg-elevated border border-border text-text-primary active:scale-95 transition-all cursor-pointer shrink-0 shadow-inner"
+              aria-label="Go back"
+            >
+              <ArrowLeft className="w-5 h-5 text-text-muted" />
+            </button>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-lg font-black text-text-primary tracking-tight truncate">
+                Manager Overview
+              </h2>
+              <p className="text-xs text-text-muted font-medium truncate">
+                {teamName}
+              </p>
+            </div>
+            {resolvedTeamId !== myTeamId && (
+              <button
+                onClick={() => setShowCompareModal(true)}
+                className="flex items-center justify-center w-10 h-10 rounded-2xl bg-secondary/15 hover:bg-secondary/25 border border-secondary/30 text-secondary active:scale-95 transition-all cursor-pointer shrink-0"
+                title="Compare with My Team"
+                aria-label="Compare with My Team"
+              >
+                <Swords className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+
+          {/* Team Profile */}
+          <div className="flex items-center gap-3 pb-4 border-b border-border/60">
+            {logo ? (
+              <div className="w-14 h-14 rounded-2xl bg-background/60 border border-border/60 flex items-center justify-center overflow-hidden shrink-0">
+                <img src={logo} alt={`${teamName} logo`} className="w-12 h-12 object-contain" />
+              </div>
+            ) : (
+              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${crest.bgGradient} flex items-center justify-center text-lg font-black text-white shadow-md border border-white/10 shrink-0`}>
+                {crest.letter}
+              </div>
+            )}
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 min-w-0">
+                <h3 className="text-base font-black text-text-primary tracking-tight truncate">{teamName}</h3>
+                <span className="text-[9px] font-black text-secondary bg-secondary/15 border border-secondary/30 px-1.5 py-0.5 rounded font-mono shrink-0">
+                  {formation}
+                </span>
+              </div>
+              <p className="text-[11px] font-semibold text-text-muted truncate mt-0.5">
+                Managers: {(managersList.length > 0 ? managersList : [managers || "Unknown"]).join(", ")}
+              </p>
+              {deadlineTime !== null && (
+                <p className="text-[10px] font-bold text-text-muted mt-1 flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-secondary shrink-0" />
+                  {deadlineCountdown ? (
+                    <span className="truncate">
+                      GW {managerDetails?.gw ?? ""} deadline{" "}
+                      <span className="text-text-primary font-black font-mono">{deadlineCountdown}</span>
+                    </span>
+                  ) : (
+                    <span className="truncate">GW {managerDetails?.gw ?? ""} deadline passed</span>
+                  )}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* 4-Stat Metric Grid */}
+          <div className="grid grid-cols-2 gap-2.5">
+            <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Overall Rank</span>
+              <span className="text-base font-extrabold text-text-primary mt-0.5 block font-mono">#{rank}</span>
+              <span className="flex items-center justify-center gap-1 text-[9px] font-bold mt-1">
+                {rankChange !== 0 && (
+                  <span className={`flex items-center gap-0.5 ${rankChange > 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    {rankChange > 0 ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                    {Math.abs(rankChange)}
+                  </span>
+                )}
+                {topPct > 0 && <span className="text-text-muted">Top {topPct}%</span>}
+              </span>
+            </div>
+            <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Season Total</span>
+              <span className="text-base font-extrabold text-secondary mt-0.5 block font-mono">{totalPoints} pts</span>
+            </div>
+            <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Season Average</span>
+              <span className="text-sm font-extrabold text-indigo-400 mt-0.5 block font-mono">{avgGwScore} pts/GW</span>
+            </div>
+            <div className="bg-background/50 border border-border/60 rounded-2xl p-3 text-center">
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-wider block">Best GW Score</span>
+              <span className="text-sm font-extrabold text-emerald-400 mt-0.5 block font-mono">
+                {highestGwObj.points} pts <span className="text-[9px] text-text-muted font-normal">(GW{highestGwObj.gameweek})</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Captain & Vice Captain */}
+          {(captain || viceCaptain) && (
+            <div className="space-y-2.5 pt-3 border-t border-border/60">
+              <div className="flex items-center gap-1.5">
+                <Crown className="w-4 h-4 text-amber-400" />
+                <span className="text-xs font-bold text-text-primary uppercase tracking-wider">Captain & Vice Captain</span>
+              </div>
+              {[captain, viceCaptain].filter(Boolean).map((p: any) => (
+                <div
+                  key={p.player_id ?? p.id}
+                  className="flex items-center justify-between gap-2 bg-background/60 border border-border/40 rounded-xl px-2.5 py-2"
+                >
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span
+                      className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black shrink-0 ${
+                        p.isCaptain || p.role === "CAPTAIN"
+                          ? "bg-amber-400/20 text-amber-400 border border-amber-400/40"
+                          : "bg-secondary/20 text-secondary border border-secondary/40"
+                      }`}
+                    >
+                      {p.isCaptain || p.role === "CAPTAIN" ? "C" : "V"}
+                    </span>
+                    <span className="text-xs font-extrabold text-text-primary truncate">{p.name}</span>
+                    <span className="text-[9px] font-black text-text-muted bg-background border border-border/40 px-1.5 py-0.5 rounded font-mono shrink-0">
+                      {p.position}
+                    </span>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-[11px] font-black font-mono text-emerald-400 leading-tight">
+                      {(p as any).gwPoint ?? 0} <span className="text-[8px] text-text-muted font-bold">GW</span>
+                    </p>
+                    <p className="text-[9px] font-mono text-text-muted leading-tight">{(p as any).point ?? 0} season</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Budget & Finance */}
+          {finance && (
+            <div className="pt-3 border-t border-border/60">
+              <div className="bg-background/50 border border-border/60 rounded-2xl p-3.5">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xs font-black uppercase text-text-muted tracking-wider flex items-center gap-1.5">
+                    <Wallet className="w-3.5 h-3.5 text-secondary" />
+                    <span>Budget & Finance</span>
+                  </h3>
+                  <span className="text-[9px] font-black text-text-muted font-mono">
+                    {financeUtilPct}% used
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="bg-background/60 border border-border/40 rounded-xl p-2.5 flex flex-col items-center text-center">
+                    <span className="text-[8px] font-bold text-text-muted uppercase tracking-wider">Budget</span>
+                    <span className="text-sm font-black text-text-primary mt-0.5 font-mono">{fmtM(financeBudget)}</span>
+                  </div>
+                  <div className="bg-background/60 border border-border/40 rounded-xl p-2.5 flex flex-col items-center text-center">
+                    <span className="text-[8px] font-bold text-text-muted uppercase tracking-wider">Spent</span>
+                    <span className="text-sm font-black text-rose-400 mt-0.5 font-mono">{fmtM(financeSpent)}</span>
+                  </div>
+                  <div className="bg-background/60 border border-border/40 rounded-xl p-2.5 flex flex-col items-center text-center">
+                    <span className="text-[8px] font-bold text-text-muted uppercase tracking-wider">In Bank</span>
+                    <span className="text-sm font-black text-emerald-400 mt-0.5 font-mono">{fmtM(financeBalance)}</span>
+                  </div>
+                </div>
+
+                {/* Utilisation bar */}
+                <div className="mt-3 h-2 rounded-full bg-background border border-border/50 overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all ${financeUtilPct > 90 ? "bg-rose-500" : financeUtilPct > 70 ? "bg-amber-400" : "bg-emerald-500"}`}
+                    style={{ width: `${Math.max(2, financeUtilPct)}%` }}
+                  />
+                </div>
+
+                {financeHasExtras && (
+                  <p className="text-[9px] font-bold text-indigo-400 mt-2 font-mono text-center">
+                    Bonus +{fmtM(financeBonus)} / Fine -{fmtM(financeFine)}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Compare with My Team */}
+          {resolvedTeamId !== myTeamId && (
+            <button
+              onClick={() => setShowCompareModal(true)}
+              className="w-full flex items-center justify-center gap-1.5 bg-secondary/15 hover:bg-secondary/25 border border-secondary/30 text-secondary rounded-xl px-3 py-2.5 text-xs font-bold transition-all active:scale-95 cursor-pointer"
+            >
+              <Swords className="w-3.5 h-3.5" />
+              Compare with My Team
+            </button>
+          )}
         </div>
-        {resolvedTeamId !== myTeamId && (
-          <button
-            onClick={() => setShowCompareModal(true)}
-            className="flex items-center gap-1.5 bg-secondary/15 hover:bg-secondary/25 border border-secondary/30 text-secondary rounded-xl px-3 py-2 text-xs font-bold transition-all active:scale-95 cursor-pointer shrink-0"
-            title="Compare with My Team"
-          >
-            <Swords className="w-3.5 h-3.5" />
-            <span>Compare</span>
-          </button>
-        )}
-      </div>
 
-      {/* SCROLLABLE CONTENT BODY */}
-      <div className="flex-1 flex flex-col min-h-0 overflow-y-auto px-3 sm:px-4 pb-3 lg:pb-4">
-        <div className="max-w-5xl mx-auto w-full space-y-4">
+        {/* RIGHT COLUMN PANEL (The Overview View on Webview / Main View on Mobile) */}
+        <div className="flex-1 flex flex-col min-h-0 lg:h-full lg:overflow-y-auto">
 
-          {/* HERO / PROFILE CARD: large logo + team name + detailed managers */}
-          <div className="mt-3 lg:mt-4 bg-surface border border-border rounded-3xl p-4 sm:p-6 shadow-card flex flex-row items-center gap-3 sm:gap-6">
+          {/* MOBILE HERO / PROFILE CARD (Visible on mobile < lg) */}
+          <div className="lg:hidden w-full max-w-3xl mx-auto px-3 sm:px-4 pt-3">
+            <div className="bg-surface border border-border rounded-3xl p-4 sm:p-6 shadow-card flex flex-row items-center gap-3 sm:gap-6">
             {logo ? (
               <div className="relative shrink-0">
                 <div className="absolute inset-0 rounded-full bg-gradient-core blur-md opacity-40" />
@@ -444,6 +637,7 @@ const ManagerOverviewPage = () => {
               )}
             </div>
           </div>
+        </div>
 
           {/* TABS: Overall | GW Breakdown (sticky on mobile + desktop so they stay reachable while scrolling) */}
           <div className="sticky top-0 z-40 -mx-3 sm:-mx-4 lg:mx-0 px-3 sm:px-4 lg:px-0 flex items-center border-b border-border gap-1 sm:gap-2 bg-surface/95 backdrop-blur-xl shadow-sm">
@@ -471,9 +665,11 @@ const ManagerOverviewPage = () => {
 
           {/* ============ OVERALL TAB ============ */}
           {activeTab === "overall" ? (
-            <>
+            <div className="w-full max-w-3xl mx-auto space-y-4 px-3 sm:px-4 lg:px-0 pt-4 pb-4 lg:pb-8">
+              {/* Mobile-only sections (Visible on mobile < lg) */}
+              <div className="lg:hidden space-y-4">
               {/* Overall Season Performance Hero Metric Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-2xl mx-auto w-full">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full">
                 <div className="bg-surface border border-border rounded-2xl p-3 shadow-card flex flex-col items-center justify-center text-center">
                   <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider">Overall Rank</span>
                   <span className="text-base font-black text-text-primary mt-0.5 font-mono">#{rank}</span>
@@ -505,8 +701,8 @@ const ManagerOverviewPage = () => {
 
               {/* Current Captain & Vice Captain */}
               {(captain || viceCaptain) && (
-                <div className="max-w-2xl mx-auto w-full">
-                  <div className="bg-background/60 border border-border/60 rounded-2xl p-3.5 space-y-2">
+                <div className="w-full">
+                  <div className="bg-surface border border-border rounded-2xl p-3.5 space-y-2">
                     <div className="flex items-center gap-1.5">
                       <Crown className="w-4 h-4 text-amber-400" />
                       <span className="text-xs font-bold text-text-primary uppercase tracking-wider">Captain & Vice Captain</span>
@@ -514,7 +710,7 @@ const ManagerOverviewPage = () => {
                     {[captain, viceCaptain].filter(Boolean).map((p: any) => (
                       <div
                         key={p.player_id ?? p.id}
-                        className="flex items-center justify-between gap-2 bg-surface/50 border border-border/40 rounded-xl px-2.5 py-2"
+                        className="flex items-center justify-between gap-2 bg-background/60 border border-border/40 rounded-xl px-2.5 py-2"
                       >
                         <div className="flex items-center gap-2 min-w-0">
                           <span
@@ -545,7 +741,7 @@ const ManagerOverviewPage = () => {
 
               {/* Budget & Finance */}
               {finance && (
-                <div className="max-w-2xl mx-auto w-full">
+                <div className="w-full">
                   <div className="bg-surface border border-border rounded-2xl p-4 sm:p-5 shadow-card">
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-xs font-black uppercase text-text-muted tracking-wider flex items-center gap-1.5">
@@ -590,19 +786,20 @@ const ManagerOverviewPage = () => {
                   </div>
                 </div>
               )}
+              </div>
 
               {/* Overall Season Squad Pitch */}
-              <div className="max-w-2xl mx-auto w-full">
+              <div className="w-full">
                 {renderPitch({ starting: displayStarting, bench: displayBench }, "Overall Season Squad (Season Total Pts)")}
               </div>
 
               {/* Squad Position Contribution Breakdown */}
-              <div className="max-w-2xl mx-auto w-full">
+              <div className="w-full">
                 <SquadPositionBreakdown starting={activeStarting} isOverallMode={true} />
               </div>
 
               {/* Performance Trend Chart */}
-              <div className="max-w-2xl mx-auto w-full">
+              <div className="w-full">
                 <ManagerRankTrendChart history={history || []} currentGwPoints={gwPoints} totalPoints={totalPoints} />
               </div>
 
@@ -610,18 +807,18 @@ const ManagerOverviewPage = () => {
               <UpcomingFixturesCard players={[...(activeStarting?.GK || []), ...(activeStarting?.DEF || []), ...(activeStarting?.MID || []), ...(activeStarting?.FWD || [])]} />
 
               {/* Transfers */}
-              <div className="max-w-2xl mx-auto w-full">
+              <div className="w-full">
                 <TeamTransfersCard transfers={transfers} />
               </div>
 
               {/* Player Values & Squad Valuation Card */}
-              <div className="max-w-2xl mx-auto w-full mb-6">
+              <div className="w-full">
                 <SquadValueStatsCard starting={activeStarting} bench={activeBench} />
               </div>
-            </>
+            </div>
           ) : (
             /* ============ GW BREAKDOWN TAB ============ */
-            <div className="space-y-4">
+            <div className="w-full max-w-3xl mx-auto space-y-4 px-3 sm:px-4 lg:px-0 pt-4 pb-4 lg:pb-8">
               {gwList.length === 0 ? (
                 <div className="bg-surface border border-border rounded-2xl p-6 shadow-card text-center">
                   <Calendar className="w-8 h-8 text-text-muted mx-auto mb-2" />

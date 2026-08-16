@@ -81,7 +81,7 @@ const UpcomingFixturesCard = ({ players }: UpcomingFixturesCardProps) => {
 
   if (totalFixtures === 0) {
     return (
-      <div className="max-w-2xl mx-auto w-full">
+      <div className="w-full">
         <div className="bg-surface border border-border rounded-2xl p-5 shadow-card">
           <h3 className="text-xs font-black uppercase text-text-muted tracking-wider flex items-center gap-1.5 mb-3">
             <Calendar className="w-3.5 h-3.5 text-secondary" />
@@ -100,7 +100,7 @@ const UpcomingFixturesCard = ({ players }: UpcomingFixturesCardProps) => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto w-full">
+    <div className="w-full">
       <div className="bg-surface border border-border rounded-2xl p-4 sm:p-5 shadow-card">
         <h3 className="text-xs font-black uppercase text-text-muted tracking-wider flex items-center gap-1.5 mb-3">
           <Calendar className="w-3.5 h-3.5 text-secondary" />
