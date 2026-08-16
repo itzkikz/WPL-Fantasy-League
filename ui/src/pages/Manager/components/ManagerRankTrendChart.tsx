@@ -28,7 +28,7 @@ export const ManagerRankTrendChart: React.FC<ManagerRankTrendChartProps> = ({
   const highestGwObj = sortedHistory.reduce((max, h) => (h.points > max.points ? h : max), sortedHistory[0] || { gameweek: 1, points: 0 });
 
   return (
-    <div className="bg-background/60 border border-border/60 rounded-2xl p-3.5 space-y-3">
+    <div className="bg-surface border border-border rounded-2xl p-3.5 space-y-3">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5">
@@ -37,14 +37,14 @@ export const ManagerRankTrendChart: React.FC<ManagerRankTrendChartProps> = ({
             Gameweek Performance
           </span>
         </div>
-        <span className="text-[10px] font-bold text-text-muted bg-white/5 border border-white/10 px-2 py-0.5 rounded-full font-mono">
+        <span className="text-[10px] font-bold text-text-muted bg-background/60 border border-border/40 px-2 py-0.5 rounded-full font-mono">
           {sortedHistory.length} GWs
         </span>
       </div>
 
       {/* Quick Stat Highlights */}
       <div className="grid grid-cols-2 gap-2">
-        <div className="bg-surface/60 border border-border/40 rounded-xl p-2 flex items-center gap-2">
+        <div className="bg-background/60 border border-border/40 rounded-xl p-2 flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
             <Award className="w-3.5 h-3.5" />
           </div>
@@ -56,7 +56,7 @@ export const ManagerRankTrendChart: React.FC<ManagerRankTrendChartProps> = ({
           </div>
         </div>
 
-        <div className="bg-surface/60 border border-border/40 rounded-xl p-2 flex items-center gap-2">
+        <div className="bg-background/60 border border-border/40 rounded-xl p-2 flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
             <Target className="w-3.5 h-3.5" />
           </div>
@@ -79,7 +79,7 @@ export const ManagerRankTrendChart: React.FC<ManagerRankTrendChartProps> = ({
             return (
               <div key={h.gameweek} className="flex-1 flex flex-col items-center justify-end h-full group relative">
                 {/* Tooltip on hover */}
-                <div className="absolute -top-7 opacity-0 group-hover:opacity-100 transition-opacity bg-surface text-[9px] font-bold px-1.5 py-0.5 rounded border border-border pointer-events-none whitespace-nowrap z-20 shadow-md">
+                <div className="absolute -top-7 opacity-0 group-hover:opacity-100 transition-opacity bg-background text-[9px] font-bold px-1.5 py-0.5 rounded border border-border pointer-events-none whitespace-nowrap z-20 shadow-md">
                   GW{h.gameweek}: {h.points} pts
                 </div>
 

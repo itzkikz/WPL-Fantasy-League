@@ -65,7 +65,7 @@ export const SquadValueStatsCard: React.FC<SquadValueStatsCardProps> = ({
   const bestValuePtsPerM = bestValuePlayer ? getValueEfficiency(bestValuePlayer).toFixed(1) : "0.0";
 
   return (
-    <div className="bg-background/60 border border-border/60 rounded-2xl p-3 sm:p-3.5 space-y-3">
+    <div className="bg-surface border border-border rounded-2xl p-3 sm:p-3.5 space-y-3">
       {/* Card Header */}
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-1.5 min-w-0">
@@ -82,7 +82,7 @@ export const SquadValueStatsCard: React.FC<SquadValueStatsCardProps> = ({
       {/* 2-Card Metric Grid (Responsive flex-col on small screens, grid on sm+) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {/* Priciest Asset */}
-        <div className="bg-surface/60 border border-border/40 rounded-xl p-2.5 space-y-1">
+        <div className="bg-background/60 border border-border/40 rounded-xl p-2.5 space-y-1">
           <span className="text-[8px] font-bold text-text-muted uppercase tracking-wider block">Priciest Asset</span>
           <div className="flex items-start justify-between gap-1.5">
             <div className="min-w-0 flex-1">
@@ -96,7 +96,7 @@ export const SquadValueStatsCard: React.FC<SquadValueStatsCardProps> = ({
         </div>
 
         {/* Best Value Pick */}
-        <div className="bg-surface/60 border border-border/40 rounded-xl p-2.5 space-y-1">
+        <div className="bg-background/60 border border-border/40 rounded-xl p-2.5 space-y-1">
           <span className="text-[8px] font-bold text-text-muted uppercase tracking-wider block">Best Value Pick</span>
           <div className="flex items-start justify-between gap-1.5">
             <div className="min-w-0 flex-1">

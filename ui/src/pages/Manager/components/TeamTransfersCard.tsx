@@ -20,7 +20,7 @@ export const TeamTransfersCard: React.FC<TeamTransfersCardProps> = ({ transfers 
   if (entries.length === 0) return null;
 
   return (
-    <div className="bg-background/60 border border-border/60 rounded-2xl p-3 sm:p-3.5 space-y-3">
+    <div className="bg-surface border border-border rounded-2xl p-3 sm:p-3.5 space-y-3">
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-1.5 min-w-0">
           <RotateCcw className="w-4 h-4 text-indigo-400 shrink-0" />

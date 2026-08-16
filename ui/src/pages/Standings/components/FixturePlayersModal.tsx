@@ -18,9 +18,9 @@ const POSITION_STYLES: Record<string, { bg: string; text: string; dot: string }>
 const getPositionStyle = (pos?: string) =>
   POSITION_STYLES[pos || ""] || { bg: "bg-slate-500/15", text: "text-slate-300", dot: "bg-slate-400" };
 
-function StatCell({ value, label }: { value: number | string; label: string }) {
+function StatCell({ value, label, title }: { value: number | string; label: string; title?: string }) {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center" title={title}>
       <span className="text-[11px] font-black text-text-primary tabular-nums">{value ?? 0}</span>
       <span className="text-[8px] font-bold text-text-muted uppercase tracking-wider mt-0.5">{label}</span>
     </div>
@@ -29,6 +29,35 @@ function StatCell({ value, label }: { value: number | string; label: string }) {
 
 function PlayerRow({ p, teamColor }: { p: FixturePlayerStats; teamColor: string }) {
   const pos = getPositionStyle(p.position);
+
+  // Points-relevant stat chips, position-aware (mirrors the scoring engine in
+  // server/lib/points.ts). Goalkeepers only show GK-related stats (clean sheet,
+  // penalty save, saves); outfielders show goals/assists/defensive plus clean
+  // sheet (FWD earns no clean-sheet points, so it is omitted for them).
+  // Zero-valued stats are dropped so rows only surface meaningful numbers.
+  const isGK = p.position === "GK";
+  const isFWD = p.position === "FWD";
+  const candidates: { value: number; label: string; title: string }[] = [];
+  if (!isGK) {
+    candidates.push({ value: p.goals || 0, label: "G", title: "Goals" });
+    candidates.push({ value: p.assists || 0, label: "A", title: "Assists" });
+  }
+  if (!isFWD) {
+    candidates.push({ value: p.cleanSheet || 0, label: "CS", title: "Clean Sheet" });
+  }
+  if (!isGK) {
+    candidates.push({ value: p.defensive || 0, label: "D", title: "Defensive Contributions" });
+  }
+  candidates.push({ value: p.yellowCards || 0, label: "YC", title: "Yellow Cards" });
+  candidates.push({ value: p.redCards || 0, label: "RC", title: "Red Cards" });
+  candidates.push({ value: p.penaltyMissed || 0, label: "PM", title: "Penalty Missed" });
+  if (isGK) {
+    candidates.push({ value: p.penaltySaved || 0, label: "PS", title: "Penalty Saved" });
+    candidates.push({ value: p.saves || 0, label: "S", title: "Saves" });
+  }
+  const statCells = candidates.filter((c) => c.value > 0);
+  const didNotPlay = p.minutes === 0;
+
   return (
     <div className="flex items-center gap-2.5 bg-card border border-border rounded-xl px-2.5 py-2">
       <div
@@ -63,12 +92,12 @@ function PlayerRow({ p, teamColor }: { p: FixturePlayerStats; teamColor: string 
       </div>
 
       <div className="flex items-center gap-3 shrink-0">
-        <StatCell value={p.minutes === 0 ? "DNP" : p.minutes} label="Min" />
-        <StatCell value={p.goals} label="G" />
-        <StatCell value={p.assists} label="A" />
+        {statCells.map((s) => (
+          <StatCell key={s.label} value={s.value} label={s.label} title={s.title} />
+        ))}
         <div className="flex flex-col items-center min-w-[24px]">
-          <span className={`text-[12px] font-black tabular-nums ${p.minutes === 0 ? "text-amber-400" : "text-[var(--color-success-bright)]"}`}>
-            {p.minutes === 0 ? "DNP" : (p.points ?? 0)}
+          <span className={`text-[12px] font-black tabular-nums ${didNotPlay ? "text-amber-400" : "text-[var(--color-success-bright)]"}`}>
+            {didNotPlay ? "DNP" : (p.points ?? 0)}
           </span>
           <span className="text-[8px] font-bold text-text-muted uppercase tracking-wider mt-0.5">Pts</span>
         </div>

@@ -762,6 +762,12 @@ export const getFixturePlayers = async (req: Request, res: Response) => {
                     goals: s.goals || 0,
                     assists: s.goalAssist || 0,
                     cleanSheet: s.cleanSheet || 0,
+                    yellowCards: s.yellowCards || 0,
+                    redCards: s.redCards || 0,
+                    penaltyMissed: s.penaltyMissed || 0,
+                    penaltySaved: s.penaltySaved || 0,
+                    saves: s.saves || 0,
+                    defensive: (s.totalTackle || 0) + (s.totalClearance || 0) + (s.outfielderBlock || 0) + (s.ballRecovery || 0) + (s.interceptionWon || 0),
                 };
             }
 
@@ -778,6 +784,12 @@ export const getFixturePlayers = async (req: Request, res: Response) => {
                     goals: s.goals || 0,
                     assists: s.goalAssist || 0,
                     cleanSheet: s.cleanSheet || 0,
+                    yellowCards: s.yellowCards || 0,
+                    redCards: s.redCards || 0,
+                    penaltyMissed: s.penaltyMissed || 0,
+                    penaltySaved: s.penaltySaved || 0,
+                    saves: s.saves || 0,
+                    defensive: (s.totalTackle || 0) + (s.totalClearance || 0) + (s.outfielderBlock || 0) + (s.ballRecovery || 0) + (s.interceptionWon || 0),
                 };
             }
 

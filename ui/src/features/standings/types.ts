@@ -46,4 +46,10 @@ export interface FixturePlayerStats {
     goals?: number;
     assists?: number;
     cleanSheet?: number;
+    yellowCards?: number;
+    redCards?: number;
+    penaltyMissed?: number;
+    penaltySaved?: number;
+    saves?: number;
+    defensive?: number;
 }
