@@ -27,9 +27,9 @@ const SHEETS = [
   },
   {
     key: "fixtures",
-    title: "Current Fixtures Export",
+    title: "All Fixtures Export",
     description:
-      "One row per fixture assigned to the current and next gameweeks (mirrors the gameweeks collection): gameweek, league, round, kickoff (UTC), both teams, live status and score. Rescheduled/double-gameweek fixtures are included.",
+      "One row per fixture across ALL gameweeks (full season): gameweek, league, round, kickoff (UTC), both teams, live status and score. Uses explicit gameweek assignments with round-number fallback for unassigned gameweeks. Rescheduled/double-gameweek fixtures are included.",
     tab: "Fixtures",
     endpoint: API_ENDPOINTS.ADMIN.SHEETS_FIXTURES,
   },

@@ -16,36 +16,70 @@ const kickoffString = (ts?: number): string => {
 };
 
 /**
- * Build rows for the "Fixtures" sheet: one row per fixture that belongs to the
- * current (and next non-completed) gameweeks. Fixtures are matched the same way
- * as the app's upcoming-fixtures logic — by explicit gameweek assignment
- * (fixtureId) and, as a fallback, by `roundInfo.round` — so rescheduled or
- * double-gameweek fixtures are never dropped. Each row carries the gameweek
- * label (assigned gameweek, else league round), league, kickoff, both teams and
- * the live status/score.
+ * Build rows for the "Fixtures" sheet: one row per fixture across ALL gameweeks.
+ * Fixtures are matched by explicit gameweek assignment (fixtureId) and, as a
+ * fallback for gameweeks without explicit assignments, by `roundInfo.round` —
+ * so rescheduled or double-gameweek fixtures are never dropped. Each row carries
+ * the gameweek label (assigned gameweek, else league round), league, kickoff,
+ * both teams and the live status/score.
  */
 export const buildCurrentFixturesRows = async (): Promise<any[][]> => {
-    const currentGwDoc = (await Gameweek.findOne({ isCurrent: true }).lean()) as any;
-    const targetGw = currentGwDoc ? currentGwDoc.number : 1;
+    // Fetch ALL gameweeks (not just current + next 2) to export the full season
+    const allGwDocs = (await Gameweek.find({}).select('number fixtures isCompleted').sort({ number: 1 }).lean()) as any[];
 
-    // Current gameweek + the next two, so the sheet shows the fixtures that
-    // matter right now rather than the whole season.
-    const upcomingGwDocs = (await Gameweek.find({ isCompleted: { $ne: true }, number: { $gte: targetGw, $lte: targetGw + 2 } }).select('number fixtures').lean()) as any[];
-    const upcomingRounds = upcomingGwDocs.map((g) => g.number);
-    const upcomingFixtureIds = [...new Set(upcomingGwDocs.flatMap((g: any) => (g.fixtures || []).map((f: any) => Number(f?.fixtureId ?? f?.id ?? f)).filter(Boolean)))];
+    // Build a map of fixtureId -> gameweek number for explicitly assigned fixtures
     const fixtureGwMap = new Map<number, number>();
-    for (const g of upcomingGwDocs) {
-        for (const fid of (g.fixtures || [])) fixtureGwMap.set(Number(fid?.fixtureId ?? fid?.id ?? fid), g.number);
+    const explicitlyAssignedFixtureIds = new Set<number>();
+    const gameweeksWithoutAssignments = new Set<number>();
+
+    for (const g of allGwDocs) {
+        const gwNumber = g.number;
+        const fixtureIds = (g.fixtures || []).map((f: any) => Number(f?.fixtureId ?? f?.id ?? f)).filter(Boolean);
+
+        if (fixtureIds.length > 0) {
+            for (const fid of fixtureIds) {
+                fixtureGwMap.set(fid, gwNumber);
+                explicitlyAssignedFixtureIds.add(fid);
+            }
+        } else {
+            // This gameweek has no explicit assignments; we'll use its round number as fallback
+            gameweeksWithoutAssignments.add(gwNumber);
+        }
     }
 
-    // Export only the fixtures explicitly assigned to these gameweeks, so the
-    // sheet mirrors the gameweeks collection. Round-number matching is used
-    // only as a fallback when no gameweek in the window has assignments yet
-    // (otherwise the sheet would invent "Gameweek 2/3" rows from unassigned
-    // fixtures whose league round happens to be 2 or 3).
-    const fixtures = upcomingFixtureIds.length > 0
-        ? (await Fixture.find({ fixtureId: { $in: upcomingFixtureIds } }).sort({ startTimestamp: 1 }).lean() as any[])
-        : (await Fixture.find({ 'roundInfo.round': { $in: upcomingRounds } }).sort({ startTimestamp: 1 }).lean() as any[]);
+    // Query fixtures using BOTH explicit assignments AND round-number fallback
+    // for gameweeks without assignments. This ensures fixtures aren't dropped
+    // just because some gameweeks have assignments and others don't.
+    let fixtures: any[] = [];
+
+    if (explicitlyAssignedFixtureIds.size > 0 && gameweeksWithoutAssignments.size > 0) {
+        // Both explicit assignments and fallback rounds exist — query for both and deduplicate
+        const [explicitFixtures, fallbackFixtures] = await Promise.all([
+            Fixture.find({ fixtureId: { $in: Array.from(explicitlyAssignedFixtureIds) } }).sort({ startTimestamp: 1 }).lean(),
+            Fixture.find({ 'roundInfo.round': { $in: Array.from(gameweeksWithoutAssignments) } }).sort({ startTimestamp: 1 }).lean(),
+        ]);
+
+        // Deduplicate by fixtureId (a fixture could match both explicit ID and round number)
+        const seen = new Set<number>();
+        for (const f of [...explicitFixtures, ...fallbackFixtures]) {
+            const fid = Number(f.fixtureId);
+            if (!seen.has(fid)) {
+                seen.add(fid);
+                fixtures.push(f);
+            }
+        }
+        // Re-sort by kickoff after deduplication
+        fixtures.sort((a, b) => (a.startTimestamp || 0) - (b.startTimestamp || 0));
+    } else if (explicitlyAssignedFixtureIds.size > 0) {
+        // Only explicit assignments exist
+        fixtures = (await Fixture.find({ fixtureId: { $in: Array.from(explicitlyAssignedFixtureIds) } }).sort({ startTimestamp: 1 }).lean()) as any[];
+    } else if (gameweeksWithoutAssignments.size > 0) {
+        // Only fallback rounds exist (no gameweek has explicit assignments)
+        fixtures = (await Fixture.find({ 'roundInfo.round': { $in: Array.from(gameweeksWithoutAssignments) } }).sort({ startTimestamp: 1 }).lean()) as any[];
+    } else {
+        // No gameweeks at all — return empty
+        fixtures = [];
+    }
 
     const teams = (await Team.find({}).populate('league').lean()) as any[];
     const teamMap = new Map<number, any>();
