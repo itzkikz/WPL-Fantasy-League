@@ -28,11 +28,20 @@ function RoundModal({ league: propLeague, onClose }: RoundModalProps) {
 
   const [selectedRound, setSelectedRound] = useState<number>(1);
   const [error, setError] = useState("");
+  const [showUrl, setShowUrl] = useState(false);
+  const [urlCopied, setUrlCopied] = useState(false);
+  const [jsonText, setJsonText] = useState("");
+  const [importError, setImportError] = useState("");
+  const [importResult, setImportResult] = useState<any>(null);
 
   useEffect(() => {
     if (propLeague) {
       setSelectedRound(propLeague.currentRound ?? 1);
       setError("");
+      setShowUrl(false);
+      setJsonText("");
+      setImportError("");
+      setImportResult(null);
     }
   }, [propLeague]);
 
@@ -48,12 +57,55 @@ function RoundModal({ league: propLeague, onClose }: RoundModalProps) {
     },
   });
 
+  const importMutation = useMutation({
+    mutationFn: (payload: any) =>
+      apiClient.post(API_ENDPOINTS.ADMIN.IMPORT_LEAGUE_FIXTURES(league._id), payload),
+    onSuccess: (res) => {
+      setImportResult(res?.data?.data ?? null);
+      setImportError("");
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ADMIN_FIXTURES] });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ADMIN_LEAGUES] });
+    },
+    onError: (err: any) => {
+      setImportResult(null);
+      setImportError(err.response?.data?.error || "Failed to import fixtures. Check that the JSON is valid.");
+    },
+  });
+
+  const handleImport = () => {
+    setImportError("");
+    setImportResult(null);
+    let parsed: any;
+    try {
+      parsed = JSON.parse(jsonText);
+    } catch (e: any) {
+      setImportError(`Invalid JSON: ${e.message}`);
+      return;
+    }
+    importMutation.mutate(parsed);
+  };
+
   if (!league) return null;
 
   const totalRounds = league.totalRounds ?? 38;
 
+  const hasSofaConfig = !!league.leagueId && !!league.leagueSeasonId;
+  const sofaUrl = hasSofaConfig
+    ? `https://www.sofascore.com/api/v1/unique-tournament/${league.leagueId}/season/${league.leagueSeasonId}/events/round/${selectedRound}`
+    : "";
+
+  const copyUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(sofaUrl);
+      setUrlCopied(true);
+      setTimeout(() => setUrlCopied(false), 1500);
+    } catch {
+      setUrlCopied(false);
+    }
+  };
+
   return (
-    <Modal isOpen={!!propLeague} onClose={onClose} variant="center" maxWidthClass="max-w-sm">
+    <Modal isOpen={!!propLeague} onClose={onClose} variant="center" maxWidthClass="max-w-lg">
       <div className="p-5 space-y-4 relative overflow-hidden text-white">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-600 opacity-80" />
 
@@ -90,6 +142,82 @@ function RoundModal({ league: propLeague, onClose }: RoundModalProps) {
         >
           {updateMutation.isPending ? "Saving..." : `Set Round ${selectedRound}`}
         </button>
+
+        <div className="border-t border-white/10 pt-3 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-extrabold tracking-widest text-white/50 uppercase">
+              Sofascore Fixtures
+            </span>
+            {hasSofaConfig && (
+              <span className="text-[9px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded-full">
+                Round {selectedRound}
+              </span>
+            )}
+          </div>
+
+          {!hasSofaConfig ? (
+            <div className="p-3 rounded-lg text-[11px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              This league has no external Sofascore leagueId/seasonId configured. Set them before importing fixtures.
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col gap-1.5">
+                <button
+                  onClick={() => setShowUrl(!showUrl)}
+                  className="w-full bg-white/5 hover:bg-white/10 border border-white/10 text-white/90 text-[11px] font-extrabold uppercase tracking-wider py-2 rounded-lg transition-all active:scale-95"
+                >
+                  {showUrl ? "Hide URL" : "Get Sofascore URL"}
+                </button>
+                {showUrl && (
+                  <div className="space-y-1.5">
+                    <div className="flex gap-1.5">
+                      <input
+                        readOnly
+                        value={sofaUrl}
+                        onFocus={(e) => e.target.select()}
+                        className="flex-1 min-w-0 px-2.5 py-1.5 bg-black/40 border border-white/10 rounded-lg text-[10px] font-mono text-indigo-300 focus:outline-none focus:border-indigo-500"
+                      />
+                      <button
+                        onClick={copyUrl}
+                        className="shrink-0 text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-1.5 rounded bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 transition-all active:scale-95"
+                      >
+                        {urlCopied ? "Copied" : "Copy"}
+                      </button>
+                    </div>
+                    <p className="text-[10px] text-white/40 font-medium leading-snug">
+                      Open this URL in a browser, then paste the returned JSON below and import it.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-1.5">
+                <textarea
+                  value={jsonText}
+                  onChange={(e) => setJsonText(e.target.value)}
+                  rows={6}
+                  placeholder='Paste the JSON from the Sofascore URL (the { "events": [...] } payload)...'
+                  className="w-full px-2.5 py-2 bg-[#150f24] border border-white/10 rounded-lg text-[10px] font-mono text-white/90 placeholder-white/30 focus:outline-none focus:border-indigo-500 transition-all resize-y"
+                />
+                <button
+                  onClick={handleImport}
+                  disabled={importMutation.isPending || !jsonText.trim()}
+                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-2 rounded-lg text-[11px] font-black shadow-lg hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:transform-none"
+                >
+                  {importMutation.isPending ? "Importing..." : "Import Fixtures JSON"}
+                </button>
+                {importError && (
+                  <div className="p-2.5 rounded-lg text-[11px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">{importError}</div>
+                )}
+                {importResult && (
+                  <div className="p-2.5 rounded-lg text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    Saved {importResult.saved} / {importResult.total} fixtures ({importResult.errors} errors)
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </Modal>
   );

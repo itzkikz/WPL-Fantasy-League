@@ -1,24 +1,12 @@
 import dotenv from 'dotenv';
 import connectDB from '../config/db';
 import { League } from '../models/League';
-import { launchWarmSession } from '../utils/sofascoreScraper';
+import { launchWarmSession, fetchViaPage } from '../utils/sofascoreScraper';
 
 dotenv.config();
 
-const fetchRounds = async (page: any, leagueId: number, seasonId: number) => {
-    return await page.evaluate(async (url: string) => {
-        const res = await fetch(url, {
-            headers: {
-                'Accept': 'application/json',
-                'Referer': 'https://www.sofascore.com/'
-            }
-        });
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status} ${res.statusText}`);
-        }
-        return res.json();
-    }, `https://www.sofascore.com/api/v1/unique-tournament/${leagueId}/season/${seasonId}/rounds`);
-};
+const fetchRounds = (page: any, leagueId: number, seasonId: number) =>
+    fetchViaPage(page, `https://www.sofascore.com/api/v1/unique-tournament/${leagueId}/season/${seasonId}/rounds`);
 
 const seedRounds = async () => {
     try {
@@ -37,7 +25,7 @@ const seedRounds = async () => {
         }
 
         console.log('Warming Puppeteer session...');
-        const { browser, page } = await launchWarmSession();
+        let { browser, page } = await launchWarmSession();
 
         let totalUpdated = 0;
 
@@ -50,18 +38,18 @@ const seedRounds = async () => {
 
                 console.log(`\n[${index + 1}/${leagues.length}] ${name} (leagueId=${leagueId}, seasonId=${seasonId})`);
 
-                try {
+                const processLeague = async () => {
                     const data = await fetchRounds(page, leagueId, seasonId);
 
                     if (!data) {
                         console.warn(`  Empty response body`);
-                        continue;
+                        return;
                     }
 
                     const rounds = data.rounds;
                     if (!Array.isArray(rounds)) {
                         console.warn(`  Response has no "rounds" array. Keys: ${Object.keys(data).join(', ')}`);
-                        continue;
+                        return;
                     }
 
                     const totalRounds = rounds.length;
@@ -76,8 +64,23 @@ const seedRounds = async () => {
 
                     console.log(`  Updated ${name}`);
                     totalUpdated++;
+                };
+
+                try {
+                    await processLeague();
                 } catch (err: any) {
-                    console.error(`  Failed: ${err.message}`);
+                    if (/(403|429|503)/.test(err.message)) {
+                        console.error(`  Failed (${err.message}). Re-warming session and retrying...`);
+                        try {
+                            await browser.close();
+                            ({ browser, page } = await launchWarmSession());
+                            await processLeague();
+                        } catch (retryErr: any) {
+                            console.error(`  Re-fetch also failed: ${retryErr.message}`);
+                        }
+                    } else {
+                        console.error(`  Failed: ${err.message}`);
+                    }
                 }
             }
 

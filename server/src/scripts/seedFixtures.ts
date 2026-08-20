@@ -3,61 +3,14 @@ import connectDB from '../config/db';
 import { League } from '../models/League';
 import { Fixture } from '../models/Fixture';
 import { MatchDetails } from '../models/MatchDetails';
-import { launchWarmSession } from '../utils/sofascoreScraper';
+import { launchWarmSession, fetchViaPage } from '../utils/sofascoreScraper';
+import { pickFields, mapLineups } from '../lib/sofascoreFixtures';
 
 dotenv.config();
 
-const EXCLUDED_KEYS = new Set([
-    'changes', 'eventFilters', 'correctAiInsight', 'correctHalftimeAiInsight',
-    'crowdsourcingDataDisplayEnabled', 'customId', 'detailId', 'feedLocked',
-    'finalResultOnly', 'hasEventPlayerHeatMap', 'hasGlobalHighlights', 'hasXg'
-]);
+const REQUEST_DELAY_MS = 2500;
 
-const pickFields = (event: any): Record<string, any> => {
-    const doc: Record<string, any> = {};
-
-    for (const key of Object.keys(event)) {
-        if (EXCLUDED_KEYS.has(key)) continue;
-
-        if (key === 'tournament') {
-            doc.tournament = { id: event.tournament?.id };
-            doc.uniqueTournament = { id: event.tournament?.uniqueTournament?.id };
-        } else if (key === 'season') {
-            doc.season = { id: event.season?.id };
-        } else if (key === 'homeTeam') {
-            doc.homeTeam = { id: event.homeTeam?.id };
-        } else if (key === 'awayTeam') {
-            doc.awayTeam = { id: event.awayTeam?.id };
-        } else if (key !== 'id') {
-            doc[key] = event[key];
-        }
-    }
-
-    return doc;
-};
-
-const fetchViaPage = async (page: any, url: string): Promise<any> => {
-    try {
-        return await page.evaluate(async (fetchUrl: string) => {
-            const res = await fetch(fetchUrl, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Referer': 'https://www.sofascore.com/'
-                }
-            });
-            if (!res.ok) {
-                throw new Error(`HTTP ${res.status} ${res.statusText}`);
-            }
-            return res.json();
-        }, url);
-    } catch (err: any) {
-        if (err.message?.includes('HTTP 404')) {
-            console.log(`    API returned 404 for ${url.split('/').pop()} — no data`);
-            return null;
-        }
-        throw err;
-    }
-};
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 const fetchIncidents = (page: any, fixtureId: number) =>
     fetchViaPage(page, `https://www.sofascore.com/api/v1/event/${fixtureId}/incidents`);
@@ -65,20 +18,79 @@ const fetchIncidents = (page: any, fixtureId: number) =>
 const fetchLineups = (page: any, fixtureId: number) =>
     fetchViaPage(page, `https://www.sofascore.com/api/v1/event/${fixtureId}/lineups`);
 
-const fetchFixturesForRound = async (page: any, tournamentId: number, seasonId: number, round: number) => {
-    const url = `https://www.sofascore.com/api/v1/unique-tournament/${tournamentId}/season/${seasonId}/events/round/${round}`;
-    return await page.evaluate(async (fetchUrl: string) => {
-        const res = await fetch(fetchUrl, {
-            headers: {
-                'Accept': 'application/json',
-                'Referer': 'https://www.sofascore.com/'
+const fetchFixturesForRound = (page: any, tournamentId: number, seasonId: number, round: number) =>
+    fetchViaPage(page, `https://www.sofascore.com/api/v1/unique-tournament/${tournamentId}/season/${seasonId}/events/round/${round}`);
+
+/**
+ * Persists a round's events (fixtures) plus post-match data (incidents/lineups)
+ * for finished matches. Returns the number of fixtures saved.
+ */
+const saveFixturesForRound = async (page: any, events: any[]): Promise<number> => {
+    let saved = 0;
+    let errors = 0;
+
+    for (const [ei, event] of events.entries()) {
+        try {
+            const fixtureDoc = pickFields(event);
+            fixtureDoc.fixtureId = event.id;
+
+            console.log(`  [${ei + 1}/${events.length}] Saving event ${event.id}...`);
+
+            await Fixture.findOneAndUpdate(
+                { fixtureId: event.id },
+                { $set: fixtureDoc },
+                { upsert: true }
+            );
+
+            if (event.status?.description === 'Ended' && event.status?.type === 'finished') {
+                console.log(`    Finished match — fetching post-match data...`);
+
+                try {
+                    const incidentsData = await fetchIncidents(page, event.id);
+                    if (incidentsData?.incidents) {
+                        // $set + $setOnInsert only: never reset addedtofantasy on an
+                        // existing doc (that flag is owned by the admin add/undo flow),
+                        // and never replace the whole doc (that would wipe lineups).
+                        await MatchDetails.findOneAndUpdate(
+                            { fixtureId: event.id },
+                            { $set: { incidents: incidentsData.incidents }, $setOnInsert: { addedtofantasy: false } },
+                            { upsert: true }
+                        );
+                        console.log(`    Saved ${incidentsData.incidents.length} incidents`);
+                    }
+                } catch (incErr: any) {
+                    console.warn(`    Could not fetch incidents: ${incErr.message}`);
+                }
+
+                await sleep(REQUEST_DELAY_MS);
+
+                try {
+                    const lineupsData = await fetchLineups(page, event.id);
+                    if (lineupsData?.home?.players || lineupsData?.away?.players) {
+                        const lineups = mapLineups(lineupsData);
+                        await MatchDetails.findOneAndUpdate(
+                            { fixtureId: event.id },
+                            { $set: { lineups }, $setOnInsert: { addedtofantasy: false } },
+                            { upsert: true }
+                        );
+                        console.log(`    Saved ${lineups.length} lineup players`);
+                    }
+                } catch (lineErr: any) {
+                    console.warn(`    Could not fetch lineups: ${lineErr.message}`);
+                }
             }
-        });
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status} ${res.statusText}`);
+
+            saved++;
+        } catch (evErr: any) {
+            errors++;
+            console.error(`  [${ei + 1}/${events.length}] Error saving event ${event.id}: ${evErr.message}`);
         }
-        return res.json();
-    }, url);
+
+        await sleep(REQUEST_DELAY_MS);
+    }
+
+    console.log(`  Done: ${saved} saved, ${errors} errors`);
+    return saved;
 };
 
 const seedFixtures = async () => {
@@ -102,7 +114,7 @@ const seedFixtures = async () => {
         console.log('Dropped stale indexes');
 
         console.log('Warming Puppeteer session...');
-        const { browser, page } = await launchWarmSession();
+        let { browser, page } = await launchWarmSession();
 
         let totalSaved = 0;
 
@@ -116,104 +128,40 @@ const seedFixtures = async () => {
 
                 console.log(`\n[${index + 1}/${leagues.length}] ${name} — fetching round ${round} (tournament=${tournamentId}, season=${seasonId})`);
 
-                try {
+                const processLeague = async () => {
                     const data = await fetchFixturesForRound(page, tournamentId, seasonId, round);
 
                     const events = data.events;
                     if (!Array.isArray(events)) {
                         console.warn(`  Response has no "events" array. Keys: ${Object.keys(data).join(', ')}`);
-                        continue;
+                        return 0;
                     }
 
                     console.log(`  Got ${events.length} events`);
+                    const saved = await saveFixturesForRound(page, events);
+                    return saved;
+                };
 
-                    let saved = 0;
-                    let errors = 0;
-                    for (const [ei, event] of events.entries()) {
-                        try {
-                            const fixtureDoc = pickFields(event);
-                            fixtureDoc.fixtureId = event.id;
-
-                            console.log(`  [${ei + 1}/${events.length}] Saving event ${event.id}...`);
-
-                            await Fixture.findOneAndUpdate(
-                                { fixtureId: event.id },
-                                { $set: fixtureDoc },
-                                { upsert: true }
-                            );
-
-                            if (event.status?.description === 'Ended' && event.status?.type === 'finished') {
-                                console.log(`    Finished match — fetching post-match data...`);
-
-                                try {
-                                    const incidentsData = await fetchIncidents(page, event.id);
-                                    if (incidentsData?.incidents) {
-                                        // $set + $setOnInsert only: never reset addedtofantasy on an
-                                        // existing doc (that flag is owned by the admin add/undo flow),
-                                        // and never replace the whole doc (that would wipe lineups).
-                                        await MatchDetails.findOneAndUpdate(
-                                            { fixtureId: event.id },
-                                            { $set: { incidents: incidentsData.incidents }, $setOnInsert: { addedtofantasy: false } },
-                                            { upsert: true }
-                                        );
-                                        console.log(`    Saved ${incidentsData.incidents.length} incidents`);
-                                    }
-                                } catch (incErr: any) {
-                                    if (incErr.message?.includes('HTTP 404')) {
-                                        console.log(`    No incidents data for event ${event.id}`);
-                                    } else {
-                                        console.warn(`    Could not fetch incidents: ${incErr.message}`);
-                                    }
-                                }
-
-                                await new Promise(resolve => setTimeout(resolve, 1000));
-
-                                try {
-                                    const lineupsData = await fetchLineups(page, event.id);
-                                    if (lineupsData?.home?.players || lineupsData?.away?.players) {
-                                        const lineups: { playerId: number; teamId: number; statistics: any; side: string; position: string }[] = [];
-                                        for (const side of ['home', 'away'] as const) {
-                                            for (const entry of (lineupsData[side]?.players ?? [])) {
-                                                if (!entry.player?.id) continue;
-                                                lineups.push({
-                                                    playerId: entry.player.id,
-                                                    teamId: entry.teamId,
-                                                    statistics: entry.statistics ?? {},
-                                                    side,
-                                                    position: entry.position || ''
-                                                });
-                                            }
-                                        }
-                                        await MatchDetails.findOneAndUpdate(
-                                            { fixtureId: event.id },
-                                            { $set: { lineups }, $setOnInsert: { addedtofantasy: false } },
-                                            { upsert: true }
-                                        );
-                                        console.log(`    Saved ${lineups.length} lineup players`);
-                                    }
-                                } catch (lineErr: any) {
-                                    if (lineErr.message?.includes('HTTP 404')) {
-                                        console.log(`    No lineups data for event ${event.id}`);
-                                    } else {
-                                        console.warn(`    Could not fetch lineups: ${lineErr.message}`);
-                                    }
-                                }
-                            } else {
-                                await new Promise(resolve => setTimeout(resolve, 500));
-                            }
-
-                            saved++;
-                        } catch (evErr: any) {
-                            errors++;
-                            console.error(`  [${ei + 1}/${events.length}] Error saving event ${event.id}: ${evErr.message}`);
-                        }
-                    }
-
-                    console.log(`  Done: ${saved} saved, ${errors} errors`);
-                    totalSaved += saved;
+                try {
+                    totalSaved += await processLeague();
                 } catch (err: any) {
-                    console.error(`  Failed for league: ${err.message}`);
+                    // 403 (challenge/IP block) or 503 (rate limit) — the session is dead.
+                    // Re-warm a fresh session and retry this league once.
+                    if (/(403|429|503)/.test(err.message)) {
+                        console.error(`  Failed for league (${err.message}). Re-warming session and retrying...`);
+                        try {
+                            await browser.close();
+                            ({ browser, page } = await launchWarmSession());
+                            totalSaved += await processLeague();
+                        } catch (retryErr: any) {
+                            console.error(`  Re-fetch also failed for league: ${retryErr.message}`);
+                        }
+                    } else {
+                        console.error(`  Failed for league: ${err.message}`);
+                    }
                 }
+
+                await sleep(REQUEST_DELAY_MS);
             }
 
             console.log(`\nDone. Saved ${totalSaved} fixtures across ${leagues.length} leagues.`);
