@@ -2,26 +2,14 @@ import dotenv from 'dotenv';
 import connectDB from '../config/db';
 import { Team } from '../models/Team';
 import { Player } from '../models/Player';
-import { launchWarmSession } from '../utils/sofascoreScraper';
+import { launchWarmSession, fetchViaPage } from '../utils/sofascoreScraper';
 
 dotenv.config();
 
 const DELAY_MS = 2000;
 
-const fetchSofascorePlayers = async (page: any, teamId: number) => {
-    return await page.evaluate(async (url: string) => {
-        const res = await fetch(url, {
-            headers: {
-                'Accept': 'application/json',
-                'Referer': 'https://www.sofascore.com/'
-            }
-        });
-        if (!res.ok) {
-            throw new Error(`HTTP ${res.status} ${res.statusText}`);
-        }
-        return res.json();
-    }, `https://www.sofascore.com/api/v1/team/${teamId}/players`);
-};
+const fetchSofascorePlayers = (page: any, teamId: number) =>
+    fetchViaPage(page, `https://www.sofascore.com/api/v1/team/${teamId}/players`);
 
 const seedPlayers = async () => {
     try {
@@ -40,7 +28,7 @@ const seedPlayers = async () => {
         }
 
         console.log('Warming Puppeteer session...');
-        const { browser, page } = await launchWarmSession();
+        let { browser, page } = await launchWarmSession();
 
         let totalSaved = 0;
         let totalTeams = 0;
@@ -54,13 +42,13 @@ const seedPlayers = async () => {
 
                 console.log(`\n[${index + 1}/${teams.length}] ${teamName} (teamId=${teamId})`);
 
-                try {
+                const processTeam = async () => {
                     const data = await fetchSofascorePlayers(page, teamId);
 
                     if (!data) {
                         console.warn(`  Empty response body`);
                         totalErrors++;
-                        continue;
+                        return;
                     }
 
                     const players = data.players;
@@ -70,7 +58,7 @@ const seedPlayers = async () => {
                             console.warn(`  "players" key is undefined — API may have returned a different shape`);
                         }
                         totalErrors++;
-                        continue;
+                        return;
                     }
 
                     console.log(`  Received ${players.length} players`);
@@ -78,7 +66,7 @@ const seedPlayers = async () => {
                     if (players.length === 0) {
                         console.warn(`  Empty players array`);
                         totalErrors++;
-                        continue;
+                        return;
                     }
 
                     let saved = 0;
@@ -132,9 +120,25 @@ const seedPlayers = async () => {
                         console.log(`  Waiting ${DELAY_MS}ms...`);
                         await new Promise(resolve => setTimeout(resolve, DELAY_MS));
                     }
+                };
+
+                try {
+                    await processTeam();
                 } catch (err: any) {
-                    console.error(`  Failed: ${err.message}`);
-                    totalErrors++;
+                    if (/(403|429|503)/.test(err.message)) {
+                        console.error(`  Failed (${err.message}). Re-warming session and retrying...`);
+                        try {
+                            await browser.close();
+                            ({ browser, page } = await launchWarmSession());
+                            await processTeam();
+                        } catch (retryErr: any) {
+                            console.error(`  Re-fetch also failed: ${retryErr.message}`);
+                            totalErrors++;
+                        }
+                    } else {
+                        console.error(`  Failed: ${err.message}`);
+                        totalErrors++;
+                    }
                 }
             }
         } finally {

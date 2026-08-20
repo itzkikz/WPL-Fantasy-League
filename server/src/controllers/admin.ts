@@ -22,6 +22,7 @@ import { Fact } from '../models/Fact';
 import { fetchSofascoreJSON } from '../utils/sofascoreScraper';
 import { calculatePlayerPoints } from '../lib/points';
 import { mapSofascoreToPlayerMatchStat } from '../lib/sofascoreMapper';
+import { pickFields, mapLineups } from '../lib/sofascoreFixtures';
 import { getLeagueAllGWPoints } from './h2h';
 import { getGameweekMinutes } from './players';
 
@@ -1437,6 +1438,124 @@ export const updateLeague = async (req: Request, res: Response) => {
 };
 
 // --- H2H Admin Controllers ---
+
+export const importFixturesFromJSON = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const league = await League.findById(req.params.id).lean();
+        if (!league) {
+            return res.status(404).json({ error: 'League not found' });
+        }
+
+        const events = Array.isArray(req.body) ? req.body : req.body?.events;
+        if (!Array.isArray(events) || events.length === 0) {
+            return res.status(400).json({ error: 'Body must contain a non-empty "events" array (Sofascore round payload).' });
+        }
+
+        let saved = 0;
+        let errors = 0;
+
+        for (const event of events) {
+            try {
+                if (!event?.id) {
+                    errors++;
+                    continue;
+                }
+                const fixtureDoc = pickFields(event);
+                fixtureDoc.fixtureId = event.id;
+                await Fixture.findOneAndUpdate(
+                    { fixtureId: event.id },
+                    { $set: fixtureDoc },
+                    { upsert: true }
+                );
+                saved++;
+            } catch (evErr: any) {
+                errors++;
+                console.error(`Error importing event ${event?.id ?? 'unknown'}: ${evErr.message}`);
+            }
+        }
+
+        res.status(200).json({ data: { saved, errors, total: events.length } });
+    } catch (error: any) {
+        console.error('Error importing fixtures from JSON:', error.message || error);
+        res.status(500).json({ error: `Failed to import fixtures: ${error.message}` });
+    }
+};
+
+export const importIncidentsFromJSON = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const fixtureId = parseInt(req.params.id);
+        if (isNaN(fixtureId)) {
+            return res.status(400).json({ error: 'Invalid fixture ID' });
+        }
+
+        const fixture = await Fixture.findOne({ fixtureId }).lean();
+        if (!fixture) {
+            return res.status(404).json({ error: 'Fixture not found' });
+        }
+
+        const incidents = Array.isArray(req.body) ? req.body : req.body?.incidents;
+        if (!Array.isArray(incidents)) {
+            return res.status(400).json({ error: 'Body must contain an "incidents" array (Sofascore incidents payload).' });
+        }
+
+        await MatchDetails.findOneAndUpdate(
+            { fixtureId },
+            { $set: { incidents }, $setOnInsert: { addedtofantasy: false } },
+            { upsert: true }
+        );
+
+        res.status(200).json({ data: { fixtureId, saved: incidents.length } });
+    } catch (error: any) {
+        console.error('Error importing incidents from JSON:', error.message || error);
+        res.status(500).json({ error: `Failed to import incidents: ${error.message}` });
+    }
+};
+
+export const importLineupsFromJSON = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const fixtureId = parseInt(req.params.id);
+        if (isNaN(fixtureId)) {
+            return res.status(400).json({ error: 'Invalid fixture ID' });
+        }
+
+        const fixture = await Fixture.findOne({ fixtureId }).lean();
+        if (!fixture) {
+            return res.status(404).json({ error: 'Fixture not found' });
+        }
+
+        if (!req.body?.home?.players && !req.body?.away?.players) {
+            return res.status(400).json({ error: 'Body must contain the Sofascore lineups payload ({ home, away } with "players" arrays).' });
+        }
+
+        const lineups = mapLineups(req.body);
+        if (lineups.length === 0) {
+            return res.status(400).json({ error: 'No lineup players found in the provided JSON.' });
+        }
+
+        await MatchDetails.findOneAndUpdate(
+            { fixtureId },
+            { $set: { lineups }, $setOnInsert: { addedtofantasy: false } },
+            { upsert: true }
+        );
+
+        res.status(200).json({ data: { fixtureId, saved: lineups.length } });
+    } catch (error: any) {
+        console.error('Error importing lineups from JSON:', error.message || error);
+        res.status(500).json({ error: `Failed to import lineups: ${error.message}` });
+    }
+};
 
 export const getH2HLeague = async (req: Request, res: Response) => {
     try {

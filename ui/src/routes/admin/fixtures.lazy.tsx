@@ -4,6 +4,7 @@ import { useState } from "react";
 import apiClient from "../../api/client";
 import { API_ENDPOINTS, QUERY_KEYS } from "../../api/endpoints";
 import dayjs from "dayjs";
+import Modal from "../../components/common/Modal";
 
 export const Route = createLazyFileRoute("/admin/fixtures")({
   component: AdminFixtures,
@@ -29,6 +30,211 @@ function getWeekRange() {
   };
 }
 
+function CopyUrlRow({ url }: { url: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      setCopied(false);
+    }
+  };
+  return (
+    <div className="flex gap-1.5">
+      <input
+        readOnly
+        value={url}
+        onFocus={(e) => e.target.select()}
+        className="flex-1 min-w-0 px-2.5 py-1.5 bg-black/40 border border-white/10 rounded-lg text-[10px] font-mono text-indigo-300 focus:outline-none focus:border-indigo-500"
+      />
+      <button
+        onClick={copy}
+        className="shrink-0 text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-1.5 rounded bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 transition-all active:scale-95"
+      >
+        {copied ? "Copied" : "Copy"}
+      </button>
+    </div>
+  );
+}
+
+function JsonImportSection({
+  label,
+  placeholder,
+  value,
+  onChange,
+  onImport,
+  isPending,
+  error,
+  resultText,
+}: {
+  label: string;
+  placeholder: string;
+  value: string;
+  onChange: (v: string) => void;
+  onImport: () => void;
+  isPending: boolean;
+  error: string;
+  resultText: string | null;
+}) {
+  return (
+    <div className="space-y-1.5">
+      <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase">{label}</label>
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        rows={5}
+        placeholder={placeholder}
+        className="w-full px-2.5 py-2 bg-[#150f24] border border-white/10 rounded-lg text-[10px] font-mono text-white/90 placeholder-white/30 focus:outline-none focus:border-indigo-500 transition-all resize-y"
+      />
+      <button
+        onClick={onImport}
+        disabled={isPending || !value.trim()}
+        className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-2 rounded-lg text-[11px] font-black shadow-lg hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:transform-none"
+      >
+        {isPending ? "Importing..." : `Import ${label}`}
+      </button>
+      {error && (
+        <div className="p-2.5 rounded-lg text-[11px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">{error}</div>
+      )}
+      {resultText && (
+        <div className="p-2.5 rounded-lg text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">{resultText}</div>
+      )}
+    </div>
+  );
+}
+
+function FixtureDataModal({ fixture, onClose }: { fixture: any; onClose: () => void }) {
+  const queryClient = useQueryClient();
+  const [incidentsText, setIncidentsText] = useState("");
+  const [lineupsText, setLineupsText] = useState("");
+  const [incidentsError, setIncidentsError] = useState("");
+  const [lineupsError, setLineupsError] = useState("");
+  const [incidentsResult, setIncidentsResult] = useState<string | null>(null);
+  const [lineupsResult, setLineupsResult] = useState<string | null>(null);
+
+  const invalidate = () => {
+    queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ADMIN_FIXTURES] });
+    queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ADMIN_FIXTURE_STATS] });
+  };
+
+  const incidentsMutation = useMutation({
+    mutationFn: (payload: any) =>
+      apiClient.post(API_ENDPOINTS.ADMIN.IMPORT_FIXTURE_INCIDENTS(fixture.fixtureId), payload),
+    onSuccess: (res) => {
+      setIncidentsResult(`Saved ${res?.data?.data?.saved ?? 0} incidents`);
+      setIncidentsError("");
+      invalidate();
+    },
+    onError: (err: any) => {
+      setIncidentsResult(null);
+      setIncidentsError(err.response?.data?.error || "Failed to import incidents. Check that the JSON is valid.");
+    },
+  });
+
+  const lineupsMutation = useMutation({
+    mutationFn: (payload: any) =>
+      apiClient.post(API_ENDPOINTS.ADMIN.IMPORT_FIXTURE_LINEUPS(fixture.fixtureId), payload),
+    onSuccess: (res) => {
+      setLineupsResult(`Saved ${res?.data?.data?.saved ?? 0} lineup players`);
+      setLineupsError("");
+      invalidate();
+    },
+    onError: (err: any) => {
+      setLineupsResult(null);
+      setLineupsError(err.response?.data?.error || "Failed to import lineups. Check that the JSON is valid.");
+    },
+  });
+
+  const handleImportIncidents = () => {
+    setIncidentsError("");
+    setIncidentsResult(null);
+    let parsed: any;
+    try {
+      parsed = JSON.parse(incidentsText);
+    } catch (e: any) {
+      setIncidentsError(`Invalid JSON: ${e.message}`);
+      return;
+    }
+    incidentsMutation.mutate(parsed);
+  };
+
+  const handleImportLineups = () => {
+    setLineupsError("");
+    setLineupsResult(null);
+    let parsed: any;
+    try {
+      parsed = JSON.parse(lineupsText);
+    } catch (e: any) {
+      setLineupsError(`Invalid JSON: ${e.message}`);
+      return;
+    }
+    lineupsMutation.mutate(parsed);
+  };
+
+  if (!fixture) return null;
+
+  const fixtureId = fixture.fixtureId;
+  const incidentsUrl = `https://www.sofascore.com/api/v1/event/${fixtureId}/incidents`;
+  const lineupsUrl = `https://www.sofascore.com/api/v1/event/${fixtureId}/lineups`;
+  const homeName = fixture.homeTeamName ?? `Team #${fixture.homeTeam?.id ?? ''}`;
+  const awayName = fixture.awayTeamName ?? `Team #${fixture.awayTeam?.id ?? ''}`;
+
+  return (
+    <Modal isOpen={!!fixture} onClose={onClose} variant="center" maxWidthClass="max-w-2xl">
+      <div className="p-5 space-y-4 relative overflow-hidden text-white">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-teal-600 opacity-80" />
+
+        <div className="flex justify-between items-center">
+          <h2 className="text-base font-black tracking-tight truncate max-w-[240px]">
+            {homeName} vs {awayName}
+          </h2>
+          <button onClick={onClose} className="w-6 h-6 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white hover:border-white/30 transition-colors text-xs font-bold">✕</button>
+        </div>
+        <p className="text-[10px] font-extrabold uppercase tracking-widest text-white/40 -mt-3">Match #{fixtureId}</p>
+
+        <div className="space-y-2">
+          <div className="space-y-1">
+            <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase">Incidents URL</label>
+            <CopyUrlRow url={incidentsUrl} />
+          </div>
+          <div className="space-y-1">
+            <label className="block text-[10px] font-extrabold tracking-widest text-white/50 uppercase">Lineups URL</label>
+            <CopyUrlRow url={lineupsUrl} />
+          </div>
+          <p className="text-[10px] text-white/40 font-medium leading-snug">
+            Open each URL in a browser, then paste the returned JSON below and import.
+          </p>
+        </div>
+
+        <div className="border-t border-white/10 pt-3 space-y-4">
+          <JsonImportSection
+            label="Incidents JSON"
+            placeholder='Paste the JSON from the incidents URL (the { "incidents": [...] } payload)...'
+            value={incidentsText}
+            onChange={setIncidentsText}
+            onImport={handleImportIncidents}
+            isPending={incidentsMutation.isPending}
+            error={incidentsError}
+            resultText={incidentsResult}
+          />
+          <JsonImportSection
+            label="Lineups JSON"
+            placeholder='Paste the JSON from the lineups URL (the { "home": { "players": [...] }, "away": { "players": [...] } } payload)...'
+            value={lineupsText}
+            onChange={setLineupsText}
+            onImport={handleImportLineups}
+            isPending={lineupsMutation.isPending}
+            error={lineupsError}
+            resultText={lineupsResult}
+          />
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
 function AdminFixtures() {
   const match = useMatch({ from: "/admin/fixtures/$fixtureId", shouldThrow: false });
 
@@ -38,6 +244,7 @@ function AdminFixtures() {
   const [showAll, setShowAll] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [gameweekFilter, setGameweekFilter] = useState<number | null>(null);
+  const [selectedFixture, setSelectedFixture] = useState<any>(null);
 
   const { data, isLoading, error } = useQuery({
     queryKey: [QUERY_KEYS.ADMIN_FIXTURES],
@@ -292,6 +499,13 @@ function AdminFixtures() {
 
                     {/* Actions container */}
                     <div className="flex items-center justify-end gap-1.5 border-t border-white/5 pt-2">
+                      <button
+                        onClick={() => setSelectedFixture(f)}
+                        className="text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-1.5 rounded bg-white/5 text-white/80 hover:bg-white/15 hover:text-white border border-white/10 transition-all"
+                      >
+                        Data URLs
+                      </button>
+
                       <Link
                         to="/admin/fixtures/$fixtureId"
                         params={{ fixtureId: String(f.fixtureId) }}
@@ -358,6 +572,11 @@ function AdminFixtures() {
           </div>
         )}
       </div>
+
+      <FixtureDataModal
+        fixture={selectedFixture}
+        onClose={() => setSelectedFixture(null)}
+      />
     </div>
   );
 }
