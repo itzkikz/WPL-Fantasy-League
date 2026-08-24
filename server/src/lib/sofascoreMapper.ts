@@ -31,12 +31,10 @@ function countGoalsConceded(entry: ILineupEntry, incidents: any[], subOn: number
         if (goalMinute == null) return false;
         if (goalMinute < subOn || goalMinute > subOff) return false;
 
-        if (inc.incidentClass === 'ownGoal') {
-            if (side === 'home' && inc.isHome === true) return true;
-            if (side === 'away' && inc.isHome === false) return true;
-            return false;
-        }
-
+        // `isHome` marks the team the goal was CREDITED to, for regular goals
+        // and own goals alike: an own goal by an away player carries
+        // isHome=true and is conceded by the away side, into whose net it went.
+        // A player therefore concedes exactly the goals credited to the opposition.
         if (side === 'home' && inc.isHome === false) return true;
         if (side === 'away' && inc.isHome === true) return true;
 
