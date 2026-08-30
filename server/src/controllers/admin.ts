@@ -23,6 +23,7 @@ import { fetchSofascoreJSON } from '../utils/sofascoreScraper';
 import { calculatePlayerPoints } from '../lib/points';
 import { mapSofascoreToPlayerMatchStat } from '../lib/sofascoreMapper';
 import { pickFields, mapLineups } from '../lib/sofascoreFixtures';
+import { runAutoSubs, resolvePosition } from '../lib/autoSub';
 import { getLeagueAllGWPoints } from './h2h';
 import { getGameweekMinutes } from './players';
 
@@ -833,7 +834,7 @@ export const createFantasyTeam = async (req: Request, res: Response) => {
 
         if (startingCounts.GK !== 1 ||
             startingCounts.DEF < 3 || startingCounts.DEF > 5 ||
-            startingCounts.MID < 2 || startingCounts.MID > 5 ||
+            startingCounts.MID < 3 || startingCounts.MID > 5 ||
             startingCounts.FWD < 1 || startingCounts.FWD > 3) {
             return res.status(400).json({ error: 'Invalid starting formation.' });
         }
@@ -1011,6 +1012,13 @@ export const updateFantasyTeam = async (req: Request, res: Response) => {
             return res.status(400).json({ error: 'Exactly 11 players must be selected as starting.' });
         }
 
+        if (startingCounts.GK !== 1 ||
+            startingCounts.DEF < 3 || startingCounts.DEF > 5 ||
+            startingCounts.MID < 3 || startingCounts.MID > 5 ||
+            startingCounts.FWD < 1 || startingCounts.FWD > 3) {
+            return res.status(400).json({ error: 'Invalid starting formation.' });
+        }
+
         const picks = squad.map((p: any) => {
             const isCaptain = p.isCaptain || false;
             const isViceCaptain = p.isViceCaptain || false;
@@ -1106,18 +1114,8 @@ export const completeGameweek = async (req: Request, res: Response) => {
         }
 
         // Fetch all players for position info
-        const { Player } = require('../models/Player');
         const players = await Player.find().lean();
         const pMap = new Map<number, any>(players.map((p: any) => [p.id, p]));
-
-        const resolvePosition = (posStr: string) => {
-            const p = (posStr || '').toUpperCase();
-            if (p === 'GK' || p === 'GOALKEEPER' || p === 'G') return 'GK';
-            if (p === 'DEF' || p === 'DEFENDER' || p === 'D') return 'DEF';
-            if (p === 'MID' || p === 'MIDFIELDER' || p === 'M') return 'MID';
-            if (p === 'FWD' || p === 'FORWARD' || p === 'ATTACKER' || p === 'A' || p === 'F') return 'FWD';
-            return 'UNK';
-        };
 
         const fantasyTeams = await FantasyTeam.find();
 
@@ -1128,70 +1126,15 @@ export const completeGameweek = async (req: Request, res: Response) => {
 
             const rawPicks = team.currentSquad.picks.map(p => (p as any).toObject ? (p as any).toObject() : p);
             const preAutoSubPicks = JSON.parse(JSON.stringify(rawPicks));
-            let picks = JSON.parse(JSON.stringify(rawPicks));
 
-            // Auto-subs logic
-            const starters = picks.filter((p: any) => p.isStarting);
-            const bench = picks.filter((p: any) => !p.isStarting).sort((a: any, b: any) => (a.subNumber || 0) - (b.subNumber || 0));
-
-            // Helper to get position of a pick
-            const getPos = (pick: any) => resolvePosition(pMap.get(pick.playerId)?.position);
-
-            for (const starter of starters) {
-                const starterMins = minutesMap.get(starter.playerId) || 0;
-                if (starterMins === 0) {
-                    const starterPos = getPos(starter);
-
-                    if (starterPos === 'GK') {
-                        // Can only sub with bench GK
-                        const benchGk = bench.find((b: any) => getPos(b) === 'GK');
-                        if (benchGk && (minutesMap.get(benchGk.playerId) || 0) > 0) {
-                            // Swap
-                            starter.isStarting = false;
-                            starter.subNumber = benchGk.subNumber;
-                            benchGk.isStarting = true;
-                            benchGk.subNumber = 0;
-                        }
-                    } else {
-                        // Outfield player
-                        for (const sub of bench) {
-                            if (sub.isStarting || getPos(sub) === 'GK') continue; // already subbed in or is GK
-
-                            if ((minutesMap.get(sub.playerId) || 0) > 0) {
-                                // Check if formation remains valid if we swap starter and sub
-                                // Calculate formation WITHOUT the starter, WITH the sub
-                                const counts = { GK: 0, DEF: 0, MID: 0, FWD: 0 };
-                                for (const p of picks) {
-                                    if (p.isStarting && p.playerId !== starter.playerId) {
-                                        counts[getPos(p) as keyof typeof counts]++;
-                                    }
-                                }
-                                counts[getPos(sub) as keyof typeof counts]++; // Add sub
-
-                                if (counts.DEF >= 3 && counts.DEF <= 5 &&
-                                    counts.MID >= 2 && counts.MID <= 5 &&
-                                    counts.FWD >= 1 && counts.FWD <= 3) {
-
-                                    // Swap
-                                    starter.isStarting = false;
-                                    starter.subNumber = sub.subNumber;
-                                    sub.isStarting = true;
-                                    sub.subNumber = 0;
-                                    break; // Found a valid sub for this starter, move to next starter
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            const { picks } = runAutoSubs({
+                picks: rawPicks,
+                minutesMap,
+                getPosition: (playerId) => resolvePosition(pMap.get(playerId)?.position),
+            });
 
             // Push to history
             if (!team.history) team.history = [];
-
-            // Clean up subNumber for starters (should be 0)
-            picks.forEach((p: any) => {
-                if (p.isStarting) p.subNumber = 0;
-            });
 
             team.history.push({
                 gameweek: gameweek.number,
