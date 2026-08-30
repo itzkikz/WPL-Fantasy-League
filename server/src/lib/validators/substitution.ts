@@ -5,7 +5,7 @@ type Category = "GK" | "DEF" | "MID" | "FWD";
 const FORMATION_RULES: Record<Category, { min: number; max: number }> = {
   GK: { min: 1, max: 1 },
   DEF: { min: 3, max: 5 },
-  MID: { min: 2, max: 5 },
+  MID: { min: 3, max: 5 },
   FWD: { min: 1, max: 3 },
 };
 

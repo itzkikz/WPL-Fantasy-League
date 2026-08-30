@@ -17,6 +17,7 @@
     "seed:team-logos": "ts-node src/scripts/uploadTeamLogos.ts",
     "recompute:stats": "ts-node src/scripts/recomputeMatchStats.ts",
     "backfill:points": "ts-node src/scripts/backfillPlayerPoints.ts",
+    "backfill:autosubs": "ts-node src/scripts/backfillAutoSubs.ts",
     "export:players-sheet": "ts-node src/scripts/exportPlayersToGoogleSheet.ts"
   },
   "author": "",
