@@ -150,8 +150,8 @@ function AdminPlayers() {
                   <th className="py-2.5 px-3">Player</th>
                   <th className="py-2.5 px-3">Team</th>
                   <th className="py-2.5 px-3">Position</th>
-                  <th className="py-2.5 px-3">TM Position</th>
-                  <th className="py-2.5 px-3 text-center">Shirt</th>
+                  <th className="hidden md:table-cell py-2.5 px-3">TM Position</th>
+                  <th className="hidden sm:table-cell py-2.5 px-3 text-center">Shirt</th>
                   <th className="py-2.5 px-3 text-right">Auction Price</th>
                 </tr>
               </thead>
@@ -188,8 +188,8 @@ function AdminPlayers() {
                           {p.position}
                         </span>
                       </td>
-                      <td className="py-2.5 px-3 text-[10px] text-white/50 font-semibold">{p.tmPosition || "—"}</td>
-                      <td className="py-2.5 px-3 text-center text-xs text-white/60 font-semibold">{p.shirtNumber ?? "—"}</td>
+                      <td className="hidden md:table-cell py-2.5 px-3 text-[10px] text-white/50 font-semibold">{p.tmPosition || "—"}</td>
+                      <td className="hidden sm:table-cell py-2.5 px-3 text-center text-xs text-white/60 font-semibold">{p.shirtNumber ?? "—"}</td>
                       <td className="py-2.5 px-3 text-right">
                         <span className={`text-[10px] font-extrabold ${p.auctionPrice != null ? "text-emerald-400" : "text-white/30"}`}>
                           {p.auctionPrice != null ? `${p.auctionPrice} M` : "—"}

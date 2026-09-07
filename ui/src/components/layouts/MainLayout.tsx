@@ -1,11 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate, useMatchRoute, useLocation } from "@tanstack/react-router";
-import { Bell } from "lucide-react";
+import { Bell, Menu } from "lucide-react";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import DarkLogo from "../../assets/wplf1-dark.png";
 import LightLogo from "../../assets/wplf1-light.png";
 import MobileNavbar from "../common/MobileNavbar";
 import SideNavbar from "../common/SideNavbar";
+import AdminDrawer from "../common/AdminDrawer";
+import { ADMIN_NAV_ITEMS } from "../common/adminNav";
 import PWAInstallBanner from "../PWAInstallBanner";
 import { useValidateToken } from "../../features/auth/hooks";
 import { useUserStore } from "../../store/useUserStore";
@@ -21,6 +23,8 @@ export const MainLayout = () => {
     const isGuest = useUserStore((state) => state.isGuest);
     const setUser = useUserStore((state) => state.setUser);
 
+    const [adminDrawerOpen, setAdminDrawerOpen] = useState(false);
+
     const { data: managerDetails } = useManagerDetails();
 
     const currentPath = location.pathname;
@@ -29,6 +33,12 @@ export const MainLayout = () => {
     const isStatsPath = currentPath.startsWith("/stats");
     const isStandingsPath = currentPath.startsWith("/standings");
     const isPublicOrAuthPath = ["/login", "/maintenance", "/"].includes(currentPath);
+
+    const adminPageTitle = (isAdminPath
+      ? ADMIN_NAV_ITEMS.find((item) => currentPath.startsWith(item.path))?.label
+      : isSettingsPath
+        ? "Settings"
+        : "") || (isAdminPath ? "Admin" : "");
 
     // Guest mode: only allow /standings and /stats routes
     const isGuestAllowedPath = isStandingsPath || isStatsPath;
@@ -118,7 +128,7 @@ export const MainLayout = () => {
         <main className="font-outfit min-h-screen shadow-sm text-primary flex flex-col">
             <PWAInstallBanner />
             <div className="flex-1 flex">
-                <div className={`flex h-dvh flex-col mx-auto w-full ${currentPath === "/my-team" ? "overflow-hidden" : "overflow-y-auto"}`} style={{ WebkitOverflowScrolling: 'touch' }}>
+                <div className={`flex h-dvh flex-col mx-auto w-full ${currentPath === "/my-team" ? "overflow-hidden" : "overflow-y-auto"} ${isAdmin && (isAdminPath || isSettingsPath) ? "pb-[calc(5.25rem+env(safe-area-inset-bottom))] lg:pb-0" : ""}`} style={{ WebkitOverflowScrolling: 'touch' }}>
                     {(currentPath === "/home" || currentPath === "/home/") && (
                         <header className="header relative w-full h-12 shrink-0 overflow-hidden bg-surface border-b border-[var(--color-border-divider)] text-text-primary lg:hidden" style={{ viewTransitionName: 'header-static' }}>
                             {/* Animated gradient overlay */}
@@ -207,6 +217,30 @@ export const MainLayout = () => {
                         </header>
                     )}
                     {!hideNav && <MobileNavbar />}
+                    {isAdmin && (isAdminPath || isSettingsPath) && (
+                        <header
+                            className="header sticky top-0 z-30 w-full h-12 shrink-0 overflow-hidden bg-surface border-b border-[var(--color-border-divider)] text-text-primary lg:hidden"
+                            style={{ viewTransitionName: 'header-static' }}
+                        >
+                            <div className="relative z-10 mx-auto flex h-full w-full items-center justify-between px-3">
+                                <div className="flex items-center gap-3 min-w-0">
+                                    <button
+                                        aria-label="Open admin menu"
+                                        onClick={() => setAdminDrawerOpen(true)}
+                                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-gray-200 dark:border-white/20 bg-gray-100 dark:bg-white/15 text-gray-700 dark:text-white/90 shadow-sm"
+                                    >
+                                        <Menu className="h-5 w-5" />
+                                    </button>
+                                    <h1 className="truncate text-[17px] font-bold tracking-tight">
+                                        {adminPageTitle}
+                                    </h1>
+                                </div>
+                                <span className="shrink-0 rounded-full bg-primary/15 border border-primary/25 px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-[#A855F7]">
+                                    Admin
+                                </span>
+                            </div>
+                        </header>
+                    )}
                     <div className="flex flex-col lg:flex-row flex-1 min-h-0">
                         {/* Sidebar: hidden on mobile, visible on lg+ */}
                         {!hideNav && (
@@ -222,6 +256,8 @@ export const MainLayout = () => {
                     </div>
 
                     <TanStackRouterDevtools />
+
+                    <AdminDrawer isOpen={adminDrawerOpen} onClose={() => setAdminDrawerOpen(false)} />
 
                 </div>
             </div>

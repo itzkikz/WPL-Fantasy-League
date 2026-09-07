@@ -635,7 +635,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
         <div className={`grid grid-cols-1 gap-4 ${isEditMode ? "" : "lg:grid-cols-2"}`}>
           
           {/* Available Players Pool (hidden in edit mode — squad is read-only) */}
-          {!isEditMode && <div className="bg-[#1b142d]/80 border border-white/10 rounded-xl p-4 h-[550px] flex flex-col shadow-lg">
+          {!isEditMode && <div className="bg-[#1b142d]/80 border border-white/10 rounded-xl p-4 h-[50vh] min-h-[320px] max-h-[550px] flex flex-col shadow-lg">
             <div className="flex-none pb-3 border-b border-white/5 mb-3">
               <h3 className="text-xs font-extrabold text-white/50 uppercase tracking-widest mb-2">Available Players</h3>
               <div className="flex gap-2">
@@ -728,7 +728,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
           </div>}
 
           {/* Selected Squad List */}
-          <div className="bg-[#1b142d]/80 border border-white/10 rounded-xl p-4 h-[550px] flex flex-col shadow-lg">
+          <div className="bg-[#1b142d]/80 border border-white/10 rounded-xl p-4 h-[50vh] min-h-[320px] max-h-[550px] flex flex-col shadow-lg">
             <div className="flex-none pb-3 border-b border-white/5 mb-3 flex items-center justify-between">
               <div>
                 <h3 className="text-xs font-extrabold text-white/50 uppercase tracking-widest">

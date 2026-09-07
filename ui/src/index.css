@@ -288,6 +288,32 @@ body {
   animation: modal-slide-out-bottom 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+@keyframes drawer-slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawer-slide-out-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-drawer-slide-in {
+  animation: drawer-slide-in-left 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-drawer-slide-out {
+  animation: drawer-slide-out-left 0.22s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
 /* Global Scrollbar Styles (Light Theme) */
 ::-webkit-scrollbar {
   width: 0.5px;

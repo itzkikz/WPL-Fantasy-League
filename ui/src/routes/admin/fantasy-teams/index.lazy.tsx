@@ -93,11 +93,11 @@ function AdminFantasyTeams() {
                 <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Team Name</th>
                 <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Managers</th>
                 <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Budget</th>
-                <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Utilisation</th>
-                <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-emerald-400/70">Bonus</th>
-                <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-rose-400/70">Fine</th>
+                <th className="hidden md:table-cell py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Utilisation</th>
+                <th className="hidden md:table-cell py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-emerald-400/70">Bonus</th>
+                <th className="hidden md:table-cell py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-rose-400/70">Fine</th>
                 <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Balance</th>
-                <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Created By</th>
+                <th className="hidden lg:table-cell py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40">Created By</th>
                 <th className="py-2.5 px-3 text-[9px] font-extrabold uppercase tracking-widest text-white/40 text-right">Actions</th>
               </tr>
             </thead>
@@ -134,13 +134,13 @@ function AdminFantasyTeams() {
                         {team.managers?.map((m: any) => m.username).join(', ') || 'None'}
                       </td>
                       <td className="py-2.5 px-3 text-xs text-white/60 font-semibold">{budget}</td>
-                      <td className="py-2.5 px-3 text-xs text-white/60 font-semibold">{utilization}</td>
-                      <td className="py-2.5 px-3 text-xs text-emerald-400 font-semibold">+{bonus}</td>
-                      <td className="py-2.5 px-3 text-xs text-rose-400 font-semibold">-{fine}</td>
+                      <td className="hidden md:table-cell py-2.5 px-3 text-xs text-white/60 font-semibold">{utilization}</td>
+                      <td className="hidden md:table-cell py-2.5 px-3 text-xs text-emerald-400 font-semibold">+{bonus}</td>
+                      <td className="hidden md:table-cell py-2.5 px-3 text-xs text-rose-400 font-semibold">-{fine}</td>
                       <td className={`py-2.5 px-3 text-xs font-extrabold ${balance >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
                         {balance}
                       </td>
-                      <td className="py-2.5 px-3 text-xs text-white/55">{team.createdBy?.username || "Unknown"}</td>
+                      <td className="hidden lg:table-cell py-2.5 px-3 text-xs text-white/55">{team.createdBy?.username || "Unknown"}</td>
                       <td className="py-2.5 px-3 text-right">
                         <Link
                           to="/admin/fantasy-teams/edit/$teamId"

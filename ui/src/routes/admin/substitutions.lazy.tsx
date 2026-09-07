@@ -176,19 +176,19 @@ function AdminSubstitutions() {
             <table className="w-full text-left border-collapse text-xs md:text-sm">
               <thead>
                 <tr className="border-b border-border/50 text-text-muted uppercase tracking-wider font-extrabold text-[10px]">
-                  <th className="py-2.5 px-3">Date</th>
+                  <th className="hidden md:table-cell py-2.5 px-3">Date</th>
                   <th className="py-2.5 px-3">Team</th>
                   <th className="py-2.5 px-3 text-center">GW</th>
                   <th className="py-2.5 px-3 text-center">Type</th>
                   <th className="py-2.5 px-3">Player Out</th>
                   <th className="py-2.5 px-3">Player In</th>
-                  <th className="py-2.5 px-3">By</th>
+                  <th className="hidden lg:table-cell py-2.5 px-3">By</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/20 font-semibold text-white">
                 {substitutions.map((s: SubstitutionHistoryRecord) => (
                   <tr key={s._id} className="hover:bg-white/5 transition-all">
-                    <td className="py-3 px-3 text-white/70 font-mono">
+                    <td className="hidden md:table-cell py-3 px-3 text-white/70 font-mono">
                       {dayjs(s.date).format("DD MMM YYYY, HH:mm")}
                     </td>
                     <td className="py-3 px-3 font-bold text-white/90 truncate max-w-[150px]">
@@ -227,7 +227,7 @@ function AdminSubstitutions() {
                         </div>
                       </div>
                     </td>
-                    <td className="py-3 px-3 text-white/60 text-[10px]">
+                    <td className="hidden lg:table-cell py-3 px-3 text-white/60 text-[10px]">
                       {s.createdBy || "Unknown"}
                     </td>
                   </tr>

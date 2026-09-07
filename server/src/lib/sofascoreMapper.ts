@@ -164,8 +164,12 @@ export function mapSofascoreToPlayerMatchStat(
         penaltyWon: 0,
         penaltyCommitted: 0,
         penaltyScored: 0,
-        penaltyMissed: 0,
-        penaltySaved: 0,
-        offsides: 0,
+        // Raw Sofascore statistics expose these as `penaltyMiss` / `penaltySave`
+        // (the same keys fetchSofascoreData.ts reads), while the stats schema and
+        // points engine use `penaltyMissed` / `penaltySaved`. Mirror the raw
+        // counts so the -2-per-miss and +5-per-GK-save rules actually fire.
+        penaltyMissed: s.penaltyMiss ?? 0,
+        penaltySaved: s.penaltySave ?? 0,
+        offsides: s.totalOffside ?? 0,
     };
 }

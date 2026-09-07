@@ -90,9 +90,9 @@ function AdminTeams() {
               <thead className="bg-black/40 border-b border-white/5">
                 <tr className="text-[9px] font-extrabold uppercase tracking-widest text-white/40">
                   <th className="py-2.5 px-3">Team</th>
-                  <th className="py-2.5 px-3">Code</th>
-                  <th className="py-2.5 px-3">Country</th>
-                  <th className="py-2.5 px-3">Colors</th>
+                  <th className="hidden md:table-cell py-2.5 px-3">Code</th>
+                  <th className="hidden md:table-cell py-2.5 px-3">Country</th>
+                  <th className="hidden md:table-cell py-2.5 px-3">Colors</th>
                   <th className="py-2.5 px-3 text-center">Players</th>
                   <th className="py-2.5 px-3 text-center">Fixtures</th>
                   <th className="py-2.5 px-3 text-right">Status</th>
@@ -123,15 +123,15 @@ function AdminTeams() {
                           </div>
                         </div>
                       </td>
-                      <td className="py-2.5 px-3">
+                      <td className="hidden md:table-cell py-2.5 px-3">
                         <span className="text-[10px] font-black uppercase tracking-wider bg-white/5 border border-white/10 px-1.5 py-0.5 rounded">
                           {team.nameCode || "—"}
                         </span>
                       </td>
-                      <td className="py-2.5 px-3 text-xs text-white/60 font-semibold">
+                      <td className="hidden md:table-cell py-2.5 px-3 text-xs text-white/60 font-semibold">
                         {team.country?.name || team.country?.alpha2 || "—"}
                       </td>
-                      <td className="py-2.5 px-3">
+                      <td className="hidden md:table-cell py-2.5 px-3">
                         <div className="flex items-center gap-1">
                           {team.teamColors?.primary && (
                             <span className="w-4 h-4 rounded border border-white/10" style={{ backgroundColor: team.teamColors.primary }} />
