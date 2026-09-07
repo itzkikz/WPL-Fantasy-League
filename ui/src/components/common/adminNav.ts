@@ -8,6 +8,7 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
   { label: "Fixtures", path: "/admin/fixtures", description: "Match scheduling" },
   { label: "Teams", path: "/admin/teams", description: "Real-world clubs" },
   { label: "Players", path: "/admin/players", description: "Player management" },
+  { label: "Roster Changes", path: "/admin/roster-changes", description: "Squad import logs" },
   { label: "Users", path: "/admin/users", description: "Accounts & roles" },
   { label: "Fantasy Teams", path: "/admin/fantasy-teams", description: "Manager squads" },
   { label: "Transfers", path: "/admin/transfers", description: "Transfer activity" },

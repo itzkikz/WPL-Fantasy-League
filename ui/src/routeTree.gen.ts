@@ -30,6 +30,7 @@ import { Route as StandingsTeamIdRouteImport } from './routes/standings/$teamId'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as AdminTeamsRouteImport } from './routes/admin/teams'
 import { Route as AdminSheetsRouteImport } from './routes/admin/sheets'
+import { Route as AdminRosterChangesRouteImport } from './routes/admin/roster-changes'
 import { Route as AdminPlayersRouteImport } from './routes/admin/players'
 import { Route as AdminNotificationsRouteImport } from './routes/admin/notifications'
 import { Route as AdminLeaguesRouteImport } from './routes/admin/leagues'
@@ -170,6 +171,13 @@ const AdminSheetsRoute = AdminSheetsRouteImport.update({
   path: '/admin/sheets',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/admin/sheets.lazy').then((d) => d.Route))
+const AdminRosterChangesRoute = AdminRosterChangesRouteImport.update({
+  id: '/admin/roster-changes',
+  path: '/admin/roster-changes',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/admin/roster-changes.lazy').then((d) => d.Route),
+)
 const AdminPlayersRoute = AdminPlayersRouteImport.update({
   id: '/admin/players',
   path: '/admin/players',
@@ -263,6 +271,7 @@ export interface FileRoutesByFullPath {
   '/admin/leagues': typeof AdminLeaguesRoute
   '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/players': typeof AdminPlayersRoute
+  '/admin/roster-changes': typeof AdminRosterChangesRoute
   '/admin/sheets': typeof AdminSheetsRoute
   '/admin/teams': typeof AdminTeamsRoute
   '/admin/users': typeof AdminUsersRoute
@@ -297,6 +306,7 @@ export interface FileRoutesByTo {
   '/admin/leagues': typeof AdminLeaguesRoute
   '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/players': typeof AdminPlayersRoute
+  '/admin/roster-changes': typeof AdminRosterChangesRoute
   '/admin/sheets': typeof AdminSheetsRoute
   '/admin/teams': typeof AdminTeamsRoute
   '/admin/users': typeof AdminUsersRoute
@@ -333,6 +343,7 @@ export interface FileRoutesById {
   '/admin/leagues': typeof AdminLeaguesRoute
   '/admin/notifications': typeof AdminNotificationsRoute
   '/admin/players': typeof AdminPlayersRoute
+  '/admin/roster-changes': typeof AdminRosterChangesRoute
   '/admin/sheets': typeof AdminSheetsRoute
   '/admin/teams': typeof AdminTeamsRoute
   '/admin/users': typeof AdminUsersRoute
@@ -370,6 +381,7 @@ export interface FileRouteTypes {
     | '/admin/leagues'
     | '/admin/notifications'
     | '/admin/players'
+    | '/admin/roster-changes'
     | '/admin/sheets'
     | '/admin/teams'
     | '/admin/users'
@@ -404,6 +416,7 @@ export interface FileRouteTypes {
     | '/admin/leagues'
     | '/admin/notifications'
     | '/admin/players'
+    | '/admin/roster-changes'
     | '/admin/sheets'
     | '/admin/teams'
     | '/admin/users'
@@ -439,6 +452,7 @@ export interface FileRouteTypes {
     | '/admin/leagues'
     | '/admin/notifications'
     | '/admin/players'
+    | '/admin/roster-changes'
     | '/admin/sheets'
     | '/admin/teams'
     | '/admin/users'
@@ -475,6 +489,7 @@ export interface RootRouteChildren {
   AdminLeaguesRoute: typeof AdminLeaguesRoute
   AdminNotificationsRoute: typeof AdminNotificationsRoute
   AdminPlayersRoute: typeof AdminPlayersRoute
+  AdminRosterChangesRoute: typeof AdminRosterChangesRoute
   AdminSheetsRoute: typeof AdminSheetsRoute
   AdminTeamsRoute: typeof AdminTeamsRoute
   AdminUsersRoute: typeof AdminUsersRoute
@@ -643,6 +658,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSheetsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/roster-changes': {
+      id: '/admin/roster-changes'
+      path: '/admin/roster-changes'
+      fullPath: '/admin/roster-changes'
+      preLoaderRoute: typeof AdminRosterChangesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/players': {
       id: '/admin/players'
       path: '/admin/players'
@@ -770,6 +792,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminLeaguesRoute: AdminLeaguesRoute,
   AdminNotificationsRoute: AdminNotificationsRoute,
   AdminPlayersRoute: AdminPlayersRoute,
+  AdminRosterChangesRoute: AdminRosterChangesRoute,
   AdminSheetsRoute: AdminSheetsRoute,
   AdminTeamsRoute: AdminTeamsRoute,
   AdminUsersRoute: AdminUsersRoute,

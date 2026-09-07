@@ -8,19 +8,7 @@ import { Subscriber } from "../models/Subscriber";
 import { Notification } from "../models/Notification";
 import { User } from "../models/User";
 import { FantasyTeam } from "../models/FantasyTeam";
-const webpush = require("web-push");
-// Configure VAPID
-const vapidPublic = process.env.VAPID_PUBLIC_KEY;
-const vapidPrivate = process.env.VAPID_PRIVATE_KEY;
-const vapidSubject = process.env.VAPID_SUBJECT || "mailto:";
-if (vapidPublic && vapidPrivate) {
-    webpush.setVapidDetails(vapidSubject, vapidPublic, vapidPrivate);
-} else {
-    console.warn(
-        "VAPID public/private keys are not set; push notifications will not be available."
-    );
-}
-
+import { sendNotification } from "../services/notify";
 
 const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID;
 type Cell = string | number | boolean | null;
@@ -74,58 +62,15 @@ export const subscribe = async (req: Request, res: Response, next: NextFunction)
 
 export const send = async (req: Request, res: Response, next: NextFunction) => {
     const { payload, targetType = 'all', targetId } = req.body;
-    
-    try {
-        let query = {};
-        let recipientUserIds: string[] = [];
-        let targetName = 'All Users';
-        
-        if (targetType === 'user' && targetId) {
-            query = { userId: targetId };
-            recipientUserIds = [targetId];
-            const targetUser = await User.findById(targetId);
-            if (targetUser) {
-                targetName = (targetUser as any).displayName || targetUser.username;
-            }
-        } else if (targetType === 'team' && targetId) {
-            const team = await FantasyTeam.findById(targetId);
-            if (team && team.managers && team.managers.length > 0) {
-                query = { userId: { $in: team.managers } };
-                recipientUserIds = team.managers.map((m: any) => m.toString());
-                targetName = team.name;
-            } else {
-                return res.status(404).json({ data: { message: "Team not found or has no managers" } });
-            }
-        }
 
-        await Notification.create({
+    try {
+        await sendNotification({
             title: payload?.title || 'Notification',
             message: payload?.body || payload?.message || JSON.stringify(payload),
-            time: Date.now(),
             targetType,
-            targetId: targetId || undefined,
-            targetName,
-            recipientUserIds,
-            readBy: [],
-            deletedBy: []
-        });
-
-        const subscribers = await Subscriber.find(query);
-
-        subscribers.forEach((sub) => {
-            const subscription = { endpoint: sub.endpoint, expirationTime: sub.expirationTime, keys: sub.keys };
-            webpush.sendNotification(subscription, JSON.stringify(payload)).catch(async (err: Error) => {
-                console.error("Error sending notification, removing subscription", err);
-                await Subscriber.deleteOne({ endpoint: sub.endpoint });
-                // Clear the mirror flag if the user has no remaining subscriptions
-                const remaining = await Subscriber.countDocuments({ userId: sub.userId });
-                if (remaining === 0) {
-                    await User.updateOne(
-                        { _id: sub.userId },
-                        { $set: { 'device.pushSubscribed': false } }
-                    );
-                }
-            });
+            targetId,
+            kind: payload?.kind,
+            url: payload?.url,
         });
         res.status(200).json({ message: "Notifications sent.." });
     } catch (e) {
@@ -169,6 +114,8 @@ export const notifications = async (req: Request, res: Response, next: NextFunct
                 targetType: notif.targetType || 'all',
                 targetId: notif.targetId,
                 targetName: notif.targetName,
+                kind: notif.kind || 'general',
+                url: notif.url,
                 read: isRead,
             };
         });

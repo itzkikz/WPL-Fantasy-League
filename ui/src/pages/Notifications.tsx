@@ -119,6 +119,9 @@ export default function Notifications() {
         markAsReadMutation.mutate(notifId);
       }
     }
+    if (notif.url) {
+      navigate({ to: notif.url });
+    }
   };
 
   const handleDismiss = (notif: NotificationType) => {
@@ -270,6 +273,7 @@ export default function Notifications() {
                   title={notif.title}
                   message={notif.message}
                   time={notif.time}
+                  kind={notif.kind}
                   unread={!notif.read}
                   onOpen={() => handleOpen(notif)}
                   onDismiss={() => handleDismiss(notif)}
