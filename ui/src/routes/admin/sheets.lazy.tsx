@@ -62,8 +62,9 @@ function SheetCard({ sheet }: { sheet: (typeof SHEETS)[number] }) {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ADMIN_FIXTURES, `sheets-${sheet.key}`] });
       alert(res?.data?.message || "Pushed to sheet successfully!");
     },
-    onError: () => {
-      alert("Failed to push to sheet. Check server logs.");
+    onError: (err: any) => {
+      const msg = err?.response?.data?.error || err?.response?.data?.message || err?.message;
+      alert(msg ? `Failed to push to sheet: ${msg}` : "Failed to push to sheet. Check server logs.");
     },
   });
 
