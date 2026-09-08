@@ -387,6 +387,13 @@ function H2HPage() {
 
   const isSpectator = !managerDetails;
 
+  const sortedStandings = useMemo(() => {
+    if (!standingsData?.standings) return [];
+    return [...standingsData.standings].sort(
+      (a: H2HStanding, b: H2HStanding) => b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga)
+    );
+  }, [standingsData]);
+
   const uniqueGameweeks = useMemo(() => {
     return [...new Set(fixturesData?.fixtures?.map((f: H2HFixture) => f.gameweek) || [])].sort((a, b) => a - b);
   }, [fixturesData]);
@@ -559,8 +566,8 @@ function H2HPage() {
                       className="h-14 bg-surface border border-border rounded-2xl animate-pulse"
                     />
                   ))
-                ) : standingsData?.standings && standingsData.standings.length > 0 ? (
-                  standingsData.standings.map((team: H2HStanding, idx: number) => {
+                ) : standingsData?.standings && sortedStandings.length > 0 ? (
+                  sortedStandings.map((team: H2HStanding, idx: number) => {
                     const isMe = isMyTeam(team, managerDetails);
                     const crest = getTeamIcon(team.teamName, idx);
                     const diff = team.gf - team.ga;
