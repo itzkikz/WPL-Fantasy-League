@@ -62,5 +62,7 @@ router.get('/sheets/player-stats', SheetController.getPlayerStatsStatus);
 router.post('/sheets/player-stats', SheetController.updatePlayerStatsSheet);
 router.get('/sheets/fixtures', SheetController.getCurrentFixturesStatus);
 router.post('/sheets/fixtures', SheetController.updateCurrentFixturesSheet);
+router.get('/sheets/players', SheetController.getPlayersStatus);
+router.post('/sheets/players', SheetController.updatePlayersSheet);
 
 export default router;

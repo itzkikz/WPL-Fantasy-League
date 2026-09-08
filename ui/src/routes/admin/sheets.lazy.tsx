@@ -33,6 +33,14 @@ const SHEETS = [
     tab: "Fixtures",
     endpoint: API_ENDPOINTS.ADMIN.SHEETS_FIXTURES,
   },
+  {
+    key: "players",
+    title: "All Players Export",
+    description:
+      "One row per player in the Players collection: id, name, age, jersey number, position, proposed market value, country, team and league.",
+    tab: "Players",
+    endpoint: API_ENDPOINTS.ADMIN.SHEETS_PLAYERS,
+  },
 ];
 
 function SheetCard({ sheet }: { sheet: (typeof SHEETS)[number] }) {
@@ -54,8 +62,9 @@ function SheetCard({ sheet }: { sheet: (typeof SHEETS)[number] }) {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ADMIN_FIXTURES, `sheets-${sheet.key}`] });
       alert(res?.data?.message || "Pushed to sheet successfully!");
     },
-    onError: () => {
-      alert("Failed to push to sheet. Check server logs.");
+    onError: (err: any) => {
+      const msg = err?.response?.data?.error || err?.response?.data?.message || err?.message;
+      alert(msg ? `Failed to push to sheet: ${msg}` : "Failed to push to sheet. Check server logs.");
     },
   });
 

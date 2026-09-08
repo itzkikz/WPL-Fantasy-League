@@ -86,6 +86,10 @@ function JsonImportSection({
         onChange={(e) => onChange(e.target.value)}
         rows={5}
         placeholder={placeholder}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
         className="w-full px-2.5 py-2 bg-[#150f24] border border-white/10 rounded-lg text-[10px] font-mono text-white/90 placeholder-white/30 focus:outline-none focus:border-indigo-500 transition-all resize-y"
       />
       <button
