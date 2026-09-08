@@ -10,6 +10,54 @@ import { buildFantasyTeamGamewiseRows, fantasyGamewiseRowsToValues, FANTASY_GAME
 import { buildPlayerStatsRows, PLAYER_STATS_SHEET_HEADERS } from '../lib/playerStatsSheet';
 import { buildCurrentFixturesRows, FIXTURES_SHEET_HEADERS } from '../lib/fixturesSheet';
 
+export const PLAYERS_SHEET_HEADERS = [
+    'ID', 'Name', 'Age', 'Jersey Number', 'Position', 'Proposed Market Value', 'Country', 'Team ID', 'Team Name', 'League Name'
+];
+
+const buildPlayersSheetRows = async (): Promise<any[][]> => {
+    // Fetch all players
+    const players = await Player.find({});
+
+    // Fetch all teams
+    const teams = (await Team.find({}).lean()) as any[];
+    // FIX: Map team by t.team.id because id is nested
+    const teamMap = new Map(teams.map(t => [t.team?.id || t.id, t]));
+
+    // Fetch all leagues and build a map of Team Object ID to League Name
+    const leagues = await mongoose.model('League').find({}).lean() as any[];
+    const teamLeagueMap = new Map<string, string>();
+    for (const league of leagues) {
+        if (league.teams && Array.isArray(league.teams)) {
+            for (const teamId of league.teams) {
+                teamLeagueMap.set(teamId.toString(), league.name);
+            }
+        }
+    }
+
+    return players.map(p => {
+        const teamData = teamMap.get(p.teamId);
+        const teamName = teamData?.name || teamData?.team?.name || 'Unknown';
+
+        // Lookup league by Team's ObjectId
+        const leagueName = teamData && teamLeagueMap.has(teamData._id.toString())
+            ? teamLeagueMap.get(teamData._id.toString())
+            : 'Unknown';
+
+        return [
+            p.id || '',
+            p.name || '',
+            p.age ?? '',
+            p.jerseyNumber || p.shirtNumber || '',
+            p.position || '',
+            p.proposedMarketValue ?? '',
+            p.country?.name || '',
+            p.teamId || '',
+            teamName,
+            leagueName
+        ];
+    });
+};
+
 export class SheetController {
     static async updatePlayersLatest(req: Request, res: Response) {
         try {
@@ -25,54 +73,9 @@ export class SheetController {
                 return res.status(500).json({ message: 'API_DATA_SHEET_ID is not defined in environment.' });
             }
 
-            // Fetch all players
-            const players = await Player.find({});
+            const rows = await buildPlayersSheetRows();
 
-            // Fetch all teams
-            const teams = (await Team.find({}).lean()) as any[];
-            // FIX: Map team by t.team.id because id is nested
-            const teamMap = new Map(teams.map(t => [t.team?.id || t.id, t]));
-
-            // Fetch all leagues and build a map of Team Object ID to League Name
-            const leagues = await mongoose.model('League').find({}).lean() as any[];
-            const teamLeagueMap = new Map<string, string>();
-            for (const league of leagues) {
-                if (league.teams && Array.isArray(league.teams)) {
-                    for (const teamId of league.teams) {
-                        teamLeagueMap.set(teamId.toString(), league.name);
-                    }
-                }
-            }
-
-            // Format data for sheet based on Player.ts schema + Team/League lookups
-            const headers = [
-                'ID', 'Name', 'Age', 'Jersey Number', 'Position', 'Proposed Market Value', 'Country', 'Team ID', 'Team Name', 'League Name'
-            ];
-
-            const rows = players.map(p => {
-                const teamData = teamMap.get(p.teamId);
-                const teamName = teamData?.name || teamData?.team?.name || 'Unknown';
-
-                // Lookup league by Team's ObjectId
-                const leagueName = teamData && teamLeagueMap.has(teamData._id.toString())
-                    ? teamLeagueMap.get(teamData._id.toString())
-                    : 'Unknown';
-
-                return [
-                    p.id || '',
-                    p.name || '',
-                    p.age ?? '',
-                    p.jerseyNumber || p.shirtNumber || '',
-                    p.position || '',
-                    p.proposedMarketValue ?? '',
-                    p.country?.name || '',
-                    p.teamId || '',
-                    teamName,
-                    leagueName
-                ];
-            });
-
-            const sheetData = [headers, ...rows];
+            const sheetData = [PLAYERS_SHEET_HEADERS, ...rows];
 
             // Clear the existing sheet data first to prevent leftover rows
             await sheets.spreadsheets.values.clear({
@@ -92,7 +95,7 @@ export class SheetController {
 
             res.status(200).json({
                 message: 'Players sheet updated successfully',
-                count: players.length
+                count: rows.length
             });
 
         } catch (error) {
@@ -471,6 +474,81 @@ export class SheetController {
             });
         } catch (error) {
             console.error('Error updating player stats sheet:', error);
+            res.status(500).json({ message: 'Update failed', error: (error as Error).message });
+        }
+    }
+
+    static async getPlayersStatus(req: Request, res: Response) {
+        try {
+            if (req.user && req.user.role !== 'admin') {
+                return res.status(403).json({ error: 'Access denied. Admins only.' });
+            }
+
+            const config = await ApiConfig.findOne({ key: 'players_push' }).lean();
+            res.status(200).json({
+                success: true,
+                lastPushedAt: config?.lastUpdated ?? null,
+            });
+        } catch (error) {
+            console.error('Error reading players push status:', error);
+            res.status(500).json({ message: 'Build failed', error: (error as Error).message });
+        }
+    }
+
+    static async updatePlayersSheet(req: Request, res: Response) {
+        try {
+            if (req.user && req.user.role !== 'admin') {
+                return res.status(403).json({ error: 'Access denied. Admins only.' });
+            }
+
+            const sheets: any = getSheets();
+            if (!sheets) {
+                return res.status(500).json({ message: 'Google Sheets API not initialized.' });
+            }
+
+            const spreadsheetId = process.env.API_DATA_SHEET_ID;
+            if (!spreadsheetId) {
+                return res.status(500).json({ message: 'API_DATA_SHEET_ID is not defined in environment.' });
+            }
+
+            const sheetTitle = 'Players';
+
+            const rows = await buildPlayersSheetRows();
+
+            await SheetController.ensureSheetTab(sheets, spreadsheetId, sheetTitle);
+
+            const sheetData = [PLAYERS_SHEET_HEADERS, ...rows];
+
+            // Clear the existing sheet data first
+            await sheets.spreadsheets.values.clear({
+                spreadsheetId,
+                range: `'${sheetTitle}'!A:J`,
+            });
+
+            await sheets.spreadsheets.values.update({
+                spreadsheetId,
+                range: `'${sheetTitle}'!A1`,
+                valueInputOption: 'USER_ENTERED',
+                requestBody: {
+                    values: sheetData,
+                },
+            });
+
+            await ApiConfig.findOneAndUpdate(
+                { key: 'players_push' },
+                { $set: { key: 'players_push', lastUpdated: new Date(), lastUpdatedString: new Date().toISOString() } },
+                { upsert: true, new: true }
+            );
+
+            res.status(200).json({
+                success: true,
+                message: `Players sheet updated successfully (${rows.length} rows)`,
+                sheet: sheetTitle,
+                count: rows.length,
+                lastPushedAt: new Date().toISOString(),
+            });
+        } catch (error) {
+            console.error('Error updating players sheet:', error);
             res.status(500).json({ message: 'Update failed', error: (error as Error).message });
         }
     }

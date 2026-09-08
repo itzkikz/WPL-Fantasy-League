@@ -33,6 +33,14 @@ const SHEETS = [
     tab: "Fixtures",
     endpoint: API_ENDPOINTS.ADMIN.SHEETS_FIXTURES,
   },
+  {
+    key: "players",
+    title: "All Players Export",
+    description:
+      "One row per player in the Players collection: id, name, age, jersey number, position, proposed market value, country, team and league.",
+    tab: "Players",
+    endpoint: API_ENDPOINTS.ADMIN.SHEETS_PLAYERS,
+  },
 ];
 
 function SheetCard({ sheet }: { sheet: (typeof SHEETS)[number] }) {
