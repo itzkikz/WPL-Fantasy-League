@@ -19,6 +19,7 @@ import { PlayerStats } from '../models/PlayerStats';
 import { H2HLeague } from '../models/H2HLeague';
 import { H2HFixture } from '../models/H2HFixture';
 import { Fact } from '../models/Fact';
+import { RosterChange } from '../models/RosterChange';
 import { fetchSofascoreJSON } from '../utils/sofascoreScraper';
 import { calculatePlayerPoints } from '../lib/points';
 import { mapSofascoreToPlayerMatchStat } from '../lib/sofascoreMapper';
@@ -26,6 +27,7 @@ import { pickFields, mapLineups } from '../lib/sofascoreFixtures';
 import { runAutoSubs, resolvePosition } from '../lib/autoSub';
 import { getLeagueAllGWPoints } from './h2h';
 import { getGameweekMinutes } from './players';
+import { sendNotification } from '../services/notify';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -367,6 +369,14 @@ export const getMatchDetails = async (req: Request, res: Response) => {
             { fixtureId },
             { $set: { addedtofantasy: true } }
         );
+
+        sendNotification({
+            title: `Gameweek ${gameweekId} results are in!`,
+            message: `Updated scores & points for ${playersProcessed} players after adding fixture ${fixtureId} to fantasy.`,
+            targetType: 'all',
+            kind: 'points',
+            url: '/standings',
+        }).catch((err) => console.error('Notification send failed:', err));
 
         res.status(200).json({
             success: true,
@@ -1165,6 +1175,14 @@ export const completeGameweek = async (req: Request, res: Response) => {
             }
         }
 
+        sendNotification({
+            title: `Gameweek ${gameweek.number} is complete!`,
+            message: 'Check your results, standings and auto-substitutions.',
+            targetType: 'all',
+            kind: 'points',
+            url: '/standings',
+        }).catch((err) => console.error('Notification send failed:', err));
+
         res.status(200).json({ success: true, message: 'Gameweek completed successfully.' });
 
     } catch (error: any) {
@@ -1274,7 +1292,23 @@ export const togglePickTeam = async (req: Request, res: Response) => {
         }
         await apiConfig.save();
 
-        res.status(200).json({ success: true, data: { enabled: apiConfig.lastUpdatedString === 'true', deadlineDate: apiConfig.deadlineDate } });
+        const pickEnabled = apiConfig.lastUpdatedString === 'true';
+        const deadlineStr = apiConfig.deadlineDate
+            ? apiConfig.deadlineDate.toLocaleString()
+            : undefined;
+        sendNotification({
+            title: pickEnabled ? 'Team selection is now open!' : 'Team selection is now closed',
+            message: pickEnabled && deadlineStr
+                ? `Pick your squad before the deadline: ${deadlineStr}.`
+                : pickEnabled
+                    ? 'Pick your squad now!'
+                    : 'Team selection window has closed.',
+            targetType: 'all',
+            kind: 'gameweek',
+            url: '/my-team',
+        }).catch((err) => console.error('Notification send failed:', err));
+
+        res.status(200).json({ success: true, data: { enabled: pickEnabled, deadlineDate: apiConfig.deadlineDate } });
     } catch (error: any) {
         console.error('Error toggling pick team:', error);
         res.status(500).json({ error: 'Failed to toggle pick team' });
@@ -1855,6 +1889,200 @@ export const deleteAdminFact = async (req: Request, res: Response) => {
         res.json({ message: 'Fact deleted successfully' });
     } catch (error: any) {
         console.error('Error deleting fact:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// --- TEAM PLAYER IMPORT CONTROLLERS ---
+
+type ImportPlayerBrief = {
+    id: number;
+    name: string;
+    position?: string;
+};
+
+/**
+ * Normalizes a Sofascore team players payload into brief player records.
+ * Accepts either `{ players: [{ player: {...} }, ...] }` or `{ players: [{ id, name, ... }] }`.
+ */
+const normalizeSofascorePlayers = (body: any): ImportPlayerBrief[] => {
+    const raw = Array.isArray(body) ? body : body?.players;
+    if (!Array.isArray(raw)) return [];
+
+    const out: ImportPlayerBrief[] = [];
+    for (const item of raw) {
+        const p = item?.player && typeof item.player === 'object' ? item.player : item;
+        if (!p || typeof p.id !== 'number') continue;
+        out.push({ id: p.id, name: p.name || `Player #${p.id}`, position: p.position || '' });
+    }
+    return out;
+};
+
+export const importPlayersPreview = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const teamId = parseInt(req.params.id);
+        if (isNaN(teamId)) {
+            return res.status(400).json({ error: 'Invalid team ID' });
+        }
+
+        const team = await Team.findOne({ id: teamId }).lean();
+        if (!team) {
+            return res.status(404).json({ error: 'Team not found' });
+        }
+
+        const incoming = normalizeSofascorePlayers(req.body);
+        if (incoming.length === 0) {
+            return res.status(400).json({ error: 'Body must contain a non-empty "players" array (Sofascore team players payload).' });
+        }
+
+        const existing = await Player.find({ teamId }).select('id name position').lean();
+
+        const existingById = new Map(existing.map((p: any) => [p.id, p]));
+        const incomingById = new Map(incoming.map((p) => [p.id, p]));
+
+        const added = incoming
+            .filter((p) => !existingById.has(p.id))
+            .map((p) => ({ playerId: p.id, name: p.name, position: p.position || existingById.get(p.id)?.position || '' }));
+
+        const removed = existing
+            .filter((p: any) => !incomingById.has(p.id))
+            .map((p: any) => ({ playerId: p.id, name: p.name, position: p.position || '' }));
+
+        const unchanged = incoming.filter((p) => existingById.has(p.id)).length;
+
+        res.status(200).json({
+            data: { teamId, teamName: team.name, added, removed, unchanged, totalExisting: existing.length, totalIncoming: incoming.length },
+        });
+    } catch (error: any) {
+        console.error('Error previewing player import:', error);
+        res.status(500).json({ error: error.message || 'Failed to preview player import' });
+    }
+};
+
+export const importPlayersApply = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const teamId = parseInt(req.params.id);
+        if (isNaN(teamId)) {
+            return res.status(400).json({ error: 'Invalid team ID' });
+        }
+
+        const team = await Team.findOne({ id: teamId }).lean();
+        if (!team) {
+            return res.status(404).json({ error: 'Team not found' });
+        }
+        const teamName = (team as any).name || `Team ${teamId}`;
+
+        const adminUser = await User.findOne({ username: req.user.userId });
+        if (!adminUser) {
+            return res.status(404).json({ error: 'Admin user not found.' });
+        }
+
+        const normalizeBodyPlayers = (list: any): ImportPlayerBrief[] => {
+            if (!Array.isArray(list)) return [];
+            return list
+                .map((p) => ({ id: Number(p?.id ?? p?.playerId), name: p?.name || `Player #${p?.id ?? p?.playerId}`, position: p?.position || '' }))
+                .filter((p) => !isNaN(p.id));
+        };
+
+        const added = normalizeBodyPlayers(req.body?.added);
+        const removed = normalizeBodyPlayers(req.body?.removed);
+
+        if (added.length === 0 && removed.length === 0) {
+            return res.status(400).json({ error: 'No changes to apply. Nothing added or removed.' });
+        }
+
+        // Upsert incoming players (set teamId; new players created with defaults)
+        for (const p of added) {
+            const playerDoc: any = {
+                id: p.id,
+                name: p.name,
+                teamId,
+                position: p.position || undefined,
+            };
+            await Player.findOneAndUpdate(
+                { id: p.id },
+                {
+                    $set: { ...playerDoc, position: p.position || '' },
+                    $setOnInsert: {
+                        slug: '',
+                        shortName: '',
+                        userCount: 0,
+                        deceased: false,
+                        gender: '',
+                        sofascoreId: '',
+                        underage: false,
+                        dateOfBirthTimestamp: undefined,
+                        country: undefined,
+                        auctionPrice: 0,
+                        photo: '',
+                    },
+                },
+                { upsert: true, setDefaultsOnInsert: true }
+            );
+        }
+
+        // Clear teamId on removed players (keep the Player document)
+        for (const p of removed) {
+            await Player.updateOne({ id: p.id, teamId }, { $unset: { teamId: '' } });
+        }
+
+        // Log the roster change
+        const totalAfter = await Player.countDocuments({ teamId });
+        await RosterChange.create({
+            teamId,
+            teamName,
+            added: added.map((p) => ({ playerId: p.id, name: p.name, position: p.position || '' })),
+            removed: removed.map((p) => ({ playerId: p.id, name: p.name, position: p.position || '' })),
+            totalBefore: totalAfter - added.length + removed.length,
+            totalAfter,
+            createdBy: adminUser._id,
+        });
+
+        res.status(200).json({
+            data: { teamId, teamName, added: added.length, removed: removed.length, totalAfter },
+        });
+    } catch (error: any) {
+        console.error('Error applying player import:', error);
+        res.status(500).json({ error: error.message || 'Failed to apply player import' });
+    }
+};
+
+export const getRosterChanges = async (req: Request, res: Response) => {
+    try {
+        if (req.user && req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied. Admins only.' });
+        }
+
+        const filter: any = {};
+        if (req.query.teamId) {
+            const teamId = parseInt(req.query.teamId as string);
+            if (!isNaN(teamId)) filter.teamId = teamId;
+        }
+
+        const page = Math.max(parseInt(req.query.page as string) || 1, 1);
+        const limit = Math.min(Math.max(parseInt(req.query.limit as string) || 50, 1), 100);
+        const skip = (page - 1) * limit;
+
+        const [changes, total] = await Promise.all([
+            RosterChange.find(filter)
+                .sort({ date: -1 })
+                .skip(skip)
+                .limit(limit)
+                .populate('createdBy', 'username'),
+            RosterChange.countDocuments(filter),
+        ]);
+
+        res.json({ data: changes, total, page, limit });
+    } catch (error: any) {
+        console.error('Error fetching roster changes:', error);
         res.status(500).json({ error: error.message });
     }
 };

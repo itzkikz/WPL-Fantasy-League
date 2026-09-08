@@ -5,6 +5,7 @@ import UserSettings from "../icons/UserSettings";
 import Graph from "../icons/Graph";
 import Notification from "../icons/Notification";
 import { Sparkles } from "lucide-react";
+import { ADMIN_NAV_ITEMS } from "./adminNav";
 
 const MyTeamIcon = ({ isActive }: { isActive: boolean }) => (
   <svg 
@@ -79,22 +80,6 @@ const SideNavbar = () => {
     );
   };
 
-  const adminItems = [
-    { label: "Fixtures", path: "/admin/fixtures" },
-    { label: "Teams", path: "/admin/teams" },
-    { label: "Players", path: "/admin/players" },
-    { label: "Users", path: "/admin/users" },
-    { label: "Fantasy Teams", path: "/admin/fantasy-teams" },
-    { label: "Transfers", path: "/admin/transfers" },
-    { label: "Substitutions", path: "/admin/substitutions" },
-    { label: "Leagues", path: "/admin/leagues" },
-    { label: "H2H Leagues", path: "/admin/h2h-leagues" },
-    { label: "Notifications", path: "/admin/notifications" },
-    { label: "Facts & News", path: "/admin/facts" },
-    { label: "Gameweeks", path: "/admin/gameweeks" },
-    { label: "Sheets", path: "/admin/sheets" },
-  ];
-
   if (
     matchRoute({ to: "/login" }) ||
     matchRoute({ to: "/maintenance" }) ||
@@ -132,19 +117,19 @@ const SideNavbar = () => {
           </div>
 
           {/* Admin Items */}
-          {adminItems.map((adminItem) => {
-            const isLinkActive = isPathActive(adminItem.path);
+          {ADMIN_NAV_ITEMS.map((item) => {
+            const isLinkActive = isPathActive(item.path);
             return (
               <Link
-                key={adminItem.label}
-                to={adminItem.path}
+                key={item.label}
+                to={item.path}
                 className={`flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all ${
                   isLinkActive
                     ? "bg-primary/15 text-[#A855F7] font-semibold border border-primary/25 shadow-sm"
                     : "text-gray-600 dark:text-[#8E89A6] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 border border-transparent"
                 }`}
               >
-                <span>{adminItem.label}</span>
+                <span>{item.label}</span>
               </Link>
             );
           })}

@@ -18,5 +18,7 @@ export interface Notifications {
   targetType?: 'all' | 'user' | 'team';
   targetId?: string;
   targetName?: string;
+  kind?: 'gameweek' | 'points' | 'transfer' | 'news' | 'general';
+  url?: string;
   read?: boolean;
 }

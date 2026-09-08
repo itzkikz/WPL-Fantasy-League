@@ -250,7 +250,7 @@ export const getH2HStandings = async (req: Request, res: Response) => {
             }
         }
 
-        const standingsList = Object.values(standings).sort((a, b) => b.pts - a.pts || b.gf - a.gf);
+        const standingsList = Object.values(standings).sort((a, b) => b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga));
 
         res.json({ data: { league, standings: standingsList } });
     } catch (error: any) {

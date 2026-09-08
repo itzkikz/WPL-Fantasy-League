@@ -49,6 +49,8 @@ export const API_ENDPOINTS = {
     PICK_TEAM_STATUS: '/admin/settings/pick-team',
     USERS: '/admin/users',
     TEAMS: '/admin/teams',
+    IMPORT_TEAM_PLAYERS_PREVIEW: (id: string | number) => `/admin/teams/${id}/import-players/preview`,
+    IMPORT_TEAM_PLAYERS_APPLY: (id: string | number) => `/admin/teams/${id}/import-players/apply`,
     ADMIN_PLAYERS: '/admin/players',
     FANTASY_TEAMS: '/admin/fantasy-teams',
     LEAGUES: '/admin/leagues',
@@ -62,6 +64,7 @@ export const API_ENDPOINTS = {
     TRANSFER: (id: string) => `/admin/transfers/${id}`,
     FACTS: '/admin/facts',
     FACT: (id: string) => `/admin/facts/${id}`,
+    ROSTER_CHANGES: '/admin/roster-changes',
   },
 } as const
 
@@ -81,4 +84,5 @@ export const QUERY_KEYS = {
   ADMIN_LEAGUES: 'admin-leagues',
   ADMIN_TEAMS: 'admin-teams',
   ADMIN_PLAYERS: 'admin-players',
+  ADMIN_ROSTER_CHANGES: 'admin-roster-changes',
 } as const

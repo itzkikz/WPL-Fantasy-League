@@ -231,7 +231,7 @@ function AdminUsers() {
                   <th className="py-2.5 px-3">Fantasy Team</th>
                   <th className="py-2.5 px-3">App</th>
                   <th className="py-2.5 px-3">Push</th>
-                  <th className="py-2.5 px-3">Device</th>
+                  <th className="hidden md:table-cell py-2.5 px-3">Device</th>
                   <th className="py-2.5 px-3 text-right">Last seen</th>
                 </tr>
               </thead>
@@ -309,7 +309,7 @@ function AdminUsers() {
                             </span>
                           )}
                         </td>
-                        <td className="py-2.5 px-3">
+                        <td className="hidden md:table-cell py-2.5 px-3">
                           {device?.os || device?.browser ? (
                             <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-white/70 whitespace-nowrap">
                               {DeviceIcon && <DeviceIcon className="w-3.5 h-3.5 text-white/40 shrink-0" />}

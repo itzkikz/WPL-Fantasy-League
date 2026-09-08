@@ -3,7 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import apiClient from "../../api/client";
 import { API_ENDPOINTS, QUERY_KEYS } from "../../api/endpoints";
-import { Loader2, Shield } from "lucide-react";
+import { Loader2, Shield, Users } from "lucide-react";
+import PlayerImportModal from "./PlayerImportModal";
 
 export const Route = createLazyFileRoute("/admin/teams")({
   component: AdminTeams,
@@ -25,6 +26,7 @@ interface AdminTeam {
 
 function AdminTeams() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTeam, setSelectedTeam] = useState<AdminTeam | null>(null);
 
   const { data, isLoading } = useQuery({
     queryKey: [QUERY_KEYS.ADMIN_TEAMS],
@@ -90,12 +92,12 @@ function AdminTeams() {
               <thead className="bg-black/40 border-b border-white/5">
                 <tr className="text-[9px] font-extrabold uppercase tracking-widest text-white/40">
                   <th className="py-2.5 px-3">Team</th>
-                  <th className="py-2.5 px-3">Code</th>
-                  <th className="py-2.5 px-3">Country</th>
-                  <th className="py-2.5 px-3">Colors</th>
+                  <th className="hidden md:table-cell py-2.5 px-3">Code</th>
+                  <th className="hidden md:table-cell py-2.5 px-3">Country</th>
+                  <th className="hidden md:table-cell py-2.5 px-3">Colors</th>
                   <th className="py-2.5 px-3 text-center">Players</th>
                   <th className="py-2.5 px-3 text-center">Fixtures</th>
-                  <th className="py-2.5 px-3 text-right">Status</th>
+                  <th className="py-2.5 px-3 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
@@ -123,15 +125,15 @@ function AdminTeams() {
                           </div>
                         </div>
                       </td>
-                      <td className="py-2.5 px-3">
+                      <td className="hidden md:table-cell py-2.5 px-3">
                         <span className="text-[10px] font-black uppercase tracking-wider bg-white/5 border border-white/10 px-1.5 py-0.5 rounded">
                           {team.nameCode || "—"}
                         </span>
                       </td>
-                      <td className="py-2.5 px-3 text-xs text-white/60 font-semibold">
+                      <td className="hidden md:table-cell py-2.5 px-3 text-xs text-white/60 font-semibold">
                         {team.country?.name || team.country?.alpha2 || "—"}
                       </td>
-                      <td className="py-2.5 px-3">
+                      <td className="hidden md:table-cell py-2.5 px-3">
                         <div className="flex items-center gap-1">
                           {team.teamColors?.primary && (
                             <span className="w-4 h-4 rounded border border-white/10" style={{ backgroundColor: team.teamColors.primary }} />
@@ -144,18 +146,28 @@ function AdminTeams() {
                           )}
                         </div>
                       </td>
-                      <td className="py-2.5 px-3 text-center text-xs text-white/60 font-semibold">{team.playerCount}</td>
+                      <td className="py-2.5 px-3 text-center">
+                        <span className="text-xs text-white/60 font-semibold">{team.playerCount}</span>
+                      </td>
                       <td className="py-2.5 px-3 text-center text-xs text-white/60 font-semibold">{team.fixtureCount}</td>
-                      <td className="py-2.5 px-3 text-right">
-                        {team.disabled ? (
-                          <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-wider text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2 py-1 rounded">
-                            <Shield className="w-2.5 h-2.5" /> Disabled
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded">
-                            <Shield className="w-2.5 h-2.5" /> Active
-                          </span>
-                        )}
+                      <td className="py-2.5 px-3 text-right whitespace-nowrap">
+                        <div className="flex items-center justify-end gap-2">
+                          <button
+                            onClick={() => setSelectedTeam(team)}
+                            className="inline-flex items-center gap-1 text-[9px] font-extrabold uppercase tracking-wider px-2 py-1 rounded bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 transition-all active:scale-95 cursor-pointer"
+                          >
+                            <Users className="w-2.5 h-2.5" /> Import Players
+                          </button>
+                          {team.disabled ? (
+                            <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-wider text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2 py-1 rounded">
+                              <Shield className="w-2.5 h-2.5" /> Disabled
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded">
+                              <Shield className="w-2.5 h-2.5" /> Active
+                            </span>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ))
@@ -164,6 +176,9 @@ function AdminTeams() {
             </table>
           </div>
         </div>
+      )}
+      {selectedTeam && (
+        <PlayerImportModal team={{ id: selectedTeam.id, name: selectedTeam.name }} onClose={() => setSelectedTeam(null)} />
       )}
     </div>
   );

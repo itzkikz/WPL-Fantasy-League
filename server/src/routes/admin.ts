@@ -1,5 +1,5 @@
 import express from 'express';
-import { getFixtures, getGameweeks, createGameweek, updateGameweek, getSeasons, updateFixturesFromApi, getMatchDetails, undoAddToFantasy, getMatchIncidentsAndStats, getUsers, createFantasyTeam, getAdminPlayers, updateAdminPlayer, getAdminTeams, getFantasyTeams, getFantasyTeamById, updateFantasyTeam, completeGameweek, revertGameweek, togglePickTeam, getPickTeamStatus, getLeagues, fetchLeagueRounds, updateLeague, importFixturesFromJSON, getH2HLeague, upsertH2HLeague, deleteH2HLeague, createH2HFixture, bulkCreateH2HFixtures, deleteH2HFixture, getH2HLeagueFixtures, getAdminFacts, createAdminFact, updateAdminFact, deleteAdminFact, importIncidentsFromJSON, importLineupsFromJSON } from '../controllers/admin';
+import { getFixtures, getGameweeks, createGameweek, updateGameweek, getSeasons, updateFixturesFromApi, getMatchDetails, undoAddToFantasy, getMatchIncidentsAndStats, getUsers, createFantasyTeam, getAdminPlayers, updateAdminPlayer, getAdminTeams, getFantasyTeams, getFantasyTeamById, updateFantasyTeam, completeGameweek, revertGameweek, togglePickTeam, getPickTeamStatus, getLeagues, fetchLeagueRounds, updateLeague, importFixturesFromJSON, getH2HLeague, upsertH2HLeague, deleteH2HLeague, createH2HFixture, bulkCreateH2HFixtures, deleteH2HFixture, getH2HLeagueFixtures, getAdminFacts, createAdminFact, updateAdminFact, deleteAdminFact, importIncidentsFromJSON, importLineupsFromJSON, importPlayersPreview, importPlayersApply, getRosterChanges } from '../controllers/admin';
 import { getTransfers, createTransfer, reverseTransfer } from '../controllers/transfers';
 import { getSubstitutionHistory } from '../controllers/manager';
 import { SheetController } from '../controllers/sheetController';
@@ -21,6 +21,8 @@ router.post('/gameweeks/:id/revert', revertGameweek);
 router.get('/seasons', getSeasons);
 router.get('/users', getUsers);
 router.get('/teams', getAdminTeams);
+router.post('/teams/:id/import-players/preview', importPlayersPreview);
+router.post('/teams/:id/import-players/apply', importPlayersApply);
 router.get('/players', getAdminPlayers);
 router.put('/players/:id', updateAdminPlayer);
 router.post('/fantasy-teams', createFantasyTeam);
@@ -49,6 +51,7 @@ router.get('/h2h-leagues/:id/fixtures', getH2HLeagueFixtures);
 router.get('/substitutions', getSubstitutionHistory);
 
 router.get('/facts', getAdminFacts);
+router.get('/roster-changes', getRosterChanges);
 router.post('/facts', createAdminFact);
 router.put('/facts/:id', updateAdminFact);
 router.delete('/facts/:id', deleteAdminFact);

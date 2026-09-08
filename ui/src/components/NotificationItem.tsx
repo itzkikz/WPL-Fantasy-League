@@ -68,10 +68,14 @@ const detectKind = (title: string, message: string): KindConfig => {
   return KINDS.find((k) => k.match.test(haystack)) || KINDS[KINDS.length - 1];
 };
 
+const byKey = (key: string): KindConfig =>
+  KINDS.find((k) => k.key === key) || KINDS[KINDS.length - 1];
+
 const NotificationItem = ({
   title,
   message,
   time,
+  kind,
   unread,
   onOpen,
   onDismiss,
@@ -79,12 +83,15 @@ const NotificationItem = ({
   title: string;
   message: string;
   time: number;
+  kind?: string;
   unread?: boolean;
   onOpen: () => void;
   onDismiss: () => void;
 }) => {
-  const kind = detectKind(title, message);
-  const Icon = kind.icon;
+  const kindConfig = kind ? byKey(kind) : null;
+  const fallback = detectKind(title, message);
+  const resolved = kindConfig && kindConfig.key !== "general" ? kindConfig : fallback;
+  const Icon = resolved.icon;
   const relative = dayjs(time).fromNow();
   const full = dayjs(time).format("ddd, D MMM YYYY • h:mm A");
 
@@ -97,12 +104,12 @@ const NotificationItem = ({
           : "bg-surface border-border hover:bg-white/5"
       }`}
     >
-      {unread && <span className={`absolute left-0 top-4 bottom-4 w-1 rounded-r-full ${kind.bar}`} />}
+      {unread && <span className={`absolute left-0 top-4 bottom-4 w-1 rounded-r-full ${resolved.bar}`} />}
 
       <div
-        className={`w-10 h-10 rounded-xl border ${kind.bg} ${kind.border} flex items-center justify-center flex-shrink-0`}
+        className={`w-10 h-10 rounded-xl border ${resolved.bg} ${resolved.border} flex items-center justify-center flex-shrink-0`}
       >
-        <Icon className={`w-5 h-5 ${kind.iconColor}`} />
+        <Icon className={`w-5 h-5 ${resolved.iconColor}`} />
       </div>
 
       <div className="flex-1 min-w-0">
