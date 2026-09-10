@@ -3,7 +3,7 @@ import { Player } from '../models/Player';
 import { FantasyTeam } from '../models/FantasyTeam';
 import { Gameweek } from '../models/Gameweek';
 import { getGameweekPoints, getGameweekMinutes, getGameweekStats } from '../controllers/players';
-import { resolveEffectivePosition } from '../utils';
+import { resolvePosition, resolveTmPosition } from '../utils';
 
 export const getPlayerStatsMap = async (): Promise<Map<number, any>> => {
     const playerStats = await PlayerStats.find({})
@@ -57,6 +57,7 @@ export interface FantasyTeamGamewiseRow {
     playerId: number;
     playerName: string;
     position: string;
+    tmPosition: string;
     lineup: string;
     role: string;
     minutesPlayed: number;
@@ -80,7 +81,7 @@ export const FANTASY_GAMEWISE_HEADERS = [
     'FantasyTeamId', 'Team Name', 'Managers', 'Gameweek', 'Player ID', 'Player Name', 'Position',
     'Lineup', 'Role', 'Minutes', 'Goals', 'Assists', 'Clean Sheet', 'Yellow Cards', 'Red Cards',
     'Penalty Missed', 'Penalty Saved', 'Saves', 'Tackles', 'Clearances', 'Blocks', 'Ball Recoveries',
-    'Interceptions', 'Points',
+    'Interceptions', 'Points', 'TM Position',
 ];
 
 const roleLabel = (pick: any): string => {
@@ -103,7 +104,7 @@ export const buildFantasyTeamGamewiseRows = async (): Promise<FantasyTeamGamewis
         Gameweek.find({}, 'number').sort({ number: 1 }).lean(),
         FantasyTeam.find({}, 'name history currentSquad managerDisplayNames').lean(),
         getPlayerStatsMap(),
-        Player.find({}, 'id name position').lean(),
+        Player.find({}, 'id name position tm_position').lean(),
     ]);
 
     const gwNumbers = gameweeks.map(gw => gw.number);
@@ -150,7 +151,8 @@ export const buildFantasyTeamGamewiseRows = async (): Promise<FantasyTeamGamewis
                     gameweek: gwNumber,
                     playerId: pick.playerId,
                     playerName: playerDoc?.name ?? `Player #${pick.playerId}`,
-                    position: resolveEffectivePosition(playerDoc),
+                    position: resolvePosition(playerDoc?.position || ''),
+                    tmPosition: resolveTmPosition(playerDoc),
                     lineup: lineupLabel(pick),
                     role: roleLabel(pick),
                     minutesPlayed: stats.minutesPlayed || 0,
@@ -206,5 +208,6 @@ export const fantasyGamewiseRowsToValues = (rows: FantasyTeamGamewiseRow[]): any
         row.ballRecovery,
         row.interceptions,
         row.points,
+        row.tmPosition,
     ]);
 };

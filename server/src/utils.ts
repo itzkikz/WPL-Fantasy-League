@@ -111,3 +111,14 @@ export function resolveEffectivePosition(entry: PositionSource | undefined | nul
   if (tm !== 'UNK') return tm;
   return resolvePosition(entry.position ?? undefined, fallback);
 }
+
+/**
+ * Resolve strictly from the Transfermarkt position: a code when tm_position is
+ * present and resolvable, '' when unset, or 'Unknown' when set but unresolvable.
+ */
+export function resolveTmPosition(entry: PositionSource | undefined | null): PositionCode | 'Unknown' | '' {
+  const raw = entry?.tm_position ?? entry?.tmPosition ?? '';
+  if (!raw || !String(raw).trim()) return '';
+  const code = resolvePosition(raw, 'UNK');
+  return code === 'UNK' ? 'Unknown' : code;
+}

@@ -4,7 +4,7 @@ import { Team } from '../models/Team';
 import { Fixture } from '../models/Fixture';
 import mongoose from 'mongoose';
 import '../models/League';
-import { resolveEffectivePosition } from '../utils';
+import { resolvePosition, resolveTmPosition } from '../utils';
 
 export const PLAYER_STATS_SHEET_HEADERS = [
     'Player ID', 'Player Name', 'Position', 'Team ID', 'Team Name', 'League Name', 'Auction Price',
@@ -18,7 +18,7 @@ export const PLAYER_STATS_SHEET_HEADERS = [
     'Aerial Won', 'Aerial Lost', 'Duels Won', 'Duels Lost',
     'Tackles', 'Won Tackles', 'Challenges Won', 'Challenges Lost', 'Dispossessed',
     'Clearances', 'Blocks', 'Ball Recoveries', 'Touches', 'Unsuccessful Touches',
-    'Fouls Drawn', 'Fouls Committed',
+    'Fouls Drawn', 'Fouls Committed', 'TM Position',
 ];
 
 const passAccuracy = (stats: any): number => {
@@ -41,7 +41,7 @@ const fixtureDate = (ts?: number): string => {
 export const buildPlayerStatsRows = async (): Promise<any[][]> => {
     const [pStatsDocs, players, teams, leagues, fixtures] = await Promise.all([
         PlayerStats.find({}).select('playerId gameweeks totalPoints').lean(),
-        Player.find({}).select('id name position teamId auctionPrice').lean(),
+        Player.find({}).select('id name position tm_position teamId auctionPrice').lean(),
         Team.find({}).lean(),
         mongoose.model('League').find({}).lean() as Promise<any[]>,
         Fixture.find({}, 'fixtureId homeTeam.id awayTeam.id homeScore.current homeScore.display awayScore.current awayScore.display startTimestamp').lean(),
@@ -101,7 +101,7 @@ export const buildPlayerStatsRows = async (): Promise<any[][]> => {
             rows.push([
                 doc.playerId,
                 player?.name ?? `Player #${doc.playerId}`,
-                resolveEffectivePosition(player),
+                resolvePosition(player?.position || ''),
                 teamId ?? '',
                 teamName,
                 leagueName || 'Unknown',
@@ -154,6 +154,7 @@ export const buildPlayerStatsRows = async (): Promise<any[][]> => {
                 stats.unsuccessfulTouch || 0,
                 stats.wasFouled || 0,
                 stats.fouls || 0,
+                resolveTmPosition(player),
             ]);
         }
     }

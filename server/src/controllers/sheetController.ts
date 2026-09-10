@@ -9,9 +9,10 @@ import { ApiConfig } from '../models/ApiConfig';
 import { buildFantasyTeamGamewiseRows, fantasyGamewiseRowsToValues, FANTASY_GAMEWISE_HEADERS } from '../lib/fantasyScore';
 import { buildPlayerStatsRows, PLAYER_STATS_SHEET_HEADERS } from '../lib/playerStatsSheet';
 import { buildCurrentFixturesRows, FIXTURES_SHEET_HEADERS } from '../lib/fixturesSheet';
+import { resolveTmPosition } from '../utils';
 
 export const PLAYERS_SHEET_HEADERS = [
-    'ID', 'Name', 'Age', 'Jersey Number', 'Position', 'Proposed Market Value', 'Country', 'Team ID', 'Team Name', 'League Name'
+    'ID', 'Name', 'Age', 'Jersey Number', 'Position', 'Proposed Market Value', 'Country', 'Team ID', 'Team Name', 'League Name', 'TM Position'
 ];
 
 const buildPlayersSheetRows = async (): Promise<any[][]> => {
@@ -53,7 +54,8 @@ const buildPlayersSheetRows = async (): Promise<any[][]> => {
             p.country?.name || '',
             p.teamId || '',
             teamName,
-            leagueName
+            leagueName,
+            resolveTmPosition(p)
         ];
     });
 };
@@ -522,7 +524,7 @@ export class SheetController {
             // Clear the existing sheet data first
             await sheets.spreadsheets.values.clear({
                 spreadsheetId,
-                range: `'${sheetTitle}'!A:J`,
+                range: `'${sheetTitle}'!A:K`,
             });
 
             await sheets.spreadsheets.values.update({
