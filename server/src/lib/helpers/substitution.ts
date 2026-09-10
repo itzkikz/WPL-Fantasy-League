@@ -1,4 +1,5 @@
 import { Formation, FormationResult, Player } from "../formatter/types";
+import { resolvePosition } from "../../utils";
 
 type Category = "GK" | "DEF" | "MID" | "FWD";
 type EnrichedPlayer = Player & { isAvlSub: boolean };
@@ -12,14 +13,9 @@ const FORMATION_RULES: Record<Category, { min: number; max: number }> = {
 
 function getPositionCategory(
   position: string
-): Category {
-  const positionMap: Record<string, Category> = {
-    GK: "GK",
-    DEF: "DEF",
-    MID: "MID",
-    FWD: "FWD",
-  };
-  return positionMap[position];
+): Category | undefined {
+  const cat = resolvePosition(position, 'UNK');
+  return cat === 'UNK' ? undefined : cat;
 }
 
 function countStartingPlayers(starting: Formation) {
@@ -103,6 +99,10 @@ export const executeSwap = (
   const currentCounts = countStartingPlayers(teamData.starting);
   const outCat = startingInfo.category;
   const inCat = getPositionCategory(benchInfo.player.position);
+
+  if (!inCat) {
+    return { error: "Swap violates formation rules" as const };
+  }
 
   if (!canSwap(currentCounts, outCat, inCat)) {
     return { error: "Swap violates formation rules" as const };

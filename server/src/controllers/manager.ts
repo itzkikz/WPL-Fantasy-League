@@ -10,7 +10,7 @@ import { getSeasonPointsBreakdown, getDefensiveContributionPoints } from "../lib
 import { Substitution as SubstitutionType } from "../types/manager";
 import { FormationResult } from "../lib/formatter/types";
 import { setCaptain, setViceCaptain } from "../lib/helpers/roleUpdate";
-import { resolvePosition } from "../utils";
+import { resolveEffectivePosition } from "../utils";
 import { getStandingsData } from "./standings";
 import { ApiConfig } from "../models/ApiConfig";
 import { Player } from "../models/Player";
@@ -161,7 +161,7 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
         gw: targetGw,
         point: gwPoints,
 
-        position: resolvePosition(playerDoc?.position || ''),
+        position: resolveEffectivePosition(playerDoc),
         price: playerDoc?.price?.nowCost || 0,
         club: teamDoc?.team?.name || "Unknown",
 
@@ -375,14 +375,14 @@ export const details = async (req: Request, res: Response, next: NextFunction) =
 
         // Season points breakdown (per-match flooring applied and summed across all gameweeks)
         const seasonPointsBreakdown = (fullPs && (fullPs as any).gameweeks)
-          ? getSeasonPointsBreakdown((fullPs as any).gameweeks, playerDoc.position)
+          ? getSeasonPointsBreakdown((fullPs as any).gameweeks, resolveEffectivePosition(playerDoc))
           : [];
 
         // Attach full PlayerStats to the detail
         (detail as any).playerStats = {
           player_name: playerDoc.name || playerDoc.webName || "",
           team_name: teamNameStr,
-          position: resolvePosition(playerDoc.position || ''),
+          position: resolveEffectivePosition(playerDoc),
           overall: overallStats,
           price: playerDoc.price?.nowCost || 0,
           release_value: playerDoc.price?.nowCost || 0,
@@ -519,7 +519,7 @@ export const substitution = async (req: Request, res: Response, next: NextFuncti
         player_name: p?.webName || p?.name || "Unknown",
         lineup: pick.isStarting ? "Starting XI" : `Sub ${pick.subNumber || posIndex - 11}`,
         type: pick.isCaptain ? "CAPTAIN" : pick.isViceCaptain ? "VICE CAPTAIN" : null,
-        position: resolvePosition(p?.position || ''),
+        position: resolveEffectivePosition(p),
         // Add other mock fields if validators need them
         player_id: pick.playerId,
         role: pick.isCaptain ? "CAPTAIN" : pick.isViceCaptain ? "VICE CAPTAIN" : null,
@@ -814,7 +814,7 @@ export const myFixtures = async (req: Request, res: Response, next: NextFunction
       playersByTeam.get(teamId)!.push({
         id: p.id,
         name: p.webName || p.name || "",
-        position: resolvePosition(p.position || ""),
+        position: resolveEffectivePosition(p),
         photo: p.photo || "",
       });
     }
@@ -1163,7 +1163,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
         name: playerDoc?.webName || playerDoc?.name || "Unknown",
         team: playerToFantasyTeam.get(stat.playerId) || teamDoc?.nameCode || "UNK",
         teamLogo: teamDoc?.logo || "",
-        position: resolvePosition(playerDoc?.position || ""),
+        position: resolveEffectivePosition(playerDoc),
         points: stat.gwPoints,
         photo: playerDoc?.photo || (playerDoc?.id ? `https://img.sofascore.com/api/v1/player/${playerDoc.id}/image` : ""),
         ownedBy: 50,
@@ -1178,7 +1178,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
         name: playerDoc?.webName || playerDoc?.name || "Unknown",
         team: playerToFantasyTeam.get(stat.playerId) || teamDoc?.nameCode || "UNK",
         teamLogo: teamDoc?.logo || "",
-        position: resolvePosition(playerDoc?.position || ""),
+        position: resolveEffectivePosition(playerDoc),
         points: stat.totalPoints || 0,
         photo: playerDoc?.photo || (playerDoc?.id ? `https://img.sofascore.com/api/v1/player/${playerDoc.id}/image` : ""),
       };
@@ -1221,7 +1221,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
           teamColor: topTeamDoc?.teamColors?.primary || "#6CABDD",
           teamLogo: topTeamDoc?.logo || "",
           point: currentGwPoints,
-          position: resolvePosition(topPlayerDoc?.position || ""),
+          position: resolveEffectivePosition(topPlayerDoc),
           isCaptain: false,
           isViceCaptain: false,
           isPowerPlayer: false,
@@ -1258,7 +1258,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     const startingStatsMap = new Map(ownedPlayersWithStats.map(s => [s.playerId, s]));
     const startingPlayerPositionMap = new Map(startingPicks.map(p => {
       const doc = pDocsMap.get(p.playerId);
-      return [p.playerId, resolvePosition(doc?.position || '')];
+      return [p.playerId, resolveEffectivePosition(doc, 'UNK')];
     }));
 
     let bdGoalsPoints = 0, bdAssistsPoints = 0, bdCleanSheetPoints = 0;
@@ -1272,7 +1272,8 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       if (!statsDoc || !statsDoc.gameweeks) continue;
       const gwEntries = getGameweekEntries(statsDoc.gameweeks, currentGw);
       if (gwEntries.length === 0) continue;
-      const position = startingPlayerPositionMap.get(pick.playerId) || 'MID';
+      const position = startingPlayerPositionMap.get(pick.playerId) || 'UNK';
+      if (position === 'UNK') continue;
 
       for (const entry of gwEntries) {
         const s = entry.stats;
@@ -1368,7 +1369,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
           photo: p.photo || (p.id ? `https://img.sofascore.com/api/v1/player/${p.id}/image` : ""),
           points: statDoc?.totalPoints || 0,
           price: (p.price?.nowCost || 0) / 10,
-          position: resolvePosition(p.position || ""),
+          position: resolveEffectivePosition(p),
           isCaptain: pick?.isCaptain || false,
           isViceCaptain: pick?.isViceCaptain || false,
           isStarting: pick?.isStarting || false,
@@ -1380,9 +1381,9 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       const midfielders = pDocsWithStats.filter(p => p.position === "MID");
       const forwards = pDocsWithStats.filter(p => p.position === "FWD");
 
-      const startingDEF = startingPlayerIds.filter(id => resolvePosition(pDocsMap.get(id)?.position || "") === "DEF").length;
-      const startingMID = startingPlayerIds.filter(id => resolvePosition(pDocsMap.get(id)?.position || "") === "MID").length;
-      const startingFWD = startingPlayerIds.filter(id => resolvePosition(pDocsMap.get(id)?.position || "") === "FWD").length;
+      const startingDEF = startingPlayerIds.filter(id => resolveEffectivePosition(pDocsMap.get(id)) === "DEF").length;
+      const startingMID = startingPlayerIds.filter(id => resolveEffectivePosition(pDocsMap.get(id)) === "MID").length;
+      const startingFWD = startingPlayerIds.filter(id => resolveEffectivePosition(pDocsMap.get(id)) === "FWD").length;
       const formation = startingPlayerIds.length > 0 ? `${startingDEF}-${startingMID}-${startingFWD}` : "4-4-2";
 
       squadComposition = {

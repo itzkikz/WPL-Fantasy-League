@@ -6,7 +6,7 @@ import { Gameweek } from "../models/Gameweek";
 import { PlayerStats as PlayerStatsModel } from "../models/PlayerStats";
 import { FantasyTeam } from "../models/FantasyTeam";
 import "../models/League";
-import { resolvePosition } from "../utils";
+import { resolveEffectivePosition } from "../utils";
 import { getMatchPointsBreakdown, getSeasonPointsBreakdown, PointsBreakdownItem } from "../lib/points";
 
 function sumNumeric(...nums: (number | undefined | null)[]): number {
@@ -304,7 +304,7 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
             leagueName = team.league ? (team.league as any).name : "Unknown League";
         }
 
-        const positionName = resolvePosition(player.position || '');
+        const positionName = resolveEffectivePosition(player);
 
         const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
         const currentGw = currentGwDoc ? currentGwDoc.number : 1;
@@ -712,13 +712,13 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
 
                 // Season points breakdown (per-match flooring applied and summed across all gameweeks)
                 const seasonPointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
-                    ? getSeasonPointsBreakdown((pStatsDoc as any).gameweeks, player.position)
+                    ? getSeasonPointsBreakdown((pStatsDoc as any).gameweeks, resolveEffectivePosition(player))
                     : [];
 
                 return {
                     player_name: player.name || player.webName || "",
                     team_name: teamName,
-                    position: resolvePosition(player.position || ""),
+                    position: resolveEffectivePosition(player),
                     overall: overallStats,
                     price: player.price?.nowCost || 0,
                     release_value: player.price?.nowCost || 0,
@@ -904,13 +904,13 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
 
             // Season points breakdown (per-match flooring applied and summed across all gameweeks)
             const seasonPointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
-                ? getSeasonPointsBreakdown((pStatsDoc as any).gameweeks, player.position)
+                ? getSeasonPointsBreakdown((pStatsDoc as any).gameweeks, resolveEffectivePosition(player))
                 : [];
 
             return {
                 player_name: player.name || player.webName || "",
                 team_name: teamName,
-                position: resolvePosition(player.position || ""),
+                position: resolveEffectivePosition(player),
                 overall: overallStats,
                 price: player.price?.nowCost || 0,
                 release_value: player.price?.nowCost || 0,

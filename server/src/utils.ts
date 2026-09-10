@@ -73,20 +73,41 @@ export function convertToJSON<T extends DataType>(
   }) as ReturnTypeMap<T>;
 }
 
+export type PositionCode = 'GK' | 'DEF' | 'MID' | 'FWD';
+
 /**
  * Convert a full position name (e.g., "Goalkeeper", "Defender") to its shorthand code.
  * Returns 'GK', 'DEF', 'MID', or 'FWD'. Falls back to the first character of the input.
+ * When nothing can be resolved, returns `fallback` (defaults to 'FWD').
  */
-export function resolvePosition(fullName: string): 'GK' | 'DEF' | 'MID' | 'FWD' {
-  const normalized = fullName.trim().toLowerCase();
+export function resolvePosition(fullName: string | undefined, fallback: PositionCode | 'UNK' = 'FWD'): PositionCode | 'UNK' {
+  const normalized = (fullName ?? '').trim().toLowerCase();
   if (['goalkeeper', 'gk', 'keeper'].includes(normalized)) return 'GK';
-  if (['defender', 'defence', 'def'].includes(normalized)) return 'DEF';
-  if (['midfielder', 'midfield', 'mid'].includes(normalized)) return 'MID';
-  if (['forward', 'striker', 'attack', 'attacker', 'fwd'].includes(normalized)) return 'FWD';
+  if (['defender', 'defence', 'defender', 'centre-back', 'center-back', 'left-back', 'right-back', 'wing-back', 'sweeper'].includes(normalized)) return 'DEF';
+  if (['midfielder', 'midfield', 'mid', 'central midfield', 'defensive midfield', 'attacking midfield', 'left midfield', 'right midfield'].includes(normalized)) return 'MID';
+  if (['forward', 'striker', 'attack', 'attacker', 'fwd', 'centre-forward', 'left winger', 'right winger', 'second striker'].includes(normalized)) return 'FWD';
   const first = normalized.charAt(0).toUpperCase();
   if (first === 'G') return 'GK';
   if (first === 'D') return 'DEF';
   if (first === 'M') return 'MID';
   if (first === 'F') return 'FWD';
-  return 'FWD';
+  return fallback;
+}
+
+export interface PositionSource {
+  position?: string | null;
+  tm_position?: string | null;
+  tmPosition?: string | null;
+}
+
+/**
+ * Resolve a player's position for scoring/lineup/display, preferring the
+ * Transfermarkt position when it is present and resolvable, and falling back
+ * to the stored `position` when it is null or invalid.
+ */
+export function resolveEffectivePosition(entry: PositionSource | undefined | null, fallback: PositionCode | 'UNK' = 'FWD'): PositionCode | 'UNK' {
+  if (!entry) return fallback;
+  const tm = resolvePosition(entry.tm_position ?? entry.tmPosition ?? undefined, 'UNK');
+  if (tm !== 'UNK') return tm;
+  return resolvePosition(entry.position ?? undefined, fallback);
 }

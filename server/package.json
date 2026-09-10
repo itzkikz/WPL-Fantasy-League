@@ -18,6 +18,7 @@
     "recompute:stats": "ts-node src/scripts/recomputeMatchStats.ts",
     "backfill:points": "ts-node src/scripts/backfillPlayerPoints.ts",
     "backfill:autosubs": "ts-node src/scripts/backfillAutoSubs.ts",
+    "backfill:player-positions": "ts-node src/scripts/normalizePlayerPositions.ts",
     "export:players-sheet": "ts-node src/scripts/exportPlayersToGoogleSheet.ts"
   },
   "author": "",

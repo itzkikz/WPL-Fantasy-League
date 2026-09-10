@@ -4,7 +4,7 @@ import { Team } from '../models/Team';
 import { Fixture } from '../models/Fixture';
 import mongoose from 'mongoose';
 import '../models/League';
-import { resolvePosition } from '../utils';
+import { resolveEffectivePosition } from '../utils';
 
 export const PLAYER_STATS_SHEET_HEADERS = [
     'Player ID', 'Player Name', 'Position', 'Team ID', 'Team Name', 'League Name', 'Auction Price',
@@ -101,7 +101,7 @@ export const buildPlayerStatsRows = async (): Promise<any[][]> => {
             rows.push([
                 doc.playerId,
                 player?.name ?? `Player #${doc.playerId}`,
-                resolvePosition(player?.position || ''),
+                resolveEffectivePosition(player),
                 teamId ?? '',
                 teamName,
                 leagueName || 'Unknown',

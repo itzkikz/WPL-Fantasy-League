@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import connectDB from '../config/db';
 import { PlayerStats } from '../models/PlayerStats';
 import { calculatePlayerPoints } from '../lib/points';
+import { resolveEffectivePosition } from '../utils';
+import { Player } from '../models/Player';
 
 dotenv.config();
 
@@ -25,6 +27,9 @@ const backfillPlayerPoints = async () => {
     const statsDocs = await PlayerStats.find().lean();
     console.log(`Loaded ${statsDocs.length} PlayerStats docs`);
 
+    const playerDocs = await Player.find({}, 'id position tm_position').lean();
+    const playerMap = new Map(playerDocs.map((p: any) => [p.id, p]));
+
     let docsChanged = 0;
     let entriesChanged = 0;
     let entriesRecomputed = 0;
@@ -46,7 +51,16 @@ const backfillPlayerPoints = async () => {
           return g;
         }
 
-        const newPoints = calculatePlayerPoints({ position: g.position || 'MID' } as any, stats);
+        const position = resolveEffectivePosition(playerMap.get(doc.playerId), 'UNK');
+        if (position === 'UNK') {
+          // Position cannot be resolved from the canonical store - leave the
+          // stored points untouched (unknown players are not re-scored).
+          skippedNoStats++;
+          newTotal += Number(g.points) || 0;
+          return g;
+        }
+
+        const newPoints = calculatePlayerPoints({ position } as any, stats);
         const oldPoints = Number(g.points) || 0;
         newTotal += newPoints;
 

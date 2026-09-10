@@ -1,9 +1,9 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import apiClient from "../../api/client";
 import { API_ENDPOINTS, QUERY_KEYS } from "../../api/endpoints";
-import { Loader2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Loader2, ChevronLeft, ChevronRight, Pencil, Check, X } from "lucide-react";
 
 export const Route = createLazyFileRoute("/admin/players")({
   component: AdminPlayers,
@@ -45,6 +45,25 @@ function AdminPlayers() {
   const [position, setPosition] = useState("");
   const [teamId, setTeamId] = useState("");
   const [page, setPage] = useState(1);
+  const [editing, setEditing] = useState<{ id: number; value: string } | null>(null);
+  const [saving, setSaving] = useState(false);
+  const queryClient = useQueryClient();
+
+  const saveTmPosition = async () => {
+    if (!editing) return;
+    setSaving(true);
+    try {
+      await apiClient.put(`${API_ENDPOINTS.ADMIN.ADMIN_PLAYERS}/${editing.id}`, {
+        tm_position: editing.value.trim(),
+      });
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.ADMIN_PLAYERS] });
+      setEditing(null);
+    } catch (err: any) {
+      alert(err?.response?.data?.error || err?.message || "Failed to update TM position");
+    } finally {
+      setSaving(false);
+    }
+  };
 
   useEffect(() => {
     const t = setTimeout(() => setDebouncedSearch(search.trim()), 300);
@@ -137,6 +156,17 @@ function AdminPlayers() {
         </select>
       </div>
 
+      <datalist id="tm-position-options">
+        <option value="F" />
+        <option value="M" />
+        <option value="D" />
+        <option value="G" />
+        <option value="Goalkeeper" />
+        <option value="Defender" />
+        <option value="Midfielder" />
+        <option value="Forward" />
+      </datalist>
+
       {isLoading ? (
         <div className="bg-[#150f24]/50 border border-white/5 rounded-xl overflow-hidden shadow-lg py-14 flex items-center justify-center">
           <Loader2 className="w-8 h-8 text-indigo-500 animate-spin" />
@@ -188,7 +218,41 @@ function AdminPlayers() {
                           {p.position}
                         </span>
                       </td>
-                      <td className="hidden md:table-cell py-2.5 px-3 text-[10px] text-white/50 font-semibold">{p.tmPosition || "—"}</td>
+                      <td className="hidden md:table-cell py-2.5 px-3">
+                        {editing?.id === p.id ? (
+                          <form
+                            onSubmit={(e) => { e.preventDefault(); saveTmPosition(); }}
+                            className="flex items-center gap-1"
+                          >
+                            <input
+                              autoFocus
+                              list="tm-position-options"
+                              value={editing.value}
+                              onChange={(e) => setEditing({ id: p.id, value: e.target.value })}
+                              disabled={saving}
+                              placeholder="F/M/D/G"
+                              className="w-24 px-2 py-1 rounded-md bg-[#150f24] border border-indigo-500/50 text-white text-[10px] font-bold outline-none focus:ring-1 focus:ring-indigo-500"
+                            />
+                            <button type="submit" disabled={saving} className="p-1 rounded hover:bg-emerald-500/20 text-emerald-400" title="Save">
+                              <Check className="w-3.5 h-3.5" />
+                            </button>
+                            <button type="button" onClick={() => setEditing(null)} className="p-1 rounded hover:bg-white/10 text-white/50" title="Cancel">
+                              <X className="w-3.5 h-3.5" />
+                            </button>
+                          </form>
+                        ) : (
+                          <button
+                            onClick={() => setEditing({ id: p.id, value: p.tmPosition || "" })}
+                            title="Edit TM position"
+                            className="group inline-flex items-center gap-1.5"
+                          >
+                            <span className="text-[10px] text-white/50 font-semibold group-hover:text-indigo-400 max-w-[100px] truncate">
+                              {p.tmPosition || "—"}
+                            </span>
+                            <Pencil className="w-3 h-3 text-white/20 group-hover:text-indigo-400 flex-none" />
+                          </button>
+                        )}
+                      </td>
                       <td className="hidden sm:table-cell py-2.5 px-3 text-center text-xs text-white/60 font-semibold">{p.shirtNumber ?? "—"}</td>
                       <td className="py-2.5 px-3 text-right">
                         <span className={`text-[10px] font-extrabold ${p.auctionPrice != null ? "text-emerald-400" : "text-white/30"}`}>
