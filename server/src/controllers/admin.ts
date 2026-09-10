@@ -24,7 +24,8 @@ import { fetchSofascoreJSON } from '../utils/sofascoreScraper';
 import { calculatePlayerPoints } from '../lib/points';
 import { mapSofascoreToPlayerMatchStat } from '../lib/sofascoreMapper';
 import { pickFields, mapLineups } from '../lib/sofascoreFixtures';
-import { runAutoSubs, resolvePosition } from '../lib/autoSub';
+import { runAutoSubs } from '../lib/autoSub';
+import { resolveEffectivePosition } from '../utils';
 import { getLeagueAllGWPoints } from './h2h';
 import { getGameweekMinutes } from './players';
 import { sendNotification } from '../services/notify';
@@ -333,11 +334,12 @@ export const getMatchDetails = async (req: Request, res: Response) => {
 
             const stats = mapSofascoreToPlayerMatchStat(entry, incidents);
 
-            // Use the canonical player position (from the players collection) for scoring,
-            // falling back to the lineup's position when the player is unknown.
+            // Use the canonical player position from the players collection for
+            // scoring. Players without a catalogued position are skipped (their
+            // points cannot be computed reliably), matching recomputeMatchStats.
             const playerDoc = await Player.findOne({ id: entry.playerId }).lean();
-            const dummyPlayer = { position: playerDoc?.position || entry.position } as any;
-            const gwPoints = calculatePlayerPoints(dummyPlayer, stats);
+            if (resolveEffectivePosition(playerDoc, 'UNK') === 'UNK') continue;
+            const gwPoints = calculatePlayerPoints({ position: resolveEffectivePosition(playerDoc) } as any, stats);
 
             await PlayerStats.findOneAndUpdate(
                 { playerId: entry.playerId },
@@ -508,9 +510,11 @@ export const getMatchIncidentsAndStats = async (req: Request, res: Response) => 
 
         const playerInfo = lineups.map((entry: any) => {
             const playerDoc = playerDocMap.get(entry.playerId);
-            const position = entry.position || playerDoc?.position || 'Unknown';
+            const rawPosition = playerDoc?.position || '';
+            const position = rawPosition || 'Unknown';
+            const positionCode = resolveEffectivePosition(playerDoc, 'UNK');
             const gameweekStats = mapSofascoreToPlayerMatchStat(entry, incidents);
-            const gameweekPoints = calculatePlayerPoints({ position } as any, gameweekStats);
+            const gameweekPoints = positionCode === 'UNK' ? 0 : calculatePlayerPoints({ position: positionCode } as any, gameweekStats);
 
             return {
                 playerId: entry.playerId,
@@ -722,8 +726,19 @@ export const getAdminPlayers = async (req: Request, res: Response) => {
             MID: /^(MID|M|MIDFIELDER)$/i,
             FWD: /^(FWD|F|A|FORWARD|ATTACKER)$/i,
         };
+        // tm_position stores single-code letters (F/M/D/G) or full labels; the
+        // effective position prefers tm_position, so filter on either source.
+        const tmPositionFilterMap: Record<string, RegExp> = {
+            GK: /^(GK|G|GOALKEEPER)$/i,
+            DEF: /^(D|DEF|DEFENDER)$/i,
+            MID: /^(M|MID|MIDFIELDER)$/i,
+            FWD: /^(F|FWD|FORWARD|ATTACKER)$/i,
+        };
         if (position && positionFilterMap[position]) {
-            query.position = positionFilterMap[position];
+            query.$or = [
+                { position: positionFilterMap[position] },
+                { tm_position: tmPositionFilterMap[position] },
+            ];
         }
         if (teamId && !isNaN(Number(teamId))) {
             query.teamId = Number(teamId);
@@ -780,8 +795,8 @@ export const updateAdminPlayer = async (req: Request, res: Response) => {
         const { position, tm_position, auctionPrice } = req.body;
 
         const updateData: any = {};
-        if (position !== undefined) updateData.position = position;
-        if (tm_position !== undefined) updateData.tm_position = tm_position;
+        if (position !== undefined) updateData.position = String(position).trim();
+        if (tm_position !== undefined) updateData.tm_position = String(tm_position).trim();
         if (auctionPrice !== undefined) updateData.auctionPrice = auctionPrice === null ? null : Number(auctionPrice);
 
         const player = await Player.findOneAndUpdate(
@@ -818,12 +833,7 @@ export const createFantasyTeam = async (req: Request, res: Response) => {
         const startingCounts = { GK: 0, DEF: 0, MID: 0, FWD: 0 };
 
         for (const player of squad) {
-            const p = (player.position || '').toUpperCase();
-            let normPos = '';
-            if (p === 'GK' || p === 'GOALKEEPER' || p === 'G') normPos = 'GK';
-            else if (p === 'DEF' || p === 'DEFENDER' || p === 'D') normPos = 'DEF';
-            else if (p === 'MID' || p === 'MIDFIELDER' || p === 'M') normPos = 'MID';
-            else if (p === 'FWD' || p === 'FORWARD' || p === 'ATTACKER' || p === 'A' || p === 'F') normPos = 'FWD';
+            const normPos = resolveEffectivePosition(player, 'UNK');
 
             if (normPos && positionCounts[normPos as keyof typeof positionCounts] !== undefined) {
                 positionCounts[normPos as keyof typeof positionCounts]++;
@@ -998,12 +1008,7 @@ export const updateFantasyTeam = async (req: Request, res: Response) => {
         const startingCounts = { GK: 0, DEF: 0, MID: 0, FWD: 0 };
 
         for (const player of squad) {
-            const p = (player.position || '').toUpperCase();
-            let normPos = '';
-            if (p === 'GK' || p === 'GOALKEEPER' || p === 'G') normPos = 'GK';
-            else if (p === 'DEF' || p === 'DEFENDER' || p === 'D') normPos = 'DEF';
-            else if (p === 'MID' || p === 'MIDFIELDER' || p === 'M') normPos = 'MID';
-            else if (p === 'FWD' || p === 'FORWARD' || p === 'ATTACKER' || p === 'A' || p === 'F') normPos = 'FWD';
+            const normPos = resolveEffectivePosition(player, 'UNK');
 
             if (normPos && positionCounts[normPos as keyof typeof positionCounts] !== undefined) {
                 positionCounts[normPos as keyof typeof positionCounts]++;
@@ -1140,7 +1145,7 @@ export const completeGameweek = async (req: Request, res: Response) => {
             const { picks } = runAutoSubs({
                 picks: rawPicks,
                 minutesMap,
-                getPosition: (playerId) => resolvePosition(pMap.get(playerId)?.position),
+                getPosition: (playerId) => resolveEffectivePosition(pMap.get(playerId), 'UNK'),
             });
 
             // Push to history

@@ -4,7 +4,8 @@ import { Gameweek } from '../models/Gameweek';
 import { Player } from '../models/Player';
 import { PlayerStats } from '../models/PlayerStats';
 import { FantasyTeam } from '../models/FantasyTeam';
-import { runAutoSubs, resolvePosition } from '../lib/autoSub';
+import { runAutoSubs } from '../lib/autoSub';
+import { resolveEffectivePosition } from '../utils';
 import { getGameweekMinutes } from '../controllers/players';
 
 dotenv.config();
@@ -47,7 +48,7 @@ const backfillAutoSubs = async () => {
 
     const players = await Player.find().lean();
     const pMap = new Map<number, any>(players.map((p: any) => [p.id, p]));
-    const getPlayerPosition = (playerId: number) => resolvePosition(pMap.get(playerId)?.position);
+    const getPlayerPosition = (playerId: number) => resolveEffectivePosition(pMap.get(playerId), 'UNK');
 
     let totalChanged = 0;
 

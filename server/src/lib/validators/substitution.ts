@@ -1,4 +1,5 @@
 import { Formation, FormationResult } from "../formatter/types";
+import { resolvePosition } from "../../utils";
 
 type Category = "GK" | "DEF" | "MID" | "FWD";
 
@@ -10,8 +11,8 @@ const FORMATION_RULES: Record<Category, { min: number; max: number }> = {
 };
 
 function getPositionCategory(pos: string): Category {
-  const map: Record<string, Category> = { GK: "GK", DEF: "DEF", MID: "MID", FWD: "FWD" };
-  return map[pos];
+  const cat = resolvePosition(pos, 'UNK');
+  return cat === 'UNK' ? (undefined as any) : cat;
 }
 
 function countStartingPlayers(starting: Formation) {

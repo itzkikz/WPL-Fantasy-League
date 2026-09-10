@@ -2,7 +2,7 @@
 // Create sheets client
 
 
-import { convertToJSON, resolvePosition } from "../utils";
+import { convertToJSON, resolveEffectivePosition } from "../utils";
 import { NextFunction, Request, Response } from "express";
 import { StandingsResponse, TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
@@ -295,9 +295,6 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
             const player = playerMap.get(pick.playerId);
             if (!player) return null; // Should not happen if data is synced
 
-            // Player position is stored as a string (e.g., 'GK', 'DEF', 'MID', 'FWD')
-            const posString = player.position ? player.position.toUpperCase() : 'UNK';
-
             // Determine lineup based on new schema fields
             let lineupType: 'Starting XI' | 'SUB 1' | 'SUB 2' | 'SUB 3' | 'SUB 4' = pick.isStarting
                 ? 'Starting XI'
@@ -347,7 +344,7 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
                 team_name: team.name, // The user's team name
                 player_id: Number(pick.playerId),
                 player_name: player.name || player.webName,
-                position: resolvePosition(posString),
+                position: resolveEffectivePosition(player),
                 lineup: lineupType,
                 role: pick.isCaptain ? 'CAPTAIN' : (pick.isViceCaptain ? 'VICE CAPTAIN' : null),
                 club: clubName,
@@ -547,14 +544,14 @@ export const getTeamDetails = async (req: Request, res: Response, next: NextFunc
 
                 // Season points breakdown (per-match flooring applied and summed across all gameweeks)
                 const seasonPointsBreakdown = (fullPs && (fullPs as any).gameweeks)
-                    ? getSeasonPointsBreakdown((fullPs as any).gameweeks, playerDoc.position)
+                    ? getSeasonPointsBreakdown((fullPs as any).gameweeks, resolveEffectivePosition(playerDoc))
                     : [];
 
                 // Attach full PlayerStats to the detail
                 (detail as any).playerStats = {
                     player_name: playerDoc.name || playerDoc.webName || "",
                     team_name: teamNameStr,
-                    position: resolvePosition(playerDoc.position || ''),
+                    position: resolveEffectivePosition(playerDoc),
                     overall: overallStats,
                     price: playerDoc.price?.nowCost || 0,
                     release_value: playerDoc.price?.nowCost || 0,
@@ -812,7 +809,7 @@ export const getFixturePlayers = async (req: Request, res: Response) => {
                     playerId: pId,
                     name: pd.webName || pd.name || "",
                     photo: pd.photo || "",
-                    position: resolvePosition(pd.position || ''),
+                    position: resolveEffectivePosition(pd),
                     teamId: pd.teamId,
                     fantasyTeams: playerToFantasyTeams.get(pId) || [],
                     ...(statsForGw(pId) || { points: 0 }),
@@ -1052,14 +1049,14 @@ export const getManagerOverview = async (req: Request, res: Response, next: Next
                     player_name: playerDoc?.webName || playerDoc?.name || "Unknown",
                     club: teamDoc?.team?.name || teamDoc?.name || "Unknown",
                     fantasy_team_name: teamName,
-                    position: resolvePosition(playerDoc?.position || ''),
+                    position: resolveEffectivePosition(playerDoc),
                     auctionPrice: playerDoc?.auctionPrice,
                     overall: overallStats,
                     recent_form: recentForm,
                     upcoming_fixtures: upcomingFixtures,
                     season_points_breakdown: seasonPointsBreakdown
                 },
-                position: resolvePosition(playerDoc?.position || ''),
+                position: resolveEffectivePosition(playerDoc),
                 price: playerDoc?.price?.nowCost || 0,
                 club: teamDoc?.team?.name || teamDoc?.name || "Unknown",
                 lineup: pick.isStarting ? "Starting XI" : `Sub ${pick.subNumber || 0}`,

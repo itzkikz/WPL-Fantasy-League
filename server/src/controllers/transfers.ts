@@ -4,22 +4,14 @@ import { Player } from '../models/Player';
 import { User } from '../models/User';
 import { Gameweek } from '../models/Gameweek';
 import { Transfer } from '../models/Transfer';
+import { resolveEffectivePosition } from '../utils';
 
 const POS_MAX: Record<string, number> = { GK: 2, DEF: 5, MID: 5, FWD: 3 };
-
-function normalizePosition(pos?: string): string {
-    const p = (pos || '').toUpperCase();
-    if (p === 'GK' || p === 'GOALKEEPER' || p === 'G') return 'GK';
-    if (p === 'DEF' || p === 'DEFENDER' || p === 'D') return 'DEF';
-    if (p === 'MID' || p === 'MIDFIELDER' || p === 'M') return 'MID';
-    if (p === 'FWD' || p === 'FORWARD' || p === 'ATTACKER' || p === 'A' || p === 'F') return 'FWD';
-    return 'UNK';
-}
 
 function getPositionCounts(picks: any[], playersMap: Map<number, any>): Record<string, number> {
     const counts: Record<string, number> = { GK: 0, DEF: 0, MID: 0, FWD: 0, UNK: 0 };
     for (const pick of picks) {
-        const pos = normalizePosition(playersMap.get(pick.playerId)?.position);
+        const pos = resolveEffectivePosition(playersMap.get(pick.playerId), 'UNK');
         counts[pos]++;
     }
     return counts;
@@ -92,8 +84,8 @@ function healLineup(picks: any[], playersMap: Map<number, any>) {
 
     for (const b of bench) {
         if (starters.length >= 11) break;
-        const pos = normalizePosition(playersMap.get(b.playerId)?.position);
-        const hasStartingGK = starters.some(s => normalizePosition(playersMap.get(s.playerId)?.position) === 'GK');
+        const pos = resolveEffectivePosition(playersMap.get(b.playerId), 'UNK');
+        const hasStartingGK = starters.some(s => resolveEffectivePosition(playersMap.get(s.playerId), 'UNK') === 'GK');
         if (pos === 'GK' && hasStartingGK) continue;
         b.isStarting = true;
         b.subNumber = 0;
@@ -178,8 +170,8 @@ export const createTransfer = async (req: Request, res: Response) => {
             if (Number(playerOutId) === Number(playerInId)) {
                 return res.status(400).json({ error: 'Players must be different' });
             }
-            const outPos = normalizePosition(squadPlayersMap.get(Number(playerOutId))?.position);
-            const inPos = normalizePosition(playersMap.get(Number(playerInId))?.position);
+            const outPos = resolveEffectivePosition(squadPlayersMap.get(Number(playerOutId)), 'UNK');
+            const inPos = resolveEffectivePosition(playersMap.get(Number(playerInId)), 'UNK');
             const err = validatePositionAfterChange(counts, inPos, outPos);
             if (err) return res.status(400).json({ error: err });
         } else if (type === 'sign') {
@@ -187,7 +179,7 @@ export const createTransfer = async (req: Request, res: Response) => {
                 return res.status(400).json({ error: 'Sign requires an incoming player' });
             }
             if (picks.length >= 15) return res.status(400).json({ error: 'Squad is already full (15 players)' });
-            const inPos = normalizePosition(playersMap.get(Number(playerInId))?.position);
+            const inPos = resolveEffectivePosition(playersMap.get(Number(playerInId)), 'UNK');
             const err = validatePositionAfterChange(counts, inPos);
             if (err) return res.status(400).json({ error: err });
         } else if (type === 'release') {
@@ -325,7 +317,7 @@ export const reverseTransfer = async (req: Request, res: Response) => {
             if (taken.has(transfer.playerOut.playerId)) {
                 return res.status(400).json({ error: 'Cannot reverse: released player has been signed by another team' });
             }
-            const outPos = normalizePosition(transfer.playerOut.position);
+            const outPos = resolveEffectivePosition(transfer.playerOut, 'UNK');
             const err = validatePositionAfterChange(counts, outPos);
             if (err) return res.status(400).json({ error: err });
         }

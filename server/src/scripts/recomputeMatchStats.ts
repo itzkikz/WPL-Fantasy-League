@@ -7,6 +7,7 @@ import { Player } from '../models/Player';
 import { Gameweek } from '../models/Gameweek';
 import { mapSofascoreToPlayerMatchStat } from '../lib/sofascoreMapper';
 import { calculatePlayerPoints, getMatchPointsBreakdown } from '../lib/points';
+import { resolveEffectivePosition } from '../utils';
 
 dotenv.config();
 
@@ -54,9 +55,10 @@ const recomputeMatchStats = async () => {
       }
     }
 
-    // Canonical positions & names, matching how the admin ingest resolves scoring position.
-    const playerDocs = await Player.find({}, 'id position name').lean();
-    const positionByPlayer = new Map(playerDocs.map((p: any) => [p.id, p.position]));
+    // Canonical positions & names, matching how the admin ingest resolves scoring
+    // position (tm_position first, falling back to the stored position).
+    const playerDocs = await Player.find({}, 'id position tm_position name').lean();
+    const positionByPlayer = new Map(playerDocs.map((p: any) => [p.id, resolveEffectivePosition(p, 'UNK')]));
     const nameByPlayer = new Map(playerDocs.map((p: any) => [p.id, p.name]));
 
     let fixturesProcessed = 0;
@@ -90,7 +92,7 @@ const recomputeMatchStats = async () => {
 
         const stats = mapSofascoreToPlayerMatchStat(entry, incidents);
         const position = positionByPlayer.get(entry.playerId)!;
-        const points = calculatePlayerPoints({ position } as any, stats);
+        const points = position === 'UNK' ? 0 : calculatePlayerPoints({ position } as any, stats);
 
         const priorCS = prior?.stats?.cleanSheet ?? null;
         const priorGC = prior?.stats?.goalsConceded ?? null;

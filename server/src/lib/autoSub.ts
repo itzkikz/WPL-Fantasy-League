@@ -1,3 +1,7 @@
+import { resolvePosition } from '../utils';
+
+export { resolvePosition };
+
 export interface Pick {
     playerId: number;
     isCaptain: boolean;
@@ -20,15 +24,6 @@ export const AUTO_SUB_FORMATION_RULES: Record<'GK' | 'DEF' | 'MID' | 'FWD', Form
     DEF: { min: 3, max: 5 },
     MID: { min: 3, max: 5 },
     FWD: { min: 1, max: 3 },
-};
-
-export const resolvePosition = (posStr: string): PositionCategory => {
-    const p = (posStr || '').toUpperCase();
-    if (p === 'GK' || p === 'GOALKEEPER' || p === 'G') return 'GK';
-    if (p === 'DEF' || p === 'DEFENDER' || p === 'D') return 'DEF';
-    if (p === 'MID' || p === 'MIDFIELDER' || p === 'M') return 'MID';
-    if (p === 'FWD' || p === 'FORWARD' || p === 'ATTACKER' || p === 'A' || p === 'F') return 'FWD';
-    return 'UNK';
 };
 
 export interface AutoSubInput {
