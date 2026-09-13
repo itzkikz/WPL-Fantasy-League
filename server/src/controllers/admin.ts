@@ -967,6 +967,7 @@ export const getFantasyTeamById = async (req: Request, res: Response) => {
                         webName: player.webName || player.name,
                         name: player.name,
                         position: player.position,
+                        tm_position: player.tm_position || '',
                         teamId: player.teamId,
                         auctionPrice: player.auctionPrice
                     } : {
@@ -974,6 +975,7 @@ export const getFantasyTeamById = async (req: Request, res: Response) => {
                         webName: 'Unknown Player',
                         name: 'Unknown Player',
                         position: 'Unknown',
+                        tm_position: '',
                         teamId: 0,
                         auctionPrice: null
                     }

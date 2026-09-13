@@ -13,12 +13,17 @@ function normalizePos(pos: string): string {
   return '';
 }
 
+function effectivePos(p: any): string {
+  return normalizePos(p?.tmPosition) || normalizePos(p?.position);
+}
+
 interface AdminPlayer {
   id: number;
   name: string;
   position: string;
   team: string;
   auctionPrice?: number;
+  tmPosition?: string;
 }
 
 interface FantasyTeamFormProps {
@@ -121,7 +126,8 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
           const p = pick.playerId; // populated player
           return {
             element: p.id,
-            position: p.position || 'Unknown',
+            position: effectivePos({ position: p.position, tmPosition: p.tm_position }) || 'Unknown',
+            tmPosition: p.tm_position || '',
             name: p.webName || p.name || 'Unknown',
             isStarting: pick.isStarting ?? false,
             subNumber: pick.subNumber ?? 0,
@@ -246,7 +252,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
         setError('Maximum 15 players allowed.');
         return;
       }
-      const defaultPos = normalizePos(player.position) || 'MID';
+      const defaultPos = normalizePos(player.tmPosition) || normalizePos(player.position) || 'MID';
       setModalPosition(defaultPos);
       setModalAuctionPrice(player.auctionPrice ? String(player.auctionPrice) : '');
       setPendingPlayer(player);
@@ -268,7 +274,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
       return;
     }
 
-    const posCount = squad.filter(p => normalizePos(p.position) === pos).length;
+    const posCount = squad.filter(p => effectivePos(p) === pos).length;
     const limits: Record<string, number> = { GK: 2, DEF: 5, MID: 5, FWD: 3 };
     if (posCount >= limits[pos]) {
       setError(`Maximum ${limits[pos]} ${pos} players allowed.`);
@@ -286,6 +292,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
       setSquad([...squad, {
         element: pendingPlayer.id,
         position: pos,
+        tmPosition: pos,
         isStarting: false,
         isCaptain: false,
         isViceCaptain: false,
@@ -350,7 +357,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
           if (p === 'FWD' || p === 'FORWARD' || p === 'ATTACKER' || p === 'A' || p === 'F') return 4;
           return 5;
         };
-        return getPosWeight(a.position) - getPosWeight(b.position);
+        return getPosWeight(effectivePos(a)) - getPosWeight(effectivePos(b));
       });
       const usedSubNumbers = new Set(squad.filter(p => !p.isStarting && p.subNumber).map(p => p.subNumber));
       let nextAvailableSub = 1;
@@ -412,13 +419,7 @@ export default function FantasyTeamForm({ teamId }: FantasyTeamFormProps) {
   };
 
   const positionCounts = squad.reduce((acc, p) => {
-    const pos = p.position.toUpperCase();
-    let norm = '';
-    if (pos === 'GK' || pos === 'GOALKEEPER' || pos === 'G') norm = 'GK';
-    else if (pos === 'DEF' || pos === 'DEFENDER' || pos === 'D') norm = 'DEF';
-    else if (pos === 'MID' || pos === 'MIDFIELDER' || pos === 'M') norm = 'MID';
-    else if (pos === 'FWD' || pos === 'FORWARD' || pos === 'ATTACKER' || pos === 'A' || pos === 'F') norm = 'FWD';
-    
+    const norm = effectivePos(p);
     if (norm) {
       acc[norm] = (acc[norm] || 0) + 1;
     }
