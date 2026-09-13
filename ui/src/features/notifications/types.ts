@@ -20,5 +20,6 @@ export interface Notifications {
   targetName?: string;
   kind?: 'gameweek' | 'points' | 'transfer' | 'news' | 'general';
   url?: string;
+  deadline?: string;
   read?: boolean;
 }

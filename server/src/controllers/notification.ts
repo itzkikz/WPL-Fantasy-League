@@ -116,6 +116,7 @@ export const notifications = async (req: Request, res: Response, next: NextFunct
                 targetName: notif.targetName,
                 kind: notif.kind || 'general',
                 url: notif.url,
+                deadline: notif.deadline,
                 read: isRead,
             };
         });
