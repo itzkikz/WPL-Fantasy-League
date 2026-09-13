@@ -3,7 +3,7 @@ import { Player } from '../models/Player';
 import { FantasyTeam } from '../models/FantasyTeam';
 import { Gameweek } from '../models/Gameweek';
 import { getGameweekPoints, getGameweekMinutes, getGameweekStats } from '../controllers/players';
-import { resolvePosition, resolveTmPosition } from '../utils';
+import { resolveEffectivePosition, resolveTmPosition } from '../utils';
 
 export const getPlayerStatsMap = async (): Promise<Map<number, any>> => {
     const playerStats = await PlayerStats.find({})
@@ -151,7 +151,7 @@ export const buildFantasyTeamGamewiseRows = async (): Promise<FantasyTeamGamewis
                     gameweek: gwNumber,
                     playerId: pick.playerId,
                     playerName: playerDoc?.name ?? `Player #${pick.playerId}`,
-                    position: resolvePosition(playerDoc?.position || ''),
+                    position: playerDoc ? resolveEffectivePosition(playerDoc) : 'Unknown',
                     tmPosition: resolveTmPosition(playerDoc),
                     lineup: lineupLabel(pick),
                     role: roleLabel(pick),
