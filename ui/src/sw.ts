@@ -165,7 +165,7 @@ self.addEventListener('push', (event: PushEvent) => {
     }
   }
 
-  const title = payload.title ?? 'Live Update'
+  let title = payload.title ?? 'Live Update'
   const options: NotificationOptions = {
     body: payload.body ?? '',
     tag: payload.tag ?? 'live-activity',
@@ -173,6 +173,15 @@ self.addEventListener('push', (event: PushEvent) => {
     badge: payload.badge ?? '/pwa-192x192.png',
     icon: payload.icon ?? '/pwa-192x192.png',
     data: payload.data ?? { url: payload.url ?? '/' },
+  }
+
+  // Deadlines travel as UTC ISO instants; render them in the device's local time.
+  const deadline = payload.data && payload.data.deadline
+  if (deadline) {
+    const local = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' })
+      .format(new Date(deadline))
+    title = title.replace('{deadline}', local)
+    options.body = (options.body ?? '').replace('{deadline}', local)
   }
 
   // Add actions separately if provided (not in TS definition but supported by browsers)

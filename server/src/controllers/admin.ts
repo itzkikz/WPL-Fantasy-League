@@ -372,9 +372,14 @@ export const getMatchDetails = async (req: Request, res: Response) => {
             { $set: { addedtofantasy: true } }
         );
 
+        const fixture = await Fixture.findOne({ fixtureId }).lean();
+        const teamIds = [fixture?.homeTeam?.id, fixture?.awayTeam?.id].filter((id): id is number => id != null);
+        const teams = await Team.find({ id: { $in: teamIds } }).select('name').lean();
+        const nameFor = (teamId?: number) => teams.find(t => t.id === teamId)?.name;
+
         sendNotification({
-            title: `Gameweek ${gameweekId} results are in!`,
-            message: `Updated scores & points for ${playersProcessed} players after adding fixture ${fixtureId} to fantasy.`,
+            title: `Match Results: ${nameFor(fixture?.homeTeam?.id) ?? 'Home'} vs ${nameFor(fixture?.awayTeam?.id) ?? 'Away'}`,
+            message: `Fantasy points updated for ${playersProcessed} players.`,
             targetType: 'all',
             kind: 'points',
             url: '/standings',
@@ -1300,19 +1305,17 @@ export const togglePickTeam = async (req: Request, res: Response) => {
         await apiConfig.save();
 
         const pickEnabled = apiConfig.lastUpdatedString === 'true';
-        const deadlineStr = apiConfig.deadlineDate
-            ? apiConfig.deadlineDate.toLocaleString()
-            : undefined;
         sendNotification({
             title: pickEnabled ? 'Team selection is now open!' : 'Team selection is now closed',
-            message: pickEnabled && deadlineStr
-                ? `Pick your squad before the deadline: ${deadlineStr}.`
+            message: pickEnabled && apiConfig.deadlineDate
+                ? 'Pick your squad before the deadline: {deadline}.'
                 : pickEnabled
                     ? 'Pick your squad now!'
                     : 'Team selection window has closed.',
             targetType: 'all',
             kind: 'gameweek',
             url: '/my-team',
+            deadline: apiConfig.deadlineDate ? apiConfig.deadlineDate.toISOString() : undefined,
         }).catch((err) => console.error('Notification send failed:', err));
 
         res.status(200).json({ success: true, data: { enabled: pickEnabled, deadlineDate: apiConfig.deadlineDate } });

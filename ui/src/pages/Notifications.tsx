@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useRouter } from "@tanstack/react-router";
+import dayjs from "dayjs";
 import { useUserStore } from "../store/useUserStore";
 import {
   useNotifications,
@@ -271,7 +272,9 @@ export default function Notifications() {
                 <NotificationItem
                   key={notif.id || notif._id || notif.time}
                   title={notif.title}
-                  message={notif.message}
+                  message={notif.deadline
+                    ? notif.message.replace("{deadline}", dayjs(notif.deadline).format("ddd, D MMM YYYY, h:mm A"))
+                    : notif.message}
                   time={notif.time}
                   kind={notif.kind}
                   unread={!notif.read}

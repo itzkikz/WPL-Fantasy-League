@@ -27,6 +27,7 @@ export interface SendNotificationOptions {
     targetName?: string;
     kind?: NotificationKind;
     url?: string;
+    deadline?: string;
 }
 
 /**
@@ -71,6 +72,7 @@ export const sendNotification = async (options: SendNotificationOptions): Promis
         targetName,
         kind: kind || 'general',
         url: url || undefined,
+        deadline: options.deadline || undefined,
         recipientUserIds,
         readBy: [],
         deletedBy: []
@@ -80,7 +82,7 @@ export const sendNotification = async (options: SendNotificationOptions): Promis
 
     subscribers.forEach((sub) => {
         const subscription = { endpoint: sub.endpoint, expirationTime: sub.expirationTime, keys: sub.keys };
-        webpush.sendNotification(subscription, JSON.stringify({ title, body: message, url, icon: '/pwa-192x192.png', badge: '/pwa-192x192.png' }))
+        webpush.sendNotification(subscription, JSON.stringify({ title, body: message, url, deadline: options.deadline, icon: '/pwa-192x192.png', badge: '/pwa-192x192.png' }))
             .catch(async (err: Error) => {
                 console.error("Error sending notification, removing subscription", err);
                 await Subscriber.deleteOne({ endpoint: sub.endpoint });
