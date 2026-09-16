@@ -374,7 +374,7 @@ export const getMatchDetails = async (req: Request, res: Response) => {
 
         const fixture = await Fixture.findOne({ fixtureId }).lean();
         const teamIds = [fixture?.homeTeam?.id, fixture?.awayTeam?.id].filter((id): id is number => id != null);
-        const teams = await Team.find({ id: { $in: teamIds } }).select('name').lean();
+        const teams = await Team.find({ id: { $in: teamIds } }).select('id name').lean();
         const nameFor = (teamId?: number) => teams.find(t => t.id === teamId)?.name;
 
         sendNotification({
