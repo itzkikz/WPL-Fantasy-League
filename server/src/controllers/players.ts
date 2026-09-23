@@ -150,6 +150,22 @@ export const getGameweekMinutes = (gameweeks: any[], gwId: number): number => {
     return getGameweekEntries(gameweeks, gwId).reduce((sum, e) => sum + (e.stats?.minutesPlayed || 0), 0);
 };
 
+// Pre-compute per-player gameweek -> (points, minutes) lookups so hot scoring
+// loops (standings, H2H) avoid O(gameweeks) `.filter` scans on every pick.
+// Semantically identical to getGameweekPoints/getGameweekMinutes.
+export const buildGameweekLookup = (gameweeks: any[]): Map<number, { points: number; minutes: number }> => {
+    const lookup = new Map<number, { points: number; minutes: number }>();
+    if (!Array.isArray(gameweeks)) return lookup;
+    for (const e of gameweeks) {
+        if (!e || typeof e.id !== 'number') continue;
+        const cur = lookup.get(e.id) || { points: 0, minutes: 0 };
+        cur.points += e.points || 0;
+        cur.minutes += e.stats?.minutesPlayed || 0;
+        lookup.set(e.id, cur);
+    }
+    return lookup;
+};
+
 export const getGameweekStats = (gameweeks: any[], gwId: number): SofaScoreStats => {
     return aggregateMatchStats(getGameweekEntries(gameweeks, gwId));
 };

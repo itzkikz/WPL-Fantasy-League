@@ -18,32 +18,31 @@ export const getPlayerStatsMap = async (): Promise<Map<number, any>> => {
  * Score a fantasy team's picks for a single gameweek. Identical to the logic
  * used by `getStandingsData` (captain doubles if he played, otherwise the
  * vice-captain doubles; only starting picks score).
+ *
+ * Accepts pre-computed per-player gw lookups (playerId -> gwId -> {points, minutes})
+ * built with `buildGameweekLookup` to avoid per-pick array scans.
  */
-export const computeTeamGwScore = (picks: any[], gwId: number, playerStatsMap: Map<number, any>): number => {
+export const computeTeamGwScore = (picks: any[], gwId: number, gwLookupByPlayer: Map<number, Map<number, { points: number; minutes: number }>>): number => {
     let score = 0;
     let captainPlayed = false;
 
     const captainPick = picks.find(p => p.isCaptain);
     if (captainPick) {
-        const cStats = playerStatsMap.get(captainPick.playerId);
-        if (cStats && cStats.gameweeks) {
-            if (getGameweekMinutes(cStats.gameweeks, gwId) > 0) {
-                captainPlayed = true;
-            }
+        if ((gwLookupByPlayer.get(captainPick.playerId)?.get(gwId)?.minutes || 0) > 0) {
+            captainPlayed = true;
         }
     }
 
     picks.forEach(pick => {
         if (!pick.isStarting) return;
 
-        const statsDoc = playerStatsMap.get(pick.playerId);
-        if (statsDoc && statsDoc.gameweeks) {
-            const pts = getGameweekPoints(statsDoc.gameweeks, gwId);
-            if (pts > 0) {
-                score += pick.isCaptain && captainPlayed
-                    ? pts * 2
-                    : (pick.isViceCaptain && !captainPlayed ? pts * 2 : pts);
-            }
+        const entry = gwLookupByPlayer.get(pick.playerId)?.get(gwId);
+        if (!entry) return;
+        const pts = entry.points;
+        if (pts > 0) {
+            score += pick.isCaptain && captainPlayed
+                ? pts * 2
+                : (pick.isViceCaptain && !captainPlayed ? pts * 2 : pts);
         }
     });
     return score;

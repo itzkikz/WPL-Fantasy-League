@@ -1114,14 +1114,11 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       }
     }
 
+    // Light ranking query: only totals + per-GW points, which is all the "best
+    // of" sections need. Full per-match stats are fetched below only for the
+    // players whose detailed current-GW breakdown we actually render.
     const ownedPlayersWithStats = await PlayerStats.find({ playerId: { $in: Array.from(allOwnedPlayerIds) } })
-        .select(
-            'playerId totalPoints ' +
-            'gameweeks.id gameweeks.points ' +
-            'gameweeks.stats.minutesPlayed gameweeks.stats.goals gameweeks.stats.goalAssist gameweeks.stats.cleanSheet ' +
-            'gameweeks.stats.yellowCards gameweeks.stats.redCards gameweeks.stats.penaltyMissed gameweeks.stats.penaltySaved ' +
-            'gameweeks.stats.saves gameweeks.stats.totalTackle gameweeks.stats.totalClearance gameweeks.stats.outfielderBlock gameweeks.stats.ballRecovery'
-        )
+        .select('playerId totalPoints gameweeks.id gameweeks.points')
         .lean();
 
     const sortedGwStats = [...ownedPlayersWithStats]
@@ -1195,19 +1192,35 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
       }
     }
 
+    // Full per-match stats only for players whose detailed breakdowns appear:
+    // the starting XI (points breakdown) + the per-team top scorer (spotlight).
+    const detailPlayerIds = [...new Set([...startingPlayerIds, ...Array.from(teamTopStatsMap.values()).map(s => s.playerId)])];
+    const ownedFullStats = await PlayerStats.find({ playerId: { $in: detailPlayerIds } })
+        .select(
+            'playerId totalPoints ' +
+            'gameweeks.id gameweeks.points ' +
+            'gameweeks.stats.minutesPlayed gameweeks.stats.goals gameweeks.stats.goalAssist gameweeks.stats.cleanSheet ' +
+            'gameweeks.stats.yellowCards gameweeks.stats.redCards gameweeks.stats.penaltyMissed gameweeks.stats.penaltySaved ' +
+            'gameweeks.stats.saves gameweeks.stats.totalTackle gameweeks.stats.totalClearance gameweeks.stats.outfielderBlock gameweeks.stats.ballRecovery'
+        )
+        .lean();
+    const ownedFullStatsMap = new Map(ownedFullStats.map(s => [s.playerId, s]));
+    const ownedTotalPointsMap = new Map(ownedPlayersWithStats.map(s => [s.playerId, s.totalPoints || 0]));
+
     const spotlightPlayers: any[] = [];
     for (const [teamName, topStat] of teamTopStatsMap.entries()) {
+      const fullStat = ownedFullStatsMap.get(topStat.playerId) || topStat;
       const topPlayerDoc = pDocsMap.get(topStat.playerId);
       const topTeamDoc = topPlayerDoc ? tDocsMap.get(topPlayerDoc.teamId) : null;
-      const currentGwStats = topStat.gameweeks?.find((g: any) => g.id === currentGw);
-      const currentGwPoints = topStat.gameweeks ? getGameweekPoints(topStat.gameweeks, currentGw) : 0;
-      const recentGws = getGameweekForm(topStat.gameweeks || [], currentGw).slice(-5);
+      const currentGwStats = fullStat.gameweeks?.find((g: any) => g.id === currentGw);
+      const currentGwPoints = fullStat.gameweeks ? getGameweekPoints(fullStat.gameweeks, currentGw) : 0;
+      const recentGws = getGameweekForm(fullStat.gameweeks || [], currentGw).slice(-5);
 
       let gwStats: any = {};
-      if (topStat.gameweeks) {
-        const gwEntries = getGameweekEntries(topStat.gameweeks, currentGw);
+      if (fullStat.gameweeks) {
+        const gwEntries = getGameweekEntries(fullStat.gameweeks, currentGw);
         if (gwEntries.length > 0) {
-          gwStats = getGameweekStats(topStat.gameweeks, currentGw);
+          gwStats = getGameweekStats(fullStat.gameweeks, currentGw);
         } else if (currentGwStats?.stats) {
           gwStats = currentGwStats.stats;
         }
@@ -1255,7 +1268,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
     const playerSpotlight = spotlightPlayers.length > 0 ? spotlightPlayers[0] : {};
 
     // 10. Points Breakdown
-    const startingStatsMap = new Map(ownedPlayersWithStats.map(s => [s.playerId, s]));
+    const startingStatsMap = new Map(ownedFullStats.map(s => [s.playerId, s]));
     const startingPlayerPositionMap = new Map(startingPicks.map(p => {
       const doc = pDocsMap.get(p.playerId);
       return [p.playerId, resolveEffectivePosition(doc, 'UNK')];
@@ -1359,7 +1372,6 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
         const p = pDocsMap.get(id);
         if (!p) return null;
         const teamDoc = tDocsMap.get(p.teamId);
-        const statDoc = startingStatsMap.get(p.id);
         const pick = fantasyTeam.currentSquad?.picks?.find(pk => pk.playerId === p.id);
         return {
           id: p.id,
@@ -1367,7 +1379,7 @@ export const dashboard = async (req: Request, res: Response, next: NextFunction)
           team: teamDoc?.nameCode || teamDoc?.name || "UNK",
           teamLogo: teamDoc?.logo || "",
           photo: p.photo || (p.id ? `https://img.sofascore.com/api/v1/player/${p.id}/image` : ""),
-          points: statDoc?.totalPoints || 0,
+          points: ownedTotalPointsMap.get(p.id) || 0,
           price: (p.price?.nowCost || 0) / 10,
           position: resolveEffectivePosition(p),
           isCaptain: pick?.isCaptain || false,
