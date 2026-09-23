@@ -4,35 +4,28 @@ import { FantasyTeam } from '../models/FantasyTeam';
 import { H2HLeague } from '../models/H2HLeague';
 import { H2HFixture } from '../models/H2HFixture';
 import { PlayerStats } from '../models/PlayerStats';
-import { Player } from '../models/Player';
 import { Gameweek } from '../models/Gameweek';
-import { getGameweekPoints, getGameweekMinutes } from './players';
+import { buildGameweekLookup } from './players';
 
-// Helper: compute a single team's GW points from picks + a player-stats lookup map
-function computePicksPoints(picks: any[], gameweek: number, statsByPlayerId: Map<number, any>): number {
+// Helper: compute a single team's GW points from picks + a prebuilt
+// player -> gwId -> {points, minutes} lookup map (no per-pick array scans).
+function computePicksPoints(picks: any[], gameweek: number, gwLookupByPlayer: Map<number, Map<number, { points: number; minutes: number }>>): number {
     if (!picks || !picks.length) return 0;
-
-    // Build minutes map for captain check
-    const minutesMap = new Map<number, number>();
-    for (const pick of picks) {
-        const ps = statsByPlayerId.get(pick.playerId);
-        if (ps) minutesMap.set(pick.playerId, getGameweekMinutes(ps.gameweeks, gameweek));
-    }
 
     // Check if captain played
     const captainPick = picks.find((p: any) => p.isCaptain);
     let captainPlayed = false;
     if (captainPick) {
-        captainPlayed = (minutesMap.get(captainPick.playerId) || 0) > 0;
+        captainPlayed = (gwLookupByPlayer.get(captainPick.playerId)?.get(gameweek)?.minutes || 0) > 0;
     }
 
     let gwScore = 0;
     for (const pick of picks) {
         if (!pick.isStarting) continue;
-        const ps = statsByPlayerId.get(pick.playerId);
-        if (!ps) continue;
+        const entry = gwLookupByPlayer.get(pick.playerId)?.get(gameweek);
+        if (!entry) continue;
 
-        let pts = getGameweekPoints(ps.gameweeks, gameweek);
+        let pts = entry.points;
         if (pts === 0) continue;
 
         if (pick.isCaptain && captainPlayed) {
@@ -46,16 +39,28 @@ function computePicksPoints(picks: any[], gameweek: number, statsByPlayerId: Map
     return gwScore;
 }
 
+// H2H GW-points are derived from the same PlayerStats/teams data and complete
+// only when a GW completes, so cache per-league results briefly like standings.
+let cachedH2HGwPoints: { key: string; at: number; data: Map<number, Map<string, number>> } | null = null;
+const H2H_GW_POINTS_CACHE_TTL_MS = 30000;
+
 // Helper: get points for all completed GWs in league range.
 // Batched: loads all league teams + all player stats up front (4 queries total)
 // instead of 2 queries per team per gameweek.
 export async function getLeagueAllGWPoints(league: any, includeCurrentGw: boolean = false): Promise<Map<number, Map<string, number>>> {
-    const gwPoints = new Map<number, Map<string, number>>();
     const completedGws = await Gameweek.find({ isCompleted: true }).select('number').lean();
     const completedGwNumbers = new Set(completedGws.map((g: any) => g.number));
 
     const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
     const currentGw = currentGwDoc?.number || 0;
+
+    const sig = `${league._id?.toString?.() || league._id}:${currentGw}:${includeCurrentGw}:${[...completedGwNumbers].sort((a, b) => a - b).join(',')}`;
+    const now = Date.now();
+    if (cachedH2HGwPoints && cachedH2HGwPoints.key === sig && now - cachedH2HGwPoints.at < H2H_GW_POINTS_CACHE_TTL_MS) {
+        return cachedH2HGwPoints.data;
+    }
+
+    const gwPoints = new Map<number, Map<string, number>>();
 
     const gwsToCompute: number[] = [];
     for (let gw = league.gameweekStart; gw <= league.gameweekEnd; gw++) {
@@ -63,7 +68,10 @@ export async function getLeagueAllGWPoints(league: any, includeCurrentGw: boolea
             gwsToCompute.push(gw);
         }
     }
-    if (gwsToCompute.length === 0) return gwPoints;
+    if (gwsToCompute.length === 0) {
+        cachedH2HGwPoints = { key: sig, at: now, data: gwPoints };
+        return gwPoints;
+    }
 
     const teamIds = league.fantasyTeams.map((t: any) => t._id.toString());
 
@@ -96,27 +104,30 @@ export async function getLeagueAllGWPoints(league: any, includeCurrentGw: boolea
         }
     }
 
-    // Load all needed player stats in one query
+    // Load only the fields the scorer needs. Full gameweeks[].stats objects are
+    // huge and dominate transfer time; minutesPlayed is all the captain logic
+    // uses, points are precomputed per match.
     const allPlayerStats = await PlayerStats.find({
         playerId: { $in: [...allPlayerIds] },
         'gameweeks.id': { $in: gwsToCompute },
-    }).lean();
+    })
+        .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
+        .lean();
 
-    const statsByPlayerId = new Map<number, any>();
-    for (const ps of allPlayerStats) {
-        if (!statsByPlayerId.has(ps.playerId)) statsByPlayerId.set(ps.playerId, ps);
-    }
+    const gwLookupByPlayer = new Map<number, Map<number, { points: number; minutes: number }>>();
+    for (const ps of allPlayerStats) gwLookupByPlayer.set(ps.playerId, buildGameweekLookup(ps.gameweeks));
 
     // Compute points per team per GW in memory
     for (const gw of gwsToCompute) {
         const teamPoints = new Map<string, number>();
         const picksMap = picksByGwByTeam.get(gw) || new Map<string, any[]>();
         for (const teamId of teamIds) {
-            teamPoints.set(teamId, computePicksPoints(picksMap.get(teamId) || [], gw, statsByPlayerId));
+            teamPoints.set(teamId, computePicksPoints(picksMap.get(teamId) || [], gw, gwLookupByPlayer));
         }
         gwPoints.set(gw, teamPoints);
     }
 
+    cachedH2HGwPoints = { key: sig, at: now, data: gwPoints };
     return gwPoints;
 }
 

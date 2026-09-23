@@ -6,7 +6,7 @@ import { convertToJSON, resolveEffectivePosition } from "../utils";
 import { NextFunction, Request, Response } from "express";
 import { StandingsResponse, TeamDetails } from "../types/standings";
 import { convertToFormation } from "../lib/formatter/lineupFormatter";
-import { aggregateMatchStats, getGameweekPoints, getGameweekMinutes, getGameweekStats, getGameweekForm, getGameweekEntries, getGameweekBreakdown, buildCurrentWeek } from "./players";
+import { aggregateMatchStats, getGameweekPoints, getGameweekMinutes, getGameweekStats, getGameweekForm, getGameweekEntries, getGameweekBreakdown, buildCurrentWeek, buildGameweekLookup } from "./players";
 import { getSeasonPointsBreakdown } from "../lib/points";
 import { computeTeamGwScore } from "../lib/fantasyScore";
 
@@ -41,11 +41,21 @@ export const getStandingsData = async () => {
     const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
     const globalCurrentGw = currentGwDoc ? currentGwDoc.number : 1;
 
-    const playerStats = await PlayerStats.find({})
+    // Only fetch stats for players actually picked by any team instead of the
+    // whole (large) collection. gameweeks[].stats dominates PlayerStats doc size.
+    const pickedPlayerIdSet = new Set<number>();
+    for (const team of teams as any[]) {
+        for (const h of team.history || []) {
+            for (const p of h.picks || []) pickedPlayerIdSet.add(p.playerId);
+        }
+        for (const p of team.currentSquad?.picks || []) pickedPlayerIdSet.add(p.playerId);
+    }
+
+    const playerStats = await PlayerStats.find({ playerId: { $in: [...pickedPlayerIdSet] } })
         .select('playerId gameweeks.id gameweeks.points gameweeks.stats.minutesPlayed')
         .lean();
-    const playerStatsMap = new Map();
-    playerStats.forEach(ps => playerStatsMap.set(ps.playerId, ps));
+    const gwLookupByPlayer = new Map<number, Map<number, { points: number; minutes: number }>>();
+    for (const ps of playerStats) gwLookupByPlayer.set(ps.playerId, buildGameweekLookup(ps.gameweeks));
 
     const standingsData: StandingsResponse[] = teams.map(team => {
         const history = team.history || [];
@@ -56,7 +66,7 @@ export const getStandingsData = async () => {
 
         if (history.length > 0) {
             history.forEach((h: any) => {
-                const gwScore = computeTeamGwScore(h.picks, h.gameweek, playerStatsMap);
+                const gwScore = computeTeamGwScore(h.picks, h.gameweek, gwLookupByPlayer);
                 totalPoints += gwScore;
                 if (h.gameweek === globalCurrentGw) {
                     currentGwPoints = gwScore;
@@ -68,7 +78,7 @@ export const getStandingsData = async () => {
 
         const hasCurrentGwHistory = history.some((h: any) => h.gameweek === globalCurrentGw);
         if (!hasCurrentGwHistory && team.currentSquad && team.currentSquad.picks) {
-            const gwScore = computeTeamGwScore(team.currentSquad.picks, globalCurrentGw, playerStatsMap);
+            const gwScore = computeTeamGwScore(team.currentSquad.picks, globalCurrentGw, gwLookupByPlayer);
             currentGwPoints = gwScore;
             totalPoints += gwScore;
         }
