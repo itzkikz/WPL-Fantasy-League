@@ -20,23 +20,64 @@ import { Fixture } from "../models/Fixture";
 
 let cachedStandingsData: StandingsResponse[] | null = null;
 let lastStandingsFetchTime = 0;
-const STANDINGS_CACHE_TTL_MS = 30000; // 30 seconds
+const STANDINGS_CACHE_TTL_MS = 60000; // 60 seconds
+
+let cachedLogosMap: Map<string, string> | null = null;
+let lastLogosFetchTime = 0;
+const LOGOS_CACHE_TTL_MS = 1000 * 60 * 60; // 1 hour
+
+export const invalidateLogosCache = () => {
+    cachedLogosMap = null;
+    lastLogosFetchTime = 0;
+};
+
+export const getFantasyTeamLogosMap = async (): Promise<Map<string, string>> => {
+    const now = Date.now();
+    if (cachedLogosMap && (now - lastLogosFetchTime < LOGOS_CACHE_TTL_MS)) {
+        return cachedLogosMap;
+    }
+    const teams = await FantasyTeam.find({}, '_id logo').lean();
+    const map = new Map<string, string>();
+    for (const t of teams) {
+        if (t.logo) map.set(t._id.toString(), t.logo);
+    }
+    cachedLogosMap = map;
+    lastLogosFetchTime = now;
+    return map;
+};
 
 export const invalidateStandingsCache = () => {
     cachedStandingsData = null;
     lastStandingsFetchTime = 0;
 };
 
-export const getStandingsData = async () => {
+export const getStandingsData = async (options?: { includeLogos?: boolean }) => {
+    const includeLogos = options?.includeLogos ?? false;
     const now = Date.now();
+
     if (cachedStandingsData && (now - lastStandingsFetchTime < STANDINGS_CACHE_TTL_MS)) {
+        if (includeLogos && cachedStandingsData.length > 0 && !cachedStandingsData[0].logo) {
+            const logos = await getFantasyTeamLogosMap();
+            return cachedStandingsData.map(item => ({
+                ...item,
+                logo: logos.get(item.team_id) || ""
+            }));
+        }
         return cachedStandingsData.map(item => ({ ...item }));
     }
 
-    const teams = await FantasyTeam.find({})
-        .select('name history currentSquad updatedAt managers managerDisplayNames logo')
-        .populate('managers', 'username displayName')
-        .lean();
+    const [teams, logosMap] = await Promise.all([
+        FantasyTeam.find({})
+            .select(
+                'name ' +
+                'history.gameweek history.picks.playerId history.picks.isCaptain history.picks.isViceCaptain history.picks.isStarting ' +
+                'currentSquad.picks.playerId currentSquad.picks.isCaptain currentSquad.picks.isViceCaptain currentSquad.picks.isStarting ' +
+                'updatedAt managers managerDisplayNames'
+            )
+            .populate('managers', 'username displayName')
+            .lean(),
+        includeLogos ? getFantasyTeamLogosMap() : Promise.resolve(null)
+    ]);
 
     const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
     const globalCurrentGw = currentGwDoc ? currentGwDoc.number : 1;
@@ -91,7 +132,7 @@ export const getStandingsData = async () => {
         return {
             team: team.name,
             team_id: team._id.toString(),
-            logo: team.logo || "",
+            logo: logosMap ? (logosMap.get(team._id.toString()) || "") : "",
             gw: globalCurrentGw,
             current_gw: currentGwPoints,
             total: totalPoints,
@@ -135,7 +176,7 @@ export const getStandingsData = async () => {
 
 export const getStandings = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const standingsData = await getStandingsData();
+        const standingsData = await getStandingsData({ includeLogos: true });
         res.set('Cache-Control', 'public, max-age=60, s-maxage=60');
         res.json({
             success: true,

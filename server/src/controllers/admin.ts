@@ -27,8 +27,9 @@ import { pickFields, mapLineups } from '../lib/sofascoreFixtures';
 import { runAutoSubs } from '../lib/autoSub';
 import { resolveEffectivePosition } from '../utils';
 import { getLeagueAllGWPoints } from './h2h';
-import { getGameweekMinutes } from './players';
+import { getGameweekMinutes, invalidatePlayerStatsCache } from './players';
 import { sendNotification } from '../services/notify';
+import { invalidateStandingsCache, invalidateLogosCache } from './standings';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -371,6 +372,8 @@ export const getMatchDetails = async (req: Request, res: Response) => {
             { fixtureId },
             { $set: { addedtofantasy: true } }
         );
+        invalidatePlayerStatsCache();
+        invalidateStandingsCache();
 
         const fixture = await Fixture.findOne({ fixtureId }).lean();
         const teamIds = [fixture?.homeTeam?.id, fixture?.awayTeam?.id].filter((id): id is number => id != null);
@@ -901,6 +904,9 @@ export const createFantasyTeam = async (req: Request, res: Response) => {
         });
 
         await newFantasyTeam.save();
+        invalidateStandingsCache();
+        invalidatePlayerStatsCache();
+        if (logo) invalidateLogosCache();
 
         // Update players' auctionPrices
         for (const p of squad) {
@@ -1084,6 +1090,9 @@ export const updateFantasyTeam = async (req: Request, res: Response) => {
         }
 
         await team.save();
+        invalidateStandingsCache();
+        invalidatePlayerStatsCache();
+        if (logo !== undefined) invalidateLogosCache();
 
         // Update players' auctionPrices
         for (const p of squad) {

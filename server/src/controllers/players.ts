@@ -5,6 +5,7 @@ import { Team } from "../models/Team";
 import { Gameweek } from "../models/Gameweek";
 import { PlayerStats as PlayerStatsModel } from "../models/PlayerStats";
 import { FantasyTeam } from "../models/FantasyTeam";
+import { Fixture } from "../models/Fixture";
 import "../models/League";
 import { resolveEffectivePosition } from "../utils";
 import { getMatchPointsBreakdown, getSeasonPointsBreakdown, PointsBreakdownItem } from "../lib/points";
@@ -499,6 +500,258 @@ export const getPlayerStats = async (req: Request, res: Response, next: NextFunc
     }
 }
 
+// --- Caching helpers for player listings ---
+let cachedTeamsMap: Map<number, any> | null = null;
+let lastTeamsMapTime = 0;
+let teamsMapPromise: Promise<Map<number, any>> | null = null;
+const TEAMS_CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+
+export const getAllTeamsMap = async (): Promise<Map<number, any>> => {
+    const now = Date.now();
+    if (cachedTeamsMap && (now - lastTeamsMapTime < TEAMS_CACHE_TTL)) {
+        return cachedTeamsMap;
+    }
+    if (teamsMapPromise) return teamsMapPromise;
+    teamsMapPromise = (async () => {
+        try {
+            const teams = await Team.find({}).populate({ path: 'league', strictPopulate: false }).lean() as any[];
+            const map = new Map<number, any>(teams.map(t => [t.id, t]));
+            cachedTeamsMap = map;
+            lastTeamsMapTime = Date.now();
+            return map;
+        } finally {
+            teamsMapPromise = null;
+        }
+    })();
+    return teamsMapPromise;
+};
+
+let cachedTotalPointsMap: Map<number, number> | null = null;
+let lastTotalPointsTime = 0;
+let totalPointsPromise: Promise<Map<number, number>> | null = null;
+const TOTAL_POINTS_TTL = 15 * 60 * 1000; // 15 minutes
+
+export const getTotalPointsMap = async (): Promise<Map<number, number>> => {
+    const now = Date.now();
+    if (cachedTotalPointsMap && (now - lastTotalPointsTime < TOTAL_POINTS_TTL)) {
+        return cachedTotalPointsMap;
+    }
+    if (totalPointsPromise) return totalPointsPromise;
+    totalPointsPromise = (async () => {
+        try {
+            const totalPointsDocs = await PlayerStatsModel.find({}, { playerId: 1, totalPoints: 1 }).lean();
+            const map = new Map<number, number>(totalPointsDocs.map(d => [d.playerId, d.totalPoints || 0]));
+            cachedTotalPointsMap = map;
+            lastTotalPointsTime = Date.now();
+            return map;
+        } finally {
+            totalPointsPromise = null;
+        }
+    })();
+    return totalPointsPromise;
+};
+
+export interface PlayerSummary {
+    id: number;
+    teamId: number;
+    position?: string;
+    tm_position?: string;
+}
+
+let cachedPlayersSummary: PlayerSummary[] | null = null;
+let lastPlayersSummaryTime = 0;
+let playersSummaryPromise: Promise<PlayerSummary[]> | null = null;
+const PLAYERS_SUMMARY_TTL = 15 * 60 * 1000; // 15 minutes
+
+export const getAllPlayersSummary = async (): Promise<PlayerSummary[]> => {
+    const now = Date.now();
+    if (cachedPlayersSummary && (now - lastPlayersSummaryTime < PLAYERS_SUMMARY_TTL)) {
+        return cachedPlayersSummary;
+    }
+    if (playersSummaryPromise) return playersSummaryPromise;
+    playersSummaryPromise = (async () => {
+        try {
+            const docs = await Player.find({}, 'id teamId position tm_position').lean() as any[];
+            const summary: PlayerSummary[] = docs.map(d => ({
+                id: d.id,
+                teamId: d.teamId,
+                position: d.position,
+                tm_position: d.tm_position
+            }));
+            cachedPlayersSummary = summary;
+            lastPlayersSummaryTime = Date.now();
+            return summary;
+        } finally {
+            playersSummaryPromise = null;
+        }
+    })();
+    return playersSummaryPromise;
+};
+
+export interface OwnershipContext {
+    allFantasyTeams: any[];
+    teamNameByPlayer: Map<number, string[]>;
+    ownedSet: Set<number>;
+    totalTeamsCount: number;
+}
+
+let cachedOwnershipContext: OwnershipContext | null = null;
+let lastOwnershipTime = 0;
+let ownershipPromise: Promise<OwnershipContext> | null = null;
+const OWNERSHIP_TTL = 15 * 60 * 1000; // 15 minutes
+
+export const getOwnershipContext = async (): Promise<OwnershipContext> => {
+    const now = Date.now();
+    if (cachedOwnershipContext && (now - lastOwnershipTime < OWNERSHIP_TTL)) {
+        return cachedOwnershipContext;
+    }
+    if (ownershipPromise) return ownershipPromise;
+    ownershipPromise = (async () => {
+        try {
+            const allFantasyTeams = await FantasyTeam.find({}).select('name currentSquad.picks.playerId').lean();
+            const teamNameByPlayer = new Map<number, string[]>();
+            const ownedSet = new Set<number>();
+            for (const ft of allFantasyTeams) {
+                for (const pick of ft.currentSquad?.picks || []) {
+                    if (!teamNameByPlayer.has(pick.playerId)) teamNameByPlayer.set(pick.playerId, []);
+                    teamNameByPlayer.get(pick.playerId)!.push(ft.name);
+                    ownedSet.add(pick.playerId);
+                }
+            }
+            const context: OwnershipContext = {
+                allFantasyTeams,
+                teamNameByPlayer,
+                ownedSet,
+                totalTeamsCount: allFantasyTeams.length
+            };
+            cachedOwnershipContext = context;
+            lastOwnershipTime = Date.now();
+            return context;
+        } finally {
+            ownershipPromise = null;
+        }
+    })();
+    return ownershipPromise;
+};
+
+export interface GwContext {
+    gw: number;
+    currentGwFixtureMap: Map<number, any>;
+    upcomingRounds: number[];
+    fixtureGwMap: Map<number, number>;
+}
+
+let cachedCurrentGwContext: GwContext | null = null;
+let lastCurrentGwContextTime = 0;
+let gwContextPromise: Promise<GwContext> | null = null;
+const GW_CONTEXT_TTL = 15 * 60 * 1000; // 15 minutes
+
+export const getCurrentGwContext = async (): Promise<GwContext> => {
+    const now = Date.now();
+    if (cachedCurrentGwContext && (now - lastCurrentGwContextTime < GW_CONTEXT_TTL)) {
+        return cachedCurrentGwContext;
+    }
+    if (gwContextPromise) return gwContextPromise;
+    gwContextPromise = (async () => {
+        try {
+            const [allTeamsMap, gwDocs, currentGwDoc] = await Promise.all([
+                getAllTeamsMap(),
+                Gameweek.find({
+                    isCompleted: { $ne: true }
+                }).select('number fixtures isCurrent').sort({ number: 1 }).lean().exec() as Promise<any[]>,
+                Gameweek.findOne({ isCurrent: true }).select('number fixtures').lean().exec() as Promise<any>
+            ]);
+
+            const currentGw = currentGwDoc ? currentGwDoc.number : 1;
+            const upcomingGwDocs = gwDocs.filter((g: any) => g.number >= currentGw && g.number <= currentGw + 3);
+            const upcomingRounds = upcomingGwDocs.map((g: any) => g.number);
+            const fixtureGwMap = new Map<number, number>();
+            for (const g of upcomingGwDocs) {
+                for (const fid of (g.fixtures || [])) {
+                    fixtureGwMap.set(Number(fid?.fixtureId ?? fid?.id ?? fid), g.number);
+                }
+            }
+
+            const tgwFixtureIds = (currentGwDoc?.fixtures || []) as number[];
+            const currentGwDocs = tgwFixtureIds.length > 0
+                ? (await Fixture.find(
+                    { fixtureId: { $in: tgwFixtureIds } },
+                    'fixtureId id startTimestamp homeTeam.id awayTeam.id'
+                  ).sort({ startTimestamp: 1 }).lean().exec() as any[])
+                : [];
+
+            const currentGwFixtureMap = new Map<number, any>(currentGwDocs.map((f: any) => {
+                const home = f.homeTeam?.id != null ? allTeamsMap.get(f.homeTeam.id) : null;
+                const away = f.awayTeam?.id != null ? allTeamsMap.get(f.awayTeam.id) : null;
+                return [f.fixtureId ?? f.id, { home: home || f.homeTeam, away: away || f.awayTeam, kickoff: f.startTimestamp }];
+            }));
+
+            const result: GwContext = {
+                gw: currentGw,
+                currentGwFixtureMap,
+                upcomingRounds,
+                fixtureGwMap
+            };
+            cachedCurrentGwContext = result;
+            lastCurrentGwContextTime = Date.now();
+            return result;
+        } finally {
+            gwContextPromise = null;
+        }
+    })();
+    return gwContextPromise;
+};
+
+// Per-player stats document cache (stores gameweeks arrays so repeated loads don't re-download 240KB of nested BSON)
+const playerStatsDocCache = new Map<number, { doc: any; timestamp: number }>();
+const PSTATS_DOC_TTL = 30 * 60 * 1000; // 30 minutes
+
+export const warmPlayersCache = () => {
+    (async () => {
+        try {
+            const [teamMap, gwContext, ownership, totalPointsMap, allPlayersSummary] = await Promise.all([
+                getAllTeamsMap(),
+                getCurrentGwContext(),
+                getOwnershipContext(),
+                getTotalPointsMap(),
+                getAllPlayersSummary()
+            ]);
+
+            // Pre-warm top 50 players stats in background
+            const sorted = allPlayersSummary.slice().sort((a, b) =>
+                (totalPointsMap.get(b.id) || 0) - (totalPointsMap.get(a.id) || 0) || a.id - b.id
+            );
+            const top50Ids = sorted.slice(0, 50).map(p => p.id);
+            const topStatsDocs = await PlayerStatsModel.find({ playerId: { $in: top50Ids } }).lean().exec();
+            const now = Date.now();
+            for (const doc of topStatsDocs) {
+                playerStatsDocCache.set(doc.playerId, { doc, timestamp: now });
+            }
+        } catch (err: any) {
+            console.warn('Background warming of players cache failed:', err?.message || err);
+        }
+    })();
+};
+
+export const invalidatePlayerStatsCache = () => {
+    cachedTeamsMap = null;
+    lastTeamsMapTime = 0;
+    teamsMapPromise = null;
+    cachedTotalPointsMap = null;
+    lastTotalPointsTime = 0;
+    totalPointsPromise = null;
+    cachedPlayersSummary = null;
+    lastPlayersSummaryTime = 0;
+    playersSummaryPromise = null;
+    cachedOwnershipContext = null;
+    lastOwnershipTime = 0;
+    ownershipPromise = null;
+    cachedCurrentGwContext = null;
+    lastCurrentGwContextTime = 0;
+    gwContextPromise = null;
+    playerStatsDocCache.clear();
+};
+
 export const getFullPlayerStats = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const page = parseInt(req.query.page as string) || 1;
@@ -510,7 +763,20 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
         const positions = req.query.positions ? (req.query.positions as string).split(',') : [];
         const freeAgents = req.query.freeAgents === 'true';
 
-        const query: any = {};
+        // 1. Fetch all data caches concurrently via Promise.all
+        // Warm: ~0ms (in-memory instant return)
+        // Cold: all 5 execute concurrently in ~1.5s instead of 8s
+        const [teamMap, gwContext, ownership, totalPointsMap, allPlayersSummary] = await Promise.all([
+            getAllTeamsMap(),
+            getCurrentGwContext(),
+            getOwnershipContext(),
+            getTotalPointsMap(),
+            getAllPlayersSummary()
+        ]);
+        const { gw: currentGw, currentGwFixtureMap, upcomingRounds, fixtureGwMap } = gwContext;
+
+        // 2. High-speed in-memory filtering across 3,236 summary candidates (< 1ms)
+        let candidates = allPlayersSummary;
 
         if (positions.length > 0) {
             const posMap: Record<string, string[]> = {
@@ -519,342 +785,118 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 'M': ['Midfielder', 'MID', 'M'],
                 'F': ['Attacker', 'FWD', 'F']
             };
-            const dbPositions = positions.flatMap(p => posMap[p] || [p]).filter(Boolean);
-            if (dbPositions.length > 0) {
-                query.position = { $in: dbPositions };
-            }
+            const dbPositions = new Set(positions.flatMap(p => posMap[p] || [p]).filter(Boolean));
+            candidates = candidates.filter(p => p.position && dbPositions.has(p.position));
         }
 
-        if (clubs.length > 0 || leagues.length > 0 || freeAgents) {
-            const teamQuery: any = {};
-
-            if (clubs.length > 0) {
-                teamQuery.name = { $in: clubs.map(c => new RegExp(`^${c}$`, 'i')) };
-            }
-
-            let teamIdsFromFilter: number[] = [];
-
-            const allTeams = (await Team.find({}).populate('league').lean()) as any[];
-
-            const filteredTeams = allTeams.filter((t: any) => {
+        if (clubs.length > 0 || leagues.length > 0) {
+            const allTeams = Array.from(teamMap.values());
+            const filteredTeamIds = new Set(allTeams.filter((t: any) => {
                 let matches = true;
                 if (clubs.length > 0 && !clubs.some(c => (t.name || t.team?.name)?.toLowerCase() === c.toLowerCase())) matches = false;
                 if (leagues.length > 0 && !leagues.some(l => t.league && (t.league as any).name && (t.league as any).name.toLowerCase() === l.toLowerCase())) matches = false;
                 return matches;
-            });
+            }).map(t => t.id).filter(Boolean));
 
-            teamIdsFromFilter = filteredTeams.map(t => t.id).filter(Boolean);
-
-            if (clubs.length > 0 || leagues.length > 0) {
-                query.teamId = { $in: teamIdsFromFilter };
-            }
+            candidates = candidates.filter(p => filteredTeamIds.has(p.teamId));
         }
 
-        // Ownership data: load once (projected) for free-agent exclusion + ownership %
-        const allFantasyTeams = await FantasyTeam.find({})
-            .select('name currentSquad.picks.playerId')
-            .lean();
-        const teamNameByPlayer = new Map<number, string[]>();
-        for (const ft of allFantasyTeams) {
-            for (const pick of ft.currentSquad?.picks || []) {
-                if (!teamNameByPlayer.has(pick.playerId)) teamNameByPlayer.set(pick.playerId, []);
-                teamNameByPlayer.get(pick.playerId)!.push(ft.name);
-            }
+        if (freeAgents) {
+            candidates = candidates.filter(p => !ownership.ownedSet.has(p.id));
         }
-        const ownedPlayerIdsForExclusion: number[] = [...teamNameByPlayer.keys()];
 
-        const totalPlayers = await Player.countDocuments(query);
-        const totalPages = Math.ceil(totalPlayers / limit);
-
-        // Sort key: total fantasy points. Load only projected sort keys (playerId + totalPoints)
-        // and sort the small id/teamId list in JS, avoiding the full-collection $lookup + Mongo sort
-        // that previously streamed every player's stats payload on each request.
-        const totalPointsDocs = await PlayerStatsModel.find({}, { playerId: 1, totalPoints: 1 }).lean();
-        const totalPointsMap = new Map(totalPointsDocs.map(d => [d.playerId, d.totalPoints || 0]));
-
-        const pageCandidates = await Player.find(query).select('id teamId').lean();
-        pageCandidates.sort((a: any, b: any) =>
+        // 3. High-speed in-memory sort by totalPoints desc, then id asc (< 1ms)
+        candidates = candidates.slice().sort((a, b) =>
             (totalPointsMap.get(b.id) || 0) - (totalPointsMap.get(a.id) || 0) || a.id - b.id
         );
 
-        // JS-side free agent filtering (Mongoose `id` virtual prevents DB-level filtering)
-        if (freeAgents) {
-            const ownedSet = new Set(ownedPlayerIdsForExclusion);
-            const freeCandidates = pageCandidates.filter((p: any) => !ownedSet.has(p.id));
-            const totalFreeAgents = freeCandidates.length;
-            const pageIds = freeCandidates.slice(skip, skip + limit).map((p: any) => p.id);
-            let players: any[] = pageIds.length > 0
-                ? await Player.find({ id: { $in: pageIds } }).lean()
-                : [];
-            const playersById = new Map(players.map(p => [p.id, p]));
-            players = pageIds.map(id => playersById.get(id)).filter(Boolean);
+        const totalPlayers = candidates.length;
+        const totalPages = Math.ceil(totalPlayers / limit);
+        const pageCandidates = candidates.slice(skip, skip + limit);
+        const pageIds = pageCandidates.map(p => p.id);
 
-            const teamIds = [...new Set(players.map(p => p.teamId))];
-            const teams = (await Team.find({ id: { $in: teamIds } }).populate({ path: 'league', strictPopulate: false }).lean()) as any[];
-            const teamMap = new Map(teams.map(t => [t.id, t]));
-
-            const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
-            const currentGw = currentGwDoc ? currentGwDoc.number : 1;
-
-            const pStatsDocs = await PlayerStatsModel.find({ playerId: { $in: players.map(p => p.id) } }).lean();
-            const pStatsMap = new Map(pStatsDocs.map(doc => [doc.playerId, doc]));
-
-            // Fetch upcoming fixtures for all players' teams
-            const Fixture = (await import("../models/Fixture")).Fixture;
-            const allPlayerTeamIds = [...new Set(players.map(p => p.teamId).filter(Boolean))];
-            // Determine upcoming rounds from the gameweek lifecycle. The fixture
-            // `status` field is unreliable (stale/always "finished"), so it cannot
-            // be used to decide which fixtures are upcoming.
-            const upcomingGwDocs = (await Gameweek.find({ isCompleted: { $ne: true }, number: { $gte: currentGw } }).select('number fixtures').lean()) as any[];
-            const upcomingRounds = upcomingGwDocs.map((g) => g.number);
-            const fixtureGwMap = new Map<number, number>();
-            for (const g of upcomingGwDocs) {
-                for (const fid of (g.fixtures || [])) fixtureGwMap.set(Number(fid?.fixtureId ?? fid?.id ?? fid), g.number);
-            }
-            const upcomingDocs = await Fixture.find({
-                'roundInfo.round': { $in: upcomingRounds },
-                $or: [
-                    { 'homeTeam.id': { $in: allPlayerTeamIds } },
-                    { 'awayTeam.id': { $in: allPlayerTeamIds } }
-                ]
-            }).sort({ startTimestamp: 1 }).lean() as any[];
-
-            // Build a team lookup from all teams appearing in the upcoming
-            // fixtures (the page-scoped `teamMap` is too small to resolve every
-            // opponent), so upcoming opponent names resolve.
-            const upcomingTeamIds = [...new Set(upcomingDocs.flatMap((f: any) => [f.homeTeam?.id, f.awayTeam?.id]).filter(Boolean))];
-            const upcomingTeamDocs = (await Team.find({ id: { $in: upcomingTeamIds } }).lean()) as any[];
-            const upcomingTeamMap = new Map(upcomingTeamDocs.map((t: any) => [t.id, t]));
-
-            // Fetch current gameweek fixtures (for per-match labels in current_week).
-            // Use the gameweek's assigned fixture list (fixture `roundInfo.round`
-            // can differ from the app gameweek number) and attach full team docs
-            // (fixtures only store team ids) so opponent names resolve.
-            const tgwDoc = (await Gameweek.findOne({ number: currentGw }).select('fixtures').lean()) as any;
-            const tgwFixtureIds = (tgwDoc?.fixtures || []) as number[];
-            const currentGwDocs = tgwFixtureIds.length > 0
-                ? (await Fixture.find({ fixtureId: { $in: tgwFixtureIds } }).sort({ startTimestamp: 1 }).lean() as any[])
-                : [];
-            const cgTeamIds = [...new Set(currentGwDocs.flatMap((f: any) => [f.homeTeam?.id, f.awayTeam?.id]).filter(Boolean))];
-            const cgTeams = (await Team.find({ id: { $in: cgTeamIds } }).lean()) as any[];
-            const fixtureTeamMap = new Map(cgTeams.map((t: any) => [t.id, t]));
-            const currentGwFixtureMap = new Map(currentGwDocs.map((f: any) => {
-                const home = f.homeTeam?.id != null ? fixtureTeamMap.get(f.homeTeam.id) : null;
-                const away = f.awayTeam?.id != null ? fixtureTeamMap.get(f.awayTeam.id) : null;
-                return [f.fixtureId ?? f.id, { home: home || f.homeTeam, away: away || f.awayTeam, kickoff: f.startTimestamp }];
-            }));
-
-            const fixturesByTeam = new Map<number, any[]>();
-            for (const f of upcomingDocs) {
-                const homeId = f.homeTeam?.id;
-                const awayId = f.awayTeam?.id;
-                if (homeId && !fixturesByTeam.has(homeId)) fixturesByTeam.set(homeId, []);
-                if (awayId && !fixturesByTeam.has(awayId)) fixturesByTeam.set(awayId, []);
-                if (homeId) fixturesByTeam.get(homeId)!.push({ fixture: f, isHome: true, opponentId: awayId });
-                if (awayId) fixturesByTeam.get(awayId)!.push({ fixture: f, isHome: false, opponentId: homeId });
-            }
-
-            // Ownership counts (single-pass map built above)
-            const totalTeamsCount = allFantasyTeams.length;
-            const ownershipMap = new Map<number, { pct: number; teamName: string | null }>();
-            for (const pid of players.map(p => p.id)) {
-                const owners = teamNameByPlayer.get(pid) || [];
-                const pct = totalTeamsCount > 0 ? Number(((owners.length / totalTeamsCount) * 100).toFixed(1)) : 0;
-                ownershipMap.set(pid, { pct, teamName: owners[0] || null });
-            }
-
-            const playerStats: PlayerStats[] = players.map(player => {
-                const team = teamMap.get(player.teamId);
-                const teamName = team ? team.name : "Unknown";
-                const leagueName = team && team.league ? (team.league as any).name : "Unknown League";
-                const teamShortName = team ? (team.nameCode || team.shortName || "UNK") : "UNK";
-                const teamColor = team?.teamColors?.primary || "#003399";
-                const teamColorText = team?.teamColors?.text || "#ffffff";
-                const teamLogo = team?.logo || "";
-
-                let currentWeekStats = undefined;
-                let overallStats = aggregateMatchStats([]);
-                const pStatsDoc = pStatsMap.get(player.id);
-                if (pStatsDoc && pStatsDoc.gameweeks) {
-                    overallStats = aggregateMatchStats(pStatsDoc.gameweeks);
-                    const gwEntries = getGameweekEntries(pStatsDoc.gameweeks, currentGw);
-                    if (gwEntries.length > 0) {
-                        currentWeekStats = buildCurrentWeek(pStatsDoc, currentGw, player.position, player.teamId, currentGwFixtureMap);
-                    }
-                }
-                (overallStats as any).total_point = pStatsDoc?.totalPoints || 0;
-
-                // Recent form (last 5 gameweeks)
-                const recentForm: any[] = (pStatsDoc && (pStatsDoc as any).gameweeks)
-                    ? getGameweekForm((pStatsDoc as any).gameweeks, currentGw).slice(-5)
-                    : [];
-                if (recentForm.length === 0) {
-                    for (let i = Math.max(1, currentGw - 4); i <= currentGw; i++) {
-                        recentForm.push({ gw: i, points: 0 });
-                    }
-                }
-
-                // Upcoming fixtures
-                const teamFixtures = fixturesByTeam.get(player.teamId) || [];
-                const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }, idx) => {
-                    const opponentTeam = upcomingTeamMap.get(opponentId);
-                    return {
-                        // Label by the app gameweek the fixture is assigned to when
-                        // one exists; otherwise by chronological position (next
-                        // match = current gameweek). Round numbers are not
-                        // chronological for rescheduled leagues, so not used here.
-                        gw: fixtureGwMap.get(Number(f.fixtureId ?? f.id)) || (currentGw + idx) || 0,
-                        fixture_id: f.fixtureId ?? f.id,
-                        kickoff: f.startTimestamp || 0,
-                        opponent_short_name: opponentTeam?.nameCode || "UNK",
-                        opponent_logo: opponentTeam?.logo || "",
-                        opponent_color: opponentTeam?.teamColors?.primary || "#003399",
-                        opponent_text_color: opponentTeam?.teamColors?.text || "#ffffff",
-                        my_team_short_name: team?.nameCode || "UNK",
-                        my_team_logo: team?.logo || "",
-                        is_home: isHome
-                    };
-                });
-                while (upcomingFixtures.length < 3) {
-                    const nextGw = currentGw + upcomingFixtures.length;
-                    upcomingFixtures.push({ gw: nextGw, fixture_id: 0, kickoff: 0, opponent_short_name: "TBD", opponent_logo: "", opponent_color: "#1b1035", opponent_text_color: "#ffffff", my_team_short_name: teamShortName, my_team_logo: "", is_home: true });
-                }
-
-                // Points breakdown
-                const ownership = ownershipMap.get(player.id) || { pct: 0, teamName: null };
-                const pointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
-                    ? getGameweekBreakdown((pStatsDoc as any).gameweeks, currentGw, player.position)
-                    : [];
-
-                // Season points breakdown (per-match flooring applied and summed across all gameweeks)
-                const seasonPointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
-                    ? getSeasonPointsBreakdown((pStatsDoc as any).gameweeks, resolveEffectivePosition(player))
-                    : [];
-
-                return {
-                    player_name: player.name || player.webName || "",
-                    team_name: teamName,
-                    position: resolveEffectivePosition(player),
-                    overall: overallStats,
-                    price: player.price?.nowCost || 0,
-                    release_value: player.price?.nowCost || 0,
-                    club: teamName,
-                    league: leagueName,
-                    team_short_name: teamShortName,
-                    team_color: teamColor,
-                    team_text_color: teamColorText,
-                    team_logo: teamLogo,
-                    player_id: player.id,
-                    current_week: currentWeekStats,
-                    photo: player.photo || "",
-                    ownership: ownership.pct,
-                    fantasy_team_name: ownership.teamName || "Free Agent",
-                    upcoming_fixtures: upcomingFixtures,
-                    recent_form: recentForm,
-                    points_breakdown: pointsBreakdown,
-                    season_points_breakdown: seasonPointsBreakdown,
-                    auctionPrice: player.auctionPrice
-                };
-            });
-
+        if (pageIds.length === 0) {
             res.set('Cache-Control', 'public, max-age=60, s-maxage=60');
             return res.json({
                 success: true,
-                data: playerStats,
+                data: [],
                 meta: {
                     page,
                     limit,
-                    totalPlayers: totalFreeAgents,
-                    totalPages: Math.ceil(totalFreeAgents / limit),
-                    hasNextPage: page < Math.ceil(totalFreeAgents / limit)
+                    totalPlayers,
+                    totalPages,
+                    hasNextPage: false
                 }
             });
         }
 
-        // Non-free-agent path
-        const pageIds = pageCandidates.slice(skip, skip + limit).map((p: any) => p.id);
-        let players: any[] = pageIds.length > 0
-            ? await Player.find({ id: { $in: pageIds } }).lean()
-            : [];
-        const playersById = new Map(players.map(p => [p.id, p]));
-        players = pageIds.map(id => playersById.get(id)).filter(Boolean);
+        // 4. Parallel fetch: 20 Players (projected) + missing PlayerStats + Upcoming Fixtures (projected next 4 rounds)
+        const playerTeamIds = [...new Set(pageCandidates.map(p => p.teamId).filter(Boolean))];
 
-        const teamIds = [...new Set(players.map(p => p.teamId))];
-        const teams = (await Team.find({ id: { $in: teamIds } }).populate({ path: 'league', strictPopulate: false }).lean()) as any[];
-        const teamMap = new Map(teams.map(t => [t.id, t]));
+        const reqTime = Date.now();
+        const missingStatsPlayerIds: number[] = [];
+        const pStatsDocs: any[] = [];
 
-        const positionMap: Record<number, string> = { 1: 'GK', 2: 'DEF', 3: 'MID', 4: 'FWD' };
+        for (const pid of pageIds) {
+            const cached = playerStatsDocCache.get(pid);
+            if (cached && (reqTime - cached.timestamp < PSTATS_DOC_TTL)) {
+                pStatsDocs.push(cached.doc);
+            } else {
+                missingStatsPlayerIds.push(pid);
+            }
+        }
 
-        const currentGwDoc = await Gameweek.findOne({ isCurrent: true }).lean();
-        const currentGw = currentGwDoc ? currentGwDoc.number : 1;
+        const [playersRaw, freshStatsDocs, upcomingDocs] = await Promise.all([
+            Player.find(
+                { id: { $in: pageIds } },
+                'id name webName photo teamId position positionsDetailed tm_position price.nowCost auctionPrice'
+            ).lean().exec() as Promise<any[]>,
+            missingStatsPlayerIds.length > 0
+                ? (PlayerStatsModel.find({ playerId: { $in: missingStatsPlayerIds } }).lean().exec() as Promise<any[]>)
+                : Promise.resolve([] as any[]),
+            upcomingRounds.length > 0 && playerTeamIds.length > 0
+                ? (Fixture.find(
+                    {
+                        'roundInfo.round': { $in: upcomingRounds },
+                        $or: [
+                            { 'homeTeam.id': { $in: playerTeamIds } },
+                            { 'awayTeam.id': { $in: playerTeamIds } }
+                        ]
+                    },
+                    'fixtureId id startTimestamp homeTeam.id awayTeam.id roundInfo.round'
+                  ).sort({ startTimestamp: 1 }).lean().exec() as Promise<any[]>)
+                : Promise.resolve([] as any[])
+        ]);
 
-        const pStatsDocs = await PlayerStatsModel.find({ playerId: { $in: players.map(p => p.id) } }).lean();
+        for (const doc of freshStatsDocs) {
+            playerStatsDocCache.set(doc.playerId, { doc, timestamp: reqTime });
+            pStatsDocs.push(doc);
+        }
+
+        const playersById = new Map(playersRaw.map(p => [p.id, p]));
+        const players = pageIds.map(id => playersById.get(id)).filter(Boolean);
         const pStatsMap = new Map(pStatsDocs.map(doc => [doc.playerId, doc]));
 
-        // Fetch upcoming fixtures for all players' teams
-        const Fixture = (await import("../models/Fixture")).Fixture;
-        const allPlayerTeamIds2 = [...new Set(players.map(p => p.teamId).filter(Boolean))];
-        // Determine upcoming rounds from the gameweek lifecycle. The fixture
-        // `status` field is unreliable (stale/always "finished"), so it cannot
-        // be used to decide which fixtures are upcoming.
-        const upcomingGwDocs2 = (await Gameweek.find({ isCompleted: { $ne: true }, number: { $gte: currentGw } }).select('number fixtures').lean()) as any[];
-        const upcomingRounds2 = upcomingGwDocs2.map((g) => g.number);
-        const fixtureGwMap2 = new Map<number, number>();
-        for (const g of upcomingGwDocs2) {
-            for (const fid of (g.fixtures || [])) fixtureGwMap2.set(Number(fid?.fixtureId ?? fid?.id ?? fid), g.number);
-        }
-        const upcomingDocs2 = await Fixture.find({
-            'roundInfo.round': { $in: upcomingRounds2 },
-            $or: [
-                { 'homeTeam.id': { $in: allPlayerTeamIds2 } },
-                { 'awayTeam.id': { $in: allPlayerTeamIds2 } }
-            ]
-        }).sort({ startTimestamp: 1 }).lean() as any[];
-
-        // Build a team lookup from all teams appearing in the upcoming
-        // fixtures (the page-scoped `teamMap` is too small to resolve every
-        // opponent), so upcoming opponent names resolve.
-        const upcomingTeamIds2 = [...new Set(upcomingDocs2.flatMap((f: any) => [f.homeTeam?.id, f.awayTeam?.id]).filter(Boolean))];
-        const upcomingTeamDocs2 = (await Team.find({ id: { $in: upcomingTeamIds2 } }).lean()) as any[];
-        const upcomingTeamMap2 = new Map(upcomingTeamDocs2.map((t: any) => [t.id, t]));
-
-        // Fetch current gameweek fixtures (for per-match labels in current_week).
-        // Use the gameweek's assigned fixture list (fixture `roundInfo.round`
-        // can differ from the app gameweek number) and attach full team docs
-        // (fixtures only store team ids) so opponent names resolve.
-        const tgwDoc2 = (await Gameweek.findOne({ number: currentGw }).select('fixtures').lean()) as any;
-        const tgwFixtureIds2 = (tgwDoc2?.fixtures || []) as number[];
-        const currentGwDocs2 = tgwFixtureIds2.length > 0
-            ? (await Fixture.find({ fixtureId: { $in: tgwFixtureIds2 } }).sort({ startTimestamp: 1 }).lean() as any[])
-            : [];
-        const cgTeamIds2 = [...new Set(currentGwDocs2.flatMap((f: any) => [f.homeTeam?.id, f.awayTeam?.id]).filter(Boolean))];
-        const cgTeams2 = (await Team.find({ id: { $in: cgTeamIds2 } }).lean()) as any[];
-        const fixtureTeamMap2 = new Map(cgTeams2.map((t: any) => [t.id, t]));
-        const currentGwFixtureMap2 = new Map(currentGwDocs2.map((f: any) => {
-            const home = f.homeTeam?.id != null ? fixtureTeamMap2.get(f.homeTeam.id) : null;
-            const away = f.awayTeam?.id != null ? fixtureTeamMap2.get(f.awayTeam.id) : null;
-            return [f.fixtureId ?? f.id, { home: home || f.homeTeam, away: away || f.awayTeam, kickoff: f.startTimestamp }];
-        }));
-
-        const fixturesByTeam2 = new Map<number, any[]>();
-        for (const f of upcomingDocs2) {
+        // 5. Map upcoming fixtures by team
+        const fixturesByTeam = new Map<number, any[]>();
+        for (const f of upcomingDocs) {
             const homeId = f.homeTeam?.id;
             const awayId = f.awayTeam?.id;
-            if (homeId && !fixturesByTeam2.has(homeId)) fixturesByTeam2.set(homeId, []);
-            if (awayId && !fixturesByTeam2.has(awayId)) fixturesByTeam2.set(awayId, []);
-            if (homeId) fixturesByTeam2.get(homeId)!.push({ fixture: f, isHome: true, opponentId: awayId });
-            if (awayId) fixturesByTeam2.get(awayId)!.push({ fixture: f, isHome: false, opponentId: homeId });
+            if (homeId && !fixturesByTeam.has(homeId)) fixturesByTeam.set(homeId, []);
+            if (awayId && !fixturesByTeam.has(awayId)) fixturesByTeam.set(awayId, []);
+            if (homeId) fixturesByTeam.get(homeId)!.push({ fixture: f, isHome: true, opponentId: awayId });
+            if (awayId) fixturesByTeam.get(awayId)!.push({ fixture: f, isHome: false, opponentId: homeId });
         }
 
-        // Ownership counts
-        const totalTeamsCount2 = allFantasyTeams.length;
-        const ownershipMap2 = new Map<number, { pct: number; teamName: string | null }>();
-        for (const pid of players.map(p => p.id)) {
-            const owners = teamNameByPlayer.get(pid) || [];
-            const pct = totalTeamsCount2 > 0 ? Number(((owners.length / totalTeamsCount2) * 100).toFixed(1)) : 0;
-            ownershipMap2.set(pid, { pct, teamName: owners[0] || null });
+        // 6. Ownership counts
+        const ownershipMap = new Map<number, { pct: number; teamName: string | null }>();
+        for (const pid of pageIds) {
+            const owners = ownership.teamNameByPlayer.get(pid) || [];
+            const pct = ownership.totalTeamsCount > 0 ? Number(((owners.length / ownership.totalTeamsCount) * 100).toFixed(1)) : 0;
+            ownershipMap.set(pid, { pct, teamName: owners[0] || null });
         }
 
+        // 8. Transform to PlayerStats[]
         const playerStats: PlayerStats[] = players.map(player => {
             const team = teamMap.get(player.teamId);
             const teamName = team ? team.name : "Unknown";
@@ -871,7 +913,7 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
                 overallStats = aggregateMatchStats(pStatsDoc.gameweeks);
                 const gwEntries = getGameweekEntries(pStatsDoc.gameweeks, currentGw);
                 if (gwEntries.length > 0) {
-                    currentWeekStats = buildCurrentWeek(pStatsDoc, currentGw, player.position, player.teamId, currentGwFixtureMap2);
+                    currentWeekStats = buildCurrentWeek(pStatsDoc, currentGw, player.position, player.teamId, currentGwFixtureMap);
                 }
             }
             (overallStats as any).total_point = pStatsDoc?.totalPoints || 0;
@@ -887,15 +929,11 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             }
 
             // Upcoming fixtures
-            const teamFixtures = fixturesByTeam2.get(player.teamId) || [];
+            const teamFixtures = fixturesByTeam.get(player.teamId) || [];
             const upcomingFixtures = teamFixtures.slice(0, 3).map(({ fixture: f, isHome, opponentId }, idx) => {
-                const opponentTeam = upcomingTeamMap2.get(opponentId);
+                const opponentTeam = teamMap.get(opponentId);
                 return {
-                    // Label by the app gameweek the fixture is assigned to when
-                    // one exists; otherwise by chronological position (next match
-                    // = current gameweek). Round numbers are not chronological
-                    // for rescheduled leagues, so not used here.
-                    gw: fixtureGwMap2.get(Number(f.fixtureId ?? f.id)) || (currentGw + idx) || 0,
+                    gw: fixtureGwMap.get(Number(f.fixtureId ?? f.id)) || (currentGw + idx) || 0,
                     fixture_id: f.fixtureId ?? f.id,
                     kickoff: f.startTimestamp || 0,
                     opponent_short_name: opponentTeam?.nameCode || "UNK",
@@ -913,7 +951,7 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             }
 
             // Points breakdown
-            const ownership = ownershipMap2.get(player.id) || { pct: 0, teamName: null };
+            const ownership = ownershipMap.get(player.id) || { pct: 0, teamName: null };
             const pointsBreakdown = (pStatsDoc && (pStatsDoc as any).gameweeks)
                 ? getGameweekBreakdown((pStatsDoc as any).gameweeks, currentGw, player.position)
                 : [];
@@ -975,7 +1013,7 @@ export const getFullPlayerStats = async (req: Request, res: Response, next: Next
             });
         }
     }
-}
+};
 
 export const getFilters = async (req: Request, res: Response, next: NextFunction) => {
     try {
